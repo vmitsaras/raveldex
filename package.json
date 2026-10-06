@@ -1,0 +1,26 @@
+{
+  "name": "@vmitsaras/raveldex",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Native, modular TypeScript local search — repository foundation; search runtime not implemented yet.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmitsaras/raveldex.git"
+  },
+  "bugs": { "url": "https://github.com/vmitsaras/raveldex/issues" },
+  "homepage": "https://github.com/vmitsaras/raveldex#readme",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "check": "npm run handoff:check && npm run docs:check && npm test",
+    "test": "node --test test/tooling/*.test.mjs",
+    "handoff:check": "node scripts/plan.mjs check",
+    "handoff:status": "node scripts/plan.mjs status",
+    "handoff:next": "node scripts/plan.mjs next",
+    "docs:generate": "node scripts/render-plan.mjs",
+    "docs:check": "node scripts/render-plan.mjs --check && node scripts/check-docs.mjs",
+    "tracking:preview": "node scripts/sync-github.mjs --dry-run",
+    "tracking:sync": "node scripts/sync-github.mjs --apply"
+  }
+}

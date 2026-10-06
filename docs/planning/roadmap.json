@@ -1,0 +1,1254 @@
+{
+  "schemaVersion": 1,
+  "repository": "vmitsaras/raveldex",
+  "milestones": [
+    {
+      "id": "N0",
+      "title": "N0 — Native design adoption",
+      "goal": "Initialize the new repository and adopt bounded native contracts, task tracking, and verification rules.",
+      "exitCriteria": [
+        "The repository records the owner-selected native direction, current bootstrap scope, source provenance, and the separation from historical companion approvals.",
+        "The native core, ranking, mutations, execution, add-on boundaries, and evaluation criteria are reconciled into implementation-ready contracts.",
+        "Planning validation, dependency-aware next-task reporting, and GitHub milestone/task tracking are checked; no search runtime is claimed."
+      ],
+      "track": "release"
+    },
+    {
+      "id": "N1",
+      "title": "N1 — Usable native core alpha",
+      "goal": "Search a real documentation corpus through a packaged consumer using only Raveldex-owned indexing, retrieval, scoring, and execution.",
+      "exitCriteria": [
+        "Exact/prefix and Boolean retrieval, fielded native BM25, and deterministic ties agree with independent semantic and arithmetic expectations.",
+        "Incremental atomic mutations preserve one coherent revision, avoid reanalyzing unchanged records, and honor documented cancellation and resource limits.",
+        "A core-only consumer installs the package, searches an allowlisted real-document corpus, and supports updates without optional modules or a foreign search engine.",
+        "Size, work, latency, and corpus limits are reported as measured outcomes; the 15 KiB gzip target and 10,000-record ceiling are not treated as measured capacity guarantees."
+      ],
+      "track": "release"
+    },
+    {
+      "id": "N2",
+      "title": "N2 — Modular search product",
+      "goal": "Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface.",
+      "exitCriteria": [
+        "Source and positional phrase strategies agree on eligibility, original-term grouping, repeated words, and field/value boundaries without changing lexical scores.",
+        "Structured filters and conjunctive facets operate on the complete qualifying set before result limits.",
+        "Original-source evidence, snippets, actual numerical explanations, and a native DOM pilot use public contracts.",
+        "Omitting a module removes its runtime imports, side indexes, startup work, and ambient/network effects."
+      ],
+      "track": "release"
+    },
+    {
+      "id": "N3",
+      "title": "N3 — Host and migration parity",
+      "goal": "Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics.",
+      "exitCriteria": [
+        "Direct and one-owner worker execution share analyzer identity, corpus statistics, ranking, revisions, errors, and add-on capability contracts.",
+        "Versioned source/native snapshots and IndexedDB recovery validate compatibility and preserve atomic state and explicit erasure behavior.",
+        "Companion migration and MiniSearch comparison remain outside the native import graph; incompatible formats or semantics fail explicitly."
+      ],
+      "track": "release"
+    },
+    {
+      "id": "N4",
+      "title": "N4 — Native 0.1 qualification",
+      "goal": "Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior.",
+      "exitCriteria": [
+        "Comparisons use equivalent semantics and complete requested configurations; relevance judgments and raw measurements are inspectable.",
+        "Browser, assistive-technology, retained/peak-memory, and device-presentation evidence is collected for the proposed supported scope; unperformed observations remain visible.",
+        "Package exports, installation, documentation, compatibility policy, and release notes are verified against the native candidate.",
+        "An independent review states readiness and remaining blockers; publication and release tags remain a separate owner decision."
+      ],
+      "track": "release"
+    },
+    {
+      "id": "N5",
+      "title": "N5 — Selected optional enhancements",
+      "goal": "Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope.",
+      "exitCriteria": [
+        "Every selected enhancement has a concrete user/query need, a bounded semantic contract, explicit optional costs, and a native compatibility assessment.",
+        "Selected enhancements pass their own relevance, correctness, packaging, and lifecycle checks; unselected ideas remain deferred.",
+        "No N5 feature is required to declare the N0–N4 native candidate complete."
+      ],
+      "track": "optional"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "RX-0001",
+      "title": "Repository foundation and native design adoption",
+      "milestone": "N0",
+      "status": "in_progress",
+      "dependsOn": [],
+      "objective": "Create the maintainable native repository, explicitly record the adopted direction, and make milestone/task progress inspectable without implementing search.",
+      "acceptanceCriteria": [
+        "RX-0001-AC01: README, AGENTS, project context, architecture decision, roadmap, task cards, contribution guidance, and bootstrap scope agree that search runtime does not yet exist.",
+        "RX-0001-AC02: Package scaffolding is TypeScript-first, ESM-only, framework-independent, private, and free of a foreign search-engine runtime dependency; metadata does not advertise usable search APIs.",
+        "RX-0001-AC03: The canonical roadmap contains 21 release tasks and 10 deferred optional tracks with valid IDs, milestones, dependencies, specifications, and truthful evidence states.",
+        "RX-0001-AC04: Planning commands distinguish eligible work, unfinished blockers, owner decisions, and a completed active backlog; malformed graphs or false done records fail validation.",
+        "RX-0001-AC05: GitHub milestone/task issues identify the same IDs, scope, dependencies, acceptance criteria, and repository contract links; synchronization is documented.",
+        "RX-0001-AC06: Historical companion work is retained as provenance, without importing old approvals, resetting completed tasks, or claiming inherited implementation/evidence."
+      ],
+      "verification": [
+        "Run repository planning validation and dependency-aware status/next reporting, including meaningful negative fixtures for cycles, missing evidence, and invalid states.",
+        "Inspect scaffold package contents and execute available build/typecheck/pack checks; record explicitly which bootstrap checks were run and what they do not prove.",
+        "Check repository links, task/issue counts, milestone mapping, issue body scope, and remote default-branch content after synchronization.",
+        "Have an independent reviewer inspect the resulting bootstrap diff and its acceptance matrix.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/BOOTSTRAP_VERIFICATION.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "README.md",
+        "AGENTS.md",
+        "PROJECT_CONTEXT.md",
+        "CONTRIBUTING.md",
+        "package.json",
+        "ROADMAP.md",
+        "IMPLEMENTATION_TASKS.md",
+        "docs/planning/",
+        "docs/decisions/0001-native-direction.md",
+        "scripts/",
+        ".github/"
+      ],
+      "specs": [
+        "docs/specs/REPOSITORY_BOOTSTRAP.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-0002",
+      "title": "Core contract reconciliation and evaluation plan",
+      "milestone": "N0",
+      "status": "planned",
+      "dependsOn": [
+        "RX-0001"
+      ],
+      "objective": "Turn the selected native design into a bounded implementation contract and acceptance plan so the next task builds the engine instead of reopening architecture selection.",
+      "acceptanceCriteria": [
+        "RX-0002-AC01: Contracts explicitly define IDs/schema/analysis, normalization and source mapping, query grouping, Boolean/filter semantics, scores/ties, source ownership, revisions, and errors.",
+        "RX-0002-AC02: The ranking model specifies field statistics, exact numerical contributions, variant aggregation, empty/negative-only query behavior, and score reconstruction tolerance.",
+        "RX-0002-AC03: Mutation/execution contracts define staged changes, commit visibility, cancellation outcomes, bounded admission, cleanup, and failure atomicity.",
+        "RX-0002-AC04: The initial 10,000-record defensive ceiling, query/input/work/output limits, and 15 KiB gzip core planning target are recorded with measurement methods and non-guarantees.",
+        "RX-0002-AC05: Add-on capabilities, required data, ordering, side-index transactions, compatibility identity, and cost isolation are explicit; source and positional phrase semantics have one meaning.",
+        "RX-0002-AC06: The verification plan separates independent correctness, relevance judgments, fair cost comparisons, packaged use, environment qualification, and missing observations.",
+        "RX-0002-AC07: No unresolved load-bearing question is silently delegated as an implementation detail; any actual blocker is named without requesting approval to choose native again."
+      ],
+      "verification": [
+        "Review representative exact/prefix/Boolean/filter/phrase/mutation examples against all contracts for contradictions and ambiguous outcomes.",
+        "Review hand-derived scoring fixtures and the full-scan oracle design before implementation shares any engine internals.",
+        "Check that each implementation task has dependencies, bounded paths, observable acceptance conditions, and criterion-appropriate evidence.",
+        "Perform independent architecture/specification review and resolve blocking findings in the contracts.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/BOOTSTRAP_VERIFICATION.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/planning/VERIFICATION_PLAN.md",
+        "docs/planning/roadmap.json",
+        "IMPLEMENTATION_TASKS.md"
+      ],
+      "specs": [
+        "docs/specs/REPOSITORY_BOOTSTRAP.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-1001",
+      "title": "Data, schema, basic analyzer, limits, and errors",
+      "milestone": "N1",
+      "status": "planned",
+      "dependsOn": [
+        "RX-0002"
+      ],
+      "objective": "Implement validated native input contracts and a deterministic basic analyzer that later indexing, querying, workers, and snapshots can share.",
+      "acceptanceCriteria": [
+        "RX-1001-AC01: Schema, field types, opaque record IDs, required/optional values, invalid inputs, and owned copies follow the core contract.",
+        "RX-1001-AC02: Index-time and query-time analysis use the same versioned basic analyzer; normalization never confuses original UTF-16 source offsets with normalized-string offsets.",
+        "RX-1001-AC03: Multi-value fields retain value boundaries and source coordinates; punctuation, combining marks, surrogate pairs, empty values, and repeated terms have deterministic fixtures.",
+        "RX-1001-AC04: Documented record, field, token, query, and operation limits reject invalid or oversized work with typed errors before publishing state.",
+        "RX-1001-AC05: Core modules can be imported without DOM access, timers, workers, storage, network activity, or optional-module initialization.",
+        "RX-1001-AC06: Input mutation by the caller cannot silently mutate admitted records, configuration, or completed query contracts."
+      ],
+      "verification": [
+        "Run targeted schema/error/ownership boundary tests with exact expected error codes and no successful state publication on rejected input.",
+        "Run table-driven analyzer fixtures using independently stated expected terms, original ranges, and value boundaries.",
+        "Check TypeScript public contracts and inspect the core import graph for prohibited runtime/platform dependencies.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-1001.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/core/contracts/",
+        "src/core/analyzer/",
+        "src/core/errors/",
+        "src/core/limits/",
+        "test/core/",
+        "test/fixtures/analysis/"
+      ],
+      "specs": [
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-1002",
+      "title": "Dictionary, postings, exact retrieval, and independent oracle",
+      "milestone": "N1",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1001"
+      ],
+      "objective": "Build the first Raveldex-owned field-aware index and prove exact token eligibility against a separately implemented full-scan evaluator.",
+      "acceptanceCriteria": [
+        "RX-1002-AC01: Dictionary/postings own field-aware term frequencies, document/field statistics, and reverse document-term records needed by later mutations.",
+        "RX-1002-AC02: Exact lookup returns the complete eligible record set with explicit field/value behavior; no foreign engine performs indexing or retrieval.",
+        "RX-1002-AC03: Initial construction handles duplicate IDs and invalid records according to the atomic admission contract; partial construction is not exposed as a valid index.",
+        "RX-1002-AC04: The independent oracle computes expected eligibility by scanning declared source fixtures and does not import production dictionary, postings, query evaluation, or scoring code.",
+        "RX-1002-AC05: Source retention remains an explicit provider choice; core frequency-only configurations allocate no phrase/position/offset side indexes.",
+        "RX-1002-AC06: Invariant checks detect inconsistent frequencies, dangling postings, missing reverse entries, and corpus-statistic drift."
+      ],
+      "verification": [
+        "Compare exact retrieval with independent expected sets for empty corpora, absent terms, repeated terms, multi-field/multi-value data, and adversarial Unicode fixtures.",
+        "Run generated corpora with fixed seeds and compare full result sets, not only the first page.",
+        "Inspect index invariants and capture construction work/retained-structure counts on 100, 1,000, and 10,000-record admitted fixtures.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-1002.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/core/index/",
+        "src/core/retrieval/",
+        "test/core/",
+        "test/oracle/",
+        "test/fixtures/corpora/"
+      ],
+      "specs": [
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-1003",
+      "title": "Query evaluation, native BM25, and numerical trace facts",
+      "milestone": "N1",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1002"
+      ],
+      "objective": "Implement complete typed query evaluation and the versioned native ranker with explanations derived from the actual arithmetic.",
+      "acceptanceCriteria": [
+        "RX-1003-AC01: Exact/prefix groups, field selection, AND/OR/NOT, explicit match-all, and strict scalar equality follow the contract; AND is between original groups and OR within alternatives.",
+        "RX-1003-AC02: Prefix expansion respects explicit limits and returns a typed limit failure when completeness cannot be established; truncation is never represented as an exact success.",
+        "RX-1003-AC03: Per-field BM25 uses the declared field statistics, boosts, and best weighted variant contribution per field; alternative multiplicity creates no accidental score bonus.",
+        "RX-1003-AC04: Stable result ordering, ties, exact totals, and result limits are deterministic; limit does not restrict candidate qualification needed for exact results.",
+        "RX-1003-AC05: Opt-in trace contributions reconstruct the score within the specified numeric tolerance and report the actual model/analyzer revision.",
+        "RX-1003-AC06: Normal queries do not allocate complete explanation trees; filters and absent positive scoring clauses have the declared contribution behavior."
+      ],
+      "verification": [
+        "Compare Boolean/field/filter/prefix result sets with the full-scan oracle across nested, repeated, missing-term, negative-only, and empty-query cases.",
+        "Check hand-derived scores, field-length statistics, ties, alternate terms, and trace sums without calling the production scorer for expected values.",
+        "Run the same query repeatedly and across input insertion orders where the public deterministic-order contract requires parity.",
+        "Exercise query/expansion/result bounds and verify complete success or the specified typed failure.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-1003.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/core/query/",
+        "src/core/retrieval/",
+        "src/core/ranking/",
+        "src/core/trace/",
+        "test/core/",
+        "test/oracle/",
+        "test/fixtures/ranking/"
+      ],
+      "specs": [
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-1004",
+      "title": "Incremental atomic mutations",
+      "milestone": "N1",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1003"
+      ],
+      "objective": "Add and change records through atomic native transactions that update affected index state without reanalyzing every unchanged record.",
+      "acceptanceCriteria": [
+        "RX-1004-AC01: Add, batch-add, replace, remove, and clear follow the documented ID/existence and batch failure policies.",
+        "RX-1004-AC02: Each successful commit publishes one revision covering dictionary, postings, corpus/field statistics, reverse entries, retained source, and installed side indexes.",
+        "RX-1004-AC03: Validation failure, preparation failure, limit rejection, and pre-commit cancellation leave the previous revision searchable and unchanged.",
+        "RX-1004-AC04: Single-record replacement does not reanalyze unchanged documents; affected shared posting/page work is measured rather than described as constant-time.",
+        "RX-1004-AC05: Readers see the declared old-or-new coherent revision and cannot observe partially published add-on state.",
+        "RX-1004-AC06: Schema/analyzer changes are explicit rebuilds; incremental document writes do not pretend to support live schema migration."
+      ],
+      "verification": [
+        "Compare deterministic and seeded mutation sequences with a separately reconstructed oracle after every committed operation.",
+        "Inject failures at validation, preparation, side-index staging, and pre-commit boundaries and assert state/revision equality with the preceding committed state.",
+        "Instrument analyzer invocation counts and touched/copied structures for replacement at 100, 1,000, and 10,000 records.",
+        "Verify delete/replace of frequent terms, last-term removal, empty fields, duplicate batch IDs, and clear/repopulate cycles.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-1004.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/core/mutations/",
+        "src/core/index/",
+        "src/core/revision/",
+        "test/core/",
+        "test/oracle/",
+        "test/fixtures/mutations/"
+      ],
+      "specs": [
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-1005",
+      "title": "Revision execution, work limits, and cancellation",
+      "milestone": "N1",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1004"
+      ],
+      "objective": "Make owned retrieval and mutation work resumable and bounded while preserving exact outcomes, revision consistency, and cleanup.",
+      "acceptanceCriteria": [
+        "RX-1005-AC01: Each operation uses one documented revision and bounded admission; queue saturation and disposed instances fail with typed outcomes.",
+        "RX-1005-AC02: Cancellation checkpoints exist inside owned dictionary, postings, scoring/selection, and staging loops rather than only around a synchronous foreign call.",
+        "RX-1005-AC03: Cancellation before commit leaves state unchanged; a committed mutation is reported as committed even if cancellation arrives later; uncertainty is not mislabeled as rollback.",
+        "RX-1005-AC04: Indivisible normalization/allocation/transport segments and work budgets are explicit; deadline/cancellation claims distinguish cooperative checkpoints from immediate interruption.",
+        "RX-1005-AC05: Dispose and error paths remove scheduled work, pending references, and owned resources according to the lifecycle contract.",
+        "RX-1005-AC06: The same operation under different yield schedules preserves complete result membership, deterministic ranking, and committed state."
+      ],
+      "verification": [
+        "Use a deterministic scheduler to test abort-before-start, abort-during-query, abort-during-staging, commit-boundary races, queue overflow, and dispose.",
+        "Compare outcomes with the non-yielded oracle on identical admitted inputs and revisions.",
+        "Measure checkpoint response and maximum observed uninterrupted work on documented workloads; report indivisible sections and environment.",
+        "Verify cleanup by observing pending tasks/handlers and later operations, not only promise rejection.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-1005.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/core/execution/",
+        "src/core/revision/",
+        "src/core/mutations/",
+        "test/core/",
+        "test/fixtures/execution/"
+      ],
+      "specs": [
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-1006",
+      "title": "Core-only packaged real-document pilot",
+      "milestone": "N1",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1005"
+      ],
+      "objective": "Deliver a usable real-content search consumer that proves the independent native core through the actual packaged public API.",
+      "acceptanceCriteria": [
+        "RX-1006-AC01: A runnable consumer installs a packed local tarball and uses public imports to index, query, inspect totals/revisions, and mutate a real-document collection.",
+        "RX-1006-AC02: The corpus is generated from an explicit allowlist of current documentation with stable record IDs and source links; archived proposals and verification logs are excluded by default.",
+        "RX-1006-AC03: Judged queries identify intended/acceptable sources, expected lexical semantics, and appropriate no-result cases; results and ranking failures are recorded.",
+        "RX-1006-AC04: The consumer imports no MiniSearch, companion runtime, DOM/search add-on, or internal source path as an undeclared dependency.",
+        "RX-1006-AC05: A fixed bundling/minification method reports core-only gzip bytes including mandatory dependencies against the 15 KiB target; misses are explained without deleting correctness behavior.",
+        "RX-1006-AC06: The deliverable performs real retrieval and updates; an exported factory stub, specification-only example, or green planning command does not satisfy this task."
+      ],
+      "verification": [
+        "Build, pack, install into an isolated consumer, typecheck public imports, and execute the real-document pilot end to end.",
+        "Compare the pilot result sets and selected arithmetic cases against independent expectations; record relevance judgments separately from correctness.",
+        "Inspect the resulting consumer bundle/import graph and captured startup effects to establish optional-module exclusion.",
+        "Record reproducible corpus hashes, package identity, query outcomes, bundle method, timings, and known limitations.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-1006.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/index.ts",
+        "src/docs.ts",
+        "package.json",
+        "examples/core-docs/",
+        "test/consumer/",
+        "test/fixtures/docs/",
+        "scripts/",
+        "README.md"
+      ],
+      "specs": [
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-2001",
+      "title": "Source-verified phrase add-on",
+      "milestone": "N2",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1006"
+      ],
+      "objective": "Adapt the useful companion phrase approach into an optional native capability with one precise strict-phrase contract.",
+      "acceptanceCriteria": [
+        "RX-2001-AC01: Phrase eligibility verifies ordered adjacency in one field value against authoritative source at the searched revision, including repeated words.",
+        "RX-2001-AC02: Lexical candidate retrieval is complete before verification; phrases refine eligibility without adding candidates, rewriting scores, or imposing hidden result-limit truncation.",
+        "RX-2001-AC03: Original group/alternative behavior and normalization are shared with the native contract; phrases cannot cross field or array-value boundaries.",
+        "RX-2001-AC04: Missing source capability and incompatible analyzer/revision state produce explicit errors rather than silently excluding records or fields.",
+        "RX-2001-AC05: The source provider participates in mutations and clear/dispose lifecycle; its required data and query-scan cost are documented.",
+        "RX-2001-AC06: Core-only consumers import no phrase verifier or source store solely because the add-on exists.",
+        "RX-2001-AC07: Phrase refinement applies to its query-tree leaf; an unmatched phrase branch cannot discard a record that qualifies through another OR branch, and NOT evaluates the phrase complement."
+      ],
+      "verification": [
+        "Compare phrase membership with independent source fixtures covering repeats, punctuation, normalization, empty values, multi-value fields, and phrase-boundary counterexamples.",
+        "Check AND/OR/NOT combinations with phrase leaves against independently computed membership, including records qualifying only through a non-phrase OR branch.",
+        "Check phrase membership before limits and assert unchanged lexical scores among surviving records.",
+        "Run revision/mutation/cancellation cases with source present, absent, and incompatible; inspect core-only import and retained-state exclusion.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-2001.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/phrases/",
+        "test/addons/phrases/",
+        "test/fixtures/phrases/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-2002",
+      "title": "Optional positions, original offsets, and phrase parity",
+      "milestone": "N2",
+      "status": "planned",
+      "dependsOn": [
+        "RX-2001"
+      ],
+      "objective": "Offer selected-field positional phrase verification and optional original offsets without changing phrase meaning or making extra index data mandatory.",
+      "acceptanceCriteria": [
+        "RX-2002-AC01: Positions are value-aware and preserve original token order; original UTF-16 offsets are independently selectable and never inferred from normalized text coordinates.",
+        "RX-2002-AC02: Positional and source phrase strategies return identical eligibility for all shared supported inputs, including repeated terms and normalization cases.",
+        "RX-2002-AC03: Mixed selected-field strategies require declared providers; adding positions changes cost, not scores or matching semantics.",
+        "RX-2002-AC04: Position/offset side indexes stage, commit, roll back, clear, and dispose with the same revision as core state.",
+        "RX-2002-AC05: Frequencies-only, source-only, positions-only, and positions-plus-offsets configurations retain only their declared structures.",
+        "RX-2002-AC06: Position-length metadata does not imply support for multiword synonym graphs or proximity search."
+      ],
+      "verification": [
+        "Run differential source-versus-position phrase tests against an independent phrase oracle across generated and hand-selected corpora.",
+        "Exercise mutations, aborted staging, field/value changes, and missing/incompatible provider errors.",
+        "Measure retained structure sizes and mutation/query work for each configuration; distinguish payload counts from isolated process memory.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-2002.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/positions/",
+        "src/addons/phrases/",
+        "test/addons/positions/",
+        "test/fixtures/phrases/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-2003",
+      "title": "Structured filters and exact conjunctive facets",
+      "milestone": "N2",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1006"
+      ],
+      "objective": "Add optional numeric/set filters and selected keyword facet counts while preserving exact totals and explicit Boolean semantics.",
+      "acceptanceCriteria": [
+        "RX-2003-AC01: Numeric comparisons, set membership, missing/null values, field types, and nested filter composition have a typed bounded contract with no JavaScript coercion surprises.",
+        "RX-2003-AC02: Filter evaluation participates in complete qualification before limits and cannot create lexical relevance contributions.",
+        "RX-2003-AC03: Conjunctive keyword facets count the fully qualified result set under the current selected filters, including the facet's own filter, before top-k slicing.",
+        "RX-2003-AC04: Multi-value facet values count each document once per distinct value; missing values, ordering, and output bounds have explicit behavior.",
+        "RX-2003-AC05: Facet and filter data remain revision-coherent during mutations, cancellation, and empty-result operations.",
+        "RX-2003-AC06: Specialized filter indexes are added only if measured need justifies them; the module is absent from core-only import/state graphs."
+      ],
+      "verification": [
+        "Compare nested filter membership and facet tables with an independent full-scan reference for typed/missing/multi-value records.",
+        "Check limit=0, small limits, repeated values, selected own-facet filters, no results, and simultaneous filter/phrase combinations.",
+        "Exercise configured facet/output bounds and ensure incomplete aggregation is reported as a typed failure rather than an exact count.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-2003.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/filters/",
+        "src/addons/facets/",
+        "test/addons/filters/",
+        "test/addons/facets/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-2004",
+      "title": "Factual explain and Inspector data",
+      "milestone": "N2",
+      "status": "planned",
+      "dependsOn": [
+        "RX-1006"
+      ],
+      "objective": "Expose bounded query/record explanations and diagnostic exports derived from actual native decisions and arithmetic.",
+      "acceptanceCriteria": [
+        "RX-2004-AC01: Explanation data distinguishes eligibility, exclusion, ranking, selected alternatives, filters, revision identity, and resource outcomes.",
+        "RX-2004-AC02: Displayed numerical contributions come from the executed native scorer and reconstruct the result score within the declared tolerance.",
+        "RX-2004-AC03: Explanations identify unknown/unavailable facts explicitly; foreign engine scores are never labeled as native numerical decomposition.",
+        "RX-2004-AC04: Normal search remains free of full trace allocations; requested traces and exports have bounded work/size and deterministic field meaning.",
+        "RX-2004-AC05: Diagnostic exports default to metadata with explicitly selected source inclusion; no collection text or personal content is silently exported.",
+        "RX-2004-AC06: Explanation objects support later DOM presentation and regression comparison without requiring DOM or persistence in the data module."
+      ],
+      "verification": [
+        "Reconstruct hand-derived scores from exported contributions and verify exclusions against independent query outcomes.",
+        "Check absent record IDs, stale revision requests, truncated diagnostic output, failed/cancelled operations, and unsupported capability reporting.",
+        "Inspect normal-query allocation counters and explicit source-inclusion behavior; validate export schema and round-trip parsing.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-2004.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/inspector/",
+        "src/core/trace/",
+        "test/addons/inspector/",
+        "test/fixtures/ranking/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-2005",
+      "title": "Original match ranges and bounded snippets",
+      "milestone": "N2",
+      "status": "planned",
+      "dependsOn": [
+        "RX-2001",
+        "RX-2002"
+      ],
+      "objective": "Produce trustworthy presentation data from original source, using reanalysis or stored offsets as explicit interchangeable providers.",
+      "acceptanceCriteria": [
+        "RX-2005-AC01: Match ranges use original UTF-16 coordinates, identify field and value, and prove actual source occurrences at the same revision.",
+        "RX-2005-AC02: Source reanalysis and stored-offset providers agree on supported occurrence evidence; normalized offsets are never substituted.",
+        "RX-2005-AC03: Snippet boundaries avoid splitting grapheme clusters, respect bounded output, and indicate omitted context without fabricating source text.",
+        "RX-2005-AC04: Ranges and snippets remain data; source text is never returned as pretrusted HTML and unsafe rendering is not encouraged.",
+        "RX-2005-AC05: Missing source prevents snippets with a clear capability error; positions alone may establish phrase eligibility without claiming display text.",
+        "RX-2005-AC06: Evidence/snippet work, retained source, and module imports remain optional and honor cancellation/output limits."
+      ],
+      "verification": [
+        "Run original-range fixtures with combining marks, surrogate pairs, emoji sequences, scripts, punctuation, repeated matches, and multiple field values.",
+        "Compare offset and reanalysis provider output to independent source slices and check all returned ranges are valid.",
+        "Verify bounded snippet windows, overlapping matches, no text injection, mutation revision coherence, and absent-source failures.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-2005.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/evidence/",
+        "src/addons/snippets/",
+        "test/addons/evidence/",
+        "test/fixtures/evidence/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-2006",
+      "title": "Native DOM UI, Inspector, and documentation pilot",
+      "milestone": "N2",
+      "status": "planned",
+      "dependsOn": [
+        "RX-2003",
+        "RX-2004",
+        "RX-2005"
+      ],
+      "objective": "Deliver a usable optional native search interface and Inspector over real documentation through public package capabilities.",
+      "acceptanceCriteria": [
+        "RX-2006-AC01: A semantic labeled search form, result navigation, filters/facets, empty/error/loading states, and actual Inspector data work against the packaged native engine.",
+        "RX-2006-AC02: IME composition, debouncing, stale requests, focus preservation, result/status announcements, and recovery states have explicit tested behavior.",
+        "RX-2006-AC03: Keyboard controls use native elements or justified patterns, focus stays visible, and reduced-motion preferences are respected.",
+        "RX-2006-AC04: Source snippets are rendered safely as text plus explicit marks; source URLs and content come from the allowlisted documentation corpus.",
+        "RX-2006-AC05: Duplicate initialization and destroy/reinitialize do not leak listeners, pending queries, workers, or UI-owned resources.",
+        "RX-2006-AC06: UI/Inspector CSS and runtime are optional imports; automated accessibility success is distinguished from unperformed exact-tool assistive-technology observations.",
+        "RX-2006-AC07: The native pilot supports real tasks and reports relevance/interaction findings; a static mock-up does not complete this task."
+      ],
+      "verification": [
+        "Run a packed-consumer browser scenario covering submit, rapid typing, IME, facets, no results, errors, navigation, Inspector open/close, and teardown.",
+        "Perform keyboard/focus tests and automated accessibility checks with recorded tool versions; record manual observations separately.",
+        "Check unsafe fixture text, long content, narrow viewports, visible focus, reduced motion, and status changes.",
+        "Re-evaluate real-document judgments and inspect the core-only consumer for absence of DOM/Inspector/CSS imports.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-2006.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/ui/",
+        "src/addons/ui/styles.css",
+        "examples/docs-search/",
+        "test/ui/",
+        "test/consumer/",
+        "package.json",
+        "README.md"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-3001",
+      "title": "One-owner module-worker adapter",
+      "milestone": "N3",
+      "status": "planned",
+      "dependsOn": [
+        "RX-2006"
+      ],
+      "objective": "Host the complete native engine in one module worker through validated transport while preserving direct execution semantics.",
+      "acceptanceCriteria": [
+        "RX-3001-AC01: The worker owns one complete corpus and its statistics; no independently scored shards change ranking semantics.",
+        "RX-3001-AC02: Direct and worker operations agree on membership, scores/ties, totals, facets, evidence, revision identity, and typed errors for the same configuration.",
+        "RX-3001-AC03: Transport validates requests/responses, operation identity, bounded payloads, analyzer/add-on compatibility, and worker lifecycle.",
+        "RX-3001-AC04: Cancel, timeout, termination, failed initialization, and unknown mutation outcome are distinguished; transport loss never proves rollback.",
+        "RX-3001-AC05: Worker construction is explicit and bundler-compatible through a documented public entry; importing core never creates a worker.",
+        "RX-3001-AC06: Destroy/recover releases listeners and worker resources, and pending promises settle according to the contract."
+      ],
+      "verification": [
+        "Run the same corpus/query/mutation/phrase/facet suite directly and through a real browser module worker and compare semantic outputs.",
+        "Inject malformed messages, delayed replies, out-of-order IDs, worker death, pre/post-commit cancellation, and failed startup.",
+        "Install a packed consumer and verify the documented worker import/bundling path in supported test environments.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-3001.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/adapters/worker/",
+        "test/adapters/worker/",
+        "test/consumer/",
+        "examples/docs-search/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-3002",
+      "title": "Versioned source and native snapshots",
+      "milestone": "N3",
+      "status": "planned",
+      "dependsOn": [
+        "RX-2006"
+      ],
+      "objective": "Export and restore explicit source/native snapshot formats with bounded decoding and verified compatibility.",
+      "acceptanceCriteria": [
+        "RX-3002-AC01: Formats identify codec, schema, analyzer, ranking, capability, index-detail, and format versions; incompatible data is rejected with a specific reason.",
+        "RX-3002-AC02: Source snapshots rebuild native state from authoritative records; native snapshots validate index structures rather than trusting opaque bytes.",
+        "RX-3002-AC03: Restore prepares and validates all participating state before atomically replacing the visible revision.",
+        "RX-3002-AC04: Round trips preserve declared search semantics and data ownership, including chosen optional state; source-free configurations do not invent omitted text.",
+        "RX-3002-AC05: Malformed, oversized, truncated, inconsistent, or unsupported snapshots fail without corrupting the current searchable state.",
+        "RX-3002-AC06: Serialization/restoration work and memory costs are measured separately from index bytes; codecs remain optional imports."
+      ],
+      "verification": [
+        "Round-trip each supported index-detail configuration and compare result sets, scores, phrases, evidence, facets, and subsequent mutations.",
+        "Use corruption and compatibility fixtures for every header/version and critical structural invariant; assert old-state preservation.",
+        "Exercise cancellation and limits during encode/decode/staging, and capture raw size and memory-method limitations.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-3002.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/adapters/snapshots/",
+        "test/adapters/snapshots/",
+        "test/fixtures/snapshots/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-3003",
+      "title": "IndexedDB persistence, recovery, and namespace erasure",
+      "milestone": "N3",
+      "status": "planned",
+      "dependsOn": [
+        "RX-3001",
+        "RX-3002"
+      ],
+      "objective": "Provide explicitly selected local persistence and recovery with truthful commit/conflict outcomes and complete namespace erasure.",
+      "acceptanceCriteria": [
+        "RX-3003-AC01: Save/load/erase are explicit API actions in a namespaced optional adapter with no import-time storage or background persistence.",
+        "RX-3003-AC02: Persisted generation/conflict rules distinguish engine commit, serialization, durable storage completion, and uncertain transport outcomes.",
+        "RX-3003-AC03: Quota failures, unavailable storage, corrupted snapshots, schema upgrades, blocked tabs, and simultaneous clients have explicit recovery behavior.",
+        "RX-3003-AC04: Loading uses validated snapshot restore and does not expose partially recovered core or add-on state.",
+        "RX-3003-AC05: Namespace erasure removes all adapter-owned records and metadata in scope; memory cleanup is a separate documented operation.",
+        "RX-3003-AC06: Direct and worker recovery flows preserve the public semantic contract and settle pending operations without leaks."
+      ],
+      "verification": [
+        "Run real-browser IndexedDB save/reload/query, mutation/save, conflicting clients, and erase/reopen scenarios using packed public imports.",
+        "Inject quota/transaction/corruption/transport failures and assert durable-state and in-memory-state outcomes separately.",
+        "Inspect all namespace-owned stores after erasure and test idempotent cleanup and unavailable-storage fallback.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-3003.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/adapters/indexeddb/",
+        "test/adapters/indexeddb/",
+        "test/consumer/",
+        "examples/docs-search/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/specs/CORE_CONTRACT.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-3004",
+      "title": "Companion migration and comparator separation",
+      "milestone": "N3",
+      "status": "planned",
+      "dependsOn": [
+        "RX-3003"
+      ],
+      "objective": "Provide a bounded route from the prior companion while keeping native implementation, third-party compatibility, and comparison evidence distinct.",
+      "acceptanceCriteria": [
+        "RX-3004-AC01: A documented mapping identifies reusable source records/configuration, native rebuild requirements, intentional semantic differences, and unsupported legacy state.",
+        "RX-3004-AC02: Supported companion source snapshots migrate by validated conversion/reindexing; opaque MiniSearch indexes are not relabeled or silently loaded as native indexes.",
+        "RX-3004-AC03: Legacy MiniSearch compatibility/comparison code resides outside native core and cannot enter a core-only consumer transitively.",
+        "RX-3004-AC04: Any foreign adapter identifies its engine/scoring/cancellation/phrase limitations and does not report native numerical explanations.",
+        "RX-3004-AC05: Migration tests compare documented shared semantics and report expected rank changes separately from migration defects.",
+        "RX-3004-AC06: Historical companion evidence remains unchanged and attributed to its original implementation; native claims link native observations."
+      ],
+      "verification": [
+        "Migrate representative supported source snapshots, query the result, update it, persist/reload, and compare with independently reindexed expected data.",
+        "Reject opaque/incompatible legacy inputs with explicit diagnostics and verify no mutation on failure.",
+        "Inspect packaged dependency/import graphs and verify native consumers have zero foreign search-engine runtime dependencies.",
+        "Review the migration guide against actual public exports and preserved provenance.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-3004.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "integrations/minisearch/",
+        "test/migration/",
+        "test/comparison/",
+        "docs/migration/",
+        "examples/migration/",
+        "package.json"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-4001",
+      "title": "Fair correctness, relevance, and cost comparison",
+      "milestone": "N4",
+      "status": "planned",
+      "dependsOn": [
+        "RX-3004"
+      ],
+      "objective": "Establish the native product's observed strengths and limitations through equivalent workloads and independently judged outcomes.",
+      "acceptanceCriteria": [
+        "RX-4001-AC01: Correctness evaluation uses the independent oracle, hand-derived score cases, mutation sequences, and phrase-strategy parity rather than ranking agreement with another library.",
+        "RX-4001-AC02: A frozen real-content query set grows to at least 50 useful judgments, preferably 50–100, with must-find/acceptable/irrelevant sources and explicit no-result cases.",
+        "RX-4001-AC03: Report Top-1, Top-3, MRR, Recall@10, and zero-result outcomes where judgments support them; disclose incomplete relevance labels and corpus bias.",
+        "RX-4001-AC04: Comparison rows declare equivalent queries, filters, phrase/count semantics, retained source, UI/worker/storage configuration, version pins, and unsupported features.",
+        "RX-4001-AC05: Measure admitted 100/1,000/10,000-record workloads for build/query/update/serialization with raw repetitions, environment, warm/cold method, and work counters.",
+        "RX-4001-AC06: Core-only, source-document, positional, and worker/storage costs are reported separately; bundle/serialized bytes are not presented as retained or peak process memory.",
+        "RX-4001-AC07: No overall winner is declared from incomparable workloads; repeated native regressions produce scoped follow-up findings rather than automatic feature expansion."
+      ],
+      "verification": [
+        "Run the complete native correctness suite and inspect oracle independence before using benchmark results.",
+        "Freeze/query the judged corpus, calculate metrics from raw ranked outputs, and manually review failed and zero-result cases.",
+        "Run version-pinned comparison harnesses with feature-equivalence metadata and record unsupported semantics as not comparable.",
+        "Review measurement scripts, seeds, raw samples, summary calculations, and claim wording independently.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-4001.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "bench/",
+        "test/comparison/",
+        "test/oracle/",
+        "test/fixtures/relevance/",
+        "docs/evaluation/",
+        "scripts/"
+      ],
+      "specs": [
+        "docs/planning/VERIFICATION_PLAN.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/architecture/ADDONS_AND_ADAPTERS.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-4002",
+      "title": "Browser, assistive-technology, memory, and device qualification",
+      "milestone": "N4",
+      "status": "planned",
+      "dependsOn": [
+        "RX-3004"
+      ],
+      "objective": "Collect the specific environment and resource observations required by the proposed native support claims.",
+      "acceptanceCriteria": [
+        "RX-4002-AC01: Define and exercise the package in explicit Chromium, WebKit/Safari, and Firefox test environments, recording actual browser/OS/runtime versions and supported configurations.",
+        "RX-4002-AC02: Record exact-tool assistive-technology observations for the declared UI flows, including query/results/status, errors, filters/facets, Inspector, and worker recovery.",
+        "RX-4002-AC03: Use an explicit memory method to distinguish retained source/index/side state, mutation staging peak, serialization/transport buffers, and worker/process scope.",
+        "RX-4002-AC04: Physical presentation/input observations identify the actual device, display/input method, workload, and observable outcome; animation-frame timing alone is not relabeled as paint evidence.",
+        "RX-4002-AC05: Test 1,000 and 10,000 admitted records at minimum for relevant resource configurations; experiments beyond the defensive ceiling require a revised capacity design.",
+        "RX-4002-AC06: Unavailable exact tools or isolated measurements remain Blocked with a concrete required observation; old companion runs or proxy metrics cannot fill the gap.",
+        "RX-4002-AC07: Any proposed narrower release claim is documented and reviewed against the release contract before acceptance criteria change; no silent waiver converts missing proof to Pass."
+      ],
+      "verification": [
+        "Execute the recorded browser package matrix and keyboard/UI scenarios, keeping engine and host capability differences visible.",
+        "Run named screen-reader/browser/OS combinations available to the evaluator and preserve observed announcements/focus outcomes and failures.",
+        "Capture retained/peak-memory methodology and raw samples with cleanup baselines and process boundaries; report noise and instrumentation limits.",
+        "Perform and document physical device interaction/presentation observations; separate these from automated rAF proxies.",
+        "Independently reconcile the observed support matrix with candidate documentation and unresolved evidence.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-4002.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "test/qualification/",
+        "bench/memory/",
+        "docs/evaluation/",
+        "docs/accessibility/",
+        "docs/support/",
+        "examples/docs-search/"
+      ],
+      "specs": [
+        "docs/planning/VERIFICATION_PLAN.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "docs/architecture/ADDONS_AND_ADAPTERS.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-4003",
+      "title": "Package, public documentation, and independent candidate review",
+      "milestone": "N4",
+      "status": "planned",
+      "dependsOn": [
+        "RX-4001",
+        "RX-4002"
+      ],
+      "objective": "Prepare a coherent native 0.1 candidate and a concrete release recommendation while keeping publication a separate action.",
+      "acceptanceCriteria": [
+        "RX-4003-AC01: Candidate scope, public exports/types, supported environments, exclusions, SemVer/compatibility policy, migration guidance, and support expectations match verified behavior.",
+        "RX-4003-AC02: Packed consumers verify core and selected add-on/adapter entrypoints, clean package contents, no unexpected runtime dependencies, and independent CSS imports.",
+        "RX-4003-AC03: Quick start, API reference, native Inspector explanation, worker/storage examples, limitations, accessibility evidence, and release notes use actual public APIs.",
+        "RX-4003-AC04: Release automation is reviewable and gated; secrets, npm publishing, public release creation, and release tags are not executed as part of candidate preparation.",
+        "RX-4003-AC05: An independent review checks acceptance evidence, unresolved defects, API/package coherence, fair claims, and documentation synchronization.",
+        "RX-4003-AC06: The final recommendation names ready scope and remaining blockers; unfinished criteria are not hidden by a passing broad command.",
+        "RX-4003-AC07: The planner reports the completed active native backlog distinctly from deferred N5 ideas and the separate owner publication decision."
+      ],
+      "verification": [
+        "Run the full required native verification, type/build/export validation, pack/install consumer checks, and optional-import isolation checks.",
+        "Run documentation examples against the candidate tarball and compare support/limitation claims with qualification records.",
+        "Inspect release workflow permissions and dry-run preparation without publishing, tagging, or using release credentials.",
+        "Have an independent reviewer produce a readiness verdict with evidence-linked findings and a clear owner release recommendation.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-4003.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "package.json",
+        "README.md",
+        "CHANGELOG.md",
+        ".changeset/",
+        ".github/workflows/",
+        "test/consumer/",
+        "docs/api/",
+        "docs/support/",
+        "docs/release/"
+      ],
+      "specs": [
+        "docs/planning/VERIFICATION_PLAN.md",
+        "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/specs/RANKING.md",
+        "docs/specs/MUTATIONS_AND_EXECUTION.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A010",
+      "title": "Bounded typo tolerance",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Expand eligible tokens under a named edit-distance policy when judged typo queries demonstrate useful gains.",
+      "acceptanceCriteria": [
+        "RX-A010-AC01: Specify algorithm, edit/transposition semantics, minimum token length, maximum distance, expansion limits, weighting, and strict exact/prefix/phrase interactions.",
+        "RX-A010-AC02: Expansion preserves original required groups and records actual alternatives; exhausted bounds fail or use an explicitly selected incomplete mode without false exact totals.",
+        "RX-A010-AC03: Judged typo queries improve under declared metrics without unacceptable false positives; optional dictionary/automaton data and import costs are measured."
+      ],
+      "verification": [
+        "Evaluate hand-derived distance cases and independent candidate expansions, then run exact and typo relevance sets.",
+        "Measure expansion work, peak candidate counts, bundle/state costs, and cancellation behavior.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A010.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/typo/",
+        "test/addons/typo/",
+        "test/fixtures/relevance/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A020",
+      "title": "Dictionary-backed suggestions",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Offer explicit query completions without silently rewriting submitted search semantics.",
+      "acceptanceCriteria": [
+        "RX-A020-AC01: Specify whether suggestions complete a token or a query, the source dictionary scope, ranking, filtering, minimum length, and output bounds.",
+        "RX-A020-AC02: Suggestions are returned separately from search results and do not automatically replace user input; stale/IME/UI behavior is explicit if integrated.",
+        "RX-A020-AC03: A standalone optional entry supports deterministic results, cancellation, mutation freshness, and measured dictionary/output costs."
+      ],
+      "verification": [
+        "Test deterministic completion order, misses, limits, mutation revisions, and empty/short inputs.",
+        "Evaluate realistic completion utility separately from search ranking, and test UI focus/announcement behavior if the pilot exposes suggestions.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A020.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/suggestions/",
+        "test/addons/suggestions/",
+        "examples/docs-search/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A030",
+      "title": "Directional one-step synonyms",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Support transparent, bounded alternatives within original query groups for a judged domain vocabulary.",
+      "acceptanceCriteria": [
+        "RX-A030-AC01: Synonyms are directional, one-step, versioned alternatives with explicit expansion/scoring limits and no recursive graph traversal.",
+        "RX-A030-AC02: AND stays between original groups and OR within alternatives; eligibility/score explanations identify applied mappings.",
+        "RX-A030-AC03: Multiword synonyms and phrase-position graphs remain outside this first version; phrase behavior, analyzer compatibility, and optional costs are documented."
+      ],
+      "verification": [
+        "Compare independent one-step expansions and original-group Boolean outcomes, including cycles and repeated alternatives.",
+        "Evaluate judged recall gains and false positives, trace arithmetic, configuration compatibility, and expansion bounds.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A030.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/synonyms/",
+        "test/addons/synonyms/",
+        "test/fixtures/relevance/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A040",
+      "title": "Evaluated language analyzer pack",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Select one language with real corpus demand and provide compatible indexing/querying/source evidence.",
+      "acceptanceCriteria": [
+        "RX-A040-AC01: Name the initial language and corpus need before implementation; specify segmentation, normalization, morphology, version identity, and source mapping.",
+        "RX-A040-AC02: Index/query/direct/worker/snapshot analysis stays compatible with phrase boundaries and original evidence; missing/incompatible packs fail explicitly.",
+        "RX-A040-AC03: Language data/code is separately installable and adds no core import or retained cost; per-language relevance and resource results support the claim."
+      ],
+      "verification": [
+        "Use native-language fixtures reviewed for segmentation and phrase/source evidence correctness.",
+        "Evaluate language-specific judgments and direct/worker/restore parity, including incompatible analyzer versions.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A040.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "integrations/languages/",
+        "test/integrations/languages/",
+        "test/fixtures/relevance/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A050",
+      "title": "Code and identifier analysis",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Search developer identifiers without losing exact original names or inventing phrase/source evidence.",
+      "acceptanceCriteria": [
+        "RX-A050-AC01: Specify original identifiers and selected camelCase, snake_case, path, or punctuation components with their weighting and grouping behavior.",
+        "RX-A050-AC02: Exact names remain searchable; derived fragments carry explicit source evidence and do not silently create unsupported phrase adjacency.",
+        "RX-A050-AC03: The analyzer is independently selected/versioned and evaluated against real developer queries and non-code regressions."
+      ],
+      "verification": [
+        "Run identifier/source-range fixtures for acronyms, digits, Unicode, separators, paths, and collisions.",
+        "Evaluate judged code queries, native trace contributions, phrase semantics, and compatibility across worker/restore.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A050.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/identifiers/",
+        "test/addons/identifiers/",
+        "test/fixtures/relevance/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A060",
+      "title": "Explicit literal and infix matching",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Expose bounded substring semantics as a distinct capability rather than disguising it as token prefix search.",
+      "acceptanceCriteria": [
+        "RX-A060-AC01: Define literal/infix case/normalization/Unicode behavior, field/value boundaries, qualification, and original-source evidence independently from token retrieval.",
+        "RX-A060-AC02: An initial source scan has explicit work bounds; any n-gram or other accelerator is optional and justified by equivalent-result measurements.",
+        "RX-A060-AC03: Result totals and ranking integration remain explicit; source-free configurations fail capability checks rather than pretending to support literal matching."
+      ],
+      "verification": [
+        "Compare results/ranges with an independent literal scan across Unicode, punctuation, overlaps, empty inputs, and multi-value boundaries.",
+        "Measure query work and optional acceleration costs on admitted corpora, including cancellation and exact-total failures.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A060.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/literal/",
+        "test/addons/literal/",
+        "bench/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A070",
+      "title": "Ordered proximity matching",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Add selected ordered-gap semantics over positional data without redefining strict phrase search.",
+      "acceptanceCriteria": [
+        "RX-A070-AC01: Specify maximum gap, ordered matching, repeated-token consumption, alternative groups, and field/value boundaries.",
+        "RX-A070-AC02: Strict phrase remains the zero-gap contract with unchanged eligibility/scores; any proximity weighting is a separately versioned declared ranking choice.",
+        "RX-A070-AC03: Required positions, bounded evaluation work, missing-capability errors, and transactional side-state behavior are explicit."
+      ],
+      "verification": [
+        "Compare proximity eligibility with an independent token-position scan, including repeats, overlapping alternatives, and zero-gap phrase parity.",
+        "Measure bounded work, limits, cancellation, and mutation/restore parity.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A070.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/proximity/",
+        "test/addons/proximity/",
+        "test/fixtures/phrases/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A080",
+      "title": "Bounded text query syntax",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Compile an explicit user-facing syntax to the existing validated query tree without introducing a second evaluator.",
+      "acceptanceCriteria": [
+        "RX-A080-AC01: Specify supported operators, quoting/escaping, precedence, field names, error spans, empty input, and depth/token limits.",
+        "RX-A080-AC02: Parsed queries use the existing validated native query contract and installed capabilities; unknown fields/operators are explicit errors.",
+        "RX-A080-AC03: The parser is optional, produces safe diagnostic text, and does not silently fall back from malformed expressions to different semantics."
+      ],
+      "verification": [
+        "Use hand-written parse trees and syntax/error-span fixtures, plus generated bounded expressions.",
+        "Compare parsed queries with equivalent typed queries for results, scores, limits, and installed-capability failures.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A080.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/query-syntax/",
+        "test/addons/query-syntax/",
+        "examples/docs-search/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A090",
+      "title": "Explicit record patch convenience",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Offer partial record updates by composing authoritative source with the existing atomic replacement contract.",
+      "acceptanceCriteria": [
+        "RX-A090-AC01: Define set/unset behavior, nested-path scope, missing records/fields, validation, and revision conflict policy.",
+        "RX-A090-AC02: Patches require authoritative source at the declared revision and compile to the same incremental atomic mutation path.",
+        "RX-A090-AC03: Source-free or stale/conflicting patches fail explicitly; no dynamic schema migration or hidden source retention is added."
+      ],
+      "verification": [
+        "Compare patch results and index state with independently constructed full replacements, including unset/null/array/invalid input cases.",
+        "Test conflict, pre-commit failure, cancellation, and source-provider absence without partial changes.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A090.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "src/addons/patch/",
+        "test/addons/patch/",
+        "test/fixtures/mutations/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    },
+    {
+      "id": "RX-A100",
+      "title": "Static-build and Astro adapter",
+      "milestone": "N5",
+      "status": "deferred",
+      "dependsOn": [
+        "RX-4003"
+      ],
+      "objective": "Integrate native search artifacts with static content pipelines while keeping extraction and framework behavior outside the engine.",
+      "acceptanceCriteria": [
+        "RX-A100-AC01: Define an explicit content allowlist, record IDs, source URLs, build/runtime analyzer compatibility, update strategy, and artifact loading behavior.",
+        "RX-A100-AC02: The adapter builds/loads native public artifacts and does not introduce framework, crawler, parser, or network code into the core.",
+        "RX-A100-AC03: A real static/Astro consumer verifies navigation, asset paths, optional result-data loading, accessible UI, and native snapshot compatibility."
+      ],
+      "verification": [
+        "Build and serve a packed integration fixture with real content and verify native query/navigation results after deployment-path changes.",
+        "Inspect core consumer imports and adapter package dependencies; test stale/incompatible/missing artifacts and optional loading behavior.",
+        "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A100.md; add the existing record to this task's evidence only after it has been produced."
+      ],
+      "affectedPaths": [
+        "integrations/astro/",
+        "examples/astro/",
+        "test/integrations/astro/"
+      ],
+      "specs": [
+        "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "docs/specs/CORE_CONTRACT.md",
+        "docs/planning/VERIFICATION_PLAN.md"
+      ],
+      "evidence": [],
+      "blocker": null
+    }
+  ]
+}
