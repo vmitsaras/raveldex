@@ -179,7 +179,7 @@ Build the first Raveldex-owned field-aware index and prove exact token eligibili
 
 **Query evaluation, native BM25, and numerical trace facts**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/11)
+**Milestone:** N1 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/11)
 
 **Dependencies:** [RX-1002](IMPLEMENTATION_TASKS.md#rx-1002)
 
@@ -212,7 +212,7 @@ Implement complete typed query evaluation and the versioned native ranker with e
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-1003.md](docs/evidence/RX-1003.md)
 
 
 ## RX-1004

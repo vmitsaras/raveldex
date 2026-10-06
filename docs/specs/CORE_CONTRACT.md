@@ -1,6 +1,6 @@
 # Core contract: data, analysis, queries, results, and limits
 
-Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001 input/analyzer/error/limit primitives and RX-1002 frequency construction/exact lookup are implemented and verified locally; public engine/full query evaluation remain planned. See [RX-1001 evidence](../evidence/RX-1001.md) and [RX-1002 evidence](../evidence/RX-1002.md).
+Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001–1003 input/analysis, frequency construction and complete query/BM25 evaluation are implemented and verified locally; the public engine/mutations/scheduler remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md) and [RX-1003 evidence](../evidence/RX-1003.md).
 
 ## Goal
 
@@ -192,7 +192,7 @@ A group may qualify from any selected field. Separate AND groups may qualify fro
 
 Exact means equality with a complete normalized dictionary term. Prefix means that a complete normalized dictionary term starts with the normalized query term. Matching is binary and never locale collation.
 
-Prefix terms require at least two Unicode code points after normalization. Enumerate qualifying live terms in the selected fields; count distinct `(field, term)` expansions. The per-group and whole-query caps below apply before result evaluation. If an expansion cap is exceeded, fail the entire operation; do not take the first alphabetic expansions or the most frequent terms.
+Prefix terms require at least two Unicode code points after normalization. Enumerate qualifying live terms in the selected fields; count distinct `(field, term)` expansions. The per-group and whole-query caps below apply before result evaluation. The whole-query count unions these pairs across canonical groups; selecting the same pair through different clauses or weights does not count it twice. If an expansion cap is exceeded, fail the entire operation; do not take the first alphabetic expansions or the most frequent terms.
 
 Prefix matching is not automatically enabled on the final word of plain-string search. A caller requests it using a typed group. Fuzzy, infix, phrase, synonym, and query-language operators are not inferred from punctuation or misspellings.
 

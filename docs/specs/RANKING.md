@@ -1,6 +1,6 @@
 # Ranking and numerical explanations
 
-Status: Approved. Primary task: RX-1003. Inspector integration: RX-2004. Implementation/evaluation: not started.
+Status: Approved. Primary task: RX-1003. Inspector integration: RX-2004. RX-1003 internal scorer/evaluator/facts verified locally; see [evidence](../evidence/RX-1003.md). Public Inspector integration and mutation/host qualification remain planned.
 
 ## Goal and outcome
 
@@ -8,7 +8,7 @@ Define one native ranking model whose returned score can be reconstructed from t
 
 ## Non-goals and current facts
 
-There is no native scorer in this fresh repository yet. This document selects `raveldex-bm25-v1`; it does not describe MiniSearch scoring or claim that native relevance has been measured. Query semantics and hard bounds are in [CORE_CONTRACT.md](CORE_CONTRACT.md).
+RX-1003 implements the native scorer and internal complete query cursor. This document selects `raveldex-bm25-v1`; it does not describe MiniSearch scoring or claim that native relevance has been measured. Query semantics and hard bounds are in [CORE_CONTRACT.md](CORE_CONTRACT.md).
 
 The first model has no learned weights, arbitrary ranking hooks, proximity/phrase bonus, recency/popularity boost, document-length approximation, score rounding, or score merging across independent indexes. Language models and foreign engine scores cannot silently enter this model.
 
@@ -131,7 +131,7 @@ For red and car, `N = 3`, `df = 2`, `avgLength = 2`, and `idf = ln(1.6)`, approx
 
 `AND(red, car)` yields a at approximately `0.956771409650921`, then b at `0.940007258491471`. A single alternatives group `red OR car` selects only red's contribution for a and one equal contribution for b. Its b trace selects car by the defined term tie-breaker.
 
-These numbers are independently calculated illustrative expectations, not native runtime test results. Tests must derive expected values independently of the scorer and cover multiple fields, empty fields, mutations, and alternative weights as well.
+These numbers are independently calculated fixture expectations, verified by RX-1003 local tests. Tests must derive expected values independently of the scorer and cover multiple fields, empty fields, mutations, and alternative weights as well.
 
 ## Explanation facts
 
@@ -162,7 +162,7 @@ Explain requests that specify an expected revision fail on mismatch; the initial
 | R-AC06 | Metadata/source/positions/facet configuration does not accidentally alter base ranking. | Compare identical ordinary lexical queries with each representation installed/uninstalled. |
 | R-AC07 | Opt-out tracing avoids explanation allocations. | Inspected import/allocation path and focused instrumentation; do not infer from an empty returned trace. |
 
-Expected areas: `src/core/` scorer/evaluator/statistics, independent numerical fixtures, and later `src/addons/inspector/`. Runtime assertions remain pending until their implementation tasks; a reviewed formula is design evidence only.
+Expected areas: `src/core/` scorer/evaluator/statistics, independent numerical fixtures, and later `src/addons/inspector/`. RX-1003 records internal single/multiple-field, Boolean, alternative, trace, ordering and opt-out allocation observations. Replacement/deletion-driven statistics, optional representation parity, direct/worker parity and public Inspector requests remain later task evidence.
 
 ## Open questions
 

@@ -14,7 +14,7 @@ export class WorkBudget {
   }
 }
 
-/** Later retrieval supplies counts; this slice does not enumerate a dictionary. */
+/** Retrieval supplies distinct live field/term pair counts before evaluation. */
 export function validateExpansionCounts(perGroup: number, wholeQuery: number, limits: Limits): void {
   for (const count of [perGroup, wholeQuery]) if (!Number.isSafeInteger(count) || count < 0) invalid('INTERNAL_ERROR', 'expansions');
   bound(perGroup, limits.maxExpansionsPerGroup, 'expansions.group');

@@ -1,6 +1,6 @@
 # Native architecture
 
-Status: Approved design; RX-1001 input/analyzer/error/limit primitives and RX-1002 frequency index/exact retrieval implemented locally. Full query evaluation, ranking, incremental mutations and scheduling remain planned. See [RX-1001 evidence](../evidence/RX-1001.md) and [RX-1002 evidence](../evidence/RX-1002.md).
+Status: Approved design; RX-1001–1003 input/analysis, frequency index and complete query/BM25 evaluation implemented locally. Incremental mutations and public scheduling remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md) and [RX-1003 evidence](../evidence/RX-1003.md).
 
 Decision date: 2026-10-06. Scope: the native Raveldex line in this repository.
 
@@ -97,6 +97,8 @@ The normative lifecycle, no-op behavior, failure outcomes, and scheduling limits
 7. Return owned data. Collect explanation facts only when explicitly requested.
 
 A selective filter or result limit may improve execution only when the optimization preserves all requested membership, scoring, totals, and facets. Phrase verification cannot run only after top-k selection. A verifier for a phrase leaf cannot globally discard documents that qualified through another OR branch.
+
+RX-1003 implements this core query pipeline as one internally consumed generator and one work-v1 budget. Canonical lexical keys contain sorted fields and deduplicated sorted normalized term/mode/weight tuples; Boolean structure preserves negative/scoring participation. Whole-query expansion counts union distinct field/term pairs across groups. Complete group posting membership is followed by evaluation of every live document, then field/group-ordered scoring. A worst-first heap retains at most offset + limit entries and uses charged resumable comparisons; no full candidate sort is required. Query-local memberships, canonical trees and page candidates are temporary operation data, not retained side indexes. Private selected-ID tracing records evaluator paths and actual scorer intermediates, including off-page/nonqualifying IDs, and caps the complete header/facts at 4,096. Public scheduling/cancellation and Inspector capability registration remain later work.
 
 ## Analyzer/environment boundary
 
