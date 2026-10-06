@@ -1,6 +1,8 @@
-# Source ownership (planned)
+# Source ownership
 
-No search runtime is implemented yet. RX-1001 creates the first actual TypeScript sources and justified development tooling.
+RX-1001 implements internal input contracts, the shared analyzer, error codes and limit guards. There is no usable search engine/factory yet. The compiler emits ESM and declarations to `dist/`; there is no public package export until later slices implement the real core.
+
+`contracts/` captures frozen bounded structures before any resumable content scan. `analyzer/basic.ts` emits work steps and original-value token spans; consumers must completely validate an operation before publishing state. `analyzeRecord` and `analyzeQuery` share that raw analyzer. `limits/` defines all hard caps and pure guards for later state, expansion and execution integration. These guards do not establish live index or scheduler behavior.
 
 | Planned path | Ownership |
 | --- | --- |
