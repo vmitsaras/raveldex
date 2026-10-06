@@ -1,0 +1,25 @@
+// Independent reviewer probe; after npm run build, run from this repository.
+import assert from 'node:assert/strict';
+import { IndexConstruction } from '../../dist/core/index/construction.js';
+import { executeSearch } from '../../dist/core/query/search.js';
+import { FactCollector } from '../../dist/core/trace/facts.js';
+const schema={text:{title:{},body:{}}};
+const drain=c=>{let work=0,steps=0;for(;;){const x=c.next();if(x.done)return{value:x.value,work,steps};assert(x.value.workUnits>0&&Number.isSafeInteger(x.value.workUnits));work+=x.value.workUnits;steps++;}};
+const build=(records,limits)=>{const c=new IndexConstruction({schema,...(limits?{limits}:{})});for(let i=0;i<records.length;i+=256)drain(c.append(records.slice(i,i+256)));return drain(c.finish()).value;};
+const fail=(fn,code,path)=>assert.throws(fn,e=>e.code===code&&(!path||e.details.path===path));
+const weighted=w=>({kind:'group',fields:['title'],variants:[{text:'red',match:'exact',weight:w}]});
+const one=build([{id:'one',text:{title:'red car'}}],{maxExpansionsPerGroup:1,maxQueryExpansions:1});
+const twoWeights=drain(executeSearch(one,{kind:'and',children:[weighted(.5),weighted(1)]})).value;assert.equal(twoWeights.total,1);
+const overlap=drain(executeSearch(one,{kind:'and',children:[weighted(1),{kind:'group',fields:['title'],variants:[{text:'re',match:'prefix'}]}]})).value;assert.equal(overlap.total,1);
+const prefix=build([{id:'a',text:{title:'car cart cargo'}}],{maxExpansionsPerGroup:2});fail(()=>drain(executeSearch(prefix,{kind:'group',variants:[{text:'ca',match:'prefix'}]})),'LIMIT_EXCEEDED','expansions.group');
+const fields=build([{id:'a',text:{title:'red',body:'red'}}],{maxQueryExpansions:1});fail(()=>drain(executeSearch(fields,'red')),'LIMIT_EXCEEDED','expansions.query');
+const tiny=drain(executeSearch(one,weighted(Number.MIN_VALUE),{}, {ids:['one']})).value;assert.equal(tiny.hits[0].score,0);const tinyFields=tiny.trace.facts.filter(f=>f.kind==='field');assert.equal(tinyFields.length,1);assert.equal(tinyFields[0].selected,0);assert.equal(tinyFields[0].term,'red');
+const ties=build([{id:'one',text:{title:'red car'}}]);const tied=drain(executeSearch(ties,{kind:'group',fields:['title'],variants:[{text:'red',match:'exact'},{text:'car',match:'exact'}]}, {},{ids:['one']})).value;assert.equal(tied.trace.facts.find(f=>f.kind==='field').term,'car');
+const revision={...ties,revision:9};assert.equal(drain(executeSearch(revision,'red')).value.revision,9);fail(()=>drain(executeSearch(revision,'red',{}, {ids:['one'],expectedRevision:0})),'REVISION_MISMATCH');
+fail(()=>drain(executeSearch(ties,'red',{}, {ids:['one'],maxFacts:1})),'LIMIT_EXCEEDED','trace.facts');assert.equal(drain(executeSearch(ties,'red')).value.total,1);
+const origRecord=FactCollector.prototype.record;FactCollector.prototype.record=function(){throw Error('unexpected fact allocation');};assert.equal(drain(executeSearch(ties,'red')).value.total,1);FactCollector.prototype.record=origRecord;
+for(const corrupt of ['df','tf','reverse','N','L','doclength','boost']){const r=structuredClone(ties);const term=Object.values(r.fields.title.terms.buckets).map(b=>b.red).find(Boolean);const doc=Object.values(r.documents.buckets).map(b=>b.one).find(Boolean);if(corrupt==='df')term.df=2;if(corrupt==='tf')Object.values(term.postings.buckets)[0].one=0;if(corrupt==='reverse')doc.fields.title.terms.red=999;if(corrupt==='N')r.fields.title.documents=0;if(corrupt==='L')r.fields.title.length=0;if(corrupt==='doclength')doc.fields.title.length=0;if(corrupt==='boost')r.configuration.schema.text.title.boost=Infinity;fail(()=>drain(executeSearch(r,{kind:'text',text:'red',fields:['title']})),'INTERNAL_ERROR');}
+const workLimited=build([{id:'one',text:{title:'red'}}],{maxSearchWorkUnits:1,checkpointWorkUnits:1});fail(()=>drain(executeSearch(workLimited,'red')),'WORK_LIMIT_EXCEEDED');
+const before=JSON.stringify(ties), full=drain(executeSearch(ties,{kind:'or',children:[weighted(.75),{kind:'not',child:weighted(1)}]}, {},{ids:['one']}));for(let stop=0;stop<full.steps;stop++){const c=executeSearch(ties,{kind:'or',children:[weighted(.75),{kind:'not',child:weighted(1)}]}, {},{ids:['one']});for(let s=0;s<stop;s++)c.next();c.return();assert.equal(JSON.stringify(ties),before);}assert.deepEqual(drain(executeSearch(ties,{kind:'or',children:[weighted(.75),{kind:'not',child:weighted(1)}]}, {},{ids:['one']})),full);
+const many=Array.from({length:10000},(_,i)=>({id:'id:'+i,text:{title:'red'}}));const big=build(many);const result=drain(executeSearch(big,'red',{offset:9899,limit:100}));assert.equal(result.value.total,10000);assert.deepEqual(result.value.hits.map(x=>x.id),many.map(x=>x.id).sort().slice(9899,9999));const empty=drain(executeSearch(big,{kind:'all'},{offset:10000,limit:0})).value;assert.equal(empty.total,10000);assert.deepEqual(empty.hits,[]);
+console.log(JSON.stringify({caps:'pass',underflowFacts:'pass',traceOffCollector:'pass',numericCorruptions:7,abandonmentCheckpoints:full.steps,largeDocuments:10000,largeWorkUnits:result.work,node:process.version}));

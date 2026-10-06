@@ -22,9 +22,9 @@ Do not publish a package/release or activate deferred N5 work.
 
 ## Current implementation boundary
 
-N0, **RX-1001 — Data, schema, basic analyzer, limits, and errors** and **RX-1002 — Dictionary, postings, exact retrieval, and independent oracle** are verified locally. See [RX-1001 evidence](docs/evidence/RX-1001.md) and [RX-1002 evidence](docs/evidence/RX-1002.md). The next slice is **RX-1003 — Query evaluation, native BM25, and numerical trace facts**; the planner and task card control readiness/scope. Reuse the captured inputs, shared analyzer and frozen frequency root. The independent source oracle must remain separate from production evaluation/scoring; BM25 needs hand-derived numerical fixtures.
+N0 and **RX-1001–1003** are verified locally: input/analysis, frequency indexing, and complete typed query/native BM25 evaluation. See [RX-1003 evidence](docs/evidence/RX-1003.md). The next slice is **RX-1004 — Incremental atomic mutations**; the planner and task card control readiness/scope. Reuse the frozen bucket directories, reverse frequencies/statistics and complete query cursor. Preserve one operation budget and the independent source oracle while implementing delta updates and rollback.
 
-RX-1002 exposes internal normalized-term membership only. RX-1003 adds the full query/ranking contract. RX-1004 implements incremental mutations; RX-1005 integrates FIFO scheduling, promise rejections, cancellation/deadlines and yielding. Construction must exhaust all validation before making a root available; frequency-only mode retains no original text/occurrences. RX-1006 is the core-only public-package real-document consumer and first usable core alpha milestone.
+`executeSearch` is an internal cursor with complete exact/prefix/Boolean/equality membership, exact totals, bounded heap pagination and opt-in actual numeric facts. It performs no public scheduling or promise conversion. RX-1004 implements incremental mutations; RX-1005 integrates FIFO scheduling, promise rejections, cancellation/deadlines and yielding. Construction still exposes only an initial revision-0 root, with separately guarded batch/finalization phases. Frequency-only mode retains no original text/occurrences. RX-1006 is the core-only public-package real-document consumer and first usable core alpha milestone.
 
 ## Daily workflow
 

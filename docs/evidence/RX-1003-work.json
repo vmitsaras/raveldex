@@ -1,0 +1,276 @@
+{
+  "task": "RX-1003",
+  "policy": "work-v1",
+  "seed": "0x5eed1002",
+  "configuration": "EXACT_SCHEMA; basic-v1/unqualified; frequency-only; one root revision 0",
+  "environment": {
+    "node": "v24.21.0",
+    "v8": "13.6.233.17-node.53",
+    "icu": "78.3",
+    "unicode": "17.0",
+    "platform": "darwin",
+    "osRelease": "27.0.0",
+    "arch": "arm64"
+  },
+  "notes": [
+    "Each query uses one budget across all execution phases. Corpus construction is excluded from query counts.",
+    "Full result membership, exact totals, ID order and numeric scores are checked independently from source; trace on/off hits and totals are identical.",
+    "Heap retains at most offset + limit candidates; this is an implementation bound, not an isolated heap-byte measurement.",
+    "Largest yielded work charge does not measure interruption time. Host yielding, deadlines and cancellation await RX-1005.",
+    "No latency, peak/retained memory, package size or cross-host qualification is claimed."
+  ],
+  "rows": [
+    {
+      "records": 100,
+      "corpusSha256": "b0fcdf996ec126bea55d52fa7961cddc211f3a5cc9cc2928239d38a184ce438a",
+      "name": "common-top20",
+      "query": "common",
+      "options": {
+        "limit": 20
+      },
+      "exactTotal": 100,
+      "returnedHits": 20,
+      "workUnits": 39314,
+      "steps": 5979,
+      "largestStep": 260,
+      "tracedWorkUnits": 39745,
+      "traceFactsIncludingHeader": 11
+    },
+    {
+      "records": 100,
+      "corpusSha256": "b0fcdf996ec126bea55d52fa7961cddc211f3a5cc9cc2928239d38a184ce438a",
+      "name": "prefix-top1",
+      "query": {
+        "kind": "group",
+        "fields": [
+          "body"
+        ],
+        "variants": [
+          {
+            "text": "com",
+            "match": "prefix"
+          }
+        ]
+      },
+      "options": {
+        "limit": 1
+      },
+      "exactTotal": 100,
+      "returnedHits": 1,
+      "workUnits": 23736,
+      "steps": 1460,
+      "largestStep": 190,
+      "tracedWorkUnits": 23981,
+      "traceFactsIncludingHeader": 9
+    },
+    {
+      "records": 100,
+      "corpusSha256": "b0fcdf996ec126bea55d52fa7961cddc211f3a5cc9cc2928239d38a184ce438a",
+      "name": "negative-only-zero-hits",
+      "query": {
+        "kind": "not",
+        "child": {
+          "kind": "text",
+          "text": "absent"
+        }
+      },
+      "options": {
+        "limit": 0
+      },
+      "exactTotal": 100,
+      "returnedHits": 0,
+      "workUnits": 9913,
+      "steps": 529,
+      "largestStep": 283,
+      "tracedWorkUnits": 10006,
+      "traceFactsIncludingHeader": 9
+    },
+    {
+      "records": 100,
+      "corpusSha256": "b0fcdf996ec126bea55d52fa7961cddc211f3a5cc9cc2928239d38a184ce438a",
+      "name": "all-last-page",
+      "query": {
+        "kind": "all"
+      },
+      "options": {
+        "offset": 80,
+        "limit": 20
+      },
+      "exactTotal": 100,
+      "returnedHits": 20,
+      "workUnits": 18515,
+      "steps": 16817,
+      "largestStep": 19,
+      "tracedWorkUnits": 18604,
+      "traceFactsIncludingHeader": 5
+    },
+    {
+      "records": 1000,
+      "corpusSha256": "eb3d46e3d9072a21f9525eeefe4c142edc9992772a684dd8e989527a783b0802",
+      "name": "common-top20",
+      "query": "common",
+      "options": {
+        "limit": 20
+      },
+      "exactTotal": 1000,
+      "returnedHits": 20,
+      "workUnits": 371292,
+      "steps": 32857,
+      "largestStep": 260,
+      "tracedWorkUnits": 371726,
+      "traceFactsIncludingHeader": 11
+    },
+    {
+      "records": 1000,
+      "corpusSha256": "eb3d46e3d9072a21f9525eeefe4c142edc9992772a684dd8e989527a783b0802",
+      "name": "prefix-top1",
+      "query": {
+        "kind": "group",
+        "fields": [
+          "body"
+        ],
+        "variants": [
+          {
+            "text": "com",
+            "match": "prefix"
+          }
+        ]
+      },
+      "options": {
+        "limit": 1
+      },
+      "exactTotal": 1000,
+      "returnedHits": 1,
+      "workUnits": 243505,
+      "steps": 14229,
+      "largestStep": 190,
+      "tracedWorkUnits": 243753,
+      "traceFactsIncludingHeader": 9
+    },
+    {
+      "records": 1000,
+      "corpusSha256": "eb3d46e3d9072a21f9525eeefe4c142edc9992772a684dd8e989527a783b0802",
+      "name": "negative-only-zero-hits",
+      "query": {
+        "kind": "not",
+        "child": {
+          "kind": "text",
+          "text": "absent"
+        }
+      },
+      "options": {
+        "limit": 0
+      },
+      "exactTotal": 1000,
+      "returnedHits": 0,
+      "workUnits": 98113,
+      "steps": 5029,
+      "largestStep": 283,
+      "tracedWorkUnits": 98209,
+      "traceFactsIncludingHeader": 9
+    },
+    {
+      "records": 1000,
+      "corpusSha256": "eb3d46e3d9072a21f9525eeefe4c142edc9992772a684dd8e989527a783b0802",
+      "name": "all-last-page",
+      "query": {
+        "kind": "all"
+      },
+      "options": {
+        "offset": 980,
+        "limit": 20
+      },
+      "exactTotal": 1000,
+      "returnedHits": 20,
+      "workUnits": 342078,
+      "steps": 323280,
+      "largestStep": 20,
+      "tracedWorkUnits": 342170,
+      "traceFactsIncludingHeader": 5
+    },
+    {
+      "records": 10000,
+      "corpusSha256": "d04ae734e969ddb0dfbda5c002ae198c336d59b9a00ac2ff8cb6880a013ce12e",
+      "name": "common-top20",
+      "query": "common",
+      "options": {
+        "limit": 20
+      },
+      "exactTotal": 10000,
+      "returnedHits": 20,
+      "workUnits": 3692859,
+      "steps": 258424,
+      "largestStep": 260,
+      "tracedWorkUnits": 3693296,
+      "traceFactsIncludingHeader": 11
+    },
+    {
+      "records": 10000,
+      "corpusSha256": "d04ae734e969ddb0dfbda5c002ae198c336d59b9a00ac2ff8cb6880a013ce12e",
+      "name": "prefix-top1",
+      "query": {
+        "kind": "group",
+        "fields": [
+          "body"
+        ],
+        "variants": [
+          {
+            "text": "com",
+            "match": "prefix"
+          }
+        ]
+      },
+      "options": {
+        "limit": 1
+      },
+      "exactTotal": 10000,
+      "returnedHits": 1,
+      "workUnits": 2484226,
+      "steps": 139950,
+      "largestStep": 190,
+      "tracedWorkUnits": 2484477,
+      "traceFactsIncludingHeader": 9
+    },
+    {
+      "records": 10000,
+      "corpusSha256": "d04ae734e969ddb0dfbda5c002ae198c336d59b9a00ac2ff8cb6880a013ce12e",
+      "name": "negative-only-zero-hits",
+      "query": {
+        "kind": "not",
+        "child": {
+          "kind": "text",
+          "text": "absent"
+        }
+      },
+      "options": {
+        "limit": 0
+      },
+      "exactTotal": 10000,
+      "returnedHits": 0,
+      "workUnits": 998113,
+      "steps": 50029,
+      "largestStep": 283,
+      "tracedWorkUnits": 998212,
+      "traceFactsIncludingHeader": 9
+    },
+    {
+      "records": 10000,
+      "corpusSha256": "d04ae734e969ddb0dfbda5c002ae198c336d59b9a00ac2ff8cb6880a013ce12e",
+      "name": "all-last-page",
+      "query": {
+        "kind": "all"
+      },
+      "options": {
+        "offset": 9980,
+        "limit": 20
+      },
+      "exactTotal": 10000,
+      "returnedHits": 20,
+      "workUnits": 4932838,
+      "steps": 4734040,
+      "largestStep": 21,
+      "tracedWorkUnits": 4932933,
+      "traceFactsIncludingHeader": 5
+    }
+  ]
+}

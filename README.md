@@ -6,9 +6,9 @@ Raveldex is a new TypeScript search library for mutable local collections: appli
 
 ## Current status
 
-**RX-1001 input/analyzer primitives and RX-1002 frequency indexing/exact lookup are implemented. A usable search engine is still pending.**
+**RX-1001–1003 implement internal input/analysis, frequency indexing and complete query/BM25 evaluation. A usable public engine is still pending.**
 
-This repository contains validated schema/record/query capture, owned immutable data, `basic-v1` analysis with original UTF-16 token spans, typed errors and finite limits. Its internal frequency index owns field-aware dictionary/postings, reverse records, field statistics and equality metadata; exact normalized-term lookup returns complete membership. An independent source-scan oracle verifies that membership. Architecture contracts, 21 release-track task cards, 10 deferred tasks and planning/tracking tools guide the remaining work. Full query evaluation, ranking, atomic mutations, scheduling, browser support and package readiness require later evidence.
+This repository contains validated schema/record/query capture, owned immutable data, `basic-v1` analysis with original UTF-16 token spans, typed errors and finite limits. Its internal frequency index owns field-aware dictionary/postings, reverse records, field statistics and equality metadata; exact normalized-term lookup returns complete membership. The internal query cursor adds typed Boolean/equality queries, complete bounded prefix expansion, native BM25, deterministic pages/exact totals and opt-in numerical facts. Independent source scans and hand-derived scores verify these behaviors. Architecture contracts, 21 release-track task cards, 10 deferred tasks and planning/tracking tools guide the remaining work. Atomic mutations, scheduling, browser support and package readiness require later evidence.
 
 The package remains `private: true`, version `0.0.0`. There is no published package, usable search export, runtime dependency, or application demo at this stage. The existing MIT license is retained.
 
@@ -64,11 +64,11 @@ The ≤15 KiB gzip core-only size budget and initial maximum of 10,000 records a
 
 | Path | Purpose |
 | --- | --- |
-| `src/core/` | Input contracts, analyzer, errors, limits, frequency index and exact retrieval; full query/ranking/execution remain planned. |
+| `src/core/` | Input contracts, analyzer, errors, limits, frequency index, complete query evaluation and BM25; mutations/execution remain planned. |
 | `src/addons/` | Explicitly installed search and presentation capabilities. |
 | `src/adapters/` | Optional host/persistence integrations. |
 | `examples/` | Core-only real-content pilot, followed by the complete documentation pilot. |
-| `test/` | Tooling/core behavior, independent exact oracle, Unicode/corpus fixtures, construction diagnostics and TypeScript contract checks. |
+| `test/` | Tooling/core behavior, independent source oracles, Unicode/corpus/numerical fixtures, construction/query diagnostics and TypeScript contract checks. |
 | `scripts/` | Roadmap validation, generated docs, and GitHub synchronization. |
 | `docs/` | Architecture, specs, decisions, planning, provenance, and acceptance evidence. |
 

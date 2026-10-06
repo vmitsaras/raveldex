@@ -1,6 +1,6 @@
 # Native verification plan
 
-Status: adopted evaluation plan; RX-1001 has local input/analyzer/import observations in [its evidence record](../evidence/RX-1001.md). RX-1002 has internal frequency/index/exact-oracle observations in [its evidence record](../evidence/RX-1002.md). Full query/ranking/execution and product qualification remain unperformed.
+Status: adopted evaluation plan; RX-1001 has local input/analyzer/import observations in [its evidence record](../evidence/RX-1001.md). RX-1002 has internal frequency/index/exact-oracle observations in [its evidence record](../evidence/RX-1002.md). RX-1003 has internal complete query/BM25/trace observations in [its evidence record](../evidence/RX-1003.md). Mutation/public execution and product qualification remain unperformed.
 
 This document defines how Raveldex's native claims will be established. The previous companion's tests, timings, accessibility reports, and pilot judgments are useful inputs for later inspection. They are not evidence that this repository's native implementation works.
 
