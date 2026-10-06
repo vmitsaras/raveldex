@@ -4,11 +4,18 @@ import { getStatus, loadRoadmap, ROOT } from './lib/roadmap.mjs';
 
 const GENERATED = '<!-- Generated from docs/planning/roadmap.json by scripts/render-plan.mjs. Run npm run docs:generate; do not edit task data here. -->';
 
+const linksPath = resolve(ROOT, 'docs/planning/github-links.json');
+const links = existsSync(linksPath) ? JSON.parse(readFileSync(linksPath, 'utf8')) : null;
+
 function table(value) {
   return String(value).replaceAll('|', '\\|').replaceAll('\n', ' ');
 }
 
 function issueSearch(roadmap, id) {
+  const number = links?.repository === roadmap.repository ? links.issues?.[id] : undefined;
+  if (Number.isSafeInteger(number) && number > 0) {
+    return 'https://github.com/' + roadmap.repository + '/issues/' + number;
+  }
   return 'https://github.com/' + roadmap.repository + '/issues?q=' +
     encodeURIComponent('in:title "' + id + '"');
 }

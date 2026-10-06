@@ -18,7 +18,7 @@ Every acceptance criterion has a stable task-specific ID. `evidence` contains ex
 
 **Repository foundation and native design adoption**
 
-**Milestone:** N0 · **Status:** `in_progress` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-0001%22)
+**Milestone:** N0 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/7)
 
 **Dependencies:** None
 
@@ -51,14 +51,15 @@ Create the maintainable native repository, explicitly record the adopted directi
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/BOOTSTRAP_VERIFICATION.md](docs/evidence/BOOTSTRAP_VERIFICATION.md)
+- [docs/evidence/BOOTSTRAP_REVIEW.md](docs/evidence/BOOTSTRAP_REVIEW.md)
 
 
 ## RX-0002
 
 **Core contract reconciliation and evaluation plan**
 
-**Milestone:** N0 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-0002%22)
+**Milestone:** N0 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/8)
 
 **Dependencies:** [RX-0001](IMPLEMENTATION_TASKS.md#rx-0001)
 
@@ -92,14 +93,15 @@ Turn the selected native design into a bounded implementation contract and accep
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/BOOTSTRAP_VERIFICATION.md](docs/evidence/BOOTSTRAP_VERIFICATION.md)
+- [docs/evidence/BOOTSTRAP_REVIEW.md](docs/evidence/BOOTSTRAP_REVIEW.md)
 
 
 ## RX-1001
 
 **Data, schema, basic analyzer, limits, and errors**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1001%22)
+**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/9)
 
 **Dependencies:** [RX-0002](IMPLEMENTATION_TASKS.md#rx-0002)
 
@@ -138,7 +140,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Dictionary, postings, exact retrieval, and independent oracle**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1002%22)
+**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/10)
 
 **Dependencies:** [RX-1001](IMPLEMENTATION_TASKS.md#rx-1001)
 
@@ -177,7 +179,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Query evaluation, native BM25, and numerical trace facts**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1003%22)
+**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/11)
 
 **Dependencies:** [RX-1002](IMPLEMENTATION_TASKS.md#rx-1002)
 
@@ -217,7 +219,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Incremental atomic mutations**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1004%22)
+**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/12)
 
 **Dependencies:** [RX-1003](IMPLEMENTATION_TASKS.md#rx-1003)
 
@@ -257,7 +259,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Revision execution, work limits, and cancellation**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1005%22)
+**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/13)
 
 **Dependencies:** [RX-1004](IMPLEMENTATION_TASKS.md#rx-1004)
 
@@ -297,7 +299,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Core-only packaged real-document pilot**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1006%22)
+**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/14)
 
 **Dependencies:** [RX-1005](IMPLEMENTATION_TASKS.md#rx-1005)
 
@@ -337,7 +339,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Source-verified phrase add-on**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2001%22)
+**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/15)
 
 **Dependencies:** [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006)
 
@@ -378,7 +380,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Optional positions, original offsets, and phrase parity**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2002%22)
+**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/16)
 
 **Dependencies:** [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001)
 
@@ -417,7 +419,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Structured filters and exact conjunctive facets**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2003%22)
+**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/17)
 
 **Dependencies:** [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006)
 
@@ -456,7 +458,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Factual explain and Inspector data**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2004%22)
+**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/18)
 
 **Dependencies:** [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006)
 
@@ -495,7 +497,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Original match ranges and bounded snippets**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2005%22)
+**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/19)
 
 **Dependencies:** [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001), [RX-2002](IMPLEMENTATION_TASKS.md#rx-2002)
 
@@ -534,7 +536,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Native DOM UI, Inspector, and documentation pilot**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2006%22)
+**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/20)
 
 **Dependencies:** [RX-2003](IMPLEMENTATION_TASKS.md#rx-2003), [RX-2004](IMPLEMENTATION_TASKS.md#rx-2004), [RX-2005](IMPLEMENTATION_TASKS.md#rx-2005)
 
@@ -575,7 +577,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **One-owner module-worker adapter**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3001%22)
+**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/21)
 
 **Dependencies:** [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006)
 
@@ -614,7 +616,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Versioned source and native snapshots**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3002%22)
+**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/22)
 
 **Dependencies:** [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006)
 
@@ -653,7 +655,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **IndexedDB persistence, recovery, and namespace erasure**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3003%22)
+**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/23)
 
 **Dependencies:** [RX-3001](IMPLEMENTATION_TASKS.md#rx-3001), [RX-3002](IMPLEMENTATION_TASKS.md#rx-3002)
 
@@ -692,7 +694,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Companion migration and comparator separation**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3004%22)
+**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/24)
 
 **Dependencies:** [RX-3003](IMPLEMENTATION_TASKS.md#rx-3003)
 
@@ -732,7 +734,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Fair correctness, relevance, and cost comparison**
 
-**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-4001%22)
+**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/25)
 
 **Dependencies:** [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004)
 
@@ -773,7 +775,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Browser, assistive-technology, memory, and device qualification**
 
-**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-4002%22)
+**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/26)
 
 **Dependencies:** [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004)
 
@@ -815,7 +817,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Package, public documentation, and independent candidate review**
 
-**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-4003%22)
+**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/27)
 
 **Dependencies:** [RX-4001](IMPLEMENTATION_TASKS.md#rx-4001), [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002)
 

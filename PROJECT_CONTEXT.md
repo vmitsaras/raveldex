@@ -8,6 +8,8 @@ The private repository's `main` started at `2947dd613c4fe2204554502c86b922a9bc04
 
 ## Current implementation reality
 
+N0 foundation/design reconciliation is verified. RX-0001 and RX-0002 are complete; the next dependency-ready task is RX-1001 (GitHub issue #9). Six milestones and 37 linked issues exist. Run the planner for live state after this snapshot.
+
 The repository contains native architecture/behavior specifications, 21 release-track tasks (N0–N4), 10 deferred enhancement tasks (N5), dependency/status tooling, generated roadmap/task documentation, CI for that tooling, and explicit GitHub tracking synchronization. Search runtime, analyzers, ranking, native index, UI, workers, and storage are not implemented here yet.
 
 The bootstrap package is ESM, `private: true`, version `0.0.0`, with zero runtime or development dependencies. Node >=22 runs its tooling; this is not yet a browser support declaration. `tsconfig.json` reserves strict core settings and is not currently claimed as a passing typecheck/build.

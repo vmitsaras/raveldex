@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 0/21 done · 1 in progress · 0 dependency-ready.
+**Release progress:** 2/21 done · 0 in progress · 1 dependency-ready.
 
-**Planner state:** `in_progress`.
+**Planner state:** `ready`.
 
-**Next or resumable release task:** [RX-0001](IMPLEMENTATION_TASKS.md#rx-0001) — Repository foundation and native design adoption.
+**Next or resumable release task:** [RX-1001](IMPLEMENTATION_TASKS.md#rx-1001) — Data, schema, basic analyzer, limits, and errors.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -30,7 +30,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 | Milestone | Tasks | Done | Required outcome |
 | --- | --- | --- | --- |
-| **N0 — Native design adoption** | `RX-0001`–`RX-0002` | 0/2 | Initialize the new repository and adopt bounded native contracts, task tracking, and verification rules. |
+| **N0 — Native design adoption** | `RX-0001`–`RX-0002` | 2/2 | Initialize the new repository and adopt bounded native contracts, task tracking, and verification rules. |
 | **N1 — Usable native core alpha** | `RX-1001`–`RX-1006` | 0/6 | Search a real documentation corpus through a packaged consumer using only Raveldex-owned indexing, retrieval, scoring, and execution. |
 | **N2 — Modular search product** | `RX-2001`–`RX-2006` | 0/6 | Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface. |
 | **N3 — Host and migration parity** | `RX-3001`–`RX-3004` | 0/4 | Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics. |
@@ -41,37 +41,37 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 | Task | Status | Dependencies | Tracking |
 | --- | --- | --- | --- |
-| [RX-0001](IMPLEMENTATION_TASKS.md#rx-0001) — Repository foundation and native design adoption | `in_progress` | None | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-0001%22) |
-| [RX-0002](IMPLEMENTATION_TASKS.md#rx-0002) — Core contract reconciliation and evaluation plan | `planned` | `RX-0001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-0002%22) |
-| [RX-1001](IMPLEMENTATION_TASKS.md#rx-1001) — Data, schema, basic analyzer, limits, and errors | `planned` | `RX-0002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1001%22) |
-| [RX-1002](IMPLEMENTATION_TASKS.md#rx-1002) — Dictionary, postings, exact retrieval, and independent oracle | `planned` | `RX-1001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1002%22) |
-| [RX-1003](IMPLEMENTATION_TASKS.md#rx-1003) — Query evaluation, native BM25, and numerical trace facts | `planned` | `RX-1002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1003%22) |
-| [RX-1004](IMPLEMENTATION_TASKS.md#rx-1004) — Incremental atomic mutations | `planned` | `RX-1003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1004%22) |
-| [RX-1005](IMPLEMENTATION_TASKS.md#rx-1005) — Revision execution, work limits, and cancellation | `planned` | `RX-1004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1005%22) |
-| [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006) — Core-only packaged real-document pilot | `planned` | `RX-1005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-1006%22) |
-| [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001) — Source-verified phrase add-on | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2001%22) |
-| [RX-2002](IMPLEMENTATION_TASKS.md#rx-2002) — Optional positions, original offsets, and phrase parity | `planned` | `RX-2001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2002%22) |
-| [RX-2003](IMPLEMENTATION_TASKS.md#rx-2003) — Structured filters and exact conjunctive facets | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2003%22) |
-| [RX-2004](IMPLEMENTATION_TASKS.md#rx-2004) — Factual explain and Inspector data | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2004%22) |
-| [RX-2005](IMPLEMENTATION_TASKS.md#rx-2005) — Original match ranges and bounded snippets | `planned` | `RX-2001`, `RX-2002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2005%22) |
-| [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006) — Native DOM UI, Inspector, and documentation pilot | `planned` | `RX-2003`, `RX-2004`, `RX-2005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-2006%22) |
-| [RX-3001](IMPLEMENTATION_TASKS.md#rx-3001) — One-owner module-worker adapter | `planned` | `RX-2006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3001%22) |
-| [RX-3002](IMPLEMENTATION_TASKS.md#rx-3002) — Versioned source and native snapshots | `planned` | `RX-2006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3002%22) |
-| [RX-3003](IMPLEMENTATION_TASKS.md#rx-3003) — IndexedDB persistence, recovery, and namespace erasure | `planned` | `RX-3001`, `RX-3002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3003%22) |
-| [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004) — Companion migration and comparator separation | `planned` | `RX-3003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-3004%22) |
-| [RX-4001](IMPLEMENTATION_TASKS.md#rx-4001) — Fair correctness, relevance, and cost comparison | `planned` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-4001%22) |
-| [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification | `planned` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-4002%22) |
-| [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003) — Package, public documentation, and independent candidate review | `planned` | `RX-4001`, `RX-4002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-4003%22) |
-| [RX-A010](docs/planning/OPTIONAL_FEATURES.md#rx-a010) — Bounded typo tolerance | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A010%22) |
-| [RX-A020](docs/planning/OPTIONAL_FEATURES.md#rx-a020) — Dictionary-backed suggestions | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A020%22) |
-| [RX-A030](docs/planning/OPTIONAL_FEATURES.md#rx-a030) — Directional one-step synonyms | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A030%22) |
-| [RX-A040](docs/planning/OPTIONAL_FEATURES.md#rx-a040) — Evaluated language analyzer pack | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A040%22) |
-| [RX-A050](docs/planning/OPTIONAL_FEATURES.md#rx-a050) — Code and identifier analysis | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A050%22) |
-| [RX-A060](docs/planning/OPTIONAL_FEATURES.md#rx-a060) — Explicit literal and infix matching | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A060%22) |
-| [RX-A070](docs/planning/OPTIONAL_FEATURES.md#rx-a070) — Ordered proximity matching | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A070%22) |
-| [RX-A080](docs/planning/OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A080%22) |
-| [RX-A090](docs/planning/OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A090%22) |
-| [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-A100%22) |
+| [RX-0001](IMPLEMENTATION_TASKS.md#rx-0001) — Repository foundation and native design adoption | `done` | None | [Issue](https://github.com/vmitsaras/raveldex/issues/7) |
+| [RX-0002](IMPLEMENTATION_TASKS.md#rx-0002) — Core contract reconciliation and evaluation plan | `done` | `RX-0001` | [Issue](https://github.com/vmitsaras/raveldex/issues/8) |
+| [RX-1001](IMPLEMENTATION_TASKS.md#rx-1001) — Data, schema, basic analyzer, limits, and errors | `planned` | `RX-0002` | [Issue](https://github.com/vmitsaras/raveldex/issues/9) |
+| [RX-1002](IMPLEMENTATION_TASKS.md#rx-1002) — Dictionary, postings, exact retrieval, and independent oracle | `planned` | `RX-1001` | [Issue](https://github.com/vmitsaras/raveldex/issues/10) |
+| [RX-1003](IMPLEMENTATION_TASKS.md#rx-1003) — Query evaluation, native BM25, and numerical trace facts | `planned` | `RX-1002` | [Issue](https://github.com/vmitsaras/raveldex/issues/11) |
+| [RX-1004](IMPLEMENTATION_TASKS.md#rx-1004) — Incremental atomic mutations | `planned` | `RX-1003` | [Issue](https://github.com/vmitsaras/raveldex/issues/12) |
+| [RX-1005](IMPLEMENTATION_TASKS.md#rx-1005) — Revision execution, work limits, and cancellation | `planned` | `RX-1004` | [Issue](https://github.com/vmitsaras/raveldex/issues/13) |
+| [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006) — Core-only packaged real-document pilot | `planned` | `RX-1005` | [Issue](https://github.com/vmitsaras/raveldex/issues/14) |
+| [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001) — Source-verified phrase add-on | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/15) |
+| [RX-2002](IMPLEMENTATION_TASKS.md#rx-2002) — Optional positions, original offsets, and phrase parity | `planned` | `RX-2001` | [Issue](https://github.com/vmitsaras/raveldex/issues/16) |
+| [RX-2003](IMPLEMENTATION_TASKS.md#rx-2003) — Structured filters and exact conjunctive facets | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/17) |
+| [RX-2004](IMPLEMENTATION_TASKS.md#rx-2004) — Factual explain and Inspector data | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/18) |
+| [RX-2005](IMPLEMENTATION_TASKS.md#rx-2005) — Original match ranges and bounded snippets | `planned` | `RX-2001`, `RX-2002` | [Issue](https://github.com/vmitsaras/raveldex/issues/19) |
+| [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006) — Native DOM UI, Inspector, and documentation pilot | `planned` | `RX-2003`, `RX-2004`, `RX-2005` | [Issue](https://github.com/vmitsaras/raveldex/issues/20) |
+| [RX-3001](IMPLEMENTATION_TASKS.md#rx-3001) — One-owner module-worker adapter | `planned` | `RX-2006` | [Issue](https://github.com/vmitsaras/raveldex/issues/21) |
+| [RX-3002](IMPLEMENTATION_TASKS.md#rx-3002) — Versioned source and native snapshots | `planned` | `RX-2006` | [Issue](https://github.com/vmitsaras/raveldex/issues/22) |
+| [RX-3003](IMPLEMENTATION_TASKS.md#rx-3003) — IndexedDB persistence, recovery, and namespace erasure | `planned` | `RX-3001`, `RX-3002` | [Issue](https://github.com/vmitsaras/raveldex/issues/23) |
+| [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004) — Companion migration and comparator separation | `planned` | `RX-3003` | [Issue](https://github.com/vmitsaras/raveldex/issues/24) |
+| [RX-4001](IMPLEMENTATION_TASKS.md#rx-4001) — Fair correctness, relevance, and cost comparison | `planned` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/25) |
+| [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification | `planned` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/26) |
+| [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003) — Package, public documentation, and independent candidate review | `planned` | `RX-4001`, `RX-4002` | [Issue](https://github.com/vmitsaras/raveldex/issues/27) |
+| [RX-A010](docs/planning/OPTIONAL_FEATURES.md#rx-a010) — Bounded typo tolerance | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/28) |
+| [RX-A020](docs/planning/OPTIONAL_FEATURES.md#rx-a020) — Dictionary-backed suggestions | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/29) |
+| [RX-A030](docs/planning/OPTIONAL_FEATURES.md#rx-a030) — Directional one-step synonyms | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/30) |
+| [RX-A040](docs/planning/OPTIONAL_FEATURES.md#rx-a040) — Evaluated language analyzer pack | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/31) |
+| [RX-A050](docs/planning/OPTIONAL_FEATURES.md#rx-a050) — Code and identifier analysis | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/32) |
+| [RX-A060](docs/planning/OPTIONAL_FEATURES.md#rx-a060) — Explicit literal and infix matching | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/33) |
+| [RX-A070](docs/planning/OPTIONAL_FEATURES.md#rx-a070) — Ordered proximity matching | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/34) |
+| [RX-A080](docs/planning/OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/35) |
+| [RX-A090](docs/planning/OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/36) |
+| [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
 
 ## Milestone exit conditions
 

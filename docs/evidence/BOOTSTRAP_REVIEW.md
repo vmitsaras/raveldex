@@ -25,10 +25,12 @@ Human/agent instructions and package scaffolding consistently state that the sea
 
 The core/ranking review found no blocking contradiction in the reviewed documents: exact membership, separate source/position costs, typed errors/limits, field-local BM25, alternative maxima, Boolean branch participation, deterministic accumulation, and numerical reconstruction are specified. The hand-calculated fixture was independently recomputed by the root and agrees with the documented values.
 
-## Initial verdict and pending evidence
+## Final review verdict
 
-**Ready for the authorized remote bootstrap.** Independent document/tooling review has no remaining blocking findings. Additional clarifications separate bounded synchronous ownership capture from queued text scanning, qualify original-range parity by installed source/offset providers, document overwritten duplicate object keys, and adapt implicit hit limits to reduced capacity.
+**Ready — repository initialization.** Independent document/tooling review has no remaining blocking findings. Additional clarifications separate bounded synchronous ownership capture from queued text scanning, qualify original-range parity by installed source/offset providers, document overwritten duplicate object keys, and adapt implicit hit limits to reduced capacity.
 
-Initial commit, GitHub item creation/read-back, and hosted Node 22 CI remain required before N0 is marked done. This record is updated in the final bootstrap verification commit.
+The initial implementation commit is [cb10d278](https://github.com/vmitsaras/raveldex/commit/cb10d278e82f306d4783e2759437d1b28597e197). Hosted Node 22 CI passed, and the tracking workflow created and read back six milestones and 37 correctly linked issues. The root also independently checked the fresh remote issue inventory against task IDs, acceptance text, milestone mapping, prerequisite links, and overview checklists with no mismatches.
+
+[Verification details](BOOTSTRAP_VERIFICATION.md) support completing N0 and advancing to RX-1001. These review conclusions apply to the foundation and design, not a search runtime.
 
 No native search, real corpus, browser UI, screen reader, memory, physical device, or public package qualification is claimed.

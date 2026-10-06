@@ -42,3 +42,52 @@ The bootstrap creates real tracking items as part of initialization. Links and w
 ## API references
 
 The implementation follows GitHub's [milestone endpoints](https://docs.github.com/en/rest/issues/milestones), [issue endpoints](https://docs.github.com/en/rest/issues/issues), [label endpoints](https://docs.github.com/en/rest/issues/labels), and [workflow permissions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#permissions). Sync requests use the versioned REST API and serialized writes; failed mutations are not blindly retried.
+
+## Verified GitHub locations
+
+| Milestone | Milestone page | Overview issue |
+| --- | --- | --- |
+| N0 | [N0](https://github.com/vmitsaras/raveldex/milestone/1) | [#1](https://github.com/vmitsaras/raveldex/issues/1) |
+| N1 | [N1](https://github.com/vmitsaras/raveldex/milestone/2) | [#2](https://github.com/vmitsaras/raveldex/issues/2) |
+| N2 | [N2](https://github.com/vmitsaras/raveldex/milestone/3) | [#3](https://github.com/vmitsaras/raveldex/issues/3) |
+| N3 | [N3](https://github.com/vmitsaras/raveldex/milestone/4) | [#4](https://github.com/vmitsaras/raveldex/issues/4) |
+| N4 | [N4](https://github.com/vmitsaras/raveldex/milestone/5) | [#5](https://github.com/vmitsaras/raveldex/issues/5) |
+| N5 | [N5](https://github.com/vmitsaras/raveldex/milestone/6) | [#6](https://github.com/vmitsaras/raveldex/issues/6) |
+
+Task links below are recorded from actual created issues. Live state is governed by the canonical roadmap and issue read-back, not a duplicated status table.
+
+| Task | GitHub issue |
+| --- | --- |
+| RX-0001 | [#7](https://github.com/vmitsaras/raveldex/issues/7) |
+| RX-0002 | [#8](https://github.com/vmitsaras/raveldex/issues/8) |
+| RX-1001 | [#9](https://github.com/vmitsaras/raveldex/issues/9) |
+| RX-1002 | [#10](https://github.com/vmitsaras/raveldex/issues/10) |
+| RX-1003 | [#11](https://github.com/vmitsaras/raveldex/issues/11) |
+| RX-1004 | [#12](https://github.com/vmitsaras/raveldex/issues/12) |
+| RX-1005 | [#13](https://github.com/vmitsaras/raveldex/issues/13) |
+| RX-1006 | [#14](https://github.com/vmitsaras/raveldex/issues/14) |
+| RX-2001 | [#15](https://github.com/vmitsaras/raveldex/issues/15) |
+| RX-2002 | [#16](https://github.com/vmitsaras/raveldex/issues/16) |
+| RX-2003 | [#17](https://github.com/vmitsaras/raveldex/issues/17) |
+| RX-2004 | [#18](https://github.com/vmitsaras/raveldex/issues/18) |
+| RX-2005 | [#19](https://github.com/vmitsaras/raveldex/issues/19) |
+| RX-2006 | [#20](https://github.com/vmitsaras/raveldex/issues/20) |
+| RX-3001 | [#21](https://github.com/vmitsaras/raveldex/issues/21) |
+| RX-3002 | [#22](https://github.com/vmitsaras/raveldex/issues/22) |
+| RX-3003 | [#23](https://github.com/vmitsaras/raveldex/issues/23) |
+| RX-3004 | [#24](https://github.com/vmitsaras/raveldex/issues/24) |
+| RX-4001 | [#25](https://github.com/vmitsaras/raveldex/issues/25) |
+| RX-4002 | [#26](https://github.com/vmitsaras/raveldex/issues/26) |
+| RX-4003 | [#27](https://github.com/vmitsaras/raveldex/issues/27) |
+| RX-A010 | [#28](https://github.com/vmitsaras/raveldex/issues/28) |
+| RX-A020 | [#29](https://github.com/vmitsaras/raveldex/issues/29) |
+| RX-A030 | [#30](https://github.com/vmitsaras/raveldex/issues/30) |
+| RX-A040 | [#31](https://github.com/vmitsaras/raveldex/issues/31) |
+| RX-A050 | [#32](https://github.com/vmitsaras/raveldex/issues/32) |
+| RX-A060 | [#33](https://github.com/vmitsaras/raveldex/issues/33) |
+| RX-A070 | [#34](https://github.com/vmitsaras/raveldex/issues/34) |
+| RX-A080 | [#35](https://github.com/vmitsaras/raveldex/issues/35) |
+| RX-A090 | [#36](https://github.com/vmitsaras/raveldex/issues/36) |
+| RX-A100 | [#37](https://github.com/vmitsaras/raveldex/issues/37) |
+
+`github-links.json` records verified issue numbers for direct links in generated docs. New tasks fall back to issue search until their created numbers are recorded; synchronization itself discovers owned issues from stable markers.
