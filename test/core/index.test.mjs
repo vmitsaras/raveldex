@@ -93,8 +93,10 @@ test('admitted input is owned before execution and core retains only frequency/e
   assert.equal(root.configuration.schema.text.title.boost, 2);
   assert.deepEqual(drain(exactIds(root, 'original')).value, ['owned']);
   assert.deepEqual(directoryGet(root.documents, 'owned').metadata.tags, ['Tag']);
-  const allowedRoot = ['configuration', 'counts', 'documents', 'fields', 'revision'];
+  const allowedRoot = ['configuration', 'counts', 'documents', 'fields', 'participants', 'revision'];
   assert.deepEqual(Object.keys(root).sort(), allowedRoot);
+  assert.deepEqual(Object.keys(root.participants), []);
+  assert.ok(Object.isFrozen(root.participants));
   for (const [, doc] of directoryEntries(root.documents)) {
     assert.deepEqual(Object.keys(doc).sort(), ['fields', 'id', 'metadata', 'textCodeUnits']);
     for (const field of Object.values(doc.fields)) assert.deepEqual(Object.keys(field).sort(), ['length', 'terms']);

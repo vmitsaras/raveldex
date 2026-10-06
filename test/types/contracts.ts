@@ -31,6 +31,10 @@ root.counts.tokens = 0;
 root.documents.buckets['0']!['changed'] = root.documents.buckets['0']!['existing']!;
 // @ts-expect-error Positive field statistics belong to the published root.
 root.fields['title']!.length = 0;
+// @ts-expect-error Revisions and participant selection belong to the publication.
+root.revision = 1;
+// @ts-expect-error Private participant root selection is readonly.
+root.participants['source'] = {};
 declare const trace: ScoreTrace;
 declare const fieldFact: FieldFact;
 // @ts-expect-error Actual numerical facts cannot be edited by the consumer.

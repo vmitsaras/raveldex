@@ -1,0 +1,213 @@
+{
+  "task": "RX-1004",
+  "policy": "work-v1",
+  "seed": "0x5eed1002",
+  "environment": {
+    "node": "v24.21.0",
+    "v8": "13.6.233.17-node.53",
+    "icu": "78.3",
+    "unicode": "17.0",
+    "platform": "darwin",
+    "osRelease": "27.0.0",
+    "arch": "arm64"
+  },
+  "notes": [
+    "Construction, diagnostics verification and source oracle work are excluded from mutation counts. Frequency-only mode: no participant/source/positions retained.",
+    "Actual analyzeRecord/analyzeValue entry counters visit only one supplied replacement record and its three original values. Other records and bucket references are inspected only after the measured operation.",
+    "copies.directories/buckets count new staging pointer directories/key buckets; directoryPointers/bucketEntries count copied entries. writes/deletes/insertions count logical updates/new bucket keys. These are partial logical allocation counts, not allocation-byte, retained-heap or peak-memory measurements.",
+    "A common posting list has 100/1000/10000 members; replacement copies its affected hash bucket, not the whole list. Directory pointers and collision buckets have real work; no constant-time claim.",
+    "Full source state reconstruction and complete query IDs/totals/scores are verified for both old and new roots at every size.",
+    "Native Object.keys/freeze/hash/normalization/allocation are bounded indivisible primitives. Largest yielded charge is not interruption time. Public FIFO/clock/host yielding remain RX-1005; no latency/package-size/browser qualification is claimed."
+  ],
+  "rows": [
+    {
+      "records": 100,
+      "corpusSha256": "b0fcdf996ec126bea55d52fa7961cddc211f3a5cc9cc2928239d38a184ce438a",
+      "operation": "replace one record (three values, frequent common terms)",
+      "changedId": "__proto__",
+      "mutationResult": {
+        "revision": 1,
+        "changed": true,
+        "added": 0,
+        "replaced": 1,
+        "removed": 0
+      },
+      "workUnits": 2487,
+      "steps": 1165,
+      "largestStep": 24,
+      "commonBodyDfBefore": 100,
+      "commonBodyPostingBucketEntriesCopied": 2,
+      "diagnostics": {
+        "analysis": {
+          "records": 1,
+          "values": 3,
+          "textCodeUnits": 52
+        },
+        "copies": {
+          "documents": {
+            "directories": 1,
+            "directoryPointers": 81,
+            "buckets": 1,
+            "bucketEntries": 2,
+            "writes": 1,
+            "deletes": 1,
+            "insertions": 1
+          },
+          "dictionary": {
+            "directories": 3,
+            "directoryPointers": 124,
+            "buckets": 15,
+            "bucketEntries": 18,
+            "writes": 14,
+            "deletes": 1,
+            "insertions": 5
+          },
+          "postings": {
+            "directories": 15,
+            "directoryPointers": 259,
+            "buckets": 15,
+            "bucketEntries": 11,
+            "writes": 7,
+            "deletes": 9,
+            "insertions": 7
+          },
+          "fieldUpdates": 5,
+          "termUpdates": 16
+        },
+        "workUnits": 2487
+      },
+      "sharing": {
+        "reusedDocuments": 99,
+        "reusedDocumentBuckets": 80,
+        "reusedDictionaryBuckets": 111,
+        "reusedPostingBuckets": 840
+      }
+    },
+    {
+      "records": 1000,
+      "corpusSha256": "eb3d46e3d9072a21f9525eeefe4c142edc9992772a684dd8e989527a783b0802",
+      "operation": "replace one record (three values, frequent common terms)",
+      "changedId": "__proto__",
+      "mutationResult": {
+        "revision": 1,
+        "changed": true,
+        "added": 0,
+        "replaced": 1,
+        "removed": 0
+      },
+      "workUnits": 6330,
+      "steps": 4108,
+      "largestStep": 24,
+      "commonBodyDfBefore": 1000,
+      "commonBodyPostingBucketEntriesCopied": 2,
+      "diagnostics": {
+        "analysis": {
+          "records": 1,
+          "values": 3,
+          "textCodeUnits": 52
+        },
+        "copies": {
+          "documents": {
+            "directories": 1,
+            "directoryPointers": 249,
+            "buckets": 1,
+            "bucketEntries": 2,
+            "writes": 1,
+            "deletes": 1,
+            "insertions": 1
+          },
+          "dictionary": {
+            "directories": 3,
+            "directoryPointers": 284,
+            "buckets": 15,
+            "bucketEntries": 68,
+            "writes": 14,
+            "deletes": 1,
+            "insertions": 5
+          },
+          "postings": {
+            "directories": 15,
+            "directoryPointers": 1352,
+            "buckets": 15,
+            "bucketEntries": 11,
+            "writes": 7,
+            "deletes": 9,
+            "insertions": 7
+          },
+          "fieldUpdates": 5,
+          "termUpdates": 16
+        },
+        "workUnits": 6330
+      },
+      "sharing": {
+        "reusedDocuments": 999,
+        "reusedDocumentBuckets": 248,
+        "reusedDictionaryBuckets": 271,
+        "reusedPostingBuckets": 6046
+      }
+    },
+    {
+      "records": 10000,
+      "corpusSha256": "d04ae734e969ddb0dfbda5c002ae198c336d59b9a00ac2ff8cb6880a013ce12e",
+      "operation": "replace one record (three values, frequent common terms)",
+      "changedId": "__proto__",
+      "mutationResult": {
+        "revision": 1,
+        "changed": true,
+        "added": 0,
+        "replaced": 1,
+        "removed": 0
+      },
+      "workUnits": 23029,
+      "steps": 6967,
+      "largestStep": 24,
+      "commonBodyDfBefore": 10000,
+      "commonBodyPostingBucketEntriesCopied": 48,
+      "diagnostics": {
+        "analysis": {
+          "records": 1,
+          "values": 3,
+          "textCodeUnits": 52
+        },
+        "copies": {
+          "documents": {
+            "directories": 1,
+            "directoryPointers": 256,
+            "buckets": 1,
+            "bucketEntries": 48,
+            "writes": 1,
+            "deletes": 1,
+            "insertions": 1
+          },
+          "dictionary": {
+            "directories": 3,
+            "directoryPointers": 288,
+            "buckets": 15,
+            "bucketEntries": 408,
+            "writes": 14,
+            "deletes": 1,
+            "insertions": 5
+          },
+          "postings": {
+            "directories": 15,
+            "directoryPointers": 2252,
+            "buckets": 15,
+            "bucketEntries": 141,
+            "writes": 7,
+            "deletes": 9,
+            "insertions": 7
+          },
+          "fieldUpdates": 5,
+          "termUpdates": 16
+        },
+        "workUnits": 23029
+      },
+      "sharing": {
+        "reusedDocuments": 9999,
+        "reusedDocumentBuckets": 255,
+        "reusedDictionaryBuckets": 275,
+        "reusedPostingBuckets": 22404
+      }
+    }
+  ]
+}
