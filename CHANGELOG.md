@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- RX-1006: export the real core factory, sanitized errors and readonly contracts; hide internal execution seams behind a frozen ordinary-method facade. Add a packed local real-document CLI, explicit section allowlist/source hashes, predeclared judgments, public type/runtime/cancellation checks and reproducible minified/gzip/import/startup evidence. The package stays private and unpublished.
+
 - RX-1005: implement the internal ordinary engine/factory, bounded FIFO promise admission, execution-start revisions, monotonic queue-time deadlines, cooperative stop priority, host task yielding and idempotent disposal/resource cleanup. Verify schedule/source-oracle parity, every selected cancellation position, committed outcomes and independent lifecycle review.
 
 - RX-1004: add incremental add/batch-add/replace/remove/clear cursors, coalesced bucket copying, reverse/statistical deltas, revision guards and atomic core/participant root publication. Verify independent source reconstruction, mutation-driven BM25, failure/cancellation rollback and replacement work/copy counts through 10,000 records.
@@ -16,4 +18,4 @@
 - Add behavioral specifications, milestone/task planning, Codex instructions, and provenance.
 - Add dependency/status validation, generated planning documents, bootstrap CI, and GitHub milestone/issue synchronization.
 
-Root package exports and the packed real-document consumer remain RX-1006. No public package release exists in this entry.
+N1 core alpha is verified locally. Optional product capabilities and release qualification remain future work; no public package release exists in this entry.

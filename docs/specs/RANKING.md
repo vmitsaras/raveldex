@@ -8,7 +8,7 @@ Define one native ranking model whose returned score can be reconstructed from t
 
 ## Non-goals and current facts
 
-RX-1003 implements the native scorer and internal complete query cursor. This document selects `raveldex-bm25-v1`; it does not describe MiniSearch scoring or claim that native relevance has been measured. Query semantics and hard bounds are in [CORE_CONTRACT.md](CORE_CONTRACT.md).
+RX-1003 implements the native scorer and internal complete query cursor. This document selects `raveldex-bm25-v1`; it does not describe MiniSearch scoring. RX-1006 records bounded relevance judgments for the core documentation pilot in [its evidence](../evidence/RX-1006.md); broader product relevance remains RX-4001. Query semantics and hard bounds are in [CORE_CONTRACT.md](CORE_CONTRACT.md).
 
 The first model has no learned weights, arbitrary ranking hooks, proximity/phrase bonus, recency/popularity boost, document-length approximation, score rounding, or score merging across independent indexes. Language models and foreign engine scores cannot silently enter this model.
 

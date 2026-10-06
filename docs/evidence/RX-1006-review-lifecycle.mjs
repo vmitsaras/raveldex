@@ -1,0 +1,13 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {resolve,join} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+const repo=process.argv[2]?resolve(process.argv[2]):fileURLToPath(new URL('../../',import.meta.url));
+const packageReport=process.argv[3]?resolve(process.argv[3]):fileURLToPath(new URL('RX-1006-review-package.json',import.meta.url));
+const directory=JSON.parse(readFileSync(packageReport,'utf8')).directory;
+const {buildCorpus}=await import(pathToFileURL(join(repo,'examples/core-docs/corpus.mjs')).href);
+writeFileSync(join(directory,'independent-corpus.json'),JSON.stringify({corpus:buildCorpus()}));
+const source="import assert from 'node:assert/strict';\nimport {readFileSync} from 'node:fs';\nimport {createRaveldex,RaveldexError} from '@vmitsaras/raveldex';\nconst {corpus}=JSON.parse(readFileSync('independent-corpus.json','utf8'));\nconst engine=createRaveldex({schema:corpus.schema});\nconst operation=engine.addMany(corpus.records);const queued=engine.search({kind:'all'});const disposal=engine.dispose();\nawait assert.rejects(operation,e=>e instanceof RaveldexError&&e.code==='DISPOSED');\nawait assert.rejects(queued,e=>e.code==='DISPOSED');await disposal;\nawait assert.rejects(engine.addMany(corpus.records),e=>e.code==='DISPOSED');\nconst separate=createRaveldex({schema:corpus.schema});\nawait assert.rejects(separate.addMany(corpus.records,{deadlineMs:0}),e=>e.code==='INVALID_OPTIONS');\nassert.equal((await separate.search({kind:'all'})).revision,0);\nassert.equal((await separate.search({kind:'all'})).total,0);\nawait assert.rejects(separate.addMany(corpus.records,{deadlineMs:1}),e=>e.code==='DEADLINE_EXCEEDED'); assert.equal((await separate.search({kind:'all'})).total,0); await separate.dispose();console.log(JSON.stringify({activeDispose:'Pass',queuedDispose:'Pass',zeroDeadlineValidation:'Pass',realDeadlineRollback:'Pass'}));";
+writeFileSync(join(directory,"lifecycle-review.mjs"),source);
+const output=execFileSync(process.execPath,["lifecycle-review.mjs"],{cwd:directory,encoding:'utf8',timeout:120000});
+console.log(output.trim());

@@ -1,16 +1,16 @@
 # Native architecture
 
-Status: Approved design; RX-1001–1004 input/analysis, frequency index, complete query/BM25 evaluation and incremental atomic mutations implemented locally. Public scheduling remains planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
+Status: Approved design; RX-1001–1006 native core, ordinary scheduling and packed real-document consumer verified locally; see [RX-1005 execution](../evidence/RX-1005.md) and [RX-1006 package evidence](../evidence/RX-1006.md). Optional modules and release qualification remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
 
 Decision date: 2026-10-06. Scope: the native Raveldex line in this repository.
 
 ## Goal and current facts
 
-Raveldex will own its indexing, lexical retrieval, ranking, updates, and execution loops. The initial product is a small TypeScript search engine for mutable local collections, with optional search capabilities and environment adapters.
+Raveldex owns its indexing, lexical retrieval, ranking, updates, and execution loops. The initial product is a small TypeScript search engine for mutable local collections, with optional search capabilities and environment adapters.
 
-The owner requested a fresh repository for the native search plan, implementation guidance, and trackable milestones/tasks. This adopts that direction and the bounded roadmap. It does not claim that an engine exists, that an old companion implementation has been imported, or that its verification transfers here. The prior MiniSearch companion is a design and migration input only.
+The owner requested a fresh repository for the native search plan, implementation guidance, and trackable milestones/tasks. This adopts that direction and the bounded roadmap. Initialization alone established no runtime claim. The subsequent N1 evidence verifies the native core; no old companion implementation or verification is transferred here. The prior MiniSearch companion is a design and migration input only.
 
-The first usable outcome is RX-1006: a real-document consumer using the native core through the actual package. N2 adds optional search/presentation capabilities. N3 adds hosting and migration parity. N4 qualifies a candidate; publication remains a separate owner decision.
+The first usable outcome is verified in RX-1006: a real-document consumer using the native core through the actual package. N2 adds optional search/presentation capabilities. N3 adds hosting and migration parity. N4 qualifies a candidate; publication remains a separate owner decision.
 
 ## Decisions
 
@@ -37,7 +37,7 @@ Metadata needed for declared core equality predicates is part of the index state
 
 ## Planned module map
 
-These are implementation destinations, not existing exported features.
+Core and the core consumer now exist. Other rows remain implementation destinations for optional capabilities.
 
 | Area | Destination | Responsibility |
 | --- | --- | --- |
@@ -74,7 +74,7 @@ The initial implementation may enumerate the bounded live dictionary for prefix 
 
 The number of buckets and hash layout are private format details selected during RX-1002/RX-1004. Collision cases must remain correct and bounded by admission/work limits; average bucket size is not a worst-case guarantee. A native snapshot codec must version these details if it serializes them.
 
-RX-1002 implements initial frequency-only construction with 256 logical slots per directory. Slot pointers and prototype-safe key buckets are allocated lazily; a private FNV-1a hash over original UTF-16 key units chooses the slot. Completed directories/buckets and all root records are frozen. Reverse field data stores aggregate frequencies/lengths across values and intentionally retains no per-value positions or original source. RX-1004 `DirectoryStage` now copies occupied slot pointers resumably and copies each touched key bucket once per transaction. Per-field term caches coalesce posting/statistical updates across a batch; empty terms/buckets disappear and unchanged roots/buckets remain shared. `MutationOwner` prepares core plus trusted participant roots, checks cancellation immediately before a single root assignment, and returns that committed revision. Replacement measurements at 100/1,000/10,000 records show one actual analyzed record/three values with counted directory/bucket copies and updates; these are partial logical allocation counts, not heap or latency measurements. RX-1005 implements bounded FIFO/promise execution, admission deadlines, cancellation and disposal; public registration and package qualification remain later tasks. Construction accepts separately bounded captured batches and exposes no root until its final cursor completes. Its per-batch/finalization work guards are internal phase guards; ordinary operations now thread one work budget through their mutation/query cursor phases. Native key enumeration/freezing remains indivisible, and a collision bucket can contain the admitted corpus; no constant-time or interruption-latency guarantee is implied.
+RX-1002 implements initial frequency-only construction with 256 logical slots per directory. Slot pointers and prototype-safe key buckets are allocated lazily; a private FNV-1a hash over original UTF-16 key units chooses the slot. Completed directories/buckets and all root records are frozen. Reverse field data stores aggregate frequencies/lengths across values and intentionally retains no per-value positions or original source. RX-1004 `DirectoryStage` now copies occupied slot pointers resumably and copies each touched key bucket once per transaction. Per-field term caches coalesce posting/statistical updates across a batch; empty terms/buckets disappear and unchanged roots/buckets remain shared. `MutationOwner` prepares core plus trusted participant roots, checks cancellation immediately before a single root assignment, and returns that committed revision. Replacement measurements at 100/1,000/10,000 records show one actual analyzed record/three values with counted directory/bucket copies and updates; these are partial logical allocation counts, not heap or latency measurements. RX-1005 implements bounded FIFO/promise execution, admission deadlines, cancellation and disposal; public registration remains N2 work, while RX-1006 qualifies the root package and a seven-method facade. Construction accepts separately bounded captured batches and exposes no root until its final cursor completes. Its per-batch/finalization work guards are internal phase guards; ordinary operations now thread one work budget through their mutation/query cursor phases. Native key enumeration/freezing remains indivisible, and a collision bucket can contain the admitted corpus; no constant-time or interruption-latency guarantee is implied.
 
 ## One revision per operation
 
@@ -112,7 +112,7 @@ This choice keeps a generated Unicode database and its licensing/build machinery
 
 ## Cost and performance contract
 
-The core-only target is **at most 15 KiB gzip** for a production ESM consumer bundle, including all mandatory code/dependencies. This is an adopted planning budget, not a current measurement or a public promise.
+The core-only target is **at most 15 KiB gzip** for a production ESM consumer bundle, including all mandatory code/dependencies. RX-1006 measures 39,702 minified bytes and 12,400 gzip bytes using the installed full public runtime entry, pinned esbuild 0.28.2 and recorded gzip settings. This local result meets the planning target; it is not a universal bundle or resource promise.
 
 Record the exact bundler/minifier version, target, minification settings, gzip settings, consumer imports, and built commit. Measure core-only and each requested combination separately. Tarball size, source size, ESM bytes, gzip bytes, retained heap, staging peak, serialized bytes, and worker transport are different measurements.
 
@@ -138,7 +138,7 @@ Comparison configurations must request equivalent semantics and retained data. U
 | N3 | Host and migration parity. | Direct/worker semantics, transport failure outcomes, validated restore/recovery/erase, and separated foreign compatibility. |
 | N4 | Qualified native candidate. | Fair relevance/cost comparisons, supported environment matrix, actual AT/device/resource observations where claimed, package review, and explicit remaining limitations. |
 
-No unresolved design choice blocks RX-1001. Measured size, runtime qualification, detailed add-on implementation, and product-release evidence remain future task work. Their absence must not be disguised as implementation success or used to restart the already adopted native-versus-companion decision.
+No unresolved core design choice blocks N2. The packed pilot and core bundle cost are recorded; broader host/resource qualification, optional implementation and product-release evidence remain future task work. Their absence must not be disguised as implementation success or used to restart the already adopted native-versus-companion decision.
 
 ## Related contracts
 

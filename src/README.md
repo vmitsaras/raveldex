@@ -1,6 +1,6 @@
 # Source ownership
 
-RX-1001 implements internal input contracts, the shared analyzer, error codes and limit guards. RX-1002 adds frequency-only index construction, exact normalized-term lookup and invariant diagnostics. RX-1003 adds complete typed query evaluation, native BM25 and actual numerical trace facts. RX-1004 adds incremental delta staging and atomic core/participant publication. RX-1005 implements the actual ordinary engine/factory internally, with package exports and packed-consumer qualification pending RX-1006. The compiler emits ESM and declarations to `dist/`; there is no public package export until later slices implement the real core.
+RX-1001 implements internal input contracts, the shared analyzer, error codes and limit guards. RX-1002 adds frequency-only index construction, exact normalized-term lookup and invariant diagnostics. RX-1003 adds complete typed query evaluation, native BM25 and actual numerical trace facts. RX-1004 adds incremental delta staging and atomic core/participant publication. RX-1005 implements the ordinary engine/factory. RX-1006 exports the real factory, errors and readonly contract types from `index.ts`, returning only bound ordinary methods through a frozen facade. The compiler emits ESM and declarations to `dist/`; the root package is qualified through an isolated tarball consumer.
 
 `contracts/` captures frozen bounded structures before any resumable content scan. `analyzer/basic.ts` emits work steps and original-value token spans; consumers must completely validate an operation before publishing state. `analyzeRecord` and `analyzeQuery` share that raw analyzer. `limits/` defines all hard caps and pure guards for later state, expansion and execution integration. These guards do not establish live index or scheduler behavior.
 
@@ -18,4 +18,4 @@ RX-1001 implements internal input contracts, the shared analyzer, error codes an
 | `addons/evidence/`, `addons/inspector/`, `addons/ui/` | Original-text evidence, factual diagnostics, optional native DOM presentation. |
 | `adapters/worker/`, `adapters/snapshots/`, `adapters/indexeddb/` | Explicit host, serialization, and persistence capabilities. |
 
-Expose `src/index.ts` only when a real core contract is implemented. Do not create a success-returning placeholder factory or re-export optional modules from the core barrel. DOM types are deliberately absent from the root core TypeScript configuration.
+`src/index.ts` exposes the implemented core contract. Do not create a success-returning placeholder factory or re-export optional modules from the core barrel. DOM types are deliberately absent from the root core TypeScript configuration.
