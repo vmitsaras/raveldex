@@ -1,5 +1,6 @@
 import type { Configuration, Query, RecordInput, Raveldex, SearchResult, CancellationSignal } from '../../src/core/contracts/types.js';
 import type { ErrorCode } from '../../src/core/errors/error.js';
+import type { IndexRoot } from '../../src/core/index/state.js';
 
 const configuration: Configuration = { schema: { text: { title: { boost: 2 } }, metadata: { tags: { type: 'string', multi: true } } } };
 const record: RecordInput = { id: '__proto__', text: { title: ['Hello'] }, metadata: { tags: ['a', 'b'] } };
@@ -22,3 +23,10 @@ result.then((value) => {
   value.hits.push({ id: 'x', score: 0 });
 });
 void [configuration, record, badRecord, badQuery, badCode];
+declare const root: IndexRoot;
+// @ts-expect-error Internal published state is readonly as well.
+root.counts.tokens = 0;
+// @ts-expect-error Bucket directories do not expose writable posting state.
+root.documents.buckets['0']!['changed'] = root.documents.buckets['0']!['existing']!;
+// @ts-expect-error Positive field statistics belong to the published root.
+root.fields['title']!.length = 0;

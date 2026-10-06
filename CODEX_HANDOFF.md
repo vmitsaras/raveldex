@@ -22,9 +22,9 @@ Do not publish a package/release or activate deferred N5 work.
 
 ## Current implementation boundary
 
-N0 and **RX-1001 — Data, schema, basic analyzer, limits, and errors** are verified. See [RX-1001 evidence](docs/evidence/RX-1001.md). The next slice is **RX-1002 — Dictionary, postings, exact retrieval, and independent oracle**; the planner and task card control current readiness/scope. Reuse the captured inputs, resumable analyzer and finite guards rather than introducing another tokenizer. Index state must consume all validation before publication, and frequency-only mode must release temporary original text/occurrences.
+N0, **RX-1001 — Data, schema, basic analyzer, limits, and errors** and **RX-1002 — Dictionary, postings, exact retrieval, and independent oracle** are verified locally. See [RX-1001 evidence](docs/evidence/RX-1001.md) and [RX-1002 evidence](docs/evidence/RX-1002.md). The next slice is **RX-1003 — Query evaluation, native BM25, and numerical trace facts**; the planner and task card control readiness/scope. Reuse the captured inputs, shared analyzer and frozen frequency root. The independent source oracle must remain separate from production evaluation/scoring; BM25 needs hand-derived numerical fixtures.
 
-Do not turn RX-1001 into every engine layer at once. RX-1002 adds dictionary/postings and an independent evaluator; RX-1003 adds the full query/ranking contract. RX-1006 is the core-only public-package real-document consumer. That is the first usable core alpha milestone, not the outcome of repository initialization.
+RX-1002 exposes internal normalized-term membership only. RX-1003 adds the full query/ranking contract. RX-1004 implements incremental mutations; RX-1005 integrates FIFO scheduling, promise rejections, cancellation/deadlines and yielding. Construction must exhaust all validation before making a root available; frequency-only mode retains no original text/occurrences. RX-1006 is the core-only public-package real-document consumer and first usable core alpha milestone.
 
 ## Daily workflow
 

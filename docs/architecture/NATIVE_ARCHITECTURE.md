@@ -1,6 +1,6 @@
 # Native architecture
 
-Status: Approved design; RX-1001 input/analysis/error/limit primitives implemented. Indexing, ranking, mutations and scheduling remain planned. See [RX-1001 evidence](../evidence/RX-1001.md).
+Status: Approved design; RX-1001 input/analyzer/error/limit primitives and RX-1002 frequency index/exact retrieval implemented locally. Full query evaluation, ranking, incremental mutations and scheduling remain planned. See [RX-1001 evidence](../evidence/RX-1001.md) and [RX-1002 evidence](../evidence/RX-1002.md).
 
 Decision date: 2026-10-06. Scope: the native Raveldex line in this repository.
 
@@ -73,6 +73,8 @@ Use bounded bucketed copy-on-write directories for the first implementation:
 The initial implementation may enumerate the bounded live dictionary for prefix lookup. It must charge visited terms, collect all qualifying expansions up to the declared cap, and fail on cap overflow. A trie, compressed postings, cached query results, and specialized range indexes are optional later optimizations justified by evidence. None is needed to prove exact native retrieval.
 
 The number of buckets and hash layout are private format details selected during RX-1002/RX-1004. Collision cases must remain correct and bounded by admission/work limits; average bucket size is not a worst-case guarantee. A native snapshot codec must version these details if it serializes them.
+
+RX-1002 implements initial frequency-only construction with 256 logical slots per directory. Slot pointers and prototype-safe key buckets are allocated lazily; a private FNV-1a hash over original UTF-16 key units chooses the slot. Completed directories/buckets and all root records are frozen. Reverse field data stores aggregate frequencies/lengths across values and intentionally retains no per-value positions or original source. Future RX-1004 updates must copy touched frozen buckets rather than rebuild these directories; that mutation behavior is not yet implemented. Construction accepts separately bounded captured batches and exposes no root until its final cursor completes. Its per-batch/finalization work guards are internal phase guards; a future public operation must thread one work budget across all its phases. Native key enumeration/freezing remains indivisible, and a collision bucket can contain the admitted corpus; no constant-time or interruption-latency guarantee is implied.
 
 ## One revision per operation
 
