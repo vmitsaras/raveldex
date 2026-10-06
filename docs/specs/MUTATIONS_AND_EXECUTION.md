@@ -1,6 +1,6 @@
 # Incremental mutations, revisions, and execution
 
-Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001. RX-1004 internal incremental mutation/participant publication verified locally; public scheduling/lifecycle integration remains RX-1005. See [evidence](../evidence/RX-1004.md).
+Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001. RX-1004 incremental mutation/participant publication and RX-1005 ordinary FIFO/lifecycle integration verified locally. See [mutation evidence](../evidence/RX-1004.md) and [execution evidence](../evidence/RX-1005.md). Package entry qualification remains RX-1006.
 
 ## Goal and system outcome
 
@@ -8,9 +8,9 @@ Changes must be atomic and incrementally maintain native index state. A caller m
 
 ## Current facts, constraints, and non-goals
 
-The repository now has a private serial mutation owner and complete query cursor, without a public FIFO scheduler/engine yet. This contract implements the adopted [native architecture](../architecture/NATIVE_ARCHITECTURE.md) and [public core API](CORE_CONTRACT.md). It does not reuse the companion's whole-state rebuild implementation or transfer its test results.
+The repository has a serial mutation owner, complete query cursor and internal ordinary engine/factory with bounded FIFO promise scheduling. Root package exports and the real-document consumer remain RX-1006. This contract implements the adopted [native architecture](../architecture/NATIVE_ARCHITECTURE.md) and [public core API](CORE_CONTRACT.md). It does not reuse the companion's whole-state rebuild implementation or transfer its test results.
 
-RX-1004 captures bounded mutation data/options under one admission counter, selects its root on cursor start and stages core/participant changes under one work-v1 budget. Its private control seam observes phase/work/final stop checks; structural signals can abort mutation cursors. Public promise conversion, queue time, monotonic deadline enforcement, disposal and host task yielding remain RX-1005. Participant roots are trusted immutable supplied state; first-party source/position registrations remain N2. No public arbitrary hook or live schema migration is added.
+RX-1004 captures bounded mutation data/options under one admission counter, selects its root on cursor start and stages core/participant changes under one work-v1 budget. Its private control seam observes phase/work/final stop checks; structural signals can abort mutation cursors. RX-1005 supplies ordinary promise conversion, queue-time monotonic deadlines, disposal and real host task yielding. The scheduler owns final signal/clock reads and rechecks closing/latched aborts after those handles may reenter; there is no extra live signal read between that final stop check and root assignment. Participant roots are trusted immutable supplied state; first-party source/position registrations remain N2. No public arbitrary hook or live schema migration is added.
 
 One owner runs one operation at a time. No concurrent read/write execution, MVCC/history retention, automatic retry, distributed transaction, background rebuild, or schema change in place is required. Worker execution uses one complete native index and cannot change these semantics.
 
@@ -160,6 +160,14 @@ The worker adapter uses operation IDs and a bounded receipt/reconciliation proto
 Expected areas: `src/core/` state/index/scheduler, `test/core/`, private fault-injection/clock seams, and later transaction participants and `src/adapters/worker/`.
 
 Verification must distinguish implementation correctness, environmental scheduling limitations, and unmeasured resource behavior. A clean tree, Promise-returning function, or passing build does not prove cancellation, atomicity, or incrementality.
+
+## RX-1005 implementation observations
+
+The internal ordinary factory returns revision 0 without analyzing records. Admission captures options before query/record data, so already-aborted calls skip caller text. Each call shares one structural counter and one cursor budget. The execution owner selects its root on FIFO start, checks every charged step/phase and before result/commit, and uses lazily captured `performance.now`, `setTimeout` and `clearTimeout` handles. No timer/network/DOM access occurs on import. Tiny calls may finish synchronously before their promises are returned; validation still rejects promises and final stop rules apply.
+
+A host pump meters charged units across consecutive FIFO operations. It schedules a task when the running cursor reaches the configured quantum; the last bounded indivisible charge can cross that threshold. Current measured workloads reach at most 2,123 charged units per burst at quantum 2,048, with largest individual charge 260. This does not measure a maximum physical uninterrupted duration. String normalization/lowercase, hashing, key enumeration/freezing, allocation, Map/Set primitives and bounded returned-hit reversal remain indivisible. There is no transport in this slice.
+
+Queued stops remove their entry/timer/listener and free the slot. Active suspended stops close the cursor/participant and cancel its continuation; active synchronous code observes stops cooperatively. Closing rejects new calls without reading their input. Disposal shares one eventual promise, releases the root after safe termination, and cannot revoke a mutation that already returned its committed result. Tests observe scheduled jobs, signal handlers, root identity and recovery; they do not prove garbage-collector heap reclamation or catch process-wide OOM.
 
 ## Open questions
 

@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 6/21 done · 0 in progress · 1 dependency-ready.
+**Release progress:** 7/21 done · 0 in progress · 1 dependency-ready.
 
 **Planner state:** `ready`.
 
-**Next or resumable release task:** [RX-1005](IMPLEMENTATION_TASKS.md#rx-1005) — Revision execution, work limits, and cancellation.
+**Next or resumable release task:** [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006) — Core-only packaged real-document pilot.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -31,7 +31,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | Milestone | Tasks | Done | Required outcome |
 | --- | --- | --- | --- |
 | **N0 — Native design adoption** | `RX-0001`–`RX-0002` | 2/2 | Initialize the new repository and adopt bounded native contracts, task tracking, and verification rules. |
-| **N1 — Usable native core alpha** | `RX-1001`–`RX-1006` | 4/6 | Search a real documentation corpus through a packaged consumer using only Raveldex-owned indexing, retrieval, scoring, and execution. |
+| **N1 — Usable native core alpha** | `RX-1001`–`RX-1006` | 5/6 | Search a real documentation corpus through a packaged consumer using only Raveldex-owned indexing, retrieval, scoring, and execution. |
 | **N2 — Modular search product** | `RX-2001`–`RX-2006` | 0/6 | Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface. |
 | **N3 — Host and migration parity** | `RX-3001`–`RX-3004` | 0/4 | Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics. |
 | **N4 — Native 0.1 qualification** | `RX-4001`–`RX-4003` | 0/3 | Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior. |
@@ -47,7 +47,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-1002](IMPLEMENTATION_TASKS.md#rx-1002) — Dictionary, postings, exact retrieval, and independent oracle | `done` | `RX-1001` | [Issue](https://github.com/vmitsaras/raveldex/issues/10) |
 | [RX-1003](IMPLEMENTATION_TASKS.md#rx-1003) — Query evaluation, native BM25, and numerical trace facts | `done` | `RX-1002` | [Issue](https://github.com/vmitsaras/raveldex/issues/11) |
 | [RX-1004](IMPLEMENTATION_TASKS.md#rx-1004) — Incremental atomic mutations | `done` | `RX-1003` | [Issue](https://github.com/vmitsaras/raveldex/issues/12) |
-| [RX-1005](IMPLEMENTATION_TASKS.md#rx-1005) — Revision execution, work limits, and cancellation | `planned` | `RX-1004` | [Issue](https://github.com/vmitsaras/raveldex/issues/13) |
+| [RX-1005](IMPLEMENTATION_TASKS.md#rx-1005) — Revision execution, work limits, and cancellation | `done` | `RX-1004` | [Issue](https://github.com/vmitsaras/raveldex/issues/13) |
 | [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006) — Core-only packaged real-document pilot | `planned` | `RX-1005` | [Issue](https://github.com/vmitsaras/raveldex/issues/14) |
 | [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001) — Source-verified phrase add-on | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/15) |
 | [RX-2002](IMPLEMENTATION_TASKS.md#rx-2002) — Optional positions, original offsets, and phrase parity | `planned` | `RX-2001` | [Issue](https://github.com/vmitsaras/raveldex/issues/16) |

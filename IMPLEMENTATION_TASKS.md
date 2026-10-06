@@ -259,7 +259,7 @@ Add and change records through atomic native transactions that update affected i
 
 **Revision execution, work limits, and cancellation**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/13)
+**Milestone:** N1 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/13)
 
 **Dependencies:** [RX-1004](IMPLEMENTATION_TASKS.md#rx-1004)
 
@@ -292,7 +292,7 @@ Make owned retrieval and mutation work resumable and bounded while preserving ex
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-1005.md](docs/evidence/RX-1005.md)
 
 
 ## RX-1006

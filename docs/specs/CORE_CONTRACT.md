@@ -1,6 +1,6 @@
 # Core contract: data, analysis, queries, results, and limits
 
-Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001–1004 input/analysis, frequency construction, complete query/BM25 evaluation and incremental atomic mutations are implemented and verified locally; the public engine/scheduler remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
+Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001–1005 input/analysis, frequency construction, complete query/BM25 evaluation, incremental atomic mutations and ordinary engine execution are implemented and verified locally; public package qualification remains RX-1006. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md), [RX-1004 evidence](../evidence/RX-1004.md) and [RX-1005 evidence](../evidence/RX-1005.md).
 
 ## Goal
 
@@ -12,7 +12,7 @@ An application can create an engine, add records, submit ordinary text or a type
 
 ## Current-system facts and constraints
 
-This is the approved contract for a fresh repository. Described methods and types are planned interfaces, not existing exports. The native architecture is in [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md). There is no prior native runtime evidence to reuse.
+This is the approved contract for a fresh repository. The ordinary methods and empty-engine factory exist in the internal execution module. They are not yet root package exports. The native architecture is in [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md). Current native verification is recorded in the task evidence linked above.
 
 Pure ESM TypeScript; no core runtime dependency or DOM import. The 10,000-document ceiling and finite bounds below are adopted initial design limits, not measurements. Limit increases require a reviewed contract change; consumers may configure stricter bounds.
 
@@ -25,9 +25,9 @@ Pure ESM TypeScript; no core runtime dependency or DOM import. The 10,000-docume
 - C-D05: Boolean membership, scoring groups, predicates, and pagination are separate concerns.
 - C-D06: Every successful search establishes complete membership and an exact total.
 
-## Planned public API
+## Public API contract
 
-These names and call shapes are normative for implementation; they are not currently exported runtime functions.
+These names and call shapes are implemented in the internal execution module; RX-1006 qualifies root exports and a packed public consumer.
 
 | Entry | Required call/result contract |
 | --- | --- |

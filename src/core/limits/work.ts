@@ -1,7 +1,7 @@
 import { bound, invalid } from '../errors/error.js';
 import type { Limits } from './limits.js';
 
-/** Pure accounting only. The FIFO scheduler/clock/checkpoints arrive in RX-1005. */
+/** Pure accounting; execution stop checks run before charges can fail. */
 export class WorkBudget {
   readonly policy = 'work-v1';
   private used = 0;
