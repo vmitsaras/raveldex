@@ -1,6 +1,6 @@
 # Verification layers
 
-Currently only `tooling/` exists: behavioral checks for roadmap validation/status and tracking synchronization. Passing these tests is bootstrap evidence only.
+`tooling/` checks roadmap validation/status and tracking synchronization. `core/` checks schema/record/query/option ownership, errors, limits, analysis and import isolation. Hand-authored `fixtures/analysis/` contains independently stated terms and original UTF-16 spans; `types/` checks readonly declarations and forbidden/coerced inputs. `npm test` builds ESM then runs all behavior tests; `npm run typecheck` also checks the type fixtures. These passes establish input/analyzer primitives, not a working search engine.
 
 Future task slices add independent analyzer/query fixtures, native retrieval oracle comparisons, hand-derived ranking arithmetic, mutation/revision sequences, owned cancellation workloads, source/positional parity, public package consumers, host integration, and qualified UI/browser/AT/resource observations. Consult [the verification plan](../docs/planning/VERIFICATION_PLAN.md).
 

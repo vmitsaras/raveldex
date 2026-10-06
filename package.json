@@ -2,25 +2,35 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native, modular TypeScript local search — repository foundation; search runtime not implemented yet.",
+  "description": "Native modular TypeScript local search — validated inputs and basic analyzer; search runtime pending.",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vmitsaras/raveldex.git"
   },
-  "bugs": { "url": "https://github.com/vmitsaras/raveldex/issues" },
+  "bugs": {
+    "url": "https://github.com/vmitsaras/raveldex/issues"
+  },
   "homepage": "https://github.com/vmitsaras/raveldex#readme",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "check": "npm run handoff:check && npm run docs:check && npm test",
-    "test": "node --test test/tooling/*.test.mjs",
+    "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
+    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
     "docs:generate": "node scripts/render-plan.mjs",
     "docs:check": "node scripts/render-plan.mjs --check && node scripts/check-docs.mjs",
     "tracking:preview": "node scripts/sync-github.mjs --dry-run",
-    "tracking:sync": "node scripts/sync-github.mjs --apply"
+    "tracking:sync": "node scripts/sync-github.mjs --apply",
+    "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "test:core": "npm run build && node --test test/core/*.test.mjs"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
   }
 }

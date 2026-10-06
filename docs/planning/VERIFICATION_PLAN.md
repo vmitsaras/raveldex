@@ -1,6 +1,6 @@
 # Native verification plan
 
-Status: adopted evaluation plan; native runtime observations have not yet been collected.
+Status: adopted evaluation plan; RX-1001 has local input/analyzer/import observations in [its evidence record](../evidence/RX-1001.md). Search/index/execution and product qualification remain unperformed.
 
 This document defines how Raveldex's native claims will be established. The previous companion's tests, timings, accessibility reports, and pilot judgments are useful inputs for later inspection. They are not evidence that this repository's native implementation works.
 

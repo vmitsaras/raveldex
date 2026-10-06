@@ -101,7 +101,7 @@ Turn the selected native design into a bounded implementation contract and accep
 
 **Data, schema, basic analyzer, limits, and errors**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/9)
+**Milestone:** N1 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/9)
 
 **Dependencies:** [RX-0002](IMPLEMENTATION_TASKS.md#rx-0002)
 
@@ -133,7 +133,7 @@ Implement validated native input contracts and a deterministic basic analyzer th
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-1001.md](docs/evidence/RX-1001.md)
 
 
 ## RX-1002

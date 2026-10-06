@@ -1,6 +1,6 @@
 # Native architecture
 
-Status: Approved design; implementation has not started.
+Status: Approved design; RX-1001 input/analysis/error/limit primitives implemented. Indexing, ranking, mutations and scheduling remain planned. See [RX-1001 evidence](../evidence/RX-1001.md).
 
 Decision date: 2026-10-06. Scope: the native Raveldex line in this repository.
 

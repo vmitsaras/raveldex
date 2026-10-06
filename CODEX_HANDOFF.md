@@ -20,9 +20,9 @@ synchronize the manifest and generated docs, and report the next task.
 Do not publish a package/release or activate deferred N5 work.
 ```
 
-## First implementation boundary
+## Current implementation boundary
 
-After N0 is verified, the first runtime task is **RX-1001 — data contracts, basic analyzer, limits, and errors**. Its task card controls the exact title/scope. Add the justified TypeScript compiler/build/test tooling and the first real sources. Verify input ownership, malformed inputs, token normalization and original UTF-16 spans, bounds, and error shape.
+N0 and **RX-1001 — Data, schema, basic analyzer, limits, and errors** are verified. See [RX-1001 evidence](docs/evidence/RX-1001.md). The next slice is **RX-1002 — Dictionary, postings, exact retrieval, and independent oracle**; the planner and task card control current readiness/scope. Reuse the captured inputs, resumable analyzer and finite guards rather than introducing another tokenizer. Index state must consume all validation before publication, and frequency-only mode must release temporary original text/occurrences.
 
 Do not turn RX-1001 into every engine layer at once. RX-1002 adds dictionary/postings and an independent evaluator; RX-1003 adds the full query/ranking contract. RX-1006 is the core-only public-package real-document consumer. That is the first usable core alpha milestone, not the outcome of repository initialization.
 
