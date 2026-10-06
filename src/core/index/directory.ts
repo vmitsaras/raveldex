@@ -23,7 +23,7 @@ export function* directoryEntries<T>(directory: Directory<T>): Generator<readonl
   }
 }
 
-/** Construction-only mutable owner. Future mutations copy only touched buckets. */
+/** Construction-only mutable owner. Mutations use DirectoryStage. */
 export class DirectoryBuilder<T> {
   private buckets: Record<string, Record<string, T>> = Object.create(null) as typeof this.buckets;
   private count = 0;

@@ -1,6 +1,6 @@
 # Incremental mutations, revisions, and execution
 
-Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001. Runtime implementation: not started.
+Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001. RX-1004 internal incremental mutation/participant publication verified locally; public scheduling/lifecycle integration remains RX-1005. See [evidence](../evidence/RX-1004.md).
 
 ## Goal and system outcome
 
@@ -8,7 +8,9 @@ Changes must be atomic and incrementally maintain native index state. A caller m
 
 ## Current facts, constraints, and non-goals
 
-The new repository has no mutation scheduler or runtime yet. This contract implements the adopted [native architecture](../architecture/NATIVE_ARCHITECTURE.md) and [public core API](CORE_CONTRACT.md). It does not reuse the companion's whole-state rebuild implementation or transfer its test results.
+The repository now has a private serial mutation owner and complete query cursor, without a public FIFO scheduler/engine yet. This contract implements the adopted [native architecture](../architecture/NATIVE_ARCHITECTURE.md) and [public core API](CORE_CONTRACT.md). It does not reuse the companion's whole-state rebuild implementation or transfer its test results.
+
+RX-1004 captures bounded mutation data/options under one admission counter, selects its root on cursor start and stages core/participant changes under one work-v1 budget. Its private control seam observes phase/work/final stop checks; structural signals can abort mutation cursors. Public promise conversion, queue time, monotonic deadline enforcement, disposal and host task yielding remain RX-1005. Participant roots are trusted immutable supplied state; first-party source/position registrations remain N2. No public arbitrary hook or live schema migration is added.
 
 One owner runs one operation at a time. No concurrent read/write execution, MVCC/history retention, automatic retry, distributed transaction, background rebuild, or schema change in place is required. Worker execution uses one complete native index and cannot change these semantics.
 

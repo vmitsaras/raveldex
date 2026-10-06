@@ -8,6 +8,10 @@ After `npm run build`, run `node test/measurements/index-construction.mjs` for r
 
 After building, `node test/measurements/query-work.mjs` reproduces the 100/1,000/10,000-record operation counts in `docs/evidence/RX-1003-work.json`; each query is checked against source expectations and tracing on/off. Counts are work-v1 diagnostics, not latency or heap measurements. Preserved independent review scripts in `docs/evidence/RX-1003-review-*.mjs` provide separate source/oracle, heap, trace, failure and abandonment probes.
 
-Future task slices add mutation/revision sequences, owned cancellation workloads, source/positional parity, public package consumers, host integration, and qualified UI/browser/AT/resource observations. Consult [the verification plan](../docs/planning/VERIFICATION_PLAN.md).
+`oracle/mutations.mjs` independently applies ID/revision policies to original fixture records and rebuilds complete reverse/posting/field/corpus state through the source query oracle. `fixtures/mutations/` supplies deterministic cycles and three seeded 160-operation sequences. `mutation-oracle.test.mjs` checks 507 operations, 511 reconstructed states and 18,683 query/page comparisons, plus hand-derived live-statistic BM25 cases. `mutations.test.mjs` checks participant/source publication, shared admission/work bounds, phase faults, every selected abort/abandonment position, revision exhaustion and collision bucket sharing.
+
+After building, `node test/measurements/mutation-copies.mjs` reproduces `docs/evidence/RX-1004-copies.json`. Each 100/1,000/10,000-record replacement analyzes one record/three values and verifies both old/new states against source. Pointer/key-bucket allocations and copied/updated entries are partial logical counters, without byte/heap/latency claims. Preserved `docs/evidence/RX-1004-review-*.mjs` scripts reproduce separate independent reviewer probes.
+
+Future task slices add public scheduled cancellation/deadline workloads, source/positional parity, public package consumers, host integration, and qualified UI/browser/AT/resource observations. Consult [the verification plan](../docs/planning/VERIFICATION_PLAN.md).
 
 Record unsupported or unavailable observations as Blocked/Not Applicable with reasons, never as passed. Never make the oracle share the implementation under test for the behavior being checked.

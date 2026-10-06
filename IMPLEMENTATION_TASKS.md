@@ -219,7 +219,7 @@ Implement complete typed query evaluation and the versioned native ranker with e
 
 **Incremental atomic mutations**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/12)
+**Milestone:** N1 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/12)
 
 **Dependencies:** [RX-1003](IMPLEMENTATION_TASKS.md#rx-1003)
 
@@ -252,7 +252,7 @@ Add and change records through atomic native transactions that update affected i
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-1004.md](docs/evidence/RX-1004.md)
 
 
 ## RX-1005

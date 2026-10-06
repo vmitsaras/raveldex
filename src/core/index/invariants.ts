@@ -32,7 +32,7 @@ export function* inspectIndex(root: IndexRoot): Generator<WorkStep, void> {
     }
     check(entries === data.size, 'directory.size');
   }
-  check(root.revision === 0, 'revision');
+  count(root.revision, 'revision');
   yield* directory(root.documents);
   const counts = { documents: 0, textCodeUnits: 0, tokens: 0, dictionaryEntries: 0, postingEntries: 0 };
   const statistics: Record<string, { documents: number; length: number }> = Object.create(null) as typeof statistics;

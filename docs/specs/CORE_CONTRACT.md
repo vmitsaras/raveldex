@@ -1,6 +1,6 @@
 # Core contract: data, analysis, queries, results, and limits
 
-Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001–1003 input/analysis, frequency construction and complete query/BM25 evaluation are implemented and verified locally; the public engine/mutations/scheduler remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md) and [RX-1003 evidence](../evidence/RX-1003.md).
+Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001–1004 input/analysis, frequency construction, complete query/BM25 evaluation and incremental atomic mutations are implemented and verified locally; the public engine/scheduler remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
 
 ## Goal
 

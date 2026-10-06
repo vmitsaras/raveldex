@@ -22,11 +22,13 @@ export interface FieldIndex {
   readonly length: number;
   readonly terms: Directory<TermEntry>;
 }
-/** Internal frequency-only root. No original text, occurrences, or providers. */
+/** Internal root. Mandatory data is frequency-only; side roots are explicit. */
 export interface IndexRoot {
-  readonly revision: 0;
+  readonly revision: number;
   readonly configuration: OwnedConfiguration;
   readonly documents: Directory<DocumentEntry>;
   readonly fields: Readonly<Record<string, FieldIndex>>;
   readonly counts: StateCounts;
+  /** Installed private transaction roots, selected by the same publication. */
+  readonly participants: Readonly<Record<string, unknown>>;
 }

@@ -170,7 +170,7 @@ export class IndexConstruction {
       }
       const documents = yield* seal(this.documents);
       validateStateCounts(this.counts, this.configuration.limits);
-      const root: IndexRoot = Object.freeze({ revision: 0, configuration: this.configuration, documents, fields: Object.freeze(fields), counts: Object.freeze({ ...this.counts }) });
+      const root: IndexRoot = Object.freeze({ revision: 0, configuration: this.configuration, documents, fields: Object.freeze(fields), counts: Object.freeze({ ...this.counts }), participants: Object.freeze(Object.create(null)) as Readonly<Record<string, unknown>> });
       this.fields = Object.create(null) as typeof this.fields;
       this.status = 'finished';
       completed = true;

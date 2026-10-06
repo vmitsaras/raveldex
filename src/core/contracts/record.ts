@@ -63,8 +63,7 @@ export function captureRecord(input: unknown, schema: OwnedSchema, limits: Limit
   return Object.freeze({ id, text: Object.freeze(text), metadata: Object.freeze(metadata), textCodeUnits });
 }
 
-export function captureBatch(input: unknown, schema: OwnedSchema, limits: Limits): readonly OwnedRecord[] {
-  const admission = new Admission(limits.maxAdmissionEntries);
+export function captureBatch(input: unknown, schema: OwnedSchema, limits: Limits, admission = new Admission(limits.maxAdmissionEntries)): readonly OwnedRecord[] {
   const values = ownArray(input, limits.maxMutationBatch, 'INVALID_RECORD', 'records', admission);
   const ids = new Set<string>();
   return Object.freeze(values.map((value, i) => {
@@ -75,8 +74,8 @@ export function captureBatch(input: unknown, schema: OwnedSchema, limits: Limits
   }));
 }
 
-export function captureRemoveIds(input: unknown, limits: Limits): readonly string[] {
-  const values = typeof input === 'string' ? [input] : ownArray(input, limits.maxMutationBatch, 'INVALID_OPTIONS', 'ids', new Admission(limits.maxAdmissionEntries));
+export function captureRemoveIds(input: unknown, limits: Limits, admission = new Admission(limits.maxAdmissionEntries)): readonly string[] {
+  const values = typeof input === 'string' ? [input] : ownArray(input, limits.maxMutationBatch, 'INVALID_OPTIONS', 'ids', admission);
   const ids = new Set<string>();
   return Object.freeze(values.map((value, i) => {
     const id = captureId(value, limits, 'INVALID_OPTIONS', `ids[${i}]`);
@@ -87,8 +86,11 @@ export function captureRemoveIds(input: unknown, limits: Limits): readonly strin
 }
 
 export interface RecordStep extends ScanStep { readonly field?: string; readonly token?: Token }
+/** Optional private invocation diagnostics, collected at the actual analyzer. */
+export interface RecordAnalysisCounts { records: number; values: number; textCodeUnits: number }
 /** Temporary source is owned until processing finishes; no engine retention here. */
-export function* analyzeRecord(record: OwnedRecord, limits: Limits): Generator<RecordStep> {
+export function* analyzeRecord(record: OwnedRecord, limits: Limits, counts?: RecordAnalysisCounts): Generator<RecordStep> {
+  if (counts) counts.records++;
   yield* scanUnicode(record.id, 'INVALID_RECORD', 'record.id');
   for (const [field, value] of Object.entries(record.metadata)) {
     for (const item of Array.isArray(value) ? value : [value]) {
@@ -98,6 +100,7 @@ export function* analyzeRecord(record: OwnedRecord, limits: Limits): Generator<R
   let tokens = 0;
   for (const [field, values] of Object.entries(record.text)) {
     for (let i = 0; i < values.length; i++) {
+      if (counts) { counts.values++; counts.textCodeUnits += values[i]!.length; }
       for (const step of analyzeValue(values[i]!, i, limits)) {
         if (step.token) {
           bound(++tokens, limits.maxTokensPerRecord, 'record.tokens');
