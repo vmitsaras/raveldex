@@ -140,7 +140,7 @@ Implement validated native input contracts and a deterministic basic analyzer th
 
 **Dictionary, postings, exact retrieval, and independent oracle**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/10)
+**Milestone:** N1 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/10)
 
 **Dependencies:** [RX-1001](IMPLEMENTATION_TASKS.md#rx-1001)
 
@@ -172,7 +172,7 @@ Build the first Raveldex-owned field-aware index and prove exact token eligibili
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-1002.md](docs/evidence/RX-1002.md)
 
 
 ## RX-1003

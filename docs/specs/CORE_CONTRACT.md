@@ -1,6 +1,6 @@
 # Core contract: data, analysis, queries, results, and limits
 
-Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001 input/analysis/error/limit primitives implemented and verified; engine/index/query evaluation remain planned. See [RX-1001 evidence](../evidence/RX-1001.md).
+Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001 input/analyzer/error/limit primitives and RX-1002 frequency construction/exact lookup are implemented and verified locally; public engine/full query evaluation remain planned. See [RX-1001 evidence](../evidence/RX-1001.md) and [RX-1002 evidence](../evidence/RX-1002.md).
 
 ## Goal
 

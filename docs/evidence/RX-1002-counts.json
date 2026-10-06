@@ -1,0 +1,111 @@
+{
+  "task": "RX-1002",
+  "policy": "work-v1",
+  "configuration": "basic-v1/unqualified, frequency-only, EXACT_SCHEMA",
+  "environment": {
+    "node": "v24.21.0",
+    "v8": "13.6.233.17-node.53",
+    "icu": "78.3",
+    "unicode": "17.0",
+    "platform": "darwin",
+    "osRelease": "27.0.0",
+    "arch": "arm64"
+  },
+  "notes": [
+    "Internal construction uses separately captured batches of at most 256 records plus finalization; these are not public engine commits/revisions.",
+    "Counts describe the completed frequency-only root. They exclude caller fixture data, captured batches, old/staged overlap, runtime/harness allocations and collector effects.",
+    "Reachable-object and bucket counts are not retained/peak heap bytes. No latency, memory capacity, package cost or host scheduling qualification is claimed."
+  ],
+  "rows": [
+    {
+      "records": 100,
+      "seed": "0x5eed1002",
+      "corpusSha256": "b0fcdf996ec126bea55d52fa7961cddc211f3a5cc9cc2928239d38a184ce438a",
+      "admittedBatches": 1,
+      "constructionWorkUnits": 73504,
+      "constructionSteps": 14011,
+      "maxBatchWorkUnits": 52354,
+      "finalizationWorkUnits": 21150,
+      "invariantWorkUnits": 64658,
+      "commonLookupWorkUnits": 2111,
+      "exactCommonMembers": 100,
+      "liveCounts": {
+        "documents": 100,
+        "textCodeUnits": 6022,
+        "tokens": 1014,
+        "dictionaryEntries": 152,
+        "postingEntries": 891
+      },
+      "retainedStructureCounts": {
+        "reachableObjects": 2218,
+        "documentBuckets": 81,
+        "dictionaryBuckets": 124,
+        "postingBuckets": 849,
+        "reverseFields": 192,
+        "reverseTerms": 891,
+        "metadataFields": 100,
+        "metadataValues": 100
+      }
+    },
+    {
+      "records": 1000,
+      "seed": "0x5eed1002",
+      "corpusSha256": "eb3d46e3d9072a21f9525eeefe4c142edc9992772a684dd8e989527a783b0802",
+      "admittedBatches": 4,
+      "constructionWorkUnits": 779454,
+      "constructionSteps": 141357,
+      "maxBatchWorkUnits": 141496,
+      "finalizationWorkUnits": 228070,
+      "invariantWorkUnits": 701324,
+      "commonLookupWorkUnits": 22811,
+      "exactCommonMembers": 1000,
+      "liveCounts": {
+        "documents": 1000,
+        "textCodeUnits": 60860,
+        "tokens": 10106,
+        "dictionaryEntries": 1052,
+        "postingEntries": 8987
+      },
+      "retainedStructureCounts": {
+        "reachableObjects": 16668,
+        "documentBuckets": 249,
+        "dictionaryBuckets": 284,
+        "postingBuckets": 6055,
+        "reverseFields": 1950,
+        "reverseTerms": 8987,
+        "metadataFields": 1000,
+        "metadataValues": 1000
+      }
+    },
+    {
+      "records": 10000,
+      "seed": "0x5eed1002",
+      "corpusSha256": "d04ae734e969ddb0dfbda5c002ae198c336d59b9a00ac2ff8cb6880a013ce12e",
+      "admittedBatches": 40,
+      "constructionWorkUnits": 8176761,
+      "constructionSteps": 1443419,
+      "maxBatchWorkUnits": 150245,
+      "finalizationWorkUnits": 2428174,
+      "invariantWorkUnits": 7377647,
+      "commonLookupWorkUnits": 238811,
+      "exactCommonMembers": 10000,
+      "liveCounts": {
+        "documents": 10000,
+        "textCodeUnits": 623379,
+        "tokens": 102195,
+        "dictionaryEntries": 10052,
+        "postingEntries": 90611
+      },
+      "retainedStructureCounts": {
+        "reachableObjects": 123028,
+        "documentBuckets": 256,
+        "dictionaryBuckets": 288,
+        "postingBuckets": 22414,
+        "reverseFields": 19945,
+        "reverseTerms": 90611,
+        "metadataFields": 10000,
+        "metadataValues": 10000
+      }
+    }
+  ]
+}
