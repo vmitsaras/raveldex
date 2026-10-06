@@ -69,7 +69,7 @@ export interface SearchResult {
   readonly total: number; readonly hits: readonly { readonly id: string; readonly score: number }[];
   readonly extensions?: Readonly<Record<string, unknown>>;
 }
-// Declaration of the planned contract, not a success-returning runtime factory.
+// Implemented by the execution owner; package entry qualification is RX-1006.
 export interface Raveldex {
   search(query: string | Query, options?: SearchOptions): Promise<SearchResult>;
   add(record: RecordInput, options?: MutationOptions): Promise<MutationResult>;

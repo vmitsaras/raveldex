@@ -2,8 +2,14 @@ import type { Configuration, Query, RecordInput, Raveldex, SearchResult, Cancell
 import type { ErrorCode } from '../../src/core/errors/error.js';
 import type { IndexRoot } from '../../src/core/index/state.js';
 import type { ScoreTrace, FieldFact } from '../../src/core/trace/facts.js';
+import { createRaveldex } from '../../src/core/execution/engine.js';
 
 const configuration: Configuration = { schema: { text: { title: { boost: 2 } }, metadata: { tags: { type: 'string', multi: true } } } };
+const implementedEngine: Raveldex = createRaveldex(configuration);
+// @ts-expect-error The ordinary factory exposes no private host or root accessor.
+implementedEngine.root;
+// @ts-expect-error Public factory callers cannot supply a semantic scheduler.
+createRaveldex(configuration, { now: () => 0 });
 const record: RecordInput = { id: '__proto__', text: { title: ['Hello'] }, metadata: { tags: ['a', 'b'] } };
 const query: Query = { kind: 'and', children: [{ kind: 'text', text: 'Hello' }, { kind: 'eq', field: 'tags', value: 'a' }] };
 // @ts-expect-error Readonly input arrays cannot be edited through the contract.

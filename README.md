@@ -2,13 +2,13 @@
 
 **Native local search with explainable results and optional feature costs.**
 
-Raveldex is a new TypeScript search library for mutable local collections: application records, documentation, notes, saved content, and modest catalogs. The engine will own its dictionary, postings, ranking, incremental updates, and execution. Additional search capabilities and environment integrations live behind explicit optional entry points.
+Raveldex is a new TypeScript search library for mutable local collections: application records, documentation, notes, saved content, and modest catalogs. The engine owns its dictionary, postings, ranking, incremental updates, and execution. Additional search capabilities and environment integrations live behind explicit optional entry points.
 
 ## Current status
 
-**RX-1001–1004 implement internal analysis, indexing, query/BM25 evaluation and incremental atomic mutations. A usable public engine is still pending.**
+**RX-1001–1005 implement native analysis, indexing, query/BM25 evaluation, atomic mutations and scheduled execution. Public package qualification is next.**
 
-This repository contains validated schema/record/query capture, owned immutable data, `basic-v1` analysis with original UTF-16 token spans, typed errors and finite limits. Its internal frequency index owns field-aware dictionary/postings, reverse records, field statistics and equality metadata; exact normalized-term lookup returns complete membership. The internal query cursor adds typed Boolean/equality queries, complete bounded prefix expansion, native BM25, deterministic pages/exact totals and opt-in numerical facts. The internal mutation owner stages add/batch-add/replace/remove/clear deltas and publishes core/participant roots together. Independent source scans, hand-derived scores and fault injection verify these behaviors. Architecture contracts, 21 release-track task cards, 10 deferred tasks and planning/tracking tools guide the remaining work. FIFO scheduling, host execution, browser support and package readiness require later evidence.
+This repository contains validated schema/record/query capture, owned immutable data, `basic-v1` analysis with original UTF-16 token spans, typed errors and finite limits. Its internal frequency index owns field-aware dictionary/postings, reverse records, field statistics and equality metadata; exact normalized-term lookup returns complete membership. The internal query cursor adds typed Boolean/equality queries, complete bounded prefix expansion, native BM25, deterministic pages/exact totals and opt-in numerical facts. The internal mutation owner stages add/batch-add/replace/remove/clear deltas and publishes core/participant roots together. The execution owner adds bounded FIFO admission, start-time revisions, promise failures, monotonic deadlines, cooperative cancellation, host task yielding and idempotent disposal. Independent source scans, hand-derived scores and fault injection verify these behaviors. Architecture contracts, 21 release-track task cards, 10 deferred tasks and planning/tracking tools guide the remaining work. [RX-1005 evidence](docs/evidence/RX-1005.md) records deterministic lifecycle tests and local host-task observations. Browser support and package readiness require later evidence.
 
 The package remains `private: true`, version `0.0.0`. There is no published package, usable search export, runtime dependency, or application demo at this stage. The existing MIT license is retained.
 
@@ -43,7 +43,7 @@ npm run handoff:next
 
 `handoff:next` reports dependency eligibility. It does not execute tasks or grant permission for publication. When implementation is requested, take the next eligible task and verify its acceptance criteria before moving on.
 
-`npm run typecheck` checks strict, DOM-free sources and declaration fixtures. `npm run build` emits internal ESM and declarations to ignored `dist/`. There is no root search export or placeholder factory; RX-1006 owns the first packaged real-document consumer. Optional UI and host code will use separate configurations when implemented.
+`npm run typecheck` checks strict, DOM-free sources and declaration fixtures. `npm run build` emits internal ESM and declarations to ignored `dist/`. The real factory is implemented internally in `core/execution/engine.ts`; RX-1006 owns the root package export and first packed real-document consumer. Optional UI and host code will use separate configurations when implemented.
 
 Normal local development requires no environment variables or secrets. Only the explicit GitHub tracking workflow uses the repository's temporary `GITHUB_TOKEN` with `issues: write` and `contents: read` permissions.
 

@@ -18,10 +18,12 @@ export interface MutationDiagnostics { analysis: AnalysisCounts; copies: Staging
 export interface MutationControl {
   /** Private scheduler/fault seam; it may throw only before publication. */
   readonly checkpoint?: (phase: MutationPhase) => void;
+  /** Execution owner checks all stop conditions and owns the signal read. */
+  readonly checkStop?: (phase: MutationPhase) => void;
   readonly diagnostics?: MutationDiagnostics;
 }
 
-/** Internal serial transaction owner. Public FIFO/promises/clock await RX-1005. */
+/** Internal transaction owner; the execution owner supplies FIFO/promises/clock. */
 export class MutationOwner {
   #root: IndexRoot;
   #active = false;
@@ -56,7 +58,8 @@ export class MutationOwner {
     let phase: MutationPhase = 'start';
     const check = (): void => {
       control.checkpoint?.(phase);
-      if (request.options.signal?.aborted) invalid('CANCELLED', 'options.signal');
+      if (control.checkStop) control.checkStop(phase);
+      else if (request.options.signal?.aborted) invalid('CANCELLED', 'options.signal');
     };
     const charge = (workUnits: number): WorkStep => {
       check(); budget.charge(workUnits);
