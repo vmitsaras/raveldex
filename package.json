@@ -2,7 +2,7 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution and optional source phrases.",
+  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution and optional source/positional phrases.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs",
+    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -32,7 +32,8 @@
     "prepack": "npm run build",
     "test:consumer": "npm run build && node --test test/consumer/*.test.mjs",
     "pilot:core": "npm run build && node scripts/core-pilot.mjs",
-    "test:phrases": "npm run build && node --test test/addons/phrases/*.test.mjs"
+    "test:phrases": "npm run build && node --test test/addons/phrases/*.test.mjs",
+    "test:positions": "npm run build && node --test test/addons/positions/*.test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2",
@@ -51,13 +52,26 @@
     "./addons/phrases/source": {
       "types": "./dist/addons/phrases/source.d.ts",
       "import": "./dist/addons/phrases/source.js"
+    },
+    "./addons/positions": {
+      "types": "./dist/addons/positions/index.d.ts",
+      "import": "./dist/addons/positions/index.js"
+    },
+    "./addons/phrases/positions": {
+      "types": "./dist/addons/positions/phrases.d.ts",
+      "import": "./dist/addons/positions/phrases.js"
+    },
+    "./addons/phrases/mixed": {
+      "types": "./dist/addons/phrases/mixed.d.ts",
+      "import": "./dist/addons/phrases/mixed.js"
     }
   },
   "files": [
     "dist/index.js",
     "dist/index.d.ts",
     "dist/core/",
-    "dist/addons/phrases/"
+    "dist/addons/phrases/",
+    "dist/addons/positions/"
   ],
   "sideEffects": false
 }

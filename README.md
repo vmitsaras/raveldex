@@ -10,7 +10,7 @@ Raveldex is a TypeScript search library for mutable local collections. The nativ
 
 RX-1001–1006 implement and verify the core. The public factory returns an empty revision-0 engine with `search`, `add`, `addMany`, `replace`, `remove`, `clear` and `dispose`. Configuration errors throw; operational errors reject promises. [RX-1006 evidence](docs/evidence/RX-1006.md) records public type checks, independent source/numerical comparisons, import/startup checks and relevance outcomes for 34 current documentation sections.
 
-RX-2001 also verifies explicit transactional source retention and strict source phrases through public subpaths; see [phrase evidence](docs/evidence/RX-2001.md).
+RX-2001 also verifies explicit transactional source retention and strict source phrases through public subpaths; see [phrase evidence](docs/evidence/RX-2001.md). RX-2002 adds selected positions, independent original spans and mixed phrase strategies; see [position evidence](docs/evidence/RX-2002.md).
 
 The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; browser support, other optional capabilities, worker/storage hosting and Unicode snapshot portability require later evidence.
 
@@ -71,7 +71,36 @@ try {
 
 Phrases require adjacent native tokens in one original value; repeats matter, punctuation separates tokens, and fields/array values cannot be joined. Eligibility refines its own Boolean leaf before pagination and adds no score bonus. Payload is exactly `{ text, fields? }`; omitted fields select all schema text fields, each requiring an enabled provider. Empty analyzed phrases match nothing; the cap is 32 analyzed tokens. Unknown keys, missing/incompatible providers and incomplete-budget verification fail explicitly.
 
-The provider retains only declared fields' complete immutable original values and follows atomic writes, rollback, clear and disposal. Source-only consumers import `createSourceProvider` from `@vmitsaras/raveldex/addons/phrases/source` without the verifier. Factory options include optional `id`, `maxWorkUnits`, and source `maxRetainedEntries`; see [protocol and costs](docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability). No source getter, offsets, snippets or positions are added to the ordinary engine.
+The provider retains only declared fields' complete immutable original values and follows atomic writes, rollback, clear and disposal. Source-only consumers import `createSourceProvider` from `@vmitsaras/raveldex/addons/phrases/source` without the verifier. Factory options include optional `id`, `maxWorkUnits`, and source `maxRetainedEntries`; see [protocol and costs](docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability). The ordinary engine has no source/position getter or snippet API.
+
+## Optional positions and original offsets
+
+```ts
+import { createPositionProvider } from '@vmitsaras/raveldex/addons/positions';
+import { createPositionPhrases } from '@vmitsaras/raveldex/addons/phrases/positions';
+
+const positions = createPositionProvider({ fields: ['title', 'body'], offsets: ['body'] });
+const phrases = createPositionPhrases({ fields: ['title', 'body'] });
+// Pass both registrations to createRaveldex's addons before adding records.
+```
+
+Positions store token order separately for each original array value, without retaining display text. `offsets` defaults to `[]`; its selected fields must be a subset of `fields`. Only those fields retain original half-open UTF-16 token spans. Normalization never supplies span coordinates. Offsets affect storage cost, while phrase membership and native scores remain identical to the source strategy. Containers/occurrences and optional span coordinates have explicit logical caps; heap and physical latency are unmeasured.
+
+To use source for one field and positions for another, install each provider and one mixed phrase registration:
+
+```ts
+import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
+import { createPositionProvider } from '@vmitsaras/raveldex/addons/positions';
+import { createPhrases } from '@vmitsaras/raveldex/addons/phrases/mixed';
+
+const addons = [
+  createSourceProvider({ fields: ['title'] }),
+  createPositionProvider({ fields: ['body'], offsets: ['body'] }),
+  createPhrases({ fields: { title: 'source', body: 'positions' } }),
+];
+```
+
+All strategies use the same `phrases` extension payload shown above. Select one phrase registration per engine; multiple registrations providing `phrases` conflict. Every query-selected field must have its declared provider, even for empty or unmatched queries. All side roots publish, roll back, clear and dispose with core. Position utility imports exclude phrase evaluation; positional-only phrases exclude source storage/reanalysis. Strict positions have `positionLength: 1`; slop, proximity and synonym graphs remain unsupported. See [RX-2002 evidence](docs/evidence/RX-2002.md).
 
 ## Start here
 
@@ -98,6 +127,7 @@ npm run check
 npm run test:core
 npm run test:consumer
 npm run test:phrases
+npm run test:positions
 npm run handoff:status
 npm run handoff:next
 ```
@@ -116,6 +146,6 @@ npm run handoff:next
 | Planned host adapters | Worker ownership/transport, snapshots, IndexedDB/recovery and later integrations. |
 | Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
-The full public core measured **15,131 bytes gzip** (49,102 minified ESM bytes), within the 15 KiB target under the fixed esbuild/gzip method. Mandatory registration/refinement coordination increases core from historical RX-1006's 12,400 gzip bytes. Complete core plus source phrases measured 17,371 gzip bytes; standalone source utility 3,544. These complete bundles overlap and are not additive module costs. The 10,000-record defensive ceiling is not a universal capacity or latency promise. No DOM, worker, storage, network, foreign engine or optional source representation enters the measured graph or runs on import.
+The RX-2002 public core measured **15,159 bytes gzip** (49,164 minified ESM bytes), within the 15 KiB target under the fixed esbuild/gzip method. Mandatory registration/refinement coordination increases core from historical RX-1006's 12,400 gzip bytes. The RX-2001 core plus source phrases measured 17,371 gzip bytes; standalone source utility remains 3,544. Current selected position/mixed graphs are recorded in RX-2002 evidence. These complete bundles overlap and are not additive module costs. The 10,000-record defensive ceiling is not a universal capacity or latency promise. No DOM, worker, storage, network, foreign engine or optional source representation enters the measured graph or runs on import.
 
-MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority is RX-2002; RX-2003 and RX-2004 are also dependency-ready.
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2002 is RX-2003; RX-2004 and RX-2005 are also dependency-ready.
