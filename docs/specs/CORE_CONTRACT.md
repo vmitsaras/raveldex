@@ -1,6 +1,6 @@
 # Core contract: data, analysis, queries, results, and limits
 
-Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001–1005 input/analysis, frequency construction, complete query/BM25 evaluation, incremental atomic mutations and ordinary engine execution are implemented and verified locally; public package qualification remains RX-1006. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md), [RX-1004 evidence](../evidence/RX-1004.md) and [RX-1005 evidence](../evidence/RX-1005.md).
+Status: Approved. Owner tasks: RX-1001 through RX-1006. RX-1001–1006 input/analysis, frequency indexing, query/BM25 evaluation, atomic mutations, ordinary execution and the packed public core pilot are implemented and verified locally; see [package evidence](../evidence/RX-1006.md). See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md), [RX-1004 evidence](../evidence/RX-1004.md) and [RX-1005 evidence](../evidence/RX-1005.md).
 
 ## Goal
 
@@ -12,7 +12,7 @@ An application can create an engine, add records, submit ordinary text or a type
 
 ## Current-system facts and constraints
 
-This is the approved contract for a fresh repository. The ordinary methods and empty-engine factory exist in the internal execution module. They are not yet root package exports. The native architecture is in [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md). Current native verification is recorded in the task evidence linked above.
+This is the approved contract for a fresh repository. The ordinary methods and empty-engine factory are exported from the root ESM package and verified by an isolated local-tarball consumer. The native architecture is in [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md). Current native verification is recorded in the task evidence linked above.
 
 Pure ESM TypeScript; no core runtime dependency or DOM import. The 10,000-document ceiling and finite bounds below are adopted initial design limits, not measurements. Limit increases require a reviewed contract change; consumers may configure stricter bounds.
 
@@ -27,7 +27,7 @@ Pure ESM TypeScript; no core runtime dependency or DOM import. The 10,000-docume
 
 ## Public API contract
 
-These names and call shapes are implemented in the internal execution module; RX-1006 qualifies root exports and a packed public consumer.
+These names and call shapes are implemented and qualified through the root package in RX-1006. The frozen factory result exposes only bound ordinary methods; private roots, scheduler handles and execution callbacks remain internal. Root exports include the factory, `RaveldexError`, `ERROR_CODES` and readonly contract types; internal subpaths are excluded by the exports map.
 
 | Entry | Required call/result contract |
 | --- | --- |
@@ -153,7 +153,7 @@ Direct and worker execution must use the same implementation/configuration and c
 
 ## Query contract
 
-The planned public search method accepts a plain string or a validated `query-v1` tree. A string is shorthand for `text` with AND semantics and all declared text fields. It is never interpreted as an operator/query-language string.
+The public search method accepts a plain string or a validated `query-v1` tree. A string is shorthand for `text` with AND semantics and all declared text fields. It is never interpreted as an operator/query-language string.
 
 ### Core nodes
 

@@ -299,7 +299,7 @@ Make owned retrieval and mutation work resumable and bounded while preserving ex
 
 **Core-only packaged real-document pilot**
 
-**Milestone:** N1 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/14)
+**Milestone:** N1 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/14)
 
 **Dependencies:** [RX-1005](IMPLEMENTATION_TASKS.md#rx-1005)
 
@@ -332,7 +332,7 @@ Deliver a usable real-content search consumer that proves the independent native
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-1006.md](docs/evidence/RX-1006.md)
 
 
 ## RX-2001

@@ -41,7 +41,7 @@ function emptyRoot(configuration: OwnedConfiguration): IndexRoot {
     participants: Object.freeze(Object.create(null)) as Readonly<Record<string, unknown>> });
 }
 
-/** Internal engine implementation. Only the ordinary factory goes public in RX-1006. */
+/** Internal engine implementation. The factory exposes only bound ordinary methods. */
 export class ExecutionOwner implements Raveldex {
   #owner: MutationOwner | undefined;
   readonly #configuration: OwnedConfiguration;
@@ -214,5 +214,13 @@ export class ExecutionOwner implements Raveldex {
 }
 
 export function createRaveldex(configuration: Configuration): Raveldex {
-  return new ExecutionOwner(emptyRoot(captureConfiguration(configuration)), directHost());
+  const owner = new ExecutionOwner(emptyRoot(captureConfiguration(configuration)), directHost());
+  // A public data facade prevents JavaScript callers reaching private test roots
+  // or TypeScript-private execution callbacks through the owner's prototype.
+  return Object.freeze({
+    search: owner.search.bind(owner), add: owner.add.bind(owner),
+    addMany: owner.addMany.bind(owner), replace: owner.replace.bind(owner),
+    remove: owner.remove.bind(owner), clear: owner.clear.bind(owner),
+    dispose: owner.dispose.bind(owner),
+  });
 }

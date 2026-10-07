@@ -1,0 +1,4522 @@
+{
+  "task": "RX-1006",
+  "sourceCommit": "52c472875adf97c1823d6ff0b9bff0273e1d92b0",
+  "workingTree": [
+    "M CHANGELOG.md",
+    " M CODEX_HANDOFF.md",
+    " M IMPLEMENTATION_TASKS.md",
+    " M PROJECT_CONTEXT.md",
+    " M README.md",
+    " M ROADMAP.md",
+    " M docs/architecture/NATIVE_ARCHITECTURE.md",
+    " M docs/planning/VERIFICATION_PLAN.md",
+    " M docs/planning/roadmap.json",
+    " M docs/specs/CORE_CONTRACT.md",
+    " M docs/specs/MUTATIONS_AND_EXECUTION.md",
+    " M docs/specs/RANKING.md",
+    " M examples/README.md",
+    " M package-lock.json",
+    " M package.json",
+    " M src/README.md",
+    " M src/core/contracts/types.ts",
+    " M src/core/execution/engine.ts",
+    " M test/README.md",
+    "?? docs/evidence/RX-1006.md",
+    "?? examples/core-docs/",
+    "?? scripts/core-pilot.mjs",
+    "?? scripts/lib/packed-consumer.mjs",
+    "?? src/index.ts",
+    "?? test/consumer/",
+    "?? test/fixtures/docs/"
+  ],
+  "environment": {
+    "node": "v24.21.0",
+    "npm": "11.19.0",
+    "typescript": "7.0.2",
+    "v8": "13.6.233.17-node.53",
+    "icu": "78.3",
+    "unicode": "17.0",
+    "platform": "darwin",
+    "release": "27.0.0",
+    "arch": "arm64",
+    "cpu": "Apple M5 Pro"
+  },
+  "corpus": {
+    "algorithmVersion": "raveldex-doc-sections-v1",
+    "hash": "e86fb296ba2b6a8710bfc0d38988875219953133b354a2d1dda83e90f29863fb",
+    "records": 34,
+    "sources": [
+      {
+        "path": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec",
+        "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md",
+        "sha256": "19388e778634f62352c3686081be44d17a0ac4475fd6237f6437350d6fa718c6",
+        "bytes": 30690
+      },
+      {
+        "path": "docs/specs/RANKING.md",
+        "category": "spec",
+        "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md",
+        "sha256": "c9ab9ab251f8fd6bb404659ecded51f937ee0832a9ff419255ee862afaab740d",
+        "bytes": 13562
+      },
+      {
+        "path": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec",
+        "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "sha256": "1ffb281026f770c599abd521769981df38c36d12d60c25b8a167b62c07fb2aef",
+        "bytes": 20066
+      },
+      {
+        "path": "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "category": "architecture",
+        "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md",
+        "sha256": "7b781e33ad7ffeff320c183485fc9cc81dc76c0dce209dfaf969bfe3069d20a0",
+        "bytes": 19220
+      },
+      {
+        "path": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "category": "architecture",
+        "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "sha256": "553f9faa663d6ffa30c9dffc9233e86e2e7bab38cdbdc7677466d12c83e4c18c",
+        "bytes": 23361
+      }
+    ],
+    "schema": {
+      "text": {
+        "title": {
+          "boost": 2
+        },
+        "body": {
+          "boost": 1
+        }
+      },
+      "metadata": {
+        "sourcePath": {
+          "type": "string",
+          "multi": false,
+          "nullable": false
+        },
+        "category": {
+          "type": "string",
+          "multi": false,
+          "nullable": false
+        }
+      }
+    },
+    "judgmentVersion": "raveldex-doc-judgments-v1"
+  },
+  "package": {
+    "name": "@vmitsaras/raveldex",
+    "version": "0.0.0",
+    "private": true,
+    "sha256": "f9db7bc0643df86c1fd36952943291ac2ae8c985bd62317bd31f89c5e15d5dce",
+    "npmIntegrity": "sha512-yKtoITi2J/sIBRaYs2c7bVAZ6WOHqr2mgSCovJWn1sLtI7qGZ7KM0qo1Sa/3Auk+oa79ElApsjjnFAxZt7Rgeg==",
+    "tarballBytes": 36946,
+    "unpackedBytes": 149922,
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 1075
+      },
+      {
+        "path": "README.md",
+        "size": 6085
+      },
+      {
+        "path": "dist/core/analyzer/basic.d.ts",
+        "size": 716
+      },
+      {
+        "path": "dist/core/analyzer/basic.js",
+        "size": 1617
+      },
+      {
+        "path": "dist/core/contracts/data.d.ts",
+        "size": 1274
+      },
+      {
+        "path": "dist/core/contracts/data.js",
+        "size": 3247
+      },
+      {
+        "path": "dist/core/contracts/options.d.ts",
+        "size": 411
+      },
+      {
+        "path": "dist/core/contracts/options.js",
+        "size": 2084
+      },
+      {
+        "path": "dist/core/contracts/query.d.ts",
+        "size": 809
+      },
+      {
+        "path": "dist/core/contracts/query.js",
+        "size": 9412
+      },
+      {
+        "path": "dist/core/contracts/record.d.ts",
+        "size": 1665
+      },
+      {
+        "path": "dist/core/contracts/record.js",
+        "size": 5949
+      },
+      {
+        "path": "dist/core/contracts/schema.d.ts",
+        "size": 346
+      },
+      {
+        "path": "dist/core/contracts/schema.js",
+        "size": 4763
+      },
+      {
+        "path": "dist/core/contracts/types.d.ts",
+        "size": 4597
+      },
+      {
+        "path": "dist/core/contracts/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/errors/error.d.ts",
+        "size": 981
+      },
+      {
+        "path": "dist/core/errors/error.js",
+        "size": 1273
+      },
+      {
+        "path": "dist/core/execution/engine.d.ts",
+        "size": 1853
+      },
+      {
+        "path": "dist/core/execution/engine.js",
+        "size": 11278
+      },
+      {
+        "path": "dist/core/execution/host.d.ts",
+        "size": 332
+      },
+      {
+        "path": "dist/core/execution/host.js",
+        "size": 703
+      },
+      {
+        "path": "dist/core/index/construction.d.ts",
+        "size": 850
+      },
+      {
+        "path": "dist/core/index/construction.js",
+        "size": 8348
+      },
+      {
+        "path": "dist/core/index/directory.d.ts",
+        "size": 948
+      },
+      {
+        "path": "dist/core/index/directory.js",
+        "size": 1906
+      },
+      {
+        "path": "dist/core/index/invariants.d.ts",
+        "size": 257
+      },
+      {
+        "path": "dist/core/index/invariants.js",
+        "size": 4747
+      },
+      {
+        "path": "dist/core/index/staging.d.ts",
+        "size": 1080
+      },
+      {
+        "path": "dist/core/index/staging.js",
+        "size": 3537
+      },
+      {
+        "path": "dist/core/index/state.d.ts",
+        "size": 1248
+      },
+      {
+        "path": "dist/core/index/state.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/limits/limits.d.ts",
+        "size": 1787
+      },
+      {
+        "path": "dist/core/limits/limits.js",
+        "size": 3039
+      },
+      {
+        "path": "dist/core/limits/work.d.ts",
+        "size": 521
+      },
+      {
+        "path": "dist/core/limits/work.js",
+        "size": 1054
+      },
+      {
+        "path": "dist/core/mutations/capture.d.ts",
+        "size": 505
+      },
+      {
+        "path": "dist/core/mutations/capture.js",
+        "size": 1323
+      },
+      {
+        "path": "dist/core/mutations/delta.d.ts",
+        "size": 1350
+      },
+      {
+        "path": "dist/core/mutations/delta.js",
+        "size": 7817
+      },
+      {
+        "path": "dist/core/mutations/document.d.ts",
+        "size": 618
+      },
+      {
+        "path": "dist/core/mutations/document.js",
+        "size": 1666
+      },
+      {
+        "path": "dist/core/mutations/owner.d.ts",
+        "size": 1644
+      },
+      {
+        "path": "dist/core/mutations/owner.js",
+        "size": 7546
+      },
+      {
+        "path": "dist/core/query/compile.d.ts",
+        "size": 1298
+      },
+      {
+        "path": "dist/core/query/compile.js",
+        "size": 3356
+      },
+      {
+        "path": "dist/core/query/evaluate.d.ts",
+        "size": 720
+      },
+      {
+        "path": "dist/core/query/evaluate.js",
+        "size": 2493
+      },
+      {
+        "path": "dist/core/query/search.d.ts",
+        "size": 1366
+      },
+      {
+        "path": "dist/core/query/search.js",
+        "size": 4618
+      },
+      {
+        "path": "dist/core/query/work.d.ts",
+        "size": 468
+      },
+      {
+        "path": "dist/core/query/work.js",
+        "size": 866
+      },
+      {
+        "path": "dist/core/ranking/bm25.d.ts",
+        "size": 600
+      },
+      {
+        "path": "dist/core/ranking/bm25.js",
+        "size": 3368
+      },
+      {
+        "path": "dist/core/ranking/page.d.ts",
+        "size": 600
+      },
+      {
+        "path": "dist/core/ranking/page.js",
+        "size": 2514
+      },
+      {
+        "path": "dist/core/retrieval/exact.d.ts",
+        "size": 318
+      },
+      {
+        "path": "dist/core/retrieval/exact.js",
+        "size": 2300
+      },
+      {
+        "path": "dist/core/retrieval/expand.d.ts",
+        "size": 858
+      },
+      {
+        "path": "dist/core/retrieval/expand.js",
+        "size": 3816
+      },
+      {
+        "path": "dist/core/revision/participant.d.ts",
+        "size": 914
+      },
+      {
+        "path": "dist/core/revision/participant.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/trace/facts.d.ts",
+        "size": 2378
+      },
+      {
+        "path": "dist/core/trace/facts.js",
+        "size": 2084
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 613
+      },
+      {
+        "path": "dist/index.js",
+        "size": 209
+      },
+      {
+        "path": "package.json",
+        "size": 1871
+      }
+    ]
+  },
+  "bundle": {
+    "method": {
+      "esbuild": "0.28.2",
+      "settings": {
+        "bundle": true,
+        "platform": "browser",
+        "format": "esm",
+        "target": "es2022",
+        "minify": true,
+        "treeShaking": true,
+        "legalComments": "none",
+        "charset": "ascii",
+        "sourcemap": false,
+        "metafile": true,
+        "write": false
+      },
+      "consumerEntry": "export { createRaveldex, RaveldexError, ERROR_CODES } from '@vmitsaras/raveldex'",
+      "gzip": {
+        "level": 9,
+        "windowBits": 15,
+        "memLevel": 8,
+        "strategy": 0,
+        "mtime": 0
+      },
+      "mandatoryRuntimeDependencies": []
+    },
+    "minifiedBytes": 39702,
+    "gzipBytes": 12400,
+    "targetGzipBytes": 15360,
+    "targetMet": true,
+    "sha256": "cb93f3b108288efa2bc80fdd2efea05bf4a0f4fe806f49a77a34a0cb1c99df71",
+    "gzipSha256": "500ce6103977d2215dbe20e6c278473934598a66c1bbce2b2fa915ac109a0f60",
+    "inputs": [
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+        "bytes": 1273,
+        "imports": []
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+        "bytes": 3247,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+        "bytes": 3039,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+        "bytes": 1617,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../limits/limits.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js",
+        "bytes": 4763,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../limits/limits.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+        "bytes": 1906,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+        "bytes": 3537,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "./directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+        "bytes": 1054,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+        "bytes": 5949,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../analyzer/basic.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js",
+        "bytes": 2084,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/capture.js",
+        "bytes": 1323,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+            "kind": "import-statement",
+            "original": "../contracts/record.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js",
+            "kind": "import-statement",
+            "original": "../contracts/options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/delta.js",
+        "bytes": 7817,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+            "kind": "import-statement",
+            "original": "../index/staging.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/document.js",
+        "bytes": 1666,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+            "kind": "import-statement",
+            "original": "../contracts/record.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/owner.js",
+        "bytes": 7546,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+            "kind": "import-statement",
+            "original": "../limits/work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/capture.js",
+            "kind": "import-statement",
+            "original": "./capture.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/delta.js",
+            "kind": "import-statement",
+            "original": "./delta.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/document.js",
+            "kind": "import-statement",
+            "original": "./document.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js",
+        "bytes": 9412,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+            "kind": "import-statement",
+            "original": "./record.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+        "bytes": 866,
+        "imports": []
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/ranking/bm25.js",
+        "bytes": 3368,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "../query/work.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/ranking/page.js",
+        "bytes": 2514,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "../query/work.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/retrieval/expand.js",
+        "bytes": 3816,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+            "kind": "import-statement",
+            "original": "../limits/work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "../query/work.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/trace/facts.js",
+        "bytes": 2084,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/query/compile.js",
+        "bytes": 3356,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js",
+            "kind": "import-statement",
+            "original": "../contracts/query.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "./work.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/query/evaluate.js",
+        "bytes": 2493,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "./work.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/query/search.js",
+        "bytes": 4618,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js",
+            "kind": "import-statement",
+            "original": "../contracts/options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js",
+            "kind": "import-statement",
+            "original": "../contracts/query.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+            "kind": "import-statement",
+            "original": "../limits/work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/ranking/bm25.js",
+            "kind": "import-statement",
+            "original": "../ranking/bm25.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/ranking/page.js",
+            "kind": "import-statement",
+            "original": "../ranking/page.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/retrieval/expand.js",
+            "kind": "import-statement",
+            "original": "../retrieval/expand.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/trace/facts.js",
+            "kind": "import-statement",
+            "original": "../trace/facts.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/compile.js",
+            "kind": "import-statement",
+            "original": "./compile.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/evaluate.js",
+            "kind": "import-statement",
+            "original": "./evaluate.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "./work.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/execution/host.js",
+        "bytes": 703,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js",
+        "bytes": 11278,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js",
+            "kind": "import-statement",
+            "original": "../contracts/schema.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+            "kind": "import-statement",
+            "original": "../index/staging.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/owner.js",
+            "kind": "import-statement",
+            "original": "../mutations/owner.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/search.js",
+            "kind": "import-statement",
+            "original": "../query/search.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/execution/host.js",
+            "kind": "import-statement",
+            "original": "./host.js"
+          }
+        ]
+      },
+      {
+        "path": "node_modules/@vmitsaras/raveldex/dist/index.js",
+        "bytes": 209,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js",
+            "kind": "import-statement",
+            "original": "./core/execution/engine.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "./core/errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "core-entry.mjs",
+        "bytes": 82,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/index.js",
+            "kind": "import-statement",
+            "original": "@vmitsaras/raveldex"
+          }
+        ]
+      }
+    ],
+    "bytesByModule": {
+      "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js": {
+        "bytesInOutput": 766
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js": {
+        "bytesInOutput": 1416
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js": {
+        "bytesInOutput": 1760
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js": {
+        "bytesInOutput": 695
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js": {
+        "bytesInOutput": 2341
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js": {
+        "bytesInOutput": 273
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js": {
+        "bytesInOutput": 1774
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js": {
+        "bytesInOutput": 485
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js": {
+        "bytesInOutput": 2661
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js": {
+        "bytesInOutput": 1119
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/capture.js": {
+        "bytesInOutput": 483
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/delta.js": {
+        "bytesInOutput": 3858
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/document.js": {
+        "bytesInOutput": 835
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/owner.js": {
+        "bytesInOutput": 2855
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js": {
+        "bytesInOutput": 4079
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/work.js": {
+        "bytesInOutput": 318
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/ranking/bm25.js": {
+        "bytesInOutput": 1155
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/ranking/page.js": {
+        "bytesInOutput": 1135
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/retrieval/expand.js": {
+        "bytesInOutput": 1353
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/trace/facts.js": {
+        "bytesInOutput": 1110
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/compile.js": {
+        "bytesInOutput": 1524
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/evaluate.js": {
+        "bytesInOutput": 1020
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/search.js": {
+        "bytesInOutput": 1778
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/execution/host.js": {
+        "bytesInOutput": 342
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js": {
+        "bytesInOutput": 4500
+      },
+      "node_modules/@vmitsaras/raveldex/dist/index.js": {
+        "bytesInOutput": 0
+      },
+      "core-entry.mjs": {
+        "bytesInOutput": 0
+      }
+    }
+  },
+  "startup": [
+    {
+      "specifier": "@vmitsaras/raveldex",
+      "reads": [],
+      "exports": [
+        "ERROR_CODES",
+        "RaveldexError",
+        "createRaveldex"
+      ]
+    },
+    {
+      "specifier": "./core-bundle.mjs",
+      "reads": [],
+      "exports": [
+        "ERROR_CODES",
+        "RaveldexError",
+        "createRaveldex"
+      ]
+    }
+  ],
+  "correctness": {
+    "comparisons": 42,
+    "mutations": 8,
+    "correctness": "Pass"
+  },
+  "arithmetic": {
+    "arithmetic": "Pass",
+    "scores": {
+      "a": 0.439569780763507,
+      "b": 0.4584084856533716
+    },
+    "postDeleteScore": 0.5753641449035617
+  },
+  "judgmentContext": {
+    "author": "Codex documentation-fixture author",
+    "date": "2026-10-06",
+    "corpusAlgorithmVersion": "raveldex-doc-sections-v1",
+    "configuration": "basic-v1/unqualified; title boost 2; body boost 1; sourcePath/category scalar strings",
+    "labelPolicy": "Intended and acceptable sections were selected from source, before production results. Acceptable IDs include intended IDs. Labels are incomplete unless explicitly marked complete.",
+    "rankingCutoff": 100,
+    "recallCutoff": 10
+  },
+  "relevance": {
+    "labels": "incomplete judgments over allowlisted sections",
+    "retrievalCutoff": 100,
+    "rows": [
+      {
+        "id": "docs-schema",
+        "query": "schema",
+        "intent": "Find the declared text/metadata schema shape and validation rules.",
+        "semantics": "One exact normalized term across title and body; no synonym or query-language parsing.",
+        "intendedIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#schema"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#schema"
+        ],
+        "expectation": "matches",
+        "total": 7,
+        "hits": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+            "score": 11.500928439042047
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "score": 2.1642888650007333
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+            "score": 1.9391766028140256
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+            "score": 1.723503293960291
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+            "score": 1.4240610645015876
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+            "score": 1.232874189109469
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+            "score": 1.0716777990253645
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+            "rank": 1
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-atomic-batch",
+        "query": "atomic batch",
+        "intent": "Understand whether a multi-record addition commits as one operation.",
+        "semantics": "Both exact terms must occur in the section, possibly across the two declared text fields.",
+        "intendedIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging"
+        ],
+        "expectation": "matches",
+        "lexicalNotes": "An independent source scan finds atomic only in the public API section; the intended mutation section uses atomically. Preserve this source vocabulary mismatch as a relevance failure rather than changing the labels to the retrieved section.",
+        "total": 1,
+        "hits": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "score": 3.881218613886501
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+            "rank": null
+          }
+        ],
+        "firstAcceptableRank": null,
+        "outcome": "missing-judged-source",
+        "recallAt10": 0
+      },
+      {
+        "id": "docs-term-contribution",
+        "query": "term contribution",
+        "intent": "Find the actual native BM25 term arithmetic.",
+        "semantics": "Two exact AND groups; the title is relevant but there is no phrase constraint.",
+        "intendedIds": [
+          "doc:docs/specs/RANKING.md#term-contribution"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/RANKING.md#term-contribution",
+          "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+          "doc:docs/specs/RANKING.md#explanation-facts"
+        ],
+        "expectation": "matches",
+        "total": 6,
+        "hits": [
+          {
+            "id": "doc:docs/specs/RANKING.md#term-contribution",
+            "score": 17.242359541904115
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#explanation-facts",
+            "score": 3.3583079983225406
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+            "score": 3.264100975330141
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+            "score": 2.8347785058361303
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+            "score": 2.079269146753495
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+            "score": 1.8110910889493839
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/RANKING.md#term-contribution",
+            "rank": 1
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-source-retention",
+        "query": "original source",
+        "intent": "Find what original source core retains and what requires an optional source participant.",
+        "semantics": "Exact AND membership; ordinary text does not test adjacency or require both terms in one field.",
+        "intendedIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+          "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+          "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+        ],
+        "expectation": "matches",
+        "total": 11,
+        "hits": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+            "score": 9.61539431055266
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+            "score": 2.280854503031974
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+            "score": 2.1472938792654563
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+            "score": 2.045988878041156
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+            "score": 1.8937659494151804
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+            "score": 1.8062883284148836
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+            "score": 1.6793560941684684
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+            "score": 1.617868203092154
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+            "score": 1.490163511386872
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+            "score": 1.4382982970531495
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+            "score": 1.2613583048163892
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+            "rank": 5
+          }
+        ],
+        "firstAcceptableRank": 3,
+        "outcome": "acceptable-top3",
+        "recallAt10": 0.6666666666666666
+      },
+      {
+        "id": "docs-prefix-contract",
+        "query": "exact prefix terms",
+        "intent": "Find how to request prefix matching and its expansion limits.",
+        "semantics": "Three exact AND groups; the word prefix in this string does not enable prefix matching.",
+        "intendedIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+          "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+          "doc:docs/specs/RANKING.md#original-groups-and-alternatives"
+        ],
+        "expectation": "matches",
+        "total": 5,
+        "hits": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+            "score": 21.44121289069217
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+            "score": 4.525149172359304
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+            "score": 4.123594735715116
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+            "score": 3.774246174438594
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+            "score": 3.6119619812839088
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+            "rank": 1
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 0.6666666666666666
+      },
+      {
+        "id": "docs-explicit-prefix",
+        "query": {
+          "kind": "group",
+          "fields": [
+            "title"
+          ],
+          "variants": [
+            {
+              "text": "cancel",
+              "match": "prefix"
+            }
+          ]
+        },
+        "intent": "Navigate to the cancellation section from an unfinished word.",
+        "semantics": "Explicit title-only prefix group; cancel matches cancellation as a complete dictionary-term prefix.",
+        "intendedIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation"
+        ],
+        "expectation": "matches",
+        "labelsComplete": true,
+        "total": 1,
+        "hits": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+            "score": 5.517571874192461
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+            "rank": 1
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-no-implicit-prefix",
+        "query": "cancell",
+        "intent": "Check that an unfinished cancellation word is not silently expanded.",
+        "semantics": "Plain strings use exact terms. No selected source contains the complete normalized term cancell.",
+        "intendedIds": [],
+        "acceptableIds": [],
+        "expectation": "zero",
+        "zeroReason": "exact-term-absent",
+        "labelsComplete": true,
+        "total": 0,
+        "hits": [],
+        "intendedRanks": [],
+        "firstAcceptableRank": null,
+        "outcome": "expected-empty",
+        "recallAt10": null
+      },
+      {
+        "id": "docs-natural-task-lexical-mismatch",
+        "query": "How do I stop an operation that is waiting in the queue?",
+        "intent": "Learn how to cancel an operation before it starts.",
+        "semantics": "Every analyzed question word is required. basic-v1 keeps stop words and has no semantic paraphrase matching; the relevant sections cannot satisfy this complete lexical conjunction.",
+        "intendedIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal"
+        ],
+        "expectation": "lexical-mismatch",
+        "expectedLexicalZero": true,
+        "total": 0,
+        "hits": [],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+            "rank": null
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+            "rank": null
+          }
+        ],
+        "firstAcceptableRank": null,
+        "outcome": "unintended-empty",
+        "recallAt10": 0
+      },
+      {
+        "id": "docs-factory-identifier",
+        "query": "createRaveldex",
+        "intent": "Find the factory call and its ordinary public method contract.",
+        "semantics": "basic-v1 lowercases the contiguous identifier; camelCase is not split into separate words.",
+        "intendedIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#public-api-contract"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+          "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts"
+        ],
+        "expectation": "matches",
+        "total": 3,
+        "hits": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+            "score": 2.023996614289028
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "score": 1.8778580412667063
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+            "score": 1.6018937767563854
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "rank": 2
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-error-identifier",
+        "query": "MISSING_CAPABILITY",
+        "intent": "Find what happens when a query requests an absent capability.",
+        "semantics": "Underscore separates the identifier into missing AND capability. This is not a verbatim identifier or special error-code search mode.",
+        "intendedIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#results-and-errors"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+          "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+          "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+          "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+        ],
+        "expectation": "matches",
+        "total": 5,
+        "hits": [
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+            "score": 9.030838943680283
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+            "score": 3.285464222932929
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+            "score": 3.11220876730534
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+            "score": 3.078957433439271
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "score": 2.387946655031958
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+            "rank": 3
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-analyzer-identifier-splitting",
+        "query": "basic_v1",
+        "intent": "Locate the documented basic-v1 analyzer and host compatibility boundary.",
+        "semantics": "Underscore and hyphen both delimit original tokens: basic_v1 queries basic AND v1. This does not add an identifier-preserving analyzer.",
+        "intendedIds": [
+          "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary"
+        ],
+        "acceptableIds": [
+          "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+          "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+        ],
+        "expectation": "matches",
+        "total": 5,
+        "hits": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+            "score": 3.7029959236812484
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+            "score": 3.4944488916983447
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+            "score": 3.2967994660550746
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+            "score": 2.7830409629524278
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "score": 2.4365191687394105
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+            "rank": 3
+          }
+        ],
+        "firstAcceptableRank": 3,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-ranking-source-navigation",
+        "query": {
+          "kind": "eq",
+          "field": "sourcePath",
+          "value": "docs/specs/RANKING.md"
+        },
+        "intent": "List all indexed sections in the ranking contract.",
+        "semantics": "Exact case-sensitive scalar equality; no text analysis and all matching sections have score zero.",
+        "intendedIds": [
+          "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+          "doc:docs/specs/RANKING.md#term-contribution",
+          "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+          "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+          "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+          "doc:docs/specs/RANKING.md#explanation-facts"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+          "doc:docs/specs/RANKING.md#term-contribution",
+          "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+          "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+          "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+          "doc:docs/specs/RANKING.md#explanation-facts"
+        ],
+        "expectation": "matches",
+        "labelsComplete": true,
+        "zeroScores": true,
+        "total": 6,
+        "hits": [
+          {
+            "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+            "score": 0
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+            "score": 0
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#explanation-facts",
+            "score": 0
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+            "score": 0
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+            "score": 0
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#term-contribution",
+            "score": 0
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+            "rank": 5
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#term-contribution",
+            "rank": 6
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+            "rank": 4
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+            "rank": 1
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+            "rank": 2
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#explanation-facts",
+            "rank": 3
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-filtered-equality",
+        "query": {
+          "kind": "and",
+          "children": [
+            {
+              "kind": "text",
+              "text": "equality"
+            },
+            {
+              "kind": "eq",
+              "field": "category",
+              "value": "spec"
+            }
+          ]
+        },
+        "intent": "Find normative equality semantics while restricting the collection to specifications.",
+        "semantics": "Lexical membership intersects exact scalar category equality. The metadata restriction contributes no score.",
+        "intendedIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#scalar-equality"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+          "doc:docs/specs/CORE_CONTRACT.md#core-nodes"
+        ],
+        "expectation": "matches",
+        "total": 5,
+        "hits": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+            "score": 10.625514106729051
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+            "score": 2.174592518653888
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+            "score": 2.0472651193615596
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+            "score": 1.6950839158101025
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+            "score": 1.3959930078270935
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+            "rank": 1
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-boolean-revision-navigation",
+        "query": {
+          "kind": "and",
+          "children": [
+            {
+              "kind": "text",
+              "text": "revision"
+            },
+            {
+              "kind": "eq",
+              "field": "category",
+              "value": "spec"
+            },
+            {
+              "kind": "not",
+              "child": {
+                "kind": "eq",
+                "field": "sourcePath",
+                "value": "docs/specs/RANKING.md"
+              }
+            }
+          ]
+        },
+        "intent": "Find revision lifecycle behavior outside the ranking contract.",
+        "semantics": "Complete lexical AND/equality/NOT membership; NOT complements within all live records and does not contribute a score.",
+        "intendedIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+          "doc:docs/specs/CORE_CONTRACT.md#results-and-errors"
+        ],
+        "knownIrrelevantIds": [
+          "doc:docs/specs/RANKING.md#statistics-from-one-revision"
+        ],
+        "expectation": "matches",
+        "total": 7,
+        "hits": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+            "score": 1.6950431287009575
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+            "score": 1.6228343485785428
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+            "score": 1.5023912863494422
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "score": 1.3384624966277383
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+            "score": 1.32459058351864
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+            "score": 0.8373967735463881
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+            "score": 0.789942492201436
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+            "rank": 1
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      },
+      {
+        "id": "docs-absent-topic",
+        "query": "PostgreSQL replication",
+        "intent": "Look for database replication setup, a topic outside this collection.",
+        "semantics": "Both exact terms are required; neither is supplied by the indexed current source sections.",
+        "intendedIds": [],
+        "acceptableIds": [],
+        "expectation": "zero",
+        "zeroReason": "out-of-corpus-topic",
+        "labelsComplete": true,
+        "total": 0,
+        "hits": [],
+        "intendedRanks": [],
+        "firstAcceptableRank": null,
+        "outcome": "expected-empty",
+        "recallAt10": null
+      },
+      {
+        "id": "docs-tokenless",
+        "query": " 😀 !!! ",
+        "intent": "Confirm an input containing no analyzable letters/numbers does not list the collection.",
+        "semantics": "Zero analyzed tokens canonicalize to none, rather than all.",
+        "intendedIds": [],
+        "acceptableIds": [],
+        "expectation": "zero",
+        "zeroReason": "tokenless-input",
+        "labelsComplete": true,
+        "total": 0,
+        "hits": [],
+        "intendedRanks": [],
+        "firstAcceptableRank": null,
+        "outcome": "expected-empty",
+        "recallAt10": null
+      },
+      {
+        "id": "docs-quotes-are-lexical",
+        "query": "\"original source\"",
+        "intent": "Search for source retention using quoted ordinary text.",
+        "semantics": "Quotes are delimiters. Ordinary text retains original AND source semantics and does not invoke the unavailable phrase capability.",
+        "intendedIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+          "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+          "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+        ],
+        "expectation": "matches",
+        "total": 11,
+        "hits": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+            "score": 9.61539431055266
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+            "score": 2.280854503031974
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+            "score": 2.1472938792654563
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+            "score": 2.045988878041156
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+            "score": 1.8937659494151804
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+            "score": 1.8062883284148836
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+            "score": 1.6793560941684684
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+            "score": 1.617868203092154
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+            "score": 1.490163511386872
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+            "score": 1.4382982970531495
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+            "score": 1.2613583048163892
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+            "rank": 5
+          }
+        ],
+        "firstAcceptableRank": 3,
+        "outcome": "acceptable-top3",
+        "recallAt10": 0.6666666666666666
+      },
+      {
+        "id": "docs-ambiguous-revision",
+        "query": "revision",
+        "intent": "Explore revision identity, mutation commits, and the statistics read by one operation.",
+        "semantics": "One exact term across text fields; several different sections answer this broad topic, so labels are deliberately incomplete.",
+        "intendedIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+          "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+          "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+          "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+          "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls"
+        ],
+        "expectation": "matches",
+        "total": 14,
+        "hits": [
+          {
+            "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+            "score": 5.517571874192461
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+            "score": 1.6950431287009575
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+            "score": 1.6228343485785428
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#explanation-facts",
+            "score": 1.5388285710214518
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+            "score": 1.5023912863494422
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+            "score": 1.3384624966277383
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+            "score": 1.32459058351864
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+            "score": 1.2942153448535783
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+            "score": 1.2402207530182705
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+            "score": 1.0281618070566108
+          },
+          {
+            "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+            "score": 1.0070598503742947
+          },
+          {
+            "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+            "score": 0.9107608792254753
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+            "score": 0.8373967735463881
+          },
+          {
+            "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+            "score": 0.789942492201436
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+            "rank": 2
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 0.6666666666666666
+      },
+      {
+        "id": "docs-title-disposal",
+        "query": {
+          "kind": "text",
+          "text": "Disposal",
+          "fields": [
+            "title"
+          ]
+        },
+        "intent": "Navigate directly to the disposal contract.",
+        "semantics": "One exact term selected only from title; body occurrences cannot qualify other sections.",
+        "intendedIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal"
+        ],
+        "acceptableIds": [
+          "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal"
+        ],
+        "expectation": "matches",
+        "labelsComplete": true,
+        "total": 1,
+        "hits": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+            "score": 8.646127143191027
+          }
+        ],
+        "intendedRanks": [
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+            "rank": 1
+          }
+        ],
+        "firstAcceptableRank": 1,
+        "outcome": "acceptable-top3",
+        "recallAt10": 1
+      }
+    ],
+    "metrics": {
+      "rankedQueries": 16,
+      "intendedEmptyQueries": 3,
+      "top1": 11,
+      "top3": 14,
+      "mrr": 0.7500000000000001,
+      "meanRecallAt10OverJudged": 0.7916666666666665,
+      "correctEmpty": 3,
+      "unexpectedEmpty": 1
+    }
+  },
+  "pilot": {
+    "corpusHash": "e86fb296ba2b6a8710bfc0d38988875219953133b354a2d1dda83e90f29863fb",
+    "initial": {
+      "revision": 0,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 0,
+      "hits": []
+    },
+    "indexed": {
+      "revision": 1,
+      "changed": true,
+      "added": 34,
+      "replaced": 0,
+      "removed": 0
+    },
+    "queries": [
+      {
+        "id": "docs-schema",
+        "query": "schema",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 7,
+          "hits": [
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+              "score": 11.500928439042047
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+              "score": 2.1642888650007333
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+              "score": 1.9391766028140256
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+              "score": 1.723503293960291
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+              "score": 1.4240610645015876
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+              "score": 1.232874189109469
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+              "score": 1.0716777990253645
+            }
+          ]
+        },
+        "samplesMs": [
+          6.146665999999982,
+          5.158500000000004,
+          4.916375000000016
+        ],
+        "medianMs": 5.158500000000004
+      },
+      {
+        "id": "docs-atomic-batch",
+        "query": "atomic batch",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1,
+          "hits": [
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+              "score": 3.881218613886501
+            }
+          ]
+        },
+        "samplesMs": [
+          7.322457999999983,
+          7.472167000000013,
+          7.168166000000042
+        ],
+        "medianMs": 7.322457999999983
+      },
+      {
+        "id": "docs-term-contribution",
+        "query": "term contribution",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 6,
+          "hits": [
+            {
+              "id": "doc:docs/specs/RANKING.md#term-contribution",
+              "score": 17.242359541904115
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#explanation-facts",
+              "score": 3.3583079983225406
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+              "score": 3.264100975330141
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+              "score": 2.8347785058361303
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+              "score": 2.079269146753495
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+              "score": 1.8110910889493839
+            }
+          ]
+        },
+        "samplesMs": [
+          9.794083999999998,
+          8.615666999999917,
+          10.847709000000009
+        ],
+        "medianMs": 9.794083999999998
+      },
+      {
+        "id": "docs-source-retention",
+        "query": "original source",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 11,
+          "hits": [
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+              "score": 9.61539431055266
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+              "score": 2.280854503031974
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+              "score": 2.1472938792654563
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+              "score": 2.045988878041156
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+              "score": 1.8937659494151804
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+              "score": 1.8062883284148836
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+              "score": 1.6793560941684684
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+              "score": 1.617868203092154
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+              "score": 1.490163511386872
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+              "score": 1.4382982970531495
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+              "score": 1.2613583048163892
+            }
+          ]
+        },
+        "samplesMs": [
+          13.611541999999986,
+          13.59258299999999,
+          13.816209000000072
+        ],
+        "medianMs": 13.611541999999986
+      },
+      {
+        "id": "docs-prefix-contract",
+        "query": "exact prefix terms",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 5,
+          "hits": [
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+              "score": 21.44121289069217
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+              "score": 4.525149172359304
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+              "score": 4.123594735715116
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+              "score": 3.774246174438594
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+              "score": 3.6119619812839088
+            }
+          ]
+        },
+        "samplesMs": [
+          15.011082999999985,
+          15.03608399999996,
+          15.16112499999997
+        ],
+        "medianMs": 15.03608399999996
+      },
+      {
+        "id": "docs-explicit-prefix",
+        "query": {
+          "kind": "group",
+          "fields": [
+            "title"
+          ],
+          "variants": [
+            {
+              "text": "cancel",
+              "match": "prefix"
+            }
+          ]
+        },
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1,
+          "hits": [
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+              "score": 5.517571874192461
+            }
+          ]
+        },
+        "samplesMs": [
+          4.354708999999957,
+          3.8611249999999018,
+          2.6010829999999032
+        ],
+        "medianMs": 3.8611249999999018
+      },
+      {
+        "id": "docs-no-implicit-prefix",
+        "query": "cancell",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 0,
+          "hits": []
+        },
+        "samplesMs": [
+          3.588416999999936,
+          3.6962499999999636,
+          3.3354170000000067
+        ],
+        "medianMs": 3.588416999999936
+      },
+      {
+        "id": "docs-natural-task-lexical-mismatch",
+        "query": "How do I stop an operation that is waiting in the queue?",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 0,
+          "hits": []
+        },
+        "samplesMs": [
+          50.02429200000006,
+          51.01520800000003,
+          49.94095900000002
+        ],
+        "medianMs": 50.02429200000006
+      },
+      {
+        "id": "docs-factory-identifier",
+        "query": "createRaveldex",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 3,
+          "hits": [
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+              "score": 2.023996614289028
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+              "score": 1.8778580412667063
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+              "score": 1.6018937767563854
+            }
+          ]
+        },
+        "samplesMs": [
+          4.13154099999997,
+          4.064249999999902,
+          3.987374999999929
+        ],
+        "medianMs": 4.064249999999902
+      },
+      {
+        "id": "docs-error-identifier",
+        "query": "MISSING_CAPABILITY",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 5,
+          "hits": [
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+              "score": 9.030838943680283
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+              "score": 3.285464222932929
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+              "score": 3.11220876730534
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+              "score": 3.078957433439271
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+              "score": 2.387946655031958
+            }
+          ]
+        },
+        "samplesMs": [
+          10.036624999999958,
+          9.481666000000132,
+          10.47241699999995
+        ],
+        "medianMs": 10.036624999999958
+      },
+      {
+        "id": "docs-analyzer-identifier-splitting",
+        "query": "basic_v1",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 5,
+          "hits": [
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+              "score": 3.7029959236812484
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+              "score": 3.4944488916983447
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+              "score": 3.2967994660550746
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+              "score": 2.7830409629524278
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+              "score": 2.4365191687394105
+            }
+          ]
+        },
+        "samplesMs": [
+          8.844332999999779,
+          8.672333999999864,
+          8.79733299999998
+        ],
+        "medianMs": 8.79733299999998
+      },
+      {
+        "id": "docs-ranking-source-navigation",
+        "query": {
+          "kind": "eq",
+          "field": "sourcePath",
+          "value": "docs/specs/RANKING.md"
+        },
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 6,
+          "hits": [
+            {
+              "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+              "score": 0
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+              "score": 0
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#explanation-facts",
+              "score": 0
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+              "score": 0
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+              "score": 0
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#term-contribution",
+              "score": 0
+            }
+          ]
+        },
+        "samplesMs": [
+          1.9783749999999145,
+          1.7554159999999683,
+          1.6865410000000338
+        ],
+        "medianMs": 1.7554159999999683
+      },
+      {
+        "id": "docs-filtered-equality",
+        "query": {
+          "kind": "and",
+          "children": [
+            {
+              "kind": "text",
+              "text": "equality"
+            },
+            {
+              "kind": "eq",
+              "field": "category",
+              "value": "spec"
+            }
+          ]
+        },
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 5,
+          "hits": [
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+              "score": 10.625514106729051
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+              "score": 2.174592518653888
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+              "score": 2.0472651193615596
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+              "score": 1.6950839158101025
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+              "score": 1.3959930078270935
+            }
+          ]
+        },
+        "samplesMs": [
+          5.642375000000129,
+          5.120042000000012,
+          4.977791000000025
+        ],
+        "medianMs": 5.120042000000012
+      },
+      {
+        "id": "docs-boolean-revision-navigation",
+        "query": {
+          "kind": "and",
+          "children": [
+            {
+              "kind": "text",
+              "text": "revision"
+            },
+            {
+              "kind": "eq",
+              "field": "category",
+              "value": "spec"
+            },
+            {
+              "kind": "not",
+              "child": {
+                "kind": "eq",
+                "field": "sourcePath",
+                "value": "docs/specs/RANKING.md"
+              }
+            }
+          ]
+        },
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 7,
+          "hits": [
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+              "score": 1.6950431287009575
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+              "score": 1.6228343485785428
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+              "score": 1.5023912863494422
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+              "score": 1.3384624966277383
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+              "score": 1.32459058351864
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+              "score": 0.8373967735463881
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+              "score": 0.789942492201436
+            }
+          ]
+        },
+        "samplesMs": [
+          7.579958000000033,
+          7.784125000000131,
+          7.577375000000075
+        ],
+        "medianMs": 7.579958000000033
+      },
+      {
+        "id": "docs-absent-topic",
+        "query": "PostgreSQL replication",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 0,
+          "hits": []
+        },
+        "samplesMs": [
+          6.058459000000084,
+          6.1003749999999854,
+          5.594875000000002
+        ],
+        "medianMs": 6.058459000000084
+      },
+      {
+        "id": "docs-tokenless",
+        "query": " 😀 !!! ",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 0,
+          "hits": []
+        },
+        "samplesMs": [
+          0.9480829999999969,
+          0.9652909999999792,
+          1.304582999999866
+        ],
+        "medianMs": 0.9652909999999792
+      },
+      {
+        "id": "docs-quotes-are-lexical",
+        "query": "\"original source\"",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 11,
+          "hits": [
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+              "score": 9.61539431055266
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+              "score": 2.280854503031974
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+              "score": 2.1472938792654563
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+              "score": 2.045988878041156
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+              "score": 1.8937659494151804
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+              "score": 1.8062883284148836
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+              "score": 1.6793560941684684
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+              "score": 1.617868203092154
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+              "score": 1.490163511386872
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+              "score": 1.4382982970531495
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+              "score": 1.2613583048163892
+            }
+          ]
+        },
+        "samplesMs": [
+          13.446707999999944,
+          12.16191600000002,
+          13.004582999999911
+        ],
+        "medianMs": 13.004582999999911
+      },
+      {
+        "id": "docs-ambiguous-revision",
+        "query": "revision",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 14,
+          "hits": [
+            {
+              "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+              "score": 5.517571874192461
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+              "score": 1.6950431287009575
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+              "score": 1.6228343485785428
+            },
+            {
+              "id": "doc:docs/specs/RANKING.md#explanation-facts",
+              "score": 1.5388285710214518
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+              "score": 1.5023912863494422
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+              "score": 1.3384624966277383
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+              "score": 1.32459058351864
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+              "score": 1.2942153448535783
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+              "score": 1.2402207530182705
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+              "score": 1.0281618070566108
+            },
+            {
+              "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+              "score": 1.0070598503742947
+            },
+            {
+              "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+              "score": 0.9107608792254753
+            },
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+              "score": 0.8373967735463881
+            },
+            {
+              "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+              "score": 0.789942492201436
+            }
+          ]
+        },
+        "samplesMs": [
+          7.320167000000083,
+          7.30270900000005,
+          7.237959000000046
+        ],
+        "medianMs": 7.30270900000005
+      },
+      {
+        "id": "docs-title-disposal",
+        "query": {
+          "kind": "text",
+          "text": "Disposal",
+          "fields": [
+            "title"
+          ]
+        },
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1,
+          "hits": [
+            {
+              "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+              "score": 8.646127143191027
+            }
+          ]
+        },
+        "samplesMs": [
+          3.7118749999999636,
+          3.620083999999906,
+          3.6048749999999927
+        ],
+        "medianMs": 3.620083999999906
+      }
+    ],
+    "mutations": [
+      {
+        "kind": "replace-title-empty",
+        "result": {
+          "revision": 2,
+          "changed": true,
+          "added": 0,
+          "replaced": 1,
+          "removed": 0
+        },
+        "searches": [
+          {
+            "query": {
+              "kind": "all"
+            },
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 34,
+              "hits": [
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#explanation-facts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#term-contribution",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "query": "source",
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 14,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 8.402448703954564
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 1.5193571992356962
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 1.4802175597633853
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 1.2173459423846869
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 1.1382224069190154
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 1.109290650989508
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 1.0922062810744892
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0.9723977985611006
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0.9315202284223859
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0.8956426210733415
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0.7186563514793246
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0.7052559368965139
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0.6300654950206288
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0.6071403207345237
+                }
+              ]
+            }
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "Public API contract"
+            },
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 5.501042744166862
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "replace-original",
+        "result": {
+          "revision": 3,
+          "changed": true,
+          "added": 0,
+          "replaced": 1,
+          "removed": 0
+        },
+        "searches": [
+          {
+            "query": {
+              "kind": "all"
+            },
+            "result": {
+              "revision": 3,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 34,
+              "hits": [
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#explanation-facts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#term-contribution",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "query": "source",
+            "result": {
+              "revision": 3,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 14,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 8.470055883205708
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 1.5193571992356962
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 1.4802175597633853
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 1.2173459423846869
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 1.1382224069190154
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 1.109290650989508
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 1.0922062810744892
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0.9723977985611006
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0.9315202284223859
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0.8956426210733415
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0.7186563514793246
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0.7052559368965139
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0.6300654950206288
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0.6071403207345237
+                }
+              ]
+            }
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "Public API contract"
+            },
+            "result": {
+              "revision": 3,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 24.324099460652217
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "remove-one",
+        "result": {
+          "revision": 4,
+          "changed": true,
+          "added": 0,
+          "replaced": 0,
+          "removed": 1
+        },
+        "searches": [
+          {
+            "query": {
+              "kind": "all"
+            },
+            "result": {
+              "revision": 4,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 33,
+              "hits": [
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#explanation-facts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#term-contribution",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "query": "source",
+            "result": {
+              "revision": 4,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 13,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 8.456014577586842
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 1.5880063810088356
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 1.5463354420049353
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 1.270005607807228
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 1.1882882760452997
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 1.1577027553372508
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 1.1396512807657404
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 1.0132575708730682
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0.9690293413891645
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0.9324642089700024
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0.73266730997597
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0.6539975514403372
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0.6300381728597292
+                }
+              ]
+            }
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "Public API contract"
+            },
+            "result": {
+              "revision": 4,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 0,
+              "hits": []
+            }
+          }
+        ]
+      },
+      {
+        "kind": "add-one",
+        "result": {
+          "revision": 5,
+          "changed": true,
+          "added": 1,
+          "replaced": 0,
+          "removed": 0
+        },
+        "searches": [
+          {
+            "query": {
+              "kind": "all"
+            },
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 34,
+              "hits": [
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#explanation-facts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#term-contribution",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "query": "source",
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 14,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 8.470055883205708
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 1.5193571992356962
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 1.4802175597633853
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 1.2173459423846869
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 1.1382224069190154
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 1.109290650989508
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 1.0922062810744892
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0.9723977985611006
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0.9315202284223859
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0.8956426210733415
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0.7186563514793246
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0.7052559368965139
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0.6300654950206288
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0.6071403207345237
+                }
+              ]
+            }
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "Public API contract"
+            },
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 24.324099460652217
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "clear",
+        "result": {
+          "revision": 6,
+          "changed": true,
+          "added": 0,
+          "replaced": 0,
+          "removed": 34
+        },
+        "searches": [
+          {
+            "query": {
+              "kind": "all"
+            },
+            "result": {
+              "revision": 6,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 0,
+              "hits": []
+            }
+          },
+          {
+            "query": "source",
+            "result": {
+              "revision": 6,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 0,
+              "hits": []
+            }
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "Public API contract"
+            },
+            "result": {
+              "revision": 6,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 0,
+              "hits": []
+            }
+          }
+        ]
+      },
+      {
+        "kind": "addMany-original",
+        "result": {
+          "revision": 7,
+          "changed": true,
+          "added": 34,
+          "replaced": 0,
+          "removed": 0
+        },
+        "searches": [
+          {
+            "query": {
+              "kind": "all"
+            },
+            "result": {
+              "revision": 7,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 34,
+              "hits": [
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#explanation-facts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#term-contribution",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "query": "source",
+            "result": {
+              "revision": 7,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 14,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 8.470055883205708
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 1.5193571992356962
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 1.4802175597633853
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 1.2173459423846869
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 1.1382224069190154
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 1.109290650989508
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 1.0922062810744892
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0.9723977985611006
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0.9315202284223859
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0.8956426210733415
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0.7186563514793246
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0.7052559368965139
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0.6300654950206288
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0.6071403207345237
+                }
+              ]
+            }
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "Public API contract"
+            },
+            "result": {
+              "revision": 7,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 24.324099460652217
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "remove-empty",
+        "result": {
+          "revision": 7,
+          "changed": false,
+          "added": 0,
+          "replaced": 0,
+          "removed": 0
+        },
+        "searches": [
+          {
+            "query": {
+              "kind": "all"
+            },
+            "result": {
+              "revision": 7,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 34,
+              "hits": [
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#explanation-facts",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+                  "score": 0
+                },
+                {
+                  "id": "doc:docs/specs/RANKING.md#term-contribution",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "query": "source",
+            "result": {
+              "revision": 7,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 14,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                  "score": 8.470055883205708
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                  "score": 1.5193571992356962
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                  "score": 1.4802175597633853
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                  "score": 1.2173459423846869
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                  "score": 1.1382224069190154
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                  "score": 1.109290650989508
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+                  "score": 1.0922062810744892
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                  "score": 0.9723977985611006
+                },
+                {
+                  "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                  "score": 0.9315202284223859
+                },
+                {
+                  "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                  "score": 0.8956426210733415
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 0.7186563514793246
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+                  "score": 0.7052559368965139
+                },
+                {
+                  "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                  "score": 0.6300654950206288
+                },
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                  "score": 0.6071403207345237
+                }
+              ]
+            }
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "Public API contract"
+            },
+            "result": {
+              "revision": 7,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                  "score": 24.324099460652217
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "label": "duplicate-id",
+        "code": "ID_EXISTS",
+        "message": "Raveldex: ID_EXISTS",
+        "details": {
+          "path": "record.id"
+        }
+      },
+      {
+        "label": "unsupported-phrase",
+        "code": "MISSING_CAPABILITY",
+        "message": "Raveldex: MISSING_CAPABILITY",
+        "details": {
+          "path": "query"
+        }
+      },
+      {
+        "label": "invalid-query",
+        "code": "INVALID_QUERY",
+        "message": "Raveldex: INVALID_QUERY",
+        "details": {
+          "path": "query"
+        }
+      }
+    ],
+    "final": {
+      "revision": 7,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 34,
+      "hits": [
+        {
+          "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/RANKING.md#explanation-facts",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+          "score": 0
+        },
+        {
+          "id": "doc:docs/specs/RANKING.md#term-contribution",
+          "score": 0
+        }
+      ]
+    },
+    "measurements": [
+      {
+        "label": "cold-addMany",
+        "milliseconds": 822.892
+      },
+      {
+        "label": "replace-title-empty",
+        "milliseconds": 77.316417
+      },
+      {
+        "label": "replace-original",
+        "milliseconds": 79.4887920000001
+      },
+      {
+        "label": "remove-one",
+        "milliseconds": 40.906708999999864
+      },
+      {
+        "label": "add-one",
+        "milliseconds": 51.39412500000003
+      },
+      {
+        "label": "clear",
+        "milliseconds": 0.17591700000002675
+      },
+      {
+        "label": "addMany-original",
+        "milliseconds": 848.0244170000001
+      },
+      {
+        "label": "remove-empty",
+        "milliseconds": 0.2558750000002874
+      }
+    ],
+    "navigation": {
+      "revision": 1,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 1,
+      "hits": [
+        {
+          "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+          "score": 2.7855586657505698,
+          "title": "Public API contract",
+          "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#public-api-contract"
+        }
+      ]
+    }
+  },
+  "bundledParity": "Pass",
+  "timingMethod": "performance.now around awaited direct operations; one cold initial addMany and three sequential query calls per judgment in one populated owner; raw samples/median, no throughput or device guarantee"
+}

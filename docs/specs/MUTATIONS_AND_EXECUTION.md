@@ -1,6 +1,6 @@
 # Incremental mutations, revisions, and execution
 
-Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001. RX-1004 incremental mutation/participant publication and RX-1005 ordinary FIFO/lifecycle integration verified locally. See [mutation evidence](../evidence/RX-1004.md) and [execution evidence](../evidence/RX-1005.md). Package entry qualification remains RX-1006.
+Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001. RX-1004 incremental mutation/participant publication and RX-1005 ordinary FIFO/lifecycle integration verified locally. See [mutation evidence](../evidence/RX-1004.md) and [execution evidence](../evidence/RX-1005.md). RX-1006 qualifies the root package and real-document consumer; see [package evidence](../evidence/RX-1006.md).
 
 ## Goal and system outcome
 
@@ -8,7 +8,7 @@ Changes must be atomic and incrementally maintain native index state. A caller m
 
 ## Current facts, constraints, and non-goals
 
-The repository has a serial mutation owner, complete query cursor and internal ordinary engine/factory with bounded FIFO promise scheduling. Root package exports and the real-document consumer remain RX-1006. This contract implements the adopted [native architecture](../architecture/NATIVE_ARCHITECTURE.md) and [public core API](CORE_CONTRACT.md). It does not reuse the companion's whole-state rebuild implementation or transfer its test results.
+The repository has a serial mutation owner, complete query cursor and internal ordinary engine/factory with bounded FIFO promise scheduling. Root package exports and the real-document consumer are verified in RX-1006. This contract implements the adopted [native architecture](../architecture/NATIVE_ARCHITECTURE.md) and [public core API](CORE_CONTRACT.md). It does not reuse the companion's whole-state rebuild implementation or transfer its test results.
 
 RX-1004 captures bounded mutation data/options under one admission counter, selects its root on cursor start and stages core/participant changes under one work-v1 budget. Its private control seam observes phase/work/final stop checks; structural signals can abort mutation cursors. RX-1005 supplies ordinary promise conversion, queue-time monotonic deadlines, disposal and real host task yielding. The scheduler owns final signal/clock reads and rechecks closing/latched aborts after those handles may reenter; there is no extra live signal read between that final stop check and root assignment. Participant roots are trusted immutable supplied state; first-party source/position registrations remain N2. No public arbitrary hook or live schema migration is added.
 

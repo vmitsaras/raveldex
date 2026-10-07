@@ -2,15 +2,47 @@
 
 **Native local search with explainable results and optional feature costs.**
 
-Raveldex is a new TypeScript search library for mutable local collections: application records, documentation, notes, saved content, and modest catalogs. The engine owns its dictionary, postings, ranking, incremental updates, and execution. Additional search capabilities and environment integrations live behind explicit optional entry points.
+Raveldex is a TypeScript search library for mutable local collections. The native core owns analysis, dictionary/postings, field-local BM25, exact totals, typed lexical/Boolean/equality queries, incremental atomic updates and cooperative execution. Optional search capabilities and host integrations follow the adopted roadmap.
 
 ## Current status
 
-**RX-1001–1005 implement native analysis, indexing, query/BM25 evaluation, atomic mutations and scheduled execution. Public package qualification is next.**
+**N1 core alpha is verified locally through a packed public ESM package and real-document CLI.**
 
-This repository contains validated schema/record/query capture, owned immutable data, `basic-v1` analysis with original UTF-16 token spans, typed errors and finite limits. Its internal frequency index owns field-aware dictionary/postings, reverse records, field statistics and equality metadata; exact normalized-term lookup returns complete membership. The internal query cursor adds typed Boolean/equality queries, complete bounded prefix expansion, native BM25, deterministic pages/exact totals and opt-in numerical facts. The internal mutation owner stages add/batch-add/replace/remove/clear deltas and publishes core/participant roots together. The execution owner adds bounded FIFO admission, start-time revisions, promise failures, monotonic deadlines, cooperative cancellation, host task yielding and idempotent disposal. Independent source scans, hand-derived scores and fault injection verify these behaviors. Architecture contracts, 21 release-track task cards, 10 deferred tasks and planning/tracking tools guide the remaining work. [RX-1005 evidence](docs/evidence/RX-1005.md) records deterministic lifecycle tests and local host-task observations. Browser support and package readiness require later evidence.
+RX-1001–1006 implement and verify the core. The public factory returns an empty revision-0 engine with `search`, `add`, `addMany`, `replace`, `remove`, `clear` and `dispose`. Configuration errors throw; operational errors reject promises. [RX-1006 evidence](docs/evidence/RX-1006.md) records public type checks, independent source/numerical comparisons, import/startup checks and relevance outcomes for 34 current documentation sections.
 
-The package remains `private: true`, version `0.0.0`. There is no published package, usable search export, runtime dependency, or application demo at this stage. The existing MIT license is retained.
+The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; browser support, optional capabilities, worker/storage hosting and Unicode snapshot portability require later evidence.
+
+## Try the core
+
+From this repository, install tooling and run the isolated packed consumer:
+
+```sh
+npm ci
+npm run check
+npm run pilot:core -- 'atomic mutation'
+```
+
+The pilot builds, packs and installs the tarball into a temporary directory, typechecks public imports, searches actual source sections, returns titles/source links and exercises replacements, deletion, clearing and repopulation. It prints the consumer/evidence directory, correctness/relevance results and core bundle measurement. See [the runnable example](examples/core-docs/README.md) for artifacts and replay commands.
+
+A consumer that installed the local tarball uses only the root entry:
+
+```ts
+import { createRaveldex, RaveldexError } from '@vmitsaras/raveldex';
+
+const engine = createRaveldex({ schema: { text: { title: { boost: 2 }, body: {} } } });
+try {
+  await engine.add({ id: 'guide:updates', text: { title: 'Atomic updates', body: 'Replace one complete record.' } });
+  const page = await engine.search('atomic');
+  console.log(page.revision, page.total, page.hits);
+} catch (error) {
+  if (error instanceof RaveldexError) console.error(error.code, error.details);
+  else throw error;
+} finally {
+  await engine.dispose();
+}
+```
+
+Ordinary strings require every analyzed word, use complete terms, and do not interpret quotes/operators as a query language. Explicit typed groups enable prefix matching. Core retains frequencies and declared equality metadata; the application keeps display/source records. Missing optional capabilities fail explicitly.
 
 ## Start here
 
@@ -20,56 +52,39 @@ The package remains `private: true`, version `0.0.0`. There is no published pack
 | Milestones and progress | [ROADMAP.md](ROADMAP.md) |
 | Detailed task cards | [IMPLEMENTATION_TASKS.md](IMPLEMENTATION_TASKS.md) |
 | Next Codex session | [CODEX_HANDOFF.md](CODEX_HANDOFF.md) |
-| Rules for changing the repository | [AGENTS.md](AGENTS.md) |
-| Native architecture | [Native architecture](docs/architecture/NATIVE_ARCHITECTURE.md) |
-| Core data and query behavior | [Core contract](docs/specs/CORE_CONTRACT.md) |
-| Optional modules | [Add-ons and adapters](docs/architecture/ADDONS_AND_ADAPTERS.md) |
-| Verification and comparison | [Verification plan](docs/planning/VERIFICATION_PLAN.md) |
-| GitHub synchronization | [Tracking guide](docs/planning/GITHUB_TRACKING.md) |
+| Repository rules | [AGENTS.md](AGENTS.md) |
+| Architecture and optional boundaries | [Native architecture](docs/architecture/NATIVE_ARCHITECTURE.md), [add-ons](docs/architecture/ADDONS_AND_ADAPTERS.md) |
+| Data, queries and limits | [Core contract](docs/specs/CORE_CONTRACT.md) |
+| Evaluation and GitHub tracking | [Verification plan](docs/planning/VERIFICATION_PLAN.md), [tracking guide](docs/planning/GITHUB_TRACKING.md) |
 
-Browse the [GitHub milestones](https://github.com/vmitsaras/raveldex/milestones) and [task issues](https://github.com/vmitsaras/raveldex/issues?q=is%3Aissue+label%3Atype%3Atask).
+Browse the [milestones](https://github.com/vmitsaras/raveldex/milestones) and [task issues](https://github.com/vmitsaras/raveldex/issues?q=is%3Aissue+label%3Atype%3Atask).
 
 ## Development
 
-Use Node.js 22 or newer and npm. TypeScript 7.0.2 is the sole direct development dependency; core has no runtime dependencies. Its platform compiler packages are development tooling only. Tests use Node's built-in runner against emitted ESM.
+Use Node.js 22 or newer and npm. TypeScript 7.0.2 emits strict DOM-free ESM/declarations; esbuild 0.28.2 is development tooling for reproducible packed-consumer bundling and import-graph inspection. Platform binaries remain tooling. Tests use Node's built-in runner.
 
 ```sh
 npm ci
 npm run check
 npm run test:core
+npm run test:consumer
 npm run handoff:status
 npm run handoff:next
 ```
 
-`handoff:next` reports dependency eligibility. It does not execute tasks or grant permission for publication. When implementation is requested, take the next eligible task and verify its acceptance criteria before moving on.
+`npm run build` emits ignored `dist/`. `npm pack` builds before packing compiled runtime/declarations; the root exports map excludes internal paths. `npm run check` includes the isolated consumer's public declaration and runtime checks. The pilot's local pack/install uses an isolated cache and offline installation without lifecycle scripts; it makes no remote tracking or publication requests.
 
-`npm run typecheck` checks strict, DOM-free sources and declaration fixtures. `npm run build` emits internal ESM and declarations to ignored `dist/`. The real factory is implemented internally in `core/execution/engine.ts`; RX-1006 owns the root package export and first packed real-document consumer. Optional UI and host code will use separate configurations when implemented.
-
-Normal local development requires no environment variables or secrets. Only the explicit GitHub tracking workflow uses the repository's temporary `GITHUB_TOKEN` with `issues: write` and `contents: read` permissions.
+`handoff:next` reports dependency eligibility. Task completion requires acceptance evidence. Normal development needs no secrets; only the explicit GitHub tracking workflow uses a temporary repository token.
 
 ## Product boundary
 
 | Layer | Responsibility |
 | --- | --- |
-| Native core | Validation, basic analysis, dictionary/postings, typed lexical queries, BM25 and numeric trace facts, exact totals, scalar equality, coherent incremental writes, bounded execution. |
-| Optional search modules | Source phrases, positions/offsets, structured filters, facets, original-text evidence, snippets, Inspector, native DOM UI. |
-| Optional adapters | Worker ownership/transport, snapshots, IndexedDB/recovery, later framework/build integrations. |
-| Development references | Independent full-scan oracle and explicitly comparable external-library baselines. |
+| Native core | Validation, basic analysis, dictionary/postings/statistics, lexical/Boolean/equality queries, BM25, exact totals, atomic writes, bounded FIFO execution and typed failures. |
+| Planned optional search modules | Source phrases, positions/offsets, structured filters, facets, source evidence/snippets, Inspector and native DOM UI. |
+| Planned host adapters | Worker ownership/transport, snapshots, IndexedDB/recovery and later integrations. |
+| Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
-MiniSearch may be used in isolated comparison or compatibility work. It must never implement the native core. An unused module must add no imported runtime code, retained side index, startup work, or network request to a core-only consumer.
+The measured full public core is **12,400 bytes gzip** (39,702 minified ESM bytes) under the fixed RX-1006 method, within the 15 KiB target. This includes mandatory validation, analysis, retrieval/ranking, mutation and execution code. The 10,000-record defensive ceiling is not a universal capacity or latency promise. No DOM, worker, storage, network, foreign engine or optional source representation enters the measured graph or runs on import.
 
-The ≤15 KiB gzip core-only size budget and initial maximum of 10,000 records are design constraints and qualification targets, not achieved results or universal capacity claims.
-
-## Planned source layout
-
-| Path | Purpose |
-| --- | --- |
-| `src/core/` | Input contracts, analyzer, errors, limits, frequency index, complete query evaluation/BM25 and atomic mutations; public execution remains planned. |
-| `src/addons/` | Explicitly installed search and presentation capabilities. |
-| `src/adapters/` | Optional host/persistence integrations. |
-| `examples/` | Core-only real-content pilot, followed by the complete documentation pilot. |
-| `test/` | Tooling/core behavior, independent source oracles, Unicode/corpus/numerical fixtures, construction/query/mutation diagnostics and TypeScript contract checks. |
-| `scripts/` | Roadmap validation, generated docs, and GitHub synchronization. |
-| `docs/` | Architecture, specs, decisions, planning, provenance, and acceptance evidence. |
-
-No website deployment or npm publication is part of initialization. The N4 release review ends with a separate owner publication decision.
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority is RX-2001; RX-2003 and RX-2004 are also dependency-ready after N1.

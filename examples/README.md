@@ -1,5 +1,5 @@
-# Planned examples
+# Runnable examples
 
-RX-1006 delivers `core-docs/`: a real-content consumer of the packed native core with deterministic documents, queries, navigation, and readable errors. RX-2006 delivers `docs-search/` with explicitly selected optional phrase/evidence/Inspector/UI capabilities.
+[core-docs/](core-docs/README.md) is the RX-1006 real-content CLI using the packed public native core. It records deterministic source snapshots, authored query judgments, real retrieval/updates and package/import/cost evidence. RX-2006 will add `docs-search/` with explicitly selected phrase/evidence/Inspector/UI capabilities.
 
-Examples must import public package entry points and exercise actual search. Keep synthetic correctness fixtures separate from judged real-content relevance cases. Do not search archived proposals by default as if they were current instructions. An example placeholder is not a completed pilot.
+Examples use public package imports. Synthetic arithmetic fixtures stay separate from judged source relevance. Archived proposals and verification logs are excluded from the current-section allowlist.
