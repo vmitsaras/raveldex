@@ -1,6 +1,6 @@
 # Add-ons and adapters
 
-Status: Approved boundary/behavior contract. Primary tasks: RX-2001–RX-2006 and RX-3001–RX-3004. Runtime implementation: not started.
+Status: Approved boundary/behavior contract. Primary tasks: RX-2001–RX-2006 and RX-3001–RX-3004. RX-2001 registration, transactional source and source phrases are verified locally; [evidence](../evidence/RX-2001.md). Other roles/strategies and adapters remain planned.
 
 ## Goal and outcome
 
@@ -94,6 +94,22 @@ The initial first-party source provider participates in the engine transaction a
 Phrase work is charged to the search budget. If complete verification cannot finish within a selected budget, return a typed failure; never verify only the first top-k lexical candidates or report an estimated total as exact.
 
 Before reusing companion phrase code in RX-2001, record the actual source repository/commit/license, inspect coupling, and add native contract tests. Do not postpone that provenance check until N3. Old passing phrase tests are not native parity evidence.
+
+### Implemented source protocol and costs — RX-2001
+
+Public `/addons/phrases` exports `createSourceProvider({ fields, id?, maxRetainedEntries?, maxWorkUnits? })` and `createSourcePhrases({ fields, id?, maxWorkUnits? })`; `/addons/phrases/source` exports only the source factory. Options are owned/frozen. Default registration IDs are `source` and `source-phrases`, providing `source:<field>` and `phrases` with contract version 1. No implicit installation, source getter or live registration/rebuild API exists.
+
+Implemented manifest role names are `transaction-participant` and `leaf-refinement`. Unsupported roles/execution fail `INCOMPATIBLE_CAPABILITY`; direct execution is supported, workers remain deferred. Complete bounded manifests/handles are captured before initialization; dependency order is deterministic and independent of input order. Missing requirements fail `MISSING_CAPABILITY`; duplicate IDs, conflicting providers, cycles, incompatible versions/data/handles fail `INCOMPATIBLE_CAPABILITY`. SemVer module identity is validated; compatibility resolution uses exact protocol versions, not package-version ranges. Arbitrary trusted implementations are not sandboxed.
+
+The initial refinement handle is `exact-token-sequence`. Core validates/owns the whole `{ text, fields? }` payload, counts text plus selected-field strings within payload/global bounds, analyzes it once with `basic-v1`, and passes the ordered normalized terms including repeats. Complete lexical groups do not reanalyze normalized output. Phrase preparation validates every selected field/provider/revision/analyzer, even for empty/unmatched phrases. A missing field on an accepted record is an ordinary nonmatch; a missing authoritative candidate record is a typed consistency failure. Other search-option extension roles remain unsupported and fail explicitly.
+
+Source state has one immutable revision/analyzer header and a sparse copy-on-write ID directory containing only selected original field/value arrays. It retains no metadata, tokens, positions, offsets or core roots. Preparation receives owned changed records, actual removal IDs and revisions; source/core publish together. No-ops skip preparation; clear removes source records; disposal releases the owned root. Unchanged immutable buckets may be shared with previous snapshots. Physical heap reclamation is not measured.
+
+A logical entry is one record, one present selected field or one original value. Default entry cap is `maxDocuments × (1 + enabledFields × (1 + maxTextValuesPerField))`, narrowed by configured core limits and an optional smaller provider cap. Logical text is bounded by `maxCorpusTextCodeUnits`. Default source prepare/phrase work caps are 50,000,000/10,000,000 work-v1 units. A phrase registration cap aggregates all its preparation/scans across every leaf in one search; the source cap covers its transaction preparation. Shared core budgets/checkpoints/deadlines remain stricter. Query token/group limits also apply before deduplication. Exhaustion rejects the whole operation, with no partial total.
+
+Streaming native reanalysis and a prefix table of at most 32 entries verify repeated-term overlap. Comparisons/scans are charged and resumable; every value resets matching. Verification can stop when one document's membership is established; every lexical candidate is considered before totals/page selection. The source utility excludes the verifier. Measured complete minified/gzip graphs are core 49,102/15,131 bytes, source utility 10,436/3,544 and core plus phrases 57,713/17,371, using pinned esbuild 0.28.2 and gzip level 9. Graphs overlap and are not additive costs. Core's 30 inputs exclude optional code. [Raw package/work evidence](../evidence/RX-2001.md) distinguishes logical counters from heap/latency claims.
+
+Before adaptation, the actual companion was audited: `vmitsaras/LocalSearch`, clean commit `5f334a8ca4f7d9d95b6b731ac539f4b1dda302cb`, MIT © 2026 Vasileios Mitsaras, especially `src/evidence/source.ts:16–55`. Only the conceptual per-value adjacency approach is adapted; no source is copied/imported. Companion NFC differs from native NFKC despite the shared historical `basic-v1` label. Its global phrase mode, mandatory source, whole-state rebuild and snippet coupling are not reused; old tests are not native evidence.
 
 ## Structured filters and facets
 

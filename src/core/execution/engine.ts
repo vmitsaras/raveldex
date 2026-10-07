@@ -1,4 +1,5 @@
 import { captureConfiguration } from '../contracts/schema.js';
+import { initializeParticipants } from '../capabilities/participants.js';
 import type { Configuration, MutationOptions, MutationResult, OwnedConfiguration, OwnedOptions, Query, Raveldex, RecordInput, SearchOptions, SearchResult } from '../contracts/types.js';
 import { invalid, RaveldexError } from '../errors/error.js';
 import type { WorkStep } from '../index/directory.js';
@@ -33,12 +34,12 @@ interface Operation {
   cancelled: boolean;
 }
 
-function emptyRoot(configuration: OwnedConfiguration): IndexRoot {
+export function emptyRoot(configuration: OwnedConfiguration, states: Readonly<Record<string, unknown>> = Object.freeze(Object.create(null)) as Readonly<Record<string, unknown>>): IndexRoot {
   const fields: Record<string, FieldIndex> = Object.create(null) as typeof fields;
   for (const name of Object.keys(configuration.schema.text)) fields[name] = Object.freeze({ documents: 0, length: 0, terms: emptyDirectory<TermEntry>() });
   return Object.freeze({ configuration, revision: 0, documents: emptyDirectory<DocumentEntry>(), fields: Object.freeze(fields),
     counts: Object.freeze({ documents: 0, textCodeUnits: 0, tokens: 0, dictionaryEntries: 0, postingEntries: 0 }),
-    participants: Object.freeze(Object.create(null)) as Readonly<Record<string, unknown>> });
+    participants: states });
 }
 
 /** Internal engine implementation. The factory exposes only bound ordinary methods. */
@@ -214,7 +215,11 @@ export class ExecutionOwner implements Raveldex {
 }
 
 export function createRaveldex(configuration: Configuration): Raveldex {
-  const owner = new ExecutionOwner(emptyRoot(captureConfiguration(configuration)), directHost());
+  let owner: ExecutionOwner;
+  try {
+    const captured = captureConfiguration(configuration), installed = initializeParticipants(captured);
+    owner = new ExecutionOwner(emptyRoot(captured, installed.states), directHost(), installed.participants);
+  } catch (error) { throw error instanceof RaveldexError ? error : new RaveldexError('INTERNAL_ERROR'); }
   // A public data facade prevents JavaScript callers reaching private test roots
   // or TypeScript-private execution callbacks through the owner's prototype.
   return Object.freeze({

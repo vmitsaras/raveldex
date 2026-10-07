@@ -1,5 +1,6 @@
 import type { ErrorCode } from '../errors/error.js';
 import type { LimitOverrides, Limits } from '../limits/limits.js';
+import type { AddonRegistration, CapabilitySet } from '../capabilities/types.js';
 
 export type Scalar = string | number | boolean | null;
 export type MetadataType = 'string' | 'number' | 'boolean';
@@ -29,12 +30,13 @@ export interface Configuration {
   readonly schema: Schema;
   readonly limits?: LimitOverrides;
   readonly analyzer?: AnalyzerDescriptor;
-  readonly addons?: readonly unknown[];
+  readonly addons?: readonly AddonRegistration[];
 }
 export interface OwnedConfiguration {
   readonly schema: OwnedSchema;
   readonly limits: Limits;
   readonly analyzer: AnalyzerDescriptor;
+  readonly capabilities?: CapabilitySet;
 }
 export interface Variant { readonly text: string; readonly match: 'exact' | 'prefix'; readonly weight?: number }
 export type Query =

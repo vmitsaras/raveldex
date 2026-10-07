@@ -339,7 +339,7 @@ Deliver a usable real-content search consumer that proves the independent native
 
 **Source-verified phrase add-on**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/15)
+**Milestone:** N2 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/15)
 
 **Dependencies:** [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006)
 
@@ -373,7 +373,7 @@ Adapt the useful companion phrase approach into an optional native capability wi
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-2001.md](docs/evidence/RX-2001.md)
 
 
 ## RX-2002

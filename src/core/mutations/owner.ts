@@ -39,7 +39,10 @@ export class MutationOwner {
     if (Object.keys(root.participants).length !== ids.size) invalid('INCOMPATIBLE_CAPABILITY', 'participants');
     this.#root = root;
     // Capture trusted handles so later mutation of registration cannot swap code.
-    this.participants = Object.freeze(participants.map(p => Object.freeze({ id: p.id, prepare: p.prepare.bind(p) })));
+    this.participants = Object.freeze(participants.map(p => {
+      if (p.maxWorkUnits !== undefined && (!Number.isSafeInteger(p.maxWorkUnits) || p.maxWorkUnits < 1)) invalid('INCOMPATIBLE_CAPABILITY', 'participants.limits');
+      return Object.freeze({ id: p.id, prepare: p.prepare.bind(p), ...(p.maxWorkUnits !== undefined ? { maxWorkUnits: p.maxWorkUnits } : {}) });
+    }));
   }
   get root(): IndexRoot { return this.#root; }
   capture(kind: MutationKind, input?: unknown, options?: unknown): OwnedMutation {
@@ -113,13 +116,15 @@ export class MutationOwner {
       const participants: Record<string, unknown> = Object.create(null) as typeof participants;
       for (const participant of this.participants) {
         boundary('participant'); yield charge(participant.id.length + 1);
+        const participantBudget = participant.maxWorkUnits === undefined ? undefined : new WorkBudget(participant.maxWorkUnits);
         const iterator = participant.prepare(old.participants[participant.id], context);
         let finished = false;
         try {
           for (;;) {
             const step = iterator.next();
             if (step.done) { participants[participant.id] = step.value; finished = true; break; }
-            yield charge(step.value.workUnits);
+            const charged = charge(step.value.workUnits);
+            participantBudget?.charge(step.value.workUnits); yield charged;
           }
         } finally {
           if (!finished) { try { iterator.return(undefined); } catch { /* Cleanup cannot replace the original failure. */ } }

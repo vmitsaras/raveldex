@@ -37,7 +37,7 @@ test('schema defaults, null-prototype dictionaries, owned configuration and opti
   assert.equal(captureSchema(nullSchema, L).text.title.boost, 1);
   fail(() => captureConfiguration({ schema: S, analyzer: { id: 'other', environmentProfile: 'unqualified' } }), 'MISSING_CAPABILITY');
   fail(() => captureConfiguration({ schema: S, analyzer: { id: 'basic-v1', environmentProfile: 'claimed-qualified' } }), 'INCOMPATIBLE_CAPABILITY');
-  fail(() => captureConfiguration({ schema: S, addons: [{}] }), 'MISSING_CAPABILITY');
+  fail(() => captureConfiguration({ schema: S, addons: [{}] }), 'INCOMPATIBLE_CAPABILITY');
   fail(() => captureConfiguration({ schema: S, limits: undefined }), 'INVALID_OPTIONS');
 });
 

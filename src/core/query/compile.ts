@@ -11,6 +11,7 @@ export type CompiledNode =
   | { readonly kind: 'group'; readonly group: CanonicalGroup }
   | { readonly kind: 'and' | 'or'; readonly children: readonly CompiledNode[] }
   | { readonly kind: 'not'; readonly child: CompiledNode }
+  | { readonly kind: 'extension'; readonly capability: string; readonly fields: readonly string[]; readonly terms: readonly string[]; readonly groups: readonly CanonicalGroup[] }
   | { readonly kind: 'eq'; readonly field: string; readonly value: Scalar }
   | { readonly kind: 'all' | 'none' };
 export interface CompiledQuery { readonly node: CompiledNode; readonly groups: ReadonlyMap<string, CanonicalGroup>; readonly key: string }
@@ -18,7 +19,7 @@ export interface CompiledQuery { readonly node: CompiledNode; readonly groups: R
 /** Consume shared analysis once. Normalized output never re-enters raw analysis. */
 export function* compileQuery(query: OwnedQuery, configuration: OwnedConfiguration, charge: Charge): Generator<WorkStep, CompiledQuery> {
   const tokens = new Map<OwnedQuery, string[]>();
-  for (const step of analyzeQuery(query, configuration.schema, configuration.limits)) {
+  for (const step of analyzeQuery(query, configuration.schema, configuration.limits, configuration.capabilities)) {
     yield charge(step.workUnits);
     if (step.token && step.leaf) {
       yield charge(1);
@@ -57,6 +58,15 @@ export function* compileQuery(query: OwnedQuery, configuration: OwnedConfigurati
         return children.length ? Object.freeze({ kind: raw.operator ?? 'and', children: Object.freeze(children) }) : Object.freeze({ kind: 'none' });
       }
       case 'group': return yield* group(raw.fields, raw.variants.map((variant, i) => ({ term: tokens.get(raw)![i]!, match: variant.match, weight: variant.weight ?? 1 })));
+      case 'extension': {
+        const lexical: CanonicalGroup[] = [], terms = Object.freeze(tokens.get(raw) ?? []);
+        for (const term of terms) {
+          const node = yield* group(raw.payload.fields, [{ term, match: 'exact', weight: 1 }]);
+          if (node.kind === 'group') lexical.push(node.group);
+        }
+        return Object.freeze({ kind: 'extension', capability: raw.capability,
+          fields: Object.freeze(yield* sortedStrings(raw.payload.fields ?? Object.keys(configuration.schema.text), charge)), terms, groups: Object.freeze(lexical) });
+      }
       case 'and': case 'or': {
         const children: CompiledNode[] = [];
         for (const child of raw.children) children.push(yield* walk(child as OwnedQuery));
