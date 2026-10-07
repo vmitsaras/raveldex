@@ -536,7 +536,7 @@ Produce trustworthy presentation data from original source, using reanalysis or 
 
 **Native DOM UI, Inspector, and documentation pilot**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/20)
+**Milestone:** N2 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/20)
 
 **Dependencies:** [RX-2003](IMPLEMENTATION_TASKS.md#rx-2003), [RX-2004](IMPLEMENTATION_TASKS.md#rx-2004), [RX-2005](IMPLEMENTATION_TASKS.md#rx-2005)
 
@@ -570,7 +570,8 @@ Deliver a usable optional native search interface and Inspector over real docume
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-2006.md](docs/evidence/RX-2006.md)
+- [docs/evidence/RX-2006-review.md](docs/evidence/RX-2006-review.md)
 
 
 ## RX-3001

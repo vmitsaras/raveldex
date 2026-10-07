@@ -1,0 +1,76 @@
+.raveldex-ui {
+  --raveldex-ui-accent: #174ea6;
+  --raveldex-ui-background: #fff;
+  --raveldex-ui-color: #17212b;
+  --raveldex-ui-border: #596b7d;
+  --raveldex-ui-focus: #7a2600;
+  --_accent: var(--raveldex-ui-accent);
+  --_background: var(--raveldex-ui-background);
+  --_color: var(--raveldex-ui-color);
+  --_border: var(--raveldex-ui-border);
+  --_focus: var(--raveldex-ui-focus);
+  box-sizing: border-box;
+  max-inline-size: 72rem;
+  min-inline-size: 0;
+  color: var(--_color);
+  background: var(--_background);
+  font: 1rem/1.6 system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+.raveldex-ui *, .raveldex-ui *::before, .raveldex-ui *::after { box-sizing: border-box; }
+.raveldex-ui__form, .raveldex-ui__facets, .raveldex-ui__navigation { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; }
+.raveldex-ui__form { margin-block-end: 1rem; }
+.raveldex-ui__label { flex-basis: 100%; font-weight: 650; }
+.raveldex-ui__input { flex: 1 1 15rem; }
+.raveldex-ui :is(input, select, button) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 2.75rem;
+  border: 2px solid var(--_border);
+  border-radius: .25rem;
+  padding: .45rem .7rem;
+  color: var(--_color);
+  background: var(--_background);
+  font: inherit;
+}
+.raveldex-ui button { cursor: pointer; font-weight: 600; }
+.raveldex-ui button[aria-disabled=true] { cursor: default; border-style: dashed; }
+.raveldex-ui :is(input, select, button, a, dialog):focus-visible { outline: 3px solid var(--_focus); outline-offset: 3px; }
+.raveldex-ui a { color: var(--_accent); text-decoration-thickness: .1em; text-underline-offset: .15em; }
+.raveldex-ui__facet-group { flex: 1 1 15rem; min-inline-size: 0; }
+.raveldex-ui__facet-label { display: block; font-weight: 600; }
+.raveldex-ui__facet { inline-size: 100%; }
+.raveldex-ui__facet-summary, .raveldex-ui__score, .raveldex-ui__snippet-omissions { font-size: .875rem; }
+.raveldex-ui__results { padding-inline-start: 1.75rem; }
+.raveldex-ui__result { padding-block: .75rem; border-block-end: 1px solid var(--_border); }
+.raveldex-ui__result-heading { margin: 0; font-size: 1.125rem; }
+.raveldex-ui__score, .raveldex-ui__snippet { margin-block: .35rem; }
+.raveldex-ui__snippet { white-space: pre-wrap; }
+.raveldex-ui__highlight { color: #17212b; background: #ffe59a; }
+.raveldex-ui__error, .raveldex-ui__inspector-error { border-inline-start: .25rem solid var(--_border); padding-inline-start: .75rem; font-weight: 600; }
+.raveldex-ui__navigation { align-items: center; margin-block: 1rem; }
+.raveldex-ui__page { margin: 0; }
+.raveldex-ui__inspector {
+  max-inline-size: min(60rem, calc(100vw - 2rem));
+  max-block-size: calc(100dvh - 2rem);
+  color: var(--_color);
+  background: var(--_background);
+  border: 2px solid var(--_border);
+  border-radius: .25rem;
+  padding: 1rem;
+  overflow: auto;
+}
+.raveldex-ui__inspector::backdrop { background: rgb(0 0 0 / .45); }
+.raveldex-ui__inspector-data { white-space: pre-wrap; overflow-wrap: anywhere; font: .875rem/1.5 ui-monospace, monospace; }
+@media (max-width: 25rem) {
+  .raveldex-ui__input, .raveldex-ui__submit { flex-basis: 100%; inline-size: 100%; }
+  .raveldex-ui__navigation { align-items: stretch; }
+  .raveldex-ui__navigation > * { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .raveldex-ui, .raveldex-ui * { scroll-behavior: auto; animation: none; transition: none; }
+}
+@media (forced-colors: active) {
+  .raveldex-ui { --raveldex-ui-focus: Highlight; --raveldex-ui-border: ButtonText; }
+  .raveldex-ui__highlight { color: HighlightText; background: Highlight; forced-color-adjust: none; }
+}

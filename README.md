@@ -16,7 +16,9 @@ RX-2004 adds optional factual Inspector data and bounded JSON diagnostics; see [
 
 RX-2005 adds optional original match ranges and bounded grapheme-safe snippet data. Source reanalysis and stored original offsets produce the same selected occurrences; snippets require explicit source. See [range/snippet evidence](docs/evidence/RX-2005.md).
 
-The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; browser support, other optional capabilities, worker/storage hosting and Unicode snapshot portability require later evidence.
+RX-2006 adds an optional native DOM interface and real documentation browser pilot, with exact facets, safe original snippets and requested factual Inspector. Browser interaction and automated accessibility observations qualify one local Chrome host; OS IME, screen-reader and cross-browser qualification remain separate.
+
+The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, worker/storage hosting and Unicode snapshot portability require later evidence.
 
 ## Try the core
 
@@ -135,6 +137,26 @@ Numeric bounds are finite and apply to one numeric array element; both endpoints
 
 Facet counts include every qualifying document and its current own-field selection before hits are limited. Repeated values count once per document. Returned buckets tag actual string/null values and optional missing separately; empty arrays have no bucket. Output is count-descending, then null, UTF-16 strings and missing for ties. Each field reports `distinctValueTotal` and `omittedBucketCount`; those are bucket totals. Requests select up to eight string metadata fields, count at most 10,000 distinct buckets per field, and return up to 100 (default 20). Output limit zero still counts the complete membership. Factory ceilings can narrow counting/output/work; exhaustion rejects the entire search. Neither module retains a side index. See [the precise protocol](docs/architecture/ADDONS_AND_ADAPTERS.md#structured-filters-and-facets).
 
+## Optional native UI
+
+```ts
+import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
+import '@vmitsaras/raveldex/addons/ui/styles.css'; // explicit bundler CSS import
+
+// Populate the engine first; register facets/snippets/Inspector if requested.
+const ui = mountRaveldexUI({
+  root: document.querySelector<HTMLElement>('#search')!, engine,
+  documents: [{ id: 'guide', title: 'Search guide', url: '/docs/search' }],
+  facets: [{ field: 'category', label: 'Category' }], snippetFields: ['body'],
+});
+// ui.search() flushes debounce; ui.destroy() restores authored child nodes.
+// The application separately owns await engine.dispose().
+```
+
+Use native forms, selects, buttons and result links. Inspector opens a native dialog with requested same-revision facts. UI-owned signals request cancellation; generation checks also discard obsolete presentation. Typed failures provide retry. Optional snippets render original text and explicit marks, with visible omissions. Duplicate mounts return the existing handle; destroy clears UI timers/listeners/requests and preserves the borrowed engine. The navigation document allowlist is captured at mount and permits HTTP(S) links without credentials. See [the bounded public contract](docs/architecture/ADDONS_AND_ADAPTERS.md#native-ui-public-contract--rx-2006).
+
+Run `npm run pilot:ui` and open the printed local URL for the real 34-section documentation application. Switch source/offset representations, submit exact terms or strict phrases, select categories, page, inspect and destroy/reinitialize. `npm run test:ui` runs installed/minified browser scenarios with pinned Playwright Core and axe-core development tools; local Chrome is the default. Use `RAVELDEX_UI_BROWSER=chromium` after explicit `node node_modules/playwright-core/cli.js install chromium` to use its pinned Chromium. [The example](examples/docs-search/README.md) describes its corpus and evidence boundaries. Core imports neither UI nor CSS.
+
 ## Start here
 
 | Need | Read |
@@ -180,13 +202,13 @@ npm run handoff:next
 | Optional source phrases | Explicit selected-field originals and strict phrase leaves. |
 | Optional positions, filters and facets | Selected original occurrence data, typed metadata qualification and complete conjunctive counts. |
 | Optional Inspector | Selected eligibility paths, actual native contributions, revision/configuration/resource identity and explicit diagnostic exports. |
-| Planned optional search modules | Native DOM UI. |
+| Optional native UI | Labeled forms, facets, result navigation, original snippets and factual Inspector; separate scoped CSS. |
 | Planned host adapters | Worker ownership/transport, snapshots, IndexedDB/recovery and later integrations. |
 | Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
 The RX-2005 packed public core measures **16,491 bytes gzip** (54,156 minified ESM bytes), exceeding the unchanged 15 KiB target by **1,131 bytes** (+32 gzip versus RX-2004). Boundary review keeps optional range collection, source traversal, segmentation, clipping, projection and serialization outside core; mandatory validation/shared metering remain intact. Complete bundles overlap and are not additive module costs. The 10,000-record observations are logical work/retention counters, not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
 
-MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2005 is RX-2006 — Native DOM UI, Inspector, and documentation pilot.
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2006 is RX-3001 — One-owner module-worker adapter.
 
 ## Factual inspection
 

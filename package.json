@@ -2,7 +2,7 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native modular TypeScript local search \u2014 ESM core with BM25, atomic mutations, cooperative execution and optional phrases, filters, facets, inspection, original ranges and snippets.",
+  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution, optional search capabilities and native DOM UI.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs",
+    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -26,8 +26,8 @@
     "docs:check": "node scripts/render-plan.mjs --check && node scripts/check-docs.mjs",
     "tracking:preview": "node scripts/sync-github.mjs --dry-run",
     "tracking:sync": "node scripts/sync-github.mjs --apply",
-    "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json",
-    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json",
+    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs",
     "test:core": "npm run build && node --test test/core/*.test.mjs",
     "prepack": "npm run build",
     "test:consumer": "npm run build && node --test test/consumer/*.test.mjs",
@@ -37,10 +37,14 @@
     "test:filters": "npm run build && node --test test/addons/filters/*.test.mjs",
     "test:facets": "npm run build && node --test test/addons/facets/*.test.mjs",
     "test:inspector": "npm run build && node --test test/addons/inspector/*.test.mjs",
-    "test:evidence": "npm run build && node --test test/addons/evidence/*.test.mjs"
+    "test:evidence": "npm run build && node --test test/addons/evidence/*.test.mjs",
+    "test:ui": "npm run build && node --test test/ui/*.test.mjs",
+    "pilot:ui": "npm run build && node scripts/ui-pilot.mjs"
   },
   "devDependencies": {
+    "axe-core": "4.13.0",
     "esbuild": "0.28.2",
+    "playwright-core": "1.61.1",
     "typescript": "7.0.2"
   },
   "types": "./dist/index.d.ts",
@@ -88,7 +92,12 @@
     "./addons/snippets": {
       "types": "./dist/addons/snippets/index.d.ts",
       "import": "./dist/addons/snippets/index.js"
-    }
+    },
+    "./addons/ui": {
+      "types": "./dist/addons/ui/index.d.ts",
+      "import": "./dist/addons/ui/index.js"
+    },
+    "./addons/ui/styles.css": "./dist/addons/ui/styles.css"
   },
   "files": [
     "dist/index.js",
@@ -101,7 +110,10 @@
     "dist/addons/metadata/",
     "dist/addons/inspector/",
     "dist/addons/evidence/",
-    "dist/addons/snippets/"
+    "dist/addons/snippets/",
+    "dist/addons/ui/"
   ],
-  "sideEffects": false
+  "sideEffects": [
+    "**/*.css"
+  ]
 }

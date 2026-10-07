@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- RX-2006 adds the optional native DOM search interface and separate scoped CSS, exact conjunctive facets, safe original snippets, factual Inspector, composition/debounce handling, cancellation plus stale-reply suppression, focus and teardown/restoration. Adds a real offline-installed documentation browser pilot and pinned development-only browser/accessibility verification tools. Core remains DOM-free and unchanged.
+
 - RX-2005 adds optional complete original token ranges from source reanalysis or stored offsets, successful-branch phrase/Boolean occurrence evidence, and bounded grapheme-safe original-source snippet data with explicit display omissions. Adds typed unsupported-segmentation errors and preserves ranking, ordinary allocation, atomic provider ownership and shared stop/output budgets.
 
 - RX-2004 adds optional factual Inspector data from actual evaluator/scorer paths, selected native arithmetic, bounded owned output and metadata-only diagnostic JSON with explicit facts/source inclusion. Preserves ordinary result/allocation behavior and FIFO/revision/cancellation rules; records independent review, packed/minified parity and the unchanged core size-target miss.
@@ -28,4 +30,4 @@
 - Add behavioral specifications, milestone/task planning, Codex instructions, and provenance.
 - Add dependency/status validation, generated planning documents, bootstrap CI, and GitHub milestone/issue synchronization.
 
-N1 core alpha is verified locally. Optional product capabilities and release qualification remain future work; no public package release exists in this entry.
+N1 core alpha is verified locally. N2 optional product capabilities are implemented; host adapters and release qualification remain future work; no public package release exists in this entry.

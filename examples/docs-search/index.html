@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Raveldex documentation search</title>
+    <link rel="stylesheet" href="./ui.css">
+    <link rel="stylesheet" href="./pilot.css">
+    <script type="module" src="./main.mjs"></script>
+  </head>
+  <body class="docs-pilot">
+    <main class="docs-pilot__main">
+      <header class="docs-pilot__header">
+        <p class="docs-pilot__eyebrow">Raveldex · native documentation pilot</p>
+        <h1>Search the implementation contracts</h1>
+        <p>Find complete sections from the current search, ranking, mutation, and add-on documentation. Open a result to read its GitHub source, or inspect the native facts behind its score.</p>
+      </header>
+
+      <section class="docs-pilot__settings" aria-labelledby="pilot-settings-title">
+        <h2 id="pilot-settings-title">Search setup</h2>
+        <div class="docs-pilot__controls">
+          <label class="docs-pilot__control">
+            Representation
+            <select data-pilot-representation>
+              <option value="source">Original source reanalysis</option>
+              <option value="offsets">Stored positions and original offsets</option>
+            </select>
+          </label>
+          <label class="docs-pilot__control">
+            Query meaning
+            <select data-pilot-mode>
+              <option value="text">All exact terms</option>
+              <option value="phrase">Strict adjacent phrase</option>
+            </select>
+          </label>
+          <button type="button" data-pilot-initialize>Reinitialize search</button>
+          <button type="button" data-pilot-destroy>Destroy interface</button>
+        </div>
+        <p>Changing setup rebuilds the owner from the same original corpus and preserves the search text. Filters and the current page reset. Original source remains available for display in both representations.</p>
+        <p class="docs-pilot__status" data-pilot-status role="status">Preparing documentation search…</p>
+      </section>
+
+      <section aria-labelledby="pilot-search-title">
+        <h2 id="pilot-search-title">Documentation</h2>
+        <p class="docs-pilot__help">Try <strong>term contribution</strong>, <strong>atomic mutation</strong>, or <strong>original source</strong>. Exact-term mode requires every analyzed term; strict phrase mode also requires adjacency in one original value. Category facets count fully qualified matches, including the selected category.</p>
+        <div data-pilot-search></div>
+        <noscript>This pilot requires JavaScript. Read the <a href="https://github.com/vmitsaras/raveldex/tree/main/docs/specs">source specifications</a> directly.</noscript>
+      </section>
+
+      <footer class="docs-pilot__footer">
+        <p data-pilot-identity>Only the local allowlisted documentation corpus is loaded.</p>
+        <p>Inspector data is requested when opened. Display snippets are bounded original text; omitted context is indicated separately. This local pilot does not establish screen-reader or cross-browser qualification.</p>
+        <a href="https://github.com/vmitsaras/raveldex">Raveldex repository</a>
+      </footer>
+    </main>
+  </body>
+</html>

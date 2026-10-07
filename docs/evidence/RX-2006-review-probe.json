@@ -1,0 +1,222 @@
+{
+  "kind": "raveldex-independent-ui-review-v1",
+  "startedAt": "2026-10-07T21:14:07.086Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "release": "27.0.0",
+    "arch": "arm64",
+    "macOS": "27.0.1",
+    "browser": {
+      "version": "154.0.8037.98",
+      "channel": "chrome",
+      "headless": true
+    },
+    "playwright": "1.61.1"
+  },
+  "limitations": [
+    "Synthetic browser composition events are not OS IME observations.",
+    "No screen reader or physical latency/heap qualification."
+  ],
+  "probes": [
+    {
+      "name": "interleaving committed write rejects mixed main/snippet revisions and recovers",
+      "status": "Pass",
+      "evidence": {
+        "failure": "REVISION_MISMATCH",
+        "partialRows": 0,
+        "recoveredRevision": 2
+      }
+    },
+    {
+      "name": "Inspector refuses intervening writes then recovers after current search",
+      "status": "Pass",
+      "evidence": {
+        "oldRevision": 1,
+        "recoveredRevision": 2,
+        "staleFactsRendered": false
+      }
+    },
+    {
+      "name": "closing Inspector aborts its signal and suppresses ignored-cancel late facts",
+      "status": "Pass",
+      "evidence": {
+        "signalAborted": true,
+        "lateFactsRendered": false,
+        "openerFocusRestored": true
+      }
+    },
+    {
+      "name": "changed input invalidates held result immediately before debounce",
+      "status": "Pass",
+      "evidence": {
+        "staleResultVisibleDuringDebounce": false,
+        "newQuery": "blue"
+      }
+    },
+    {
+      "name": "destroy cancels timer and removes detached control listeners while borrowing engine",
+      "status": "Pass",
+      "evidence": {
+        "timerCallsAfterDestroy": 0,
+        "oldListenersRemoved": true,
+        "originalNodesIdentical": true,
+        "borrowedDisposals": 0
+      }
+    },
+    {
+      "name": "captured options are stable and duplicate root keeps first handle",
+      "status": "Pass",
+      "evidence": {
+        "duplicateSameHandle": true,
+        "capturedDocumentsStable": true,
+        "invalidOptions": {
+          "out": [
+            {
+              "code": "INVALID_OPTIONS",
+              "restored": true
+            },
+            {
+              "code": "INVALID_OPTIONS",
+              "restored": true
+            },
+            {
+              "code": "INVALID_OPTIONS",
+              "restored": true
+            },
+            {
+              "code": "INVALID_OPTIONS",
+              "restored": true
+            },
+            {
+              "code": "INVALID_OPTIONS",
+              "restored": true
+            }
+          ],
+          "invoked": 0
+        }
+      }
+    },
+    {
+      "name": "protocol-relative HTTP(S) navigation follows declared allowlist contract",
+      "status": "Pass",
+      "evidence": {
+        "resolvedAllowedURL": "http://example.test/docs/alpha"
+      }
+    },
+    {
+      "name": "whitespace-only human-facing labels reject before changing authored content",
+      "status": "Pass",
+      "evidence": {
+        "rejectedBlankLabels": [
+          {
+            "code": "INVALID_OPTIONS",
+            "sameOriginal": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "sameOriginal": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "sameOriginal": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "a reduced corpus bound permits the final partial result page",
+      "status": "Pass",
+      "evidence": {
+        "maxDocuments": 5,
+        "pageSize": 3,
+        "status": "5 results. Showing 4–5.",
+        "error": "",
+        "rows": 2,
+        "inspectorDocuments": 2,
+        "inspectorRevision": 1
+      }
+    }
+  ],
+  "package": {
+    "sha256": "5bd89e2b9604a82af600f453f1210af28be49105da16e775208ad812ba88a0fd",
+    "runtimeDependencies": [],
+    "uiSourceHashes": {
+      "ui.ts": "fb97dac6bc8c61355b3f3b056438d1412ef1aaf778bb287d9b33aa76a8998a3d",
+      "options.ts": "8c63e84ab80d4e9b857920767f57bb390d17f21b27a499a925ab94a92978e3e0",
+      "render.ts": "140784f6759871d746493863e194846ed54360bd377c3ca1747b0dd52a304e0f",
+      "styles.css": "6152525fb59c13c357f73df120e757d4ebfd9a68bfedbb26e249e01410e432f6"
+    },
+    "shippedUIHashes": {
+      "ui.js": "37480149517c51f9a1396c448a4d65a8d24fef8d67aa114353905d07e5a80509",
+      "options.js": "7fa2a3e36b30d398092aa978f263a9fb918b3d15c1b5782a1b68b7c8c83a3b03",
+      "render.js": "012e0a30cc2f1f659a371763521e433ad1c06f603526f64c1f4594991a3dcf90",
+      "styles.css": "6152525fb59c13c357f73df120e757d4ebfd9a68bfedbb26e249e01410e432f6"
+    }
+  },
+  "bundleInputs": [
+    "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/capabilities/registration.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/capabilities/participants.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/capabilities/capture.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/mutations/capture.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/mutations/delta.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/mutations/document.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/mutations/owner.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/ranking/bm25.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/ranking/page.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/retrieval/expand.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/trace/facts.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/query/compile.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/query/evaluate.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/query/search.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/execution/host.js",
+    "node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js",
+    "node_modules/@vmitsaras/raveldex/dist/index.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/phrases/options.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/phrases/store.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/phrases/source.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/metadata/payload.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/facets/options.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/facets/facets.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/facets/index.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/inspector/options.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/inspector/output.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/inspector/inspector.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/inspector/diagnostics.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/inspector/index.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/positions/options.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/positions/store.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/evidence/occurrences.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/evidence/options.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/evidence/providers.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/evidence/builder.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/snippets/snippets.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/snippets/index.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/ui/render.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/ui/ui.js",
+    "node_modules/@vmitsaras/raveldex/dist/addons/ui/index.js",
+    "review-entry.mjs"
+  ],
+  "paginationObservation": {
+    "maxDocuments": 5,
+    "pageSize": 3,
+    "status": "5 results. Showing 4–5.",
+    "error": "",
+    "rows": 2
+  },
+  "finishedAt": "2026-10-07T21:14:12.049Z"
+}

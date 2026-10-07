@@ -1,0 +1,2515 @@
+{
+  "kind": "raveldex-packed-ui-browser-v1",
+  "startedAt": "2026-10-07T21:26:16.778Z",
+  "verification": {
+    "syntheticComposition": "Executed browser CompositionEvent protocol; real OS IME not run.",
+    "assistiveTechnology": "Not run; axe and browser role/name lookups are supporting automated evidence.",
+    "physicalPaintLatency": "Not measured.",
+    "crossBrowser": "Only the recorded installed Chrome channel."
+  },
+  "environment": {
+    "node": "v24.21.0",
+    "os": {
+      "platform": "darwin",
+      "release": "27.0.0",
+      "arch": "arm64",
+      "product": {
+        "ProductName": "macOS",
+        "ProductVersion": "27.0.1",
+        "BuildVersion": "26A434"
+      }
+    },
+    "esbuild": "0.28.2",
+    "browser": {
+      "channel": "chrome",
+      "version": "154.0.8037.98",
+      "headless": true
+    },
+    "playwright": "1.61.1",
+    "axe": "4.13.0"
+  },
+  "records": [
+    {
+      "name": "native submit / exact pagination / focus",
+      "status": "Pass",
+      "evidence": {
+        "total": 7,
+        "pages": [
+          3,
+          3,
+          1
+        ],
+        "first": [
+          "gamma",
+          "long",
+          "alpha"
+        ],
+        "second": [
+          "epsilon",
+          "delta",
+          "quoted"
+        ]
+      }
+    },
+    {
+      "name": "axe: search results",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 26,
+      "inapplicable": 37,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "facets",
+      "status": "Pass",
+      "evidence": {
+        "options": [
+          {
+            "text": "All",
+            "value": ""
+          },
+          {
+            "text": "Guide (5)",
+            "value": "0"
+          },
+          {
+            "text": "Reference (2)",
+            "value": "1"
+          }
+        ],
+        "selectedTotal": 5,
+        "clearTotal": 7,
+        "exactCoreFilter": {
+          "kind": "and",
+          "children": [
+            {
+              "kind": "text",
+              "text": "red"
+            },
+            {
+              "kind": "eq",
+              "field": "category",
+              "value": "Guide"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "axe: facet results",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 27,
+      "inapplicable": 36,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "stricter actual maxDocuments / bounded last page",
+      "status": "Pass",
+      "evidence": {
+        "maxDocuments": 5,
+        "records": 5,
+        "configuredPageSize": 3,
+        "finalPage": {
+          "mainLimit": 2,
+          "snippetLimit": 2,
+          "inspectorLimit": 2,
+          "offset": 3,
+          "hits": 2,
+          "inspectorDocuments": 2
+        },
+        "backwardPageHits": 3
+      }
+    },
+    {
+      "name": "debounce",
+      "status": "Pass",
+      "evidence": {
+        "inputEvents": 4,
+        "admittedMainSearches": 1,
+        "calls": [
+          {
+            "query": {
+              "kind": "text",
+              "text": "blue"
+            },
+            "extensions": [
+              "facets"
+            ]
+          },
+          {
+            "query": {
+              "kind": "text",
+              "text": "blue"
+            },
+            "extensions": [
+              "snippets"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "synthetic IME event protocol",
+      "status": "Pass",
+      "evidence": {
+        "interimSearches": 0,
+        "finalSearches": 1,
+        "realOSIME": "Not run"
+      }
+    },
+    {
+      "name": "axe: loading with previous results",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 23,
+      "inapplicable": 40,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "stale suppression distinct from cancellation",
+      "status": "Pass",
+      "evidence": {
+        "discardedActualResultTotal": 7,
+        "presentedTotal": 1,
+        "signalAborted": true,
+        "wrapper": "Underlying real result computed without UI signal, then intentionally delayed."
+      }
+    },
+    {
+      "name": "axe: empty results",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 23,
+      "inapplicable": 40,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "axe: recoverable error",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 23,
+      "inapplicable": 40,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "empty / typed failure / retry",
+      "status": "Pass",
+      "evidence": {
+        "emptyTotal": 0,
+        "injectedError": "WORK_LIMIT_EXCEEDED",
+        "recoveredTotal": 1,
+        "liveRegion": "status"
+      }
+    },
+    {
+      "name": "actual main/projection mutation conflict",
+      "status": "Pass",
+      "evidence": {
+        "firstResultRevision": 1,
+        "mutationRevision": 2,
+        "conflict": "REVISION_MISMATCH",
+        "recoveredMainAndSnippetRevision": 2
+      }
+    },
+    {
+      "name": "safe original display / URL refusal",
+      "status": "Pass",
+      "evidence": {
+        "maliciousHTMLExecuted": false,
+        "sourceHref": "http://127.0.0.1:58308/docs/unsafe",
+        "invalidURLs": [
+          {
+            "url": "javascript:alert(1)",
+            "code": "INVALID_OPTIONS",
+            "authoredNodePreserved": true
+          },
+          {
+            "url": "data:text/html,unsafe",
+            "code": "INVALID_OPTIONS",
+            "authoredNodePreserved": true
+          },
+          {
+            "url": "https://user:secret@example.test/docs",
+            "code": "INVALID_OPTIONS",
+            "authoredNodePreserved": true
+          }
+        ],
+        "invalidLabels": {
+          "outcomes": [
+            {
+              "name": "whitespace input label",
+              "code": "INVALID_OPTIONS",
+              "authoredNodeAndAttributesPreserved": true
+            },
+            {
+              "name": "whitespace result title",
+              "code": "INVALID_OPTIONS",
+              "authoredNodeAndAttributesPreserved": true
+            },
+            {
+              "name": "whitespace facet label",
+              "code": "INVALID_OPTIONS",
+              "authoredNodeAndAttributesPreserved": true
+            },
+            {
+              "name": "accessor result title",
+              "code": "INVALID_OPTIONS",
+              "authoredNodeAndAttributesPreserved": true
+            },
+            {
+              "name": "accessor facet label",
+              "code": "INVALID_OPTIONS",
+              "authoredNodeAndAttributesPreserved": true
+            },
+            {
+              "name": "accessor input label",
+              "code": "INVALID_OPTIONS",
+              "authoredNodeAndAttributesPreserved": true
+            }
+          ],
+          "getterExecutions": 0,
+          "admittedSearches": 0
+        },
+        "oneEvidenceCapability": [
+          "snippets"
+        ],
+        "revision": 1
+      }
+    },
+    {
+      "name": "bounded long original / explicit mark",
+      "status": "Pass",
+      "evidence": {
+        "longFixtureUTF16Units": 2500,
+        "maxWindowUTF16Units": 120,
+        "safeSource": "http://127.0.0.1:58308/docs/long",
+        "exactOriginalMarkedText": "red grapefruit"
+      }
+    },
+    {
+      "name": "axe: open Inspector",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 16,
+      "inapplicable": 47,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "Inspector facts / keyboard modal lifecycle",
+      "status": "Pass",
+      "evidence": {
+        "revision": 1,
+        "document": "beta",
+        "facts": 5,
+        "separateSoleExtension": true,
+        "EscapeAndNativeCloseRestoreFocus": true
+      }
+    },
+    {
+      "name": "duplicate / authored rollback / late suppression / borrowed lifetime",
+      "status": "Pass",
+      "evidence": {
+        "duplicateSameHandle": true,
+        "sameAuthoredNodeIdentities": true,
+        "detachedOldControlAndHandleSearches": 0,
+        "engineDisposals": 0,
+        "borrowedEngineStillSearches": true,
+        "mainCallsAfterRemount": 3
+      }
+    },
+    {
+      "name": "Inspector close during completed delayed reply",
+      "status": "Pass",
+      "evidence": {
+        "signalAborted": true,
+        "discardedActualFactCount": 5,
+        "staleDataPresented": false,
+        "restoredFocus": true
+      }
+    },
+    {
+      "name": "axe: 320px reduced-motion results",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 27,
+      "inapplicable": 36,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "narrow / motion / keyboard focus / live status",
+      "status": "Pass",
+      "evidence": {
+        "viewport": 320,
+        "width": 320,
+        "reduced": true,
+        "animations": 0,
+        "focus": {
+          "tag": "BUTTON",
+          "focusVisible": true,
+          "outlineStyle": "solid",
+          "outlineWidth": 3,
+          "outlineColor": "rgb(122, 38, 0)"
+        }
+      }
+    },
+    {
+      "name": "axe: real-document offsets phrase pilot",
+      "status": "Pass",
+      "violations": [],
+      "incomplete": [],
+      "passes": 27,
+      "inapplicable": 36,
+      "tool": {
+        "name": "axe-core",
+        "version": "4.13.0"
+      }
+    },
+    {
+      "name": "real-document task / representation / lifecycle pilot",
+      "status": "Pass",
+      "evidence": {
+        "corpusHash": "93c21d1028d7e907ae6b7f607b8efa15948094b62de6af1557c0cbbd1e176f68",
+        "corpusSources": [
+          {
+            "path": "docs/specs/CORE_CONTRACT.md",
+            "category": "spec",
+            "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md",
+            "sha256": "90eec2bfbdf5ea3119a3e70ecceece53e96d3bfe020c468797cae49f42395626",
+            "bytes": 31235
+          },
+          {
+            "path": "docs/specs/RANKING.md",
+            "category": "spec",
+            "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md",
+            "sha256": "3fbded5d80f28a48c5fe06c81f186daa3154bd7a389f6b5aa42b55d683b7f94c",
+            "bytes": 13768
+          },
+          {
+            "path": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+            "category": "spec",
+            "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md",
+            "sha256": "d3b673b44a9a5fea53c149a684bde0391c3145cbda5eaf5b7c58b635444c054d",
+            "bytes": 22959
+          },
+          {
+            "path": "docs/architecture/NATIVE_ARCHITECTURE.md",
+            "category": "architecture",
+            "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md",
+            "sha256": "5028e4991d8e07a19c1c39f0091b85af396eac46d97235eded35e4084dd7f840",
+            "bytes": 22776
+          },
+          {
+            "path": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+            "category": "architecture",
+            "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md",
+            "sha256": "8d2a46f08d4bc52568c3865ac8ef5ac5584bae02c2e5bacac762f9cc2bc9a225",
+            "bytes": 53202
+          }
+        ],
+        "observations": [
+          {
+            "query": "term contribution",
+            "total": 6,
+            "hits": [
+              {
+                "id": "doc:docs/specs/RANKING.md#term-contribution",
+                "title": "Term contribution",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#term-contribution",
+                "score": "Score 17.34511307739239"
+              },
+              {
+                "id": "doc:docs/specs/RANKING.md#explanation-facts",
+                "title": "Explanation facts",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#explanation-facts",
+                "score": "Score 3.4503170008792567"
+              },
+              {
+                "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+                "title": "Original groups and alternatives",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#original-groups-and-alternatives",
+                "score": "Score 3.3604746516450565"
+              },
+              {
+                "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+                "title": "Statistics from one revision",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#statistics-from-one-revision",
+                "score": "Score 2.932121375840198"
+              },
+              {
+                "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+                "title": "Core nodes",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#core-nodes",
+                "score": "Score 2.2037555607412314"
+              },
+              {
+                "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                "title": "Work, deadline, and yield accounting",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+                "score": "Score 1.934029264881135"
+              }
+            ],
+            "intendedRank": [
+              {
+                "id": "doc:docs/specs/RANKING.md#term-contribution",
+                "rank": 1
+              }
+            ],
+            "acceptableTop1": true
+          },
+          {
+            "query": "original source",
+            "total": 11,
+            "hits": [
+              {
+                "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+                "title": "Source mapping",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#source-mapping",
+                "score": "Score 9.653895047878597"
+              },
+              {
+                "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                "title": "Strict phrase capability",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+                "score": "Score 2.4717362022393803"
+              },
+              {
+                "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                "title": "Snapshots and IndexedDB",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+                "score": "Score 2.345675126377912"
+              },
+              {
+                "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                "title": "Product boundary",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+                "score": "Score 2.1024175259883737"
+              },
+              {
+                "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                "title": "Ownership and retention",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                "score": "Score 1.951788863008935"
+              },
+              {
+                "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                "title": "Mutation behavior",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                "score": "Score 1.8818615533581382"
+              },
+              {
+                "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                "title": "Registration and effect contracts",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+                "score": "Score 1.7702937835489851"
+              },
+              {
+                "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                "title": "Analyzer/environment boundary",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+                "score": "Score 1.691784927936324"
+              },
+              {
+                "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                "title": "State model",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+                "score": "Score 1.6687726495919046"
+              },
+              {
+                "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                "title": "Incremental staging",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+                "score": "Score 1.5688488725510457"
+              },
+              {
+                "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                "title": "Finite initial limits",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+                "score": "Score 1.52031212042071"
+              }
+            ],
+            "intendedRank": [
+              {
+                "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+                "rank": 5
+              }
+            ],
+            "acceptableTop1": false
+          },
+          {
+            "query": "atomic batch",
+            "total": 1,
+            "hits": [
+              {
+                "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+                "title": "Public API contract",
+                "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#public-api-contract",
+                "score": "Score 3.692776710171656"
+              }
+            ],
+            "intendedRank": [
+              {
+                "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+                "rank": null
+              }
+            ],
+            "acceptableTop1": false
+          },
+          {
+            "query": "PostgreSQL replication",
+            "total": 0,
+            "hits": [],
+            "intendedRank": [],
+            "acceptableTop1": null
+          }
+        ],
+        "sourceOffsetPhraseParity": [
+          {
+            "id": "doc:docs/specs/RANKING.md#term-contribution",
+            "score": "Score 17.34511307739239",
+            "snippets": []
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#explanation-facts",
+            "score": "Score 3.4503170008792567",
+            "snippets": [
+              "…`df`, `N`, document field length, total field length, and average length;\n- `k1`, `b`, IDF, normalizer, TF part, base term contribution, weighted selected contribution;\n- field/group subtotals, final score, and the ID tie-breaker.\n\nThese fa…"
+            ]
+          },
+          {
+            "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+            "score": "Score 2.932121375840198",
+            "snippets": [
+              "… boost, default 1, at most 16. |\n\nMissing, empty, and tokenless fields do not increment `N(f)`. An empty index has no term contribution and never divides by zero. An indexed term must satisfy `1 <= df(t,f) <= N(f)`, `tf > 0` for its posting…"
+            ]
+          },
+          {
+            "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+            "score": "Score 1.934029264881135",
+            "snippets": [
+              "… per posting or candidate membership operation. |\n| Score/Boolean evaluation | One per evaluated node, selected field-term contribution, or union insertion. |\n| Staging/copying | One per copied directory/bucket entry or updated posting/stat…"
+            ]
+          }
+        ],
+        "sameOriginRequestsOnly": true,
+        "destroyReinitializePreservedQuery": true,
+        "packageSHA256": "bf59fad0e7c2c5263a4602b7c4447bd20ac14b24aaa0a2b28ba1c0dca2bfd350"
+      }
+    }
+  ],
+  "package": {
+    "name": "@vmitsaras/raveldex",
+    "version": "0.0.0",
+    "private": true,
+    "sha256": "bf59fad0e7c2c5263a4602b7c4447bd20ac14b24aaa0a2b28ba1c0dca2bfd350",
+    "npmIntegrity": "sha512-ozc48IQzSTlTjmScLBKc3sAmdeWCCRPyx5ieBDKRr/TooPrFXxiSrGymcAn28wTyJ0l/aLb546Iu9yJ4j/aCmQ==",
+    "tarballBytes": 96310,
+    "unpackedBytes": 417742,
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 1075
+      },
+      {
+        "path": "README.md",
+        "size": 22185
+      },
+      {
+        "path": "dist/addons/evidence/builder.d.ts",
+        "size": 900
+      },
+      {
+        "path": "dist/addons/evidence/builder.js",
+        "size": 9996
+      },
+      {
+        "path": "dist/addons/evidence/index.d.ts",
+        "size": 430
+      },
+      {
+        "path": "dist/addons/evidence/index.js",
+        "size": 220
+      },
+      {
+        "path": "dist/addons/evidence/occurrences.d.ts",
+        "size": 1361
+      },
+      {
+        "path": "dist/addons/evidence/occurrences.js",
+        "size": 3794
+      },
+      {
+        "path": "dist/addons/evidence/options.d.ts",
+        "size": 1114
+      },
+      {
+        "path": "dist/addons/evidence/options.js",
+        "size": 4808
+      },
+      {
+        "path": "dist/addons/evidence/providers.d.ts",
+        "size": 866
+      },
+      {
+        "path": "dist/addons/evidence/providers.js",
+        "size": 9384
+      },
+      {
+        "path": "dist/addons/evidence/types.d.ts",
+        "size": 1419
+      },
+      {
+        "path": "dist/addons/evidence/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/facets/facets.d.ts",
+        "size": 288
+      },
+      {
+        "path": "dist/addons/facets/facets.js",
+        "size": 10135
+      },
+      {
+        "path": "dist/addons/facets/index.d.ts",
+        "size": 152
+      },
+      {
+        "path": "dist/addons/facets/index.js",
+        "size": 44
+      },
+      {
+        "path": "dist/addons/facets/options.d.ts",
+        "size": 1180
+      },
+      {
+        "path": "dist/addons/facets/options.js",
+        "size": 2083
+      },
+      {
+        "path": "dist/addons/filters/index.d.ts",
+        "size": 690
+      },
+      {
+        "path": "dist/addons/filters/index.js",
+        "size": 7294
+      },
+      {
+        "path": "dist/addons/filters/options.d.ts",
+        "size": 365
+      },
+      {
+        "path": "dist/addons/filters/options.js",
+        "size": 1818
+      },
+      {
+        "path": "dist/addons/inspector/diagnostics.d.ts",
+        "size": 280
+      },
+      {
+        "path": "dist/addons/inspector/diagnostics.js",
+        "size": 12871
+      },
+      {
+        "path": "dist/addons/inspector/index.d.ts",
+        "size": 384
+      },
+      {
+        "path": "dist/addons/inspector/index.js",
+        "size": 104
+      },
+      {
+        "path": "dist/addons/inspector/inspector.d.ts",
+        "size": 300
+      },
+      {
+        "path": "dist/addons/inspector/inspector.js",
+        "size": 7479
+      },
+      {
+        "path": "dist/addons/inspector/options.d.ts",
+        "size": 998
+      },
+      {
+        "path": "dist/addons/inspector/options.js",
+        "size": 4125
+      },
+      {
+        "path": "dist/addons/inspector/output.d.ts",
+        "size": 573
+      },
+      {
+        "path": "dist/addons/inspector/output.js",
+        "size": 2201
+      },
+      {
+        "path": "dist/addons/inspector/types.d.ts",
+        "size": 3849
+      },
+      {
+        "path": "dist/addons/inspector/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/metadata/payload.d.ts",
+        "size": 892
+      },
+      {
+        "path": "dist/addons/metadata/payload.js",
+        "size": 2964
+      },
+      {
+        "path": "dist/addons/phrases/index.d.ts",
+        "size": 432
+      },
+      {
+        "path": "dist/addons/phrases/index.js",
+        "size": 5059
+      },
+      {
+        "path": "dist/addons/phrases/mixed.d.ts",
+        "size": 423
+      },
+      {
+        "path": "dist/addons/phrases/mixed.js",
+        "size": 4215
+      },
+      {
+        "path": "dist/addons/phrases/options.d.ts",
+        "size": 796
+      },
+      {
+        "path": "dist/addons/phrases/options.js",
+        "size": 2706
+      },
+      {
+        "path": "dist/addons/phrases/source.d.ts",
+        "size": 186
+      },
+      {
+        "path": "dist/addons/phrases/source.js",
+        "size": 127
+      },
+      {
+        "path": "dist/addons/phrases/store.d.ts",
+        "size": 1373
+      },
+      {
+        "path": "dist/addons/phrases/store.js",
+        "size": 7923
+      },
+      {
+        "path": "dist/addons/phrases/verifier.d.ts",
+        "size": 658
+      },
+      {
+        "path": "dist/addons/phrases/verifier.js",
+        "size": 1790
+      },
+      {
+        "path": "dist/addons/positions/index.d.ts",
+        "size": 192
+      },
+      {
+        "path": "dist/addons/positions/index.js",
+        "size": 131
+      },
+      {
+        "path": "dist/addons/positions/options.d.ts",
+        "size": 1019
+      },
+      {
+        "path": "dist/addons/positions/options.js",
+        "size": 3285
+      },
+      {
+        "path": "dist/addons/positions/phrases.d.ts",
+        "size": 368
+      },
+      {
+        "path": "dist/addons/positions/phrases.js",
+        "size": 2957
+      },
+      {
+        "path": "dist/addons/positions/store.d.ts",
+        "size": 2091
+      },
+      {
+        "path": "dist/addons/positions/store.js",
+        "size": 12509
+      },
+      {
+        "path": "dist/addons/positions/verifier.d.ts",
+        "size": 447
+      },
+      {
+        "path": "dist/addons/positions/verifier.js",
+        "size": 6386
+      },
+      {
+        "path": "dist/addons/snippets/index.d.ts",
+        "size": 291
+      },
+      {
+        "path": "dist/addons/snippets/index.js",
+        "size": 133
+      },
+      {
+        "path": "dist/addons/snippets/snippets.d.ts",
+        "size": 299
+      },
+      {
+        "path": "dist/addons/snippets/snippets.js",
+        "size": 16242
+      },
+      {
+        "path": "dist/addons/snippets/types.d.ts",
+        "size": 2076
+      },
+      {
+        "path": "dist/addons/snippets/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/ui/index.d.ts",
+        "size": 119
+      },
+      {
+        "path": "dist/addons/ui/index.js",
+        "size": 43
+      },
+      {
+        "path": "dist/addons/ui/options.d.ts",
+        "size": 756
+      },
+      {
+        "path": "dist/addons/ui/options.js",
+        "size": 5638
+      },
+      {
+        "path": "dist/addons/ui/render.d.ts",
+        "size": 1301
+      },
+      {
+        "path": "dist/addons/ui/render.js",
+        "size": 8570
+      },
+      {
+        "path": "dist/addons/ui/styles.css",
+        "size": 3582
+      },
+      {
+        "path": "dist/addons/ui/types.d.ts",
+        "size": 1230
+      },
+      {
+        "path": "dist/addons/ui/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/ui/ui.d.ts",
+        "size": 199
+      },
+      {
+        "path": "dist/addons/ui/ui.js",
+        "size": 16400
+      },
+      {
+        "path": "dist/core/analyzer/basic.d.ts",
+        "size": 716
+      },
+      {
+        "path": "dist/core/analyzer/basic.js",
+        "size": 1617
+      },
+      {
+        "path": "dist/core/capabilities/capture.d.ts",
+        "size": 460
+      },
+      {
+        "path": "dist/core/capabilities/capture.js",
+        "size": 724
+      },
+      {
+        "path": "dist/core/capabilities/participants.d.ts",
+        "size": 418
+      },
+      {
+        "path": "dist/core/capabilities/participants.js",
+        "size": 1911
+      },
+      {
+        "path": "dist/core/capabilities/refinement.d.ts",
+        "size": 1304
+      },
+      {
+        "path": "dist/core/capabilities/refinement.js",
+        "size": 6940
+      },
+      {
+        "path": "dist/core/capabilities/registration.d.ts",
+        "size": 264
+      },
+      {
+        "path": "dist/core/capabilities/registration.js",
+        "size": 11396
+      },
+      {
+        "path": "dist/core/capabilities/types.d.ts",
+        "size": 6437
+      },
+      {
+        "path": "dist/core/capabilities/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/contracts/data.d.ts",
+        "size": 1274
+      },
+      {
+        "path": "dist/core/contracts/data.js",
+        "size": 3247
+      },
+      {
+        "path": "dist/core/contracts/options.d.ts",
+        "size": 534
+      },
+      {
+        "path": "dist/core/contracts/options.js",
+        "size": 2893
+      },
+      {
+        "path": "dist/core/contracts/query.d.ts",
+        "size": 1409
+      },
+      {
+        "path": "dist/core/contracts/query.js",
+        "size": 11910
+      },
+      {
+        "path": "dist/core/contracts/record.d.ts",
+        "size": 1665
+      },
+      {
+        "path": "dist/core/contracts/record.js",
+        "size": 5949
+      },
+      {
+        "path": "dist/core/contracts/schema.d.ts",
+        "size": 346
+      },
+      {
+        "path": "dist/core/contracts/schema.js",
+        "size": 4680
+      },
+      {
+        "path": "dist/core/contracts/types.d.ts",
+        "size": 4793
+      },
+      {
+        "path": "dist/core/contracts/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/errors/error.d.ts",
+        "size": 1008
+      },
+      {
+        "path": "dist/core/errors/error.js",
+        "size": 1300
+      },
+      {
+        "path": "dist/core/execution/engine.d.ts",
+        "size": 1998
+      },
+      {
+        "path": "dist/core/execution/engine.js",
+        "size": 11646
+      },
+      {
+        "path": "dist/core/execution/host.d.ts",
+        "size": 332
+      },
+      {
+        "path": "dist/core/execution/host.js",
+        "size": 703
+      },
+      {
+        "path": "dist/core/index/construction.d.ts",
+        "size": 850
+      },
+      {
+        "path": "dist/core/index/construction.js",
+        "size": 8470
+      },
+      {
+        "path": "dist/core/index/directory.d.ts",
+        "size": 948
+      },
+      {
+        "path": "dist/core/index/directory.js",
+        "size": 1906
+      },
+      {
+        "path": "dist/core/index/invariants.d.ts",
+        "size": 257
+      },
+      {
+        "path": "dist/core/index/invariants.js",
+        "size": 4747
+      },
+      {
+        "path": "dist/core/index/staging.d.ts",
+        "size": 1080
+      },
+      {
+        "path": "dist/core/index/staging.js",
+        "size": 3537
+      },
+      {
+        "path": "dist/core/index/state.d.ts",
+        "size": 1248
+      },
+      {
+        "path": "dist/core/index/state.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/limits/limits.d.ts",
+        "size": 1787
+      },
+      {
+        "path": "dist/core/limits/limits.js",
+        "size": 3039
+      },
+      {
+        "path": "dist/core/limits/work.d.ts",
+        "size": 521
+      },
+      {
+        "path": "dist/core/limits/work.js",
+        "size": 1054
+      },
+      {
+        "path": "dist/core/mutations/capture.d.ts",
+        "size": 505
+      },
+      {
+        "path": "dist/core/mutations/capture.js",
+        "size": 1323
+      },
+      {
+        "path": "dist/core/mutations/delta.d.ts",
+        "size": 1350
+      },
+      {
+        "path": "dist/core/mutations/delta.js",
+        "size": 7817
+      },
+      {
+        "path": "dist/core/mutations/document.d.ts",
+        "size": 618
+      },
+      {
+        "path": "dist/core/mutations/document.js",
+        "size": 1666
+      },
+      {
+        "path": "dist/core/mutations/owner.d.ts",
+        "size": 1644
+      },
+      {
+        "path": "dist/core/mutations/owner.js",
+        "size": 8098
+      },
+      {
+        "path": "dist/core/query/compile.d.ts",
+        "size": 1598
+      },
+      {
+        "path": "dist/core/query/compile.js",
+        "size": 4165
+      },
+      {
+        "path": "dist/core/query/evaluate.d.ts",
+        "size": 813
+      },
+      {
+        "path": "dist/core/query/evaluate.js",
+        "size": 4365
+      },
+      {
+        "path": "dist/core/query/search.d.ts",
+        "size": 1414
+      },
+      {
+        "path": "dist/core/query/search.js",
+        "size": 6977
+      },
+      {
+        "path": "dist/core/query/work.d.ts",
+        "size": 468
+      },
+      {
+        "path": "dist/core/query/work.js",
+        "size": 866
+      },
+      {
+        "path": "dist/core/ranking/bm25.d.ts",
+        "size": 600
+      },
+      {
+        "path": "dist/core/ranking/bm25.js",
+        "size": 3368
+      },
+      {
+        "path": "dist/core/ranking/page.d.ts",
+        "size": 600
+      },
+      {
+        "path": "dist/core/ranking/page.js",
+        "size": 2514
+      },
+      {
+        "path": "dist/core/retrieval/exact.d.ts",
+        "size": 318
+      },
+      {
+        "path": "dist/core/retrieval/exact.js",
+        "size": 2300
+      },
+      {
+        "path": "dist/core/retrieval/expand.d.ts",
+        "size": 858
+      },
+      {
+        "path": "dist/core/retrieval/expand.js",
+        "size": 3816
+      },
+      {
+        "path": "dist/core/revision/participant.d.ts",
+        "size": 950
+      },
+      {
+        "path": "dist/core/revision/participant.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/trace/facts.d.ts",
+        "size": 2441
+      },
+      {
+        "path": "dist/core/trace/facts.js",
+        "size": 2084
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 1184
+      },
+      {
+        "path": "dist/index.js",
+        "size": 209
+      },
+      {
+        "path": "package.json",
+        "size": 4834
+      }
+    ]
+  },
+  "bundle": {
+    "sha256": "05e0c00e51ac39af9baa8df4c879082d6eb50a4225fac1d4dfd283fa93068b2c",
+    "inputs": {
+      "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js": {
+        "bytes": 1300,
+        "imports": [],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js": {
+        "bytes": 3247,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js": {
+        "bytes": 3039,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js": {
+        "bytes": 1617,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../limits/limits.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/capabilities/registration.js": {
+        "bytes": 11396,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../limits/limits.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js": {
+        "bytes": 4680,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/capabilities/registration.js",
+            "kind": "import-statement",
+            "original": "../capabilities/registration.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/capabilities/participants.js": {
+        "bytes": 1911,
+        "imports": [],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js": {
+        "bytes": 1906,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js": {
+        "bytes": 3537,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "./directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js": {
+        "bytes": 1054,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js": {
+        "bytes": 5949,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../analyzer/basic.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/capabilities/capture.js": {
+        "bytes": 724,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js": {
+        "bytes": 2893,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/capabilities/capture.js",
+            "kind": "import-statement",
+            "original": "../capabilities/capture.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/capture.js": {
+        "bytes": 1323,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+            "kind": "import-statement",
+            "original": "../contracts/record.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js",
+            "kind": "import-statement",
+            "original": "../contracts/options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/delta.js": {
+        "bytes": 7817,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+            "kind": "import-statement",
+            "original": "../index/staging.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/document.js": {
+        "bytes": 1666,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+            "kind": "import-statement",
+            "original": "../contracts/record.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/mutations/owner.js": {
+        "bytes": 8098,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+            "kind": "import-statement",
+            "original": "../limits/work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/capture.js",
+            "kind": "import-statement",
+            "original": "./capture.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/delta.js",
+            "kind": "import-statement",
+            "original": "./delta.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/document.js",
+            "kind": "import-statement",
+            "original": "./document.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js": {
+        "bytes": 11910,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "./data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/record.js",
+            "kind": "import-statement",
+            "original": "./record.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/capabilities/capture.js",
+            "kind": "import-statement",
+            "original": "../capabilities/capture.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/work.js": {
+        "bytes": 866,
+        "imports": [],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/ranking/bm25.js": {
+        "bytes": 3368,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "../query/work.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/ranking/page.js": {
+        "bytes": 2514,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "../query/work.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/retrieval/expand.js": {
+        "bytes": 3816,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+            "kind": "import-statement",
+            "original": "../limits/work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "../query/work.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/trace/facts.js": {
+        "bytes": 2084,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/compile.js": {
+        "bytes": 4165,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js",
+            "kind": "import-statement",
+            "original": "../contracts/query.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "./work.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/evaluate.js": {
+        "bytes": 4365,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "./work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js": {
+        "bytes": 6940,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+            "kind": "import-statement",
+            "original": "../limits/work.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/query/search.js": {
+        "bytes": 6977,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/options.js",
+            "kind": "import-statement",
+            "original": "../contracts/options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/query.js",
+            "kind": "import-statement",
+            "original": "../contracts/query.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/work.js",
+            "kind": "import-statement",
+            "original": "../limits/work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/ranking/bm25.js",
+            "kind": "import-statement",
+            "original": "../ranking/bm25.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/ranking/page.js",
+            "kind": "import-statement",
+            "original": "../ranking/page.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/retrieval/expand.js",
+            "kind": "import-statement",
+            "original": "../retrieval/expand.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/trace/facts.js",
+            "kind": "import-statement",
+            "original": "../trace/facts.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/compile.js",
+            "kind": "import-statement",
+            "original": "./compile.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/evaluate.js",
+            "kind": "import-statement",
+            "original": "./evaluate.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "./work.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js",
+            "kind": "import-statement",
+            "original": "../capabilities/refinement.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/execution/host.js": {
+        "bytes": 703,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js": {
+        "bytes": 11646,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js",
+            "kind": "import-statement",
+            "original": "../contracts/schema.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/capabilities/participants.js",
+            "kind": "import-statement",
+            "original": "../capabilities/participants.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+            "kind": "import-statement",
+            "original": "../index/staging.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/mutations/owner.js",
+            "kind": "import-statement",
+            "original": "../mutations/owner.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/search.js",
+            "kind": "import-statement",
+            "original": "../query/search.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/execution/host.js",
+            "kind": "import-statement",
+            "original": "./host.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/index.js": {
+        "bytes": 209,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js",
+            "kind": "import-statement",
+            "original": "./core/execution/engine.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "./core/errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/phrases/options.js": {
+        "bytes": 2706,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/phrases/store.js": {
+        "bytes": 7923,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+            "kind": "import-statement",
+            "original": "../../core/index/staging.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/phrases/verifier.js": {
+        "bytes": 1790,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../../core/analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/query/work.js",
+            "kind": "import-statement",
+            "original": "../../core/query/work.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/phrases/source.js": {
+        "bytes": 127,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/store.js",
+            "kind": "import-statement",
+            "original": "./store.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/phrases/index.js": {
+        "bytes": 5059,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../../core/analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../../core/index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/store.js",
+            "kind": "import-statement",
+            "original": "./store.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/verifier.js",
+            "kind": "import-statement",
+            "original": "./verifier.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/source.js",
+            "kind": "import-statement",
+            "original": "./source.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/metadata/payload.js": {
+        "bytes": 2964,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/facets/options.js": {
+        "bytes": 2083,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/facets/facets.js": {
+        "bytes": 10135,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/metadata/payload.js",
+            "kind": "import-statement",
+            "original": "../metadata/payload.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/facets/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/facets/index.js": {
+        "bytes": 44,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/facets/facets.js",
+            "kind": "import-statement",
+            "original": "./facets.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/inspector/options.js": {
+        "bytes": 4125,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/metadata/payload.js",
+            "kind": "import-statement",
+            "original": "../metadata/payload.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/inspector/output.js": {
+        "bytes": 2201,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/inspector/inspector.js": {
+        "bytes": 7479,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../../core/index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/metadata/payload.js",
+            "kind": "import-statement",
+            "original": "../metadata/payload.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/store.js",
+            "kind": "import-statement",
+            "original": "../phrases/store.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/inspector/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/inspector/output.js",
+            "kind": "import-statement",
+            "original": "./output.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/inspector/diagnostics.js": {
+        "bytes": 12871,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/inspector/output.js",
+            "kind": "import-statement",
+            "original": "./output.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/inspector/index.js": {
+        "bytes": 104,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/inspector/inspector.js",
+            "kind": "import-statement",
+            "original": "./inspector.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/inspector/diagnostics.js",
+            "kind": "import-statement",
+            "original": "./diagnostics.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/positions/options.js": {
+        "bytes": 3285,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/positions/store.js": {
+        "bytes": 12509,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../../core/analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/staging.js",
+            "kind": "import-statement",
+            "original": "../../core/index/staging.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/positions/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/evidence/occurrences.js": {
+        "bytes": 3794,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/evidence/options.js": {
+        "bytes": 4808,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/metadata/payload.js",
+            "kind": "import-statement",
+            "original": "../metadata/payload.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/evidence/providers.js": {
+        "bytes": 9384,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../../core/analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../../core/index/directory.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/evidence/builder.js": {
+        "bytes": 9996,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/analyzer/basic.js",
+            "kind": "import-statement",
+            "original": "../../core/analyzer/basic.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/inspector/output.js",
+            "kind": "import-statement",
+            "original": "../inspector/output.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/metadata/payload.js",
+            "kind": "import-statement",
+            "original": "../metadata/payload.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/store.js",
+            "kind": "import-statement",
+            "original": "../phrases/store.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/positions/store.js",
+            "kind": "import-statement",
+            "original": "../positions/store.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/evidence/occurrences.js",
+            "kind": "import-statement",
+            "original": "./occurrences.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/evidence/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/evidence/providers.js",
+            "kind": "import-statement",
+            "original": "./providers.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/snippets/snippets.js": {
+        "bytes": 16242,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../../core/contracts/data.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/index/directory.js",
+            "kind": "import-statement",
+            "original": "../../core/index/directory.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../core/limits/limits.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/evidence/builder.js",
+            "kind": "import-statement",
+            "original": "../evidence/builder.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/store.js",
+            "kind": "import-statement",
+            "original": "../phrases/store.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/snippets/index.js": {
+        "bytes": 133,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/snippets/snippets.js",
+            "kind": "import-statement",
+            "original": "./snippets.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js": {
+        "bytes": 5638,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/render.js": {
+        "bytes": 8570,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/ui.js": {
+        "bytes": 16400,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../core/errors/error.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js",
+            "kind": "import-statement",
+            "original": "./options.js"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/ui/render.js",
+            "kind": "import-statement",
+            "original": "./render.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/index.js": {
+        "bytes": 43,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/ui/ui.js",
+            "kind": "import-statement",
+            "original": "./ui.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "fixture-entry.mjs": {
+        "bytes": 7758,
+        "imports": [
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/index.js",
+            "kind": "import-statement",
+            "original": "@vmitsaras/raveldex"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/phrases/index.js",
+            "kind": "import-statement",
+            "original": "@vmitsaras/raveldex/addons/phrases"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/facets/index.js",
+            "kind": "import-statement",
+            "original": "@vmitsaras/raveldex/addons/facets"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/inspector/index.js",
+            "kind": "import-statement",
+            "original": "@vmitsaras/raveldex/addons/inspector"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/snippets/index.js",
+            "kind": "import-statement",
+            "original": "@vmitsaras/raveldex/addons/snippets"
+          },
+          {
+            "path": "node_modules/@vmitsaras/raveldex/dist/addons/ui/index.js",
+            "kind": "import-statement",
+            "original": "@vmitsaras/raveldex/addons/ui"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "cssSha256": "6152525fb59c13c357f73df120e757d4ebfd9a68bfedbb26e249e01410e432f6",
+    "publicTypecheck": "Pass"
+  },
+  "finishedAt": "2026-10-07T21:27:03.975Z",
+  "consumerDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-GlGb9k"
+}

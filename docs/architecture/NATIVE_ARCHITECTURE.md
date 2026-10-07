@@ -1,6 +1,6 @@
 # Native architecture
 
-Status: Approved design; RX-1001–1006 native core, ordinary scheduling and packed real-document consumer verified locally; see [RX-1005 execution](../evidence/RX-1005.md) and [RX-1006 package evidence](../evidence/RX-1006.md). RX-2001–2005 add explicit source/position/phrase/filter/facet/Inspector/original-range/snippet capabilities; UI, host modules and release qualification remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
+Status: Approved design; RX-1001–1006 native core, ordinary scheduling and packed real-document consumer verified locally; see [RX-1005 execution](../evidence/RX-1005.md) and [RX-1006 package evidence](../evidence/RX-1006.md). RX-2001–2005 add explicit source/position/phrase/filter/facet/Inspector/original-range/snippet capabilities; RX-2006 adds the optional native DOM interface and real documentation browser pilot; host modules and release qualification remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
 
 Decision date: 2026-10-06. Scope: the native Raveldex line in this repository.
 
