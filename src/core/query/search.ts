@@ -16,6 +16,7 @@ import type { OwnedTraceRequest, ScoreTrace } from '../trace/facts.js';
 import { compileQuery } from './compile.js';
 import { evaluate } from './evaluate.js';
 import { sortedStrings } from './work.js';
+import { prepareRefinements } from '../capabilities/refinement.js';
 
 export interface SearchEvaluation extends SearchResult { readonly trace?: ScoreTrace }
 
@@ -32,7 +33,7 @@ export function captureSearch(configuration: OwnedConfiguration, input: unknown,
   const admission = new Admission(limits.maxAdmissionEntries);
   const page = captureOptions(options, limits, true, admission);
   if (page.signal?.aborted) invalid('CANCELLED', 'options.signal');
-  const query = captureQuery(input, schema, limits, admission);
+  const query = captureQuery(input, schema, limits, admission, configuration.capabilities);
   const request = trace === undefined ? undefined : captureTrace(trace, limits, admission);
   return Object.freeze({ query, options: page, ...(request ? { trace: request } : {}) });
 }
@@ -64,6 +65,7 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   const compiled = yield* compileQuery(query, root.configuration, charge);
   boundary('expansion');
   const expansions = yield* expandGroups(root, compiled.groups, charge, boundary);
+  const refinements = root.configuration.capabilities ? yield* prepareRefinements(compiled.node, root, charge) : undefined;
   const page = new PageSelection(options.limit ? options.offset + options.limit : 0, charge);
   let total = 0;
   for (const [id, doc] of directoryEntries(root.documents)) {
@@ -71,7 +73,7 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
     yield charge(id.length + 1);
     if (doc.id !== id) invalid('INTERNAL_ERROR', 'index.documents');
     const facts = selected.has(id) ? collector : undefined;
-    const qualified = yield* evaluate(compiled.node, doc, expansions, charge, facts);
+    const qualified = yield* evaluate(compiled.node, doc, expansions, charge, facts, 'query', refinements);
     boundary('scoring');
     const score = qualified.matched ? yield* scoreDocument(root, doc, qualified.groups, expansions, charge, facts) : 0;
     if (qualified.matched) {

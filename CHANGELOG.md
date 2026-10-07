@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- RX-2001: add explicit validated direct registrations, transactional selected-field original source and strict phrase leaves through optional public subpaths. Verify independent adjacency/Boolean/BM25 parity, atomic source lifecycle, exhaustive cancellation, typed capability failures and packed/minified boundaries. Record conceptual companion provenance and full graph/work costs.
+
 - RX-1006: export the real core factory, sanitized errors and readonly contracts; hide internal execution seams behind a frozen ordinary-method facade. Add a packed local real-document CLI, explicit section allowlist/source hashes, predeclared judgments, public type/runtime/cancellation checks and reproducible minified/gzip/import/startup evidence. The package stays private and unpublished.
 
 - RX-1005: implement the internal ordinary engine/factory, bounded FIFO promise admission, execution-start revisions, monotonic queue-time deadlines, cooperative stop priority, host task yielding and idempotent disposal/resource cleanup. Verify schedule/source-oracle parity, every selected cancellation position, committed outcomes and independent lifecycle review.

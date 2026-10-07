@@ -17,5 +17,6 @@ export interface TransactionContext {
  */
 export interface TransactionParticipant {
   readonly id: string;
+  readonly maxWorkUnits?: number;
   prepare(previous: unknown, context: TransactionContext): Generator<WorkStep, unknown>;
 }

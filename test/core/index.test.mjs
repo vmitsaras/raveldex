@@ -52,7 +52,7 @@ test('field-local frequency, positive-length populations and reverse records are
     if (value && typeof value === 'object') { assert.ok(Object.isFrozen(value)); for (const child of Object.values(value)) frozen(child); }
   }
   frozen(root);
-  fail(() => new IndexConstruction({ schema, addons: [{}] }), 'MISSING_CAPABILITY');
+  fail(() => new IndexConstruction({ schema, addons: [{}] }), 'INCOMPATIBLE_CAPABILITY');
 });
 
 test('empty index has all declared empty field indexes and empty complete exact membership', () => {

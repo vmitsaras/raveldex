@@ -26,6 +26,7 @@ export class IndexConstruction {
   get workUnits(): number { return this.totalWork; }
   constructor(configuration: unknown) {
     this.configuration = captureConfiguration(configuration);
+    if (this.configuration.capabilities) invalid('INCOMPATIBLE_CAPABILITY', 'index.construction.addons');
     for (const name of Object.keys(this.configuration.schema.text)) {
       this.fields[name] = { documents: 0, length: 0, terms: new DirectoryBuilder(), keys: new Set() };
     }

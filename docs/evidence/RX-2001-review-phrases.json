@@ -1,0 +1,531 @@
+{
+  "searches": [
+    {
+      "name": "phrase",
+      "query": {
+        "kind": "extension",
+        "capability": "phrases",
+        "version": 1,
+        "payload": {
+          "text": "red blue"
+        }
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 4,
+        "hits": [
+          {
+            "id": "v",
+            "score": 0.7704124888714321
+          },
+          {
+            "id": "u",
+            "score": 0.6925038871801308
+          },
+          {
+            "id": "p",
+            "score": 0.6405660956416208
+          },
+          {
+            "id": "t",
+            "score": 0.6234972059943151
+          }
+        ]
+      },
+      "expectedScores": {
+        "p": 0.6405660956416208,
+        "t": 0.6234972059943151,
+        "u": 0.6925038871801308,
+        "v": 0.7704124888714321
+      }
+    },
+    {
+      "name": "repeats",
+      "query": {
+        "kind": "extension",
+        "capability": "phrases",
+        "version": 1,
+        "payload": {
+          "text": "red red"
+        }
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "t",
+            "score": 0.27272035970873915
+          }
+        ]
+      },
+      "expectedScores": {
+        "t": 0.27272035970873915
+      }
+    },
+    {
+      "name": "OR ordinary branch",
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "extension",
+            "capability": "phrases",
+            "version": 1,
+            "payload": {
+              "text": "red blue"
+            }
+          },
+          {
+            "kind": "text",
+            "text": "keep"
+          }
+        ]
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 5,
+        "hits": [
+          {
+            "id": "q",
+            "score": 1.363980797725066
+          },
+          {
+            "id": "v",
+            "score": 0.7704124888714321
+          },
+          {
+            "id": "u",
+            "score": 0.6925038871801308
+          },
+          {
+            "id": "p",
+            "score": 0.6405660956416208
+          },
+          {
+            "id": "t",
+            "score": 0.6234972059943151
+          }
+        ]
+      },
+      "expectedScores": {
+        "p": 0.6405660956416208,
+        "q": 1.363980797725066,
+        "t": 0.6234972059943151,
+        "u": 0.6925038871801308,
+        "v": 0.7704124888714321
+      }
+    },
+    {
+      "name": "OR equality branch",
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "extension",
+            "capability": "phrases",
+            "version": 1,
+            "payload": {
+              "text": "red blue"
+            }
+          },
+          {
+            "kind": "eq",
+            "field": "flag",
+            "value": true
+          }
+        ]
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 6,
+        "hits": [
+          {
+            "id": "v",
+            "score": 0.7704124888714321
+          },
+          {
+            "id": "u",
+            "score": 0.6925038871801308
+          },
+          {
+            "id": "p",
+            "score": 0.6405660956416208
+          },
+          {
+            "id": "t",
+            "score": 0.6234972059943151
+          },
+          {
+            "id": "e",
+            "score": 0
+          },
+          {
+            "id": "q",
+            "score": 0
+          }
+        ]
+      },
+      "expectedScores": {
+        "p": 0.6405660956416208,
+        "q": 0,
+        "t": 0.6234972059943151,
+        "u": 0.6925038871801308,
+        "v": 0.7704124888714321,
+        "e": 0
+      }
+    },
+    {
+      "name": "NOT complement",
+      "query": {
+        "kind": "not",
+        "child": {
+          "kind": "extension",
+          "capability": "phrases",
+          "version": 1,
+          "payload": {
+            "text": "red blue"
+          }
+        }
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 5,
+        "hits": [
+          {
+            "id": "e",
+            "score": 0
+          },
+          {
+            "id": "q",
+            "score": 0
+          },
+          {
+            "id": "r",
+            "score": 0
+          },
+          {
+            "id": "s",
+            "score": 0
+          },
+          {
+            "id": "w",
+            "score": 0
+          }
+        ]
+      },
+      "expectedScores": {
+        "q": 0,
+        "r": 0,
+        "s": 0,
+        "w": 0,
+        "e": 0
+      }
+    },
+    {
+      "name": "failed AND in OR",
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "and",
+            "children": [
+              {
+                "kind": "extension",
+                "capability": "phrases",
+                "version": 1,
+                "payload": {
+                  "text": "red blue"
+                }
+              },
+              {
+                "kind": "text",
+                "text": "absent"
+              }
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "keep"
+          }
+        ]
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "q",
+            "score": 1.363980797725066
+          }
+        ]
+      },
+      "expectedScores": {
+        "q": 1.363980797725066
+      }
+    },
+    {
+      "name": "normalization",
+      "query": {
+        "kind": "extension",
+        "capability": "phrases",
+        "version": 1,
+        "payload": {
+          "text": "file ½"
+        }
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "w",
+            "score": 3.682748153857678
+          }
+        ]
+      },
+      "expectedScores": {
+        "w": 3.682748153857678
+      }
+    },
+    {
+      "name": "empty NOT",
+      "query": {
+        "kind": "not",
+        "child": {
+          "kind": "extension",
+          "capability": "phrases",
+          "version": 1,
+          "payload": {
+            "text": "😀"
+          }
+        }
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 9,
+        "hits": [
+          {
+            "id": "e",
+            "score": 0
+          },
+          {
+            "id": "p",
+            "score": 0
+          },
+          {
+            "id": "q",
+            "score": 0
+          },
+          {
+            "id": "r",
+            "score": 0
+          },
+          {
+            "id": "s",
+            "score": 0
+          },
+          {
+            "id": "t",
+            "score": 0
+          },
+          {
+            "id": "u",
+            "score": 0
+          },
+          {
+            "id": "v",
+            "score": 0
+          },
+          {
+            "id": "w",
+            "score": 0
+          }
+        ]
+      },
+      "expectedScores": {
+        "p": 0,
+        "q": 0,
+        "r": 0,
+        "s": 0,
+        "t": 0,
+        "u": 0,
+        "v": 0,
+        "w": 0,
+        "e": 0
+      }
+    },
+    {
+      "name": "pagination",
+      "options": {
+        "limit": 0
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 4,
+        "hits": []
+      }
+    },
+    {
+      "name": "pagination",
+      "options": {
+        "limit": 1
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 4,
+        "hits": [
+          {
+            "id": "v",
+            "score": 0.7704124888714321
+          }
+        ]
+      }
+    },
+    {
+      "name": "pagination",
+      "options": {
+        "limit": 1,
+        "offset": 1
+      },
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 4,
+        "hits": [
+          {
+            "id": "u",
+            "score": 0.6925038871801308
+          }
+        ]
+      }
+    },
+    {
+      "name": "replace source boundary",
+      "actual": {
+        "revision": 3,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 3,
+        "hits": [
+          {
+            "id": "v",
+            "score": 0.7704124888714321
+          },
+          {
+            "id": "u",
+            "score": 0.6925038871801308
+          },
+          {
+            "id": "t",
+            "score": 0.6234972059943151
+          }
+        ]
+      }
+    },
+    {
+      "name": "clear",
+      "actual": {
+        "revision": 5,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 0,
+        "hits": []
+      }
+    },
+    {
+      "name": "repopulate",
+      "actual": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "fresh",
+            "score": 0.5753641449035617
+          }
+        ]
+      }
+    },
+    {
+      "name": "retention rollback",
+      "actual": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "kept",
+            "score": 0.5753641449035617
+          }
+        ]
+      }
+    }
+  ],
+  "mutations": [
+    {
+      "revision": 2,
+      "changed": true,
+      "added": 0,
+      "replaced": 1,
+      "removed": 0
+    },
+    {
+      "revision": 3,
+      "changed": true,
+      "added": 0,
+      "replaced": 1,
+      "removed": 0
+    },
+    {
+      "revision": 4,
+      "changed": true,
+      "added": 0,
+      "replaced": 0,
+      "removed": 2
+    },
+    {
+      "revision": 5,
+      "changed": true,
+      "added": 0,
+      "replaced": 0,
+      "removed": 7
+    },
+    {
+      "revision": 6,
+      "changed": true,
+      "added": 1,
+      "replaced": 0,
+      "removed": 0
+    }
+  ],
+  "failures": [
+    {
+      "name": "retention cap",
+      "code": "LIMIT_EXCEEDED"
+    }
+  ]
+}

@@ -51,7 +51,7 @@ test('tarball contains compiled core/declarations and installs public API withou
     const detached = engine.add;
     assert.equal((await detached({id:'opaque',text:{body:'red'}})).revision, 1);
     const dispose = engine.dispose; assert.equal(dispose(), dispose()); await dispose();
-    for (const name of ['@vmitsaras/raveldex/dist/core/execution/engine.js', '@vmitsaras/raveldex/src/index.ts', '@vmitsaras/raveldex/addons/phrases']) {
+    for (const name of ['@vmitsaras/raveldex/dist/core/execution/engine.js', '@vmitsaras/raveldex/src/index.ts', '@vmitsaras/raveldex/addons/phrases/verifier']) {
       await assert.rejects(import(name), (error) => error.code === 'ERR_PACKAGE_PATH_NOT_EXPORTED');
     }
   `;

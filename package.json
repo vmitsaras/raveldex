@@ -2,7 +2,7 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native modular TypeScript local search — core-only ESM package with BM25, atomic mutations and cooperative execution.",
+  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution and optional source phrases.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs",
+    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -31,7 +31,8 @@
     "test:core": "npm run build && node --test test/core/*.test.mjs",
     "prepack": "npm run build",
     "test:consumer": "npm run build && node --test test/consumer/*.test.mjs",
-    "pilot:core": "npm run build && node scripts/core-pilot.mjs"
+    "pilot:core": "npm run build && node scripts/core-pilot.mjs",
+    "test:phrases": "npm run build && node --test test/addons/phrases/*.test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2",
@@ -42,12 +43,21 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./addons/phrases": {
+      "types": "./dist/addons/phrases/index.d.ts",
+      "import": "./dist/addons/phrases/index.js"
+    },
+    "./addons/phrases/source": {
+      "types": "./dist/addons/phrases/source.d.ts",
+      "import": "./dist/addons/phrases/source.js"
     }
   },
   "files": [
     "dist/index.js",
     "dist/index.d.ts",
-    "dist/core/"
+    "dist/core/",
+    "dist/addons/phrases/"
   ],
   "sideEffects": false
 }

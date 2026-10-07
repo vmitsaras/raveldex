@@ -4,6 +4,16 @@ import {
   type MutationResult, type RecordInput, type CancellationSignal,
   type ErrorCode, type ErrorDetails, type Limits, type LimitOverrides,
 } from '@vmitsaras/raveldex';
+import { createSourceProvider, createSourcePhrases, type SourceProviderOptions, type SourcePhraseOptions } from '@vmitsaras/raveldex/addons/phrases';
+import { createSourceProvider as sourceOnly } from '@vmitsaras/raveldex/addons/phrases/source';
+// @ts-expect-error source roots and consistency helpers remain private
+import { requireSourceRoot } from '@vmitsaras/raveldex/addons/phrases/source';
+const sourceOptions: SourceProviderOptions = { fields: ['title', 'body'] };
+const phraseOptions: SourcePhraseOptions = { fields: ['title', 'body'], maxWorkUnits: 100_000 };
+const phraseEngine = createRaveldex({ schema: { text: { title: {}, body: {} } }, addons: [sourceOnly(sourceOptions), createSourcePhrases(phraseOptions)] });
+void createSourceProvider(sourceOptions); void phraseEngine.search({ kind: 'extension', capability: 'phrases', version: 1, payload: { text: 'atomic writes', fields: ['body'] } });
+// @ts-expect-error factory fields are readonly
+sourceOptions.fields.push('another');
 // @ts-expect-error private scheduling/roots are not public exports
 import { ExecutionOwner } from '@vmitsaras/raveldex';
 // @ts-expect-error private subpath resolution is forbidden by exports

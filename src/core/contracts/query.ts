@@ -5,11 +5,12 @@ import type { AnalysisStep } from '../analyzer/basic.js';
 import { captureScalar } from './record.js';
 import type { Limits } from '../limits/limits.js';
 import type { OwnedSchema, Query, Variant } from './types.js';
+import type { CapabilitySet } from '../capabilities/types.js';
 
-export type OwnedQuery = Exclude<Query, { readonly kind: 'extension' }>;
+export type OwnedQuery = Exclude<Query, { readonly kind: 'extension' }> | { readonly kind: 'extension'; readonly capability: string; readonly version: 1; readonly payload: { readonly text: string; readonly fields?: readonly string[] } };
 
 /** Own raw query data now; content analysis/canonical evaluation happen later. */
-export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits, admission = new Admission(limits.maxAdmissionEntries)): OwnedQuery {
+export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits, admission = new Admission(limits.maxAdmissionEntries), capabilities?: CapabilitySet): OwnedQuery {
   let nodes = 0;
   let lexicalUnits = 0;
   let stringUnits = 0;
@@ -94,10 +95,21 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
         keysOnly(data, ['kind'], 'INVALID_QUERY', path);
         result = { kind };
         break;
-      case 'extension':
+      case 'extension': {
         keysOnly(data, ['kind', 'capability', 'version', 'payload'], 'INVALID_QUERY', path);
         if (typeof data.capability !== 'string' || !data.capability.length || !Number.isSafeInteger(data.version) || (data.version as number) < 1 || !has(data, 'payload')) invalid('INVALID_QUERY', path);
-        return invalid('MISSING_CAPABILITY', path);
+        const capability = string(data.capability, false, `${path}.capability`);
+        const registration = capabilities?.providers[capability];
+        if (!registration?.refinement) invalid('MISSING_CAPABILITY', path);
+        if (data.version !== 1) invalid('INCOMPATIBLE_CAPABILITY', `${path}.version`);
+        const payload = ownObject(data.payload, 'INVALID_QUERY', `${path}.payload`, admission);
+        keysOnly(payload, ['text', 'fields'], 'INVALID_QUERY', `${path}.payload`);
+        const text = string(payload.text, true, `${path}.payload.text`);
+        const selected = has(payload, 'fields') ? fields(payload.fields, `${path}.payload.fields`) : undefined;
+        bound(text.length + (selected?.reduce((sum, field) => sum + field.length, 0) ?? 0), registration.manifest.limits.maxPayloadCodeUnits, `${path}.payload`);
+        result = { kind, capability, version: 1, payload: Object.freeze({ text, ...(selected ? { fields: selected } : {}) }) };
+        break;
+      }
       default: return invalid('INVALID_QUERY', path);
     }
     ancestors.delete(value as object);
@@ -115,7 +127,7 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
 export interface QueryStep extends AnalysisStep { readonly leaf?: OwnedQuery; readonly variantIndex?: number }
 
 /** Validate lexical contents using basic-v1; no retrieval or Boolean evaluator. */
-export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Limits): Generator<QueryStep> {
+export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Limits, capabilities?: CapabilitySet): Generator<QueryStep> {
   let tokens = 0;
   const groups = new Set<string>();
   const queryLimits = { ...limits, maxTextCodeUnitsPerValue: limits.maxQueryLexicalCodeUnits };
@@ -139,6 +151,20 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
           yield { ...step, leaf };
         }
         break;
+      case 'extension': {
+        const registration = capabilities?.providers[leaf.capability];
+        if (!registration?.refinement) invalid('MISSING_CAPABILITY', 'query.capability');
+        let count = 0;
+        for (const step of analyzeValue(leaf.payload.text, 0, queryLimits, 'INVALID_QUERY')) {
+          if (step.token) {
+            bound(++count, registration.refinement.maxTokens, 'query.phraseTokens');
+            bound(++tokens, limits.maxQueryTokens, 'query.tokens');
+            addGroup(groupKey(leaf.payload.fields, [[step.token.term, 'exact', 1]]));
+          }
+          yield { ...step, leaf };
+        }
+        break;
+      }
       case 'group': {
         const variants: (readonly [string, string, number])[] = [];
         for (let i = 0; i < leaf.variants.length; i++) {

@@ -1,7 +1,8 @@
-import { Admission, has, keysOnly, ownArray, ownObject } from './data.js';
+import { Admission, has, keysOnly, ownObject } from './data.js';
 import { bound, invalid } from '../errors/error.js';
 import { BASIC_ANALYZER } from '../analyzer/basic.js';
 import { DEFAULT_LIMITS, resolveLimits } from '../limits/limits.js';
+import { captureRegistrations } from '../capabilities/registration.js';
 import type { Limits } from '../limits/limits.js';
 import type { MetadataType, OwnedConfiguration, OwnedSchema } from './types.js';
 
@@ -57,11 +58,7 @@ export function captureConfiguration(input: unknown): OwnedConfiguration {
     if (analyzer.id !== BASIC_ANALYZER.id) invalid('MISSING_CAPABILITY', 'config.analyzer');
     if (analyzer.environmentProfile !== BASIC_ANALYZER.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'config.analyzer');
   }
-  if (has(config, 'addons')) {
-    // Registration/transaction machinery arrives in N2; fail explicitly today.
-    const addons = ownArray(config.addons, limits.maxAdmissionEntries, 'INVALID_OPTIONS', 'config.addons', admission);
-    if (addons.length) invalid('MISSING_CAPABILITY', 'config.addons');
-  }
+  const capabilities = has(config, 'addons') ? captureRegistrations(config.addons, { schema, limits, admission }) : undefined;
   bound(admission.count, limits.maxAdmissionEntries, 'config');
-  return Object.freeze({ schema, limits, analyzer: BASIC_ANALYZER });
+  return Object.freeze({ schema, limits, analyzer: BASIC_ANALYZER, ...(capabilities?.ordered.length ? { capabilities } : {}) });
 }
