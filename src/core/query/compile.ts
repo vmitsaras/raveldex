@@ -12,6 +12,7 @@ export type CompiledNode =
   | { readonly kind: 'and' | 'or'; readonly children: readonly CompiledNode[] }
   | { readonly kind: 'not'; readonly child: CompiledNode }
   | { readonly kind: 'extension'; readonly capability: string; readonly fields: readonly string[]; readonly terms: readonly string[]; readonly groups: readonly CanonicalGroup[] }
+  | { readonly kind: 'predicate'; readonly capability: string; readonly payload: unknown }
   | { readonly kind: 'eq'; readonly field: string; readonly value: Scalar }
   | { readonly kind: 'all' | 'none' };
 export interface CompiledQuery { readonly node: CompiledNode; readonly groups: ReadonlyMap<string, CanonicalGroup>; readonly key: string }
@@ -73,6 +74,7 @@ export function* compileQuery(query: OwnedQuery, configuration: OwnedConfigurati
         return Object.freeze({ kind: raw.kind, children: Object.freeze(children) });
       }
       case 'not': return Object.freeze({ kind: 'not', child: yield* walk(raw.child as OwnedQuery) });
+      case 'predicate': return Object.freeze({ kind: 'predicate', capability: raw.capability, payload: raw.payload });
       case 'eq': return Object.freeze({ kind: 'eq', field: raw.field, value: raw.value });
       case 'all': case 'none': return Object.freeze({ kind: raw.kind });
     }

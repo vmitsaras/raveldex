@@ -21,7 +21,7 @@ import { prepareRefinements } from '../capabilities/refinement.js';
 export interface SearchEvaluation extends SearchResult { readonly trace?: ScoreTrace }
 
 export interface OwnedSearch { readonly query: OwnedQuery; readonly options: OwnedSearchOptions; readonly trace?: OwnedTraceRequest }
-export type SearchPhase = 'start' | 'analysis' | 'expansion' | 'dictionary' | 'postings' | 'evaluation' | 'scoring' | 'selection' | 'result';
+export type SearchPhase = 'start' | 'analysis' | 'expansion' | 'dictionary' | 'postings' | 'evaluation' | 'scoring' | 'aggregation' | 'selection' | 'result';
 export interface SearchControl {
   readonly checkpoint?: (phase: SearchPhase) => void;
   readonly checkStop?: (phase: SearchPhase) => void;
@@ -31,7 +31,7 @@ export interface SearchControl {
 export function captureSearch(configuration: OwnedConfiguration, input: unknown, options?: unknown, trace?: unknown): OwnedSearch {
   const { schema, limits } = configuration;
   const admission = new Admission(limits.maxAdmissionEntries);
-  const page = captureOptions(options, limits, true, admission);
+  const page = captureOptions(options, limits, true, admission, configuration.capabilities);
   if (page.signal?.aborted) invalid('CANCELLED', 'options.signal');
   const query = captureQuery(input, schema, limits, admission, configuration.capabilities);
   const request = trace === undefined ? undefined : captureTrace(trace, limits, admission);
@@ -65,7 +65,7 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   const compiled = yield* compileQuery(query, root.configuration, charge);
   boundary('expansion');
   const expansions = yield* expandGroups(root, compiled.groups, charge, boundary);
-  const refinements = root.configuration.capabilities ? yield* prepareRefinements(compiled.node, root, charge) : undefined;
+  const extensions = root.configuration.capabilities ? yield* prepareRefinements(compiled.node, root, charge, options) : undefined;
   const page = new PageSelection(options.limit ? options.offset + options.limit : 0, charge);
   let total = 0;
   for (const [id, doc] of directoryEntries(root.documents)) {
@@ -73,11 +73,15 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
     yield charge(id.length + 1);
     if (doc.id !== id) invalid('INTERNAL_ERROR', 'index.documents');
     const facts = selected.has(id) ? collector : undefined;
-    const qualified = yield* evaluate(compiled.node, doc, expansions, charge, facts, 'query', refinements);
+    const qualified = yield* evaluate(compiled.node, doc, expansions, charge, facts, 'query', extensions?.leaves);
     boundary('scoring');
     const score = qualified.matched ? yield* scoreDocument(root, doc, qualified.groups, expansions, charge, facts) : 0;
     if (qualified.matched) {
       total++;
+      if (extensions?.aggregations.length) {
+        boundary('aggregation');
+        for (const aggregation of extensions.aggregations) yield* aggregation.add(doc.metadata);
+      }
       boundary('selection');
       yield* page.add({ id, score });
     }
@@ -92,9 +96,16 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   }
   boundary('selection');
   const hits = yield* page.finish(options.offset, options.limit);
+  let additional: Readonly<Record<string, unknown>> | undefined;
+  if (extensions?.aggregations.length) {
+    boundary('aggregation');
+    const result: Record<string, unknown> = Object.create(null) as Record<string, unknown>;
+    for (const aggregation of extensions.aggregations) result[aggregation.capability] = yield* aggregation.finish();
+    additional = Object.freeze(result);
+  }
   boundary('result');
   yield charge(1);
   const result = Object.freeze({ revision: root.revision, model: 'raveldex-bm25-v1', completeness: 'complete', total, hits,
-    ...(collector ? { trace: collector.finish(root.revision, root.configuration.analyzer, compiled.key) } : {}) });
+    ...(collector ? { trace: collector.finish(root.revision, root.configuration.analyzer, compiled.key) } : {}), ...(additional ? { extensions: additional } : {}) });
   check(); return result;
 }

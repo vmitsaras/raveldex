@@ -61,7 +61,7 @@ export interface SearchOptions extends MutationOptions {
   readonly extensions?: Readonly<Record<string, unknown>>;
 }
 export interface OwnedOptions extends MutationOptions { readonly deadlineMs: number }
-export interface OwnedSearchOptions extends OwnedOptions { readonly limit: number; readonly offset: number }
+export interface OwnedSearchOptions extends OwnedOptions { readonly limit: number; readonly offset: number; readonly extensions?: Readonly<Record<string, unknown>> }
 export interface MutationResult {
   readonly revision: number; readonly changed: boolean;
   readonly added: number; readonly replaced: number; readonly removed: number;

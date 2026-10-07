@@ -34,16 +34,17 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     }));
   };
   for (const entry of entries) {
-    const data = object(entry, 'addons.registration', ['manifest', 'participant', 'refinement']);
+    const data = object(entry, 'addons.registration', ['manifest', 'participant', 'refinement', 'predicate', 'aggregation']);
     const raw = object(data.manifest, 'addons.manifest', ['id', 'version', 'contractVersion', 'roles', 'provides', 'requires', 'dataRequirements', 'indexEffect', 'rebuildPolicy', 'execution', 'limits', 'costs', 'codec']);
     const name = id(raw.id, 'addons.id'), version = string(raw.version, 'addons.version');
     const semanticVersion = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/;
     if (!semanticVersion.test(version) || raw.contractVersion !== 1 || registrations.has(name)) invalid(code, 'addons.identity');
-    const roles = ownArray(raw.roles, 2, code, 'addons.roles', admission);
-    if (!roles.length || new Set(roles).size !== roles.length || roles.some(role => role !== 'leaf-refinement' && role !== 'transaction-participant')) invalid(code, 'addons.roles');
+    const roles = ownArray(raw.roles, 3, code, 'addons.roles', admission);
+    if (!roles.length || new Set(roles).size !== roles.length || roles.some(role => role !== 'leaf-refinement' && role !== 'transaction-participant' && role !== 'aggregation')) invalid(code, 'addons.roles');
     const requirements = object(raw.dataRequirements, 'addons.dataRequirements', ['fields', 'source', 'positions', 'offsets', 'metadata']);
-    const fields = ownArray(requirements.fields, limits.maxTextFields, code, 'addons.fields', admission).map(field => {
-      const name = id(field, 'addons.fields'); if (!has(schema.text, name)) invalid(code, 'addons.fields'); return name;
+    const metadata = flag(requirements.metadata, 'addons.metadata');
+    const fields = ownArray(requirements.fields, metadata ? limits.maxMetadataFields : limits.maxTextFields, code, 'addons.fields', admission).map(field => {
+      const name = id(field, 'addons.fields'); if (!has(metadata ? schema.metadata : schema.text, name)) invalid(code, 'addons.fields'); return name;
     });
     if (new Set(fields).size !== fields.length) invalid(code, 'addons.fields');
     const execution = object(raw.execution, 'addons.execution', ['direct', 'worker', 'workerRegistration']);
@@ -54,28 +55,33 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     if (ownedLimits.maxPayloadCodeUnits > DEFAULT_LIMITS.maxQueryCodeUnits || ownedLimits.maxWorkUnits > Math.max(DEFAULT_LIMITS.maxSearchWorkUnits, DEFAULT_LIMITS.maxMutationWorkUnits)) invalid(code, 'addons.limits');
     const costs = object(raw.costs, 'addons.costs', ['importedCode', 'retainedRepresentation', 'transientWork', 'externalResources']);
     if (costs.externalResources !== 'none' || raw.rebuildPolicy !== 'new-index') invalid(code, 'addons.costs');
-    const participantRole = roles.includes('transaction-participant'), refinementRole = roles.includes('leaf-refinement');
-    if (participantRole !== has(data, 'participant') || refinementRole !== has(data, 'refinement') || raw.indexEffect !== (participantRole ? 'transactional' : 'none')) invalid(code, 'addons.roles');
-    let participant: CapturedRegistration['participant'], refinement: CapturedRegistration['refinement'];
-    if (participantRole) {
-      const handles = object(data.participant, 'addons.participant', ['initialize', 'prepare']);
-      if (typeof handles.initialize !== 'function' || typeof handles.prepare !== 'function') invalid(code, 'addons.participant');
-      participant = Object.freeze({ initialize: handles.initialize.bind(data.participant), prepare: handles.prepare.bind(data.participant) });
-    }
-    if (refinementRole) {
-      const handles = object(data.refinement, 'addons.refinement', ['kind', 'maxTokens', 'prepare']);
-      const maxTokens = integer(handles.maxTokens, 'addons.maxTokens', 1);
-      if (handles.kind !== 'exact-token-sequence' || maxTokens > DEFAULT_LIMITS.maxQueryTokens || typeof handles.prepare !== 'function') invalid(code, 'addons.refinement');
-      refinement = Object.freeze({ kind: 'exact-token-sequence', maxTokens, prepare: handles.prepare.bind(data.refinement) });
+    const participantRole = roles.includes('transaction-participant'), refinementRole = roles.includes('leaf-refinement'), aggregationRole = roles.includes('aggregation');
+    if (participantRole !== has(data, 'participant') || refinementRole !== (has(data, 'refinement') || has(data, 'predicate')) || has(data, 'refinement') && has(data, 'predicate') || aggregationRole !== has(data, 'aggregation') || raw.indexEffect !== (participantRole ? 'transactional' : 'none')) invalid(code, 'addons.roles');
+    if ((has(data, 'predicate') || aggregationRole) && (!metadata || participantRole || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.dataRequirements');
+    // All handles use the same descriptor capture/type/binding rules.
+    const implementations: Record<string, unknown> = {};
+    for (const key of ['participant', 'refinement', 'predicate', 'aggregation'] as const) {
+      if (!has(data, key)) continue;
+      const methods = key === 'participant' ? ['initialize', 'prepare'] : key === 'refinement' ? ['prepare'] : ['capture', 'prepare'];
+      const attributes = key === 'refinement' ? ['kind', 'maxTokens'] : key === 'aggregation' ? ['fieldType'] : [];
+      const handles = object(data[key], `addons.${key}`, [...methods, ...attributes]);
+      for (const method of methods) {
+        const callback = handles[method];
+        if (typeof callback !== 'function') invalid(code, `addons.${key}`);
+        handles[method] = callback.bind(data[key]);
+      }
+      if (key === 'refinement' && (handles.kind !== 'exact-token-sequence' || integer(handles.maxTokens, 'addons.maxTokens', 1) > DEFAULT_LIMITS.maxQueryTokens)) invalid(code, 'addons.refinement');
+      if (key === 'aggregation' && (handles.fieldType !== 'string' || fields.some(field => schema.metadata[field]?.type !== handles.fieldType))) invalid(code, 'addons.aggregation');
+      implementations[key] = Object.freeze(handles);
     }
     let codec: CapabilityManifest['codec'];
     if (has(raw, 'codec')) { const value = object(raw.codec, 'addons.codec', ['id', 'version']); codec = Object.freeze({ id: id(value.id, 'addons.codec'), version: integer(value.version, 'addons.codec', 1) }); }
     const manifest: CapabilityManifest = Object.freeze({ id: name, version, contractVersion: 1,
       roles: Object.freeze(roles as CapabilityManifest['roles'][number][]), provides: references(raw.provides, 'addons.provides'), requires: references(raw.requires, 'addons.requires'),
-      dataRequirements: Object.freeze({ fields: Object.freeze(fields.sort()), source: flag(requirements.source, 'addons.source'), positions: flag(requirements.positions, 'addons.positions'), offsets: flag(requirements.offsets, 'addons.offsets'), metadata: flag(requirements.metadata, 'addons.metadata') }),
+      dataRequirements: Object.freeze({ fields: Object.freeze(fields.sort()), source: flag(requirements.source, 'addons.source'), positions: flag(requirements.positions, 'addons.positions'), offsets: flag(requirements.offsets, 'addons.offsets'), metadata }),
       indexEffect: participantRole ? 'transactional' : 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: false }), limits: ownedLimits,
       costs: Object.freeze({ importedCode: string(costs.importedCode, 'addons.costs', 1024), retainedRepresentation: string(costs.retainedRepresentation, 'addons.costs', 1024), transientWork: string(costs.transientWork, 'addons.costs', 1024), externalResources: 'none' }), ...(codec ? { codec } : {}) });
-    const captured = Object.freeze({ manifest, ...(participant ? { participant } : {}), ...(refinement ? { refinement } : {}) });
+    const captured: CapturedRegistration = Object.freeze({ manifest, ...implementations });
     registrations.set(name, captured);
     if (!manifest.provides.length) invalid(code, 'addons.provides');
     for (const provided of manifest.provides) { if (has(providers, provided.id)) invalid(code, 'addons.providers'); providers[provided.id] = captured; }

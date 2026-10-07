@@ -9,6 +9,26 @@ import { createSourceProvider as sourceOnly } from '@vmitsaras/raveldex/addons/p
 import { createPositionProvider, type PositionProviderOptions } from '@vmitsaras/raveldex/addons/positions';
 import { createPositionPhrases } from '@vmitsaras/raveldex/addons/phrases/positions';
 import { createPhrases, type MixedPhraseOptions } from '@vmitsaras/raveldex/addons/phrases/mixed';
+import { createFilters, type FilterOptions, type NumericRangePayload, type SetMembershipPayload } from '@vmitsaras/raveldex/addons/filters';
+import { createFacets, type FacetOptions, type FacetRequest, type FacetResult } from '@vmitsaras/raveldex/addons/facets';
+const filters: FilterOptions = { fields: ['price', 'tags'] };
+const facets: FacetOptions = { fields: ['tags'], maxDistinctValuesPerField: 100, maxBucketsPerField: 10 };
+const range: NumericRangePayload = { field: 'price', gte: 10, lt: 20 };
+const selection: SetMembershipPayload = { field: 'tags', values: ['guide', null] };
+const facetRequest: FacetRequest = { fields: [{ field: 'tags', limit: 0, missing: true }] };
+const metadataEngine = createRaveldex({ schema: { text: { title: {} }, metadata: { price: { type: 'number' }, tags: { type: 'string', multi: true, nullable: true } } }, addons: [createFilters(filters), createFacets(facets)] });
+void metadataEngine.search({ kind: 'and', children: [{ kind: 'extension', capability: 'numeric-range', version: 1, payload: range }, { kind: 'extension', capability: 'set-membership', version: 1, payload: selection }] }, { limit: 0, extensions: { facets: facetRequest } });
+declare const facetResult: FacetResult;
+// @ts-expect-error bounded output buckets are readonly
+facetResult.fields[0]!.buckets.push({ kind: 'missing', count: 1 });
+// @ts-expect-error requested facet fields are readonly
+facetRequest.fields[0]!.field = 'other';
+// @ts-expect-error filter selection is readonly
+selection.values.push('other');
+// @ts-expect-error filter helper internals are private
+import { captureFilterOptions } from '@vmitsaras/raveldex/addons/filters';
+// @ts-expect-error optional payload parser is not a public subpath
+import { captureMetadataPayload } from '@vmitsaras/raveldex/addons/metadata/payload';
 // @ts-expect-error private position roots are not a utility export
 import { requirePositionRoot } from '@vmitsaras/raveldex/addons/positions';
 const positionOptions: PositionProviderOptions = { fields: ['title', 'body'], offsets: ['title'] };

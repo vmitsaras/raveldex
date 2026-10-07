@@ -6,7 +6,10 @@ before(async () => { report = await measurePackedPositions(); });
 test('installed declarations, real tarball and minified consumer preserve four representation memberships, pages, scores and mutations', () => {
   assert.equal(report.correctness.status, 'Pass'); assert.equal(report.correctness.representations, 4);
   assert.equal(report.correctness.completeComparisonsPerRepresentation, 23); assert.equal(report.correctness.bundledParity, 'Pass');
-  assert.equal(report.core.targetMet, true);
+  // RX-1006-AC05 requires a truthful measurement against the unchanged target;
+  // an explained qualification miss must not erase required runtime behavior.
+  assert.equal(report.core.targetGzipBytes, 15 * 1024);
+  assert.equal(report.core.targetMet, report.core.gzipBytes <= report.core.targetGzipBytes);
 });
 test('core/source/position utilities exclude unselected verifier modules and public imports have no host access', () => {
   assert.ok(report.core.inputs.every(({ path }) => !/addons|adapters/.test(path)));

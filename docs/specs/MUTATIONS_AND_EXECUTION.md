@@ -172,3 +172,5 @@ Queued stops remove their entry/timer/listener and free the slot. Active suspend
 ## Open questions
 
 None blocks N1. Specific bucket layout, cursor representations, and test-only injection seams are local implementation decisions within this contract. A design that cannot satisfy it must produce a narrow architecture finding before substituting full-state rebuilds or weaker outcomes.
+
+RX-2003 metadata predicates/facets read the execution-start core root without retaining side indexes. Every requested payload is owned at admission; prepared aggregation visits all qualifying immutable metadata before output projection. No-op/write/clear/cancel/dispose semantics use the existing FIFO owner and one shared operation budget. Module budgets cover preparation, every leaf/request, counting and output; aliases/combined roles cannot reset them. See [filter/facet evidence](../evidence/RX-2003.md).

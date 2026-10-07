@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- RX-2003 adds optional typed numeric/set filters and exact conjunctive string facets with complete pre-pagination membership, bounded tagged buckets, immutable payload/output capture and shared revision/work/stop behavior. Adds packed/minified consumer and independent full-scan evidence; records the unchanged 15 KiB core planning-target miss.
+
 - RX-2002 adds optional selected-field positions, separately selected original UTF-16 offsets, positional/mixed strict phrases with unchanged native scores, and atomic side-index lifecycle.
 
 - RX-2001: add explicit validated direct registrations, transactional selected-field original source and strict phrase leaves through optional public subpaths. Verify independent adjacency/Boolean/BM25 parity, atomic source lifecycle, exhaustive cancellation, typed capability failures and packed/minified boundaries. Record conceptual companion provenance and full graph/work costs.

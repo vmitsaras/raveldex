@@ -2,7 +2,7 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution and optional source/positional phrases.",
+  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution and optional phrases, filters and facets.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs",
+    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -27,13 +27,15 @@
     "tracking:preview": "node scripts/sync-github.mjs --dry-run",
     "tracking:sync": "node scripts/sync-github.mjs --apply",
     "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.build.json",
     "test:core": "npm run build && node --test test/core/*.test.mjs",
     "prepack": "npm run build",
     "test:consumer": "npm run build && node --test test/consumer/*.test.mjs",
     "pilot:core": "npm run build && node scripts/core-pilot.mjs",
     "test:phrases": "npm run build && node --test test/addons/phrases/*.test.mjs",
-    "test:positions": "npm run build && node --test test/addons/positions/*.test.mjs"
+    "test:positions": "npm run build && node --test test/addons/positions/*.test.mjs",
+    "test:filters": "npm run build && node --test test/addons/filters/*.test.mjs",
+    "test:facets": "npm run build && node --test test/addons/facets/*.test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2",
@@ -64,6 +66,14 @@
     "./addons/phrases/mixed": {
       "types": "./dist/addons/phrases/mixed.d.ts",
       "import": "./dist/addons/phrases/mixed.js"
+    },
+    "./addons/filters": {
+      "types": "./dist/addons/filters/index.d.ts",
+      "import": "./dist/addons/filters/index.js"
+    },
+    "./addons/facets": {
+      "types": "./dist/addons/facets/index.d.ts",
+      "import": "./dist/addons/facets/index.js"
     }
   },
   "files": [
@@ -71,7 +81,10 @@
     "dist/index.d.ts",
     "dist/core/",
     "dist/addons/phrases/",
-    "dist/addons/positions/"
+    "dist/addons/positions/",
+    "dist/addons/filters/",
+    "dist/addons/facets/",
+    "dist/addons/metadata/"
   ],
   "sideEffects": false
 }

@@ -29,12 +29,16 @@ export function* evaluate(node: CompiledNode, doc: DocumentEntry, expansions: Re
       }
       if (matched) {
         const verifier = refinements?.get(node); if (!verifier) invalid('MISSING_CAPABILITY', 'query.refinement');
-        const cursor = verifier.test(doc.id);
+        const cursor = verifier.test(doc.id, doc.metadata);
         try { for (;;) { const step = cursor.next(); if (step.done) { matched = step.value; break; } yield step.value; } }
         finally { try { cursor.return(false); } catch { /* Preserve the original failure. */ } }
       }
       if (matched) for (const group of node.groups) { yield charge(group.key.length + 1); groups.add(group.key); }
       break;
+    }
+    case 'predicate': {
+      const predicate = refinements?.get(node); if (!predicate) invalid('MISSING_CAPABILITY', 'query.predicate');
+      matched = yield* predicate.test(doc.id, doc.metadata); break;
     }
     case 'all': matched = true; break;
     case 'none': break;

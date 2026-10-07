@@ -6,8 +6,13 @@ import { captureScalar } from './record.js';
 import type { Limits } from '../limits/limits.js';
 import type { OwnedSchema, Query, Variant } from './types.js';
 import type { CapabilitySet } from '../capabilities/types.js';
+import { captureExtension } from '../capabilities/capture.js';
 
-export type OwnedQuery = Exclude<Query, { readonly kind: 'extension' }> | { readonly kind: 'extension'; readonly capability: string; readonly version: 1; readonly payload: { readonly text: string; readonly fields?: readonly string[] } };
+export type OwnedQuery = Exclude<Query, { readonly kind: 'extension' | 'and' | 'or' | 'not' }>
+  | { readonly kind: 'and' | 'or'; readonly children: readonly OwnedQuery[] }
+  | { readonly kind: 'not'; readonly child: OwnedQuery }
+  | { readonly kind: 'extension'; readonly capability: string; readonly version: 1; readonly payload: { readonly text: string; readonly fields?: readonly string[] } }
+  | { readonly kind: 'predicate'; readonly capability: string; readonly payload: unknown };
 
 /** Own raw query data now; content analysis/canonical evaluation happen later. */
 export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits, admission = new Admission(limits.maxAdmissionEntries), capabilities?: CapabilitySet): OwnedQuery {
@@ -100,8 +105,13 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
         if (typeof data.capability !== 'string' || !data.capability.length || !Number.isSafeInteger(data.version) || (data.version as number) < 1 || !has(data, 'payload')) invalid('INVALID_QUERY', path);
         const capability = string(data.capability, false, `${path}.capability`);
         const registration = capabilities?.providers[capability];
-        if (!registration?.refinement) invalid('MISSING_CAPABILITY', path);
+        if (!registration?.refinement && !registration?.predicate) invalid('MISSING_CAPABILITY', path);
         if (data.version !== 1) invalid('INCOMPATIBLE_CAPABILITY', `${path}.version`);
+        if (registration.predicate) {
+          const captured = captureExtension(registration.predicate.capture, data.payload, admission, limits, registration.manifest.limits.maxPayloadCodeUnits);
+          stringUnits += captured.codeUnits; bound(stringUnits, limits.maxQueryCodeUnits, 'query.strings');
+          result = { kind: 'predicate', capability, payload: captured.value }; break;
+        }
         const payload = ownObject(data.payload, 'INVALID_QUERY', `${path}.payload`, admission);
         keysOnly(payload, ['text', 'fields'], 'INVALID_QUERY', `${path}.payload`);
         const text = string(payload.text, true, `${path}.payload.text`);
@@ -187,7 +197,7 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
       case 'and': case 'or': for (const child of leaf.children) yield* walk(child as OwnedQuery); break;
       case 'not': yield* walk(leaf.child as OwnedQuery); break;
       case 'eq': if (typeof leaf.value === 'string') yield* scanUnicode(leaf.value, 'INVALID_QUERY', 'query.value'); break;
-      case 'all': case 'none': break;
+      case 'predicate': case 'all': case 'none': break;
     }
   }
   yield* walk(query);

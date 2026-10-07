@@ -10,7 +10,7 @@ Raveldex is a TypeScript search library for mutable local collections. The nativ
 
 RX-1001–1006 implement and verify the core. The public factory returns an empty revision-0 engine with `search`, `add`, `addMany`, `replace`, `remove`, `clear` and `dispose`. Configuration errors throw; operational errors reject promises. [RX-1006 evidence](docs/evidence/RX-1006.md) records public type checks, independent source/numerical comparisons, import/startup checks and relevance outcomes for 34 current documentation sections.
 
-RX-2001 also verifies explicit transactional source retention and strict source phrases through public subpaths; see [phrase evidence](docs/evidence/RX-2001.md). RX-2002 adds selected positions, independent original spans and mixed phrase strategies; see [position evidence](docs/evidence/RX-2002.md).
+RX-2001 also verifies explicit transactional source retention and strict source phrases through public subpaths; see [phrase evidence](docs/evidence/RX-2001.md). RX-2002 adds selected positions, independent original spans and mixed phrase strategies; see [position evidence](docs/evidence/RX-2002.md). RX-2003 adds typed metadata filters and exact conjunctive facets; see [filter/facet evidence](docs/evidence/RX-2003.md).
 
 The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; browser support, other optional capabilities, worker/storage hosting and Unicode snapshot portability require later evidence.
 
@@ -102,6 +102,35 @@ const addons = [
 
 All strategies use the same `phrases` extension payload shown above. Select one phrase registration per engine; multiple registrations providing `phrases` conflict. Every query-selected field must have its declared provider, even for empty or unmatched queries. All side roots publish, roll back, clear and dispose with core. Position utility imports exclude phrase evaluation; positional-only phrases exclude source storage/reanalysis. Strict positions have `positionLength: 1`; slop, proximity and synonym graphs remain unsupported. See [RX-2002 evidence](docs/evidence/RX-2002.md).
 
+## Optional structured filters and facets
+
+```ts
+import { createRaveldex } from '@vmitsaras/raveldex';
+import { createFilters } from '@vmitsaras/raveldex/addons/filters';
+import { createFacets } from '@vmitsaras/raveldex/addons/facets';
+
+const engine = createRaveldex({
+  schema: { text: { title: {} }, metadata: {
+    price: { type: 'number' }, tags: { type: 'string', multi: true, nullable: true },
+  } },
+  addons: [createFilters({ fields: ['price', 'tags'] }), createFacets({ fields: ['tags'] })],
+});
+try {
+  await engine.add({ id: 'guide', text: { title: 'Search guide' }, metadata: { price: 15, tags: ['guide', 'guide', null] } });
+  const page = await engine.search({ kind: 'and', children: [
+    { kind: 'extension', capability: 'numeric-range', version: 1, payload: { field: 'price', gte: 10, lt: 20 } },
+    { kind: 'extension', capability: 'set-membership', version: 1, payload: { field: 'tags', values: ['guide'] } },
+  ] }, { limit: 0, extensions: { facets: { fields: [{ field: 'tags', limit: 20, missing: true }] } } });
+  console.log(page.revision, page.total, page.extensions?.facets);
+} finally {
+  await engine.dispose();
+}
+```
+
+Numeric bounds are finite and apply to one numeric array element; both endpoints cannot be satisfied by different values. Set membership accepts 1–128 declared typed/null values, with no coercion. Missing positive data is false and NOT follows normal Boolean complement. Filters add no lexical score; source/position phrases and core equality remain composable in the same tree.
+
+Facet counts include every qualifying document and its current own-field selection before hits are limited. Repeated values count once per document. Returned buckets tag actual string/null values and optional missing separately; empty arrays have no bucket. Output is count-descending, then null, UTF-16 strings and missing for ties. Each field reports `distinctValueTotal` and `omittedBucketCount`; those are bucket totals. Requests select up to eight string metadata fields, count at most 10,000 distinct buckets per field, and return up to 100 (default 20). Output limit zero still counts the complete membership. Factory ceilings can narrow counting/output/work; exhaustion rejects the entire search. Neither module retains a side index. See [the precise protocol](docs/architecture/ADDONS_AND_ADAPTERS.md#structured-filters-and-facets).
+
 ## Start here
 
 | Need | Read |
@@ -128,11 +157,13 @@ npm run test:core
 npm run test:consumer
 npm run test:phrases
 npm run test:positions
+npm run test:filters
+npm run test:facets
 npm run handoff:status
 npm run handoff:next
 ```
 
-`npm run build` emits ignored `dist/`. `npm pack` builds before packing compiled runtime/declarations; the root exports map excludes internal paths. `npm run check` includes the isolated consumer's public declaration and runtime checks. The pilot's local pack/install uses an isolated cache and offline installation without lifecycle scripts; it makes no remote tracking or publication requests.
+`npm run build` clears and emits ignored `dist/` so deleted modules cannot remain in the tarball. `npm pack` builds before packing compiled runtime/declarations; the root exports map excludes internal paths. `npm run check` includes the isolated consumer's public declaration and runtime checks. The pilot's local pack/install uses an isolated cache and offline installation without lifecycle scripts; it makes no remote tracking or publication requests.
 
 `handoff:next` reports dependency eligibility. Task completion requires acceptance evidence. Normal development needs no secrets; only the explicit GitHub tracking workflow uses a temporary repository token.
 
@@ -142,10 +173,11 @@ npm run handoff:next
 | --- | --- |
 | Native core | Validation, basic analysis, dictionary/postings/statistics, lexical/Boolean/equality queries, BM25, exact totals, atomic writes, bounded FIFO execution and typed failures. |
 | Optional source phrases | Explicit selected-field originals and strict phrase leaves. |
-| Planned optional search modules | Positions/offsets, structured filters, facets, source evidence/snippets, Inspector and native DOM UI. |
+| Optional positions, filters and facets | Selected original occurrence data, typed metadata qualification and complete conjunctive counts. |
+| Planned optional search modules | Source evidence/snippets, Inspector and native DOM UI. |
 | Planned host adapters | Worker ownership/transport, snapshots, IndexedDB/recovery and later integrations. |
 | Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
-The RX-2002 public core measured **15,159 bytes gzip** (49,164 minified ESM bytes), within the 15 KiB target under the fixed esbuild/gzip method. Mandatory registration/refinement coordination increases core from historical RX-1006's 12,400 gzip bytes. The RX-2001 core plus source phrases measured 17,371 gzip bytes; standalone source utility remains 3,544. Current selected position/mixed graphs are recorded in RX-2002 evidence. These complete bundles overlap and are not additive module costs. The 10,000-record defensive ceiling is not a universal capacity or latency promise. No DOM, worker, storage, network, foreign engine or optional source representation enters the measured graph or runs on import.
+The RX-2003 packed public core measures **16,025 bytes gzip** (52,212 minified ESM bytes), exceeding the unchanged 15 KiB target by **665 bytes**. Mandatory bounded capture/role coordination increases the RX-2002 snapshot's 15,159 gzip bytes. Boundary review keeps optional parsers, filter/facet evaluators and retained side indexes outside core and consolidates shared metering; validation and semantics remain intact. [RX-2003 evidence](docs/evidence/RX-2003.md) records full selected graphs, the explained planning-target miss and logical work through 10,000 records. Complete bundles overlap and are not additive module costs. The 10,000-record ceiling is not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
 
-MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2002 is RX-2003; RX-2004 and RX-2005 are also dependency-ready.
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2003 is RX-2004; RX-2005 is also dependency-ready.

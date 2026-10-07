@@ -1,0 +1,795 @@
+{
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "policy": "work-v1",
+  "method": "Complete real mutation/search cursors on identical admitted records; independent typed source selection and complete facet scan before projection.",
+  "limitations": "Work units and logical absence of side roots; no heap/peak bytes, latency, throughput or capacity guarantees. Filtered configurations qualify 10% and unfiltered configurations qualify all documents, so these are not speedup comparisons.",
+  "rows": [
+    {
+      "documents": 100,
+      "representation": "core",
+      "buildWorkUnits": 16858,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 817,
+          "total": 100
+        },
+        {
+          "limit": 3,
+          "workUnits": 1495,
+          "total": 100
+        },
+        {
+          "limit": 100,
+          "workUnits": 8418,
+          "total": 100
+        }
+      ],
+      "replacementWorkUnits": 815,
+      "postReplacementSearchWorkUnits": 817,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 17,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 100,
+      "representation": "filters",
+      "buildWorkUnits": 16858,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 1940,
+          "total": 10
+        },
+        {
+          "limit": 3,
+          "workUnits": 2080,
+          "total": 10
+        },
+        {
+          "limit": 100,
+          "workUnits": 2262,
+          "total": 10
+        }
+      ],
+      "replacementWorkUnits": 815,
+      "postReplacementSearchWorkUnits": 1939,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 150,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 100,
+      "representation": "facets",
+      "buildWorkUnits": 16858,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 3936,
+          "total": 100,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 90
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 13
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 10
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        },
+        {
+          "limit": 3,
+          "workUnits": 4614,
+          "total": 100,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 90
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 13
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 10
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        },
+        {
+          "limit": 100,
+          "workUnits": 11537,
+          "total": 100,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 90
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 13
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 10
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        }
+      ],
+      "replacementWorkUnits": 815,
+      "postReplacementSearchWorkUnits": 3954,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 202,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 100,
+      "representation": "combined",
+      "buildWorkUnits": 16858,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 2644,
+          "total": 10,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 9
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 1
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 1
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        },
+        {
+          "limit": 3,
+          "workUnits": 2784,
+          "total": 10,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 9
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 1
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 1
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        },
+        {
+          "limit": 100,
+          "workUnits": 2966,
+          "total": 10,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 9
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 1
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 1
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        }
+      ],
+      "replacementWorkUnits": 815,
+      "postReplacementSearchWorkUnits": 2660,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 335,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 1000,
+      "representation": "core",
+      "buildWorkUnits": 207309,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 8017,
+          "total": 1000
+        },
+        {
+          "limit": 3,
+          "workUnits": 13291,
+          "total": 1000
+        },
+        {
+          "limit": 100,
+          "workUnits": 34444,
+          "total": 1000
+        }
+      ],
+      "replacementWorkUnits": 1943,
+      "postReplacementSearchWorkUnits": 8017,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 17,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 1000,
+      "representation": "filters",
+      "buildWorkUnits": 207309,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 18050,
+          "total": 100
+        },
+        {
+          "limit": 3,
+          "workUnits": 18720,
+          "total": 100
+        },
+        {
+          "limit": 100,
+          "workUnits": 24859,
+          "total": 100
+        }
+      ],
+      "replacementWorkUnits": 1943,
+      "postReplacementSearchWorkUnits": 18049,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 150,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 1000,
+      "representation": "facets",
+      "buildWorkUnits": 207309,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 34852,
+          "total": 1000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 900
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 128
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 100
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        },
+        {
+          "limit": 3,
+          "workUnits": 40126,
+          "total": 1000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 900
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 128
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 100
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        },
+        {
+          "limit": 100,
+          "workUnits": 61279,
+          "total": 1000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 900
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 128
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 100
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        }
+      ],
+      "replacementWorkUnits": 1943,
+      "postReplacementSearchWorkUnits": 34870,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 202,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 1000,
+      "representation": "combined",
+      "buildWorkUnits": 207309,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 21189,
+          "total": 100,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 90
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 13
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 10
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        },
+        {
+          "limit": 3,
+          "workUnits": 21859,
+          "total": 100,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 90
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 13
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 10
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        },
+        {
+          "limit": 100,
+          "workUnits": 27998,
+          "total": 100,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 90
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 13
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 10
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        }
+      ],
+      "replacementWorkUnits": 1943,
+      "postReplacementSearchWorkUnits": 21212,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 335,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 10000,
+      "representation": "core",
+      "buildWorkUnits": 6935421,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 80017,
+          "total": 10000
+        },
+        {
+          "limit": 3,
+          "workUnits": 121291,
+          "total": 10000
+        },
+        {
+          "limit": 100,
+          "workUnits": 154329,
+          "total": 10000
+        }
+      ],
+      "replacementWorkUnits": 3329,
+      "postReplacementSearchWorkUnits": 80017,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 17,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 10000,
+      "representation": "filters",
+      "buildWorkUnits": 6935421,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 179150,
+          "total": 1000
+        },
+        {
+          "limit": 3,
+          "workUnits": 183452,
+          "total": 1000
+        },
+        {
+          "limit": 100,
+          "workUnits": 202014,
+          "total": 1000
+        }
+      ],
+      "replacementWorkUnits": 3329,
+      "postReplacementSearchWorkUnits": 179149,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 150,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 10000,
+      "representation": "facets",
+      "buildWorkUnits": 6935421,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 344151,
+          "total": 10000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 9000
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 1286
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 1000
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        },
+        {
+          "limit": 3,
+          "workUnits": 385425,
+          "total": 10000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 9000
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 1286
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 1000
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        },
+        {
+          "limit": 100,
+          "workUnits": 418463,
+          "total": 10000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 9000
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 1286
+                  },
+                  {
+                    "kind": "missing",
+                    "count": 1000
+                  }
+                ],
+                "distinctValueTotal": 28,
+                "omittedBucketCount": 25
+              }
+            ]
+          }
+        }
+      ],
+      "replacementWorkUnits": 3329,
+      "postReplacementSearchWorkUnits": 344169,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 202,
+      "retainedOptionalRoots": []
+    },
+    {
+      "documents": 10000,
+      "representation": "combined",
+      "buildWorkUnits": 6935421,
+      "searches": [
+        {
+          "limit": 0,
+          "workUnits": 206664,
+          "total": 1000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 900
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 129
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 100
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        },
+        {
+          "limit": 3,
+          "workUnits": 210966,
+          "total": 1000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 900
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 129
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 100
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        },
+        {
+          "limit": 100,
+          "workUnits": 229528,
+          "total": 1000,
+          "buckets": {
+            "fields": [
+              {
+                "field": "tags",
+                "buckets": [
+                  {
+                    "kind": "value",
+                    "value": "shared",
+                    "count": 900
+                  },
+                  {
+                    "kind": "value",
+                    "value": null,
+                    "count": 129
+                  },
+                  {
+                    "kind": "value",
+                    "value": "v11",
+                    "count": 100
+                  }
+                ],
+                "distinctValueTotal": 12,
+                "omittedBucketCount": 9
+              }
+            ]
+          }
+        }
+      ],
+      "replacementWorkUnits": 3329,
+      "postReplacementSearchWorkUnits": 206687,
+      "clearWorkUnits": 7,
+      "emptySearchWorkUnits": 335,
+      "retainedOptionalRoots": []
+    }
+  ]
+}

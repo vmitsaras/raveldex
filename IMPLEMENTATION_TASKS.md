@@ -419,7 +419,7 @@ Offer selected-field positional phrase verification and optional original offset
 
 **Structured filters and exact conjunctive facets**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/17)
+**Milestone:** N2 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/17)
 
 **Dependencies:** [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006)
 
@@ -451,7 +451,7 @@ Add optional numeric/set filters and selected keyword facet counts while preserv
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-2003.md](docs/evidence/RX-2003.md)
 
 
 ## RX-2004

@@ -6,7 +6,7 @@ import type { WorkStep } from '../index/directory.js';
 export interface CapabilityReference { readonly id: string; readonly contractVersion: number }
 export interface CapabilityManifest {
   readonly id: string; readonly version: string; readonly contractVersion: number;
-  readonly roles: readonly ('leaf-refinement' | 'transaction-participant')[];
+  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation')[];
   readonly provides: readonly CapabilityReference[]; readonly requires: readonly CapabilityReference[];
   readonly dataRequirements: { readonly fields: readonly string[]; readonly source: boolean; readonly positions: boolean; readonly offsets: boolean; readonly metadata: boolean };
   readonly indexEffect: 'none' | 'transactional'; readonly rebuildPolicy: 'new-index';
@@ -38,10 +38,36 @@ export interface RefinementImplementation {
   readonly kind: 'exact-token-sequence'; readonly maxTokens: number;
   prepare(context: RefinementContext): Generator<WorkStep, PreparedRefinement>;
 }
+/** Metadata roles see only an owned payload, immutable schema and one revision.
+ * No source, scorer, mutable owner or core root is exposed. */
+export interface MetadataContext {
+  readonly revision: number; readonly schema: OwnedSchema; readonly limits: Limits;
+  readonly capability: string; readonly payload: unknown;
+}
+/** Trusted handlers capture bounded immutable payloads during admission. */
+export interface PayloadContext { readonly admission: Admission; readonly limits: Limits; readonly maxCodeUnits: number }
+export interface CapturedPayload { readonly value: unknown; readonly codeUnits: number }
+export interface AggregationOutput { readonly value: unknown; readonly entries: number }
+export interface PreparedPredicate { test(metadata: OwnedRecord['metadata']): Generator<WorkStep, boolean> }
+export interface PredicateImplementation {
+  capture(input: unknown, context: PayloadContext): CapturedPayload;
+  prepare(context: MetadataContext): Generator<WorkStep, PreparedPredicate>;
+}
+export interface PreparedAggregation {
+  add(metadata: OwnedRecord['metadata']): Generator<WorkStep, void>;
+  finish(): Generator<WorkStep, AggregationOutput>;
+}
+export interface AggregationImplementation {
+  readonly fieldType: 'string';
+  capture(input: unknown, context: PayloadContext): CapturedPayload;
+  prepare(context: MetadataContext): Generator<WorkStep, PreparedAggregation>;
+}
 export interface AddonRegistration {
   readonly manifest: CapabilityManifest;
   readonly participant?: ParticipantImplementation;
   readonly refinement?: RefinementImplementation;
+  readonly predicate?: PredicateImplementation;
+  readonly aggregation?: AggregationImplementation;
 }
 export interface CapturedRegistration extends AddonRegistration { readonly manifest: CapabilityManifest }
 export interface CapabilitySet {
