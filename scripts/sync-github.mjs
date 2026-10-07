@@ -174,7 +174,9 @@ export async function synchronize(roadmap, request, log = () => {}) {
       title: item.title,
       body: mergeManagedBody(existing?.body, item.id, item.task ? taskSection(roadmap, item.task, index) : milestoneSection(roadmap, item.milestone, index)),
       labels: [...new Set([...manualLabels, `type:${item.type}`, `track:${item.milestone.track}`, `status:${status}`])].sort(),
-      milestone: milestoneIndex.get(item.milestone.id).number,
+      // Overview issues summarize tasks; counting them would inflate milestone progress.
+      // Explicit null also removes the association left by older sync runs.
+      milestone: item.task ? milestoneIndex.get(item.milestone.id).number : null,
       state: done ? 'closed' : 'open',
       ...(done ? { state_reason: 'completed' } : {}),
     };
@@ -191,7 +193,7 @@ export async function synchronize(roadmap, request, log = () => {}) {
     const desired = properties(item);
     const existing = index.get(item.id);
     const currentLabels = (existing.labels || []).map((l) => typeof l === 'string' ? l : l.name).sort();
-    if (existing.title !== desired.title || existing.body !== desired.body || existing.state !== desired.state || existing.milestone?.number !== desired.milestone || JSON.stringify(currentLabels) !== JSON.stringify(desired.labels)) {
+    if (existing.title !== desired.title || existing.body !== desired.body || existing.state !== desired.state || (existing.milestone?.number ?? null) !== desired.milestone || JSON.stringify(currentLabels) !== JSON.stringify(desired.labels)) {
       const updated = await request('PATCH', `${prefix}/issues/${existing.number}`, desired);
       index.set(item.id, updated);
       log(`Updated ${item.id}: ${updated.html_url}`);
@@ -217,7 +219,7 @@ export async function synchronize(roadmap, request, log = () => {}) {
   for (const item of items) {
     const actual = readback.get(item.id);
     const desired = properties(item);
-    if (!actual || actual.title !== desired.title || actual.body !== desired.body || actual.state !== desired.state || actual.milestone?.number !== desired.milestone || JSON.stringify((actual.labels || []).map((l) => typeof l === 'string' ? l : l.name).sort()) !== JSON.stringify(desired.labels)) {
+    if (!actual || actual.title !== desired.title || actual.body !== desired.body || actual.state !== desired.state || (actual.milestone?.number ?? null) !== desired.milestone || JSON.stringify((actual.labels || []).map((l) => typeof l === 'string' ? l : l.name).sort()) !== JSON.stringify(desired.labels)) {
       throw new Error(`Read-back mismatch for ${item.id}; synchronization is incomplete.`);
     }
   }
