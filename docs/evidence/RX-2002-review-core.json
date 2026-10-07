@@ -1,0 +1,229 @@
+{
+  "status": "Pass",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "expectationBasis": "Literal original inputs paired with explicit expected token sequences; separate BM25 arithmetic and Boolean positive-group evaluation; no production tokenizer/scorer or repository test oracle imports.",
+  "comparisons": 1294,
+  "queries": 258,
+  "fixtures": 76,
+  "registrationErrors": [
+    {
+      "name": "options {\"fields\":[]}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.fields"
+    },
+    {
+      "name": "options {\"fields\":[\"title\",\"title\"]}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.fields"
+    },
+    {
+      "name": "options {\"fields\":[\"title\"],\"offsets\":[\"body\"]}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.offsets"
+    },
+    {
+      "name": "options {\"fields\":[\"title\"],\"offsets\":[\"title\",\"title\"]}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.offsets"
+    },
+    {
+      "name": "options {\"fields\":[\"title\"],\"offsets\":true}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.offsets"
+    },
+    {
+      "name": "options {\"fields\":[\"title\"],\"unexpected\":1}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.options"
+    },
+    {
+      "name": "options {\"fields\":[\"title\"],\"maxWorkUnits\":0}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.maxWorkUnits"
+    },
+    {
+      "name": "options {\"fields\":[\"title\"],\"maxRetainedEntries\":-1}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.maxRetainedEntries"
+    },
+    {
+      "name": "options {\"fields\":[\"title\"],\"id\":\"\"}",
+      "code": "INVALID_OPTIONS",
+      "path": "positions.id"
+    },
+    {
+      "name": "missing positions registration",
+      "code": "MISSING_CAPABILITY",
+      "path": "addons.requires"
+    },
+    {
+      "name": "source cannot satisfy positions",
+      "code": "MISSING_CAPABILITY",
+      "path": "addons.requires"
+    },
+    {
+      "name": "duplicate positions providers",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "addons.providers"
+    },
+    {
+      "name": "missing mixed source",
+      "code": "MISSING_CAPABILITY",
+      "path": "addons.requires"
+    },
+    {
+      "name": "missing mixed positions",
+      "code": "MISSING_CAPABILITY",
+      "path": "addons.requires"
+    },
+    {
+      "name": "wrong strategy",
+      "code": "INVALID_OPTIONS",
+      "path": "phrases.strategy"
+    },
+    {
+      "name": "wrong field",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "addons.fields"
+    },
+    {
+      "name": "manifest contractVersion",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "addons.identity"
+    },
+    {
+      "name": "manifest version",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "addons.identity"
+    },
+    {
+      "name": "manifest execution",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "addons.execution"
+    },
+    {
+      "name": "manifest roles",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "addons.roles"
+    },
+    {
+      "name": "source missing requested field with zero candidates ",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.field"
+    },
+    {
+      "name": "source missing requested field with zero candidates never found",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.field"
+    },
+    {
+      "name": "positions missing requested field with zero candidates ",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.field"
+    },
+    {
+      "name": "positions missing requested field with zero candidates never found",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.field"
+    },
+    {
+      "name": "position header wrong revision at zero candidates ",
+      "code": "REVISION_MISMATCH",
+      "path": "phrases.positions.revision"
+    },
+    {
+      "name": "position header wrong revision at zero candidates nothing",
+      "code": "REVISION_MISMATCH",
+      "path": "phrases.positions.revision"
+    },
+    {
+      "name": "position header wrong analyzer id at zero candidates ",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "phrases.positions.analyzer"
+    },
+    {
+      "name": "position header wrong analyzer id at zero candidates nothing",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "phrases.positions.analyzer"
+    },
+    {
+      "name": "position header wrong analyzer profile at zero candidates ",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "phrases.positions.analyzer"
+    },
+    {
+      "name": "position header wrong analyzer profile at zero candidates nothing",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "phrases.positions.analyzer"
+    },
+    {
+      "name": "position header wrong kind at zero candidates ",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "phrases.positions"
+    },
+    {
+      "name": "position header wrong kind at zero candidates nothing",
+      "code": "INCOMPATIBLE_CAPABILITY",
+      "path": "phrases.positions"
+    },
+    {
+      "name": "position header missing selected field at zero candidates ",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.positions.field"
+    },
+    {
+      "name": "position header missing selected field at zero candidates nothing",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.positions.field"
+    },
+    {
+      "name": "positions missing authoritative candidate even though other selected field matches",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.positions.record"
+    },
+    {
+      "name": "mixedSourceMissing missing authoritative candidate even though other selected field matches",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.source.record"
+    },
+    {
+      "name": "mixedPositionsMissing missing authoritative candidate even though other selected field matches",
+      "code": "MISSING_CAPABILITY",
+      "path": "phrases.positions.record"
+    },
+    {
+      "name": "position refinement cannot omit declared positions requirements",
+      "code": "MISSING_CAPABILITY",
+      "path": "addons.data"
+    },
+    {
+      "name": "position refinement cannot omit declared positions requirements",
+      "code": "MISSING_CAPABILITY",
+      "path": "addons.data"
+    },
+    {
+      "name": "phrase manifest work cap fails complete exact total even limit0",
+      "code": "WORK_LIMIT_EXCEEDED",
+      "path": "work"
+    },
+    {
+      "name": "phrase manifest work cap fails complete exact total even limit0",
+      "code": "WORK_LIMIT_EXCEEDED",
+      "path": "work"
+    }
+  ],
+  "capErrors": [],
+  "searchCases": 86,
+  "configurations": [
+    "source",
+    "positions",
+    "offsets",
+    "mixed",
+    "reverseMixed"
+  ],
+  "inputHash": "68a1d2cd1f694c2f16d82f079351a1e1402ade31ed50d826994f693c43521e40"
+}

@@ -380,7 +380,7 @@ Adapt the useful companion phrase approach into an optional native capability wi
 
 **Optional positions, original offsets, and phrase parity**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/16)
+**Milestone:** N2 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/16)
 
 **Dependencies:** [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001)
 
@@ -412,7 +412,7 @@ Offer selected-field positional phrase verification and optional original offset
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-2002.md](docs/evidence/RX-2002.md)
 
 
 ## RX-2003

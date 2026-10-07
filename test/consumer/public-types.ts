@@ -6,6 +6,18 @@ import {
 } from '@vmitsaras/raveldex';
 import { createSourceProvider, createSourcePhrases, type SourceProviderOptions, type SourcePhraseOptions } from '@vmitsaras/raveldex/addons/phrases';
 import { createSourceProvider as sourceOnly } from '@vmitsaras/raveldex/addons/phrases/source';
+import { createPositionProvider, type PositionProviderOptions } from '@vmitsaras/raveldex/addons/positions';
+import { createPositionPhrases } from '@vmitsaras/raveldex/addons/phrases/positions';
+import { createPhrases, type MixedPhraseOptions } from '@vmitsaras/raveldex/addons/phrases/mixed';
+// @ts-expect-error private position roots are not a utility export
+import { requirePositionRoot } from '@vmitsaras/raveldex/addons/positions';
+const positionOptions: PositionProviderOptions = { fields: ['title', 'body'], offsets: ['title'] };
+const mixedOptions: MixedPhraseOptions = { fields: { title: 'source', body: 'positions' } };
+void createPositionProvider(positionOptions); void createPositionPhrases({ fields: ['title', 'body'] }); void createPhrases(mixedOptions);
+// @ts-expect-error selected offset fields are readonly
+positionOptions.offsets?.push('body');
+// @ts-expect-error field strategies are readonly
+mixedOptions.fields.title = 'positions';
 // @ts-expect-error source roots and consistency helpers remain private
 import { requireSourceRoot } from '@vmitsaras/raveldex/addons/phrases/source';
 const sourceOptions: SourceProviderOptions = { fields: ['title', 'body'] };

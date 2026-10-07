@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- RX-2002 adds optional selected-field positions, separately selected original UTF-16 offsets, positional/mixed strict phrases with unchanged native scores, and atomic side-index lifecycle.
+
 - RX-2001: add explicit validated direct registrations, transactional selected-field original source and strict phrase leaves through optional public subpaths. Verify independent adjacency/Boolean/BM25 parity, atomic source lifecycle, exhaustive cancellation, typed capability failures and packed/minified boundaries. Record conceptual companion provenance and full graph/work costs.
 
 - RX-1006: export the real core factory, sanitized errors and readonly contracts; hide internal execution seams behind a frozen ordinary-method facade. Add a packed local real-document CLI, explicit section allowlist/source hashes, predeclared judgments, public type/runtime/cancellation checks and reproducible minified/gzip/import/startup evidence. The package stays private and unpublished.

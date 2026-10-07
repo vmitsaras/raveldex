@@ -90,10 +90,11 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
       const provider = providers[requirement.id]; if (!provider) invalid('MISSING_CAPABILITY', 'addons.requires');
       visit(provider);
     }
-    // A declared source consumer cannot omit any enabled-field requirement.
-    if (manifest.dataRequirements.source && registration.refinement) for (const field of manifest.dataRequirements.fields) {
-      const capability = `source:${field}`, provider = providers[capability];
-      if (!manifest.requires.some(ref => ref.id === capability) || !provider?.participant) invalid('MISSING_CAPABILITY', 'addons.source');
+    // Declared source/position consumers require an explicit provider per field.
+    const data = manifest.dataRequirements;
+    if ((data.source || data.positions) && registration.refinement) for (const field of data.fields) {
+      const present = (kind: string): boolean => manifest.requires.some(ref => ref.id === `${kind}:${field}`) && !!providers[`${kind}:${field}`]?.participant;
+      if (!(data.source && present('source') || data.positions && present('positions'))) invalid('MISSING_CAPABILITY', 'addons.data');
     }
     active.delete(manifest.id); visited.add(manifest.id); ordered.push(registration);
   }
