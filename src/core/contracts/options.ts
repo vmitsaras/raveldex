@@ -35,8 +35,9 @@ export function captureOptions(input: unknown = {}, limits: Limits, search: bool
     let units = 0;
     for (const capability of Object.keys(captured)) {
       const registration = capabilities?.providers[capability];
-      if (!registration?.aggregation) invalid('MISSING_CAPABILITY', 'options.extensions');
-      const payload = captureExtension(registration.aggregation.capture, captured[capability], admission, limits, registration.manifest.limits.maxPayloadCodeUnits);
+      const handler = registration?.evidence ?? registration?.aggregation;
+      if (!registration || !handler) invalid('MISSING_CAPABILITY', 'options.extensions');
+      const payload = captureExtension(handler.capture, captured[capability], admission, limits, registration.manifest.limits.maxPayloadCodeUnits);
       units += capability.length + payload.codeUnits; bound(units, limits.maxQueryCodeUnits, 'options.extensions');
       captured[capability] = payload.value;
     }

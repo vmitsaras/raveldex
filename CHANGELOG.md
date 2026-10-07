@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- RX-2004 adds optional factual Inspector data from actual evaluator/scorer paths, selected native arithmetic, bounded owned output and metadata-only diagnostic JSON with explicit facts/source inclusion. Preserves ordinary result/allocation behavior and FIFO/revision/cancellation rules; records independent review, packed/minified parity and the unchanged core size-target miss.
+
 - RX-2003 adds optional typed numeric/set filters and exact conjunctive string facets with complete pre-pagination membership, bounded tagged buckets, immutable payload/output capture and shared revision/work/stop behavior. Adds packed/minified consumer and independent full-scan evidence; records the unchanged 15 KiB core planning-target miss.
 
 - RX-2002 adds optional selected-field positions, separately selected original UTF-16 offsets, positional/mixed strict phrases with unchanged native scores, and atomic side-index lifecycle.

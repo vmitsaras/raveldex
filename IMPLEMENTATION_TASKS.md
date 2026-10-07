@@ -458,7 +458,7 @@ Add optional numeric/set filters and selected keyword facet counts while preserv
 
 **Factual explain and Inspector data**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/18)
+**Milestone:** N2 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/18)
 
 **Dependencies:** [RX-1006](IMPLEMENTATION_TASKS.md#rx-1006)
 
@@ -490,7 +490,7 @@ Expose bounded query/record explanations and diagnostic exports derived from act
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-2004.md](docs/evidence/RX-2004.md)
 
 
 ## RX-2005

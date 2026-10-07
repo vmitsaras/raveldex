@@ -12,6 +12,8 @@ RX-1001–1006 implement and verify the core. The public factory returns an empt
 
 RX-2001 also verifies explicit transactional source retention and strict source phrases through public subpaths; see [phrase evidence](docs/evidence/RX-2001.md). RX-2002 adds selected positions, independent original spans and mixed phrase strategies; see [position evidence](docs/evidence/RX-2002.md). RX-2003 adds typed metadata filters and exact conjunctive facets; see [filter/facet evidence](docs/evidence/RX-2003.md).
 
+RX-2004 adds optional factual Inspector data and bounded JSON diagnostics; see [Inspector evidence](docs/evidence/RX-2004.md). It uses executed native decisions and score arithmetic, with no DOM or persistence.
+
 The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; browser support, other optional capabilities, worker/storage hosting and Unicode snapshot portability require later evidence.
 
 ## Try the core
@@ -159,6 +161,7 @@ npm run test:phrases
 npm run test:positions
 npm run test:filters
 npm run test:facets
+npm run test:inspector
 npm run handoff:status
 npm run handoff:next
 ```
@@ -174,10 +177,40 @@ npm run handoff:next
 | Native core | Validation, basic analysis, dictionary/postings/statistics, lexical/Boolean/equality queries, BM25, exact totals, atomic writes, bounded FIFO execution and typed failures. |
 | Optional source phrases | Explicit selected-field originals and strict phrase leaves. |
 | Optional positions, filters and facets | Selected original occurrence data, typed metadata qualification and complete conjunctive counts. |
-| Planned optional search modules | Source evidence/snippets, Inspector and native DOM UI. |
+| Optional Inspector | Selected eligibility paths, actual native contributions, revision/configuration/resource identity and explicit diagnostic exports. |
+| Planned optional search modules | Original match ranges/snippets and native DOM UI. |
 | Planned host adapters | Worker ownership/transport, snapshots, IndexedDB/recovery and later integrations. |
 | Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
-The RX-2003 packed public core measures **16,025 bytes gzip** (52,212 minified ESM bytes), exceeding the unchanged 15 KiB target by **665 bytes**. Mandatory bounded capture/role coordination increases the RX-2002 snapshot's 15,159 gzip bytes. Boundary review keeps optional parsers, filter/facet evaluators and retained side indexes outside core and consolidates shared metering; validation and semantics remain intact. [RX-2003 evidence](docs/evidence/RX-2003.md) records full selected graphs, the explained planning-target miss and logical work through 10,000 records. Complete bundles overlap and are not additive module costs. The 10,000-record ceiling is not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
+The RX-2004 packed public core measures **16,459 bytes gzip** (53,999 minified ESM bytes), exceeding the unchanged 15 KiB target by **1,099 bytes**. The evidence bridge adds 434 gzip bytes to the RX-2003 snapshot. Boundary review keeps optional parsing, projection, serialization and source access outside core; mandatory validation and shared metering remain intact. [RX-2004 evidence](docs/evidence/RX-2004.md) records full selected graphs, the explained planning-target miss and logical work through 10,000 records. Complete bundles overlap and are not additive module costs. The 10,000-record ceiling is not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
 
-MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2003 is RX-2004; RX-2005 is also dependency-ready.
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2004 is RX-2005 — Original match ranges and bounded snippets.
+
+## Factual inspection
+
+```ts
+import { createRaveldex } from '@vmitsaras/raveldex';
+import { createInspector, exportDiagnostics, type InspectorData } from '@vmitsaras/raveldex/addons/inspector';
+
+const engine = createRaveldex({ schema: { text: { title: {} } }, addons: [createInspector()] });
+await engine.addMany([
+  { id: 'a', text: { title: 'red red car' } },
+  { id: 'b', text: { title: 'red car' } },
+  { id: 'c', text: { title: 'blue' } },
+]);
+const result = await engine.search('red car', {
+  limit: 1,
+  extensions: { inspector: { ids: ['a', 'b', 'c', 'missing'], expectedRevision: 1 } },
+});
+// This application explicitly installed and requested this first-party extension.
+const data = result.extensions!.inspector as InspectorData;
+const diagnostic = exportDiagnostics(data); // Metadata-only JSON, no IDs/query/facts/source.
+console.log(diagnostic.json);
+await engine.dispose();
+```
+
+`createInspector({id?,sourceFields?,maxFacts?,maxWorkUnits?,maxOutputEntries?})` provides `inspector` v1. Requests select up to 128 unique IDs, including excluded, off-page and absent records. `trace.facts` contains actual evaluator paths and selected native field/group/document arithmetic. `documents` distinguishes eligibility from page placement; absent records have score `null`. Full alternatives, absolute ranks and heap bytes are explicitly unavailable. Ordinary searches allocate no full collector even with Inspector installed.
+
+Complete explanations fail on revision mismatch, fact/work/output overflow, cancellation or disposal. Defaults narrow only: 4,096 header-inclusive facts, 10,000,000 module work units, 16,384 structural output entries, and 262,144 aggregate key/string UTF-16 units. Core limits can be stricter. Resource work is labeled `before-evidence-projection`, excluding output projection/final delivery; it is not elapsed time or heap usage.
+
+Source requires an installed selected source provider, `sourceFields` enabled at Inspector creation and explicitly selected in each request. `exportDiagnostics(data, {includeFacts?,includeSource?,maxCodeUnits?})` exports metadata by default. Facts intentionally include selected IDs and canonical query content; source inclusion exports only already-selected originals. Serialized JSON is separately capped at 262,144 UTF-16 units, including escapes and the envelope. When selected sections cannot fit, whole sections are omitted with `complete:false` and `omitted`; a metadata envelope that cannot fit fails. Returned JSON contains the same omission marker. These objects are deeply owned/readonly plain data; source remains text for later safe presentation.

@@ -2,7 +2,7 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution and optional phrases, filters and facets.",
+  "description": "Native modular TypeScript local search \u2014 ESM core with BM25, atomic mutations, cooperative execution and optional phrases, filters, facets and factual inspection.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs",
+    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -35,7 +35,8 @@
     "test:phrases": "npm run build && node --test test/addons/phrases/*.test.mjs",
     "test:positions": "npm run build && node --test test/addons/positions/*.test.mjs",
     "test:filters": "npm run build && node --test test/addons/filters/*.test.mjs",
-    "test:facets": "npm run build && node --test test/addons/facets/*.test.mjs"
+    "test:facets": "npm run build && node --test test/addons/facets/*.test.mjs",
+    "test:inspector": "npm run build && node --test test/addons/inspector/*.test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2",
@@ -74,6 +75,10 @@
     "./addons/facets": {
       "types": "./dist/addons/facets/index.d.ts",
       "import": "./dist/addons/facets/index.js"
+    },
+    "./addons/inspector": {
+      "types": "./dist/addons/inspector/index.d.ts",
+      "import": "./dist/addons/inspector/index.js"
     }
   },
   "files": [
@@ -84,7 +89,8 @@
     "dist/addons/positions/",
     "dist/addons/filters/",
     "dist/addons/facets/",
-    "dist/addons/metadata/"
+    "dist/addons/metadata/",
+    "dist/addons/inspector/"
   ],
   "sideEffects": false
 }

@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 11/21 done · 0 in progress · 2 dependency-ready.
+**Release progress:** 12/21 done · 0 in progress · 1 dependency-ready.
 
 **Planner state:** `ready`.
 
-**Next or resumable release task:** [RX-2004](IMPLEMENTATION_TASKS.md#rx-2004) — Factual explain and Inspector data.
+**Next or resumable release task:** [RX-2005](IMPLEMENTATION_TASKS.md#rx-2005) — Original match ranges and bounded snippets.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -32,7 +32,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | --- | --- | --- | --- |
 | **N0 — Native design adoption** | `RX-0001`–`RX-0002` | 2/2 | Initialize the new repository and adopt bounded native contracts, task tracking, and verification rules. |
 | **N1 — Usable native core alpha** | `RX-1001`–`RX-1006` | 6/6 | Search a real documentation corpus through a packaged consumer using only Raveldex-owned indexing, retrieval, scoring, and execution. |
-| **N2 — Modular search product** | `RX-2001`–`RX-2006` | 3/6 | Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface. |
+| **N2 — Modular search product** | `RX-2001`–`RX-2006` | 4/6 | Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface. |
 | **N3 — Host and migration parity** | `RX-3001`–`RX-3004` | 0/4 | Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics. |
 | **N4 — Native 0.1 qualification** | `RX-4001`–`RX-4003` | 0/3 | Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior. |
 | **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 0/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
@@ -52,7 +52,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001) — Source-verified phrase add-on | `done` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/15) |
 | [RX-2002](IMPLEMENTATION_TASKS.md#rx-2002) — Optional positions, original offsets, and phrase parity | `done` | `RX-2001` | [Issue](https://github.com/vmitsaras/raveldex/issues/16) |
 | [RX-2003](IMPLEMENTATION_TASKS.md#rx-2003) — Structured filters and exact conjunctive facets | `done` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/17) |
-| [RX-2004](IMPLEMENTATION_TASKS.md#rx-2004) — Factual explain and Inspector data | `planned` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/18) |
+| [RX-2004](IMPLEMENTATION_TASKS.md#rx-2004) — Factual explain and Inspector data | `done` | `RX-1006` | [Issue](https://github.com/vmitsaras/raveldex/issues/18) |
 | [RX-2005](IMPLEMENTATION_TASKS.md#rx-2005) — Original match ranges and bounded snippets | `planned` | `RX-2001`, `RX-2002` | [Issue](https://github.com/vmitsaras/raveldex/issues/19) |
 | [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006) — Native DOM UI, Inspector, and documentation pilot | `planned` | `RX-2003`, `RX-2004`, `RX-2005` | [Issue](https://github.com/vmitsaras/raveldex/issues/20) |
 | [RX-3001](IMPLEMENTATION_TASKS.md#rx-3001) — One-owner module-worker adapter | `planned` | `RX-2006` | [Issue](https://github.com/vmitsaras/raveldex/issues/21) |

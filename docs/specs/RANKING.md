@@ -1,6 +1,6 @@
 # Ranking and numerical explanations
 
-Status: Approved. Primary task: RX-1003. Inspector integration: RX-2004. RX-1003 internal scorer/evaluator/facts verified locally; see [evidence](../evidence/RX-1003.md). RX-1004 verifies replacement/deletion statistics against source and hand arithmetic. Public Inspector integration and host qualification remain planned.
+Status: Approved. Primary task: RX-1003. Inspector integration: RX-2004. RX-1003 internal scorer/evaluator/facts verified locally; see [evidence](../evidence/RX-1003.md). RX-1004 verifies replacement/deletion statistics against source and hand arithmetic. RX-2004 verifies optional public Inspector integration locally; see [Inspector evidence](../evidence/RX-2004.md). Host qualification remains planned.
 
 ## Goal and outcome
 
@@ -162,7 +162,7 @@ Explain requests that specify an expected revision fail on mismatch; the initial
 | R-AC06 | Metadata/source/positions/facet configuration does not accidentally alter base ranking. | Compare identical ordinary lexical queries with each representation installed/uninstalled. |
 | R-AC07 | Opt-out tracing avoids explanation allocations. | Inspected import/allocation path and focused instrumentation; do not infer from an empty returned trace. |
 
-Expected areas: `src/core/` scorer/evaluator/statistics, independent numerical fixtures, and later `src/addons/inspector/`. RX-1003 records internal single/multiple-field, Boolean, alternative, trace, ordering and opt-out allocation observations. RX-1004 adds independently rebuilt source comparisons after each mutation plus four hand-derived deletion/replacement/tokenless score observations in [its evidence](../evidence/RX-1004.md). Optional representation parity, direct/worker parity and public Inspector requests remain later task evidence.
+Expected areas: `src/core/` scorer/evaluator/statistics, independent numerical fixtures, and later `src/addons/inspector/`. RX-1003 records internal single/multiple-field, Boolean, alternative, trace, ordering and opt-out allocation observations. RX-1004 adds independently rebuilt source comparisons after each mutation plus four hand-derived deletion/replacement/tokenless score observations in [its evidence](../evidence/RX-1004.md). RX-2001–2003 separately verify optional representation/filter/facet parity. RX-2004 verifies public selected Inspector facts, ordinary allocation guards and bounded exports; direct/worker and broad host parity remain later evidence.
 
 ## Open questions
 

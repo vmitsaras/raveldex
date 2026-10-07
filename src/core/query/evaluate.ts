@@ -68,7 +68,9 @@ export function* evaluate(node: CompiledNode, doc: DocumentEntry, expansions: Re
   }
   if (facts) {
     const keys = Object.freeze(yield* sortedStrings(groups, charge));
-    yield charge(1); facts.record({ kind: 'node', id: doc.id, path, node: node.kind, matched, groups: keys });
+    yield charge(1); facts.record({ kind: 'node', id: doc.id, path, node: node.kind, matched, groups: keys,
+      ...(node.kind === 'predicate' || node.kind === 'extension' ? { capability: node.capability } : {}),
+      ...(node.kind === 'eq' ? { field: node.field } : {}) });
   }
   return { matched, groups };
 }

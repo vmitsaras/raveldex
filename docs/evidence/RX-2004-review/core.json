@@ -1,0 +1,2948 @@
+{
+  "status": "Pass",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "oracle": {
+    "tokenization": "ASCII literal space; no production tokenizer/compiler/retrieval/scorer imports",
+    "records": 41,
+    "queries": 60,
+    "pages": 4,
+    "comparisons": 240,
+    "documentComparisons": 10080,
+    "factCount": 63072,
+    "numericalAssertions": 46498,
+    "ordinaryQueries": 60,
+    "ordinaryFactCalls": 0,
+    "ordinaryCollectorFinishes": 0
+  },
+  "sample": {
+    "input": {
+      "kind": "group",
+      "variants": [
+        {
+          "text": "alpha",
+          "match": "exact"
+        }
+      ]
+    },
+    "data": {
+      "kind": "raveldex-inspector-v1",
+      "revision": 1,
+      "model": "raveldex-bm25-v1",
+      "configuration": {
+        "schema": {
+          "text": {
+            "title": {
+              "boost": 2
+            },
+            "body": {
+              "boost": 0.75
+            }
+          },
+          "metadata": {
+            "flag": {
+              "type": "boolean",
+              "multi": false,
+              "nullable": false
+            },
+            "cost": {
+              "type": "number",
+              "multi": true,
+              "nullable": true
+            },
+            "tag": {
+              "type": "string",
+              "multi": true,
+              "nullable": true
+            }
+          }
+        },
+        "limits": {
+          "maxDocuments": 10000,
+          "maxTextFields": 32,
+          "maxMetadataFields": 32,
+          "maxFieldNameCodeUnits": 64,
+          "maxIdCodeUnits": 256,
+          "maxTextValuesPerField": 64,
+          "maxMetadataValuesPerField": 128,
+          "maxMetadataStringCodeUnits": 1024,
+          "maxMetadataCodeUnitsPerRecord": 32768,
+          "maxTextCodeUnitsPerValue": 65536,
+          "maxTextCodeUnitsPerRecord": 262144,
+          "maxCorpusTextCodeUnits": 67108864,
+          "maxRawTokenCodeUnits": 256,
+          "maxTermCodeUnits": 256,
+          "maxTokensPerRecord": 32768,
+          "maxCorpusTokens": 4000000,
+          "maxDictionaryEntries": 250000,
+          "maxPostingEntries": 2000000,
+          "maxMutationBatch": 256,
+          "maxAdmissionEntries": 16384,
+          "maxQueryNodes": 128,
+          "maxQueryDepth": 16,
+          "maxQueryLexicalCodeUnits": 2048,
+          "maxQueryCodeUnits": 16384,
+          "maxQueryTokens": 64,
+          "maxQueryGroups": 64,
+          "maxVariantsPerGroup": 16,
+          "maxExpansionsPerGroup": 256,
+          "maxQueryExpansions": 1024,
+          "minPrefixCodePoints": 2,
+          "maxHits": 100,
+          "maxQueuedOperations": 32,
+          "maxSearchWorkUnits": 10000000,
+          "maxMutationWorkUnits": 50000000,
+          "checkpointWorkUnits": 2048,
+          "maxDeadlineMs": 60000
+        },
+        "analyzer": {
+          "id": "basic-v1",
+          "environmentProfile": "unqualified"
+        },
+        "capabilities": [
+          {
+            "id": "filters",
+            "version": "0.0.0",
+            "contractVersion": 1,
+            "roles": [
+              "leaf-refinement"
+            ],
+            "provides": [
+              {
+                "id": "numeric-range",
+                "contractVersion": 1
+              },
+              {
+                "id": "set-membership",
+                "contractVersion": 1
+              }
+            ],
+            "requires": []
+          },
+          {
+            "id": "inspector",
+            "version": "0.0.0",
+            "contractVersion": 1,
+            "roles": [
+              "evidence"
+            ],
+            "provides": [
+              {
+                "id": "inspector",
+                "contractVersion": 1
+              }
+            ],
+            "requires": []
+          }
+        ]
+      },
+      "query": {
+        "traceScope": "selected-documents",
+        "alternativeScope": "selected-best-per-group-and-field",
+        "fullAlternatives": {
+          "status": "unavailable",
+          "reason": "not-collected"
+        }
+      },
+      "trace": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "analyzer": {
+          "id": "basic-v1",
+          "environmentProfile": "unqualified"
+        },
+        "query": "{\"kind\":\"group\",\"group\":{\"key\":\"[[\\\"body\\\",\\\"title\\\"],[\\\"[\\\\\\\"alpha\\\\\\\",\\\\\\\"exact\\\\\\\",1]\\\"]]\",\"fields\":[\"body\",\"title\"],\"variants\":[{\"term\":\"alpha\",\"match\":\"exact\",\"weight\":1,\"key\":\"[\\\"alpha\\\",\\\"exact\\\",1]\"}]}}",
+        "tieBreaker": "utf16-id-ascending",
+        "facts": [
+          {
+            "kind": "node",
+            "id": "row-12",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-12",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 2,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 0.7125,
+            "tfPart": 1.2846715328467155,
+            "base": 0.6399202406324342,
+            "selected": 0.6399202406324342
+          },
+          {
+            "kind": "field",
+            "id": "row-12",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 7,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.2913705583756345,
+            "tfPart": 0.9601240584847144,
+            "base": 0.8551076411982048,
+            "selected": 0.8551076411982048
+          },
+          {
+            "kind": "group",
+            "id": "row-12",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.495027881830639
+          },
+          {
+            "kind": "document",
+            "id": "row-12",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.495027881830639
+          },
+          {
+            "kind": "node",
+            "id": "row-33",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-33",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-34",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-34",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 6,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.149746192893401,
+            "tfPart": 1.0233766233766233,
+            "base": 0.9114417691543555,
+            "selected": 0.9114417691543555
+          },
+          {
+            "kind": "group",
+            "id": "row-34",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.9114417691543555
+          },
+          {
+            "kind": "document",
+            "id": "row-34",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.9114417691543555
+          },
+          {
+            "kind": "node",
+            "id": "row-05",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-05",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 4,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.125,
+            "tfPart": 1.035294117647059,
+            "base": 0.5157004292155499,
+            "selected": 0.5157004292155499
+          },
+          {
+            "kind": "field",
+            "id": "row-05",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 7,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.2913705583756345,
+            "tfPart": 0.9601240584847144,
+            "base": 0.8551076411982048,
+            "selected": 0.8551076411982048
+          },
+          {
+            "kind": "group",
+            "id": "row-05",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.3708080704137546
+          },
+          {
+            "kind": "document",
+            "id": "row-05",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.3708080704137546
+          },
+          {
+            "kind": "node",
+            "id": "row-25",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-25",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 2,
+            "df": 20,
+            "N": 31,
+            "length": 9,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.5746192893401014,
+            "tfPart": 1.230900312411247,
+            "base": 1.0962669390425153,
+            "selected": 1.0962669390425153
+          },
+          {
+            "kind": "group",
+            "id": "row-25",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.0962669390425153
+          },
+          {
+            "kind": "document",
+            "id": "row-25",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.0962669390425153
+          },
+          {
+            "kind": "node",
+            "id": "row-14",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-14",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 2,
+            "df": 17,
+            "N": 33,
+            "length": 5,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.33125,
+            "tfPart": 1.3208255159474673,
+            "base": 0.6579292530329718,
+            "selected": 0.6579292530329718
+          },
+          {
+            "kind": "field",
+            "id": "row-14",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 4,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 0.866497461928934,
+            "tfPart": 1.1786782703290726,
+            "base": 1.0497568377396507,
+            "selected": 1.0497568377396507
+          },
+          {
+            "kind": "group",
+            "id": "row-14",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.7076860907726226
+          },
+          {
+            "kind": "document",
+            "id": "row-14",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.7076860907726226
+          },
+          {
+            "kind": "node",
+            "id": "row-31",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-31",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-03",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-03",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-20",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-20",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 3,
+            "df": 20,
+            "N": 31,
+            "length": 10,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.716243654822335,
+            "tfPart": 1.3994187923797223,
+            "base": 1.2463532103224721,
+            "selected": 1.2463532103224721
+          },
+          {
+            "kind": "group",
+            "id": "row-20",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.2463532103224721
+          },
+          {
+            "kind": "document",
+            "id": "row-20",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.2463532103224721
+          },
+          {
+            "kind": "node",
+            "id": "row-18",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-18",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-27",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-27",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 6,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.149746192893401,
+            "tfPart": 1.0233766233766233,
+            "base": 0.9114417691543555,
+            "selected": 0.9114417691543555
+          },
+          {
+            "kind": "group",
+            "id": "row-27",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.9114417691543555
+          },
+          {
+            "kind": "document",
+            "id": "row-27",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.9114417691543555
+          },
+          {
+            "kind": "node",
+            "id": "row-11",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-11",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 3,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 0.91875,
+            "tfPart": 1.1465798045602607,
+            "base": 0.5711340258413257,
+            "selected": 0.5711340258413257
+          },
+          {
+            "kind": "group",
+            "id": "row-11",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.5711340258413257
+          },
+          {
+            "kind": "document",
+            "id": "row-11",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.5711340258413257
+          },
+          {
+            "kind": "node",
+            "id": "row-16",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-16",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-37",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-37",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 2,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 0.7125,
+            "tfPart": 1.2846715328467155,
+            "base": 0.6399202406324342,
+            "selected": 0.6399202406324342
+          },
+          {
+            "kind": "group",
+            "id": "row-37",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.6399202406324342
+          },
+          {
+            "kind": "document",
+            "id": "row-37",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.6399202406324342
+          },
+          {
+            "kind": "node",
+            "id": "row-06",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-06",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-01",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-01",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 5,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.33125,
+            "tfPart": 0.9436997319034854,
+            "base": 0.47007545826618496,
+            "selected": 0.47007545826618496
+          },
+          {
+            "kind": "group",
+            "id": "row-01",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.47007545826618496
+          },
+          {
+            "kind": "document",
+            "id": "row-01",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.47007545826618496
+          },
+          {
+            "kind": "node",
+            "id": "row-22",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-22",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 3,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 0.7248730964467005,
+            "tfPart": 1.275456150676869,
+            "base": 1.1359493503145075,
+            "selected": 1.1359493503145075
+          },
+          {
+            "kind": "group",
+            "id": "row-22",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.1359493503145075
+          },
+          {
+            "kind": "document",
+            "id": "row-22",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.1359493503145075
+          },
+          {
+            "kind": "node",
+            "id": "row-08",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-08",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 6,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.5374999999999999,
+            "tfPart": 0.8669950738916258,
+            "base": 0.4318673545154852,
+            "selected": 0.4318673545154852
+          },
+          {
+            "kind": "field",
+            "id": "row-08",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 2,
+            "df": 20,
+            "N": 31,
+            "length": 5,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.0081218274111674,
+            "tfPart": 1.4627067161660483,
+            "base": 1.3027188296890642,
+            "selected": 1.3027188296890642
+          },
+          {
+            "kind": "group",
+            "id": "row-08",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.7345861842045494
+          },
+          {
+            "kind": "document",
+            "id": "row-08",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.7345861842045494
+          },
+          {
+            "kind": "node",
+            "id": "row-29",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-29",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-13",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-13",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 2,
+            "df": 17,
+            "N": 33,
+            "length": 4,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.125,
+            "tfPart": 1.4080000000000001,
+            "base": 0.7013525837331479,
+            "selected": 0.7013525837331479
+          },
+          {
+            "kind": "field",
+            "id": "row-13",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 2,
+            "df": 20,
+            "N": 31,
+            "length": 4,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 0.866497461928934,
+            "tfPart": 1.5349743226491943,
+            "base": 1.3670819523175832,
+            "selected": 1.3670819523175832
+          },
+          {
+            "kind": "group",
+            "id": "row-13",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 2.0684345360507312
+          },
+          {
+            "kind": "document",
+            "id": "row-13",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 2.0684345360507312
+          },
+          {
+            "kind": "node",
+            "id": "row-35",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-35",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 3,
+            "df": 20,
+            "N": 31,
+            "length": 11,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.8578680203045685,
+            "tfPart": 1.3586206896551725,
+            "base": 1.2100175211187136,
+            "selected": 1.2100175211187136
+          },
+          {
+            "kind": "group",
+            "id": "row-35",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.2100175211187136
+          },
+          {
+            "kind": "document",
+            "id": "row-35",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.2100175211187136
+          },
+          {
+            "kind": "node",
+            "id": "row-04",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-04",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 7,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.2913705583756345,
+            "tfPart": 0.9601240584847144,
+            "base": 0.8551076411982048,
+            "selected": 0.8551076411982048
+          },
+          {
+            "kind": "group",
+            "id": "row-04",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.8551076411982048
+          },
+          {
+            "kind": "document",
+            "id": "row-04",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.8551076411982048
+          },
+          {
+            "kind": "node",
+            "id": "manual-c",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "manual-c",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 3,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 0.91875,
+            "tfPart": 1.1465798045602607,
+            "base": 0.5711340258413257,
+            "selected": 0.5711340258413257
+          },
+          {
+            "kind": "group",
+            "id": "manual-c",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.5711340258413257
+          },
+          {
+            "kind": "document",
+            "id": "manual-c",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.5711340258413257
+          },
+          {
+            "kind": "node",
+            "id": "row-24",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-24",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-15",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-15",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 5,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.0081218274111674,
+            "tfPart": 1.0955510616784634,
+            "base": 0.9757219141478001,
+            "selected": 0.9757219141478001
+          },
+          {
+            "kind": "group",
+            "id": "row-15",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.9757219141478001
+          },
+          {
+            "kind": "document",
+            "id": "row-15",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.9757219141478001
+          },
+          {
+            "kind": "node",
+            "id": "row-32",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-32",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 2,
+            "df": 17,
+            "N": 33,
+            "length": 4,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.125,
+            "tfPart": 1.4080000000000001,
+            "base": 0.7013525837331479,
+            "selected": 0.7013525837331479
+          },
+          {
+            "kind": "field",
+            "id": "row-32",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 3,
+            "df": 20,
+            "N": 31,
+            "length": 10,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.716243654822335,
+            "tfPart": 1.3994187923797223,
+            "base": 1.2463532103224721,
+            "selected": 1.2463532103224721
+          },
+          {
+            "kind": "group",
+            "id": "row-32",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.94770579405562
+          },
+          {
+            "kind": "document",
+            "id": "row-32",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.94770579405562
+          },
+          {
+            "kind": "node",
+            "id": "row-02",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-02",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-19",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-19",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 5,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.0081218274111674,
+            "tfPart": 1.0955510616784634,
+            "base": 0.9757219141478001,
+            "selected": 0.9757219141478001
+          },
+          {
+            "kind": "group",
+            "id": "row-19",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.9757219141478001
+          },
+          {
+            "kind": "document",
+            "id": "row-19",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.9757219141478001
+          },
+          {
+            "kind": "node",
+            "id": "manual-a",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "manual-a",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 3,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 0.91875,
+            "tfPart": 1.1465798045602607,
+            "base": 0.5711340258413257,
+            "selected": 0.5711340258413257
+          },
+          {
+            "kind": "field",
+            "id": "manual-a",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 2,
+            "df": 20,
+            "N": 31,
+            "length": 3,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 0.7248730964467005,
+            "tfPart": 1.6147540983606559,
+            "base": 1.438135578378799,
+            "selected": 1.438135578378799
+          },
+          {
+            "kind": "group",
+            "id": "manual-a",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 2.009269604220125
+          },
+          {
+            "kind": "document",
+            "id": "manual-a",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 2.009269604220125
+          },
+          {
+            "kind": "node",
+            "id": "row-26",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-26",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 3,
+            "df": 20,
+            "N": 31,
+            "length": 10,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.716243654822335,
+            "tfPart": 1.3994187923797223,
+            "base": 1.2463532103224721,
+            "selected": 1.2463532103224721
+          },
+          {
+            "kind": "group",
+            "id": "row-26",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.2463532103224721
+          },
+          {
+            "kind": "document",
+            "id": "row-26",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.2463532103224721
+          },
+          {
+            "kind": "node",
+            "id": "row-17",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-17",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 3,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 0.91875,
+            "tfPart": 1.1465798045602607,
+            "base": 0.5711340258413257,
+            "selected": 0.5711340258413257
+          },
+          {
+            "kind": "group",
+            "id": "row-17",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.5711340258413257
+          },
+          {
+            "kind": "document",
+            "id": "row-17",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.5711340258413257
+          },
+          {
+            "kind": "node",
+            "id": "row-30",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-30",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-00",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-00",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 6,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.5374999999999999,
+            "tfPart": 0.8669950738916258,
+            "base": 0.4318673545154852,
+            "selected": 0.4318673545154852
+          },
+          {
+            "kind": "group",
+            "id": "row-00",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.4318673545154852
+          },
+          {
+            "kind": "document",
+            "id": "row-00",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.4318673545154852
+          },
+          {
+            "kind": "node",
+            "id": "row-21",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-21",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 4,
+            "df": 17,
+            "N": 33,
+            "length": 13,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 2.9812499999999997,
+            "tfPart": 1.2605192479856762,
+            "base": 0.6278895109517887,
+            "selected": 0.6278895109517887
+          },
+          {
+            "kind": "field",
+            "id": "row-21",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 3,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 0.7248730964467005,
+            "tfPart": 1.275456150676869,
+            "base": 1.1359493503145075,
+            "selected": 1.1359493503145075
+          },
+          {
+            "kind": "group",
+            "id": "row-21",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.7638388612662963
+          },
+          {
+            "kind": "document",
+            "id": "row-21",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.7638388612662963
+          },
+          {
+            "kind": "node",
+            "id": "row-28",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-28",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 2,
+            "df": 20,
+            "N": 31,
+            "length": 9,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.5746192893401014,
+            "tfPart": 1.230900312411247,
+            "base": 1.0962669390425153,
+            "selected": 1.0962669390425153
+          },
+          {
+            "kind": "group",
+            "id": "row-28",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.0962669390425153
+          },
+          {
+            "kind": "document",
+            "id": "row-28",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.0962669390425153
+          },
+          {
+            "kind": "node",
+            "id": "row-10",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-10",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-36",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-36",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-07",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-07",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 3,
+            "df": 17,
+            "N": 33,
+            "length": 8,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.95,
+            "tfPart": 1.3333333333333335,
+            "base": 0.6641596436866931,
+            "selected": 0.6641596436866931
+          },
+          {
+            "kind": "group",
+            "id": "row-07",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.6641596436866931
+          },
+          {
+            "kind": "document",
+            "id": "row-07",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.6641596436866931
+          },
+          {
+            "kind": "node",
+            "id": "manual-b",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "manual-b",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 2,
+            "df": 17,
+            "N": 33,
+            "length": 3,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 0.91875,
+            "tfPart": 1.5074946466809422,
+            "base": 0.7509128305494088,
+            "selected": 0.7509128305494088
+          },
+          {
+            "kind": "group",
+            "id": "manual-b",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 0.7509128305494088
+          },
+          {
+            "kind": "document",
+            "id": "manual-b",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 0.7509128305494088
+          },
+          {
+            "kind": "node",
+            "id": "row-23",
+            "path": "query",
+            "node": "group",
+            "matched": false,
+            "groups": []
+          },
+          {
+            "kind": "document",
+            "id": "row-23",
+            "exists": true,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          },
+          {
+            "kind": "node",
+            "id": "row-09",
+            "path": "query",
+            "node": "group",
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ]
+          },
+          {
+            "kind": "field",
+            "id": "row-09",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "body",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 0.75,
+            "tf": 1,
+            "df": 17,
+            "N": 33,
+            "length": 8,
+            "totalLength": 144,
+            "avgLength": 4.363636363636363,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.664159643686693,
+            "normalizer": 1.95,
+            "tfPart": 0.7457627118644068,
+            "base": 0.3714791227400147,
+            "selected": 0.3714791227400147
+          },
+          {
+            "kind": "field",
+            "id": "row-09",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "field": "title",
+            "term": "alpha",
+            "variant": "[\"alpha\",\"exact\",1]",
+            "weight": 1,
+            "boost": 2,
+            "tf": 1,
+            "df": 20,
+            "N": 31,
+            "length": 8,
+            "totalLength": 197,
+            "avgLength": 6.354838709677419,
+            "k1": 1.2,
+            "b": 0.75,
+            "idf": 0.4453110166553641,
+            "normalizer": 1.4329949238578679,
+            "tfPart": 0.9042353432088464,
+            "base": 0.8053319199600869,
+            "selected": 0.8053319199600869
+          },
+          {
+            "kind": "group",
+            "id": "row-09",
+            "group": "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]",
+            "score": 1.1768110427001015
+          },
+          {
+            "kind": "document",
+            "id": "row-09",
+            "exists": true,
+            "matched": true,
+            "groups": [
+              "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+            ],
+            "score": 1.1768110427001015
+          },
+          {
+            "kind": "document",
+            "id": "missing-selected",
+            "exists": false,
+            "matched": false,
+            "groups": [],
+            "score": 0
+          }
+        ]
+      },
+      "documents": [
+        {
+          "id": "manual-a",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 2.009269604220125,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "manual-b",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.7509128305494088,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "manual-c",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.5711340258413257,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-00",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.4318673545154852,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-01",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.47007545826618496,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-02",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-03",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-04",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.8551076411982048,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-05",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.3708080704137546,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-06",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-07",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.6641596436866931,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-08",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.7345861842045494,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-09",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.1768110427001015,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-10",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-11",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.5711340258413257,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-12",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.495027881830639,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-13",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 2.0684345360507312,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-14",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.7076860907726226,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-15",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.9757219141478001,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-16",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-17",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.5711340258413257,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-18",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-19",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.9757219141478001,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-20",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.2463532103224721,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-21",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.7638388612662963,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-22",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.1359493503145075,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-23",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-24",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-25",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.0962669390425153,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-26",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.2463532103224721,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-27",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.9114417691543555,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-28",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.0962669390425153,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-29",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-30",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-31",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-32",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.94770579405562,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-33",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-34",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.9114417691543555,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-35",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 1.2100175211187136,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-36",
+          "exists": true,
+          "eligibility": "excluded",
+          "score": 0,
+          "groups": [],
+          "page": {
+            "placement": "excluded",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "row-37",
+          "exists": true,
+          "eligibility": "matched",
+          "score": 0.6399202406324342,
+          "groups": [
+            "[[\"body\",\"title\"],[\"[\\\"alpha\\\",\\\"exact\\\",1]\"]]"
+          ],
+          "page": {
+            "placement": "outside-page",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        },
+        {
+          "id": "missing-selected",
+          "exists": false,
+          "eligibility": "absent",
+          "score": null,
+          "groups": [],
+          "page": {
+            "placement": "absent",
+            "index": null
+          },
+          "absoluteRank": {
+            "status": "unavailable",
+            "reason": "not-collected"
+          },
+          "source": {
+            "status": "not-requested"
+          }
+        }
+      ],
+      "result": {
+        "total": 28,
+        "returned": 0
+      },
+      "resources": {
+        "outcome": "complete",
+        "unit": "work-v1",
+        "searchWorkUnits": 11673,
+        "maxSearchWorkUnits": 10000000,
+        "scope": "before-evidence-projection",
+        "counts": {
+          "documents": 41,
+          "textCodeUnits": 1969,
+          "tokens": 341,
+          "dictionaryEntries": 12,
+          "postingEntries": 224
+        },
+        "heapBytes": {
+          "status": "unavailable",
+          "reason": "not-measured"
+        }
+      },
+      "numericalTolerance": {
+        "absolute": 1e-12,
+        "relative": 1e-12
+      }
+    },
+    "diagnostic": {
+      "kind": "raveldex-inspector-v1",
+      "revision": 1,
+      "model": "raveldex-bm25-v1",
+      "configuration": {
+        "schema": {
+          "text": {
+            "title": {
+              "boost": 2
+            },
+            "body": {
+              "boost": 0.75
+            }
+          },
+          "metadata": {
+            "flag": {
+              "type": "boolean",
+              "multi": false,
+              "nullable": false
+            },
+            "cost": {
+              "type": "number",
+              "multi": true,
+              "nullable": true
+            },
+            "tag": {
+              "type": "string",
+              "multi": true,
+              "nullable": true
+            }
+          }
+        },
+        "limits": {
+          "maxDocuments": 10000,
+          "maxTextFields": 32,
+          "maxMetadataFields": 32,
+          "maxFieldNameCodeUnits": 64,
+          "maxIdCodeUnits": 256,
+          "maxTextValuesPerField": 64,
+          "maxMetadataValuesPerField": 128,
+          "maxMetadataStringCodeUnits": 1024,
+          "maxMetadataCodeUnitsPerRecord": 32768,
+          "maxTextCodeUnitsPerValue": 65536,
+          "maxTextCodeUnitsPerRecord": 262144,
+          "maxCorpusTextCodeUnits": 67108864,
+          "maxRawTokenCodeUnits": 256,
+          "maxTermCodeUnits": 256,
+          "maxTokensPerRecord": 32768,
+          "maxCorpusTokens": 4000000,
+          "maxDictionaryEntries": 250000,
+          "maxPostingEntries": 2000000,
+          "maxMutationBatch": 256,
+          "maxAdmissionEntries": 16384,
+          "maxQueryNodes": 128,
+          "maxQueryDepth": 16,
+          "maxQueryLexicalCodeUnits": 2048,
+          "maxQueryCodeUnits": 16384,
+          "maxQueryTokens": 64,
+          "maxQueryGroups": 64,
+          "maxVariantsPerGroup": 16,
+          "maxExpansionsPerGroup": 256,
+          "maxQueryExpansions": 1024,
+          "minPrefixCodePoints": 2,
+          "maxHits": 100,
+          "maxQueuedOperations": 32,
+          "maxSearchWorkUnits": 10000000,
+          "maxMutationWorkUnits": 50000000,
+          "checkpointWorkUnits": 2048,
+          "maxDeadlineMs": 60000
+        },
+        "analyzer": {
+          "id": "basic-v1",
+          "environmentProfile": "unqualified"
+        },
+        "capabilities": [
+          {
+            "id": "filters",
+            "version": "0.0.0",
+            "contractVersion": 1,
+            "roles": [
+              "leaf-refinement"
+            ],
+            "provides": [
+              {
+                "id": "numeric-range",
+                "contractVersion": 1
+              },
+              {
+                "id": "set-membership",
+                "contractVersion": 1
+              }
+            ],
+            "requires": []
+          },
+          {
+            "id": "inspector",
+            "version": "0.0.0",
+            "contractVersion": 1,
+            "roles": [
+              "evidence"
+            ],
+            "provides": [
+              {
+                "id": "inspector",
+                "contractVersion": 1
+              }
+            ],
+            "requires": []
+          }
+        ]
+      },
+      "result": {
+        "total": 28,
+        "returned": 0
+      },
+      "resources": {
+        "outcome": "complete",
+        "unit": "work-v1",
+        "searchWorkUnits": 11673,
+        "maxSearchWorkUnits": 10000000,
+        "scope": "before-evidence-projection",
+        "counts": {
+          "documents": 41,
+          "textCodeUnits": 1969,
+          "tokens": 341,
+          "dictionaryEntries": 12,
+          "postingEntries": 224
+        },
+        "heapBytes": {
+          "status": "unavailable",
+          "reason": "not-measured"
+        }
+      },
+      "numericalTolerance": {
+        "absolute": 1e-12,
+        "relative": 1e-12
+      },
+      "diagnostic": {
+        "complete": true,
+        "omitted": []
+      }
+    }
+  },
+  "sourceHashes": {
+    "src/core/query/search.ts": "cf047b461c985d786404a8f5e881529e33ebcd36c9f3ac8a090a22b57b18728f",
+    "src/core/query/evaluate.ts": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670",
+    "src/core/ranking/bm25.ts": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+    "src/addons/inspector/inspector.ts": "d70bfcef4e531b76f426827c2b238b156d1892c13401bbc81c2d8c340fe0b0fe",
+    "src/addons/inspector/diagnostics.ts": "94fd70aa463f51f7ccdb29bb22f1e485af657925c8863cf953764fc11b22107a"
+  }
+}

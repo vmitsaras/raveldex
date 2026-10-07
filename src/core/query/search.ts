@@ -20,7 +20,7 @@ import { prepareRefinements } from '../capabilities/refinement.js';
 
 export interface SearchEvaluation extends SearchResult { readonly trace?: ScoreTrace }
 
-export interface OwnedSearch { readonly query: OwnedQuery; readonly options: OwnedSearchOptions; readonly trace?: OwnedTraceRequest }
+export interface OwnedSearch { readonly query: OwnedQuery; readonly options: OwnedSearchOptions; readonly trace?: OwnedTraceRequest; readonly evidence?: string }
 export type SearchPhase = 'start' | 'analysis' | 'expansion' | 'dictionary' | 'postings' | 'evaluation' | 'scoring' | 'aggregation' | 'selection' | 'result';
 export interface SearchControl {
   readonly checkpoint?: (phase: SearchPhase) => void;
@@ -34,8 +34,17 @@ export function captureSearch(configuration: OwnedConfiguration, input: unknown,
   const page = captureOptions(options, limits, true, admission, configuration.capabilities);
   if (page.signal?.aborted) invalid('CANCELLED', 'options.signal');
   const query = captureQuery(input, schema, limits, admission, configuration.capabilities);
-  const request = trace === undefined ? undefined : captureTrace(trace, limits, admission);
-  return Object.freeze({ query, options: page, ...(request ? { trace: request } : {}) });
+  let request = trace === undefined ? undefined : captureTrace(trace, limits, admission);
+  let evidence: string | undefined;
+  for (const capability of Object.keys(page.extensions ?? {})) {
+    const handler = configuration.capabilities?.providers[capability]?.evidence;
+    if (!handler) continue;
+    // One complete selected trace per operation; aliases cannot reset its cap.
+    if (request || evidence) invalid('INVALID_OPTIONS', 'options.extensions.evidence');
+    request = captureTrace(handler.select(page.extensions![capability]), limits, admission);
+    evidence = capability;
+  }
+  return Object.freeze({ query, options: page, ...(request ? { trace: request } : {}), ...(evidence ? { evidence } : {}) });
 }
 
 export function executeSearch(root: IndexRoot, input: unknown, options?: unknown, trace?: unknown): Generator<WorkStep, SearchEvaluation> {
@@ -103,9 +112,19 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
     for (const aggregation of extensions.aggregations) result[aggregation.capability] = yield* aggregation.finish();
     additional = Object.freeze(result);
   }
+  const scoreTrace = collector?.finish(root.revision, root.configuration.analyzer, compiled.key);
+  if (extensions?.evidence) {
+    boundary('aggregation');
+    if (!scoreTrace) invalid('INTERNAL_ERROR', 'extensions.evidence');
+    const publicResult: SearchResult = Object.freeze({ revision: root.revision, model: 'raveldex-bm25-v1', completeness: 'complete', total, hits, ...(additional ? { extensions: additional } : {}) });
+    const value = yield* extensions.evidence.finish(Object.freeze({ trace: scoreTrace, result: publicResult, counts: root.counts,
+      searchWorkUnits: budget.consumed, maxSearchWorkUnits: root.configuration.limits.maxSearchWorkUnits,
+      capabilities: Object.freeze(root.configuration.capabilities!.ordered.map(registration => registration.manifest)) }));
+    additional = Object.freeze({ ...additional, [extensions.evidence.capability]: value });
+  }
   boundary('result');
   yield charge(1);
   const result = Object.freeze({ revision: root.revision, model: 'raveldex-bm25-v1', completeness: 'complete', total, hits,
-    ...(collector ? { trace: collector.finish(root.revision, root.configuration.analyzer, compiled.key) } : {}), ...(additional ? { extensions: additional } : {}) });
+    ...(scoreTrace && !request.evidence ? { trace: scoreTrace } : {}), ...(additional ? { extensions: additional } : {}) });
   check(); return result;
 }

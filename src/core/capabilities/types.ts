@@ -2,11 +2,14 @@ import type { Admission } from '../contracts/data.js';
 import type { AnalyzerDescriptor, OwnedConfiguration, OwnedRecord, OwnedSchema } from '../contracts/types.js';
 import type { Limits } from '../limits/limits.js';
 import type { WorkStep } from '../index/directory.js';
+import type { StateCounts } from '../limits/limits.js';
+import type { ScoreTrace, TraceRequest } from '../trace/facts.js';
+import type { SearchResult } from '../contracts/types.js';
 
 export interface CapabilityReference { readonly id: string; readonly contractVersion: number }
 export interface CapabilityManifest {
   readonly id: string; readonly version: string; readonly contractVersion: number;
-  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation')[];
+  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation' | 'evidence')[];
   readonly provides: readonly CapabilityReference[]; readonly requires: readonly CapabilityReference[];
   readonly dataRequirements: { readonly fields: readonly string[]; readonly source: boolean; readonly positions: boolean; readonly offsets: boolean; readonly metadata: boolean };
   readonly indexEffect: 'none' | 'transactional'; readonly rebuildPolicy: 'new-index';
@@ -62,12 +65,31 @@ export interface AggregationImplementation {
   capture(input: unknown, context: PayloadContext): CapturedPayload;
   prepare(context: MetadataContext): Generator<WorkStep, PreparedAggregation>;
 }
+/** Opt-in factual evidence receives actual decisions, never a core root/scorer. */
+export interface EvidenceContext extends MetadataContext {
+  readonly analyzer: AnalyzerDescriptor;
+  state(capability: string): unknown;
+}
+export interface EvidenceResultContext {
+  readonly trace: ScoreTrace; readonly result: SearchResult;
+  readonly counts: StateCounts; readonly searchWorkUnits: number;
+  readonly maxSearchWorkUnits: number; readonly capabilities: readonly CapabilityManifest[];
+}
+export interface PreparedEvidence {
+  finish(context: EvidenceResultContext): Generator<WorkStep, AggregationOutput>;
+}
+export interface EvidenceImplementation {
+  capture(input: unknown, context: PayloadContext): CapturedPayload;
+  select(payload: unknown): TraceRequest;
+  prepare(context: EvidenceContext): Generator<WorkStep, PreparedEvidence>;
+}
 export interface AddonRegistration {
   readonly manifest: CapabilityManifest;
   readonly participant?: ParticipantImplementation;
   readonly refinement?: RefinementImplementation;
   readonly predicate?: PredicateImplementation;
   readonly aggregation?: AggregationImplementation;
+  readonly evidence?: EvidenceImplementation;
 }
 export interface CapturedRegistration extends AddonRegistration { readonly manifest: CapabilityManifest }
 export interface CapabilitySet {

@@ -11,6 +11,23 @@ import { createPositionPhrases } from '@vmitsaras/raveldex/addons/phrases/positi
 import { createPhrases, type MixedPhraseOptions } from '@vmitsaras/raveldex/addons/phrases/mixed';
 import { createFilters, type FilterOptions, type NumericRangePayload, type SetMembershipPayload } from '@vmitsaras/raveldex/addons/filters';
 import { createFacets, type FacetOptions, type FacetRequest, type FacetResult } from '@vmitsaras/raveldex/addons/facets';
+import { createInspector, exportDiagnostics, type InspectorOptions, type InspectorRequest, type InspectorData, type DiagnosticExport } from '@vmitsaras/raveldex/addons/inspector';
+const inspectorOptions: InspectorOptions = { sourceFields: ['title'], maxFacts: 100 };
+const inspectorRequest: InspectorRequest = { ids: ['a'], expectedRevision: 1, sourceFields: ['title'] };
+void createInspector(inspectorOptions);
+declare const inspection: InspectorData;
+const diagnostic: DiagnosticExport = exportDiagnostics(inspection, { includeFacts: true });
+void diagnostic;
+// @ts-expect-error selected IDs remain readonly
+inspectorRequest.ids.push('b');
+// @ts-expect-error original source selection remains readonly
+inspectorOptions.sourceFields?.push('body');
+// @ts-expect-error actual score facts remain readonly
+inspection.trace.facts.push({ kind: 'group', id: 'a', group: 'x', score: 1 });
+// @ts-expect-error inspector private payload capture is not exported
+import { captureRequest } from '@vmitsaras/raveldex/addons/inspector';
+// @ts-expect-error inspector private source readers are not public subpaths
+import { createInspector as hiddenInspector } from '@vmitsaras/raveldex/dist/addons/inspector/index.js';
 const filters: FilterOptions = { fields: ['price', 'tags'] };
 const facets: FacetOptions = { fields: ['tags'], maxDistinctValuesPerField: 100, maxBucketsPerField: 10 };
 const range: NumericRangePayload = { field: 'price', gte: 10, lt: 20 };

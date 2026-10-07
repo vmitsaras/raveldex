@@ -14,7 +14,7 @@ export interface FieldFact {
   readonly idf: number; readonly normalizer: number; readonly tfPart: number; readonly base: number; readonly selected: number;
 }
 export type Fact = FieldFact
-  | { readonly kind: 'node'; readonly id: string; readonly path: string; readonly node: string; readonly matched: boolean; readonly groups: readonly string[] }
+  | { readonly kind: 'node'; readonly id: string; readonly path: string; readonly node: string; readonly matched: boolean; readonly groups: readonly string[]; readonly capability?: string; readonly field?: string }
   | { readonly kind: 'group'; readonly id: string; readonly group: string; readonly score: number }
   | { readonly kind: 'document'; readonly id: string; readonly exists: boolean; readonly matched: boolean; readonly groups: readonly string[]; readonly score: number };
 export interface ScoreTrace {

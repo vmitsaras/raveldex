@@ -1,4 +1,4 @@
-import type { MetadataContext, RefinementContext } from './types.js';
+import type { MetadataContext, RefinementContext, EvidenceResultContext, AggregationOutput } from './types.js';
 import { bound, invalid } from '../errors/error.js';
 import type { OwnedRecord, OwnedSearchOptions } from '../contracts/types.js';
 import type { IndexRoot } from '../index/state.js';
@@ -13,6 +13,7 @@ export type Refinements = ReadonlyMap<CompiledNode, PreparedLeaf>;
 export interface PreparedExtensions {
   readonly leaves: Refinements;
   readonly aggregations: readonly { readonly capability: string; add(metadata: Metadata): Generator<WorkStep, void>; finish(): Generator<WorkStep, unknown> }[];
+  readonly evidence?: { readonly capability: string; finish(context: EvidenceResultContext): Generator<WorkStep, unknown> };
 }
 
 /** Prepare every requested leaf and aggregation, including empty/failed branches.
@@ -20,6 +21,7 @@ export interface PreparedExtensions {
 export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge: Charge, options: OwnedSearchOptions): Generator<WorkStep, PreparedExtensions> {
   const leaves = new Map<CompiledNode, PreparedLeaf>();
   const aggregations: PreparedExtensions['aggregations'][number][] = [], budgets = new Map<string, WorkBudget>();
+  let evidence: PreparedExtensions['evidence'];
   function setup(capability: string) {
     const set = root.configuration.capabilities, registration = set?.providers[capability];
     if (!registration) invalid('MISSING_CAPABILITY', 'query.capability');
@@ -32,6 +34,18 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
     } };
   }
   const metadataContext = (capability: string, payload: unknown): MetadataContext => Object.freeze({ revision: root.revision, schema: root.configuration.schema, limits: root.configuration.limits, capability, payload });
+  function state(capability: string, consumer: string): unknown {
+    const registration = root.configuration.capabilities!.providers[consumer]!;
+    if (!registration.manifest.requires.some(ref => ref.id === capability)) invalid('MISSING_CAPABILITY', 'query.provider');
+    const provider = root.configuration.capabilities!.providers[capability];
+    if (!provider?.participant || !Object.hasOwn(root.participants, provider.manifest.id)) invalid('MISSING_CAPABILITY', 'query.provider');
+    return root.participants[provider.manifest.id];
+  }
+  function output(capability: string, result: AggregationOutput): unknown {
+    if (!result || !Number.isSafeInteger(result.entries) || result.entries < 0 || result.value !== null && typeof result.value === 'object' && !Object.isFrozen(result.value)) invalid('INCOMPATIBLE_CAPABILITY', 'extensions.output');
+    bound(result.entries, Math.min(root.configuration.capabilities!.providers[capability]!.manifest.limits.maxOutputEntries, root.configuration.limits.maxAdmissionEntries), 'extensions.output');
+    return result.value;
+  }
   function* walk(node: CompiledNode): Generator<WorkStep> {
     if (node.kind === 'extension' || node.kind === 'predicate') {
       const { registration, run } = setup(node.capability);
@@ -40,10 +54,7 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
         if (!registration.refinement) invalid('MISSING_CAPABILITY', 'query.refinement');
         const context: RefinementContext = Object.freeze({ revision: root.revision, analyzer: root.configuration.analyzer, limits: root.configuration.limits, fields: node.fields, terms: node.terms,
           state(capability: string): unknown {
-            if (!registration.manifest.requires.some(ref => ref.id === capability)) invalid('MISSING_CAPABILITY', 'query.provider');
-            const provider = root.configuration.capabilities!.providers[capability];
-            if (!provider?.participant || !Object.hasOwn(root.participants, provider.manifest.id)) invalid('MISSING_CAPABILITY', 'query.provider');
-            return root.participants[provider.manifest.id];
+            return state(capability, node.capability);
           } });
         const prepared = yield* run(registration.refinement.prepare(context));
         if (!prepared || typeof prepared.test !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'query.refinement');
@@ -67,6 +78,17 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
   for (const capability of Object.keys(options.extensions ?? {}).sort()) {
     yield charge(capability.length + 1);
     const { registration, run } = setup(capability);
+    if (registration.evidence) {
+      if (evidence) invalid('INVALID_OPTIONS', 'options.extensions.evidence');
+      const prepared = yield* run(registration.evidence.prepare(Object.freeze({ ...metadataContext(capability, options.extensions![capability]), analyzer: root.configuration.analyzer,
+        state: (requested: string): unknown => state(requested, capability) })));
+      if (!prepared || typeof prepared.finish !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'extensions.evidence');
+      const finish = prepared.finish.bind(prepared);
+      evidence = Object.freeze({ capability, *finish(context: EvidenceResultContext): Generator<WorkStep, unknown> {
+        return output(capability, yield* run(finish(context)));
+      } });
+      continue;
+    }
     if (!registration.aggregation) invalid('MISSING_CAPABILITY', 'options.extensions');
     const prepared = yield* run(registration.aggregation.prepare(metadataContext(capability, options.extensions![capability])));
     if (!prepared || typeof prepared.add !== 'function' || typeof prepared.finish !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'extensions.aggregation');
@@ -76,12 +98,9 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
         if ((yield* run(add(metadata))) !== undefined) invalid('INCOMPATIBLE_CAPABILITY', 'extensions.aggregation');
       },
       *finish(): Generator<WorkStep, unknown> {
-        const result = yield* run(finish());
-        if (!result || !Number.isSafeInteger(result.entries) || result.entries < 0 || result.value !== null && typeof result.value === 'object' && !Object.isFrozen(result.value)) invalid('INCOMPATIBLE_CAPABILITY', 'extensions.output');
-        bound(result.entries, Math.min(registration.manifest.limits.maxOutputEntries, root.configuration.limits.maxAdmissionEntries), 'extensions.output');
-        return result.value;
+        return output(capability, yield* run(finish()));
       },
     }));
   }
-  return { leaves, aggregations };
+  return { leaves, aggregations, ...(evidence ? { evidence } : {}) };
 }
