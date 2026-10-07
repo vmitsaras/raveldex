@@ -5,11 +5,36 @@ The [milestone list](https://github.com/vmitsaras/raveldex/milestones) and [issu
 ## Structure
 
 - Six milestones: N0 native design, N1 core alpha, N2 modular product, N3 hosts/migration, N4 qualification, N5 deferred enhancements.
-- Six milestone overview issues with linked task checklists.
+- Six milestone overview issues with linked task checklists, deliberately not assigned to any GitHub milestone.
 - Twenty-one release-track task issues and ten deferred optional-task issues.
 - Type, track, and status labels expose ready, waiting, in-progress, blocked, needs-decision, deferred, and done states.
 
 Every task issue includes its objective, prerequisite links, measurable acceptance checklist, governing specs, expected paths, verification method, and actual evidence links when complete. No arbitrary dates or assignees are inferred.
+
+## Milestone membership and progress
+
+Only managed `RX-*` task issues are assigned to their corresponding GitHub milestone. The `N0` through `N5` overview issues summarize their tasks but are not additional work items. They must have `milestone: null`, including when their associated milestone is already complete. Keep their checklist links, labels, human notes, and normal completion rules; do not delete or prematurely close them to change a progress bar.
+
+For the current roadmap, the managed task membership is N0: 2, N1: 6, N2: 6, N3: 4, N4: 3, and N5: 10. For example, two accepted N2 tasks mean 2/6 task progress, not 2/7 including the overview. Derive live counts from the manifest and the actual issue inventory; these examples are not stored completion percentages.
+
+GitHub's milestone display includes associated issues and pull requests, not just our managed task IDs. Unrelated items can therefore change its denominator. Do not detach unrelated issues or pull requests automatically. The overview checklist continues to report accepted manifest tasks only.
+
+### Synchronizer invariants
+
+- For a task, send its resolved GitHub milestone number. For an overview, send explicit `milestone: null`. Omitting the property on an update does not remove an old association.
+- Normalize both the pre-update comparison and final read-back comparison with `(issue.milestone?.number ?? null)`. Otherwise an unassigned overview can trigger repeated writes or a false mismatch between `undefined` and `null`.
+- Discover and update existing overview issues through their stable managed markers. The first run after this repair removes legacy milestone associations; it must not recreate issues, change task acceptance, reopen completed tasks, or reset milestone completion.
+- A second run with an unchanged manifest and remote inventory performs zero writes. Keep existing ownership/collision protections and preserve human notes and unrelated labels.
+
+### Verification and Codex maintenance
+
+Before changing tracking behavior, inspect `test/tooling/tracking.test.mjs`. Its in-memory REST boundary should represent an unassigned issue as `milestone: null`, rather than only `{ number: null }`, when testing GitHub's actual response shape.
+
+Required regression scenarios are fresh overview creation without milestone membership; migration of an already-assigned overview; unchanged task assignments and closed states; zero-write repeat synchronization; and rejection when read-back still assigns an overview despite a successful PATCH response. Preserve the existing rule that an overview and its milestone close only when all their manifest tasks are done.
+
+Run the focused tracking tests, `npm run check`, and `npm run tracking:preview` before accepting a change. After the accepted change reaches `main`, inspect the `Sync roadmap tracking` workflow and its final issue read-back. Verify the overview's absent association and every managed task's expected milestone, including closed tasks. Do not change `roadmap.json` merely to repair these associations; regenerate roadmap documents only when the manifest actually changes.
+
+GitHub owns the rendered progress bar; this script does not write a percentage. If the UI still disagrees with verified memberships, completed issue states, and API counts after refresh, record the discrepancy as a separate GitHub display/counter issue. Do not promise that detaching an overview will repair GitHub's cache, or reopen/reclose genuine tasks just to force a display refresh.
 
 ## Source of truth
 
