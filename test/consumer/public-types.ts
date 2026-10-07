@@ -11,6 +11,27 @@ import { createPositionPhrases } from '@vmitsaras/raveldex/addons/phrases/positi
 import { createPhrases, type MixedPhraseOptions } from '@vmitsaras/raveldex/addons/phrases/mixed';
 import { createFilters, type FilterOptions, type NumericRangePayload, type SetMembershipPayload } from '@vmitsaras/raveldex/addons/filters';
 import { createFacets, type FacetOptions, type FacetRequest, type FacetResult } from '@vmitsaras/raveldex/addons/facets';
+import { createMatchEvidence, type MatchEvidenceOptions, type MatchEvidenceRequest, type MatchEvidenceData, type MatchRange } from '@vmitsaras/raveldex/addons/evidence';
+import { createSnippetEvidence, type SnippetOptions, type SnippetEvidenceData } from '@vmitsaras/raveldex/addons/snippets';
+const matchOptions: MatchEvidenceOptions = { fields: { title: 'source', body: 'offsets' }, maxRanges: 100 };
+const matchRequest: MatchEvidenceRequest = { ids: ['a'], fields: ['title'], expectedRevision: 1 };
+const snippetOptions: SnippetOptions = { ...matchOptions, maxCodeUnits: 120, maxHighlights: 10, maxSnippets: 2 };
+void createMatchEvidence(matchOptions); void createSnippetEvidence(snippetOptions);
+declare const matchData: MatchEvidenceData; declare const snippetData: SnippetEvidenceData; declare const matchRange: MatchRange;
+void [matchData, snippetData];
+const unsupported: ErrorCode = 'UNSUPPORTED_ENVIRONMENT'; void unsupported;
+// @ts-expect-error Original ranges are readonly.
+matchRange.start = 0;
+// @ts-expect-error Requested selected IDs are readonly.
+matchRequest.ids.push('b');
+// @ts-expect-error Evidence provider strategies are readonly.
+matchOptions.fields.title = 'offsets';
+// @ts-expect-error Snippet marks are readonly presentation data.
+snippetData.documents[0]!.snippets[0]!.highlights.push({ start: 0, end: 1 });
+// @ts-expect-error No private presentation hook is public.
+import { buildMatchEvidence } from '@vmitsaras/raveldex/addons/evidence';
+// @ts-expect-error Optional implementation subpaths are private.
+import { createSnippetEvidence as hiddenSnippets } from '@vmitsaras/raveldex/dist/addons/snippets/index.js';
 import { createInspector, exportDiagnostics, type InspectorOptions, type InspectorRequest, type InspectorData, type DiagnosticExport } from '@vmitsaras/raveldex/addons/inspector';
 const inspectorOptions: InspectorOptions = { sourceFields: ['title'], maxFacts: 100 };
 const inspectorRequest: InspectorRequest = { ids: ['a'], expectedRevision: 1, sourceFields: ['title'] };

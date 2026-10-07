@@ -1,0 +1,122 @@
+{
+  "task": "RX-2005",
+  "baseCommit": "e9852f9",
+  "verdict": "Ready with follow-ups",
+  "reviewScope": "Independent read-only production/source review, portable generated/literal expected-behavior probes, private malformed-root and host probes, selected lifecycle stops, shared budgets, current graph/hash audit, and reviewer-run focused tests. No production/test/config changes by reviewer.",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "commands": [
+    "node docs/evidence/RX-2005-review/source-oracle.mjs",
+    "node docs/evidence/RX-2005-review/faults-and-lifecycle.mjs",
+    "node docs/evidence/RX-2005-review/shared-budgets.mjs",
+    "node docs/evidence/RX-2005-review/package-audit.mjs",
+    "node --test test/addons/evidence/*.test.mjs"
+  ],
+  "acceptance": [
+    {
+      "id": "RX-2005-AC01",
+      "status": "Pass",
+      "basis": "Literal original coordinates across fields/values and generated source/offset/mixed parity; 312 complete searches, 7488 selected-document comparisons, 3558 original slices. Successful Boolean ancestors and complete overlapping phrase participation are independently evaluated."
+    },
+    {
+      "id": "RX-2005-AC02",
+      "status": "Pass",
+      "basis": "Source/offset/mixed outputs agree against independently constructed raw/normalized lexeme pairs, including normalization length changes and supplementary letters; independent expected behavior never calls production tokenizer/compiler/evaluator/scorer."
+    },
+    {
+      "id": "RX-2005-AC03",
+      "status": "Pass",
+      "basis": "1260 exact grapheme-safe snippet windows and 3744 independent omission-count reconstructions; exact source slices, relative marks, window/highlight caps and omission flags checked. Focused tests additionally cover overlong token/grapheme unavailable counts."
+    },
+    {
+      "id": "RX-2005-AC04",
+      "status": "Pass",
+      "basis": "Output stays ordinary readonly plain data. Unsafe literal source is returned only as exact text; source and documented rendering contract contain no HTML producer or unsafe DOM insertion."
+    },
+    {
+      "id": "RX-2005-AC05",
+      "status": "Pass",
+      "basis": "Missing source, missing offsets, positions-only range claims, missing selected roots/fields, stale revisions and six malformed/missing Segmenter hosts fail explicitly, including empty selections/queries. Ordinary and range-only requests need no Segmenter."
+    },
+    {
+      "id": "RX-2005-AC06",
+      "status": "Pass",
+      "basis": "7 cancellation outcomes, 1 deadline, 1 disposal, 13 recoveries, 5 selected projection stops, 1 real native segmentation iterator closure and 6 FIFO ownership operations. Complete range/fact/output caps reject whole output; shared registration and global operation budgets are independently measured. Graph/startup/source hashes confirm optional imports, no new side-root participant or runtime dependency."
+    }
+  ],
+  "focusedTests": {
+    "tests": 24,
+    "pass": 24,
+    "fail": 0,
+    "skipped": 0
+  },
+  "repairedFindings": [
+    {
+      "category": "implementation defect in provider validation",
+      "path": "src/addons/snippets/snippets.ts:sourceValue",
+      "problem": "Offset snippet source projection originally read frozen source record/field/value properties directly, invoking a malformed frozen accessor.",
+      "repair": "Descriptor ownership rejects accessors before evaluation. Independent repro now fails INCOMPATIBLE_CAPABILITY with zero getters executed.",
+      "measurementCorrection": "Original probe total of 8 accessor reads included 3 reads by the old probe deep-freeze helper; the original engine itself made 5 reads. The probe helper now recursively freezes data descriptors only."
+    },
+    {
+      "category": "implementation defect in original-source consistency validation",
+      "path": "src/addons/snippets/snippets.ts:valuesFor",
+      "problem": "A private synthetic source root with the same revision header but different source spelling could display marks for incompatible stored offset terms.",
+      "repair": "Charged raw-slice UTF-16 validation and NFKC/lowercase identity checks reject spelling divergence and bisected supplementary-token offsets with INCOMPATIBLE_CAPABILITY. Generated normal Unicode/provider results remain unchanged."
+    }
+  ],
+  "packageAudit": {
+    "recordedPackageSha256": "6c6cb96f980794c078825c31d940449ddc63c66f9c398cec09080b6fcbbb6d32",
+    "compiledFileChecks": 138,
+    "sourceFileChecks": 138,
+    "recordedGraphModuleHashChecks": 114,
+    "allFiveCorpusSourceHashesCurrent": true,
+    "core": {
+      "minifiedBytes": 54156,
+      "gzipBytes": 16491,
+      "inputs": 31,
+      "optionalImports": 0,
+      "startupHostReads": 0
+    },
+    "ranges": {
+      "minifiedBytes": 23318,
+      "gzipBytes": 6807,
+      "inputs": 18,
+      "snippetImports": 0,
+      "startupHostReads": 0
+    },
+    "snippets": {
+      "minifiedBytes": 30843,
+      "gzipBytes": 8801,
+      "inputs": 19,
+      "startupHostReads": 0
+    },
+    "runtimeDependencies": 0
+  },
+  "sharedBudgets": {
+    "refinementUnits": 45,
+    "evidenceUnits": 987,
+    "combinedRegistrationUnits": 1032,
+    "registrationCap": 988,
+    "eachRoleAlonePasses": true,
+    "combinedFails": "WORK_LIMIT_EXCEEDED",
+    "combinedOperationUnits": 2076,
+    "operationCap": 2075,
+    "wholeOperationFails": "WORK_LIMIT_EXCEEDED",
+    "recovery": "Pass"
+  },
+  "remainingLimits": [
+    "The unchanged 15360-byte core gzip planning target remains missed by 1131 bytes. This is a recorded qualification follow-up, not an RX-2005 semantic failure.",
+    "First-party transactional roots establish authoritative complete token maps and maximal original spans. Arbitrarily forged external term maps can erase actual occurrences despite a coherent claimed header; arbitrary external-provider consistency requires its separately reviewed protocol and is not qualified by RX-2005.",
+    "No browser/worker/snapshot, cross-host Unicode, physical heap/peak-memory, latency or assistive-technology qualification is claimed."
+  ],
+  "rawReports": [
+    "docs/evidence/RX-2005-review/source-oracle.json",
+    "docs/evidence/RX-2005-review/faults-and-lifecycle.json",
+    "docs/evidence/RX-2005-review/shared-budgets.json",
+    "docs/evidence/RX-2005-review/package-audit.json"
+  ]
+}

@@ -5,6 +5,7 @@ import type { WorkStep } from '../index/directory.js';
 import type { StateCounts } from '../limits/limits.js';
 import type { ScoreTrace, TraceRequest } from '../trace/facts.js';
 import type { SearchResult } from '../contracts/types.js';
+import type { CompiledNode } from '../query/compile.js';
 
 export interface CapabilityReference { readonly id: string; readonly contractVersion: number }
 export interface CapabilityManifest {
@@ -71,6 +72,8 @@ export interface EvidenceContext extends MetadataContext {
   state(capability: string): unknown;
 }
 export interface EvidenceResultContext {
+  /** Immutable analyzed query; actual trace paths establish contributing branches. */
+  readonly query: CompiledNode;
   readonly trace: ScoreTrace; readonly result: SearchResult;
   readonly counts: StateCounts; readonly searchWorkUnits: number;
   readonly maxSearchWorkUnits: number; readonly capabilities: readonly CapabilityManifest[];

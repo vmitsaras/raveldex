@@ -58,7 +58,7 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     const participantRole = roles.includes('transaction-participant'), refinementRole = roles.includes('leaf-refinement'), aggregationRole = roles.includes('aggregation'), evidenceRole = roles.includes('evidence');
     if (participantRole !== has(data, 'participant') || refinementRole !== (has(data, 'refinement') || has(data, 'predicate')) || has(data, 'refinement') && has(data, 'predicate') || aggregationRole !== has(data, 'aggregation') || evidenceRole !== has(data, 'evidence') || raw.indexEffect !== (participantRole ? 'transactional' : 'none')) invalid(code, 'addons.roles');
     if ((has(data, 'predicate') || aggregationRole) && (!metadata || participantRole || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.dataRequirements');
-    if (evidenceRole && (participantRole || metadata || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.dataRequirements');
+    if (evidenceRole && (participantRole || metadata || requirements.offsets === true && requirements.positions !== true)) invalid(code, 'addons.dataRequirements');
     // All handles use the same descriptor capture/type/binding rules.
     const implementations: Record<string, unknown> = {};
     for (const key of ['participant', 'refinement', 'predicate', 'aggregation', 'evidence'] as const) {
@@ -103,8 +103,9 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
       const present = (kind: string): boolean => manifest.requires.some(ref => ref.id === `${kind}:${field}`) && !!providers[`${kind}:${field}`]?.participant;
       if (!(data.source && present('source') || data.positions && present('positions'))) invalid('MISSING_CAPABILITY', 'addons.data');
     }
-    if (data.source && registration.evidence) for (const field of data.fields) {
-      if (!manifest.requires.some(ref => ref.id === `source:${field}`) || !providers[`source:${field}`]?.participant) invalid('MISSING_CAPABILITY', 'addons.data');
+    if (registration.evidence && (data.source || data.positions || data.offsets)) for (const field of data.fields) {
+      const present = (kind: string): boolean => manifest.requires.some(ref => ref.id === `${kind}:${field}`) && !!providers[`${kind}:${field}`]?.participant;
+      if (!(data.source && present('source') || data.offsets && present('offsets') || data.positions && !data.offsets && present('positions'))) invalid('MISSING_CAPABILITY', 'addons.data');
     }
     active.delete(manifest.id); visited.add(manifest.id); ordered.push(registration);
   }

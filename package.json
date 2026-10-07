@@ -2,7 +2,7 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native modular TypeScript local search \u2014 ESM core with BM25, atomic mutations, cooperative execution and optional phrases, filters, facets and factual inspection.",
+  "description": "Native modular TypeScript local search \u2014 ESM core with BM25, atomic mutations, cooperative execution and optional phrases, filters, facets, inspection, original ranges and snippets.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs",
+    "test": "npm run build && node --test test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -36,7 +36,8 @@
     "test:positions": "npm run build && node --test test/addons/positions/*.test.mjs",
     "test:filters": "npm run build && node --test test/addons/filters/*.test.mjs",
     "test:facets": "npm run build && node --test test/addons/facets/*.test.mjs",
-    "test:inspector": "npm run build && node --test test/addons/inspector/*.test.mjs"
+    "test:inspector": "npm run build && node --test test/addons/inspector/*.test.mjs",
+    "test:evidence": "npm run build && node --test test/addons/evidence/*.test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2",
@@ -79,6 +80,14 @@
     "./addons/inspector": {
       "types": "./dist/addons/inspector/index.d.ts",
       "import": "./dist/addons/inspector/index.js"
+    },
+    "./addons/evidence": {
+      "types": "./dist/addons/evidence/index.d.ts",
+      "import": "./dist/addons/evidence/index.js"
+    },
+    "./addons/snippets": {
+      "types": "./dist/addons/snippets/index.d.ts",
+      "import": "./dist/addons/snippets/index.js"
     }
   },
   "files": [
@@ -90,7 +99,9 @@
     "dist/addons/filters/",
     "dist/addons/facets/",
     "dist/addons/metadata/",
-    "dist/addons/inspector/"
+    "dist/addons/inspector/",
+    "dist/addons/evidence/",
+    "dist/addons/snippets/"
   ],
   "sideEffects": false
 }

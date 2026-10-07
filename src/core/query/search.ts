@@ -117,7 +117,7 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
     boundary('aggregation');
     if (!scoreTrace) invalid('INTERNAL_ERROR', 'extensions.evidence');
     const publicResult: SearchResult = Object.freeze({ revision: root.revision, model: 'raveldex-bm25-v1', completeness: 'complete', total, hits, ...(additional ? { extensions: additional } : {}) });
-    const value = yield* extensions.evidence.finish(Object.freeze({ trace: scoreTrace, result: publicResult, counts: root.counts,
+    const value = yield* extensions.evidence.finish(Object.freeze({ query: compiled.node, trace: scoreTrace, result: publicResult, counts: root.counts,
       searchWorkUnits: budget.consumed, maxSearchWorkUnits: root.configuration.limits.maxSearchWorkUnits,
       capabilities: Object.freeze(root.configuration.capabilities!.ordered.map(registration => registration.manifest)) }));
     additional = Object.freeze({ ...additional, [extensions.evidence.capability]: value });

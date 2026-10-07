@@ -1,0 +1,147 @@
+{
+  "status": "Pass",
+  "node": "v24.21.0",
+  "recordedPackageSha256": "6c6cb96f980794c078825c31d940449ddc63c66f9c398cec09080b6fcbbb6d32",
+  "compiledChecks": 138,
+  "sourceChecks": 138,
+  "recordedGraphModuleHashChecks": 114,
+  "corpusChecks": [
+    {
+      "path": "docs/specs/CORE_CONTRACT.md",
+      "current": true
+    },
+    {
+      "path": "docs/specs/RANKING.md",
+      "current": true
+    },
+    {
+      "path": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "current": true
+    },
+    {
+      "path": "docs/architecture/NATIVE_ARCHITECTURE.md",
+      "current": true
+    },
+    {
+      "path": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+      "current": true
+    }
+  ],
+  "allCorpusCurrent": true,
+  "runtimeDependencies": 0,
+  "private": true,
+  "independentGraphs": {
+    "core": {
+      "minifiedBytes": 54156,
+      "gzipBytes": 16491,
+      "inputCount": 31,
+      "inputs": [
+        "dist/core/errors/error.js",
+        "dist/core/contracts/data.js",
+        "dist/core/limits/limits.js",
+        "dist/core/analyzer/basic.js",
+        "dist/core/capabilities/registration.js",
+        "dist/core/contracts/schema.js",
+        "dist/core/capabilities/participants.js",
+        "dist/core/index/directory.js",
+        "dist/core/index/staging.js",
+        "dist/core/limits/work.js",
+        "dist/core/contracts/record.js",
+        "dist/core/capabilities/capture.js",
+        "dist/core/contracts/options.js",
+        "dist/core/mutations/capture.js",
+        "dist/core/mutations/delta.js",
+        "dist/core/mutations/document.js",
+        "dist/core/mutations/owner.js",
+        "dist/core/contracts/query.js",
+        "dist/core/query/work.js",
+        "dist/core/ranking/bm25.js",
+        "dist/core/ranking/page.js",
+        "dist/core/retrieval/expand.js",
+        "dist/core/trace/facts.js",
+        "dist/core/query/compile.js",
+        "dist/core/query/evaluate.js",
+        "dist/core/capabilities/refinement.js",
+        "dist/core/query/search.js",
+        "dist/core/execution/host.js",
+        "dist/core/execution/engine.js",
+        "dist/index.js",
+        "independent-core.mjs"
+      ],
+      "startup": {
+        "reads": [],
+        "exports": [
+          "ERROR_CODES",
+          "RaveldexError",
+          "createRaveldex"
+        ]
+      }
+    },
+    "evidence": {
+      "minifiedBytes": 23318,
+      "gzipBytes": 6807,
+      "inputCount": 18,
+      "inputs": [
+        "dist/core/errors/error.js",
+        "dist/core/contracts/data.js",
+        "dist/core/limits/limits.js",
+        "dist/core/analyzer/basic.js",
+        "dist/addons/inspector/output.js",
+        "dist/addons/metadata/payload.js",
+        "dist/core/index/directory.js",
+        "dist/core/index/staging.js",
+        "dist/addons/phrases/options.js",
+        "dist/addons/phrases/store.js",
+        "dist/addons/positions/options.js",
+        "dist/addons/positions/store.js",
+        "dist/addons/evidence/occurrences.js",
+        "dist/addons/evidence/options.js",
+        "dist/addons/evidence/providers.js",
+        "dist/addons/evidence/builder.js",
+        "dist/addons/evidence/index.js",
+        "independent-evidence.mjs"
+      ],
+      "startup": {
+        "reads": [],
+        "exports": [
+          "createMatchEvidence"
+        ]
+      }
+    },
+    "snippets": {
+      "minifiedBytes": 30843,
+      "gzipBytes": 8801,
+      "inputCount": 19,
+      "inputs": [
+        "dist/core/errors/error.js",
+        "dist/core/contracts/data.js",
+        "dist/core/index/directory.js",
+        "dist/core/limits/limits.js",
+        "dist/core/analyzer/basic.js",
+        "dist/addons/inspector/output.js",
+        "dist/addons/metadata/payload.js",
+        "dist/core/index/staging.js",
+        "dist/addons/phrases/options.js",
+        "dist/addons/phrases/store.js",
+        "dist/addons/positions/options.js",
+        "dist/addons/positions/store.js",
+        "dist/addons/evidence/occurrences.js",
+        "dist/addons/evidence/options.js",
+        "dist/addons/evidence/providers.js",
+        "dist/addons/evidence/builder.js",
+        "dist/addons/snippets/snippets.js",
+        "dist/addons/snippets/index.js",
+        "independent-snippets.mjs"
+      ],
+      "startup": {
+        "reads": [],
+        "exports": [
+          "createSnippetEvidence"
+        ]
+      }
+    }
+  },
+  "coreTargetGzipBytes": 15360,
+  "coreTargetMet": false,
+  "claim": "This probe audits local compiled/source bytes and recorded graphs, and independently rebuilds current bundles with guarded startup. Packed/minified semantic tests were also run separately via node --test test/addons/evidence/*.test.mjs."
+}

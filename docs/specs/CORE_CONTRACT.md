@@ -242,6 +242,7 @@ Use a stable `RaveldexError`-style shape with `code`, a sanitized `message`, and
 | `WORK_LIMIT_EXCEEDED`, `DEADLINE_EXCEEDED` | Execution cannot finish within the selected operation budget. |
 | `CANCELLED`, `DISPOSED` | The operation was cancelled before its commit/delivery boundary, or the engine has been disposed. |
 | `MISSING_CAPABILITY`, `INCOMPATIBLE_CAPABILITY` | A query/adapter requests absent or incompatible behavior/data. |
+| `UNSUPPORTED_ENVIRONMENT` | Requested optional behavior requires a missing host feature, such as grapheme segmentation for snippets. |
 | `REVISION_MISMATCH`, `REVISION_EXHAUSTED` | A revision precondition fails or another safe-integer revision cannot be created. |
 | `RESOURCE_EXHAUSTED`, `INTERNAL_ERROR` | A recoverable resource failure or invariant failure prevented success. |
 

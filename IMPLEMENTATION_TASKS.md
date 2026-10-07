@@ -497,7 +497,7 @@ Expose bounded query/record explanations and diagnostic exports derived from act
 
 **Original match ranges and bounded snippets**
 
-**Milestone:** N2 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/19)
+**Milestone:** N2 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/19)
 
 **Dependencies:** [RX-2001](IMPLEMENTATION_TASKS.md#rx-2001), [RX-2002](IMPLEMENTATION_TASKS.md#rx-2002)
 
@@ -529,7 +529,7 @@ Produce trustworthy presentation data from original source, using reanalysis or 
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-2005.md](docs/evidence/RX-2005.md)
 
 
 ## RX-2006
