@@ -28,6 +28,7 @@ export interface WorkerOptions {
 export interface WorkerHostOptions { readonly addons?: readonly AddonRegistration[]; readonly maxMessageBytes?: number }
 export interface MutationPromise extends Promise<MutationResult> { readonly operationId: string }
 export type WireError =
+  | { readonly name: 'SnapshotAdapterError'; readonly code: ErrorCode; readonly reason: string; readonly details: Readonly<ErrorDetails> }
   | { readonly name: 'RaveldexError'; readonly code: ErrorCode; readonly details: Readonly<ErrorDetails> }
   | { readonly name: 'WorkerAdapterError'; readonly code: WorkerErrorCode; readonly details: Readonly<WorkerErrorDetails> };
 export type MutationReceipt =

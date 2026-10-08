@@ -1,0 +1,86 @@
+✔ explicit actions preserve complete direct/add-on source recovery and later mutations (2420.741333ms)
+✔ unminified installed consumer preserves complete source recovery (809.594042ms)
+✔ mutation, serialization and durable generations remain separately observable (365.965417ms)
+✔ simultaneous clients require CAS and stale erased tokens cannot overwrite recreated state (387.819708ms)
+✔ namespace erasure deletes every owned store and isolates other namespaces (384.099292ms)
+✔ unavailable storage preserves usable borrowed in-memory engine (215.8265ms)
+✔ injected genuine quota and transaction failures preserve previous durable generation (489.657416ms)
+✔ corrupt, malformed and incompatible durable snapshots cannot partially restore (352.741959ms)
+✔ future versions and unknown database stores fail with explicit recovery (306.403583ms)
+✖ real blocked upgrade is bounded and late opened connections close (657.457667ms)
+✔ actual external versionchange closes owned connection and preserves memory state (209.952333ms)
+✔ pre-abort and deadline failure perform no storage work and release listeners (126.867167ms)
+✔ save cancellation during real serialization preserves durable and in-memory states (6135.063834ms)
+✖ load cancellation preserves complete previous core and add-on states (8129.353ms)
+✔ disposal settles pending action and leaves borrowed engine usable (226.054667ms)
+✔ real one-owner module worker recovers exact source/add-on semantics (626.87825ms)
+✔ lost actual worker restore reply exposes unknown outcome and conclusive receipt (586.442833ms)
+✔ observed committed restore survives same-event late cancellation before Promise delivery (316.875959ms)
+✖ negotiated worker snapshot transport bound refuses partial persisted data (154.533708ms)
+✖ real worker termination settles pending load and explicit new worker recovers durable data (1041.775959ms)
+✔ actual page reload and current documentation recover through installed public storage (25820.983125ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 17
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 50084.580334
+
+✖ failing tests:
+
+test at test/adapters/indexeddb/packed-browser.test.mjs:144:47
+✖ real blocked upgrade is bounded and late opened connections close (657.457667ms)
+  page.evaluate: Error: late upgraded connection closed after failed action
+      at se (http://127.0.0.1:64088/fixture.mjs:2:116921)
+      at Object.blocked (http://127.0.0.1:64088/fixture.mjs:2:130023)
+      at async <anonymous>:329:30
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/indexeddb/packed-browser.test.mjs:147:33) {
+    log: []
+  }
+
+test at test/adapters/indexeddb/packed-browser.test.mjs:144:47
+✖ load cancellation preserves complete previous core and add-on states (8129.353ms)
+  page.evaluate: RaveldexError: Raveldex: DEADLINE_EXCEEDED
+      at f (http://127.0.0.1:64088/fixture.mjs:1:668)
+      at In.check (http://127.0.0.1:64088/fixture.mjs:1:51701)
+      at In.pump (http://127.0.0.1:64088/fixture.mjs:1:53382)
+      at http://127.0.0.1:64088/fixture.mjs:1:53839
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/indexeddb/packed-browser.test.mjs:147:33) {
+    log: []
+  }
+
+test at test/adapters/indexeddb/packed-browser.test.mjs:144:47
+✖ negotiated worker snapshot transport bound refuses partial persisted data (154.533708ms)
+  page.evaluate: WorkerAdapterError: Raveldex worker: TRANSPORT_LIMIT
+      at s (http://127.0.0.1:64088/fixture.mjs:2:41140)
+      at o (http://127.0.0.1:64088/fixture.mjs:2:41351)
+      at c (http://127.0.0.1:64088/fixture.mjs:2:41701)
+      at c (http://127.0.0.1:64088/fixture.mjs:2:42767)
+      at c (http://127.0.0.1:64088/fixture.mjs:2:42767)
+      at c (http://127.0.0.1:64088/fixture.mjs:2:42500)
+      at c (http://127.0.0.1:64088/fixture.mjs:2:42767)
+      at c (http://127.0.0.1:64088/fixture.mjs:2:42767)
+      at wt (http://127.0.0.1:64088/fixture.mjs:2:42825)
+      at Cn.request (http://127.0.0.1:64088/fixture.mjs:2:48930)
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/indexeddb/packed-browser.test.mjs:147:33) {
+    log: []
+  }
+
+test at test/adapters/indexeddb/packed-browser.test.mjs:144:47
+✖ real worker termination settles pending load and explicit new worker recovers durable data (1041.775959ms)
+  AssertionError [ERR_ASSERTION]: all retained test handles dispose
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/adapters/indexeddb/packed-browser.test.mjs:110:10)
+      at async TestHook.run (node:internal/test_runner/test:1409:7)
+      at async Test.runHook (node:internal/test_runner/test:1289:9)
+      at async node:internal/test_runner/test:1347:9
+      at async Test.run (node:internal/test_runner/test:1427:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

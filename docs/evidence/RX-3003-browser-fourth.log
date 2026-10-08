@@ -1,0 +1,68 @@
+✔ explicit actions preserve complete direct/add-on source recovery and later mutations (2565.38975ms)
+✔ unminified installed consumer preserves complete source recovery (822.295041ms)
+✔ mutation, serialization and durable generations remain separately observable (362.469625ms)
+✖ simultaneous clients require CAS and stale erased tokens cannot overwrite recreated state (220.538542ms)
+✔ namespace erasure deletes every owned store and isolates other namespaces (372.405916ms)
+✔ unavailable storage preserves usable borrowed in-memory engine (219.067583ms)
+✔ injected genuine quota and transaction failures preserve previous durable generation (473.015417ms)
+✔ observed strict transaction commit remains successful across same-event late cancellation (214.783458ms)
+✔ lost real durable completion delivery has unknown outcome and explicit load recovery (950.969ms)
+✔ corrupt, malformed and incompatible durable snapshots cannot partially restore (392.384292ms)
+✔ orphaned durable snapshot has explicit complete erasure and recreate recovery (313.157209ms)
+✔ future versions and unknown database stores fail with explicit recovery (481.836584ms)
+✖ real blocked upgrade is bounded and late opened connections close (658.400458ms)
+✔ actual external versionchange closes owned connection and preserves memory state (212.89075ms)
+✔ pre-abort and deadline failure perform no storage work and release listeners (121.396916ms)
+✔ bounded pending FIFO settles queued stops and disposal before held snapshot delivery (216.152208ms)
+✔ save cancellation during real serialization preserves durable and in-memory states (961.344167ms)
+✔ load cancellation preserves complete previous core and add-on states (3250.089125ms)
+✔ disposal settles pending action and leaves borrowed engine usable (127.528792ms)
+✔ real one-owner module worker recovers exact source/add-on semantics (750.584083ms)
+✔ lost actual worker restore reply exposes unknown outcome and conclusive receipt (598.1045ms)
+✔ observed committed restore survives same-event late cancellation before Promise delivery (320.7525ms)
+✖ negotiated worker snapshot transport bound refuses partial persisted data (123.987584ms)
+✔ real worker termination settles pending load and explicit new worker recovers durable data (1019.438417ms)
+✔ actual page reload and current documentation recover through installed public storage (26308.9825ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 22
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 48289.411625
+
+✖ failing tests:
+
+test at test/adapters/indexeddb/packed-browser.test.mjs:149:47
+✖ simultaneous clients require CAS and stale erased tokens cannot overwrite recreated state (220.538542ms)
+  page.evaluate: Error: stale generation uses conflict category: "INVALID_OPTIONS" !== "GENERATION_CONFLICT"
+      at P (http://127.0.0.1:64910/fixture.mjs:2:117435)
+      at Object.conflicts (http://127.0.0.1:64910/fixture.mjs:2:125489)
+      at async <anonymous>:329:30
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/indexeddb/packed-browser.test.mjs:152:33) {
+    log: []
+  }
+
+test at test/adapters/indexeddb/packed-browser.test.mjs:149:47
+✖ real blocked upgrade is bounded and late opened connections close (658.400458ms)
+  page.evaluate: Error: late upgraded connection closed after failed action
+      at se (http://127.0.0.1:64910/fixture.mjs:2:117520)
+      at http://127.0.0.1:64910/fixture.mjs:2:135136
+      at async jt (http://127.0.0.1:64910/fixture.mjs:2:120054)
+      at async <anonymous>:329:30
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/indexeddb/packed-browser.test.mjs:152:33) {
+    log: []
+  }
+
+test at test/adapters/indexeddb/packed-browser.test.mjs:149:47
+✖ negotiated worker snapshot transport bound refuses partial persisted data (123.987584ms)
+  page.evaluate: RaveldexError: Raveldex: LIMIT_EXCEEDED
+      at Gi (http://127.0.0.1:64910/fixture.mjs:2:44405)
+      at Pn.receive (http://127.0.0.1:64910/fixture.mjs:2:51266)
+      at Pn.#h (http://127.0.0.1:64910/fixture.mjs:2:46913)
+      at Xn.emit (http://127.0.0.1:64910/fixture.mjs:2:122188)
+      at Worker.<anonymous> (http://127.0.0.1:64910/fixture.mjs:2:121740)
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/indexeddb/packed-browser.test.mjs:152:33) {
+    log: []
+  }

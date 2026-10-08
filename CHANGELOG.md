@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- RX-3003 adds optional explicit namespaced IndexedDB save/load/erase, optimistic generation conflicts, transaction-completion outcomes, bounded open/action/queue lifecycle and complete namespace erasure. Source recovery uses validated atomic snapshots directly or through an explicitly installed one-owner worker snapshot bridge with separate restore receipts and truthful unknown outcomes. No import-time storage or automatic persistence.
+
 - RX-3002 adds optional distinct source/native JSON snapshots, bounded resumable decoding, explicit format/configuration/codec compatibility and atomic next-local-revision restore. Complete source rebuilds under the receiving analyzer; native state validates frequency/posting/reverse/statistical/selected source/position/offset structures and requires an exact trusted Node qualification declaration from engine creation. Adds public codec types/reasons, real packed/minified document round trips, cancellation/corruption regressions and separate work/process-memory observations.
 
 - RX-3001 adds an optional explicit one-owner module-worker client/host adapter, bounded validated transport, capability/analyzer compatibility checks, cooperative cancellation, truthful unknown mutation outcomes and a 256-receipt reconciliation window. Adds direct/worker selection to the packaged documentation pilot.
@@ -34,4 +36,4 @@
 - Add behavioral specifications, milestone/task planning, Codex instructions, and provenance.
 - Add dependency/status validation, generated planning documents, bootstrap CI, and GitHub milestone/issue synchronization.
 
-N1 core alpha is verified locally. N2 optional product capabilities are implemented; worker hosting and snapshots are implemented while storage adapters and release qualification remain future work; no public package release exists in this entry.
+N1 core alpha is verified locally. N2 optional product capabilities are implemented; worker hosting, snapshots and optional IndexedDB recovery are implemented while migration and release qualification remain future work; no public package release exists in this entry.

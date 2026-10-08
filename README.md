@@ -22,7 +22,9 @@ RX-3001 adds an explicit one-owner module-worker adapter with bounded transport,
 
 RX-3002 adds explicit versioned source/native snapshots, complete atomic restore and exact declared Node-profile compatibility through an optional entry. See [snapshot evidence](docs/evidence/RX-3002.md).
 
-The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, storage hosting and cross-host Unicode snapshot portability require later evidence.
+RX-3003 adds explicit namespaced IndexedDB save/load/erase and an optional source-snapshot worker bridge. Storage and engine commit outcomes stay separate; recovery never retries an unknown restore automatically.
+
+The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, physical durability and cross-host Unicode snapshot portability require later evidence.
 
 ## Try the core
 
@@ -123,6 +125,50 @@ try {
 `nativeQualification` is a trusted application declaration of its tests. The helper reports the current Node/V8/ICU/Unicode/platform/architecture; copying that record or naming an evidence file does not run qualification. The owner has its qualified descriptor from revision 0. Restore requires the same complete declaration and actual runtime. Browser/worker owners and cross-host native portability are not qualified by this API. Source-only attachment remains available to a direct ordinary owner.
 
 The two versioned JSON formats identify schema, analyzer, native ranking/implementation, limits, capabilities and index detail. The checksum detects accidental damage; structural validation remains mandatory. Unknown side codecs or incompatible configuration fail explicitly. Snapshot errors add a fixed `SnapshotAdapterError.reason` alongside ordinary core error codes. Both export and restore share the owner's FIFO, cancellation, deadlines and work limits. Failure preserves the previous searchable revision. `maxEncodedBytes` narrows the 64 MiB UTF-8 JSON ceiling; large admitted live collections can exceed that serialization cap. No storage is performed; explicit IndexedDB save/load/erase belongs to RX-3003.
+
+## Optional IndexedDB persistence
+
+```ts
+import { createSnapshots } from '@vmitsaras/raveldex/adapters/snapshots';
+import { createIndexedDBPersistence } from '@vmitsaras/raveldex/adapters/indexeddb';
+
+// engine retains complete source for every indexed text field.
+const storage = createIndexedDBPersistence(createSnapshots(engine), {
+  databaseName: 'my-raveldex-database', // dedicated to this adapter
+  namespace: 'documentation-v1',
+});
+try {
+  const loaded = await storage.load();
+  const saved = await storage.save({ expectedGeneration: loaded.generation });
+  // Explicit erasure removes both namespace records; the engine remains usable.
+  await storage.erase({ expectedGeneration: saved.generation });
+} finally {
+  await storage.dispose();
+}
+```
+
+Importing or constructing this adapter opens no database and starts no background saving. Actions lazily open dedicated database version 1 with `snapshots` and `metadata` stores keyed by namespace. The source format is the default. Native selection still requires an actually qualified matching snapshot owner; browser native snapshots remain unsupported. An optional explicit `indexedDB` handle supports application-selected host access.
+
+Storage-v1 retains the exact canonical snapshot format/version prefix and checks it against metadata before full codec validation. Arbitrarily reformatting stored JSON is refused; portable snapshots alone keep their general JSON decoder. The supplied snapshot handle is a trusted application dependency.
+
+Save and erase require `expectedGeneration`, a previous opaque token or `null` for an absent namespace. Both records and the generation comparison belong to one transaction, so simultaneous stale writers reject `GENERATION_CONFLICT`. Each save creates a fresh token; erase/recreate cannot reuse the old token. Erase also accepts `null` as an explicit recovery action when corrupt/orphaned metadata has no valid generation. Other namespaces remain intact, and no tombstone remains. Later explicit saves by another client can recreate the namespace.
+
+Save returns `{ generation, format, encodedBytes, durable: true }` only at IndexedDB transaction completion, with the `strict` durability hint requested. Serialization and the engine's earlier writes are separate from that storage commit. Completion is not physical power-loss, eviction or browser-retention qualification. Load returns `missing` without changing the engine, or `restored` with the selected generation and actual atomic snapshot restore result. The selected token is not a lease on the current storage head; another client may save during restoration.
+
+`IndexedDBAdapterError` provides fixed codes and bounded phase/conflict/snapshot details. Unavailable storage, quota, corrupt records, incompatible snapshots/database versions, blocked tabs, transaction failure, cancellation and deadlines have explicit outcomes. Recovery never silently erases or overwrites bad data. A dedicated incompatible schema is refused rather than migrated. Connections close on version change; a late open closes after its stopped caller settles. Adapter disposal releases its resources while retaining durable data and the borrowed engine.
+
+Browser worker recovery is an explicit additional selection:
+
+```ts
+import { createWorkerSnapshots } from '@vmitsaras/raveldex/adapters/worker/snapshots';
+const storage = createIndexedDBPersistence(createWorkerSnapshots(workerEngine), {
+  databaseName: 'my-raveldex-database', namespace: 'documentation-v1',
+});
+```
+
+The application's module worker must use `serveSnapshotRaveldexWorker` from `@vmitsaras/raveldex/adapters/worker/snapshots/host` with the same trusted local add-ons. The bridge reuses its one complete owner and FIFO, preserves the 8 MiB transport ceiling, and supports source export/restore plus separate restore receipts. Ordinary worker/core imports exclude the codecs and IndexedDB implementation. A dispatched restore with an unobserved result reports `OUTCOME_UNKNOWN`; its operation ID can be reconciled through the snapshot bridge. No restore is retried automatically. Database operations remain on the selected storage adapter host.
+
+Defaults are 5,000 ms for open and 30,000 ms for the complete queued action; configurable ceilings are 30,000 and 60,000 ms. At most 64 storage actions are pending. UTF-8 envelope checks yield in bounded batches outside active database transactions; browser structured-clone work is a separate platform primitive. The snapshot ceiling remains 64 MiB, with the narrower worker envelope cap where applicable. See the [storage contract](docs/architecture/ADDONS_AND_ADAPTERS.md#indexeddb-adapter-contract-rx-3003).
 
 ## Optional positions and original offsets
 
@@ -282,14 +328,15 @@ A dispatched mutation with a lost reply can reject with `WorkerAdapterError` cod
 | Optional native UI | Labeled forms, facets, result navigation, original snippets and factual Inspector; separate scoped CSS. |
 | Optional worker adapter | One complete engine owner, validated transport, explicit lifecycle and mutation receipts. |
 | Optional snapshots | Versioned complete-source rebuild and validated native state under an exact declared Node profile. |
-| Planned host adapters | IndexedDB/recovery and later integrations. |
+| Optional persistence | Explicit namespaced IndexedDB actions, generation conflicts, atomic source recovery and complete erasure. |
+| Planned integrations | Later migration and selected enhancements. |
 | Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
 The historical RX-2005 packed public core measured **16,491 bytes gzip** (54,156 minified ESM bytes), exceeding the unchanged 15 KiB target by **1,131 bytes** (+32 gzip versus RX-2004). Boundary review keeps optional range collection, source traversal, segmentation, clipping, projection and serialization outside core; mandatory validation/shared metering remain intact. Complete bundles overlap and are not additive module costs. The 10,000-record observations are logical work/retention counters, not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
 
 RX-3001 measures the current core at **16,631 gzip bytes** (54,672 minified bytes), missing the same 15 KiB target by **1,271 bytes**. Its core graph remains 31 inputs without optional adapter modules; the increase covers supported capability metadata and the narrow internal execution-control seam. The selected worker client is 35,574/11,237 minified/gzip bytes. Complete product and worker graphs are measured separately; these figures are not additive costs or heap measurements.
 
-MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-3002 is RX-3003 — IndexedDB persistence, recovery, and namespace erasure.
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-3003 is RX-3004 — Companion migration and comparator separation.
 
 ## Factual inspection
 

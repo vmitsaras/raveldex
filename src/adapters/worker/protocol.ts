@@ -9,9 +9,9 @@ export const MAX_MESSAGE_BYTES = 8 * 1024 * 1024;
 export const MAX_PENDING = 64;
 export const RECEIPT_WINDOW = 256;
 const MAX_NODES = 131_072, MAX_DEPTH = 64, MAX_ARRAY = 65_536;
-export const OPERATIONS = Object.freeze(['init', 'search', 'add', 'addMany', 'replace', 'remove', 'clear', 'reconcile', 'dispose'] as const);
+export const OPERATIONS = Object.freeze(['init', 'search', 'add', 'addMany', 'replace', 'remove', 'clear', 'reconcile', 'dispose', 'snapshotExportSource', 'snapshotRestore', 'snapshotReconcile'] as const);
 export type Operation = typeof OPERATIONS[number];
-export const mutation = (operation: string): boolean => ['add', 'addMany', 'replace', 'remove', 'clear'].includes(operation);
+export const mutation = (operation: string): boolean => ['add', 'addMany', 'replace', 'remove', 'clear', 'snapshotRestore'].includes(operation);
 /** Same-host comparable monotonic epoch; wall-clock adjustments are irrelevant. */
 export function monotonicEpoch(): number {
   const origin = performance.timeOrigin, now = performance.now();
@@ -103,22 +103,28 @@ export function canonical(value: unknown): string {
   return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonical((value as Data)[key])}`).join(',')}}`;
 }
 export function wireError(error: unknown): WireError {
+  if (error instanceof RaveldexError && error.name === 'SnapshotAdapterError' && 'reason' in error && typeof error.reason === 'string' && error.reason.length <= 64) return Object.freeze({ name: 'SnapshotAdapterError', code: error.code, reason: error.reason, details: error.details });
   if (error instanceof RaveldexError) return Object.freeze({ name: 'RaveldexError', code: error.code, details: error.details });
   if (error instanceof WorkerAdapterError) return Object.freeze({ name: 'WorkerAdapterError', code: error.code, details: error.details });
   return Object.freeze({ name: 'RaveldexError', code: 'INTERNAL_ERROR', details: Object.freeze({}) });
 }
 export function validateError(value: unknown): WireError {
-  const data = object(value, ['name', 'code', 'details']), details = object(data.details, ['path', 'limit', 'actual', 'operationId']);
+  const data = object(value, ['name', 'code', 'details', 'reason']), details = object(data.details, ['path', 'limit', 'actual', 'operationId']);
   if (details.path !== undefined && (typeof details.path !== 'string' || details.path.length > 256)) fail('transport.error');
   for (const field of ['limit', 'actual'] as const) if (details[field] !== undefined) integer(details[field]);
-  if (data.name === 'RaveldexError') {
+  if (data.name === 'SnapshotAdapterError') {
+    if (!(ERROR_CODES as readonly unknown[]).includes(data.code) || typeof data.reason !== 'string' || data.reason.length > 64 || details.operationId !== undefined) fail('transport.error');
+  } else if (data.name === 'RaveldexError') {
+    if (data.reason !== undefined) fail('transport.error');
     if (!(ERROR_CODES as readonly unknown[]).includes(data.code) || details.operationId !== undefined) fail('transport.error');
   } else if (data.name === 'WorkerAdapterError') {
+    if (data.reason !== undefined) fail('transport.error');
     if (!(WORKER_ERROR_CODES as readonly unknown[]).includes(data.code) || details.operationId !== undefined && (typeof details.operationId !== 'string' || details.operationId.length > 80)) fail('transport.error');
   } else fail('transport.error');
   return data as unknown as WireError;
 }
 export function inflateError(value: WireError): Error {
+  if (value.name === 'SnapshotAdapterError') { const error = new RaveldexError(value.code, value.details) as RaveldexError & { reason: string }; error.name = value.name; error.reason = value.reason; return error; }
   return value.name === 'RaveldexError' ? new RaveldexError(value.code, value.details) : new WorkerAdapterError(value.code, value.details);
 }
 export function mutationResult(value: unknown, maxDocuments: number, operation?: string, maximumChanged = maxDocuments): MutationResult {

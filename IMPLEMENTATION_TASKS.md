@@ -665,7 +665,7 @@ Export and restore explicit source/native snapshot formats with bounded decoding
 
 **IndexedDB persistence, recovery, and namespace erasure**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/23)
+**Milestone:** N3 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/23)
 
 **Dependencies:** [RX-3001](IMPLEMENTATION_TASKS.md#rx-3001), [RX-3002](IMPLEMENTATION_TASKS.md#rx-3002)
 
@@ -697,7 +697,11 @@ Provide explicitly selected local persistence and recovery with truthful commit/
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-3003.md](docs/evidence/RX-3003.md)
+- [docs/evidence/RX-3003-review.md](docs/evidence/RX-3003-review.md)
+- [docs/evidence/RX-3003-browser-fifth.json](docs/evidence/RX-3003-browser-fifth.json)
+- [docs/evidence/RX-3003-review-probe.json](docs/evidence/RX-3003-review-probe.json)
+- [docs/evidence/RX-3003-browser-accepted.json](docs/evidence/RX-3003-browser-accepted.json)
 
 
 ## RX-3004

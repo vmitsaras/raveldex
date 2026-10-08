@@ -4,6 +4,7 @@ import type { Configuration, MutationOptions, OwnedConfiguration, Query, SearchO
 import type { AddonRegistration } from '../../core/capabilities/types.js';
 import { initializeParticipants } from '../../core/capabilities/participants.js';
 import { directHost } from '../../core/execution/host.js';
+import type { AdapterControl } from '../../core/execution/engine.js';
 import { emptyRoot, ExecutionOwner } from '../../core/execution/engine.js';
 import type { MutationKind } from '../../core/mutations/capture.js';
 import { RaveldexError } from '../../core/errors/error.js';
@@ -14,19 +15,30 @@ import type { MutationReceipt, WorkerHostOptions, WorkerScope } from './types.js
 
 export type { WorkerScope, WorkerHostOptions } from './types.js';
 export interface WorkerHostHandle { dispose(): Promise<void> }
+interface SnapshotHostBridge {
+  exportSource(options: MutationOptions, control: AdapterControl): Promise<string>;
+  restore(encoded: string, options: MutationOptions, control: AdapterControl): Promise<unknown>;
+}
+type SnapshotFactory = (owner: ExecutionOwner) => SnapshotHostBridge;
+type HostReceipt = { readonly operationId: string; readonly status: 'pending' | 'expired' } | { readonly operationId: string; readonly status: 'committed'; readonly result: unknown } | { readonly operationId: string; readonly status: 'rejected'; readonly error: ReturnType<typeof wireError> };
 const liveScopes = new WeakSet<WorkerScope>();
 
 /** Called explicitly by the consumer's own module worker. The consumer imports
  * trusted local addon factories; executable handles never cross the boundary. */
 export function serveRaveldexWorker(scope: WorkerScope, options: WorkerHostOptions = {}): WorkerHostHandle {
+  return serveWorkerWithSnapshots(scope, options);
+}
+
+/** Private selected snapshot seam; the ordinary host imports no codecs. */
+export function serveWorkerWithSnapshots(scope: WorkerScope, options: WorkerHostOptions = {}, snapshotFactory?: SnapshotFactory): WorkerHostHandle {
   if (liveScopes.has(scope)) throw new WorkerAdapterError('INCOMPATIBLE_WORKER', { path: 'worker.owner' });
   // Reserve ownership before any trusted live-handle access can reenter setup.
   liveScopes.add(scope);
-  try { return installWorkerHost(scope, options); }
+  try { return installWorkerHost(scope, options, snapshotFactory); }
   catch (error) { liveScopes.delete(scope); throw error; }
 }
 
-function installWorkerHost(scope: WorkerScope, options: WorkerHostOptions): WorkerHostHandle {
+function installWorkerHost(scope: WorkerScope, options: WorkerHostOptions, snapshotFactory: SnapshotFactory | undefined): WorkerHostHandle {
   const data = ownObject(options, 'INVALID_OPTIONS', 'worker.host', new Admission(64));
   keysOnly(data, ['addons', 'maxMessageBytes'], 'INVALID_OPTIONS', 'worker.host');
   const addons = Object.hasOwn(data, 'addons') ? ownArray(data.addons, 32, 'INVALID_OPTIONS', 'worker.host.addons', new Admission(64)) as AddonRegistration[] : [];
@@ -36,17 +48,19 @@ function installWorkerHost(scope: WorkerScope, options: WorkerHostOptions): Work
   let owner: ExecutionOwner | undefined, configuration: OwnedConfiguration | undefined;
   let initialized = false, closing = false, cleaned = false, disposal: Promise<void> | undefined;
   const active = new Map<number, AbortController>();
-  const receipts = new Map<string, MutationReceipt>();
+  const receipts = new Map<string, HostReceipt>();
+  const receiptDomains = new Map<string, boolean>();
+  let snapshots: SnapshotHostBridge | undefined;
   const inflight = new Map<number, Promise<void>>();
 
-  function record(value: MutationReceipt): void {
+  function record(value: HostReceipt): void {
     receipts.set(value.operationId, value);
     // Pending operations cannot lose their receipt before their native outcome;
     // at most MAX_PENDING pending entries exist independently of this window.
     while (receipts.size > RECEIPT_WINDOW) {
       const victim = [...receipts].find(([, receipt]) => receipt.status !== 'pending');
       if (!victim) break;
-      receipts.delete(victim[0]);
+      receipts.delete(victim[0]); receiptDomains.delete(victim[0]);
     }
   }
   function send(request: Data, kind: 'result' | 'error', value: unknown): void {
@@ -81,15 +95,18 @@ function installWorkerHost(scope: WorkerScope, options: WorkerHostOptions): Work
         const installed = initializeParticipants(captured);
         // Exactly one complete root and one FIFO owner. No per-field/shard engine.
         configuration = captured; owner = new ExecutionOwner(emptyRoot(captured, installed.states), directHost(), installed.participants);
+        snapshots = snapshotFactory?.(owner);
         send(request, 'result', { implementation: IMPLEMENTATION, model: 'raveldex-bm25-v1', analyzer: captured.analyzer, identity: identity(captured), manifests, maxMessageBytes: maximum, receipts: RECEIPT_WINDOW });
         return;
       }
       if (!owner || !configuration) throw new WorkerAdapterError('STARTUP_FAILED');
       if (closing) throw new WorkerAdapterError('DISPOSED');
-      if (operation === 'reconcile') {
+      if (operation === 'reconcile' || operation === 'snapshotReconcile') {
         object(payload, ['operationId']);
         if (typeof payload.operationId !== 'string' || !payload.operationId.startsWith(`${session}:`) || !/^[1-9][0-9]*$/.test(payload.operationId.slice(session!.length + 1))) fail('transport.operationId');
         integer(Number(payload.operationId.slice(session!.length + 1)), lastId, 1);
+        const domain = receiptDomains.get(payload.operationId);
+        if (domain !== undefined && domain !== (operation === 'snapshotReconcile')) throw new WorkerAdapterError('INVALID_TRANSPORT', { path: 'transport.receiptDomain' });
         send(request, 'result', receipts.get(payload.operationId) ?? { operationId: payload.operationId, status: 'expired' });
         return;
       }
@@ -101,15 +118,16 @@ function installWorkerHost(scope: WorkerScope, options: WorkerHostOptions): Work
         await Promise.all([...inflight].filter(([requestId]) => requestId !== id).map(([, promise]) => promise));
         send(request, 'result', null); cleanup(); return;
       }
+      if ((operation === 'snapshotExportSource' || operation === 'snapshotRestore') && !snapshots) throw new WorkerAdapterError('INCOMPATIBLE_WORKER', { path: 'snapshot.host' });
       if (active.size >= MAX_PENDING) throw new WorkerAdapterError('TRANSPORT_LIMIT', { path: 'transport.pending', limit: MAX_PENDING, actual: active.size + 1 });
       object(payload, operation === 'search' ? ['query', 'options', 'admittedAt'] : ['input', 'options', 'admittedAt']);
       const requestOptions = object(payload.options, operation === 'search' ? ['deadlineMs', 'limit', 'offset', 'extensions'] : ['deadlineMs']);
       if (typeof payload.admittedAt !== 'number' || !Number.isFinite(payload.admittedAt) || payload.admittedAt < 0) fail('transport.admission');
       const controller = new AbortController(); active.set(id, controller);
       const control = { signal: controller.signal, elapsedMs: Math.max(0, monotonicEpoch() - payload.admittedAt) };
-      if (mutation(operation)) { trackedMutation = true; record(Object.freeze({ operationId, status: 'pending' })); }
-      const result = operation === 'search' ? await owner.searchControlled(payload.query as string | Query, requestOptions as SearchOptions, control) : await owner.mutateControlled(operation as MutationKind, payload.input, requestOptions as MutationOptions, control);
-      if (trackedMutation) record(Object.freeze({ operationId, status: 'committed', result: result as Extract<MutationReceipt, { status: 'committed' }>['result'] }));
+      if (mutation(operation)) { trackedMutation = true; receiptDomains.set(operationId, operation === 'snapshotRestore'); record(Object.freeze({ operationId, status: 'pending' })); }
+      const result = operation === 'snapshotExportSource' ? await snapshots!.exportSource(requestOptions as MutationOptions, control) : operation === 'snapshotRestore' ? await snapshots!.restore(payload.input as string, requestOptions as MutationOptions, control) : operation === 'search' ? await owner.searchControlled(payload.query as string | Query, requestOptions as SearchOptions, control) : await owner.mutateControlled(operation as MutationKind, payload.input, requestOptions as MutationOptions, control);
+      if (trackedMutation) record(Object.freeze({ operationId, status: 'committed', result }));
       send(request, 'result', result);
     } catch (error) {
       const failure = wireError(error);
@@ -152,7 +170,7 @@ function installWorkerHost(scope: WorkerScope, options: WorkerHostOptions): Work
     cleaned = true;
     closing = true;
     for (const [type, listener] of [['message', message], ['messageerror', failure]] as const) { try { removeListener(type, listener); } catch { /* Continue cleanup. */ } }
-    active.clear(); receipts.clear(); owner = undefined; configuration = undefined;
+    active.clear(); receipts.clear(); receiptDomains.clear(); snapshots = undefined; owner = undefined; configuration = undefined;
     liveScopes.delete(scope);
   }
   function dispose(): Promise<void> {

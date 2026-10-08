@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
+    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -26,8 +26,8 @@
     "docs:check": "node scripts/render-plan.mjs --check && node scripts/check-docs.mjs",
     "tracking:preview": "node scripts/sync-github.mjs --dry-run",
     "tracking:sync": "node scripts/sync-github.mjs --apply",
-    "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json && tsc -p tsconfig.worker.json",
-    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json",
+    "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.indexeddb.json",
+    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json && tsc -p tsconfig.indexeddb.build.json",
     "test:core": "npm run build && node --test test/core/*.test.mjs",
     "prepack": "npm run build",
     "test:consumer": "npm run build && node --test test/consumer/*.test.mjs",
@@ -42,7 +42,8 @@
     "pilot:ui": "npm run build && node scripts/ui-pilot.mjs",
     "test:worker": "npm run build && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
     "test:snapshots": "npm run build && node --test --test-timeout=120000 test/adapters/snapshots/*.test.mjs",
-    "measure:snapshots": "npm run build && node --expose-gc scripts/snapshot-costs.mjs"
+    "measure:snapshots": "npm run build && node --expose-gc scripts/snapshot-costs.mjs",
+    "test:indexeddb": "npm run build && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs"
   },
   "devDependencies": {
     "axe-core": "4.13.0",
@@ -106,12 +107,24 @@
       "import": "./dist/adapters/worker/index.js"
     },
     "./adapters/worker/host": {
-      "types": "./dist/adapters/worker/host.d.ts",
-      "import": "./dist/adapters/worker/host.js"
+      "types": "./dist/adapters/worker/host-entry.d.ts",
+      "import": "./dist/adapters/worker/host-entry.js"
     },
     "./adapters/snapshots": {
       "types": "./dist/adapters/snapshots/index.d.ts",
       "import": "./dist/adapters/snapshots/index.js"
+    },
+    "./adapters/indexeddb": {
+      "types": "./dist/adapters/indexeddb/index.d.ts",
+      "import": "./dist/adapters/indexeddb/index.js"
+    },
+    "./adapters/worker/snapshots": {
+      "types": "./dist/adapters/worker/snapshots.d.ts",
+      "import": "./dist/adapters/worker/snapshots.js"
+    },
+    "./adapters/worker/snapshots/host": {
+      "types": "./dist/adapters/worker/snapshots-host.d.ts",
+      "import": "./dist/adapters/worker/snapshots-host.js"
     }
   },
   "files": [
@@ -128,7 +141,8 @@
     "dist/addons/snippets/",
     "dist/addons/ui/",
     "dist/adapters/worker/",
-    "dist/adapters/snapshots/"
+    "dist/adapters/snapshots/",
+    "dist/adapters/indexeddb/"
   ],
   "sideEffects": [
     "**/*.css"

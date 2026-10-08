@@ -73,14 +73,14 @@ export class ExecutionOwner implements Raveldex {
   }
   get root(): IndexRoot | undefined { return this.#owner?.root; }
 
-  adapterOperation<T>(capture: (configuration: OwnedConfiguration) => AdapterOperation<T>): Promise<T> {
+  adapterOperation<T>(capture: (configuration: OwnedConfiguration) => AdapterOperation<T>, control?: AdapterControl): Promise<T> {
     return this.admit(() => {
       const request = capture(this.#configuration);
       return { options: request.options, start: check => {
         const owner = this.#owner!, previous = owner.root;
         return request.start(previous, check, root => owner.publishPrepared(root, previous));
       } };
-    }) as Promise<T>;
+    }, control) as Promise<T>;
   }
 
   search(query: string | Query, options?: SearchOptions): Promise<SearchResult> {

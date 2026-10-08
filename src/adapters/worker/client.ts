@@ -1,3 +1,5 @@
+import { bindSnapshotChannel } from './snapshot-channel.js';
+import type { SnapshotOperation } from './snapshot-channel.js';
 import { captureConfiguration } from '../../core/contracts/schema.js';
 import { captureOptions } from '../../core/contracts/options.js';
 import { Admission, ownObject, keysOnly } from '../../core/contracts/data.js';
@@ -229,6 +231,26 @@ class Client implements WorkerRaveldex {
       return this.request('reconcile', { operationId }, value => receipt(value, operationId, this.#configuration.limits.maxDocuments)) as Promise<MutationReceipt>;
     } catch (error) { return Promise.reject(nativeFailure(error)); }
   }
+  snapshot(operation: SnapshotOperation, input: unknown, options: MutationOptions | undefined, validate: (value: unknown) => unknown): Promise<unknown> & { readonly operationId?: string } {
+    let id: number | undefined, promise: Promise<unknown>;
+    try {
+      if (this.#closed || this.#closing) throw new WorkerAdapterError('DISPOSED');
+      const captured = this.options(options, false);
+      if (operation === 'snapshotRestore' && typeof input !== 'string') throw new WorkerAdapterError('INVALID_TRANSPORT', { path: 'snapshot.encoded' });
+      id = this.next();
+      promise = this.request(operation, { ...(operation === 'snapshotRestore' ? { input } : {}), options: captured.options, admittedAt: captured.admittedAt }, validate, captured.signal, id);
+    } catch (error) { promise = Promise.reject(nativeFailure(error)); if (id !== undefined) this.release(id); }
+    if (operation === 'snapshotRestore') Object.defineProperty(promise, 'operationId', { value: id === undefined ? '' : `${this.#session}:${id}`, enumerable: true });
+    return promise;
+  }
+  snapshotReconcile(operationId: string, validate: (value: unknown) => unknown): Promise<unknown> {
+    if (this.#closed || this.#closing) return Promise.reject(new WorkerAdapterError('DISPOSED'));
+    try {
+      if (typeof operationId !== 'string' || !operationId.startsWith(`${this.#session}:`) || !/^[1-9][0-9]*$/.test(operationId.slice(this.#session.length + 1))) fail('transport.operationId');
+      integer(Number(operationId.slice(this.#session.length + 1)), this.#sequence, 1);
+      return this.request('snapshotReconcile', { operationId }, validate);
+    } catch (error) { return Promise.reject(nativeFailure(error)); }
+  }
   dispose(): Promise<void> {
     if (this.#disposal) return this.#disposal;
     if (this.#closed) return Promise.resolve();
@@ -241,7 +263,9 @@ class Client implements WorkerRaveldex {
   }
   destroy(): Promise<void> { return this.dispose(); }
   facade(): WorkerRaveldex {
-    return Object.freeze({ search: this.search.bind(this), add: this.add.bind(this), addMany: this.addMany.bind(this), replace: this.replace.bind(this), remove: this.remove.bind(this), clear: this.clear.bind(this), reconcile: this.reconcile.bind(this), dispose: this.dispose.bind(this), destroy: this.destroy.bind(this) });
+    const facade = Object.freeze({ search: this.search.bind(this), add: this.add.bind(this), addMany: this.addMany.bind(this), replace: this.replace.bind(this), remove: this.remove.bind(this), clear: this.clear.bind(this), reconcile: this.reconcile.bind(this), dispose: this.dispose.bind(this), destroy: this.destroy.bind(this) });
+    bindSnapshotChannel(facade, Object.freeze({ invoke: this.snapshot.bind(this), reconcile: this.snapshotReconcile.bind(this) }));
+    return facade;
   }
 }
 

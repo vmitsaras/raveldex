@@ -4,7 +4,7 @@ import { captureOptions } from '../../core/contracts/options.js';
 import type { Configuration, MutationOptions, OwnedConfiguration, Raveldex } from '../../core/contracts/types.js';
 import { initializeParticipants } from '../../core/capabilities/participants.js';
 import { createOwnedRaveldex, emptyRoot, getExecutionOwner } from '../../core/execution/engine.js';
-import type { ExecutionMetrics } from '../../core/execution/engine.js';
+import type { AdapterControl, ExecutionMetrics } from '../../core/execution/engine.js';
 import type { ExecutionHost } from '../../core/execution/host.js';
 import { MutationOwner } from '../../core/mutations/owner.js';
 import { invalid, RaveldexError } from '../../core/errors/error.js';
@@ -171,6 +171,11 @@ function* restoreCursor(engine: Raveldex, root: IndexRoot, encoded: string, maxi
 /** Optional codecs borrow one direct native owner. They add no engine methods,
  * background persistence, worker proxy, network access or automatic import. */
 export function createSnapshots(engine: Raveldex, options: SnapshotOptions = {}): Snapshots {
+  return controlledSnapshots(engine, options);
+}
+
+/** Private selected-worker bridge. Transport controls attach after admission. */
+export function controlledSnapshots(engine: Raveldex, options: SnapshotOptions = {}, control?: AdapterControl): Snapshots {
   const owner = getExecutionOwner(engine); if (!owner) fail('UNSUPPORTED_ENGINE');
   const data = ownObject(options, 'INVALID_OPTIONS', 'snapshot.options', new Admission(32));
   keysOnly(data, ['maxEncodedBytes'], 'INVALID_OPTIONS', 'snapshot.options');
@@ -180,7 +185,7 @@ export function createSnapshots(engine: Raveldex, options: SnapshotOptions = {})
     return owner!.adapterOperation(configuration => ({ options: captureOptions(options, configuration.limits, false), *start(root, check) {
       const qualification = format === 'raveldex-native' ? nativeQualification(engine, root) : bindings.get(engine);
       return yield* metered(encoded(root, format, qualification, maximum as number), configuration.limits.maxMutationWorkUnits, check);
-    } }));
+    } }), control);
   }
   return Object.freeze({
     exportSource: (options?: MutationOptions) => exportFormat('raveldex-source', options),
@@ -196,7 +201,7 @@ export function createSnapshots(engine: Raveldex, options: SnapshotOptions = {})
         return { options: capturedOptions, *start(root, check, publish) {
           return yield* metered(restoreCursor(engine, root, encoded, maximum as number, publish, check), configuration.limits.maxMutationWorkUnits, check);
         } };
-      });
+      }, control);
     },
   });
 }
