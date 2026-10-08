@@ -1,0 +1,15 @@
+Independent probe preparation failure, 2026-10-08.
+Command: node docs/evidence/RX-4002-facets-review-probe.mjs --primary=docs/evidence/RX-4002-facet-keyboard-idle-typeahead.json
+Exit: 1. No browser/server launch was reached.
+Provenance: copied from the exec tool output because this first invocation did not redirect to a file.
+
+AssertionError [ERR_ASSERTION]: browser-worker.mjs
++ actual - expected
+
++ 'b40d87d4f02621f34f57bbc981a4871f9b0888c74eaffc916226cb48fd43a4eb'
+- '4598c22cc200fd2c689963537654ae117bb12efd5704cafbb6d025f2f877ad30'
+
+    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-facets-review-probe.mjs:81:44
+Node.js v24.21.0
+
+Classification: independent review-harness assumption defect. browser-serve.mjs intentionally replaces its copied browser-worker.mjs with browser-worker-bundle.mjs after recording original input identities. This narrow probe executes only browser-ui-driver.mjs. The corrected probe verifies every input of that executed UI graph; it still compares all 208 installed production files in each new consumer. No production or primary observer change resulted.

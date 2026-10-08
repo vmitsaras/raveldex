@@ -4,6 +4,8 @@
 
 - Add RX-4002 installed-package browser qualification, explicit manual fault/recovery fixtures, fresh-process memory/heap-graph methods and separate offline graph-cut retention analysis. Preserve original observations and guard analysis output from overwriting immutable inputs. Exact-tool AT, physical presentation and unisolated memory criteria remain Blocked; no runtime/API/dependency changes or release waiver.
 
+- Record a focused RX-4002 native facet choice/clear path in WebKit 26.5 and Chrome 155.0.8059.40 with trusted events, new exact queries, retained focus and paging reset. Preserve the earlier Blocked ArrowUp route and historical matrix; broader qualification remains Blocked.
+
 - Add reproducible RX-4001 independent correctness, frozen 76-query documentation relevance, explicit pinned companion comparison and separate native/worker/storage cost observations. Preserve lexical/ranking gaps, bounded refusals and the unchanged core size target; no runtime/API/dependency changes or release qualification.
 
 - RX-3004 adds an optional LocalSearch source snapshot converter with canonical SHA-256 validation, owned native configuration/records, explicit provenance and native intersection checks. Migration rebuilds a new owner through ordinary public APIs. Isolated development comparison declares the companion/MiniSearch identity and expected analyzer/rank differences; core retains zero foreign runtime dependencies.

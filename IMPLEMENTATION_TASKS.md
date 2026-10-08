@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** Firefox package matrix and native WebKit facet clearing need a working environment/input path; exact-tool AT and physical display/input observations are unavailable; collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. Offline node-cut effects from the original dumps are observed; see docs/evidence/RX-4002-retainers.md. All seven criteria remain unchanged.
+**Blocker or decision:** Firefox package matrix, installed Safari/exact-tool AT and physical display/input observations remain unavailable; collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. A focused native WebKit facet clearing route is observed; see docs/evidence/RX-4002-facets.md. All seven criteria remain unchanged.
 
 **Expected affected areas**
 
@@ -865,6 +865,15 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-retainers-review-probe.json](docs/evidence/RX-4002-retainers-review-probe.json)
 - [docs/evidence/RX-4002-retainers-package.json](docs/evidence/RX-4002-retainers-package.json)
 - [docs/evidence/RX-4002-retainers-package-audit.json](docs/evidence/RX-4002-retainers-package-audit.json)
+- [docs/evidence/RX-4002-facets.md](docs/evidence/RX-4002-facets.md)
+- [docs/evidence/RX-4002-facet-keyboard-arrowup.json](docs/evidence/RX-4002-facet-keyboard-arrowup.json)
+- [docs/evidence/RX-4002-facet-keyboard-arrowup-source.mjs](docs/evidence/RX-4002-facet-keyboard-arrowup-source.mjs)
+- [docs/evidence/RX-4002-facet-keyboard-idle-typeahead.json](docs/evidence/RX-4002-facet-keyboard-idle-typeahead.json)
+- [docs/evidence/RX-4002-facets-review-probe.mjs](docs/evidence/RX-4002-facets-review-probe.mjs)
+- [docs/evidence/RX-4002-facets-review-probe.json](docs/evidence/RX-4002-facets-review-probe.json)
+- [docs/evidence/RX-4002-facets-package.json](docs/evidence/RX-4002-facets-package.json)
+- [docs/evidence/RX-4002-facets-package-audit.json](docs/evidence/RX-4002-facets-package-audit.json)
+- [docs/evidence/RX-4002-facets-review.md](docs/evidence/RX-4002-facets-review.md)
 
 
 ## RX-4003
