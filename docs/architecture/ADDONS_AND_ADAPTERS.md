@@ -1,6 +1,6 @@
 # Add-ons and adapters
 
-Status: Approved boundary/behavior contract. Primary tasks: RX-2001–RX-2006 and RX-3001–RX-3004. RX-2001 registration/source phrases and RX-2002 positions/original offsets/mixed phrases are verified locally; [source evidence](../evidence/RX-2001.md), [position evidence](../evidence/RX-2002.md). RX-2003 typed metadata leaves and exact conjunctive facets are implemented; [evidence](../evidence/RX-2003.md). RX-2004 factual evidence/Inspector data and diagnostic exports are verified locally; [evidence](../evidence/RX-2004.md). RX-2005 original ranges and bounded grapheme-safe snippets are verified locally; [evidence](../evidence/RX-2005.md). RX-2006 implements the optional native DOM UI and packaged documentation pilot. Host adapters remain planned.
+Status: Approved boundary/behavior contract. Primary tasks: RX-2001–RX-2006 and RX-3001–RX-3004. RX-2001 registration/source phrases and RX-2002 positions/original offsets/mixed phrases are verified locally; [source evidence](../evidence/RX-2001.md), [position evidence](../evidence/RX-2002.md). RX-2003 typed metadata leaves and exact conjunctive facets are implemented; [evidence](../evidence/RX-2003.md). RX-2004 factual evidence/Inspector data and diagnostic exports are verified locally; [evidence](../evidence/RX-2004.md). RX-2005 original ranges and bounded grapheme-safe snippets are verified locally; [evidence](../evidence/RX-2005.md). RX-2006 implements the optional native DOM UI and packaged documentation pilot. RX-3001 adds the optional one-owner module-worker adapter; snapshots and persistence remain planned.
 
 ## Goal and outcome
 
@@ -99,7 +99,7 @@ Before reusing companion phrase code in RX-2001, record the actual source reposi
 
 Public `/addons/phrases` exports `createSourceProvider({ fields, id?, maxRetainedEntries?, maxWorkUnits? })` and `createSourcePhrases({ fields, id?, maxWorkUnits? })`; `/addons/phrases/source` exports only the source factory. Options are owned/frozen. Default registration IDs are `source` and `source-phrases`, providing `source:<field>` and `phrases` with contract version 1. No implicit installation, source getter or live registration/rebuild API exists.
 
-Implemented manifest role names are `transaction-participant`, `leaf-refinement`, (RX-2003) `aggregation` and (RX-2004) `evidence`. Unsupported roles/execution fail `INCOMPATIBLE_CAPABILITY`; direct execution is supported, workers remain deferred. Complete bounded manifests/handles are captured before initialization; dependency order is deterministic and independent of input order. Missing requirements fail `MISSING_CAPABILITY`; duplicate IDs, conflicting providers, cycles, incompatible versions/data/handles fail `INCOMPATIBLE_CAPABILITY`. SemVer module identity is validated; compatibility resolution uses exact protocol versions, not package-version ranges. Arbitrary trusted implementations are not sandboxed.
+Implemented manifest role names are `transaction-participant`, `leaf-refinement`, (RX-2003) `aggregation` and (RX-2004) `evidence`. Unsupported roles/execution fail `INCOMPATIBLE_CAPABILITY`; direct execution is supported and RX-3001 adds explicit worker registration identities for first-party capabilities. Complete bounded manifests/handles are captured before initialization; dependency order is deterministic and independent of input order. Missing requirements fail `MISSING_CAPABILITY`; duplicate IDs, conflicting providers, cycles, incompatible versions/data/handles fail `INCOMPATIBLE_CAPABILITY`. SemVer module identity is validated; compatibility resolution uses exact protocol versions, not package-version ranges. Arbitrary trusted implementations are not sandboxed.
 
 The initial refinement handle is `exact-token-sequence`. Core validates/owns the whole `{ text, fields? }` payload, counts text plus selected-field strings within payload/global bounds, analyzes it once with `basic-v1`, and passes the ordered normalized terms including repeats. Complete lexical groups do not reanalyze normalized output. Phrase preparation validates every selected field/provider/revision/analyzer, even for empty/unmatched phrases. A missing field on an accepted record is an ordinary nonmatch; a missing authoritative candidate record is a typed consistency failure. RX-2003 now supports requested metadata aggregations; RX-2004 implements selected factual evidence; other unsupported roles fail explicitly.
 
@@ -229,7 +229,7 @@ RX-2006 adds pinned development-only `playwright-core` for real browser scenario
 
 ## Worker adapter
 
-Primary task RX-3001.
+Primary task RX-3001. The public client and host entries are implemented independently of core imports.
 
 One module worker owns one complete native engine. No independent scoring shards. The adapter validates bounded request/response envelopes, request IDs, supported operations, configuration/capability versions, and same-index statistics. It never transports executable function strings or evaluates caller code.
 
@@ -240,6 +240,18 @@ Initial transport payload cap is 8 MiB per message, including encoded payload me
 Every mutation request has an operation ID. The adapter retains a bounded 256-receipt reconciliation window and never reuses request IDs within the worker session. A known precommit cancellation is `CANCELLED`; a known commit reports its result. Lost responses or termination without a conclusive receipt produce `OUTCOME_UNKNOWN`. Do not retry automatically. Reconcile authoritative state or recover explicitly when the receipt window cannot establish an outcome.
 
 Disposal cleans request maps/listeners and terminates an adapter-owned worker. Externally supplied workers are released according to explicit ownership, not terminated silently. Ordinary cancellation checkpoints remain inside the native engine; ignoring a late result alone does not prove cancellation.
+
+### Public worker entries — RX-3001
+
+`/adapters/worker` exports `createWorkerRaveldex`, `WorkerAdapterError`, error codes and readonly transport/receipt types. `/adapters/worker/host` exports `serveRaveldexWorker`. Importing either entry does not construct or initialize a worker; the application explicitly creates its own ESM entry and supplies its endpoint. The worker module installs its trusted local add-ons; no callback or executable source crosses transport.
+
+`createWorkerRaveldex({ worker, configuration, ownership, sameHost: true, maxMessageBytes?, responseTimeoutMs? })` returns a promise for the ordinary facade plus `reconcile` and `destroy`. The complete captured schema, limits, analyzer, model/implementation identity and worker-capable manifests must match the host's registered capabilities. First-party `workerRegistration` identities contain the versioned module family and canonical complete normalized factory options, capped at 8,192 UTF-16 units. Output/window/fact limits therefore cannot collide merely because broader manifest caps match. `sameHost` must explicitly select the implemented unqualified browser page/own-worker pairing; no native-snapshot or cross-host qualification is inferred.
+
+Mutation promises carry a readonly session operation ID before settlement. A living owner answers `reconcile(id)` with `pending`, `committed` plus its actual result, `rejected` plus its sanitized typed error, or `expired`. Missing/expired receipts do not prove rejection. Transport errors use the separate `WorkerAdapterError` codes, leaving the root core codes intact. A dispatched mutation whose result cannot be established reports `OUTCOME_UNKNOWN`; no operation is retried automatically. Explicit recovery creates a fresh owner from application-authoritative source; snapshots and persistence remain separate tasks.
+
+Transport capture additionally bounds 131,072 visited nodes, depth 64 and 65,536 array elements. Message caps range from 1,024 bytes to 8 MiB; handshake selects the stricter client/host cap. At most 64 client requests are pending, independently of the native queue limit. The reply watchdog defaults to 65,000 ms and may be selected from 1 to 120,000 ms; it is a transport timeout, distinct from a native operation deadline. Same-host monotonic admission time counts capture/transport delay before the native FIFO deadline. Native cancellation control is attached internally after caller capture so it cannot consume synthetic caller admission entries. A silent worker death can be detected by timeout, and disposal still releases resources if acknowledgement fails.
+
+The documentation example bundles the page and module worker as separate ESM entries, imports only installed public subpaths, and lets users select direct or worker execution. Selecting a new setup disposes the previous owner and reindexes the same corpus atomically. The server exposes the explicit local worker artifact under the same origin/CSP.
 
 ## Snapshots and IndexedDB
 

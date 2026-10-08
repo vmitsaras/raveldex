@@ -276,7 +276,7 @@ function* project(context: EvidenceContext, roots: ReadonlyMap<string, SourceRoo
 }
 
 function presentation(caps: Caps): EvidencePresentation {
-  return Object.freeze({ capability: 'snippets',
+  return Object.freeze({ capability: 'snippets', workerOptions: Object.freeze({ ...caps }),
     prepare: function* (context: EvidenceContext, fields: readonly string[]): Generator<WorkStep, PreparedPresentation> {
       const roots = new Map<string, SourceRoot>();
       for (const field of fields) {

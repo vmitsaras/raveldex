@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import type { AddonRegistration, AggregationOutput, EvidenceContext, EvidenceResultContext, PayloadContext, PreparedEvidence } from '../../core/capabilities/types.js';
 import { has } from '../../core/contracts/data.js';
 import { invalid } from '../../core/errors/error.js';
@@ -96,7 +97,7 @@ export function createInspector(options: InspectorOptions = {}): AddonRegistrati
       roles: Object.freeze(['evidence'] as const), provides: Object.freeze([Object.freeze({ id: 'inspector', contractVersion: 1 })]),
       requires: Object.freeze(captured.sourceFields.map(field => Object.freeze({ id: `source:${field}`, contractVersion: 1 }))),
       dataRequirements: Object.freeze({ fields: captured.sourceFields, source: captured.sourceFields.length > 0, positions: false, offsets: false, metadata: false }),
-      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: false }),
+      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('inspector', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: 0, maxOutputEntries: captured.maxOutputEntries }),
       costs: Object.freeze({ importedCode: 'Factual native Inspector projection, explicit source lookup and bounded JSON diagnostics; no DOM or phrase verifier.',
         retainedRepresentation: 'No side root, record metadata copy, full corpus trace or original source retention.',

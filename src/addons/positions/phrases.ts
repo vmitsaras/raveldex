@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import type { AddonRegistration, PreparedRefinement, RefinementContext } from '../../core/capabilities/types.js';
 import { bound, invalid } from '../../core/errors/error.js';
 import type { WorkStep } from '../../core/index/directory.js';
@@ -40,7 +41,7 @@ export function createPositionPhrases(options: PositionPhraseOptions): AddonRegi
       provides: Object.freeze([Object.freeze({ id: 'phrases', contractVersion: 1 })]),
       requires: Object.freeze(captured.fields.map(field => Object.freeze({ id: `positions:${field}`, contractVersion: 1 }))),
       dataRequirements: Object.freeze({ fields: captured.fields, source: false, positions: true, offsets: false, metadata: false }),
-      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: false }),
+      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('position-phrases', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: 0, maxOutputEntries: 0 }),
       costs: Object.freeze({ importedCode: 'Selected-position protocol and resumable occurrence-position intersection; no source reanalysis.', retainedRepresentation: 'No additional index state; position providers retain declared term occurrences and optionally original spans.', transientWork: 'Sorted occurrence lists are intersected with ordered query offsets independently in each original value; complete lexical candidates and selected providers are checked under the shared search budget.', externalResources: 'none' }),
     }),

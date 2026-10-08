@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import type { AddonRegistration, AggregationOutput, MetadataContext, PayloadContext, PreparedAggregation } from '../../core/capabilities/types.js';
 import { Admission, has, keysOnly, ownArray, ownObject, stringValue } from '../../core/contracts/data.js';
 import type { OwnedRecord } from '../../core/contracts/types.js';
@@ -155,7 +156,7 @@ export function createFacets(options: FacetOptions): AddonRegistration {
     manifest: Object.freeze({ id: captured.id, version: '0.0.0', contractVersion: 1,
       roles: Object.freeze(['aggregation'] as const), provides: Object.freeze([Object.freeze({ id: 'facets', contractVersion: 1 })]), requires: Object.freeze([]),
       dataRequirements: Object.freeze({ fields: captured.fields, source: false, positions: false, offsets: false, metadata: true }),
-      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: false }),
+      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('facets', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: 0, maxOutputEntries: 8_192 }),
       costs: Object.freeze({ importedCode: 'Typed metadata aggregation, per-document distinct counting and bounded output heap.',
         retainedRepresentation: 'No side index or corpus metadata copy; counters exist only during requested aggregation.',

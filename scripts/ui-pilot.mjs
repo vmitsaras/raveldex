@@ -24,7 +24,7 @@ console.log(`Judged relevance: Top-1 ${pilot.report.relevance.metrics.top1}/${pi
 if (serve) {
   // Serve exactly these local artifacts, never arbitrary repository/cache files.
   const files = { '/': ['index.html', 'text/html'], '/index.html': ['index.html', 'text/html'],
-    '/main.mjs': ['main.mjs', 'text/javascript'], '/ui.css': ['ui.css', 'text/css'],
+    '/main.mjs': ['main.mjs', 'text/javascript'], '/engine-worker.mjs': ['engine-worker.mjs', 'text/javascript'], '/ui.css': ['ui.css', 'text/css'],
     '/pilot.css': ['pilot.css', 'text/css'], '/corpus.json': ['corpus.json', 'application/json'] };
   const server = createServer(async (request, response) => {
     const path = (request.url ?? '').split('?')[0];

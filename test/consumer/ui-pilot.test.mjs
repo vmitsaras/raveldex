@@ -13,7 +13,7 @@ const observations = [];
 before(async () => {
   pilot = await prepareUIPilot();
   const files = { '/': ['index.html', 'text/html'], '/main.mjs': ['main.mjs', 'text/javascript'],
-    '/ui.css': ['ui.css', 'text/css'], '/pilot.css': ['pilot.css', 'text/css'], '/corpus.json': ['corpus.json', 'application/json'] };
+    '/engine-worker.mjs': ['engine-worker.mjs', 'text/javascript'], '/ui.css': ['ui.css', 'text/css'], '/pilot.css': ['pilot.css', 'text/css'], '/corpus.json': ['corpus.json', 'application/json'] };
   server = createServer(async (request, response) => {
     const file = files[new URL(request.url, 'http://localhost').pathname];
     if (!file) { response.writeHead(404); response.end(); return; }
@@ -110,6 +110,22 @@ test('real packaged documentation UI preserves judged tasks, source links, Inspe
   assert.match(await page.locator('[data-pilot-status]').innerText(), /Stored positions/);
   await submit('term contribution'); compare(await observed(), sourceQueryResult(scan, { kind: 'text', text: 'term contribution' }, { limit: 5 }));
   observations.push({ name: 'destroy / reinitialize / rapid representation transitions', interfaces: 1, latestRepresentation: 'offsets' });
+  const directPage = await observed();
+  await page.locator('[data-pilot-execution]').selectOption('worker'); await settled();
+  assert.match(await page.locator('[data-pilot-status]').innerText(), /One module worker/);
+  assert.deepEqual(await observed(), directPage);
+  await page.locator('[data-raveldex-inspect]').click();
+  await page.waitForFunction(() => document.querySelector('[data-raveldex-inspector-data]')?.textContent.includes('raveldex-inspector-v1'));
+  const workerFacts = JSON.parse(await page.locator('[data-raveldex-inspector-data]').innerText());
+  assert.equal(workerFacts.revision, 1); assert.equal(workerFacts.result.total, sourceQueryResult(scan, { kind: 'text', text: 'term contribution' }, { limit: 5 }).total);
+  await page.keyboard.press('Escape');
+  await page.locator('[data-pilot-mode]').selectOption('phrase'); await settled(); await submit('commit point');
+  compare(await observed(), sourcePhraseQueryResult(phraseScan, { kind: 'phrase', text: 'commit point' }, { limit: 5 }));
+  observations.push({ name: 'real-document worker text/phrase/Inspector parity', facts: workerFacts.trace.facts.length, ...await observed() });
+  await page.locator('[data-pilot-execution]').selectOption('direct'); await settled();
+  assert.match(await page.locator('[data-pilot-status]').innerText(), /Direct execution/);
+  assert.equal(await page.locator('[data-raveldex-ui]').count(), 1);
+
   assert.deepEqual(errors, []);
   // The only external request was the explicitly intercepted native navigation.
   assert.ok(external.every(url => url.split('#')[0] === href.split('#')[0]));

@@ -1,6 +1,6 @@
 # Incremental mutations, revisions, and execution
 
-Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001. RX-1004 incremental mutation/participant publication and RX-1005 ordinary FIFO/lifecycle integration verified locally. See [mutation evidence](../evidence/RX-1004.md) and [execution evidence](../evidence/RX-1005.md). RX-1006 qualifies the root package and real-document consumer; see [package evidence](../evidence/RX-1006.md).
+Status: Approved. Primary tasks: RX-1004 and RX-1005. Transport application: RX-3001, implemented by the optional client/host entries. RX-1004 incremental mutation/participant publication and RX-1005 ordinary FIFO/lifecycle integration verified locally. See [mutation evidence](../evidence/RX-1004.md) and [execution evidence](../evidence/RX-1005.md). RX-1006 qualifies the root package and real-document consumer; see [package evidence](../evidence/RX-1006.md).
 
 ## Goal and system outcome
 
@@ -143,6 +143,8 @@ Disposal unregisters signal listeners and queue timers and leaves no scheduled w
 Native direct mode can determine whether its root publication occurred. A worker caller that loses the response may not know whether the mutation committed. Such a failure is `OUTCOME_UNKNOWN`, not `CANCELLED`, and must never trigger automatic retry of a non-idempotent mutation.
 
 The worker adapter uses operation IDs and a bounded receipt/reconciliation protocol. When available receipts cannot establish the outcome, the caller must reconcile authoritative state or recover it explicitly. Killing a worker or ignoring an old reply does not establish cooperative rollback.
+
+The RX-3001 worker facade exposes session operation IDs on mutation promises and a 256-receipt reconciliation window. Deadline and abort messages request native engine stops; transport watchdog failures are distinct from observed native `DEADLINE_EXCEEDED` or `CANCELLED`. A delayed authoritative committed result preserves commit truth. Termination/lost transport without such a receipt yields `OUTCOME_UNKNOWN`. See the [worker API](../architecture/ADDONS_AND_ADAPTERS.md#public-worker-entries--rx-3001) for explicit ownership and recovery.
 
 ## Acceptance criteria and verification
 

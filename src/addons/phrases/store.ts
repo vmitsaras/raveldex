@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import type { AddonRegistration, ParticipantContext } from '../../core/capabilities/types.js';
 import { has } from '../../core/contracts/data.js';
 import type { AnalyzerDescriptor, OwnedConfiguration, OwnedRecord } from '../../core/contracts/types.js';
@@ -125,7 +126,7 @@ export function createSourceProvider(options: SourceProviderOptions): AddonRegis
       requires: Object.freeze([]),
       dataRequirements: Object.freeze({ fields: captured.fields, source: true, positions: false, offsets: false, metadata: false }),
       indexEffect: 'transactional', rebuildPolicy: 'new-index',
-      execution: Object.freeze({ direct: true, worker: false }),
+      execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('source', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: captured.maxRetainedEntries, maxOutputEntries: 0 }),
       costs: Object.freeze({ importedCode: 'Selected-source capture and copy-on-write directory staging; no phrase verifier.', retainedRepresentation: 'One entry per record, present selected field and original value; selected original UTF-16 strings only.', transientWork: 'Changed selected-field values and touched source-directory buckets; shared mutation budget.', externalResources: 'none' }),
     }),

@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import type { AddonRegistration, MetadataContext, PayloadContext, PreparedPredicate } from '../../core/capabilities/types.js';
 import { Admission, has, keysOnly, ownArray, ownObject, stringValue } from '../../core/contracts/data.js';
 import type { OwnedRecord, Scalar } from '../../core/contracts/types.js';
@@ -127,7 +128,7 @@ export function createFilters(options: FilterOptions): AddonRegistration {
       requires: Object.freeze([]),
       dataRequirements: Object.freeze({ fields: captured.fields, source: false, positions: false, offsets: false, metadata: true }),
       indexEffect: 'none', rebuildPolicy: 'new-index',
-      execution: Object.freeze({ direct: true, worker: false }),
+      execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('filters', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: 0, maxOutputEntries: 0 }),
       costs: Object.freeze({ importedCode: 'Typed numeric-range and set-membership metadata predicates.', retainedRepresentation: 'No side index or copied metadata; reads the immutable core revision.', transientWork: 'Bounded owned payload and complete candidate evaluation under the shared search budget.', externalResources: 'none' }),
     }),

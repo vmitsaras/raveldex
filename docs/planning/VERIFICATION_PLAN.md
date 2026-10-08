@@ -72,7 +72,7 @@ Measure cancellation inside owned loops and disclose indivisible normalization/a
 
 For source phrases, positions/offsets, filters/facets, evidence, and Inspector, test installed, omitted, incompatible, stale, and partially staged providers. Missing capabilities must produce the specified errors. Optional side indexes publish at the same revision as core state.
 
-When workers arrive, run the same admitted dataset/configuration/query/mutation cases in direct execution and one real module worker. Compare result sets, scores/order, totals, facets, evidence, revisions, and error categories. Independently sharded statistics are outside the initial design. Exercise malformed messages, delayed replies, worker death, bundling paths, and recovery.
+For RX-3001, run the same admitted dataset/configuration/query/mutation cases in direct execution and one real module worker. Compare result sets, scores/order, totals, facets, evidence, revisions, and error categories. Independently sharded statistics are outside the initial design. Exercise malformed messages, delayed replies, worker death, bundling paths, and recovery.
 
 ## 3. Relevance judgments
 

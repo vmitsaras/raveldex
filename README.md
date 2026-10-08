@@ -18,7 +18,9 @@ RX-2005 adds optional original match ranges and bounded grapheme-safe snippet da
 
 RX-2006 adds an optional native DOM interface and real documentation browser pilot, with exact facets, safe original snippets and requested factual Inspector. Browser interaction and automated accessibility observations qualify one local Chrome host; OS IME, screen-reader and cross-browser qualification remain separate.
 
-The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, worker/storage hosting and Unicode snapshot portability require later evidence.
+RX-3001 adds an explicit one-owner module-worker adapter with bounded transport, compatible local capabilities, cancellation and mutation receipt reconciliation. The documentation pilot offers direct or worker execution.
+
+The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, snapshot/storage hosting and Unicode snapshot portability require later evidence.
 
 ## Try the core
 
@@ -194,6 +196,38 @@ npm run handoff:next
 
 `handoff:next` reports dependency eligibility. Task completion requires acceptance evidence. Normal development needs no secrets; only the explicit GitHub tracking workflow uses a temporary repository token.
 
+## Use one module worker
+
+The application supplies a same-host module-worker entry. Construction and ownership are explicit:
+
+```js
+// engine-worker.mjs: import each trusted add-on here with the same options as
+// the page configuration; core-only uses no add-ons.
+import { serveRaveldexWorker } from '@vmitsaras/raveldex/adapters/worker/host';
+serveRaveldexWorker(self);
+```
+
+```js
+import { createWorkerRaveldex } from '@vmitsaras/raveldex/adapters/worker';
+const engine = await createWorkerRaveldex({
+  worker: new Worker(new URL('./engine-worker.mjs', import.meta.url), { type: 'module' }),
+  configuration: { schema: { text: { body: {} } } },
+  ownership: 'owned', sameHost: true,
+});
+const operation = engine.add({ id: 'one', text: { body: 'red car' } });
+const operationId = operation.operationId;
+await operation;
+console.log(await engine.search('red'));
+console.log(await engine.reconcile(operationId));
+await engine.dispose();
+```
+
+Bundle the page and worker as two explicit ESM entries; serve both from the same origin. The [documentation pilot](examples/docs-search/README.md) exercises this path. The host creates one empty engine during the validated handshake; all selected state and statistics live in that owner. A client configuration can include add-on registrations, but only their captured manifests cross transport; the worker entry imports matching implementations locally. First-party registrations declare versioned worker identities including their complete normalized options.
+
+`sameHost: true` explicitly selects a page and its own worker using the implemented `basic-v1` unqualified profile. It does not establish cross-browser or native-snapshot portability. Message caps include encoded envelope metadata; the default ceiling is 8 MiB and can be narrowed. The adapter adds typed transport failures without changing root core error codes. Its reply watchdog defaults to 65,000 ms (configurable from 1 to 120,000); this is separate from native queue-time deadlines. A silently terminated worker may be detected by the watchdog. Disposal releases listeners and owned resources even if its acknowledgement times out.
+
+A dispatched mutation with a lost reply can reject with `WorkerAdapterError` code `OUTCOME_UNKNOWN` and its operation ID. This never proves rollback or permits automatic retry. `reconcile(id)` asks the living owner for its bounded receipt (`pending`, `committed`, `rejected`, or `expired`); the last 256 mutation outcomes remain available. When the worker has died or the receipt expired, recover explicitly from authoritative source. Caller aborts request native cooperative cancellation; known committed results remain successful. `dispose()`/`destroy()` releases adapter listeners and terminates only an `owned` worker. An `external` worker remains caller-owned.
+
 ## Product boundary
 
 | Layer | Responsibility |
@@ -203,12 +237,15 @@ npm run handoff:next
 | Optional positions, filters and facets | Selected original occurrence data, typed metadata qualification and complete conjunctive counts. |
 | Optional Inspector | Selected eligibility paths, actual native contributions, revision/configuration/resource identity and explicit diagnostic exports. |
 | Optional native UI | Labeled forms, facets, result navigation, original snippets and factual Inspector; separate scoped CSS. |
-| Planned host adapters | Worker ownership/transport, snapshots, IndexedDB/recovery and later integrations. |
+| Optional worker adapter | One complete engine owner, validated transport, explicit lifecycle and mutation receipts. |
+| Planned host adapters | Snapshots, IndexedDB/recovery and later integrations. |
 | Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
-The RX-2005 packed public core measures **16,491 bytes gzip** (54,156 minified ESM bytes), exceeding the unchanged 15 KiB target by **1,131 bytes** (+32 gzip versus RX-2004). Boundary review keeps optional range collection, source traversal, segmentation, clipping, projection and serialization outside core; mandatory validation/shared metering remain intact. Complete bundles overlap and are not additive module costs. The 10,000-record observations are logical work/retention counters, not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
+The historical RX-2005 packed public core measured **16,491 bytes gzip** (54,156 minified ESM bytes), exceeding the unchanged 15 KiB target by **1,131 bytes** (+32 gzip versus RX-2004). Boundary review keeps optional range collection, source traversal, segmentation, clipping, projection and serialization outside core; mandatory validation/shared metering remain intact. Complete bundles overlap and are not additive module costs. The 10,000-record observations are logical work/retention counters, not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
 
-MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-2006 is RX-3001 — One-owner module-worker adapter.
+RX-3001 measures the current core at **16,631 gzip bytes** (54,672 minified bytes), missing the same 15 KiB target by **1,271 bytes**. Its core graph remains 31 inputs without optional adapter modules; the increase covers supported capability metadata and the narrow internal execution-control seam. The selected worker client is 33,997/10,827 minified/gzip bytes. Complete product and worker graphs are measured separately; these figures are not additive costs or heap measurements.
+
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-3001 is RX-3002 — Versioned source and native snapshots.
 
 ## Factual inspection
 

@@ -1,0 +1,181 @@
+{
+  "kind": "raveldex-worker-transport-capture-work-v1",
+  "time": "2026-10-08T09:04:34.391Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "esbuild": "0.28.2"
+  },
+  "source": {
+    "path": "src/adapters/worker/protocol.ts",
+    "sha256": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1"
+  },
+  "corpus": {
+    "sections": 34,
+    "sha256": "c4fbd2046ecbe4202d97e5479cb65bb3694fc187694be4244f00a7aae751b859"
+  },
+  "method": "Non-production observer inserts counters into the current capture loop; exact unchanged byte/shape results are checked against JSON UTF-8 and one platform structuredClone. String scan iterations count loop visits, not UTF-16 units or lookahead reads. Known peak copy roots are deliberately held in this isolated synchronous fixture.",
+  "limits": {
+    "messageBytes": 8388608
+  },
+  "measurements": [
+    {
+      "name": "ordinary query",
+      "encodedBytes": 182,
+      "captureMs": 0.12250000000000227,
+      "clientWork": {
+        "visitedNodes": 11,
+        "encodedBytes": 182,
+        "chargeCalls": 163,
+        "stringScanIterations": 125,
+        "ownedObjects": 3,
+        "ownedArrays": 0,
+        "maxDepth": 3
+      },
+      "hostWork": {
+        "visitedNodes": 11,
+        "encodedBytes": 182,
+        "chargeCalls": 163,
+        "stringScanIterations": 125,
+        "ownedObjects": 3,
+        "ownedArrays": 0,
+        "maxDepth": 3
+      },
+      "knownFixturePeakDistinctGraphRoots": 4,
+      "graphRoles": [
+        "caller input",
+        "client bounded capture",
+        "platform structured clone",
+        "host bounded capture"
+      ]
+    },
+    {
+      "name": "actual current documentation corpus",
+      "encodedBytes": 80185,
+      "captureMs": 0.9608749999999979,
+      "clientWork": {
+        "visitedNodes": 281,
+        "encodedBytes": 80185,
+        "chargeCalls": 79002,
+        "stringScanIterations": 78054,
+        "ownedObjects": 105,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "hostWork": {
+        "visitedNodes": 281,
+        "encodedBytes": 80185,
+        "chargeCalls": 79002,
+        "stringScanIterations": 78054,
+        "ownedObjects": 105,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "knownFixturePeakDistinctGraphRoots": 4,
+      "graphRoles": [
+        "caller input",
+        "client bounded capture",
+        "platform structured clone",
+        "host bounded capture"
+      ]
+    },
+    {
+      "name": "100 bounded records",
+      "encodedBytes": 4535,
+      "captureMs": 0.13187500000000085,
+      "clientWork": {
+        "visitedNodes": 409,
+        "encodedBytes": 4535,
+        "chargeCalls": 3818,
+        "stringScanIterations": 2588,
+        "ownedObjects": 203,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "hostWork": {
+        "visitedNodes": 409,
+        "encodedBytes": 4535,
+        "chargeCalls": 3818,
+        "stringScanIterations": 2588,
+        "ownedObjects": 203,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "knownFixturePeakDistinctGraphRoots": 4,
+      "graphRoles": [
+        "caller input",
+        "client bounded capture",
+        "platform structured clone",
+        "host bounded capture"
+      ]
+    },
+    {
+      "name": "1000 bounded records",
+      "encodedBytes": 45035,
+      "captureMs": 1.1587919999999983,
+      "clientWork": {
+        "visitedNodes": 4009,
+        "encodedBytes": 45035,
+        "chargeCalls": 38018,
+        "stringScanIterations": 25988,
+        "ownedObjects": 2003,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "hostWork": {
+        "visitedNodes": 4009,
+        "encodedBytes": 45035,
+        "chargeCalls": 38018,
+        "stringScanIterations": 25988,
+        "ownedObjects": 2003,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "knownFixturePeakDistinctGraphRoots": 4,
+      "graphRoles": [
+        "caller input",
+        "client bounded capture",
+        "platform structured clone",
+        "host bounded capture"
+      ]
+    },
+    {
+      "name": "10000 bounded records",
+      "encodedBytes": 459035,
+      "captureMs": 7.635667000000005,
+      "clientWork": {
+        "visitedNodes": 40009,
+        "encodedBytes": 459035,
+        "chargeCalls": 389018,
+        "stringScanIterations": 268988,
+        "ownedObjects": 20003,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "hostWork": {
+        "visitedNodes": 40009,
+        "encodedBytes": 459035,
+        "chargeCalls": 389018,
+        "stringScanIterations": 268988,
+        "ownedObjects": 20003,
+        "ownedArrays": 1,
+        "maxDepth": 5
+      },
+      "knownFixturePeakDistinctGraphRoots": 4,
+      "graphRoles": [
+        "caller input",
+        "client bounded capture",
+        "platform structured clone",
+        "host bounded capture"
+      ]
+    }
+  ],
+  "limitations": [
+    "Not a browser-worker buffer or garbage-collection measurement.",
+    "Large transport fixtures do not assert admission as one native mutation batch; core batch/admission/work bounds remain separate.",
+    "Distinct graph roots do not measure physical copies of immutable strings.",
+    "Browser internal peak transport copies and worker retained/peak heap remain unmeasured.",
+    "Single smoke capture timings are observations, not latency qualification."
+  ]
+}

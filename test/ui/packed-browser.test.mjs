@@ -99,7 +99,7 @@ before(async () => {
     const path = new URL(request.url, 'http://localhost').pathname;
     const pilotPath = path.startsWith('/pilot/');
     const known = pilotPath ? { '/pilot/index.html': 'index.html', '/pilot/main.mjs': 'main.mjs', '/pilot/pilot.css': 'pilot.css',
-      '/pilot/ui.css': 'ui.css', '/pilot/corpus.json': 'corpus.json' }[path]
+      '/pilot/ui.css': 'ui.css', '/pilot/engine-worker.mjs': 'engine-worker.mjs', '/pilot/corpus.json': 'corpus.json' }[path]
       : { '/': 'index.html', '/fixture.mjs': 'fixture.mjs', '/styles.css': 'styles.css' }[path];
     if (!known) { response.writeHead(404); response.end(); return; }
     try { const bytes = await readFile(join(pilotPath ? pilotConsumer.directory : consumer.directory, known));

@@ -48,8 +48,8 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     });
     if (new Set(fields).size !== fields.length) invalid(code, 'addons.fields');
     const execution = object(raw.execution, 'addons.execution', ['direct', 'worker', 'workerRegistration']);
-    // Only the qualified direct protocol is implemented in this slice.
-    if (execution.direct !== true || execution.worker !== false || has(execution, 'workerRegistration')) invalid(code, 'addons.execution');
+    if (execution.direct !== true || typeof execution.worker !== 'boolean' || execution.worker !== has(execution, 'workerRegistration')) invalid(code, 'addons.execution');
+    const workerRegistration = execution.worker ? string(execution.workerRegistration, 'addons.workerRegistration', 8192) : undefined;
     const caps = object(raw.limits, 'addons.limits', ['maxPayloadCodeUnits', 'maxWorkUnits', 'maxRetainedEntries', 'maxOutputEntries']);
     const ownedLimits = Object.freeze({ maxPayloadCodeUnits: integer(caps.maxPayloadCodeUnits, 'addons.limits', 1), maxWorkUnits: integer(caps.maxWorkUnits, 'addons.limits', 1), maxRetainedEntries: integer(caps.maxRetainedEntries, 'addons.limits'), maxOutputEntries: integer(caps.maxOutputEntries, 'addons.limits') });
     if (ownedLimits.maxPayloadCodeUnits > DEFAULT_LIMITS.maxQueryCodeUnits || ownedLimits.maxWorkUnits > Math.max(DEFAULT_LIMITS.maxSearchWorkUnits, DEFAULT_LIMITS.maxMutationWorkUnits)) invalid(code, 'addons.limits');
@@ -80,7 +80,7 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     const manifest: CapabilityManifest = Object.freeze({ id: name, version, contractVersion: 1,
       roles: Object.freeze(roles as CapabilityManifest['roles'][number][]), provides: references(raw.provides, 'addons.provides'), requires: references(raw.requires, 'addons.requires'),
       dataRequirements: Object.freeze({ fields: Object.freeze(fields.sort()), source: flag(requirements.source, 'addons.source'), positions: flag(requirements.positions, 'addons.positions'), offsets: flag(requirements.offsets, 'addons.offsets'), metadata }),
-      indexEffect: participantRole ? 'transactional' : 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: false }), limits: ownedLimits,
+      indexEffect: participantRole ? 'transactional' : 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: execution.worker, ...(workerRegistration ? { workerRegistration } : {}) }), limits: ownedLimits,
       costs: Object.freeze({ importedCode: string(costs.importedCode, 'addons.costs', 1024), retainedRepresentation: string(costs.retainedRepresentation, 'addons.costs', 1024), transientWork: string(costs.transientWork, 'addons.costs', 1024), externalResources: 'none' }), ...(codec ? { codec } : {}) });
     const captured: CapturedRegistration = Object.freeze({ manifest, ...implementations });
     registrations.set(name, captured);

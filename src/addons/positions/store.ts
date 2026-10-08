@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import { BASIC_ANALYZER, analyzeValue } from '../../core/analyzer/basic.js';
 import type { AddonRegistration, ParticipantContext } from '../../core/capabilities/types.js';
 import { has } from '../../core/contracts/data.js';
@@ -185,7 +186,7 @@ export function createPositionProvider(options: PositionProviderOptions): AddonR
       provides: Object.freeze([...captured.fields.map(field => Object.freeze({ id: `positions:${field}`, contractVersion: 1 })), ...captured.offsetFields.map(field => Object.freeze({ id: `offsets:${field}`, contractVersion: 1 }))]),
       requires: Object.freeze([]),
       dataRequirements: Object.freeze({ fields: captured.fields, source: false, positions: true, offsets: captured.offsetFields.length > 0, metadata: false }),
-      indexEffect: 'transactional', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: false }),
+      indexEffect: 'transactional', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('positions', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: captured.maxRetainedEntries, maxOutputEntries: 0 }),
       costs: Object.freeze({ importedCode: 'Native analyzer and selected-position copy-on-write staging; no phrase verifier.', retainedRepresentation: 'Record, selected-field/value and term containers, ordered occurrences with positionLength 1, and two original span coordinates only for selected offset fields; no display source or metadata.', transientWork: 'One native analysis per changed selected value, occurrence construction and touched directory buckets; shared mutation budget.', externalResources: 'none' }),
     }),

@@ -578,7 +578,7 @@ Deliver a usable optional native search interface and Inspector over real docume
 
 **One-owner module-worker adapter**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/21)
+**Milestone:** N3 · **Status:** `in_progress` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/21)
 
 **Dependencies:** [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006)
 

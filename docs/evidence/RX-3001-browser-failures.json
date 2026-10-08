@@ -1,0 +1,61 @@
+{
+  "classification": "Initial disposal expectation and expanded short replay watchdog/floating byte-template failures retained as failed evaluation runs. See evidence for fixes.",
+  "runs": [
+    {
+      "tag": "initial",
+      "rawPath": "docs/evidence/RX-3001-browser-initial-raw.json.gz",
+      "rawSha256": "dd7c196c6925e3c50e1e8922faeb66387e55ef533cb8bf773d9fbadeb4593930",
+      "decodedBytes": 2149426,
+      "gzipBytes": 116676,
+      "summary": {
+        "passed": 18,
+        "failed": 0,
+        "semanticCompleteComparisons": 411
+      },
+      "failures": [],
+      "terminalOutcome": {
+        "tests": 19,
+        "pass": 18,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "status": "Fail",
+      "rawSummaryLimitation": "The initial reporter omitted its failing scenario from raw summary; terminal outcome and log establish 18 passed, one failed. It is not a passing run."
+    },
+    {
+      "tag": "expanded",
+      "rawPath": "docs/evidence/RX-3001-browser-expanded-raw.json.gz",
+      "rawSha256": "84f100492063150611b396c3c96406118bd6df08a0b018e62444a9e9e946cbe4",
+      "decodedBytes": 2164730,
+      "gzipBytes": 117955,
+      "summary": {
+        "passed": 20,
+        "failed": 2,
+        "semanticCompleteComparisons": 419
+      },
+      "failures": [
+        {
+          "name": "replayed live mutation ID cannot falsify a committed outcome or execute twice",
+          "status": "Fail",
+          "evidence": "Scenario did not return successful observations; see terminal failure."
+        },
+        {
+          "name": "finite payload cap includes all request/response envelope metadata",
+          "status": "Fail",
+          "evidence": "Scenario did not return successful observations; see terminal failure."
+        }
+      ],
+      "terminalOutcome": {
+        "tests": 22,
+        "pass": 20,
+        "fail": 2,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "status": "Fail"
+    }
+  ]
+}

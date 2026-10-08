@@ -9,7 +9,7 @@ npm ci
 npm run pilot:ui
 ```
 
-Open the local URL printed by the command. Stop its local server with Ctrl+C. The runner builds the private ESM package, packs it, installs the actual tarball into an isolated consumer, generates `corpus.json` from the explicit allowlist, bundles [main.mjs](main.mjs) through public installed package imports, and copies the separately exported UI CSS. No package is published, no remote service is called, and loading the pilot fetches only its local corpus. Following a source link navigates to the corresponding GitHub section.
+Open the local URL printed by the command. Stop its local server with Ctrl+C. The runner builds the private ESM package, packs it, installs the actual tarball into an isolated consumer, generates `corpus.json` from the explicit allowlist, bundles [main.mjs](main.mjs) through public installed package imports, and copies the separately exported UI CSS. No package is published, no remote service is called, and loading the pilot fetches its local corpus and, when selected, its local module-worker entry. Following a source link navigates to the corresponding GitHub section.
 
 ## Interactions
 
@@ -17,9 +17,10 @@ Open the local URL printed by the command. Stop its local server with Ctrl+C. Th
 - Select a document category, inspect its exact conjunctive count, clear the selection, and move through pages without changing the complete total.
 - Open a result's Inspector to request actual native facts, inspect score contributions and configuration, then close it. Source is not selected for Inspector output by default.
 - Switch between source reanalysis and stored positions/original offsets. Both use the same original corpus. The application destroys the previous interface, awaits owner disposal and then indexes a new owner. It preserves search text; category selection and page reset.
+- Switch **Execution** between direct mode and one module worker. Each selected owner has the whole corpus and field statistics; startup compares the complete configuration and local capability manifests. Switching disposes the previous owner and starts a fresh revision-0 owner before one atomic corpus add.
 - Use **Destroy interface** and **Reinitialize search** to exercise cleanup. Rapid setup changes suppress stale mounts and abort in-flight indexing. Leaving the page tears down the application listeners and active UI/owner.
 
-Snippets come from the packaged optional evidence module and are inserted as text plus explicit marks. Bounded snippets can omit context or matches; complete original range evidence remains separate. Neither normalization nor HTML rendering rewrites displayed source. UI and CSS are independent optional exports, outside the core import graph. The example uses no framework, worker or persistence adapter.
+Snippets come from the packaged optional evidence module and are inserted as text plus explicit marks. Bounded snippets can omit context or matches; complete original range evidence remains separate. Neither normalization nor HTML rendering rewrites displayed source. UI and CSS are independent optional exports, outside the core import graph. The example uses the optional worker adapter through the public client and host entries, with explicit worker ownership and same-host unqualified analyzer pairing. It uses no framework or persistence adapter. Worker failure never triggers an automatic mutation retry; Reinitialize search is an explicit fresh-corpus recovery action.
 
 ## Evidence boundaries
 

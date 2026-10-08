@@ -30,7 +30,7 @@ export async function prepareUIPilot() {
   const corpus = buildCorpus(REPO_ROOT);
   const consumer = await prepareConsumer(corpus, DOCS_JUDGMENTS);
   const { directory, installed } = consumer;
-  for (const file of ['index.html', 'pilot.css', 'main.mjs']) {
+  for (const file of ['index.html', 'pilot.css', 'main.mjs', 'configuration.mjs', 'engine-worker.mjs']) {
     await copyFile(join(REPO_ROOT, 'examples/docs-search', file), join(directory, file === 'main.mjs' ? 'pilot-entry.mjs' : file));
   }
   await copyFile(join(installed, 'dist/addons/ui/styles.css'), join(directory, 'ui.css'));
@@ -38,6 +38,9 @@ export async function prepareUIPilot() {
   assert.ok(ui.inputs.every(input => input.path === 'ui-entry.mjs' || input.path.includes('/addons/ui/')
     || input.path.endsWith('/core/errors/error.js')), 'UI imports no engine/evidence implementation');
   const product = await graph(directory, 'pilot-entry.mjs', 'main.mjs');
+  const worker = await graph(directory, 'engine-worker.mjs', 'engine-worker-bundle.mjs');
+  await copyFile(join(directory, 'engine-worker-bundle.mjs'), join(directory, 'engine-worker.mjs'));
+  const workerClient = await graph(directory, 'worker-client-entry.mjs', 'worker-client.mjs', "export { createWorkerRaveldex, WorkerAdapterError } from '@vmitsaras/raveldex/adapters/worker';\n");
   const core = await bundleConsumer(directory);
   const startup = [];
   for (const specifier of ['@vmitsaras/raveldex', './core-bundle.mjs']) startup.push(await checkStartup(directory, specifier));
@@ -56,7 +59,7 @@ export async function prepareUIPilot() {
   const relevance = judgeResults(DOCS_JUDGMENTS, pilot);
   const report = { environment: { node: process.version, platform: process.platform, arch: process.arch },
     package: consumer.package, corpus: { hash: corpus.hash, records: corpus.records.length, sources: corpus.sources,
-      sections: corpus.sections }, core, ui, product, css: { bytes: (await readFile(join(directory, 'ui.css'))).length,
+      sections: corpus.sections }, core, ui, product, worker, workerClient, css: { bytes: (await readFile(join(directory, 'ui.css'))).length,
       sha256: digest(await readFile(join(directory, 'ui.css'))) }, startup, optionalStartup, correctness, relevance };
   await writeFile(join(directory, 'RX-2006-package.json'), JSON.stringify(report, null, 2) + '\n');
   return { ...consumer, corpus, report };

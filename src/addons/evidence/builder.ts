@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import { BASIC_ANALYZER } from '../../core/analyzer/basic.js';
 import { Admission, has, ownObject } from '../../core/contracts/data.js';
 import type { AddonRegistration, AggregationOutput, EvidenceContext, EvidenceResultContext, PayloadContext, PreparedEvidence } from '../../core/capabilities/types.js';
@@ -21,6 +22,7 @@ import type { MatchDocument, MatchEvidenceData, MatchEvidenceOptions, MatchRange
 /** Internal composition seam. Only /addons/snippets supplies presentation. */
 export interface EvidencePresentation {
   readonly capability: string;
+  readonly workerOptions: Readonly<Record<string, number>>;
   prepare(context: EvidenceContext, fields: readonly string[]): Generator<WorkStep, PreparedPresentation>;
 }
 export interface PreparedPresentation {
@@ -144,7 +146,7 @@ export function buildMatchEvidence(input: MatchEvidenceOptions, presentation?: E
       roles: Object.freeze(['evidence'] as const), provides: Object.freeze([Object.freeze({ id: capability, contractVersion: 1 })]),
       requires: Object.freeze(requires.map(id => Object.freeze({ id, contractVersion: 1 }))),
       dataRequirements: Object.freeze({ fields: options.fields, source: sourceFields.length > 0, positions: offsetFields.length > 0, offsets: offsetFields.length > 0, metadata: false }),
-      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: false }),
+      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity(capability, { options, ...(presentation ? { presentation: presentation.workerOptions } : {}) }) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: options.maxWorkUnits, maxRetainedEntries: 0, maxOutputEntries: options.maxOutputEntries }),
       costs: Object.freeze({ importedCode: 'Actual positive-path original-token evidence and optional explicit presentation; no scorer, diagnostics, DOM or network.',
         retainedRepresentation: 'No additional root or source retention; per-field source or original-offset providers are explicit.',

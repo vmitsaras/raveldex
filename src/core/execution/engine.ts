@@ -13,6 +13,9 @@ import { directHost } from './host.js';
 import type { ExecutionHost } from './host.js';
 
 type Result = SearchResult | MutationResult;
+/** Private trusted adapter control. Applied after caller admission so transport
+ * signals and elapsed time do not consume the caller's data-entry allowance. */
+export interface AdapterControl { readonly signal: NonNullable<MutationOptions['signal']>; readonly elapsedMs: number }
 /** Optional private counted-work diagnostics, never public callbacks or heap bytes. */
 export interface ExecutionMetrics {
   workUnits: number; steps: number; hostYields: number;
@@ -65,10 +68,13 @@ export class ExecutionOwner implements Raveldex {
   get root(): IndexRoot | undefined { return this.#owner?.root; }
 
   search(query: string | Query, options?: SearchOptions): Promise<SearchResult> {
+    return this.searchControlled(query, options);
+  }
+  searchControlled(query: string | Query, options?: SearchOptions, control?: AdapterControl): Promise<SearchResult> {
     return this.admit(() => {
       const request = captureSearch(this.#configuration, query, options);
       return { options: request.options, start: (check: (phase?: string) => void) => executeOwnedSearch(this.#owner!.root, request, { checkStop: check }) };
-    }) as Promise<SearchResult>;
+    }, control) as Promise<SearchResult>;
   }
   add(record: RecordInput, options?: MutationOptions): Promise<MutationResult> { return this.mutate('add', record, options); }
   addMany(records: readonly RecordInput[], options?: MutationOptions): Promise<MutationResult> { return this.mutate('addMany', records, options); }
@@ -77,10 +83,13 @@ export class ExecutionOwner implements Raveldex {
   clear(options?: MutationOptions): Promise<MutationResult> { return this.mutate('clear', undefined, options); }
 
   private mutate(kind: MutationKind, input?: unknown, options?: MutationOptions): Promise<MutationResult> {
+    return this.mutateControlled(kind, input, options);
+  }
+  mutateControlled(kind: MutationKind, input?: unknown, options?: MutationOptions, control?: AdapterControl): Promise<MutationResult> {
     return this.admit(() => {
       const request = this.#owner!.capture(kind, input, options);
       return { options: request.options, start: (check: (phase?: string) => void) => this.#owner!.execute(request, { checkStop: check }) };
-    }) as Promise<MutationResult>;
+    }, control) as Promise<MutationResult>;
   }
 
   private check(op: Operation, phase?: string): void {
@@ -97,19 +106,24 @@ export class ExecutionOwner implements Raveldex {
     if (expired) invalid('DEADLINE_EXCEEDED', 'options.deadlineMs');
   }
 
-  private admit(capture: () => { options: OwnedOptions; start: (check: (phase?: string) => void) => Generator<WorkStep, Result> }): Promise<Result> {
+  private admit(capture: () => { options: OwnedOptions; start: (check: (phase?: string) => void) => Generator<WorkStep, Result> }, control?: AdapterControl): Promise<Result> {
     // Synchronous ownership capture, with every operational exception rejected.
     try {
       if (this.#closing) invalid('DISPOSED', 'execution');
       const admittedAt = this.#host.now();
       const request = capture();
+      if (control) {
+        if (!Number.isFinite(control.elapsedMs) || control.elapsedMs < 0) invalid('INTERNAL_ERROR', 'execution.control');
+        request.options = Object.freeze({ ...request.options, signal: control.signal });
+      }
       if (this.#closing) invalid('DISPOSED', 'execution');
       if (request.options.signal?.aborted) invalid('CANCELLED', 'options.signal');
+      if (control && control.elapsedMs >= request.options.deadlineMs) invalid('DEADLINE_EXCEEDED', 'options.deadlineMs');
       if (this.#active && this.#queue.length >= this.#configuration.limits.maxQueuedOperations) invalid('QUEUE_FULL', 'execution.queue');
       let resolve!: (value: Result) => void, reject!: (error: unknown) => void;
       const promise = new Promise<Result>((yes, no) => { resolve = yes; reject = no; });
       const op: Operation = { options: request.options, start: undefined, cursor: undefined, resolve, reject,
-        deadline: admittedAt + request.options.deadlineMs, detach: undefined, timer: undefined, resume: undefined, settled: false, executing: false, cancelled: false };
+        deadline: admittedAt + request.options.deadlineMs - (control?.elapsedMs ?? 0), detach: undefined, timer: undefined, resume: undefined, settled: false, executing: false, cancelled: false };
       op.start = () => request.start(phase => this.check(op, phase));
       if (this.#active) this.#queue.push(op); else this.#active = op;
       try {

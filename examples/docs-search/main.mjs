@@ -1,11 +1,6 @@
 import { createRaveldex } from '@vmitsaras/raveldex';
-import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
-import { createPositionProvider } from '@vmitsaras/raveldex/addons/positions';
-import { createPhrases } from '@vmitsaras/raveldex/addons/phrases/mixed';
-import { createFilters } from '@vmitsaras/raveldex/addons/filters';
-import { createFacets } from '@vmitsaras/raveldex/addons/facets';
-import { createInspector } from '@vmitsaras/raveldex/addons/inspector';
-import { createSnippetEvidence } from '@vmitsaras/raveldex/addons/snippets';
+import { createWorkerRaveldex } from '@vmitsaras/raveldex/adapters/worker';
+import { makeAddons } from './configuration.mjs';
 import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
 
 // The application owns source navigation and the corpus. The installed package
@@ -13,11 +8,11 @@ import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
 const root = document.querySelector('[data-pilot-search]');
 const representation = document.querySelector('[data-pilot-representation]');
 const mode = document.querySelector('[data-pilot-mode]');
+const execution = document.querySelector('[data-pilot-execution]');
 const initialize = document.querySelector('[data-pilot-initialize]');
 const destroy = document.querySelector('[data-pilot-destroy]');
 const status = document.querySelector('[data-pilot-status]');
 const identity = document.querySelector('[data-pilot-identity]');
-const fields = ['title', 'body'];
 const listeners = new AbortController();
 const corpusAbort = new AbortController();
 
@@ -75,22 +70,13 @@ async function readCorpus() {
   return corpusPromise;
 }
 
-function makeOwner(loaded, strategy) {
-  const positions = strategy === 'offsets';
-  const phraseFields = Object.fromEntries(fields.map((field) => [field, positions ? 'positions' : 'source']));
-  const evidenceFields = Object.fromEntries(fields.map((field) => [field, positions ? 'offsets' : 'source']));
-  return createRaveldex({
-    schema: loaded.schema,
-    addons: [
-      createSourceProvider({ fields }),
-      ...(positions ? [createPositionProvider({ fields, offsets: fields })] : []),
-      createPhrases({ fields: phraseFields }),
-      createFilters({ fields: ['category'] }),
-      createFacets({ fields: ['category'] }),
-      createInspector(),
-      createSnippetEvidence({ fields: evidenceFields }),
-    ],
-  });
+async function makeOwner(loaded, strategy, host) {
+  const configuration = { schema: loaded.schema, addons: makeAddons(strategy) };
+  if (host === 'direct') return createRaveldex(configuration);
+  const url = new URL('./engine-worker.mjs', import.meta.url);
+  url.searchParams.set('representation', strategy);
+  const worker = new Worker(url, { type: 'module' });
+  return createWorkerRaveldex({ worker, configuration, ownership: 'owned', sameHost: true });
 }
 
 function initializeInterface() {
@@ -98,6 +84,7 @@ function initializeInterface() {
   const requested = ++generation;
   const strategy = representation.value;
   const queryMode = mode.value;
+  const host = execution.value;
   stopCurrentInterface();
   announce('Loading documentation and preparing the search interface…');
   root.dataset.pilotState = 'loading';
@@ -106,7 +93,8 @@ function initializeInterface() {
     if (closing || requested !== generation) return;
     const loaded = await readCorpus();
     if (closing || requested !== generation) return;
-    const engine = makeOwner(loaded, strategy);
+    const engine = await makeOwner(loaded, strategy, host);
+    if (closing || requested !== generation) { await engine.dispose(); return; }
     active = { engine, ui: undefined };
     mutationAbort = new AbortController();
     await engine.addMany(loaded.records, { signal: mutationAbort.signal });
@@ -129,7 +117,7 @@ function initializeInterface() {
     }
     if (closing || requested !== generation) return;
     root.dataset.pilotState = 'ready';
-    announce(`${loaded.records.length} sections indexed. ${strategy === 'offsets' ? 'Stored positions and original offsets' : 'Source reanalysis'} selected. ${queryMode === 'phrase' ? 'Strict phrase' : 'All exact terms'} search is ready.`);
+    announce(`${loaded.records.length} sections indexed. ${host === 'worker' ? 'One module worker' : 'Direct execution'} selected. ${strategy === 'offsets' ? 'Stored positions and original offsets' : 'Source reanalysis'} selected. ${queryMode === 'phrase' ? 'Strict phrase' : 'All exact terms'} search is ready.`);
   }).catch(async (error) => {
     await releaseOwner();
     if (closing || requested !== generation) return;
@@ -151,6 +139,7 @@ function destroyInterface() {
 }
 
 representation.addEventListener('change', initializeInterface, { signal: listeners.signal });
+execution.addEventListener('change', initializeInterface, { signal: listeners.signal });
 mode.addEventListener('change', initializeInterface, { signal: listeners.signal });
 initialize.addEventListener('click', initializeInterface, { signal: listeners.signal });
 destroy.addEventListener('click', destroyInterface, { signal: listeners.signal });

@@ -1,3 +1,4 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import { BASIC_ANALYZER } from '../../core/analyzer/basic.js';
 import type { AddonRegistration, PreparedRefinement, RefinementContext } from '../../core/capabilities/types.js';
 import { bound, invalid } from '../../core/errors/error.js';
@@ -71,7 +72,7 @@ export function createSourcePhrases(options: SourcePhraseOptions): AddonRegistra
       requires: Object.freeze(captured.fields.map(field => Object.freeze({ id: `source:${field}`, contractVersion: 1 }))),
       dataRequirements: Object.freeze({ fields: captured.fields, source: true, positions: false, offsets: false, metadata: false }),
       indexEffect: 'none', rebuildPolicy: 'new-index',
-      execution: Object.freeze({ direct: true, worker: false }),
+      execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('source-phrases', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: 0, maxOutputEntries: 0 }),
       costs: Object.freeze({ importedCode: 'Native analyzer, resumable source phrase verifier and selected-source protocol.', retainedRepresentation: 'No additional index state; source providers retain declared originals.', transientWork: 'At most 32 phrase-prefix entries plus one current token; complete lexical candidates are scanned under the shared search budget.', externalResources: 'none' }),
     }),
