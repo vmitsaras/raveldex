@@ -1,0 +1,31 @@
+
+> @vmitsaras/raveldex@0.0.0 test:memory-method
+> node --test bench/memory/*.test.mjs
+
+✔ selected-data graph keeps backing stores, counts shared strings once and excludes prototypes/maps/weak edges (0.934708ms)
+✔ missing graph marker fails instead of returning an invented zero measurement (2.14425ms)
+✔ a three-way shared node contributes once to union rather than sum minus one overlap (0.154208ms)
+✔ literal cycles and three-way sharing: individual effects are not summed as a joint effect (1.542875ms)
+✔ complete graph preserves an outside hidden/context path to a descendant (0.554667ms)
+✔ hypothetical node deletion removes every seed alias, unlike releasing one owner property (0.28075ms)
+✔ marker-owned PropertyArray aliases are neutralized; unrelated outside paths survive (0.173083ms)
+✔ ambiguous externally retained marker backing store fails rather than deleting that retainer (0.43825ms)
+✔ weak edges never become strong; non-root shortcuts produce explicit sensitivity (0.235875ms)
+✔ labelled ephemeron table/key edges change graph sensitivity without pretending conditional GC (0.2425ms)
+✔ missing, duplicate, malformed and unreachable seeds fail with reasons, not invented zeros (0.537333ms)
+✔ missing or ambiguous observation marker is an error (0.420292ms)
+✔ malformed schema/count/target/self-size and unfamiliar edge types fail explicitly (0.824459ms)
+✔ component labels must agree with the actual marked index root property targets (0.406208ms)
+✔ exported string marker accepts string families and rejects a mislabeled object (0.198ms)
+✔ aliased component seeds have overlapping individual effects and a deduplicated joint cut (0.173791ms)
+✔ malformed, incomplete and incorrect-target ephemeron encodings fail explicitly (0.286167ms)
+✔ 48 deterministic generated graphs match the independent fixed-point removal oracle (16.309167ms)
+✔ output guard rejects normalized, symlink and hardlink aliases using only disposable scratch files (5.818167ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.407125

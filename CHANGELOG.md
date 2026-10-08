@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add RX-4002 installed-package browser qualification, explicit manual fault/recovery fixtures, fresh-process memory/heap-graph methods and durable observation boundaries. Exact-tool AT, physical presentation and unisolated memory criteria remain Blocked; no runtime/API/dependency changes or release waiver.
+- Add RX-4002 installed-package browser qualification, explicit manual fault/recovery fixtures, fresh-process memory/heap-graph methods and separate offline graph-cut retention analysis. Preserve original observations and guard analysis output from overwriting immutable inputs. Exact-tool AT, physical presentation and unisolated memory criteria remain Blocked; no runtime/API/dependency changes or release waiver.
 
 - Add reproducible RX-4001 independent correctness, frozen 76-query documentation relevance, explicit pinned companion comparison and separate native/worker/storage cost observations. Preserve lexical/ranking gaps, bounded refusals and the unchanged core size target; no runtime/API/dependency changes or release qualification.
 

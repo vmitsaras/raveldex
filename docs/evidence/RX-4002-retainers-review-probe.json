@@ -1,0 +1,225 @@
+{
+  "kind": "rx4002-retainers-independent-probe-v1",
+  "recordedAt": "2026-10-08T17:11:04.284Z",
+  "baseline": "32f2a13",
+  "outcome": "Pass",
+  "scope": "Independent literal/generated node-removal oracle, schema failures and provenance; optional existing-heap reads only. No native workload, browser/AT/device run or GC-retention/peak claim.",
+  "retainedArtifact": {
+    "path": "docs/evidence/RX-4002-memory-retainers.json",
+    "sha256": "f2d9cf3f9aec3deaf75b34434865a4d1f9754f099ba6e22ec53f3063c77a293e"
+  },
+  "analyzer": {
+    "path": "bench/memory/retainer-cuts.mjs",
+    "sha256": "9a2e4605e61a87d89e0e883b1fd6b4e41c2933b3ea6d881c5105ba47228bff40"
+  },
+  "probeSha256": "7ebe3d3132a1789f85f83c69bc9e792d13d98f933744bd160ba2093b6cd252f7",
+  "reusedHeapObservations": {
+    "recordedAt": "2026-10-08T17:02:14.860Z",
+    "executedProbeSha256": "f72b5a63e8b29011cad6f92d705f121707dc823e2953dc9611edf8c370a4193a",
+    "method": "Prior direct five-heap oracle observations reused only for the identical frozen artifact/analyzer. This reconciliation does not reread heap files."
+  },
+  "pendingBindings": [],
+  "groups": [
+    {
+      "name": "Independent literal cuts, three-way sharing, cycles, every outside edge and owner-release distinction",
+      "status": "Pass",
+      "detail": {
+        "manualPrimaryBytes": {
+          "reverse": 144,
+          "dictionary": 24,
+          "participant": 24,
+          "root": 288,
+          "joint": 216
+        },
+        "ownerEdgeReleaseKeepsAliasedSeed": true
+      }
+    },
+    {
+      "name": "Separate generated-topology removal oracle and labelled ephemeron sensitivity",
+      "status": "Pass",
+      "detail": {
+        "generatedGraphs": 64,
+        "policyVariants": 3,
+        "comparedCuts": 1626,
+        "collectorLivenessNotInferred": true
+      }
+    },
+    {
+      "name": "Contradictory schema/marker/export and missing/unreachable failures versus a genuine zero",
+      "status": "Pass",
+      "detail": {
+        "rejectedInputs": 23,
+        "genuineZeroSelfSizeAccepted": true
+      }
+    },
+    {
+      "name": "Independent scratch-only canonical/symlink/hardlink output-preservation guard",
+      "status": "Pass",
+      "detail": {
+        "forbiddenOutputs": 8,
+        "allowedNewOutput": true,
+        "originalEvidenceSourcesAndDumpsNeverUsedAsProbeOutputs": true
+      }
+    },
+    {
+      "name": "Original report/dump/source provenance, immutable previous artifacts and unchanged criteria/runtime",
+      "status": "Pass",
+      "detail": {
+        "baseline": "32f2a13",
+        "recordedDumps": 16,
+        "oldArtifactsByteComparedToCommit": 14,
+        "allPreservedArtifactsHashed": 15,
+        "invocationAndCanonicalOutputChecked": true,
+        "protectedOriginalSourceAndDumpPaths": 42,
+        "sourceBindings": [
+          {
+            "path": "bench/memory/retainer-cuts.mjs",
+            "sha256": "9a2e4605e61a87d89e0e883b1fd6b4e41c2933b3ea6d881c5105ba47228bff40"
+          },
+          {
+            "path": "bench/memory/retainer-cuts.test.mjs",
+            "sha256": "248d7006fa4673d63909ed6a576e572e366bc7e429799a41a009dc09bea982f5"
+          },
+          {
+            "path": "bench/memory/analyse-retainers.mjs",
+            "sha256": "bc3d5b406db65d990e1f4a565418e06d13c274fc734fa3d3bfdd7583d557d998"
+          },
+          {
+            "path": "bench/memory/retainer-output.mjs",
+            "sha256": "e807ae849d3eafa9d29e686a4080d3702a10dbd155983136a0e9aa2152c47a4e"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Printed graph-cut table and checkpoint/policy claims reconciled to raw observations",
+      "status": "Pass",
+      "detail": {
+        "numericTableCells": 24,
+        "rows": 6,
+        "snapshotsWithEqualReportedCutEffectsAcrossThreePolicies": 16,
+        "precommitJointBytes": {
+          "1000": 13544,
+          "10000": 14888
+        },
+        "noStagePeakOrCollectorInference": true
+      }
+    },
+    {
+      "name": "Independent fresh/recorded package identity and unchanged public contracts",
+      "status": "Pass",
+      "detail": {
+        "distinctInstalledDirectories": 7,
+        "productionFilesPerDirectory": 208,
+        "comparedInstalledProductionFiles": 1456,
+        "sourceReportBindings": 5,
+        "freshPackageSha256": "ce770b1e5de67ba4b01644168c44c102d9e869c4715f20c9a929f7f38dcfb524",
+        "fixedCoreSha256": "88fd585775b248421315ebc8f42701d41cd5ec784d37602895df7246206b7758",
+        "gzipBytes": 16829,
+        "targetGzipBytes": 15360,
+        "targetMet": false,
+        "startupObservationReusedFromFreshPackageReport": true,
+        "packageAudit": {
+          "path": "docs/evidence/RX-4002-retainers-package-audit.json",
+          "sha256": "3a276879761746ffe8e700dc8ce2d62fc5060c5b32033f8b8ecd7d3772a6100e"
+        },
+        "packageReport": {
+          "path": "docs/evidence/RX-4002-retainers-package.json",
+          "sha256": "1ca5f6ef22391c5d2f029896562a557468bfad89b423d80cce1133df418cb6c0"
+        },
+        "noResourceOrStartupRerun": true
+      }
+    },
+    {
+      "name": "Final completed check-log and existing-evidence planner reconciliation",
+      "status": "Pass",
+      "detail": {
+        "checkLog": {
+          "path": "docs/evidence/RX-4002-retainers-final-check.log",
+          "sha256": "4e8dc9cafb051b72f9b73fdc13828c2a111f384fcd1e428aeab8f2bf7dd4898c"
+        },
+        "phases": [
+          491,
+          15,
+          24,
+          26,
+          1
+        ],
+        "passedTests": 557,
+        "failures": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "processExitCodeConfirmedSeparatelyByParent": 0,
+        "doneReleaseTasks": 19,
+        "rx4002": "blocked",
+        "rx4003": "planned/waiting",
+        "noCriterionWaiver": true
+      }
+    },
+    {
+      "name": "Independent actual whole-recorded-graph oracle: core-only/1000/built",
+      "status": "Pass",
+      "detail": {
+        "dumpSha256": "3942656e2911efbaeaf2b7df34f243faea8ccf7cacddc20f2aded122e7076252",
+        "fileBytes": 8199522,
+        "nodes": 97222,
+        "comparedCuts": 21,
+        "neutralizedNodes": 1,
+        "indexRootShapeCandidates": 1,
+        "primaryJointCutBytes": 1803976
+      }
+    },
+    {
+      "name": "Independent actual whole-recorded-graph oracle: source-phrase/1000/built",
+      "status": "Pass",
+      "detail": {
+        "dumpSha256": "c1bee91cb134a933ef8efc96fc07abdcf48e1bfc99e9c7d72e5c5fd04f57ad51",
+        "fileBytes": 9020094,
+        "nodes": 109027,
+        "comparedCuts": 21,
+        "neutralizedNodes": 1,
+        "indexRootShapeCandidates": 1,
+        "primaryJointCutBytes": 2347184
+      }
+    },
+    {
+      "name": "Independent actual whole-recorded-graph oracle: positions-offsets/1000/mutation-precommit",
+      "status": "Pass",
+      "detail": {
+        "dumpSha256": "8ea0bdfef1fe026b15d4ff4dce26c0155161d82928d428109c69df4130b584ab",
+        "fileBytes": 10514572,
+        "nodes": 133042,
+        "comparedCuts": 27,
+        "neutralizedNodes": 1,
+        "indexRootShapeCandidates": 3,
+        "primaryJointCutBytes": 13544
+      }
+    },
+    {
+      "name": "Independent actual whole-recorded-graph oracle: source-phrase/1000/serialization-string-held",
+      "status": "Pass",
+      "detail": {
+        "dumpSha256": "85fc42bc07ccd3e540f40d06651aadc9bbafd9df219d5731bae3d5fd2468cf18",
+        "fileBytes": 9234500,
+        "nodes": 111624,
+        "comparedCuts": 24,
+        "neutralizedNodes": 1,
+        "indexRootShapeCandidates": 1,
+        "primaryJointCutBytes": 2348096
+      }
+    },
+    {
+      "name": "Independent actual whole-recorded-graph oracle: positions-offsets/10000/built",
+      "status": "Pass",
+      "detail": {
+        "dumpSha256": "27aedde9b50e321e4d99a64257416ba4d648298d89a0259532c85c4caa43a60e",
+        "fileBytes": 37636942,
+        "nodes": 534804,
+        "comparedCuts": 21,
+        "neutralizedNodes": 1,
+        "indexRootShapeCandidates": 1,
+        "primaryJointCutBytes": 37554656
+      }
+    }
+  ]
+}

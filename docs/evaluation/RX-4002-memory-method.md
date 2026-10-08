@@ -1,6 +1,6 @@
 # RX-4002 memory method
 
-Status: bounded Node process observations and corrected selected-data graph analysis are complete. Browser/component qualification remains separate. Raw outcomes are in [the memory evidence](../evidence/RX-4002-memory.json), with distinct [corrected graph analysis](../evidence/RX-4002-memory-graphs.json). This document does not change the native capacity, limits, optional representations, public exports, or proposed release requirements.
+Status: bounded Node process observations, corrected selected-data graph analysis and a separate offline recorded-graph cut analysis are observed. Browser/component qualification remains separate. Raw outcomes are in [the memory evidence](../evidence/RX-4002-memory.json), with distinct [corrected graph analysis](../evidence/RX-4002-memory-graphs.json) and [graph-cut analysis](../evidence/RX-4002-memory-retainers.json). This document does not change the native capacity, limits, optional representations, public exports, or proposed release requirements.
 
 ## Reproduction and boundaries
 
@@ -87,6 +87,29 @@ All values are V8 node bytes in the permitted-edge graph. Component columns over
 
 At the held-native-string phase, the graph associates 368,680 / 3,487,856 bytes with the source 1,000 / 10,000 export string and 768,472 / 7,472,656 bytes with positional exports. These are actual string/parent node self-sizes, separate from UTF-8 encoded lengths and from intermediate encoder allocations. Every built/held-string dump has one root-shaped object; every precommit dump has three, with the old committed one identified by the marker. Staged roots are therefore directly observable, but their exact exclusive/peak bytes remain unqualified.
 
+## Offline recorded-graph cuts
+
+The continuation uses `node bench/memory/analyse-retainers.mjs` on the same 16 hashed dumps, with no new native workloads or heap collection. The separate analyzer reads the complete recorded graph, including context, hidden, code, prototype and backing-store paths. It validates schema descriptors and marker component targets, and neutralizes only the identified observation marker and any verified exclusively marker-owned property store. Outside descendant retainers remain in the graph. The original process/selected-data/probe artifacts stay byte-identical; input, dump and executed-source hashes bind the distinct report.
+
+For each declared edge policy, the analyzer measures which baseline-root-reachable nodes become unreachable when a component seed or group of seeds is deleted. `graphCutSelfSizeBytes` sums those nodes' recorded `self_size` once. **Node deletion removes every alias to that node.** It differs from releasing one owner property, disposing an engine, and actual collection by V8. The primary policy follows all nonweak edges except non-root shortcuts; separate policies include those shortcuts and omit labelled WeakMap table-to-value pair edges while keeping key-to-value edges. These are sensitivity models rather than collector-retained bounds. [V8's ephemeron explanation](https://v8.dev/features/weak-references) distinguishes conditional key/table liveness from ordinary independent graph edges. The analyzer does not implement V8 conditional GC or DevTools page-object/dominator rules.
+
+Built/input-released graph-cut observations, in bytes:
+
+| Mode / records | Reverse-document node cut | Dictionary/postings/statistics node cut | Participant node cut | Joint cut of all three components |
+| --- | ---: | ---: | ---: | ---: |
+| Core / 1,000 | 1,085,768 | 717,592 | 256 | 1,803,976 |
+| Core / 10,000 | 10,394,960 | 3,986,536 | 256 | 14,382,112 |
+| Source phrases / 1,000 | 1,085,840 | 717,688 | 543,296 | 2,347,184 |
+| Source phrases / 10,000 | 10,395,000 | 3,986,624 | 4,637,032 | 19,019,136 |
+| Positions + offsets / 1,000 | 1,085,880 | 717,688 | 2,367,016 | 4,171,064 |
+| Positions + offsets / 10,000 | 10,395,000 | 3,986,624 | 23,172,552 | 37,554,656 |
+
+The joint cut is recomputed against the root, rather than obtained by adding individual effects. Shared children can survive every individual cut and disappear only after a joint cut. Core's participant entry remains an empty container with runtime backing metadata; it is not an optional side index. These full-policy effects differ from the earlier selected-edge reachable sizes and do not replace that historical quantity.
+
+All three policies give the same component and root-candidate cut effects for these actual dumps; literal tests deliberately produce different shortcut/ephemeron outcomes. Every actual marker is in-object, requiring one scaffold-node exclusion. PropertyArray neutralization is covered by literal tests, not claimed as observed in these marker shapes. At precommit, the joint cut of the still-committed marked components loses 13,544 bytes at 1,000 records and 14,888 at 10,000 in each mode: outside references from other candidate roots preserve shared data. Those values are neither staged allocation nor a peak. The unmarked root shapes retain structural IDs without guessed old/new/staging roles. Held encoding-string cuts reproduce their recorded string-node sizes and establish no intermediate encoder/decoder allocation.
+
+Reproduction requires the original temporary dumps. Missing/changed inputs fail explicitly. The output guard protects immutable reports, sources and dumps against canonical-path, symlink and existing hardlink aliases before analysis; it never rewrites a preserved input to create a report. Full RX-4002-AC03 remains Blocked: this snapshot graph model adds retention evidence but cannot fill collector-accurate, allocation-peak, decode/restore or browser-worker/transport observations.
+
 ## Outstanding qualification
 
 | Required observation | Status/boundary |
@@ -94,7 +117,8 @@ At the held-native-string phase, the graph associates 368,680 / 3,487,856 bytes 
 | Fresh-process whole-process/V8 stages, repetitions and cleanup | Actual raw readings, separate from component claims. |
 | True lifetime process RSS high-water | Kernel quantity, covering complete instrumented child lifetime. |
 | Reachable core/source/positions/held encoding data | V8 selected-edge node-size attribution; shared subgraphs retained explicitly. |
-| Exact exclusive component retained bytes | **Blocked**: requires a reviewed dominator/retainer method covering omitted runtime edges and outside retainers. No process delta is substituted. |
+| Complete recorded-graph component/group cuts | Same-dump root-reachability differences under explicit policies; every-node-alias deletion, separate from owner-edge release or V8 GC. |
+| Exact exclusive component retained bytes | **Blocked**: recorded-graph cuts now cover runtime edges and outside descendant retainers, but conditional collector liveness, owner/API reference release and actual post-GC attribution remain unqualified. No graph-cut effect or process delta is substituted for those observations. |
 | Exact mutation/serialization allocation peak | **Blocked**: periodic/cooperative samples and lifetime process maximum do not isolate stage allocation high-water. Requires allocation chronology/peak attribution with known instrumentation bounds. |
 | Decode/restore buffers | **Blocked** in this harness: restore phases need independently instrumented receiving-state allocation records; export observations do not qualify them. |
 | Browser renderer/main-thread/worker/transport memory | **Blocked** in this Node method: requires separately scoped actual browser/worker heap/allocation and buffer-copy observations. |

@@ -75,7 +75,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 ## Recorded blockers and decisions
 
-- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): Firefox package matrix and native WebKit facet clearing need a working environment/input path; exact-tool AT and physical display/input observations are unavailable; exclusive retained/staging/encoding and browser-worker/transport memory are not isolated. See docs/evidence/RX-4002.md; all seven criteria remain unchanged.
+- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): Firefox package matrix and native WebKit facet clearing need a working environment/input path; exact-tool AT and physical display/input observations are unavailable; collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. Offline node-cut effects from the original dumps are observed; see docs/evidence/RX-4002-retainers.md. All seven criteria remain unchanged.
 
 ## Milestone exit conditions
 

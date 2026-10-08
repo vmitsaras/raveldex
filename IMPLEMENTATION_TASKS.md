@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** Firefox package matrix and native WebKit facet clearing need a working environment/input path; exact-tool AT and physical display/input observations are unavailable; exclusive retained/staging/encoding and browser-worker/transport memory are not isolated. See docs/evidence/RX-4002.md; all seven criteria remain unchanged.
+**Blocker or decision:** Firefox package matrix and native WebKit facet clearing need a working environment/input path; exact-tool AT and physical display/input observations are unavailable; collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. Offline node-cut effects from the original dumps are observed; see docs/evidence/RX-4002-retainers.md. All seven criteria remain unchanged.
 
 **Expected affected areas**
 
@@ -859,6 +859,12 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-review-probe.json](docs/evidence/RX-4002-review-probe.json)
 - [docs/evidence/RX-4002-package-final.json](docs/evidence/RX-4002-package-final.json)
 - [docs/evidence/RX-4002-package-audit.json](docs/evidence/RX-4002-package-audit.json)
+- [docs/evidence/RX-4002-retainers.md](docs/evidence/RX-4002-retainers.md)
+- [docs/evidence/RX-4002-memory-retainers.json](docs/evidence/RX-4002-memory-retainers.json)
+- [docs/evidence/RX-4002-retainers-review.md](docs/evidence/RX-4002-retainers-review.md)
+- [docs/evidence/RX-4002-retainers-review-probe.json](docs/evidence/RX-4002-retainers-review-probe.json)
+- [docs/evidence/RX-4002-retainers-package.json](docs/evidence/RX-4002-retainers-package.json)
+- [docs/evidence/RX-4002-retainers-package-audit.json](docs/evidence/RX-4002-retainers-package-audit.json)
 
 
 ## RX-4003
