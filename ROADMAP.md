@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 19/21 done · 0 in progress · 1 dependency-ready.
+**Release progress:** 19/21 done · 0 in progress · 0 dependency-ready.
 
-**Planner state:** `ready`.
+**Planner state:** `blocked`.
 
-**Next or resumable release task:** [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification.
+**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -60,7 +60,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-3003](IMPLEMENTATION_TASKS.md#rx-3003) — IndexedDB persistence, recovery, and namespace erasure | `done` | `RX-3001`, `RX-3002` | [Issue](https://github.com/vmitsaras/raveldex/issues/23) |
 | [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004) — Companion migration and comparator separation | `done` | `RX-3003` | [Issue](https://github.com/vmitsaras/raveldex/issues/24) |
 | [RX-4001](IMPLEMENTATION_TASKS.md#rx-4001) — Fair correctness, relevance, and cost comparison | `done` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/25) |
-| [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification | `planned` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/26) |
+| [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification | `blocked` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/26) |
 | [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003) — Package, public documentation, and independent candidate review | `planned` | `RX-4001`, `RX-4002` | [Issue](https://github.com/vmitsaras/raveldex/issues/27) |
 | [RX-A010](docs/planning/OPTIONAL_FEATURES.md#rx-a010) — Bounded typo tolerance | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/28) |
 | [RX-A020](docs/planning/OPTIONAL_FEATURES.md#rx-a020) — Dictionary-backed suggestions | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/29) |
@@ -72,6 +72,10 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-A080](docs/planning/OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/35) |
 | [RX-A090](docs/planning/OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/36) |
 | [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
+
+## Recorded blockers and decisions
+
+- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): Firefox package matrix and native WebKit facet clearing need a working environment/input path; exact-tool AT and physical display/input observations are unavailable; exclusive retained/staging/encoding and browser-worker/transport memory are not isolated. See docs/evidence/RX-4002.md; all seven criteria remain unchanged.
 
 ## Milestone exit conditions
 

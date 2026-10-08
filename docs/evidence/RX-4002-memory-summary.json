@@ -1,0 +1,4146 @@
+{
+  "kind": "rx4002-memory-derived-summary-v1",
+  "raw": {
+    "path": "docs/evidence/RX-4002-memory.json",
+    "sha256": "3f95ed7609ec82b6eb68da667a4a599ab2d490e5b0a97de12a22869a06ef7fb9"
+  },
+  "calculationSource": {
+    "path": "bench/memory/summarize.mjs",
+    "sha256": "884b670792c0dd22c6d2c1301facd5ed23f70d6fa4f386e14999b96b9a0941e5"
+  },
+  "graphAnalysisRevision": {
+    "path": "docs/evidence/RX-4002-memory-graphs.json",
+    "sha256": "adcb92eccd9be000944cab19373497f3f105672de3d3ad2785960892f9dbc088",
+    "acceptedParser": {
+      "path": "bench/memory/heap-graph.mjs",
+      "sha256": "dab576d6e3ca9b6eddaf2108851a6810e8ef2c90772a128eed4ad11b61585f50"
+    },
+    "originalParser": {
+      "path": "bench/memory/heap-graph.mjs",
+      "sha256": "a3846c9a5f78a76e898bcfb5c9af93569451089725164c1259b8b63de5643938"
+    }
+  },
+  "summaryMethod": "Whole bytes. Median/minimum/maximum across three independent fresh-process last-cycle readings or each process observed maxima. No subtraction, component assignment, percentile or timing claim.",
+  "groups": [
+    {
+      "mode": "core-only",
+      "size": 1000,
+      "repetitions": 3,
+      "steady": [
+        {
+          "stage": "matched-module-harness-baseline",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5457400,
+              5457296,
+              5457328
+            ],
+            "minimumBytes": 5457296,
+            "medianBytes": 5457328,
+            "maximumBytes": 5457400
+          },
+          "rss": {
+            "samples": [
+              57999360,
+              57671680,
+              57884672
+            ],
+            "minimumBytes": 57671680,
+            "medianBytes": 57884672,
+            "maximumBytes": 57999360
+          }
+        },
+        {
+          "stage": "application-corpus-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5752504,
+              5752512,
+              5752512
+            ],
+            "minimumBytes": 5752504,
+            "medianBytes": 5752512,
+            "maximumBytes": 5752512
+          },
+          "rss": {
+            "samples": [
+              58589184,
+              58343424,
+              58458112
+            ],
+            "minimumBytes": 58343424,
+            "medianBytes": 58458112,
+            "maximumBytes": 58589184
+          }
+        },
+        {
+          "stage": "empty-owner-with-application-corpus",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5823616,
+              5823544,
+              5823544
+            ],
+            "minimumBytes": 5823544,
+            "medianBytes": 5823544,
+            "maximumBytes": 5823616
+          },
+          "rss": {
+            "samples": [
+              58720256,
+              58540032,
+              58589184
+            ],
+            "minimumBytes": 58540032,
+            "medianBytes": 58589184,
+            "maximumBytes": 58720256
+          }
+        },
+        {
+          "stage": "built-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8082544,
+              8083344,
+              8083712
+            ],
+            "minimumBytes": 8082544,
+            "medianBytes": 8083344,
+            "maximumBytes": 8083712
+          },
+          "rss": {
+            "samples": [
+              78692352,
+              78741504,
+              77856768
+            ],
+            "minimumBytes": 77856768,
+            "medianBytes": 78692352,
+            "maximumBytes": 78741504
+          }
+        },
+        {
+          "stage": "replacement-cleanup",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8125896,
+              8126504,
+              8126520
+            ],
+            "minimumBytes": 8125896,
+            "medianBytes": 8126504,
+            "maximumBytes": 8126520
+          },
+          "rss": {
+            "samples": [
+              78954496,
+              78626816,
+              78168064
+            ],
+            "minimumBytes": 78168064,
+            "medianBytes": 78626816,
+            "maximumBytes": 78954496
+          }
+        },
+        {
+          "stage": "disposed-handles-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              6229552,
+              6230048,
+              6230048
+            ],
+            "minimumBytes": 6229552,
+            "medianBytes": 6230048,
+            "maximumBytes": 6230048
+          },
+          "rss": {
+            "samples": [
+              78954496,
+              78659584,
+              78168064
+            ],
+            "minimumBytes": 78168064,
+            "medianBytes": 78659584,
+            "maximumBytes": 78954496
+          }
+        }
+      ],
+      "observedOperationMaxima": [
+        {
+          "operation": "build-admitted-batches",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              14614184,
+              14355696,
+              12979704
+            ],
+            "minimumBytes": 12979704,
+            "medianBytes": 14355696,
+            "maximumBytes": 14614184
+          },
+          "rss": {
+            "samples": [
+              75153408,
+              74203136,
+              73203712
+            ],
+            "minimumBytes": 73203712,
+            "medianBytes": 74203136,
+            "maximumBytes": 75153408
+          }
+        },
+        {
+          "operation": "replace-one-record",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              8926840,
+              8928888,
+              8927856
+            ],
+            "minimumBytes": 8926840,
+            "medianBytes": 8927856,
+            "maximumBytes": 8928888
+          },
+          "rss": {
+            "samples": [
+              78790656,
+              78872576,
+              78004224
+            ],
+            "minimumBytes": 78004224,
+            "medianBytes": 78790656,
+            "maximumBytes": 78872576
+          }
+        }
+      ],
+      "kernelLifetimeMaximumRSS": {
+        "samples": [
+          79233024,
+          78905344,
+          78413824
+        ],
+        "minimumBytes": 78413824,
+        "medianBytes": 78905344,
+        "maximumBytes": 79233024
+      },
+      "cleanupChecksPassed": 3,
+      "actualStateVerifications": [
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28
+        },
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28
+        },
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28
+        }
+      ],
+      "operationOutcomes": [
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 106243
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 2889
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Not Applicable",
+            "reason": "Core-only configuration imports no snapshot adapter."
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 106243
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 2889
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Not Applicable",
+            "reason": "Core-only configuration imports no snapshot adapter."
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 106243
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 2889
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Not Applicable",
+            "reason": "Core-only configuration imports no snapshot adapter."
+          }
+        ]
+      ]
+    },
+    {
+      "mode": "core-only",
+      "size": 10000,
+      "repetitions": 3,
+      "steady": [
+        {
+          "stage": "matched-module-harness-baseline",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5457216,
+              5457352,
+              5457216
+            ],
+            "minimumBytes": 5457216,
+            "medianBytes": 5457216,
+            "maximumBytes": 5457352
+          },
+          "rss": {
+            "samples": [
+              57851904,
+              57884672,
+              57475072
+            ],
+            "minimumBytes": 57475072,
+            "medianBytes": 57851904,
+            "maximumBytes": 57884672
+          }
+        },
+        {
+          "stage": "application-corpus-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8056400,
+              8056536,
+              8056400
+            ],
+            "minimumBytes": 8056400,
+            "medianBytes": 8056400,
+            "maximumBytes": 8056536
+          },
+          "rss": {
+            "samples": [
+              64438272,
+              64143360,
+              63782912
+            ],
+            "minimumBytes": 63782912,
+            "medianBytes": 64143360,
+            "maximumBytes": 64438272
+          }
+        },
+        {
+          "stage": "empty-owner-with-application-corpus",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8127544,
+              8127568,
+              8127544
+            ],
+            "minimumBytes": 8127544,
+            "medianBytes": 8127544,
+            "maximumBytes": 8127568
+          },
+          "rss": {
+            "samples": [
+              64585728,
+              64290816,
+              63979520
+            ],
+            "minimumBytes": 63979520,
+            "medianBytes": 64290816,
+            "maximumBytes": 64585728
+          }
+        },
+        {
+          "stage": "built-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              20107312,
+              20113208,
+              20120600
+            ],
+            "minimumBytes": 20107312,
+            "medianBytes": 20113208,
+            "maximumBytes": 20120600
+          },
+          "rss": {
+            "samples": [
+              202964992,
+              200048640,
+              206143488
+            ],
+            "minimumBytes": 200048640,
+            "medianBytes": 202964992,
+            "maximumBytes": 206143488
+          }
+        },
+        {
+          "stage": "replacement-cleanup",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              20114144,
+              20121104,
+              20115368
+            ],
+            "minimumBytes": 20114144,
+            "medianBytes": 20115368,
+            "maximumBytes": 20121104
+          },
+          "rss": {
+            "samples": [
+              203046912,
+              200081408,
+              208896000
+            ],
+            "minimumBytes": 200081408,
+            "medianBytes": 203046912,
+            "maximumBytes": 208896000
+          }
+        },
+        {
+          "stage": "disposed-handles-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5344688,
+              5350208,
+              5350312
+            ],
+            "minimumBytes": 5344688,
+            "medianBytes": 5350208,
+            "maximumBytes": 5350312
+          },
+          "rss": {
+            "samples": [
+              203046912,
+              200081408,
+              208896000
+            ],
+            "minimumBytes": 200081408,
+            "medianBytes": 203046912,
+            "maximumBytes": 208896000
+          }
+        }
+      ],
+      "observedOperationMaxima": [
+        {
+          "operation": "build-admitted-batches",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              80319112,
+              78392624,
+              79612200
+            ],
+            "minimumBytes": 78392624,
+            "medianBytes": 79612200,
+            "maximumBytes": 80319112
+          },
+          "rss": {
+            "samples": [
+              201572352,
+              197869568,
+              204406784
+            ],
+            "minimumBytes": 197869568,
+            "medianBytes": 201572352,
+            "maximumBytes": 204406784
+          }
+        },
+        {
+          "operation": "replace-one-record",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              21235128,
+              21240304,
+              21009712
+            ],
+            "minimumBytes": 21009712,
+            "medianBytes": 21235128,
+            "maximumBytes": 21240304
+          },
+          "rss": {
+            "samples": [
+              202964992,
+              200048640,
+              206143488
+            ],
+            "minimumBytes": 200048640,
+            "medianBytes": 202964992,
+            "maximumBytes": 206143488
+          }
+        }
+      ],
+      "kernelLifetimeMaximumRSS": {
+        "samples": [
+          203882496,
+          201310208,
+          209698816
+        ],
+        "minimumBytes": 201310208,
+        "medianBytes": 203882496,
+        "maximumBytes": 209698816
+      },
+      "cleanupChecksPassed": 3,
+      "actualStateVerifications": [
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272
+        },
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272
+        },
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272
+        }
+      ],
+      "operationOutcomes": [
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 2379390
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3775
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Not Applicable",
+            "reason": "Core-only configuration imports no snapshot adapter."
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 2379390
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3775
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Not Applicable",
+            "reason": "Core-only configuration imports no snapshot adapter."
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 2379390
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3775
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Not Applicable",
+            "reason": "Core-only configuration imports no snapshot adapter."
+          }
+        ]
+      ]
+    },
+    {
+      "mode": "source-phrase",
+      "size": 1000,
+      "repetitions": 3,
+      "steady": [
+        {
+          "stage": "matched-module-harness-baseline",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5747184,
+              5747256,
+              5747256
+            ],
+            "minimumBytes": 5747184,
+            "medianBytes": 5747256,
+            "maximumBytes": 5747256
+          },
+          "rss": {
+            "samples": [
+              60817408,
+              60784640,
+              61030400
+            ],
+            "minimumBytes": 60784640,
+            "medianBytes": 60817408,
+            "maximumBytes": 61030400
+          }
+        },
+        {
+          "stage": "application-corpus-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              6028792,
+              6028864,
+              6028864
+            ],
+            "minimumBytes": 6028792,
+            "medianBytes": 6028864,
+            "maximumBytes": 6028864
+          },
+          "rss": {
+            "samples": [
+              61128704,
+              61145088,
+              61358080
+            ],
+            "minimumBytes": 61128704,
+            "medianBytes": 61145088,
+            "maximumBytes": 61358080
+          }
+        },
+        {
+          "stage": "empty-owner-with-application-corpus",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              6143384,
+              6143456,
+              6143456
+            ],
+            "minimumBytes": 6143384,
+            "medianBytes": 6143456,
+            "maximumBytes": 6143456
+          },
+          "rss": {
+            "samples": [
+              61325312,
+              61374464,
+              61505536
+            ],
+            "minimumBytes": 61325312,
+            "medianBytes": 61374464,
+            "maximumBytes": 61505536
+          }
+        },
+        {
+          "stage": "built-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              9120096,
+              9120064,
+              9120696
+            ],
+            "minimumBytes": 9120064,
+            "medianBytes": 9120096,
+            "maximumBytes": 9120696
+          },
+          "rss": {
+            "samples": [
+              79216640,
+              80003072,
+              79986688
+            ],
+            "minimumBytes": 79216640,
+            "medianBytes": 79986688,
+            "maximumBytes": 80003072
+          }
+        },
+        {
+          "stage": "replacement-cleanup",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              9187512,
+              9186296,
+              9186296
+            ],
+            "minimumBytes": 9186296,
+            "medianBytes": 9186296,
+            "maximumBytes": 9187512
+          },
+          "rss": {
+            "samples": [
+              79429632,
+              80068608,
+              80035840
+            ],
+            "minimumBytes": 79429632,
+            "medianBytes": 80035840,
+            "maximumBytes": 80068608
+          }
+        },
+        {
+          "stage": "native-string-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              9869544,
+              9872832,
+              9867984
+            ],
+            "minimumBytes": 9867984,
+            "medianBytes": 9869544,
+            "maximumBytes": 9872832
+          },
+          "rss": {
+            "samples": [
+              85655552,
+              97812480,
+              86032384
+            ],
+            "minimumBytes": 85655552,
+            "medianBytes": 86032384,
+            "maximumBytes": 97812480
+          }
+        },
+        {
+          "stage": "native-string-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              9501464,
+              9500560,
+              9499904
+            ],
+            "minimumBytes": 9499904,
+            "medianBytes": 9500560,
+            "maximumBytes": 9501464
+          },
+          "rss": {
+            "samples": [
+              85295104,
+              97435648,
+              85655552
+            ],
+            "minimumBytes": 85295104,
+            "medianBytes": 85655552,
+            "maximumBytes": 97435648
+          }
+        },
+        {
+          "stage": "disposed-handles-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              7039208,
+              7039112,
+              7038584
+            ],
+            "minimumBytes": 7038584,
+            "medianBytes": 7039112,
+            "maximumBytes": 7039208
+          },
+          "rss": {
+            "samples": [
+              85295104,
+              97435648,
+              85655552
+            ],
+            "minimumBytes": 85295104,
+            "medianBytes": 85655552,
+            "maximumBytes": 97435648
+          }
+        }
+      ],
+      "observedOperationMaxima": [
+        {
+          "operation": "build-admitted-batches",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              15952200,
+              16057064,
+              16343744
+            ],
+            "minimumBytes": 15952200,
+            "medianBytes": 16057064,
+            "maximumBytes": 16343744
+          },
+          "rss": {
+            "samples": [
+              77103104,
+              78446592,
+              77676544
+            ],
+            "minimumBytes": 77103104,
+            "medianBytes": 77676544,
+            "maximumBytes": 78446592
+          }
+        },
+        {
+          "operation": "replace-one-record",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              10303440,
+              10282824,
+              10283056
+            ],
+            "minimumBytes": 10282824,
+            "medianBytes": 10283056,
+            "maximumBytes": 10303440
+          },
+          "rss": {
+            "samples": [
+              79249408,
+              80003072,
+              79986688
+            ],
+            "minimumBytes": 79249408,
+            "medianBytes": 79986688,
+            "maximumBytes": 80003072
+          }
+        },
+        {
+          "operation": "export-native",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              21233064,
+              27090864,
+              22273344
+            ],
+            "minimumBytes": 21233064,
+            "medianBytes": 22273344,
+            "maximumBytes": 27090864
+          },
+          "rss": {
+            "samples": [
+              89964544,
+              101941248,
+              90423296
+            ],
+            "minimumBytes": 89964544,
+            "medianBytes": 90423296,
+            "maximumBytes": 101941248
+          }
+        }
+      ],
+      "kernelLifetimeMaximumRSS": {
+        "samples": [
+          89964544,
+          101990400,
+          90423296
+        ],
+        "minimumBytes": 89964544,
+        "medianBytes": 90423296,
+        "maximumBytes": 101990400
+      },
+      "cleanupChecksPassed": 3,
+      "actualStateVerifications": [
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27,
+          "phraseTotal": 334
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28,
+          "phraseTotal": 333
+        },
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27,
+          "phraseTotal": 334
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28,
+          "phraseTotal": 333
+        },
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27,
+          "phraseTotal": 334
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28,
+          "phraseTotal": 333
+        }
+      ],
+      "operationOutcomes": [
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 114571
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3414
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 633197
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 114571
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3414
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 633197
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 114571
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3414
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 633197
+          }
+        ]
+      ]
+    },
+    {
+      "mode": "source-phrase",
+      "size": 10000,
+      "repetitions": 3,
+      "steady": [
+        {
+          "stage": "matched-module-harness-baseline",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5747264,
+              5747296,
+              5747296
+            ],
+            "minimumBytes": 5747264,
+            "medianBytes": 5747296,
+            "maximumBytes": 5747296
+          },
+          "rss": {
+            "samples": [
+              60899328,
+              60882944,
+              61161472
+            ],
+            "minimumBytes": 60882944,
+            "medianBytes": 60899328,
+            "maximumBytes": 61161472
+          }
+        },
+        {
+          "stage": "application-corpus-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8012760,
+              8012760,
+              8012792
+            ],
+            "minimumBytes": 8012760,
+            "medianBytes": 8012760,
+            "maximumBytes": 8012792
+          },
+          "rss": {
+            "samples": [
+              66764800,
+              66830336,
+              67092480
+            ],
+            "minimumBytes": 66764800,
+            "medianBytes": 66830336,
+            "maximumBytes": 67092480
+          }
+        },
+        {
+          "stage": "empty-owner-with-application-corpus",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8127352,
+              8127384,
+              8127384
+            ],
+            "minimumBytes": 8127352,
+            "medianBytes": 8127384,
+            "maximumBytes": 8127384
+          },
+          "rss": {
+            "samples": [
+              67010560,
+              67026944,
+              67289088
+            ],
+            "minimumBytes": 67010560,
+            "medianBytes": 67026944,
+            "maximumBytes": 67289088
+          }
+        },
+        {
+          "stage": "built-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              25145536,
+              25144936,
+              25147440
+            ],
+            "minimumBytes": 25144936,
+            "medianBytes": 25145536,
+            "maximumBytes": 25147440
+          },
+          "rss": {
+            "samples": [
+              207749120,
+              206422016,
+              207552512
+            ],
+            "minimumBytes": 206422016,
+            "medianBytes": 207552512,
+            "maximumBytes": 207749120
+          }
+        },
+        {
+          "stage": "replacement-cleanup",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              25247560,
+              25247344,
+              25250352
+            ],
+            "minimumBytes": 25247344,
+            "medianBytes": 25247560,
+            "maximumBytes": 25250352
+          },
+          "rss": {
+            "samples": [
+              208699392,
+              204275712,
+              207962112
+            ],
+            "minimumBytes": 204275712,
+            "medianBytes": 207962112,
+            "maximumBytes": 208699392
+          }
+        },
+        {
+          "stage": "native-string-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              29248864,
+              29248720,
+              29246824
+            ],
+            "minimumBytes": 29246824,
+            "medianBytes": 29248720,
+            "maximumBytes": 29248864
+          },
+          "rss": {
+            "samples": [
+              221200384,
+              216924160,
+              233095168
+            ],
+            "minimumBytes": 216924160,
+            "medianBytes": 221200384,
+            "maximumBytes": 233095168
+          }
+        },
+        {
+          "stage": "native-string-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              25757592,
+              25757448,
+              25755552
+            ],
+            "minimumBytes": 25755552,
+            "medianBytes": 25757448,
+            "maximumBytes": 25757592
+          },
+          "rss": {
+            "samples": [
+              217710592,
+              213434368,
+              229605376
+            ],
+            "minimumBytes": 213434368,
+            "medianBytes": 217710592,
+            "maximumBytes": 229605376
+          }
+        },
+        {
+          "stage": "disposed-handles-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              6344280,
+              6344208,
+              6342128
+            ],
+            "minimumBytes": 6342128,
+            "medianBytes": 6344208,
+            "maximumBytes": 6344280
+          },
+          "rss": {
+            "samples": [
+              217726976,
+              213434368,
+              229605376
+            ],
+            "minimumBytes": 213434368,
+            "medianBytes": 217726976,
+            "maximumBytes": 229605376
+          }
+        }
+      ],
+      "observedOperationMaxima": [
+        {
+          "operation": "build-admitted-batches",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              82926416,
+              82665216,
+              82948384
+            ],
+            "minimumBytes": 82665216,
+            "medianBytes": 82926416,
+            "maximumBytes": 82948384
+          },
+          "rss": {
+            "samples": [
+              201998336,
+              205635584,
+              203505664
+            ],
+            "minimumBytes": 201998336,
+            "medianBytes": 203505664,
+            "maximumBytes": 205635584
+          }
+        },
+        {
+          "operation": "replace-one-record",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              26407496,
+              26405080,
+              26537648
+            ],
+            "minimumBytes": 26405080,
+            "medianBytes": 26407496,
+            "maximumBytes": 26537648
+          },
+          "rss": {
+            "samples": [
+              207749120,
+              206422016,
+              207552512
+            ],
+            "minimumBytes": 206422016,
+            "medianBytes": 207552512,
+            "maximumBytes": 207749120
+          }
+        },
+        {
+          "operation": "export-native",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              143249456,
+              111474592,
+              139470752
+            ],
+            "minimumBytes": 111474592,
+            "medianBytes": 139470752,
+            "maximumBytes": 143249456
+          },
+          "rss": {
+            "samples": [
+              268943360,
+              263634944,
+              282017792
+            ],
+            "minimumBytes": 263634944,
+            "medianBytes": 268943360,
+            "maximumBytes": 282017792
+          }
+        }
+      ],
+      "kernelLifetimeMaximumRSS": {
+        "samples": [
+          272515072,
+          263782400,
+          282017792
+        ],
+        "minimumBytes": 263782400,
+        "medianBytes": 272515072,
+        "maximumBytes": 282017792
+      },
+      "cleanupChecksPassed": 3,
+      "actualStateVerifications": [
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271,
+          "phraseTotal": 3334
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272,
+          "phraseTotal": 3333
+        },
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271,
+          "phraseTotal": 3334
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272,
+          "phraseTotal": 3333
+        },
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271,
+          "phraseTotal": 3334
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272,
+          "phraseTotal": 3333
+        }
+      ],
+      "operationOutcomes": [
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 2696586
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 4368
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 6058390
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 2696586
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 4368
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 6058390
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 2696586
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 4368
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 6058390
+          }
+        ]
+      ]
+    },
+    {
+      "mode": "positions-offsets",
+      "size": 1000,
+      "repetitions": 3,
+      "steady": [
+        {
+          "stage": "matched-module-harness-baseline",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5781504,
+              5790184,
+              5782752
+            ],
+            "minimumBytes": 5781504,
+            "medianBytes": 5782752,
+            "maximumBytes": 5790184
+          },
+          "rss": {
+            "samples": [
+              60817408,
+              60932096,
+              60735488
+            ],
+            "minimumBytes": 60735488,
+            "medianBytes": 60817408,
+            "maximumBytes": 60932096
+          }
+        },
+        {
+          "stage": "application-corpus-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              6063112,
+              6071792,
+              6064328
+            ],
+            "minimumBytes": 6063112,
+            "medianBytes": 6064328,
+            "maximumBytes": 6071792
+          },
+          "rss": {
+            "samples": [
+              61145088,
+              61161472,
+              60997632
+            ],
+            "minimumBytes": 60997632,
+            "medianBytes": 61145088,
+            "maximumBytes": 61161472
+          }
+        },
+        {
+          "stage": "empty-owner-with-application-corpus",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              6179208,
+              6187920,
+              6180488
+            ],
+            "minimumBytes": 6179208,
+            "medianBytes": 6180488,
+            "maximumBytes": 6187920
+          },
+          "rss": {
+            "samples": [
+              61276160,
+              61292544,
+              61145088
+            ],
+            "minimumBytes": 61145088,
+            "medianBytes": 61276160,
+            "maximumBytes": 61292544
+          }
+        },
+        {
+          "stage": "built-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              11076840,
+              11092072,
+              11078544
+            ],
+            "minimumBytes": 11076840,
+            "medianBytes": 11078544,
+            "maximumBytes": 11092072
+          },
+          "rss": {
+            "samples": [
+              83492864,
+              85180416,
+              85098496
+            ],
+            "minimumBytes": 83492864,
+            "medianBytes": 85098496,
+            "maximumBytes": 85180416
+          }
+        },
+        {
+          "stage": "replacement-cleanup",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              11118592,
+              11133752,
+              11119880
+            ],
+            "minimumBytes": 11118592,
+            "medianBytes": 11119880,
+            "maximumBytes": 11133752
+          },
+          "rss": {
+            "samples": [
+              83623936,
+              84787200,
+              85262336
+            ],
+            "minimumBytes": 83623936,
+            "medianBytes": 84787200,
+            "maximumBytes": 85262336
+          }
+        },
+        {
+          "stage": "native-string-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              12278056,
+              12298872,
+              12279536
+            ],
+            "minimumBytes": 12278056,
+            "medianBytes": 12279536,
+            "maximumBytes": 12298872
+          },
+          "rss": {
+            "samples": [
+              102596608,
+              103120896,
+              102989824
+            ],
+            "minimumBytes": 102596608,
+            "medianBytes": 102989824,
+            "maximumBytes": 103120896
+          }
+        },
+        {
+          "stage": "native-string-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              11482920,
+              11503544,
+              11484448
+            ],
+            "minimumBytes": 11482920,
+            "medianBytes": 11484448,
+            "maximumBytes": 11503544
+          },
+          "rss": {
+            "samples": [
+              101826560,
+              102350848,
+              102219776
+            ],
+            "minimumBytes": 101826560,
+            "medianBytes": 102219776,
+            "maximumBytes": 102350848
+          }
+        },
+        {
+          "stage": "disposed-handles-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              7162312,
+              7178120,
+              7163592
+            ],
+            "minimumBytes": 7162312,
+            "medianBytes": 7163592,
+            "maximumBytes": 7178120
+          },
+          "rss": {
+            "samples": [
+              101859328,
+              102350848,
+              102219776
+            ],
+            "minimumBytes": 101859328,
+            "medianBytes": 102219776,
+            "maximumBytes": 102350848
+          }
+        }
+      ],
+      "observedOperationMaxima": [
+        {
+          "operation": "build-admitted-batches",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              17494544,
+              17472472,
+              17812056
+            ],
+            "minimumBytes": 17472472,
+            "medianBytes": 17494544,
+            "maximumBytes": 17812056
+          },
+          "rss": {
+            "samples": [
+              80986112,
+              82264064,
+              81149952
+            ],
+            "minimumBytes": 80986112,
+            "medianBytes": 81149952,
+            "maximumBytes": 82264064
+          }
+        },
+        {
+          "operation": "replace-one-record",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              12312120,
+              12327016,
+              12285160
+            ],
+            "minimumBytes": 12285160,
+            "medianBytes": 12312120,
+            "maximumBytes": 12327016
+          },
+          "rss": {
+            "samples": [
+              83525632,
+              85180416,
+              85098496
+            ],
+            "minimumBytes": 83525632,
+            "medianBytes": 85098496,
+            "maximumBytes": 85180416
+          }
+        },
+        {
+          "operation": "export-native",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              35838008,
+              31950440,
+              32120752
+            ],
+            "minimumBytes": 31950440,
+            "medianBytes": 32120752,
+            "maximumBytes": 35838008
+          },
+          "rss": {
+            "samples": [
+              111837184,
+              108363776,
+              108052480
+            ],
+            "minimumBytes": 108052480,
+            "medianBytes": 108363776,
+            "maximumBytes": 111837184
+          }
+        }
+      ],
+      "kernelLifetimeMaximumRSS": {
+        "samples": [
+          111837184,
+          111591424,
+          111443968
+        ],
+        "minimumBytes": 111443968,
+        "medianBytes": 111591424,
+        "maximumBytes": 111837184
+      },
+      "cleanupChecksPassed": 3,
+      "actualStateVerifications": [
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27,
+          "phraseTotal": 334
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28,
+          "phraseTotal": 333
+        },
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27,
+          "phraseTotal": 334
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28,
+          "phraseTotal": 333
+        },
+        {
+          "changed": false,
+          "records": 1000,
+          "revision": 4,
+          "selectiveTotal": 27,
+          "expectedSelectiveTotal": 27,
+          "phraseTotal": 334
+        },
+        {
+          "changed": true,
+          "records": 1000,
+          "revision": 5,
+          "selectiveTotal": 28,
+          "expectedSelectiveTotal": 28,
+          "phraseTotal": 333
+        }
+      ],
+      "operationOutcomes": [
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 160294
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3462
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 1065676
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 160294
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3462
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 1065676
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 160294
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 3462
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 1065676
+          }
+        ]
+      ]
+    },
+    {
+      "mode": "positions-offsets",
+      "size": 10000,
+      "repetitions": 3,
+      "steady": [
+        {
+          "stage": "matched-module-harness-baseline",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              5790264,
+              5782928,
+              5782720
+            ],
+            "minimumBytes": 5782720,
+            "medianBytes": 5782928,
+            "maximumBytes": 5790264
+          },
+          "rss": {
+            "samples": [
+              60768256,
+              60833792,
+              60588032
+            ],
+            "minimumBytes": 60588032,
+            "medianBytes": 60768256,
+            "maximumBytes": 60833792
+          }
+        },
+        {
+          "stage": "application-corpus-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8055760,
+              8048424,
+              8048328
+            ],
+            "minimumBytes": 8048328,
+            "medianBytes": 8048424,
+            "maximumBytes": 8055760
+          },
+          "rss": {
+            "samples": [
+              66453504,
+              66519040,
+              66322432
+            ],
+            "minimumBytes": 66322432,
+            "medianBytes": 66453504,
+            "maximumBytes": 66519040
+          }
+        },
+        {
+          "stage": "empty-owner-with-application-corpus",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              8171888,
+              8164552,
+              8164456
+            ],
+            "minimumBytes": 8164456,
+            "medianBytes": 8164552,
+            "maximumBytes": 8171888
+          },
+          "rss": {
+            "samples": [
+              66666496,
+              66682880,
+              66600960
+            ],
+            "minimumBytes": 66600960,
+            "medianBytes": 66666496,
+            "maximumBytes": 66682880
+          }
+        },
+        {
+          "stage": "built-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              43852832,
+              43850640,
+              43841512
+            ],
+            "minimumBytes": 43841512,
+            "medianBytes": 43850640,
+            "maximumBytes": 43852832
+          },
+          "rss": {
+            "samples": [
+              201359360,
+              228442112,
+              223641600
+            ],
+            "minimumBytes": 201359360,
+            "medianBytes": 223641600,
+            "maximumBytes": 228442112
+          }
+        },
+        {
+          "stage": "replacement-cleanup",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              43878088,
+              43877336,
+              43910712
+            ],
+            "minimumBytes": 43877336,
+            "medianBytes": 43878088,
+            "maximumBytes": 43910712
+          },
+          "rss": {
+            "samples": [
+              224755712,
+              230834176,
+              226689024
+            ],
+            "minimumBytes": 224755712,
+            "medianBytes": 226689024,
+            "maximumBytes": 230834176
+          }
+        },
+        {
+          "stage": "native-string-held",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              52127632,
+              52124576,
+              52096928
+            ],
+            "minimumBytes": 52096928,
+            "medianBytes": 52124576,
+            "maximumBytes": 52127632
+          },
+          "rss": {
+            "samples": [
+              248971264,
+              255164416,
+              247922688
+            ],
+            "minimumBytes": 247922688,
+            "medianBytes": 248971264,
+            "maximumBytes": 255164416
+          }
+        },
+        {
+          "stage": "native-string-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              44637312,
+              44634256,
+              44606608
+            ],
+            "minimumBytes": 44606608,
+            "medianBytes": 44634256,
+            "maximumBytes": 44637312
+          },
+          "rss": {
+            "samples": [
+              241483776,
+              247693312,
+              240435200
+            ],
+            "minimumBytes": 240435200,
+            "medianBytes": 241483776,
+            "maximumBytes": 247693312
+          }
+        },
+        {
+          "stage": "disposed-handles-inputs-released",
+          "reading": "Last of three explicit-GC/settling cycles per fresh process; all three cycles remain in raw report.",
+          "heapUsed": {
+            "samples": [
+              6660040,
+              6655920,
+              6630064
+            ],
+            "minimumBytes": 6630064,
+            "medianBytes": 6655920,
+            "maximumBytes": 6660040
+          },
+          "rss": {
+            "samples": [
+              241483776,
+              247726080,
+              240435200
+            ],
+            "minimumBytes": 240435200,
+            "medianBytes": 241483776,
+            "maximumBytes": 247726080
+          }
+        }
+      ],
+      "observedOperationMaxima": [
+        {
+          "operation": "build-admitted-batches",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              99924440,
+              102506776,
+              100080160
+            ],
+            "minimumBytes": 99924440,
+            "medianBytes": 100080160,
+            "maximumBytes": 102506776
+          },
+          "rss": {
+            "samples": [
+              222642176,
+              222478336,
+              216432640
+            ],
+            "minimumBytes": 216432640,
+            "medianBytes": 222478336,
+            "maximumBytes": 222642176
+          }
+        },
+        {
+          "operation": "replace-one-record",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              45115696,
+              45120936,
+              45107880
+            ],
+            "minimumBytes": 45107880,
+            "medianBytes": 45115696,
+            "maximumBytes": 45120936
+          },
+          "rss": {
+            "samples": [
+              201539584,
+              228442112,
+              223707136
+            ],
+            "minimumBytes": 201539584,
+            "medianBytes": 223707136,
+            "maximumBytes": 228442112
+          }
+        },
+        {
+          "operation": "export-native",
+          "outcome": "Observed sample maximum only; not true component/operation allocation peak.",
+          "heapUsed": {
+            "samples": [
+              176243192,
+              197553896,
+              164614680
+            ],
+            "minimumBytes": 164614680,
+            "medianBytes": 176243192,
+            "maximumBytes": 197553896
+          },
+          "rss": {
+            "samples": [
+              322650112,
+              354631680,
+              320503808
+            ],
+            "minimumBytes": 320503808,
+            "medianBytes": 322650112,
+            "maximumBytes": 354631680
+          }
+        }
+      ],
+      "kernelLifetimeMaximumRSS": {
+        "samples": [
+          322650112,
+          354992128,
+          320503808
+        ],
+        "minimumBytes": 320503808,
+        "medianBytes": 322650112,
+        "maximumBytes": 354992128
+      },
+      "cleanupChecksPassed": 3,
+      "actualStateVerifications": [
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271,
+          "phraseTotal": 3334
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272,
+          "phraseTotal": 3333
+        },
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271,
+          "phraseTotal": 3334
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272,
+          "phraseTotal": 3333
+        },
+        {
+          "changed": false,
+          "records": 10000,
+          "revision": 40,
+          "selectiveTotal": 271,
+          "expectedSelectiveTotal": 271,
+          "phraseTotal": 3334
+        },
+        {
+          "changed": true,
+          "records": 10000,
+          "revision": 41,
+          "selectiveTotal": 272,
+          "expectedSelectiveTotal": 272,
+          "phraseTotal": 3333
+        }
+      ],
+      "operationOutcomes": [
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 3153870
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 4416
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 10370315
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 3153870
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 4416
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 10370315
+          }
+        ],
+        [
+          {
+            "operation": "build-admitted-batches",
+            "outcome": "Pass",
+            "emittedSteps": 3153870
+          },
+          {
+            "operation": "replace-one-record",
+            "outcome": "Pass",
+            "emittedSteps": 4416
+          },
+          {
+            "operation": "export-native",
+            "outcome": "Pass",
+            "emittedSteps": 10370315
+          }
+        ]
+      ]
+    }
+  ],
+  "graphObservations": [
+    {
+      "mode": "core-only",
+      "size": 1000,
+      "kernelLifetimeMaximumResidentSetSizeBytes": 124600320,
+      "note": "Separate intrusive graph-process maximum includes V8 snapshot machinery. One graph process per configuration/size, not repeated component retained-size qualification.",
+      "graphs": [
+        {
+          "phase": "built",
+          "snapshotSha256": "3942656e2911efbaeaf2b7df34f243faea8ccf7cacddc20f2aded122e7076252",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 63763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10561,
+              "reachableSelfSizeBytes": 883736,
+              "disjointAmongSelectedDataGraphsNodes": 9518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850728,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2044,
+                  "selfSizeBytes": 57032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 63765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 63767,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 1452800,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 63769,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 63763,
+              "fieldsNodeId": 63765,
+              "participantsNodeId": 63767,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "snapshotSha256": "2ec781d9bf6322dc53444908a9ead7bb3f288b4663fd4cd06583dbaa77634ac9",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 63763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10561,
+              "reachableSelfSizeBytes": 883736,
+              "disjointAmongSelectedDataGraphsNodes": 9518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850728,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2044,
+                  "selfSizeBytes": 57032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 63765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 63767,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 1452800,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 194155,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 195233,
+              "fieldsNodeId": 195153,
+              "participantsNodeId": 194157,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 194161,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 195233,
+              "fieldsNodeId": 195153,
+              "participantsNodeId": 63767,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 63769,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 63763,
+              "fieldsNodeId": 63765,
+              "participantsNodeId": 63767,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "core-only",
+      "size": 10000,
+      "kernelLifetimeMaximumResidentSetSizeBytes": 212959232,
+      "note": "Separate intrusive graph-process maximum includes V8 snapshot machinery. One graph process per configuration/size, not repeated component retained-size qualification.",
+      "graphs": [
+        {
+          "phase": "built",
+          "snapshotSha256": "201c80699ab02e9ceb314f03283c3ccb57318dbf0067fd08c4ff54ca85c8371e",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 66315,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100561,
+              "reachableSelfSizeBytes": 8536856,
+              "disjointAmongSelectedDataGraphsNodes": 90518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215848,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20044,
+                  "selfSizeBytes": 561032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 66317,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 66319,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 11994992,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 66321,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 66315,
+              "fieldsNodeId": 66317,
+              "participantsNodeId": 66319,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "snapshotSha256": "07fac2bd1d65b4b91064a46d7acee9225ed3c3e0e95a18dacbcc6814f5bb1ef8",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 66315,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100561,
+              "reachableSelfSizeBytes": 8536856,
+              "disjointAmongSelectedDataGraphsNodes": 90518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215848,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20044,
+                  "selfSizeBytes": 561032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 66317,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 66319,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 11994992,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 445837,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 446813,
+              "fieldsNodeId": 446611,
+              "participantsNodeId": 445839,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 445843,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 446813,
+              "fieldsNodeId": 446611,
+              "participantsNodeId": 66319,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 66321,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 66315,
+              "fieldsNodeId": 66317,
+              "participantsNodeId": 66319,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "source-phrase",
+      "size": 1000,
+      "kernelLifetimeMaximumResidentSetSizeBytes": 140984320,
+      "note": "Separate intrusive graph-process maximum includes V8 snapshot machinery. One graph process per configuration/size, not repeated component retained-size qualification.",
+      "graphs": [
+        {
+          "phase": "built",
+          "snapshotSha256": "c1bee91cb134a933ef8efc96fc07abdcf48e1bfc99e9c7d72e5c5fd04f57ad51",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 173521,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10561,
+              "reachableSelfSizeBytes": 883736,
+              "disjointAmongSelectedDataGraphsNodes": 9518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850728,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2044,
+                  "selfSizeBytes": 57032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 173523,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 173525,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 8529,
+              "reachableSelfSizeBytes": 483224,
+              "disjointAmongSelectedDataGraphsNodes": 7527,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 451200,
+              "byType": {
+                "object": {
+                  "nodes": 3262,
+                  "selfSizeBytes": 110400
+                },
+                "array": {
+                  "nodes": 2261,
+                  "selfSizeBytes": 260680
+                },
+                "concatenated string": {
+                  "nodes": 1000,
+                  "selfSizeBytes": 32000
+                },
+                "string": {
+                  "nodes": 2006,
+                  "selfSizeBytes": 80144
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 1903816,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 173519,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 173521,
+              "fieldsNodeId": 173523,
+              "participantsNodeId": 173525,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "snapshotSha256": "d2b262383ea954bd9f06a15fae1e2dff349a59c1fda62041eaa24e92c07f8133",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 173521,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10561,
+              "reachableSelfSizeBytes": 883736,
+              "disjointAmongSelectedDataGraphsNodes": 9518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850728,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2044,
+                  "selfSizeBytes": 57032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 173523,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 173525,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 8529,
+              "reachableSelfSizeBytes": 483224,
+              "disjointAmongSelectedDataGraphsNodes": 7527,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 451200,
+              "byType": {
+                "object": {
+                  "nodes": 3262,
+                  "selfSizeBytes": 110400
+                },
+                "array": {
+                  "nodes": 2261,
+                  "selfSizeBytes": 260680
+                },
+                "concatenated string": {
+                  "nodes": 1000,
+                  "selfSizeBytes": 32000
+                },
+                "string": {
+                  "nodes": 2006,
+                  "selfSizeBytes": 80144
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 1903816,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 217745,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 218275,
+              "fieldsNodeId": 218277,
+              "participantsNodeId": 217747,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 217751,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 218275,
+              "fieldsNodeId": 218277,
+              "participantsNodeId": 173525,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 173519,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 173521,
+              "fieldsNodeId": 173523,
+              "participantsNodeId": 173525,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "snapshotSha256": "85fc42bc07ccd3e540f40d06651aadc9bbafd9df219d5731bae3d5fd2468cf18",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 218275,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10560,
+              "reachableSelfSizeBytes": 883712,
+              "disjointAmongSelectedDataGraphsNodes": 9517,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850704,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2043,
+                  "selfSizeBytes": 57008
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 218277,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 217747,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 8528,
+              "reachableSelfSizeBytes": 483192,
+              "disjointAmongSelectedDataGraphsNodes": 7525,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 451168,
+              "byType": {
+                "object": {
+                  "nodes": 3262,
+                  "selfSizeBytes": 110400
+                },
+                "array": {
+                  "nodes": 2261,
+                  "selfSizeBytes": 260680
+                },
+                "concatenated string": {
+                  "nodes": 999,
+                  "selfSizeBytes": 31968
+                },
+                "string": {
+                  "nodes": 2006,
+                  "selfSizeBytes": 80144
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 220991,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 368680,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 368680,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 368648
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 2272440,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 217745,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 218275,
+              "fieldsNodeId": 218277,
+              "participantsNodeId": 217747,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "source-phrase",
+      "size": 10000,
+      "kernelLifetimeMaximumResidentSetSizeBytes": 244809728,
+      "note": "Separate intrusive graph-process maximum includes V8 snapshot machinery. One graph process per configuration/size, not repeated component retained-size qualification.",
+      "graphs": [
+        {
+          "phase": "built",
+          "snapshotSha256": "956aef8adc4fba2b6a517843e5d66afd2472b8b61c4460e9f556b9e18f542055",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 91001,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100561,
+              "reachableSelfSizeBytes": 8536856,
+              "disjointAmongSelectedDataGraphsNodes": 90518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215848,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20044,
+                  "selfSizeBytes": 561032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 91003,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 91005,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 70528,
+              "reachableSelfSizeBytes": 4216344,
+              "disjointAmongSelectedDataGraphsNodes": 60526,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3896320,
+              "byType": {
+                "object": {
+                  "nodes": 30262,
+                  "selfSizeBytes": 1046400
+                },
+                "array": {
+                  "nodes": 20261,
+                  "selfSizeBytes": 2369800
+                },
+                "string": {
+                  "nodes": 20005,
+                  "selfSizeBytes": 800144
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 15891128,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 91007,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 91001,
+              "fieldsNodeId": 91003,
+              "participantsNodeId": 91005,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "snapshotSha256": "9b83a4e2464435fd4d112e21f39332844b889b8a2b6741b8afc3267b4bd21c45",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 91001,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100561,
+              "reachableSelfSizeBytes": 8536856,
+              "disjointAmongSelectedDataGraphsNodes": 90518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215848,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20044,
+                  "selfSizeBytes": 561032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 91003,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 91005,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 70528,
+              "reachableSelfSizeBytes": 4216344,
+              "disjointAmongSelectedDataGraphsNodes": 60526,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3896320,
+              "byType": {
+                "object": {
+                  "nodes": 30262,
+                  "selfSizeBytes": 1046400
+                },
+                "array": {
+                  "nodes": 20261,
+                  "selfSizeBytes": 2369800
+                },
+                "string": {
+                  "nodes": 20005,
+                  "selfSizeBytes": 800144
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 15891128,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 614465,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 615049,
+              "fieldsNodeId": 615051,
+              "participantsNodeId": 614467,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 614471,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 615049,
+              "fieldsNodeId": 615051,
+              "participantsNodeId": 91005,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 91007,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 91001,
+              "fieldsNodeId": 91003,
+              "participantsNodeId": 91005,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "snapshotSha256": "be0c807bd6ea835335ac08ce5734612dacf802ac204de06eb499e498c4fdea26",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 615049,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100560,
+              "reachableSelfSizeBytes": 8536832,
+              "disjointAmongSelectedDataGraphsNodes": 90517,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215824,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20043,
+                  "selfSizeBytes": 561008
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 615051,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 614467,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 70528,
+              "reachableSelfSizeBytes": 4216344,
+              "disjointAmongSelectedDataGraphsNodes": 60526,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3896320,
+              "byType": {
+                "object": {
+                  "nodes": 30262,
+                  "selfSizeBytes": 1046400
+                },
+                "array": {
+                  "nodes": 20261,
+                  "selfSizeBytes": 2369800
+                },
+                "string": {
+                  "nodes": 20005,
+                  "selfSizeBytes": 800144
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 617945,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 3487856,
+              "disjointAmongSelectedDataGraphsNodes": 3,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3487856,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 3487824
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 19378960,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 614465,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 615049,
+              "fieldsNodeId": 615051,
+              "participantsNodeId": 614467,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "positions-offsets",
+      "size": 1000,
+      "kernelLifetimeMaximumResidentSetSizeBytes": 157581312,
+      "note": "Separate intrusive graph-process maximum includes V8 snapshot machinery. One graph process per configuration/size, not repeated component retained-size qualification.",
+      "graphs": [
+        {
+          "phase": "built",
+          "snapshotSha256": "f5aea56d6a74b7509399abf5ccbf328243ee9046276acd2da100c97a83529ac1",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 58763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10561,
+              "reachableSelfSizeBytes": 883736,
+              "disjointAmongSelectedDataGraphsNodes": 9518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850728,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2044,
+                  "selfSizeBytes": 57032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 58765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 58771,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 30236,
+              "reachableSelfSizeBytes": 2233808,
+              "disjointAmongSelectedDataGraphsNodes": 29193,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 2200800,
+              "byType": {
+                "object": {
+                  "nodes": 15596,
+                  "selfSizeBytes": 620072
+                },
+                "array": {
+                  "nodes": 7928,
+                  "selfSizeBytes": 1353936
+                },
+                "hidden": {
+                  "nodes": 5666,
+                  "selfSizeBytes": 226640
+                },
+                "string": {
+                  "nodes": 1046,
+                  "selfSizeBytes": 33160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 3653416,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 58761,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 58763,
+              "fieldsNodeId": 58765,
+              "participantsNodeId": 58771,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "snapshotSha256": "8ea0bdfef1fe026b15d4ff4dce26c0155161d82928d428109c69df4130b584ab",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 58763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10561,
+              "reachableSelfSizeBytes": 883736,
+              "disjointAmongSelectedDataGraphsNodes": 9518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850728,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2044,
+                  "selfSizeBytes": 57032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 58765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 58771,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 30236,
+              "reachableSelfSizeBytes": 2233808,
+              "disjointAmongSelectedDataGraphsNodes": 29193,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 2200800,
+              "byType": {
+                "object": {
+                  "nodes": 15596,
+                  "selfSizeBytes": 620072
+                },
+                "array": {
+                  "nodes": 7928,
+                  "selfSizeBytes": 1353936
+                },
+                "hidden": {
+                  "nodes": 5666,
+                  "selfSizeBytes": 226640
+                },
+                "string": {
+                  "nodes": 1046,
+                  "selfSizeBytes": 33160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 3653416,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 264531,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 265215,
+              "fieldsNodeId": 265217,
+              "participantsNodeId": 264533,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 264537,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 265215,
+              "fieldsNodeId": 265217,
+              "participantsNodeId": 58771,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 58761,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 58763,
+              "fieldsNodeId": 58765,
+              "participantsNodeId": 58771,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "snapshotSha256": "ef31f82b7f7cab8b5498c6fe6aa469639f83497465e8aa370995c25a66ff063b",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 265215,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10560,
+              "reachableSelfSizeBytes": 883712,
+              "disjointAmongSelectedDataGraphsNodes": 9517,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 850704,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2043,
+                  "selfSizeBytes": 57008
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 265217,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5289,
+              "reachableSelfSizeBytes": 601888,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                },
+                "string": {
+                  "nodes": 1042,
+                  "selfSizeBytes": 33008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 264533,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 30240,
+              "reachableSelfSizeBytes": 2234080,
+              "disjointAmongSelectedDataGraphsNodes": 29197,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 2201072,
+              "byType": {
+                "object": {
+                  "nodes": 15598,
+                  "selfSizeBytes": 620152
+                },
+                "array": {
+                  "nodes": 7929,
+                  "selfSizeBytes": 1354088
+                },
+                "hidden": {
+                  "nodes": 5667,
+                  "selfSizeBytes": 226680
+                },
+                "string": {
+                  "nodes": 1046,
+                  "selfSizeBytes": 33160
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 266055,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 768472,
+              "disjointAmongSelectedDataGraphsNodes": 3,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 768472,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 768440
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 4422136,
+          "sharedSelectedDataSelfSizeBytes": 33008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 264531,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 265215,
+              "fieldsNodeId": 265217,
+              "participantsNodeId": 264533,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "positions-offsets",
+      "size": 10000,
+      "kernelLifetimeMaximumResidentSetSizeBytes": 374980608,
+      "note": "Separate intrusive graph-process maximum includes V8 snapshot machinery. One graph process per configuration/size, not repeated component retained-size qualification.",
+      "graphs": [
+        {
+          "phase": "built",
+          "snapshotSha256": "27aedde9b50e321e4d99a64257416ba4d648298d89a0259532c85c4caa43a60e",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 468095,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100561,
+              "reachableSelfSizeBytes": 8536856,
+              "disjointAmongSelectedDataGraphsNodes": 90518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215848,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20044,
+                  "selfSizeBytes": 561032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 468097,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 468099,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 297236,
+              "reachableSelfSizeBytes": 22030928,
+              "disjointAmongSelectedDataGraphsNodes": 287193,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 21709920,
+              "byType": {
+                "object": {
+                  "nodes": 153596,
+                  "selfSizeBytes": 6140072
+                },
+                "array": {
+                  "nodes": 76928,
+                  "selfSizeBytes": 13303056
+                },
+                "hidden": {
+                  "nodes": 56666,
+                  "selfSizeBytes": 2266640
+                },
+                "string": {
+                  "nodes": 10046,
+                  "selfSizeBytes": 321160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 33704728,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 468101,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 468095,
+              "fieldsNodeId": 468097,
+              "participantsNodeId": 468099,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "snapshotSha256": "288f0ba2b36982162af439fcff8f91fe63ec6b1272919ef1aab98b993939511b",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 468095,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100561,
+              "reachableSelfSizeBytes": 8536856,
+              "disjointAmongSelectedDataGraphsNodes": 90518,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215848,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20044,
+                  "selfSizeBytes": 561032
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 468097,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 468099,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 297236,
+              "reachableSelfSizeBytes": 22030928,
+              "disjointAmongSelectedDataGraphsNodes": 287193,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 21709920,
+              "byType": {
+                "object": {
+                  "nodes": 153596,
+                  "selfSizeBytes": 6140072
+                },
+                "array": {
+                  "nodes": 76928,
+                  "selfSizeBytes": 13303056
+                },
+                "hidden": {
+                  "nodes": 56666,
+                  "selfSizeBytes": 2266640
+                },
+                "string": {
+                  "nodes": 10046,
+                  "selfSizeBytes": 321160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 33704728,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 1069299,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 1070287,
+              "fieldsNodeId": 1069797,
+              "participantsNodeId": 1069301,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 1069305,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 1070287,
+              "fieldsNodeId": 1069797,
+              "participantsNodeId": 468099,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 468101,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 468095,
+              "fieldsNodeId": 468097,
+              "participantsNodeId": 468099,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "snapshotSha256": "ad173ab01043f193b3fa1cbcdded2a8a85d13938b46959b2d1a3c847de0cdbe2",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 1070287,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100560,
+              "reachableSelfSizeBytes": 8536832,
+              "disjointAmongSelectedDataGraphsNodes": 90517,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8215824,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20043,
+                  "selfSizeBytes": 561008
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 1069797,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 24837,
+              "reachableSelfSizeBytes": 3778960,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                },
+                "string": {
+                  "nodes": 10042,
+                  "selfSizeBytes": 321008
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 1069301,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 297240,
+              "reachableSelfSizeBytes": 22031200,
+              "disjointAmongSelectedDataGraphsNodes": 287197,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 21710192,
+              "byType": {
+                "object": {
+                  "nodes": 153598,
+                  "selfSizeBytes": 6140152
+                },
+                "array": {
+                  "nodes": 76929,
+                  "selfSizeBytes": 13303208
+                },
+                "hidden": {
+                  "nodes": 56667,
+                  "selfSizeBytes": 2266680
+                },
+                "string": {
+                  "nodes": 10046,
+                  "selfSizeBytes": 321160
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 1076887,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 7472656,
+              "disjointAmongSelectedDataGraphsNodes": 3,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 7472656,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 7472624
+                }
+              }
+            }
+          ],
+          "unionSelectedDataSelfSizeBytes": 41177632,
+          "sharedSelectedDataSelfSizeBytes": 321008,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 1069299,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 1070287,
+              "fieldsNodeId": 1069797,
+              "participantsNodeId": 1069301,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

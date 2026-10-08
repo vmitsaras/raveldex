@@ -809,11 +809,13 @@ Establish the native product's observed strengths and limitations through equiva
 
 **Browser, assistive-technology, memory, and device qualification**
 
-**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/26)
+**Milestone:** N4 · **Status:** `blocked` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/26)
 
 **Dependencies:** [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004)
 
 Collect the specific environment and resource observations required by the proposed native support claims.
+
+**Blocker or decision:** Firefox package matrix and native WebKit facet clearing need a working environment/input path; exact-tool AT and physical display/input observations are unavailable; exclusive retained/staging/encoding and browser-worker/transport memory are not isolated. See docs/evidence/RX-4002.md; all seven criteria remain unchanged.
 
 **Expected affected areas**
 
@@ -844,7 +846,19 @@ Collect the specific environment and resource observations required by the propo
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-4002.md](docs/evidence/RX-4002.md)
+- [docs/evidence/RX-4002-browsers-accepted.json](docs/evidence/RX-4002-browsers-accepted.json)
+- [docs/evidence/RX-4002-memory.json](docs/evidence/RX-4002-memory.json)
+- [docs/evidence/RX-4002-memory-graphs.json](docs/evidence/RX-4002-memory-graphs.json)
+- [docs/evidence/RX-4002-memory-summary.json](docs/evidence/RX-4002-memory-summary.json)
+- [docs/evidence/RX-4002-memory-integrity.json](docs/evidence/RX-4002-memory-integrity.json)
+- [docs/support/RX-4002.md](docs/support/RX-4002.md)
+- [docs/evaluation/RX-4002-memory-method.md](docs/evaluation/RX-4002-memory-method.md)
+- [docs/accessibility/RX-4002-manual-observations.md](docs/accessibility/RX-4002-manual-observations.md)
+- [docs/evidence/RX-4002-review.md](docs/evidence/RX-4002-review.md)
+- [docs/evidence/RX-4002-review-probe.json](docs/evidence/RX-4002-review-probe.json)
+- [docs/evidence/RX-4002-package-final.json](docs/evidence/RX-4002-package-final.json)
+- [docs/evidence/RX-4002-package-audit.json](docs/evidence/RX-4002-package-audit.json)
 
 
 ## RX-4003

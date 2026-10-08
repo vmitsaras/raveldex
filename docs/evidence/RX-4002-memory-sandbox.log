@@ -1,0 +1,17 @@
+{"mode":"core-only","size":1000,"repetition":0,"pass":"samples","outcome":"Pass","samples":48,"snapshots":0}
+        1.04 real         0.39 user         0.03 sys
+time: sysctl kern.clockrate: Operation not permitted
+file:///Users/vasilis/Documents/GitHub/raveldex/bench/memory/run.mjs:64
+    child.once('error', no); child.once('close', code => code === 0 ? yes() : no(Error(`Memory child rejected ${mode}/${size}/${repetition}/${pass}: ${code}`)));
+                                                                                 ^
+
+Error: Memory child rejected core-only/1000/0/samples: 1
+    at ChildProcess.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/bench/memory/run.mjs:64:82)
+    at ChildProcess.wrapper (node:events:639:12)
+    at ChildProcess.emit (node:events:514:28)
+    at maybeClose (node:internal/child_process:1141:16)
+    at Socket.<anonymous> (node:internal/child_process:498:11)
+    at Socket.emit (node:events:514:28)
+    at Pipe.<anonymous> (node:net:362:12)
+
+Node.js v24.21.0

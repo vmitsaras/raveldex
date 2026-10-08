@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
+    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/heap-graph.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -50,7 +50,11 @@
     "measure:costs": "node bench/costs.mjs",
     "measure:browser-costs": "node bench/browser-costs.mjs",
     "test:indexeddb": "npm run build && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs",
-    "test:migration": "npm run build && node --test --test-timeout=120000 test/migration/converter.test.mjs test/comparison/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs"
+    "test:migration": "npm run build && node --test --test-timeout=120000 test/migration/converter.test.mjs test/comparison/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
+    "qualify:browsers": "npm run build && node scripts/qualify-browsers.mjs --resources",
+    "qualify:serve": "npm run build && node scripts/qualify-browsers.mjs --serve",
+    "measure:memory": "node bench/memory/run.mjs",
+    "test:memory-method": "node --test bench/memory/heap-graph.test.mjs"
   },
   "devDependencies": {
     "axe-core": "4.13.0",

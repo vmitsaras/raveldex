@@ -1,0 +1,3214 @@
+{
+  "kind": "rx4002-original-restricted-graph-v1",
+  "rawSource": {
+    "path": "docs/evidence/RX-4002-memory.json",
+    "sha256": "3f95ed7609ec82b6eb68da667a4a599ab2d490e5b0a97de12a22869a06ef7fb9"
+  },
+  "originalParser": {
+    "path": "bench/memory/heap-graph.mjs",
+    "sha256": "a3846c9a5f78a76e898bcfb5c9af93569451089725164c1259b8b63de5643938"
+  },
+  "reason": "Original selected-edge parser omitted numeric internal backing-array content references in this actual V8 frozen-array representation. These restricted values are excluded from accepted component attribution; process/kernel samples remain unchanged.",
+  "graphObservations": [
+    {
+      "mode": "core-only",
+      "size": 1000,
+      "graphs": [
+        {
+          "phase": "built",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/core-only-1000-0-built.heapsnapshot",
+          "fileBytes": 8199522,
+          "sha256": "3942656e2911efbaeaf2b7df34f243faea8ccf7cacddc20f2aded122e7076252",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 97222,
+          "snapshotEdgeCount": 416449,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 63763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882696,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882696,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 55992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 63765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 63767,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 14765,
+          "unionSelectedDataSelfSizeBytes": 1451760,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 63769,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 63763,
+              "fieldsNodeId": 63765,
+              "participantsNodeId": 63767,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/core-only-1000-0-mutation-precommit.heapsnapshot",
+          "fileBytes": 8284743,
+          "sha256": "2ec781d9bf6322dc53444908a9ead7bb3f288b4663fd4cd06583dbaa77634ac9",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 97748,
+          "snapshotEdgeCount": 421909,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 63763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882696,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882696,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 55992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 63765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 63767,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 14765,
+          "unionSelectedDataSelfSizeBytes": 1451760,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 194155,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 195233,
+              "fieldsNodeId": 195153,
+              "participantsNodeId": 194157,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 194161,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 195233,
+              "fieldsNodeId": 195153,
+              "participantsNodeId": 63767,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 63769,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 63763,
+              "fieldsNodeId": 63765,
+              "participantsNodeId": 63767,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "core-only",
+      "size": 10000,
+      "graphs": [
+        {
+          "phase": "built",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/core-only-10000-0-built.heapsnapshot",
+          "fileBytes": 18291051,
+          "sha256": "201c80699ab02e9ceb314f03283c3ccb57318dbf0067fd08c4ff54ca85c8371e",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 223063,
+          "snapshotEdgeCount": 954069,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 66315,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535816,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535816,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 559992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 66317,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 66319,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 115313,
+          "unionSelectedDataSelfSizeBytes": 11993952,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 66321,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 66315,
+              "fieldsNodeId": 66317,
+              "participantsNodeId": 66319,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/core-only-10000-0-mutation-precommit.heapsnapshot",
+          "fileBytes": 18383991,
+          "sha256": "07fac2bd1d65b4b91064a46d7acee9225ed3c3e0e95a18dacbcc6814f5bb1ef8",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 223549,
+          "snapshotEdgeCount": 960085,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 66315,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535816,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535816,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 559992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 66317,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 66319,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 184,
+              "disjointAmongSelectedDataGraphsNodes": 2,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 184,
+              "byType": {
+                "object": {
+                  "nodes": 1,
+                  "selfSizeBytes": 24
+                },
+                "array": {
+                  "nodes": 2,
+                  "selfSizeBytes": 160
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 115313,
+          "unionSelectedDataSelfSizeBytes": 11993952,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 445837,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 446813,
+              "fieldsNodeId": 446611,
+              "participantsNodeId": 445839,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 445843,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 446813,
+              "fieldsNodeId": 446611,
+              "participantsNodeId": 66319,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 66321,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 66315,
+              "fieldsNodeId": 66317,
+              "participantsNodeId": 66319,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "source-phrase",
+      "size": 1000,
+      "graphs": [
+        {
+          "phase": "built",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/source-phrase-1000-0-built.heapsnapshot",
+          "fileBytes": 9020094,
+          "sha256": "c1bee91cb134a933ef8efc96fc07abdcf48e1bfc99e9c7d72e5c5fd04f57ad51",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 109027,
+          "snapshotEdgeCount": 458267,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 173521,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882696,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882696,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 55992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 173523,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 173525,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5526,
+              "reachableSelfSizeBytes": 371200,
+              "disjointAmongSelectedDataGraphsNodes": 5525,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 371200,
+              "byType": {
+                "object": {
+                  "nodes": 3262,
+                  "selfSizeBytes": 110400
+                },
+                "array": {
+                  "nodes": 2261,
+                  "selfSizeBytes": 260680
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 20288,
+          "unionSelectedDataSelfSizeBytes": 1822776,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 173519,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 173521,
+              "fieldsNodeId": 173523,
+              "participantsNodeId": 173525,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/source-phrase-1000-0-mutation-precommit.heapsnapshot",
+          "fileBytes": 9114912,
+          "sha256": "d2b262383ea954bd9f06a15fae1e2dff349a59c1fda62041eaa24e92c07f8133",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 109580,
+          "snapshotEdgeCount": 464395,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 173521,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882696,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882696,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 55992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 173523,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 173525,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5526,
+              "reachableSelfSizeBytes": 371200,
+              "disjointAmongSelectedDataGraphsNodes": 5525,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 371200,
+              "byType": {
+                "object": {
+                  "nodes": 3262,
+                  "selfSizeBytes": 110400
+                },
+                "array": {
+                  "nodes": 2261,
+                  "selfSizeBytes": 260680
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 20288,
+          "unionSelectedDataSelfSizeBytes": 1822776,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 217745,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 218275,
+              "fieldsNodeId": 218277,
+              "participantsNodeId": 217747,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 217751,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 218275,
+              "fieldsNodeId": 218277,
+              "participantsNodeId": 173525,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 173519,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 173521,
+              "fieldsNodeId": 173523,
+              "participantsNodeId": 173525,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/source-phrase-1000-0-serialization-string-held.heapsnapshot",
+          "fileBytes": 9234500,
+          "sha256": "85fc42bc07ccd3e540f40d06651aadc9bbafd9df219d5731bae3d5fd2468cf18",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 111624,
+          "snapshotEdgeCount": 471162,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 218275,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882704,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882704,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 56000
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 218277,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 217747,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5526,
+              "reachableSelfSizeBytes": 371200,
+              "disjointAmongSelectedDataGraphsNodes": 5525,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 371200,
+              "byType": {
+                "object": {
+                  "nodes": 3262,
+                  "selfSizeBytes": 110400
+                },
+                "array": {
+                  "nodes": 2261,
+                  "selfSizeBytes": 260680
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 220991,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 368680,
+              "disjointAmongSelectedDataGraphsNodes": 3,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 368680,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 368648
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 20291,
+          "unionSelectedDataSelfSizeBytes": 2191464,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 217745,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 218275,
+              "fieldsNodeId": 218277,
+              "participantsNodeId": 217747,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "source-phrase",
+      "size": 10000,
+      "graphs": [
+        {
+          "phase": "built",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/source-phrase-10000-0-built.heapsnapshot",
+          "fileBytes": 23956829,
+          "sha256": "956aef8adc4fba2b6a517843e5d66afd2472b8b61c4460e9f556b9e18f542055",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 307387,
+          "snapshotEdgeCount": 1237473,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 91001,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535816,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535816,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 559992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 91003,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 91005,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 50526,
+              "reachableSelfSizeBytes": 3416320,
+              "disjointAmongSelectedDataGraphsNodes": 50525,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3416320,
+              "byType": {
+                "object": {
+                  "nodes": 30262,
+                  "selfSizeBytes": 1046400
+                },
+                "array": {
+                  "nodes": 20261,
+                  "selfSizeBytes": 2369800
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 165836,
+          "unionSelectedDataSelfSizeBytes": 15410088,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 91007,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 91001,
+              "fieldsNodeId": 91003,
+              "participantsNodeId": 91005,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/source-phrase-10000-0-mutation-precommit.heapsnapshot",
+          "fileBytes": 24064424,
+          "sha256": "9b83a4e2464435fd4d112e21f39332844b889b8a2b6741b8afc3267b4bd21c45",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 307920,
+          "snapshotEdgeCount": 1244349,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 91001,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535816,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535816,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 559992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 91003,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 91005,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 50526,
+              "reachableSelfSizeBytes": 3416320,
+              "disjointAmongSelectedDataGraphsNodes": 50525,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3416320,
+              "byType": {
+                "object": {
+                  "nodes": 30262,
+                  "selfSizeBytes": 1046400
+                },
+                "array": {
+                  "nodes": 20261,
+                  "selfSizeBytes": 2369800
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 165836,
+          "unionSelectedDataSelfSizeBytes": 15410088,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 614465,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 615049,
+              "fieldsNodeId": 615051,
+              "participantsNodeId": 614467,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 614471,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 615049,
+              "fieldsNodeId": 615051,
+              "participantsNodeId": 91005,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 91007,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 91001,
+              "fieldsNodeId": 91003,
+              "participantsNodeId": 91005,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/source-phrase-10000-0-serialization-string-held.heapsnapshot",
+          "fileBytes": 23859443,
+          "sha256": "be0c807bd6ea835335ac08ce5734612dacf802ac204de06eb499e498c4fdea26",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 305828,
+          "snapshotEdgeCount": 1227917,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 615049,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535824,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535824,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 560000
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 615051,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 614467,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 50526,
+              "reachableSelfSizeBytes": 3416320,
+              "disjointAmongSelectedDataGraphsNodes": 50525,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3416320,
+              "byType": {
+                "object": {
+                  "nodes": 30262,
+                  "selfSizeBytes": 1046400
+                },
+                "array": {
+                  "nodes": 20261,
+                  "selfSizeBytes": 2369800
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 617945,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 3487856,
+              "disjointAmongSelectedDataGraphsNodes": 3,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3487856,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 3487824
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 165839,
+          "unionSelectedDataSelfSizeBytes": 18897952,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 614465,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 615049,
+              "fieldsNodeId": 615051,
+              "participantsNodeId": 614467,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "positions-offsets",
+      "size": 1000,
+      "graphs": [
+        {
+          "phase": "built",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/positions-offsets-1000-0-built.heapsnapshot",
+          "fileBytes": 10413210,
+          "sha256": "f5aea56d6a74b7509399abf5ccbf328243ee9046276acd2da100c97a83529ac1",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 132420,
+          "snapshotEdgeCount": 525679,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 58763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882696,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882696,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 55992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 58765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 58771,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5529,
+              "reachableSelfSizeBytes": 523616,
+              "disjointAmongSelectedDataGraphsNodes": 5528,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 523616,
+              "byType": {
+                "object": {
+                  "nodes": 3264,
+                  "selfSizeBytes": 134792
+                },
+                "array": {
+                  "nodes": 2262,
+                  "selfSizeBytes": 388704
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 20291,
+          "unionSelectedDataSelfSizeBytes": 1975192,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 58761,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 58763,
+              "fieldsNodeId": 58765,
+              "participantsNodeId": 58771,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/positions-offsets-1000-0-mutation-precommit.heapsnapshot",
+          "fileBytes": 10514572,
+          "sha256": "8ea0bdfef1fe026b15d4ff4dce26c0155161d82928d428109c69df4130b584ab",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 133042,
+          "snapshotEdgeCount": 532299,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 58763,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882696,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882696,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 55992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 58765,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 58771,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5529,
+              "reachableSelfSizeBytes": 523616,
+              "disjointAmongSelectedDataGraphsNodes": 5528,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 523616,
+              "byType": {
+                "object": {
+                  "nodes": 3264,
+                  "selfSizeBytes": 134792
+                },
+                "array": {
+                  "nodes": 2262,
+                  "selfSizeBytes": 388704
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 20291,
+          "unionSelectedDataSelfSizeBytes": 1975192,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 264531,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 265215,
+              "fieldsNodeId": 265217,
+              "participantsNodeId": 264533,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 264537,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 265215,
+              "fieldsNodeId": 265217,
+              "participantsNodeId": 58771,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 58761,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 58763,
+              "fieldsNodeId": 58765,
+              "participantsNodeId": 58771,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/positions-offsets-1000-0-serialization-string-held.heapsnapshot",
+          "fileBytes": 10661067,
+          "sha256": "ef31f82b7f7cab8b5498c6fe6aa469639f83497465e8aa370995c25a66ff063b",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 135512,
+          "snapshotEdgeCount": 540453,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 265215,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 10517,
+              "reachableSelfSizeBytes": 882704,
+              "disjointAmongSelectedDataGraphsNodes": 10516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 882704,
+              "byType": {
+                "object": {
+                  "nodes": 5258,
+                  "selfSizeBytes": 174208
+                },
+                "array": {
+                  "nodes": 3259,
+                  "selfSizeBytes": 652496
+                },
+                "string": {
+                  "nodes": 2000,
+                  "selfSizeBytes": 56000
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 265217,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 4247,
+              "reachableSelfSizeBytes": 568880,
+              "disjointAmongSelectedDataGraphsNodes": 4246,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 568880,
+              "byType": {
+                "object": {
+                  "nodes": 2144,
+                  "selfSizeBytes": 53136
+                },
+                "array": {
+                  "nodes": 2103,
+                  "selfSizeBytes": 515744
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 264533,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 5529,
+              "reachableSelfSizeBytes": 523616,
+              "disjointAmongSelectedDataGraphsNodes": 5528,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 523616,
+              "byType": {
+                "object": {
+                  "nodes": 3264,
+                  "selfSizeBytes": 134792
+                },
+                "array": {
+                  "nodes": 2262,
+                  "selfSizeBytes": 388704
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 266055,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 768472,
+              "disjointAmongSelectedDataGraphsNodes": 3,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 768472,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 768440
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 20294,
+          "unionSelectedDataSelfSizeBytes": 2743672,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 264531,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 265215,
+              "fieldsNodeId": 265217,
+              "participantsNodeId": 264533,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "positions-offsets",
+      "size": 10000,
+      "graphs": [
+        {
+          "phase": "built",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/positions-offsets-10000-0-built.heapsnapshot",
+          "fileBytes": 37636942,
+          "sha256": "27aedde9b50e321e4d99a64257416ba4d648298d89a0259532c85c4caa43a60e",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 534804,
+          "snapshotEdgeCount": 1877336,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 468095,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535816,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535816,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 559992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 468097,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 468099,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 50529,
+              "reachableSelfSizeBytes": 4936736,
+              "disjointAmongSelectedDataGraphsNodes": 50528,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 4936736,
+              "byType": {
+                "object": {
+                  "nodes": 30264,
+                  "selfSizeBytes": 1286792
+                },
+                "array": {
+                  "nodes": 20262,
+                  "selfSizeBytes": 3649824
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 165839,
+          "unionSelectedDataSelfSizeBytes": 16930504,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 468101,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 468095,
+              "fieldsNodeId": 468097,
+              "participantsNodeId": 468099,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "mutation-precommit",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/positions-offsets-10000-0-mutation-precommit.heapsnapshot",
+          "fileBytes": 37737371,
+          "sha256": "288f0ba2b36982162af439fcff8f91fe63ec6b1272919ef1aab98b993939511b",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 535342,
+          "snapshotEdgeCount": 1884151,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 468095,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535816,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535816,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 559992
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 468097,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 468099,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 50529,
+              "reachableSelfSizeBytes": 4936736,
+              "disjointAmongSelectedDataGraphsNodes": 50528,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 4936736,
+              "byType": {
+                "object": {
+                  "nodes": 30264,
+                  "selfSizeBytes": 1286792
+                },
+                "array": {
+                  "nodes": 20262,
+                  "selfSizeBytes": 3649824
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 165839,
+          "unionSelectedDataSelfSizeBytes": 16930504,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 1069299,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 1070287,
+              "fieldsNodeId": 1069797,
+              "participantsNodeId": 1069301,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 1069305,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 1070287,
+              "fieldsNodeId": 1069797,
+              "participantsNodeId": 468099,
+              "isMarkedCommittedRoot": false
+            },
+            {
+              "node": {
+                "id": 468101,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 468095,
+              "fieldsNodeId": 468097,
+              "participantsNodeId": 468099,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        },
+        {
+          "phase": "serialization-string-held",
+          "path": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx4002-heap-6j0Vel/positions-offsets-10000-0-serialization-string-held.heapsnapshot",
+          "fileBytes": 38488041,
+          "sha256": "ad173ab01043f193b3fa1cbcdded2a8a85d13938b46959b2d1a3c847de0cdbe2",
+          "schema": {
+            "node_fields": [
+              "type",
+              "name",
+              "id",
+              "self_size",
+              "edge_count",
+              "detachedness"
+            ],
+            "node_types": [
+              [
+                "hidden",
+                "array",
+                "string",
+                "object",
+                "code",
+                "closure",
+                "regexp",
+                "number",
+                "native",
+                "synthetic",
+                "concatenated string",
+                "sliced string",
+                "symbol",
+                "bigint",
+                "object shape"
+              ],
+              "string",
+              "number",
+              "number",
+              "number",
+              "number",
+              "number"
+            ],
+            "edge_fields": [
+              "type",
+              "name_or_index",
+              "to_node"
+            ],
+            "edge_types": [
+              [
+                "context",
+                "element",
+                "property",
+                "internal",
+                "hidden",
+                "shortcut",
+                "weak"
+              ],
+              "string_or_number",
+              "node"
+            ],
+            "trace_function_info_fields": [
+              "function_id",
+              "name",
+              "script_name",
+              "script_id",
+              "line",
+              "column"
+            ],
+            "trace_node_fields": [
+              "id",
+              "function_info_index",
+              "count",
+              "size",
+              "children"
+            ],
+            "sample_fields": [
+              "timestamp_us",
+              "last_assigned_id"
+            ],
+            "location_fields": [
+              "object_index",
+              "script_id",
+              "line",
+              "column"
+            ]
+          },
+          "snapshotNodeCount": 549210,
+          "snapshotEdgeCount": 1920630,
+          "method": "Selected property/element/internal backing store and string-parent graph, excluding prototypes/maps/code/weak/hidden edges. Self-size sums count selected-data reachability; no retained-size/dominator or browser/process claim.",
+          "components": [
+            {
+              "label": "reverseDocuments",
+              "root": {
+                "id": 1070287,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 40
+              },
+              "reachableNodes": 100517,
+              "reachableSelfSizeBytes": 8535824,
+              "disjointAmongSelectedDataGraphsNodes": 100516,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 8535824,
+              "byType": {
+                "object": {
+                  "nodes": 50258,
+                  "selfSizeBytes": 1686208
+                },
+                "array": {
+                  "nodes": 30259,
+                  "selfSizeBytes": 6289616
+                },
+                "string": {
+                  "nodes": 20000,
+                  "selfSizeBytes": 560000
+                }
+              }
+            },
+            {
+              "label": "dictionaryPostingsStatistics",
+              "root": {
+                "id": 1069797,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 14795,
+              "reachableSelfSizeBytes": 3457952,
+              "disjointAmongSelectedDataGraphsNodes": 14794,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 3457952,
+              "byType": {
+                "object": {
+                  "nodes": 7418,
+                  "selfSizeBytes": 179712
+                },
+                "array": {
+                  "nodes": 7377,
+                  "selfSizeBytes": 3278240
+                }
+              }
+            },
+            {
+              "label": "sourceOrPositions",
+              "root": {
+                "id": 1069301,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 24
+              },
+              "reachableNodes": 50529,
+              "reachableSelfSizeBytes": 4936736,
+              "disjointAmongSelectedDataGraphsNodes": 50528,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 4936736,
+              "byType": {
+                "object": {
+                  "nodes": 30264,
+                  "selfSizeBytes": 1286792
+                },
+                "array": {
+                  "nodes": 20262,
+                  "selfSizeBytes": 3649824
+                },
+                "string": {
+                  "nodes": 3,
+                  "selfSizeBytes": 120
+                }
+              }
+            },
+            {
+              "label": "exportedString",
+              "root": {
+                "id": 1076887,
+                "type": "concatenated string",
+                "name": "(concatenated string)",
+                "selfSizeBytes": 32
+              },
+              "reachableNodes": 3,
+              "reachableSelfSizeBytes": 7472656,
+              "disjointAmongSelectedDataGraphsNodes": 3,
+              "disjointAmongSelectedDataGraphsSelfSizeBytes": 7472656,
+              "byType": {
+                "concatenated string": {
+                  "nodes": 1,
+                  "selfSizeBytes": 32
+                },
+                "string": {
+                  "nodes": 2,
+                  "selfSizeBytes": 7472624
+                }
+              }
+            }
+          ],
+          "unionSelectedDataNodes": 165842,
+          "unionSelectedDataSelfSizeBytes": 24403168,
+          "sharedSelectedDataNodes": 1,
+          "sharedSelectedDataSelfSizeBytes": 0,
+          "indexRootShapeCandidates": [
+            {
+              "node": {
+                "id": 1069299,
+                "type": "object",
+                "name": "Object",
+                "selfSizeBytes": 48
+              },
+              "documentsNodeId": 1070287,
+              "fieldsNodeId": 1069797,
+              "participantsNodeId": 1069301,
+              "isMarkedCommittedRoot": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

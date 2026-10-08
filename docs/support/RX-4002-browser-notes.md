@@ -1,0 +1,45 @@
+# RX-4002 browser qualification method
+
+The accepted automated record contains **15 Pass, zero Fail, one Blocked UI scenario, and one Blocked browser**. These are finite observations on macOS 27.0.1 build 26A434 arm64 with Node 24.21.0, Playwright Core 1.61.1, esbuild 0.28.2 and axe-core 4.13.0. They do not complete the required exact-tool assistive-technology, installed Safari, physical-device or browser matrix qualification.
+
+| Actual environment | Installed-package observations | Remaining limitation |
+| --- | --- | --- |
+| Chrome 154.0.8037.98, installed Chrome channel, headless | Core/source/positions literal membership and same-host worker parity; hand scores; source IndexedDB recovery/erase; 1,000/10,000 direct-core and source-worker admission/query/replace/dispose; UI flows and worker recovery | Native facet `g`/`a` typeahead was observed. The attempted popup key sequence was a harness/platform mismatch and is preserved as diagnostic evidence. No human popup or physical input claim. |
+| Playwright WebKit 26.5, cache revision 2311, headless | Same engine/storage and four resource configurations; Inspector/error/retry/composition/teardown; focus/media/CSS reflow; actual worker failure/recovery | Native `g` selection observed, but `a` clearing did not select All. That keyboard substep is Blocked; `selectOption` separately verified functional selection/clearing. This executable is distinct from Safari. |
+| Playwright Firefox builds in caches 1532 and 1543 | No behavioral observations; launch attempts only | Matching Firefox 151 cache timed out (180 s initially; 30 s with explicit realpath profile), with platform sandbox-extension and framebuffer diagnostics. Cached Firefox 155 inventory build exited 1 with “Could not find profile folder”, including an explicit existing `/private/tmp` profile attempt. Actual `browser.version()` was never obtained; inventory identities are not launched-browser results. |
+
+The [accepted aggregate](../evidence/RX-4002-browsers-accepted.json) retains every source-report SHA and consumer path and the source report for each accepted row. It combines the frozen second run's passing engine/storage/resource observations with the focused repaired UI run and the separate Firefox environment attempts. Captured production graph input bytes match across those observations; fixture and assertion versions are different and explicitly identified. It is not presented as a single rerun. The initial raw run did not capture the runner's source hash; its original isolated-consumer fixtures/bundles were preserved separately in [first sources](../evidence/RX-4002-browsers-first-sources.json). Later runs directly capture runner/helper identities at startup.
+
+The qualification harness installs a local tarball into an isolated consumer and bundles only exported public imports. `test/qualification/browser-serve.mjs` records tarball identity, all graph inputs and their SHA-256 values, fixture identities, separate CSS, and the actual consumer directory. The application fixtures are test-only; they do not ship in the package.
+
+Run after `npm run build`, outside other resource experiments:
+
+```sh
+node scripts/qualify-browsers.mjs --browsers=chrome,firefox,webkit --resources
+```
+
+The runner records actual launched browser versions and executables, macOS/runtime/tool versions, every scenario result, returned operation errors, and public disposal outcomes in `docs/evidence/RX-4002-browsers.json`. Its exit status is nonzero for failed scenarios, refused requested resource configurations, or unavailable browser launches. A bounded operation refusal is a `RejectedOutcome`, not a successful smaller workload. Unexpected protocol/capability errors are failures. Playwright's WebKit build is identified separately from installed Safari.
+
+Native popup keys produced no selection in the initial headless Mac harness. The focused repair used actual native typeahead and recorded key/change events; unavailable keyboard substeps stayed Blocked while Inspector, errors and other UI checks continued independently. All observed UI text/error/focus assertions passed. Actual worker termination returned `WorkerAdapterError(TIMEOUT)` through the facade. The accepted UI contract's core-only error allowlist renders that separate adapter category as generic `INTERNAL_ERROR`; the actual transport error and dead-host disposal timeout are retained separately. This is a presentation limitation, not a changed runtime contract or a protocol failure.
+
+The finite literal cases independently specify complete Unicode/Boolean membership, source and stored-offset phrase membership, original ligature/combining UTF-16 spans, malformed-input refusal, and two BM25 scores. Direct execution and its same-host module worker must return identical complete results in core, source and positions/offsets configurations. These observations retain the ordinary `basic-v1` unqualified profile and establish no universal Unicode or browser-native snapshot portability claim.
+
+The UI scenarios exercise actual keyboard submission, paging, native facet selection, tab navigation, Inspector opening/Escape/focus restoration, a deliberately injected typed UI error and retry, synthetic composition events, authored-node teardown and remount. Automated axe scans, computed focus styles, reduced-motion media/styles, forced-colors media emulation, and a 375 CSS-pixel viewport with 200% root font sizing are supporting automated observations. CSS text scaling is distinct from browser zoom, operating-system settings, real IME, assistive technology and physical device presentation.
+
+Both observed browser UIs had a computed 3 px solid focus outline and, at the tested 375 CSS-pixel/32 px root-font setting, UI client/scroll widths of 359/359 px. Forced-colors and reduced-motion media/style checks passed in these emulated environments. This verifies the UI subtree's CSS behavior, not whole-page WCAG reflow, contrast on an actual display or user-agent zoom. Inspector, recoverable-error and worker-recovery axe scans had zero violations in both browsers; incomplete automated checks remain in raw records. No screen-reader announcements were observed.
+
+The worker UI scenario terminates an actual module worker, observes its transport failure, retains the dead worker's unsuccessful disposal acknowledgement, then explicitly creates a new owner and rebuilds from authoritative fixture originals. The storage scenario observes explicit worker source save/rebuild, direct recovery of the same durable generation, namespace erasure and database cleanup. Observed IndexedDB transaction completion is distinct from power-loss or eviction durability.
+
+Resource scenarios request 1,000 and 10,000 records in direct core and source-worker configurations, using atomic batches of at most 256. They check admitted totals, independently expected common/selective totals, optional source phrase/facet evaluation, one-record replacement and revision identity, and disposal. They are deliberately untimed. They do not measure retained/peak memory, transport copies, responsiveness or physical paint.
+
+For an exact-tool human session, start the same installed fixtures:
+
+```sh
+node scripts/qualify-browsers.mjs --serve
+```
+
+The command prints the localhost origin and installs the actual package before serving it. `/ui` automatically mounts the nine-record direct UI and provides native controls named **Inject next search error**, **Destroy UI** and **Remount UI**. `/worker` automatically mounts the three-record source-worker UI and provides **Inject next search error**, **Terminate worker** and **Recover from authoritative source**. Both routes contain query, results/status, Category facets and Inspector controls. Faults take effect on the next submitted search; worker recovery explicitly rebuilds a new owner. Manual preparation writes `RX-4002-browsers-manual-package.json` and does not overwrite the automated matrix. Set `RAVELDEX_QUALIFICATION_BROWSER_REPORT` to retain another independently named run.
+
+Exact-tool screen-reader announcements, installed Safari interaction, real OS IME, actual device/display/input observations and isolated physical memory remain separate evidence requirements. The automated runner cannot fill them.
+
+Reproduce the focused UI checks with `--browsers=chrome,webkit --scenario=ui` and a separately named `RAVELDEX_QUALIFICATION_BROWSER_REPORT`. `--firefox-real-profile` creates a task-owned canonical profile under `/private/tmp`; `RAVELDEX_QUALIFICATION_FIREFOX_EXECUTABLE` selects an already installed explicit binary. Neither option changes browser security settings or downloads software. A usable named Firefox/OS/Playwright environment must launch and run the package matrix before Firefox qualification can pass.

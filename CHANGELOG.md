@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add RX-4002 installed-package browser qualification, explicit manual fault/recovery fixtures, fresh-process memory/heap-graph methods and durable observation boundaries. Exact-tool AT, physical presentation and unisolated memory criteria remain Blocked; no runtime/API/dependency changes or release waiver.
+
 - Add reproducible RX-4001 independent correctness, frozen 76-query documentation relevance, explicit pinned companion comparison and separate native/worker/storage cost observations. Preserve lexical/ranking gaps, bounded refusals and the unchanged core size target; no runtime/API/dependency changes or release qualification.
 
 - RX-3004 adds an optional LocalSearch source snapshot converter with canonical SHA-256 validation, owned native configuration/records, explicit provenance and native intersection checks. Migration rebuilds a new owner through ordinary public APIs. Isolated development comparison declares the companion/MiniSearch identity and expected analyzer/rank differences; core retains zero foreign runtime dependencies.
