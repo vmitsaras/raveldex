@@ -1,0 +1,2027 @@
+{
+  "kind": "raveldex-foreign-companion-comparison-v1",
+  "command": "node test/comparison/run-companion.mjs <explicit companion repository> [report.json]",
+  "environment": {
+    "node": "v24.21.0",
+    "v8": "13.6.233.17-node.53",
+    "icu": "78.3",
+    "unicode": "17.0"
+  },
+  "producer": {
+    "repository": "https://github.com/vmitsaras/LocalSearch",
+    "revision": "5f334a8ca4f7d9d95b6b731ac539f4b1dda302cb",
+    "clean": true,
+    "package": "@vmitsaras/localsearch",
+    "dependency": "minisearch@7.2.0",
+    "distEntrySha256": "58766143339ccc2e671a8f4fa026313bfecf99a48ccfd77f1dabdd7cca5183bc",
+    "minisearchEntrySha256": "0393b3ba253b809d5e55707c7b0875ef9b518a296a006c6739b28876e154edb3"
+  },
+  "shared": [
+    {
+      "label": "exact",
+      "independentlyExpectedIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "a",
+            "score": 4.238199011841845,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "Red red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                },
+                {
+                  "startUtf16": 4,
+                  "endUtf16": 7
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "b",
+            "score": 3.8108246913167827,
+            "fields": {
+              "title": "red car",
+              "category": "Reference"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "body",
+                "valueIndex": 1,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "d",
+            "score": 1.0164682296390253,
+            "fields": {
+              "title": "",
+              "category": ""
+            },
+            "matches": [
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "body",
+              "valueIndex": 0,
+              "text": "red",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                }
+              ],
+              "highlightsComplete": true
+            }
+          }
+        ],
+        "total": {
+          "value": 3,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 3,
+        "hits": [
+          {
+            "id": "a",
+            "score": 1.9850233174955418
+          },
+          {
+            "id": "b",
+            "score": 1.8346857192142971
+          },
+          {
+            "id": "d",
+            "score": 0.4129920403501112
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "all terms",
+      "independentlyExpectedIds": [
+        "a",
+        "b"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "a",
+            "score": 10.924969029463027,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "blue",
+                "term": "blue",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 8
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "Red red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                },
+                {
+                  "startUtf16": 4,
+                  "endUtf16": 7
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "b",
+            "score": 10.307970255651428,
+            "fields": {
+              "title": "red car",
+              "category": "Reference"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "body",
+                "valueIndex": 1,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 2,
+                "queryTerm": "blue",
+                "term": "blue",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 4
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                }
+              ],
+              "highlightsComplete": true
+            }
+          }
+        ],
+        "total": {
+          "value": 2,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 2,
+        "hits": [
+          {
+            "id": "a",
+            "score": 2.5949928363882937
+          },
+          {
+            "id": "b",
+            "score": 2.444655238107049
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "any terms",
+      "independentlyExpectedIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "a",
+            "score": 10.924969029463027,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "blue",
+                "term": "blue",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 8
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "Red red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                },
+                {
+                  "startUtf16": 4,
+                  "endUtf16": 7
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "b",
+            "score": 10.307970255651428,
+            "fields": {
+              "title": "red car",
+              "category": "Reference"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "body",
+                "valueIndex": 1,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 2,
+                "queryTerm": "blue",
+                "term": "blue",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 4
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "c",
+            "score": 4.7990787814122715,
+            "fields": {
+              "title": "blue",
+              "category": "Guide"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "blue",
+                "term": "blue",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 4
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "blue",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 4
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "d",
+            "score": 1.0164682296390253,
+            "fields": {
+              "title": "",
+              "category": ""
+            },
+            "matches": [
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "body",
+              "valueIndex": 0,
+              "text": "red",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                }
+              ],
+              "highlightsComplete": true
+            }
+          }
+        ],
+        "total": {
+          "value": 4,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 4,
+        "hits": [
+          {
+            "id": "c",
+            "score": 3.027131622305211
+          },
+          {
+            "id": "a",
+            "score": 2.5949928363882937
+          },
+          {
+            "id": "b",
+            "score": 2.444655238107049
+          },
+          {
+            "id": "d",
+            "score": 0.4129920403501112
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "browse",
+      "independentlyExpectedIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "empty",
+        "unicode"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "a",
+            "score": 0,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          },
+          {
+            "id": "b",
+            "score": 0,
+            "fields": {
+              "title": "red car",
+              "category": "Reference"
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          },
+          {
+            "id": "c",
+            "score": 0,
+            "fields": {
+              "title": "blue",
+              "category": "Guide"
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          },
+          {
+            "id": "d",
+            "score": 0,
+            "fields": {
+              "title": "",
+              "category": ""
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          },
+          {
+            "id": "empty",
+            "score": 0,
+            "fields": {},
+            "matches": [],
+            "matchEvidenceComplete": true
+          },
+          {
+            "id": "unicode",
+            "score": 0,
+            "fields": {
+              "title": "ＣＡＲ ﬁle",
+              "category": "Unicode"
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          }
+        ],
+        "total": {
+          "value": 6,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 6,
+        "hits": [
+          {
+            "id": "a",
+            "score": 0
+          },
+          {
+            "id": "b",
+            "score": 0
+          },
+          {
+            "id": "c",
+            "score": 0
+          },
+          {
+            "id": "d",
+            "score": 0
+          },
+          {
+            "id": "empty",
+            "score": 0
+          },
+          {
+            "id": "unicode",
+            "score": 0
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "keyword equality",
+      "independentlyExpectedIds": [
+        "a",
+        "c"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "a",
+            "score": 0,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          },
+          {
+            "id": "c",
+            "score": 0,
+            "fields": {
+              "title": "blue",
+              "category": "Guide"
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          }
+        ],
+        "total": {
+          "value": 2,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 2,
+        "hits": [
+          {
+            "id": "a",
+            "score": 0
+          },
+          {
+            "id": "c",
+            "score": 0
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "number equality",
+      "independentlyExpectedIds": [
+        "a"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "a",
+            "score": 0,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [],
+            "matchEvidenceComplete": true
+          }
+        ],
+        "total": {
+          "value": 1,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "a",
+            "score": 0
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "boolean equality",
+      "independentlyExpectedIds": [
+        "b",
+        "d"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "b",
+            "score": 3.8108246913167827,
+            "fields": {
+              "title": "red car",
+              "category": "Reference"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "body",
+                "valueIndex": 1,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "d",
+            "score": 1.0164682296390253,
+            "fields": {
+              "title": "",
+              "category": ""
+            },
+            "matches": [
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "body",
+              "valueIndex": 0,
+              "text": "red",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                }
+              ],
+              "highlightsComplete": true
+            }
+          }
+        ],
+        "total": {
+          "value": 2,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 2,
+        "hits": [
+          {
+            "id": "b",
+            "score": 1.8346857192142971
+          },
+          {
+            "id": "d",
+            "score": 0.4129920403501112
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "phrase",
+      "independentlyExpectedIds": [
+        "a",
+        "b"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "b",
+            "score": 15.603155829725955,
+            "fields": {
+              "title": "red car",
+              "category": "Reference"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 3
+              },
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "car",
+                "term": "car",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "red car",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 3
+                },
+                {
+                  "startUtf16": 4,
+                  "endUtf16": 7
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "a",
+            "score": 13.771583597758216,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "red",
+                "term": "red",
+                "kind": "exact",
+                "position": 1,
+                "startUtf16": 4,
+                "endUtf16": 7
+              },
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "car",
+                "term": "car",
+                "kind": "exact",
+                "position": 2,
+                "startUtf16": 8,
+                "endUtf16": 11
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "Red red car",
+              "highlights": [
+                {
+                  "startUtf16": 4,
+                  "endUtf16": 7
+                },
+                {
+                  "startUtf16": 8,
+                  "endUtf16": 11
+                }
+              ],
+              "highlightsComplete": true
+            }
+          }
+        ],
+        "total": {
+          "value": 2,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 2,
+        "hits": [
+          {
+            "id": "b",
+            "score": 3.1580051259845137
+          },
+          {
+            "id": "a",
+            "score": 2.577238318752305
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "no array boundary phrase",
+      "independentlyExpectedIds": [],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [],
+        "total": {
+          "value": 0,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 0,
+        "hits": []
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "NFC shared",
+      "independentlyExpectedIds": [
+        "a",
+        "unicode"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "unicode",
+            "score": 1.5098891772720497,
+            "fields": {
+              "title": "ＣＡＲ ﬁle",
+              "category": "Unicode"
+            },
+            "matches": [
+              {
+                "field": "body",
+                "valueIndex": 0,
+                "queryTerm": "café",
+                "term": "café",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 5
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "body",
+              "valueIndex": 0,
+              "text": "café 🙂 𐐀",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 5
+                }
+              ],
+              "highlightsComplete": true
+            }
+          },
+          {
+            "id": "a",
+            "score": 1.2242855028896686,
+            "fields": {
+              "title": "Red red car",
+              "category": "Guide"
+            },
+            "matches": [
+              {
+                "field": "body",
+                "valueIndex": 1,
+                "queryTerm": "café",
+                "term": "café",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 4
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "body",
+              "valueIndex": 1,
+              "text": "café manual",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 4
+                }
+              ],
+              "highlightsComplete": true
+            }
+          }
+        ],
+        "total": {
+          "value": 2,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 2,
+        "hits": [
+          {
+            "id": "unicode",
+            "score": 0.8025914722273051
+          },
+          {
+            "id": "a",
+            "score": 0.609969518892752
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "field restriction",
+      "independentlyExpectedIds": [
+        "c"
+      ],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [
+          {
+            "id": "c",
+            "score": 4.7990787814122715,
+            "fields": {
+              "title": "blue",
+              "category": "Guide"
+            },
+            "matches": [
+              {
+                "field": "title",
+                "valueIndex": 0,
+                "queryTerm": "blue",
+                "term": "blue",
+                "kind": "exact",
+                "position": 0,
+                "startUtf16": 0,
+                "endUtf16": 4
+              }
+            ],
+            "matchEvidenceComplete": true,
+            "snippet": {
+              "field": "title",
+              "valueIndex": 0,
+              "text": "blue",
+              "highlights": [
+                {
+                  "startUtf16": 0,
+                  "endUtf16": 4
+                }
+              ],
+              "highlightsComplete": true
+            }
+          }
+        ],
+        "total": {
+          "value": 1,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "c",
+            "score": 3.027131622305211
+          }
+        ]
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    },
+    {
+      "label": "absent term",
+      "independentlyExpectedIds": [],
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [],
+        "total": {
+          "value": 0,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 0,
+        "hits": []
+      },
+      "membership": "Pass",
+      "ranking": "Compared as different models; no cross-model equality requirement."
+    }
+  ],
+  "expectedSemanticChanges": [
+    {
+      "branch": "Native NFKC folds fullwidth CAR and fi ligature; companion NFC retains those compatibility forms.",
+      "legacy": {
+        "snapshot": {
+          "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+          "generation": 1
+        },
+        "hits": [],
+        "total": {
+          "value": 0,
+          "relation": "exact"
+        },
+        "execution": "complete",
+        "ranking": "exact",
+        "scoreModel": "minisearch-7.2.0-companion-v1"
+      },
+      "native": {
+        "revision": 6,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "unicode",
+            "score": 3.121295496529337
+          }
+        ]
+      },
+      "status": "Pass"
+    }
+  ],
+  "ranks": [
+    {
+      "fixture": "representative",
+      "text": "red",
+      "memberSetEqual": true,
+      "classification": "ranking-only different models",
+      "foreignModel": "minisearch-7.2.0-companion-v1",
+      "nativeModel": "raveldex-bm25-v1",
+      "foreign": [
+        {
+          "id": "a",
+          "score": 4.238199011841845
+        },
+        {
+          "id": "b",
+          "score": 3.8108246913167827
+        },
+        {
+          "id": "d",
+          "score": 1.0164682296390253
+        }
+      ],
+      "native": [
+        {
+          "id": "a",
+          "score": 1.9850233174955418
+        },
+        {
+          "id": "b",
+          "score": 1.8346857192142971
+        },
+        {
+          "id": "d",
+          "score": 0.4129920403501112
+        }
+      ],
+      "changedOrder": false,
+      "rankingOnlyChange": false
+    },
+    {
+      "fixture": "representative",
+      "text": "red blue",
+      "memberSetEqual": true,
+      "classification": "ranking-only different models",
+      "foreignModel": "minisearch-7.2.0-companion-v1",
+      "nativeModel": "raveldex-bm25-v1",
+      "foreign": [
+        {
+          "id": "a",
+          "score": 10.924969029463027
+        },
+        {
+          "id": "b",
+          "score": 10.307970255651428
+        },
+        {
+          "id": "c",
+          "score": 4.7990787814122715
+        },
+        {
+          "id": "d",
+          "score": 1.0164682296390253
+        }
+      ],
+      "native": [
+        {
+          "id": "c",
+          "score": 3.027131622305211
+        },
+        {
+          "id": "a",
+          "score": 2.5949928363882937
+        },
+        {
+          "id": "b",
+          "score": 2.444655238107049
+        },
+        {
+          "id": "d",
+          "score": 0.4129920403501112
+        }
+      ],
+      "changedOrder": true,
+      "rankingOnlyChange": true
+    },
+    {
+      "fixture": "representative",
+      "text": "car",
+      "memberSetEqual": false,
+      "classification": "expected NFKC membership difference",
+      "foreignModel": "minisearch-7.2.0-companion-v1",
+      "nativeModel": "raveldex-bm25-v1",
+      "foreign": [
+        {
+          "id": "b",
+          "score": 3.9907532235461947
+        },
+        {
+          "id": "a",
+          "score": 2.6475927870372638
+        },
+        {
+          "id": "d",
+          "score": 1.5098891772720497
+        }
+      ],
+      "native": [
+        {
+          "id": "b",
+          "score": 1.3233194067702168
+        },
+        {
+          "id": "d",
+          "score": 0.8025914722273051
+        },
+        {
+          "id": "unicode",
+          "score": 0.7133498878774648
+        },
+        {
+          "id": "a",
+          "score": 0.5922150012567633
+        }
+      ],
+      "changedOrder": true,
+      "rankingOnlyChange": false
+    },
+    {
+      "fixture": "ranking",
+      "text": "red",
+      "memberSetEqual": true,
+      "classification": "ranking-only different models",
+      "foreignModel": "minisearch-7.2.0-companion-v1",
+      "nativeModel": "raveldex-bm25-v1",
+      "foreign": [
+        {
+          "id": "two",
+          "score": 1.4932415692341523
+        },
+        {
+          "id": "one",
+          "score": 1.4271569675893137
+        },
+        {
+          "id": "four",
+          "score": 0.6020334096935623
+        },
+        {
+          "id": "three",
+          "score": 0.5856133595118633
+        }
+      ],
+      "native": [
+        {
+          "id": "two",
+          "score": 1.088265869355129
+        },
+        {
+          "id": "one",
+          "score": 1.0861757850802343
+        },
+        {
+          "id": "four",
+          "score": 0.49042804791575706
+        },
+        {
+          "id": "three",
+          "score": 0.4376728395742215
+        }
+      ],
+      "changedOrder": false,
+      "rankingOnlyChange": false
+    },
+    {
+      "fixture": "ranking",
+      "text": "red blue",
+      "memberSetEqual": true,
+      "classification": "ranking-only different models",
+      "foreignModel": "minisearch-7.2.0-companion-v1",
+      "nativeModel": "raveldex-bm25-v1",
+      "foreign": [
+        {
+          "id": "three",
+          "score": 8.042793630342512
+        },
+        {
+          "id": "two",
+          "score": 1.4932415692341523
+        },
+        {
+          "id": "one",
+          "score": 1.4271569675893137
+        },
+        {
+          "id": "four",
+          "score": 0.6020334096935623
+        }
+      ],
+      "native": [
+        {
+          "id": "three",
+          "score": 3.1175100967168263
+        },
+        {
+          "id": "two",
+          "score": 1.088265869355129
+        },
+        {
+          "id": "one",
+          "score": 1.0861757850802343
+        },
+        {
+          "id": "four",
+          "score": 0.49042804791575706
+        }
+      ],
+      "changedOrder": false,
+      "rankingOnlyChange": false
+    },
+    {
+      "fixture": "ranking",
+      "text": "car",
+      "memberSetEqual": true,
+      "classification": "ranking-only different models",
+      "foreignModel": "minisearch-7.2.0-companion-v1",
+      "nativeModel": "raveldex-bm25-v1",
+      "foreign": [
+        {
+          "id": "four",
+          "score": 3.25157686741891
+        }
+      ],
+      "native": [
+        {
+          "id": "four",
+          "score": 2.4826749551272753
+        }
+      ],
+      "changedOrder": false,
+      "rankingOnlyChange": false
+    }
+  ],
+  "historicalPreservation": {
+    "status": "Pass",
+    "comparison": "Byte SHA256 for every fixture-generation baseline tracked docs/verification file before/after; foreign repository clean and commit unchanged.",
+    "files": [
+      {
+        "path": "docs/verification/LS-0001-review.md",
+        "sha256": "11611ff8038bcc2cb803df35a7d60d28df63e4c756ed5b6b8e8dc2ed51b3164c"
+      },
+      {
+        "path": "docs/verification/LS-0001.md",
+        "sha256": "a473f27b03222de14bfa0994b06062743824fb16b1f48e056ecd4e8a79f90f75"
+      },
+      {
+        "path": "docs/verification/LS-0002-environment.json",
+        "sha256": "7a56acf461708bef4ba898416b23489a25a67aa179e711d8e8ed112392340123"
+      },
+      {
+        "path": "docs/verification/LS-0002-findings.md",
+        "sha256": "0750c19916a93b4d3f66ee3560c20c05ebb52d8feb7252d6e4d1b46601d2a55a"
+      },
+      {
+        "path": "docs/verification/LS-0002-results.json",
+        "sha256": "5df3b0688ebfa2da0718b58020e831eccc4de33a4c0822354061928ed84bf8b4"
+      },
+      {
+        "path": "docs/verification/LS-0002-review.md",
+        "sha256": "baa4cef5ef99527b7499154151cf471258774454f4cca6cf520b03254b9e61fb"
+      },
+      {
+        "path": "docs/verification/LS-0002.md",
+        "sha256": "c066500a139c21ba287a8da2e39953146187a8d4c2bd8772a1a289e9b49d990a"
+      },
+      {
+        "path": "docs/verification/LS-0003-review.md",
+        "sha256": "0e79762efb6b7be7f405277dd2d959a26f5e7bc03a86ffb19ea9445b077ce2bf"
+      },
+      {
+        "path": "docs/verification/LS-0003-sample.md",
+        "sha256": "bd9ddcd3f48d102bb3bf080185abc208b4036f0eb69677717f63142f30d0ff5c"
+      },
+      {
+        "path": "docs/verification/LS-0003.md",
+        "sha256": "41a627f15722027a36fc71b6bd2a4c716fd4db4bcabcaae217a4e44512cad789"
+      },
+      {
+        "path": "docs/verification/LS-0004-execution-v2.md",
+        "sha256": "b6180f0b3d13af78a365773826e8060dab6dc77e4aa4509efad6413e03e1fb1a"
+      },
+      {
+        "path": "docs/verification/LS-0004-execution.md",
+        "sha256": "d4e43b0e392283af458ac4b80af4042478278f92ce84becf3c16aa44856c76a7"
+      },
+      {
+        "path": "docs/verification/LS-0004-finalization.md",
+        "sha256": "114fdbf551a4fde330b2ccd16ccb8a537be93ba7b87cd20c3179c52675e9b451"
+      },
+      {
+        "path": "docs/verification/LS-0004-provenance.json",
+        "sha256": "65e6312191c48885bcdac2e1bbcd119a94f379cfdf573e5d2b630649d8587d5a"
+      },
+      {
+        "path": "docs/verification/LS-0004-review.md",
+        "sha256": "f18298a0b566068a9791685c48bc72eac1d997d067c26443ee4b8bc44caa2cc3"
+      },
+      {
+        "path": "docs/verification/LS-0004.md",
+        "sha256": "ae8e80e55a538d64f2046f87a70c3d23863afd2fcb464b4d396942b52cd4e9d8"
+      },
+      {
+        "path": "docs/verification/LS-0005-execution.md",
+        "sha256": "76813e35d0da2fdcd40974e068d5b0c276400be54dce3f34ad41825ce0c016c1"
+      },
+      {
+        "path": "docs/verification/LS-0005-review.md",
+        "sha256": "0efdd9b7c8b9bf490ec6a5628676cc9209364593bbcb839f4435597e0fc21ae2"
+      },
+      {
+        "path": "docs/verification/LS-0005.md",
+        "sha256": "80e7fea733d0411bab75c9201d81776b50ebe7e4e5ac219d3bb2762c22627885"
+      },
+      {
+        "path": "docs/verification/LS-C0001-execution.md",
+        "sha256": "c766aa43b7f59ddcb9e1d1abedf131e4093e725f058ecd4dc0503754ff1396f2"
+      },
+      {
+        "path": "docs/verification/LS-C0001-preservation.json",
+        "sha256": "fb2b194794cd34935a6b6c7fe5e96718dc7651e3a376e9ee93588e3119dfc854"
+      },
+      {
+        "path": "docs/verification/LS-C0001-review.md",
+        "sha256": "9c3274a7bd9d823e2cf04469eb2324fb504a2fb619f1a94beb19ec6ce1ca862b"
+      },
+      {
+        "path": "docs/verification/LS-C0001.md",
+        "sha256": "ec117eb263ccf606e0dbeb722bef84dd8c1be049370db6ae8da448ff7818709d"
+      },
+      {
+        "path": "docs/verification/LS-C1001-execution.md",
+        "sha256": "55b06786e6b9acd40a374a970791a1784b4ecfb393e3aa92deb96a13dd57bb7b"
+      },
+      {
+        "path": "docs/verification/LS-C1001-review.md",
+        "sha256": "95738cce1e3c16ae1d9547e8eedd567ec2a25a06da47d84c270e481bec2ea602"
+      },
+      {
+        "path": "docs/verification/LS-C1001.md",
+        "sha256": "0e78aaed85422d5eec072215b08e413731e75b1a237c603b270edcd62f9eabd0"
+      },
+      {
+        "path": "docs/verification/LS-C1002-execution.md",
+        "sha256": "c919f6f662753e8dd673a4005655af2ef6f2b4f116dc8dc970404758658f4d16"
+      },
+      {
+        "path": "docs/verification/LS-C1002-review.md",
+        "sha256": "02075c2c785b1655d643d8f2199fd28702b7e389fb94c9b2d82dbd25196b2ee7"
+      },
+      {
+        "path": "docs/verification/LS-C1002.md",
+        "sha256": "4fb758484f234c6d3476b8b743d5975b55f1eeb378702bb235ebc662944de45e"
+      },
+      {
+        "path": "docs/verification/LS-C1003-execution.md",
+        "sha256": "86a9c46408a74859e1f5a48e3b5b6ae62ba74a427278664fd78e94a5bdc44e14"
+      },
+      {
+        "path": "docs/verification/LS-C1003-review.md",
+        "sha256": "cda5f4571c23ef5bb1d3daaffc85bff1db0cc160448f82de61276414c096673e"
+      },
+      {
+        "path": "docs/verification/LS-C1003.md",
+        "sha256": "910477175ad1803d8922d908535682b5c403e66c95cd83d74ee840fc726f3e2a"
+      },
+      {
+        "path": "docs/verification/LS-C1004-execution.md",
+        "sha256": "2e8adf0515bf856b45374210c2ea3adc060cb4785511001d0a3ac831dd14fbd2"
+      },
+      {
+        "path": "docs/verification/LS-C1004-review.md",
+        "sha256": "06395c448b5120ee0a2cdc5e7e1c5b4a21cb01da1897effc576e1a402cfbb59e"
+      },
+      {
+        "path": "docs/verification/LS-C1004.md",
+        "sha256": "9ae99f099a2102211fe512731c5f99ca8f165302c160f83cbe1bad2ad7b1ba1f"
+      },
+      {
+        "path": "docs/verification/LS-C1005-execution.md",
+        "sha256": "f5b17e636ad33e0be80134a50bac12bfb7a81001cb4a1bb9bb8109fee6d04380"
+      },
+      {
+        "path": "docs/verification/LS-C1005-review.md",
+        "sha256": "d957bef3824b739144af2ec7b1e4b11f0b6f75a2aee1de741242769dfd0a854e"
+      },
+      {
+        "path": "docs/verification/LS-C1005.md",
+        "sha256": "4d8eaa33df9e9aef62321dba9d412836a51c01f14205ff88a8f4bb10de216654"
+      },
+      {
+        "path": "docs/verification/LS-C1006-execution.md",
+        "sha256": "b089d9514c55490745e7b41d1f62194fe018fca86932a2fc717218c8b7980eb8"
+      },
+      {
+        "path": "docs/verification/LS-C1006-review.md",
+        "sha256": "a290b475361b9f0e61f4e14018937e1f1cd638e489f995659f8cea0a2ed656fd"
+      },
+      {
+        "path": "docs/verification/LS-C1006.md",
+        "sha256": "d70953f7caf79a62f78f99ee7c8832fb5efb98a177a606493d7608ce9f0e5e2b"
+      },
+      {
+        "path": "docs/verification/LS-C1007-execution.md",
+        "sha256": "7c02b6fabb1ca9de2333120527236ce656e9461255e799cd4f19df35ad228cda"
+      },
+      {
+        "path": "docs/verification/LS-C1007-review.md",
+        "sha256": "25173587a294973396c3418577027e9e194b0453dd16dda873dd3bc4e712f7bb"
+      },
+      {
+        "path": "docs/verification/LS-C1007.md",
+        "sha256": "e20591f4073cdb2dd466113ee00dfb3f181812d3cfa4d2f59ead8d21dc6d5f49"
+      },
+      {
+        "path": "docs/verification/LS-C1008-execution.md",
+        "sha256": "f137e6c69a91a18e543ff9d405338770b427e9d809f460def44bfea4cf97bfda"
+      },
+      {
+        "path": "docs/verification/LS-C1008-package.json",
+        "sha256": "a7f4dd7ce9ed4fa728852108e1c72d85ebe4acaf797e9387e9cba46c2c076d34"
+      },
+      {
+        "path": "docs/verification/LS-C1008-review.md",
+        "sha256": "c665be29a2e0660d90bd7feda184e6729c575cafa7b55afcc9e5da2909646f93"
+      },
+      {
+        "path": "docs/verification/LS-C1008.md",
+        "sha256": "bc74aa995ba929c21ed494bcb8b15e973fdb34f18d6e217af72356dc788d77cc"
+      },
+      {
+        "path": "docs/verification/LS-C2001-execution.md",
+        "sha256": "05a9b47b478858806bc71a8b3812a9d91b602f62fafb5c25b905959e207fa7b0"
+      },
+      {
+        "path": "docs/verification/LS-C2001-preservation.json",
+        "sha256": "e1cb54062541bb0740bf9dead519210c3de6f61d7283bf52929c9ccd7fd94aed"
+      },
+      {
+        "path": "docs/verification/LS-C2001-review.md",
+        "sha256": "eeed196847ab7fb566399032b09de19e5261b80e26798136aee850259dcac8f0"
+      },
+      {
+        "path": "docs/verification/LS-C2001.md",
+        "sha256": "fd090c66d23c3988ef4a8264b06c5dc1cd216f5b1121e7ff00e9782581eb359e"
+      },
+      {
+        "path": "docs/verification/LS-C2002-review.md",
+        "sha256": "c5e9a66c6d9731861ca9cd9814939a5df05d45819c45ff21b42e58f85542b118"
+      },
+      {
+        "path": "docs/verification/LS-C2002.md",
+        "sha256": "726eba84f040f04860af2206af9ac18fb0551162b3e1b8381dc340ec2a6b1a35"
+      },
+      {
+        "path": "docs/verification/LS-C2003-measurement.json",
+        "sha256": "76051379ead60d93ddd9872e29b9480cda07b78499ae9722fa656354983b0323"
+      },
+      {
+        "path": "docs/verification/LS-C2003-review.md",
+        "sha256": "57408dda20e4393e96901c16c7a0f2d87de3e0113f663479dfb6204f4f5d9532"
+      },
+      {
+        "path": "docs/verification/LS-C2003.md",
+        "sha256": "338a52b7d2d1e01030eaf75e93ab55f25222e3dfff7c7a9e509387d69d984161"
+      },
+      {
+        "path": "docs/verification/LS-C2004-review.md",
+        "sha256": "c970474f546debebdb0ae755e89d12a9f58096f95fcf5e9e233b0bb8eed5defe"
+      },
+      {
+        "path": "docs/verification/LS-C2004.md",
+        "sha256": "458b3435f924f248591c6e11c95480e285bd8c867d70c0ceefe34973817141cc"
+      },
+      {
+        "path": "docs/verification/LS-C2005-review.md",
+        "sha256": "e87780f79c53291d2fb38c0decf988b87a63c11e036c6ccb92d27f3c0f5f3b92"
+      },
+      {
+        "path": "docs/verification/LS-C2005.md",
+        "sha256": "61823146a9b31532b0391dc13a6279f5378f1a011a56345c62889e6b80a43cf2"
+      },
+      {
+        "path": "docs/verification/LS-C2006-baseline.json",
+        "sha256": "46063c39550162bc3127e5576f2febfd18800191dbc4a35295f65adac71026f0"
+      },
+      {
+        "path": "docs/verification/LS-C2006-cancellation.json",
+        "sha256": "15799ce65ceb545b3eb35123fbfb09c272c9c5b8f240325741fd73ab2ddc315c"
+      },
+      {
+        "path": "docs/verification/LS-C2006-measurement.json",
+        "sha256": "6c55e986ed723f19970d00a0611a023aa20ee748f33d429eac11c4ab6c4d70cf"
+      },
+      {
+        "path": "docs/verification/LS-C2006-review.md",
+        "sha256": "e9cf1354599be13afe3b8efd41dd71426a5116e5d8954bb16e97ddc7c30307bf"
+      },
+      {
+        "path": "docs/verification/LS-C2006-webkit.json",
+        "sha256": "547dcb72630f1974c9f14dd8f7829dff034ce039b91abb809d009551f1e4f797"
+      },
+      {
+        "path": "docs/verification/LS-C2006.md",
+        "sha256": "089ee687086c8fa0997fe22a0c6ba48c8608d2a768c48d62249306d72086c127"
+      },
+      {
+        "path": "docs/verification/LS-C3001-review.md",
+        "sha256": "b1faba6eedddf7c530b359e2de87389a890509768c63cfb59ef67753baa18ac7"
+      },
+      {
+        "path": "docs/verification/LS-C3001.md",
+        "sha256": "b0e00acf75dd9f462b866b1c1865ef54628334bb61c4cb447893446eb7697730"
+      },
+      {
+        "path": "docs/verification/LS-C3002-facets.json",
+        "sha256": "fa2a237ad3dcc95377ba60f103be0519f4895c44863a3385ac23f849c0cebecc"
+      },
+      {
+        "path": "docs/verification/LS-C3002-regression-c2006.json",
+        "sha256": "026a23239c81f5505b991e915e91eebbfc730a1fd71de8ac484d3d60ae83681b"
+      },
+      {
+        "path": "docs/verification/LS-C3002-review.md",
+        "sha256": "16d759b04fed9730cd7c7027a2d6239c07ca048ad9439690f16aafa44fa00178"
+      },
+      {
+        "path": "docs/verification/LS-C3002.md",
+        "sha256": "cd2eabd7ab553ca5ff6e5234098ac18d13f85498e939f1c828f4b01461a57b37"
+      },
+      {
+        "path": "docs/verification/LS-C4001-review.md",
+        "sha256": "9c0b5bf1a47cfa1138108674dc20903c3c5db97758d49cf61a2cc6a27461970d"
+      },
+      {
+        "path": "docs/verification/LS-C4001.md",
+        "sha256": "b05a0746c0aa884d7d2610899af016238e3f7ef8f191a7f54cfa26ae41529eb6"
+      },
+      {
+        "path": "docs/verification/LS-C4002-manual.md",
+        "sha256": "5ac591fd3c88577db3975cc921064f692b62f875072db21ad79790640a225618"
+      },
+      {
+        "path": "docs/verification/LS-C4002-queries.txt",
+        "sha256": "b1a09ac149402072dde596dc3d3e0bdfeb56a5349915438b39c54c49515a53c7"
+      },
+      {
+        "path": "docs/verification/LS-C4002-review.md",
+        "sha256": "b8dd770c9a72d0853a531d6f15b995ed159bb2fad40f1e4fcb84d44bee67cb2c"
+      },
+      {
+        "path": "docs/verification/LS-C4002.md",
+        "sha256": "8a41fad77db5a7455b7997b63929fc54791ba290c4c1ad40fe27299a15350893"
+      },
+      {
+        "path": "docs/verification/MANUAL-SR-2026-10-01.md",
+        "sha256": "20f14e6dccf6e7b5791d5505543be8f94dea6cccfd2b8e9f49a9dbcda717d110"
+      }
+    ]
+  },
+  "statuses": [
+    {
+      "name": "shared independently literal memberships",
+      "status": "Pass",
+      "count": 12
+    },
+    {
+      "name": "expected native normalization changes",
+      "status": "Pass",
+      "count": 1
+    },
+    {
+      "name": "foreign rank model separation",
+      "status": "Pass",
+      "rankingOnlyChangedOrders": 1,
+      "expectedMembershipChanges": 1
+    },
+    {
+      "name": "foreign numerical explanation honesty",
+      "status": "Pass"
+    },
+    {
+      "name": "historical evidence preservation",
+      "status": "Pass",
+      "files": 80
+    }
+  ],
+  "limitations": {
+    "engine": "MiniSearch",
+    "scoreModel": "minisearch-7.2.0-companion-v1",
+    "analyzer": "basic-v1 uses NFC-lowercase-NFC; native basic-v1 uses NFKC-lowercase",
+    "scoring": "Upstream MiniSearch BM25 policy k=1.2 b=0.7 d=0.5; field lengths and multi-term combination differ from native BM25.",
+    "numericalExplanation": "Unavailable: upstream-not-exposed. No native term facts or score decomposition are manufactured.",
+    "cancellation": "Companion public signals check before dispatch and between staged work; synchronous upstream MiniSearch retrieval is not interruptible.",
+    "phrase": "Companion global tokens/phrase mode verifies adjacency within one original field value; native phrase is an optional query leaf.",
+    "capacity": "Companion fixed admission ceilings: 10000 records, 16 text fields, 32 schema fields, 50000 units/text value, 128 values/text array, 100000 array slots, 10000000 source string units, 1000000 indexed tokens; result limit 1..100.",
+    "persistence": "Foreign source snapshots require conversion and native rebuild; opaque upstream indexes are unsupported."
+  },
+  "foreignExplanation": {
+    "matched": true,
+    "selected": true,
+    "total": {
+      "value": 3,
+      "relation": "exact"
+    },
+    "score": 4.238199011841845,
+    "snapshot": {
+      "sessionId": "ls-muzl9ha4-1-i4aun2gqxo",
+      "generation": 1
+    },
+    "provenance": "reevaluation",
+    "sourceFreshness": "unknown",
+    "query": {
+      "kind": "text",
+      "value": "red",
+      "mode": "tokens",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "combine": "all",
+      "prefixLast": false,
+      "where": {},
+      "limit": 20
+    },
+    "targetId": "a",
+    "targetPresent": true,
+    "clauses": [
+      {
+        "queryTerm": "red",
+        "kind": "exact",
+        "matched": true,
+        "fields": [
+          "title",
+          "body"
+        ]
+      }
+    ],
+    "filters": [],
+    "phrase": "not-required",
+    "outcome": "selected",
+    "scoreModel": "minisearch-7.2.0-companion-v1",
+    "scoreDecomposition": {
+      "status": "unavailable",
+      "reason": "upstream-not-exposed"
+    },
+    "counterfactuals": []
+  },
+  "foreignCancellation": {
+    "preAbortedPublicSignal": "Pass",
+    "synchronousMiniSearchInterruption": "Unsupported; not tested as native cooperative behavior"
+  }
+}

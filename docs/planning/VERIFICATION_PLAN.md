@@ -153,6 +153,8 @@ RX-3003 verifies 26 installed public-package browser scenarios and 301 complete 
 
 IndexedDB tests use a real browser and distinguish in-memory engine commit, durable storage completion, conflicts, and uncertain transport outcomes. Include quota/transaction failure, unavailable storage, corrupt snapshots, simultaneous clients, reload/recovery, and complete namespace erasure. Keep erasure of durable namespace data distinct from disposal of in-memory state.
 
+RX-3004 verifies genuine canonical companion source conversion and native rebuild with 49 focused Node tests, installed Chrome source/IndexedDB update/reload/erase with 48 complete comparisons, twelve independent shared foreign/native memberships and thirteen independent review probes. The optional converter imports no foreign runtime, and development comparison identifies MiniSearch scores/cancellation/phrase limits separately. Expected rank changes and NFC/NFKC membership branches remain distinct. Licensed adaptation/provenance and unchanged historical bytes are audited; these are current native/foreign observations, not inherited companion passes. See [migration evidence](../evidence/RX-3004.md). Conversion has bounded synchronous host work and no physical latency/heap/cancellation guarantee.
+
 ## 6. Browser, accessibility, and device qualification
 
 At `RX-4002`, state the proposed supported matrix using actual browser/OS/runtime versions. Exercise Chromium, WebKit/Safari, and Firefox configurations; distinguish an automated WebKit build from a qualified Safari/OS combination. Lack of a browser runner is an environment blocker, not proof that the browser is unsupported or that the tests passed.

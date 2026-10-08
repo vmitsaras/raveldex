@@ -302,6 +302,35 @@ Browser recovery uses source snapshots through a direct snapshot handle or an ex
 
 RX-3004 reconciles reusable APIs/data and any MiniSearch compatibility support. Keep foreign scoring identity, capacity, cancellation, and state limitations explicit. Source migration may rebuild a native index; opaque engine state cannot be relabeled.
 
+### Implemented companion source conversion — RX-3004
+
+The explicit `/integrations/localsearch` entry exports
+`convertLocalSearchSnapshot(bytes: Uint8Array)`, `MigrationError`, fixed error
+codes and readonly migration types. It accepts only the canonical format-1
+source envelope from the audited companion-v1/MiniSearch 7.2.0 implementation.
+Historical SHA-256/domain/canonical encoding, source counts and origin identities
+are checked separately from native schema/record/analyzer/corpus validation.
+Opaque indexes and incompatible/corrupt source fail before any engine mutation.
+
+The result is an owned frozen configuration/record plan with separate origin,
+source revision, display projection and explicit legacy/native identities.
+There is no implicit source provider, engine creation, schema upgrade, worker,
+storage action or automatic fallback. Applications rebuild a new owner through
+ordinary native methods and publish it only after the complete rebuild; each
+native batch remains atomic, while a sequence of batches is not one transaction.
+Admission/work/optional-provider limits still apply. Parsing and conversion are
+bounded offline synchronous host work plus explicit SHA-256 capability; they
+have no signal/deadline or physical latency guarantee.
+
+Only source admission/codec concepts and licensed code portions are adapted.
+The companion's historical NFC analyzer and MiniSearch scorer remain explicit;
+originals rebuild with native NFKC and `raveldex-bm25-v1`. The repository-level
+`integrations/minisearch/` comparator requires an explicit pinned foreign
+implementation, declares upstream numerical explanation and cancellation
+limitations, and is excluded from native compilation and package contents.
+There is no exported legacy search facade. See the
+[migration mapping and provenance](../migration/LOCALSEARCH.md).
+
 Later optional tracks may add typo alternatives, suggestions, directional one-step synonyms, language analyzers, code identifiers, literal/infix search, proximity, text query syntax, patch convenience, or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
 
 ## Verification and acceptance criteria

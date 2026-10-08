@@ -708,7 +708,7 @@ Provide explicitly selected local persistence and recovery with truthful commit/
 
 **Companion migration and comparator separation**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/24)
+**Milestone:** N3 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/24)
 
 **Dependencies:** [RX-3003](IMPLEMENTATION_TASKS.md#rx-3003)
 
@@ -741,7 +741,14 @@ Provide a bounded route from the prior companion while keeping native implementa
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-3004.md](docs/evidence/RX-3004.md)
+- [docs/evidence/RX-3004-review.md](docs/evidence/RX-3004-review.md)
+- [docs/evidence/RX-3004-migration.json](docs/evidence/RX-3004-migration.json)
+- [docs/evidence/RX-3004-browser.json](docs/evidence/RX-3004-browser.json)
+- [docs/evidence/RX-3004-comparison.json](docs/evidence/RX-3004-comparison.json)
+- [docs/evidence/RX-3004-review-probe.json](docs/evidence/RX-3004-review-probe.json)
+- [docs/evidence/RX-3004-provenance.json](docs/evidence/RX-3004-provenance.json)
+- [docs/evidence/RX-3004-browser-final.json](docs/evidence/RX-3004-browser-final.json)
 
 
 ## RX-4001

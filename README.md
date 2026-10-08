@@ -24,6 +24,8 @@ RX-3002 adds explicit versioned source/native snapshots, complete atomic restore
 
 RX-3003 adds explicit namespaced IndexedDB save/load/erase and an optional source-snapshot worker bridge. Storage and engine commit outcomes stay separate; recovery never retries an unknown restore automatically.
 
+RX-3004 adds explicit validated LocalSearch source conversion through `/integrations/localsearch`. Rebuild a new native owner from the owned configuration/records; legacy indexes, scores, live handles and storage namespaces remain separate. See the [migration guide](docs/migration/LOCALSEARCH.md).
+
 The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, physical durability and cross-host Unicode snapshot portability require later evidence.
 
 ## Try the core

@@ -1,0 +1,281 @@
+✖ actual public companion exports match pinned fixture provenance and independent data (9.216708ms)
+✖ owned input is captured before asynchronous checksum and returned values cannot mutate (1.0305ms)
+✔ genuine empty export preserves absent source revision and fresh native zero revision (2.658292ms)
+✔ public conversion rebuild query update source export and reload match independently authored native records (49.551583ms)
+✔ native Unicode normalization is explicit expected semantic change (17.050875ms)
+✔ explicit rejection: corrupt checksum (0.586709ms)
+✔ explicit rejection: unsupported envelope version (0.120542ms)
+✔ explicit rejection: unsupported contract (0.073584ms)
+✔ explicit rejection: unsupported dependency (0.088833ms)
+✔ explicit rejection: unsupported analyzer (0.10975ms)
+✔ explicit rejection: unsupported scoring model (0.090833ms)
+✔ explicit rejection: opaque MiniSearch index (0.066917ms)
+✔ explicit rejection: noncanonical whitespace (0.175625ms)
+✖ explicit rejection: noncanonical schema order (0.260291ms)
+✔ explicit rejection: noncanonical record order (0.190375ms)
+✔ explicit rejection: duplicate lexical key (0.051708ms)
+✔ explicit rejection: duplicate record ids (0.10575ms)
+✔ explicit rejection: duplicate schema fields (0.08ms)
+✔ explicit rejection: count mismatch (0.083459ms)
+✔ explicit rejection: token count mismatch (0.08625ms)
+✔ explicit rejection: array count mismatch (0.085125ms)
+✔ explicit rejection: source count mismatch (0.084166ms)
+✔ explicit rejection: unknown schema type (0.083792ms)
+✔ explicit rejection: unsafe schema field (0.065167ms)
+✔ explicit rejection: undeclared record field (0.074834ms)
+✔ explicit rejection: unknown projection field (0.06875ms)
+✔ explicit rejection: duplicate projection field (0.071083ms)
+✔ explicit rejection: unsafe origin generation (0.067625ms)
+✔ explicit rejection: overlong source revision (0.072125ms)
+✔ explicit rejection: text scalar given array (0.067542ms)
+✔ explicit rejection: native boost limit (2.100833ms)
+✔ explicit rejection: native keyword limit (0.375292ms)
+✔ explicit rejection: native text array limit (0.503ms)
+✔ explicit rejection: native malformed UTF16 (0.374209ms)
+✔ explicit rejection: native raw token limit (0.405916ms)
+✔ explicit rejection: maximum byte bound (0.059333ms)
+✔ explicit rejection: empty bytes (0.0385ms)
+✔ explicit rejection: UTF8 BOM (0.034ms)
+✔ explicit rejection: malformed UTF8 (0.047083ms)
+✔ explicit rejection: deep payload before parse (0.035209ms)
+✔ explicit rejection: truncated payload (0.054208ms)
+✔ explicit rejection: ordinary object (0.031417ms)
+✔ explicit rejection: Node Buffer subtype (0.031042ms)
+✔ explicit rejection: typed array subclass (0.032875ms)
+✔ explicit rejection: shared backing memory (0.032834ms)
+✔ byte capture rejects detached views and hostile accessors without invoking them (2.430167ms)
+✔ conversion failure never mutates an existing native owner or native source snapshot (43.275291ms)
+ℹ tests 47
+ℹ suites 0
+ℹ pass 44
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 191.454333
+
+✖ failing tests:
+
+test at test/migration/converter.test.mjs:26:33
+✖ actual public companion exports match pinned fixture provenance and independent data (9.216708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    [
+      {
+        id: 'a',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: true,
+          category: 'Guide',
+          price: 0
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'red blue',
+            'café manual'
+          ],
+          title: [
+  ...
+        id: 'b',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: false,
+          category: 'Reference',
+          price: 5
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'car red',
+            'red',
+            'blue'
+          ],
+  ...
+        id: 'c',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          category: 'Guide',
+          price: 10
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [],
+          title: [
+            'blue'
+          ]
+        }
+  ...
+        id: 'd',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: false,
+          category: ''
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'red',
+            'car'
+          ],
+          title: [
+  ...
+        id: 'empty',
+  +     metadata: [Object: null prototype] {},
+  +     text: [Object: null prototype] {}
+  -     metadata: {},
+  -     text: {}
+      },
+      {
+        id: 'unicode',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: true,
+          category: 'Unicode',
+          price: 15
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'café 🙂 𐐀'
+          ],
+          title: [
+            'ＣＡＲ ﬁle'
+  
+      at file:///Users/vasilis/Documents/GitHub/raveldex/test/migration/converter.test.mjs:38:10
+      at async TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/migration/converter.test.mjs:27:26)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'a', text: [Object], metadata: [Object] }, { id: 'b', text: [Object], metadata: [Object] }, { id: 'c', text: [Object], metadata: [Object] }, { id: 'd', text: [Object], metadata: [Object] }, { id: 'empty', text: {}, metadata: {} }, { id: 'unicode', text: [Object], metadata: [Object] } ],
+    expected: [ { id: 'a', text: [Object], metadata: [Object] }, { id: 'b', text: [Object], metadata: [Object] }, { id: 'c', text: [Object], metadata: [Object] }, { id: 'd', text: [Object], metadata: [Object] }, { id: 'empty', text: {}, metadata: {} }, { id: 'unicode', text: [Object], metadata: [Object] } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/migration/converter.test.mjs:26:33
+✖ owned input is captured before asynchronous checksum and returned values cannot mutate (1.0305ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    [
+      {
+        id: 'a',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: true,
+          category: 'Guide',
+          price: 0
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'red blue',
+            'café manual'
+          ],
+          title: [
+  ...
+        id: 'b',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: false,
+          category: 'Reference',
+          price: 5
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'car red',
+            'red',
+            'blue'
+          ],
+  ...
+        id: 'c',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          category: 'Guide',
+          price: 10
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [],
+          title: [
+            'blue'
+          ]
+        }
+  ...
+        id: 'd',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: false,
+          category: ''
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'red',
+            'car'
+          ],
+          title: [
+  ...
+        id: 'empty',
+  +     metadata: [Object: null prototype] {},
+  +     text: [Object: null prototype] {}
+  -     metadata: {},
+  -     text: {}
+      },
+      {
+        id: 'unicode',
+  +     metadata: [Object: null prototype] {
+  -     metadata: {
+          active: true,
+          category: 'Unicode',
+          price: 15
+        },
+  +     text: [Object: null prototype] {
+  -     text: {
+          body: [
+            'café 🙂 𐐀'
+          ],
+          title: [
+            'ＣＡＲ ﬁle'
+  
+      at file:///Users/vasilis/Documents/GitHub/raveldex/test/migration/converter.test.mjs:50:38
+      at async TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/migration/converter.test.mjs:27:26)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { id: 'a', text: [Object], metadata: [Object] }, { id: 'b', text: [Object], metadata: [Object] }, { id: 'c', text: [Object], metadata: [Object] }, { id: 'd', text: [Object], metadata: [Object] }, { id: 'empty', text: {}, metadata: {} }, { id: 'unicode', text: [Object], metadata: [Object] } ],
+    expected: [ { id: 'a', text: [Object], metadata: [Object] }, { id: 'b', text: [Object], metadata: [Object] }, { id: 'c', text: [Object], metadata: [Object] }, { id: 'd', text: [Object], metadata: [Object] }, { id: 'empty', text: {}, metadata: {} }, { id: 'unicode', text: [Object], metadata: [Object] } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/migration/converter.test.mjs:26:33
+✖ explicit rejection: noncanonical schema order (0.260291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_SNAPSHOT'
+  - 'NONCANONICAL_SNAPSHOT'
+  
+      at Object.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/migration/converter.test.mjs:130:121)
+      at expectedException (node:assert:578:17)
+      at expectsError (node:assert:703:21)
+      at strict.rejects (node:assert:769:3)
+      at async file:///Users/vasilis/Documents/GitHub/raveldex/test/migration/converter.test.mjs:130:3
+      at async TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/migration/converter.test.mjs:27:26)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_SNAPSHOT',
+    expected: 'NONCANONICAL_SNAPSHOT',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
