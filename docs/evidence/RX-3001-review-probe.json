@@ -1,6 +1,6 @@
 {
   "kind": "raveldex-independent-worker-review-v1",
-  "startedAt": "2026-10-08T09:10:22.267Z",
+  "startedAt": "2026-10-08T09:31:36.727Z",
   "environment": {
     "node": "v24.21.0",
     "platform": "darwin",
@@ -108,12 +108,12 @@
             "name": "WorkerAdapterError",
             "code": "OUTCOME_UNKNOWN",
             "details": {
-              "operationId": "3ee4a47b-235d-4860-8568-7f725d9c91b1:2"
+              "operationId": "22e15c18-d75f-4892-886a-54035dd9110a:2"
             }
           }
         },
         "receipt": {
-          "operationId": "3ee4a47b-235d-4860-8568-7f725d9c91b1:2",
+          "operationId": "22e15c18-d75f-4892-886a-54035dd9110a:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -140,7 +140,7 @@
           }
         },
         "receipt": {
-          "operationId": "72ac2e7e-0bbd-49a7-9ffe-ef6e1826543b:2",
+          "operationId": "76e47261-7893-4420-b7e1-b498ffc94721:2",
           "status": "rejected",
           "error": {
             "name": "RaveldexError",
@@ -170,7 +170,7 @@
           }
         },
         "receipt": {
-          "operationId": "233c45e0-53fd-40bf-b6ef-c71647067df9:2",
+          "operationId": "7e1cac6d-0b4a-4544-b33c-4054fbeecd60:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -208,7 +208,7 @@
           }
         },
         "receipt": {
-          "operationId": "233c45e0-53fd-40bf-b6ef-c71647067df9:2",
+          "operationId": "7e1cac6d-0b4a-4544-b33c-4054fbeecd60:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -231,12 +231,12 @@
             "name": "WorkerAdapterError",
             "code": "OUTCOME_UNKNOWN",
             "details": {
-              "operationId": "d5f844fe-f69d-4caa-970d-4978f0f36e0b:2"
+              "operationId": "825ed2b5-aa14-4f5d-abf8-88fc678ff9ea:2"
             }
           }
         },
         "receipt": {
-          "operationId": "d5f844fe-f69d-4caa-970d-4978f0f36e0b:2",
+          "operationId": "825ed2b5-aa14-4f5d-abf8-88fc678ff9ea:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -269,12 +269,12 @@
             "name": "WorkerAdapterError",
             "code": "OUTCOME_UNKNOWN",
             "details": {
-              "operationId": "d5f844fe-f69d-4caa-970d-4978f0f36e0b:2"
+              "operationId": "825ed2b5-aa14-4f5d-abf8-88fc678ff9ea:2"
             }
           }
         },
         "receipt": {
-          "operationId": "d5f844fe-f69d-4caa-970d-4978f0f36e0b:2",
+          "operationId": "825ed2b5-aa14-4f5d-abf8-88fc678ff9ea:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -295,11 +295,11 @@
         "terminalMutations": 257,
         "uniqueMutationIds": 257,
         "expired": {
-          "operationId": "106c0093-8543-4c44-b3f9-8591fb2b6c99:2",
+          "operationId": "a1075586-1a86-476c-ad70-3859b0b7eaeb:2",
           "status": "expired"
         },
         "newest": {
-          "operationId": "106c0093-8543-4c44-b3f9-8591fb2b6c99:258",
+          "operationId": "a1075586-1a86-476c-ad70-3859b0b7eaeb:258",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -336,12 +336,12 @@
       "status": "Observation",
       "evidence": {
         "actual": {
-          "error": {
-            "name": "WorkerAdapterError",
-            "code": "OUTCOME_UNKNOWN",
-            "details": {
-              "operationId": "70010eb5-545d-497b-92f3-c35318125ee2:2"
-            }
+          "value": {
+            "revision": 1,
+            "changed": true,
+            "added": 1,
+            "replaced": 0,
+            "removed": 0
           }
         },
         "expected": {
@@ -355,7 +355,7 @@
         },
         "nested": {
           "value": {
-            "revision": 1,
+            "revision": 2,
             "changed": true,
             "added": 1,
             "replaced": 0,
@@ -372,13 +372,17 @@
           }
         },
         "state": {
-          "revision": 1,
+          "revision": 2,
           "model": "raveldex-bm25-v1",
           "completeness": "complete",
-          "total": 1,
+          "total": 2,
           "hits": [
             {
               "id": "nested",
+              "score": 0
+            },
+            {
+              "id": "outer",
               "score": 0
             }
           ]
@@ -387,12 +391,28 @@
     },
     {
       "name": "reentrant live signal registration preserves admission FIFO",
-      "status": "Fail",
-      "error": {
-        "name": "AssertionError",
-        "code": "ERR_ASSERTION",
-        "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '70010eb5-545d-497b-92f3-c35318125ee2:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 1\n    }\n  }\n",
-        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '70010eb5-545d-497b-92f3-c35318125ee2:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 1\n    }\n  }\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:260:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:245:1"
+      "status": "Pass",
+      "evidence": {
+        "actual": {
+          "value": {
+            "revision": 1,
+            "changed": true,
+            "added": 1,
+            "replaced": 0,
+            "removed": 0
+          }
+        },
+        "nested": {
+          "value": {
+            "revision": 2,
+            "changed": true,
+            "added": 1,
+            "replaced": 0,
+            "removed": 0
+          }
+        },
+        "revision": 2,
+        "total": 2
       }
     },
     {
@@ -400,12 +420,12 @@
       "status": "Observation",
       "evidence": {
         "actual": {
-          "error": {
-            "name": "WorkerAdapterError",
-            "code": "OUTCOME_UNKNOWN",
-            "details": {
-              "operationId": "73aa415d-a162-4fae-9287-0fe0fd0fbc2d:2"
-            }
+          "value": {
+            "revision": 2,
+            "changed": true,
+            "added": 1,
+            "replaced": 0,
+            "removed": 0
           }
         },
         "expected": {
@@ -436,13 +456,17 @@
           }
         },
         "state": {
-          "revision": 1,
+          "revision": 2,
           "model": "raveldex-bm25-v1",
           "completeness": "complete",
-          "total": 1,
+          "total": 2,
           "hits": [
             {
               "id": "nested",
+              "score": 0
+            },
+            {
+              "id": "outer",
               "score": 0
             }
           ]
@@ -451,31 +475,66 @@
     },
     {
       "name": "reentrant live signal capture preserves completed-admission order",
-      "status": "Fail",
-      "error": {
-        "name": "AssertionError",
-        "code": "ERR_ASSERTION",
-        "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '73aa415d-a162-4fae-9287-0fe0fd0fbc2d:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 2\n    }\n  }\n",
-        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '73aa415d-a162-4fae-9287-0fe0fd0fbc2d:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 2\n    }\n  }\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:282:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:265:1"
+      "status": "Pass",
+      "evidence": {
+        "actual": {
+          "value": {
+            "revision": 2,
+            "changed": true,
+            "added": 1,
+            "replaced": 0,
+            "removed": 0
+          }
+        },
+        "nested": {
+          "value": {
+            "revision": 1,
+            "changed": true,
+            "added": 1,
+            "replaced": 0,
+            "removed": 0
+          }
+        },
+        "revision": 2,
+        "total": 2
       }
     },
     {
       "name": "raw duplicate-host installation observation",
       "status": "Observation",
       "evidence": {
-        "failure": null,
-        "extraHandle": true,
-        "hostListenerCount": 4
+        "failure": {
+          "name": "WorkerAdapterError",
+          "code": "INCOMPATIBLE_WORKER"
+        },
+        "extraHandle": false,
+        "hostListenerCount": 2
+      }
+    },
+    {
+      "name": "raw reentrant-host installation observation",
+      "status": "Observation",
+      "evidence": {
+        "nestedAccepted": false,
+        "nestedFailure": {
+          "name": "WorkerAdapterError",
+          "code": "INCOMPATIBLE_WORKER"
+        },
+        "hostListenerCount": 2
       }
     },
     {
       "name": "one scope cannot install two worker engine owners",
-      "status": "Fail",
-      "error": {
-        "name": "AssertionError",
-        "code": "ERR_ASSERTION",
-        "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'INCOMPATIBLE_WORKER'\n",
-        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'INCOMPATIBLE_WORKER'\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:292:12\n    at probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:32)\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:286:7"
+      "status": "Pass",
+      "evidence": {
+        "failure": {
+          "name": "WorkerAdapterError",
+          "code": "INCOMPATIBLE_WORKER"
+        },
+        "hostListenerCount": 2,
+        "methodBindingReentryRejected": true,
+        "failedBindingGuardReleased": true,
+        "remainingListeners": 0
       }
     },
     {
@@ -485,22 +544,33 @@
         "result": {
           "error": {
             "name": "WorkerAdapterError",
-            "code": "TIMEOUT",
-            "details": {}
+            "code": "INCOMPATIBLE_WORKER",
+            "details": {
+              "path": "worker.owner"
+            }
           }
         },
-        "terminations": 1,
+        "terminations": 0,
         "clientListenerCount": 3
       }
     },
     {
       "name": "duplicate client cannot terminate first owner and external recovery releases guards",
-      "status": "Fail",
-      "error": {
-        "name": "AssertionError",
-        "code": "ERR_ASSERTION",
-        "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'TIMEOUT'\n- 'INCOMPATIBLE_WORKER'\n",
-        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'TIMEOUT'\n- 'INCOMPATIBLE_WORKER'\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:303:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:296:1"
+      "status": "Pass",
+      "evidence": {
+        "duplicate": {
+          "error": {
+            "name": "WorkerAdapterError",
+            "code": "INCOMPATIBLE_WORKER",
+            "details": {
+              "path": "worker.owner"
+            }
+          }
+        },
+        "existingOwnerUsable": true,
+        "explicitSameEndpointFreshOwner": true,
+        "terminations": 0,
+        "remainingListeners": 0
       }
     }
   ],
@@ -1081,12 +1151,949 @@
           }
         }
       ]
+    },
+    {
+      "startedAt": "2026-10-08T09:10:22.267Z",
+      "completedAt": "2026-10-08T09:10:22.597Z",
+      "sourceHashes": {
+        "src/adapters/worker/client.ts": "71383536e44394bb215c7507e6e34d77b7398dd26b1f1046582ebba125f66506",
+        "src/adapters/worker/error.ts": "0cda22a21199bd30b62d2a488f7ecf541500f6ad090e8562bb8b7b69ca525e66",
+        "src/adapters/worker/host.ts": "b68f03a2e12f4e9c4a02fd7ff41b2d467fa88e5abca45792a2eacb24160508e4",
+        "src/adapters/worker/index.ts": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d",
+        "src/adapters/worker/protocol.ts": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1",
+        "src/addons/evidence/builder.ts": "1e9494242173b639f1921ce9258146446f2246bf8845a5348e14b3e2ed02a797",
+        "src/addons/evidence/index.ts": "0335028aaa647552d046ad7a82a032c33e393ea38f8589c5d58d4f59937cd258",
+        "src/addons/evidence/occurrences.ts": "ab7c38b598c57255d3a486aee0035fffb8e69267ee29746f54c7d1a58deaa06d",
+        "src/addons/evidence/options.ts": "c8da7583abbdf29b94e886a46c193ff030382eb52f9bcf17420426d70e214b15",
+        "src/addons/evidence/providers.ts": "d4b9cf1ed76ede91725d86a675695bda3ddbe7d6829aab4d8aff6e115054e8ae",
+        "src/addons/facets/facets.ts": "c7c70433a7c063da58b172e8d67054cf412655519b12cbe361dc5ad14c93af22",
+        "src/addons/facets/index.ts": "52ffc961ad27c90e568f5e14f1554bd5ea34378ece05b344fa60ad149660fcc8",
+        "src/addons/facets/options.ts": "48277d81b23e7bd5de5fb8b38f6447766c0d107791815ce822cfea5a5c3e85fb",
+        "src/addons/inspector/diagnostics.ts": "94fd70aa463f51f7ccdb29bb22f1e485af657925c8863cf953764fc11b22107a",
+        "src/addons/inspector/index.ts": "0ef694aedd432ed6420831242e2100561abbca3c9a0bb90835a2f82888b06144",
+        "src/addons/inspector/inspector.ts": "206bd1b107680426849301b82255dda320a64f3daa6dfd523fc16571bc0b8432",
+        "src/addons/inspector/options.ts": "c05d15912b2def1730447f9b0f8e30d7b413e7efb2a4b539c0d185cca57af2f2",
+        "src/addons/inspector/output.ts": "dc5ffcc3ce842d1b9b7a6448d0c1f0914e371b6e1569db47cf9313d2f889e818",
+        "src/addons/metadata/payload.ts": "d2de877cce479a202e2e651ebbd48c5a79e3db7327b66830ba67e4d134499c8a",
+        "src/addons/phrases/options.ts": "472f301c1b2c01bcb0f2b93efb909301b68fa20825dd3e725dcc9233ae9c00ad",
+        "src/addons/phrases/source.ts": "b69e1d17086bc480378654a73acf8dea6f6dea1fdd9bb6743dd061612c475171",
+        "src/addons/phrases/store.ts": "4fefb9a5fe12109db212e1216ed19535b7804b4f9defb44e0af0be3316f101cd",
+        "src/addons/positions/options.ts": "b4ba6d9118a351e2af37db67d5334be9027cf5fc22364f8fbfe8272205133fac",
+        "src/addons/positions/store.ts": "87cf2990da01bcf6196727cd6ca72f68a53419530dadf071ccdff2b88132ad68",
+        "src/addons/snippets/index.ts": "5886043a08cebbc97bdfe69d13e47dd8a7aac4e36a5f0576dfcdcc5ad1b289e8",
+        "src/addons/snippets/snippets.ts": "08d39187382f0a0f75aeb647fb4ceee01e3086fa77853d4c3ae98ce34be9bd3c",
+        "src/core/analyzer/basic.ts": "33cdd8ab819f7c1f2cdb08ab8a269a47dbf0cf7321ac2205f29735cd61a9cef8",
+        "src/core/capabilities/capture.ts": "5aee519c2055f2a9c516e6b058181ff5adb93ce43410a208a012876d78e567b2",
+        "src/core/capabilities/participants.ts": "172c6f2169e741fc700b915c2048794e8826254cd9ea03b6f6e3254a054e8d57",
+        "src/core/capabilities/refinement.ts": "7ac25cc788cc91650a7abe6739b9637b53deb037d4a77e004828b5ec78f15301",
+        "src/core/capabilities/registration.ts": "a0c1913d261dadef58af4b5862f3e6e10e258e16bbf2b1030bf421756c03eb73",
+        "src/core/capabilities/worker-identity.ts": "deeef4653868641b868410bf6094822e1d0cf7e303834ff5bba902527fba0c4c",
+        "src/core/contracts/data.ts": "ad5cb3df86d9cda637dfe8528566197f7fce3803699470945526b822b3fc9624",
+        "src/core/contracts/options.ts": "01d4ad7fc75679042b37839498a909bdbe0ee7eeedaa653f1a2a71cb748ec5f7",
+        "src/core/contracts/query.ts": "4306a09b64b06d1455fd8536d927159045d21d8241cfe3e8a954740699d3900c",
+        "src/core/contracts/record.ts": "e34b1db54fcd7b01559eb16034d52cbb1eb9941cdf29332331b53aa96bb7701f",
+        "src/core/contracts/schema.ts": "be26cf3b11fe0d1269137eecc0af5aab98e433052db0056e995dfbbc0a3aa4b2",
+        "src/core/errors/error.ts": "a6d445660533af4344f0cd17c2469d953e3276b95cfb81c7cf4c508a2f2eb5f4",
+        "src/core/execution/engine.ts": "0d3006d1930f102858c4aad7a0c29c64ec7ec33de687ca9352dc883aaea3fd63",
+        "src/core/execution/host.ts": "d787db43ad885e3aaccbac4a4deb6c439c56b301b91a57706ebcb57cde891fe6",
+        "src/core/index/directory.ts": "bf3334da2415508fd0b7cc15c68badbdb05419de8945c39457dce796f3e5811f",
+        "src/core/index/staging.ts": "87405966d972e10a139294639ad1442bf38441f7e1746109c277e1dfc105f924",
+        "src/core/limits/limits.ts": "41c5a3ecf85128ffdfcaa6e140eea0463daafb34d7488853bda588df8d0fdf58",
+        "src/core/limits/work.ts": "7681a435b9f8298bbe89bfd0a2b70b4b5044b8d5402f25e7bf7ae85c3db61316",
+        "src/core/mutations/capture.ts": "522c2c2d2a0bf87b54ac43be5c9b29befdfd2a3650d7f39761a152a62d6cd9e1",
+        "src/core/mutations/delta.ts": "f2ec161183dac4acf8c3a6a83d112ab4858a178d5b0a64d890b7c885e5fc169e",
+        "src/core/mutations/document.ts": "e9b92a9b6237f9d276d33d8ba3e75a38211bd93a74d48b5a4f789c88c1a77206",
+        "src/core/mutations/owner.ts": "5c2f3e789802f674b77d247f720081787b4be016ad817989ef353ec683a29415",
+        "src/core/query/compile.ts": "f31dbb285f19815561e5d5b494cea6a8d86dce638b4cd94eb7ef5344993c1826",
+        "src/core/query/evaluate.ts": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670",
+        "src/core/query/search.ts": "a466c717251903b7d74add3a8ddb0e85e1279b06a71dc2efd917f36870bef37c",
+        "src/core/query/work.ts": "985f6f9386ad21c2ee5d346a75cb85f80c99ea99cd9c8ee72c3e3b7712cfbdc9",
+        "src/core/ranking/bm25.ts": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+        "src/core/ranking/page.ts": "d1f3bd789ca1b10ec946be751ab4ab7d1d53e07d4e4ce8e3be7ff20081f311d0",
+        "src/core/retrieval/expand.ts": "8347cbf829dc60cd9a243736814640f6ee4765c7f63bdcf07c64979edbf22cb0",
+        "src/core/trace/facts.ts": "b51fb6696bb78aababd4c59865b7198bd08098be09ef5fe768b371c9d7ea47c4",
+        "src/index.ts": "c7042f5d1c1c7191ed7024f1b1410081e1dcc02482ce8b93a015ff842e651ad8"
+      },
+      "summary": {
+        "pass": 10,
+        "fail": 4
+      },
+      "probes": [
+        {
+          "name": "raw live-mutation replay observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "receipt": {
+              "operationId": "233c45e0-53fd-40bf-b6ef-c71647067df9:2",
+              "status": "committed",
+              "result": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "replay",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw post-commit result-send failure observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "OUTCOME_UNKNOWN",
+                "details": {
+                  "operationId": "d5f844fe-f69d-4caa-970d-4978f0f36e0b:2"
+                }
+              }
+            },
+            "receipt": {
+              "operationId": "d5f844fe-f69d-4caa-970d-4978f0f36e0b:2",
+              "status": "committed",
+              "result": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "post-failure",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw reentrant signal registration observation",
+          "status": "Observation",
+          "evidence": {
+            "actual": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "OUTCOME_UNKNOWN",
+                "details": {
+                  "operationId": "70010eb5-545d-497b-92f3-c35318125ee2:2"
+                }
+              }
+            },
+            "expected": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "nested": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expectedNested": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "nested",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "reentrant live signal registration preserves admission FIFO",
+          "status": "Fail",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '70010eb5-545d-497b-92f3-c35318125ee2:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 1\n    }\n  }\n",
+            "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '70010eb5-545d-497b-92f3-c35318125ee2:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 1\n    }\n  }\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:260:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:245:1"
+          }
+        },
+        {
+          "name": "raw reentrant signal capture observation",
+          "status": "Observation",
+          "evidence": {
+            "actual": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "OUTCOME_UNKNOWN",
+                "details": {
+                  "operationId": "73aa415d-a162-4fae-9287-0fe0fd0fbc2d:2"
+                }
+              }
+            },
+            "expected": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "nested": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expectedNested": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "nested",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "reentrant live signal capture preserves completed-admission order",
+          "status": "Fail",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '73aa415d-a162-4fae-9287-0fe0fd0fbc2d:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 2\n    }\n  }\n",
+            "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   error: {\n+     code: 'OUTCOME_UNKNOWN',\n+     details: {\n+       operationId: '73aa415d-a162-4fae-9287-0fe0fd0fbc2d:2'\n+     },\n+     name: 'WorkerAdapterError'\n-   value: {\n-     added: 1,\n-     changed: true,\n-     removed: 0,\n-     replaced: 0,\n-     revision: 2\n    }\n  }\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:282:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:265:1"
+          }
+        },
+        {
+          "name": "raw duplicate-host installation observation",
+          "status": "Observation",
+          "evidence": {
+            "failure": null,
+            "extraHandle": true,
+            "hostListenerCount": 4
+          }
+        },
+        {
+          "name": "one scope cannot install two worker engine owners",
+          "status": "Fail",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'INCOMPATIBLE_WORKER'\n",
+            "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'INCOMPATIBLE_WORKER'\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:292:12\n    at probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:32)\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:286:7"
+          }
+        },
+        {
+          "name": "raw duplicate-client installation observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "TIMEOUT",
+                "details": {}
+              }
+            },
+            "terminations": 1,
+            "clientListenerCount": 3
+          }
+        },
+        {
+          "name": "duplicate client cannot terminate first owner and external recovery releases guards",
+          "status": "Fail",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'TIMEOUT'\n- 'INCOMPATIBLE_WORKER'\n",
+            "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'TIMEOUT'\n- 'INCOMPATIBLE_WORKER'\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:303:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:296:1"
+          }
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-10-08T09:26:18.538Z",
+      "completedAt": "2026-10-08T09:26:18.719Z",
+      "sourceHashes": {
+        "src/adapters/worker/client.ts": "9d82d9e9455f9892faf913ee0a185bd70f8df548ba74e67e7d1459821c25daa3",
+        "src/adapters/worker/error.ts": "0cda22a21199bd30b62d2a488f7ecf541500f6ad090e8562bb8b7b69ca525e66",
+        "src/adapters/worker/host.ts": "a441fd17067d32405fe0dfae0d6435f384f350de79b04af6ea342f01b450246b",
+        "src/adapters/worker/index.ts": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d",
+        "src/adapters/worker/protocol.ts": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1",
+        "src/addons/evidence/builder.ts": "1e9494242173b639f1921ce9258146446f2246bf8845a5348e14b3e2ed02a797",
+        "src/addons/evidence/index.ts": "0335028aaa647552d046ad7a82a032c33e393ea38f8589c5d58d4f59937cd258",
+        "src/addons/evidence/occurrences.ts": "ab7c38b598c57255d3a486aee0035fffb8e69267ee29746f54c7d1a58deaa06d",
+        "src/addons/evidence/options.ts": "c8da7583abbdf29b94e886a46c193ff030382eb52f9bcf17420426d70e214b15",
+        "src/addons/evidence/providers.ts": "d4b9cf1ed76ede91725d86a675695bda3ddbe7d6829aab4d8aff6e115054e8ae",
+        "src/addons/facets/facets.ts": "c7c70433a7c063da58b172e8d67054cf412655519b12cbe361dc5ad14c93af22",
+        "src/addons/facets/index.ts": "52ffc961ad27c90e568f5e14f1554bd5ea34378ece05b344fa60ad149660fcc8",
+        "src/addons/facets/options.ts": "48277d81b23e7bd5de5fb8b38f6447766c0d107791815ce822cfea5a5c3e85fb",
+        "src/addons/inspector/diagnostics.ts": "94fd70aa463f51f7ccdb29bb22f1e485af657925c8863cf953764fc11b22107a",
+        "src/addons/inspector/index.ts": "0ef694aedd432ed6420831242e2100561abbca3c9a0bb90835a2f82888b06144",
+        "src/addons/inspector/inspector.ts": "206bd1b107680426849301b82255dda320a64f3daa6dfd523fc16571bc0b8432",
+        "src/addons/inspector/options.ts": "c05d15912b2def1730447f9b0f8e30d7b413e7efb2a4b539c0d185cca57af2f2",
+        "src/addons/inspector/output.ts": "dc5ffcc3ce842d1b9b7a6448d0c1f0914e371b6e1569db47cf9313d2f889e818",
+        "src/addons/metadata/payload.ts": "d2de877cce479a202e2e651ebbd48c5a79e3db7327b66830ba67e4d134499c8a",
+        "src/addons/phrases/options.ts": "472f301c1b2c01bcb0f2b93efb909301b68fa20825dd3e725dcc9233ae9c00ad",
+        "src/addons/phrases/source.ts": "b69e1d17086bc480378654a73acf8dea6f6dea1fdd9bb6743dd061612c475171",
+        "src/addons/phrases/store.ts": "4fefb9a5fe12109db212e1216ed19535b7804b4f9defb44e0af0be3316f101cd",
+        "src/addons/positions/options.ts": "b4ba6d9118a351e2af37db67d5334be9027cf5fc22364f8fbfe8272205133fac",
+        "src/addons/positions/store.ts": "87cf2990da01bcf6196727cd6ca72f68a53419530dadf071ccdff2b88132ad68",
+        "src/addons/snippets/index.ts": "5886043a08cebbc97bdfe69d13e47dd8a7aac4e36a5f0576dfcdcc5ad1b289e8",
+        "src/addons/snippets/snippets.ts": "08d39187382f0a0f75aeb647fb4ceee01e3086fa77853d4c3ae98ce34be9bd3c",
+        "src/core/analyzer/basic.ts": "33cdd8ab819f7c1f2cdb08ab8a269a47dbf0cf7321ac2205f29735cd61a9cef8",
+        "src/core/capabilities/capture.ts": "5aee519c2055f2a9c516e6b058181ff5adb93ce43410a208a012876d78e567b2",
+        "src/core/capabilities/participants.ts": "172c6f2169e741fc700b915c2048794e8826254cd9ea03b6f6e3254a054e8d57",
+        "src/core/capabilities/refinement.ts": "7ac25cc788cc91650a7abe6739b9637b53deb037d4a77e004828b5ec78f15301",
+        "src/core/capabilities/registration.ts": "a0c1913d261dadef58af4b5862f3e6e10e258e16bbf2b1030bf421756c03eb73",
+        "src/core/capabilities/worker-identity.ts": "deeef4653868641b868410bf6094822e1d0cf7e303834ff5bba902527fba0c4c",
+        "src/core/contracts/data.ts": "ad5cb3df86d9cda637dfe8528566197f7fce3803699470945526b822b3fc9624",
+        "src/core/contracts/options.ts": "01d4ad7fc75679042b37839498a909bdbe0ee7eeedaa653f1a2a71cb748ec5f7",
+        "src/core/contracts/query.ts": "4306a09b64b06d1455fd8536d927159045d21d8241cfe3e8a954740699d3900c",
+        "src/core/contracts/record.ts": "e34b1db54fcd7b01559eb16034d52cbb1eb9941cdf29332331b53aa96bb7701f",
+        "src/core/contracts/schema.ts": "be26cf3b11fe0d1269137eecc0af5aab98e433052db0056e995dfbbc0a3aa4b2",
+        "src/core/errors/error.ts": "a6d445660533af4344f0cd17c2469d953e3276b95cfb81c7cf4c508a2f2eb5f4",
+        "src/core/execution/engine.ts": "0d3006d1930f102858c4aad7a0c29c64ec7ec33de687ca9352dc883aaea3fd63",
+        "src/core/execution/host.ts": "d787db43ad885e3aaccbac4a4deb6c439c56b301b91a57706ebcb57cde891fe6",
+        "src/core/index/directory.ts": "bf3334da2415508fd0b7cc15c68badbdb05419de8945c39457dce796f3e5811f",
+        "src/core/index/staging.ts": "87405966d972e10a139294639ad1442bf38441f7e1746109c277e1dfc105f924",
+        "src/core/limits/limits.ts": "41c5a3ecf85128ffdfcaa6e140eea0463daafb34d7488853bda588df8d0fdf58",
+        "src/core/limits/work.ts": "7681a435b9f8298bbe89bfd0a2b70b4b5044b8d5402f25e7bf7ae85c3db61316",
+        "src/core/mutations/capture.ts": "522c2c2d2a0bf87b54ac43be5c9b29befdfd2a3650d7f39761a152a62d6cd9e1",
+        "src/core/mutations/delta.ts": "f2ec161183dac4acf8c3a6a83d112ab4858a178d5b0a64d890b7c885e5fc169e",
+        "src/core/mutations/document.ts": "e9b92a9b6237f9d276d33d8ba3e75a38211bd93a74d48b5a4f789c88c1a77206",
+        "src/core/mutations/owner.ts": "5c2f3e789802f674b77d247f720081787b4be016ad817989ef353ec683a29415",
+        "src/core/query/compile.ts": "f31dbb285f19815561e5d5b494cea6a8d86dce638b4cd94eb7ef5344993c1826",
+        "src/core/query/evaluate.ts": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670",
+        "src/core/query/search.ts": "a466c717251903b7d74add3a8ddb0e85e1279b06a71dc2efd917f36870bef37c",
+        "src/core/query/work.ts": "985f6f9386ad21c2ee5d346a75cb85f80c99ea99cd9c8ee72c3e3b7712cfbdc9",
+        "src/core/ranking/bm25.ts": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+        "src/core/ranking/page.ts": "d1f3bd789ca1b10ec946be751ab4ab7d1d53e07d4e4ce8e3be7ff20081f311d0",
+        "src/core/retrieval/expand.ts": "8347cbf829dc60cd9a243736814640f6ee4765c7f63bdcf07c64979edbf22cb0",
+        "src/core/trace/facts.ts": "b51fb6696bb78aababd4c59865b7198bd08098be09ef5fe768b371c9d7ea47c4",
+        "src/index.ts": "c7042f5d1c1c7191ed7024f1b1410081e1dcc02482ce8b93a015ff842e651ad8"
+      },
+      "summary": {
+        "pass": 12,
+        "fail": 2
+      },
+      "probes": [
+        {
+          "name": "raw live-mutation replay observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "receipt": {
+              "operationId": "a6a5cf09-8599-43f0-8d77-1bcaab2d91e9:2",
+              "status": "committed",
+              "result": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "replay",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw post-commit result-send failure observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "OUTCOME_UNKNOWN",
+                "details": {
+                  "operationId": "c284de2a-321a-48f7-97a1-8577d3d565ba:2"
+                }
+              }
+            },
+            "receipt": {
+              "operationId": "c284de2a-321a-48f7-97a1-8577d3d565ba:2",
+              "status": "committed",
+              "result": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "post-failure",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw reentrant signal registration observation",
+          "status": "Observation",
+          "evidence": {
+            "actual": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expected": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "nested": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expectedNested": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 2,
+              "hits": [
+                {
+                  "id": "nested",
+                  "score": 0
+                },
+                {
+                  "id": "outer",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "reentrant live signal registration preserves admission FIFO",
+          "status": "Fail",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   value: [Object: null prototype] {\n-   value: {\n      added: 1,\n      changed: true,\n      removed: 0,\n      replaced: 0,\n      revision: 1\n",
+            "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   value: [Object: null prototype] {\n-   value: {\n      added: 1,\n      changed: true,\n      removed: 0,\n      replaced: 0,\n      revision: 1\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:260:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:245:1"
+          }
+        },
+        {
+          "name": "raw reentrant signal capture observation",
+          "status": "Observation",
+          "evidence": {
+            "actual": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expected": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "nested": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expectedNested": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 2,
+              "hits": [
+                {
+                  "id": "nested",
+                  "score": 0
+                },
+                {
+                  "id": "outer",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "reentrant live signal capture preserves completed-admission order",
+          "status": "Fail",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   value: [Object: null prototype] {\n-   value: {\n      added: 1,\n      changed: true,\n      removed: 0,\n      replaced: 0,\n      revision: 2\n",
+            "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   value: [Object: null prototype] {\n-   value: {\n      added: 1,\n      changed: true,\n      removed: 0,\n      replaced: 0,\n      revision: 2\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:282:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:265:1"
+          }
+        },
+        {
+          "name": "raw duplicate-host installation observation",
+          "status": "Observation",
+          "evidence": {
+            "failure": {
+              "name": "WorkerAdapterError",
+              "code": "INCOMPATIBLE_WORKER"
+            },
+            "extraHandle": false,
+            "hostListenerCount": 2
+          }
+        },
+        {
+          "name": "raw duplicate-client installation observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "INCOMPATIBLE_WORKER",
+                "details": {
+                  "path": "worker.owner"
+                }
+              }
+            },
+            "terminations": 0,
+            "clientListenerCount": 3
+          }
+        }
+      ],
+      "classification": "Probe defect: strict equality compared object prototypes despite identical mutation data. Final assertions normalize plain wire records, consistent with complete-result comparisons; original errors and observations remain preserved."
+    },
+    {
+      "startedAt": "2026-10-08T09:28:41.867Z",
+      "completedAt": "2026-10-08T09:28:42.067Z",
+      "sourceHashes": {
+        "src/adapters/worker/client.ts": "9d82d9e9455f9892faf913ee0a185bd70f8df548ba74e67e7d1459821c25daa3",
+        "src/adapters/worker/error.ts": "0cda22a21199bd30b62d2a488f7ecf541500f6ad090e8562bb8b7b69ca525e66",
+        "src/adapters/worker/host.ts": "a441fd17067d32405fe0dfae0d6435f384f350de79b04af6ea342f01b450246b",
+        "src/adapters/worker/index.ts": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d",
+        "src/adapters/worker/protocol.ts": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1",
+        "src/addons/evidence/builder.ts": "1e9494242173b639f1921ce9258146446f2246bf8845a5348e14b3e2ed02a797",
+        "src/addons/evidence/index.ts": "0335028aaa647552d046ad7a82a032c33e393ea38f8589c5d58d4f59937cd258",
+        "src/addons/evidence/occurrences.ts": "ab7c38b598c57255d3a486aee0035fffb8e69267ee29746f54c7d1a58deaa06d",
+        "src/addons/evidence/options.ts": "c8da7583abbdf29b94e886a46c193ff030382eb52f9bcf17420426d70e214b15",
+        "src/addons/evidence/providers.ts": "d4b9cf1ed76ede91725d86a675695bda3ddbe7d6829aab4d8aff6e115054e8ae",
+        "src/addons/facets/facets.ts": "c7c70433a7c063da58b172e8d67054cf412655519b12cbe361dc5ad14c93af22",
+        "src/addons/facets/index.ts": "52ffc961ad27c90e568f5e14f1554bd5ea34378ece05b344fa60ad149660fcc8",
+        "src/addons/facets/options.ts": "48277d81b23e7bd5de5fb8b38f6447766c0d107791815ce822cfea5a5c3e85fb",
+        "src/addons/inspector/diagnostics.ts": "94fd70aa463f51f7ccdb29bb22f1e485af657925c8863cf953764fc11b22107a",
+        "src/addons/inspector/index.ts": "0ef694aedd432ed6420831242e2100561abbca3c9a0bb90835a2f82888b06144",
+        "src/addons/inspector/inspector.ts": "206bd1b107680426849301b82255dda320a64f3daa6dfd523fc16571bc0b8432",
+        "src/addons/inspector/options.ts": "c05d15912b2def1730447f9b0f8e30d7b413e7efb2a4b539c0d185cca57af2f2",
+        "src/addons/inspector/output.ts": "dc5ffcc3ce842d1b9b7a6448d0c1f0914e371b6e1569db47cf9313d2f889e818",
+        "src/addons/metadata/payload.ts": "d2de877cce479a202e2e651ebbd48c5a79e3db7327b66830ba67e4d134499c8a",
+        "src/addons/phrases/options.ts": "472f301c1b2c01bcb0f2b93efb909301b68fa20825dd3e725dcc9233ae9c00ad",
+        "src/addons/phrases/source.ts": "b69e1d17086bc480378654a73acf8dea6f6dea1fdd9bb6743dd061612c475171",
+        "src/addons/phrases/store.ts": "4fefb9a5fe12109db212e1216ed19535b7804b4f9defb44e0af0be3316f101cd",
+        "src/addons/positions/options.ts": "b4ba6d9118a351e2af37db67d5334be9027cf5fc22364f8fbfe8272205133fac",
+        "src/addons/positions/store.ts": "87cf2990da01bcf6196727cd6ca72f68a53419530dadf071ccdff2b88132ad68",
+        "src/addons/snippets/index.ts": "5886043a08cebbc97bdfe69d13e47dd8a7aac4e36a5f0576dfcdcc5ad1b289e8",
+        "src/addons/snippets/snippets.ts": "08d39187382f0a0f75aeb647fb4ceee01e3086fa77853d4c3ae98ce34be9bd3c",
+        "src/core/analyzer/basic.ts": "33cdd8ab819f7c1f2cdb08ab8a269a47dbf0cf7321ac2205f29735cd61a9cef8",
+        "src/core/capabilities/capture.ts": "5aee519c2055f2a9c516e6b058181ff5adb93ce43410a208a012876d78e567b2",
+        "src/core/capabilities/participants.ts": "172c6f2169e741fc700b915c2048794e8826254cd9ea03b6f6e3254a054e8d57",
+        "src/core/capabilities/refinement.ts": "7ac25cc788cc91650a7abe6739b9637b53deb037d4a77e004828b5ec78f15301",
+        "src/core/capabilities/registration.ts": "a0c1913d261dadef58af4b5862f3e6e10e258e16bbf2b1030bf421756c03eb73",
+        "src/core/capabilities/worker-identity.ts": "deeef4653868641b868410bf6094822e1d0cf7e303834ff5bba902527fba0c4c",
+        "src/core/contracts/data.ts": "ad5cb3df86d9cda637dfe8528566197f7fce3803699470945526b822b3fc9624",
+        "src/core/contracts/options.ts": "01d4ad7fc75679042b37839498a909bdbe0ee7eeedaa653f1a2a71cb748ec5f7",
+        "src/core/contracts/query.ts": "4306a09b64b06d1455fd8536d927159045d21d8241cfe3e8a954740699d3900c",
+        "src/core/contracts/record.ts": "e34b1db54fcd7b01559eb16034d52cbb1eb9941cdf29332331b53aa96bb7701f",
+        "src/core/contracts/schema.ts": "be26cf3b11fe0d1269137eecc0af5aab98e433052db0056e995dfbbc0a3aa4b2",
+        "src/core/errors/error.ts": "a6d445660533af4344f0cd17c2469d953e3276b95cfb81c7cf4c508a2f2eb5f4",
+        "src/core/execution/engine.ts": "0d3006d1930f102858c4aad7a0c29c64ec7ec33de687ca9352dc883aaea3fd63",
+        "src/core/execution/host.ts": "d787db43ad885e3aaccbac4a4deb6c439c56b301b91a57706ebcb57cde891fe6",
+        "src/core/index/directory.ts": "bf3334da2415508fd0b7cc15c68badbdb05419de8945c39457dce796f3e5811f",
+        "src/core/index/staging.ts": "87405966d972e10a139294639ad1442bf38441f7e1746109c277e1dfc105f924",
+        "src/core/limits/limits.ts": "41c5a3ecf85128ffdfcaa6e140eea0463daafb34d7488853bda588df8d0fdf58",
+        "src/core/limits/work.ts": "7681a435b9f8298bbe89bfd0a2b70b4b5044b8d5402f25e7bf7ae85c3db61316",
+        "src/core/mutations/capture.ts": "522c2c2d2a0bf87b54ac43be5c9b29befdfd2a3650d7f39761a152a62d6cd9e1",
+        "src/core/mutations/delta.ts": "f2ec161183dac4acf8c3a6a83d112ab4858a178d5b0a64d890b7c885e5fc169e",
+        "src/core/mutations/document.ts": "e9b92a9b6237f9d276d33d8ba3e75a38211bd93a74d48b5a4f789c88c1a77206",
+        "src/core/mutations/owner.ts": "5c2f3e789802f674b77d247f720081787b4be016ad817989ef353ec683a29415",
+        "src/core/query/compile.ts": "f31dbb285f19815561e5d5b494cea6a8d86dce638b4cd94eb7ef5344993c1826",
+        "src/core/query/evaluate.ts": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670",
+        "src/core/query/search.ts": "a466c717251903b7d74add3a8ddb0e85e1279b06a71dc2efd917f36870bef37c",
+        "src/core/query/work.ts": "985f6f9386ad21c2ee5d346a75cb85f80c99ea99cd9c8ee72c3e3b7712cfbdc9",
+        "src/core/ranking/bm25.ts": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+        "src/core/ranking/page.ts": "d1f3bd789ca1b10ec946be751ab4ab7d1d53e07d4e4ce8e3be7ff20081f311d0",
+        "src/core/retrieval/expand.ts": "8347cbf829dc60cd9a243736814640f6ee4765c7f63bdcf07c64979edbf22cb0",
+        "src/core/trace/facts.ts": "b51fb6696bb78aababd4c59865b7198bd08098be09ef5fe768b371c9d7ea47c4",
+        "src/index.ts": "c7042f5d1c1c7191ed7024f1b1410081e1dcc02482ce8b93a015ff842e651ad8"
+      },
+      "summary": {
+        "pass": 13,
+        "fail": 1
+      },
+      "probes": [
+        {
+          "name": "raw live-mutation replay observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "receipt": {
+              "operationId": "3e650400-86af-4772-b68c-136d2bdc0275:2",
+              "status": "committed",
+              "result": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "replay",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw post-commit result-send failure observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "OUTCOME_UNKNOWN",
+                "details": {
+                  "operationId": "ffade509-9a0a-4e2e-abb8-a41358b67b6a:2"
+                }
+              }
+            },
+            "receipt": {
+              "operationId": "ffade509-9a0a-4e2e-abb8-a41358b67b6a:2",
+              "status": "committed",
+              "result": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 1,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "post-failure",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw reentrant signal registration observation",
+          "status": "Observation",
+          "evidence": {
+            "actual": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expected": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "nested": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expectedNested": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 2,
+              "hits": [
+                {
+                  "id": "nested",
+                  "score": 0
+                },
+                {
+                  "id": "outer",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw reentrant signal capture observation",
+          "status": "Observation",
+          "evidence": {
+            "actual": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expected": {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "nested": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "expectedNested": {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            "state": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 2,
+              "hits": [
+                {
+                  "id": "nested",
+                  "score": 0
+                },
+                {
+                  "id": "outer",
+                  "score": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "raw duplicate-host installation observation",
+          "status": "Observation",
+          "evidence": {
+            "failure": {
+              "name": "WorkerAdapterError",
+              "code": "INCOMPATIBLE_WORKER"
+            },
+            "extraHandle": false,
+            "hostListenerCount": 2
+          }
+        },
+        {
+          "name": "raw reentrant-host installation observation",
+          "status": "Observation",
+          "evidence": {
+            "nestedAccepted": true,
+            "nestedFailure": null,
+            "hostListenerCount": 4
+          }
+        },
+        {
+          "name": "one scope cannot install two worker engine owners",
+          "status": "Fail",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'INCOMPATIBLE_WORKER'\n",
+            "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'INCOMPATIBLE_WORKER'\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:310:12\n    at async probe (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:77:26)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3001-review-probe.mjs:288:1"
+          }
+        },
+        {
+          "name": "raw duplicate-client installation observation",
+          "status": "Observation",
+          "evidence": {
+            "result": {
+              "error": {
+                "name": "WorkerAdapterError",
+                "code": "INCOMPATIBLE_WORKER",
+                "details": {
+                  "path": "worker.owner"
+                }
+              }
+            },
+            "terminations": 0,
+            "clientListenerCount": 3
+          }
+        }
+      ]
     }
   ],
   "sourceHashes": {
-    "src/adapters/worker/client.ts": "71383536e44394bb215c7507e6e34d77b7398dd26b1f1046582ebba125f66506",
+    "src/adapters/worker/client.ts": "9d82d9e9455f9892faf913ee0a185bd70f8df548ba74e67e7d1459821c25daa3",
     "src/adapters/worker/error.ts": "0cda22a21199bd30b62d2a488f7ecf541500f6ad090e8562bb8b7b69ca525e66",
-    "src/adapters/worker/host.ts": "b68f03a2e12f4e9c4a02fd7ff41b2d467fa88e5abca45792a2eacb24160508e4",
+    "src/adapters/worker/host.ts": "8fe613d8725873dacc945bec8a985f57944727d4e4023576de551db0be91701f",
     "src/adapters/worker/index.ts": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d",
     "src/adapters/worker/protocol.ts": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1",
     "src/addons/evidence/builder.ts": "1e9494242173b639f1921ce9258146446f2246bf8845a5348e14b3e2ed02a797",
@@ -1142,9 +2149,9 @@
     "src/core/trace/facts.ts": "b51fb6696bb78aababd4c59865b7198bd08098be09ef5fe768b371c9d7ea47c4",
     "src/index.ts": "c7042f5d1c1c7191ed7024f1b1410081e1dcc02482ce8b93a015ff842e651ad8"
   },
-  "completedAt": "2026-10-08T09:10:22.597Z",
+  "completedAt": "2026-10-08T09:31:36.932Z",
   "summary": {
-    "pass": 10,
-    "fail": 4
+    "pass": 14,
+    "fail": 0
   }
 }

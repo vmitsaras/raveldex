@@ -20,6 +20,13 @@ const liveScopes = new WeakSet<WorkerScope>();
  * trusted local addon factories; executable handles never cross the boundary. */
 export function serveRaveldexWorker(scope: WorkerScope, options: WorkerHostOptions = {}): WorkerHostHandle {
   if (liveScopes.has(scope)) throw new WorkerAdapterError('INCOMPATIBLE_WORKER', { path: 'worker.owner' });
+  // Reserve ownership before any trusted live-handle access can reenter setup.
+  liveScopes.add(scope);
+  try { return installWorkerHost(scope, options); }
+  catch (error) { liveScopes.delete(scope); throw error; }
+}
+
+function installWorkerHost(scope: WorkerScope, options: WorkerHostOptions): WorkerHostHandle {
   const data = ownObject(options, 'INVALID_OPTIONS', 'worker.host', new Admission(64));
   keysOnly(data, ['addons', 'maxMessageBytes'], 'INVALID_OPTIONS', 'worker.host');
   const addons = Object.hasOwn(data, 'addons') ? ownArray(data.addons, 32, 'INVALID_OPTIONS', 'worker.host.addons', new Admission(64)) as AddonRegistration[] : [];
@@ -155,7 +162,6 @@ export function serveRaveldexWorker(scope: WorkerScope, options: WorkerHostOptio
     disposal = (async () => { try { await owner?.dispose(); await Promise.all([...inflight.values()]); } finally { cleanup(); } })();
     return disposal;
   }
-  liveScopes.add(scope);
   try { addListener('message', message); addListener('messageerror', failure); }
   catch (error) { cleanup(); throw error; }
   return Object.freeze({ dispose });

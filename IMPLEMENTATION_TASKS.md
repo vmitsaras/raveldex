@@ -578,7 +578,7 @@ Deliver a usable optional native search interface and Inspector over real docume
 
 **One-owner module-worker adapter**
 
-**Milestone:** N3 · **Status:** `in_progress` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/21)
+**Milestone:** N3 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/21)
 
 **Dependencies:** [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006)
 
@@ -610,7 +610,12 @@ Host the complete native engine in one module worker through validated transport
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-3001.md](docs/evidence/RX-3001.md)
+- [docs/evidence/RX-3001-review.md](docs/evidence/RX-3001-review.md)
+- [docs/evidence/RX-3001-browser.json](docs/evidence/RX-3001-browser.json)
+- [docs/evidence/RX-3001-package.json](docs/evidence/RX-3001-package.json)
+- [docs/evidence/RX-3001-transport-work.json](docs/evidence/RX-3001-transport-work.json)
+- [docs/evidence/RX-3001-review-probe.json](docs/evidence/RX-3001-review-probe.json)
 
 
 ## RX-3002

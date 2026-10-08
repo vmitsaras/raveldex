@@ -56,6 +56,64 @@
         "todo": 0
       },
       "status": "Fail"
+    },
+    {
+      "tag": "singleton-before",
+      "rawPath": "docs/evidence/RX-3001-browser-singleton-before-raw.json.gz",
+      "rawSha256": "658fc220f1458ab4d691c9e079d693d0660a4575405ae038cd5b26eafb47ab98",
+      "decodedBytes": 152941,
+      "gzipBytes": 8855,
+      "summary": {
+        "passed": 0,
+        "failed": 1,
+        "semanticCompleteComparisons": 0
+      },
+      "failures": [
+        {
+          "name": "one scope and endpoint permit exactly one live or initializing worker owner",
+          "status": "Fail",
+          "evidence": "Scenario did not return successful observations; see terminal failure."
+        }
+      ],
+      "terminalOutcome": {
+        "tests": 1,
+        "pass": 0,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "status": "Fail",
+      "classification": "Confirmed runtime lifecycle defect; test-name selection executed exactly one scenario."
+    },
+    {
+      "tag": "reentrant-before",
+      "rawPath": "docs/evidence/RX-3001-browser-reentrant-before-raw.json.gz",
+      "rawSha256": "7d27a984e7b994dd21209ff78b01325c1faafad12bf8f524647a35d5301bdbf7",
+      "decodedBytes": 154592,
+      "gzipBytes": 9239,
+      "summary": {
+        "passed": 0,
+        "failed": 1,
+        "semanticCompleteComparisons": 0
+      },
+      "failures": [
+        {
+          "name": "reentrant caller signal preserves direct FIFO admission and both mutation outcomes",
+          "status": "Fail",
+          "error": "Error: page.evaluate: Error: reentrant signal callback preserves direct FIFO {\"results\":[{\"error\":{\"name\":\"WorkerAdapterError\",\"code\":\"OUTCOME_UNKNOWN\",\"details\":{\"operationId\":\"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2\"},\"operationId\":\"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2\",\"coreClass\":false,\"adapterClass\":true}},{\"value\":{\"revision\":1,\"changed\":true,\"added\":1,\"replaced\":0,\"removed\":0}}],\"state\":{\"revision\":1,\"model\":\"raveldex-bm25-v1\",\"completeness\":\"complete\",\"total\":1,\"hits\":[{\"id\":\"nested\",\"score\":0}]},\"remainingSignalListeners\":0}: {\"results\":[{\"error\":{\"name\":\"WorkerAdapterError\",\"code\":\"OUTCOME_UNKNOWN\",\"details\":{\"operationId\":\"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2\"},\"operationId\":\"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2\",\"coreClass\":false,\"adapterClass\":true}},{\"value\":{\"revision\":1,\"changed\":true,\"added\":1,\"replaced\":0,\"removed\":0}}],\"state\":{\"revision\":1,\"model\":\"raveldex-bm25-v1\",\"completeness\":\"complete\",\"total\":1,\"hits\":[{\"id\":\"nested\",\"score\":0}]},\"remainingSignalListeners\":0} !== {\"results\":[{\"value\":{\"revision\":1,\"changed\":true,\"added\":1,\"replaced\":0,\"removed\":0}},{\"value\":{\"revision\":2,\"changed\":true,\"added\":1,\"replaced\":0,\"removed\":0}}],\"state\":{\"revision\":2,\"model\":\"raveldex-bm25-v1\",\"completeness\":\"complete\",\"total\":2,\"hits\":[{\"id\":\"nested\",\"score\":0},{\"id\":\"outer\",\"score\":0}]},\"remainingSignalListeners\":0}\n    at C (http://127.0.0.1:50161/fixture.mjs:1:136377)\n    at Object.reentrantSignalFIFO (http://127.0.0.1:50161/fixture.mjs:1:139873)\n    at async <anonymous>:329:30"
+        }
+      ],
+      "terminalOutcome": {
+        "tests": 1,
+        "pass": 0,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "status": "Fail",
+      "classification": "Confirmed runtime lifecycle defect; test-name selection executed exactly one scenario."
     }
   ]
 }

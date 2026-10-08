@@ -22,6 +22,12 @@ try {
     sourceHashes: previous.sourceHashes, summary: previous.summary,
     probes: previous.probes.filter(row => row.status === 'Fail' || row.status === 'Observation') });
 } catch { report.failedExecutions = []; }
+for (const previous of report.failedExecutions) {
+  const failures = previous.probes.filter(row => row.status === 'Fail');
+  if (failures.length && failures.every(row => row.error?.message.includes('[Object: null prototype]'))) {
+    previous.classification = 'Probe defect: strict equality compared object prototypes despite identical mutation data. Final assertions normalize plain wire records, consistent with complete-result comparisons; original errors and observations remain preserved.';
+  }
+}
 const bundled = await build({ absWorkingDir: root, stdin: { contents: `
 export { createRaveldex } from './src/index.ts';
 export { createWorkerRaveldex } from './src/adapters/worker/index.ts';
@@ -257,7 +263,9 @@ await probe('reentrant live signal registration preserves admission FIFO', async
     const nested = await remoteNested, expectedNested = await directNested;
     const state = await remote.engine.search({ kind: 'all' });
     report.probes.push({ name: 'raw reentrant signal registration observation', status: 'Observation', evidence: { actual, expected, nested, expectedNested, state } });
-    assert.deepEqual(actual, expected); assert.deepEqual(nested, expectedNested);
+    // Public immutable wire records have a null prototype; compare all JSON
+    // data values, as in the complete-result parity checks above.
+    assert.deepEqual(copy(actual), copy(expected)); assert.deepEqual(copy(nested), copy(expectedNested));
     assert.deepEqual([state.revision, state.total], [2, 2]);
     return { actual, nested, revision: state.revision, total: state.total };
   } finally { await remote.close(); await direct.dispose(); }
@@ -279,7 +287,7 @@ await probe('reentrant live signal capture preserves completed-admission order',
     const actual = await outcome(outer), expected = await outcome(directOuter), nested = await remoteNested, expectedNested = await directNested;
     const state = await remote.engine.search({ kind: 'all' });
     report.probes.push({ name: 'raw reentrant signal capture observation', status: 'Observation', evidence: { actual, expected, nested, expectedNested, state } });
-    assert.deepEqual(actual, expected); assert.deepEqual(nested, expectedNested); assert.deepEqual([state.revision, state.total], [2, 2]);
+    assert.deepEqual(copy(actual), copy(expected)); assert.deepEqual(copy(nested), copy(expectedNested)); assert.deepEqual([state.revision, state.total], [2, 2]);
     return { actual, nested, revision: state.revision, total: state.total };
   } finally { await remote.close(); await direct.dispose(); }
 });
@@ -290,8 +298,35 @@ await probe('one scope cannot install two worker engine owners', async () => {
     try { second = api.serveRaveldexWorker(transport.scope); } catch (error) { failure = { name: error.name, code: error.code }; }
     report.probes.push({ name: 'raw duplicate-host installation observation', status: 'Observation', evidence: { failure: failure ?? null, extraHandle: !!second, hostListenerCount: transport.count('host') } });
     assert.equal(failure?.code, 'INCOMPATIBLE_WORKER'); assert.equal(transport.count('host'), 2);
-    return { failure, hostListenerCount: 2 };
   } finally { await second?.dispose(); await first.dispose(); }
+  // The public scope is structural. Its trusted live method property can
+  // reenter setup before bind; owner reservation must already be present.
+  const listeners = new Set(); let reentered = false, nested, nestedFailure;
+  const scope = {
+    get postMessage() {
+      if (!reentered) { reentered = true; try { nested = api.serveRaveldexWorker(scope); } catch (error) { nestedFailure = { name: error.name, code: error.code }; } }
+      return () => {};
+    },
+    addEventListener(type, listener) { listeners.add(listener); },
+    removeEventListener(type, listener) { listeners.delete(listener); },
+  };
+  const outer = api.serveRaveldexWorker(scope);
+  try {
+    report.probes.push({ name: 'raw reentrant-host installation observation', status: 'Observation', evidence: { nestedAccepted: !!nested, nestedFailure: nestedFailure ?? null, hostListenerCount: listeners.size } });
+    assert.equal(nestedFailure?.code, 'INCOMPATIBLE_WORKER'); assert.equal(listeners.size, 2);
+  } finally { await nested?.dispose(); await outer.dispose(); }
+  assert.equal(listeners.size, 0);
+  let rejectBinding = true;
+  const failingScope = {
+    get postMessage() { if (rejectBinding) throw new Error('Injected host method-binding failure'); return () => {}; },
+    addEventListener(type, listener) { listeners.add(listener); },
+    removeEventListener(type, listener) { listeners.delete(listener); },
+  };
+  assert.throws(() => api.serveRaveldexWorker(failingScope), /Injected host method-binding failure/);
+  rejectBinding = false;
+  const recovered = api.serveRaveldexWorker(failingScope);
+  assert.equal(listeners.size, 2); await recovered.dispose(); assert.equal(listeners.size, 0);
+  return { failure, hostListenerCount: 2, methodBindingReentryRejected: true, failedBindingGuardReleased: true, remainingListeners: 0 };
 });
 await probe('duplicate client cannot terminate first owner and external recovery releases guards', async () => {
   const remote = await open({ ownership: 'external' });

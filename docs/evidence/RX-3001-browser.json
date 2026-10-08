@@ -1,6 +1,6 @@
 {
   "kind": "raveldex-packed-module-worker-v1",
-  "startedAt": "2026-10-08T09:01:52.928Z",
+  "startedAt": "2026-10-08T09:34:53.526Z",
   "environment": {
     "node": "v24.21.0",
     "os": {
@@ -25,6 +25,198 @@
   },
   "records": [
     {
+      "name": "reentrant caller signal preserves direct FIFO admission and both mutation outcomes",
+      "status": "Pass",
+      "evidence": {
+        "expected": {
+          "results": [
+            {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            }
+          ],
+          "state": {
+            "revision": 2,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 2,
+            "hits": [
+              {
+                "id": "nested",
+                "score": 0
+              },
+              {
+                "id": "outer",
+                "score": 0
+              }
+            ]
+          },
+          "remainingSignalListeners": 0
+        },
+        "actual": {
+          "results": [
+            {
+              "value": {
+                "revision": 1,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            },
+            {
+              "value": {
+                "revision": 2,
+                "changed": true,
+                "added": 1,
+                "replaced": 0,
+                "removed": 0
+              }
+            }
+          ],
+          "state": {
+            "revision": 2,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 2,
+            "hits": [
+              {
+                "id": "nested",
+                "score": 0
+              },
+              {
+                "id": "outer",
+                "score": 0
+              }
+            ]
+          },
+          "remainingSignalListeners": 0
+        },
+        "fullComparisons": 3,
+        "transport": {
+          "requests": 5,
+          "responses": 5,
+          "bytesSent": 2364,
+          "bytesReceived": 2308,
+          "largestSentEnvelope": 1713,
+          "largestReceivedEnvelope": 1580,
+          "actualPostMessageCalls": 5,
+          "actualPostedEnvelopeBytes": 2364,
+          "actualWorkerResponseEvents": 5,
+          "clientDeliveredMessageEvents": 5,
+          "deliveredEnvelopeBytes": 2308,
+          "listenerCount": 0,
+          "terminated": 1
+        },
+        "trigger": "Structural user signal.addEventListener synchronously invokes nested ordinary add during outer call admission"
+      }
+    },
+    {
+      "name": "one scope and endpoint permit exactly one live or initializing worker owner",
+      "status": "Pass",
+      "evidence": {
+        "host": {
+          "fixture": "duplicate-host",
+          "before": 2,
+          "after": 2,
+          "second": {
+            "name": "WorkerAdapterError",
+            "code": "INCOMPATIBLE_WORKER"
+          }
+        },
+        "duplicate": {
+          "error": {
+            "name": "WorkerAdapterError",
+            "code": "INCOMPATIBLE_WORKER",
+            "details": {
+              "path": "worker.owner"
+            },
+            "coreClass": false,
+            "adapterClass": true
+          }
+        },
+        "state": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1,
+          "hits": [
+            {
+              "id": "first-owner",
+              "score": 0.28768207245178085
+            }
+          ]
+        },
+        "simultaneous": {
+          "error": {
+            "name": "WorkerAdapterError",
+            "code": "INCOMPATIBLE_WORKER",
+            "details": {
+              "path": "worker.owner"
+            },
+            "coreClass": false,
+            "adapterClass": true
+          }
+        },
+        "concurrentState": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1,
+          "hits": [
+            {
+              "id": "concurrent-owner",
+              "score": 0.28768207245178085
+            }
+          ]
+        },
+        "firstOwner": {
+          "requests": 4,
+          "responses": 5,
+          "bytesSent": 2171,
+          "bytesReceived": 2246,
+          "largestSentEnvelope": 1713,
+          "largestReceivedEnvelope": 1580,
+          "actualPostMessageCalls": 4,
+          "actualPostedEnvelopeBytes": 2171,
+          "actualWorkerResponseEvents": 5,
+          "clientDeliveredMessageEvents": 4,
+          "deliveredEnvelopeBytes": 2129,
+          "listenerCount": 0,
+          "terminated": 1
+        },
+        "concurrentOwner": {
+          "requests": 4,
+          "responses": 4,
+          "bytesSent": 2178,
+          "bytesReceived": 2134,
+          "largestSentEnvelope": 1713,
+          "largestReceivedEnvelope": 1580,
+          "actualPostMessageCalls": 4,
+          "actualPostedEnvelopeBytes": 2178,
+          "actualWorkerResponseEvents": 4,
+          "clientDeliveredMessageEvents": 4,
+          "deliveredEnvelopeBytes": 2134,
+          "listenerCount": 0,
+          "terminated": 1
+        }
+      }
+    },
+    {
       "name": "real source worker has complete direct/core/add-on query and atomic mutation parity",
       "status": "Pass",
       "evidence": {
@@ -35,12 +227,12 @@
         "transport": {
           "requests": 138,
           "responses": 138,
-          "bytesSent": 48548,
+          "bytesSent": 48543,
           "bytesReceived": 230261,
           "largestSentEnvelope": 9661,
           "largestReceivedEnvelope": 13420,
           "actualPostMessageCalls": 138,
-          "actualPostedEnvelopeBytes": 48548,
+          "actualPostedEnvelopeBytes": 48543,
           "actualWorkerResponseEvents": 138,
           "clientDeliveredMessageEvents": 138,
           "deliveredEnvelopeBytes": 230261,
@@ -50,6 +242,7 @@
         "rawCompleteResults": {
           "count": 136,
           "sha256": "22f6d784663c1de50a826d4f3f653489288f90bddfbbbdf05d455e368238cf05",
+          "serialization": "Python compact JSON UTF-8, ensure_ascii=False",
           "rawRecordName": "real source worker has complete direct/core/add-on query and atomic mutation parity"
         }
       }
@@ -65,12 +258,12 @@
         "transport": {
           "requests": 138,
           "responses": 138,
-          "bytesSent": 50033,
+          "bytesSent": 50131,
           "bytesReceived": 238044,
           "largestSentEnvelope": 11220,
           "largestReceivedEnvelope": 13809,
           "actualPostMessageCalls": 138,
-          "actualPostedEnvelopeBytes": 50033,
+          "actualPostedEnvelopeBytes": 50131,
           "actualWorkerResponseEvents": 138,
           "clientDeliveredMessageEvents": 138,
           "deliveredEnvelopeBytes": 238044,
@@ -80,6 +273,7 @@
         "rawCompleteResults": {
           "count": 136,
           "sha256": "5525973458ee93be083837ea2ae12e9f494b5aad84debe3557ae2496a7f8c503",
+          "serialization": "Python compact JSON UTF-8, ensure_ascii=False",
           "rawRecordName": "real stored positions/offsets worker has complete semantic parity"
         }
       }
@@ -95,12 +289,12 @@
         "transport": {
           "requests": 138,
           "responses": 138,
-          "bytesSent": 49813,
+          "bytesSent": 49737,
           "bytesReceived": 235552,
           "largestSentEnvelope": 10936,
           "largestReceivedEnvelope": 13671,
           "actualPostMessageCalls": 138,
-          "actualPostedEnvelopeBytes": 49813,
+          "actualPostedEnvelopeBytes": 49737,
           "actualWorkerResponseEvents": 138,
           "clientDeliveredMessageEvents": 138,
           "deliveredEnvelopeBytes": 235552,
@@ -110,6 +304,7 @@
         "rawCompleteResults": {
           "count": 136,
           "sha256": "be6807bf1f99f547a0ded004452803c51ba7f29d4c4682e7b6f4a34850eca75f",
+          "serialization": "Python compact JSON UTF-8, ensure_ascii=False",
           "rawRecordName": "real mixed phrase worker has complete semantic parity"
         }
       }
@@ -249,12 +444,12 @@
         "transport": {
           "requests": 6,
           "responses": 6,
-          "bytesSent": 3991,
+          "bytesSent": 3997,
           "bytesReceived": 2296,
           "largestSentEnvelope": 1411,
           "largestReceivedEnvelope": 1385,
           "actualPostMessageCalls": 6,
-          "actualPostedEnvelopeBytes": 3991,
+          "actualPostedEnvelopeBytes": 3997,
           "actualWorkerResponseEvents": 6,
           "clientDeliveredMessageEvents": 6,
           "deliveredEnvelopeBytes": 2296,
@@ -634,12 +829,12 @@
         "transport": {
           "requests": 5,
           "responses": 5,
-          "bytesSent": 2798,
+          "bytesSent": 2793,
           "bytesReceived": 2475,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 5,
-          "actualPostedEnvelopeBytes": 2798,
+          "actualPostedEnvelopeBytes": 2793,
           "actualWorkerResponseEvents": 5,
           "clientDeliveredMessageEvents": 7,
           "deliveredEnvelopeBytes": 3068,
@@ -650,6 +845,7 @@
         "rawCompleteResults": {
           "count": 2,
           "sha256": "10bb8fa3db3eed7a2c4c564762a07369d10b211be86d206d09baaf69aa7145e6",
+          "serialization": "Python compact JSON UTF-8, ensure_ascii=False",
           "rawRecordName": "real replies reordered and duplicated retain exact operation identity"
         }
       }
@@ -668,7 +864,7 @@
           }
         },
         "receipt": {
-          "operationId": "bbdec1bd-1101-4e67-ba5e-945d8fc00e9c:2",
+          "operationId": "f42f9843-f07e-4945-80de-f6ecebdec335:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -694,12 +890,12 @@
         "transport": {
           "requests": 5,
           "responses": 5,
-          "bytesSent": 3367,
+          "bytesSent": 3370,
           "bytesReceived": 2374,
           "largestSentEnvelope": 1747,
           "largestReceivedEnvelope": 1578,
           "actualPostMessageCalls": 6,
-          "actualPostedEnvelopeBytes": 4553,
+          "actualPostedEnvelopeBytes": 4559,
           "actualWorkerResponseEvents": 5,
           "clientDeliveredMessageEvents": 5,
           "deliveredEnvelopeBytes": 2374,
@@ -717,15 +913,15 @@
             "name": "WorkerAdapterError",
             "code": "OUTCOME_UNKNOWN",
             "details": {
-              "operationId": "4144319d-5f14-4a62-a704-5c0d329bf5a6:2"
+              "operationId": "cbf30105-9f20-4a69-b94c-ff83eaafc7e7:2"
             },
-            "operationId": "4144319d-5f14-4a62-a704-5c0d329bf5a6:2",
+            "operationId": "cbf30105-9f20-4a69-b94c-ff83eaafc7e7:2",
             "coreClass": false,
             "adapterClass": true
           }
         },
         "receipt": {
-          "operationId": "4144319d-5f14-4a62-a704-5c0d329bf5a6:2",
+          "operationId": "cbf30105-9f20-4a69-b94c-ff83eaafc7e7:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -751,12 +947,12 @@
         "transport": {
           "requests": 5,
           "responses": 5,
-          "bytesSent": 2333,
+          "bytesSent": 2339,
           "bytesReceived": 2456,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 5,
-          "actualPostedEnvelopeBytes": 2333,
+          "actualPostedEnvelopeBytes": 2339,
           "actualWorkerResponseEvents": 5,
           "clientDeliveredMessageEvents": 5,
           "deliveredEnvelopeBytes": 2456,
@@ -779,7 +975,7 @@
           }
         },
         "receipt": {
-          "operationId": "4d3c76b4-648b-4576-9d8c-c4a364d91af2:2",
+          "operationId": "649f2dc6-fff8-461f-9c85-63c161ce3ae5:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -816,15 +1012,15 @@
             "name": "WorkerAdapterError",
             "code": "OUTCOME_UNKNOWN",
             "details": {
-              "operationId": "e2e285e2-406f-46c7-bf84-5b27675050eb:2"
+              "operationId": "7db4d008-ad4b-48fd-b41f-8ac68203ffa0:2"
             },
-            "operationId": "e2e285e2-406f-46c7-bf84-5b27675050eb:2",
+            "operationId": "7db4d008-ad4b-48fd-b41f-8ac68203ffa0:2",
             "coreClass": false,
             "adapterClass": true
           }
         },
         "receipt": {
-          "operationId": "e2e285e2-406f-46c7-bf84-5b27675050eb:2",
+          "operationId": "7db4d008-ad4b-48fd-b41f-8ac68203ffa0:2",
           "status": "committed",
           "result": {
             "revision": 1,
@@ -849,12 +1045,12 @@
         "transport": {
           "requests": 5,
           "responses": 5,
-          "bytesSent": 2331,
+          "bytesSent": 2334,
           "bytesReceived": 2398,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 5,
-          "actualPostedEnvelopeBytes": 2331,
+          "actualPostedEnvelopeBytes": 2334,
           "actualWorkerResponseEvents": 5,
           "clientDeliveredMessageEvents": 4,
           "deliveredEnvelopeBytes": 2221,
@@ -868,14 +1064,14 @@
       "status": "Pass",
       "evidence": {
         "mutations": 257,
-        "firstOperationId": "077eaba5-e1b5-498b-bf9e-0a0fb7d0a31b:2",
+        "firstOperationId": "f4204b21-719a-4a32-b288-566dd2f94d52:2",
         "expired": {
-          "operationId": "077eaba5-e1b5-498b-bf9e-0a0fb7d0a31b:2",
+          "operationId": "f4204b21-719a-4a32-b288-566dd2f94d52:2",
           "status": "expired"
         },
         "newest": [
           {
-            "operationId": "077eaba5-e1b5-498b-bf9e-0a0fb7d0a31b:257",
+            "operationId": "f4204b21-719a-4a32-b288-566dd2f94d52:257",
             "status": "committed",
             "result": {
               "revision": 1,
@@ -886,7 +1082,7 @@
             }
           },
           {
-            "operationId": "077eaba5-e1b5-498b-bf9e-0a0fb7d0a31b:259",
+            "operationId": "f4204b21-719a-4a32-b288-566dd2f94d52:259",
             "status": "committed",
             "result": {
               "revision": 1,
@@ -900,12 +1096,12 @@
         "transport": {
           "requests": 262,
           "responses": 262,
-          "bytesSent": 45388,
+          "bytesSent": 45259,
           "bytesReceived": 49370,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 262,
-          "actualPostedEnvelopeBytes": 45388,
+          "actualPostedEnvelopeBytes": 45259,
           "actualWorkerResponseEvents": 262,
           "clientDeliveredMessageEvents": 262,
           "deliveredEnvelopeBytes": 49370,
@@ -930,7 +1126,7 @@
           }
         },
         "receipt": {
-          "operationId": "6dd92070-f9d5-4f50-8c04-bf69124ec86b:2",
+          "operationId": "93988c8f-33b3-4776-9c0b-bdc28588b33e:2",
           "status": "rejected",
           "error": {
             "name": "RaveldexError",
@@ -980,12 +1176,12 @@
         "transport": {
           "requests": 8,
           "responses": 7,
-          "bytesSent": 4239071,
+          "bytesSent": 4239068,
           "bytesReceived": 2790,
           "largestSentEnvelope": 2118303,
           "largestReceivedEnvelope": 1578,
           "actualPostMessageCalls": 8,
-          "actualPostedEnvelopeBytes": 4239071,
+          "actualPostedEnvelopeBytes": 4239068,
           "actualWorkerResponseEvents": 7,
           "clientDeliveredMessageEvents": 7,
           "deliveredEnvelopeBytes": 2790,
@@ -1012,7 +1208,7 @@
           }
         },
         "receipt": {
-          "operationId": "798a57bd-c656-43be-99f7-e9498c4a2455:2",
+          "operationId": "de18d6cc-1cf9-4e31-97d6-6171b1fd15d2:2",
           "status": "rejected",
           "error": {
             "name": "RaveldexError",
@@ -1032,12 +1228,12 @@
         "transport": {
           "requests": 5,
           "responses": 5,
-          "bytesSent": 2363,
+          "bytesSent": 2369,
           "bytesReceived": 2402,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 5,
-          "actualPostedEnvelopeBytes": 2363,
+          "actualPostedEnvelopeBytes": 2369,
           "actualWorkerResponseEvents": 5,
           "clientDeliveredMessageEvents": 5,
           "deliveredEnvelopeBytes": 2402,
@@ -1062,12 +1258,12 @@
         "transport": {
           "requests": 2,
           "responses": 1,
-          "bytesSent": 1870,
+          "bytesSent": 1872,
           "bytesReceived": 1580,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 2,
-          "actualPostedEnvelopeBytes": 1870,
+          "actualPostedEnvelopeBytes": 1872,
           "actualWorkerResponseEvents": 1,
           "clientDeliveredMessageEvents": 1,
           "deliveredEnvelopeBytes": 1580,
@@ -1100,12 +1296,12 @@
         "transport": {
           "requests": 4,
           "responses": 4,
-          "bytesSent": 2148,
+          "bytesSent": 2145,
           "bytesReceived": 2107,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 4,
-          "actualPostedEnvelopeBytes": 2148,
+          "actualPostedEnvelopeBytes": 2145,
           "actualWorkerResponseEvents": 4,
           "clientDeliveredMessageEvents": 3,
           "deliveredEnvelopeBytes": 1904,
@@ -1163,12 +1359,12 @@
           "transport": {
             "requests": 3,
             "responses": 3,
-            "bytesSent": 2530,
+            "bytesSent": 2528,
             "bytesReceived": 2076,
             "largestSentEnvelope": 1713,
             "largestReceivedEnvelope": 1580,
             "actualPostMessageCalls": 3,
-            "actualPostedEnvelopeBytes": 2530,
+            "actualPostedEnvelopeBytes": 2528,
             "actualWorkerResponseEvents": 3,
             "clientDeliveredMessageEvents": 3,
             "deliveredEnvelopeBytes": 2076,
@@ -1221,12 +1417,12 @@
           "transport": {
             "requests": 3,
             "responses": 3,
-            "bytesSent": 2526,
+            "bytesSent": 2530,
             "bytesReceived": 2076,
             "largestSentEnvelope": 1713,
             "largestReceivedEnvelope": 1580,
             "actualPostMessageCalls": 3,
-            "actualPostedEnvelopeBytes": 2526,
+            "actualPostedEnvelopeBytes": 2530,
             "actualWorkerResponseEvents": 3,
             "clientDeliveredMessageEvents": 3,
             "deliveredEnvelopeBytes": 2077,
@@ -1250,12 +1446,12 @@
           "transport": {
             "requests": 3,
             "responses": 3,
-            "bytesSent": 2531,
+            "bytesSent": 2530,
             "bytesReceived": 2076,
             "largestSentEnvelope": 1713,
             "largestReceivedEnvelope": 1580,
             "actualPostMessageCalls": 3,
-            "actualPostedEnvelopeBytes": 2531,
+            "actualPostedEnvelopeBytes": 2530,
             "actualWorkerResponseEvents": 3,
             "clientDeliveredMessageEvents": 3,
             "deliveredEnvelopeBytes": 2080,
@@ -1308,12 +1504,12 @@
           "transport": {
             "requests": 3,
             "responses": 3,
-            "bytesSent": 2533,
+            "bytesSent": 2530,
             "bytesReceived": 2076,
             "largestSentEnvelope": 1713,
             "largestReceivedEnvelope": 1580,
             "actualPostMessageCalls": 3,
-            "actualPostedEnvelopeBytes": 2533,
+            "actualPostedEnvelopeBytes": 2530,
             "actualWorkerResponseEvents": 3,
             "clientDeliveredMessageEvents": 3,
             "deliveredEnvelopeBytes": 2081,
@@ -1457,12 +1653,12 @@
         "transport": {
           "requests": 5,
           "responses": 5,
-          "bytesSent": 10405,
+          "bytesSent": 10411,
           "bytesReceived": 2418,
           "largestSentEnvelope": 8192,
           "largestReceivedEnvelope": 1577,
           "actualPostMessageCalls": 5,
-          "actualPostedEnvelopeBytes": 10405,
+          "actualPostedEnvelopeBytes": 10411,
           "actualWorkerResponseEvents": 5,
           "clientDeliveredMessageEvents": 5,
           "deliveredEnvelopeBytes": 11445,
@@ -1484,9 +1680,9 @@
               "name": "WorkerAdapterError",
               "code": "OUTCOME_UNKNOWN",
               "details": {
-                "operationId": "ce78fd47-8c93-4259-8e25-280ee06841e9:2"
+                "operationId": "a16e1c0f-0dba-40ed-a332-5879a7f76d79:2"
               },
-              "operationId": "ce78fd47-8c93-4259-8e25-280ee06841e9:2",
+              "operationId": "a16e1c0f-0dba-40ed-a332-5879a7f76d79:2",
               "coreClass": false,
               "adapterClass": true
             }
@@ -1523,9 +1719,9 @@
               "name": "WorkerAdapterError",
               "code": "OUTCOME_UNKNOWN",
               "details": {
-                "operationId": "3ad21583-7203-4396-bf65-0b75ed3fe695:2"
+                "operationId": "318ad2b7-c8db-4dd7-89f4-98c88611fd98:2"
               },
-              "operationId": "3ad21583-7203-4396-bf65-0b75ed3fe695:2",
+              "operationId": "318ad2b7-c8db-4dd7-89f4-98c88611fd98:2",
               "coreClass": false,
               "adapterClass": true
             }
@@ -1562,48 +1758,9 @@
               "name": "WorkerAdapterError",
               "code": "OUTCOME_UNKNOWN",
               "details": {
-                "operationId": "8acc54bf-3f41-4268-9fc9-a59ad884355d:2"
+                "operationId": "4c35079b-9d0c-4411-921d-4b87cea0af39:2"
               },
-              "operationId": "8acc54bf-3f41-4268-9fc9-a59ad884355d:2",
-              "coreClass": false,
-              "adapterClass": true
-            }
-          },
-          "state": {
-            "value": {
-              "revision": 0,
-              "model": "raveldex-bm25-v1",
-              "completeness": "complete",
-              "total": 0,
-              "hits": []
-            }
-          },
-          "transport": {
-            "requests": 4,
-            "responses": 3,
-            "bytesSent": 2182,
-            "bytesReceived": 1904,
-            "largestSentEnvelope": 1713,
-            "largestReceivedEnvelope": 1580,
-            "actualPostMessageCalls": 4,
-            "actualPostedEnvelopeBytes": 2183,
-            "actualWorkerResponseEvents": 3,
-            "clientDeliveredMessageEvents": 3,
-            "deliveredEnvelopeBytes": 1904,
-            "listenerCount": 0,
-            "terminated": 1
-          }
-        },
-        {
-          "name": "invalid request ID",
-          "result": {
-            "error": {
-              "name": "WorkerAdapterError",
-              "code": "OUTCOME_UNKNOWN",
-              "details": {
-                "operationId": "2946f6dc-0d9f-44a4-9381-e5c4845bb77b:2"
-              },
-              "operationId": "2946f6dc-0d9f-44a4-9381-e5c4845bb77b:2",
+              "operationId": "4c35079b-9d0c-4411-921d-4b87cea0af39:2",
               "coreClass": false,
               "adapterClass": true
             }
@@ -1626,6 +1783,45 @@
             "largestReceivedEnvelope": 1580,
             "actualPostMessageCalls": 4,
             "actualPostedEnvelopeBytes": 2188,
+            "actualWorkerResponseEvents": 3,
+            "clientDeliveredMessageEvents": 3,
+            "deliveredEnvelopeBytes": 1904,
+            "listenerCount": 0,
+            "terminated": 1
+          }
+        },
+        {
+          "name": "invalid request ID",
+          "result": {
+            "error": {
+              "name": "WorkerAdapterError",
+              "code": "OUTCOME_UNKNOWN",
+              "details": {
+                "operationId": "9477c25b-dde2-4c8d-9715-d5f17f1cc2ac:2"
+              },
+              "operationId": "9477c25b-dde2-4c8d-9715-d5f17f1cc2ac:2",
+              "coreClass": false,
+              "adapterClass": true
+            }
+          },
+          "state": {
+            "value": {
+              "revision": 0,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 0,
+              "hits": []
+            }
+          },
+          "transport": {
+            "requests": 4,
+            "responses": 3,
+            "bytesSent": 2184,
+            "bytesReceived": 1904,
+            "largestSentEnvelope": 1713,
+            "largestReceivedEnvelope": 1580,
+            "actualPostMessageCalls": 4,
+            "actualPostedEnvelopeBytes": 2185,
             "actualWorkerResponseEvents": 3,
             "clientDeliveredMessageEvents": 3,
             "deliveredEnvelopeBytes": 1904,
@@ -1658,12 +1854,12 @@
           "transport": {
             "requests": 4,
             "responses": 4,
-            "bytesSent": 2185,
+            "bytesSent": 2187,
             "bytesReceived": 2103,
             "largestSentEnvelope": 1713,
             "largestReceivedEnvelope": 1580,
             "actualPostMessageCalls": 4,
-            "actualPostedEnvelopeBytes": 2103,
+            "actualPostedEnvelopeBytes": 2108,
             "actualWorkerResponseEvents": 4,
             "clientDeliveredMessageEvents": 4,
             "deliveredEnvelopeBytes": 2103,
@@ -1682,9 +1878,9 @@
             "name": "WorkerAdapterError",
             "code": "OUTCOME_UNKNOWN",
             "details": {
-              "operationId": "e64677e0-d44d-405d-90c4-7d1855e42fbe:2"
+              "operationId": "7f23b24f-309d-4950-b821-f26bdab64e5c:2"
             },
-            "operationId": "e64677e0-d44d-405d-90c4-7d1855e42fbe:2",
+            "operationId": "7f23b24f-309d-4950-b821-f26bdab64e5c:2",
             "coreClass": false,
             "adapterClass": true
           }
@@ -1810,12 +2006,12 @@
         "transport": {
           "requests": 70,
           "responses": 70,
-          "bytesSent": 13239,
+          "bytesSent": 13362,
           "bytesReceived": 15566,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 70,
-          "actualPostedEnvelopeBytes": 13239,
+          "actualPostedEnvelopeBytes": 13362,
           "actualWorkerResponseEvents": 70,
           "clientDeliveredMessageEvents": 66,
           "deliveredEnvelopeBytes": 14750,
@@ -1850,12 +2046,12 @@
         "transport": {
           "requests": 4,
           "responses": 4,
-          "bytesSent": 2168,
+          "bytesSent": 2174,
           "bytesReceived": 2126,
           "largestSentEnvelope": 1713,
           "largestReceivedEnvelope": 1580,
           "actualPostMessageCalls": 4,
-          "actualPostedEnvelopeBytes": 2168,
+          "actualPostedEnvelopeBytes": 2174,
           "actualWorkerResponseEvents": 4,
           "clientDeliveredMessageEvents": 3,
           "deliveredEnvelopeBytes": 1878,
@@ -1868,7 +2064,7 @@
   "stages": [
     {
       "name": "before:start",
-      "time": "2026-10-08T09:01:52.931Z",
+      "time": "2026-10-08T09:34:53.528Z",
       "activeResources": [
         "PipeWrap",
         "PipeWrap"
@@ -1876,7 +2072,7 @@
     },
     {
       "name": "before:packed-consumer",
-      "time": "2026-10-08T09:01:53.794Z",
+      "time": "2026-10-08T09:34:54.338Z",
       "activeResources": [
         "CloseReq",
         "PipeWrap",
@@ -1885,7 +2081,7 @@
     },
     {
       "name": "before:bundles-types-startup",
-      "time": "2026-10-08T09:01:54.069Z",
+      "time": "2026-10-08T09:34:54.654Z",
       "activeResources": [
         "PipeWrap",
         "PipeWrap",
@@ -1895,7 +2091,7 @@
     },
     {
       "name": "before:done",
-      "time": "2026-10-08T09:01:54.301Z",
+      "time": "2026-10-08T09:34:54.885Z",
       "activeResources": [
         "CloseReq",
         "PipeWrap",
@@ -1910,7 +2106,7 @@
     },
     {
       "name": "after:browser-close:start",
-      "time": "2026-10-08T09:01:59.269Z",
+      "time": "2026-10-08T09:35:00.155Z",
       "activeResources": [
         "CloseReq",
         "PipeWrap",
@@ -1926,7 +2122,7 @@
     },
     {
       "name": "after:browser-close:complete",
-      "time": "2026-10-08T09:01:59.415Z",
+      "time": "2026-10-08T09:35:00.283Z",
       "activeResources": [
         "PipeWrap",
         "PipeWrap",
@@ -1935,7 +2131,7 @@
     },
     {
       "name": "after:server-close:complete",
-      "time": "2026-10-08T09:01:59.424Z",
+      "time": "2026-10-08T09:35:00.291Z",
       "activeResources": [
         "CloseReq",
         "PipeWrap",
@@ -1948,10 +2144,10 @@
     "name": "@vmitsaras/raveldex",
     "version": "0.0.0",
     "private": true,
-    "sha256": "4418d17d400d38fe365eb989f855602a52f8b8e5d10c185b87f3f71c0851a016",
-    "npmIntegrity": "sha512-0rRRQND4fmSjf5KNbLITHxXrrzNbyGq6mv4FAOboq5GYdzsF3pLoss61VyNdzVJ5N+fSvb9yMsjjPVtPGrSBaw==",
-    "tarballBytes": 110154,
-    "unpackedBytes": 474422,
+    "sha256": "ec6cf82b56f988c530236f366f7613c024705eb1978fbeab394f1f959b285e30",
+    "npmIntegrity": "sha512-L0qCvA2lThWL0LqkXGojdcVGiX1kuJVP+XdUi35MzNt9LV32BYTGiXH1gzH5OrdrheELETTDC9khZmyyrO6FeQ==",
+    "tarballBytes": 110944,
+    "unpackedBytes": 479398,
     "files": [
       {
         "path": "LICENSE",
@@ -1959,7 +2155,7 @@
       },
       {
         "path": "README.md",
-        "size": 25814
+        "size": 25970
       },
       {
         "path": "dist/adapters/worker/client.d.ts",
@@ -1967,7 +2163,7 @@
       },
       {
         "path": "dist/adapters/worker/client.js",
-        "size": 17512
+        "size": 21843
       },
       {
         "path": "dist/adapters/worker/error.d.ts",
@@ -1983,7 +2179,7 @@
       },
       {
         "path": "dist/adapters/worker/host.js",
-        "size": 11771
+        "size": 12260
       },
       {
         "path": "dist/adapters/worker/index.d.ts",
@@ -2619,14 +2815,14 @@
       }
     ]
   },
-  "installedDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3RtDXh",
+  "installedDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMQP0Q",
   "bundles": {
     "client": {
       "entry": "fixture-entry.mjs",
       "outfile": "fixture.mjs",
-      "sha256": "e622c7f84e167b9f1400ec47d9c326ee9519d6c4e18c7a61b948a1a954184633",
-      "minifiedBytes": 160140,
-      "gzipBytes": 43611,
+      "sha256": "c2d2265581b2b5653c8b6f2534f99b29cf60510cd328856de50424f8da7d8511",
+      "minifiedBytes": 164613,
+      "gzipBytes": 44802,
       "method": {
         "esbuild": "0.28.2",
         "target": "es2022",
@@ -3275,7 +3471,7 @@
           "format": "esm"
         },
         "node_modules/@vmitsaras/raveldex/dist/adapters/worker/client.js": {
-          "bytes": 17512,
+          "bytes": 21843,
           "imports": [
             {
               "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js",
@@ -4167,7 +4363,7 @@
           "format": "esm"
         },
         "fixture-entry.mjs": {
-          "bytes": 35813,
+          "bytes": 40022,
           "imports": [
             {
               "path": "node_modules/@vmitsaras/raveldex/dist/index.js",
@@ -4286,7 +4482,7 @@
           "bytesInOutput": 5527
         },
         "node_modules/@vmitsaras/raveldex/dist/adapters/worker/client.js": {
-          "bytesInOutput": 8006
+          "bytesInOutput": 9583
         },
         "node_modules/@vmitsaras/raveldex/dist/adapters/worker/index.js": {
           "bytesInOutput": 0
@@ -4382,16 +4578,16 @@
           "bytesInOutput": 3254
         },
         "fixture-entry.mjs": {
-          "bytesInOutput": 23995
+          "bytesInOutput": 26891
         }
       }
     },
     "worker": {
       "entry": "engine-worker.mjs",
       "outfile": "worker-bundle.mjs",
-      "sha256": "3cf0498f65295f22c0a66c9de2878df0cb37f1b8c273739a78ef5a4f2af92778",
-      "minifiedBytes": 128752,
-      "gzipBytes": 34841,
+      "sha256": "6534d5e52ea7b926f0b8cb2aa4e282c3e9527646d14e34161b8e5befb45f305c",
+      "minifiedBytes": 129327,
+      "gzipBytes": 35039,
       "method": {
         "esbuild": "0.28.2",
         "target": "es2022",
@@ -5024,7 +5220,7 @@
           "format": "esm"
         },
         "node_modules/@vmitsaras/raveldex/dist/adapters/worker/host.js": {
-          "bytes": 11771,
+          "bytes": 12260,
           "imports": [
             {
               "path": "node_modules/@vmitsaras/raveldex/dist/core/contracts/schema.js",
@@ -5900,7 +6096,7 @@
           "format": "esm"
         },
         "engine-worker.mjs": {
-          "bytes": 801,
+          "bytes": 1570,
           "imports": [
             {
               "path": "node_modules/@vmitsaras/raveldex/dist/adapters/worker/host.js",
@@ -6011,7 +6207,7 @@
           "bytesInOutput": 3144
         },
         "node_modules/@vmitsaras/raveldex/dist/adapters/worker/host.js": {
-          "bytesInOutput": 4496
+          "bytesInOutput": 4675
         },
         "node_modules/@vmitsaras/raveldex/dist/core/capabilities/worker-identity.js": {
           "bytesInOutput": 240
@@ -6104,10 +6300,19 @@
           "bytesInOutput": 1586
         },
         "engine-worker.mjs": {
-          "bytesInOutput": 528
+          "bytesInOutput": 924
         }
       }
     }
+  },
+  "hostPublicTypecheck": {
+    "status": "Pass",
+    "libraries": [
+      "ES2022",
+      "WebWorker"
+    ],
+    "browserDOMTypes": "Excluded",
+    "documentedCall": "serveRaveldexWorker(self, { addons: [...] })"
   },
   "publicTypecheck": "Pass",
   "coreStartup": {
@@ -6131,6 +6336,20 @@
     ]
   },
   "cleanup": [
+    {
+      "name": "reentrant caller signal preserves direct FIFO admission and both mutation outcomes",
+      "outcomes": [
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "one scope and endpoint permit exactly one live or initializing worker owner",
+      "outcomes": [
+        {},
+        {}
+      ]
+    },
     {
       "name": "real source worker has complete direct/core/add-on query and atomic mutation parity",
       "outcomes": [
@@ -6279,24 +6498,24 @@
       ]
     }
   ],
-  "finishedAt": "2026-10-08T09:01:59.435Z",
+  "finishedAt": "2026-10-08T09:35:00.298Z",
   "summary": {
-    "passed": 22,
+    "passed": 24,
     "failed": 0,
-    "semanticCompleteComparisons": 419
+    "semanticCompleteComparisons": 422
   },
   "raw": {
     "path": "docs/evidence/RX-3001-browser-raw.json.gz",
-    "decodedBytes": 2168570,
-    "decodedSha256": "eeb714a1e6ed5b396d515e344c096d210dd88acf75199f12667e0491c253a439",
-    "gzipBytes": 118362,
-    "gzipSha256": "deebc08c15ead516f678d76721c98abb70432aa134670798627a23eeeee20c91",
+    "decodedBytes": 2174388,
+    "decodedSha256": "65dd42413f0edb1e4d53ad10a358a7516423378d31e051f1d3c7bc81b3be8142",
+    "gzipBytes": 119268,
+    "gzipSha256": "bf055bcc70ba4778a195993929949c6afbbdf50e951f2386e9fc38ea45f83e16",
     "method": "gzip level9,mtime0; exact original final browser JSON preserved"
   },
   "testedModuleIdentity": [
     {
       "path": "dist/adapters/worker/client.js",
-      "sha256": "da507f23892b67191ac69b5706f91957c66191000d14cc05baf2279d0dd8dde1"
+      "sha256": "97e42560ca4b5787d448b85b2a5a310c1a435af61ec2bff7be6bdbabde6009d9"
     },
     {
       "path": "dist/adapters/worker/error.js",
@@ -6304,7 +6523,7 @@
     },
     {
       "path": "dist/adapters/worker/host.js",
-      "sha256": "5d451d9a906dcb3e8f2b18318ebdd3cd2e6e461d517b5d07453dbfc0938937ff"
+      "sha256": "9d90fdb9a753700d96fb57f0c515e69ca521d5aa6abf01011f4ba85161bb3292"
     },
     {
       "path": "dist/adapters/worker/index.js",

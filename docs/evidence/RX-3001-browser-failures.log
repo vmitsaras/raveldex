@@ -1,0 +1,138 @@
+Retained failed initial run
+✔ real source worker has complete direct/core/add-on query and atomic mutation parity (1757.607ms)
+✔ real stored positions/offsets worker has complete semantic parity (366.569917ms)
+✔ real mixed phrase worker has complete semantic parity (334.597709ms)
+✔ whole-worker BM25 agrees with independent hand-derived numerical fixture (133.537583ms)
+✔ startup mismatch, module failure and unqualified pairing reject without leaks (176.98275ms)
+✔ real replies reordered and duplicated retain exact operation identity (126.554083ms)
+✔ actual postcommit cancellation reports known commit and conclusive receipt (116.174667ms)
+✔ lost actual mutation reply gives unknown then reconciles committed state (182.84225ms)
+✔ bounded 256 mutation receipt window expires old operation IDs (131.345333ms)
+✔ real cooperative precommit cancellation and deadline publish no mutation (161.356125ms)
+✔ admission deadlines include delayed actual message delivery (186.653209ms)
+✔ worker error event distinguishes termination and releases the owned worker (119.477709ms)
+✔ lost read reply gives timeout and allows subsequent read recovery (181.461042ms)
+✔ malformed response envelopes and result data cannot become successful facts (178.718125ms)
+✔ finite payload cap includes all request/response envelope metadata (165.586541ms)
+✔ malformed actual worker requests cannot commit unvalidated writes (509.429ms)
+✖ actual worker death gives honest unknown and explicit new-worker recovery (271.460958ms)
+✔ bounded pending map rejects overflow and destroy clears timers/signals/listeners (133.400459ms)
+✔ external worker disposal releases listeners and settles pending requests without termination (115.076667ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 18
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5675.554417
+
+✖ failing tests:
+
+test at test/adapters/worker/packed-browser.test.mjs:115:51
+✖ actual worker death gives honest unknown and explicit new-worker recovery (271.460958ms)
+  page.evaluate: WorkerAdapterError: Raveldex worker: TIMEOUT
+      at http://127.0.0.1:64860/fixture.mjs:1:62634
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/worker/packed-browser.test.mjs:116:31) {
+    log: []
+  }
+
+Retained failed expanded run
+✔ real source worker has complete direct/core/add-on query and atomic mutation parity (1796.766625ms)
+✔ real stored positions/offsets worker has complete semantic parity (394.926291ms)
+✔ real mixed phrase worker has complete semantic parity (352.699042ms)
+✔ direct and actual worker preserve exact caller admission-entry cliffs (146.890709ms)
+✔ whole-worker BM25 agrees with independent hand-derived numerical fixture (126.115084ms)
+✔ startup mismatch, module failure and unqualified pairing reject without leaks (178.726167ms)
+✔ real replies reordered and duplicated retain exact operation identity (132.485542ms)
+✖ replayed live mutation ID cannot falsify a committed outcome or execute twice (2122.909208ms)
+✔ actual postcommit host send failure preserves unknown outcome and committed receipt (138.630042ms)
+✔ actual postcommit cancellation reports known commit and conclusive receipt (129.407333ms)
+✔ lost actual mutation reply gives unknown then reconciles committed state (182.14725ms)
+✔ bounded 256 mutation receipt window expires old operation IDs (147.618667ms)
+✔ real cooperative precommit cancellation and deadline publish no mutation (169.550208ms)
+✔ admission deadlines include delayed actual message delivery (187.730833ms)
+✔ worker error event distinguishes termination and releases the owned worker (126.648333ms)
+✔ lost read reply gives timeout and allows subsequent read recovery (187.887542ms)
+✔ malformed response envelopes and result data cannot become successful facts (188.812ms)
+✖ finite payload cap includes all request/response envelope metadata (160.324166ms)
+✔ malformed actual worker requests cannot commit unvalidated writes (502.871875ms)
+✔ actual worker death gives honest unknown and explicit new-worker recovery (310.890708ms)
+✔ bounded pending map rejects overflow and destroy clears timers/signals/listeners (132.402083ms)
+✔ external worker disposal releases listeners and settles pending requests without termination (122.780292ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 20
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8285.134833
+
+✖ failing tests:
+
+test at test/adapters/worker/packed-browser.test.mjs:128:51
+✖ replayed live mutation ID cannot falsify a committed outcome or execute twice (2122.909208ms)
+  page.evaluate: Error: active replay receipt conclusive: "pending" !== "committed"
+      at D (http://127.0.0.1:65264/fixture.mjs:1:136172)
+      at Object.replayLiveMutation (http://127.0.0.1:65264/fixture.mjs:1:146436)
+      at async <anonymous>:329:30
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/worker/packed-browser.test.mjs:129:31) {
+    log: []
+  }
+
+test at test/adapters/worker/packed-browser.test.mjs:128:51
+✖ finite payload cap includes all request/response envelope metadata (160.324166ms)
+  page.evaluate: Error: envelope including metadata exactly fills cap: 8189 !== 8192
+      at D (http://127.0.0.1:65264/fixture.mjs:1:136172)
+      at Object.boundedPayload (http://127.0.0.1:65264/fixture.mjs:1:154247)
+      at async <anonymous>:329:30
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/worker/packed-browser.test.mjs:129:31) {
+    log: []
+  }
+
+Preserved confirmed defect run: singleton-before
+✖ one scope and endpoint permit exactly one live or initializing worker owner (1465.094208ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1757.526959
+
+✖ failing tests:
+
+test at test/adapters/worker/packed-browser.test.mjs:129:51
+✖ one scope and endpoint permit exactly one live or initializing worker owner (1465.094208ms)
+  page.evaluate: Error: duplicate same-scope host guard {"fixture":"duplicate-host","before":2,"after":4,"second":{"accepted":true}}: {"accepted":true} !== {"name":"WorkerAdapterError","code":"INCOMPATIBLE_WORKER"}
+      at C (http://127.0.0.1:50021/fixture.mjs:1:136377)
+      at Object.singleOwners (http://127.0.0.1:50021/fixture.mjs:1:139556)
+      at async <anonymous>:329:30
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/worker/packed-browser.test.mjs:130:31) {
+    log: []
+  }
+
+Preserved confirmed defect run: reentrant-before
+✖ reentrant caller signal preserves direct FIFO admission and both mutation outcomes (2221.133666ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2522.163
+
+✖ failing tests:
+
+test at test/adapters/worker/packed-browser.test.mjs:130:51
+✖ reentrant caller signal preserves direct FIFO admission and both mutation outcomes (2221.133666ms)
+  page.evaluate: Error: reentrant signal callback preserves direct FIFO {"results":[{"error":{"name":"WorkerAdapterError","code":"OUTCOME_UNKNOWN","details":{"operationId":"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2"},"operationId":"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2","coreClass":false,"adapterClass":true}},{"value":{"revision":1,"changed":true,"added":1,"replaced":0,"removed":0}}],"state":{"revision":1,"model":"raveldex-bm25-v1","completeness":"complete","total":1,"hits":[{"id":"nested","score":0}]},"remainingSignalListeners":0}: {"results":[{"error":{"name":"WorkerAdapterError","code":"OUTCOME_UNKNOWN","details":{"operationId":"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2"},"operationId":"634d573f-9cfb-4b7f-beed-7dbdd3444be5:2","coreClass":false,"adapterClass":true}},{"value":{"revision":1,"changed":true,"added":1,"replaced":0,"removed":0}}],"state":{"revision":1,"model":"raveldex-bm25-v1","completeness":"complete","total":1,"hits":[{"id":"nested","score":0}]},"remainingSignalListeners":0} !== {"results":[{"value":{"revision":1,"changed":true,"added":1,"replaced":0,"removed":0}},{"value":{"revision":2,"changed":true,"added":1,"replaced":0,"removed":0}}],"state":{"revision":2,"model":"raveldex-bm25-v1","completeness":"complete","total":2,"hits":[{"id":"nested","score":0},{"id":"outer","score":0}]},"remainingSignalListeners":0}
+      at C (http://127.0.0.1:50161/fixture.mjs:1:136377)
+      at Object.reentrantSignalFIFO (http://127.0.0.1:50161/fixture.mjs:1:139873)
+      at async <anonymous>:329:30
+      at test.timeout (/Users/vasilis/Documents/GitHub/raveldex/test/adapters/worker/packed-browser.test.mjs:132:33) {
+    log: []
+  }
