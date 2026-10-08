@@ -755,7 +755,7 @@ Provide a bounded route from the prior companion while keeping native implementa
 
 **Fair correctness, relevance, and cost comparison**
 
-**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/25)
+**Milestone:** N4 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/25)
 
 **Dependencies:** [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004)
 
@@ -789,7 +789,20 @@ Establish the native product's observed strengths and limitations through equiva
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-4001.md](docs/evidence/RX-4001.md)
+- [docs/evidence/RX-4001-review.md](docs/evidence/RX-4001-review.md)
+- [docs/evidence/RX-4001-correctness.json](docs/evidence/RX-4001-correctness.json)
+- [docs/evidence/RX-4001-relevance.json](docs/evidence/RX-4001-relevance.json)
+- [docs/evidence/RX-4001-comparison.json](docs/evidence/RX-4001-comparison.json)
+- [docs/evidence/RX-4001-costs.json](docs/evidence/RX-4001-costs.json)
+- [docs/evidence/RX-4001-costs-first.json](docs/evidence/RX-4001-costs-first.json)
+- [docs/evidence/RX-4001-costs-small-core-repeat.json](docs/evidence/RX-4001-costs-small-core-repeat.json)
+- [docs/evidence/RX-4001-costs-first-unrepaired.json](docs/evidence/RX-4001-costs-first-unrepaired.json)
+- [docs/evidence/RX-4001-browser-costs.json](docs/evidence/RX-4001-browser-costs.json)
+- [docs/evidence/RX-4001-review-probe.json](docs/evidence/RX-4001-review-probe.json)
+- [docs/evidence/RX-4001-package.json](docs/evidence/RX-4001-package.json)
+- [docs/evidence/RX-4001-package-final.json](docs/evidence/RX-4001-package-final.json)
+- [docs/evidence/RX-4001-package-audit.json](docs/evidence/RX-4001-package-audit.json)
 
 
 ## RX-4002

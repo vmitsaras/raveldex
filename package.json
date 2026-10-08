@@ -43,6 +43,12 @@
     "test:worker": "npm run build && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
     "test:snapshots": "npm run build && node --test --test-timeout=120000 test/adapters/snapshots/*.test.mjs",
     "measure:snapshots": "npm run build && node --expose-gc scripts/snapshot-costs.mjs",
+    "evaluate:prepare": "npm run build && node scripts/evaluation-consumer.mjs",
+    "evaluate:correctness": "node scripts/evaluate-correctness.mjs",
+    "evaluate:relevance": "node bench/relevance.mjs",
+    "evaluate:comparison": "node scripts/evaluate-comparison.mjs",
+    "measure:costs": "node bench/costs.mjs",
+    "measure:browser-costs": "node bench/browser-costs.mjs",
     "test:indexeddb": "npm run build && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs",
     "test:migration": "npm run build && node --test --test-timeout=120000 test/migration/converter.test.mjs test/comparison/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs"
   },

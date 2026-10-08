@@ -128,6 +128,8 @@ The core-only target is **at most 15 KiB gzip** using a fixed, recorded bundler/
 
 Check import graphs and startup effects to show that omitted modules add no imported runtime code, side indexes, startup work, or network requests. A single package tarball can expose optional subpaths; tarball membership does not imply browser import cost.
 
+RX-4001 records the completed local evaluation in [acceptance evidence](../evidence/RX-4001.md) and [reproducible tables/method](../evaluation/RX-4001.md). Independent correctness and hand arithmetic remain separate from 76 frozen source-authored relevance judgments and the pinned foreign equal-membership subset. Labels are incomplete and biased toward one evaluator's English technical self-documentation; failed/empty judgments remain unchanged. Costs use 27 Node owners plus nine untimed native work rows and nine actual Chrome worker/IndexedDB owners across admitted 100/1,000/10,000 workloads. Raw repetitions, fresh-owner versus warm-process states, whole-ms median/observed maximum, selected graphs and encoded bytes are retained separately. Native 10,000-record source work refusals, browser restore deadlines and the uncertain storage-load return remain operation outcomes, not successful round trips or environment blocks. The core gzip target miss is unchanged. Independent review recalculates raw metrics/tables and inspects kernels, source identities and claims; none of these observations fills RX-4002's physical memory/device/AT/browser qualification.
+
 ### Retained and peak memory
 
 Define process/realm scope before measuring. Distinguish at minimum:

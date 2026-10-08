@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add reproducible RX-4001 independent correctness, frozen 76-query documentation relevance, explicit pinned companion comparison and separate native/worker/storage cost observations. Preserve lexical/ranking gaps, bounded refusals and the unchanged core size target; no runtime/API/dependency changes or release qualification.
+
 - RX-3004 adds an optional LocalSearch source snapshot converter with canonical SHA-256 validation, owned native configuration/records, explicit provenance and native intersection checks. Migration rebuilds a new owner through ordinary public APIs. Isolated development comparison declares the companion/MiniSearch identity and expected analyzer/rank differences; core retains zero foreign runtime dependencies.
 
 - RX-3003 adds optional explicit namespaced IndexedDB save/load/erase, optimistic generation conflicts, transaction-completion outcomes, bounded open/action/queue lifecycle and complete namespace erasure. Source recovery uses validated atomic snapshots directly or through an explicitly installed one-owner worker snapshot bridge with separate restore receipts and truthful unknown outcomes. No import-time storage or automatic persistence.
@@ -38,4 +40,4 @@
 - Add behavioral specifications, milestone/task planning, Codex instructions, and provenance.
 - Add dependency/status validation, generated planning documents, bootstrap CI, and GitHub milestone/issue synchronization.
 
-N1 core alpha is verified locally. N2 optional product capabilities are implemented; worker hosting, snapshots and optional IndexedDB recovery are implemented while migration and release qualification remain future work; no public package release exists in this entry.
+N1 core alpha is verified locally. N2 optional product capabilities, worker hosting, snapshots, optional IndexedDB recovery and companion source migration are implemented. RX-4001 records correctness, relevance and cost observations; broader qualification and candidate review remain future work. No public package release exists in this entry.

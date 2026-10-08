@@ -26,6 +26,8 @@ RX-3003 adds explicit namespaced IndexedDB save/load/erase and an optional sourc
 
 RX-3004 adds explicit validated LocalSearch source conversion through `/integrations/localsearch`. Rebuild a new native owner from the owned configuration/records; legacy indexes, scores, live handles and storage namespaces remain separate. See the [migration guide](docs/migration/LOCALSEARCH.md).
 
+RX-4001 evaluates the unchanged native contracts with independent correctness, 76 frozen real-document judgments, an explicitly pinned companion comparison and separate bounded cost configurations. See [the evaluation](docs/evaluation/RX-4001.md) for raw outcomes, incomplete-label limits and reproduction. Natural-question lexical gaps, the core gzip target miss and refused large source rebuilds remain visible; these observations do not qualify browser/AT/device/heap or a public release.
+
 The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, physical durability and cross-host Unicode snapshot portability require later evidence.
 
 ## Try the core
