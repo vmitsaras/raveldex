@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** Firefox package matrix, installed Safari/exact-tool AT and physical display/input observations remain unavailable; collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. A focused native WebKit facet clearing route is observed; see docs/evidence/RX-4002-facets.md. All seven criteria remain unchanged.
+**Blocker or decision:** The full installed Firefox/Safari engine/storage/resource matrix remains unrun; exact-tool AT and physical display/input observations remain missing, and collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. Finite installed native UI and worker recovery are observed; see docs/evidence/RX-4002-installed.md. All seven criteria remain unchanged.
 
 **Expected affected areas**
 
@@ -874,6 +874,13 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-facets-package.json](docs/evidence/RX-4002-facets-package.json)
 - [docs/evidence/RX-4002-facets-package-audit.json](docs/evidence/RX-4002-facets-package-audit.json)
 - [docs/evidence/RX-4002-facets-review.md](docs/evidence/RX-4002-facets-review.md)
+- [docs/evidence/RX-4002-installed.md](docs/evidence/RX-4002-installed.md)
+- [docs/evidence/RX-4002-installed-package.json](docs/evidence/RX-4002-installed-package.json)
+- [docs/evidence/RX-4002-installed-observations.json](docs/evidence/RX-4002-installed-observations.json)
+- [docs/evidence/RX-4002-installed-preservation.json](docs/evidence/RX-4002-installed-preservation.json)
+- [docs/evidence/RX-4002-installed-audit.json](docs/evidence/RX-4002-installed-audit.json)
+- [docs/evidence/RX-4002-installed-review.md](docs/evidence/RX-4002-installed-review.md)
+- [docs/evidence/RX-4002-installed-review-observations.json](docs/evidence/RX-4002-installed-review-observations.json)
 
 
 ## RX-4003

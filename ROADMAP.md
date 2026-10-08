@@ -75,7 +75,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 ## Recorded blockers and decisions
 
-- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): Firefox package matrix, installed Safari/exact-tool AT and physical display/input observations remain unavailable; collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. A focused native WebKit facet clearing route is observed; see docs/evidence/RX-4002-facets.md. All seven criteria remain unchanged.
+- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): The full installed Firefox/Safari engine/storage/resource matrix remains unrun; exact-tool AT and physical display/input observations remain missing, and collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. Finite installed native UI and worker recovery are observed; see docs/evidence/RX-4002-installed.md. All seven criteria remain unchanged.
 
 ## Milestone exit conditions
 

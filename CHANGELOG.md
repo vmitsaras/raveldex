@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Record bounded installed Firefox/Safari native UI and module-worker recovery observations over the unchanged package. Keep broader browser matrices, speech/AT, physical input/IME and scoped memory qualification Blocked.
+
 - Add RX-4002 installed-package browser qualification, explicit manual fault/recovery fixtures, fresh-process memory/heap-graph methods and separate offline graph-cut retention analysis. Preserve original observations and guard analysis output from overwriting immutable inputs. Exact-tool AT, physical presentation and unisolated memory criteria remain Blocked; no runtime/API/dependency changes or release waiver.
 
 - Record a focused RX-4002 native facet choice/clear path in WebKit 26.5 and Chrome 155.0.8059.40 with trusted events, new exact queries, retained focus and paging reset. Preserve the earlier Blocked ArrowUp route and historical matrix; broader qualification remains Blocked.

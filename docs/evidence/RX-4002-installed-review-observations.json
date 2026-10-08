@@ -1,0 +1,267 @@
+{
+  "kind": "raveldex-rx4002-installed-independent-observations-v1",
+  "recordedAt": "2026-10-08T18:49:09.754Z",
+  "baseline": "c1897c9",
+  "method": "Curated transcriptions of the actual mcp__cua_repl.js native Firefox actions and returned AX diffs in this independent review. Not an exported complete AX tree, DOM trace, trusted-event assertion, screen-reader or physical-input observation.",
+  "app": "Firefox",
+  "bundleIdentifier": "org.mozilla.firefox",
+  "versionScope": "This independent probe did not open About or read the running process build. Subsequent primary About observations in the same non-restarted apps report Firefox 156.0 (aarch64), with exact running build unknown, and Safari 27.0.1 (22625.1.29.11.28). Installed Firefox build 15626.9.9 remains a separate metadata fact.",
+  "origin": "http://127.0.0.1:60360",
+  "route": "/ui",
+  "packageEvidence": "docs/evidence/RX-4002-installed-package.json",
+  "packageSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+  "installedDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-jrcPml",
+  "primaryObservations": "docs/evidence/RX-4002-installed-observations.json",
+  "status": "Pass",
+  "expectedFromIndependentFixtureInspection": {
+    "redTotal": 7,
+    "referenceIDs": [
+      "delta",
+      "long"
+    ],
+    "referenceTotal": 2,
+    "clearTotal": 7,
+    "pageSize": 3,
+    "membershipBoundary": "Only Reference complete two-record membership was independently traversed; red/All first-page members and displayed total were observed, not all three red pages or numerical ranking."
+  },
+  "steps": [
+    {
+      "phase": "mount",
+      "actions": [
+        "super+t",
+        "paste http://127.0.0.1:60360/ui",
+        "Return"
+      ],
+      "axExcerpts": [
+        "142 tab (selected) Value: Raveldex RX-4002 installed package qualification, Raveldex RX-4002 installed package qualification",
+        "165 text 9 results. Showing 1–3.",
+        "163 pop up button All",
+        "The focused UI element is 148 HTML Content Description: Raveldex RX-4002 installed package qualification, URL: 127.0.0.1:60360/ui"
+      ]
+    },
+    {
+      "phase": "red",
+      "actions": [
+        "click search AX160",
+        "type red",
+        "Return"
+      ],
+      "axExcerpts": [
+        "160 search text field (settable) Search documentation, Value: red",
+        "191 text 7 results. Showing 1–3.",
+        "194 heading Gamma red, Value: 3",
+        "195 link Gamma red, Value: 127.0.0.1:60360/docs/gamma",
+        "202 heading Long content, Value: 3",
+        "203 link Long content, Value: 127.0.0.1:60360/docs/long",
+        "243 heading Atomic alpha, Value: 3",
+        "244 link Atomic alpha, Value: 127.0.0.1:60360/docs/alpha#commit",
+        "250 text Page 1 of 3.",
+        "The focused UI element is 160 search text field (settable) Search documentation, Value: red"
+      ]
+    },
+    {
+      "phase": "reference",
+      "actions": [
+        "Tab",
+        "Tab",
+        "r"
+      ],
+      "axExcerpts": [
+        "163 pop up button Reference (2)",
+        "191 text 2 results. Showing 1–2.",
+        "194 heading Long content, Value: 3",
+        "195 link Long content, Value: 127.0.0.1:60360/docs/long",
+        "235 heading Delta, Value: 3",
+        "236 link Delta, Value: 127.0.0.1:60360/docs/delta",
+        "240 text Page 1 of 1.",
+        "The focused UI element is 163 pop up button Reference (2)"
+      ]
+    },
+    {
+      "phase": "clear-popup",
+      "actions": [
+        "Up"
+      ],
+      "axExcerpts": [
+        "241 pop up button Reference (2)",
+        "242 menu Secondary Actions: Cancel",
+        "243 All, ID: menuItemHit:",
+        "244 (selected) Reference (2), ID: menuItemHit:",
+        "The focused UI element is 163 pop up button Reference (2)"
+      ]
+    },
+    {
+      "phase": "clear",
+      "actions": [
+        "Up",
+        "Return"
+      ],
+      "axExcerpts": [
+        "163 pop up button All",
+        "191 text 7 results. Showing 1–3.",
+        "194 heading Gamma red, Value: 3",
+        "195 link Gamma red, Value: 127.0.0.1:60360/docs/gamma",
+        "202 heading Long content, Value: 3",
+        "203 link Long content, Value: 127.0.0.1:60360/docs/long",
+        "243 heading Atomic alpha, Value: 3",
+        "244 link Atomic alpha, Value: 127.0.0.1:60360/docs/alpha#commit",
+        "250 text Page 1 of 3.",
+        "The focused UI element is 163 pop up button All"
+      ]
+    },
+    {
+      "phase": "close-task-tab",
+      "actions": [
+        "super+w"
+      ],
+      "axExcerpts": [
+        "0 standard window NEU IN FIREFOX 156 — Firefox.com, Secondary Actions: Raise",
+        "4 tab (selected) Value: NEU IN FIREFOX 156 — Firefox.com, NEU IN FIREFOX 156 — Firefox.com",
+        "The focused UI element is 150 HTML Content Description: NEU IN FIREFOX 156 — Firefox.com, URL: firefox.com/de/whatsnew/156/?oldversion=155.0.1&utm_medium=firefox-desktop&utm_source=update&utm_campaign=156"
+      ]
+    }
+  ],
+  "cleanup": "Closed only the one new task tab and observed restoration of the original Firefox What's New tab; native ownership released to parent. No Safari action, browser/OS setting, download, console, DOM injection or additional scenario.",
+  "staticReview": {
+    "baseline": "c1897c9",
+    "checkedAt": "2026-10-08T18:47:34.456Z",
+    "status": "Pass",
+    "issues": [],
+    "distCount": 208,
+    "oldCount": 156,
+    "uiInputs": 59,
+    "fixtureSources": 5,
+    "installedDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-jrcPml",
+    "packageEvidenceSha256": "010fbc29fa9188661ac3cc08acb4cc68c2890b1ef1a695a40d9ccef5da4e8d1d",
+    "packageSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+    "uiSha256": "ddea80495b02c8978d58c3aa9373d419201b344d1d28b24e7acbfbcd65c8bff3",
+    "cssSha256": "6152525fb59c13c357f73df120e757d4ebfd9a68bfedbb26e249e01410e432f6",
+    "primaryObservationsSha256": "5c046e8feab06ade651e4f692bfaa0e642c0de3348ba079def21123c0c1ab95e",
+    "primaryAuditSha256": "01113fd3faaca0ba657144065105b3f07c109b1edfbc81ca00aa594d56438376",
+    "preservationSha256": "eb98eb250e1b7b304fdbbbcccfe6e53d4b3da30f85aefa8fd81499135f0f3c85",
+    "taskStatus": "blocked",
+    "taskKeys": [
+      "id",
+      "title",
+      "milestone",
+      "status",
+      "dependsOn",
+      "objective",
+      "acceptanceCriteria",
+      "verification",
+      "affectedPaths",
+      "specs",
+      "evidence",
+      "blocker"
+    ],
+    "stableTaskKeys": [
+      "id",
+      "title",
+      "milestone",
+      "dependsOn",
+      "objective",
+      "acceptanceCriteria",
+      "verification",
+      "affectedPaths",
+      "specs",
+      "blocker"
+    ],
+    "browserReports": [
+      {
+        "bundleIdentifier": "org.mozilla.firefox",
+        "installedVersion": "156.0",
+        "installedBuild": "15626.9.9",
+        "steps": 27
+      },
+      {
+        "bundleIdentifier": "com.apple.Safari",
+        "installedVersion": "27.0.1",
+        "installedBuild": "22625.1.29.11.28",
+        "steps": 29
+      }
+    ],
+    "reconciliation": "The sole reported difference, task.blocker, is the authorized evidence-dependent documentation update. A separate final contract audit verifies all seven acceptance criteria, dependencies, other fixed task fields and every task status against c1897c9.",
+    "auditAttempts": [
+      {
+        "classification": "review harness",
+        "status": "Fail",
+        "failure": "execFileSync git show exceeded default maxBuffer, ENOBUFS at docs/evidence/RX-3003-browser-accepted.json; no product failure or input mutation"
+      },
+      {
+        "classification": "review harness",
+        "status": "Fail",
+        "failure": "Initial stable task key set incorrectly included the explicitly updated evidence-dependent blocker; all file/asset comparisons had no mismatch"
+      },
+      {
+        "classification": "corrected scoped static audit",
+        "status": "Pass"
+      }
+    ]
+  },
+  "limits": [
+    "AX-reported focus does not establish DOM activeElement or spoken announcements.",
+    "No main-query/revision/call trace or Event.isTrusted was read in this probe.",
+    "No worker, storage, semantics matrix, large-corpus, memory, real IME, presentation or resource observation was run by this reviewer.",
+    "The historical Playwright Firefox/WebKit records and old qualification artifacts remain preserved; this is a separate installed-app observation."
+  ],
+  "finalReconciliation": {
+    "checkedAt": "2026-10-08T18:53:00.498Z",
+    "method": "Lightweight read/hash audit after parent final regression and bounded primary About observation. No browser replay or new workload.",
+    "primaryObservationsSha256": "d6a39d60d7d3fd566edff22ff37cbcafec4f6bff1cf9fa9ed1d1eddeadabdd26",
+    "primaryAbout": [
+      {
+        "bundleIdentifier": "org.mozilla.firefox",
+        "about": {
+          "actions": "getApp(org.mozilla.firefox); Firefox menu; About Firefox; AX observation; click About close button; verify original tab",
+          "axExcerpts": [
+            "text 156.0 (aarch64)",
+            "button Restart to update Firefox"
+          ],
+          "runningVersion": "156.0",
+          "runningBuild": null,
+          "cleanup": "Closed About; original Firefox tab restored. No restart/update button activated."
+        }
+      },
+      {
+        "bundleIdentifier": "com.apple.Safari",
+        "about": {
+          "actions": "getApp(com.apple.Safari); Safari menu; About Safari; AX observation; click About close button; verify Start Page",
+          "axExcerpts": [
+            "text Safari Version 27.0.1 (22625.1.29.11.28)"
+          ],
+          "runningVersion": "27.0.1",
+          "runningBuild": "22625.1.29.11.28",
+          "cleanup": "Closed About; original Start Page restored."
+        }
+      }
+    ],
+    "historicalStaticReview": "staticReview.primaryObservationsSha256 binds the primary record before its later About metadata addition; this current digest binds the completed record.",
+    "preservedArtifacts": 156,
+    "finalCheck": {
+      "log": "docs/evidence/RX-4002-installed-final-check.log",
+      "sha256": "fddeffdb6ec1286303f1ebf2a0fd0230f4544f88e4d674610db267b795b699f3",
+      "passes": [
+        491,
+        15,
+        24,
+        26,
+        1
+      ],
+      "total": 557,
+      "failuresCancellationsSkips": 0,
+      "processExit": "Parent reports closed exit 0; reviewer read the closed log and exact counts."
+    },
+    "nativeRerun": false,
+    "finalPlanner": {
+      "checkedAt": "2026-10-08T18:53:37.470Z",
+      "status": "Pass",
+      "taskStatus": "blocked",
+      "evidenceCount": 35,
+      "evidencePathsExist": true,
+      "reviewPathsRegistered": true,
+      "criteriaCount": 7,
+      "criteriaDependenciesFixedFieldsAndTaskStatuses": "Unchanged from c1897c9",
+      "comparedTaskStatuses": 21
+    }
+  }
+}

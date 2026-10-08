@@ -1,0 +1,621 @@
+{
+  "kind": "raveldex-rx4002-installed-app-observations-v1",
+  "date": "2026-10-08",
+  "baseline": "c1897c9",
+  "recordedAt": "2026-10-08T18:41:28.163Z",
+  "method": "Curated action sequence and transcribed excerpts from actual mcp__cua_repl.js native-app AX tool results. This is not an exported full AX tree, DOM call trace or automated assertion runner.",
+  "packageEvidence": "docs/evidence/RX-4002-installed-package.json",
+  "origin": "http://127.0.0.1:60360",
+  "packageSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0.1\nBuildVersion:\t\t26A434",
+  "versionsMethod": "Installed Info.plist metadata plus subsequent native About dialogs in the same non-restarted apps. Firefox About reports version/architecture but no exact running build; its installed build remains separate.",
+  "common": {
+    "route": "/ui",
+    "expectedRedIDs": [
+      "alpha",
+      "delta",
+      "epsilon",
+      "gamma",
+      "long",
+      "quoted",
+      "unsafe"
+    ],
+    "expectedGuideIDs": [
+      "alpha",
+      "epsilon",
+      "gamma",
+      "quoted",
+      "unsafe"
+    ]
+  },
+  "observedRedPages": [
+    [
+      "gamma",
+      "long",
+      "alpha"
+    ],
+    [
+      "epsilon",
+      "delta",
+      "quoted"
+    ],
+    [
+      "unsafe"
+    ]
+  ],
+  "observedGuidePages": [
+    [
+      "gamma",
+      "alpha",
+      "epsilon"
+    ],
+    [
+      "quoted",
+      "unsafe"
+    ]
+  ],
+  "browsers": [
+    {
+      "bundleIdentifier": "org.mozilla.firefox",
+      "installedVersion": "156.0",
+      "installedBuild": "15626.9.9",
+      "steps": [
+        {
+          "sequence": 1,
+          "phase": "mount",
+          "actions": "New task tab /ui",
+          "axExcerpts": [
+            "Installed fixture UI ready.",
+            "9 results. Showing 1–3."
+          ]
+        },
+        {
+          "sequence": 2,
+          "phase": "red-1",
+          "actions": "Click search; type red; Return",
+          "axExcerpts": [
+            "7 results. Showing 1–3.",
+            "Page 1 of 3.",
+            "The focused UI element is 160 search text field (settable) Search documentation, Value: red"
+          ]
+        },
+        {
+          "sequence": 3,
+          "phase": "guide",
+          "actions": "Tab; Tab; g",
+          "axExcerpts": [
+            "pop up button Guide (5)",
+            "5 results. Showing 1–3.",
+            "Page 1 of 2.",
+            "The focused UI element is 163 pop up button Guide (5)"
+          ]
+        },
+        {
+          "sequence": 4,
+          "phase": "clear-first",
+          "actions": "Up (opens popup); Up; Return",
+          "axExcerpts": [
+            "All, ID: menuItemHit:",
+            "7 results. Showing 1–3.",
+            "The focused UI element is 163 pop up button All"
+          ]
+        },
+        {
+          "sequence": 5,
+          "phase": "red-2",
+          "actions": "Click Next page",
+          "axExcerpts": [
+            "7 results. Showing 4–6.",
+            "Page 2 of 3.",
+            "The focused UI element is 187 button Next page"
+          ]
+        },
+        {
+          "sequence": 6,
+          "phase": "red-3",
+          "actions": "Return on focused Next page",
+          "axExcerpts": [
+            "7 results. Showing 7–7.",
+            "Page 3 of 3.",
+            "heading <img src=x onerror=\"window.fixtureInjection=1\">, Value: 3",
+            "button (disabled) Next page"
+          ]
+        },
+        {
+          "sequence": 7,
+          "phase": "guide-reset",
+          "actions": "Click Category popup; g; Return",
+          "axExcerpts": [
+            "5 results. Showing 1–3.",
+            "Page 1 of 2.",
+            "The focused UI element is 163 pop up button Guide (5)"
+          ]
+        },
+        {
+          "sequence": 8,
+          "phase": "guide-2",
+          "actions": "Click Next page",
+          "axExcerpts": [
+            "5 results. Showing 4–5.",
+            "Page 2 of 2."
+          ]
+        },
+        {
+          "sequence": 9,
+          "phase": "clear-reset",
+          "actions": "Click Category popup; Up; Return",
+          "axExcerpts": [
+            "7 results. Showing 1–3.",
+            "Page 1 of 3.",
+            "The focused UI element is 163 pop up button All"
+          ]
+        },
+        {
+          "sequence": 10,
+          "phase": "blue",
+          "actions": "Replace query with blue; Return",
+          "axExcerpts": [
+            "1 results. Showing 1–1.",
+            "heading Beta banana, Value: 3"
+          ]
+        },
+        {
+          "sequence": 11,
+          "phase": "inspector",
+          "actions": "Click Inspect results",
+          "axExcerpts": [
+            "Inspector for revision 1. 1 selected documents.",
+            "\"kind\": \"raveldex-inspector-v1\"",
+            "\"model\": \"raveldex-bm25-v1\"",
+            "The focused UI element is 152 button Close Inspector"
+          ]
+        },
+        {
+          "sequence": 12,
+          "phase": "inspector-close",
+          "actions": "Escape",
+          "axExcerpts": [
+            "The focused UI element is 181 button Inspect results"
+          ]
+        },
+        {
+          "sequence": 13,
+          "phase": "inject",
+          "actions": "Click Inject next search error",
+          "axExcerpts": [
+            "The next search will display a deliberately injected WORK_LIMIT_EXCEEDED."
+          ]
+        },
+        {
+          "sequence": 14,
+          "phase": "error",
+          "actions": "Click blue query; Return",
+          "axExcerpts": [
+            "Search failed. Retry is available.",
+            "Search failed (WORK_LIMIT_EXCEEDED). Try again.",
+            "The focused UI element is 160 search text field (settable) Search documentation, Value: blue"
+          ]
+        },
+        {
+          "sequence": 15,
+          "phase": "retry-focus",
+          "actions": "Tab; Tab; Tab",
+          "axExcerpts": [
+            "The focused UI element is 185 button Retry search"
+          ]
+        },
+        {
+          "sequence": 16,
+          "phase": "retry",
+          "actions": "Return",
+          "axExcerpts": [
+            "1 results. Showing 1–1.",
+            "heading Beta banana, Value: 3",
+            "The focused UI element is 185 button (disabled) Retry search"
+          ]
+        },
+        {
+          "sequence": 17,
+          "phase": "empty",
+          "actions": "Replace query with unmatchedword; Return",
+          "axExcerpts": [
+            "No results.",
+            "0 distinct values; 0 buckets omitted. Counts include the current filters."
+          ]
+        },
+        {
+          "sequence": 18,
+          "phase": "destroy",
+          "actions": "Click Destroy UI",
+          "axExcerpts": [
+            "UI destroyed; authored fallback restored. Borrowed engine remains usable.",
+            "text Authored fallback",
+            "link documentation, Value: 127.0.0.1:60360/authored"
+          ]
+        },
+        {
+          "sequence": 19,
+          "phase": "remount",
+          "actions": "Click Remount UI",
+          "axExcerpts": [
+            "UI remounted over the same borrowed engine.",
+            "9 results. Showing 1–3."
+          ]
+        },
+        {
+          "sequence": 20,
+          "phase": "worker-mount",
+          "actions": "New task tab /worker",
+          "axExcerpts": [
+            "3 results. Showing 1–2."
+          ]
+        },
+        {
+          "sequence": 21,
+          "phase": "worker-red",
+          "actions": "Click search; type red; Return",
+          "axExcerpts": [
+            "2 results. Showing 1–2.",
+            "heading Gamma red, Value: 3",
+            "heading Atomic alpha, Value: 3"
+          ]
+        },
+        {
+          "sequence": 22,
+          "phase": "worker-terminate",
+          "actions": "Click Terminate worker",
+          "axExcerpts": [
+            "Worker terminated. Submit a search to observe transport failure."
+          ]
+        },
+        {
+          "sequence": 23,
+          "phase": "worker-error",
+          "actions": "Replace query with blue; Return",
+          "axExcerpts": [
+            "Search failed (INTERNAL_ERROR). Try again.",
+            "No page loaded."
+          ]
+        },
+        {
+          "sequence": 24,
+          "phase": "worker-recover-pending",
+          "actions": "Click Recover from authoritative source",
+          "axExcerpts": [
+            "Fixture source fallback."
+          ]
+        },
+        {
+          "sequence": 25,
+          "phase": "worker-recovered",
+          "actions": "Read subsequent AX state",
+          "axExcerpts": [
+            "Recovered a new worker from authoritative fixture source.",
+            "3 results. Showing 1–2."
+          ]
+        },
+        {
+          "sequence": 26,
+          "phase": "worker-blue",
+          "actions": "Click query; type blue; Return",
+          "axExcerpts": [
+            "1 results. Showing 1–1.",
+            "heading Beta banana, Value: 3",
+            "The focused UI element is 161 search text field (settable) Search documentation, Value: blue"
+          ]
+        },
+        {
+          "sequence": 27,
+          "phase": "cleanup",
+          "actions": "Close worker task tab, observe /ui; close UI task tab",
+          "axExcerpts": [
+            "Window: \"NEU IN FIREFOX 156 — Firefox.com\""
+          ]
+        }
+      ],
+      "about": {
+        "actions": "getApp(org.mozilla.firefox); Firefox menu; About Firefox; AX observation; click About close button; verify original tab",
+        "axExcerpts": [
+          "text 156.0 (aarch64)",
+          "button Restart to update Firefox"
+        ],
+        "runningVersion": "156.0",
+        "runningBuild": null,
+        "cleanup": "Closed About; original Firefox tab restored. No restart/update button activated."
+      }
+    },
+    {
+      "bundleIdentifier": "com.apple.Safari",
+      "installedVersion": "27.0.1",
+      "installedBuild": "22625.1.29.11.28",
+      "steps": [
+        {
+          "sequence": 1,
+          "phase": "binding",
+          "actions": "Refresh getApp after first navigation attempt rejected stale state",
+          "axExcerpts": [
+            "The user changed '/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app'. Re-query the latest state with `get_app_state` before sending more actions."
+          ]
+        },
+        {
+          "sequence": 2,
+          "phase": "mount",
+          "actions": "New task tab /ui",
+          "axExcerpts": [
+            "Installed fixture UI ready.",
+            "9 results. Showing 1–3."
+          ]
+        },
+        {
+          "sequence": 3,
+          "phase": "red-1",
+          "actions": "Click search; type red; Return",
+          "axExcerpts": [
+            "7 results. Showing 1–3.",
+            "Page 1 of 3.",
+            "The focused UI element is 111 search text field (settable) Search documentation, Value: red"
+          ]
+        },
+        {
+          "sequence": 4,
+          "phase": "facet-focus",
+          "actions": "Tab",
+          "axExcerpts": [
+            "The focused UI element is 114 pop up button (collapsed) Category, Value: All, Secondary Actions: Expand"
+          ]
+        },
+        {
+          "sequence": 5,
+          "phase": "guide",
+          "actions": "g",
+          "axExcerpts": [
+            "5 results. Showing 1–3.",
+            "Page 1 of 2.",
+            "The focused UI element is 114 pop up button (collapsed) Category, Value: Guide (5), Secondary Actions: Expand"
+          ]
+        },
+        {
+          "sequence": 6,
+          "phase": "guide-2",
+          "actions": "Click Next page",
+          "axExcerpts": [
+            "5 results. Showing 4–5.",
+            "Page 2 of 2."
+          ]
+        },
+        {
+          "sequence": 7,
+          "phase": "popup",
+          "actions": "Click Category",
+          "axExcerpts": [
+            "pop up button (expanded) Category, Value: Guide (5), Secondary Actions: Collapse",
+            "All",
+            "(selected) Guide (5)"
+          ]
+        },
+        {
+          "sequence": 8,
+          "phase": "clear-reset",
+          "actions": "Up; Return",
+          "axExcerpts": [
+            "7 results. Showing 1–3.",
+            "Page 1 of 3.",
+            "The focused UI element is 170 pop up button (collapsed) Category, Value: All, Secondary Actions: Expand"
+          ]
+        },
+        {
+          "sequence": 9,
+          "phase": "red-2",
+          "actions": "Click Next page",
+          "axExcerpts": [
+            "7 results. Showing 4–6.",
+            "Page 2 of 3."
+          ]
+        },
+        {
+          "sequence": 10,
+          "phase": "red-3",
+          "actions": "Click Next page",
+          "axExcerpts": [
+            "7 results. Showing 7–7.",
+            "Page 3 of 3.",
+            "heading <img src=x onerror=\"window.fixtureInjection=1\">, Value: 3"
+          ]
+        },
+        {
+          "sequence": 11,
+          "phase": "blue",
+          "actions": "Replace query with blue; Return",
+          "axExcerpts": [
+            "1 results. Showing 1–1.",
+            "heading Beta banana, Value: 3"
+          ]
+        },
+        {
+          "sequence": 12,
+          "phase": "inspector",
+          "actions": "Click Inspect results",
+          "axExcerpts": [
+            "Inspector for revision 1. 1 selected documents.",
+            "\"kind\": \"raveldex-inspector-v1\"",
+            "\"model\": \"raveldex-bm25-v1\"",
+            "The focused UI element is 157 button Close Inspector"
+          ]
+        },
+        {
+          "sequence": 13,
+          "phase": "inspector-close",
+          "actions": "Escape",
+          "axExcerpts": [
+            "The focused UI element is 186 button Inspect results"
+          ]
+        },
+        {
+          "sequence": 14,
+          "phase": "inject",
+          "actions": "Click Inject next search error",
+          "axExcerpts": [
+            "The next search will display a deliberately injected WORK_LIMIT_EXCEEDED."
+          ]
+        },
+        {
+          "sequence": 15,
+          "phase": "error",
+          "actions": "Click blue query; Return",
+          "axExcerpts": [
+            "Search failed. Retry is available.",
+            "Search failed (WORK_LIMIT_EXCEEDED). Try again.",
+            "The focused UI element is 165 search text field (settable) Search documentation, Value: blue"
+          ]
+        },
+        {
+          "sequence": 16,
+          "phase": "search-focus",
+          "actions": "alt+Tab (Option-Tab)",
+          "axExcerpts": [
+            "The focused UI element is 168 button Search"
+          ]
+        },
+        {
+          "sequence": 17,
+          "phase": "retry-focus",
+          "actions": "alt+Tab; alt+Tab",
+          "axExcerpts": [
+            "The focused UI element is 190 button Retry search"
+          ]
+        },
+        {
+          "sequence": 18,
+          "phase": "retry",
+          "actions": "Return",
+          "axExcerpts": [
+            "1 results. Showing 1–1.",
+            "heading Beta banana, Value: 3",
+            "The focused UI element is 190 button (disabled) Retry search"
+          ]
+        },
+        {
+          "sequence": 19,
+          "phase": "empty",
+          "actions": "Replace query with unmatchedword; Return",
+          "axExcerpts": [
+            "No results.",
+            "0 distinct values; 0 buckets omitted. Counts include the current filters."
+          ]
+        },
+        {
+          "sequence": 20,
+          "phase": "destroy",
+          "actions": "Click Destroy UI",
+          "axExcerpts": [
+            "UI destroyed; authored fallback restored. Borrowed engine remains usable. Authored fallback",
+            "link documentation, Value: 127.0.0.1:60360/authored"
+          ]
+        },
+        {
+          "sequence": 21,
+          "phase": "remount",
+          "actions": "Click Remount UI",
+          "axExcerpts": [
+            "UI remounted over the same borrowed engine.",
+            "9 results. Showing 1–3."
+          ]
+        },
+        {
+          "sequence": 22,
+          "phase": "worker-mount",
+          "actions": "New task tab /worker",
+          "axExcerpts": [
+            "3 results. Showing 1–2."
+          ]
+        },
+        {
+          "sequence": 23,
+          "phase": "worker-red",
+          "actions": "Click search; type red; Return",
+          "axExcerpts": [
+            "2 results. Showing 1–2.",
+            "heading Gamma red, Value: 3",
+            "heading Atomic alpha, Value: 3"
+          ]
+        },
+        {
+          "sequence": 24,
+          "phase": "worker-terminate",
+          "actions": "Click Terminate worker",
+          "axExcerpts": [
+            "Worker terminated. Submit a search to observe transport failure."
+          ]
+        },
+        {
+          "sequence": 25,
+          "phase": "worker-error",
+          "actions": "Replace query with blue; Return",
+          "axExcerpts": [
+            "Search failed (INTERNAL_ERROR). Try again.",
+            "No page loaded."
+          ]
+        },
+        {
+          "sequence": 26,
+          "phase": "worker-recover-pending",
+          "actions": "Click Recover from authoritative source",
+          "axExcerpts": [
+            "Worker terminated. Submit a search to observe transport failure. Fixture source fallback."
+          ]
+        },
+        {
+          "sequence": 27,
+          "phase": "worker-recovered",
+          "actions": "Read subsequent AX state",
+          "axExcerpts": [
+            "Recovered a new worker from authoritative fixture source.",
+            "3 results. Showing 1–2."
+          ]
+        },
+        {
+          "sequence": 28,
+          "phase": "worker-blue",
+          "actions": "Click query; type blue; Return",
+          "axExcerpts": [
+            "1 results. Showing 1–1.",
+            "heading Beta banana, Value: 3",
+            "The focused UI element is 196 search text field (settable) Search documentation, Value: blue"
+          ]
+        },
+        {
+          "sequence": 29,
+          "phase": "cleanup",
+          "actions": "Close worker task tab, observe /ui; close UI task tab",
+          "axExcerpts": [
+            "Window: \"Start Page\""
+          ]
+        }
+      ],
+      "about": {
+        "actions": "getApp(com.apple.Safari); Safari menu; About Safari; AX observation; click About close button; verify Start Page",
+        "axExcerpts": [
+          "text Safari Version 27.0.1 (22625.1.29.11.28)"
+        ],
+        "runningVersion": "27.0.1",
+        "runningBuild": "22625.1.29.11.28",
+        "cleanup": "Closed About; original Start Page restored."
+      }
+    }
+  ],
+  "limitations": [
+    "Native software keyboard/AX clicks only; no human or physical display/input/IME observation.",
+    "No speech or VoiceOver session; AX text is not an announcement.",
+    "No Event.isTrusted, activeElement, exact main-query, or complete error/cleanup trace was read from DOM. Focus describes the native AX reported element only.",
+    "Inspector AX text is truncated; only displayed header/model and modal focus/close are asserted, not complete numerical fact verification.",
+    "After keyboard Retry success both apps reported disabled Retry as the AX focus; subsequent editing succeeded by clicking the query. No post-Retry focus restoration or fully exhaustive keyboard-flow claim.",
+    "Safari plain Tab skipped Search; Option-Tab reached Search and Retry. No settings changed.",
+    "No full semantics/persistence/resource matrix or 1,000/10,000 workload was run in these apps.",
+    "No public disposal/cleanup outcome was observed on unload. Only task tab closure/original tab restoration was observed."
+  ],
+  "fixtureServerCleanup": {
+    "action": "SIGINT through task-owned PTY after primary and independent browser tabs closed",
+    "exitCode": 0,
+    "scope": "Serve process exited after its fixture.close handler; no public engine disposal acknowledgement was inspected."
+  }
+}
