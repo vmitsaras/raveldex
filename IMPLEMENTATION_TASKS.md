@@ -622,7 +622,7 @@ Host the complete native engine in one module worker through validated transport
 
 **Versioned source and native snapshots**
 
-**Milestone:** N3 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/22)
+**Milestone:** N3 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/22)
 
 **Dependencies:** [RX-2006](IMPLEMENTATION_TASKS.md#rx-2006)
 
@@ -654,7 +654,11 @@ Export and restore explicit source/native snapshot formats with bounded decoding
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-3002.md](docs/evidence/RX-3002.md)
+- [docs/evidence/RX-3002-review.md](docs/evidence/RX-3002-review.md)
+- [docs/evidence/RX-3002-package.json](docs/evidence/RX-3002-package.json)
+- [docs/evidence/RX-3002-costs.json](docs/evidence/RX-3002-costs.json)
+- [docs/evidence/RX-3002-review-probe.json](docs/evidence/RX-3002-review-probe.json)
 
 
 ## RX-3003

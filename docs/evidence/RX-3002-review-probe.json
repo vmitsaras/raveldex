@@ -1,0 +1,924 @@
+{
+  "task": "RX-3002",
+  "method": "Independent live-source esbuild ESM bundle; actual platform API and separate manually controlled host for stop/cleanup probes. Literal memberships and original UTF16 coordinates; no production analyzer/scorer/codec helper used by expected-value logic.",
+  "environment": {
+    "node": "24.21.0",
+    "acorn": "8.18.0",
+    "ada": "4.0.0",
+    "amaro": "1.1.11",
+    "ares": "1.34.8",
+    "brotli": "1.2.0",
+    "cldr": "48.0",
+    "icu": "78.3",
+    "llhttp": "9.4.3",
+    "merve": "1.2.2",
+    "modules": "137",
+    "napi": "10",
+    "nbytes": "0.1.4",
+    "ncrypto": "0.0.1",
+    "nghttp2": "1.70.0",
+    "nghttp3": "",
+    "ngtcp2": "",
+    "openssl": "3.6.4",
+    "simdjson": "4.6.11",
+    "simdutf": "6.4.0",
+    "sqlite": "3.53.4",
+    "tz": "2026a",
+    "undici": "7.29.1",
+    "unicode": "17.0",
+    "uv": "1.52.1",
+    "uvwasi": "0.0.23",
+    "v8": "13.6.233.17-node.53",
+    "zlib": "1.2.12",
+    "zstd": "1.5.7",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "27.0.0"
+  },
+  "sourceHashes": {
+    "src/README.md": "e0f2ea52911b92595c4b998663156e68689d7e479087aa32e854c16d6e9c0391",
+    "src/adapters/snapshots/error.ts": "a8a751bbb7d1592f7c51a9c227a90b65963b3e09a3def0d265ef5f595ecb6eec",
+    "src/adapters/snapshots/index.ts": "197ef9eafc6dc0e6676cd7deb0e20fb8e4c104b5481734d2e12341edb48527d3",
+    "src/adapters/snapshots/json.ts": "aca883c4fa6843a44682ff54933f794697245098d5da605f480d37e77b4beb47",
+    "src/adapters/snapshots/native.ts": "ba59b6ee0e4d7764e763c452b74eb578016a4893fdb6ca7d598657caee0cab02",
+    "src/adapters/snapshots/qualification.ts": "f9d4a19a249583d99b3369a3a845fb0af69fbd977e908f47e24cf4b7d873f0ae",
+    "src/adapters/snapshots/snapshots.ts": "293bb4725c823f40b307b6f65b1d33b4b39d91c7c210df4a6dcec3590b06a75b",
+    "src/adapters/snapshots/source.ts": "cfcf2857f26b52b0bb38bd764645252a708d4aebfed9150eea9a53e673ec715e",
+    "src/adapters/snapshots/types.ts": "2a8def2772e40af0c3686384d930aa1e25f60905a449ce31be67390cff233875",
+    "src/adapters/worker/client.ts": "9d82d9e9455f9892faf913ee0a185bd70f8df548ba74e67e7d1459821c25daa3",
+    "src/adapters/worker/error.ts": "0cda22a21199bd30b62d2a488f7ecf541500f6ad090e8562bb8b7b69ca525e66",
+    "src/adapters/worker/host.ts": "8fe613d8725873dacc945bec8a985f57944727d4e4023576de551db0be91701f",
+    "src/adapters/worker/index.ts": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d",
+    "src/adapters/worker/protocol.ts": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1",
+    "src/adapters/worker/types.ts": "311c1136410fdc57bcfc6e8eae24a5ddc9456973d871dca138e9b2f933dc9a5e",
+    "src/addons/evidence/builder.ts": "b073d61734ffb0c7b941935f746471271eb2053b79f4bd8c3ed4ad077e367444",
+    "src/addons/evidence/index.ts": "0335028aaa647552d046ad7a82a032c33e393ea38f8589c5d58d4f59937cd258",
+    "src/addons/evidence/occurrences.ts": "ab7c38b598c57255d3a486aee0035fffb8e69267ee29746f54c7d1a58deaa06d",
+    "src/addons/evidence/options.ts": "c8da7583abbdf29b94e886a46c193ff030382eb52f9bcf17420426d70e214b15",
+    "src/addons/evidence/providers.ts": "d4b9cf1ed76ede91725d86a675695bda3ddbe7d6829aab4d8aff6e115054e8ae",
+    "src/addons/evidence/types.ts": "bd4fdcc00eb26c6bb14aa75e7b4e2dbca2d3c96e148d966ce0c0d08e164cebf9",
+    "src/addons/facets/facets.ts": "c7c70433a7c063da58b172e8d67054cf412655519b12cbe361dc5ad14c93af22",
+    "src/addons/facets/index.ts": "52ffc961ad27c90e568f5e14f1554bd5ea34378ece05b344fa60ad149660fcc8",
+    "src/addons/facets/options.ts": "48277d81b23e7bd5de5fb8b38f6447766c0d107791815ce822cfea5a5c3e85fb",
+    "src/addons/filters/index.ts": "e9b02134e579b64bee61201632fab3a83f9558e3be1a45287f81cd0b03adfb87",
+    "src/addons/filters/options.ts": "d3fe1af3348c3794860790f558ce1fd60f7a09b7c875bb88f39575c255460ace",
+    "src/addons/inspector/diagnostics.ts": "94fd70aa463f51f7ccdb29bb22f1e485af657925c8863cf953764fc11b22107a",
+    "src/addons/inspector/index.ts": "0ef694aedd432ed6420831242e2100561abbca3c9a0bb90835a2f82888b06144",
+    "src/addons/inspector/inspector.ts": "206bd1b107680426849301b82255dda320a64f3daa6dfd523fc16571bc0b8432",
+    "src/addons/inspector/options.ts": "c05d15912b2def1730447f9b0f8e30d7b413e7efb2a4b539c0d185cca57af2f2",
+    "src/addons/inspector/output.ts": "dc5ffcc3ce842d1b9b7a6448d0c1f0914e371b6e1569db47cf9313d2f889e818",
+    "src/addons/inspector/types.ts": "35f547178b9fa08dde5b8f2af09aa0b479c5d7482734c389ee0a51858e9a0942",
+    "src/addons/metadata/payload.ts": "d2de877cce479a202e2e651ebbd48c5a79e3db7327b66830ba67e4d134499c8a",
+    "src/addons/phrases/index.ts": "961e7c57dcde244a1b2f15190f7307d70ab4ad7674057bafb0301a8c7fb570b2",
+    "src/addons/phrases/mixed.ts": "f409c4431dee3b24317fe6ab61f3c04c0b5bf82064d383762346db5bd701a0f6",
+    "src/addons/phrases/options.ts": "472f301c1b2c01bcb0f2b93efb909301b68fa20825dd3e725dcc9233ae9c00ad",
+    "src/addons/phrases/source.ts": "b69e1d17086bc480378654a73acf8dea6f6dea1fdd9bb6743dd061612c475171",
+    "src/addons/phrases/store.ts": "26292de8ab5b495481a88e552302e5c082416d1719148d392b3ba610f945644c",
+    "src/addons/phrases/verifier.ts": "6a6d4d5a0dd47bd1c5c739290d9160011f0e4026a49d39b71f024fc01f171605",
+    "src/addons/positions/index.ts": "ca0fadb3ba5ba238e4fcad4a170f485cfb870bcb3f8c6e64af9f1b8184b9b69a",
+    "src/addons/positions/options.ts": "b4ba6d9118a351e2af37db67d5334be9027cf5fc22364f8fbfe8272205133fac",
+    "src/addons/positions/phrases.ts": "81f8eca9fc82315c9564dc832f30cc373d391d0a15e5ff2e92f6b4baddce5186",
+    "src/addons/positions/store.ts": "cacedc9dcb6d69e951faae6981c226e1d0abfd5c2829359318367f7a530f4757",
+    "src/addons/positions/verifier.ts": "ade7a56d477a0c560c7d5a11a08a9a089cc6d593cce5806eabdd5b0020d70bb8",
+    "src/addons/snippets/index.ts": "5886043a08cebbc97bdfe69d13e47dd8a7aac4e36a5f0576dfcdcc5ad1b289e8",
+    "src/addons/snippets/snippets.ts": "08d39187382f0a0f75aeb647fb4ceee01e3086fa77853d4c3ae98ce34be9bd3c",
+    "src/addons/snippets/types.ts": "79a38f346e625db98b775a9e0d48f7aac45651fa8d810c566a4cf08c8bf21742",
+    "src/addons/ui/index.ts": "982af774169a293ed39fe35dc836c596649e3d083d061bf63b4bbfa33090f1fd",
+    "src/addons/ui/options.ts": "8c63e84ab80d4e9b857920767f57bb390d17f21b27a499a925ab94a92978e3e0",
+    "src/addons/ui/render.ts": "140784f6759871d746493863e194846ed54360bd377c3ca1747b0dd52a304e0f",
+    "src/addons/ui/styles.css": "6152525fb59c13c357f73df120e757d4ebfd9a68bfedbb26e249e01410e432f6",
+    "src/addons/ui/types.ts": "567de75ec63b3eae0031e34ccaede506435678c33009df993769df0cdec79c36",
+    "src/addons/ui/ui.ts": "fb97dac6bc8c61355b3f3b056438d1412ef1aaf778bb287d9b33aa76a8998a3d",
+    "src/core/analyzer/basic.ts": "33cdd8ab819f7c1f2cdb08ab8a269a47dbf0cf7321ac2205f29735cd61a9cef8",
+    "src/core/capabilities/capture.ts": "5aee519c2055f2a9c516e6b058181ff5adb93ce43410a208a012876d78e567b2",
+    "src/core/capabilities/participants.ts": "172c6f2169e741fc700b915c2048794e8826254cd9ea03b6f6e3254a054e8d57",
+    "src/core/capabilities/refinement.ts": "7ac25cc788cc91650a7abe6739b9637b53deb037d4a77e004828b5ec78f15301",
+    "src/core/capabilities/registration.ts": "a0c1913d261dadef58af4b5862f3e6e10e258e16bbf2b1030bf421756c03eb73",
+    "src/core/capabilities/types.ts": "b4aa9457f527fc5634e4fa75c4a99f8bb358fa93fdf194cd884b98f66a20d067",
+    "src/core/capabilities/worker-identity.ts": "deeef4653868641b868410bf6094822e1d0cf7e303834ff5bba902527fba0c4c",
+    "src/core/contracts/data.ts": "ad5cb3df86d9cda637dfe8528566197f7fce3803699470945526b822b3fc9624",
+    "src/core/contracts/options.ts": "01d4ad7fc75679042b37839498a909bdbe0ee7eeedaa653f1a2a71cb748ec5f7",
+    "src/core/contracts/query.ts": "4306a09b64b06d1455fd8536d927159045d21d8241cfe3e8a954740699d3900c",
+    "src/core/contracts/record.ts": "e34b1db54fcd7b01559eb16034d52cbb1eb9941cdf29332331b53aa96bb7701f",
+    "src/core/contracts/schema.ts": "be26cf3b11fe0d1269137eecc0af5aab98e433052db0056e995dfbbc0a3aa4b2",
+    "src/core/contracts/types.ts": "4706b4f5b6e8cae949d7f1f247a8de39bed99b568d9952c3301d077e462ca49f",
+    "src/core/errors/error.ts": "a6d445660533af4344f0cd17c2469d953e3276b95cfb81c7cf4c508a2f2eb5f4",
+    "src/core/execution/engine.ts": "94ffdda7b72409b65cb6bdae74b98954c0652397a9ccce220fd08003ce7c0606",
+    "src/core/execution/host.ts": "d787db43ad885e3aaccbac4a4deb6c439c56b301b91a57706ebcb57cde891fe6",
+    "src/core/index/construction.ts": "c7d554dce356108471e22b32a741dd61837b295872b5ce895872200a7adcb607",
+    "src/core/index/directory.ts": "bf3334da2415508fd0b7cc15c68badbdb05419de8945c39457dce796f3e5811f",
+    "src/core/index/invariants.ts": "0b930b72de18475c553702e95dd4439ed07710cf4d6577a8b48b078770e11817",
+    "src/core/index/staging.ts": "87405966d972e10a139294639ad1442bf38441f7e1746109c277e1dfc105f924",
+    "src/core/index/state.ts": "c406402762f871101f26a4e70ad2582357b24bf02023a896f3e57edc9fed04c7",
+    "src/core/limits/limits.ts": "41c5a3ecf85128ffdfcaa6e140eea0463daafb34d7488853bda588df8d0fdf58",
+    "src/core/limits/work.ts": "7681a435b9f8298bbe89bfd0a2b70b4b5044b8d5402f25e7bf7ae85c3db61316",
+    "src/core/mutations/capture.ts": "522c2c2d2a0bf87b54ac43be5c9b29befdfd2a3650d7f39761a152a62d6cd9e1",
+    "src/core/mutations/delta.ts": "f2ec161183dac4acf8c3a6a83d112ab4858a178d5b0a64d890b7c885e5fc169e",
+    "src/core/mutations/document.ts": "e9b92a9b6237f9d276d33d8ba3e75a38211bd93a74d48b5a4f789c88c1a77206",
+    "src/core/mutations/owner.ts": "1300d159c989e9f17af35fcf9f6f99c76f8012626d6e62e047036b84828b077c",
+    "src/core/query/compile.ts": "f31dbb285f19815561e5d5b494cea6a8d86dce638b4cd94eb7ef5344993c1826",
+    "src/core/query/evaluate.ts": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670",
+    "src/core/query/search.ts": "a466c717251903b7d74add3a8ddb0e85e1279b06a71dc2efd917f36870bef37c",
+    "src/core/query/work.ts": "985f6f9386ad21c2ee5d346a75cb85f80c99ea99cd9c8ee72c3e3b7712cfbdc9",
+    "src/core/ranking/bm25.ts": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+    "src/core/ranking/page.ts": "d1f3bd789ca1b10ec946be751ab4ab7d1d53e07d4e4ce8e3be7ff20081f311d0",
+    "src/core/retrieval/exact.ts": "170423fb15c0f1d22bf2fe25bae19bc66c14dcc56770af64007e1f0fd7da01ee",
+    "src/core/retrieval/expand.ts": "8347cbf829dc60cd9a243736814640f6ee4765c7f63bdcf07c64979edbf22cb0",
+    "src/core/revision/participant.ts": "dba9979d1929ede20d1b4c05b2556cc2ded0b2e7d7aefbb9dd18cf754c4738f1",
+    "src/core/trace/facts.ts": "b51fb6696bb78aababd4c59865b7198bd08098be09ef5fe768b371c9d7ea47c4",
+    "src/index.ts": "c7042f5d1c1c7191ed7024f1b1410081e1dcc02482ce8b93a015ff842e651ad8"
+  },
+  "bundleInputs": [
+    "independent-review-entry.ts",
+    "src/adapters/snapshots/error.ts",
+    "src/adapters/snapshots/index.ts",
+    "src/adapters/snapshots/json.ts",
+    "src/adapters/snapshots/native.ts",
+    "src/adapters/snapshots/qualification.ts",
+    "src/adapters/snapshots/snapshots.ts",
+    "src/adapters/snapshots/source.ts",
+    "src/addons/phrases/options.ts",
+    "src/addons/phrases/store.ts",
+    "src/addons/positions/options.ts",
+    "src/addons/positions/phrases.ts",
+    "src/addons/positions/store.ts",
+    "src/addons/positions/verifier.ts",
+    "src/core/analyzer/basic.ts",
+    "src/core/capabilities/capture.ts",
+    "src/core/capabilities/participants.ts",
+    "src/core/capabilities/refinement.ts",
+    "src/core/capabilities/registration.ts",
+    "src/core/capabilities/worker-identity.ts",
+    "src/core/contracts/data.ts",
+    "src/core/contracts/options.ts",
+    "src/core/contracts/query.ts",
+    "src/core/contracts/record.ts",
+    "src/core/contracts/schema.ts",
+    "src/core/errors/error.ts",
+    "src/core/execution/engine.ts",
+    "src/core/execution/host.ts",
+    "src/core/index/directory.ts",
+    "src/core/index/invariants.ts",
+    "src/core/index/staging.ts",
+    "src/core/limits/limits.ts",
+    "src/core/limits/work.ts",
+    "src/core/mutations/capture.ts",
+    "src/core/mutations/delta.ts",
+    "src/core/mutations/document.ts",
+    "src/core/mutations/owner.ts",
+    "src/core/query/compile.ts",
+    "src/core/query/evaluate.ts",
+    "src/core/query/search.ts",
+    "src/core/query/work.ts",
+    "src/core/ranking/bm25.ts",
+    "src/core/ranking/page.ts",
+    "src/core/retrieval/expand.ts",
+    "src/core/trace/facts.ts"
+  ],
+  "rows": [
+    {
+      "name": "restore returns known commit despite signal changing after publication",
+      "status": "Pass",
+      "observations": {
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 1,
+          "revision": 2,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "unqualified"
+          }
+        },
+        "revision": 2
+      }
+    },
+    {
+      "name": "whole source restore shares participant cap across individually admissible colliding donor writes",
+      "status": "Pass",
+      "observations": {
+        "code": "WORK_LIMIT_EXCEEDED",
+        "revision": 1,
+        "donorWrites": 100,
+        "participantCap": 4000
+      }
+    },
+    {
+      "name": "source-free native frequencies cannot claim zero original code units",
+      "status": "Pass",
+      "observations": {
+        "code": "INCOMPATIBLE_CAPABILITY",
+        "reason": "INVALID_NATIVE_STATE",
+        "revision": 1
+      }
+    },
+    {
+      "name": "complete retained originals must equal native per-document logical text counts",
+      "status": "Pass",
+      "observations": {
+        "code": "INCOMPATIBLE_CAPABILITY",
+        "reason": "INVALID_NATIVE_STATE",
+        "revision": 1
+      }
+    },
+    {
+      "name": "native canonical terms containing punctuation and spaces preserve exact membership without raw reanalysis",
+      "status": "Pass",
+      "observations": {
+        "originalValues": [
+          "½",
+          "⑴",
+          "Ŀ",
+          "ﷺ",
+          "á",
+          "ΟΣ",
+          "İ",
+          "𝔸"
+        ],
+        "nativeTerms": [
+          "1⁄2",
+          "(1)",
+          "l·",
+          "صلى الله عليه وسلم",
+          "á",
+          "ος",
+          "i̇",
+          "a"
+        ],
+        "comparisons": 9,
+        "sourceAvailable": false
+      }
+    },
+    {
+      "name": "native original UTF16 offsets and strict phrase semantics survive source-free restore and later replacement",
+      "status": "Pass",
+      "observations": {
+        "nativeCoordinates": {
+          "1⁄2": [
+            {
+              "end": 10,
+              "position": 2,
+              "positionLength": 1,
+              "start": 9
+            }
+          ],
+          "file": [
+            {
+              "end": 8,
+              "position": 1,
+              "positionLength": 1,
+              "start": 5
+            }
+          ],
+          "á": [
+            {
+              "end": 4,
+              "position": 0,
+              "positionLength": 1,
+              "start": 2
+            }
+          ]
+        },
+        "phraseTotals": [
+          1,
+          0,
+          1
+        ],
+        "sourceAvailable": false
+      }
+    },
+    {
+      "name": "duplicate ordinals, overlapping spans and damaged authoritative source reject atomically",
+      "status": "Pass",
+      "observations": [
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "INVALID_NATIVE_STATE",
+          "revision": 1
+        },
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "INVALID_NATIVE_STATE",
+          "revision": 1
+        },
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "INVALID_NATIVE_STATE",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "name": "native metadata duplicate membership and undeclared metadata fields reject atomically",
+      "status": "Pass",
+      "observations": [
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "INVALID_NATIVE_STATE",
+          "revision": 1
+        },
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "INVALID_NATIVE_STATE",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "name": "native numeric metadata rejects noncanonical negative zero despite valid checksum",
+      "status": "Pass",
+      "observations": {
+        "code": "INCOMPATIBLE_CAPABILITY",
+        "reason": "INVALID_NATIVE_STATE",
+        "revision": 1
+      }
+    },
+    {
+      "name": "source origin qualification is structurally validated independently of receiving runtime match",
+      "status": "Pass",
+      "observations": [
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "PROFILE_MISMATCH",
+          "revision": 1
+        },
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "PROFILE_MISMATCH",
+          "revision": 1
+        },
+        {
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "reason": "PROFILE_MISMATCH",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "name": "numeric lexical cap, duplicate keys, malformed surrogate escapes and byte caps preserve old root",
+      "status": "Pass",
+      "observations": {
+        "malformed": [
+          {
+            "code": "INCOMPATIBLE_CAPABILITY",
+            "reason": "MALFORMED_SNAPSHOT",
+            "revision": 1
+          },
+          {
+            "code": "INCOMPATIBLE_CAPABILITY",
+            "reason": "MALFORMED_SNAPSHOT",
+            "revision": 1
+          },
+          {
+            "code": "INCOMPATIBLE_CAPABILITY",
+            "reason": "MALFORMED_SNAPSHOT",
+            "revision": 1
+          }
+        ],
+        "stricterByteCap": 1024
+      }
+    },
+    {
+      "name": "native qualification cannot promote ordinary engines or silently accept a mismatched runtime",
+      "status": "Pass",
+      "observations": {
+        "actualEnvironment": {
+          "runtime": "node",
+          "version": "24.21.0",
+          "v8": "13.6.233.17-node.53",
+          "icu": "78.3",
+          "unicode": "17.0",
+          "platform": "darwin",
+          "arch": "arm64"
+        },
+        "rootFacadeMethods": [
+          "search",
+          "add",
+          "addMany",
+          "replace",
+          "remove",
+          "clear",
+          "dispose"
+        ],
+        "arbitraryAttestationPromotedDefault": false
+      }
+    },
+    {
+      "name": "source and native encode/decode suspensions abort with exact old root and host cleanup",
+      "status": "Pass",
+      "observations": [
+        {
+          "format": "source",
+          "suspension": 0,
+          "code": "CANCELLED",
+          "revision": 1
+        },
+        {
+          "format": "source",
+          "suspension": 1,
+          "code": "CANCELLED",
+          "revision": 1
+        },
+        {
+          "format": "source",
+          "suspension": 64,
+          "code": "CANCELLED",
+          "revision": 1
+        },
+        {
+          "format": "source",
+          "suspension": 512,
+          "code": "CANCELLED",
+          "revision": 1
+        },
+        {
+          "format": "native",
+          "suspension": 0,
+          "code": "CANCELLED",
+          "revision": 1
+        },
+        {
+          "format": "native",
+          "suspension": 1,
+          "code": "CANCELLED",
+          "revision": 1
+        },
+        {
+          "format": "native",
+          "suspension": 64,
+          "code": "CANCELLED",
+          "revision": 1
+        },
+        {
+          "format": "native",
+          "suspension": 512,
+          "code": "CANCELLED",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "name": "reentrant source stop at final publication check prevents all core and side changes",
+      "status": "Pass",
+      "observations": {
+        "failureCode": "INTERNAL_ERROR",
+        "injectedPrecommitStops": 1,
+        "oldRevision": 1
+      }
+    }
+  ],
+  "summary": {
+    "tests": 14,
+    "pass": 14,
+    "fail": 0
+  },
+  "limitations": [
+    "Attestation fixture tests exact running identity and literal semantics, not independent universal Unicode or cross-host equivalence.",
+    "Controlled host tests are not browser worker observations.",
+    "No GC/heap/physical paint/assistive technology/remote CI claims."
+  ],
+  "artifactAudit": {
+    "status": "Pass",
+    "path": "/tmp/raveldex-rx3002-package-synchronized.json",
+    "packageSha256": "eecb1673b0f85b25d0fd4f9b2952ccab609a478b66db724fe0c8057b552838a7",
+    "packageFiles": 182,
+    "distributionInputHashChecks": 79,
+    "syntheticEntryHashChecks": 2,
+    "rebuiltGraphs": [
+      {
+        "name": "core",
+        "sha256": "d16151fd9a80296ab95866f890cfb7a6bdf068e20beecc6c713ec44bcde37cd7",
+        "gzipSha256": "011f78164cf69094031f50f07ae84ff41504c3831092adbdf0996ea9d2cd3a1a",
+        "minifiedBytes": 55341,
+        "gzipBytes": 16826
+      },
+      {
+        "name": "snapshots",
+        "sha256": "984b390185b6a60a55fda8ed212724e4b88ed5b0fad47da04bb0a9b40000187d",
+        "gzipSha256": "615d5a6a814860bf031004f753e30fcd3ee38bcbfe3c49d10f3fc46313a21ab7",
+        "minifiedBytes": 104816,
+        "gzipBytes": 29196
+      }
+    ],
+    "corpus": {
+      "hash": "a3c318e00667faccdf8f143a6c0a4b64ad2ae6be873d0de99b3872c6c982ab0a",
+      "records": 34
+    }
+  },
+  "costAudit": {
+    "status": "Pass",
+    "path": "docs/evidence/RX-3002-costs.json",
+    "implementationHashChecks": 178,
+    "runnerHashChecks": 1,
+    "cases": 9,
+    "successfulOperations": 28,
+    "boundedRejectedOperations": 2,
+    "meaning": "Raw actual emitted work and process-memory observations with shared harness; bounded source10000 refusals preserve previous roots. Neither exact physical component memory nor true peak/latency qualification."
+  },
+  "failedExecutions": [
+    {
+      "summary": {
+        "tests": 13,
+        "pass": 12,
+        "fail": 1
+      },
+      "sourceHashes": {
+        "src/README.md": "fd908c3a504cb94c60c1e2ec4a1c640fb8c96dea56d2d9637402970820cfdcdd",
+        "src/adapters/snapshots/error.ts": "a8a751bbb7d1592f7c51a9c227a90b65963b3e09a3def0d265ef5f595ecb6eec",
+        "src/adapters/snapshots/index.ts": "197ef9eafc6dc0e6676cd7deb0e20fb8e4c104b5481734d2e12341edb48527d3",
+        "src/adapters/snapshots/json.ts": "ca0847dd428d265dbb3d8a41f119412d34cbd8c8d0e452e131e3e7ef4bccf7c2",
+        "src/adapters/snapshots/native.ts": "1d5768138f6acefbd89e32dd5661eb4dbf76ce066c972fa9276f2479d0d1bd1c",
+        "src/adapters/snapshots/qualification.ts": "f9d4a19a249583d99b3369a3a845fb0af69fbd977e908f47e24cf4b7d873f0ae",
+        "src/adapters/snapshots/snapshots.ts": "6e99c546b50752ff17f5c4d52c9eb5d385db771e80c21ccce61a2048f242cb4e",
+        "src/adapters/snapshots/source.ts": "ba50868c7f929e9c7ec99c85ee944680d0af634a08c2d6e22748a47cec8efbc1",
+        "src/adapters/snapshots/types.ts": "2a8def2772e40af0c3686384d930aa1e25f60905a449ce31be67390cff233875",
+        "src/adapters/worker/client.ts": "9d82d9e9455f9892faf913ee0a185bd70f8df548ba74e67e7d1459821c25daa3",
+        "src/adapters/worker/error.ts": "0cda22a21199bd30b62d2a488f7ecf541500f6ad090e8562bb8b7b69ca525e66",
+        "src/adapters/worker/host.ts": "8fe613d8725873dacc945bec8a985f57944727d4e4023576de551db0be91701f",
+        "src/adapters/worker/index.ts": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d",
+        "src/adapters/worker/protocol.ts": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1",
+        "src/adapters/worker/types.ts": "311c1136410fdc57bcfc6e8eae24a5ddc9456973d871dca138e9b2f933dc9a5e",
+        "src/addons/evidence/builder.ts": "b073d61734ffb0c7b941935f746471271eb2053b79f4bd8c3ed4ad077e367444",
+        "src/addons/evidence/index.ts": "0335028aaa647552d046ad7a82a032c33e393ea38f8589c5d58d4f59937cd258",
+        "src/addons/evidence/occurrences.ts": "ab7c38b598c57255d3a486aee0035fffb8e69267ee29746f54c7d1a58deaa06d",
+        "src/addons/evidence/options.ts": "c8da7583abbdf29b94e886a46c193ff030382eb52f9bcf17420426d70e214b15",
+        "src/addons/evidence/providers.ts": "d4b9cf1ed76ede91725d86a675695bda3ddbe7d6829aab4d8aff6e115054e8ae",
+        "src/addons/evidence/types.ts": "bd4fdcc00eb26c6bb14aa75e7b4e2dbca2d3c96e148d966ce0c0d08e164cebf9",
+        "src/addons/facets/facets.ts": "c7c70433a7c063da58b172e8d67054cf412655519b12cbe361dc5ad14c93af22",
+        "src/addons/facets/index.ts": "52ffc961ad27c90e568f5e14f1554bd5ea34378ece05b344fa60ad149660fcc8",
+        "src/addons/facets/options.ts": "48277d81b23e7bd5de5fb8b38f6447766c0d107791815ce822cfea5a5c3e85fb",
+        "src/addons/filters/index.ts": "e9b02134e579b64bee61201632fab3a83f9558e3be1a45287f81cd0b03adfb87",
+        "src/addons/filters/options.ts": "d3fe1af3348c3794860790f558ce1fd60f7a09b7c875bb88f39575c255460ace",
+        "src/addons/inspector/diagnostics.ts": "94fd70aa463f51f7ccdb29bb22f1e485af657925c8863cf953764fc11b22107a",
+        "src/addons/inspector/index.ts": "0ef694aedd432ed6420831242e2100561abbca3c9a0bb90835a2f82888b06144",
+        "src/addons/inspector/inspector.ts": "206bd1b107680426849301b82255dda320a64f3daa6dfd523fc16571bc0b8432",
+        "src/addons/inspector/options.ts": "c05d15912b2def1730447f9b0f8e30d7b413e7efb2a4b539c0d185cca57af2f2",
+        "src/addons/inspector/output.ts": "dc5ffcc3ce842d1b9b7a6448d0c1f0914e371b6e1569db47cf9313d2f889e818",
+        "src/addons/inspector/types.ts": "35f547178b9fa08dde5b8f2af09aa0b479c5d7482734c389ee0a51858e9a0942",
+        "src/addons/metadata/payload.ts": "d2de877cce479a202e2e651ebbd48c5a79e3db7327b66830ba67e4d134499c8a",
+        "src/addons/phrases/index.ts": "961e7c57dcde244a1b2f15190f7307d70ab4ad7674057bafb0301a8c7fb570b2",
+        "src/addons/phrases/mixed.ts": "f409c4431dee3b24317fe6ab61f3c04c0b5bf82064d383762346db5bd701a0f6",
+        "src/addons/phrases/options.ts": "472f301c1b2c01bcb0f2b93efb909301b68fa20825dd3e725dcc9233ae9c00ad",
+        "src/addons/phrases/source.ts": "b69e1d17086bc480378654a73acf8dea6f6dea1fdd9bb6743dd061612c475171",
+        "src/addons/phrases/store.ts": "26292de8ab5b495481a88e552302e5c082416d1719148d392b3ba610f945644c",
+        "src/addons/phrases/verifier.ts": "6a6d4d5a0dd47bd1c5c739290d9160011f0e4026a49d39b71f024fc01f171605",
+        "src/addons/positions/index.ts": "ca0fadb3ba5ba238e4fcad4a170f485cfb870bcb3f8c6e64af9f1b8184b9b69a",
+        "src/addons/positions/options.ts": "b4ba6d9118a351e2af37db67d5334be9027cf5fc22364f8fbfe8272205133fac",
+        "src/addons/positions/phrases.ts": "81f8eca9fc82315c9564dc832f30cc373d391d0a15e5ff2e92f6b4baddce5186",
+        "src/addons/positions/store.ts": "cacedc9dcb6d69e951faae6981c226e1d0abfd5c2829359318367f7a530f4757",
+        "src/addons/positions/verifier.ts": "ade7a56d477a0c560c7d5a11a08a9a089cc6d593cce5806eabdd5b0020d70bb8",
+        "src/addons/snippets/index.ts": "5886043a08cebbc97bdfe69d13e47dd8a7aac4e36a5f0576dfcdcc5ad1b289e8",
+        "src/addons/snippets/snippets.ts": "08d39187382f0a0f75aeb647fb4ceee01e3086fa77853d4c3ae98ce34be9bd3c",
+        "src/addons/snippets/types.ts": "79a38f346e625db98b775a9e0d48f7aac45651fa8d810c566a4cf08c8bf21742",
+        "src/addons/ui/index.ts": "982af774169a293ed39fe35dc836c596649e3d083d061bf63b4bbfa33090f1fd",
+        "src/addons/ui/options.ts": "8c63e84ab80d4e9b857920767f57bb390d17f21b27a499a925ab94a92978e3e0",
+        "src/addons/ui/render.ts": "140784f6759871d746493863e194846ed54360bd377c3ca1747b0dd52a304e0f",
+        "src/addons/ui/styles.css": "6152525fb59c13c357f73df120e757d4ebfd9a68bfedbb26e249e01410e432f6",
+        "src/addons/ui/types.ts": "567de75ec63b3eae0031e34ccaede506435678c33009df993769df0cdec79c36",
+        "src/addons/ui/ui.ts": "fb97dac6bc8c61355b3f3b056438d1412ef1aaf778bb287d9b33aa76a8998a3d",
+        "src/core/analyzer/basic.ts": "33cdd8ab819f7c1f2cdb08ab8a269a47dbf0cf7321ac2205f29735cd61a9cef8",
+        "src/core/capabilities/capture.ts": "5aee519c2055f2a9c516e6b058181ff5adb93ce43410a208a012876d78e567b2",
+        "src/core/capabilities/participants.ts": "172c6f2169e741fc700b915c2048794e8826254cd9ea03b6f6e3254a054e8d57",
+        "src/core/capabilities/refinement.ts": "7ac25cc788cc91650a7abe6739b9637b53deb037d4a77e004828b5ec78f15301",
+        "src/core/capabilities/registration.ts": "a0c1913d261dadef58af4b5862f3e6e10e258e16bbf2b1030bf421756c03eb73",
+        "src/core/capabilities/types.ts": "b4aa9457f527fc5634e4fa75c4a99f8bb358fa93fdf194cd884b98f66a20d067",
+        "src/core/capabilities/worker-identity.ts": "deeef4653868641b868410bf6094822e1d0cf7e303834ff5bba902527fba0c4c",
+        "src/core/contracts/data.ts": "ad5cb3df86d9cda637dfe8528566197f7fce3803699470945526b822b3fc9624",
+        "src/core/contracts/options.ts": "01d4ad7fc75679042b37839498a909bdbe0ee7eeedaa653f1a2a71cb748ec5f7",
+        "src/core/contracts/query.ts": "4306a09b64b06d1455fd8536d927159045d21d8241cfe3e8a954740699d3900c",
+        "src/core/contracts/record.ts": "e34b1db54fcd7b01559eb16034d52cbb1eb9941cdf29332331b53aa96bb7701f",
+        "src/core/contracts/schema.ts": "be26cf3b11fe0d1269137eecc0af5aab98e433052db0056e995dfbbc0a3aa4b2",
+        "src/core/contracts/types.ts": "4706b4f5b6e8cae949d7f1f247a8de39bed99b568d9952c3301d077e462ca49f",
+        "src/core/errors/error.ts": "a6d445660533af4344f0cd17c2469d953e3276b95cfb81c7cf4c508a2f2eb5f4",
+        "src/core/execution/engine.ts": "5fb42fba657576c426a2c47cced9419218c97f4ed11af9685efe15ad362d40f0",
+        "src/core/execution/host.ts": "d787db43ad885e3aaccbac4a4deb6c439c56b301b91a57706ebcb57cde891fe6",
+        "src/core/index/construction.ts": "c7d554dce356108471e22b32a741dd61837b295872b5ce895872200a7adcb607",
+        "src/core/index/directory.ts": "bf3334da2415508fd0b7cc15c68badbdb05419de8945c39457dce796f3e5811f",
+        "src/core/index/invariants.ts": "0b930b72de18475c553702e95dd4439ed07710cf4d6577a8b48b078770e11817",
+        "src/core/index/staging.ts": "87405966d972e10a139294639ad1442bf38441f7e1746109c277e1dfc105f924",
+        "src/core/index/state.ts": "c406402762f871101f26a4e70ad2582357b24bf02023a896f3e57edc9fed04c7",
+        "src/core/limits/limits.ts": "41c5a3ecf85128ffdfcaa6e140eea0463daafb34d7488853bda588df8d0fdf58",
+        "src/core/limits/work.ts": "7681a435b9f8298bbe89bfd0a2b70b4b5044b8d5402f25e7bf7ae85c3db61316",
+        "src/core/mutations/capture.ts": "522c2c2d2a0bf87b54ac43be5c9b29befdfd2a3650d7f39761a152a62d6cd9e1",
+        "src/core/mutations/delta.ts": "f2ec161183dac4acf8c3a6a83d112ab4858a178d5b0a64d890b7c885e5fc169e",
+        "src/core/mutations/document.ts": "e9b92a9b6237f9d276d33d8ba3e75a38211bd93a74d48b5a4f789c88c1a77206",
+        "src/core/mutations/owner.ts": "1300d159c989e9f17af35fcf9f6f99c76f8012626d6e62e047036b84828b077c",
+        "src/core/query/compile.ts": "f31dbb285f19815561e5d5b494cea6a8d86dce638b4cd94eb7ef5344993c1826",
+        "src/core/query/evaluate.ts": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670",
+        "src/core/query/search.ts": "a466c717251903b7d74add3a8ddb0e85e1279b06a71dc2efd917f36870bef37c",
+        "src/core/query/work.ts": "985f6f9386ad21c2ee5d346a75cb85f80c99ea99cd9c8ee72c3e3b7712cfbdc9",
+        "src/core/ranking/bm25.ts": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+        "src/core/ranking/page.ts": "d1f3bd789ca1b10ec946be751ab4ab7d1d53e07d4e4ce8e3be7ff20081f311d0",
+        "src/core/retrieval/exact.ts": "170423fb15c0f1d22bf2fe25bae19bc66c14dcc56770af64007e1f0fd7da01ee",
+        "src/core/retrieval/expand.ts": "8347cbf829dc60cd9a243736814640f6ee4765c7f63bdcf07c64979edbf22cb0",
+        "src/core/revision/participant.ts": "dba9979d1929ede20d1b4c05b2556cc2ded0b2e7d7aefbb9dd18cf754c4738f1",
+        "src/core/trace/facts.ts": "b51fb6696bb78aababd4c59865b7198bd08098be09ef5fe768b371c9d7ea47c4",
+        "src/index.ts": "c7042f5d1c1c7191ed7024f1b1410081e1dcc02482ce8b93a015ff842e651ad8"
+      },
+      "rows": [
+        {
+          "name": "restore returns known commit despite signal changing after publication",
+          "status": "Pass",
+          "observations": {
+            "result": {
+              "format": "raveldex-source",
+              "originRevision": 1,
+              "revision": 2,
+              "reindexed": true,
+              "receivingAnalyzer": {
+                "id": "basic-v1",
+                "environmentProfile": "unqualified"
+              }
+            },
+            "revision": 2
+          }
+        },
+        {
+          "name": "whole source restore shares participant cap across ten individually admissible donor writes",
+          "status": "Fail",
+          "failure": {
+            "name": "RaveldexError",
+            "message": "Raveldex: WORK_LIMIT_EXCEEDED",
+            "code": "WORK_LIMIT_EXCEEDED",
+            "stack": "RaveldexError: Raveldex: WORK_LIMIT_EXCEEDED\n    at invalid (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx3002-independent-OCFs49/runtime.mjs:38:9)\n    at WorkBudget.charge (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx3002-independent-OCFs49/runtime.mjs:572:71)\n    at validateNative (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx3002-independent-OCFs49/runtime.mjs:2808:16)\n    at validateNative.next (<anonymous>)\n    at encoded (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx3002-independent-OCFs49/runtime.mjs:3222:12)\n    at encoded.next (<anonymous>)\n    at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx3002-independent-OCFs49/runtime.mjs:3180:27)\n    at metered.next (<anonymous>)\n    at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx3002-independent-OCFs49/runtime.mjs:3346:21)\n    at start.next (<anonymous>)"
+          }
+        },
+        {
+          "name": "source-free native frequencies cannot claim zero original code units",
+          "status": "Pass",
+          "observations": {
+            "code": "INCOMPATIBLE_CAPABILITY",
+            "reason": "INVALID_NATIVE_STATE",
+            "revision": 1
+          }
+        },
+        {
+          "name": "complete retained originals must equal native per-document logical text counts",
+          "status": "Pass",
+          "observations": {
+            "code": "INCOMPATIBLE_CAPABILITY",
+            "reason": "INVALID_NATIVE_STATE",
+            "revision": 1
+          }
+        },
+        {
+          "name": "native canonical terms containing punctuation and spaces preserve exact membership without raw reanalysis",
+          "status": "Pass",
+          "observations": {
+            "originalValues": [
+              "½",
+              "⑴",
+              "Ŀ",
+              "ﷺ",
+              "á",
+              "ΟΣ",
+              "İ",
+              "𝔸"
+            ],
+            "nativeTerms": [
+              "1⁄2",
+              "(1)",
+              "l·",
+              "صلى الله عليه وسلم",
+              "á",
+              "ος",
+              "i̇",
+              "a"
+            ],
+            "comparisons": 9,
+            "sourceAvailable": false
+          }
+        },
+        {
+          "name": "native original UTF16 offsets and strict phrase semantics survive source-free restore and later replacement",
+          "status": "Pass",
+          "observations": {
+            "nativeCoordinates": {
+              "1⁄2": [
+                {
+                  "end": 10,
+                  "position": 2,
+                  "positionLength": 1,
+                  "start": 9
+                }
+              ],
+              "file": [
+                {
+                  "end": 8,
+                  "position": 1,
+                  "positionLength": 1,
+                  "start": 5
+                }
+              ],
+              "á": [
+                {
+                  "end": 4,
+                  "position": 0,
+                  "positionLength": 1,
+                  "start": 2
+                }
+              ]
+            },
+            "phraseTotals": [
+              1,
+              0,
+              1
+            ],
+            "sourceAvailable": false
+          }
+        },
+        {
+          "name": "duplicate ordinals, overlapping spans and damaged authoritative source reject atomically",
+          "status": "Pass",
+          "observations": [
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "INVALID_NATIVE_STATE",
+              "revision": 1
+            },
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "INVALID_NATIVE_STATE",
+              "revision": 1
+            },
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "INVALID_NATIVE_STATE",
+              "revision": 1
+            }
+          ]
+        },
+        {
+          "name": "native metadata duplicate membership and undeclared metadata fields reject atomically",
+          "status": "Pass",
+          "observations": [
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "INVALID_NATIVE_STATE",
+              "revision": 1
+            },
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "INVALID_NATIVE_STATE",
+              "revision": 1
+            }
+          ]
+        },
+        {
+          "name": "source origin qualification is structurally validated independently of receiving runtime match",
+          "status": "Pass",
+          "observations": [
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "PROFILE_MISMATCH",
+              "revision": 1
+            },
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "PROFILE_MISMATCH",
+              "revision": 1
+            },
+            {
+              "code": "INCOMPATIBLE_CAPABILITY",
+              "reason": "PROFILE_MISMATCH",
+              "revision": 1
+            }
+          ]
+        },
+        {
+          "name": "numeric lexical cap, duplicate keys, malformed surrogate escapes and byte caps preserve old root",
+          "status": "Pass",
+          "observations": {
+            "malformed": [
+              {
+                "code": "INCOMPATIBLE_CAPABILITY",
+                "reason": "MALFORMED_SNAPSHOT",
+                "revision": 1
+              },
+              {
+                "code": "INCOMPATIBLE_CAPABILITY",
+                "reason": "MALFORMED_SNAPSHOT",
+                "revision": 1
+              },
+              {
+                "code": "INCOMPATIBLE_CAPABILITY",
+                "reason": "MALFORMED_SNAPSHOT",
+                "revision": 1
+              }
+            ],
+            "stricterByteCap": 1024
+          }
+        },
+        {
+          "name": "native qualification cannot promote ordinary engines or silently accept a mismatched runtime",
+          "status": "Pass",
+          "observations": {
+            "actualEnvironment": {
+              "runtime": "node",
+              "version": "24.21.0",
+              "v8": "13.6.233.17-node.53",
+              "icu": "78.3",
+              "unicode": "17.0",
+              "platform": "darwin",
+              "arch": "arm64"
+            },
+            "rootFacadeMethods": [
+              "search",
+              "add",
+              "addMany",
+              "replace",
+              "remove",
+              "clear",
+              "dispose"
+            ],
+            "arbitraryAttestationPromotedDefault": false
+          }
+        },
+        {
+          "name": "source and native encode/decode suspensions abort with exact old root and host cleanup",
+          "status": "Pass",
+          "observations": [
+            {
+              "format": "source",
+              "suspension": 0,
+              "code": "CANCELLED",
+              "revision": 1
+            },
+            {
+              "format": "source",
+              "suspension": 1,
+              "code": "CANCELLED",
+              "revision": 1
+            },
+            {
+              "format": "source",
+              "suspension": 64,
+              "code": "CANCELLED",
+              "revision": 1
+            },
+            {
+              "format": "source",
+              "suspension": 512,
+              "code": "CANCELLED",
+              "revision": 1
+            },
+            {
+              "format": "native",
+              "suspension": 0,
+              "code": "CANCELLED",
+              "revision": 1
+            },
+            {
+              "format": "native",
+              "suspension": 1,
+              "code": "CANCELLED",
+              "revision": 1
+            },
+            {
+              "format": "native",
+              "suspension": 64,
+              "code": "CANCELLED",
+              "revision": 1
+            },
+            {
+              "format": "native",
+              "suspension": 512,
+              "code": "CANCELLED",
+              "revision": 1
+            }
+          ]
+        },
+        {
+          "name": "reentrant source stop at final publication check prevents all core and side changes",
+          "status": "Pass",
+          "observations": {
+            "failureCode": "INTERNAL_ERROR",
+            "injectedPrecommitStops": 1,
+            "oldRevision": 1
+          }
+        }
+      ],
+      "classification": "Review fixture defect: source cap 40 correctly rejected full-state export validation before the intended restore. Replaced with 100 individually admissible colliding donor writes/cap 4000, where export succeeds and cumulative restore must reject. Historical failing observation retained."
+    }
+  ],
+  "failedArtifactAudits": [
+    {
+      "status": "Fail",
+      "path": "/tmp/raveldex-rx3002-package-finalfocused.json",
+      "failure": {
+        "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '0efa6f9315c829c6a9bcd00cf1221987f52c2374d19f19ecd33ad88cc57cfd94'\n- 'cced035f82c2a17bc9ecec6c0cf42d7b590e1d4e39439353ec9f89bcd1c8236c'\n",
+        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '0efa6f9315c829c6a9bcd00cf1221987f52c2374d19f19ecd33ad88cc57cfd94'\n- 'cced035f82c2a17bc9ecec6c0cf42d7b590e1d4e39439353ec9f89bcd1c8236c'\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3002-review-probe.mjs:279:46\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+      },
+      "classification": "Historical artifact mismatch: last source-free provenance documentation changed the current corpus after finalfocused package capture. Behavioral14/14 passed; distribution inputs and independently rebuilt code/gzip identities agreed before the corpus identity assertion failed. Final synchronized package evidence must replace this focused historical capture."
+    },
+    {
+      "status": "Fail",
+      "path": "/tmp/raveldex-rx3002-package-regression.json",
+      "failure": {
+        "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'a3c318e00667faccdf8f143a6c0a4b64ad2ae6be873d0de99b3872c6c982ab0a'\n- '0efa6f9315c829c6a9bcd00cf1221987f52c2374d19f19ecd33ad88cc57cfd94'\n",
+        "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'a3c318e00667faccdf8f143a6c0a4b64ad2ae6be873d0de99b3872c6c982ab0a'\n- '0efa6f9315c829c6a9bcd00cf1221987f52c2374d19f19ecd33ad88cc57cfd94'\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-3002-review-probe.mjs:279:46\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+      },
+      "classification": "Historical artifact mismatch: final approved contract/documentation synchronization changed the current corpus after regression package capture. All 14 behavioral probes and distribution/code/gzip identities passed before the corpus assertion. The final synchronized package audit now verifies the frozen current corpus."
+    }
+  ]
+}

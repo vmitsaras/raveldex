@@ -2,7 +2,7 @@
   "name": "@vmitsaras/raveldex",
   "version": "0.0.0",
   "private": true,
-  "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution, optional search capabilities and native DOM UI.",
+  "description": "Native modular TypeScript local search \u2014 ESM core with BM25, atomic mutations, cooperative execution, optional search capabilities and native DOM UI.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
+    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -40,7 +40,9 @@
     "test:evidence": "npm run build && node --test test/addons/evidence/*.test.mjs",
     "test:ui": "npm run build && node --test test/ui/*.test.mjs",
     "pilot:ui": "npm run build && node scripts/ui-pilot.mjs",
-    "test:worker": "npm run build && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs"
+    "test:worker": "npm run build && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
+    "test:snapshots": "npm run build && node --test --test-timeout=120000 test/adapters/snapshots/*.test.mjs",
+    "measure:snapshots": "npm run build && node --expose-gc scripts/snapshot-costs.mjs"
   },
   "devDependencies": {
     "axe-core": "4.13.0",
@@ -106,6 +108,10 @@
     "./adapters/worker/host": {
       "types": "./dist/adapters/worker/host.d.ts",
       "import": "./dist/adapters/worker/host.js"
+    },
+    "./adapters/snapshots": {
+      "types": "./dist/adapters/snapshots/index.d.ts",
+      "import": "./dist/adapters/snapshots/index.js"
     }
   },
   "files": [
@@ -121,7 +127,8 @@
     "dist/addons/evidence/",
     "dist/addons/snippets/",
     "dist/addons/ui/",
-    "dist/adapters/worker/"
+    "dist/adapters/worker/",
+    "dist/adapters/snapshots/"
   ],
   "sideEffects": [
     "**/*.css"

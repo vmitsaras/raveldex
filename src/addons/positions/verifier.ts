@@ -59,7 +59,7 @@ function* intersectOffsets(lists: readonly (readonly PositionOccurrence[])[]): G
 /** One selected field, usable by a mixed-strategy registration. Headers are
  * checked during preparation even if the lexical candidate set will be empty. */
 export function* preparePositionField(context: RefinementContext, field: string): Generator<WorkStep, PreparedRefinement> {
-  if (context.analyzer.id !== BASIC_ANALYZER.id || context.analyzer.environmentProfile !== BASIC_ANALYZER.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.positions.analyzer');
+  if (context.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.positions.analyzer');
   yield rawCharge(field.length + 1);
   const root = requirePositionRoot(context.state(`positions:${field}`), field, context.revision, context.analyzer);
   yield rawCharge(root.fields.length + root.offsetFields.length + 1);

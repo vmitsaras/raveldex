@@ -12,7 +12,13 @@ import type { TransactionParticipant } from '../revision/participant.js';
 import { directHost } from './host.js';
 import type { ExecutionHost } from './host.js';
 
-type Result = SearchResult | MutationResult;
+type Result = unknown;
+/** Private adapter seam. Optional implementations prepare their complete owned
+ * result/state inside the same admission, FIFO and stop lifecycle. */
+export interface AdapterOperation<T> {
+  readonly options: OwnedOptions;
+  start(root: IndexRoot, check: (phase?: string) => void, publish: (root: IndexRoot) => void): Generator<WorkStep, T>;
+}
 /** Private trusted adapter control. Applied after caller admission so transport
  * signals and elapsed time do not consume the caller's data-entry allowance. */
 export interface AdapterControl { readonly signal: NonNullable<MutationOptions['signal']>; readonly elapsedMs: number }
@@ -66,6 +72,16 @@ export class ExecutionOwner implements Raveldex {
     this.#host = Object.freeze({ now: host.now.bind(host), schedule: host.schedule.bind(host) });
   }
   get root(): IndexRoot | undefined { return this.#owner?.root; }
+
+  adapterOperation<T>(capture: (configuration: OwnedConfiguration) => AdapterOperation<T>): Promise<T> {
+    return this.admit(() => {
+      const request = capture(this.#configuration);
+      return { options: request.options, start: check => {
+        const owner = this.#owner!, previous = owner.root;
+        return request.start(previous, check, root => owner.publishPrepared(root, previous));
+      } };
+    }) as Promise<T>;
+  }
 
   search(query: string | Query, options?: SearchOptions): Promise<SearchResult> {
     return this.searchControlled(query, options);
@@ -228,18 +244,36 @@ export class ExecutionOwner implements Raveldex {
   }
 }
 
-export function createRaveldex(configuration: Configuration): Raveldex {
+const executionOwners = new WeakMap<object, ExecutionOwner>();
+/** Private identity lookup; optional adapters cannot attach to foreign facades. */
+export function getExecutionOwner(engine: Raveldex): ExecutionOwner | undefined { return executionOwners.get(engine); }
+
+/** Trusted owned factory, excluded from the public root package exports. */
+export function createOwnedRaveldex(captured: OwnedConfiguration, host: ExecutionHost = directHost(), metrics?: ExecutionMetrics): Raveldex {
   let owner: ExecutionOwner;
   try {
-    const captured = captureConfiguration(configuration), installed = initializeParticipants(captured);
-    owner = new ExecutionOwner(emptyRoot(captured, installed.states), directHost(), installed.participants);
+    const installed = initializeParticipants(captured);
+    owner = new ExecutionOwner(emptyRoot(captured, installed.states), host, installed.participants, metrics);
   } catch (error) { throw error instanceof RaveldexError ? error : new RaveldexError('INTERNAL_ERROR'); }
+  return facadeFromExecutionOwner(owner);
+}
+
+/** The single trusted owner-to-facade binding path. Kept outside public exports;
+ * internal controlled owners use the same identity and ordinary method surface. */
+export function facadeFromExecutionOwner(owner: ExecutionOwner): Raveldex {
   // A public data facade prevents JavaScript callers reaching private test roots
   // or TypeScript-private execution callbacks through the owner's prototype.
-  return Object.freeze({
+  const facade = Object.freeze({
     search: owner.search.bind(owner), add: owner.add.bind(owner),
     addMany: owner.addMany.bind(owner), replace: owner.replace.bind(owner),
     remove: owner.remove.bind(owner), clear: owner.clear.bind(owner),
     dispose: owner.dispose.bind(owner),
   });
+  executionOwners.set(facade, owner);
+  return facade;
+}
+
+export function createRaveldex(configuration: Configuration): Raveldex {
+  try { return createOwnedRaveldex(captureConfiguration(configuration)); }
+  catch (error) { throw error instanceof RaveldexError ? error : new RaveldexError('INTERNAL_ERROR'); }
 }

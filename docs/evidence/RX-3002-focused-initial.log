@@ -1,0 +1,326 @@
+✔ format, codec and every compatibility header/version produce specific reasons and preserve old state (783.898958ms)
+ℹ {"compatibilityCases":28}
+✖ malformed, truncated, duplicate-property and damaged JSON snapshots never modify a visible revision (132.047333ms)
+✔ qualified factory strictly owns and validates the attestation without promoting ordinary engines (7.030084ms)
+✔ valid-integrity native corruption fails reverse, postings, statistics and directory invariants atomically (536.742083ms)
+ℹ {"nativeCoreCorruptions":16}
+✔ snapshot calls share ordinary FIFO, read execution-start roots and own admitted strings/options (25.246708ms)
+✔ snapshot encode/decode/staging cancellation at multiple suspensions preserves exact old core and participant roots (71.44675ms)
+ℹ {"controlledSuspensionCancellations":10}
+✔ queued deadlines, aborts and overflow release slots while successful restore advances exactly once (10.26825ms)
+✔ active deadlines, work caps and encoded byte caps fail honestly without side-state publication (6.2665ms)
+✖ early stop and disposal skip untrusted snapshot/options access and release pending adapter work (0.769625ms)
+✔ successful empty restore is a new local revision even when both origin and target are empty (74.277458ms)
+✖ installed public codec declarations and complete minified native/source consumers preserve actual behavior (1059.769708ms)
+✖ snapshots stay optional and public imports do not inspect host/storage/startup capabilities (0.8145ms)
+✖ source roundtrip preserves source representation, exact semantic output and subsequent writes (8.485708ms)
+✖ source roundtrip preserves positions representation, exact semantic output and subsequent writes (2.558709ms)
+✖ source roundtrip preserves offsets representation, exact semantic output and subsequent writes (1.9495ms)
+✖ source roundtrip preserves mixed representation, exact semantic output and subsequent writes (1.389083ms)
+✖ native roundtrip preserves core representation, exact semantic output and subsequent writes (15.797042ms)
+✖ native roundtrip preserves source representation, exact semantic output and subsequent writes (1.611625ms)
+✖ native roundtrip preserves positions representation, exact semantic output and subsequent writes (1.016333ms)
+✖ native roundtrip preserves offsets representation, exact semantic output and subsequent writes (1.239ms)
+✖ native roundtrip preserves mixed representation, exact semantic output and subsequent writes (1.187875ms)
+✔ source export requires originals for every indexed field and never fabricates source-free text (143.149125ms)
+✔ unqualified ordinary engines reject native state and source restore reports explicit receiving reindex (138.227042ms)
+✔ literal hand BM25 arithmetic survives both formats and deletion without calling the native scorer (43.598459ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 11
+ℹ fail 13
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1782.487041
+
+✖ failing tests:
+
+test at test/adapters/snapshots/compatibility.test.mjs:56:1
+✖ malformed, truncated, duplicate-property and damaged JSON snapshots never modify a visible revision (132.047333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'UNSUPPORTED_CODEC'
+  - 'MALFORMED_SNAPSHOT'
+  
+      at Object.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/adapters/snapshots/compatibility.test.mjs:13:10)
+      at expectedException (node:assert:578:17)
+      at expectsError (node:assert:703:21)
+      at strict.rejects (node:assert:769:3)
+      at async TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/adapters/snapshots/compatibility.test.mjs:67:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'UNSUPPORTED_CODEC',
+    expected: 'MALFORMED_SNAPSHOT',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/adapters/snapshots/lifecycle.test.mjs:105:1
+✖ early stop and disposal skip untrusted snapshot/options access and release pending adapter work (0.769625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    Comparison {
+  +   code: 'INCOMPATIBLE_CAPABILITY'
+  -   code: 'CANCELLED'
+    }
+  
+      at async TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/adapters/snapshots/lifecycle.test.mjs:110:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+        at fail (file:///Users/vasilis/Documents/GitHub/raveldex/dist/adapters/snapshots/error.js:16:44)
+        at file:///Users/vasilis/Documents/GitHub/raveldex/dist/adapters/snapshots/snapshots.js:226:21
+        at file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:38:29
+        at ExecutionOwner.admit (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:92:29)
+        at ExecutionOwner.adapterOperation (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:37:21)
+        at Object.restore (file:///Users/vasilis/Documents/GitHub/raveldex/dist/adapters/snapshots/snapshots.js:223:26)
+        at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/adapters/snapshots/lifecycle.test.mjs:110:43)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18),
+    expected: { code: 'CANCELLED' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/adapters/snapshots/package.test.mjs:81:1
+✖ installed public codec declarations and complete minified native/source consumers preserve actual behavior (1059.769708ms)
+  Error: Command failed: /opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-snapshots.mjs
+  file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24
+      throw new RaveldexError(code, { path });
+            ^
+  
+  RaveldexError: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24:11)
+      at preparePhrase (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/addons/phrases/index.js:14:9)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:92:12)
+      at prepareRefinements.next (<anonymous>)
+      at executeOwnedSearch (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/query/search.js:69:65) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.analyzer' }
+  }
+  
+  Node.js v24.21.0
+  
+      at genericNodeError (node:internal/errors:986:15)
+      at wrappedFn (node:internal/errors:540:14)
+      at ChildProcess.exithandler (node:child_process:417:12)
+      at ChildProcess.emit (node:events:514:28)
+      at maybeClose (node:internal/child_process:1141:16)
+      at Socket.<anonymous> (node:internal/child_process:498:11)
+      at Socket.emit (node:events:514:28)
+      at Pipe.<anonymous> (node:net:362:12) {
+    code: 1,
+    killed: false,
+    signal: null,
+    cmd: '/opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-snapshots.mjs',
+    stdout: '',
+    stderr: "file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24\n    throw new RaveldexError(code, { path });\n          ^\n\nRaveldexError: Raveldex: INCOMPATIBLE_CAPABILITY\n    at invalid (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24:11)\n    at preparePhrase (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/addons/phrases/index.js:14:9)\n    at preparePhrase.next (<anonymous>)\n    at run (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:22:45)\n    at run.next (<anonymous>)\n    at walk (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:65:41)\n    at walk.next (<anonymous>)\n    at prepareRefinements (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:92:12)\n    at prepareRefinements.next (<anonymous>)\n    at executeOwnedSearch (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/query/search.js:69:65) {\n  code: 'INCOMPATIBLE_CAPABILITY',\n  details: { path: 'phrases.analyzer' }\n}\n\nNode.js v24.21.0\n"
+  }
+
+test at test/adapters/snapshots/package.test.mjs:87:1
+✖ snapshots stay optional and public imports do not inspect host/storage/startup capabilities (0.8145ms)
+  Error: Command failed: /opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-snapshots.mjs
+  file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24
+      throw new RaveldexError(code, { path });
+            ^
+  
+  RaveldexError: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24:11)
+      at preparePhrase (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/addons/phrases/index.js:14:9)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:92:12)
+      at prepareRefinements.next (<anonymous>)
+      at executeOwnedSearch (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/query/search.js:69:65) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.analyzer' }
+  }
+  
+  Node.js v24.21.0
+  
+      at genericNodeError (node:internal/errors:986:15)
+      at wrappedFn (node:internal/errors:540:14)
+      at ChildProcess.exithandler (node:child_process:417:12)
+      at ChildProcess.emit (node:events:514:28)
+      at maybeClose (node:internal/child_process:1141:16)
+      at Socket.<anonymous> (node:internal/child_process:498:11)
+      at Socket.emit (node:events:514:28)
+      at Pipe.<anonymous> (node:net:362:12) {
+    code: 1,
+    killed: false,
+    signal: null,
+    cmd: '/opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-snapshots.mjs',
+    stdout: '',
+    stderr: "file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24\n    throw new RaveldexError(code, { path });\n          ^\n\nRaveldexError: Raveldex: INCOMPATIBLE_CAPABILITY\n    at invalid (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/errors/error.js:24:11)\n    at preparePhrase (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/addons/phrases/index.js:14:9)\n    at preparePhrase.next (<anonymous>)\n    at run (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:22:45)\n    at run.next (<anonymous>)\n    at walk (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:65:41)\n    at walk.next (<anonymous>)\n    at prepareRefinements (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/capabilities/refinement.js:92:12)\n    at prepareRefinements.next (<anonymous>)\n    at executeOwnedSearch (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-0HeGR1/node_modules/@vmitsaras/raveldex/dist/core/query/search.js:69:65) {\n  code: 'INCOMPATIBLE_CAPABILITY',\n  details: { path: 'phrases.analyzer' }\n}\n\nNode.js v24.21.0\n"
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ source roundtrip preserves source representation, exact semantic output and subsequent writes (8.485708ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePhrase (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/phrases/index.js:14:9)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12)
+      at prepareRefinements.next (<anonymous>)
+      at executeOwnedSearch (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/query/search.js:69:65) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.analyzer' }
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ source roundtrip preserves positions representation, exact semantic output and subsequent writes (2.558709ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePositionField (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/verifier.js:66:9)
+      at preparePositionField.next (<anonymous>)
+      at preparePhrase (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/phrases.js:15:28)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.positions.analyzer' }
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ source roundtrip preserves offsets representation, exact semantic output and subsequent writes (1.9495ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePositionField (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/verifier.js:66:9)
+      at preparePositionField.next (<anonymous>)
+      at preparePhrase (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/phrases.js:15:28)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.positions.analyzer' }
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ source roundtrip preserves mixed representation, exact semantic output and subsequent writes (1.389083ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePositionField (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/verifier.js:66:9)
+      at preparePositionField.next (<anonymous>)
+      at Object.prepare (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/phrases/mixed.js:47:47)
+      at prepare.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.positions.analyzer' }
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ native roundtrip preserves core representation, exact semantic output and subsequent writes (15.797042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '9116cfc5'
+  - 'e32da095'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/adapters/snapshots/roundtrip.test.mjs:37:16)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '9116cfc5',
+    expected: 'e32da095',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ native roundtrip preserves source representation, exact semantic output and subsequent writes (1.611625ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePhrase (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/phrases/index.js:14:9)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12)
+      at prepareRefinements.next (<anonymous>)
+      at executeOwnedSearch (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/query/search.js:69:65) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.analyzer' }
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ native roundtrip preserves positions representation, exact semantic output and subsequent writes (1.016333ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePositionField (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/verifier.js:66:9)
+      at preparePositionField.next (<anonymous>)
+      at preparePhrase (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/phrases.js:15:28)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.positions.analyzer' }
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ native roundtrip preserves offsets representation, exact semantic output and subsequent writes (1.239ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePositionField (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/verifier.js:66:9)
+      at preparePositionField.next (<anonymous>)
+      at preparePhrase (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/phrases.js:15:28)
+      at preparePhrase.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.positions.analyzer' }
+  }
+
+test at test/adapters/snapshots/roundtrip.test.mjs:20:5
+✖ native roundtrip preserves mixed representation, exact semantic output and subsequent writes (1.187875ms)
+  Error [RaveldexError]: Raveldex: INCOMPATIBLE_CAPABILITY
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at preparePositionField (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/positions/verifier.js:66:9)
+      at preparePositionField.next (<anonymous>)
+      at Object.prepare (file:///Users/vasilis/Documents/GitHub/raveldex/dist/addons/phrases/mixed.js:47:47)
+      at prepare.next (<anonymous>)
+      at run (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:22:45)
+      at run.next (<anonymous>)
+      at walk (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:65:41)
+      at walk.next (<anonymous>)
+      at prepareRefinements (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/capabilities/refinement.js:92:12) {
+    code: 'INCOMPATIBLE_CAPABILITY',
+    details: { path: 'phrases.positions.analyzer' }
+  }

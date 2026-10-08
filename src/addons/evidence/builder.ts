@@ -117,7 +117,7 @@ function* project(context: EvidenceContext, finished: EvidenceResultContext, req
 
 function* prepare(context: EvidenceContext, options: CapturedMatchOptions, presentation?: EvidencePresentation): Generator<WorkStep, PreparedEvidence> {
   yield* validatePayload(context.payload, 'INVALID_OPTIONS');
-  if (context.analyzer.id !== BASIC_ANALYZER.id || context.analyzer.environmentProfile !== BASIC_ANALYZER.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.analyzer');
+  if (context.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.analyzer');
   const request = parseMatchRequest(context.payload, context.limits, options), providers = new Map<string, Provider>();
   for (const field of request.fields) {
     yield charge(field.length + 1);

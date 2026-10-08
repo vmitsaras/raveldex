@@ -89,6 +89,8 @@ Prepare/finalize failures discard staging and retain the old root. Best-effort c
 
 The operation's response contains the revision it actually read or committed. It must not obtain a newer revision later from mutable global state while constructing the response.
 
+RX-3002 snapshot export/restore uses a private optional-adapter operation on this same owner queue. Restore validates and stages a complete core plus every installed participant, then publishes exactly one next local revision. Source rebuild may consume separately bounded record batches, but its complete decode/rebuild/participant work shares one overall restore ceiling; resetting per-batch counters cannot bypass that ceiling or participant limits. Imported origin revisions are returned as metadata and never reset the existing owner. A failed/cancelled import preserves exact old root identity and all side-state revisions. The root public facade gains no snapshot/root/publication method.
+
 ## State transitions and cancellation
 
 Conceptually an accepted call is `queued → running → completed/failed/cancelled`; a mutation additionally reaches `prepared → committed → completed`. These states are lifecycle facts, not mandatory public events.

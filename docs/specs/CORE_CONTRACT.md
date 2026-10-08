@@ -151,6 +151,8 @@ The default profile is **unqualified**: useful for same-owner indexing/querying,
 
 Direct and worker execution must use the same implementation/configuration and compatible qualified profiles, or an explicitly same-host unqualified pairing supported by the worker contract. Importing native state across incompatible or unqualified profiles is rejected. A source snapshot may be rebuilt under a receiving profile with an explicit reindex result; this is not a score/membership equivalence claim.
 
+The RX-3002 optional snapshot entry may create a direct owner with an explicit trusted application qualification declaration and an actual matching Node environment record. This records the owner's qualified descriptor from revision 0; it cannot promote an already unqualified ordinary owner. Profile identity is separate from the unchanged `basic-v1` algorithm. Local round-trip fixtures qualify the observed scope only; declaration strings, probes, and exact version matching alone do not prove all-Unicode cross-host equivalence. Browser/worker native qualification remains unsupported by that entry.
+
 ## Query contract
 
 The public search method accepts a plain string or a validated `query-v1` tree. A string is shorthand for `text` with AND semantics and all declared text fields. It is never interpreted as an operator/query-language string.

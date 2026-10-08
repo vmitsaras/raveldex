@@ -1,0 +1,25 @@
+{"mode":"core","size":100,"nativeBytes":28543,"nativeRestoreUnits":126963}
+{"mode":"core","size":1000,"nativeBytes":227894,"nativeRestoreUnits":1092166}
+{"mode":"core","size":10000,"nativeBytes":2198870,"nativeRestoreUnits":10929896}
+{"mode":"source","size":100,"nativeBytes":40256,"sourceBytes":12232,"nativeRestoreUnits":184672,"sourceRestoreUnits":139798}
+{"mode":"source","size":1000,"nativeBytes":329698,"sourceBytes":97491,"nativeRestoreUnits":1617618,"sourceRestoreUnits":3013200}
+file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24
+    throw new RaveldexError(code, { path });
+          ^
+
+RaveldexError: Raveldex: WORK_LIMIT_EXCEEDED
+    at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+    at WorkBudget.charge (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/limits/work.js:16:13)
+    at metered (file:///Users/vasilis/Documents/GitHub/raveldex/dist/adapters/snapshots/snapshots.js:51:20)
+    at metered.next (<anonymous>)
+    at Object.start (file:///Users/vasilis/Documents/GitHub/raveldex/dist/adapters/snapshots/snapshots.js:248:39)
+    at start.next (<anonymous>)
+    at Object.start (file:///Users/vasilis/Documents/GitHub/raveldex/scripts/snapshot-costs.mjs:26:31)
+    at start.next (<anonymous>)
+    at ExecutionOwner.pump (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:178:48)
+    at Timeout._onTimeout (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:193:97) {
+  code: 'WORK_LIMIT_EXCEEDED',
+  details: { path: 'work' }
+}
+
+Node.js v24.21.0

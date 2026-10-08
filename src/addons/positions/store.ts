@@ -89,7 +89,9 @@ export function requirePositionRoot(input: unknown, field: string, revision: num
 }
 
 function initialRoot(configuration: OwnedConfiguration, fields: readonly string[], offsetFields: readonly string[], requestedEntries: number): PositionRoot {
-  if (configuration.analyzer.id !== BASIC_ANALYZER.id || configuration.analyzer.environmentProfile !== BASIC_ANALYZER.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'positions.analyzer');
+  // The optional snapshot factory may qualify this same basic-v1 algorithm for
+  // one explicitly evidenced runtime. Ordinary capture still owns the default.
+  if (configuration.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'positions.analyzer');
   for (const field of fields) if (!has(configuration.schema.text, field)) invalid('MISSING_CAPABILITY', 'positions.fields');
   const limits = configuration.limits;
   return Object.freeze({
@@ -189,6 +191,7 @@ export function createPositionProvider(options: PositionProviderOptions): AddonR
       indexEffect: 'transactional', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('positions', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: captured.maxRetainedEntries, maxOutputEntries: 0 }),
       costs: Object.freeze({ importedCode: 'Native analyzer and selected-position copy-on-write staging; no phrase verifier.', retainedRepresentation: 'Record, selected-field/value and term containers, ordered occurrences with positionLength 1, and two original span coordinates only for selected offset fields; no display source or metadata.', transientWork: 'One native analysis per changed selected value, occurrence construction and touched directory buckets; shared mutation budget.', externalResources: 'none' }),
+      codec: Object.freeze({ id: 'raveldex-positions-v1', version: 1 }),
     }),
     participant: Object.freeze({
       initialize: (configuration: OwnedConfiguration): PositionRoot => initialRoot(configuration, captured.fields, captured.offsetFields, captured.maxRetainedEntries),

@@ -45,6 +45,15 @@ export class MutationOwner {
     }));
   }
   get root(): IndexRoot { return this.#root; }
+  /** Trusted optional adapter publication after complete bounded preparation.
+   * It runs in ExecutionOwner's FIFO, with no callbacks at the commit point. */
+  publishPrepared(root: IndexRoot, previous: IndexRoot): void {
+    if (this.#active || this.#root !== previous || root.configuration !== previous.configuration ||
+        !Object.isFrozen(root) || previous.revision === Number.MAX_SAFE_INTEGER || root.revision !== previous.revision + 1 ||
+        Object.keys(root.participants).length !== this.participants.length ||
+        this.participants.some(participant => !Object.hasOwn(root.participants, participant.id))) invalid('INTERNAL_ERROR', 'adapter.publication');
+    this.#root = root;
+  }
   capture(kind: MutationKind, input?: unknown, options?: unknown): OwnedMutation {
     const request = captureMutation(this.#root.configuration, kind, input, options);
     this.admitted.add(request); return request;

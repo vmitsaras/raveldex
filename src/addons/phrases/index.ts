@@ -18,7 +18,7 @@ const MAX_PHRASE_TOKENS = 32;
 const rawCharge = (workUnits: number): WorkStep => ({ workUnits });
 
 function* preparePhrase(context: RefinementContext, enabledFields: readonly string[]): Generator<WorkStep, PreparedRefinement> {
-  if (context.analyzer.id !== BASIC_ANALYZER.id || context.analyzer.environmentProfile !== BASIC_ANALYZER.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.analyzer');
+  if (context.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.analyzer');
   bound(context.terms.length, Math.min(MAX_PHRASE_TOKENS, context.limits.maxQueryTokens), 'phrases.tokens');
   const fields: { readonly name: string; readonly root: SourceRoot }[] = [];
   // Validate every requested field before testing any candidate, including empty

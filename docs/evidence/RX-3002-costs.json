@@ -1,0 +1,1764 @@
+{
+  "environment": {
+    "runtime": "node",
+    "version": "24.21.0",
+    "v8": "13.6.233.17-node.53",
+    "icu": "78.3",
+    "unicode": "17.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "qualification": {
+    "profileId": "raveldex-rx3002-local-node-v1",
+    "scope": "exact-node-runtime",
+    "environment": {
+      "runtime": "node",
+      "version": "24.21.0",
+      "v8": "13.6.233.17-node.53",
+      "icu": "78.3",
+      "unicode": "17.0",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "evidence": [
+      "docs/evidence/RX-3002.md",
+      "test/adapters/snapshots/"
+    ]
+  },
+  "gcAvailable": true,
+  "method": {
+    "samplesPerModeSize": 1,
+    "work": "Actual private FIFO adapter generator yields counted; no production source rewrite or alternate codec.",
+    "processMemory": "Node process.memoryUsage before, after, after explicit GC where --expose-gc is provided; sampled every 64 yielded steps. Harness records, two engines, old/staged/new roots and encoded strings share one process. Sampled maxima are observed only at yielded-step samples plus the pre-operation baseline, not continuous peaks or isolated component bytes. Post-operation readings are reported separately. Work counts report emitted yielded steps; a failing attempted charge may not be emitted.",
+    "limitations": "Bounded operational rejections are retained as Rejected with their typed error and exact old-root preservation; they are not successful round trips. One raw sample per case, no latency qualification, browser heap, internal primitive peaks, allocation profiler, percentiles or universal capacity claim. Serialized bytes are UTF-8 JSON size; graph/object counts are not heap bytes."
+  },
+  "observations": [
+    {
+      "mode": "core",
+      "size": 100,
+      "corpusSha256": "bce3e582f005a09dd99d564476500d11f5af6f201c3290972dd6b2a1fd65f5c8",
+      "harnessBaseline": {
+        "rss": 58130432,
+        "heapTotal": 10829824,
+        "heapUsed": 5426944,
+        "external": 2346198,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 60833792,
+        "heapTotal": 11878400,
+        "heapUsed": 6150280,
+        "external": 2346202,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 28543,
+        "encodedCodeUnits": 28543,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 60899328,
+            "heapTotal": 11616256,
+            "heapUsed": 6156768,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "steps": 43900,
+          "workUnits": 160537,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 685,
+          "sampledMaximum": {
+            "rss": 64847872,
+            "heapTotal": 16334848,
+            "heapUsed": 10402088,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 114,
+          "after": {
+            "rss": 64864256,
+            "heapTotal": 16334848,
+            "heapUsed": 9894104,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 64880640,
+            "heapTotal": 16334848,
+            "heapUsed": 6566424,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 65011712,
+            "heapTotal": 16072704,
+            "heapUsed": 6553920,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "steps": 29147,
+          "workUnits": 126963,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 455,
+          "sampledMaximum": {
+            "rss": 67305472,
+            "heapTotal": 16859136,
+            "heapUsed": 10920328,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 91,
+          "after": {
+            "rss": 67305472,
+            "heapTotal": 16859136,
+            "heapUsed": 8516400,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 67338240,
+            "heapTotal": 16596992,
+            "heapUsed": 6986912,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 1,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 67715072,
+        "heapTotal": 16596992,
+        "heapUsed": 6535696,
+        "external": 2346202,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "core",
+      "size": 1000,
+      "corpusSha256": "df05a5560f4cd7e7a0056c48d0b9c0956b246dc032f2094011b4405ca73d3537",
+      "harnessBaseline": {
+        "rss": 67715072,
+        "heapTotal": 16334848,
+        "heapUsed": 6707920,
+        "external": 2346202,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 76644352,
+        "heapTotal": 27082752,
+        "heapUsed": 8842160,
+        "external": 2346202,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 227894,
+        "encodedCodeUnits": 227894,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 76644352,
+            "heapTotal": 27082752,
+            "heapUsed": 8824376,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "steps": 369249,
+          "workUnits": 1360210,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 5769,
+          "sampledMaximum": {
+            "rss": 86720512,
+            "heapTotal": 32931840,
+            "heapUsed": 20593552,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 1012,
+          "after": {
+            "rss": 86720512,
+            "heapTotal": 32931840,
+            "heapUsed": 20605000,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 82427904,
+            "heapTotal": 28622848,
+            "heapUsed": 9169736,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 82444288,
+            "heapTotal": 27574272,
+            "heapUsed": 8949216,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "steps": 254833,
+          "workUnits": 1092166,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 3981,
+          "sampledMaximum": {
+            "rss": 85032960,
+            "heapTotal": 29933568,
+            "heapUsed": 18999496,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 818,
+          "after": {
+            "rss": 81838080,
+            "heapTotal": 29933568,
+            "heapUsed": 14464272,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 81838080,
+            "heapTotal": 29933568,
+            "heapUsed": 11237608,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 4,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 81952768,
+        "heapTotal": 29409280,
+        "heapUsed": 7237536,
+        "external": 2346202,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "core",
+      "size": 10000,
+      "corpusSha256": "96f9f947b2e3163f83dff60f8246951f9447f708f95391f311c3808780185b51",
+      "harnessBaseline": {
+        "rss": 82771968,
+        "heapTotal": 44351488,
+        "heapUsed": 8956216,
+        "external": 2346202,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 201834496,
+        "heapTotal": 165986304,
+        "heapUsed": 23588760,
+        "external": 2346202,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 2198870,
+        "encodedCodeUnits": 2198870,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 201850880,
+            "heapTotal": 162840576,
+            "heapUsed": 23283352,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "steps": 3615288,
+          "workUnits": 13577616,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 56488,
+          "sampledMaximum": {
+            "rss": 240369664,
+            "heapTotal": 205242368,
+            "heapUsed": 102610312,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 11177,
+          "after": {
+            "rss": 240369664,
+            "heapTotal": 205242368,
+            "heapUsed": 102628160,
+            "external": 2346202,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 203964416,
+            "heapTotal": 166363136,
+            "heapUsed": 24665152,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 203472896,
+            "heapTotal": 164298752,
+            "heapUsed": 24352568,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 2564078,
+          "workUnits": 10929896,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 40063,
+          "sampledMaximum": {
+            "rss": 216629248,
+            "heapTotal": 184483840,
+            "heapUsed": 101050464,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 8532,
+          "after": {
+            "rss": 203079680,
+            "heapTotal": 184483840,
+            "heapUsed": 75528400,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 209207296,
+            "heapTotal": 183697408,
+            "heapUsed": 43895592,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 40,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 215252992,
+        "heapTotal": 165347328,
+        "heapUsed": 10888032,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "source",
+      "size": 100,
+      "corpusSha256": "bce3e582f005a09dd99d564476500d11f5af6f201c3290972dd6b2a1fd65f5c8",
+      "harnessBaseline": {
+        "rss": 215105536,
+        "heapTotal": 145686528,
+        "heapUsed": 8165072,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 215252992,
+        "heapTotal": 145162240,
+        "heapUsed": 8408304,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 40256,
+        "encodedCodeUnits": 40256,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 215252992,
+            "heapTotal": 144637952,
+            "heapUsed": 8392032,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 63801,
+          "workUnits": 228157,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 996,
+          "sampledMaximum": {
+            "rss": 215416832,
+            "heapTotal": 144900096,
+            "heapUsed": 39723768,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 167,
+          "after": {
+            "rss": 215416832,
+            "heapTotal": 144900096,
+            "heapUsed": 39741928,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 215416832,
+            "heapTotal": 145162240,
+            "heapUsed": 8485936,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 213204992,
+            "heapTotal": 142426112,
+            "heapUsed": 6247112,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 45128,
+          "workUnits": 184672,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 705,
+          "sampledMaximum": {
+            "rss": 213254144,
+            "heapTotal": 142426112,
+            "heapUsed": 38001216,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 136,
+          "after": {
+            "rss": 213254144,
+            "heapTotal": 142426112,
+            "heapUsed": 38015488,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 213254144,
+            "heapTotal": 142950400,
+            "heapUsed": 6728072,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 1,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "source": {
+        "encodedBytes": 12232,
+        "encodedCodeUnits": 12232,
+        "encoding": {
+          "operation": "exportSource",
+          "before": {
+            "rss": 213254144,
+            "heapTotal": 142950400,
+            "heapUsed": 6708200,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 31255,
+          "workUnits": 104599,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 488,
+          "sampledMaximum": {
+            "rss": 213254144,
+            "heapTotal": 142950400,
+            "heapUsed": 21728128,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 75,
+          "after": {
+            "rss": 213172224,
+            "heapTotal": 142950400,
+            "heapUsed": 21736448,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 213172224,
+            "heapTotal": 143212544,
+            "heapUsed": 6770712,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreSource",
+          "before": {
+            "rss": 213188608,
+            "heapTotal": 143212544,
+            "heapUsed": 6733600,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 70911,
+          "workUnits": 139798,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 1107,
+          "sampledMaximum": {
+            "rss": 213188608,
+            "heapTotal": 143474688,
+            "heapUsed": 43276432,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 118,
+          "after": {
+            "rss": 210272256,
+            "heapTotal": 143474688,
+            "heapUsed": 43307680,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 210272256,
+            "heapTotal": 143736832,
+            "heapUsed": 6900312,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 1,
+          "revision": 3,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 210272256,
+        "heapTotal": 143736832,
+        "heapUsed": 5993960,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "source",
+      "size": 1000,
+      "corpusSha256": "df05a5560f4cd7e7a0056c48d0b9c0956b246dc032f2094011b4405ca73d3537",
+      "harnessBaseline": {
+        "rss": 210288640,
+        "heapTotal": 142688256,
+        "heapUsed": 6161864,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 211697664,
+        "heapTotal": 145047552,
+        "heapUsed": 8602008,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 329698,
+        "encodedCodeUnits": 329698,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 211697664,
+            "heapTotal": 144785408,
+            "heapUsed": 8543168,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 551945,
+          "workUnits": 1971048,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 8624,
+          "sampledMaximum": {
+            "rss": 216334336,
+            "heapTotal": 150388736,
+            "heapUsed": 64851192,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 1318,
+          "after": {
+            "rss": 213565440,
+            "heapTotal": 150388736,
+            "heapUsed": 49235880,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 208961536,
+            "heapTotal": 145653760,
+            "heapUsed": 8916112,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 209010688,
+            "heapTotal": 144867328,
+            "heapUsed": 8766400,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 404418,
+          "workUnits": 1617618,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 6319,
+          "sampledMaximum": {
+            "rss": 211156992,
+            "heapTotal": 148848640,
+            "heapUsed": 65604176,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 1112,
+          "after": {
+            "rss": 211156992,
+            "heapTotal": 148848640,
+            "heapUsed": 51552000,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 211173376,
+            "heapTotal": 148799488,
+            "heapUsed": 11930080,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 4,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "source": {
+        "encodedBytes": 97491,
+        "encodedCodeUnits": 97491,
+        "encoding": {
+          "operation": "exportSource",
+          "before": {
+            "rss": 210944000,
+            "heapTotal": 148275200,
+            "heapUsed": 12019272,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 286123,
+          "workUnits": 955850,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 4470,
+          "sampledMaximum": {
+            "rss": 212090880,
+            "heapTotal": 149798912,
+            "heapUsed": 67112824,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 662,
+          "after": {
+            "rss": 212090880,
+            "heapTotal": 149798912,
+            "heapUsed": 32185248,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 211402752,
+            "heapTotal": 148963328,
+            "heapUsed": 12350416,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreSource",
+          "before": {
+            "rss": 211091456,
+            "heapTotal": 148013056,
+            "heapUsed": 12015240,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 2230327,
+          "workUnits": 3013200,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 34848,
+          "sampledMaximum": {
+            "rss": 215236608,
+            "heapTotal": 166363136,
+            "heapUsed": 77231296,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 2705,
+          "after": {
+            "rss": 215236608,
+            "heapTotal": 165314560,
+            "heapUsed": 31611960,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 215269376,
+            "heapTotal": 150372352,
+            "heapUsed": 11464528,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 4,
+          "revision": 3,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 215252992,
+        "heapTotal": 147226624,
+        "heapUsed": 6897216,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "source",
+      "size": 10000,
+      "corpusSha256": "96f9f947b2e3163f83dff60f8246951f9447f708f95391f311c3808780185b51",
+      "harnessBaseline": {
+        "rss": 215252992,
+        "heapTotal": 145915904,
+        "heapUsed": 8698176,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 219201536,
+        "heapTotal": 169246720,
+        "heapUsed": 27272136,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 3198316,
+        "encodedCodeUnits": 3198316,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 219119616,
+            "heapTotal": 168722432,
+            "heapUsed": 27096632,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 5426787,
+          "workUnits": 19647153,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 84793,
+          "sampledMaximum": {
+            "rss": 264798208,
+            "heapTotal": 219332608,
+            "heapUsed": 126978824,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 14902,
+          "after": {
+            "rss": 264355840,
+            "heapTotal": 219332608,
+            "heapUsed": 126990240,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 221315072,
+            "heapTotal": 172621824,
+            "heapUsed": 30436472,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 220971008,
+            "heapTotal": 171327488,
+            "heapUsed": 29841536,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 4060222,
+          "workUnits": 16147218,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 63440,
+          "sampledMaximum": {
+            "rss": 231653376,
+            "heapTotal": 198033408,
+            "heapUsed": 114450280,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 12723,
+          "after": {
+            "rss": 229720064,
+            "heapTotal": 198033408,
+            "heapUsed": 97192136,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 229949440,
+            "heapTotal": 196132864,
+            "heapUsed": 57627512,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 40,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "source": {
+        "encodedBytes": 959053,
+        "encodedCodeUnits": 959053,
+        "encoding": {
+          "operation": "exportSource",
+          "before": {
+            "rss": 231899136,
+            "heapTotal": 194920448,
+            "heapUsed": 57391616,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 2885224,
+          "workUnits": 9789394,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 45081,
+          "sampledMaximum": {
+            "rss": 250757120,
+            "heapTotal": 214171648,
+            "heapUsed": 122176696,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 7840,
+          "after": {
+            "rss": 250757120,
+            "heapTotal": 214171648,
+            "heapUsed": 100774320,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 238829568,
+            "heapTotal": 199294976,
+            "heapUsed": 58303960,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreSource",
+          "before": {
+            "rss": 238862336,
+            "heapTotal": 195887104,
+            "heapUsed": 58163152,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 28676871,
+          "workUnits": 49999998,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 448076,
+          "sampledMaximum": {
+            "rss": 327729152,
+            "heapTotal": 297336832,
+            "heapUsed": 196682736,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 48422,
+          "outcome": "Rejected",
+          "error": {
+            "code": "WORK_LIMIT_EXCEEDED"
+          },
+          "oldRootPreserved": true,
+          "after": {
+            "rss": 321912832,
+            "heapTotal": 280559616,
+            "heapUsed": 112035168,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 321912832,
+            "heapTotal": 207159296,
+            "heapUsed": 58406392,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 322912256,
+        "heapTotal": 195100672,
+        "heapUsed": 40317624,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "source-offsets",
+      "size": 100,
+      "corpusSha256": "bce3e582f005a09dd99d564476500d11f5af6f201c3290972dd6b2a1fd65f5c8",
+      "harnessBaseline": {
+        "rss": 322764800,
+        "heapTotal": 180944896,
+        "heapUsed": 38027512,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 323452928,
+        "heapTotal": 175177728,
+        "heapUsed": 38719632,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 89156,
+        "encodedCodeUnits": 89156,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 323452928,
+            "heapTotal": 174653440,
+            "heapUsed": 38664032,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 127037,
+          "workUnits": 469464,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 1984,
+          "sampledMaximum": {
+            "rss": 329728000,
+            "heapTotal": 175718400,
+            "heapUsed": 93695824,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 335,
+          "after": {
+            "rss": 329728000,
+            "heapTotal": 175718400,
+            "heapUsed": 47267152,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 328925184,
+            "heapTotal": 174915584,
+            "heapUsed": 39017576,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 328908800,
+            "heapTotal": 171704320,
+            "heapUsed": 35647696,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 85992,
+          "workUnits": 368679,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 1343,
+          "sampledMaximum": {
+            "rss": 330350592,
+            "heapTotal": 171704320,
+            "heapUsed": 90266856,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 280,
+          "after": {
+            "rss": 330350592,
+            "heapTotal": 171704320,
+            "heapUsed": 45711704,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 330366976,
+            "heapTotal": 172752896,
+            "heapUsed": 36567376,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 1,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "source": {
+        "encodedBytes": 13479,
+        "encodedCodeUnits": 13479,
+        "encoding": {
+          "operation": "exportSource",
+          "before": {
+            "rss": 330432512,
+            "heapTotal": 172752896,
+            "heapUsed": 36554824,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 39633,
+          "workUnits": 125484,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 619,
+          "sampledMaximum": {
+            "rss": 330432512,
+            "heapTotal": 172752896,
+            "heapUsed": 55929408,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 100,
+          "after": {
+            "rss": 330432512,
+            "heapTotal": 172752896,
+            "heapUsed": 55936432,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 330432512,
+            "heapTotal": 173015040,
+            "heapUsed": 36581752,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreSource",
+          "before": {
+            "rss": 330432512,
+            "heapTotal": 172752896,
+            "heapUsed": 36527792,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 85493,
+          "workUnits": 171451,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 1335,
+          "sampledMaximum": {
+            "rss": 330792960,
+            "heapTotal": 173277184,
+            "heapUsed": 81194088,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 146,
+          "after": {
+            "rss": 330792960,
+            "heapTotal": 173277184,
+            "heapUsed": 81221776,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 330792960,
+            "heapTotal": 173277184,
+            "heapUsed": 36651288,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 1,
+          "revision": 3,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 329842688,
+        "heapTotal": 152125440,
+        "heapUsed": 6584520,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "source-offsets",
+      "size": 1000,
+      "corpusSha256": "df05a5560f4cd7e7a0056c48d0b9c0956b246dc032f2094011b4405ca73d3537",
+      "harnessBaseline": {
+        "rss": 329662464,
+        "heapTotal": 143736832,
+        "heapUsed": 6680056,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 330006528,
+        "heapTotal": 148193280,
+        "heapUsed": 11244800,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 791792,
+        "encodedCodeUnits": 791792,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 329842688,
+            "heapTotal": 148193280,
+            "heapUsed": 11096136,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 1156701,
+          "workUnits": 4265541,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 18073,
+          "sampledMaximum": {
+            "rss": 347537408,
+            "heapTotal": 162955264,
+            "heapUsed": 80679488,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 3506,
+          "after": {
+            "rss": 335069184,
+            "heapTotal": 150044672,
+            "heapUsed": 12240672,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 335069184,
+            "heapTotal": 148996096,
+            "heapUsed": 11872784,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 335069184,
+            "heapTotal": 148733952,
+            "heapUsed": 11735704,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 793895,
+          "workUnits": 3363777,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 12404,
+          "sampledMaximum": {
+            "rss": 335069184,
+            "heapTotal": 156385280,
+            "heapUsed": 73141680,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 2726,
+          "after": {
+            "rss": 295305216,
+            "heapTotal": 156385280,
+            "heapUsed": 69704224,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 295305216,
+            "heapTotal": 156073984,
+            "heapUsed": 19254896,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 4,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "source": {
+        "encodedBytes": 98738,
+        "encodedCodeUnits": 98738,
+        "encoding": {
+          "operation": "exportSource",
+          "before": {
+            "rss": 295403520,
+            "heapTotal": 156073984,
+            "heapUsed": 19303752,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 358981,
+          "workUnits": 1118551,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 5609,
+          "sampledMaximum": {
+            "rss": 295976960,
+            "heapTotal": 156565504,
+            "heapUsed": 74254360,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 926,
+          "after": {
+            "rss": 295845888,
+            "heapTotal": 156565504,
+            "heapUsed": 24263544,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 295387136,
+            "heapTotal": 156073984,
+            "heapUsed": 19417736,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreSource",
+          "before": {
+            "rss": 294928384,
+            "heapTotal": 155811840,
+            "heapUsed": 19125608,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 2667288,
+          "workUnits": 3619996,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 41676,
+          "sampledMaximum": {
+            "rss": 295665664,
+            "heapTotal": 177307648,
+            "heapUsed": 89573856,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 3955,
+          "after": {
+            "rss": 294584320,
+            "heapTotal": 177307648,
+            "heapUsed": 38693712,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 294584320,
+            "heapTotal": 166559744,
+            "heapUsed": 16880656,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 4,
+          "revision": 3,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 294633472,
+        "heapTotal": 149782528,
+        "heapUsed": 7682224,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      }
+    },
+    {
+      "mode": "source-offsets",
+      "size": 10000,
+      "corpusSha256": "96f9f947b2e3163f83dff60f8246951f9447f708f95391f311c3808780185b51",
+      "harnessBaseline": {
+        "rss": 294404096,
+        "heapTotal": 146898944,
+        "heapUsed": 9497056,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "populated": {
+        "rss": 223494144,
+        "heapTotal": 200114176,
+        "heapUsed": 49587592,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      },
+      "native": {
+        "encodedBytes": 7789055,
+        "encodedCodeUnits": 7789055,
+        "encoding": {
+          "operation": "exportNative",
+          "before": {
+            "rss": 224100352,
+            "heapTotal": 189366272,
+            "heapUsed": 49203048,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 11447588,
+          "workUnits": 42499915,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 178868,
+          "sampledMaximum": {
+            "rss": 298205184,
+            "heapTotal": 290078720,
+            "heapUsed": 171441656,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 30028,
+          "after": {
+            "rss": 168181760,
+            "heapTotal": 290078720,
+            "heapUsed": 171453696,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 160940032,
+            "heapTotal": 199688192,
+            "heapUsed": 57121296,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreNative",
+          "before": {
+            "rss": 160776192,
+            "heapTotal": 196100096,
+            "heapUsed": 56068056,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 7946346,
+          "workUnits": 33529256,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 124161,
+          "sampledMaximum": {
+            "rss": 300564480,
+            "heapTotal": 266240000,
+            "heapUsed": 182773808,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 24920,
+          "after": {
+            "rss": 300515328,
+            "heapTotal": 266240000,
+            "heapUsed": 180912000,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 300646400,
+            "heapTotal": 264421376,
+            "heapUsed": 125411328,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "result": {
+          "format": "raveldex-native",
+          "originRevision": 40,
+          "revision": 2,
+          "reindexed": false,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "raveldex-rx3002-local-node-v1"
+          }
+        }
+      },
+      "source": {
+        "encodedBytes": 960300,
+        "encodedCodeUnits": 960300,
+        "encoding": {
+          "operation": "exportSource",
+          "before": {
+            "rss": 302399488,
+            "heapTotal": 262946816,
+            "heapUsed": 125187200,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 3610214,
+          "workUnits": 11386471,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 56409,
+          "sampledMaximum": {
+            "rss": 317079552,
+            "heapTotal": 279904256,
+            "heapUsed": 192250512,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 8898,
+          "after": {
+            "rss": 317079552,
+            "heapTotal": 279904256,
+            "heapUsed": 174167168,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 307003392,
+            "heapTotal": 264437760,
+            "heapUsed": 126020096,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "outcome": "Pass"
+        },
+        "restoration": {
+          "operation": "restoreSource",
+          "before": {
+            "rss": 307134464,
+            "heapTotal": 262864896,
+            "heapUsed": 125868448,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "steps": 29371466,
+          "workUnits": 49999998,
+          "maxStepWorkUnits": 256,
+          "sampleCount": 458929,
+          "sampledMaximum": {
+            "rss": 404979712,
+            "heapTotal": 378470400,
+            "heapUsed": 272689376,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "durationMs": 46153,
+          "outcome": "Rejected",
+          "error": {
+            "code": "WORK_LIMIT_EXCEEDED"
+          },
+          "oldRootPreserved": true,
+          "after": {
+            "rss": 405192704,
+            "heapTotal": 361431040,
+            "heapUsed": 212929688,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          },
+          "afterCollection": {
+            "rss": 405422080,
+            "heapTotal": 274923520,
+            "heapUsed": 126383592,
+            "external": 2343604,
+            "arrayBuffers": 143611
+          }
+        }
+      },
+      "afterDisposalAndCollection": {
+        "rss": 406470656,
+        "heapTotal": 262602752,
+        "heapUsed": 86767808,
+        "external": 2343604,
+        "arrayBuffers": 143611
+      }
+    }
+  ],
+  "implementationIdentities": {
+    "src/adapters/snapshots/error.ts": "a8a751bbb7d1592f7c51a9c227a90b65963b3e09a3def0d265ef5f595ecb6eec",
+    "src/adapters/snapshots/index.ts": "197ef9eafc6dc0e6676cd7deb0e20fb8e4c104b5481734d2e12341edb48527d3",
+    "src/adapters/snapshots/json.ts": "aca883c4fa6843a44682ff54933f794697245098d5da605f480d37e77b4beb47",
+    "src/adapters/snapshots/native.ts": "ba59b6ee0e4d7764e763c452b74eb578016a4893fdb6ca7d598657caee0cab02",
+    "src/adapters/snapshots/qualification.ts": "f9d4a19a249583d99b3369a3a845fb0af69fbd977e908f47e24cf4b7d873f0ae",
+    "src/adapters/snapshots/snapshots.ts": "293bb4725c823f40b307b6f65b1d33b4b39d91c7c210df4a6dcec3590b06a75b",
+    "src/adapters/snapshots/source.ts": "cfcf2857f26b52b0bb38bd764645252a708d4aebfed9150eea9a53e673ec715e",
+    "src/adapters/snapshots/types.ts": "2a8def2772e40af0c3686384d930aa1e25f60905a449ce31be67390cff233875",
+    "src/adapters/worker/client.ts": "9d82d9e9455f9892faf913ee0a185bd70f8df548ba74e67e7d1459821c25daa3",
+    "src/adapters/worker/error.ts": "0cda22a21199bd30b62d2a488f7ecf541500f6ad090e8562bb8b7b69ca525e66",
+    "src/adapters/worker/host.ts": "8fe613d8725873dacc945bec8a985f57944727d4e4023576de551db0be91701f",
+    "src/adapters/worker/index.ts": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d",
+    "src/adapters/worker/protocol.ts": "acb0549d60275addfbaa7cc75fcd567c78528417982fda6529a32c877ae9fca1",
+    "src/adapters/worker/types.ts": "311c1136410fdc57bcfc6e8eae24a5ddc9456973d871dca138e9b2f933dc9a5e",
+    "src/addons/evidence/builder.ts": "b073d61734ffb0c7b941935f746471271eb2053b79f4bd8c3ed4ad077e367444",
+    "src/addons/evidence/index.ts": "0335028aaa647552d046ad7a82a032c33e393ea38f8589c5d58d4f59937cd258",
+    "src/addons/evidence/occurrences.ts": "ab7c38b598c57255d3a486aee0035fffb8e69267ee29746f54c7d1a58deaa06d",
+    "src/addons/evidence/options.ts": "c8da7583abbdf29b94e886a46c193ff030382eb52f9bcf17420426d70e214b15",
+    "src/addons/evidence/providers.ts": "d4b9cf1ed76ede91725d86a675695bda3ddbe7d6829aab4d8aff6e115054e8ae",
+    "src/addons/evidence/types.ts": "bd4fdcc00eb26c6bb14aa75e7b4e2dbca2d3c96e148d966ce0c0d08e164cebf9",
+    "src/addons/facets/facets.ts": "c7c70433a7c063da58b172e8d67054cf412655519b12cbe361dc5ad14c93af22",
+    "src/addons/facets/index.ts": "52ffc961ad27c90e568f5e14f1554bd5ea34378ece05b344fa60ad149660fcc8",
+    "src/addons/facets/options.ts": "48277d81b23e7bd5de5fb8b38f6447766c0d107791815ce822cfea5a5c3e85fb",
+    "src/addons/filters/index.ts": "e9b02134e579b64bee61201632fab3a83f9558e3be1a45287f81cd0b03adfb87",
+    "src/addons/filters/options.ts": "d3fe1af3348c3794860790f558ce1fd60f7a09b7c875bb88f39575c255460ace",
+    "src/addons/inspector/diagnostics.ts": "94fd70aa463f51f7ccdb29bb22f1e485af657925c8863cf953764fc11b22107a",
+    "src/addons/inspector/index.ts": "0ef694aedd432ed6420831242e2100561abbca3c9a0bb90835a2f82888b06144",
+    "src/addons/inspector/inspector.ts": "206bd1b107680426849301b82255dda320a64f3daa6dfd523fc16571bc0b8432",
+    "src/addons/inspector/options.ts": "c05d15912b2def1730447f9b0f8e30d7b413e7efb2a4b539c0d185cca57af2f2",
+    "src/addons/inspector/output.ts": "dc5ffcc3ce842d1b9b7a6448d0c1f0914e371b6e1569db47cf9313d2f889e818",
+    "src/addons/inspector/types.ts": "35f547178b9fa08dde5b8f2af09aa0b479c5d7482734c389ee0a51858e9a0942",
+    "src/addons/metadata/payload.ts": "d2de877cce479a202e2e651ebbd48c5a79e3db7327b66830ba67e4d134499c8a",
+    "src/addons/phrases/index.ts": "961e7c57dcde244a1b2f15190f7307d70ab4ad7674057bafb0301a8c7fb570b2",
+    "src/addons/phrases/mixed.ts": "f409c4431dee3b24317fe6ab61f3c04c0b5bf82064d383762346db5bd701a0f6",
+    "src/addons/phrases/options.ts": "472f301c1b2c01bcb0f2b93efb909301b68fa20825dd3e725dcc9233ae9c00ad",
+    "src/addons/phrases/source.ts": "b69e1d17086bc480378654a73acf8dea6f6dea1fdd9bb6743dd061612c475171",
+    "src/addons/phrases/store.ts": "26292de8ab5b495481a88e552302e5c082416d1719148d392b3ba610f945644c",
+    "src/addons/phrases/verifier.ts": "6a6d4d5a0dd47bd1c5c739290d9160011f0e4026a49d39b71f024fc01f171605",
+    "src/addons/positions/index.ts": "ca0fadb3ba5ba238e4fcad4a170f485cfb870bcb3f8c6e64af9f1b8184b9b69a",
+    "src/addons/positions/options.ts": "b4ba6d9118a351e2af37db67d5334be9027cf5fc22364f8fbfe8272205133fac",
+    "src/addons/positions/phrases.ts": "81f8eca9fc82315c9564dc832f30cc373d391d0a15e5ff2e92f6b4baddce5186",
+    "src/addons/positions/store.ts": "cacedc9dcb6d69e951faae6981c226e1d0abfd5c2829359318367f7a530f4757",
+    "src/addons/positions/verifier.ts": "ade7a56d477a0c560c7d5a11a08a9a089cc6d593cce5806eabdd5b0020d70bb8",
+    "src/addons/snippets/index.ts": "5886043a08cebbc97bdfe69d13e47dd8a7aac4e36a5f0576dfcdcc5ad1b289e8",
+    "src/addons/snippets/snippets.ts": "08d39187382f0a0f75aeb647fb4ceee01e3086fa77853d4c3ae98ce34be9bd3c",
+    "src/addons/snippets/types.ts": "79a38f346e625db98b775a9e0d48f7aac45651fa8d810c566a4cf08c8bf21742",
+    "src/addons/ui/index.ts": "982af774169a293ed39fe35dc836c596649e3d083d061bf63b4bbfa33090f1fd",
+    "src/addons/ui/options.ts": "8c63e84ab80d4e9b857920767f57bb390d17f21b27a499a925ab94a92978e3e0",
+    "src/addons/ui/render.ts": "140784f6759871d746493863e194846ed54360bd377c3ca1747b0dd52a304e0f",
+    "src/addons/ui/types.ts": "567de75ec63b3eae0031e34ccaede506435678c33009df993769df0cdec79c36",
+    "src/addons/ui/ui.ts": "fb97dac6bc8c61355b3f3b056438d1412ef1aaf778bb287d9b33aa76a8998a3d",
+    "src/core/analyzer/basic.ts": "33cdd8ab819f7c1f2cdb08ab8a269a47dbf0cf7321ac2205f29735cd61a9cef8",
+    "src/core/capabilities/capture.ts": "5aee519c2055f2a9c516e6b058181ff5adb93ce43410a208a012876d78e567b2",
+    "src/core/capabilities/participants.ts": "172c6f2169e741fc700b915c2048794e8826254cd9ea03b6f6e3254a054e8d57",
+    "src/core/capabilities/refinement.ts": "7ac25cc788cc91650a7abe6739b9637b53deb037d4a77e004828b5ec78f15301",
+    "src/core/capabilities/registration.ts": "a0c1913d261dadef58af4b5862f3e6e10e258e16bbf2b1030bf421756c03eb73",
+    "src/core/capabilities/types.ts": "b4aa9457f527fc5634e4fa75c4a99f8bb358fa93fdf194cd884b98f66a20d067",
+    "src/core/capabilities/worker-identity.ts": "deeef4653868641b868410bf6094822e1d0cf7e303834ff5bba902527fba0c4c",
+    "src/core/contracts/data.ts": "ad5cb3df86d9cda637dfe8528566197f7fce3803699470945526b822b3fc9624",
+    "src/core/contracts/options.ts": "01d4ad7fc75679042b37839498a909bdbe0ee7eeedaa653f1a2a71cb748ec5f7",
+    "src/core/contracts/query.ts": "4306a09b64b06d1455fd8536d927159045d21d8241cfe3e8a954740699d3900c",
+    "src/core/contracts/record.ts": "e34b1db54fcd7b01559eb16034d52cbb1eb9941cdf29332331b53aa96bb7701f",
+    "src/core/contracts/schema.ts": "be26cf3b11fe0d1269137eecc0af5aab98e433052db0056e995dfbbc0a3aa4b2",
+    "src/core/contracts/types.ts": "4706b4f5b6e8cae949d7f1f247a8de39bed99b568d9952c3301d077e462ca49f",
+    "src/core/errors/error.ts": "a6d445660533af4344f0cd17c2469d953e3276b95cfb81c7cf4c508a2f2eb5f4",
+    "src/core/execution/engine.ts": "94ffdda7b72409b65cb6bdae74b98954c0652397a9ccce220fd08003ce7c0606",
+    "src/core/execution/host.ts": "d787db43ad885e3aaccbac4a4deb6c439c56b301b91a57706ebcb57cde891fe6",
+    "src/core/index/construction.ts": "c7d554dce356108471e22b32a741dd61837b295872b5ce895872200a7adcb607",
+    "src/core/index/directory.ts": "bf3334da2415508fd0b7cc15c68badbdb05419de8945c39457dce796f3e5811f",
+    "src/core/index/invariants.ts": "0b930b72de18475c553702e95dd4439ed07710cf4d6577a8b48b078770e11817",
+    "src/core/index/staging.ts": "87405966d972e10a139294639ad1442bf38441f7e1746109c277e1dfc105f924",
+    "src/core/index/state.ts": "c406402762f871101f26a4e70ad2582357b24bf02023a896f3e57edc9fed04c7",
+    "src/core/limits/limits.ts": "41c5a3ecf85128ffdfcaa6e140eea0463daafb34d7488853bda588df8d0fdf58",
+    "src/core/limits/work.ts": "7681a435b9f8298bbe89bfd0a2b70b4b5044b8d5402f25e7bf7ae85c3db61316",
+    "src/core/mutations/capture.ts": "522c2c2d2a0bf87b54ac43be5c9b29befdfd2a3650d7f39761a152a62d6cd9e1",
+    "src/core/mutations/delta.ts": "f2ec161183dac4acf8c3a6a83d112ab4858a178d5b0a64d890b7c885e5fc169e",
+    "src/core/mutations/document.ts": "e9b92a9b6237f9d276d33d8ba3e75a38211bd93a74d48b5a4f789c88c1a77206",
+    "src/core/mutations/owner.ts": "1300d159c989e9f17af35fcf9f6f99c76f8012626d6e62e047036b84828b077c",
+    "src/core/query/compile.ts": "f31dbb285f19815561e5d5b494cea6a8d86dce638b4cd94eb7ef5344993c1826",
+    "src/core/query/evaluate.ts": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670",
+    "src/core/query/search.ts": "a466c717251903b7d74add3a8ddb0e85e1279b06a71dc2efd917f36870bef37c",
+    "src/core/query/work.ts": "985f6f9386ad21c2ee5d346a75cb85f80c99ea99cd9c8ee72c3e3b7712cfbdc9",
+    "src/core/ranking/bm25.ts": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+    "src/core/ranking/page.ts": "d1f3bd789ca1b10ec946be751ab4ab7d1d53e07d4e4ce8e3be7ff20081f311d0",
+    "src/core/retrieval/exact.ts": "170423fb15c0f1d22bf2fe25bae19bc66c14dcc56770af64007e1f0fd7da01ee",
+    "src/core/retrieval/expand.ts": "8347cbf829dc60cd9a243736814640f6ee4765c7f63bdcf07c64979edbf22cb0",
+    "src/core/revision/participant.ts": "dba9979d1929ede20d1b4c05b2556cc2ded0b2e7d7aefbb9dd18cf754c4738f1",
+    "src/core/trace/facts.ts": "b51fb6696bb78aababd4c59865b7198bd08098be09ef5fe768b371c9d7ea47c4",
+    "src/index.ts": "c7042f5d1c1c7191ed7024f1b1410081e1dcc02482ce8b93a015ff842e651ad8",
+    "dist/adapters/snapshots/error.js": "60f4741b9be8571be1fd0562effe98e79c998d0f81e4d7afbb730c774bdb6212",
+    "dist/adapters/snapshots/index.js": "95d7153ce8beb8cab441b883a733935f373a5d5a2c48247e1a3c24335c634179",
+    "dist/adapters/snapshots/json.js": "20902588e56f29b4e8f34ea7d8fab610000ea5743558ca96af2d51dc2af7d4fd",
+    "dist/adapters/snapshots/native.js": "7bc4384b5b12605bb5d75aa7ca562a2381c6455ba542313422de785e47c23144",
+    "dist/adapters/snapshots/qualification.js": "619b8dd28da5d66e30daffb1e8386045a92fbfd5dfb7ab6019d542f50a7a27a4",
+    "dist/adapters/snapshots/snapshots.js": "5d3559fb72716d7a88928d38b37c988326a2f5441b0f719df13cabbc85a60811",
+    "dist/adapters/snapshots/source.js": "b0049f331e305eae5dd51ff983b5d9ae2784000696babf4e70496d91faf62ce7",
+    "dist/adapters/snapshots/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/adapters/worker/client.js": "97e42560ca4b5787d448b85b2a5a310c1a435af61ec2bff7be6bdbabde6009d9",
+    "dist/adapters/worker/error.js": "151187f0f1b1c983e55902f36b182d560ece129b9566d09d1b50572d3d6d8a49",
+    "dist/adapters/worker/host.js": "9d90fdb9a753700d96fb57f0c515e69ca521d5aa6abf01011f4ba85161bb3292",
+    "dist/adapters/worker/index.js": "197be6ca5cdc52da300031b12e675ebe6d63a805e9a90e3a7088945f60247beb",
+    "dist/adapters/worker/protocol.js": "242de8297ad13187606d47538bcbbd16dde6e49fdfa3611c10f1c19f2624a2a1",
+    "dist/adapters/worker/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/addons/evidence/builder.js": "d86dc0e3713ae872b9b2a263bf7b70c1ef8dd195d356318fba1bb98012fd677c",
+    "dist/addons/evidence/index.js": "6a5b8fe242dabbc5cd1f1fec29ef36262b411b82089bd234f2ba11bbee4e6d29",
+    "dist/addons/evidence/occurrences.js": "2adb83cff2c182cc6acd30dfe2a75dcb7ba518529a8eee6e2d6152d3c7e2034a",
+    "dist/addons/evidence/options.js": "5c7079dd1e2b4841c1d56ab9d082a5388edd0f9a05865d03bd00e0338e6e9e23",
+    "dist/addons/evidence/providers.js": "e611a7b7a8811e149f8af7138ff914ec70e5f2ab2655c6cf653adba38997d65e",
+    "dist/addons/evidence/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/addons/facets/facets.js": "55aff0d6816ab10d05cbcb0919a9c37cddd154de06b7eccce54562839aaf45a2",
+    "dist/addons/facets/index.js": "b7d46e266954d01e384f3b5a04755dac52ebaf0fc3a0f697b2e7ae980100ec6c",
+    "dist/addons/facets/options.js": "5e8d7042f098d0a25cf624ec5462ea8e05210813b2d02433ea0f3ce811591b21",
+    "dist/addons/filters/index.js": "d76145102aedb26e34cd075a6dfeb97d9e141edd210fed28ce75ba1d4c66d052",
+    "dist/addons/filters/options.js": "3864a4bb553a49caf5ce3e906a10b0c6093db674b4acb94c488c6c60d555516a",
+    "dist/addons/inspector/diagnostics.js": "291a09a8e09db3b17f72697a5a33eb9cf357e35e15f139664f6e848c0a6340d1",
+    "dist/addons/inspector/index.js": "4a41cb1268f186eee7415cef96e5ce4dec68bde1249fd6656f6c92159e2d4c0c",
+    "dist/addons/inspector/inspector.js": "98a427376f63f177b88acd782239e1ee34dd4017c4b8e21ccec6b4e58fbf0d67",
+    "dist/addons/inspector/options.js": "b8c81c7490cf31180f90f0434965dfbf61af4b3065c9167d80469799a9381f9c",
+    "dist/addons/inspector/output.js": "af3028481948196ada3bade44887733643d4424ca39bfe4b233b57743e760170",
+    "dist/addons/inspector/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/addons/metadata/payload.js": "11368994864ee1471ec1b63fc8727fb3e5f7e9da1e70ad224f0e5c9165734ffc",
+    "dist/addons/phrases/index.js": "ee34e20b44b0336003103156b4a7cd7e2185f0cc71fa594e8899e1ef21b69803",
+    "dist/addons/phrases/mixed.js": "f7136ebae1977ac37e60d48fc632f879c61c683496a914c799f18160a5ab1f41",
+    "dist/addons/phrases/options.js": "12c5a586d7ad5fb6c3b7720d40e33dc22a89733d2ef44b7bdb38f0469a308bf0",
+    "dist/addons/phrases/source.js": "76d103369c6160ded559564276cf363f1e78acc439cb16665585f821de6eebff",
+    "dist/addons/phrases/store.js": "50b5d85ee9c71965ff6cb77b0f30df851383eb6b634d199cc88f66913d47f877",
+    "dist/addons/phrases/verifier.js": "bbfb0a1f45218759120024412adb9785d453ad403fa05590e8fb57fe67ff9688",
+    "dist/addons/positions/index.js": "59f13af5808db5159d87c119df7d0a4b1d7a1ea19d087c5ed41f14f42eb33052",
+    "dist/addons/positions/options.js": "b0e01e01789039d60a2555b884f82561f44f452d01341beeeda3535ebc1b8ba3",
+    "dist/addons/positions/phrases.js": "172a70ad76f4c9a6867262d3e19b0bd7f24a0b3746cedb5d201270abfe529d78",
+    "dist/addons/positions/store.js": "188e74fbb7dc0161309fd834f073161a91e82c851e8a05d884e39e86a9e301de",
+    "dist/addons/positions/verifier.js": "ce2c4465a144060fb46e0cb03ad265455ae060f038af8f0379c7ee4901213d0d",
+    "dist/addons/snippets/index.js": "ac6baa2f0f78f2a744dd1a13b5f4cd229f37b1e3601e147c66fbfd20f2995171",
+    "dist/addons/snippets/snippets.js": "c60d39530115c32c09f3cc3f77a1255dd2da130fa108c733d42405faf7782ccb",
+    "dist/addons/snippets/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/addons/ui/index.js": "17d367e52d8724a4f82fc8c9c93518f9bf2f44abbeb672330c045b1b924985fd",
+    "dist/addons/ui/options.js": "7fa2a3e36b30d398092aa978f263a9fb918b3d15c1b5782a1b68b7c8c83a3b03",
+    "dist/addons/ui/render.js": "012e0a30cc2f1f659a371763521e433ad1c06f603526f64c1f4594991a3dcf90",
+    "dist/addons/ui/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/addons/ui/ui.js": "37480149517c51f9a1396c448a4d65a8d24fef8d67aa114353905d07e5a80509",
+    "dist/core/analyzer/basic.js": "ac8661d3c5c4e612cd8fc4401cf5497ec35aaf759e63d39eee281ae48e86b98a",
+    "dist/core/capabilities/capture.js": "77bcf26eda14403dccd2d740f460e0217b9890892dc674d90471c2c2924f3d24",
+    "dist/core/capabilities/participants.js": "3d1ba17b65b1c7ddf8d923b7c8f92b1f58b50dace5d7eb9db87d397d11b5f415",
+    "dist/core/capabilities/refinement.js": "00cd5e0858d8192ac23eb5108de6f9daea9f6f5a1ddd38693e75f12aa6cd9ef1",
+    "dist/core/capabilities/registration.js": "0618a05a1a09e492a119e8b0e5efb67c56a38504dbeb37b46624193b57c56305",
+    "dist/core/capabilities/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/core/capabilities/worker-identity.js": "304328f03ffb2e524a7cf4f1e488416fb18ebbb92e7da3ad9fcd56df063ef09e",
+    "dist/core/contracts/data.js": "9c2d7594d6c649d9c80b339bc00752ae594debc3a85b52742afe3bdf4300c501",
+    "dist/core/contracts/options.js": "2a55ea9f1a67f70da788505ffcb15b93ecea3fe0a78c9c8e7050ffcdaea2c836",
+    "dist/core/contracts/query.js": "2b42b6c1dd557e4e844177c0489b1f21bbc0107e3235d19a74baf5516887b8c0",
+    "dist/core/contracts/record.js": "db44c35edb75b034a3e651d2f3016985fc0c32d11b35c8eb09f295d822471e99",
+    "dist/core/contracts/schema.js": "2db52cc9a69f646c672e092631fb565ac9ca821d47d3a274f2ec682333b1fc75",
+    "dist/core/contracts/types.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/core/errors/error.js": "5381218a0fb36ee4fe65ba9f8a556220de3b1098048b15f6640cac721ab214f7",
+    "dist/core/execution/engine.js": "acab8c6738e37a14c10a2f05bffd6409db4075423b795d32ef06ee823152f38d",
+    "dist/core/execution/host.js": "989ca45e4f46a2ab987e3856c0e13348ec798474f5b9ae7448a507ea7dd2f27f",
+    "dist/core/index/construction.js": "2ac1d2964aef38dcca7aa5a9f384f2fe5f2f783ee858603f61b3edce087be1f3",
+    "dist/core/index/directory.js": "153b4c155343694104161b7879774d480e40e4d50c21cae2f40f210f19e0fe7b",
+    "dist/core/index/invariants.js": "98446c30de1a1fe5219fb911d09b8e765caa24fad9ae087afb2ced77f9ead0f2",
+    "dist/core/index/staging.js": "fddbb1ca9d069fd78ed11cf759153a826f0a042e3003262769e644ff05aeaffc",
+    "dist/core/index/state.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/core/limits/limits.js": "a0a9d000e1455dacd821140bbf2007408c33b1434174e8ccd1600c1f2bdf1d6c",
+    "dist/core/limits/work.js": "20bcd5f14b516f67e49b32b00b168d629fb76d0de396c24e576a6c98cef0fba9",
+    "dist/core/mutations/capture.js": "291ff714d63323541a63c85b4082fedb7003826e81aebe4b9c35b01de954b676",
+    "dist/core/mutations/delta.js": "496263187ed4abacfdfd9046729f9496aa32e0fc8d8b68dc948a937e82c8481b",
+    "dist/core/mutations/document.js": "6107c7ef07a62e9a9d9d320c810e717432083ebfab891bb7497954cb25b63ab6",
+    "dist/core/mutations/owner.js": "d0e9dca79db41d48a69e112bed053fe948d784e0b80edd2515af22b80cb68299",
+    "dist/core/query/compile.js": "4d3b42a740a47c142b32bf1cc6a7011dcbdd987261d1dada3170c36320d6bf7d",
+    "dist/core/query/evaluate.js": "596fe7bb26e18034dfcf5d001807a50b318c529d9c493b01a3b334260e405ec2",
+    "dist/core/query/search.js": "7aa0dd88bef3c1a3a89c6f42649175329a88ad12307b48d64b30f0c29a6d3524",
+    "dist/core/query/work.js": "3470ee5640dbb65b337ac6f7fabec3fdc6c3161dceab773b3d65879683ce115e",
+    "dist/core/ranking/bm25.js": "29990f62f130d37b6b586384b32506ebc512aea50aa07cc11e46f7b5f42f6356",
+    "dist/core/ranking/page.js": "09a4550f387524692e4366d5a38bf7d665c309749025fe2b0b8e0271a0aa742f",
+    "dist/core/retrieval/exact.js": "5cfe6bc485ab2bc217faa5dcb2b2cdb2ba92aae25f4d698ac1ffa5bad9c1ae9e",
+    "dist/core/retrieval/expand.js": "4547d1a27099eed1dbdc2403e5dcc496dd0b33a7c3623db768055c84cbc992bd",
+    "dist/core/revision/participant.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+    "dist/core/trace/facts.js": "0a1d971df28d194d16392c71801813d306a91321a9e0a462f4f28023a6378e82",
+    "dist/index.js": "640c86a133d3432da6369c8d5de28228988d1d2ad5392519427730595b60d27e"
+  },
+  "identityMethod": "Parent records frozen final source/compiler output identities after sampler completion; independent package audit compares current compiled bytes. Production source held stable throughout final cost run; no source rewrite for measurement.",
+  "runner": {
+    "path": "scripts/snapshot-costs.mjs",
+    "sha256": "6371849865d3744a8c55a6c89e3fb946c80a1f906148ec59e4386ef4d0a7a401"
+  }
+}

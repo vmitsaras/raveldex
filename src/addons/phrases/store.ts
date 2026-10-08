@@ -129,6 +129,7 @@ export function createSourceProvider(options: SourceProviderOptions): AddonRegis
       execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity('source', captured) }),
       limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: captured.maxWorkUnits, maxRetainedEntries: captured.maxRetainedEntries, maxOutputEntries: 0 }),
       costs: Object.freeze({ importedCode: 'Selected-source capture and copy-on-write directory staging; no phrase verifier.', retainedRepresentation: 'One entry per record, present selected field and original value; selected original UTF-16 strings only.', transientWork: 'Changed selected-field values and touched source-directory buckets; shared mutation budget.', externalResources: 'none' }),
+      codec: Object.freeze({ id: 'raveldex-source-v1', version: 1 }),
     }),
     participant: Object.freeze({
       initialize: (configuration: OwnedConfiguration): SourceRoot => initialRoot(configuration, captured.fields, captured.maxRetainedEntries),

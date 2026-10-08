@@ -20,7 +20,9 @@ RX-2006 adds an optional native DOM interface and real documentation browser pil
 
 RX-3001 adds an explicit one-owner module-worker adapter with bounded transport, compatible local capabilities, cancellation and mutation receipt reconciliation. The documentation pilot offers direct or worker execution.
 
-The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, snapshot/storage hosting and Unicode snapshot portability require later evidence.
+RX-3002 adds explicit versioned source/native snapshots, complete atomic restore and exact declared Node-profile compatibility through an optional entry. See [snapshot evidence](docs/evidence/RX-3002.md).
+
+The package remains `private: true`, version `0.0.0`, with zero runtime dependencies and the existing MIT license. It is usable from a local tarball. Publication and release qualification remain owner decisions; broader browser support, storage hosting and cross-host Unicode snapshot portability require later evidence.
 
 ## Try the core
 
@@ -80,6 +82,47 @@ try {
 Phrases require adjacent native tokens in one original value; repeats matter, punctuation separates tokens, and fields/array values cannot be joined. Eligibility refines its own Boolean leaf before pagination and adds no score bonus. Payload is exactly `{ text, fields? }`; omitted fields select all schema text fields, each requiring an enabled provider. Empty analyzed phrases match nothing; the cap is 32 analyzed tokens. Unknown keys, missing/incompatible providers and incomplete-budget verification fail explicitly.
 
 The provider retains only declared fields' complete immutable original values and follows atomic writes, rollback, clear and disposal. Source-only consumers import `createSourceProvider` from `@vmitsaras/raveldex/addons/phrases/source` without the verifier. Factory options include optional `id`, `maxWorkUnits`, and source `maxRetainedEntries`; see [protocol and costs](docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability). The ordinary engine has no source/position getter or snippet API.
+
+## Optional source and native snapshots
+
+```ts
+import { createSnapshots } from '@vmitsaras/raveldex/adapters/snapshots';
+
+// engine has a source provider covering every indexed text field.
+const snapshots = createSnapshots(engine);
+const encoded = await snapshots.exportSource();
+const restored = await snapshots.restore(encoded);
+console.log(restored.originRevision, restored.revision, restored.reindexed);
+```
+
+Source snapshots contain canonical IDs, metadata and complete original values. Restore rebuilds using the receiving engine's analyzer, prepares every installed participant, and commits one next local revision. It explicitly returns the receiving analyzer and `reindexed: true`. Original origin revisions are metadata, never reused as the receiving revision. Missing or partial source fails `SOURCE_UNAVAILABLE`, including an empty engine with no complete source provider. No omitted original text is manufactured.
+
+Native snapshots contain actual native frequency/dictionary/posting/reverse/statistical state and selected source/position/offset roots. They validate those structures and their cross-references before publication. The ordinary `createRaveldex` profile remains unqualified and rejects native export/restore. For an application that has its own recorded qualification evidence for an exact Node runtime:
+
+```ts
+import {
+  createSnapshotRaveldex, createSnapshots, currentNodeSnapshotEnvironment,
+} from '@vmitsaras/raveldex/adapters/snapshots';
+
+const qualified = createSnapshotRaveldex({ schema: { text: { body: {} } } }, {
+  nativeQualification: {
+    profileId: 'my-tested-node-profile-v1',
+    scope: 'exact-node-runtime',
+    environment: currentNodeSnapshotEnvironment(),
+    evidence: ['my-project/qualification-record.md'],
+  },
+});
+try {
+  await qualified.add({ id: 'a', text: { body: 'Original text' } });
+  const codec = createSnapshots(qualified);
+  const encoded = await codec.exportNative();
+  await codec.restore(encoded);
+} finally { await qualified.dispose(); }
+```
+
+`nativeQualification` is a trusted application declaration of its tests. The helper reports the current Node/V8/ICU/Unicode/platform/architecture; copying that record or naming an evidence file does not run qualification. The owner has its qualified descriptor from revision 0. Restore requires the same complete declaration and actual runtime. Browser/worker owners and cross-host native portability are not qualified by this API. Source-only attachment remains available to a direct ordinary owner.
+
+The two versioned JSON formats identify schema, analyzer, native ranking/implementation, limits, capabilities and index detail. The checksum detects accidental damage; structural validation remains mandatory. Unknown side codecs or incompatible configuration fail explicitly. Snapshot errors add a fixed `SnapshotAdapterError.reason` alongside ordinary core error codes. Both export and restore share the owner's FIFO, cancellation, deadlines and work limits. Failure preserves the previous searchable revision. `maxEncodedBytes` narrows the 64 MiB UTF-8 JSON ceiling; large admitted live collections can exceed that serialization cap. No storage is performed; explicit IndexedDB save/load/erase belongs to RX-3003.
 
 ## Optional positions and original offsets
 
@@ -238,14 +281,15 @@ A dispatched mutation with a lost reply can reject with `WorkerAdapterError` cod
 | Optional Inspector | Selected eligibility paths, actual native contributions, revision/configuration/resource identity and explicit diagnostic exports. |
 | Optional native UI | Labeled forms, facets, result navigation, original snippets and factual Inspector; separate scoped CSS. |
 | Optional worker adapter | One complete engine owner, validated transport, explicit lifecycle and mutation receipts. |
-| Planned host adapters | Snapshots, IndexedDB/recovery and later integrations. |
+| Optional snapshots | Versioned complete-source rebuild and validated native state under an exact declared Node profile. |
+| Planned host adapters | IndexedDB/recovery and later integrations. |
 | Development references | Independent source oracles, judged relevance fixtures and separately identified comparators. |
 
 The historical RX-2005 packed public core measured **16,491 bytes gzip** (54,156 minified ESM bytes), exceeding the unchanged 15 KiB target by **1,131 bytes** (+32 gzip versus RX-2004). Boundary review keeps optional range collection, source traversal, segmentation, clipping, projection and serialization outside core; mandatory validation/shared metering remain intact. Complete bundles overlap and are not additive module costs. The 10,000-record observations are logical work/retention counters, not a universal capacity/latency promise. Heap, peak memory and broad host qualification remain pending. No DOM, worker, storage, network, foreign engine or optional representation enters the core graph or runs on import.
 
 RX-3001 measures the current core at **16,631 gzip bytes** (54,672 minified bytes), missing the same 15 KiB target by **1,271 bytes**. Its core graph remains 31 inputs without optional adapter modules; the increase covers supported capability metadata and the narrow internal execution-control seam. The selected worker client is 35,574/11,237 minified/gzip bytes. Complete product and worker graphs are measured separately; these figures are not additive costs or heap measurements.
 
-MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-3001 is RX-3002 — Versioned source and native snapshots.
+MiniSearch and other engines may be isolated comparators; they cannot implement or silently replace the native core. N5 remains deferred. Next planner priority after RX-3002 is RX-3003 — IndexedDB persistence, recovery, and namespace erasure.
 
 ## Factual inspection
 
