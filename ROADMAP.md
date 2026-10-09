@@ -75,7 +75,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 ## Recorded blockers and decisions
 
-- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): Owner-reported VoiceOver result speech on Safari/macOS 27.0.1 remains interrupted by recognized-word speech in the explicit settled-polite/busy-off test. Removing parent busy did not resolve that reported case; typing feedback is a candidate, not a proven complete cause. Results-only/other combinations, exact AT settings and full AT flows remain unqualified. Physical display/input and real OS IME remain unqualified. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
+- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): Open finding RX-4002-F01 tracks owner-reported Safari/macOS 27.0.1 result-announcement interruption, including settled-polite/busy-off and the wait-then-Return diagnostic. A separate independent Codex task owns the read-only investigation; no fix or complete cause is established. Other qualification observations can continue, but exact AT settings and full AT flows remain unqualified. Physical display/input and real OS IME remain unqualified. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
 
 ## Milestone exit conditions
 

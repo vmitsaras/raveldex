@@ -85,4 +85,8 @@ In the subsequent [owner-guided announcement continuation](docs/evidence/RX-4002
 
 The owner subsequently reports speech beginning then being interrupted, without identifying the earlier mode. A [test-only busy-scope continuation](docs/evidence/RX-4002-announcements-busy.md) crosses the three announcement modes with whole-UI busy, busy removed and results-list-only busy. Production behavior is unchanged; the current full check passes 584/584. Human results and remaining RX-4002 gates remain pending.
 
-The owner then reports B/off still interrupted by spoken recognized words in reply to that explicit test. Removing parent busy did not resolve the reported case; competing typing feedback remains a candidate. Exact typing-echo settings, explicit submission after word speech and other busy combinations remain unobserved.
+The owner then reports B/off still interrupted by spoken recognized words in reply to that explicit test. Removing parent busy did not resolve the reported case; competing typing feedback remains a candidate. At that point, exact typing-echo settings, explicit submission after word speech and other busy combinations remained unobserved; the later explicit-submission report is recorded below.
+
+The owner also reports interruption after the proposed wait-then-Return procedure. Open [finding RX-4002-F01](docs/accessibility/RX-4002-announcement-investigation.md) is assigned to a separate independent Codex task with an initial read-only investigation scope. Remaining qualification flows can proceed independently; RX-4002 stays Blocked and RX-4003 waits.
+
+An owner-reported ordinary-UI Inspector follow-up announces “inspector with 3 items” and reports expected Tab/Escape behavior. Exact focus/cursor distinctions and complete Inspector flow remain unqualified; the human checklist records the partial evidence. Error/retry is the next guided observation.

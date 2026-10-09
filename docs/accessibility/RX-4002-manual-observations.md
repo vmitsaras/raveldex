@@ -1,6 +1,6 @@
 # RX-4002 exact-tool and physical observations
 
-Status: **Blocked — preliminary human query/focus observations reported; exact environment and remaining flows unqualified.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
+Status: **Blocked — preliminary human query/focus and Inspector observations reported; exact environment and complete flows remain unqualified.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
 
 The evaluator must record the date, tested package hash, exact browser/OS/screen-reader versions, speech language, VoiceOver verbosity, Quick Nav state, keyboard navigation settings, and the actual announced text and focus outcome for each step. Record failures as failures; do not copy the visible DOM text into an announcement field unless the tool actually spoke it. A caption panel may help preserve output, but it does not establish what a listener heard. Apple's [caption-panel guidance](https://support.apple.com/en-am/guide/voiceover/unac078/mac) describes that tool.
 
@@ -14,7 +14,7 @@ Use the installed-package fixture served by `npm run qualify:serve` after instal
 | Empty results | Search for `unmatchedword`; record the announced empty state and the ability to edit and resubmit. | Blocked |
 | Error and retry | Activate **Inject next search error**, submit a query, record the error/retry announcement and focus, activate Retry, and record recovery. Injection is not a physical resource failure. | Blocked |
 | Filters and facets | Search `red`, select a Category option, record its name/count, changed results/status, retained control focus, and clearing the filter. | Blocked |
-| Inspector | Open Inspector after a successful search; record dialog/title/loading/factual-content traversal, focus containment, Escape/Close behavior, and focus restoration to the opener. | Blocked |
+| Inspector | Open Inspector after a successful search; record dialog/title/loading/factual-content traversal, focus containment, Escape/Close behavior, and focus restoration to the opener. | Partial human Tab/Escape/dialog report below; complete flow Blocked |
 | Worker failure and recovery | Open `/worker`, activate **Terminate worker**, submit, record the honest error, activate **Recover from authoritative source**, then search again. A fresh owner is distinct from retrying an uncertain mutation. | Blocked |
 | Teardown and initialization | On `/ui`, activate **Destroy UI**, then **Remount UI**; record restored authored content, focus destination, control names, and duplicate announcements if any. | Blocked |
 | Composition input | Use an actual installed OS IME, record its name/settings and entered text, and observe whether composition completes before the query is submitted. Synthetic CompositionEvent checks are separate. | Blocked |
@@ -59,3 +59,15 @@ The controlled test-only announcement comparison separates the unchanged status 
 The owner now reports the announcement begins then is interrupted, and suspects parent busy transitions; the comparison mode was not identified. No new-mode human Pass is claimed. The [busy comparison](../evidence/RX-4002-announcements-busy.md) offers each fixed announcement mode with `busy=shell`, `busy=off` or `busy=results`. Begin with B/off, keep settings unchanged, and record whether the full count finishes, the interrupting speech and retained focus. Then change only busy scope before comparing priority. Inspector is unchanged; initial/remount speech remains unverified.
 
 In reply to the explicit B/off test, the owner reports: “it always is interrupted by the word announcement if a known word is recognized”. Parent busy removal therefore did not resolve that reported case. Association is through the test question/reply; there is no independent audio/URL capture or new focus/settings confirmation. Competing typing feedback is a candidate. Next observe explicit submission after word speech finishes, preserving settings; an optional temporary typing-echo comparison must record and restore the original setting.
+
+## Independent announcement investigation and next observation
+
+The explicit-submission follow-up also receives the owner report “is beeign interrupted”. It is associated through the previous question/reply; exact utterance, timing, focus and settings remain incomplete. [RX-4002-F01](RX-4002-announcement-investigation.md) tracks this open failure in a separate independent Codex task. It does not waive the status-announcement requirement.
+
+Continue the independent Inspector observation on the ordinary installed `/ui` page: search `red`, activate **Inspect results**, record the dialog name and initial focused control, use Tab/Shift+Tab to check focus stays inside, then Escape and record focus restoration to **Inspect results**. Record actual VoiceOver speech and physical key behavior, including failures. The URL/package binding is the current fixture preparation; exact human browser/VoiceOver/settings still require the evaluator's confirmation. This procedure is pending, not a Pass.
+
+## Owner-reported Inspector follow-up — 2026-10-09
+
+In reply to the ordinary `/ui` Inspector procedure, the owner reports: “tab and esc function normal as expected. dialog: inspector with 3 items, tabbing between h2 and close button”. This supplies an attributed dialog announcement and reported normal Tab/Escape behavior. It is associated with requested URL `http://127.0.0.1:63024/ui` through the question/reply; browser/URL/audio/focus were not independently captured. Safari/macOS/English were confirmed earlier, while exact tested VoiceOver/settings remain incomplete.
+
+The owner reports traversal between the heading and Close button. Whether that describes DOM keyboard focus or the VoiceOver cursor is unconfirmed; initial focus, explicit Shift+Tab behavior, exact Escape return target, loading/factual-data traversal and the Close action were not separately described. Preserve the positive report without converting it into a complete modal-focus or RX-4002-AC02 Pass. The next guided observation is injected error/retry without additional typing, so the existing word-feedback concern is tracked separately.
