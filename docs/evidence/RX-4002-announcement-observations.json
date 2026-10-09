@@ -1,0 +1,129 @@
+{
+  "kind": "raveldex-rx4002-owner-announcement-report-v1",
+  "date": "2026-10-09",
+  "scope": "Human report plus sampled recording-frame inspection; no independent heard-audio verification",
+  "ownerConfirmedEnvironment": {
+    "browser": "Safari",
+    "version": "27.0.1",
+    "build": "22625.1.29.11.28",
+    "os": "macOS",
+    "osVersion": "27.0.1",
+    "osBuild": "26A434",
+    "speechLanguage": "English",
+    "screenReader": "VoiceOver (from report/context)",
+    "screenReaderVersion": null,
+    "verbosity": null,
+    "quickNav": null,
+    "hintDelay": null,
+    "keyboardNavigationSettings": null,
+    "displayInputPowerSettings": null
+  },
+  "ownerReport": {
+    "originalAnnouncement": "waiting for search; slow typing and space announces 7 results. Showing 1–3.; normal typing suppressed",
+    "focus": "on input",
+    "assertiveExperiment": "Only manually setting aria-live=\"assertive\" on status announces 7 results. Showing 1–3. properly; otherwise text-field hint suppresses it",
+    "assertiveChangeBeforeOrAfterRecording": null,
+    "fixtureURL": null
+  },
+  "recording": {
+    "path": "/Users/vasilis/Downloads/screen-recording-2026-10-09T15-50-13-466Z.webm",
+    "sha256": "51345def6ed430d9b83abcb7642d6a83bff07a6ca03679d6f5faa75bbec6ab8b",
+    "metadata": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "vp9",
+          "codec_type": "video",
+          "width": 3456,
+          "height": 2234
+        },
+        {
+          "index": 1,
+          "codec_name": "opus",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      ],
+      "format": {
+        "duration": "72.138695",
+        "size": "8702637"
+      }
+    },
+    "inspection": {
+      "command": [
+        "ffmpeg",
+        "-v",
+        "error",
+        "-n",
+        "-i",
+        "/Users/vasilis/Downloads/screen-recording-2026-10-09T15-50-13-466Z.webm",
+        "-vf",
+        "fps=1/6,scale=1280:-1",
+        "frame-%03d.png"
+      ],
+      "sampledFrames": 12,
+      "audioStreamPresent": true,
+      "audioReview": "Unavailable: tool explicitly reports this model does not support audio input. Caption observations are not relabeled as independent heard speech.",
+      "rawMediaCommitted": false
+    }
+  },
+  "sampledCaptionObservations": [
+    {
+      "sampleIndex": 2,
+      "visibleQuery": "",
+      "visibleStatus": "9 results. Showing 1–3.",
+      "caption": "Search documentation, search text field, search"
+    },
+    {
+      "sampleIndex": 4,
+      "visibleQuery": "red",
+      "visibleStatus": "7 results. Showing 1–3.",
+      "caption": "You are currently on a text field. To enter text in this field, type."
+    },
+    {
+      "sampleIndex": 6,
+      "visibleQuery": "red",
+      "visibleStatus": "7 results. Showing 1–3.",
+      "caption": "Searching..."
+    },
+    {
+      "sampleIndex": 7,
+      "visibleQuery": "red",
+      "category": "Guide (5)",
+      "visibleStatus": "5 results. Showing 1–3.",
+      "caption": "Closing menu Guide (5), Category 1 distinct values; 0 buckets omitted. Counts include the current filters., collapsed, pop up button"
+    },
+    {
+      "sampleIndex": 8,
+      "visibleQuery": "red",
+      "category": "Guide (5)",
+      "visibleStatus": "5 results. Showing 4–5.",
+      "caption": "Next page, button"
+    },
+    {
+      "sampleIndex": 9,
+      "visibleQuery": "red",
+      "category": "Guide (5)",
+      "visibleStatus": "5 results. Showing 4–5.",
+      "caption": "You are currently on a button. This item is dimmed."
+    },
+    {
+      "sampleIndex": 11,
+      "visibleQuery": "blu",
+      "category": "Guide (not in displayed buckets)",
+      "visibleStatus": "No results.",
+      "caption": "You are currently on a text field. To enter text in this field, type."
+    }
+  ],
+  "limitations": [
+    "Frame samples are neither continuous caption transcripts nor independent audio observations.",
+    "The manual assertive DOM change is owner-reported and was not independently established from the sampled frames.",
+    "Safari chrome is visible and versions are owner-confirmed; exact VoiceOver/settings remain incomplete.",
+    "Found original manual package report is not yet bound to the recording by an owner-confirmed URL.",
+    "No blanket assertive production policy or fully qualified AT/physical input claim follows."
+  ],
+  "outcome": "Reported announcement failure; diagnostic comparison pending human results"
+}
