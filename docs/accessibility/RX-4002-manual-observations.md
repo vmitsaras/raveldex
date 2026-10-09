@@ -1,6 +1,6 @@
 # RX-4002 exact-tool and physical observations
 
-Status: **Blocked — preliminary human query/focus, Inspector and error/recovery observations reported; exact environment and complete flows remain unqualified.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
+Status: **Blocked — human query/focus, Inspector and error/recovery observations plus a passed human filter check are recorded; exact environment and remaining flows are still required.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
 
 The evaluator must record the date, tested package hash, exact browser/OS/screen-reader versions, speech language, VoiceOver verbosity, Quick Nav state, keyboard navigation settings, and the actual announced text and focus outcome for each step. Record failures as failures; do not copy the visible DOM text into an announcement field unless the tool actually spoke it. A caption panel may help preserve output, but it does not establish what a listener heard. Apple's [caption-panel guidance](https://support.apple.com/en-am/guide/voiceover/unac078/mac) describes that tool.
 
@@ -13,13 +13,13 @@ Use the installed-package fixture served by `npm run qualify:serve` after instal
 | Query and results | Navigate to the labeled search field with VoiceOver, enter `red`, submit, and record the field/button names, searching/result announcement, result heading/list/link traversal, and whether focus stays usable. | Partial human report below; full flow Blocked |
 | Empty results | Search for `unmatchedword`; record the announced empty state and the ability to edit and resubmit. | Blocked |
 | Error and retry | Activate **Inject next search error**, submit a query, record the error/retry announcement and focus, activate Retry, and record recovery. Injection is not a physical resource failure. | Owner-reported error/recovery speech and retained focus across three activation paths below; exact environment and query binding incomplete |
-| Filters and facets | Search `red`, select a Category option, record its name/count, changed results/status, retained control focus, and clearing the filter. | Blocked |
+| Filters and facets | Search `red`, select a Category option, record its name/count, changed results/status, retained control focus, and clearing the filter. | Pass — owner verifies correct uninterrupted announcements and retained select focus for All → Guide → All; screenshots below |
 | Inspector | Open Inspector after a successful search; record dialog/title/loading/factual-content traversal, focus containment, Escape/Close behavior, and focus restoration to the opener. | Partial human Tab/Escape/dialog report below; complete flow Blocked |
 | Worker failure and recovery | Open `/worker`, activate **Terminate worker**, submit, record the honest error, activate **Recover from authoritative source**, then search again. A fresh owner is distinct from retrying an uncertain mutation. | Blocked |
 | Teardown and initialization | On `/ui`, activate **Destroy UI**, then **Remount UI**; record restored authored content, focus destination, control names, and duplicate announcements if any. | Blocked |
 | Composition input | Use an actual installed OS IME, record its name/settings and entered text, and observe whether composition completes before the query is submitted. Synthetic CompositionEvent checks are separate. | Blocked |
 
-The local inventory identifies VoiceOver 10 (build 993), Safari 27.0.1 (22625.1.29.11.28), and macOS 27.0.1 (26A434). These are inventory facts, not an observed assistive-technology combination. The separate [installed-browser continuation](../evidence/RX-4002-installed.md) records software-driven native Firefox/Safari UI/worker flows and returned AX focus/text; it supplies no spoken announcements or human observations. No complete checklist flow above is qualified by those software observations or the preliminary human report below. NVDA/Windows and other screen-reader/browser combinations have no observation in this slice.
+The local inventory identifies VoiceOver 10 (build 993), Safari 27.0.1 (22625.1.29.11.28), and macOS 27.0.1 (26A434). These are inventory facts, not an observed assistive-technology combination. The separate [installed-browser continuation](../evidence/RX-4002-installed.md) records software-driven native Firefox/Safari UI/worker flows and returned AX focus/text; it supplies no spoken announcements or human observations. Those software observations alone do not qualify the human checklist. The later owner-observed filter check below passes its bounded flow; exact VoiceOver settings and the remaining flows are still required for overall qualification. NVDA/Windows and other screen-reader/browser combinations have no observation in this slice.
 
 ## Physical presentation and input
 
@@ -52,7 +52,7 @@ The initial reply did not supply fixture identity or settings. The owner subsequ
 
 The owner reports that manually adding `aria-live="assertive"` to the status makes “7 results. Showing 1–3.” announce properly, whereas the ordinary behavior is suppressed by the text-field hint. This is a reported announcement failure and a useful diagnostic result, not an accepted production policy. The [follow-up observation record](../evidence/RX-4002-announcement-observations.json) preserves the supplied recording hash, stream metadata, sampled caption observations, exact confirmed environment and remaining uncertainties. Frame inspection shows correct visible results with the text-field hint in the caption panel, a later Searching caption, Guide selection/paging and a dimmed Next-page hint. Frame text is not relabeled as independent heard speech; the available model cannot receive audio. The assertive DOM edit itself is not verified from those samples. A later `blu`/empty result retains the Guide filter and is not treated as a retrieval defect.
 
-The controlled test-only announcement comparison separates the unchanged status stream from an external settled-only polite announcer and an otherwise identical assertive control. It changes neither the library nor the acceptance criteria. Actual candidate speech remains pending; all other complete manual flows remain Blocked.
+The controlled test-only announcement comparison separates the unchanged status stream from an external settled-only polite announcer and an otherwise identical assertive control. It changes neither the library nor the acceptance criteria. At that boundary, candidate speech was pending and all other complete manual flows remained Blocked; subsequent observations are recorded below.
 
 ## Busy-scope follow-up
 
@@ -78,4 +78,17 @@ In reply to the guided error/retry check, the owner reports the screen reader an
 
 The requested fixture is the ordinary `http://127.0.0.1:63024/ui` page. The reply does not explicitly reconfirm the browser/URL, query, filter state, exact VoiceOver settings or timing. Safari/macOS/English were confirmed earlier. Preserve the reported nine-result count without binding it to `red`: the frozen fixture expects seven unfiltered `red` matches, and this reply does not establish what was searched. This recovery observation does not resolve the separately reported normal-typing interruption in RX-4002-F01 or complete RX-4002-AC02.
 
-The next guided check is filters/facets on the same ordinary fixture: explicitly reset Category to All, search `red`, select Guide, then return to All. The literal fixture and `test/ui/packed-browser.test.mjs` establish expected visible totals of 7 → 5 → 7; human control/option speech, result announcements, interruptions and retained Category focus remain to be observed.
+The next guided check was filters/facets on the same ordinary fixture: explicitly reset Category to All, search `red`, select Guide, then return to All. The literal fixture and `test/ui/packed-browser.test.mjs` establish expected visible totals of 7 → 5 → 7; the owner response follows.
+
+## Owner-verified filter follow-up — 2026-10-09
+
+**Pass for the guided All → Guide → All filter flow.** The owner reports: “all anouncements are correct, not interrupted, when changes to all, guide, and back to all. focus stays on the select. all verified”. This directly supplies human confirmation of correct uninterrupted announcements and retained select focus throughout the requested sequence. The sequence is associated with the preceding ordinary `/ui`, `red`, Category All → Guide → All procedure; the same Safari/macOS/English session was confirmed earlier. Exact VoiceOver version/settings remain an overall qualification field rather than being inferred from inventory.
+
+Two supplied screenshot crops are saved byte-for-byte as supporting evidence. The Guide crop shows visible “5 results. Showing 1–3.” and the VoiceOver caption “Guide (5), Category 1 distinct values; 0 buckets omitted. Counts include the current filters., menu pop up collapsed, button”. The All crop shows visible and caption text “7 results. Showing 1–3.”. These are observed image text; uninterrupted heard speech and retained select focus are established by the owner's report, not inferred from the still images.
+
+| Supplied image | Durable copy | Original dimensions / bytes | SHA-256 |
+| --- | --- | --- | --- |
+| `codex-clipboard-340fff54-626c-4522-94cc-7240caaf27cc.png` | [Guide caption/results](../evidence/RX-4002-human-facet-guide.png) | 1394 × 412 / 119,307 | `2d2f672e8afc3305677d537f7fd2423c5fc566bf33d819c56b0ebf628f752871` |
+| `codex-clipboard-76521f5b-24f4-4acd-8fbe-8f27a1d371c6.png` | [All caption/results](../evidence/RX-4002-human-facet-all.png) | 1732 × 458 / 72,860 | `0557e3bf11ed4bdc684f3ac3407f5e96758c9ce5b50daf30ec39616bea3992a1` |
+
+The filter pass does not resolve the separate normal-typing interruption in RX-4002-F01 or complete the remaining AT/device/IME/memory criteria. Next is the empty-results/recovery flow on ordinary `/ui`: Category All, search `unmatchedword` using Search, pause five seconds and record actual speech/focus, then search `red` again using Search. Expected visible statuses are “No results.” and “7 results. Showing 1–3.”; actual speech and recovery remain pending.
