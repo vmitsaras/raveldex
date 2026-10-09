@@ -1,6 +1,6 @@
 # RX-4002 exact-tool and physical observations
 
-Status: **Blocked — human query/focus, Inspector and error/retry observations plus passed human filter, empty-results/recovery and worker-recovery checks are recorded; exact environment and remaining flows are still required.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
+Status: **Blocked — bounded human filter, empty-results/recovery, worker and teardown/remount flows pass; query/focus, Inspector and error/retry observations are also recorded. Exact environment and remaining flows are still required.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
 
 The evaluator must record the date, tested package hash, exact browser/OS/screen-reader versions, speech language, VoiceOver verbosity, Quick Nav state, keyboard navigation settings, and the actual announced text and focus outcome for each step. Record failures as failures; do not copy the visible DOM text into an announcement field unless the tool actually spoke it. A caption panel may help preserve output, but it does not establish what a listener heard. Apple's [caption-panel guidance](https://support.apple.com/en-am/guide/voiceover/unac078/mac) describes that tool.
 
@@ -16,10 +16,10 @@ Use the installed-package fixture served by `npm run qualify:serve` after instal
 | Filters and facets | Search `red`, select a Category option, record its name/count, changed results/status, retained control focus, and clearing the filter. | Pass — owner verifies correct uninterrupted announcements and retained select focus for All → Guide → All; screenshots below |
 | Inspector | Open Inspector after a successful search; record dialog/title/loading/factual-content traversal, focus containment, Escape/Close behavior, and focus restoration to the opener. | Partial human Tab/Escape/dialog report below; complete flow Blocked |
 | Worker failure and recovery | Open `/worker`, activate **Terminate worker**, submit, record the honest error, activate **Recover from authoritative source**, then search again. A fresh owner is distinct from retrying an uncertain mutation. | Pass — owner verifies all three guided steps and retained focus on the control used; exact utterances not transcribed |
-| Teardown and initialization | On `/ui`, activate **Destroy UI**, then **Remount UI**; record restored authored content, focus destination, control names, and duplicate announcements if any. | Blocked |
+| Teardown and initialization | On `/ui`, activate **Destroy UI**, then **Remount UI**; record restored authored content, focus destination, control names, and duplicate announcements if any. | Pass — owner verifies all guided steps, supplies destroy/remount/result speech and reports retained control focus |
 | Composition input | Use an actual installed OS IME, record its name/settings and entered text, and observe whether composition completes before the query is submitted. Synthetic CompositionEvent checks are separate. | Blocked |
 
-The local inventory identifies VoiceOver 10 (build 993), Safari 27.0.1 (22625.1.29.11.28), and macOS 27.0.1 (26A434). These are inventory facts, not an observed assistive-technology combination. The separate [installed-browser continuation](../evidence/RX-4002-installed.md) records software-driven native Firefox/Safari UI/worker flows and returned AX focus/text; it supplies no spoken announcements or human observations. Those software observations alone do not qualify the human checklist. The later owner-observed filter, empty-results/recovery and worker checks below pass their bounded flows; exact VoiceOver settings and the remaining flows are still required for overall qualification. NVDA/Windows and other screen-reader/browser combinations have no observation in this slice.
+The local inventory identifies VoiceOver 10 (build 993), Safari 27.0.1 (22625.1.29.11.28), and macOS 27.0.1 (26A434). These are inventory facts, not an observed assistive-technology combination. The separate [installed-browser continuation](../evidence/RX-4002-installed.md) records software-driven native Firefox/Safari UI/worker flows and returned AX focus/text; it supplies no spoken announcements or human observations. Those software observations alone do not qualify the human checklist. The later owner-observed filter, empty-results/recovery, worker and teardown/remount checks below pass their bounded flows; exact VoiceOver settings and the remaining flows are still required for overall qualification. NVDA/Windows and other screen-reader/browser combinations have no observation in this slice.
 
 ## Physical presentation and input
 
@@ -112,4 +112,16 @@ The next guided check was worker failure/recovery at `http://127.0.0.1:63024/wor
 
 The pass is associated with the preceding `/worker` procedure in the ongoing Safari/macOS/English session. It does not establish an actual transport error code, physical resource failure, memory observation or resolution of RX-4002-F01. Overall exact-tool settings and remaining qualification observations still need evidence.
 
-Next is teardown/remount on ordinary `/ui`: activate **Destroy UI**, confirm the search controls disappear and the authored fallback documentation link is readable, activate **Remount UI**, confirm labeled controls return, then search `red` (seven expected results). Record actual speech, focus after each action, duplicate announcements and any unusable controls. These human teardown/remount outcomes remain pending.
+The next guided check was teardown/remount on ordinary `/ui`: activate **Destroy UI**, confirm the search controls disappear and the authored fallback documentation link is readable, activate **Remount UI**, confirm labeled controls return, then search `red` (seven expected results). The question requested actual speech, focus after each action, duplicate announcements and any unusable controls; the owner response follows.
+
+## Owner-verified teardown/remount follow-up — 2026-10-09
+
+**Pass for the guided teardown/remount and subsequent search.** The owner replies “all verified, focus stays on the control used” and supplies these heard announcements:
+
+1. Destroy: “UI destroyed; authored fallback restored. Borrowed engine remains usable.”
+2. Remount: “UI remounted over the same borrowed engine.”
+3. Subsequent `red` search: “7 results”.
+
+The confirmation covers the requested control removal/readable fallback, returned labeled controls and successful search, with focus retained on the control used. No duplicate-announcement or unusable-control failure is reported. Preserve the supplied wording; the abbreviated seven-result report is not expanded into an invented full utterance. These are owner observations in reply to the ordinary `/ui` procedure, without a new independent audio, image or DOM-focus capture. Safari/macOS/English were confirmed earlier; remaining exact VoiceOver/settings fields are not inferred.
+
+Next is to identify an already installed, usable composing OS input method before guiding the real composition test. The owner has been asked for its exact name, or “none / not sure”; no installation or settings change is requested. Until that response and the actual composition observation, real OS IME remains Blocked. Query/result traversal, complete Inspector observations, exact AT settings and named physical device/display/input observations remain incomplete. RX-4002-F01 and the separately tracked scoped memory requirements also remain open; these bounded passes do not complete RX-4002.
