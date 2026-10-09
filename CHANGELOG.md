@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Record all 12 finite installed Firefox 157.0.1/Safari 27.0.1 engine/storage/resource cases with acknowledged local evidence, and add fresh-process native-restore allocation/cleanup observations. Preserve previous reports, the memory wrapper inventory failure and separate offline reconciliation. Keep exact AT, physical input/IME and unresolved memory qualification Blocked; no runtime/API/dependency change.
+
 - Record bounded installed Firefox/Safari native UI and module-worker recovery observations over the unchanged package. Keep broader browser matrices, speech/AT, physical input/IME and scoped memory qualification Blocked.
 
 - Add RX-4002 installed-package browser qualification, explicit manual fault/recovery fixtures, fresh-process memory/heap-graph methods and separate offline graph-cut retention analysis. Preserve original observations and guard analysis output from overwriting immutable inputs. Exact-tool AT, physical presentation and unisolated memory criteria remain Blocked; no runtime/API/dependency changes or release waiver.

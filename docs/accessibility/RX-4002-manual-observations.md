@@ -34,3 +34,5 @@ Local hardware inventory reports Mac17,8, Apple M5 Pro, 18 CPU cores and 24 GB R
 | OS IME | Blocked | Complete the composition flow with a named real input method. |
 
 No support claim or acceptance criterion is narrowed by this record. RX-4002 cannot be marked done while required observations remain unavailable.
+
+The [2026-10-09 installed matrix continuation](../evidence/RX-4002-installed-matrix.md) adds actual finite engine/storage/resource outcomes in Firefox 157.0.1 and Safari 27.0.1 plus independently observed current Firefox UI/worker flows. The evaluator request for human assistance received no observations during this run. No VoiceOver settings or actual heard speech, physical input/display or named OS IME composition was recorded. All human checklist outcomes above remain Blocked; browser-matrix results and Node memory sampling do not fill them.

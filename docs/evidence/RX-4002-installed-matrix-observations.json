@@ -1,0 +1,82 @@
+{
+  "kind": "raveldex-rx4002-installed-matrix-native-observations-v1",
+  "date": "2026-10-09",
+  "baseCommit": "65a21f5",
+  "method": "Native macOS app automation through mcp__cua_repl; curated selected actual AX excerpts and actions, not a full AX export, physical input, DOM assertion trace, or speech recording. Actual matrix results are recorded separately by the local fixture.",
+  "environment": {
+    "os": {
+      "product": "macOS",
+      "version": "27.0.1",
+      "build": "26A434"
+    },
+    "firefox": {
+      "bundleId": "org.mozilla.firefox",
+      "runningAboutText": "Checking for updates… 157.0.1 (aarch64)",
+      "installedVersion": "157.0.1",
+      "installedBuild": "15726.10.5",
+      "runningBuildExposed": false,
+      "originalTab": "New Tab / about:home",
+      "aboutClosed": true,
+      "versionDrift": "Prior installed UI observations used Firefox 156.0. This run uses independently observed 157.0.1; no update/restart control was activated."
+    },
+    "safari": {
+      "bundleId": "com.apple.Safari",
+      "runningAboutText": "Safari Version 27.0.1 (22625.1.29.11.28)",
+      "installedVersion": "27.0.1",
+      "installedBuild": "22625.1.29.11.28",
+      "originalTab": "Start Page",
+      "aboutClosed": true,
+      "taskTabClosed": true
+    }
+  },
+  "actions": [
+    {
+      "app": "Firefox",
+      "route": "/matrix",
+      "sequence": [
+        "Refresh stale app binding after guard rejected navigation before input.",
+        "Open separate task tab.",
+        "Select Firefox explicitly from native operator-label popup.",
+        "Click finite semantics; AX returned Recorded Pass: semantics, attempt a6f73ee9-6ac5-459c-92d3-0944dd1122c9.",
+        "Click IndexedDB; AX returned Recorded Pass: persistence, attempt d73bd491-5447-47a2-96fa-5623519222ca.",
+        "Click 1,000 direct; observe Running then Recorded Pass: 1000-direct-core, attempt eac735cf-8566-472c-a987-1ca02838e1a4.",
+        "Click 1,000 source worker; observe Running then Recorded Pass: 1000-worker-source, attempt 273f6912-96af-4728-bde6-5701e0089aaa.",
+        "Click 10,000 direct; observe Running then Recorded Pass: 10000-direct-core, attempt 4bfcb4db-c39e-4157-90ce-6292b3aeabfe.",
+        "Click 10,000 source worker; observe Running then Recorded Pass: 10000-worker-source, attempt 1cfd4d4f-47e3-43de-94d8-390a39518134."
+      ]
+    },
+    {
+      "app": "Safari",
+      "route": "/matrix",
+      "sequence": [
+        "Open separate task tab and explicitly select Safari in the native operator-label popup.",
+        "Click finite semantics; AX returned Recorded Pass: semantics, attempt d193afe8-8972-4a89-9762-599cd9c3616b.",
+        "Click IndexedDB; AX returned Recorded Pass: persistence, attempt 9d060172-1c9a-4ce7-b868-dbe8a86445c3.",
+        "Click 1,000 direct; observe Running then Recorded Pass: 1000-direct-core, attempt 3b0f73c4-3408-45c7-9298-7a7752d40e53.",
+        "Click 1,000 source worker; observe Running then Recorded Pass: 1000-worker-source, attempt daf1f0cd-e900-450b-b701-fe0110146c7e.",
+        "Click 10,000 direct; observe Running then Recorded Pass: 10000-direct-core, attempt 394e0448-0a58-4fcc-91f8-56da885dca9b.",
+        "Click 10,000 source worker; observe Running then Recorded Pass: 10000-worker-source, attempt f770544c-58cd-4990-ae17-48f03c0eb67a.",
+        "Close the Safari task tab; returned AX window is Start Page with smart search field focused."
+      ]
+    }
+  ],
+  "limitations": {
+    "AT": "No heard speech or exact-tool AT interaction observed.",
+    "physicalInputAndDisplay": "Software automation only; no physical keyboard/pointer/display observations.",
+    "OSIME": "No actual OS IME composition observed.",
+    "memory": "Matrix functions contain no retained/peak memory measurement."
+  },
+  "fixture": {
+    "origin": "http://127.0.0.1:51314",
+    "consumer": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-jQwKMT",
+    "packageSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+    "sessionId": "928b69a8-06ab-4c45-a7a5-6526c3984a84"
+  },
+  "cleanup": {
+    "safariTaskTabClosed": true,
+    "safariOriginalVerified": "Start Page",
+    "firefoxTaskTabsClosedByIndependentReviewer": true,
+    "firefoxOriginalVerifiedByIndependentReviewer": "New Tab / about:home",
+    "serveProcess": "SIGINT, exit0 after task tabs closed"
+  }
+}

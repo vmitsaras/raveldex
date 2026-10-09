@@ -1,0 +1,907 @@
+{
+  "kind": "raveldex-rx4002-installed-matrix-independent-review-v1",
+  "baseCommit": "65a21f5",
+  "date": "2026-10-09",
+  "method": "Independent reviewer used mcp__cua_repl native Firefox app actions. These are curated transcriptions of actual returned AX excerpts and actual commands, not an automatic event log, DOM activeElement read, speech observation, physical input observation or timing measurement.",
+  "origin": "http://127.0.0.1:51314",
+  "installedConsumer": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-jQwKMT",
+  "packageSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+  "browserIdentity": {
+    "application": "Firefox",
+    "runningVersion": "157.0.1 (aarch64)",
+    "identitySource": "Parent's direct About observation in RX-4002-installed-matrix-observations.json, same non-restarted app; reviewer did not open another About dialog.",
+    "runningBuild": "Unknown; About did not expose it",
+    "installedBuild": "15726.10.5",
+    "os": "macOS 27.0.1 / 26A434"
+  },
+  "outcome": "Pass",
+  "observations": [
+    {
+      "step": "fresh UI tab",
+      "actions": [
+        "super+t",
+        "paste http://127.0.0.1:51314/ui",
+        "Return"
+      ],
+      "ax": [
+        "9 results. Showing 1–3.",
+        "Page 1 of 3.",
+        "Atomic alpha",
+        "Beta banana",
+        "Delta"
+      ]
+    },
+    {
+      "step": "red page one",
+      "actions": [
+        "click query",
+        "type red",
+        "Return"
+      ],
+      "ax": [
+        "7 results. Showing 1–3.",
+        "Gamma red",
+        "Long content",
+        "Atomic alpha",
+        "Page 1 of 3.",
+        "The focused UI element is 94 search text field (settable) Search documentation, Value: red"
+      ]
+    },
+    {
+      "step": "red page two",
+      "actions": [
+        "click Next page"
+      ],
+      "ax": [
+        "7 results. Showing 4–6.",
+        "Epsilon",
+        "Delta",
+        "Quoted \"text\" & safe",
+        "<script>window.fixtureInjection=1</script> & original text",
+        "Page 2 of 3.",
+        "The focused UI element is 121 button Next page"
+      ]
+    },
+    {
+      "step": "red final page",
+      "actions": [
+        "click Next page"
+      ],
+      "ax": [
+        "7 results. Showing 7–7.",
+        "<img src=x onerror=\"window.fixtureInjection=1\">",
+        "Page 3 of 3.",
+        "The focused UI element is 121 button (disabled) Next page"
+      ]
+    },
+    {
+      "step": "native Guide selection resets paging",
+      "actions": [
+        "click Category",
+        "g",
+        "Return"
+      ],
+      "ax": [
+        "97 pop up button Guide (5)",
+        "5 results. Showing 1–3.",
+        "Gamma red",
+        "Atomic alpha",
+        "Epsilon",
+        "Page 1 of 2.",
+        "The focused UI element is 97 pop up button Guide (5)"
+      ]
+    },
+    {
+      "step": "Guide remaining membership",
+      "actions": [
+        "click Next page"
+      ],
+      "ax": [
+        "5 results. Showing 4–5.",
+        "Quoted \"text\" & safe",
+        "<img src=x onerror=\"window.fixtureInjection=1\">",
+        "Page 2 of 2."
+      ]
+    },
+    {
+      "step": "native All clears Guide and resets paging",
+      "actions": [
+        "click Category",
+        "a",
+        "Return"
+      ],
+      "ax": [
+        "97 pop up button All",
+        "7 results. Showing 1–3.",
+        "Gamma red",
+        "Long content",
+        "Atomic alpha",
+        "Page 1 of 3.",
+        "The focused UI element is 97 pop up button All"
+      ]
+    },
+    {
+      "step": "blue one result",
+      "actions": [
+        "click query",
+        "super+a",
+        "type blue",
+        "Return"
+      ],
+      "ax": [
+        "1 results. Showing 1–1.",
+        "Beta banana",
+        "Page 1 of 1.",
+        "The focused UI element is 94 search text field (settable) Search documentation, Value: blue"
+      ]
+    },
+    {
+      "step": "Inspector opened",
+      "actions": [
+        "click Inspect results"
+      ],
+      "ax": [
+        "Inspector for revision 1. 1 selected documents.",
+        "\"kind\": \"raveldex-inspector-v1\"",
+        "\"revision\": 1",
+        "\"model\": \"raveldex-bm25-v1\"",
+        "The focused UI element is 86 button Close Inspector"
+      ],
+      "limit": "Returned AX JSON was truncated; this is not an independent full numerical Inspector-model audit."
+    },
+    {
+      "step": "Inspector Escape",
+      "actions": [
+        "Escape"
+      ],
+      "ax": [
+        "1 results. Showing 1–1.",
+        "Beta banana",
+        "The focused UI element is 115 button Inspect results"
+      ]
+    },
+    {
+      "step": "injected bounded error",
+      "actions": [
+        "click Inject next search error",
+        "click query",
+        "Return"
+      ],
+      "ax": [
+        "The next search will display a deliberately injected WORK_LIMIT_EXCEEDED.",
+        "Search failed. Retry is available.",
+        "Search failed (WORK_LIMIT_EXCEEDED). Try again.",
+        "119 button Retry search",
+        "No page loaded.",
+        "The focused UI element is 94 search text field (settable) Search documentation, Value: blue"
+      ]
+    },
+    {
+      "step": "keyboard reaches Retry",
+      "actions": [
+        "Tab",
+        "Tab",
+        "Tab"
+      ],
+      "ax": [
+        "The focused UI element is 119 button Retry search"
+      ]
+    },
+    {
+      "step": "keyboard Retry succeeds",
+      "actions": [
+        "Return"
+      ],
+      "ax": [
+        "1 results. Showing 1–1.",
+        "Beta banana",
+        "119 button (disabled) Retry search",
+        "The focused UI element is 119 button (disabled) Retry search"
+      ],
+      "limit": "The stable aria-disabled Retry remains in AX focus; no DOM activeElement or heard announcement was inspected."
+    },
+    {
+      "step": "empty result",
+      "actions": [
+        "click query",
+        "super+a",
+        "type unmatchedword",
+        "Return"
+      ],
+      "ax": [
+        "0 distinct values; 0 buckets omitted. Counts include the current filters.",
+        "No results.",
+        "Page 1 of 1.",
+        "The focused UI element is 94 search text field (settable) Search documentation, Value: unmatchedword"
+      ]
+    },
+    {
+      "step": "Destroy UI",
+      "actions": [
+        "click Destroy UI"
+      ],
+      "ax": [
+        "UI destroyed; authored fallback restored. Borrowed engine remains usable.",
+        "Authored fallback",
+        "link documentation, Value: 127.0.0.1:51314/authored"
+      ]
+    },
+    {
+      "step": "Remount UI",
+      "actions": [
+        "click Remount UI"
+      ],
+      "ax": [
+        "UI remounted over the same borrowed engine.",
+        "9 results. Showing 1–3.",
+        "Atomic alpha",
+        "Beta banana",
+        "Delta",
+        "Page 1 of 3."
+      ]
+    },
+    {
+      "step": "fresh worker tab",
+      "actions": [
+        "super+w closes review UI tab",
+        "super+t",
+        "paste http://127.0.0.1:51314/worker",
+        "Return"
+      ],
+      "ax": [
+        "Test-only fault controls affect this fixture and its worker. Recovery explicitly rebuilds the three fixture records.",
+        "3 results. Showing 1–2.",
+        "Page 1 of 2."
+      ]
+    },
+    {
+      "step": "worker red two",
+      "actions": [
+        "click query",
+        "type red",
+        "Return"
+      ],
+      "ax": [
+        "2 results. Showing 1–2.",
+        "Gamma red",
+        "Atomic alpha",
+        "Page 1 of 1.",
+        "The focused UI element is 94 search text field (settable) Search documentation, Value: red"
+      ]
+    },
+    {
+      "step": "terminated worker generic error",
+      "actions": [
+        "click Terminate worker",
+        "click query",
+        "super+a",
+        "type blue",
+        "Return"
+      ],
+      "ax": [
+        "Worker terminated. Submit a search to observe transport failure.",
+        "Search failed. Retry is available.",
+        "Search failed (INTERNAL_ERROR). Try again.",
+        "No page loaded."
+      ],
+      "limit": "AX observes the rendered generic error, not the transport-layer code or a worker disposal acknowledgement."
+    },
+    {
+      "step": "explicit worker recovery",
+      "actions": [
+        "click Recover from authoritative source",
+        "observe completion with full AX state"
+      ],
+      "ax": [
+        "Fixture source fallback.",
+        "Recovered a new worker from authoritative fixture source.",
+        "3 results. Showing 1–2.",
+        "Page 1 of 2.",
+        "The focused UI element is 52 button Recover from authoritative source"
+      ]
+    },
+    {
+      "step": "recovered worker blue one",
+      "actions": [
+        "click query",
+        "type blue",
+        "Return"
+      ],
+      "ax": [
+        "1 results. Showing 1–1.",
+        "Beta banana",
+        "Page 1 of 1.",
+        "The focused UI element is 57 search text field (settable) Search documentation, Value: blue"
+      ]
+    },
+    {
+      "step": "restore original tab",
+      "actions": [
+        "super+w closes review worker tab",
+        "observe primary matrix task tab",
+        "super+w closes primary matrix task tab",
+        "observe original New Tab"
+      ],
+      "ax": [
+        "4 tab (selected) Value: New Tab, New Tab",
+        "HTML Content Description: New Tab, URL: about:home",
+        "The focused UI element is 18 combo box (settable) Search with Google or enter address"
+      ]
+    }
+  ],
+  "scopeLimits": [
+    "No optional matrix semantics repeat or resource repeat was performed by this reviewer.",
+    "No Safari action, developer console, DOM injection, browser/OS setting change, screen-reader activation, heard speech or physical input/presentation observation was performed.",
+    "AX focus is distinct from DOM activeElement, event trust and assistive-technology announcement behavior.",
+    "Closing tabs is not evidence of public worker disposal or object collection."
+  ],
+  "matrixAudit": {
+    "method": "Independent Python standard-library assertions over closed JSONL; literal membership, UTF16 ranges and BM25 arithmetic written independently; no owner validator/analyzer called. Static byte/hash comparisons only; no workload replay.",
+    "priorReviewHarnessAttempt": {
+      "outcome": "Fail",
+      "classification": "review harness",
+      "reason": "Initial audit read nonexistent roadmap dependencies key; corrected to actual dependsOn schema before any evidence write."
+    },
+    "journalSha256": "1c12a48a6364a6653c77591ec1ed3b6fa219136db063ee811d251067a3aa8241",
+    "manifestSha256": "65a2a16d979f2cfb21767d069607d8782c4c1f1f1a534440d49bd752f696cd54",
+    "assertionsPassed": 1675,
+    "primaryResults": [
+      {
+        "browser": "Firefox",
+        "scenario": "semantics",
+        "outcome": "Pass",
+        "attemptId": "a6f73ee9-6ac5-459c-92d3-0944dd1122c9"
+      },
+      {
+        "browser": "Firefox",
+        "scenario": "persistence",
+        "outcome": "Pass",
+        "attemptId": "d73bd491-5447-47a2-96fa-5623519222ca"
+      },
+      {
+        "browser": "Firefox",
+        "scenario": "1000-direct-core",
+        "outcome": "Pass",
+        "attemptId": "eac735cf-8566-472c-a987-1ca02838e1a4"
+      },
+      {
+        "browser": "Firefox",
+        "scenario": "1000-worker-source",
+        "outcome": "Pass",
+        "attemptId": "273f6912-96af-4728-bde6-5701e0089aaa"
+      },
+      {
+        "browser": "Firefox",
+        "scenario": "10000-direct-core",
+        "outcome": "Pass",
+        "attemptId": "4bfcb4db-c39e-4157-90ce-6292b3aeabfe"
+      },
+      {
+        "browser": "Firefox",
+        "scenario": "10000-worker-source",
+        "outcome": "Pass",
+        "attemptId": "1cfd4d4f-47e3-43de-94d8-390a39518134"
+      },
+      {
+        "browser": "Safari",
+        "scenario": "semantics",
+        "outcome": "Pass",
+        "attemptId": "d193afe8-8972-4a89-9762-599cd9c3616b"
+      },
+      {
+        "browser": "Safari",
+        "scenario": "persistence",
+        "outcome": "Pass",
+        "attemptId": "9d060172-1c9a-4ce7-b868-dbe8a86445c3"
+      },
+      {
+        "browser": "Safari",
+        "scenario": "1000-direct-core",
+        "outcome": "Pass",
+        "attemptId": "3b0f73c4-3408-45c7-9298-7a7752d40e53"
+      },
+      {
+        "browser": "Safari",
+        "scenario": "1000-worker-source",
+        "outcome": "Pass",
+        "attemptId": "daf1f0cd-e900-450b-b701-fe0110146c7e"
+      },
+      {
+        "browser": "Safari",
+        "scenario": "10000-direct-core",
+        "outcome": "Pass",
+        "attemptId": "394e0448-0a58-4fcc-91f8-56da885dca9b"
+      },
+      {
+        "browser": "Safari",
+        "scenario": "10000-worker-source",
+        "outcome": "Pass",
+        "attemptId": "f770544c-58cd-4990-ae17-48f03c0eb67a"
+      }
+    ],
+    "independentMembershipRowsChecked": 100,
+    "handDerivedScoresChecked": 4,
+    "observedResourceFacetRowsChecked": 4,
+    "graphInputHashComparisons": 206,
+    "installedProductionFilesCompared": 208,
+    "priorTrackedArtifactsPreserved": 181,
+    "otherTasksUnchanged": 30,
+    "acceptanceCriteriaUnchanged": 7,
+    "productionPublicSpecsDependenciesUnchanged": true,
+    "outcome": "Pass"
+  },
+  "memoryAudit": {
+    "method": "Independent Python standard-library audit of original native input/payload, raw childreports, allocation tree/sample arrays, process maxima and WeakRef stages. No owner summary/analyzer called; no workloads replayed. Frame attribution independently normalizes file URLs to actual filesystem paths.",
+    "reviewHarnessCorrection": "Initial frame oracle used Python Path.as_uri which percent-encoded @ unlike actual JS frame URLs; normalized decoded URL paths before accepting the audit. No raw artifacts changed.",
+    "rawSha256": "77057e6c5d1264dceeaf2f87cc25e2b62ee9e1965b26dfb0e3ac6e08bda8abb7",
+    "rawWrapperOutcome": "Fail",
+    "rawWrapperFailureClassification": "Harness inventory included its own live redirected log; original Fail remains unchanged.",
+    "assertionsPassed": 11403,
+    "freshProducerProcesses": 2,
+    "freshReceivingProcesses": 6,
+    "distinctOwnedPids": [
+      80388,
+      80482,
+      80498,
+      80589,
+      80608,
+      81060,
+      81337,
+      81642
+    ],
+    "preservedMemoryEvidenceMatched": 16,
+    "inventoryDifferences": [
+      {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-restore.log",
+        "recordedBeforeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "currentSha256": "173a0b566bd21f4990ac7d3b1d76f911fc1d0f3d88c9d2b5156d32c632fbc16b"
+      }
+    ],
+    "currentSourceBindingsMatched": [
+      "bench/memory/restore-common.mjs",
+      "bench/memory/restore-producer.mjs",
+      "bench/memory/restore-entry.mjs",
+      "bench/cost-common.mjs",
+      "bench/memory/restore-child.mjs",
+      "bench/memory/restore-common.test.mjs",
+      "bench/memory/retainer-output.mjs"
+    ],
+    "currentSourceBindingsDiffering": [
+      "bench/memory/restore-run.mjs"
+    ],
+    "stagedSourcesMatched": 4,
+    "productionFilesMatched": 208,
+    "independentSnapshotCounts": [
+      {
+        "size": 1000,
+        "counts": {
+          "dictionaryEntries": 41,
+          "documents": 1000,
+          "postingEntries": 4666,
+          "textCodeUnits": 29725,
+          "tokens": 5666
+        },
+        "encodedUtf8Bytes": 368596,
+        "encodedSha256": "496fa14f4fd169b9e4ad03c10c368a26eb575c466adb07e01d2ab15505679e4b"
+      },
+      {
+        "size": 10000,
+        "counts": {
+          "dictionaryEntries": 41,
+          "documents": 10000,
+          "postingEntries": 46666,
+          "textCodeUnits": 297286,
+          "tokens": 56666
+        },
+        "encodedUtf8Bytes": 3487776,
+        "encodedSha256": "600a9b527c3db1a310d6726fa15a42088bbe2f006572c44389bedd6050de6365"
+      }
+    ],
+    "profileNodesChecked": 1876,
+    "profileSamplesChecked": 230005,
+    "receivingObservations": [
+      {
+        "size": 1000,
+        "repetition": 0,
+        "pid": 80482,
+        "operationReadings": 248,
+        "maximaBytes": {
+          "rss": 85688320,
+          "heapTotal": 29442048,
+          "heapUsed": 18430128,
+          "external": 2508037,
+          "arrayBuffers": 143615
+        },
+        "profile": {
+          "nodes": 289,
+          "samples": 7504,
+          "reportedNodeSelfSizeSumBytes": 246383696,
+          "reportedSampleSizeSumBytes": 246580400,
+          "frameGroups": {
+            "runtime-or-unattributed-frame": {
+              "nodes": 117,
+              "reportedNodeSelfSizeSumBytes": 43608968
+            },
+            "installed-production-frame": {
+              "nodes": 170,
+              "reportedNodeSelfSizeSumBytes": 202741928
+            },
+            "observer-frame": {
+              "nodes": 2,
+              "reportedNodeSelfSizeSumBytes": 32800
+            }
+          }
+        },
+        "listedWitnessesCollected": 12
+      },
+      {
+        "size": 1000,
+        "repetition": 1,
+        "pid": 80498,
+        "operationReadings": 256,
+        "maximaBytes": {
+          "rss": 85360640,
+          "heapTotal": 29442048,
+          "heapUsed": 18593352,
+          "external": 2508037,
+          "arrayBuffers": 143615
+        },
+        "profile": {
+          "nodes": 327,
+          "samples": 7571,
+          "reportedNodeSelfSizeSumBytes": 248565672,
+          "reportedSampleSizeSumBytes": 248770824,
+          "frameGroups": {
+            "runtime-or-unattributed-frame": {
+              "nodes": 136,
+              "reportedNodeSelfSizeSumBytes": 41929408
+            },
+            "observer-frame": {
+              "nodes": 3,
+              "reportedNodeSelfSizeSumBytes": 131152
+            },
+            "installed-production-frame": {
+              "nodes": 188,
+              "reportedNodeSelfSizeSumBytes": 206505112
+            }
+          }
+        },
+        "listedWitnessesCollected": 12
+      },
+      {
+        "size": 1000,
+        "repetition": 2,
+        "pid": 80589,
+        "operationReadings": 264,
+        "maximaBytes": {
+          "rss": 85311488,
+          "heapTotal": 29966336,
+          "heapUsed": 18409520,
+          "external": 2508037,
+          "arrayBuffers": 143615
+        },
+        "profile": {
+          "nodes": 299,
+          "samples": 7491,
+          "reportedNodeSelfSizeSumBytes": 245980880,
+          "reportedSampleSizeSumBytes": 246168360,
+          "frameGroups": {
+            "runtime-or-unattributed-frame": {
+              "nodes": 121,
+              "reportedNodeSelfSizeSumBytes": 41523000
+            },
+            "observer-frame": {
+              "nodes": 3,
+              "reportedNodeSelfSizeSumBytes": 0
+            },
+            "installed-production-frame": {
+              "nodes": 175,
+              "reportedNodeSelfSizeSumBytes": 204457880
+            }
+          }
+        },
+        "listedWitnessesCollected": 12
+      },
+      {
+        "size": 10000,
+        "repetition": 0,
+        "pid": 81060,
+        "operationReadings": 2481,
+        "maximaBytes": {
+          "rss": 166232064,
+          "heapTotal": 111083520,
+          "heapUsed": 68923088,
+          "external": 2508037,
+          "arrayBuffers": 143615
+        },
+        "profile": {
+          "nodes": 318,
+          "samples": 69089,
+          "reportedNodeSelfSizeSumBytes": 2268247360,
+          "reportedSampleSizeSumBytes": 2270251040,
+          "frameGroups": {
+            "runtime-or-unattributed-frame": {
+              "nodes": 136,
+              "reportedNodeSelfSizeSumBytes": 331473384
+            },
+            "observer-frame": {
+              "nodes": 3,
+              "reportedNodeSelfSizeSumBytes": 557456
+            },
+            "installed-production-frame": {
+              "nodes": 179,
+              "reportedNodeSelfSizeSumBytes": 1936216520
+            }
+          }
+        },
+        "listedWitnessesCollected": 12
+      },
+      {
+        "size": 10000,
+        "repetition": 1,
+        "pid": 81337,
+        "operationReadings": 2498,
+        "maximaBytes": {
+          "rss": 166658048,
+          "heapTotal": 111083520,
+          "heapUsed": 69032736,
+          "external": 2508037,
+          "arrayBuffers": 143615
+        },
+        "profile": {
+          "nodes": 325,
+          "samples": 69075,
+          "reportedNodeSelfSizeSumBytes": 2267830592,
+          "reportedSampleSizeSumBytes": 2269823736,
+          "frameGroups": {
+            "runtime-or-unattributed-frame": {
+              "nodes": 131,
+              "reportedNodeSelfSizeSumBytes": 338383128
+            },
+            "observer-frame": {
+              "nodes": 3,
+              "reportedNodeSelfSizeSumBytes": 524640
+            },
+            "installed-production-frame": {
+              "nodes": 191,
+              "reportedNodeSelfSizeSumBytes": 1928922824
+            }
+          }
+        },
+        "listedWitnessesCollected": 12
+      },
+      {
+        "size": 10000,
+        "repetition": 2,
+        "pid": 81642,
+        "operationReadings": 2544,
+        "maximaBytes": {
+          "rss": 166494208,
+          "heapTotal": 111083520,
+          "heapUsed": 69115368,
+          "external": 2508037,
+          "arrayBuffers": 143615
+        },
+        "profile": {
+          "nodes": 318,
+          "samples": 69275,
+          "reportedNodeSelfSizeSumBytes": 2274416488,
+          "reportedSampleSizeSumBytes": 2276422616,
+          "frameGroups": {
+            "runtime-or-unattributed-frame": {
+              "nodes": 139,
+              "reportedNodeSelfSizeSumBytes": 343859560
+            },
+            "observer-frame": {
+              "nodes": 3,
+              "reportedNodeSelfSizeSumBytes": 327872
+            },
+            "installed-production-frame": {
+              "nodes": 176,
+              "reportedNodeSelfSizeSumBytes": 1930229056
+            }
+          }
+        },
+        "listedWitnessesCollected": 12
+      }
+    ],
+    "boundedObservedDataAudit": "Pass",
+    "fullMemoryAcceptance": "Blocked",
+    "claimLimits": [
+      "Raw profiler node/selfSize and sample/size sums are distinct statistical quantities.",
+      "Sample maxima describe the full instrumented process/isolate, not exact/component peaks.",
+      "Listed root/control collection does not prove every string/descendant, normal GC, general leak freedom, or browser-worker transport memory."
+    ]
+  },
+  "memoryReconciliationAudit": {
+    "method": "Independent byte/hash checks of the archived executed wrapper, all current repair/reconciliation bindings and preserved artifact rows; derived rows compared against this reviewer’s independently recomputed raw quantities. No owner reconciliation program or workload was run by the reviewer.",
+    "assertionsPassed": 76,
+    "outcome": "Pass",
+    "reconciliationSha256": "372f933a083ca0f9fc3bbcd0d3a92cc536943f300d7d6b08007e941f272d7ec1",
+    "archivedExecutedRunnerSha256": "f29e5124b9abac32f62e29a24f60882e892c6922a074cce4c7af5c10c621b753",
+    "currentFutureRunnerSha256": "dd0f0fb909cb4b4143cf189d4ce632dc0705fdbe0d7ce0c564caaa6a2ad1c91b",
+    "scope": "The future capture repair has scratch-test evidence only; no fresh receiving workload exercised it. Frozen original wrapper Fail remains Fail."
+  },
+  "finalAudit": {
+    "kind": "light-static-closed-result-reconciliation",
+    "outcome": "Pass",
+    "assertions": 667,
+    "method": "Independent standard-library file hashes, git baseline byte comparisons, parsed closed logs and planner objects. No new browser, resource, allocation-profile or heap traversal; earlier independently audited behavior/raw quantities were not re-executed.",
+    "baseCommit": "65a21f5",
+    "rootAudit": {
+      "path": "docs/evidence/RX-4002-installed-matrix-audit.json",
+      "sha256": "b24e4659ec21def8481c5c2b8434d47d36d0061a449c69448f9f8a7ea9f86337"
+    },
+    "closedCheck": {
+      "path": "docs/evidence/RX-4002-installed-matrix-final-check.log",
+      "sha256": "0145de3b30ee48f12b5eed9db7ee366fe978d0bf1732ac9264720ced3504017d",
+      "testsByPhase": [
+        511,
+        15,
+        24,
+        26,
+        1
+      ],
+      "pass": 577,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "exitCodeEvidence": "Parent actual completed exec session; independent reviewer read all five complete passing phase summaries and hash-bound the closed log."
+    },
+    "currentToolingSources": [
+      {
+        "path": "test/qualification/browser-entry.mjs",
+        "sha256": "92000821814e6e43901de0d6de80aaa78039fcc28ecea12984903b3f49577e85"
+      },
+      {
+        "path": "test/qualification/browser-serve.mjs",
+        "sha256": "e7fc1f886ae195e196cdb2431f38e005483f35af84c22d0251deb117e59d8e6c"
+      },
+      {
+        "path": "test/qualification/browser-matrix-reporting.mjs",
+        "sha256": "23fbfb968124136328f0a2c52db3b5ff0cf0eeda6968faef0d8384de935646c1"
+      },
+      {
+        "path": "test/tooling/browser-matrix-reporting.test.mjs",
+        "sha256": "53391bf54d8ec739aa6ee496d5d1d568d600eb63bf2482bc298274c3721d03bc"
+      },
+      {
+        "path": "bench/memory/restore-common.mjs",
+        "sha256": "c808fc47d64ac2e38dfd1141f57d9878f4a037585f20f72300ff6b7c25da515b"
+      },
+      {
+        "path": "bench/memory/restore-entry.mjs",
+        "sha256": "2a94705bed90f778b5fc63979b56601b608f6f767e1a14586cfde1fa2fe8bca3"
+      },
+      {
+        "path": "bench/memory/restore-producer.mjs",
+        "sha256": "45c29899ff98c92a197ba9efbcd2157c2a13e5d8ded059b9c027c0a2912e1fb5"
+      },
+      {
+        "path": "bench/memory/restore-child.mjs",
+        "sha256": "e1c78eeb0b7f2ebe4287d952af23e7ca1ba5da5a252a6d15cdcbb1bbb0fa7473"
+      },
+      {
+        "path": "bench/memory/restore-run.mjs",
+        "sha256": "dd0f0fb909cb4b4143cf189d4ce632dc0705fdbe0d7ce0c564caaa6a2ad1c91b"
+      },
+      {
+        "path": "bench/memory/restore-inventory.mjs",
+        "sha256": "8c6793dbf56471cf7fe41379a1812c713a6ca23c2b0e6246d9e764bdd06e7507"
+      },
+      {
+        "path": "bench/memory/restore-inventory.test.mjs",
+        "sha256": "d83a099fe49a5413c2cbea9f3bb406001be8ceaeff34caa69069d3a6a1800e3f"
+      },
+      {
+        "path": "bench/memory/restore-common.test.mjs",
+        "sha256": "89ab089e282a9fa7351a23e5b11ada38f41b38b5b8f4c1470b4bbe28de81bf50"
+      },
+      {
+        "path": "bench/memory/restore-reconcile.mjs",
+        "sha256": "dde251ff771232ef4dc57d7b9b1521b53fa1534cbf5437959cff54acead2e7c5"
+      }
+    ],
+    "installedProductionFilesMatchedAfterFinalBuild": 208,
+    "preservedPriorArtifactsComparedToBaseline": 181,
+    "unchangedAcceptanceCriteria": 7,
+    "unchangedOtherTaskObjects": 30,
+    "planner": {
+      "releaseDone": 19,
+      "releaseTotal": 21,
+      "ready": 0,
+      "RX-4002": "blocked",
+      "RX-4003": "waiting for RX-4002",
+      "N5": "deferred"
+    },
+    "synchronization": [
+      {
+        "path": "docs/evidence/RX-4002-installed-matrix-sync.log",
+        "sha256": "53576a46ecd63fe38e766b511163120daaea8b4910bfcdbc89045b2473390b72",
+        "exitCode": 0
+      },
+      {
+        "path": "docs/evidence/RX-4002-installed-matrix-handoff-status.log",
+        "sha256": "128a56d7008ed0e37446ce793fac6958de52190af2c360bbfee9fb43e1c3aaa8",
+        "exitCode": 0
+      },
+      {
+        "path": "docs/evidence/RX-4002-installed-matrix-handoff-next.log",
+        "sha256": "1e4cbee7de387c3102cea186047e5237dceceb1e7627e29e8c9f4be2c46790d4",
+        "exitCode": 0
+      },
+      {
+        "path": "docs/evidence/RX-4002-installed-matrix-tracking-preview.log",
+        "sha256": "1ca77ea2a91c91e5403bb8c8b3073f1808d140276df7d756037543af8ff22cd8",
+        "exitCode": 0
+      }
+    ],
+    "rootDocumentsAndIdentities": [
+      {
+        "path": "docs/evidence/RX-4002-installed-matrix.md",
+        "sha256": "2dfd297fc9a2dd8ecc5564352301b206115e4483c9e7b28561b60e5f4cad1433"
+      },
+      {
+        "path": "docs/evidence/RX-4002-installed-matrix-observations.json",
+        "sha256": "bada5374e819a91990b4da6959c4ff79700d5e3f52576c7d39cc5f46340f8487"
+      },
+      {
+        "path": "docs/evidence/RX-4002-installed-matrix-package.json",
+        "sha256": "4b4866536ac566f473fb8c027afb8f8e2aee4fbe941dbbf5dd07222d5298c18c"
+      },
+      {
+        "path": "docs/evidence/RX-4002-memory-restore.md",
+        "sha256": "2ae1f8857334a08c9eee2e3d7caa047fef322e3458fd1dd5f9ee797b0095154b"
+      },
+      {
+        "path": "docs/evidence/RX-4002.md",
+        "sha256": "00974a759dfe1eab40f728d94b74afee24d0366d21d0d93f076b45e25d95d03f"
+      },
+      {
+        "path": "docs/evaluation/RX-4002-memory-method.md",
+        "sha256": "7ca605b5d637318d657e3e22d956788f010a0097b49e897f5a0ce6582ecdaa20"
+      },
+      {
+        "path": "docs/support/RX-4002.md",
+        "sha256": "763660dc01fe800e9c2b714ca66cfaa818be8aaf46170e3a7dfb488a6c75c75a"
+      },
+      {
+        "path": "docs/support/RX-4002-browser-notes.md",
+        "sha256": "fd1215623b4e8eac06c739226c50d83add249cac08309bfed14caf80e89f0781"
+      },
+      {
+        "path": "docs/accessibility/RX-4002-manual-observations.md",
+        "sha256": "8afd6e9b73b01d21e9f92ef772a4c1f7044dc4d4ce79fb6d3f2f8e917357e008"
+      },
+      {
+        "path": "PROJECT_CONTEXT.md",
+        "sha256": "ed8253753b0f56fa56c4799487a1bdb882e2db35acc4131d665c7adc189918ff"
+      },
+      {
+        "path": "CODEX_HANDOFF.md",
+        "sha256": "46bbc84ab7abe70c02c3090c5b629acf37d8efbc2b553fff886adfc05f837dd6"
+      },
+      {
+        "path": "CHANGELOG.md",
+        "sha256": "d390f26ef88dcaff231b6a8a6d73b4d29900cc998fa4fd5a3d197f5e3f67016b"
+      },
+      {
+        "path": "docs/planning/roadmap.json",
+        "sha256": "64046a391b7f905d65909994086131e1cc3c8e6eec83a4d84ef8f009ac70263b"
+      },
+      {
+        "path": "ROADMAP.md",
+        "sha256": "264dcfbd7ae71ec30551a83ab26519cd874d923d64043ea479f00347ee5cc6aa"
+      },
+      {
+        "path": "IMPLEMENTATION_TASKS.md",
+        "sha256": "1cb7324debfc64da046304c848a10e60e7e4d6a50918d8610c74d0b25dc0fcd3"
+      }
+    ],
+    "nativeMemoryWrapperOutcome": "Fail / exit1 preserved; separate offline reconciliation and six receiver/two producer Pass outcomes remain distinct",
+    "boundedReviewVerdict": "Ready with follow-ups",
+    "fullRX4002Verdict": "Unable to verify / Blocked: exact-tool AT, physical display/input/OS IME and remaining scoped memory observations",
+    "freezeBoundary": "All actual native/measurement code and raw observations were frozen before the final full check. This final review update changes only the two independently owned review records."
+  }
+}

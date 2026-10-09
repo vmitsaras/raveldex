@@ -4,6 +4,7 @@ import { readFile, writeFile, copyFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { build, version } from 'esbuild';
 import { prepareConsumer, digest, REPO_ROOT } from '../../scripts/lib/packed-consumer.mjs';
+import { createMatrixRecorder, MATRIX_SCENARIOS, readMatrixBody } from './browser-matrix-reporting.mjs';
 
 export async function prepareBrowserQualification() {
   const consumer = await prepareConsumer([], []), graphs = {};
@@ -28,13 +29,25 @@ export async function prepareBrowserQualification() {
   const shell = body => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Raveldex RX-4002 installed package qualification</title><link rel="stylesheet" href="/styles.css"></head><body><main><h1>Raveldex installed package qualification</h1>${body}</main></body></html>`;
   const pages = {
     '/': shell('<p>Automated engine qualification fixture.</p><script type="module" src="/browser-bundle.mjs"></script>'),
+    '/matrix': shell(`<p>Finite installed-browser engine, IndexedDB and admitted resource observations. No AT, physical input/presentation or memory qualification.</p><p><label for="matrix-browser">Operator-assigned browser label</label> <select id="matrix-browser"><option value="">Choose a label</option><option>Firefox</option><option>Safari</option></select></p><fieldset id="matrix-controls" disabled><legend>Run one scenario at a time</legend>${MATRIX_SCENARIOS.map(row => `<p><button type="button" data-matrix-scenario="${row.id}">${row.label}</button></p>`).join('')}</fieldset><p id="matrix-status" role="status">Loading package identity.</p><p id="matrix-identity"></p><button id="matrix-retry-save" type="button" hidden>Retry saving existing result</button><pre id="matrix-result" aria-label="Actual scenario result"></pre><script type="module" src="/browser-bundle.mjs"></script>`),
     '/ui': shell('<p>Test-only controls affect this installed fixture.</p><p><button id="inject-error" type="button">Inject next search error</button> <button id="destroy-ui" type="button">Destroy UI</button> <button id="remount-ui" type="button">Remount UI</button></p><p id="fixture-status" role="status">Starting fixture UI.</p><div id="fixture-root"><p id="authored">Authored fallback <a href="/authored">documentation</a></p></div><script type="module" src="/browser-ui-bundle.mjs"></script>'),
     '/worker': shell('<p>Test-only fault controls affect this fixture and its worker. Recovery explicitly rebuilds the three fixture records.</p><p><button id="inject-error" type="button">Inject next search error</button> <button id="terminate-worker" type="button">Terminate worker</button> <button id="recover-worker" type="button">Recover from authoritative source</button></p><p id="fixture-status" role="status">Starting fixture worker.</p><div id="worker-root"><p>Fixture source fallback.</p></div><script type="module" src="/browser-bundle.mjs"></script>'),
   };
   const paths = new Map([['/browser-bundle.mjs', 'browser-bundle.mjs'], ['/browser-worker.mjs', 'browser-worker.mjs'], ['/browser-ui-bundle.mjs', 'browser-ui-bundle.mjs'], ['/styles.css', 'styles.css']]);
+  let matrix;
   const server = createServer(async (request, response) => {
     const path = new URL(request.url, 'http://localhost').pathname;
     response.setHeader('content-security-policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; worker-src 'self'; connect-src 'self'; object-src 'none'");
+    if (path === '/matrix/session' || path === '/matrix/start' || path === '/matrix/result') {
+      response.setHeader('content-type', 'application/json'); response.setHeader('cache-control', 'no-store');
+      try {
+        if (!matrix) throw Object.assign(new Error('Matrix capture is starting.'), { status: 503 });
+        const result = path === '/matrix/session' && request.method === 'GET' ? matrix.session()
+          : await matrix.accept({ path, method: request.method, headers: request.headers, bytes: await readMatrixBody(request) });
+        response.end(JSON.stringify(result));
+      } catch (error) { response.writeHead(error.status ?? 500); response.end(JSON.stringify({ error: error.message })); }
+      return;
+    }
     if (pages[path]) { response.setHeader('content-type', 'text/html; charset=utf-8'); response.end(pages[path]); return; }
     const file = paths.get(path); if (!file) { response.writeHead(404); response.end(); return; }
     try { response.setHeader('content-type', file.endsWith('.css') ? 'text/css' : 'text/javascript'); response.end(await readFile(join(consumer.directory, file))); }
@@ -45,6 +58,11 @@ export async function prepareBrowserQualification() {
   const report = { kind: 'raveldex-rx4002-browser-package-v1', package: consumer.package, installedDirectory: consumer.directory, graphs,
     sourceFixtures: await Promise.all([...fixtureFiles.map(file => `test/qualification/${file}`), 'test/ui/fixture-entry.mjs'].map(async path => ({ path, sha256: digest(await readFile(join(REPO_ROOT, path))) }))),
     cssSha256: digest(await readFile(join(consumer.directory, 'styles.css'))) };
-  await writeFile(join(consumer.directory, 'RX-4002-browser-package.json'), JSON.stringify(report, null, 2) + '\n');
-  return { ...consumer, origin, report, async close() { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); } };
+  try {
+    matrix = await createMatrixRecorder({ directory: consumer.directory, origin, packageIdentity: report,
+      harnessIdentity: await Promise.all(['scripts/qualify-browsers.mjs', 'test/qualification/browser-serve.mjs', 'test/qualification/browser-matrix-reporting.mjs'].map(async path => ({ path, sha256: digest(await readFile(join(REPO_ROOT, path))) }))) });
+    report.matrix = { url: `${origin}/matrix`, artifactPath: matrix.artifactPath, sessionId: matrix.sessionId, manifestSha256: matrix.manifestSha256 };
+    await writeFile(join(consumer.directory, 'RX-4002-browser-package.json'), JSON.stringify(report, null, 2) + '\n');
+  } catch (error) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); if (matrix) await matrix.close(); throw error; }
+  return { ...consumer, origin, report, async close() { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); await matrix.close(); } };
 }

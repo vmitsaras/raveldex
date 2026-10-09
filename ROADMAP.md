@@ -75,7 +75,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 ## Recorded blockers and decisions
 
-- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): The full installed Firefox/Safari engine/storage/resource matrix remains unrun; exact-tool AT and physical display/input observations remain missing, and collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. Finite installed native UI and worker recovery are observed; see docs/evidence/RX-4002-installed.md. All seven criteria remain unchanged.
+- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): Exact-tool AT announcements/focus/settings, physical display/input and real OS IME observations remain unrecorded. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed Firefox 157.0.1/Safari 27.0.1 engine/storage/resource matrix passes; no acceptance criterion or release claim is waived.
 
 ## Milestone exit conditions
 

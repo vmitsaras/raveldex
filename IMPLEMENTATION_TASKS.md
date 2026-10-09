@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** The full installed Firefox/Safari engine/storage/resource matrix remains unrun; exact-tool AT and physical display/input observations remain missing, and collector-accurate retention, staging/encoding/decoding peaks and browser-worker/transport memory remain unqualified. Finite installed native UI and worker recovery are observed; see docs/evidence/RX-4002-installed.md. All seven criteria remain unchanged.
+**Blocker or decision:** Exact-tool AT announcements/focus/settings, physical display/input and real OS IME observations remain unrecorded. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed Firefox 157.0.1/Safari 27.0.1 engine/storage/resource matrix passes; no acceptance criterion or release claim is waived.
 
 **Expected affected areas**
 
@@ -881,6 +881,17 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-installed-audit.json](docs/evidence/RX-4002-installed-audit.json)
 - [docs/evidence/RX-4002-installed-review.md](docs/evidence/RX-4002-installed-review.md)
 - [docs/evidence/RX-4002-installed-review-observations.json](docs/evidence/RX-4002-installed-review-observations.json)
+- [docs/evidence/RX-4002-installed-matrix.md](docs/evidence/RX-4002-installed-matrix.md)
+- [docs/evidence/RX-4002-installed-matrix-package.json](docs/evidence/RX-4002-installed-matrix-package.json)
+- [docs/evidence/RX-4002-installed-matrix-observations.json](docs/evidence/RX-4002-installed-matrix-observations.json)
+- [docs/evidence/RX-4002-installed-matrix-audit.json](docs/evidence/RX-4002-installed-matrix-audit.json)
+- [docs/evidence/RX-4002-installed-matrix.jsonl](docs/evidence/RX-4002-installed-matrix.jsonl)
+- [docs/evidence/RX-4002-installed-matrix-review-observations.json](docs/evidence/RX-4002-installed-matrix-review-observations.json)
+- [docs/evidence/RX-4002-memory-restore.md](docs/evidence/RX-4002-memory-restore.md)
+- [docs/evidence/RX-4002-memory-restore.json](docs/evidence/RX-4002-memory-restore.json)
+- [docs/evidence/RX-4002-memory-restore-reconciliation.json](docs/evidence/RX-4002-memory-restore-reconciliation.json)
+- [docs/evidence/RX-4002-memory-restore-executed-run.mjs](docs/evidence/RX-4002-memory-restore-executed-run.mjs)
+- [docs/evidence/RX-4002-installed-matrix-review.md](docs/evidence/RX-4002-installed-matrix-review.md)
 
 
 ## RX-4003
