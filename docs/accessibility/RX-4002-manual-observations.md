@@ -1,6 +1,6 @@
 # RX-4002 exact-tool and physical observations
 
-Status: **Blocked — human query/focus, Inspector and error/recovery observations plus a passed human filter check are recorded; exact environment and remaining flows are still required.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
+Status: **Blocked — human query/focus, Inspector and error/retry observations plus passed human filter and empty-results/recovery checks are recorded; exact environment and remaining flows are still required.** Automated browser checks are linked separately from this record. Installing or identifying VoiceOver does not prove that it announced the native interface correctly.
 
 The evaluator must record the date, tested package hash, exact browser/OS/screen-reader versions, speech language, VoiceOver verbosity, Quick Nav state, keyboard navigation settings, and the actual announced text and focus outcome for each step. Record failures as failures; do not copy the visible DOM text into an announcement field unless the tool actually spoke it. A caption panel may help preserve output, but it does not establish what a listener heard. Apple's [caption-panel guidance](https://support.apple.com/en-am/guide/voiceover/unac078/mac) describes that tool.
 
@@ -11,7 +11,7 @@ Use the installed-package fixture served by `npm run qualify:serve` after instal
 | Flow | Required action and observation | Outcome |
 | --- | --- | --- |
 | Query and results | Navigate to the labeled search field with VoiceOver, enter `red`, submit, and record the field/button names, searching/result announcement, result heading/list/link traversal, and whether focus stays usable. | Partial human report below; full flow Blocked |
-| Empty results | Search for `unmatchedword`; record the announced empty state and the ability to edit and resubmit. | Blocked |
+| Empty results | Search for `unmatchedword`; record the announced empty state and the ability to edit and resubmit. | Pass — owner reports “No results”, then seven-result recovery after searching `red`, with focus retained on the control used; screenshots below |
 | Error and retry | Activate **Inject next search error**, submit a query, record the error/retry announcement and focus, activate Retry, and record recovery. Injection is not a physical resource failure. | Owner-reported error/recovery speech and retained focus across three activation paths below; exact environment and query binding incomplete |
 | Filters and facets | Search `red`, select a Category option, record its name/count, changed results/status, retained control focus, and clearing the filter. | Pass — owner verifies correct uninterrupted announcements and retained select focus for All → Guide → All; screenshots below |
 | Inspector | Open Inspector after a successful search; record dialog/title/loading/factual-content traversal, focus containment, Escape/Close behavior, and focus restoration to the opener. | Partial human Tab/Escape/dialog report below; complete flow Blocked |
@@ -19,7 +19,7 @@ Use the installed-package fixture served by `npm run qualify:serve` after instal
 | Teardown and initialization | On `/ui`, activate **Destroy UI**, then **Remount UI**; record restored authored content, focus destination, control names, and duplicate announcements if any. | Blocked |
 | Composition input | Use an actual installed OS IME, record its name/settings and entered text, and observe whether composition completes before the query is submitted. Synthetic CompositionEvent checks are separate. | Blocked |
 
-The local inventory identifies VoiceOver 10 (build 993), Safari 27.0.1 (22625.1.29.11.28), and macOS 27.0.1 (26A434). These are inventory facts, not an observed assistive-technology combination. The separate [installed-browser continuation](../evidence/RX-4002-installed.md) records software-driven native Firefox/Safari UI/worker flows and returned AX focus/text; it supplies no spoken announcements or human observations. Those software observations alone do not qualify the human checklist. The later owner-observed filter check below passes its bounded flow; exact VoiceOver settings and the remaining flows are still required for overall qualification. NVDA/Windows and other screen-reader/browser combinations have no observation in this slice.
+The local inventory identifies VoiceOver 10 (build 993), Safari 27.0.1 (22625.1.29.11.28), and macOS 27.0.1 (26A434). These are inventory facts, not an observed assistive-technology combination. The separate [installed-browser continuation](../evidence/RX-4002-installed.md) records software-driven native Firefox/Safari UI/worker flows and returned AX focus/text; it supplies no spoken announcements or human observations. Those software observations alone do not qualify the human checklist. The later owner-observed filter and empty-results/recovery checks below pass their bounded flows; exact VoiceOver settings and the remaining flows are still required for overall qualification. NVDA/Windows and other screen-reader/browser combinations have no observation in this slice.
 
 ## Physical presentation and input
 
@@ -91,4 +91,17 @@ Two supplied screenshot crops are saved byte-for-byte as supporting evidence. Th
 | `codex-clipboard-340fff54-626c-4522-94cc-7240caaf27cc.png` | [Guide caption/results](../evidence/RX-4002-human-facet-guide.png) | 1394 × 412 / 119,307 | `2d2f672e8afc3305677d537f7fd2423c5fc566bf33d819c56b0ebf628f752871` |
 | `codex-clipboard-76521f5b-24f4-4acd-8fbe-8f27a1d371c6.png` | [All caption/results](../evidence/RX-4002-human-facet-all.png) | 1732 × 458 / 72,860 | `0557e3bf11ed4bdc684f3ac3407f5e96758c9ce5b50daf30ec39616bea3992a1` |
 
-The filter pass does not resolve the separate normal-typing interruption in RX-4002-F01 or complete the remaining AT/device/IME/memory criteria. Next is the empty-results/recovery flow on ordinary `/ui`: Category All, search `unmatchedword` using Search, pause five seconds and record actual speech/focus, then search `red` again using Search. Expected visible statuses are “No results.” and “7 results. Showing 1–3.”; actual speech and recovery remain pending.
+The filter pass does not resolve the separate normal-typing interruption in RX-4002-F01 or complete the remaining AT/device/IME/memory criteria. The next guided flow was empty results/recovery on ordinary `/ui`: Category All, search `unmatchedword` using Search, pause five seconds and record actual speech/focus, then search `red` again using Search. Expected visible statuses are “No results.” and “7 results. Showing 1–3.”; the owner response follows.
+
+## Owner-observed empty-results/recovery follow-up — 2026-10-09
+
+**Pass for the guided empty-results/recovery flow.** In direct reply to that procedure, the owner reports: “first: No results,s econd search: 7 results. Showing 1–3. focus stays on the control i used”. This supplies the heard empty-state and successful subsequent search announcements, with retained triggering-control focus. The completed second search establishes recovery from the empty state. The reply does not identify a different browser or settings; Safari/macOS/English were confirmed earlier, while exact VoiceOver settings remain an overall qualification field.
+
+The supplied empty-state crop shows `unmatchedword` in the search input and the VoiceOver caption “No results.”. The recovery crop shows input `red` and both visible status and caption “7 results. Showing 1–3.”. Input outlines are visible in both crops; they are image evidence, not an independent DOM-focus trace. Actual speech and retained control focus are owner-reported observations. Both original images are preserved byte-for-byte:
+
+| Supplied image | Durable copy | Original dimensions / bytes | SHA-256 |
+| --- | --- | --- | --- |
+| `codex-clipboard-b8bb7680-d015-4601-964d-cd91a1598b5e.png` | [Empty-state caption/input](../evidence/RX-4002-human-empty.png) | 1302 × 546 / 68,793 | `47fe3b4ae325500a391e09cfe97ffc449da4a30e81f4e1b67496a1cc0a491200` |
+| `codex-clipboard-bfcf5dca-c7ed-4b66-97b0-24a9a698217a.png` | [Recovered caption/input/results](../evidence/RX-4002-human-empty-recovery.png) | 1264 × 560 / 75,507 | `e5ae965e2a53ef59a21b3833a4a20b03d7164bb69748517befd8e4d12a7ecdc1` |
+
+Next is worker failure/recovery at `http://127.0.0.1:63024/worker`: search `red` (two expected matches), activate **Terminate worker**, search `blue` and wait five seconds for the failure, then activate **Recover from authoritative source**, wait for recovery and search `blue` again (one expected match, Beta banana). The three-record worker fixture differs from the nine-record direct UI. Its source and automated checks establish those expected visible outcomes; human failure/recovery/result speech, focus and usability remain pending. This pass does not close RX-4002-F01 or the remaining qualification criteria.
