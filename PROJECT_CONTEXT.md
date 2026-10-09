@@ -95,4 +95,6 @@ The subsequent error/recovery reply reports “Search failed. Retry is available
 
 The owner verifies correct uninterrupted announcements and retained select focus for the guided Category All → Guide → All sequence. This bounded human filter flow is recorded as Pass, with the supplied Guide/five-result and All/seven-result screenshot crops preserved and hashed.
 
-The guided empty-results/recovery flow also passes by owner observation: “No results” for `unmatchedword`, then “7 results. Showing 1–3.” for `red`, with focus retained on the control used. Both supplied caption/input crops are preserved and hashed in the human checklist. Worker failure/recovery is the next guided observation. RX-4002 remains Blocked by the open typing finding and remaining qualification observations; runtime behavior and public contracts are unchanged.
+The guided empty-results/recovery flow also passes by owner observation: “No results” for `unmatchedword`, then “7 results. Showing 1–3.” for `red`, with focus retained on the control used. Both supplied caption/input crops are preserved and hashed in the human checklist.
+
+The owner verifies all three guided worker steps (initial search, terminated-worker failure and authoritative-source recovery/search), with focus retained on the control used. The bounded flow is Pass; exact spoken wording was not transcribed. Teardown/remount is the next guided observation. RX-4002 remains Blocked by the open typing finding and remaining qualification observations; runtime behavior and public contracts are unchanged.
