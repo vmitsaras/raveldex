@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** Owner-reported VoiceOver result-announcement suppression on Safari/macOS 27.0.1 now requires a validated resolution; the test-only original/settled-polite/settled-assertive comparison awaits human speech results and exact AT settings. Complete AT flows, physical display/input and real OS IME remain unqualified. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
+**Blocker or decision:** Owner-reported VoiceOver result speech on Safari/macOS 27.0.1 remains interrupted by recognized-word speech in the explicit settled-polite/busy-off test. Removing parent busy did not resolve that reported case; typing feedback is a candidate, not a proven complete cause. Results-only/other combinations, exact AT settings and full AT flows remain unqualified. Physical display/input and real OS IME remain unqualified. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
 
 **Expected affected areas**
 
@@ -898,6 +898,10 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-announcements-review.md](docs/evidence/RX-4002-announcements-review.md)
 - [docs/evidence/RX-4002-announcements-validation.json](docs/evidence/RX-4002-announcements-validation.json)
 - [docs/evidence/RX-4002-announcements-check.log](docs/evidence/RX-4002-announcements-check.log)
+- [docs/evidence/RX-4002-announcements-busy.md](docs/evidence/RX-4002-announcements-busy.md)
+- [docs/evidence/RX-4002-announcements-busy-validation.json](docs/evidence/RX-4002-announcements-busy-validation.json)
+- [docs/evidence/RX-4002-announcements-busy-review.md](docs/evidence/RX-4002-announcements-busy-review.md)
+- [docs/evidence/RX-4002-announcements-busy-check.log](docs/evidence/RX-4002-announcements-busy-check.log)
 
 
 ## RX-4003

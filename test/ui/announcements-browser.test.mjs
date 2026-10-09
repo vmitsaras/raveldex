@@ -6,11 +6,11 @@ import { prepareBrowserQualification } from '../qualification/browser-serve.mjs'
 let fixture, browser, context, page, errors, expectedPageError;
 const hook = name => `[data-raveldex-${name}]`;
 const snapshot = () => page.evaluate(() => window.announcementProbe.snapshot());
-async function open(mode) {
+async function open(mode, busyScope = 'shell') {
   await page.evaluate(() => window.harness?.cleanup());
-  await page.goto(`${fixture.origin}/ui-announcements?mode=${encodeURIComponent(mode)}`);
+  await page.goto(`${fixture.origin}/ui-announcements?mode=${encodeURIComponent(mode)}&busy=${encodeURIComponent(busyScope)}`);
   await page.waitForFunction(() => window.announcementProbe && document.querySelector('[data-raveldex-status]')?.textContent === '9 results. Showing 1–3.'
-    && document.querySelector('[data-raveldex-ui]')?.getAttribute('aria-busy') === 'false');
+    && window.announcementProbe.snapshot().current.requestedBusy === 'false');
   if (mode !== 'original') await page.waitForFunction(() => window.announcementProbe.snapshot().publishedCount === 1);
 }
 async function search(text, expected) {
@@ -32,11 +32,25 @@ before(async () => {
 }, { timeout: 120_000 });
 beforeEach(async () => {
   context = await browser.newContext(); page = await context.newPage(); errors = []; expectedPageError = false;
+  await page.addInitScript(() => {
+    window.shellBusyMutations = [];
+    new MutationObserver(changes => {
+      for (const change of changes) {
+        if (change.type === 'attributes' && change.target.hasAttribute('data-raveldex-ui'))
+          window.shellBusyMutations.push({ old: change.oldValue, current: change.target.getAttribute('aria-busy') });
+        for (const node of change.addedNodes) {
+          if (!(node instanceof Element)) continue;
+          const shell = node.matches('[data-raveldex-ui]') ? node : node.querySelector('[data-raveldex-ui]');
+          if (shell?.hasAttribute('aria-busy')) window.shellBusyMutations.push({ inserted: shell.getAttribute('aria-busy') });
+        }
+      }
+    }).observe(document, { subtree: true, childList: true, attributes: true, attributeOldValue: true, attributeFilter: ['aria-busy'] });
+  });
   page.on('pageerror', error => errors.push(error.message));
 });
 afterEach(async () => {
   try {
-    if (expectedPageError) assert.deepEqual(errors, ['Unknown announcement comparison mode.']);
+    if (expectedPageError) assert.deepEqual(errors, [expectedPageError]);
     else assert.deepEqual(errors, []);
     await page.evaluate(() => window.harness?.cleanup());
   } finally { await context?.close(); }
@@ -44,10 +58,14 @@ afterEach(async () => {
 after(async () => { try { await browser?.close(); } finally { await fixture?.close(); } });
 
 test('fixed original, settled polite and settled assertive policies preserve the installed result presentation', async () => {
+  for (const busyScope of ['shell', 'off', 'results']) {
   for (const mode of ['original', 'settled-polite', 'settled-assertive']) {
-    await open(mode);
+    await open(mode, busyScope);
     const state = await snapshot(), output = page.locator('#announcement-output'), status = page.locator(hook('status'));
     assert.equal(state.mode, mode);
+    assert.equal(state.busyScope, busyScope);
+    assert.equal(state.current.busy, busyScope === 'shell' ? 'false' : null);
+    assert.equal(state.current.resultsBusy, busyScope === 'results' ? 'false' : null);
     assert.equal(await output.evaluate(node => !document.getElementById('fixture-root').contains(node)), true);
     assert.equal(await status.getAttribute('role'), 'status');
     assert.equal(await status.getAttribute('aria-atomic'), 'true');
@@ -58,10 +76,55 @@ test('fixed original, settled polite and settled assertive policies preserve the
     assert.equal(state.publishedCount, mode === 'original' ? 0 : 1);
     if (mode !== 'original') {
       const publication = state.rows.findLast(row => row.kind === 'publish');
-      assert.equal(publication.busy, 'false');
+      assert.equal(publication.requestedBusy, 'false');
       assert.equal(publication.main.completed, true); assert.equal(publication.snippets.completed, true);
       assert.equal(publication.main.revision, publication.snippets.revision);
     }
+  }
+  }
+});
+
+for (const busyScope of ['off', 'results']) test(`${busyScope} intercepts busy before mount, preserves settled gates and isolates unrelated/Inspector writes`, async () => {
+  for (const mode of ['original', 'settled-polite', 'settled-assertive']) {
+    await open(mode, busyScope);
+    await page.evaluate(() => { window.harness.state.holdNext = true; });
+    await page.locator(hook('input')).fill('red'); await page.locator(hook('input')).press('Enter');
+    await page.waitForFunction(() => window.harness.state.pending.length === 1);
+    const held = await snapshot();
+    assert.equal(held.current.busy, null);
+    assert.equal(held.current.requestedBusy, 'true');
+    assert.equal(held.current.resultsBusy, busyScope === 'results' ? 'true' : null);
+    assert.equal(held.publishedCount, mode === 'original' ? 0 : 1);
+    assert.equal(await page.locator(hook('status')).evaluate(node => node.closest('[aria-busy]') === null), true);
+    assert.equal(await page.locator(hook('input')).evaluate(node => node.closest('[aria-busy]') === null && node === document.activeElement), true);
+    await page.evaluate(() => window.harness.release());
+    await page.waitForFunction(() => window.announcementProbe.snapshot().current.requestedBusy === 'false'
+      && document.querySelector('[data-raveldex-status]').textContent === '7 results. Showing 1–3.');
+    const completed = await snapshot();
+    assert.equal(completed.publishedCount, mode === 'original' ? 0 : 2);
+    if (mode !== 'original') assert.equal(completed.lastPublication.text, '7 results. Showing 1–3.');
+    assert.deepEqual(await page.evaluate(() => {
+      const unrelated = document.createElement('section'); unrelated.setAttribute('data-raveldex-ui', '');
+      unrelated.setAttribute('aria-busy', 'true');
+      const dialog = document.querySelector('[data-raveldex-inspector]'); dialog.setAttribute('aria-busy', 'true');
+      const values = [unrelated.getAttribute('aria-busy'), dialog.getAttribute('aria-busy')];
+      dialog.setAttribute('aria-busy', 'false'); return values;
+    }), ['true', 'true']);
+    await page.locator('#destroy-ui').click(); await page.locator('#remount-ui').click();
+    await page.waitForFunction(() => window.announcementProbe.snapshot().current.requestedBusy === 'false'
+      && document.querySelector('[data-raveldex-status]').textContent === '9 results. Showing 1–3.');
+    assert.equal((await snapshot()).current.busy, null);
+    assert.deepEqual(await page.evaluate(() => window.shellBusyMutations), []);
+    await page.locator('#inject-error').click();
+    await page.locator(hook('input')).fill('blue'); await page.locator(hook('input')).press('Enter');
+    await page.waitForFunction(() => window.announcementProbe.snapshot().current.requestedBusy === 'false'
+      && document.querySelector('[data-raveldex-status]').textContent === 'Search failed. Retry is available.');
+    if (mode !== 'original') assert.equal((await snapshot()).lastPublication.kind, 'error');
+    await page.locator(hook('retry')).click();
+    await page.waitForFunction(() => window.announcementProbe.snapshot().current.requestedBusy === 'false'
+      && document.querySelector('[data-raveldex-status]').textContent === '1 results. Showing 1–1.');
+    if (mode !== 'original') assert.equal((await snapshot()).lastPublication.text, '1 results. Showing 1–1.');
+    assert.deepEqual(await page.evaluate(() => window.shellBusyMutations), []);
   }
 });
 
@@ -140,9 +203,18 @@ test('settled assertive publishes empty/errors/retry and keeps the external node
 });
 
 test('unknown policy fails explicitly before mounting the fixture', async () => {
-  expectedPageError = true;
+  expectedPageError = 'Unknown announcement comparison mode.';
   await page.goto(`${fixture.origin}/ui-announcements?mode=unknown`);
   await page.waitForFunction(() => document.getElementById('announcement-mode').textContent.includes('unknown mode unknown'));
+  assert.equal(await page.locator(hook('ui')).count(), 0);
+  assert.equal(await page.locator('#announcement-output').getAttribute('role'), null);
+  assert.equal(await page.evaluate(() => typeof window.harness), 'undefined');
+});
+
+test('unknown busy scope fails explicitly before mounting the fixture', async () => {
+  expectedPageError = 'Unknown announcement busy scope.';
+  await page.goto(`${fixture.origin}/ui-announcements?mode=settled-polite&busy=unknown`);
+  await page.waitForFunction(() => document.getElementById('announcement-mode').textContent.includes('unknown busy scope unknown'));
   assert.equal(await page.locator(hook('ui')).count(), 0);
   assert.equal(await page.locator('#announcement-output').getAttribute('role'), null);
   assert.equal(await page.evaluate(() => typeof window.harness), 'undefined');
