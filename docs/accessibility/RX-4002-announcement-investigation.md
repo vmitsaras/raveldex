@@ -1,6 +1,6 @@
 # RX-4002-F01 — Safari/VoiceOver result-announcement interruption
 
-Date: 2026-10-09. Status: **Open — assigned to independent investigation**. Parent task: RX-4002; acceptance link: RX-4002-AC02. This finding is tracked separately so unrelated qualification observations can proceed. Closing RX-4002 still requires a validated disposition of the finding and the other qualification gates; no release criterion is waived.
+Date: 2026-10-09. Status: **Open — owner reports uninterrupted speech at Medium verbosity; retest identity pending**. Parent task: RX-4002; acceptance link: RX-4002-AC02. This finding is tracked separately so unrelated qualification observations can proceed. Closing RX-4002 still requires a validated disposition of the finding and the other qualification gates; no release criterion is waived.
 
 Independent Codex task: `01a1219d-ee9e-7fa3-a372-6a6378e13c28`, created in the Raveldex project with a read-only initial scope. The parent observed the task active; this is dispatch evidence, not a diagnosis or completed fix.
 
@@ -47,3 +47,13 @@ The parent verified task completion through Codex status and read the full resul
 ## Parent documentation verification
 
 `npm run check` closed with exit 0, **584/584 Pass** (511 package/core/tooling, 22 UI, 24 worker, 26 IndexedDB and one migration-browser test), zero failed/cancelled/skipped. The direct local log is `/tmp/raveldex-announcement-handoff-check.log`, SHA-256 `3bdb3427590be3f85fcbed6ef5e67a903707047a21ce01446aa801885b97c167`. Documentation/planner checks pass. Follow-up human-report text was synchronized afterward and receives final documentation checks; the source/tests/package/specification/architecture files remain unchanged. The seven RX-4002 criteria/dependencies and 30 other task objects are unchanged. These checks validate the repository handoff, not speech or physical interaction. No production contract or release gate changed.
+
+## Owner-reported Medium verbosity retest — 2026-10-09
+
+The owner reports: “i hade the verbosity  to high, chnage it to medium, and now all the announcement beign correctly announcent no interruptaions.” This records an owner-observed successful retest after changing VoiceOver's default speech verbosity from High to Medium. The supplied screenshot confirms **Default Speech Verbosity: Medium** on VoiceOver Utility's Speech tab; High is the owner's description of the prior setting, not a captured prior screenshot.
+
+The original `codex-clipboard-591e858e-62e1-47c8-8a70-1216ae9ecf3f.png` is preserved byte-for-byte as [Medium verbosity evidence](../evidence/RX-4002-human-voiceover-medium.png): 1120 × 516 pixels, 49,376 bytes, SHA-256 `c0ee2b513c423ad67b6fdffbccf8ef575d63490db4e16a68566edad0a4c14112`. It proves the visible setting, not audible continuity, the tested URL or package identity. Uninterrupted speech is the owner's report; no independent audio observation was made.
+
+This supports a settings-dependent interaction but does not establish a complete root cause. The exact retest page/mode/busy scope, package binding, actions, spoken wording and focus outcome remain unconfirmed. In particular, “all” is not mapped to every comparison mode or qualification flow. Earlier Safari/macOS/English confirmations remain attributed to the preceding session; exact VoiceOver version, typing echo and other settings still require confirmation.
+
+Preserve the earlier High-verbosity failure alongside this successful Medium report. Do not require Medium as a product prerequisite, adopt assertive priority, or claim the original production status now passes without identifying the retested page. No production change is justified by this report alone. The immediate next step is to bind the successful report to original versus settled-polite/settled-assertive output and the actual actions/settings; the previously proposed minimal probe is conditional on unresolved or reproducible interruption, not an automatic prerequisite after this success. F01 stays Open pending that disposition; the remaining RX-4002 gates and RX-4003 dependency are unchanged.

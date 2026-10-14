@@ -165,6 +165,12 @@ The owner reports “safari zoom was 100% and up to 400%” and requests Compute
 
 Documentation verification: `npm run docs:check`, `npm run handoff:check` and `git diff --check` pass. Parent review checks the sanitized transcription against the returned native UI fields and preserves the distinction between inventory, owner reports and unobserved session conditions. No new runtime regression or independent AT test is claimed.
 
+## Owner-reported speech verbosity follow-up — 2026-10-09
+
+The owner reports that changing VoiceOver default speech verbosity from High to Medium makes all announcements complete correctly without interruptions. The supplied [VoiceOver Utility screenshot](../evidence/RX-4002-human-voiceover-medium.png) visibly confirms **Default Speech Verbosity: Medium**. The [F01 finding record](RX-4002-announcement-investigation.md#owner-reported-medium-verbosity-retest--2026-10-09) preserves the verbatim report, original image identity, dimensions, size and SHA-256.
+
+**Owner-reported success at Medium; exact retest scope pending.** No tested URL/mode/busy scope, package identity, specific action sequence, exact utterances or new focus outcome accompanies this report. Do not infer every comparison mode or every checklist flow from “all”. The screenshot is setting evidence, not independent heard-speech evidence. High is the owner-reported earlier setting. Other exact AT settings remain incomplete. Preserve both outcomes; F01 remains Open pending retest identity/disposition, and Medium is not made a required user setting or a production fix.
+
 ## Owner-reported atomic query and typing feedback — 2026-10-15
 
 In reply to the guided ordinary-UI traversal question for `http://127.0.0.1:52996/ui`, the owner reports the spoken sequence “waiting for search”, then “1 results. Showing 1–1.”, with “focus didnt move”. The owner confirms that verbosity is **Medium** and reports changing **While typing, speak** to **Words**, adding “this option caused the interpution sometimes”. Preserve this as the owner's association with typing feedback; the reply does not establish a root cause or whether those occasional interruptions occurred before or after the settings change. The earlier interruption evidence and open [RX-4002-F01](RX-4002-announcement-investigation.md) remain unchanged.
