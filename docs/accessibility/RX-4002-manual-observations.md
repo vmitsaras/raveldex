@@ -10,7 +10,7 @@ Use the installed-package fixture served by `npm run qualify:serve` after instal
 
 | Flow | Required action and observation | Outcome |
 | --- | --- | --- |
-| Query and results | Navigate to the labeled search field with VoiceOver, enter `red`, submit, and record the field/button names, searching/result announcement, result heading/list/link traversal, and whether focus stays usable. | Partial human report below; full flow Blocked |
+| Query and results | Navigate to the labeled search field with VoiceOver, enter `red`, submit, and record the field/button names, searching/result announcement, result heading/list/link traversal, and whether focus stays usable. | Pass for bounded result heading/list/link/snippet reading and return-to-edit. Normal-typing status reliability remains open under RX-4002-F01; current settings and their limits are recorded below. |
 | Empty results | Search for `unmatchedword`; record the announced empty state and the ability to edit and resubmit. | Pass — owner reports “No results”, then seven-result recovery after searching `red`, with focus retained on the control used; screenshots below |
 | Error and retry | Activate **Inject next search error**, submit a query, record the error/retry announcement and focus, activate Retry, and record recovery. Injection is not a physical resource failure. | Pass for the later guided Search-button injected failure and Retry recovery with seven `red` results and retained focus; activation method and remaining exact environment details are unspecified. The earlier nine-result report is preserved separately below. |
 | Filters and facets | Search `red`, select a Category option, record its name/count, changed results/status, retained control focus, and clearing the filter. | Pass — owner verifies correct uninterrupted announcements and retained select focus for All → Guide → All; screenshots below |
@@ -226,3 +226,34 @@ The owner now describes Inspector/the heading as the initial focus target, where
 The next human question returns to the outstanding ordinary-results level-2 heading and first-result snippet reading. Previously accepted search, editing, error/retry, filter, worker, teardown and bounded Inspector outcomes are preserved without requesting a repeat of those flows. Real composing-IME, remaining physical/context fields and scoped memory observations still require separate evidence.
 
 Documentation verification: `npm run docs:check`, `npm run handoff:check` and `git diff --check` pass. Parent review preserves the exact reported Tab sequence, both initial-focus descriptions and the distinction between owner reports and DOM instrumentation. No runtime change or new independent browser/AT test is claimed.
+
+## Result reading and current VoiceOver settings — 2026-10-15
+
+In direct reply to the ordinary-results level-2 heading and first-result snippet check, the owner confirms: “i can hear both and snippet witout interruptions.” **Pass for this bounded heading/snippet reading observation.** Combined with the preceding heard one-item list, level-3 heading/link and usable return-to-edit observations, this completes the requested bounded result-reading checks. It does not close the separate normal-typing status-announcement finding RX-4002-F01 or resolve Inspector's exact initial DOM-focus question. No full spoken snippet text, new version declaration or independent audio capture is invented.
+
+The agent then reads the current VoiceOver Utility through native Computer UI, opening category/tab views and the About dialog without editing preferences. The About dialog reports the literal **VoiceOver Utility Version 10 (993)**. This is a current Utility observation after the user's reading check, not independent confirmation of every historical screen-reader process/version or setting. The About dialog is closed and the original General pane restored.
+
+| Current setting | Computer-observed value |
+| --- | --- |
+| Default Speech Verbosity | Medium |
+| While typing speak | Words |
+| Punctuation | Some |
+| Speak instructions for using the item in the VoiceOver cursor | Enabled |
+| Speak hints after delay | 0.5 seconds |
+| Synchronize keyboard focus and VoiceOver cursor | Enabled |
+| Automatically interact when using tab key | Enabled |
+| Allow cursor wrapping | Disabled |
+| Initial position of VoiceOver cursor | Keyboard focused item |
+| Grouping behavior | Standard |
+| Mouse pointer | Ignores VoiceOver cursor |
+| Navigate webpages by | DOM order |
+| Enable Web Announcements | Enabled |
+| Arrow-key Quick Nav | Disabled |
+| Single-key Quick Nav | Disabled |
+| Always allow typing in text fields | Enabled |
+
+These values supplement the owner-confirmed Medium/Words reports and the earlier software/hardware inventory. They are neither assumed historical settings nor an established cause of the Tab sequence or interruption. In particular, automatic Tab interaction and cursor synchronization are relevant observed context, without identifying `document.activeElement` at the earlier heading/Close stops. Safari/macOS/English, historical zoom/input conditions and earlier successes/failures retain their own attribution; this inspection does not retroactively reconfirm them.
+
+No further repetition of accepted result-reading or ordinary recovery flows is requested. Remaining qualification includes F01 disposition, exact Inspector focus characterization, real OS composition/pre-commit/final-commit behavior, remaining physical-session context and scoped retained/peak/browser-worker memory. Existing ABC – QWERTZ/German/Greek entry checks remain distinct from actual composition evidence. No input source is installed or requested, no runtime/public contract or acceptance criterion changes, and RX-4002 remains Blocked with RX-4003 waiting.
+
+Documentation verification: `npm run docs:check`, `npm run handoff:check` and `git diff --check` pass. Parent review checks the direct human reply and native Utility fields, distinguishes current from historical settings and preserves independent dirty work. No new automated browser test or independent audio observation is claimed.
