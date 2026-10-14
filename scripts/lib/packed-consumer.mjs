@@ -15,9 +15,19 @@ export async function command(file, args, cwd = REPO_ROOT) {
   const { stdout, stderr } = await promisify(execFile)(file, args, { cwd, encoding: 'utf8', timeout: 120_000, maxBuffer: 16 * 1024 * 1024 });
   return { stdout, stderr };
 }
+export function parsePackedMetadata(stdout) {
+  const result = JSON.parse(stdout);
+  // Legacy npm returns an array; npm 12 keys the same metadata by package name.
+  const entries = Array.isArray(result) ? result : result && typeof result === 'object' ? Object.values(result) : [];
+  assert.equal(entries.length, 1, 'npm pack must describe exactly one package');
+  const packed = entries[0];
+  assert.equal(packed?.name, '@vmitsaras/raveldex', 'npm pack must describe Raveldex');
+  assert.ok(typeof packed.filename === 'string' && packed.filename.length > 0, 'npm pack must include the tarball filename');
+  return packed;
+}
 export async function prepareConsumer(corpus, judgments) {
   const directory = await realpath(await mkdtemp(join(tmpdir(), 'raveldex-core-consumer-')));
-  const packed = JSON.parse((await command('npm', ['pack', '--json', '--ignore-scripts', '--pack-destination', directory, '--cache', join(directory, '.npm-cache')])).stdout)[0];
+  const packed = parsePackedMetadata((await command('npm', ['pack', '--json', '--ignore-scripts', '--pack-destination', directory, '--cache', join(directory, '.npm-cache')])).stdout);
   const tarball = join(directory, packed.filename);
   await writeFile(join(directory, 'package.json'), JSON.stringify({ name: 'raveldex-isolated-pilot', private: true, type: 'module' }));
   await command('npm', ['install', tarball, '--offline', '--ignore-scripts', '--omit=dev', '--no-audit', '--no-fund', '--cache', join(directory, '.npm-cache')], directory);
