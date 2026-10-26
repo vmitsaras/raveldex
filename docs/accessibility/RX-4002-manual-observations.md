@@ -282,3 +282,8 @@ The source label is blank. Exact input source, separate dead key versus held-key
 ## Owner confirms long-press accent selection — 2026-10-26
 
 The owner reports “i long pressed e, and then pressed the 1 in the popup selection”. The [follow-up evidence](../evidence/RX-4002-input.md#owner-confirms-accent-picker-method--2026-10-26) binds that action to the inspected ordinary/replacement input sequence. It supplies a concrete accent-picker method, without turning that sequence into a separate-dead-key or composing-IME Pass. Input source, current keyboard/zoom and VoiceOver settings remain unconfirmed. The next clarification requests only the selected source so the subsequent separate-key test can be specific; accepted text/result and prior flows are preserved.
+
+
+## Current German DE source confirmed — 2026-10-26
+
+The owner answers “german DE” to the current-source question. This binds the next [separate-key procedure](../evidence/RX-4002-input.md#current-german-de-source-and-separate-key-follow-up--2026-10-26) to current German DE; it does not retroactively populate the earlier stopped trace's blank source label. The requested sequence is `caf`, separate `´` tap/release, two-second pause, then `e`, followed by settling and stopped-trace inspection. It has no new outcome yet. No installation or settings change is made; the long-press replacement/result observation remains accepted within its scope.

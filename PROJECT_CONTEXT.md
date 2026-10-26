@@ -129,3 +129,6 @@ The [2026-10-26 stopped Safari trace inspection](docs/evidence/RX-4002-input.md#
 
 
 The [owner's accent-entry clarification](docs/evidence/RX-4002-input.md#owner-confirms-accent-picker-method--2026-10-26) confirms long-press `e`, then `1` in the popup. This resolves the inspected replacement method without qualifying a separate dead key or composition interval. Selected input source and current physical/settings context remain unspecified; the pending source clarification controls the next precise input test. Preserve all accepted outcomes; RX-4002 remains Blocked and RX-4003 waits.
+
+
+The owner now confirms current **German DE**. The [separate-key follow-up](docs/evidence/RX-4002-input.md#current-german-de-source-and-separate-key-follow-up--2026-10-26) requests `caf`, tap/release the separate `´` key, pause two seconds, then tap `e`, settle and stop the trace. Await inspection of that actual sequence; do not substitute the accepted long-press popup observation or infer composition from the layout. The earlier trace's blank source label remains historical; physical/settings context and other RX-4002 gates remain open.
