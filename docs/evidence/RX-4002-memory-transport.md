@@ -1,0 +1,54 @@
+# RX-4002 — Correlated native worker transport intervals
+
+Date: 2026-10-26. Outcome: **Observed transport-path work; peak copies Blocked**. This slice measures named native serialization/deserialization elapsed intervals separately from worker heap readings. It does not establish total adapter cost, CPU time, per-message buffer ownership or peak physical copies. Full RX-4002 remains Blocked; no criterion, public contract, limit or dependency changes.
+
+The [frozen report](RX-4002-memory-transport.json) is 521,044 bytes, SHA-256 `f026e5db0f9a2fea56cce4d8c57204efec1a2e634949eb4ee29c3fed5c533613`. Six adjacent trace archives preserve 96,624,249 decompressed JSON bytes in 6,694,377 gzip bytes, with raw/compressed hashes. The [independent audit](RX-4002-memory-transport-independent-audit.json), [audit source](RX-4002-memory-transport-independent-audit.mjs) and [review](RX-4002-memory-transport-review.md) reconstruct the observations without rerunning resources. Nine earlier reports, 208 production files, nine source bindings and the installed package remain unchanged.
+
+## Actual configuration and operation outcomes
+
+Three serial fresh owned headless Chrome processes run at each admitted size, 1,000/10,000. Each has one page and one module worker over the installed public worker/source-snapshot entries, source provider and strict source phrases. Both Runtime isolate identities, target IDs/URLs and trace process/thread coordinates are recorded. The current browser is **Chrome 156.0.8078.48**, revision `d0c02bfad08ec92a6ffcf989e53cd995e6381a4c`, V8 `15.6.75.19`; it does not replace the earlier Chrome 155 evidence. Harness Node/OS/architecture/tool versions are recorded separately. No owner browser/profile is operated.
+
+Each owner builds 256-record batches, replaces one record and verifies public results before tracing. Small control messages therefore warm the path before the first measured large source export/restore. Native deadlines remain 60,000ms; response timeout is explicitly 120,000ms, as in the earlier browser experiment. Admission/work/transport limits remain unchanged. Hardware power/load is uncontrolled; these instrumented elapsed observations are not device latency, population percentiles or a capacity promise.
+
+All six builds, replacements and source exports pass. After build and replacement, revisions are 5/41, with common/selective/strict-phrase totals 1,000/28/333 and 10,000/272/3,333. Clear/add creates the prior receiver at revision 7/43. Three 1,000-record source restores pass, reindexing to revision 8 with the exact replaced totals. Three 10,000-record restores return **DEADLINE_EXCEEDED** and preserve the exact prior revision-43 page. Thirty-six semantic rows and literal memberships/revisions pass. These refusals are real instrumented operation outcomes, not environment failures, successful restores or evidence of a production fix.
+
+## Correlation and measured quantity
+
+Measurement-only endpoint wrappers preserve the actual native post arguments and adapter listener/event ordering. Primitive `performance.mark(name)` calls bracket each `postMessage` and the **first** `event.data` access. Operation/ID/kind/length metadata is read afterward; envelopes are not retained. The first data access moves into the observer wrapper before the real adapter listener, so the timing locus is deliberately instrumented. Marks carry no detail payload that would itself trigger structured serialization. The wrapper supports the actual adapters' bare message-listener calls; it is not a new public endpoint abstraction.
+
+For each source export and restore, the analyzer requires unique ordered operation marks, exactly one native `SerializedScriptValueFactory::create` or `::deserialize` complete event inside each matching send/read bracket, the same pid/tid across a bracket and stable distinct main/worker coordinates. Peer operation/adapter-ID/kind/length records must match. Exactly four native intervals are allowed per public round trip; extras, missing markers, duplicate event attribution, truncated observation rows or reported trace loss reject acceptance. All six runs pass these guards. Each run has four message transfers, observed at send and read: **24 transfers / 48 native intervals** overall, not 48 distinct messages or physical copies.
+
+The names correspond to Blink's current [serialization factory source](https://raw.githubusercontent.com/chromium/chromium/main/third_party/blink/renderer/bindings/core/v8/serialization/serialized_script_value_factory.cc). Exact tested-build source retrieval was unavailable; current-source explanation is distinct from runtime/browser binding. Actual trace records contain those names, complete-event durations and empty args. [Chrome JSON trace units](https://perfetto.dev/docs/getting-started/other-formats) make `ts`/`dur` microseconds. `dur` is an elapsed interval on that recorded thread; raw `tdur`, when present, is preserved separately and not interpreted as CPU time here. Full public-operation windows include codec/index/rebuild/deadline work and are only correlation context.
+
+Observed native-factory **median / sample maximum**, microseconds, across three fresh processes per size, for the large-string legs:
+
+| Native interval | 1,000 records | 10,000 records |
+| --- | ---: | ---: |
+| Worker serializes export response | 59 / 60 | 141 / 317 |
+| Main deserializes export response | 28 / 41 | 212 / 248 |
+| Main serializes restore request | 43 / 51 | 155 / 194 |
+| Worker deserializes restore request | 12 / 14 | 199 / 1,368 |
+
+All individual intervals, bracket widths, control-message legs and operation windows remain in the report. Zero durations are permitted at trace resolution; no noise threshold or exclusive CPU total is invented. The 104,328/1,010,890 UTF-16 source-string lengths are separate payload diagnostics, not wire-buffer allocation or heap sizes. Native factory work also excludes adapter admission/capture/canonicalization, validation, queueing and JavaScript codec/index work outside those brackets.
+
+## Memory visibility and peak-copy boundary
+
+Twelve detailed global memory-dump commands report success. All six complete traces explicitly report `dataLossOccurred: false`. There are 345,998 trace events and **40 serialization-named allocator records**, all paths named for `UnpackedSerializedScriptValue` wrapper/type accounting in Blink GC/object hierarchies. Raw attributes retain hex values/units and overlapping parent/type/aggregate paths. They are not summed or assigned to messages. Point dumps can contain periodic groups; raw command dump GUIDs and exported event IDs are preserved separately without assuming equality.
+
+The [feasibility visibility audit](RX-4002-memory-transport-feasibility-audit.json) independently inventories these scopes. Current [unpacked-value](https://raw.githubusercontent.com/chromium/chromium/main/third_party/blink/renderer/bindings/core/v8/serialization/unpacked_serialized_script_value.h) and [serializer delegate](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/third_party/blink/renderer/bindings/core/v8/serialization/v8_script_value_serializer.cc) sources distinguish wrapper members from native serialized backing allocation. That current-source interpretation is not an exact-build ownership proof. The observed type records and empty factory args lack a per-message allocation/reallocation/free/backing-copy timeline or synchronous high-water. Generic process/malloc/V8 totals cannot fill that gap.
+
+The raw JSON trace stream is archived from bounded `IO.read` output without parsing/reserializing it first. Analysis uses only safe fields for correlation; native flow IDs are unused. Debugger/trace streaming and detailed dump overhead remain in the workload, and normal GC is not controlled. No `deterministic:true` request or explicit collectGarbage operation is used in this slice. This is distinct from the earlier forced-GC isolate readings and native codec heap graphs. Main/worker heap or process quantities are not subtracted or added to derive transport memory.
+
+Peak-copy qualification requires instrumentable per-message native buffer/backing-copy lifetimes and high-water across serialization, delivery and receiving, separately from live worker state. This remains a concrete missing observation, not an extra every-VM-byte gate or an acceptance waiver. Mutation/codec allocation peaks and remaining AT/F01/Inspector/context findings also remain open. RX-4003 waits; N5 is deferred.
+
+## Calibration, verification and preservation
+
+The [calibration archive](RX-4002-memory-transport-calibration.json.gz) keeps the first failed capability probe, corrected capability probe and excluded 1,000-record exact-bracket smoke sources/results separate from six accepted repetitions. The initial callback incorrectly referenced a Node variable in the browser after export/restore API calls; tracing had not ended, so its zero events prove no missing capability. The corrected [feasibility trace](RX-4002-memory-transport-feasibility.json.gz) has 27,040 events despite an empty getCategories response; that empty inventory was not interpreted as absence. The [calibrated bracket trace](RX-4002-memory-transport-calibration-trace.json.gz) passes all exact message guards. Its pre-freeze runner is recovered byte-for-byte against its recorded source hash; the final runner adds only output-import/preservation guards before the accepted matrix.
+
+Executed: `npm ci`; baseline `npm run check` **608/608 Pass**; `node --test bench/memory/transport-trace.test.mjs` **4/4 Pass**; and the six-case runner below. Focused tests exercise hand-derived intervals/peers, lost/duplicate/missing/unsafe fields, rejection of extra/outside/non-complete factory events, and actual endpoint forwarding/first-read/listener cleanup without retaining envelope payload. Independent review reruns those four focused tests, reconstructs all six traces without the implementation helper, and checks source/package/preservation hashes. Both endpoint message-listener maps are empty after disposal; all owned browsers close. No general object/string-collection or leak claim follows.
+
+```sh
+node bench/memory/transport-run.mjs /private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz docs/evidence/RX-4002-memory-transport.json
+```
+
+Reproduction requires a new output filename; exclusive report/trace creation refuses overwriting earlier evidence. Final regression passes **612/612** with zero failed/cancelled/skipped; docs/planner checks pass and independent disposition is **Ready with follow-ups**. Details are recorded in [the review](RX-4002-memory-transport-review.md). Public exports, runtime source, dependencies, limits and all accepted historical/manual evidence are unchanged.

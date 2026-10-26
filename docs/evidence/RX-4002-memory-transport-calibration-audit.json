@@ -1,0 +1,69 @@
+{
+  "kind": "rx4002-transport-calibration-independent-v1",
+  "input": {
+    "path": "docs/evidence/RX-4002-memory-transport-calibration.json.gz",
+    "sha256": "c0ebe56260da076d5b41d80cf7d7b7479fe63e046006de4036fd5f32fb7b01b4"
+  },
+  "probes": [
+    {
+      "name": "v1",
+      "sourceSha256": "6a257b86f759cb76843a02f1f9178e82be890140decf67369791790e405236a3",
+      "reportedRawSha256": "5c80f997571a7e8afa87d3a6ed91fdfa053533e0cfce73f49718f6322cdab100",
+      "outcome": "Fail",
+      "disposition": "Unfinished trace, not negative capability evidence"
+    },
+    {
+      "name": "v2",
+      "sourceSha256": "1f204c165cf59593b4ca862bdc9c73501141d806c050c2bbe8694daaa36cac78",
+      "reportSha256": "e6944a9a3fa874a169bdee60ca92a5c100388362d37ffe9c1b8ad3d11f0691cc",
+      "outcome": "Observed"
+    }
+  ],
+  "smokeSources": [
+    {
+      "path": "bench/memory/transport-fixture.mjs",
+      "sha256": "bf65cd0e62fb66dc9bc22813fc6c749b2da8485932422a2c07e964114036a5c3"
+    },
+    {
+      "path": "bench/memory/transport-worker.mjs",
+      "sha256": "f76e8b39dc4618b1c527b1cdfec1ed218d04dfd80439964c6c81f283f551ada5"
+    },
+    {
+      "path": "bench/memory/transport-observer.mjs",
+      "sha256": "d958562b9530f6c1c672dd404daaedbe075ac69bab051e9f024a36abb5aa6391"
+    },
+    {
+      "path": "bench/cost-common.mjs",
+      "sha256": "63b0f517b4f989b11f48511ebe965ffbf9b182ec8040293aa38b1ed9ef82ab4f"
+    },
+    {
+      "path": "bench/memory/transport-run.mjs",
+      "sha256": "a54858c6d0ae4f344d8a998a9455837f8ff098251475433c31911f65ff641b36"
+    },
+    {
+      "path": "bench/memory/transport-trace.mjs",
+      "sha256": "15900d52bd8a7b63098da497cf4361b12ed759b2a5639dd4436e7dac3a5dae27"
+    },
+    {
+      "path": "bench/memory/transport-trace.test.mjs",
+      "sha256": "e3b9ac3552448865b9eb9988e5877dcee21d42cd8975d4fbdf0c42d93d609ed6"
+    },
+    {
+      "path": "bench/memory/browser-cdp.mjs",
+      "sha256": "6aefbe7b9e07ce980541271671b6063ce9174269b5b57c44323b88f216596c33"
+    },
+    {
+      "path": "scripts/lib/packed-consumer.mjs",
+      "sha256": "5251979b172be25fc8505ee1de270bb9432357e788c2467b6c501b4b43d40e1f"
+    }
+  ],
+  "outcome": "Pass",
+  "smokeTrace": {
+    "sha256": "ac4fad7436d258f3d730f555654675729ad5e23840da0586ab6499484418766d",
+    "rawBytes": 11034536
+  },
+  "reconstructedSmokeRunnerBound": {
+    "path": "bench/memory/transport-run.mjs",
+    "sha256": "a54858c6d0ae4f344d8a998a9455837f8ff098251475433c31911f65ff641b36"
+  }
+}
