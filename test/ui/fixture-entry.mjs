@@ -35,6 +35,7 @@ window.createFixture = async (options = {}, fixtureOptions = {}) => {
     async search(query, searchOptions = {}) {
       const call = { query, options: { ...searchOptions, signal: undefined }, signal: searchOptions.signal, completed: false };
       state.calls.push(call);
+      fixtureOptions.observeSearch?.(call, state.calls.length - 1);
       const hold = state.holdNext; state.holdNext = false;
       if (state.failNext) { state.failNext = false; throw new RaveldexError('WORK_LIMIT_EXCEEDED', { path: 'ui.fixture' }); }
       if (state.mutateBeforeSnippets && searchOptions.extensions?.snippets) {
