@@ -132,3 +132,9 @@ The [owner's accent-entry clarification](docs/evidence/RX-4002-input.md#owner-co
 
 
 The owner now confirms current **German DE**. The [separate-key follow-up](docs/evidence/RX-4002-input.md#current-german-de-source-and-separate-key-follow-up--2026-10-26) requests `caf`, tap/release the separate `´` key, pause two seconds, then tap `e`, settle and stop the trace. Await inspection of that actual sequence; do not substitute the accepted long-press popup observation or infer composition from the layout. The earlier trace's blank source label remains historical; physical/settings context and other RX-4002 gates remain open.
+
+
+The [real German DE dead-key continuation](docs/evidence/RX-4002-dead-key.md) passes after the owner reports completion: a new 64-row trace contains real compositionstart/update/end, no main/snippet calls during the actual 728ms pending interval, then one final `café` query and Long content result with input DOM focus in recorded snapshots. Independent review confirms the bounded automatic-query path; preserve the earlier accent-picker replacement run. Do not request another typing repeat or claim a two-second pause, explicit submit/cancel, all-IME or speech Pass. Next bind current keyboard/zoom/VoiceOver/power context; F01, exact Inspector focus and scoped memory remain. RX-4002 stays Blocked, RX-4003 waits and N5 is deferred.
+
+
+The owner further binds that dead-key run to **400% Safari zoom, on battery, Automatic power mode** and reports VoiceOver “accute prime” without an explicit target/timing. Preserve this literal speech separately from the DOM status; it does not confirm verbosity/Words settings or built-in input use. The typing test remains accepted without repetition. Next outstanding evidence is current input-hardware/AT context, F01/Inspector characterization and scoped memory; RX-4002 stays Blocked.
