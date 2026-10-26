@@ -1,0 +1,15 @@
+# RX-4002 buffer/allocation and AT continuation review
+
+Independent reviewer: delegated `at_gap_review`, read-only. Parent owns implementation, evidence integration and command execution. Review scope: tiny native control artifacts, focus observer/server/test diff, durable archive reconstruction and affected documentation/manifest. No resource rerun, UI interaction or owner-settings change by the reviewer.
+
+**Outcome: Ready for this bounded continuation, with overall qualification still Blocked. No unresolved blocking finding.**
+
+- All 13 original capability manifest entries and ten raw profiles match byte/SHA, counts, sums, module arrays and control/size buckets. Seventeen CDP commands comprise 16 successes and one expected unsupported browser start. The probe records completed/ownedProcessExited and empty errors; cleanup code is reviewed but process exit was not independently witnessed. Four held 1 MiB buffers are native positive controls. The freed 3 MiB transient is absent from both current/all-time profiles. No lifetime/high-water/message attribution claim is supported. The peak gap stays Blocked.
+- The original README attributed Node/platform/architecture to probe output despite their absence from that schema. The new overview corrects this as separately observed shell context; frozen original bytes remain untouched.
+- The focus observer imports the original UI driver. `/ui` remains probe-free. Recording, local query/status capture, row/text/pending-timer caps, root/modal-body boundary and stop/restart cleanup are proportionate. No competing live region, focus or tabindex change, custom Tab trap, or busy/announcement interception is added.
+- One minor trace ambiguity concerned `defaultPrevented` in later-task rows. Documentation now explicitly says event metadata is capture-time and only `current` is refreshed; no final default-prevention result is asserted. No production fix was needed.
+- The supplied corrected focused log passes four tests; the reviewer does not rerun it or treat trusted automation as AT/physical input. Initial missing modal-body capture, timeout and interrupted exploratory run remain preserved as instrumentation outcomes.
+- Independent decompression verifies 198,443 gzip / 6,944,828 raw bytes and every one of 16 archived member lengths/hashes. Frozen report/audit bytes match their adjacent copies. Package identity is unchanged; 59 original UI graph inputs occur identically inside the 60-input observer graph. Parent static checks match 208 production files and preserve six prior reports.
+- Overview/method/context/manual/manifest keep original speech distinct from instrumented DOM, historical settings distinct from current metadata, accepted owner passes intact and RX-4003 waiting. No new owner outcome, scope waiver or additional universal gate is invented.
+
+The parent records the final complete project-check result in [the continuation](RX-4002-peaks-at.md) after it finishes. This independent review is not proof of actual VoiceOver speech or product allocation peaks. No publication, remote write or N5 activation occurs.

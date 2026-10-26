@@ -29,7 +29,7 @@ if (platform() === 'darwin') report.environment.os.product = (await command('/us
 async function save() { await mkdir(dirname(target), { recursive: true }); await writeFile(target, JSON.stringify(report, null, 2) + '\n'); }
 const fixture = await prepareBrowserQualification(); report.package = fixture.report; report.fixtureOrigin = fixture.origin; await save();
 if (serve) {
-  console.log(JSON.stringify({ origin: fixture.origin, ui: `${fixture.origin}/ui`, input: `${fixture.origin}/ui-input`, worker: `${fixture.origin}/worker`, installedDirectory: fixture.directory, packageSha256: fixture.package.sha256, report: target }));
+  console.log(JSON.stringify({ origin: fixture.origin, ui: `${fixture.origin}/ui`, input: `${fixture.origin}/ui-input`, focus: `${fixture.origin}/ui-focus`, worker: `${fixture.origin}/worker`, installedDirectory: fixture.directory, packageSha256: fixture.package.sha256, report: target }));
   const stop = async () => { await fixture.close(); process.exit(0); }; process.on('SIGINT', stop); process.on('SIGTERM', stop);
   await new Promise(() => {});
 }
