@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** RX-4002-F01 remains Open: the earlier interruption and later settings-dependent success retain their distinct page/context bindings; no complete cause or production fix is established. Bounded owner-reported flows and the October 15 VoiceOver settings are recorded, but exact Inspector initial DOM focus and full AT qualification remain incomplete. Device/display/built-in input and earlier reported 400% zoom are identified; the owner binds the current dead-key run to 400% Safari zoom, battery power and Automatic mode, while current input-hardware/VoiceOver settings remain unconfirmed. The independently reviewed October 26 German DE dead-key run now passes bounded real OS composition and automatic-query suppression with final café/Long content; it does not qualify all IMEs, explicit submission/cancellation during composition or speech. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
+**Blocker or decision:** RX-4002-F01 remains Open: the earlier interruption and later settings-dependent success retain their distinct page/context bindings; no complete cause or production fix is established. Bounded owner-reported flows and the October 15 VoiceOver settings are recorded, but exact Inspector initial DOM focus and full AT qualification remain incomplete. Device/display/built-in input and earlier reported 400% zoom are identified; the owner binds the current dead-key run to 400% Safari zoom, battery power and Automatic mode, while current input-hardware/VoiceOver settings remain unconfirmed. The independently reviewed October 26 German DE dead-key run now passes bounded real OS composition and automatic-query suppression with final café/Long content; it does not qualify all IMEs, explicit submission/cancellation during composition or speech. The October 26 browser memory continuation observes separate Chrome main/worker heap fields and statistical profiles: all builds/replacements/source exports pass; 1,000-record restores pass and 10,000-record restores reach the unchanged deadline with prior state preserved. Exact exclusive source/index/side retention, mutation/serialization peaks, hidden transport-buffer ownership/copies and combined browser-process attribution remain unqualified. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
 
 **Expected affected areas**
 
@@ -911,6 +911,20 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-input-inspection.json](docs/evidence/RX-4002-input-inspection.json)
 - [docs/evidence/RX-4002-dead-key.md](docs/evidence/RX-4002-dead-key.md)
 - [docs/evidence/RX-4002-dead-key.json](docs/evidence/RX-4002-dead-key.json)
+- [docs/evidence/RX-4002-memory-browser-first-smoke.json.gz](docs/evidence/RX-4002-memory-browser-first-smoke.json.gz)
+- [docs/evidence/RX-4002-memory-browser-focused.log](docs/evidence/RX-4002-memory-browser-focused.log)
+- [docs/evidence/RX-4002-memory-browser-profiles-1000-0.json.gz](docs/evidence/RX-4002-memory-browser-profiles-1000-0.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-1000-1.json.gz](docs/evidence/RX-4002-memory-browser-profiles-1000-1.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-1000-2.json.gz](docs/evidence/RX-4002-memory-browser-profiles-1000-2.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-10000-0.json.gz](docs/evidence/RX-4002-memory-browser-profiles-10000-0.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-10000-1.json.gz](docs/evidence/RX-4002-memory-browser-profiles-10000-1.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-10000-2.json.gz](docs/evidence/RX-4002-memory-browser-profiles-10000-2.json.gz)
+- [docs/evidence/RX-4002-memory-browser-second-smoke.json.gz](docs/evidence/RX-4002-memory-browser-second-smoke.json.gz)
+- [docs/evidence/RX-4002-memory-browser.json.gz](docs/evidence/RX-4002-memory-browser.json.gz)
+- [docs/evidence/RX-4002-memory-browser.md](docs/evidence/RX-4002-memory-browser.md)
+- [docs/evidence/RX-4002-memory-browser-check.log](docs/evidence/RX-4002-memory-browser-check.log)
+- [docs/evidence/RX-4002-memory-browser-review.md](docs/evidence/RX-4002-memory-browser-review.md)
+- [docs/evidence/RX-4002-memory-browser-run.log](docs/evidence/RX-4002-memory-browser-run.log)
 
 
 ## RX-4003

@@ -119,3 +119,6 @@ The [real German DE dead-key continuation](docs/evidence/RX-4002-dead-key.md) pa
 
 
 The owner further binds that dead-key run to **400% Safari zoom, on battery, Automatic power mode** and reports VoiceOver “accute prime” without an explicit target/timing. Preserve this literal speech separately from the DOM status; it does not confirm verbosity/Words settings or built-in input use. The typing test remains accepted without repetition. Next outstanding evidence is current input-hardware/AT context, F01/Inspector characterization and scoped memory; RX-4002 stays Blocked.
+
+
+The [browser isolate memory continuation](docs/evidence/RX-4002-memory-browser.md) now supplies actual headless Chrome main/worker heap fields, 48 statistical profiles, explicit held/released collection stages and observed string-transport shapes from six fresh processes at 1,000/10,000 records. Build/replace/source export pass throughout; 1,000 restores pass and 10,000 restores reach DEADLINE_EXCEEDED while preserving exact prior state. Preserve these rejection outcomes and the earlier Node/manual evidence. Next is remaining exclusive retention/peak/hidden transport-process attribution and F01/exact AT/Inspector/context disposition, without repeating accepted input or UI flows. RX-4002 remains Blocked, RX-4003 waits; no publication or N5.
