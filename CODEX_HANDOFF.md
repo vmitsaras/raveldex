@@ -107,3 +107,6 @@ The [2026-10-26 input-observation continuation](docs/evidence/RX-4002-input.md) 
 
 
 The [2026-10-26 stopped Safari trace inspection](docs/evidence/RX-4002-input.md#stopped-safari-trace-inspected--2026-10-26) observes `café` / one Long content result and input DOM focus through the final result. All 71 rows are present, but no composition events occur: `e` is followed by `insertReplacementText` for `é`, with input `isComposing: false`. The input-source label is blank; exact source/method and current physical/settings context await the owner. Preserve this bounded replacement/result observation without calling it an OS composition Pass or defect. RX-4002 remains Blocked, RX-4003 waits, and the pending clarification determines the next input step; scoped memory and other open evidence remain required.
+
+
+The [owner's accent-entry clarification](docs/evidence/RX-4002-input.md#owner-confirms-accent-picker-method--2026-10-26) confirms long-press `e`, then `1` in the popup. This resolves the inspected replacement method without qualifying a separate dead key or composition interval. Selected input source and current physical/settings context remain unspecified; the pending source clarification controls the next precise input test. Preserve all accepted outcomes; RX-4002 remains Blocked and RX-4003 waits.
