@@ -1,6 +1,6 @@
 # RX-4002 memory method
 
-Status: bounded Node process observations, corrected selected-data graph analysis and a separate offline recorded-graph cut analysis are observed. The [browser isolate continuation](../evidence/RX-4002-memory-browser.md) adds separately scoped main/worker observations; exact component/peak qualification remains incomplete. Node outcomes are in [the memory evidence](../evidence/RX-4002-memory.json), with distinct [corrected graph analysis](../evidence/RX-4002-memory-graphs.json) and [graph-cut analysis](../evidence/RX-4002-memory-retainers.json). This document does not change the native capacity, limits, optional representations, public exports, or proposed release requirements.
+Status: bounded Node process observations, corrected selected-data graph analysis and a separate offline recorded-graph cut analysis are observed. The [browser isolate continuation](../evidence/RX-4002-memory-browser.md) adds separately scoped main/worker observations. The [observer-held continuation](../evidence/RX-4002-memory-collection.md) accepts direct WeakRef root release but blocks descendant-byte attribution after discovering incompatible identities under the same snapshot IDs. Node outcomes are in [the memory evidence](../evidence/RX-4002-memory.json), with distinct [corrected graph analysis](../evidence/RX-4002-memory-graphs.json) and [graph-cut analysis](../evidence/RX-4002-memory-retainers.json). This document does not change the native capacity, limits, optional representations, public exports, or proposed release requirements.
 
 ## Reproduction and boundaries
 
@@ -112,19 +112,20 @@ Reproduction requires the original temporary dumps. Missing/changed inputs fail 
 
 ## Outstanding qualification
 
-| Required observation | Status/boundary |
+| Observation / method target | Status/boundary |
 | --- | --- |
 | Fresh-process whole-process/V8 stages, repetitions and cleanup | Actual raw readings, separate from component claims. |
 | True lifetime process RSS high-water | Kernel quantity, covering complete instrumented child lifetime. |
 | Reachable core/source/positions/held encoding data | V8 selected-edge node-size attribution; shared subgraphs retained explicitly. |
 | Complete recorded-graph component/group cuts | Same-dump root-reachability differences under explicit policies; every-node-alias deletion, separate from owner-edge release or V8 GC. |
-| Exact exclusive component retained bytes | **Blocked**: recorded-graph cuts now cover runtime edges and outside descendant retainers, but conditional collector liveness, owner/API reference release and actual post-GC attribution remain unqualified. No graph-cut effect or process delta is substituted for those observations. |
-| Exact mutation/serialization allocation peak | **Blocked**: periodic/cooperative samples and lifetime process maximum do not isolate stage allocation high-water. Requires allocation chronology/peak attribution with known instrumentation bounds. |
+| Actual observer-held component-root release | **Observed**, source-phrase configuration at 1,000/10,000 across independent hold/release branches. Direct WeakRefs distinguish disposed facade/owner/full root, held/released component roots and literal outside aliases. No descendant or byte claim follows. |
+| Identity for proposed descendant-byte comparisons | **Blocked method target**: recorded-graph cuts do not implement conditional GC. The observer-held attempt exposes nine incompatible identities under the same snapshot ID; all cross-snapshot ID-derived byte claims are quarantined, even conflict-free rows. A calibrated identity method is needed before making those claims. This experiment is not an added release gate. |
+| Mutation staging and codec allocation/peak attribution | **Blocked**: periodic/cooperative samples and lifetime process maximum do not isolate old/staged state or codec buffer high-water. Requires observations with stated instrumentation bounds; mathematically exact accounting of every VM/native byte is not an added release criterion. |
 | Decode/restore buffers | **Partially observed / still Blocked**: native receiving adds statistical allocation profiles, held-input/prior-receiver baselines, sampled process maxima and listed-object collection checks. The separate browser continuation observes source-reindex receiving and deadline refusals. Exact buffer ownership/copies/peaks remain unqualified; export observations do not fill them. |
 | Browser renderer/main-thread/worker/transport memory | **Partially observed / still Blocked**: separate Chrome main/worker isolate usage, statistical profiles and string-transport shapes are now observed. Combined renderer/process memory, exact exclusive retention and hidden structured-clone buffers/copies/peaks remain unqualified. |
 | General capacity or physical device latency | Unqualified; the 10,000 defensive ceiling is not converted to a capacity promise. |
 
-Missing attribution remains missing evidence under RX-4002-AC03/AC06. This method supplies bounded observations and concrete required follow-up work; it does not silently narrow or waive the release contract.
+Missing staging/codec/transport attribution remains missing evidence under RX-4002-AC03/AC06. Method-specific targets do not add acceptance criteria. This method supplies bounded observations and concrete required follow-up work; it does not silently narrow or waive the release contract.
 
 ## Native receiving restore continuation
 
@@ -139,3 +140,11 @@ The [browser method and outcomes](../evidence/RX-4002-memory-browser.md) supplem
 Sequential per-isolate request/response timestamps and all readings remain visible. Polling has one serial pair in flight; ten milliseconds is a requested gap after completion, not a guaranteed sampling period. Raw profile structures are preserved as hashed compressed JSON. Samples whose node IDs are absent from a returned tree remain explicit unresolved samples, rather than being dropped or assigned invented frames. Full-isolate samples and statistical allocation outputs include instrumentation/runtime effects; they are neither collector-accurate component retention nor simultaneous peaks or process RSS.
 
 The real bridge is observed without replacing its representation: caller posts and received responses carry plain envelopes and source strings. Primitive shape logs retain no payload. Argument counts and string lengths are distinct from actual clone-buffer allocation, number of physical copies or their overlap. Exact source/index/side retention, mutation/encoding/decoding peaks, hidden transport buffers and combined browser-process attribution remain required. Typed receiving refusals and exact prior-state preservation are operation outcomes, not environment failures or successful restores.
+
+## Observer-held root release and identity disposition
+
+The [new continuation](../evidence/RX-4002-memory-collection.md) uses ten fresh serial source-phrase processes at 1,000/10,000 records: no-op, three individual component releases and joint release. Public build/verification/disposal precedes every baseline; only explicit observer component holders remain. Actual WeakRefs confirm owner/facade/full-root collection, all 12 selected component-root releases and all 18 intentionally held final roots. This is post-disposal observer-held data, not public live-engine component removal.
+
+The planned descendant analysis fails its identity premise: all nine original reported “surviving size changes” are incompatible type/name pairs under the same snapshot ID. A real document object later shares its ID with a V8 FeedbackVector. Full raw measurements, numeric cohorts and executed v1 sources stay frozen; a separate same-dump reconciliation blocks descendant-byte attribution for all rows. Matching descriptors also cannot exclude reuse. Direct root WeakRefs and literal controls remain accepted; no retained/freed-byte totals are printed as accepted evidence.
+
+The contract audit distinguishes the approved scope from an overstrict method target. AC03 and the verification plan require meaningful representation/staging/buffer/process distinctions and honest isolation limits, not mathematical ownership of every runtime byte. This does not waive the worker contract’s explicit transport-work/peak-copy requirement or the still-missing staging/codec observations. No release criterion or support claim changes. Previous same-snapshot graph arithmetic, statistical allocation profiles and direct WeakRef observations are separate quantities and are not invalidated by this cross-snapshot identity defect.

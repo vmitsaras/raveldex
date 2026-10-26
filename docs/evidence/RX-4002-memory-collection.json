@@ -1,0 +1,4681 @@
+{
+  "kind": "rx4002-observer-held-component-release-v1",
+  "startedAt": "2026-10-26T15:23:09.571Z",
+  "invocation": {
+    "argv": [
+      "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz",
+      "docs/evidence/RX-4002-memory-collection.json"
+    ],
+    "consumer": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz",
+    "output": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection.json"
+  },
+  "method": {
+    "sizes": [
+      1000,
+      10000
+    ],
+    "branches": [
+      "noop",
+      "side",
+      "reverse",
+      "fields",
+      "joint"
+    ],
+    "smoke": false,
+    "configuration": "source-phrase only",
+    "roles": [
+      "reverseDocuments",
+      "dictionaryPostingsStatistics",
+      "sourceOrPositions"
+    ],
+    "process": "One fresh Node main-isolate child per size/branch; serial. Each branch has baseline/no-op/final snapshots after public build/verification/disposal. No live-engine root mutation.",
+    "collection": "Three setImmediate/explicit-GC/25ms settling cycles per stage. Full heap dumping is intrusive. Only explicit component holders remain; owner/facade/root collection is separately witnessed.",
+    "cohort": "Baseline own-data property/element/backing/string-parent reachability identifies a deduplicated node-ID cohort with overlapping role masks. Actual subsequent snapshot ID presence supplies disappearance observations. Baseline self-sizes of disappeared IDs are not total freed bytes or exact live-engine exclusive cost.",
+    "controls": "Same-holder no-op interval and independent final noop branch; strong positive, released negative, shared object with external alias; surviving-ID size changes reported separately. Snapshot IDs are checked across controls and held roots.",
+    "boundaries": "Node main isolate, source-phrase configuration only. No mutation/serialization peak, native allocator/RSS attribution, positions qualification, browser/worker/transport or AT claim. Raw dumps never enter the measured child as parsed objects.",
+    "childEnvironment": "PATH/TMPDIR/LANG/LC_ALL only; 180-second owned-child watchdog. No credentials or unrelated browser/application data collected."
+  },
+  "sourceBindings": [
+    {
+      "path": "bench/memory/collection-child.mjs",
+      "staged": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/collection-child.mjs",
+      "sha256": "914196b58faad6075f0d60a9d2035a52b63b0b582df56986cb36285dc98272b2"
+    },
+    {
+      "path": "bench/cost-common.mjs",
+      "staged": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/collection-fixture.mjs",
+      "sha256": "63b0f517b4f989b11f48511ebe965ffbf9b182ec8040293aa38b1ed9ef82ab4f"
+    },
+    {
+      "path": "bench/memory/collection-graph.mjs",
+      "sha256": "3bc585b1a29ce3b1cf141c32fbe5d93c7b34ed10d2a609314c62b83b7bc42b9b"
+    },
+    {
+      "path": "bench/memory/collection-graph.test.mjs",
+      "sha256": "378147a63b815f29c4442d542cf40f84e657993e95378342040b479e1bef52c0"
+    },
+    {
+      "path": "bench/memory/collection-run.mjs",
+      "sha256": "7842e69e5e7a8020f816cd9aed0a863fa2ce3269491c915998da891385a3e03b"
+    },
+    {
+      "path": "bench/memory/restore-child.mjs",
+      "sha256": "e1c78eeb0b7f2ebe4287d952af23e7ca1ba5da5a252a6d15cdcbb1bbb0fa7473"
+    }
+  ],
+  "productionFiles": [
+    {
+      "path": "dist/adapters/indexeddb/error.d.ts",
+      "sha256": "096e511d97c26a48e7e73f56d4034d733bfe402d4e231f929972b224852c1886"
+    },
+    {
+      "path": "dist/adapters/indexeddb/error.js",
+      "sha256": "d8ca358e233f9dd686a8ce673133d68395a26e14a0a4c0799170080bbddd3ba7"
+    },
+    {
+      "path": "dist/adapters/indexeddb/index.d.ts",
+      "sha256": "38cb12ac6e348103a8e696f58143bf78807256f6845ce92b84474c2abcbb37c3"
+    },
+    {
+      "path": "dist/adapters/indexeddb/index.js",
+      "sha256": "c3171f2785d4cc4c9f5dd562aa970387f4231f1359e4540098ccc194b0551dff"
+    },
+    {
+      "path": "dist/adapters/indexeddb/persistence.d.ts",
+      "sha256": "fa099fdbc943ca0b77d0ffea99ed2c116823017a001b53b8120fcdcbe004c51c"
+    },
+    {
+      "path": "dist/adapters/indexeddb/persistence.js",
+      "sha256": "e68f0494bd62dbbcac5369cda07dddccd719a63e085a50258b824d6396b90e73"
+    },
+    {
+      "path": "dist/adapters/indexeddb/types.d.ts",
+      "sha256": "0dc63317dd30ae1c606fc091ccac38cbf1dc7e05ca3391004f7b5e25aa34566d"
+    },
+    {
+      "path": "dist/adapters/indexeddb/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/adapters/snapshots/error.d.ts",
+      "sha256": "b0ff136c04bf164a664be527b54c7bbea642201ba56fff51fa20ba101a046edf"
+    },
+    {
+      "path": "dist/adapters/snapshots/error.js",
+      "sha256": "60f4741b9be8571be1fd0562effe98e79c998d0f81e4d7afbb730c774bdb6212"
+    },
+    {
+      "path": "dist/adapters/snapshots/index.d.ts",
+      "sha256": "197ef9eafc6dc0e6676cd7deb0e20fb8e4c104b5481734d2e12341edb48527d3"
+    },
+    {
+      "path": "dist/adapters/snapshots/index.js",
+      "sha256": "95d7153ce8beb8cab441b883a733935f373a5d5a2c48247e1a3c24335c634179"
+    },
+    {
+      "path": "dist/adapters/snapshots/json.d.ts",
+      "sha256": "5da58967213a90e0551fc7ef5b1d63ea39fd04651fdcb5fe1e363befc1efbac6"
+    },
+    {
+      "path": "dist/adapters/snapshots/json.js",
+      "sha256": "20902588e56f29b4e8f34ea7d8fab610000ea5743558ca96af2d51dc2af7d4fd"
+    },
+    {
+      "path": "dist/adapters/snapshots/native.d.ts",
+      "sha256": "93378a2db2e5f57a3ff4d4408f82acf28dc5f49a2029bf829641024dd4d0766e"
+    },
+    {
+      "path": "dist/adapters/snapshots/native.js",
+      "sha256": "7bc4384b5b12605bb5d75aa7ca562a2381c6455ba542313422de785e47c23144"
+    },
+    {
+      "path": "dist/adapters/snapshots/qualification.d.ts",
+      "sha256": "f91410c5219ab89d7d53096c0583637a9a3c67c5ddf3513582ed26b14e0f1145"
+    },
+    {
+      "path": "dist/adapters/snapshots/qualification.js",
+      "sha256": "619b8dd28da5d66e30daffb1e8386045a92fbfd5dfb7ab6019d542f50a7a27a4"
+    },
+    {
+      "path": "dist/adapters/snapshots/snapshots.d.ts",
+      "sha256": "05b2ffc83e96a5fbe9ad07bae2ec41500c04fb852e94a6ee305f46f56feb3d6c"
+    },
+    {
+      "path": "dist/adapters/snapshots/snapshots.js",
+      "sha256": "85c546d6e5a4956f15d68ef07891a9b03392145765341ae2b8f4e6ce3c43afb2"
+    },
+    {
+      "path": "dist/adapters/snapshots/source.d.ts",
+      "sha256": "f5689b55d2274bd135622d395e9e8616508107b77d36c26ac9ff395806dc8199"
+    },
+    {
+      "path": "dist/adapters/snapshots/source.js",
+      "sha256": "b0049f331e305eae5dd51ff983b5d9ae2784000696babf4e70496d91faf62ce7"
+    },
+    {
+      "path": "dist/adapters/snapshots/types.d.ts",
+      "sha256": "a95265539db7674730c905bbacfa51477e91a6cd4b58a6a4de533fbd8a61b314"
+    },
+    {
+      "path": "dist/adapters/snapshots/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/adapters/worker/client.d.ts",
+      "sha256": "cc2035e4704a7e1ef79dbe0106bc6f92c27aef3d97e0065a12957b11b7844f82"
+    },
+    {
+      "path": "dist/adapters/worker/client.js",
+      "sha256": "4d0b14cd1b6fb798201a4c7fd77d6cfe66f804d0b24f525b51dd574a14f2fb76"
+    },
+    {
+      "path": "dist/adapters/worker/error.d.ts",
+      "sha256": "b6397c0a454e336ff83c8dddcd367710ee395be607aa81eb7c2136d614bed69f"
+    },
+    {
+      "path": "dist/adapters/worker/error.js",
+      "sha256": "151187f0f1b1c983e55902f36b182d560ece129b9566d09d1b50572d3d6d8a49"
+    },
+    {
+      "path": "dist/adapters/worker/host-entry.d.ts",
+      "sha256": "abe5e3d600f9b4129138f08b1a880359d117c08d91f1ffc665e52cf020fef4ca"
+    },
+    {
+      "path": "dist/adapters/worker/host-entry.js",
+      "sha256": "1b80ece2df80b8a39e49cfba1206ada940274562a1634e5eb57b3bb7c7a5ac5c"
+    },
+    {
+      "path": "dist/adapters/worker/host.d.ts",
+      "sha256": "07c4502abef493d9a69260272f9a4aa784edb5ded6160386e11d9bd4fe0caf68"
+    },
+    {
+      "path": "dist/adapters/worker/host.js",
+      "sha256": "f6c8c87083938ecef5ec5bb571c37c81b3dcea96e6e81a6404a621c0ecf768d9"
+    },
+    {
+      "path": "dist/adapters/worker/index.d.ts",
+      "sha256": "c386c46c1bde6b8ebc3e3491bafc2eb9c7c3e98947d061f7dd9215cf7ecbac7d"
+    },
+    {
+      "path": "dist/adapters/worker/index.js",
+      "sha256": "197be6ca5cdc52da300031b12e675ebe6d63a805e9a90e3a7088945f60247beb"
+    },
+    {
+      "path": "dist/adapters/worker/protocol.d.ts",
+      "sha256": "eaccad122e022462b276bbda0547999e7142b784d0985063ff5b629f9817eeb5"
+    },
+    {
+      "path": "dist/adapters/worker/protocol.js",
+      "sha256": "8766eb54a9c10969808063e10ede2e216e04ab22eb6c4914af94bd879c28ad60"
+    },
+    {
+      "path": "dist/adapters/worker/snapshot-channel.d.ts",
+      "sha256": "3ed131d6ebd3d7fb2a263e2ef4934a54b1e4128c30839a6d72b585ea43d58f9d"
+    },
+    {
+      "path": "dist/adapters/worker/snapshot-channel.js",
+      "sha256": "2f26c2dcd55b138d43198e4c4a3d3d2e80d5f165ddb6628ed7ab60e8580d2a10"
+    },
+    {
+      "path": "dist/adapters/worker/snapshots-host.d.ts",
+      "sha256": "b5fe9032e021f27491c182b3839eb59b6e5931e81e9c893e80a16c074edfaeb5"
+    },
+    {
+      "path": "dist/adapters/worker/snapshots-host.js",
+      "sha256": "700a750139d75b44d2404d8f36f7b7bade48986cb328c0c211b0673eaf701d45"
+    },
+    {
+      "path": "dist/adapters/worker/snapshots.d.ts",
+      "sha256": "97ef287c34c4933a7e56d2b9134252855b28e15765f90d9c0e270ad6dcdb7880"
+    },
+    {
+      "path": "dist/adapters/worker/snapshots.js",
+      "sha256": "c841f452c67f3b4b66d14d2d5b2430ee2845c34e8dbe733cfe6c3316df5272c0"
+    },
+    {
+      "path": "dist/adapters/worker/types.d.ts",
+      "sha256": "0bb3b1f3340e0d453e1751ca37ff616c9d87c81a547da44a7837b9800a8d250e"
+    },
+    {
+      "path": "dist/adapters/worker/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/addons/evidence/builder.d.ts",
+      "sha256": "239b28949a43175931fdf072e57d79620c2d34c2f3fa31d5bd80e05f71a0ebf4"
+    },
+    {
+      "path": "dist/addons/evidence/builder.js",
+      "sha256": "d86dc0e3713ae872b9b2a263bf7b70c1ef8dd195d356318fba1bb98012fd677c"
+    },
+    {
+      "path": "dist/addons/evidence/index.d.ts",
+      "sha256": "3d80b197f96889ab712d8330aacc581667e37171ef59942a6470d898a0242550"
+    },
+    {
+      "path": "dist/addons/evidence/index.js",
+      "sha256": "6a5b8fe242dabbc5cd1f1fec29ef36262b411b82089bd234f2ba11bbee4e6d29"
+    },
+    {
+      "path": "dist/addons/evidence/occurrences.d.ts",
+      "sha256": "048baf45cee47a91a3611647e25d66051b7375b4a315dcda67359837d280a1c6"
+    },
+    {
+      "path": "dist/addons/evidence/occurrences.js",
+      "sha256": "2adb83cff2c182cc6acd30dfe2a75dcb7ba518529a8eee6e2d6152d3c7e2034a"
+    },
+    {
+      "path": "dist/addons/evidence/options.d.ts",
+      "sha256": "5f7e41995d676748d103fce4c395f1e15d7850b2d4a38528c1a57e5fd57e2a0e"
+    },
+    {
+      "path": "dist/addons/evidence/options.js",
+      "sha256": "5c7079dd1e2b4841c1d56ab9d082a5388edd0f9a05865d03bd00e0338e6e9e23"
+    },
+    {
+      "path": "dist/addons/evidence/providers.d.ts",
+      "sha256": "5cd9f390488a34fd8ed5ce4e9e3ce700949e81d4cc0a1e7d6e5c098a23efac9e"
+    },
+    {
+      "path": "dist/addons/evidence/providers.js",
+      "sha256": "e611a7b7a8811e149f8af7138ff914ec70e5f2ab2655c6cf653adba38997d65e"
+    },
+    {
+      "path": "dist/addons/evidence/types.d.ts",
+      "sha256": "1c29eff79bd84a4ced4c0daf248b1632f91bd7fbcbe7f894a53a6300acb25419"
+    },
+    {
+      "path": "dist/addons/evidence/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/addons/facets/facets.d.ts",
+      "sha256": "9e169b19cb4c5e7f6a0941994a5075e9709b75f63edbf8dc9a315839b852bd10"
+    },
+    {
+      "path": "dist/addons/facets/facets.js",
+      "sha256": "55aff0d6816ab10d05cbcb0919a9c37cddd154de06b7eccce54562839aaf45a2"
+    },
+    {
+      "path": "dist/addons/facets/index.d.ts",
+      "sha256": "52ffc961ad27c90e568f5e14f1554bd5ea34378ece05b344fa60ad149660fcc8"
+    },
+    {
+      "path": "dist/addons/facets/index.js",
+      "sha256": "b7d46e266954d01e384f3b5a04755dac52ebaf0fc3a0f697b2e7ae980100ec6c"
+    },
+    {
+      "path": "dist/addons/facets/options.d.ts",
+      "sha256": "4e153b94cae696e8c89b680fedbfd8d24d6001a3359491c54d22e87f698c0ae3"
+    },
+    {
+      "path": "dist/addons/facets/options.js",
+      "sha256": "5e8d7042f098d0a25cf624ec5462ea8e05210813b2d02433ea0f3ce811591b21"
+    },
+    {
+      "path": "dist/addons/filters/index.d.ts",
+      "sha256": "fe61b2eab9846474dfa8ba7a96a2c5eb8bf42cf88ed5bf5dca8bfd560f0668bc"
+    },
+    {
+      "path": "dist/addons/filters/index.js",
+      "sha256": "d76145102aedb26e34cd075a6dfeb97d9e141edd210fed28ce75ba1d4c66d052"
+    },
+    {
+      "path": "dist/addons/filters/options.d.ts",
+      "sha256": "8fd0fa66bd44f6778305eda1efdb2c615de33f66c6d0ea8c84cf7245b8df2b78"
+    },
+    {
+      "path": "dist/addons/filters/options.js",
+      "sha256": "3864a4bb553a49caf5ce3e906a10b0c6093db674b4acb94c488c6c60d555516a"
+    },
+    {
+      "path": "dist/addons/inspector/diagnostics.d.ts",
+      "sha256": "ad6de35a1d7f6f9421209c460512e8de9674281f606fe32c4cd983637ef38ee6"
+    },
+    {
+      "path": "dist/addons/inspector/diagnostics.js",
+      "sha256": "291a09a8e09db3b17f72697a5a33eb9cf357e35e15f139664f6e848c0a6340d1"
+    },
+    {
+      "path": "dist/addons/inspector/index.d.ts",
+      "sha256": "0ef694aedd432ed6420831242e2100561abbca3c9a0bb90835a2f82888b06144"
+    },
+    {
+      "path": "dist/addons/inspector/index.js",
+      "sha256": "4a41cb1268f186eee7415cef96e5ce4dec68bde1249fd6656f6c92159e2d4c0c"
+    },
+    {
+      "path": "dist/addons/inspector/inspector.d.ts",
+      "sha256": "a4a66413f598c78db661faea095dcdd10074737c92b62dba05da0a743fa3b82f"
+    },
+    {
+      "path": "dist/addons/inspector/inspector.js",
+      "sha256": "98a427376f63f177b88acd782239e1ee34dd4017c4b8e21ccec6b4e58fbf0d67"
+    },
+    {
+      "path": "dist/addons/inspector/options.d.ts",
+      "sha256": "40c0dbd81011ca08033aded8fd47a3448d8487cf59f0e399abc4bdcbbc791ce7"
+    },
+    {
+      "path": "dist/addons/inspector/options.js",
+      "sha256": "b8c81c7490cf31180f90f0434965dfbf61af4b3065c9167d80469799a9381f9c"
+    },
+    {
+      "path": "dist/addons/inspector/output.d.ts",
+      "sha256": "be2a3dc3db525577366be09ad04f0bf0fe27d27e5f2190ea922c2cebfedbc4a9"
+    },
+    {
+      "path": "dist/addons/inspector/output.js",
+      "sha256": "af3028481948196ada3bade44887733643d4424ca39bfe4b233b57743e760170"
+    },
+    {
+      "path": "dist/addons/inspector/types.d.ts",
+      "sha256": "113b3f61b86ec91b2e229ea96614fa8330a23582065634eca43e9e6a84d484bf"
+    },
+    {
+      "path": "dist/addons/inspector/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/addons/metadata/payload.d.ts",
+      "sha256": "c6c0c8765cca804e7cf9d38bd6e69087085492937629e9dbb61ad2b067a2eb3e"
+    },
+    {
+      "path": "dist/addons/metadata/payload.js",
+      "sha256": "11368994864ee1471ec1b63fc8727fb3e5f7e9da1e70ad224f0e5c9165734ffc"
+    },
+    {
+      "path": "dist/addons/phrases/index.d.ts",
+      "sha256": "08abf360b907d302f11e0e4a719795dd47b0591716766e870fec4b7261a156b2"
+    },
+    {
+      "path": "dist/addons/phrases/index.js",
+      "sha256": "ee34e20b44b0336003103156b4a7cd7e2185f0cc71fa594e8899e1ef21b69803"
+    },
+    {
+      "path": "dist/addons/phrases/mixed.d.ts",
+      "sha256": "664629496d0c3d753dbb27e42006915d5d590751d9a3c09c645c21df06b4506f"
+    },
+    {
+      "path": "dist/addons/phrases/mixed.js",
+      "sha256": "f7136ebae1977ac37e60d48fc632f879c61c683496a914c799f18160a5ab1f41"
+    },
+    {
+      "path": "dist/addons/phrases/options.d.ts",
+      "sha256": "b4857a6f4adcefebcf64c4264d172e5ae1dc49beeb8a6a931ea66671cb2cf9dc"
+    },
+    {
+      "path": "dist/addons/phrases/options.js",
+      "sha256": "12c5a586d7ad5fb6c3b7720d40e33dc22a89733d2ef44b7bdb38f0469a308bf0"
+    },
+    {
+      "path": "dist/addons/phrases/source.d.ts",
+      "sha256": "b69e1d17086bc480378654a73acf8dea6f6dea1fdd9bb6743dd061612c475171"
+    },
+    {
+      "path": "dist/addons/phrases/source.js",
+      "sha256": "76d103369c6160ded559564276cf363f1e78acc439cb16665585f821de6eebff"
+    },
+    {
+      "path": "dist/addons/phrases/store.d.ts",
+      "sha256": "9feb2b1984036ea64c9e550edf18b87418219028ba6996c92a44743c32cff8b6"
+    },
+    {
+      "path": "dist/addons/phrases/store.js",
+      "sha256": "50b5d85ee9c71965ff6cb77b0f30df851383eb6b634d199cc88f66913d47f877"
+    },
+    {
+      "path": "dist/addons/phrases/verifier.d.ts",
+      "sha256": "21a3609d901d39c8897d645bca5049cc230710e4617db6a6c9e304069b3abc32"
+    },
+    {
+      "path": "dist/addons/phrases/verifier.js",
+      "sha256": "bbfb0a1f45218759120024412adb9785d453ad403fa05590e8fb57fe67ff9688"
+    },
+    {
+      "path": "dist/addons/positions/index.d.ts",
+      "sha256": "ca0fadb3ba5ba238e4fcad4a170f485cfb870bcb3f8c6e64af9f1b8184b9b69a"
+    },
+    {
+      "path": "dist/addons/positions/index.js",
+      "sha256": "59f13af5808db5159d87c119df7d0a4b1d7a1ea19d087c5ed41f14f42eb33052"
+    },
+    {
+      "path": "dist/addons/positions/options.d.ts",
+      "sha256": "ea198923ee845b930f3c3776f806fee28dd75714e101542d90e56ca45b38a093"
+    },
+    {
+      "path": "dist/addons/positions/options.js",
+      "sha256": "b0e01e01789039d60a2555b884f82561f44f452d01341beeeda3535ebc1b8ba3"
+    },
+    {
+      "path": "dist/addons/positions/phrases.d.ts",
+      "sha256": "2636e9f77e11f24dfa6d3f0e4d7d5d2e6354998616d2e5bb35dfcfd1fa43a798"
+    },
+    {
+      "path": "dist/addons/positions/phrases.js",
+      "sha256": "172a70ad76f4c9a6867262d3e19b0bd7f24a0b3746cedb5d201270abfe529d78"
+    },
+    {
+      "path": "dist/addons/positions/store.d.ts",
+      "sha256": "1598eaf21d432992927a197efc0511b8ae5458c953645e773fb141597286a9e8"
+    },
+    {
+      "path": "dist/addons/positions/store.js",
+      "sha256": "188e74fbb7dc0161309fd834f073161a91e82c851e8a05d884e39e86a9e301de"
+    },
+    {
+      "path": "dist/addons/positions/verifier.d.ts",
+      "sha256": "bf356f539ecd2e92f57f74f628f9ee12e4fb16a38da1eaa30cef67425cb900bd"
+    },
+    {
+      "path": "dist/addons/positions/verifier.js",
+      "sha256": "ce2c4465a144060fb46e0cb03ad265455ae060f038af8f0379c7ee4901213d0d"
+    },
+    {
+      "path": "dist/addons/snippets/index.d.ts",
+      "sha256": "530a694c655d1359551fdc86c6b1c87cbb6e1993d799d4590e19c897aba8466d"
+    },
+    {
+      "path": "dist/addons/snippets/index.js",
+      "sha256": "ac6baa2f0f78f2a744dd1a13b5f4cd229f37b1e3601e147c66fbfd20f2995171"
+    },
+    {
+      "path": "dist/addons/snippets/snippets.d.ts",
+      "sha256": "7a25c592f23b680d4777603897061fbf296b9c17c0299003f34ec786bfe450a7"
+    },
+    {
+      "path": "dist/addons/snippets/snippets.js",
+      "sha256": "c60d39530115c32c09f3cc3f77a1255dd2da130fa108c733d42405faf7782ccb"
+    },
+    {
+      "path": "dist/addons/snippets/types.d.ts",
+      "sha256": "ad22acbc86fc8095a6f66be7a8df05716c2f6a3f484aa8e352d5b4292a792b5c"
+    },
+    {
+      "path": "dist/addons/snippets/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/addons/ui/index.d.ts",
+      "sha256": "982af774169a293ed39fe35dc836c596649e3d083d061bf63b4bbfa33090f1fd"
+    },
+    {
+      "path": "dist/addons/ui/index.js",
+      "sha256": "17d367e52d8724a4f82fc8c9c93518f9bf2f44abbeb672330c045b1b924985fd"
+    },
+    {
+      "path": "dist/addons/ui/options.d.ts",
+      "sha256": "26d13e6548db8176b4c294b8653743acc4148148dd6f66907af130db924bc723"
+    },
+    {
+      "path": "dist/addons/ui/options.js",
+      "sha256": "7fa2a3e36b30d398092aa978f263a9fb918b3d15c1b5782a1b68b7c8c83a3b03"
+    },
+    {
+      "path": "dist/addons/ui/render.d.ts",
+      "sha256": "cfca243a890c617a00f31f5c2d04971dda56c3562a8f24b7b470db1ec75e71f2"
+    },
+    {
+      "path": "dist/addons/ui/render.js",
+      "sha256": "012e0a30cc2f1f659a371763521e433ad1c06f603526f64c1f4594991a3dcf90"
+    },
+    {
+      "path": "dist/addons/ui/styles.css",
+      "sha256": "6152525fb59c13c357f73df120e757d4ebfd9a68bfedbb26e249e01410e432f6"
+    },
+    {
+      "path": "dist/addons/ui/types.d.ts",
+      "sha256": "4cb0ba0f4203ac8df30afe16dd6ac4fb59a33ab0b3a9e5a2721ece352bd7a022"
+    },
+    {
+      "path": "dist/addons/ui/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/addons/ui/ui.d.ts",
+      "sha256": "546b41565145d9441d17a83647f49a3bb355a52e6bb472985bc2ee88741eb1f8"
+    },
+    {
+      "path": "dist/addons/ui/ui.js",
+      "sha256": "37480149517c51f9a1396c448a4d65a8d24fef8d67aa114353905d07e5a80509"
+    },
+    {
+      "path": "dist/core/analyzer/basic.d.ts",
+      "sha256": "ddad706011a98cc79eb8250eb8d8b1a52000f1f9372de3a1d601676063d6e577"
+    },
+    {
+      "path": "dist/core/analyzer/basic.js",
+      "sha256": "ac8661d3c5c4e612cd8fc4401cf5497ec35aaf759e63d39eee281ae48e86b98a"
+    },
+    {
+      "path": "dist/core/capabilities/capture.d.ts",
+      "sha256": "536dd1cad2f1806e27f2b7ebd7b4269769404dbe054f78827a2b0b7570c95dc7"
+    },
+    {
+      "path": "dist/core/capabilities/capture.js",
+      "sha256": "77bcf26eda14403dccd2d740f460e0217b9890892dc674d90471c2c2924f3d24"
+    },
+    {
+      "path": "dist/core/capabilities/participants.d.ts",
+      "sha256": "816d4e5397eb1b6e38b0fc95d6f0a5b763d971a37df7a4f97d3f4f4f66ad3ac8"
+    },
+    {
+      "path": "dist/core/capabilities/participants.js",
+      "sha256": "3d1ba17b65b1c7ddf8d923b7c8f92b1f58b50dace5d7eb9db87d397d11b5f415"
+    },
+    {
+      "path": "dist/core/capabilities/refinement.d.ts",
+      "sha256": "ee845541515f6544d552d7e7779d24fd2a39e52ed8cf590830b29fdab9db6e2a"
+    },
+    {
+      "path": "dist/core/capabilities/refinement.js",
+      "sha256": "00cd5e0858d8192ac23eb5108de6f9daea9f6f5a1ddd38693e75f12aa6cd9ef1"
+    },
+    {
+      "path": "dist/core/capabilities/registration.d.ts",
+      "sha256": "d5744d0beff1932bcd0db57fd69333423dfdec5bef826d0dfce3ed4bb4055af0"
+    },
+    {
+      "path": "dist/core/capabilities/registration.js",
+      "sha256": "0618a05a1a09e492a119e8b0e5efb67c56a38504dbeb37b46624193b57c56305"
+    },
+    {
+      "path": "dist/core/capabilities/types.d.ts",
+      "sha256": "9d6de939de7d264983989cd57ef2c8d3028d18a867879285e61f93606559693c"
+    },
+    {
+      "path": "dist/core/capabilities/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/core/capabilities/worker-identity.d.ts",
+      "sha256": "26efae1d875e70e261648869ba840aef6ff5d672762bcd1910d1fc350af7ba8e"
+    },
+    {
+      "path": "dist/core/capabilities/worker-identity.js",
+      "sha256": "304328f03ffb2e524a7cf4f1e488416fb18ebbb92e7da3ad9fcd56df063ef09e"
+    },
+    {
+      "path": "dist/core/contracts/data.d.ts",
+      "sha256": "76f0faa84608aa632e60b161880b310eeae7892ddb180996389976b2c135f1e5"
+    },
+    {
+      "path": "dist/core/contracts/data.js",
+      "sha256": "9c2d7594d6c649d9c80b339bc00752ae594debc3a85b52742afe3bdf4300c501"
+    },
+    {
+      "path": "dist/core/contracts/options.d.ts",
+      "sha256": "18bf04b954966abf409d750c16264c899d41b07e3baee1cc82a17a41df633da3"
+    },
+    {
+      "path": "dist/core/contracts/options.js",
+      "sha256": "2a55ea9f1a67f70da788505ffcb15b93ecea3fe0a78c9c8e7050ffcdaea2c836"
+    },
+    {
+      "path": "dist/core/contracts/query.d.ts",
+      "sha256": "c09e06ef2733c972373f03093370a18840379313b61cdb0e8fc3c05a882dcf76"
+    },
+    {
+      "path": "dist/core/contracts/query.js",
+      "sha256": "2b42b6c1dd557e4e844177c0489b1f21bbc0107e3235d19a74baf5516887b8c0"
+    },
+    {
+      "path": "dist/core/contracts/record.d.ts",
+      "sha256": "576b61a6999d2965594584931160976995ae9fc12fad550a72e2db0d45707184"
+    },
+    {
+      "path": "dist/core/contracts/record.js",
+      "sha256": "db44c35edb75b034a3e651d2f3016985fc0c32d11b35c8eb09f295d822471e99"
+    },
+    {
+      "path": "dist/core/contracts/schema.d.ts",
+      "sha256": "ed5fad8f9d174a02be2b72f4099c3877017152cab3c1a3fd945aea22d65dc951"
+    },
+    {
+      "path": "dist/core/contracts/schema.js",
+      "sha256": "2db52cc9a69f646c672e092631fb565ac9ca821d47d3a274f2ec682333b1fc75"
+    },
+    {
+      "path": "dist/core/contracts/types.d.ts",
+      "sha256": "031edf514c95c03352845cdbf9f6dc1da78e4d7072bcc734fb6287eb3543ac87"
+    },
+    {
+      "path": "dist/core/contracts/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/core/errors/error.d.ts",
+      "sha256": "9fb115119317118f32a64782758566c203060d0c9f3f7cb6b19056d03df8a9b1"
+    },
+    {
+      "path": "dist/core/errors/error.js",
+      "sha256": "5381218a0fb36ee4fe65ba9f8a556220de3b1098048b15f6640cac721ab214f7"
+    },
+    {
+      "path": "dist/core/execution/engine.d.ts",
+      "sha256": "27ec7ed50934ea80a774fe79b58e1a9e4e0cf90c55f3fb026702ebcb2cfaf4bd"
+    },
+    {
+      "path": "dist/core/execution/engine.js",
+      "sha256": "37ea0a92778aa1c5c1c0005fa700c67abde139d0fb03f5031950defcfe94ebba"
+    },
+    {
+      "path": "dist/core/execution/host.d.ts",
+      "sha256": "a87a4e34bf6ed32b2a6edf27d2c148698c27c490d372fe0d4a7e4f85a9f69931"
+    },
+    {
+      "path": "dist/core/execution/host.js",
+      "sha256": "989ca45e4f46a2ab987e3856c0e13348ec798474f5b9ae7448a507ea7dd2f27f"
+    },
+    {
+      "path": "dist/core/index/construction.d.ts",
+      "sha256": "d448a35466b9aba02e44367728b5ba562d4bb611db9a2d6f02b107d3d8b8b5f3"
+    },
+    {
+      "path": "dist/core/index/construction.js",
+      "sha256": "2ac1d2964aef38dcca7aa5a9f384f2fe5f2f783ee858603f61b3edce087be1f3"
+    },
+    {
+      "path": "dist/core/index/directory.d.ts",
+      "sha256": "8aa450602927081673f6cd4a268b1c70e1f6a59a0b3963b565dad0d4efcc37a9"
+    },
+    {
+      "path": "dist/core/index/directory.js",
+      "sha256": "153b4c155343694104161b7879774d480e40e4d50c21cae2f40f210f19e0fe7b"
+    },
+    {
+      "path": "dist/core/index/invariants.d.ts",
+      "sha256": "0c0f48e9a68cfbde121d04446f72217ed275f40ca9e3683eb15051534322e5de"
+    },
+    {
+      "path": "dist/core/index/invariants.js",
+      "sha256": "98446c30de1a1fe5219fb911d09b8e765caa24fad9ae087afb2ced77f9ead0f2"
+    },
+    {
+      "path": "dist/core/index/staging.d.ts",
+      "sha256": "4c14cdb5ffae4021ba5a367102bc2987a6b1c0bbefaaa82d508987ed1ae9899b"
+    },
+    {
+      "path": "dist/core/index/staging.js",
+      "sha256": "fddbb1ca9d069fd78ed11cf759153a826f0a042e3003262769e644ff05aeaffc"
+    },
+    {
+      "path": "dist/core/index/state.d.ts",
+      "sha256": "d8d67107c9cb7c9b9ba256622258bc30d3d51fef8a0d6078678d898d90f0f583"
+    },
+    {
+      "path": "dist/core/index/state.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/core/limits/limits.d.ts",
+      "sha256": "6cee6d396dc4ea67e3f3e905fbab499d2f219d528e8f3026bf08d5e5b903c998"
+    },
+    {
+      "path": "dist/core/limits/limits.js",
+      "sha256": "a0a9d000e1455dacd821140bbf2007408c33b1434174e8ccd1600c1f2bdf1d6c"
+    },
+    {
+      "path": "dist/core/limits/work.d.ts",
+      "sha256": "47d5e0d6b2f453f0b522aa98031d089f7e227b637b6be59c34bbd59cfc86e547"
+    },
+    {
+      "path": "dist/core/limits/work.js",
+      "sha256": "20bcd5f14b516f67e49b32b00b168d629fb76d0de396c24e576a6c98cef0fba9"
+    },
+    {
+      "path": "dist/core/mutations/capture.d.ts",
+      "sha256": "f8c8a79111b27bf21aef8931a51d69851b0b1cb64e30bc7dc4b6c3061c6f4066"
+    },
+    {
+      "path": "dist/core/mutations/capture.js",
+      "sha256": "291ff714d63323541a63c85b4082fedb7003826e81aebe4b9c35b01de954b676"
+    },
+    {
+      "path": "dist/core/mutations/delta.d.ts",
+      "sha256": "38bcb0efc9cc38209bf498251bcd6460d8766318958369a615fa05e17613c7e6"
+    },
+    {
+      "path": "dist/core/mutations/delta.js",
+      "sha256": "496263187ed4abacfdfd9046729f9496aa32e0fc8d8b68dc948a937e82c8481b"
+    },
+    {
+      "path": "dist/core/mutations/document.d.ts",
+      "sha256": "7da148adec932d9ec3654c99645c72d3d2e14b247f704251fb598bcd2420bfd7"
+    },
+    {
+      "path": "dist/core/mutations/document.js",
+      "sha256": "6107c7ef07a62e9a9d9d320c810e717432083ebfab891bb7497954cb25b63ab6"
+    },
+    {
+      "path": "dist/core/mutations/owner.d.ts",
+      "sha256": "a98cec1b43549b028641016eeffa170a24b6231ec6748b51b44e964eb66fd197"
+    },
+    {
+      "path": "dist/core/mutations/owner.js",
+      "sha256": "d0e9dca79db41d48a69e112bed053fe948d784e0b80edd2515af22b80cb68299"
+    },
+    {
+      "path": "dist/core/query/compile.d.ts",
+      "sha256": "5ef31bad989cd0ba5ab0f6e6019c5f268e10273b95792895036ef99c1ade929e"
+    },
+    {
+      "path": "dist/core/query/compile.js",
+      "sha256": "4d3b42a740a47c142b32bf1cc6a7011dcbdd987261d1dada3170c36320d6bf7d"
+    },
+    {
+      "path": "dist/core/query/evaluate.d.ts",
+      "sha256": "d37d9b1fce2298a9cb4ed4e322ac0ff452de8332182999709f882cf211cfe8f6"
+    },
+    {
+      "path": "dist/core/query/evaluate.js",
+      "sha256": "596fe7bb26e18034dfcf5d001807a50b318c529d9c493b01a3b334260e405ec2"
+    },
+    {
+      "path": "dist/core/query/search.d.ts",
+      "sha256": "65d9d12bc0ae93385e21a1e7d6d14f7482efa1043b9078f2e5b8913e8e555a44"
+    },
+    {
+      "path": "dist/core/query/search.js",
+      "sha256": "7aa0dd88bef3c1a3a89c6f42649175329a88ad12307b48d64b30f0c29a6d3524"
+    },
+    {
+      "path": "dist/core/query/work.d.ts",
+      "sha256": "726eb441981814a68b7d14bf0dc21adf4994499aebdb73ca94c8fedf2eb477c7"
+    },
+    {
+      "path": "dist/core/query/work.js",
+      "sha256": "3470ee5640dbb65b337ac6f7fabec3fdc6c3161dceab773b3d65879683ce115e"
+    },
+    {
+      "path": "dist/core/ranking/bm25.d.ts",
+      "sha256": "70c295380c521da1daa235a131caec551c825b195510067ae26d2a433d611fd3"
+    },
+    {
+      "path": "dist/core/ranking/bm25.js",
+      "sha256": "29990f62f130d37b6b586384b32506ebc512aea50aa07cc11e46f7b5f42f6356"
+    },
+    {
+      "path": "dist/core/ranking/page.d.ts",
+      "sha256": "1f615e43702f094fcfa276ebb676af8675f76994dfa9d05203b7fb9bff17cf3b"
+    },
+    {
+      "path": "dist/core/ranking/page.js",
+      "sha256": "09a4550f387524692e4366d5a38bf7d665c309749025fe2b0b8e0271a0aa742f"
+    },
+    {
+      "path": "dist/core/retrieval/exact.d.ts",
+      "sha256": "b3d52dd6e846ef5b25af672b0f1ead92db983e4d0aade90be7d362562c1789e2"
+    },
+    {
+      "path": "dist/core/retrieval/exact.js",
+      "sha256": "5cfe6bc485ab2bc217faa5dcb2b2cdb2ba92aae25f4d698ac1ffa5bad9c1ae9e"
+    },
+    {
+      "path": "dist/core/retrieval/expand.d.ts",
+      "sha256": "7e4d16bffc31092b2ab1f0383537c9a5b7271396527126179ea050f9258dacb6"
+    },
+    {
+      "path": "dist/core/retrieval/expand.js",
+      "sha256": "4547d1a27099eed1dbdc2403e5dcc496dd0b33a7c3623db768055c84cbc992bd"
+    },
+    {
+      "path": "dist/core/revision/participant.d.ts",
+      "sha256": "602011090601396fca68735b94cf8bf79f31e57b8eae6f494a8f117b37603ad9"
+    },
+    {
+      "path": "dist/core/revision/participant.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "dist/core/trace/facts.d.ts",
+      "sha256": "acea113456d983c0f9cf84393d75d08851da40222c6f5ef7862f2cfc12c26dfc"
+    },
+    {
+      "path": "dist/core/trace/facts.js",
+      "sha256": "0a1d971df28d194d16392c71801813d306a91321a9e0a462f4f28023a6378e82"
+    },
+    {
+      "path": "dist/index.d.ts",
+      "sha256": "5145c1c3fbec60550f09165662b00f3e815f90d8eecb3e3aa929a1a26020e4a9"
+    },
+    {
+      "path": "dist/index.js",
+      "sha256": "640c86a133d3432da6369c8d5de28228988d1d2ad5392519427730595b60d27e"
+    },
+    {
+      "path": "dist/integrations/localsearch/codec.d.ts",
+      "sha256": "88b0cb7589e750dbff77a94f4e8aed921fcfe03880acbddd107e254660fc8ed2"
+    },
+    {
+      "path": "dist/integrations/localsearch/codec.js",
+      "sha256": "c82dc255fd37b01965aba9ce4069c256e2b8fd2b18406848f799849da6e81b59"
+    },
+    {
+      "path": "dist/integrations/localsearch/error.d.ts",
+      "sha256": "6e1ca063fbb8be67b04cfdabb50ce110a746733c6f48b220c9fa4e8db5f91d65"
+    },
+    {
+      "path": "dist/integrations/localsearch/error.js",
+      "sha256": "467a260d40ac8a37f723898b0910d09c0bff59dc7443c1b9987b05a9658f1528"
+    },
+    {
+      "path": "dist/integrations/localsearch/index.d.ts",
+      "sha256": "ff77d10b91aef259c400e2a064b2eae8e15abc26ffd325e979c8a74488a52ebc"
+    },
+    {
+      "path": "dist/integrations/localsearch/index.js",
+      "sha256": "9ee5e39284d8951f0d0b5ee3c8b2ccd8d4d3dd6b466a71525ff838034e0332ba"
+    },
+    {
+      "path": "dist/integrations/localsearch/legacy.d.ts",
+      "sha256": "aa5f137123ef638a72f21970b4cc998e691c1ee04a1a28aace64a31674fcd617"
+    },
+    {
+      "path": "dist/integrations/localsearch/legacy.js",
+      "sha256": "4f53e053e45554f33ee0050b9053c181e7b24610989e3f5a2922f1bed2095597"
+    },
+    {
+      "path": "dist/integrations/localsearch/LICENSE.LocalSearch",
+      "sha256": "725220e34f62b1a21a6455157b433e466e3255141eea6157040779ddc2e384ee"
+    },
+    {
+      "path": "dist/integrations/localsearch/migration.d.ts",
+      "sha256": "ec2f11c78e458a38145271f52681a90a883483646a1bd24ed8c13e668e69dc5a"
+    },
+    {
+      "path": "dist/integrations/localsearch/migration.js",
+      "sha256": "179d23ae1d4a2ef4a5ed3dedcfc16595477b8018232c9f9654b59199ea3cab80"
+    },
+    {
+      "path": "dist/integrations/localsearch/types.d.ts",
+      "sha256": "2bc793e6084832bf2b7bb5b9b95b4c41c24d123d02fd3969b04c131cc21e7517"
+    },
+    {
+      "path": "dist/integrations/localsearch/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    }
+  ],
+  "preservedEvidence": [
+    {
+      "path": "docs/evidence/RX-4002-memory.json",
+      "sha256": "3f95ed7609ec82b6eb68da667a4a599ab2d490e5b0a97de12a22869a06ef7fb9"
+    },
+    {
+      "path": "docs/evidence/RX-4002-memory-graphs.json",
+      "sha256": "adcb92eccd9be000944cab19373497f3f105672de3d3ad2785960892f9dbc088"
+    },
+    {
+      "path": "docs/evidence/RX-4002-memory-retainers.json",
+      "sha256": "f2d9cf3f9aec3deaf75b34434865a4d1f9754f099ba6e22ec53f3063c77a293e"
+    },
+    {
+      "path": "docs/evidence/RX-4002-memory-restore.json",
+      "sha256": "77057e6c5d1264dceeaf2f87cc25e2b62ee9e1965b26dfb0e3ac6e08bda8abb7"
+    },
+    {
+      "path": "docs/evidence/RX-4002-memory-browser.json.gz",
+      "sha256": "8afb897b608b6323a732b9dc89eb787029bc85847b27f3d161137eabcd7e341d"
+    }
+  ],
+  "observations": [
+    {
+      "size": 1000,
+      "branch": "noop",
+      "execution": {
+        "childPid": 2574,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 1258.079917,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-noop-child.json",
+        "sha256": "14cae12d6b8f464bc91201a96284970415dcfdafb91fd47c89958c7291e96c4f"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 1000,
+        "branch": "noop",
+        "pid": 2574,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-noop-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-noop-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-noop-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 80412672,
+              "heapTotal": 28131328,
+              "heapUsed": 9102680,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 80412672,
+              "heapTotal": 28131328,
+              "heapUsed": 8846736,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 80412672,
+              "heapTotal": 28131328,
+              "heapUsed": 8825896,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123387904,
+              "heapTotal": 13451264,
+              "heapUsed": 8480632,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123387904,
+              "heapTotal": 13451264,
+              "heapUsed": 8488936,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123387904,
+              "heapTotal": 13451264,
+              "heapUsed": 8489664,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123322368,
+              "heapTotal": 11354112,
+              "heapUsed": 8489840,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123322368,
+              "heapTotal": 11354112,
+              "heapUsed": 8489720,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123322368,
+              "heapTotal": 11354112,
+              "heapUsed": 8490992,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "0c3d02e548a04c4d8288eeb9e9f04544febe6495417f43b6c0767f4cd77c9a69",
+        "verification": [
+          {
+            "total": 1000,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 27,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 334,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-noop-baseline.heapsnapshot",
+          "bytes": 8787677,
+          "sha256": "57ee1129ad98ed93238eeff83cc8537abf28fdd78a4fc2afb04160c197a26a32"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-noop-noop.heapsnapshot",
+          "bytes": 8794549,
+          "sha256": "f7e4685fcbd7e3ba2f6fcd9706282f75e238d883848c982b16ad785aeaa7a312"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-noop-final.heapsnapshot",
+          "bytes": 8798719,
+          "sha256": "f975b6ca1cdc0e53c1ed3ceec231d1e05ae2d11a13cb35d19814690559883ba7"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587,
+          "sourceOrPositions": 48589
+        },
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587,
+          "sourceOrPositions": 48589
+        },
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587,
+          "sourceOrPositions": 48589
+        }
+      ],
+      "controls": [
+        {
+          "positive": 48591,
+          "negative": 48593,
+          "sharedLeft": 48595,
+          "sharedRight": 48595,
+          "externalId": 48595
+        },
+        {
+          "positive": 48591,
+          "negative": 48593,
+          "sharedLeft": 48595,
+          "sharedRight": 48595,
+          "externalId": 48595
+        },
+        {
+          "positive": 48591,
+          "externalId": 48595
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 21333,
+          "baselineSelfSizeBytes": 1871792
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "noopToFinalMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "2": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-1000-noop.json.gz",
+        "sha256": "4bfb920648683471821fa658da1ce18f27748830ee65f6d7d736a9cae4008b45",
+        "bytes": 61343,
+        "decompressedSha256": "21e18ef1d6263da544bb982bdd5410ce48f414233875d08ab0a6bd83b41bfdcc",
+        "decompressedBytes": 662405
+      }
+    },
+    {
+      "size": 1000,
+      "branch": "side",
+      "execution": {
+        "childPid": 2576,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 1225.657042,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-side-child.json",
+        "sha256": "79385d3cc5d6a37ebade1a979ab44f61dfbd866a4d414846c68d0d3cff079890"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 1000,
+        "branch": "side",
+        "pid": 2576,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-side-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-side-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-side-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": true
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 80134144,
+              "heapTotal": 28655616,
+              "heapUsed": 9256800,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 80183296,
+              "heapTotal": 28131328,
+              "heapUsed": 8848144,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 80183296,
+              "heapTotal": 28131328,
+              "heapUsed": 8826408,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123289600,
+              "heapTotal": 13451264,
+              "heapUsed": 8481144,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123289600,
+              "heapTotal": 13451264,
+              "heapUsed": 8489448,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123289600,
+              "heapTotal": 13451264,
+              "heapUsed": 8490176,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123240448,
+              "heapTotal": 11354112,
+              "heapUsed": 7979240,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123240448,
+              "heapTotal": 11354112,
+              "heapUsed": 7979088,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123240448,
+              "heapTotal": 11354112,
+              "heapUsed": 7980136,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "0c3d02e548a04c4d8288eeb9e9f04544febe6495417f43b6c0767f4cd77c9a69",
+        "verification": [
+          {
+            "total": 1000,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 27,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 334,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "sourceOrPositions"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-side-baseline.heapsnapshot",
+          "bytes": 8777987,
+          "sha256": "4ac7d30b3bd07ec4e878148fd1c8bdbddfca4aad1d3439de6a88146b571b3981"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-side-noop.heapsnapshot",
+          "bytes": 8784887,
+          "sha256": "2a56e8b7c43d7bce895ea6bca3dd5953fb09c0658f8f6699a02ee18edc6fea8a"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-side-final.heapsnapshot",
+          "bytes": 8284321,
+          "sha256": "48fcde1005a82eb428dea5eb582784b100d4e1d11e438b04ac33c95bf3e97ce4"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587,
+          "sourceOrPositions": 48589
+        },
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587,
+          "sourceOrPositions": 48589
+        },
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587
+        }
+      ],
+      "controls": [
+        {
+          "positive": 48591,
+          "negative": 48593,
+          "sharedLeft": 48595,
+          "sharedRight": 48595,
+          "externalId": 48595
+        },
+        {
+          "positive": 48591,
+          "negative": 48593,
+          "sharedLeft": 48595,
+          "sharedRight": 48595,
+          "externalId": 48595
+        },
+        {
+          "positive": 48591,
+          "externalId": 48595
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 21333,
+          "baselineSelfSizeBytes": 1871792
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 6522,
+          "baselineSelfSizeBytes": 419080
+        },
+        "noopToFinalMissing": {
+          "nodes": 6522,
+          "baselineSelfSizeBytes": 419080
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "2": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 6522,
+            "baselineSelfSizeBytes": 419080
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-1000-side.json.gz",
+        "sha256": "ca7ab21538e46566fe4bd6633d3fe781385d2864f8f633ad8767337cee4608bb",
+        "bytes": 61479,
+        "decompressedSha256": "2973b148fc7964cb0a5af50649dfd1a187d9aeca7b2b021fb47a8a23f0795b39",
+        "decompressedBytes": 676095
+      }
+    },
+    {
+      "size": 1000,
+      "branch": "reverse",
+      "execution": {
+        "childPid": 2581,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 1217.4804580000005,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-reverse-child.json",
+        "sha256": "dfe9a8e11cc979231fb52c27344e2e4f9231de3ec4551e4d183da3104632a520"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 1000,
+        "branch": "reverse",
+        "pid": 2581,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-reverse-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-reverse-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-reverse-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": true,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 80019456,
+              "heapTotal": 28917760,
+              "heapUsed": 9256744,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 80019456,
+              "heapTotal": 28917760,
+              "heapUsed": 8848152,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 80019456,
+              "heapTotal": 28917760,
+              "heapUsed": 8826248,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123142144,
+              "heapTotal": 13451264,
+              "heapUsed": 8481280,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123142144,
+              "heapTotal": 13451264,
+              "heapUsed": 8489584,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123142144,
+              "heapTotal": 13451264,
+              "heapUsed": 8490312,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123076608,
+              "heapTotal": 11091968,
+              "heapUsed": 7405128,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123076608,
+              "heapTotal": 11091968,
+              "heapUsed": 7404992,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123076608,
+              "heapTotal": 11091968,
+              "heapUsed": 7405656,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "0c3d02e548a04c4d8288eeb9e9f04544febe6495417f43b6c0767f4cd77c9a69",
+        "verification": [
+          {
+            "total": 1000,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 27,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 334,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "reverseDocuments"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-reverse-baseline.heapsnapshot",
+          "bytes": 8787187,
+          "sha256": "a37c4a29d799735c288ebb553c68c9924cef75b39996cb383fbe38e662c8f173"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-reverse-noop.heapsnapshot",
+          "bytes": 8794091,
+          "sha256": "a388de662860b0b946ebc2a09fae8348527bc98640085c7502f8da6dc2e4a3b5"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-reverse-final.heapsnapshot",
+          "bytes": 7840465,
+          "sha256": "80adbe6fed3fa98cb8c85d2ef42fb49e898c1ca7a1960737b38d4cb8244946f4"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 56607,
+          "dictionaryPostingsStatistics": 56609,
+          "sourceOrPositions": 56611
+        },
+        {
+          "reverseDocuments": 56607,
+          "dictionaryPostingsStatistics": 56609,
+          "sourceOrPositions": 56611
+        },
+        {
+          "sourceOrPositions": 56611,
+          "dictionaryPostingsStatistics": 56609
+        }
+      ],
+      "controls": [
+        {
+          "positive": 52951,
+          "negative": 52953,
+          "sharedLeft": 52683,
+          "sharedRight": 52683,
+          "externalId": 52683
+        },
+        {
+          "positive": 52951,
+          "negative": 52953,
+          "sharedLeft": 52683,
+          "sharedRight": 52683,
+          "externalId": 52683
+        },
+        {
+          "positive": 52951,
+          "externalId": 52683
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 21333,
+          "baselineSelfSizeBytes": 1871792
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 9517,
+          "baselineSelfSizeBytes": 850728
+        },
+        "noopToFinalMissing": {
+          "nodes": 9517,
+          "baselineSelfSizeBytes": 850728
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 9517,
+            "baselineSelfSizeBytes": 850728
+          },
+          "2": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-1000-reverse.json.gz",
+        "sha256": "19c4cf7d6ecb1ada7eb99d0cf7c8c23deee07fe9e76822431fd568ebbf54bd80",
+        "bytes": 61712,
+        "decompressedSha256": "431460cf828c9778384e75e384263c6376a8d3c9e7271b396d26f4d2c2d9ce86",
+        "decompressedBytes": 686368
+      }
+    },
+    {
+      "size": 1000,
+      "branch": "fields",
+      "execution": {
+        "childPid": 2585,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 1230.17,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-fields-child.json",
+        "sha256": "2084de5daf74f7bac308f852fbecafee2654f86e3d5bb0822b662e92f02e8b5c"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 1000,
+        "branch": "fields",
+        "pid": 2585,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-fields-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-fields-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-fields-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": true,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 79953920,
+              "heapTotal": 28393472,
+              "heapUsed": 9103096,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 80052224,
+              "heapTotal": 27869184,
+              "heapUsed": 8847168,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 80052224,
+              "heapTotal": 27869184,
+              "heapUsed": 8826328,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 122994688,
+              "heapTotal": 13189120,
+              "heapUsed": 8481072,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 122994688,
+              "heapTotal": 13189120,
+              "heapUsed": 8489376,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 122994688,
+              "heapTotal": 13189120,
+              "heapUsed": 8490104,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 122961920,
+              "heapTotal": 11091968,
+              "heapUsed": 7773024,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 122961920,
+              "heapTotal": 11091968,
+              "heapUsed": 7772888,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 122961920,
+              "heapTotal": 11091968,
+              "heapUsed": 7773712,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "0c3d02e548a04c4d8288eeb9e9f04544febe6495417f43b6c0767f4cd77c9a69",
+        "verification": [
+          {
+            "total": 1000,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 27,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 334,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "dictionaryPostingsStatistics"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-fields-baseline.heapsnapshot",
+          "bytes": 8788601,
+          "sha256": "d8a9ae9eb62b4f8a5233ad702bc2dc56a9d4ae17f738393cc25e1860f9ecc8e7"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-fields-noop.heapsnapshot",
+          "bytes": 8795470,
+          "sha256": "7999ed24e57137cd6f37bb1f6223586f28195fea9789360e3ed29209941d6e18"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-fields-final.heapsnapshot",
+          "bytes": 8307589,
+          "sha256": "4bf3b98019ef7aa739c749b72fda2238109021bc79b932d6ff91e4d08d871ed4"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 196791,
+          "dictionaryPostingsStatistics": 196793,
+          "sourceOrPositions": 196795
+        },
+        {
+          "reverseDocuments": 196791,
+          "dictionaryPostingsStatistics": 196793,
+          "sourceOrPositions": 196795
+        },
+        {
+          "reverseDocuments": 196791,
+          "sourceOrPositions": 196795
+        }
+      ],
+      "controls": [
+        {
+          "positive": 196797,
+          "negative": 168219,
+          "sharedLeft": 140039,
+          "sharedRight": 140039,
+          "externalId": 140039
+        },
+        {
+          "positive": 196797,
+          "negative": 168219,
+          "sharedLeft": 140039,
+          "sharedRight": 140039,
+          "externalId": 140039
+        },
+        {
+          "positive": 196797,
+          "externalId": 140039
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 21333,
+          "baselineSelfSizeBytes": 1871792
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 4243,
+          "baselineSelfSizeBytes": 568576
+        },
+        "noopToFinalMissing": {
+          "nodes": 4243,
+          "baselineSelfSizeBytes": 568576
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [
+          {
+            "id": 133881,
+            "baseline": 24,
+            "final": 160
+          },
+          {
+            "id": 134011,
+            "baseline": 256,
+            "final": 16
+          },
+          {
+            "id": 134579,
+            "baseline": 24,
+            "final": 232
+          }
+        ],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "2": {
+            "nodes": 4243,
+            "baselineSelfSizeBytes": 568576
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-1000-fields.json.gz",
+        "sha256": "d2b8b76ff6b0efc5a0f882613f14bf65c2d423c81700d74537aeb2936bcd78e9",
+        "bytes": 61525,
+        "decompressedSha256": "cd32286493d36de837e2371bbbaa1a240ffe3c78fb2941831f0fc82538a3ec3d",
+        "decompressedBytes": 673976
+      }
+    },
+    {
+      "size": 1000,
+      "branch": "joint",
+      "execution": {
+        "childPid": 2589,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 1180.2724170000001,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-joint-child.json",
+        "sha256": "f0b57a926b341ac1e9ce83fd26402c536c77cf53960ebade3fef11408c25fc01"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 1000,
+        "branch": "joint",
+        "pid": 2589,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-joint-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-joint-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-joint-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": true,
+              "dictionaryPostingsStatistics": true,
+              "sourceOrPositions": true
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 80347136,
+              "heapTotal": 28393472,
+              "heapUsed": 9256944,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 80347136,
+              "heapTotal": 28393472,
+              "heapUsed": 8848288,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 80347136,
+              "heapTotal": 28131328,
+              "heapUsed": 8826480,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123191296,
+              "heapTotal": 13451264,
+              "heapUsed": 8481408,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123191296,
+              "heapTotal": 13451264,
+              "heapUsed": 8489712,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123191296,
+              "heapTotal": 13451264,
+              "heapUsed": 8490440,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 123109376,
+              "heapTotal": 11354112,
+              "heapUsed": 6144120,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 123109376,
+              "heapTotal": 9256960,
+              "heapUsed": 6143968,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 123109376,
+              "heapTotal": 9256960,
+              "heapUsed": 6143528,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "0c3d02e548a04c4d8288eeb9e9f04544febe6495417f43b6c0767f4cd77c9a69",
+        "verification": [
+          {
+            "total": 1000,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 27,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 334,
+            "revision": 4,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "reverseDocuments",
+          "dictionaryPostingsStatistics",
+          "sourceOrPositions"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-joint-baseline.heapsnapshot",
+          "bytes": 8790636,
+          "sha256": "ae0e69c29a6079d70e28d569a2495dc63d8b400254c2b10f45dde6a7a03ac089"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-joint-noop.heapsnapshot",
+          "bytes": 8797536,
+          "sha256": "fcccc4258a4e14810a4c7957dac5b4bb27298b9d8076375d2ff7d8902e50d453"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/1000-joint-final.heapsnapshot",
+          "bytes": 6778213,
+          "sha256": "27233f9bba5c6db4f29914676bd31be761a85f810f2f55aec0385b806ae99bee"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587,
+          "sourceOrPositions": 48589
+        },
+        {
+          "reverseDocuments": 48585,
+          "dictionaryPostingsStatistics": 48587,
+          "sourceOrPositions": 48589
+        },
+        {}
+      ],
+      "controls": [
+        {
+          "positive": 48591,
+          "negative": 48593,
+          "sharedLeft": 48595,
+          "sharedRight": 48595,
+          "externalId": 48595
+        },
+        {
+          "positive": 48591,
+          "negative": 48593,
+          "sharedLeft": 48595,
+          "sharedRight": 48595,
+          "externalId": 48595
+        },
+        {
+          "positive": 48591,
+          "externalId": 48595
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 21333,
+          "baselineSelfSizeBytes": 1871792
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 21320,
+          "baselineSelfSizeBytes": 1871512
+        },
+        "noopToFinalMissing": {
+          "nodes": 21320,
+          "baselineSelfSizeBytes": 1871512
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 9517,
+            "baselineSelfSizeBytes": 850728
+          },
+          "2": {
+            "nodes": 4246,
+            "baselineSelfSizeBytes": 568880
+          },
+          "3": {
+            "nodes": 37,
+            "baselineSelfSizeBytes": 888
+          },
+          "4": {
+            "nodes": 6522,
+            "baselineSelfSizeBytes": 419080
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 998,
+            "baselineSelfSizeBytes": 31936
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-1000-joint.json.gz",
+        "sha256": "f71d607bf5cc8fac0c9a4103ff59a0fe26aa5b4d197101ed40e679ee4839ce07",
+        "bytes": 60110,
+        "decompressedSha256": "9d0f06551e868c37db837af89cc1e6c09cdc09372de70910d32525ad3af11a4a",
+        "decompressedBytes": 699334
+      }
+    },
+    {
+      "size": 10000,
+      "branch": "noop",
+      "execution": {
+        "childPid": 2593,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 16608.773957999998,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-noop-child.json",
+        "sha256": "ca48c3fbbd88aec5e7139bb4b3262457988f1691e58ac8155480ea28e07cb9a8"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 10000,
+        "branch": "noop",
+        "pid": 2593,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-noop-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-noop-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-noop-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 215187456,
+              "heapTotal": 168378368,
+              "heapUsed": 26311384,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 214777856,
+              "heapTotal": 167067648,
+              "heapUsed": 25871008,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 214810624,
+              "heapTotal": 166543360,
+              "heapUsed": 25848864,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 197312512,
+              "heapTotal": 30752768,
+              "heapUsed": 25574504,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 197345280,
+              "heapTotal": 30752768,
+              "heapUsed": 25581672,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 197345280,
+              "heapTotal": 30752768,
+              "heapUsed": 25582400,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 197148672,
+              "heapTotal": 28393472,
+              "heapUsed": 25582560,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 197148672,
+              "heapTotal": 28393472,
+              "heapUsed": 25582384,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 197148672,
+              "heapTotal": 28393472,
+              "heapUsed": 25583656,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "6d2c203a79f672d6db5a40fa7851b210b6947c841a8edfe6b0d53e86fe9039b6",
+        "verification": [
+          {
+            "total": 10000,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 271,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 3334,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-noop-baseline.heapsnapshot",
+          "bytes": 23576700,
+          "sha256": "678640ea439c471e6ddb2ca45c9411b36e2e9bb2c8d2c87055e53e49c461d91e"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-noop-noop.heapsnapshot",
+          "bytes": 23582811,
+          "sha256": "0889a72a4b448e6670bbc98706639fa774bf7a288dad2112630c228606ffcd34"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-noop-final.heapsnapshot",
+          "bytes": 23586909,
+          "sha256": "a8820087e34ee3cda117483e801eed11b032d37d1d7f60ce10b71b5df5a66bdd"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 487165,
+          "dictionaryPostingsStatistics": 475213,
+          "sourceOrPositions": 475221
+        },
+        {
+          "reverseDocuments": 487165,
+          "dictionaryPostingsStatistics": 475213,
+          "sourceOrPositions": 475221
+        },
+        {
+          "reverseDocuments": 487165,
+          "dictionaryPostingsStatistics": 475213,
+          "sourceOrPositions": 475221
+        }
+      ],
+      "controls": [
+        {
+          "positive": 487185,
+          "negative": 487261,
+          "sharedLeft": 487351,
+          "sharedRight": 487351,
+          "externalId": 487351
+        },
+        {
+          "positive": 487185,
+          "negative": 487261,
+          "sharedLeft": 487351,
+          "sharedRight": 487351,
+          "externalId": 487351
+        },
+        {
+          "positive": 487185,
+          "externalId": 487351
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 175881,
+          "baselineSelfSizeBytes": 15891104
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "noopToFinalMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "2": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-10000-noop.json.gz",
+        "sha256": "1e9030358a6930bb1c80e4110e3e7c0a45d9172b6cf3e920a79079b4b2059b0f",
+        "bytes": 494339,
+        "decompressedSha256": "a100d001e32965ea98f1b371f73c581705f9e4c3b724cae7ba89a63c64795ec5",
+        "decompressedBytes": 5523408
+      }
+    },
+    {
+      "size": 10000,
+      "branch": "side",
+      "execution": {
+        "childPid": 2621,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 16573.001708999996,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-side-child.json",
+        "sha256": "a476738339c8bafb5948d167ca46a80ec0ac4b70f73d6e3966fb35f640873d37"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 10000,
+        "branch": "side",
+        "pid": 2621,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-side-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-side-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-side-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": true
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 214155264,
+              "heapTotal": 167854080,
+              "heapUsed": 26308960,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 213778432,
+              "heapTotal": 166805504,
+              "heapUsed": 25868736,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 213778432,
+              "heapTotal": 166281216,
+              "heapUsed": 25847032,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 196706304,
+              "heapTotal": 30228480,
+              "heapUsed": 25572672,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 196706304,
+              "heapTotal": 30228480,
+              "heapUsed": 25579840,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 196706304,
+              "heapTotal": 30228480,
+              "heapUsed": 25580568,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 196640768,
+              "heapTotal": 28131328,
+              "heapUsed": 20945680,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 196640768,
+              "heapTotal": 28131328,
+              "heapUsed": 20945472,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 196640768,
+              "heapTotal": 28131328,
+              "heapUsed": 20944672,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "6d2c203a79f672d6db5a40fa7851b210b6947c841a8edfe6b0d53e86fe9039b6",
+        "verification": [
+          {
+            "total": 10000,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 271,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 3334,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "sourceOrPositions"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-side-baseline.heapsnapshot",
+          "bytes": 23535674,
+          "sha256": "edf08e2c1ffb969407c965d12b693030d7cfe9fac94b153a6bd7443a80209217"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-side-noop.heapsnapshot",
+          "bytes": 23541736,
+          "sha256": "0717372a61b429a96e5ebca1d740dc145ce20383c6da989ab20a760a37657c15"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-side-final.heapsnapshot",
+          "bytes": 18882069,
+          "sha256": "6fccca66bb41591f4e986b19176e12b6072bb26aa2671b4c36635a4e272d55a8"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 72333,
+          "dictionaryPostingsStatistics": 72335,
+          "sourceOrPositions": 72337
+        },
+        {
+          "reverseDocuments": 72333,
+          "dictionaryPostingsStatistics": 72335,
+          "sourceOrPositions": 72337
+        },
+        {
+          "reverseDocuments": 72333,
+          "dictionaryPostingsStatistics": 72335
+        }
+      ],
+      "controls": [
+        {
+          "positive": 72339,
+          "negative": 72341,
+          "sharedLeft": 72343,
+          "sharedRight": 72343,
+          "externalId": 72343
+        },
+        {
+          "positive": 72339,
+          "negative": 72341,
+          "sharedLeft": 72343,
+          "sharedRight": 72343,
+          "externalId": 72343
+        },
+        {
+          "positive": 72339,
+          "externalId": 72343
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 175881,
+          "baselineSelfSizeBytes": 15891104
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 60522,
+          "baselineSelfSizeBytes": 3896200
+        },
+        "noopToFinalMissing": {
+          "nodes": 60522,
+          "baselineSelfSizeBytes": 3896200
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "2": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 60522,
+            "baselineSelfSizeBytes": 3896200
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-10000-side.json.gz",
+        "sha256": "e722d141cdb7c1702793935f4381321f9419eb19cf663af377d9c184f27c979f",
+        "bytes": 493695,
+        "decompressedSha256": "a242029e0589ea33c817e94b54466cbdb61bad900c6fb0f19e44f821d058a4d7",
+        "decompressedBytes": 5635429
+      }
+    },
+    {
+      "size": 10000,
+      "branch": "reverse",
+      "execution": {
+        "childPid": 2648,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 16042.931082999996,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-reverse-child.json",
+        "sha256": "004966d1c274704c5c5104096f01306f0006ad144d62590ef4697608e448d821"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 10000,
+        "branch": "reverse",
+        "pid": 2648,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-reverse-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-reverse-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-reverse-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": true,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 207765504,
+              "heapTotal": 166019072,
+              "heapUsed": 26409952,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 207405056,
+              "heapTotal": 164708352,
+              "heapUsed": 25868480,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 207405056,
+              "heapTotal": 164708352,
+              "heapUsed": 25846464,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 192806912,
+              "heapTotal": 30490624,
+              "heapUsed": 25572112,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 192839680,
+              "heapTotal": 30752768,
+              "heapUsed": 25579280,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 192839680,
+              "heapTotal": 30752768,
+              "heapUsed": 25580120,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 194379776,
+              "heapTotal": 28131328,
+              "heapUsed": 15185520,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 194379776,
+              "heapTotal": 25509888,
+              "heapUsed": 15185568,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 194379776,
+              "heapTotal": 25509888,
+              "heapUsed": 15186192,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "6d2c203a79f672d6db5a40fa7851b210b6947c841a8edfe6b0d53e86fe9039b6",
+        "verification": [
+          {
+            "total": 10000,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 271,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 3334,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "reverseDocuments"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-reverse-baseline.heapsnapshot",
+          "bytes": 23569225,
+          "sha256": "aac7ec085eef951ac7660d24cd13ea3331de310b73573a0b4f3dd00889ccd37a"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-reverse-noop.heapsnapshot",
+          "bytes": 23575293,
+          "sha256": "3909ff22d45ee82430b5cb8aef8fc9516e74ab39b1be985440165e880a4e73d1"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-reverse-final.heapsnapshot",
+          "bytes": 14328107,
+          "sha256": "db4beccfab6345b04be3d7b500a276db600cf07832df4157677d65cb1d980c60"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 66581,
+          "dictionaryPostingsStatistics": 66583,
+          "sourceOrPositions": 66585
+        },
+        {
+          "reverseDocuments": 66581,
+          "dictionaryPostingsStatistics": 66583,
+          "sourceOrPositions": 66585
+        },
+        {
+          "sourceOrPositions": 66585,
+          "dictionaryPostingsStatistics": 66583
+        }
+      ],
+      "controls": [
+        {
+          "positive": 66587,
+          "negative": 66589,
+          "sharedLeft": 66591,
+          "sharedRight": 66591,
+          "externalId": 66591
+        },
+        {
+          "positive": 66587,
+          "negative": 66589,
+          "sharedLeft": 66591,
+          "sharedRight": 66591,
+          "externalId": 66591
+        },
+        {
+          "positive": 66587,
+          "externalId": 66591
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 175881,
+          "baselineSelfSizeBytes": 15891104
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 90513,
+          "baselineSelfSizeBytes": 8215752
+        },
+        "noopToFinalMissing": {
+          "nodes": 90513,
+          "baselineSelfSizeBytes": 8215752
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [
+          {
+            "id": 334193,
+            "baseline": 24,
+            "final": 16
+          },
+          {
+            "id": 334209,
+            "baseline": 24,
+            "final": 16
+          },
+          {
+            "id": 334225,
+            "baseline": 24,
+            "final": 16
+          },
+          {
+            "id": 334241,
+            "baseline": 24,
+            "final": 16
+          }
+        ],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 90513,
+            "baselineSelfSizeBytes": 8215752
+          },
+          "2": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-10000-reverse.json.gz",
+        "sha256": "43663ba63191e3e5256e991aae179ad9d6358cbfe8cd9ce4c185f8607cde3ee1",
+        "bytes": 494500,
+        "decompressedSha256": "11b938a86687520ce36d0ea70097ce269374da9cfa08dd2c0f9059c9502fa57b",
+        "decompressedBytes": 5669619
+      }
+    },
+    {
+      "size": 10000,
+      "branch": "fields",
+      "execution": {
+        "childPid": 2718,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 15663.494959000003,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-fields-child.json",
+        "sha256": "a59a2f718563e8183553367d172bf5574265ab96408fa5a36cc2b85f4e44a4d0"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 10000,
+        "branch": "fields",
+        "pid": 2718,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-fields-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-fields-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-fields-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": true,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 207650816,
+              "heapTotal": 169689088,
+              "heapUsed": 26399344,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 207405056,
+              "heapTotal": 163397632,
+              "heapUsed": 25870776,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 207405056,
+              "heapTotal": 163397632,
+              "heapUsed": 25848472,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 193167360,
+              "heapTotal": 30490624,
+              "heapUsed": 25574120,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 193167360,
+              "heapTotal": 30490624,
+              "heapUsed": 25581288,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 193167360,
+              "heapTotal": 30490624,
+              "heapUsed": 25582016,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 192823296,
+              "heapTotal": 28393472,
+              "heapUsed": 21596064,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 192823296,
+              "heapTotal": 27607040,
+              "heapUsed": 21595928,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 192823296,
+              "heapTotal": 27607040,
+              "heapUsed": 21596504,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "6d2c203a79f672d6db5a40fa7851b210b6947c841a8edfe6b0d53e86fe9039b6",
+        "verification": [
+          {
+            "total": 10000,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 271,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 3334,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "dictionaryPostingsStatistics"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-fields-baseline.heapsnapshot",
+          "bytes": 23473298,
+          "sha256": "e588f9018b43644f047eac642629170cc82d1347ac336b9e2e4e187d4ff96226"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-fields-noop.heapsnapshot",
+          "bytes": 23479352,
+          "sha256": "0ae5376490cb8aeede4c9ab0f18f1df493328e11a44f01eba5695da5be19f1e2"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-fields-final.heapsnapshot",
+          "bytes": 21256734,
+          "sha256": "f00b2d09384fe2d5550ec4878d8cecd3ee4fa19d293f3ffa66d8fd6b1452feb5"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 462949,
+          "dictionaryPostingsStatistics": 462953,
+          "sourceOrPositions": 463355
+        },
+        {
+          "reverseDocuments": 462949,
+          "dictionaryPostingsStatistics": 462953,
+          "sourceOrPositions": 463355
+        },
+        {
+          "reverseDocuments": 462949,
+          "sourceOrPositions": 463355
+        }
+      ],
+      "controls": [
+        {
+          "positive": 523651,
+          "negative": 523721,
+          "sharedLeft": 352161,
+          "sharedRight": 352161,
+          "externalId": 352161
+        },
+        {
+          "positive": 523651,
+          "negative": 523721,
+          "sharedLeft": 352161,
+          "sharedRight": 352161,
+          "externalId": 352161
+        },
+        {
+          "positive": 523651,
+          "externalId": 352161
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 175881,
+          "baselineSelfSizeBytes": 15891104
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 14793,
+          "baselineSelfSizeBytes": 3457792
+        },
+        "noopToFinalMissing": {
+          "nodes": 14793,
+          "baselineSelfSizeBytes": 3457792
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [
+          {
+            "id": 163357,
+            "baseline": 160,
+            "final": 16
+          }
+        ],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "2": {
+            "nodes": 14793,
+            "baselineSelfSizeBytes": 3457792
+          },
+          "3": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "4": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-10000-fields.json.gz",
+        "sha256": "467f3da65076b76d91b04e7c01d3f67272d299e0af29f630563de11e7dbfb65d",
+        "bytes": 494856,
+        "decompressedSha256": "3155da48fbbb047ebffc5527df5b0d6710defd88269ee6d57501ea56013a8cb7",
+        "decompressedBytes": 5553165
+      }
+    },
+    {
+      "size": 10000,
+      "branch": "joint",
+      "execution": {
+        "childPid": 2962,
+        "childExitCode": 0,
+        "childSignal": null,
+        "childWallMs": 15448.888542,
+        "childWallLimitMs": 180000,
+        "childTimedOut": false,
+        "terminationAttempted": false,
+        "killAttempted": false,
+        "spawnFailure": null,
+        "stderr": ""
+      },
+      "outcome": "Observed",
+      "childReport": {
+        "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-joint-child.json",
+        "sha256": "14d5fd62fd0922167680e5f7cd7c2156c47ba711f3183f7be1e50149d33e159d"
+      },
+      "child": {
+        "kind": "rx4002-observer-held-component-release-v1",
+        "size": 10000,
+        "branch": "joint",
+        "pid": 2962,
+        "node": "v24.21.0",
+        "versions": {
+          "node": "24.21.0",
+          "acorn": "8.18.0",
+          "ada": "4.0.0",
+          "amaro": "1.1.11",
+          "ares": "1.34.8",
+          "brotli": "1.2.0",
+          "cldr": "48.0",
+          "icu": "78.3",
+          "llhttp": "9.4.3",
+          "merve": "1.2.2",
+          "modules": "137",
+          "napi": "10",
+          "nbytes": "0.1.4",
+          "ncrypto": "0.0.1",
+          "nghttp2": "1.70.0",
+          "nghttp3": "",
+          "ngtcp2": "",
+          "openssl": "3.6.4",
+          "simdjson": "4.6.11",
+          "simdutf": "6.4.0",
+          "sqlite": "3.53.4",
+          "tz": "2026a",
+          "undici": "7.29.1",
+          "unicode": "17.0",
+          "uv": "1.52.1",
+          "uvwasi": "0.0.23",
+          "v8": "13.6.233.17-node.53",
+          "zlib": "1.2.12",
+          "zstd": "1.5.7"
+        },
+        "snapshots": [
+          {
+            "label": "baseline",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-joint-baseline.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "noop",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-joint-noop.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": false,
+              "dictionaryPostingsStatistics": false,
+              "sourceOrPositions": false
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": false,
+              "shared": false
+            }
+          },
+          {
+            "label": "final",
+            "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-joint-final.heapsnapshot",
+            "collected": {
+              "owner": true,
+              "engine": true,
+              "root": true,
+              "reverseDocuments": true,
+              "dictionaryPostingsStatistics": true,
+              "sourceOrPositions": true
+            },
+            "controlCollected": {
+              "positive": false,
+              "negative": true,
+              "shared": false
+            }
+          }
+        ],
+        "stages": [
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 0,
+            "bytes": {
+              "rss": 206536704,
+              "heapTotal": 169426944,
+              "heapUsed": 26399152,
+              "external": 2459017,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 1,
+            "bytes": {
+              "rss": 206258176,
+              "heapTotal": 164184064,
+              "heapUsed": 25870704,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "observer-held-after-public-dispose",
+            "cycle": 2,
+            "bytes": {
+              "rss": 206258176,
+              "heapTotal": 163921920,
+              "heapUsed": 25848400,
+              "external": 2459057,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 0,
+            "bytes": {
+              "rss": 195297280,
+              "heapTotal": 30490624,
+              "heapUsed": 25574048,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 1,
+            "bytes": {
+              "rss": 195395584,
+              "heapTotal": 30752768,
+              "heapUsed": 25581216,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "no-holder-change",
+            "cycle": 2,
+            "bytes": {
+              "rss": 195395584,
+              "heapTotal": 30752768,
+              "heapUsed": 25581944,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 0,
+            "bytes": {
+              "rss": 195313664,
+              "heapTotal": 22888448,
+              "heapUsed": 6245768,
+              "external": 2456461,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 1,
+            "bytes": {
+              "rss": 195313664,
+              "heapTotal": 8470528,
+              "heapUsed": 6245616,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          },
+          {
+            "label": "selected-holder-release",
+            "cycle": 2,
+            "bytes": {
+              "rss": 195313664,
+              "heapTotal": 8470528,
+              "heapUsed": 6242872,
+              "external": 2456459,
+              "arrayBuffers": 143787
+            }
+          }
+        ],
+        "outcome": "Observed",
+        "corpusSha256": "6d2c203a79f672d6db5a40fa7851b210b6947c841a8edfe6b0d53e86fe9039b6",
+        "verification": [
+          {
+            "total": 10000,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 271,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          },
+          {
+            "total": 3334,
+            "revision": 40,
+            "returned": 20,
+            "literalHitEligibility": true
+          }
+        ],
+        "releasedRoles": [
+          "reverseDocuments",
+          "dictionaryPostingsStatistics",
+          "sourceOrPositions"
+        ],
+        "baselineOwnersCollected": true,
+        "releasedRootsCollected": true
+      },
+      "dumps": [
+        {
+          "label": "baseline",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-joint-baseline.heapsnapshot",
+          "bytes": 23494236,
+          "sha256": "d3547826454086d49a618edd3b26c068fc6d56ac6f6c227571d74a07278bbf2c"
+        },
+        {
+          "label": "noop",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-joint-noop.heapsnapshot",
+          "bytes": 23500278,
+          "sha256": "4bba59a31347d6000a9e9a8bcc7dad55e78cbfbfa9edbf43da712ebb333427ba"
+        },
+        {
+          "label": "final",
+          "path": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x/10000-joint-final.heapsnapshot",
+          "bytes": 6826406,
+          "sha256": "f12dc0bba9c9f6064bc7487292138ca0580e206b99448497897c121aef02e64f"
+        }
+      ],
+      "roots": [
+        {
+          "reverseDocuments": 475393,
+          "dictionaryPostingsStatistics": 116617,
+          "sourceOrPositions": 116585
+        },
+        {
+          "reverseDocuments": 475393,
+          "dictionaryPostingsStatistics": 116617,
+          "sourceOrPositions": 116585
+        },
+        {}
+      ],
+      "controls": [
+        {
+          "positive": 507813,
+          "negative": 507887,
+          "sharedLeft": 434029,
+          "sharedRight": 434029,
+          "externalId": 434029
+        },
+        {
+          "positive": 507813,
+          "negative": 507887,
+          "sharedLeft": 434029,
+          "sharedRight": 434029,
+          "externalId": 434029
+        },
+        {
+          "positive": 507813,
+          "externalId": 434029
+        }
+      ],
+      "summary": {
+        "baseline": {
+          "nodes": 175881,
+          "baselineSelfSizeBytes": 15891104
+        },
+        "baselineToNoopMissing": {
+          "nodes": 0,
+          "baselineSelfSizeBytes": 0
+        },
+        "baselineToFinalMissing": {
+          "nodes": 175867,
+          "baselineSelfSizeBytes": 15890768
+        },
+        "noopToFinalMissing": {
+          "nodes": 175867,
+          "baselineSelfSizeBytes": 15890768
+        },
+        "reappearedIds": [],
+        "survivingSizeChanges": [
+          {
+            "id": 75041,
+            "baseline": 56,
+            "final": 64
+          }
+        ],
+        "finalMissingBySelectedRoleMask": {
+          "1": {
+            "nodes": 90516,
+            "baselineSelfSizeBytes": 8215792
+          },
+          "2": {
+            "nodes": 14794,
+            "baselineSelfSizeBytes": 3457952
+          },
+          "3": {
+            "nodes": 37,
+            "baselineSelfSizeBytes": 888
+          },
+          "4": {
+            "nodes": 60522,
+            "baselineSelfSizeBytes": 3896200
+          },
+          "5": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "6": {
+            "nodes": 0,
+            "baselineSelfSizeBytes": 0
+          },
+          "7": {
+            "nodes": 9998,
+            "baselineSelfSizeBytes": 319936
+          }
+        },
+        "meaning": "Baseline selected-data node self-sizes whose IDs are absent in actual later snapshots. Not total freed allocator bytes, exact normal live-engine component cost or a peak. Membership overlaps; no-op churn, surviving size changes and release branches remain separate."
+      },
+      "cohort": {
+        "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-memory-collection-cohort-10000-joint.json.gz",
+        "sha256": "fc3d9b1162806e19e4e08a47310ed75fda14d4ee5d3c1abc3ec9e662b4bde4de",
+        "bytes": 475712,
+        "decompressedSha256": "6c8a6c3b9bba1a48c9586e213a736f6ae361cb4feb0f910f28e302de5f616417",
+        "decompressedBytes": 5820218
+      }
+    }
+  ],
+  "outcome": "ObservedWithLimitations",
+  "package": {
+    "name": "@vmitsaras/raveldex",
+    "version": "0.0.0",
+    "private": true,
+    "description": "Native modular TypeScript local search — ESM core with BM25, atomic mutations, cooperative execution, optional search capabilities and native DOM UI.",
+    "type": "module",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/vmitsaras/raveldex.git"
+    },
+    "bugs": {
+      "url": "https://github.com/vmitsaras/raveldex/issues"
+    },
+    "homepage": "https://github.com/vmitsaras/raveldex#readme",
+    "engines": {
+      "node": ">=22"
+    },
+    "scripts": {
+      "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
+      "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
+      "handoff:check": "node scripts/plan.mjs check",
+      "handoff:status": "node scripts/plan.mjs status",
+      "handoff:next": "node scripts/plan.mjs next",
+      "docs:generate": "node scripts/render-plan.mjs",
+      "docs:check": "node scripts/render-plan.mjs --check && node scripts/check-docs.mjs",
+      "tracking:preview": "node scripts/sync-github.mjs --dry-run",
+      "tracking:sync": "node scripts/sync-github.mjs --apply",
+      "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.indexeddb.json && tsc -p tsconfig.migration.json",
+      "build": "node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json && tsc -p tsconfig.indexeddb.build.json && tsc -p tsconfig.migration.build.json && node scripts/copy-migration-license.mjs",
+      "test:core": "npm run build && node --test test/core/*.test.mjs",
+      "prepack": "npm run build",
+      "test:consumer": "npm run build && node --test test/consumer/*.test.mjs",
+      "pilot:core": "npm run build && node scripts/core-pilot.mjs",
+      "test:phrases": "npm run build && node --test test/addons/phrases/*.test.mjs",
+      "test:positions": "npm run build && node --test test/addons/positions/*.test.mjs",
+      "test:filters": "npm run build && node --test test/addons/filters/*.test.mjs",
+      "test:facets": "npm run build && node --test test/addons/facets/*.test.mjs",
+      "test:inspector": "npm run build && node --test test/addons/inspector/*.test.mjs",
+      "test:evidence": "npm run build && node --test test/addons/evidence/*.test.mjs",
+      "test:ui": "npm run build && node --test test/ui/*.test.mjs",
+      "pilot:ui": "npm run build && node scripts/ui-pilot.mjs",
+      "test:worker": "npm run build && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
+      "test:snapshots": "npm run build && node --test --test-timeout=120000 test/adapters/snapshots/*.test.mjs",
+      "measure:snapshots": "npm run build && node --expose-gc scripts/snapshot-costs.mjs",
+      "evaluate:prepare": "npm run build && node scripts/evaluation-consumer.mjs",
+      "evaluate:correctness": "node scripts/evaluate-correctness.mjs",
+      "evaluate:relevance": "node bench/relevance.mjs",
+      "evaluate:comparison": "node scripts/evaluate-comparison.mjs",
+      "measure:costs": "node bench/costs.mjs",
+      "measure:browser-costs": "node bench/browser-costs.mjs",
+      "test:indexeddb": "npm run build && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs",
+      "test:migration": "npm run build && node --test --test-timeout=120000 test/migration/converter.test.mjs test/comparison/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
+      "qualify:browsers": "npm run build && node scripts/qualify-browsers.mjs --resources",
+      "qualify:serve": "npm run build && node scripts/qualify-browsers.mjs --serve",
+      "measure:memory": "node bench/memory/run.mjs",
+      "test:memory-method": "node --test bench/memory/*.test.mjs"
+    },
+    "devDependencies": {
+      "axe-core": "4.13.0",
+      "esbuild": "0.28.2",
+      "playwright-core": "1.61.1",
+      "typescript": "7.0.2"
+    },
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./addons/phrases": {
+        "types": "./dist/addons/phrases/index.d.ts",
+        "import": "./dist/addons/phrases/index.js"
+      },
+      "./addons/phrases/source": {
+        "types": "./dist/addons/phrases/source.d.ts",
+        "import": "./dist/addons/phrases/source.js"
+      },
+      "./addons/positions": {
+        "types": "./dist/addons/positions/index.d.ts",
+        "import": "./dist/addons/positions/index.js"
+      },
+      "./addons/phrases/positions": {
+        "types": "./dist/addons/positions/phrases.d.ts",
+        "import": "./dist/addons/positions/phrases.js"
+      },
+      "./addons/phrases/mixed": {
+        "types": "./dist/addons/phrases/mixed.d.ts",
+        "import": "./dist/addons/phrases/mixed.js"
+      },
+      "./addons/filters": {
+        "types": "./dist/addons/filters/index.d.ts",
+        "import": "./dist/addons/filters/index.js"
+      },
+      "./addons/facets": {
+        "types": "./dist/addons/facets/index.d.ts",
+        "import": "./dist/addons/facets/index.js"
+      },
+      "./addons/inspector": {
+        "types": "./dist/addons/inspector/index.d.ts",
+        "import": "./dist/addons/inspector/index.js"
+      },
+      "./addons/evidence": {
+        "types": "./dist/addons/evidence/index.d.ts",
+        "import": "./dist/addons/evidence/index.js"
+      },
+      "./addons/snippets": {
+        "types": "./dist/addons/snippets/index.d.ts",
+        "import": "./dist/addons/snippets/index.js"
+      },
+      "./addons/ui": {
+        "types": "./dist/addons/ui/index.d.ts",
+        "import": "./dist/addons/ui/index.js"
+      },
+      "./addons/ui/styles.css": "./dist/addons/ui/styles.css",
+      "./adapters/worker": {
+        "types": "./dist/adapters/worker/index.d.ts",
+        "import": "./dist/adapters/worker/index.js"
+      },
+      "./adapters/worker/host": {
+        "types": "./dist/adapters/worker/host-entry.d.ts",
+        "import": "./dist/adapters/worker/host-entry.js"
+      },
+      "./adapters/snapshots": {
+        "types": "./dist/adapters/snapshots/index.d.ts",
+        "import": "./dist/adapters/snapshots/index.js"
+      },
+      "./adapters/indexeddb": {
+        "types": "./dist/adapters/indexeddb/index.d.ts",
+        "import": "./dist/adapters/indexeddb/index.js"
+      },
+      "./adapters/worker/snapshots": {
+        "types": "./dist/adapters/worker/snapshots.d.ts",
+        "import": "./dist/adapters/worker/snapshots.js"
+      },
+      "./adapters/worker/snapshots/host": {
+        "types": "./dist/adapters/worker/snapshots-host.d.ts",
+        "import": "./dist/adapters/worker/snapshots-host.js"
+      },
+      "./integrations/localsearch": {
+        "types": "./dist/integrations/localsearch/index.d.ts",
+        "import": "./dist/integrations/localsearch/index.js"
+      }
+    },
+    "files": [
+      "dist/index.js",
+      "dist/index.d.ts",
+      "dist/core/",
+      "dist/addons/phrases/",
+      "dist/addons/positions/",
+      "dist/addons/filters/",
+      "dist/addons/facets/",
+      "dist/addons/metadata/",
+      "dist/addons/inspector/",
+      "dist/addons/evidence/",
+      "dist/addons/snippets/",
+      "dist/addons/ui/",
+      "dist/adapters/worker/",
+      "dist/adapters/snapshots/",
+      "dist/adapters/indexeddb/",
+      "dist/integrations/localsearch/"
+    ],
+    "sideEffects": [
+      "**/*.css"
+    ]
+  },
+  "packageMetadataSha256": "c3b15c97d3d952a76114189fd5c52a21e3d94e7c0db2d2cbaf953b793dd7e191",
+  "tarballSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+  "temporaryDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-3nZSlz/memory-collection-pgvy9x",
+  "preservation": "Pass",
+  "finishedAt": "2026-10-26T15:24:40.146Z"
+}
