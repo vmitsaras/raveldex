@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** RX-4002-F01 remains Open: the earlier interruption and later settings-dependent success retain their distinct page/context bindings; no complete cause or production fix is established. Bounded owner-reported flows and the October 15 VoiceOver settings are recorded, but exact Inspector initial DOM focus and full AT qualification remain incomplete. Device/display/built-in input and reported 400% zoom are identified; remaining physical-session context and real OS composition are pending. The opt-in input probe is verified, with no human composition outcome yet. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
+**Blocker or decision:** RX-4002-F01 remains Open: the earlier interruption and later settings-dependent success retain their distinct page/context bindings; no complete cause or production fix is established. Bounded owner-reported flows and the October 15 VoiceOver settings are recorded, but exact Inspector initial DOM focus and full AT qualification remain incomplete. Device/display/built-in input and reported 400% zoom are identified; remaining physical-session context and real OS composition are pending. The opt-in input probe is verified; the inspected Safari trace shows accented replacement without composition events, with actual source/method still unconfirmed. Scoped memory still needs exclusive source/index/side retention, mutation/serialization peaks and browser/main/worker/transport observations. The finite installed browser/resource matrix passes; no criteria or production policy are waived.
 
 **Expected affected areas**
 
@@ -908,6 +908,7 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-input-check.log](docs/evidence/RX-4002-input-check.log)
 - [docs/evidence/RX-4002-input-package.json](docs/evidence/RX-4002-input-package.json)
 - [docs/evidence/RX-4002-input-serve-validation.json](docs/evidence/RX-4002-input-serve-validation.json)
+- [docs/evidence/RX-4002-input-inspection.json](docs/evidence/RX-4002-input-inspection.json)
 
 
 ## RX-4003
