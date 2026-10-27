@@ -44,3 +44,7 @@ Final approved loopback check confirms `/ui` returns HTTP 200 while the task-own
 ## Subsequent Inspector observation — 2026-10-27
 
 The [new stopped trace](RX-4002-inspector-focus-20261027.md) at port 63447 observes Close Inspector initial DOM focus and Inspect results restoration, and the owner confirms tabbing to Close. This supersedes further requests for Inspector opening/three-Tab characterization. Captured modal Tab events and literal speech are absent, so their cause/output is unestablished; they are not an added acceptance gate. Do not repeat accepted Inspector flows. F01 normal typing/current context and scoped peak evidence remain open.
+
+## Subsequent original-UI normal typing — 2026-10-27
+
+The owner now reports the complete “7 results. Showing 1–3.” without interruption, matching visible status and retained input focus on the identified original `/ui` procedure, explicitly confirming Medium/Words. The [bounded observation](RX-4002-normal-typing-20261027.md) resolves F01's retest-identity gap and records its scoped disposition while preserving historical interruptions and unknown cause. This supersedes the pending normal-typing request above. No further typing/Inspector repeat or automatic isolated speech probe is required by this success. Native allocation/transport peaks and outstanding physical-session context remain Blocked independently; no production, criterion or public-contract change.
