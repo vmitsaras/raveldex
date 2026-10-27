@@ -1,0 +1,223 @@
+{
+  "kind": "raveldex-native-allocator-event-control-audit-v1",
+  "archive": {
+    "path": "docs/evidence/RX-4002-native-events-20261027.json.gz",
+    "bytes": 32814,
+    "sha256": "5d4c33138e06a796cbe132924698aa8b54d896c754e12fb9e7f6aeffe03b7ceb",
+    "rawBytes": 1212018,
+    "rawSha256": "eeafe811be435b9aa277dc07e676b233223669946dcbe6ded29ce6486bf6b143",
+    "members": 25
+  },
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "approvedPid": 86011,
+  "targets": [
+    {
+      "role": "held",
+      "address": "0x76bd400000",
+      "bytes": 1048576
+    },
+    {
+      "role": "transient",
+      "address": "0x7ce0404000",
+      "bytes": 3145728
+    },
+    {
+      "role": "resized-before",
+      "address": "0x76bd500000",
+      "bytes": 2097152
+    },
+    {
+      "role": "resized-after",
+      "address": "0x7ce0800000",
+      "bytes": 4194304
+    }
+  ],
+  "stages": {
+    "held-all-events": {
+      "exportedEventCount": 287,
+      "selectedEvents": [
+        {
+          "ordinal": 280,
+          "line": 302,
+          "kind": "ALLOC",
+          "address": "0x76bd400000",
+          "bytes": 1048576,
+          "role": "held"
+        },
+        {
+          "ordinal": 282,
+          "line": 304,
+          "kind": "ALLOC",
+          "address": "0x7ce0404000",
+          "bytes": 3145728,
+          "role": "transient"
+        },
+        {
+          "ordinal": 283,
+          "line": 305,
+          "kind": "ALLOC",
+          "address": "0x76bd500000",
+          "bytes": 2097152,
+          "role": "resized-before"
+        },
+        {
+          "ordinal": 284,
+          "line": 306,
+          "kind": "FREE",
+          "address": "0x7ce0404000",
+          "bytes": null,
+          "role": "transient"
+        },
+        {
+          "ordinal": 286,
+          "line": 308,
+          "kind": "FREE",
+          "address": "0x76bd500000",
+          "bytes": null,
+          "role": "resized-before"
+        },
+        {
+          "ordinal": 287,
+          "line": 309,
+          "kind": "ALLOC",
+          "address": "0x7ce0800000",
+          "bytes": 4194304,
+          "role": "resized-after"
+        }
+      ],
+      "selectedLiveBytes": 5242880,
+      "selectedEventHighWaterBytes": 6291456,
+      "liveRoles": [
+        "held",
+        "resized-after"
+      ],
+      "toolHighWaterText": null
+    },
+    "high-water-events": {
+      "exportedEventCount": 283,
+      "selectedEvents": [
+        {
+          "ordinal": 280,
+          "line": 307,
+          "kind": "ALLOC",
+          "address": "0x76bd400000",
+          "bytes": 1048576,
+          "role": "held"
+        },
+        {
+          "ordinal": 282,
+          "line": 309,
+          "kind": "ALLOC",
+          "address": "0x7ce0404000",
+          "bytes": 3145728,
+          "role": "transient"
+        },
+        {
+          "ordinal": 283,
+          "line": 310,
+          "kind": "ALLOC",
+          "address": "0x76bd500000",
+          "bytes": 2097152,
+          "role": "resized-before"
+        }
+      ],
+      "selectedLiveBytes": 6291456,
+      "selectedEventHighWaterBytes": 6291456,
+      "liveRoles": [
+        "held",
+        "transient",
+        "resized-before"
+      ],
+      "toolHighWaterText": "High water mark of allocated heap + VM memory:    6 MB  at malloc stack log record index 283"
+    },
+    "released-all-events": {
+      "exportedEventCount": 289,
+      "selectedEvents": [
+        {
+          "ordinal": 280,
+          "line": 302,
+          "kind": "ALLOC",
+          "address": "0x76bd400000",
+          "bytes": 1048576,
+          "role": "held"
+        },
+        {
+          "ordinal": 282,
+          "line": 304,
+          "kind": "ALLOC",
+          "address": "0x7ce0404000",
+          "bytes": 3145728,
+          "role": "transient"
+        },
+        {
+          "ordinal": 283,
+          "line": 305,
+          "kind": "ALLOC",
+          "address": "0x76bd500000",
+          "bytes": 2097152,
+          "role": "resized-before"
+        },
+        {
+          "ordinal": 284,
+          "line": 306,
+          "kind": "FREE",
+          "address": "0x7ce0404000",
+          "bytes": null,
+          "role": "transient"
+        },
+        {
+          "ordinal": 286,
+          "line": 308,
+          "kind": "FREE",
+          "address": "0x76bd500000",
+          "bytes": null,
+          "role": "resized-before"
+        },
+        {
+          "ordinal": 287,
+          "line": 309,
+          "kind": "ALLOC",
+          "address": "0x7ce0800000",
+          "bytes": 4194304,
+          "role": "resized-after"
+        },
+        {
+          "ordinal": 288,
+          "line": 310,
+          "kind": "FREE",
+          "address": "0x7ce0800000",
+          "bytes": null,
+          "role": "resized-after"
+        },
+        {
+          "ordinal": 289,
+          "line": 311,
+          "kind": "FREE",
+          "address": "0x76bd400000",
+          "bytes": null,
+          "role": "held"
+        }
+      ],
+      "selectedLiveBytes": 0,
+      "selectedEventHighWaterBytes": 6291456,
+      "liveRoles": [],
+      "toolHighWaterText": null
+    }
+  },
+  "sandboxMachPortFailure": "Observed; approved execution succeeds without sudo or system changes",
+  "childCleanup": "Both controlled children exited 0 with no kill/timeout",
+  "outcome": "Pass for selected C system-malloc allocation/free history; product allocation and transport peaks remain Blocked",
+  "limits": [
+    "Selected API-visible ALLOC/FREE replay, not physical live backing or isolated product allocation peak.",
+    "VM reservations and malloc payload are separate and never summed here.",
+    "Realloc exports FREE old before ALLOC new; internal copy overlap is not established.",
+    "Four distinct selected addresses; address-reuse behavior is not calibrated.",
+    "No timestamp field in selected text events; no cross-process operation/message clock binding.",
+    "No Chrome PartitionAlloc, V8 object, serializer backing or Node product workload was observed.",
+    "Instrumented overhead and allocator coverage are not measured or inferred from successful control."
+  ]
+}
