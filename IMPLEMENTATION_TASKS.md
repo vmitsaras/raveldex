@@ -1076,7 +1076,7 @@ Collect the specific environment and resource observations required by the propo
 
 **Package, public documentation, and independent candidate review**
 
-**Milestone:** N4 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/27)
+**Milestone:** N4 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/27)
 
 **Dependencies:** [RX-4001](IMPLEMENTATION_TASKS.md#rx-4001), [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002)
 
@@ -1110,7 +1110,20 @@ Prepare a coherent native 0.1 candidate and a concrete release recommendation wh
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-4003.md](docs/evidence/RX-4003.md)
+- [docs/evidence/RX-4003-review.json](docs/evidence/RX-4003-review.json)
+- [docs/evidence/RX-4003-identity.json](docs/evidence/RX-4003-identity.json)
+- [docs/evidence/RX-4003-package.json](docs/evidence/RX-4003-package.json)
+- [docs/evidence/RX-4003-preparation.json](docs/evidence/RX-4003-preparation.json)
+- [docs/evidence/RX-4003-check.log](docs/evidence/RX-4003-check.log)
+- [docs/evidence/RX-4003-candidate-0.1.0-rc.0.tgz](docs/evidence/RX-4003-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-4003-bundle.json](docs/evidence/RX-4003-bundle.json)
+- [docs/evidence/RX-4003-workflow-audit.json](docs/evidence/RX-4003-workflow-audit.json)
+- [docs/evidence/RX-4003-baseline-check.log](docs/evidence/RX-4003-baseline-check.log)
+- [docs/evidence/RX-4003-focused.log](docs/evidence/RX-4003-focused.log)
+- [docs/evidence/RX-4003-preparation-guards.log](docs/evidence/RX-4003-preparation-guards.log)
+- [docs/evidence/RX-4003-sandbox-failure.json](docs/evidence/RX-4003-sandbox-failure.json)
+- [docs/evidence/RX-4003-sync.log](docs/evidence/RX-4003-sync.log)
 
 
 ## Deferred enhancement tasks

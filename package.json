@@ -1,6 +1,6 @@
 {
   "name": "@vmitsaras/raveldex",
-  "version": "0.0.0",
+  "version": "0.1.0-rc.0",
   "private": true,
   "description": "Native modular TypeScript local search \u2014 ESM core with BM25, atomic mutations, cooperative execution, optional search capabilities and native DOM UI.",
   "type": "module",
@@ -54,7 +54,9 @@
     "qualify:browsers": "npm run build && node scripts/qualify-browsers.mjs --resources",
     "qualify:serve": "npm run build && node scripts/qualify-browsers.mjs --serve",
     "measure:memory": "node bench/memory/run.mjs",
-    "test:memory-method": "node --test bench/memory/*.test.mjs"
+    "test:memory-method": "node --test bench/memory/*.test.mjs",
+    "candidate:check": "npm run build && node scripts/candidate-check.mjs",
+    "candidate:prepare": "node scripts/prepare-candidate.mjs"
   },
   "devDependencies": {
     "axe-core": "4.13.0",
@@ -158,7 +160,11 @@
     "dist/adapters/worker/",
     "dist/adapters/snapshots/",
     "dist/adapters/indexeddb/",
-    "dist/integrations/localsearch/"
+    "dist/integrations/localsearch/",
+    "CHANGELOG.md",
+    "docs/api/",
+    "docs/release/",
+    "docs/support/RX-4003.md"
   ],
   "sideEffects": [
     "**/*.css"

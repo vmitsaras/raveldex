@@ -25,6 +25,11 @@ jobs:
     permissions:
       contents: read
       issues: write
+    env:
+      RAVELDEX_UI_BROWSER: chromium
+      RAVELDEX_WORKER_BROWSER: chromium
+      RAVELDEX_INDEXEDDB_BROWSER: chromium
+      RAVELDEX_CANDIDATE_BROWSER: chromium
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -33,6 +38,7 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node node_modules/playwright-core/cli.js install --with-deps chromium
       - run: npm run check
       - name: Create or update repository milestones and task issues
         run: npm run tracking:sync

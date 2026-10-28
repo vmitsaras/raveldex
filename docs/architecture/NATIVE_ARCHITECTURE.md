@@ -1,6 +1,6 @@
 # Native architecture
 
-Status: Approved design; RX-1001–1006 native core, ordinary scheduling and packed real-document consumer verified locally; see [RX-1005 execution](../evidence/RX-1005.md) and [RX-1006 package evidence](../evidence/RX-1006.md). RX-2001–2005 add explicit source/position/phrase/filter/facet/Inspector/original-range/snippet capabilities; RX-2006 adds the optional native DOM interface and real documentation browser pilot; host modules and release qualification remain planned. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
+Status: Approved design; RX-1001–1006 native core, ordinary scheduling and packed real-document consumer verified locally; see [RX-1005 execution](../evidence/RX-1005.md) and [RX-1006 package evidence](../evidence/RX-1006.md). RX-2001–2005 add explicit source/position/phrase/filter/facet/Inspector/original-range/snippet capabilities; RX-2006 adds the optional native DOM interface and real documentation browser pilot; RX-3001–3004 implement the explicit worker/snapshot/storage/migration modules, and RX-4001/RX-4002 record finite evaluation and environment/resource qualification. RX-4003 prepares the private candidate; publication remains separate. See [RX-1001 evidence](../evidence/RX-1001.md), [RX-1002 evidence](../evidence/RX-1002.md), [RX-1003 evidence](../evidence/RX-1003.md) and [RX-1004 evidence](../evidence/RX-1004.md).
 
 Decision date: 2026-10-06. Scope: the native Raveldex line in this repository.
 
@@ -37,7 +37,7 @@ Metadata needed for declared core equality predicates is part of the index state
 
 ## Planned module map
 
-Core and the core consumer now exist. Other rows remain implementation destinations for optional capabilities.
+These module destinations now exist. Optional capabilities and host adapters remain explicit selections, separate from core import and retention.
 
 | Area | Destination | Responsibility |
 | --- | --- | --- |

@@ -1,0 +1,33 @@
+# Compatibility policy
+
+The prepared package is `@vmitsaras/raveldex@0.1.0-rc.0`, pure ESM with no runtime dependencies. It remains private and unpublished. Install the locally prepared tarball; a registry installation is not offered by this candidate.
+
+## Public contract
+
+The explicit package `exports` map and its declarations define the supported import surface. The [API reference](../api/README.md) describes those entries. Files under `dist/core/` and other implementation paths are not public imports. Internal layouts, scheduler seams and test instrumentation carry no compatibility promise. CSS is an explicit independent import.
+
+For the `0.x` line, compatible fixes use a patch increment. Incompatible public API or semantic changes require a minor increment and migration notes. Candidate iterations increment the prerelease identifier when issued for review. Published bytes must never be replaced under an existing version. Local unissued drafts are identified by the tarball digest in their separate verification report; any edit invalidates that report and requires preparation again. This is the project's pre-1.0 policy, consistent with [SemVer 2.0](https://semver.org/), not a promise of 1.0 stability.
+
+Exact totals, atomic revision publication, sanitized error categories, native ranking identity, original UTF-16 coordinates, explicit capability failures and resource bounds are part of the documented behavior. Limits are defensive admission ceilings, not promises that every admitted operation completes within its time/work budget. Score values depend on corpus statistics; compare results only at the intended revision/configuration.
+
+## Runtime and environment
+
+`engines.node >=22` is the declared package floor. Local candidate verification records its actual Node/V8/ICU/Unicode/OS versions. The preparation workflow is configured for Node 22 and 24 on Linux; configuration is not an executed remote CI result. Browser and assistive-technology support is bounded to the environments and flows in the [support notes](../support/RX-4003.md). Applications must evaluate their own corpus, host, CSP, bundling and resource budgets.
+
+Core is DOM-free. Browser UI needs a DOM; optional snippets need usable `Intl.Segmenter`; module workers and IndexedDB need their respective host capabilities. Importing a module does not create those hosts or initialize the product. No framework integration or automatic application startup is provided.
+
+`basic-v1` uses NFKC normalization, lowercasing and the specified token rules. It is not accent-insensitive, locale-aware word segmentation, full case folding, fuzzy matching or natural-language retrieval. `cafe` and `café`, and Greek words with different accents, can differ. Changing that behavior requires an explicit future analyzer design, not a candidate-docs patch.
+
+## Snapshot and migration compatibility
+
+Source snapshots are the portable rebuild route: retain complete originals, decode and rebuild under the receiving analyzer, and publish a new local revision. Origin revision metadata does not replace the receiver's revision. The same source data can legitimately produce different tokens on another Unicode runtime.
+
+Native snapshots preserve versioned native state. Ordinary owners are unqualified for native export/restore. The optional factory requires the application's own exact Node runtime qualification declaration and matching format/schema/analyzer/model/limits/capabilities; a profile name or evidence filename alone runs no tests. Native browser/worker and cross-host portability are not promised. The private allocation-instrumented runtimes used for memory evidence do not qualify every normal Node runtime.
+
+IndexedDB persistence is explicitly namespaced. Retain and compare generation tokens for save/erase; a restored snapshot and durable storage are separate commits. Transaction completion is not a power-loss or eviction guarantee. Applications retain authoritative source and choose recovery after worker death or an unknown mutation outcome; do not blindly retry a potentially committed mutation.
+
+The optional LocalSearch integration converts the documented complete source format and rebuilds using ordinary native APIs. It does not import opaque MiniSearch state, preserve foreign scores, or make the old companion's tests native evidence. Existing `0.0.0` artifacts were private development snapshots; no published stable-version migration is assumed.
+
+## Deferred work
+
+N5 enhancements remain deferred. Typo tolerance, suggestions, synonyms, language analyzers, proximity, query syntax, partial patching and higher capacities are not silently added to this candidate. A support request or proposal does not activate those tasks.
