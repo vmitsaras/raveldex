@@ -33,6 +33,10 @@ The prior generated eight-document bundle was not present in this checkout. The 
 
 Run `npm run handoff:status` for current counts rather than relying on a historical narrative. Run `npm run handoff:next` for the next eligible work. N1 now ends with verified real-document search through the packed public native package; N2/N3 make the optional product capabilities usable; N4 qualifies a release candidate.
 
+## Remote candidate CI — 2026-10-28
+
+The [remote verification follow-up](docs/evidence/RX-4003-remote-ci-20261028.md) records successful GitHub Actions run [40771652630](https://github.com/vmitsaras/raveldex/actions/runs/40771652630) on source `9f22e37`: Node 22.23.4 and 24.22.1 on Ubuntu 26.04 x64 each pass all 625 tests, candidate preparation and tracking preview. Downloaded reports, logs and tarballs are preserved with GitHub ZIP digest checks. All 228 package members and the entire decompressed tar match the original private candidate; the same 208 production files remain unchanged. CI/test-only fixes honor the Chromium selector and keep the complete matrix while omitting 127 non-input archival streams from runner checkout. The original Git history and all archives remain preserved. No package publication, tag, release, main merge or deferred work activation occurred. A later documentation-only evidence commit is not relabeled as this tested CI source.
+
 ## Known limits
 
 The current [GC/wire result](docs/evidence/RX-4002-gc-shrink-20261028.md) resolves the remaining mandatory AC03 observations. Thirty-six selected valid codec windows and two native wire observations per admitted size retain exact runtime/capacity/telemetry boundaries. Native wire requested-capacity high-waters are 115,400 and 1,016,016 bytes; they are separate from worker heap and physical/global memory. Unknown receiver routes and the interrupted forced allocator control stay conditional nonclaims. Earlier dated notes below preserve the prior state rather than define new current gates. No public contract, deadline/admission ceiling, dependency or release criterion changes.

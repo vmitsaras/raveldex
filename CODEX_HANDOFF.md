@@ -13,6 +13,10 @@ npm run handoff:next
 
 The canonical state is `docs/planning/roadmap.json`. Run `npm run docs:generate` after manifest changes. A task is done only with actual acceptance evidence and required independent review. Never reset a completed task to manufacture work. The completed active N0–N4 backlog is a legitimate terminal state; all ten N5 enhancements remain deferred unless explicitly selected.
 
+## Latest remote CI
+
+[Run 40771652630](https://github.com/vmitsaras/raveldex/actions/runs/40771652630) passes all 625 tests plus candidate preparation on each of Node 22.23.4 and 24.22.1 / Ubuntu 26.04 x64, on exact source `9f22e37`. [Remote evidence](docs/evidence/RX-4003-remote-ci-20261028.md) preserves both downloaded artifacts and their closed identities. All 228 unpacked package members match the original private candidate. The tested source is distinguished from the later documentation-only evidence commit. Keep the package private; publication still needs a separate owner instruction and revalidation after any release-artifact change.
+
 ## Candidate preparation
 
 ```sh

@@ -1124,6 +1124,14 @@ Prepare a coherent native 0.1 candidate and a concrete release recommendation wh
 - [docs/evidence/RX-4003-preparation-guards.log](docs/evidence/RX-4003-preparation-guards.log)
 - [docs/evidence/RX-4003-sandbox-failure.json](docs/evidence/RX-4003-sandbox-failure.json)
 - [docs/evidence/RX-4003-sync.log](docs/evidence/RX-4003-sync.log)
+- [docs/evidence/RX-4003-remote-ci-20261028.md](docs/evidence/RX-4003-remote-ci-20261028.md)
+- [docs/evidence/RX-4003-remote-ci-20261028.json](docs/evidence/RX-4003-remote-ci-20261028.json)
+- [docs/evidence/RX-4003-remote-ci-20261028.tar.gz](docs/evidence/RX-4003-remote-ci-20261028.tar.gz)
+- [docs/evidence/RX-4003-ci-node22-20261028.zip](docs/evidence/RX-4003-ci-node22-20261028.zip)
+- [docs/evidence/RX-4003-ci-node24-20261028.zip](docs/evidence/RX-4003-ci-node24-20261028.zip)
+- [docs/evidence/RX-4003-remote-ci-identity-20261028.json](docs/evidence/RX-4003-remote-ci-identity-20261028.json)
+- [docs/evidence/RX-4003-remote-ci-review-20261028.json](docs/evidence/RX-4003-remote-ci-review-20261028.json)
+- [docs/evidence/RX-4003-remote-ci-sync-20261028.log](docs/evidence/RX-4003-remote-ci-sync-20261028.log)
 
 
 ## Deferred enhancement tasks
