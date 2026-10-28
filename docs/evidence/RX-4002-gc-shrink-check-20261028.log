@@ -1,0 +1,838 @@
+npm notice run @vmitsaras/raveldex@0.0.0 check
+npm notice run npm run handoff:check && npm run docs:check && npm run typecheck && npm test
+npm notice run @vmitsaras/raveldex@0.0.0 handoff:check
+npm notice run node scripts/plan.mjs check
+Roadmap valid: 31 tasks across 6 milestones; graph and local references checked.
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+npm notice run @vmitsaras/raveldex@0.0.0 docs:check
+npm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs
+Generated roadmap and task documents match the canonical manifest (3 files).
+Local Markdown link targets checked in 101 files (external URLs and anchors not evaluated).
+npm notice run @vmitsaras/raveldex@0.0.0 typecheck
+npm notice run tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.indexeddb.json && tsc -p tsconfig.migration.json
+npm notice run @vmitsaras/raveldex@0.0.0 test
+npm notice run npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs
+npm notice run @vmitsaras/raveldex@0.0.0 build
+npm notice run node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json && tsc -p tsconfig.indexeddb.build.json && tsc -p tsconfig.migration.build.json && node scripts/copy-migration-license.mjs
+✔ worker CDP demultiplexes out-of-order replies, excludes foreign sessions and rejects protocol errors (1.368708ms)
+✔ worker CDP detach, transport failure and timeout settle pending commands and clean up listeners (12.454334ms)
+✔ heap fields reject missing/nonfinite data and maxima remain separate per isolate (2.52925ms)
+✔ statistical profile keeps unresolved allocating nodes explicit instead of dropping or attributing them (0.211875ms)
+✔ prejoin hand sums deduplicate payload/state, frozen backing and string parents without counting excluded edges (1.75625ms)
+✔ primitive sliced and complete strings share backing within a snapshot; lengths are not heap or copy counts (0.259166ms)
+✔ nine-role receiving masks preserve bit256 and actual decoded/candidate reuse (0.205292ms)
+✔ wrong stage/aliases, duplicate or absent marker and malformed/unsafe graphs refuse attribution (1.707917ms)
+✔ literal cohort includes frozen-array/string backing data and overlapping roles, excluding prototypes/weak edges (1.424125ms)
+✔ later ID presence is raw arithmetic only; even matching descriptors leave attribution blocked (0.569208ms)
+✔ same-ID object-to-code/name changes are rejected as identity evidence, including unchanged sizes (0.14775ms)
+✔ no-op churn and unexpected ID reappearance remain explicit (0.379166ms)
+✔ malformed schema, duplicate IDs and invalid edge targets reject rather than inventing sizes (0.7475ms)
+✔ selected-data graph keeps backing stores, counts shared strings once and excludes prototypes/maps/weak edges (1.018ms)
+✔ missing graph marker fails instead of returning an invented zero measurement (3.809ms)
+✔ a three-way shared node contributes once to union rather than sum minus one overlap (0.180417ms)
+✔ message observer forwards original native arguments/events and binds only primitive protocol metadata (1.134208ms)
+✔ refusal and bounded observation loss preserve actual transport behavior (1.784584ms)
+✔ one-dump old/candidate/request/change groups have hand-derived sharing and deduplicated sums (1.276167ms)
+✔ literal frozen-array backing contents and string parents are selected; maps/weak/hidden/prototypes are excluded (0.31975ms)
+✔ wrong lexical aliases and missing/duplicate marker refuse graph attribution (0.645708ms)
+✔ malformed fields, duplicate IDs, target/count bounds and unsafe sums refuse analysis (0.735542ms)
+✔ sampling summary preserves literal statistical quantities and source groups without peak/retained labels (1.243916ms)
+✔ malformed/cyclic/duplicate sampling trees and invalid allocation references fail explicitly (0.505208ms)
+✔ observed maxima select only the measured operation and preserve absent observations as null (0.126ms)
+✔ root witnesses contain WeakRefs and primitive labels; returned readings hold no target objects (0.140542ms)
+✔ owned-child watchdog preserves successful, refused, missing executable and timeout outcomes (202.515959ms)
+✔ preparation failure is never hidden by unrun receivers; typed refusal remains explicit limitation (0.20375ms)
+✔ unchanged ordinary and encoded bounds remain refusals while malformed/profile/integrity failures do not (0.084ms)
+✔ only explicit empty capture matching both stdio handles is mutable; other logs remain immutable (4.441709ms)
+✔ capture aliases cannot exclude an existing protected artifact through symlinks or hardlinks (2.121042ms)
+✔ literal cycles and three-way sharing: individual effects are not summed as a joint effect (1.658208ms)
+✔ complete graph preserves an outside hidden/context path to a descendant (0.619167ms)
+✔ hypothetical node deletion removes every seed alias, unlike releasing one owner property (0.534333ms)
+✔ marker-owned PropertyArray aliases are neutralized; unrelated outside paths survive (0.24125ms)
+✔ ambiguous externally retained marker backing store fails rather than deleting that retainer (0.474167ms)
+✔ weak edges never become strong; non-root shortcuts produce explicit sensitivity (0.247625ms)
+✔ labelled ephemeron table/key edges change graph sensitivity without pretending conditional GC (0.262792ms)
+✔ missing, duplicate, malformed and unreachable seeds fail with reasons, not invented zeros (0.548ms)
+✔ missing or ambiguous observation marker is an error (0.609292ms)
+✔ malformed schema/count/target/self-size and unfamiliar edge types fail explicitly (0.684416ms)
+✔ component labels must agree with the actual marked index root property targets (0.409375ms)
+✔ exported string marker accepts string families and rejects a mislabeled object (0.213833ms)
+✔ aliased component seeds have overlapping individual effects and a deduplicated joint cut (0.128375ms)
+✔ malformed, incomplete and incorrect-target ephemeron encodings fail explicitly (0.277916ms)
+✔ 48 deterministic generated graphs match the independent fixed-point removal oracle (16.868667ms)
+✔ output guard rejects normalized, symlink and hardlink aliases using only disposable scratch files (6.427667ms)
+✔ literal send/read brackets correlate native elapsed intervals, distinct realms and exact adapter peers (1.569667ms)
+✔ dropped/absent/duplicate marks, truncated observations and same-thread realms reject rather than inventing timing (0.732709ms)
+✔ missing/extra/outside or non-complete native spans, unsafe timings and mismatched peers reject attribution (0.452958ms)
+✔ endpoint wrapper preserves actual posts, first data access, duplicate listener identity and removal without retaining envelopes (1.017959ms)
+✔ format, codec and every compatibility header/version produce specific reasons and preserve old state (1011.55575ms)
+ℹ {"compatibilityCases":36}
+✔ unknown or absent participant codecs fail explicitly instead of dropping selected transactional state (2.460708ms)
+✔ malformed, truncated, duplicate-property and damaged JSON snapshots never modify a visible revision (138.802291ms)
+ℹ {"malformedCases":10,"integrityCases":2}
+✔ source and offset participant corruption cannot bypass native side-state validation with a recomputed checksum (1119.678375ms)
+ℹ {"nativeSideStateCorruptions":26}
+✔ qualified factory strictly owns and validates the attestation without promoting ordinary engines (6.965208ms)
+✔ valid-integrity native corruption fails reverse, postings, statistics and directory invariants atomically (554.322125ms)
+ℹ {"nativeCoreCorruptions":16}
+✔ snapshot calls share ordinary FIFO, read execution-start roots and own admitted strings/options (24.7345ms)
+✔ snapshot encode/decode/staging cancellation at multiple suspensions preserves exact old core and participant roots (68.219667ms)
+ℹ {"controlledSuspensionCancellations":10}
+✔ queued deadlines, aborts and overflow release slots while successful restore advances exactly once (11.103625ms)
+✔ active deadlines, work caps and encoded byte caps fail honestly without side-state publication (8.342084ms)
+✔ early stop and disposal skip untrusted snapshot/options access and release pending adapter work (0.408875ms)
+✔ successful empty restore is a new local revision even when both origin and target are empty (71.238125ms)
+✔ genuinely qualified native encode and restore cancellation preserve exact old roots and permit recovery (92.095ms)
+ℹ {"qualifiedNativeSuspensionCancellations":10}
+✔ source and native final-precommit stops roll back, and no signal read after publication can revoke success (34.836791ms)
+✔ whole source restore accumulates participant work across private batches and preserves old state on a late failure (29.355583ms)
+ℹ {"individuallyAdmittedDonorWrites":100,"wholeRestoreParticipantWorkCap":4000,"validSnapshotPrivateRecordsBeyondMutationBatch":3}
+✔ qualified native decoding, integrity and structural validation phases can each stop without publication (22.844334ms)
+ℹ {"qualifiedNativePhaseStops":[{"phase":"snapshot.decode","postBoundarySignalChecks":8},{"phase":"snapshot.integrity","postBoundarySignalChecks":8},{"phase":"snapshot.validation","postBoundarySignalChecks":8}]}
+✔ a genuine maximum-revision native owner rejects source restore and preserves its actual immutable root (12.391584ms)
+✔ complete UTF-8 envelope byte boundary includes multibyte source and all header/checksum overhead (19.893959ms)
+✔ installed public codec declarations and complete minified native/source consumers preserve actual behavior (43963.096292ms)
+✔ snapshots stay optional and public imports do not inspect host/storage/startup capabilities (0.300666ms)
+✔ source roundtrip preserves source representation, exact semantic output and subsequent writes (199.638583ms)
+ℹ {"format":"source","representation":"source","completeComparisons":101}
+✔ source roundtrip preserves positions representation, exact semantic output and subsequent writes (144.163291ms)
+ℹ {"format":"source","representation":"positions","completeComparisons":76}
+✔ source roundtrip preserves offsets representation, exact semantic output and subsequent writes (177.950667ms)
+ℹ {"format":"source","representation":"offsets","completeComparisons":101}
+✔ source roundtrip preserves mixed representation, exact semantic output and subsequent writes (179.436417ms)
+ℹ {"format":"source","representation":"mixed","completeComparisons":101}
+✔ native roundtrip preserves core representation, exact semantic output and subsequent writes (38.200917ms)
+ℹ {"format":"native","representation":"core","completeComparisons":41}
+✔ native roundtrip preserves source representation, exact semantic output and subsequent writes (186.6585ms)
+ℹ {"format":"native","representation":"source","completeComparisons":101}
+✔ native roundtrip preserves positions representation, exact semantic output and subsequent writes (163.3285ms)
+ℹ {"format":"native","representation":"positions","completeComparisons":76}
+✔ native roundtrip preserves offsets representation, exact semantic output and subsequent writes (192.268ms)
+ℹ {"format":"native","representation":"offsets","completeComparisons":96}
+✔ native roundtrip preserves mixed representation, exact semantic output and subsequent writes (202.724459ms)
+ℹ {"format":"native","representation":"mixed","completeComparisons":96}
+✔ source export requires originals for every indexed field and never fabricates source-free text (146.102875ms)
+✔ unqualified ordinary engines reject native state and source restore reports explicit receiving reindex (128.920292ms)
+✔ literal hand BM25 arithmetic survives both formats and deletion without calling the native scorer (39.400125ms)
+✔ range and snippet requests own bounded plain data without invoking getters on empty or irrelevant queries (5.666334ms)
+ℹ {"malformedRequestRejections":120,"gettersExecuted":0}
+✔ factories own strategy fields and caps, reject unsupported strategies and sanitize errors (0.554167ms)
+✔ source, original offsets and display source are separate explicit requirements even before any data exists (1.515ms)
+✔ global range/fact/ID limits are inclusive, narrow only, and reject complete overflow while ordinary search recovers (10.342625ms)
+✔ requested output structure is bounded inclusively and its registration work cap counts all selected documents (4.106041ms)
+ℹ {"exactOutputEntries":47,"exactSharedEvidenceWork":726}
+✔ missing, stale and incompatible selected source/offset roots fail before empty-result projection (2.068125ms)
+✔ installed but unrequested presentation executes no evidence cursor and a second evidence request cannot reset limits (0.669791ms)
+✔ snippet source projection shares complete structural and range ceilings and never returns a partial overflow (14.201708ms)
+ℹ {"exactSnippetOutputEntries":85,"completeCrossDocumentRangeCeiling":3}
+✔ real mutations, failed atomic writes, no-ops and clear keep original ranges revision coherent and old outputs stable (21.80775ms)
+ℹ {"mutationCompleteResultComparisons":8,"rejectedAtomicMutations":6,"noOpIdentityChecks":12}
+✔ queued query/request/page/provider source capture precedes execution and expected revisions use FIFO start roots (2.195167ms)
+✔ every evidence or snippet suspension supports cancellation, cursor cleanup and unchanged recovery (73.95925ms)
+ℹ {"exhaustiveCancellationRecoveries":122,"preparationStops":6,"evidenceProjectionStops":72}
+✔ deadline and disposal during projection reject whole output, close iterators, release queue and stale callbacks (3.024292ms)
+✔ installed range/snippet declarations and real-document results match independent occurrences and minified source/offset/mixed consumers (15709.683625ms)
+✔ full optional graphs, lazy startup and private exports preserve core and range-only boundaries (0.178959ms)
+✔ offset snippets reject source spelling divergence and spans that would split original surrogate pairs (13.456166ms)
+✔ offset snippet source descriptors reject frozen record, field and value accessors without executing them (1.514ms)
+✔ original UTF-16 hand fixtures agree through source, stored offsets and mixed providers (181.133083ms)
+ℹ {"literalOriginalFixtures":14,"completeProviderPageComparisons":126,"originalSliceChecks":252}
+✔ literal successful Boolean paths and actual repeated phrases yield all and only positive occurrences (423.123416ms)
+ℹ {"independentLiteralTrees":13,"completeProviderPageComparisons":117,"selectedDocumentProjections":936}
+✔ selected fields are sorted explicit projection, preserve original value indices, and never affect membership (28.273209ms)
+✔ ranges alone need no original source and positions without offsets cannot claim them (2.310708ms)
+✔ snippets slice original text, preserve grapheme clusters and mark literal tokens without trusted HTML (24.351542ms)
+ℹ {"literalGraphemeSourceFixtures":6,"completeSourceOffsetComparisons":12}
+✔ bounded context and overlapping phrase marks remain original slices with truthful omission flags (9.411083ms)
+✔ a whole original token or enclosing grapheme beyond the cap is explicitly unavailable without clipping its marks (1.087791ms)
+✔ missing Intl.Segmenter rejects requested snippets even on empty selections while range and ordinary search still work (1.0215ms)
+✔ facet factory captures bounded options without getters and declares no retained representation (1.23375ms)
+✔ requests reject invalid complete payloads even with no qualifying records (0.973542ms)
+✔ exact values, null, tagged missing and empty arrays are distinct and documents deduplicate values (0.799042ms)
+✔ UTF-16 tie order is original, stable and independent of document insertion order (1.743125ms)
+✔ bounded projection selects exact highest counts beyond early buckets without incomplete counting (5.794834ms)
+✔ distinct ceiling includes opted-in missing and applies even with zero output (0.288833ms)
+✔ empty complete aggregation reports exact zero buckets for every selected field (0.106833ms)
+✔ default ten-thousand distinct ceiling counts fully at output zero and fails the next value (18.017875ms)
+✔ registration rejects unknown/non-string enabled metadata fields before an operation (2.118ms)
+✔ facets count complete conjunctive membership including own selections before every page limit/offset (16.672375ms)
+✔ facet requests compose with numeric/set predicates and source phrases without lexical score changes (7.994292ms)
+✔ fixed-seed multi-value full scans agree across nesting, own-filters and bounded bucket projection (107.35325ms)
+✔ mutation revisions and failed writes leave facet tables coherent without retained facet roots (2.07625ms)
+✔ counting overflow is a typed full-operation failure even with zero result and bucket limits (0.542417ms)
+✔ all eight maximum-sized facet outputs are complete and fit declared structural output bounds (93.204875ms)
+✔ facet work ceiling covers preparation, all counting and final projection and is shared across requests (7.104167ms)
+✔ queued facet payloads are captured before mutation and execute at their FIFO revision (1.508583ms)
+✔ every selected host suspension can abort and recover complete facets without leaking pending work (12.11825ms)
+ℹ {"suspensionCases":32,"phases":{"prepare":6,"count":6,"finish":19,"core":1}}
+✔ deadlines and disposal inside counting and final output unwind active aggregation cursors (1.222417ms)
+✔ offline installed package and minified consumer preserve complete filter/phrase scores and exact facets through all pages and writes (5084.51ms)
+✔ complete import graphs keep utility/core boundaries, deny private paths and perform no guarded startup access (0.299375ms)
+✔ range bounds apply to one numeric element with finite typed endpoints (7.162083ms)
+✔ set membership distinguishes missing, empty, null, scalar types, case and duplicate values (1.913208ms)
+✔ nullable scalar fields retain exact null/empty/zero/false membership and numeric null exclusion (0.597584ms)
+✔ invalid payloads reject before candidate traversal on an empty index and irrelevant Boolean branches (3.409458ms)
+✔ set values obey both v1 cardinality and stricter metadata string/cardinality limits (0.764834ms)
+✔ plain payload ownership rejects malformed JSON/UTF-16 without executing accessors even for zero results (0.966875ms)
+✔ aggregate query and installed payload caps account owned keys and scalar strings (0.320083ms)
+✔ filter factory owns immutable bounded options and rejects accessor/prototype/field/cap mistakes (0.181375ms)
+✔ configured fields must be metadata and require explicit capability installation/version (0.31625ms)
+✔ metadata reads share atomic revisions through writes/noops, rollback, clear and immutable old snapshots without side state (18.713708ms)
+✔ queued filter payloads and metadata arrays are owned before caller changes, then FIFO searches use their selected revision (1.00075ms)
+✔ every selected filter search suspension can abort, close real predicate cursors and recover a complete unchanged revision (32.72625ms)
+ℹ {"suspensionCases":107,"insidePredicateCases":94}
+✔ deadlines and active/queued disposal inside a real predicate release tasks/listeners and preserve committed outcomes (0.757917ms)
+✔ one module work cap spans repeated leaves and the shared search cap rejects complete qualification instead of returning partial totals (2.14325ms)
+ℹ {"minimumCompleteModuleWork":132,"doubledCompleteSearchWork":506}
+✔ nested typed filters qualify the whole set before pages and preserve native Boolean scores (22.8715ms)
+✔ fixed-seed generated nested queries compare complete membership, totals, stable pages and hand BM25 reference (332.959542ms)
+✔ simultaneous source phrases and typed filters share complete membership without changing lexical scores (6.505333ms)
+✔ Inspector requests reject malformed owned payloads on empty and irrelevant searches without executing getters (3.986833ms)
+ℹ {"malformedAdmissionCases":60,"gettersExecuted":0}
+✔ request and factory caps are inclusive; complete traces fail overflow without affecting ordinary search (50.274666ms)
+✔ factory admission owns options and preserves explicit identity/source bounds without introducing side state (0.380041ms)
+✔ missing Inspector, unknown source requests, and incompatible source manifests fail explicitly even without documents (0.511375ms)
+✔ output entries and registration work ceilings fail complete evidence at the exact boundary (11.16675ms)
+ℹ {"exactInspectorOutputEntries":206}
+✔ source is explicit per request and shares original values while default diagnostics export metadata only (11.96175ms)
+✔ diagnostic JSON bounds preserve parseable whole sections and state every omitted requested section (7.043583ms)
+✔ diagnostic schema round trips and rejects foreign/inconsistent/malformed data without toJSON or getter calls (10.065292ms)
+ℹ {"invalidDiagnosticDataCases":18,"hooksExecuted":0}
+✔ explicit source projection enforces aggregate original UTF-16 text ceiling and leaves ordinary search usable (382.9805ms)
+✔ public selected contributions reconstruct hand BM25, per-field winners and full-corpus filter statistics (29.998167ms)
+ℹ {"handNumericAssertions":133}
+✔ literal Boolean/filter/phrase outcomes and selected paths distinguish excluded, off-page and absent records (180.738208ms)
+ℹ {"literalCompleteResultComparisons":36,"reconstructedArithmeticAssertions":469}
+✔ ordinary public searches allocate no full facts while explicit Inspector records actual scored paths (11.807083ms)
+✔ actual mutation/no-op/rollback/clear identities and old owned explanation/source objects stay coherent (21.192583ms)
+ℹ {"mutationCompleteResultComparisons":10,"rejectedMutations":3,"noOpIdentityChecks":6}
+✔ queued AST/request/page/source fields are owned and expected revisions select actual FIFO start roots (4.184292ms)
+✔ every selected suspension can cancel, close optional evidence cursors and recover unchanged ordinary results (510.366709ms)
+ℹ {"cancellationRecoveries":400,"preparationStops":5,"outputStops":368}
+✔ deadline/disposal inside evidence projection rejects whole operation and cleans queued and stale callbacks (1.994333ms)
+✔ requested source revision/analyzer/field/record headers fail explicitly before returning evidence (1.658208ms)
+✔ installed public Inspector declarations, complete native facts and original source agree with independent source expectations and minified consumer (4911.499084ms)
+✔ core/Inspector full graphs preserve optional boundaries, startup has no host access and private paths fail (0.1805ms)
+✔ real source/core roots publish one revision, preserve old snapshots and reset every mutation/no-op lifecycle (10.9555ms)
+✔ late malformed batches and selected-source caps roll back the complete core/source root and permit recovery (4.775125ms)
+✔ a later public participant failure cannot publish a real source root that already finished preparation (1.165458ms)
+✔ selected-field retention excludes other originals/metadata and omitted record fields are ordinary phrase nonmatches (0.832791ms)
+✔ queued phrase payloads and original arrays are owned before callers mutate them; FIFO queries use their actual revision (1.27925ms)
+✔ stale/incompatible source fails before an empty lexical candidate set; missing authoritative candidate records fail explicitly (0.985209ms)
+✔ deadline during real source verification/preparation unwinds work and leaves the old root coherent (2.528083ms)
+✔ every host suspension in phrase search and replacement can abort and recover exact revision/membership/resources (160.451791ms)
+ℹ [{"method":"search","suspensionCases":199,"sourceSuspensionCases":66},{"method":"replace","suspensionCases":134,"sourceSuspensionCases":12}]
+✔ active/queued disposal releases source roots, listeners and stale callbacks; committed source results keep their revision (0.506583ms)
+✔ handler yields respect disposal, abort, deadline, then shared work failure in all implemented roles (6.544667ms)
+✔ phrase source scanning joins the shared search budget and a manifest cap rejects partial verification (0.911042ms)
+✔ 40 hand-authored strict phrases and Boolean trees agree with complete IDs and native BM25 before every page (53.575708ms)
+ℹ {"completeAndPageComparisons":181,"handCases":40}
+✔ complete independent generated phrase membership, order, Boolean participation and numeric scores: 5eed2001 (173.021542ms)
+ℹ {"records":48,"comparisons":384}
+✔ complete independent generated phrase membership, order, Boolean participation and numeric scores: c0ffee21 (195.880958ms)
+ℹ {"records":48,"comparisons":384}
+✔ complete independent generated phrase membership, order, Boolean participation and numeric scores: 2001 (153.76325ms)
+ℹ {"records":48,"comparisons":384}
+✔ 32 ordered original tokens are allowed and the 33rd fails before repeated-group deduplication (1.0845ms)
+✔ only the last deep lexical candidate qualifies; limit zero and offset never truncate phrase verification (11.293542ms)
+✔ installed tarball and complete minified selected-module consumer preserve phrase membership, scores, revisions and clear (4070.847875ms)
+✔ core excludes optional code, source utility excludes verification, selected phrase graph has no foreign/external runtime (0.223084ms)
+✔ fresh public imports have no host access and contain only public factory exports (0.066208ms)
+✔ registrations validate complete manifests, identities, versions, direct support and handle roles without evaluating getters (3.08525ms)
+✔ missing requirements, duplicate IDs, conflicting field providers, contract versions and dependency cycles fail creation (0.901666ms)
+✔ registration data is captured and dependency order, field provider splitting and unused source preserve ordinary semantics (6.919791ms)
+✔ phrase envelopes own plain bounded payloads and reject unsupported fields, versions and unknown data precisely (1.520417ms)
+✔ whole-query limits and finite payload/operation work caps apply across every installed leaf (0.940458ms)
+✔ factory options capture field arrays and reject malformed or raised bounds without adding state implicitly (0.303375ms)
+✔ position and selected-offset roots atomically publish all real writes/no-ops and preserve old immutable snapshots (13.961917ms)
+✔ malformed late batches, duplicate IDs and side-retention/work caps roll back before recovery (4.740125ms)
+✔ later participant failure cannot publish an already prepared real position/offset root (1.178208ms)
+✔ queued records, value arrays and positional phrase payloads remain owned at their FIFO execution revision (1.416542ms)
+✔ stale/incompatible/missing positional providers fail even for empty candidates and cannot silently exclude selected fields (1.137167ms)
+✔ deadlines inside real positional verification and staging unwind iterators and preserve the coherent revision (2.190708ms)
+✔ every selected host suspension of position phrase search and replacement can abort and recover exact roots, totals and resources (240.046292ms)
+ℹ [{"method":"search","suspensionCases":166,"positionSuspensionCases":34},{"method":"replace","suspensionCases":170,"positionSuspensionCases":43}]
+✔ active/queued disposal releases position roots and listeners, and stale host callbacks cannot republish them (0.913ms)
+✔ a positional phrase registration work cap rejects the whole exact-total query and is shared across repeated leaves (1.289291ms)
+✔ a valid earlier phrase occurrence cannot hide later malformed position-length or original-offset provider data (0.654584ms)
+✔ installed declarations, real tarball and minified consumer preserve four representation memberships, pages, scores and mutations (13904.786709ms)
+✔ core/source/position utilities exclude unselected verifier modules and public imports have no host access (0.199542ms)
+✔ source, positions and mixed fields agree on every complete literal Boolean result and unrounded native score (116.889167ms)
+ℹ {"literalTrees":40,"branchTrees":8,"completeOracleComparisons":504}
+✔ three representations preserve independent generated totals, stable pages and numeric scores: 5eed2001 (412.194834ms)
+ℹ {"records":48,"queries":96,"completeOracleComparisons":1152}
+✔ three representations preserve independent generated totals, stable pages and numeric scores: c0ffee21 (469.472916ms)
+ℹ {"records":48,"queries":96,"completeOracleComparisons":1152}
+✔ three representations preserve independent generated totals, stable pages and numeric scores: 2001 (372.803583ms)
+ℹ {"records":48,"queries":96,"completeOracleComparisons":1152}
+✔ positions preserve the original 32-token phrase bound before repeated-group deduplication (3.131208ms)
+✔ positions consider all deep lexical candidates before total and page selection (27.974375ms)
+✔ mixed strategy options are owned before mutation and reject getters, invalid strategies and unsupported scope (10.535417ms)
+✔ mixed fields require their declared provider independently of registration order, complete matches or empty candidate sets (3.97975ms)
+✔ mixed phrase work cap covers preparation and both representations across every leaf in one operation (1.919209ms)
+✔ literal original UTF-16 spans and value-aware token positions survive every normalization case (9.369208ms)
+ℹ {"literalCoordinateCases":12,"positionAssertions":46,"originalSpanAssertions":23}
+✔ core-only, source-only, positions-only and selected-offset roots retain exactly their declared representations (1.57575ms)
+✔ position factories own field/offset selections, reject malformed options and expose no proximity or synonym-graph contract (2.513792ms)
+✔ positional field providers are explicit, dependency-validated and cannot fall back to another selected field (1.688709ms)
+✔ foreign comparator requires explicit public implementation and pinned identity; never falls back (0.477167ms)
+✔ foreign comparator forwards genuine foreign behavior and identity without native numerical facts (0.159875ms)
+✔ public native qualification replays independent membership, mutation, phrase and hand-score cases (4518.440041ms)
+✔ cost summary retains rejections and unsupported operations without treating them as successful zero-time work (0.651ms)
+✔ cost groups preserve configuration, size, operation and cold/warm semantics (0.123166ms)
+✔ deterministic ASCII cost corpus declares independent full totals and update changes (14.426417ms)
+✔ measured page checks exact complete total, requested size and all returned IDs rather than a convenient first hit (0.45625ms)
+✔ comparison translates complete supported semantics and refuses predicate loss (2.233125ms)
+✔ independent foreign eligibility preserves repetition, value boundaries and historical normalization (0.724958ms)
+✔ ranking metrics exclude intended empty queries while retaining known-answer empty misses (0.7875ms)
+✔ MRR records rank beyond ten; recall denominator stays known labels and not retrieved count (0.088208ms)
+✔ empty metric groups have explicit null values rather than NaN or fabricated success (0.062833ms)
+✔ metrics reject reordered, duplicate or inconsistent ranked observations (1.875ms)
+✔ labels validate unique known sources, disjoint irrelevant sets and expected-zero support (0.26825ms)
+✔ query mapping preserves explicit phrase leaves through nested Boolean branches (0.080917ms)
+✔ failed/zero classifications separate lexical eligibility, ranking and intended emptiness (0.170334ms)
+✔ the source corpus and source-authored judgments remain frozen and useful (3.935709ms)
+✔ independent complete source scan verifies all six frozen intended-empty cases (8.370584ms)
+✔ the relevance harness uses public package imports and the independent oracle has no production imports (0.891875ms)
+✔ section extraction keeps exact source, fences, nested content and source hashes (9.138ms)
+✔ missing, duplicate and malformed source cannot silently produce a partial corpus (3.479375ms)
+✔ corpus uses reproducible current sections, stable IDs and source links (3935.864084ms)
+✔ tarball contains compiled core/declarations and installs public API without hidden dependencies (43.200542ms)
+✔ packed real-content CLI retrieval and every update agree with independent source expectations (117.277209ms)
+✔ relevance judgments keep expected empties and lexical/ranking misses visible (0.33275ms)
+✔ public package and measured bundle import without platform startup access (140.657625ms)
+✔ full minified core performs the same real retrieval, mutations and typed errors (3316.333042ms)
+✔ packed public scores match hand arithmetic before and after deletion (40.818916ms)
+✔ packed public cancellation rolls back a real admitted batch and recovers (1113.376959ms)
+✔ real packaged documentation UI preserves judged tasks, source links, Inspector, representations and cleanup (63974.986917ms)
+✔ basic-v1 identity is a versioned unqualified descriptor (1.025125ms)
+✔ basic-v1: underscores delimit identifiers (0.822958ms)
+✔ basic-v1: apostrophes delimit contractions (0.067375ms)
+✔ basic-v1: em dash delimits words (0.515541ms)
+✔ basic-v1: accents remain significant (0.057ms)
+✔ basic-v1: combining acute composes without moving source offsets (0.047542ms)
+✔ basic-v1: ligature expansion preserves the original length (0.03675ms)
+✔ basic-v1: lowercasing does not fold sharp s (0.037459ms)
+✔ basic-v1: fraction normalization stays one term (0.0665ms)
+✔ basic-v1: Japanese letters form one contiguous token (0.09575ms)
+✔ basic-v1: empty value has no terms (0.035458ms)
+✔ basic-v1: whitespace has no terms (0.025125ms)
+✔ basic-v1: emoji has no terms (0.018458ms)
+✔ basic-v1: leading marks are delimiters and later marks remain attached (0.024083ms)
+✔ basic-v1: contextual lowercase uses complete original tokens (0.021084ms)
+✔ basic-v1: default lowercase is locale independent (0.02125ms)
+✔ basic-v1: supplementary letters and emoji retain UTF-16 coordinates (0.017334ms)
+✔ basic-v1: emoji sequence and joiner delimit words (0.017417ms)
+✔ basic-v1: multiple combining marks preserve the full original span (0.02ms)
+✔ basic-v1: Unicode numbers are recognized without digit transliteration (0.020042ms)
+✔ basic-v1: NFKC punctuation stays in a single normalized term (0.022958ms)
+✔ basic-v1: NFKC spaces do not create new tokens (0.019292ms)
+✔ basic-v1: compatibility normalization precedes lowercasing (0.017208ms)
+✔ basic-v1: repeated tokens preserve every occurrence (0.018458ms)
+✔ value indices preserve empty array entries while positions and offsets reset (0.060875ms)
+✔ the same analyzer produces identical indexing and query terms with explicit query errors (0.108917ms)
+✔ invalid UTF-16: lone leading high surrogate (0.186125ms)
+✔ invalid UTF-16: lone leading low surrogate (0.033792ms)
+✔ invalid UTF-16: high surrogate inside a token (0.039167ms)
+✔ invalid UTF-16: low surrogate inside a token (0.038708ms)
+✔ invalid UTF-16: high surrogate after delimiter (0.045333ms)
+✔ invalid UTF-16: low surrogate after delimiter (0.033208ms)
+✔ invalid UTF-16: high surrogate followed by high surrogate (0.031667ms)
+✔ invalid UTF-16: low surrogate followed by high surrogate (0.032333ms)
+✔ invalid UTF-16: high surrogate followed by a regular delimiter (0.030208ms)
+✔ invalid UTF-16: high surrogate after supplementary letter (0.030584ms)
+✔ well-formed supplementary delimiters at the input limit are accepted (0.112333ms)
+✔ the default original-value cap counts all delimiters and cannot be evaded by empty analysis (3.171208ms)
+✔ raw tokens are accepted exactly at the cap and rejected rather than split above it (0.110583ms)
+✔ raw UTF-16 limits count supplementary letters as two units (0.079666ms)
+✔ normalization contraction does not bypass the raw-token cap (0.050125ms)
+✔ NFKC expansion is bounded after normalization with no truncation (0.049792ms)
+✔ the normalized cap applies after lowercasing expands dotted capital I (0.038417ms)
+✔ default normalized cap rejects a raw token whose compatibility expansion exceeds 256 units (0.069709ms)
+✔ validation executes through the generator rather than scanning on creation (0.047291ms)
+✔ work steps count original code points and bounded normalization inputs/outputs (0.061333ms)
+✔ delimiter scanning offers resumable steps and resumes without skipping the final token (0.784625ms)
+✔ bounded failure details omit raw source content (0.056083ms)
+✔ schema defaults, null-prototype dictionaries, owned configuration and optional capabilities (1.009875ms)
+✔ invalid schema data is rejected without calling getters or toJSON (0.309625ms)
+✔ opaque IDs, missing values, canonical equality metadata, and input/result ownership (1.406333ms)
+✔ malformed records, arrays, metadata, and IDs have exact typed failures (0.29875ms)
+✔ UTF-16 scans happen after capture and rejected content has no completed analysis (0.121708ms)
+✔ batch/remove capture shares admission budgets and detects duplicate IDs (0.202875ms)
+✔ every limit key accepts its minimum/rejects invalid and raised ceilings (1.479709ms)
+✔ schema/record/content bounds enforce exact inclusive edges and aggregate pre-dedup limits (0.490792ms)
+✔ typed query ownership, defaults, missing/null equality and shared analysis (0.675583ms)
+✔ invalid query shapes, accessors, cycles and unsupported capabilities (0.711083ms)
+✔ query node/depth/lexical/all-content/token/group/variant caps count before dedup where required (0.332667ms)
+✔ options validate pagination/deadlines/live signals without initialization (0.300625ms)
+✔ pure proposed-state, expansion and work accounting guards fail before a caller can accept success (0.18225ms)
+✔ all declared errors expose bounded fixed messages and value-free validator details (0.214375ms)
+✔ independent original-token reference: punctuation boundaries (2.191792ms)
+✔ independent original-token reference: combining composition and leading marks (0.06175ms)
+✔ independent original-token reference: accent significance (0.313291ms)
+✔ independent original-token reference: compatibility ligature (0.044666ms)
+✔ independent original-token reference: compatibility width and numbers (0.042166ms)
+✔ independent original-token reference: fraction is not retokenized (0.035459ms)
+✔ independent original-token reference: compatibility spaces remain one term (0.031458ms)
+✔ independent original-token reference: default dotted I lowercase (0.027625ms)
+✔ independent original-token reference: lowercase is not case folding (0.045458ms)
+✔ independent original-token reference: contextual Greek lowercase (0.074542ms)
+✔ independent original-token reference: supplementary letters and delimiters (0.041083ms)
+✔ independent original-token reference: contiguous ideographs (0.04125ms)
+✔ independent original-token reference: zero width joiner separates original spans (0.028875ms)
+✔ independent original-token reference: Hangul composition (0.026958ms)
+✔ independent original-token reference: empty value (0.018292ms)
+✔ independent original-token reference: marks emoji whitespace without token (0.021417ms)
+✔ native exact memberships follow every hand-authored critical token expectation (3.752083ms)
+✔ empty corpus returns complete empty exact memberships (0.118791ms)
+✔ hand-authored eligibility checks independent source scan and complete native membership (1.542ms)
+✔ oracle scans only declared text fields and never metadata or undeclared source properties (0.066ms)
+✔ generated fixture identity is reproducible and seeds change source data (0.764333ms)
+✔ full exact membership equals source scan across selected fields, seed 0x5eed1002 (189.730625ms)
+✔ full exact membership equals source scan across selected fields, seed 0xc0ffee02 (186.907709ms)
+✔ full exact membership equals source scan across selected fields, seed 0x1002 (184.08375ms)
+✔ 10,000 admitted records compare complete common, last-record, and absent memberships (386.083208ms)
+✔ factory validation throws synchronously; ordinary operational failures reject promises (4.186459ms)
+✔ every operation converts validation failures without changing state or running getters (1.408334ms)
+✔ already aborted and disposed calls skip caller data, queue slots and host handles (0.304292ms)
+✔ search, batch and removal options share each call admission counter (0.615667ms)
+✔ zero queue capacity still accepts an idle operation and rejects concurrent waiting calls (1.165667ms)
+✔ default queue keeps 32 FIFO waiters, rejects the 33rd and never supersedes a search (2.685292ms)
+✔ FIFO selects revisions and conflicts at start; a failed operation preserves the next read (0.606583ms)
+✔ admission owns nested record/query/options and removal inputs before a queued call returns (0.877042ms)
+✔ queued abort removes its listener/timer and immediately frees a bounded queue slot (0.528625ms)
+✔ deadline starts at admission; an expired queue entry releases its slot before active work completes (0.657584ms)
+✔ delayed timer delivery cannot allow an expired operation to execute successfully (0.157166ms)
+✔ silent queued abort is rechecked when its operation starts (0.241625ms)
+✔ active search cancellation closes owned work at different host opportunities and preserves later recovery (13.821042ms)
+✔ active mutation cancellation unwinds participant staging and keeps the previous coherent root (0.386292ms)
+✔ no-op operations still perform final cancellation/deadline checks (0.310625ms)
+✔ abort in participant finalization is observed before publication even below one whole work quantum (0.14725ms)
+✔ every precommit signal read preserves disposal and an observed abort event even if its getter returns false (7.840375ms)
+✔ a committed response keeps its actual revision after late abort, a newer write and disposal (0.285209ms)
+✔ dispose immediately rejects active/queued work, unregisters resources and shares one promise (0.108875ms)
+✔ disposal requested inside active trusted preparation waits for unwinding and prevents commit (0.126041ms)
+✔ participant failures and throwing abandonment cleanup preserve the original typed outcome and permit reuse (0.320042ms)
+✔ unknown participant failures become sanitized rejections and release all scheduling resources (0.174125ms)
+✔ host timer/continuation and signal-registration failures reject safely and permit later operations (0.572041ms)
+✔ search and addMany retain one work budget across analysis, selection, records and participants (2.417083ms)
+✔ visible stop precedence is disposed, caller abort, deadline, work; a settled first error is retained (0.222375ms)
+✔ late malformed content rejects the whole queued batch after charged work and preserves later reads (0.19275ms)
+✔ four task yield quanta preserve full source-oracle membership, pages, order and BM25 after queued mutations (226.049416ms)
+✔ query stop checks run inside dictionary, postings, analysis, evaluation, scoring, selection and final result (3.294583ms)
+✔ every search and replacement yield can abort and recover with identical published state (9.914ms)
+ℹ Exhaustive cancellation positions: 52
+ℹ Exhaustive cancellation positions: 86
+✔ actual direct factory yields to host timers during complete common-term search and atomic staging (4890.239375ms)
+✔ compiled core runtime graph contains only relative core modules and has no platform/optional imports (5.674ms)
+✔ fresh core imports never read DOM, scheduling, network, workers or storage globals (49.537542ms)
+✔ field-local frequency, positive-length populations and reverse records are exact and frozen (3.136667ms)
+✔ empty index has all declared empty field indexes and empty complete exact membership (0.232833ms)
+✔ exact term lookup unions selected fields and values once per ID; returns complete owned membership (0.512792ms)
+✔ admitted input is owned before execution and core retains only frequency/equality structures (0.277958ms)
+✔ duplicate batches, existing IDs and malformed late records never expose partially constructed roots (0.386916ms)
+✔ construction cursors must be exhausted; abandonment is terminal before/after first step (0.43ms)
+✔ live corpus limits count tokens, field/term dictionary pairs and distinct postings before publication (0.842041ms)
+✔ construction and exact traversal work guards reject complete results rather than returning a subset (1.62125ms)
+✔ opaque keys and adversarial same-bucket collisions preserve every posting and reverse record (5.771708ms)
+✔ metadata work charges original duplicate entries before canonicalization and enforces its budget (0.415542ms)
+✔ invariant inspection detects frequency, reverse, dangling, field/corpus and directory corruption (1.218042ms)
+✔ independent source reconstruction derives canonical reverse/postings/populations and policy counts (2.546792ms)
+✔ deterministic mutation epochs exactly match independent full-source state and complete query scores (49.92625ms)
+ℹ {"label":"deterministic","operations":27,"states":28,"queryComparisons":812,"commits":17,"noops":5,"rejections":5}
+✔ live BM25 statistics after delete/replace/empty transitions match hand-derived arithmetic (0.490875ms)
+✔ mutation generators reproduce seeds and exercise all five operations with conflicts/noops (3.725917ms)
+✔ incremental state equals independent source rebuild after every mutation, seed 0x5eed1004 (289.667542ms)
+ℹ {"label":"seed=0x5eed1004","operations":160,"states":161,"queryComparisons":5957,"commits":87,"noops":42,"rejections":31}
+✔ incremental state equals independent source rebuild after every mutation, seed 0xc0ffee04 (300.308083ms)
+ℹ {"label":"seed=0xc0ffee04","operations":160,"states":161,"queryComparisons":5957,"commits":81,"noops":51,"rejections":28}
+✔ incremental state equals independent source rebuild after every mutation, seed 0x1004 (239.720291ms)
+ℹ {"label":"seed=0x1004","operations":160,"states":161,"queryComparisons":5957,"commits":79,"noops":61,"rejections":20}
+✔ admission owns records, removals and options; conflict selection uses execution-start state (5.125ms)
+✔ malformed late input and duplicate offending paths preserve all state and permit reuse (2.765292ms)
+✔ one publication selects core/source/side roots together; old readers cannot see staging (3.419417ms)
+✔ batch stages source once, clear resets every participant, noops never call prepare (0.427875ms)
+✔ faults at every phase roll back prepared roots and preserve the specific first error (2.245625ms)
+✔ failure in a later participant cannot publish an earlier prepared root; cleanup preserves original error (0.311334ms)
+✔ abort at every yielded boundary including final precommit leaves root unchanged; late abort stays success (18.234583ms)
+ℹ 134 abort injection positions, including immediately before commit
+✔ abandoning every cursor position releases the owner, including unstarted and participant preparation (8.763708ms)
+ℹ 134 abandonment injection positions
+✔ only one cursor can run; unstarted captures and abandoned cursors do not claim the owner (0.224541ms)
+✔ net live-state bounds are inclusive; replacement does not reject temporary old/new overlap (0.92275ms)
+✔ one work budget covers analysis, core copying and participant work through final publication (0.787ms)
+✔ replacement shares unrelated records, dictionary buckets and common posting buckets (2.939958ms)
+✔ collision buckets copy once per whole batch and remove empty term/posting buckets (1.513084ms)
+✔ directory stage caches an empty touched bucket across delete/set and seals terminally (0.1025ms)
+✔ revision exhaustion rejects changing operations, while noops preserve maximum revision (0.784334ms)
+✔ live configuration stays immutable and incompatible participant roots/handlers fail explicitly (0.674959ms)
+✔ affected invalid reverse/term/statistics fail before publication rather than clamping (0.303125ms)
+✔ independent query reference reads original Unicode spans without normalizing or retokenizing the whole source (2.567417ms)
+✔ hand-stated query membership and source-derived participation agree with complete native results (11.861709ms)
+✔ failed Boolean branches, duplicate groups, and double NOT have independently stated participation (1.4445ms)
+✔ hand-derived numerical constants: one field (0.342625ms)
+✔ hand-derived numerical constants: multiple fields and tokenless/missing values (0.56325ms)
+✔ source-derived field populations exclude missing, empty arrays, whitespace and tokenless fields (0.429209ms)
+✔ duplicate alternatives and exact/prefix overlap retain only the greatest contribution within each field (1.273333ms)
+✔ different explicit weights and field selections are separate scoring groups (0.670875ms)
+✔ reordered normalized variants and selected fields preserve canonical deduplication and exact arithmetic (1.04375ms)
+✔ empty corpus is complete for all, negative-only, lexical and equality queries (0.271583ms)
+✔ generated query fixtures reproduce seeds and cover varied source structures (2.185916ms)
+✔ complete Boolean/field/equality/prefix/numerical parity, seed 0x5eed1003 (95.034541ms)
+✔ complete Boolean/field/equality/prefix/numerical parity, seed 0xc0ffee03 (68.679917ms)
+✔ complete Boolean/field/equality/prefix/numerical parity, seed 0x1003 (81.581666ms)
+✔ hand-derived single-field BM25 and alternative term ties match unrounded arithmetic (3.810292ms)
+✔ field populations, boosts and best weighted term differ by field; filters preserve full-corpus IDF (0.984625ms)
+✔ positive groups only participate in successful branches; double NOT remains unscored (1.3545ms)
+✔ empty analysis, strict equality, missing/null and value/field group boundaries are preserved (1.365708ms)
+✔ prefix/exact overlap has no multiplicity bonus and normalized output is not retokenized (0.725083ms)
+✔ expansion caps include fields, deduplicate all query pairs and fail even in unevaluated branches (0.71875ms)
+✔ UTF-16 score ties and pagination are exact over all candidates and insertion orders (27.486709ms)
+✔ query, page and trace inputs are captured before execution; returned trees are frozen (0.404583ms)
+✔ complete trace reports revision/model/analyzer, off-page predicates and missing documents (0.421875ms)
+✔ trace bounds are inclusive and explicit; malformed requests fail without truncation (5.021708ms)
+✔ ordinary searches bypass fact recording/finalization and the guarded collector allocation (5.003708ms)
+✔ underflow weights retain a deterministic selected term fact without altering zero score (0.209416ms)
+✔ one work budget spans analysis, expansion, evaluation, scoring and selection; failures leave root usable (0.969667ms)
+✔ invalid ranking statistics and dangling/corrupt postings fail safely rather than clamping (0.763792ms)
+✔ actual public companion exports match pinned fixture provenance and independent data (9.556583ms)
+✔ owned input is captured before asynchronous checksum and returned values cannot mutate (1.117542ms)
+✔ genuine empty export preserves absent source revision and fresh native zero revision (2.550625ms)
+✔ public conversion rebuild query update source export and reload match independently authored native records (52.722209ms)
+✔ native Unicode normalization is explicit expected semantic change (17.816708ms)
+✔ explicit rejection: corrupt checksum (0.436916ms)
+✔ explicit rejection: unsupported envelope version (0.114792ms)
+✔ explicit rejection: unsupported contract (0.075542ms)
+✔ explicit rejection: unsupported dependency (0.07825ms)
+✔ explicit rejection: unsupported analyzer (0.103084ms)
+✔ explicit rejection: unsupported scoring model (0.075666ms)
+✔ explicit rejection: opaque MiniSearch index (0.065875ms)
+✔ explicit rejection: noncanonical whitespace (0.189083ms)
+✔ explicit rejection: noncanonical schema order (0.088167ms)
+✔ explicit rejection: noncanonical record order (0.175667ms)
+✔ explicit rejection: duplicate lexical key (0.046417ms)
+✔ explicit rejection: duplicate record ids (0.09575ms)
+✔ explicit rejection: duplicate schema fields (0.064625ms)
+✔ explicit rejection: count mismatch (0.073333ms)
+✔ explicit rejection: token count mismatch (0.079166ms)
+✔ explicit rejection: array count mismatch (0.064333ms)
+✔ explicit rejection: source count mismatch (0.097334ms)
+✔ explicit rejection: unknown schema type (0.114083ms)
+✔ explicit rejection: unsafe schema field (0.076417ms)
+✔ explicit rejection: undeclared record field (0.0805ms)
+✔ explicit rejection: unknown projection field (0.067375ms)
+✔ explicit rejection: duplicate projection field (0.083291ms)
+✔ explicit rejection: unsafe origin generation (0.078417ms)
+✔ explicit rejection: overlong source revision (0.066042ms)
+✔ explicit rejection: text scalar given array (0.073333ms)
+✔ explicit rejection: native boost limit (1.730208ms)
+✔ explicit rejection: native keyword limit (0.337541ms)
+✔ explicit rejection: native text array limit (0.352667ms)
+✔ explicit rejection: native malformed UTF16 (0.292375ms)
+✔ explicit rejection: native raw token limit (0.348875ms)
+✔ explicit rejection: maximum byte bound (0.047917ms)
+✔ explicit rejection: empty bytes (0.032834ms)
+✔ explicit rejection: UTF8 BOM (0.031208ms)
+✔ explicit rejection: malformed UTF8 (0.045625ms)
+✔ explicit rejection: deep payload before parse (0.033ms)
+✔ explicit rejection: truncated payload (0.052417ms)
+✔ explicit rejection: ordinary object (0.0295ms)
+✔ explicit rejection: Node Buffer subtype (0.028833ms)
+✔ explicit rejection: typed array subclass (0.030667ms)
+✔ explicit rejection: shared backing memory (0.030125ms)
+✔ byte capture rejects detached views and hostile accessors without invoking them (0.393708ms)
+✔ conversion failure never mutates an existing native owner or native source snapshot (44.136959ms)
+✔ matrix journal exclusively creates a capture and binds immutable actual identities (9.011208ms)
+✔ matrix start/result acknowledgements bind UA, session, scenario and operator label (12.504041ms)
+✔ matrix rejects off-origin, wrong host, unsupported methods/content and malformed identities (5.084792ms)
+✔ matrix serializes simultaneous starts and preserves the sole admitted attempt (12.47775ms)
+✔ matrix refuses stale/mismatched results and accepts an exact save retry without rerunning (11.297417ms)
+✔ matrix refuses Pass when cleanup or page execution failed and retains honest Fail (10.741292ms)
+✔ matrix cannot turn incomplete or wrong resource configurations into Pass (9.924084ms)
+✔ matrix requires successful storage database cleanup before Pass (10.950208ms)
+✔ matrix rejects missing observations, noncanonical/backward timestamps and malformed error rows (10.805666ms)
+✔ matrix body capture is bounded before JSON admission (4.631125ms)
+✔ matrix server close records unfinished execution as unknown, never Pass (11.033ms)
+✔ packed consumer preserves legacy npm pack array metadata (0.568875ms)
+✔ packed consumer preserves npm 12 package-keyed metadata (0.070208ms)
+✔ packed consumer rejects missing, ambiguous or unexpected package metadata (0.651958ms)
+✔ selects canonical first ready task and lists every ready release task without changing input (1.285125ms)
+✔ resumes in-progress work before starting another ready task (0.1585ms)
+✔ reports explicit blocked work and dependent unfinished work without claiming completion (0.137709ms)
+✔ shows owner decisions separately from blocked implementation work (0.160167ms)
+✔ mixed blocks and owner decisions remain separately visible (0.15275ms)
+✔ an optional-only deferred backlog never starts work and has no unfinished active release tasks (0.1155ms)
+✔ completed active work stays complete with optional work remaining (0.130625ms)
+✔ deferring a release task does not hide it as completed (0.121833ms)
+✔ waiting on optional dependencies does not automatically activate the optional track (0.144792ms)
+▶ rejects malformed required schema data instead of crashing or silently defaulting
+  ✔ unsupported version (0.139959ms)
+  ✔ wrong repository (0.054584ms)
+  ✔ missing task list (0.049792ms)
+  ✔ unknown property (0.040167ms)
+  ✔ missing acceptance list (0.037292ms)
+  ✔ empty acceptance list (0.034ms)
+  ✔ invalid status (0.03325ms)
+  ✔ invalid dependencies (0.038625ms)
+  ✔ missing milestone (0.038166ms)
+  ✔ nonobject task (0.0365ms)
+  ✔ empty text (0.062875ms)
+  ✔ invalid track (0.040792ms)
+✔ rejects malformed required schema data instead of crashing or silently defaulting (1.23225ms)
+✔ rejects duplicate IDs, duplicate dependencies, and unknown dependency references (0.073875ms)
+✔ enforces stable milestone/task ID namespaces used by GitHub ownership markers (0.069625ms)
+✔ rejects self-cycles and multi-task cycles with an actionable path (0.059792ms)
+✔ rejects completed or started tasks with unfinished prerequisites (0.045042ms)
+✔ done needs actual evidence references; block and decision statuses need a reason (0.05125ms)
+✔ checks listed evidence and specs, rejects escaped paths, and leaves future affected paths optional (1.529166ms)
+✔ rejects a specification symlink resolving outside the repository (1.074084ms)
+✔ loading validates real files, surfaces malformed JSON and graph errors, and never rewrites the plan (2.302833ms)
+✔ planner output labels tooling verification without claiming search qualification (0.103375ms)
+✔ status presentation does not duplicate an ID already present in the milestone title (0.095875ms)
+✔ fresh synchronization creates linked tracking, then a second run performs zero mutations (2.71675ms)
+✔ updating managed content preserves human notes and unrelated labels (0.760875ms)
+✔ accepted tasks close their issues and milestones with concrete evidence and dependency links (0.775375ms)
+✔ an issue closed contrary to the manifest refuses synchronization before any write (0.674709ms)
+▶ ambiguous managed ownership and unmanaged collisions fail before all writes
+  ✔ two issues own one ID (0.14775ms)
+  ✔ unmanaged title collision (0.120708ms)
+  ✔ repeated marker within one issue (0.096208ms)
+  ✔ two milestones own one ID (0.122125ms)
+  ✔ unmanaged milestone title collision (0.156166ms)
+  ✔ one issue claims two IDs (0.356417ms)
+  ✔ one milestone claims two IDs (0.222292ms)
+✔ ambiguous managed ownership and unmanaged collisions fail before all writes (1.86225ms)
+✔ pagination finds tracking beyond page one instead of creating duplicates (1.18ms)
+✔ final issue readback must match the intended state rather than successful write responses (0.306583ms)
+✔ final milestone readback must match the manifest even when a PATCH ignores the requested state (0.336209ms)
+✔ managed-block replacement preserves exact surrounding text and rejects malformed delimiters (0.08525ms)
+✔ task labels distinguish dependency readiness from recorded blocks and decisions (0.051709ms)
+ℹ tests 537
+ℹ suites 0
+ℹ pass 537
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83811.100167
+{"qualification":"Announcement policy DOM regression; no speech/AT observation.","installedDirectory":"/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-s7i4z7","browser":"156.0.8078.49","headless":true,"bundleSha256":"51c67a828c0c1c8096b543b41e3a1162220637e80ff796b6f5db101af9ac1a1a"}
+✔ fixed original, settled polite and settled assertive policies preserve the installed result presentation (2442.916959ms)
+✔ off intercepts busy before mount, preserves settled gates and isolates unrelated/Inspector writes (1124.423375ms)
+✔ results intercepts busy before mount, preserves settled gates and isolates unrelated/Inspector writes (1032.561833ms)
+✔ settled polite skips waiting, stale replies and composing work, republishes repeated submissions and bounds its trace (478.049208ms)
+✔ settled assertive publishes empty/errors/retry and keeps the external node through destroy/remount (410.341875ms)
+✔ unknown policy fails explicitly before mounting the fixture (116.273625ms)
+✔ unknown busy scope fails explicitly before mounting the fixture (134.591583ms)
+{"scope":"DOM focus observer regression only; no VoiceOver, speech or physical-input observation.","browser":"156.0.8078.49","packageSha256":"6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437","bundleSha256":"aa983e634414b92a54cb1100da502d3babd514e6bdb79a9aacd764adc0269cf7"}
+✔ opt-in observer keeps original UI policy and ordinary page untouched, with no competing live output (2290.536292ms)
+✔ trusted automated activation and Tab capture separate pre-default focus from a later task without adding heading stops (580.802042ms)
+✔ bounded trace reports dropped rows and truncated query, ignores outside typing and cancels pending samples on restart (280.444584ms)
+✔ identity failure disables recording without breaking the original search UI (349.439708ms)
+{"scope":"Input trace instrumentation regression; no physical/OS IME/AT qualification.","browser":"156.0.8078.49","packageSha256":"6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437","bundleSha256":"cc91596a3ea4c85fbdc62ec2f2a86c95d0f2b2f01f4c95559fe99f3a50f44ad4"}
+✔ opt-in trace leaves original UI policy intact, records automated trusted input honestly and stops without stealing focus (2403.967833ms)
+✔ synthetic precommit/submit/finalcommit is marked untrusted and correlates actual UI search calls after composition (431.300834ms)
+✔ trace excludes other fields, bounds strings/rows, and reports truncation rather than silently claiming a complete sequence (339.397208ms)
+✔ unavailable package identity fails visibly with recording disabled (198.074333ms)
+✔ packaged native controls submit, navigate exact pages, and preserve input focus (2534.472542ms)
+✔ facet counts follow exact conjunctive membership and selection resets paging (587.345333ms)
+✔ partial final page respects a stricter real engine document limit in main, snippets, and Inspector (349.865375ms)
+✔ debounced rapid typing admits the last value once (246.107084ms)
+✔ synthetic composition suppresses interim searches and admits compositionend once (318.85125ms)
+✔ late real replies are suppressed even when a borrowed engine ignores cancellation (337.241834ms)
+✔ empty results and typed errors announce status and recover by retry (335.350209ms)
+✔ intervening real mutation between main results and snippets rejects mixed revisions and retry recovers (369.970333ms)
+✔ snippets and hostile fixture titles remain literal text, and unsafe URL configuration is rejected (473.665667ms)
+✔ long content uses bounded original marked windows and safe allowed source links (263.817ms)
+✔ Inspector uses a separate revision checked actual fact request and native modal keyboard focus (339.574167ms)
+✔ duplicate mount, destroy, late reply, and remount preserve authored nodes and borrowed engine (371.339041ms)
+✔ closing pending Inspector suppresses a late completed fact reply and restores focus (293.624583ms)
+✔ narrow viewport, reduced motion, visible keyboard focus, and live status remain usable (390.369459ms)
+✔ real documentation pilot supports judged tasks and source/offset phrase presentation parity (27144.9035ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46885.22075
+✔ reentrant caller signal preserves direct FIFO admission and both mutation outcomes (1359.738041ms)
+✔ one scope and endpoint permit exactly one live or initializing worker owner (126.202125ms)
+✔ real source worker has complete direct/core/add-on query and atomic mutation parity (310.102458ms)
+✔ real stored positions/offsets worker has complete semantic parity (331.769791ms)
+✔ real mixed phrase worker has complete semantic parity (322.358125ms)
+✔ direct and actual worker preserve exact caller admission-entry cliffs (149.806583ms)
+✔ whole-worker BM25 agrees with independent hand-derived numerical fixture (123.987125ms)
+✔ startup mismatch, module failure and unqualified pairing reject without leaks (176.024708ms)
+✔ real replies reordered and duplicated retain exact operation identity (125.064625ms)
+✔ replayed live mutation ID cannot falsify a committed outcome or execute twice (439.749042ms)
+✔ actual postcommit host send failure preserves unknown outcome and committed receipt (123.313916ms)
+✔ actual postcommit cancellation reports known commit and conclusive receipt (122.08125ms)
+✔ lost actual mutation reply gives unknown then reconciles committed state (177.347417ms)
+✔ bounded 256 mutation receipt window expires old operation IDs (131.146167ms)
+✔ real cooperative precommit cancellation and deadline publish no mutation (165.201792ms)
+✔ admission deadlines include delayed actual message delivery (177.747375ms)
+✔ worker error event distinguishes termination and releases the owned worker (113.692875ms)
+✔ lost read reply gives timeout and allows subsequent read recovery (167.952167ms)
+✔ malformed response envelopes and result data cannot become successful facts (179.19125ms)
+✔ finite payload cap includes all request/response envelope metadata (169.974458ms)
+✔ malformed actual worker requests cannot commit unvalidated writes (500.035083ms)
+✔ actual worker death gives honest unknown and explicit new-worker recovery (299.252792ms)
+✔ bounded pending map rejects overflow and destroy clears timers/signals/listeners (121.4705ms)
+✔ external worker disposal releases listeners and settles pending requests without termination (121.716917ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6403.789708
+✔ explicit actions preserve complete direct/add-on source recovery and later mutations (2190.121375ms)
+✔ unminified installed consumer preserves complete source recovery (898.765125ms)
+✔ mutation, serialization and durable generations remain separately observable (391.659667ms)
+✔ simultaneous clients require CAS and stale erased tokens cannot overwrite recreated state (548.434ms)
+✔ namespace erasure deletes every owned store and isolates other namespaces (418.1395ms)
+✔ unavailable storage preserves usable borrowed in-memory engine (222.758542ms)
+✔ injected genuine quota and transaction failures preserve previous durable generation (530.559833ms)
+✔ observed strict transaction commit remains successful across same-event late cancellation (224.028209ms)
+✔ lost real durable completion delivery has unknown outcome and explicit load recovery (969.212583ms)
+✔ corrupt, malformed and incompatible durable snapshots cannot partially restore (411.796291ms)
+✔ orphaned durable snapshot has explicit complete erasure and recreate recovery (320.639416ms)
+✔ future versions and unknown database stores fail with explicit recovery (521.681ms)
+✔ real blocked upgrade is bounded and stopped late upgrade is aborted (222.145666ms)
+✔ delayed genuine opened connection closes after finite open timeout (204.497292ms)
+✔ actual external versionchange closes owned connection and preserves memory state (215.6ms)
+✔ pre-abort and deadline failure perform no storage work and release listeners (112.413708ms)
+✔ bounded pending FIFO settles queued stops and disposal before held snapshot delivery (220.756708ms)
+✔ save cancellation during real serialization preserves durable and in-memory states (1022.948125ms)
+✔ load cancellation preserves complete previous core and add-on states (3526.688708ms)
+✔ disposal settles pending action and leaves borrowed engine usable (113.071458ms)
+✔ real one-owner module worker recovers exact source/add-on semantics (664.085083ms)
+✔ lost actual worker restore reply exposes unknown outcome and conclusive receipt (605.217917ms)
+✔ observed committed restore survives same-event late cancellation before Promise delivery (340.543834ms)
+✔ negotiated worker snapshot transport bound refuses partial persisted data (853.953833ms)
+✔ real worker termination settles pending load and explicit new worker recovers durable data (1080.957334ms)
+✔ actual page reload and current documentation recover through installed public storage (28900.241875ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 47870.389625
+✔ installed public migration exports rebuild update persist reload and erase actual browser source state (1821.010333ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1976.103083
+
+Final manifest/docs synchronization after completed full check (no source changes):
+
+docs:check — exit 0
+npm notice run @vmitsaras/raveldex@0.0.0 docs:check
+npm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs
+Generated roadmap and task documents match the canonical manifest (3 files).
+Local Markdown link targets checked in 101 files (external URLs and anchors not evaluated).
+
+handoff:check — exit 0
+npm notice run @vmitsaras/raveldex@0.0.0 handoff:check
+npm notice run node scripts/plan.mjs check
+Roadmap valid: 31 tasks across 6 milestones; graph and local references checked.
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+
+handoff:status — exit 0
+npm notice run @vmitsaras/raveldex@0.0.0 handoff:status
+npm notice run node scripts/plan.mjs status
+Raveldex roadmap
+Release progress: 20/21 done; 0 in progress; 1 ready.
+
+N0 — Native design adoption: 2/2 done [release]
+N1 — Usable native core alpha: 6/6 done [release]
+N2 — Modular search product: 6/6 done [release]
+N3 — Host and migration parity: 4/4 done [release]
+N4 — Native 0.1 qualification: 2/3 done [release]
+N5 — Selected optional enhancements: 0/10 done [optional]
+
+Next dependency-ready release task: RX-4003 — Package, public documentation, and independent candidate review
+
+All dependency-ready release tasks (1):
+- RX-4003 — Package, public documentation, and independent candidate review
+
+Optional backlog — never selected automatically (10):
+- RX-A010 — Bounded typo tolerance [deferred]
+- RX-A020 — Dictionary-backed suggestions [deferred]
+- RX-A030 — Directional one-step synonyms [deferred]
+- RX-A040 — Evaluated language analyzer pack [deferred]
+- RX-A050 — Code and identifier analysis [deferred]
+- RX-A060 — Explicit literal and infix matching [deferred]
+- RX-A070 — Ordered proximity matching [deferred]
+- RX-A080 — Bounded text query syntax [deferred]
+- RX-A090 — Explicit record patch convenience [deferred]
+- RX-A100 — Static-build and Astro adapter [deferred]
+
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+
+handoff:next — exit 0
+npm notice run @vmitsaras/raveldex@0.0.0 handoff:next
+npm notice run node scripts/plan.mjs next
+Next dependency-ready release task: RX-4003 — Package, public documentation, and independent candidate review
+
+All dependency-ready release tasks (1):
+- RX-4003 — Package, public documentation, and independent candidate review
+
+Optional backlog — never selected automatically (10):
+- RX-A010 — Bounded typo tolerance [deferred]
+- RX-A020 — Dictionary-backed suggestions [deferred]
+- RX-A030 — Directional one-step synonyms [deferred]
+- RX-A040 — Evaluated language analyzer pack [deferred]
+- RX-A050 — Code and identifier analysis [deferred]
+- RX-A060 — Explicit literal and infix matching [deferred]
+- RX-A070 — Ordered proximity matching [deferred]
+- RX-A080 — Bounded text query syntax [deferred]
+- RX-A090 — Explicit record patch convenience [deferred]
+- RX-A100 — Static-build and Astro adapter [deferred]
+
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+
+tracking:preview — exit 0
+npm notice run @vmitsaras/raveldex@0.0.0 tracking:preview
+npm notice run node scripts/sync-github.mjs --dry-run
+Preview only: vmitsaras/raveldex; no network requests or remote mutations.
+6 milestones; 6 overview issues; 31 task issues.
+RX-0001 [done] Repository foundation and native design adoption
+RX-0002 [done] Core contract reconciliation and evaluation plan
+RX-1001 [done] Data, schema, basic analyzer, limits, and errors
+RX-1002 [done] Dictionary, postings, exact retrieval, and independent oracle
+RX-1003 [done] Query evaluation, native BM25, and numerical trace facts
+RX-1004 [done] Incremental atomic mutations
+RX-1005 [done] Revision execution, work limits, and cancellation
+RX-1006 [done] Core-only packaged real-document pilot
+RX-2001 [done] Source-verified phrase add-on
+RX-2002 [done] Optional positions, original offsets, and phrase parity
+RX-2003 [done] Structured filters and exact conjunctive facets
+RX-2004 [done] Factual explain and Inspector data
+RX-2005 [done] Original match ranges and bounded snippets
+RX-2006 [done] Native DOM UI, Inspector, and documentation pilot
+RX-3001 [done] One-owner module-worker adapter
+RX-3002 [done] Versioned source and native snapshots
+RX-3003 [done] IndexedDB persistence, recovery, and namespace erasure
+RX-3004 [done] Companion migration and comparator separation
+RX-4001 [done] Fair correctness, relevance, and cost comparison
+RX-4002 [done] Browser, assistive-technology, memory, and device qualification
+RX-4003 [ready] Package, public documentation, and independent candidate review
+RX-A010 [deferred] Bounded typo tolerance
+RX-A020 [deferred] Dictionary-backed suggestions
+RX-A030 [deferred] Directional one-step synonyms
+RX-A040 [deferred] Evaluated language analyzer pack
+RX-A050 [deferred] Code and identifier analysis
+RX-A060 [deferred] Explicit literal and infix matching
+RX-A070 [deferred] Ordered proximity matching
+RX-A080 [deferred] Bounded text query syntax
+RX-A090 [deferred] Explicit record patch convenience
+RX-A100 [deferred] Static-build and Astro adapter

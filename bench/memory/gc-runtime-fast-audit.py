@@ -6,6 +6,8 @@ offline tooling, not a replacement runtime or a source of measurement events.
 import argparse, hashlib, importlib.util, json, pathlib, subprocess
 spec=importlib.util.spec_from_file_location('extent_checks',pathlib.Path(__file__).with_name('runtime-audit.py'))
 checks=importlib.util.module_from_spec(spec);spec.loader.exec_module(checks)
+spec=importlib.util.spec_from_file_location('gc_method_checks',pathlib.Path(__file__).with_name('gc-runtime-audit.py'))
+methods=importlib.util.module_from_spec(spec);spec.loader.exec_module(methods)
 METRICS=('gross_birth_bytes','mutator_occupied_high_water_bytes','occupied_at_stop_bytes','trimmed_bytes','gc_removed_bytes')
 def require(test,why):
     if not test:raise ValueError(why)
@@ -15,17 +17,25 @@ def sha(path):
         for b in iter(lambda:f.read(1048576),b''):h.update(b)
     return h.hexdigest()
 def audit(path,executable,bound=256):
-    require(type(bound) is int and bound in (256,512,2048),'Invalid offline bound')
+    require(type(bound) is int and bound in (256,512,2048,4096,8192),'Invalid offline bound')
     require(pathlib.Path(path).stat().st_size<=bound*1048576,'Raw exceeds offline bound')
-    p=subprocess.run([str(pathlib.Path(executable).resolve()),str(path),str(bound)],capture_output=True,timeout=600)
+    with pathlib.Path(path).open('rb') as stream:
+        line=stream.readline(4097)
+    require(line.endswith(b'\n') and len(line)<=4096,'Header bound')
+    header=json.loads(line,object_pairs_hook=checks.unique_object)
+    tracked_shrink=methods.shrink_mode(header)
+    extent_limit=2000000 if tracked_shrink else 1000000
+    require(type(header['active_extent_cap_per_map']) is int and 1<=header['active_extent_cap_per_map']<=extent_limit,'Map scope mismatch')
+    p=subprocess.run([str(pathlib.Path(executable).resolve()),str(path),str(bound),'v2' if tracked_shrink else 'v1'],capture_output=True,timeout=600)
     require(p.returncode==0,'Offline replay failed: '+p.stderr.decode(errors='replace')[:1024])
     # Up to 4096 mark summaries fit below this finite bound. The prior 64KiB
     # limit refused the preserved deliberate stream-overflow calibration.
     require(len(p.stdout)<=1048576 and not p.stderr,'Offline output bound or unexpected stderr')
     r=json.loads(p.stdout,object_pairs_hook=checks.unique_object);h=r['header'];s=r['footer']
-    require(h['schema']=='raveldex-gc-extents-varint-v1','Schema mismatch')
+    require(h==header,'Replay header mismatch')
+    methods.shrink_mode(h)
     require(h['fields']==['kind','address','to','bytes','old_bytes','marker'],'Layout mismatch')
-    require(type(h['active_extent_cap_per_map']) is int and 1<=h['active_extent_cap_per_map']<=1000000 and h['map_count_max']==5,'Map scope mismatch')
+    require(type(h['active_extent_cap_per_map']) is int and 1<=h['active_extent_cap_per_map']<=extent_limit and h['map_count_max']==5,'Map scope mismatch')
     require(type(h['stream_byte_cap']) is int and 1048576<=h['stream_byte_cap']<=16384*1048576,'Native cap mismatch')
     require(h['stdio_buffer_bytes']==65536 and h['single_threaded'] is True and h['incremental_marking'] is False,'Recorder mode mismatch')
     for key in ('physical_memory_measured','inline_new','turbo_allocation_folding','collector_overlap_measured','includes_preexisting_objects'):
@@ -39,14 +49,15 @@ def audit(path,executable,bound=256):
         require(s['errors']==0 and s['dropped_events']==0 and not s['aborted'],'Invalid accepted footer')
         require([s[k] for k in METRICS]==[r[k] for k in ('gross','peak','stop','trimmed','reclaimed')],'Independent metric mismatch')
         require([s[k] for k in ('gc_cycles','gc_moves','census_objects')]==[r[k] for k in ('gcs','moves','census')],'GC counter mismatch')
+        if tracked_shrink:require(type(s.get('gc_pre_move_shrinks')) is int and s['gc_pre_move_shrinks']==r['shrinks'],'GC shrink counter mismatch')
         require(s['heap_gc_count_stop']-s['heap_gc_count_start']==r['gcs'],'Missing internal GC')
     else:require(s['errors']>0 and all(s[k] is None for k in METRICS),'Invalid footer exposes metrics')
     return dict(path=str(path),bytes=r['bytes'],sha256=sha(path),events=r['events'],valid=s['valid'],
         independentReplay='Pass' if s['valid'] else 'Invalid window retained; numeric prefix unqualified',summary=s,
         marks=r['marks'],maxStreamMiB=bound,prefixFailure=dict(sequence=r['failureSequence'],reason=r['failure']) if r['failure'] else None,
         replayExecutableSha256=sha(executable),replaySourceSha256=sha(pathlib.Path(__file__).with_name('gc-runtime-replay.cc')),
-        offlineLimits={'timeoutSeconds':600,'extentsPerMap':1000000,'movesPerGc':1000000,'censusRowsPerGc':4000000,'distinctMarks':4096})
+        offlineLimits={'timeoutSeconds':600,'extentsPerMap':extent_limit,'movesPerGc':extent_limit,'censusRowsPerGc':4000000,'distinctMarks':4096})
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--executable',required=True,type=pathlib.Path)
-    parser.add_argument('--max-stream-mib',type=int,choices=(256,512,2048),default=256);parser.add_argument('paths',nargs='+',type=pathlib.Path);args=parser.parse_args()
+    parser.add_argument('--max-stream-mib',type=int,choices=(256,512,2048,4096,8192),default=256);parser.add_argument('paths',nargs='+',type=pathlib.Path);args=parser.parse_args()
     print(json.dumps([audit(p,args.executable,args.max_stream_mib) for p in args.paths],indent=2))

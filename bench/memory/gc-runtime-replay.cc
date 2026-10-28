@@ -11,6 +11,7 @@
 #include <tuple>
 #include <vector>
 using U = uint64_t;
+U offlineExtentCap=1000000;
 void need(bool b, const char* why) { if (!b) throw std::runtime_error(why); }
 U end(U a, U n) { need(a > 0 && n > 0 && a <= UINT64_MAX-n, "invalid extent"); return a+n; }
 void plus(U& a,U b){need(a<=UINT64_MAX-b,"metric overflow");a+=b;}
@@ -30,7 +31,7 @@ struct Extents {
   }
   void add(U a,U b) {
     need(a>0 && b>a && overlap(a,b)==m.end(),"overlapping extent");
-    need(m.size()<1000000,"offline extent map cap");
+    need(m.size()<offlineExtentCap,"offline extent map cap");
     m.emplace(a,b); total+=b-a;
   }
   U cut(U a,U b) {
@@ -55,8 +56,10 @@ struct Reader {
 };
 int main(int argc,char**argv) {
  try {
-  need(argc==3,"supply raw file and MiB bound");
-  std::string arg=argv[2]; need(arg=="256" || arg=="512" || arg=="2048","offline bound choice");
+  need(argc==4,"supply raw file, MiB bound and validated schema version");
+  std::string schema=argv[3];need(schema=="v1" || schema=="v2","schema version choice");bool trackedShrink=schema=="v2";
+  offlineExtentCap=trackedShrink?2000000:1000000;
+  std::string arg=argv[2]; need(arg=="256" || arg=="512" || arg=="2048" || arg=="4096" || arg=="8192","offline bound choice");
   Reader r(argv[1],std::stoull(arg)*1024*1024);
   std::string header;for(int i=0;i<4096;++i){char c=r.byte();if(c=='\n')break;header+=c;need(i<4095,"header bound");}
   Extents state,sources,destinations;
@@ -64,7 +67,7 @@ int main(int argc,char**argv) {
   std::vector<std::pair<U,U>> census;
   std::map<U,std::array<U,3>> marks;
   U count=0,gross=0,peak=0,trimmed=0,reclaimed=0,gcs=0,moveCount=0,censusCount=0,before=0,collector=0,badSeq=0,footerAt=0;
-  bool gc=false; std::string failure,footer;
+  bool gc=false,phaseLocked=false,pendingUpdate=false; U gcTrimmed=0,gcShrinks=0,updateAddress=0,updateSize=0; std::string failure,footer;
   for(;;) {
    U start=r.bytes,kind=r.integer();
    if(kind==0){footerAt=start;footer=r.text(r.integer());need(std::fgetc(r.f)==EOF,"trailing bytes");break;}
@@ -72,22 +75,42 @@ int main(int argc,char**argv) {
    U a=r.integer(),to=r.integer(),size=r.integer(),old=r.integer(),marker=r.integer(); ++count;
    if(!failure.empty()) continue;
    try {
+    if(trackedShrink && gc && pendingUpdate) {
+     need(kind==4 && a==updateAddress && size==updateSize && to==0 && old==0 && marker==0,"missing matching GC size update");
+     pendingUpdate=false;continue;
+    }
     switch(kind) {
      case 1:need(!gc,"birth during GC");state.add(a,end(a,size));plus(gross,size);peak=std::max(peak,state.total);break;
      case 2:
       need(size>0,"empty move");
       if(!gc){need(to>a,"unsupported non-GC move");U b=end(to,size),covered=state.covered(a,b);need(covered==0 || covered==b-a,"partial left trim");if(covered)plus(trimmed,state.cut(a,to));}
-      else{sources.add(a,end(a,size));destinations.add(to,end(to,size));need(moves.size()<1000000,"offline move cap");moves.emplace_back(a,to,size);++moveCount;}
+      else{phaseLocked=true;sources.add(a,end(a,size));destinations.add(to,end(to,size));need(moves.size()<offlineExtentCap,"offline move cap");moves.emplace_back(a,to,size);++moveCount;}
       break;
      case 3:
       need(size>0 && size<=old,"invalid shrink");
       if(!gc){U b=end(a,old),covered=state.covered(a,b);need(covered==0 || covered==old,"partial shrink");if(covered)plus(trimmed,state.cut(a+size,b));}
       else {
-       U b=end(a,old);need(state.covered(a,b)==0,"tracked GC shrink");
+       U b=end(a,old);
+       if(trackedShrink) {
+        need(!phaseLocked,"GC shrink after move/census");
+        U covered=state.covered(a,b);need(covered==0 || covered==old,"partial tracked GC shrink");
+        if(covered) {
+         need(size<old,"GC shrink must strictly decrease");
+         U removed=state.cut(a+size,b);need(removed==old-size,"incomplete GC shrink tail");
+         plus(trimmed,removed);plus(gcTrimmed,removed);++gcShrinks;pendingUpdate=true;updateAddress=a;updateSize=size;
+        }
+        break;
+       }
+       need(state.covered(a,b)==0,"tracked GC shrink");
        for(auto [src,dst,n]:moves)for(auto p:state.pieces(src,end(src,n)))need(dst+(p.second-src)<=a || dst+(p.first-src)>=b,"moved tracked GC shrink");
       }
       break;
-     case 4:break; // Corroborating update, never count a second resize.
+     case 4:
+      if(trackedShrink && gc) {
+       U b=end(a,size);need(state.covered(a,b)==0,"unmatched monitored GC size update");
+       for(auto [src,dst,n]:moves)for(auto p:state.pieces(src,end(src,n)))need(dst+(p.second-src)<=a || dst+(p.first-src)>=b,"unmatched moved GC size update");
+      }
+      break; // Corroborating update, never count a second resize.
      case 5:
       need(size==state.total && old==peak,"mark metric mismatch");
       need(marks.count(marker) || marks.size()<4096,"offline mark cap");
@@ -95,18 +118,18 @@ int main(int argc,char**argv) {
       ++marks[marker][0];marks[marker][2]=count;break;
      case 6:case 7:need(state.covered(a,end(a,size))<=size,"inspection mismatch");break;
      case 8:
-      need(!gc && marker<=1 && size==state.total,"invalid GC begin");gc=true;collector=marker;before=state.total;++gcs;break;
+      need(!gc && marker<=1 && size==state.total,"invalid GC begin");gc=true;phaseLocked=false;gcTrimmed=0;pendingUpdate=false;collector=marker;before=state.total;++gcs;break;
      case 10:
-      need(gc && size>0,"census outside GC");need(census.size()<4000000,"offline census cap");census.emplace_back(a,end(a,size));++censusCount;break;
+      need(gc && size>0,"census outside GC");phaseLocked=true;need(census.size()<4000000,"offline census cap");census.emplace_back(a,end(a,size));++censusCount;break;
      case 9: {
-      need(gc && marker==collector && old==before,"invalid GC end");
+      need(gc && marker==collector && old==before-gcTrimmed,"invalid GC end");
       std::vector<std::pair<U,U>> tagged;
       for(auto [src,dst,n]:moves)for(auto p:state.pieces(src,end(src,n)))tagged.emplace_back(dst+(p.first-src),dst+(p.second-src));
       for(auto [src,dst,n]:moves){state.cut(src,end(src,n));state.cut(dst,end(dst,n));}
       for(auto p:tagged)state.add(p.first,p.second);
       Extents occupied,survivors;
       for(auto p:census){occupied.add(p.first,p.second);for(auto q:state.pieces(p.first,p.second))survivors.add(q.first,q.second);}
-      need(survivors.total<=before,"GC increased tracked bytes");plus(reclaimed,before-survivors.total);state=std::move(survivors);
+      need(survivors.total<=before-gcTrimmed,"GC increased tracked bytes");plus(reclaimed,before-gcTrimmed-survivors.total);state=std::move(survivors);
       need(size==state.total,"GC metric mismatch");gc=false;sources=Extents{};destinations=Extents{};moves.clear();census.clear();break;
      }
     }
@@ -114,7 +137,7 @@ int main(int argc,char**argv) {
   }
   std::cout<<"{\"header\":"<<header<<",\"footer\":"<<footer<<",\"bytes\":"<<r.bytes<<",\"footerAt\":"<<footerAt<<",\"events\":"<<count
    <<",\"gross\":"<<gross<<",\"peak\":"<<peak<<",\"stop\":"<<state.total<<",\"trimmed\":"<<trimmed<<",\"reclaimed\":"<<reclaimed
-   <<",\"gcs\":"<<gcs<<",\"moves\":"<<moveCount<<",\"census\":"<<censusCount<<",\"openGc\":"<<(gc?"true":"false")
+   <<",\"gcs\":"<<gcs<<",\"moves\":"<<moveCount<<",\"shrinks\":"<<gcShrinks<<",\"census\":"<<censusCount<<",\"openGc\":"<<(gc?"true":"false")
    <<",\"failureSequence\":"<<badSeq<<",\"failure\":\""<<failure<<"\",\"marks\":{";
   bool first=true;for(auto [id,row]:marks){if(!first)std::cout<<',';first=false;std::cout<<'\"'<<id<<"\":{\"count\":"<<row[0]<<",\"firstSequence\":"<<row[1]<<",\"lastSequence\":"<<row[2]<<'}';}
   std::cout<<"}}\n";

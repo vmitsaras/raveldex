@@ -809,13 +809,11 @@ Establish the native product's observed strengths and limitations through equiva
 
 **Browser, assistive-technology, memory, and device qualification**
 
-**Milestone:** N4 · **Status:** `blocked` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/26)
+**Milestone:** N4 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/26)
 
 **Dependencies:** [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004)
 
 Collect the specific environment and resource observations required by the proposed native support claims.
-
-**Blocker or decision:** RX-4002 remains Blocked solely on AC03. Five further complete GC-aware native codec windows are independently replayed: source/phrase and positions/offsets pairs at 1,000, and source/phrase native export at 10,000. The 10,000 native restore passes publicly but a monitored 376→264 pre-move major-GC shrink invalidates all managed metrics; next calibrate exact shrink/tail-reuse/census handling before repeating it. Remaining relevant codec sizes/configurations and repetitions are incomplete. Actual four-record worker messages now bind 222 selected one-byte string copies (including each 3,993-byte snapshot write), growth copies and 16 final frees to protocol/session/request/process/thread/peer identities. Receiver/two-byte coverage, actual in-place calibration and the 1,000/10,000 browser product matrix remain unqualified. The in-place LLDB expression interruption and every raw invalid attempt remain preserved; no physical/global-copy claim, criterion/contract/dependency/production-limit change, AT/physical repeat or support waiver. RX-4003 waits, N5 stays deferred; no publication or remote write.
 
 **Expected affected areas**
 
@@ -1063,6 +1061,15 @@ Collect the specific environment and resource observations required by the propo
 - [docs/evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz)
 - [docs/evidence/RX-4002-codecs-copy-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-20261028.tar.xz)
 - [docs/evidence/RX-4002-codecs-copy-review-20261028.json](docs/evidence/RX-4002-codecs-copy-review-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-20261028.md](docs/evidence/RX-4002-gc-shrink-20261028.md)
+- [docs/evidence/RX-4002-gc-shrink-20261028.tar.xz](docs/evidence/RX-4002-gc-shrink-20261028.tar.xz)
+- [docs/evidence/RX-4002-gc-shrink-raw-index-20261028.json](docs/evidence/RX-4002-gc-shrink-raw-index-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-summary-20261028.json](docs/evidence/RX-4002-gc-shrink-summary-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-reconstruction-20261028.json](docs/evidence/RX-4002-gc-shrink-reconstruction-20261028.json)
+- [docs/evidence/RX-4002-wire-frontiers-20261028.json](docs/evidence/RX-4002-wire-frontiers-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-identity-20261028.json](docs/evidence/RX-4002-gc-shrink-identity-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-review-20261028.json](docs/evidence/RX-4002-gc-shrink-review-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-check-20261028.log](docs/evidence/RX-4002-gc-shrink-check-20261028.log)
 
 
 ## RX-4003

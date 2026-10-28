@@ -60,14 +60,26 @@ class Extents:
 
 
 METRICS = ('gross_birth_bytes', 'mutator_occupied_high_water_bytes', 'occupied_at_stop_bytes', 'trimmed_bytes', 'gc_removed_bytes')
+SHRINK_MODE = 'pre-move-full-coverage-right-trim-v1'
+
+
+def shrink_mode(header):
+    """An explicit new schema is required; never upgrade a preserved v1 stream."""
+    schema = header.get('schema')
+    if schema == 'raveldex-gc-extents-varint-v1':
+        require('gc_tracked_shrink_mode' not in header, 'Legacy schema with shrink method')
+        return False
+    require(schema == 'raveldex-gc-extents-varint-v2' and header.get('gc_tracked_shrink_mode') == SHRINK_MODE,
+            'Schema/shrink method mismatch')
+    return True
 
 
 def audit(path, max_stream_mib=256):
-    require(type(max_stream_mib) is int and max_stream_mib in (256, 512, 2048), 'Audit bound must be 256, 512 or 2048MiB')
+    require(type(max_stream_mib) is int and max_stream_mib in (256, 512, 2048, 4096, 8192), 'Audit bound must be 256, 512, 2048, 4096 or 8192MiB')
     digest = hashlib.sha256()
     measured = 0
     state = Extents()
-    gross = peak = trimmed = reclaimed = count = gcs = moves = census_count = 0
+    gross = peak = trimmed = reclaimed = count = gcs = moves = census_count = gc_shrinks = 0
     gc = None
     prefix_failure = None
     inspections = []
@@ -99,9 +111,10 @@ def audit(path, max_stream_mib=256):
         require(line.endswith(b'\n') and len(line) <= 4096, 'Header bound')
         digest.update(line); measured += len(line)
         header = json.loads(line, object_pairs_hook=prior.unique_object)
-        require(header['schema'] == 'raveldex-gc-extents-varint-v1', 'Schema mismatch')
+        tracked_shrink = shrink_mode(header)
         require(header['fields'] == ['kind', 'address', 'to', 'bytes', 'old_bytes', 'marker'], 'Record layout mismatch')
-        require(type(header['active_extent_cap_per_map']) is int and 1 <= header['active_extent_cap_per_map'] <= 1000000, 'Map cap mismatch')
+        extent_limit = 2000000 if tracked_shrink else 1000000
+        require(type(header['active_extent_cap_per_map']) is int and 1 <= header['active_extent_cap_per_map'] <= extent_limit, 'Map cap mismatch')
         require(type(header['map_count_max']) is int and header['map_count_max'] == 5, 'Map count mismatch')
         require(type(header['stream_byte_cap']) is int and 1048576 <= header['stream_byte_cap'] <= 16384*1048576, 'Stream cap mismatch')
         require(header['stdio_buffer_bytes'] == 65536 and header['physical_memory_measured'] is False, 'Native overhead/scope mismatch')
@@ -124,6 +137,11 @@ def audit(path, max_stream_mib=256):
             if prefix_failure is not None:
                 continue
             try:
+                if tracked_shrink and gc is not None and gc['pending_update'] is not None:
+                    require(kind == 4 and (a, size, to, old, marker) == (*gc['pending_update'], 0, 0, 0),
+                            'Missing matching GC size update')
+                    gc['pending_update'] = None
+                    continue
                 if kind == 1:
                     require(gc is None, 'Birth during GC')
                     require(gross <= 2**64 - 1 - size, 'Metric overflow')
@@ -138,6 +156,8 @@ def audit(path, max_stream_mib=256):
                         if covered:
                             trimmed += state.cut(a, to)
                     else:
+                        if tracked_shrink:
+                            gc['phase_locked'] = True
                         gc['sources'].add(a, a + size); gc['destinations'].add(to, to + size)
                         gc['moves'].append((a, to, size))
                         moves += 1
@@ -149,10 +169,31 @@ def audit(path, max_stream_mib=256):
                         if covered:
                             trimmed += state.cut(a + size, a + old)
                     else:
+                        if tracked_shrink:
+                            require(0 < a < a + old <= 2**64 - 1, 'Invalid extent')
+                            require(not gc['phase_locked'], 'GC shrink after move/census')
+                            covered = sum(y - x for x, y in state.pieces(a, a + old))
+                            require(covered in (0, old), 'Partial tracked GC shrink')
+                            if covered:
+                                require(size < old, 'GC shrink must strictly decrease')
+                                removed = state.cut(a + size, a + old)
+                                require(removed == old - size, 'Incomplete GC shrink tail')
+                                trimmed += removed; gc['trimmed'] += removed
+                                gc_shrinks += 1
+                                gc['pending_update'] = (a, size)
+                            continue
                         require(not state.pieces(a, a + old), 'Tracked GC shrink')
                         for source, destination, length in gc['moves']:
                             for x, y in state.pieces(source, source + length):
                                 require(destination + y - source <= a or destination + x - source >= a + old, 'Moved tracked GC shrink')
+                elif kind == 4:
+                    if tracked_shrink and gc is not None:
+                        require(0 < a < a + size <= 2**64 - 1, 'Invalid extent')
+                        require(not state.pieces(a, a + size), 'Unmatched monitored GC size update')
+                        for source, destination, length in gc['moves']:
+                            for x, y in state.pieces(source, source + length):
+                                require(destination + y - source <= a or destination + x - source >= a + size,
+                                        'Unmatched moved GC size update')
                 elif kind == 5:
                     require((size, old) == (state.total, peak), 'Mark metric mismatch')
                     require(marker in marks or len(marks) < 4096, 'Too many distinct marks')
@@ -163,13 +204,16 @@ def audit(path, max_stream_mib=256):
                                             monitoredBytes=sum(y-x for x, y in state.pieces(a, a+size))))
                 elif kind == 8:
                     require(gc is None and marker in (0, 1) and size == state.total, 'Invalid GC begin')
-                    gc = dict(collector=marker, before=state.total, sources=Extents(), destinations=Extents(), moves=[], census=[])
+                    gc = dict(collector=marker, before=state.total, sources=Extents(), destinations=Extents(), moves=[], census=[],
+                              trimmed=0, phase_locked=False, pending_update=None)
                     gcs += 1
                 elif kind == 10:
                     require(gc is not None and size > 0, 'Census outside GC')
+                    if tracked_shrink:
+                        gc['phase_locked'] = True
                     gc['census'].append((a, a + size)); census_count += 1
                 elif kind == 9:
-                    require(gc is not None and marker == gc['collector'] and old == gc['before'], 'Invalid GC end')
+                    require(gc is not None and marker == gc['collector'] and old == gc['before'] - gc['trimmed'], 'Invalid GC end')
                     # Compute all moved tags from the same immutable pre-GC map.
                     tagged = []
                     for source, destination, length in gc['moves']:
@@ -183,8 +227,8 @@ def audit(path, max_stream_mib=256):
                         census.add(x, y)
                         for first, last in state.pieces(x, y):
                             survivors.add(first, last)
-                    require(survivors.total <= gc['before'], 'GC increased tracked occupied bytes')
-                    reclaimed += gc['before'] - survivors.total
+                    require(survivors.total <= gc['before'] - gc['trimmed'], 'GC increased tracked occupied bytes')
+                    reclaimed += gc['before'] - gc['trimmed'] - survivors.total
                     state = survivors; gc = None
                     require(size == state.total, 'GC census metric mismatch')
             except (ValueError, prior.AuditError) as error:
@@ -200,6 +244,9 @@ def audit(path, max_stream_mib=256):
             expected = (gross, peak, state.total, trimmed, reclaimed)
             require(tuple(summary[key] for key in METRICS) == expected, 'Derived summary mismatch')
             require((summary['gc_cycles'], summary['gc_moves'], summary['census_objects']) == (gcs, moves, census_count), 'GC counters mismatch')
+            if tracked_shrink:
+                require(type(summary.get('gc_pre_move_shrinks')) is int and summary['gc_pre_move_shrinks'] == gc_shrinks,
+                        'GC shrink counter mismatch')
             require(summary['heap_gc_count_stop'] - summary['heap_gc_count_start'] == gcs, 'Missing internal GC')
         else:
             require(summary['errors'] > 0 and all(summary[key] is None for key in METRICS), 'Invalid footer exposes metrics')
@@ -212,7 +259,7 @@ def audit(path, max_stream_mib=256):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--max-stream-mib', type=int, choices=(256, 512, 2048), default=256)
+    parser.add_argument('--max-stream-mib', type=int, choices=(256, 512, 2048, 4096, 8192), default=256)
     parser.add_argument('paths', nargs='+', type=Path)
     args = parser.parse_args()
     print(json.dumps([audit(path, args.max_stream_mib) for path in args.paths], indent=2))

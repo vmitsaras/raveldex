@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 19/21 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 20/21 done · 0 in progress · 1 dependency-ready.
 
-**Planner state:** `blocked`.
+**Planner state:** `ready`.
 
-**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
+**Next or resumable release task:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003) — Package, public documentation, and independent candidate review.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -34,7 +34,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N1 — Usable native core alpha** | `RX-1001`–`RX-1006` | 6/6 | Search a real documentation corpus through a packaged consumer using only Raveldex-owned indexing, retrieval, scoring, and execution. |
 | **N2 — Modular search product** | `RX-2001`–`RX-2006` | 6/6 | Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface. |
 | **N3 — Host and migration parity** | `RX-3001`–`RX-3004` | 4/4 | Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics. |
-| **N4 — Native 0.1 qualification** | `RX-4001`–`RX-4003` | 1/3 | Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior. |
+| **N4 — Native 0.1 qualification** | `RX-4001`–`RX-4003` | 2/3 | Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior. |
 | **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 0/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
 
 ## Task index
@@ -60,7 +60,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-3003](IMPLEMENTATION_TASKS.md#rx-3003) — IndexedDB persistence, recovery, and namespace erasure | `done` | `RX-3001`, `RX-3002` | [Issue](https://github.com/vmitsaras/raveldex/issues/23) |
 | [RX-3004](IMPLEMENTATION_TASKS.md#rx-3004) — Companion migration and comparator separation | `done` | `RX-3003` | [Issue](https://github.com/vmitsaras/raveldex/issues/24) |
 | [RX-4001](IMPLEMENTATION_TASKS.md#rx-4001) — Fair correctness, relevance, and cost comparison | `done` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/25) |
-| [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification | `blocked` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/26) |
+| [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification | `done` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/26) |
 | [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003) — Package, public documentation, and independent candidate review | `planned` | `RX-4001`, `RX-4002` | [Issue](https://github.com/vmitsaras/raveldex/issues/27) |
 | [RX-A010](docs/planning/OPTIONAL_FEATURES.md#rx-a010) — Bounded typo tolerance | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/28) |
 | [RX-A020](docs/planning/OPTIONAL_FEATURES.md#rx-a020) — Dictionary-backed suggestions | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/29) |
@@ -72,10 +72,6 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-A080](docs/planning/OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/35) |
 | [RX-A090](docs/planning/OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/36) |
 | [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
-
-## Recorded blockers and decisions
-
-- [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002): RX-4002 remains Blocked solely on AC03. Five further complete GC-aware native codec windows are independently replayed: source/phrase and positions/offsets pairs at 1,000, and source/phrase native export at 10,000. The 10,000 native restore passes publicly but a monitored 376→264 pre-move major-GC shrink invalidates all managed metrics; next calibrate exact shrink/tail-reuse/census handling before repeating it. Remaining relevant codec sizes/configurations and repetitions are incomplete. Actual four-record worker messages now bind 222 selected one-byte string copies (including each 3,993-byte snapshot write), growth copies and 16 final frees to protocol/session/request/process/thread/peer identities. Receiver/two-byte coverage, actual in-place calibration and the 1,000/10,000 browser product matrix remain unqualified. The in-place LLDB expression interruption and every raw invalid attempt remain preserved; no physical/global-copy claim, criterion/contract/dependency/production-limit change, AT/physical repeat or support waiver. RX-4003 waits, N5 stays deferred; no publication or remote write.
 
 ## Milestone exit conditions
 
