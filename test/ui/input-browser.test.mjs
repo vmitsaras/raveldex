@@ -11,7 +11,9 @@ const settled = text => page.waitForFunction(expected => document.querySelector(
   && document.querySelector('[data-raveldex-ui]')?.getAttribute('aria-busy') === 'false', text);
 before(async () => {
   fixture = await prepareBrowserQualification();
-  browser = await chromium.launch({ channel: 'chrome', headless: true, timeout: 30_000 });
+  const browserChannel = process.env.RAVELDEX_UI_BROWSER ?? 'chrome';
+  assert.ok(['chrome', 'chromium'].includes(browserChannel), 'RAVELDEX_UI_BROWSER must be chrome or chromium');
+  browser = await chromium.launch({ ...(browserChannel === 'chrome' ? { channel: 'chrome' } : {}), headless: true, timeout: 30_000 });
   console.log(JSON.stringify({ scope: 'Input trace instrumentation regression; no physical/OS IME/AT qualification.',
     browser: browser.version(), packageSha256: fixture.package.sha256,
     bundleSha256: fixture.report.graphs['browser-input.mjs'].sha256 }));

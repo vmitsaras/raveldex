@@ -10,7 +10,9 @@ const settled = text => page.waitForFunction(expected => document.querySelector(
   && document.querySelector('[data-raveldex-ui]')?.getAttribute('aria-busy') === 'false', text);
 before(async () => {
   fixture = await prepareBrowserQualification();
-  browser = await chromium.launch({ channel: 'chrome', headless: true, timeout: 30_000 });
+  const browserChannel = process.env.RAVELDEX_UI_BROWSER ?? 'chrome';
+  assert.ok(['chrome', 'chromium'].includes(browserChannel), 'RAVELDEX_UI_BROWSER must be chrome or chromium');
+  browser = await chromium.launch({ ...(browserChannel === 'chrome' ? { channel: 'chrome' } : {}), headless: true, timeout: 30_000 });
   const original = fixture.report.graphs['browser-ui-driver.mjs'].inputs;
   const observed = fixture.report.graphs['browser-focus.mjs'].inputs;
   for (const row of original) assert.equal(observed.find(input => input.path === row.path)?.sha256, row.sha256);

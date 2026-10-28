@@ -11,9 +11,13 @@ permissions:
 
 jobs:
   checks:
-    name: Tooling, core, UI, worker, snapshot, storage and migration checks (not release qualification)
+    name: Candidate verification (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
     env:
       RAVELDEX_UI_BROWSER: chromium
       RAVELDEX_WORKER_BROWSER: chromium
@@ -23,10 +27,30 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+          # Retain the original commit; omit only archival raw streams that are
+          # not inputs to the test suite or manifest/link validation.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/docs/evidence/RX-4002-gc-shrink-raw-*-20261028.tar.xz
+      - name: Record available runner storage
+        run: df -h .
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22
+          node-version: ${{ matrix.node }}
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node node_modules/playwright-core/cli.js install --with-deps chromium
-      - run: npm run check
+      - name: Verify and prepare the private candidate
+        run: npm run candidate:prepare -- --output "${{ runner.temp }}/raveldex-candidate"
       - run: npm run tracking:preview
+      - name: Preserve candidate reports and tarball
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: raveldex-ci-candidate-node-${{ matrix.node }}
+          path: |
+            ${{ runner.temp }}/raveldex-candidate/*.json
+            ${{ runner.temp }}/raveldex-candidate/*.log
+            ${{ runner.temp }}/raveldex-candidate/*.tgz
+          if-no-files-found: ignore
+          retention-days: 7

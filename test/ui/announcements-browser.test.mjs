@@ -24,7 +24,9 @@ async function search(text, expected) {
 }
 before(async () => {
   fixture = await prepareBrowserQualification();
-  browser = await chromium.launch({ channel: 'chrome', headless: true, timeout: 30_000 });
+  const browserChannel = process.env.RAVELDEX_UI_BROWSER ?? 'chrome';
+  assert.ok(['chrome', 'chromium'].includes(browserChannel), 'RAVELDEX_UI_BROWSER must be chrome or chromium');
+  browser = await chromium.launch({ ...(browserChannel === 'chrome' ? { channel: 'chrome' } : {}), headless: true, timeout: 30_000 });
   assert.ok(fixture.report.graphs['browser-announcements.mjs'].inputs.some(input => input.path.includes('dist/addons/ui/')));
   console.log(JSON.stringify({ qualification: 'Announcement policy DOM regression; no speech/AT observation.',
     installedDirectory: fixture.directory, browser: browser.version(), headless: true,
