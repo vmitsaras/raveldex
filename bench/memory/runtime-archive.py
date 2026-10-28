@@ -24,12 +24,15 @@ def verify(archive,destination=None):
             safe(item.name)
             if not item.isfile() or item.name in seen:raise ValueError('Non-file or duplicate member')
             seen.add(item.name)
-            if item.size<0 or item.size>128*1024*1024:raise ValueError('Member size bound')
+            # The lossless GC receiver trace is 241,398,844 bytes. Keep its
+            # streaming member bound separate from the small JSON manifest.
+            if item.size<0 or item.size>256*1024*1024:raise ValueError('Member size bound')
             total+=item.size
             if total>LIMIT:raise ValueError('Archive size bound')
             stream=tar.extractfile(item)
             if item.name=='MANIFEST.json':
                 if expected is not None or len(seen)!=1:raise ValueError('Manifest order/duplicate')
+                if item.size>8*1024*1024:raise ValueError('Manifest size bound')
                 raw=stream.read();manifest_hash=hashlib.sha256(raw).hexdigest();data=json.loads(raw,object_pairs_hook=unique_members)
                 if data['schema']!='raveldex-ac03-workload-archive-v1':raise ValueError('Wrong archive schema')
                 expected={}

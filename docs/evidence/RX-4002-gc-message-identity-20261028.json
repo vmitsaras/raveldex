@@ -1,0 +1,547 @@
+{
+  "schema": "raveldex-gc-message-evidence-v1",
+  "localDate": "2026-10-28",
+  "task": "RX-4002",
+  "status": "blocked",
+  "baseCommit": "8933191",
+  "productionChanged": false,
+  "publicContractsChanged": false,
+  "acceptanceCriteriaChanged": false,
+  "runtimeDependenciesChanged": false,
+  "archives": [
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-gc-message-20261028.tar.gz",
+      "bytes": 55629589,
+      "sha256": "c47dd0f418ab0794cebe6218abbfbefc3020dfe543e2bd82cff3efd9fbab84ec",
+      "members": 204,
+      "memberBytes": 269062524,
+      "manifestSha256": "78fda57866493792d7264be29368fd9c9a13352e27352a26b02adf279739270a"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-gc-message-receiver-20261028.tar.gz",
+      "bytes": 49598666,
+      "sha256": "bca9e198c19d4dde181a50c45166c2363e361158fa182c719ee7df8b578534a9",
+      "members": 5,
+      "memberBytes": 241434298,
+      "manifestSha256": "aad1945485747f03cf099681b825561804040e4798fe81d33793876f081e2d6b"
+    }
+  ],
+  "runtime": {
+    "path": "/tmp/raveldex-ac03-gc-message-20261028.qQls0e/gc/node-gc-v3",
+    "sha256": "ad443b2a6fc8092abeeb3ae8c6405e101cf15fc531f05eb769da4707d5154ae0",
+    "priorPreservedRuntimeSha256": "28d5845f1e59182b5c8d81403836500728972b9816a7195f49e3442fcb9b5e67",
+    "compiledSource": {
+      "member": "gc/source-identity-v3-final.json",
+      "sha256": "0532a8e5b08756d9fc4e2291f05e0e332a55529d6853c76ee9be10a4b8403f72"
+    },
+    "patch": {
+      "member": "gc/gc-extension-v3.patch",
+      "sha256": "de6b6574972949bb6e1b49dac04d5f17d3cb7083b8b3bed465810a5a528dece8"
+    },
+    "reapplication": {
+      "member": "gc/patch-reapplication-control.log",
+      "sha256": "3a3990e74896dbd034a12a89b41e3f151602cb63f312da8632f09956f72948be"
+    },
+    "sourceIsolation": {
+      "member": "gc/source-isolation-status.json",
+      "sha256": "44c47429c1b276d8741c94aa0fe2d2d9761f4b12f7a1a4d019fe98634bebdf8b"
+    },
+    "flags": [
+      "--expose-internals",
+      "--expose-gc",
+      "--no-inline-new",
+      "--no-turbo-allocation-folding",
+      "--single-threaded",
+      "--no-incremental-marking"
+    ],
+    "pilotSemiSpaceFlags": [
+      "--min-semi-space-size=16",
+      "--max-semi-space-size=16"
+    ]
+  },
+  "package": {
+    "tarballSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+    "productionFiles": 208,
+    "publicPilotHosts": [
+      {
+        "member": "codec-pilot/host.json",
+        "sha256": "8837fa75bdf3585ee82bbc581eb67883e7d48f2aaf0e34a43e0aa53849a05afb"
+      },
+      {
+        "member": "codec-receiver/host.json",
+        "sha256": "ce254e4e1c4d6bbbfbf3f899c5e2b91d802000e992279297d6ca5aad14dedd36"
+      },
+      {
+        "member": "codec-receiver-512/host.json",
+        "sha256": "6c6c77013140efb41f680caddfa42cceddb2e59d0566563a26334c1f910afe61"
+      }
+    ]
+  },
+  "managedMetric": "New monitored managed occupied extents at mutator frontiers/completed-GC checkpoints, includes managed host/harness, excludes preexisting state, collector overlap, native observer storage, external backing and OS/process physical memory; no baseline subtraction.",
+  "nativeRecorderBounds": {
+    "maps": 5,
+    "activeExtentsPerMapOnPilots": 1000000,
+    "stdioBufferBytes": 65536,
+    "streamCapsMiB": [
+      128,
+      512
+    ],
+    "mapNativeAllocatorBytesNotMeasured": true
+  },
+  "acceptedSourcePilots": [
+    {
+      "label": "source-export-1000",
+      "path": "/tmp/raveldex-ac03-gc-message-20261028.qQls0e/codec-pilot/source-export-1000.rdxgc",
+      "sha256": "450a2c5cb2e8ad8ff3363780664dab6941888ba3cd3f347fc1c75785e27fe6d9",
+      "bytes": 36286310,
+      "events": 3011318,
+      "valid": true,
+      "independentReplay": "Pass",
+      "prefixFailure": null,
+      "summary": {
+        "record": "summary",
+        "valid": true,
+        "errors": 0,
+        "first_error": "none",
+        "aborted": false,
+        "events": 3011318,
+        "attempted_events": 3011318,
+        "dropped_events": 0,
+        "stream_bytes_before_summary": 36285731,
+        "gc_cycles": 7,
+        "heap_gc_count_start": 7,
+        "heap_gc_count_stop": 14,
+        "gc_moves": 20227,
+        "census_objects": 759411,
+        "max_nodes_per_map": 328086,
+        "active_extents": 250858,
+        "preexisting_or_unmonitored_changes": 0,
+        "gross_birth_bytes": 110336688,
+        "mutator_occupied_high_water_bytes": 15910280,
+        "occupied_at_stop_bytes": 15910208,
+        "trimmed_bytes": 6636776,
+        "gc_removed_bytes": 87789704,
+        "coverage_calibrated_by_runtime": false
+      },
+      "inspections": [],
+      "reusedBirthAddresses": 467708,
+      "auditMember": "review/gc-codec-pilot-audit-final.json"
+    },
+    {
+      "label": "source-restore-1000-512mib",
+      "path": "/tmp/raveldex-ac03-gc-message-20261028.qQls0e/codec-receiver-512/source-restore-1000.rdxgc",
+      "sha256": "f22f4273a394a294b4dbd4a937d90c070fb333fa6827810f52311acdaa0c5037",
+      "bytes": 241398844,
+      "events": 20079313,
+      "valid": true,
+      "independentReplay": "Pass",
+      "prefixFailure": null,
+      "summary": {
+        "record": "summary",
+        "valid": true,
+        "errors": 0,
+        "first_error": "none",
+        "aborted": false,
+        "events": 20079313,
+        "attempted_events": 20079313,
+        "dropped_events": 0,
+        "stream_bytes_before_summary": 241398260,
+        "gc_cycles": 52,
+        "heap_gc_count_start": 1,
+        "heap_gc_count_stop": 53,
+        "gc_moves": 93809,
+        "census_objects": 5926758,
+        "max_nodes_per_map": 351300,
+        "active_extents": 98012,
+        "preexisting_or_unmonitored_changes": 0,
+        "gross_birth_bytes": 704788952,
+        "mutator_occupied_high_water_bytes": 21415952,
+        "occupied_at_stop_bytes": 9479768,
+        "trimmed_bytes": 15270520,
+        "gc_removed_bytes": 680038664,
+        "coverage_calibrated_by_runtime": false
+      },
+      "inspections": [],
+      "reusedBirthAddresses": 10628661,
+      "auditMember": "review/gc-codec-receiver-512-audit.json"
+    }
+  ],
+  "invalidReceiver128MiB": [
+    {
+      "path": "/tmp/raveldex-ac03-gc-message-20261028.qQls0e/codec-receiver/source-restore-1000.rdxgc",
+      "sha256": "54232217bd66bd0e3257773a51a5750bacedd1759cf831a54e1df911f35d8cfe",
+      "bytes": 134214193,
+      "events": 11172420,
+      "valid": false,
+      "independentReplay": "Invalid window retained; numeric prefix unqualified",
+      "prefixFailure": null,
+      "summary": {
+        "record": "summary",
+        "valid": false,
+        "errors": 1,
+        "first_error": "stream_byte_cap",
+        "aborted": false,
+        "events": 11172420,
+        "attempted_events": 17190870,
+        "dropped_events": 6018450,
+        "stream_bytes_before_summary": 134213611,
+        "gc_cycles": 52,
+        "heap_gc_count_start": 1,
+        "heap_gc_count_stop": 53,
+        "gc_moves": 65991,
+        "census_objects": 3038298,
+        "max_nodes_per_map": 328469,
+        "active_extents": 138241,
+        "preexisting_or_unmonitored_changes": 0,
+        "gross_birth_bytes": null,
+        "mutator_occupied_high_water_bytes": null,
+        "occupied_at_stop_bytes": null,
+        "trimmed_bytes": null,
+        "gc_removed_bytes": null,
+        "coverage_calibrated_by_runtime": false
+      },
+      "inspections": [],
+      "reusedBirthAddresses": 4898281
+    }
+  ],
+  "managedControls": [
+    {
+      "member": "gc/controls-v3-report.json",
+      "sha256": "168fe3cd72c6dea37981213e2b43fb09b4bd3cce08680b0e3e14457bf1387739"
+    },
+    {
+      "member": "review/gc-independent-replay.json",
+      "sha256": "6815c63585ac6eaeccc932a28cb25b0ca596f90930d705d86d739c9366ed80f0"
+    },
+    {
+      "member": "review/gc-other-controls-replay.json",
+      "sha256": "c287431a8f24df3b8cbb0cdc3a72661251b2dfb7aba86ff7a1f02b2e6f4c8f31"
+    },
+    {
+      "member": "review/gc-calibration-review.json",
+      "sha256": "8274918555aa0adf6a06672b2da221f8e86c7fba2ac4518cc2b5b32dd75ef226"
+    },
+    {
+      "member": "review/gc-literal-tests.log",
+      "sha256": "af55efa5c3ceb122f8184c380aa405d3f3b4e7e0c1e892773d0eff31d0645c8a"
+    },
+    {
+      "member": "gc/overhead-v3-report.json",
+      "sha256": "f254d0ac6d1828e2646bdff0f5721b5c4e2c8013179111b250a6faff3b184883"
+    }
+  ],
+  "browser": {
+    "summary": {
+      "schema": "raveldex-four-record-native-buffer-calibration-v1",
+      "outcome": "Pass for bounded declared control scope",
+      "table": [
+        {
+          "id": 3,
+          "operation": "addMany",
+          "chains": [
+            1,
+            2
+          ],
+          "requestWireBytes": 178,
+          "requestRequestedCapacity": 216,
+          "responseWireBytes": 183,
+          "responseRequestedCapacity": 216,
+          "selectedGrowthCopyBytes": 144,
+          "copyCalls": 2,
+          "finalFrees": 2
+        },
+        {
+          "id": 4,
+          "operation": "snapshotExportSource",
+          "chains": [
+            3,
+            4
+          ],
+          "requestWireBytes": 179,
+          "requestRequestedCapacity": 216,
+          "responseWireBytes": 4135,
+          "responseRequestedCapacity": 5112,
+          "selectedGrowthCopyBytes": 360,
+          "copyCalls": 3,
+          "finalFrees": 2
+        },
+        {
+          "id": 5,
+          "operation": "clear",
+          "chains": [
+            5,
+            6
+          ],
+          "requestWireBytes": 164,
+          "requestRequestedCapacity": 216,
+          "responseWireBytes": 181,
+          "responseRequestedCapacity": 216,
+          "selectedGrowthCopyBytes": 144,
+          "copyCalls": 2,
+          "finalFrees": 2
+        },
+        {
+          "id": 6,
+          "operation": "add",
+          "chains": [
+            7,
+            8
+          ],
+          "requestWireBytes": 238,
+          "requestRequestedCapacity": 504,
+          "responseWireBytes": 179,
+          "responseRequestedCapacity": 216,
+          "selectedGrowthCopyBytes": 360,
+          "copyCalls": 3,
+          "finalFrees": 2
+        },
+        {
+          "id": 7,
+          "operation": "search",
+          "chains": [
+            9,
+            10
+          ],
+          "requestWireBytes": 186,
+          "requestRequestedCapacity": 216,
+          "responseWireBytes": 234,
+          "responseRequestedCapacity": 504,
+          "selectedGrowthCopyBytes": 360,
+          "copyCalls": 3,
+          "finalFrees": 2
+        },
+        {
+          "id": 8,
+          "operation": "snapshotRestore",
+          "chains": [
+            11,
+            12
+          ],
+          "requestWireBytes": 4177,
+          "requestRequestedCapacity": 5112,
+          "responseWireBytes": 273,
+          "responseRequestedCapacity": 504,
+          "selectedGrowthCopyBytes": 576,
+          "copyCalls": 4,
+          "finalFrees": 2
+        },
+        {
+          "id": 9,
+          "operation": "search",
+          "chains": [
+            13,
+            14
+          ],
+          "requestWireBytes": 186,
+          "requestRequestedCapacity": 216,
+          "responseWireBytes": 357,
+          "responseRequestedCapacity": 504,
+          "selectedGrowthCopyBytes": 360,
+          "copyCalls": 3,
+          "finalFrees": 2
+        },
+        {
+          "id": 10,
+          "operation": "dispose",
+          "chains": [
+            15,
+            16
+          ],
+          "requestWireBytes": 117,
+          "requestRequestedCapacity": 216,
+          "responseWireBytes": 127,
+          "responseRequestedCapacity": 216,
+          "selectedGrowthCopyBytes": 144,
+          "copyCalls": 2,
+          "finalFrees": 2
+        }
+      ],
+      "rows": 558,
+      "births": 38,
+      "matchedCalls": 114,
+      "selectedGrowthCopyCalls": 22,
+      "selectedGrowthCopyBytes": 2448,
+      "internalFrees": 22,
+      "successfulBoundFinalFrees": 16,
+      "remaining": 0,
+      "dropped": 0,
+      "invalid": 0,
+      "pending": 0,
+      "largestObservedGrowthPairRequestedOverlapBytes": 5328,
+      "sources": {
+        "native-run-1/tap-5-export-gc-drain.json": "f79687add66ebdcd51a5f0cc4a566c88ddb772787e6971d4ffc04b2dcce8b6ce",
+        "controller-run-1/report.json": "64630eaaac08319c11be1b5649bc68decd012ea4d3df47e3194026423420cdba",
+        "native-run-1/lldb-install.json": "2638f2753d5dcf90976d09af91438050cc6c631e5db3e8660cb8e88b41aad5bf",
+        "lldb_native_tap.py": "8b707d03ca3baff251d12638b6689540c5db916904fcdd1c1c4537a0d605c659",
+        "wire_metadata.py": "1c20a8c6d195afc0099314d2b9136af20a108d6ebec75b4455bd80f805ec3558",
+        "audit_tap.py": "f019e8b2663bdc8ce98a9684335d0fcd8b8db2503e1ff15b88dd3891dff3b9a0",
+        "hook-manifest.json": "f6c8bdd4dffaac190c95c7c978144fb8ba78d62aa0ac6b2922371b87afe9d408"
+      },
+      "limits": [
+        "Only four-record source-worker control; 1000/10000 product matrix unrun.",
+        "Late frees under explicitly forced main/worker/main GC; no ordinary deletion timing claim.",
+        "Window export-gc-drain encompasses multiple later operations; protocol identities define operation attribution.",
+        "Capacities are requested serializer-buffer extents. Copy bytes cover selected executed growth calls only.",
+        "No full payload-copy total, global registry peak, physical/process memory, or latency claim.",
+        "In-place resize remains a mock-tested branch with no native in-place observation."
+      ]
+    },
+    "raw": {
+      "member": "browser/native-run-1/tap-5-export-gc-drain.json",
+      "sha256": "f79687add66ebdcd51a5f0cc4a566c88ddb772787e6971d4ffc04b2dcce8b6ce"
+    },
+    "controller": {
+      "member": "browser/controller-run-1/report.json",
+      "sha256": "64630eaaac08319c11be1b5649bc68decd012ea4d3df47e3194026423420cdba"
+    },
+    "install": {
+      "member": "browser/native-run-1/lldb-install.json",
+      "sha256": "2638f2753d5dcf90976d09af91438050cc6c631e5db3e8660cb8e88b41aad5bf"
+    },
+    "replay": {
+      "member": "browser/replay-final.json",
+      "sha256": "16e2a00c69d3a8abb10ef1dd129fcb2aeef95c71dc1363651745c355e8e33188"
+    },
+    "independentReview": {
+      "member": "review/native-protocol-raw-review.json",
+      "sha256": "bb2a41a5fbd1e43c18f62d8618f89e0a31189e08f4dd2a0f6619fd4e6f62d74b"
+    },
+    "cleanup": {
+      "member": "browser-cleanup.json",
+      "sha256": "c8958011af11bbfe94ac7017dc2a98c236137eac2a5fa6d80c77730c07b7b534"
+    },
+    "scope": "Four-record actual public worker/source-snapshot session;16protocol-boundmessage buffers freed after explicit debugger GC drains;selected growth copies only, no global/physical/fullpayloadcopy peak or product-size matrix."
+  },
+  "independentReviews": [
+    {
+      "member": "review/harness-review.json",
+      "sha256": "2327fe9eb86695ea434b465f0365fe48ad28fdbbfe823a14b65083e5991fed24"
+    },
+    {
+      "member": "review/native-preflight-review.json",
+      "sha256": "b91ef6209e50a2c83899e4d03f6c9e491e452bb5063c2f01306345e19f44c3f0"
+    },
+    {
+      "member": "review/gc-source-review.json",
+      "sha256": "e019cce8d48d32a61c77cb402a633e5a35bf318ecf28ff57c2b296f11b4b6cec"
+    },
+    {
+      "member": "review/gc-calibration-review.json",
+      "sha256": "8274918555aa0adf6a06672b2da221f8e86c7fba2ac4518cc2b5b32dd75ef226"
+    },
+    {
+      "member": "review/gc-public-pilot-review.json",
+      "sha256": "30f10854efb4e8ea612209fe3fd758ad3a06c8b2da084dd828fc87a255a6fe27"
+    }
+  ],
+  "checks": {
+    "npmCi": "Pass",
+    "baselineNpmCheck": {
+      "tests": 616,
+      "pass": 616,
+      "fail": 0
+    },
+    "messageObserverTests": {
+      "tests": 2,
+      "pass": 2
+    },
+    "gcLiteralTests": {
+      "tests": 4,
+      "pass": 4
+    },
+    "nativeObserverTests": {
+      "tests": 16,
+      "pass": 16
+    },
+    "archiveNegativeChecks": {
+      "member": "review/archive-negative-checks.json",
+      "sha256": "7240b3ca04aba18d9adaad6cfd035b3fbbb635a8a02e23b17edb574ee51c5e5a"
+    },
+    "finalNpmCheck": {
+      "outcome": "Pass",
+      "command": "npm run check",
+      "exitCode": 0,
+      "counts": {
+        "tests": 618,
+        "pass": 618,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "path": "docs/evidence/RX-4002-gc-message-check-20261028.log",
+      "sha256": "c361b38b17438fe8ff767661b65782239e78ea29cbf09358d699943ef69fc073"
+    },
+    "archiveCheck": [
+      {
+        "schema": "raveldex-ac03-archive-verification-v1",
+        "members": 204,
+        "uncompressedBytes": 269097030,
+        "manifestSha256": "78fda57866493792d7264be29368fd9c9a13352e27352a26b02adf279739270a",
+        "outcome": "Pass: bytes only; numerical/native scope is separate"
+      },
+      {
+        "schema": "raveldex-ac03-archive-verification-v1",
+        "members": 5,
+        "uncompressedBytes": 241435488,
+        "manifestSha256": "aad1945485747f03cf099681b825561804040e4798fe81d33793876f081e2d6b",
+        "outcome": "Pass: bytes only; numerical/native scope is separate"
+      }
+    ],
+    "trackingPreview": "Pass: local dry run, no network requests"
+  },
+  "remaining": [
+    "Remaining relevant source/native/positions codec configurations at 1,000/10,000 records, with any concrete unsupported event/cap extension separately calibrated.",
+    "Native full payload-copy routes, actual in-place calibration and 1,000/10,000 real browser message matrix."
+  ],
+  "humanATRepeatPending": false,
+  "next": "Continue RX-4002 AC03; RX-4003 waits; N5 remains deferred. No publication/remote write.",
+  "sourceTools": {
+    "bench/memory/browser-message-control.mjs": "fb70b1e5b01dd8528c868ca4d1ebe66ddee7a992ab4b6a4943864b2da4ba07c1",
+    "bench/memory/gc-codec-pilot.mjs": "8416683fc495cd63a7db6d6f6c4e67c7e7c154a777f2d686d9cf63b3e0d37ba3",
+    "bench/memory/gc-codec-receiver.mjs": "6460a1525c3e52c49f70cc3978505fc32374b10197f49921c9c46ecb82a968c7",
+    "bench/memory/gc-runtime-audit.py": "e47e765a0253ce6fe6d45ecfba575b10677abe37558a373dfed25a1b9b3e0f7a",
+    "bench/memory/gc-runtime-audit.test.py": "bcd617573901acf6c6a52f84cb705990dec5a660ba2474a5427b3fa6fac8e05b",
+    "bench/memory/message-fixture.mjs": "6a3f8e4af2ec851e2a14757ab3c306b0c7197f338db77b4503c371b03ab08c0b",
+    "bench/memory/message-observer.mjs": "8f381d66e854887e0185e3a320a7295b2381f402d9a52067a0b1acfa401a1b07",
+    "bench/memory/message-observer.test.mjs": "9a64e5b0f4c0c81b784da674e18d540534dd45e64865d4ffd76a2f861e7a606c",
+    "bench/memory/message-worker.mjs": "82f2faa5c75c905f531c8323f3809fbe289a29957353bef5c0d74aedc3b0a697",
+    "bench/memory/runtime-archive.py": "5fdf9e4460b9e021eff750900dcdc4097f7b45630c544d16d253d1d5f021ca75"
+  },
+  "sourceArchiveAliases": {
+    "bench/memory/browser-message-control.mjs": [
+      "executed-sources/browser-message-control.mjs"
+    ],
+    "bench/memory/gc-codec-pilot.mjs": [
+      "executed-sources/gc-codec-pilot.mjs"
+    ],
+    "bench/memory/gc-codec-receiver.mjs": [
+      "executed-sources/gc-codec-receiver.mjs"
+    ],
+    "bench/memory/gc-runtime-audit.py": [
+      "executed-sources/gc-runtime-audit.py"
+    ],
+    "bench/memory/gc-runtime-audit.test.py": [
+      "executed-sources/gc-runtime-audit.test.py"
+    ],
+    "bench/memory/message-fixture.mjs": [
+      "executed-sources/message-fixture.mjs"
+    ],
+    "bench/memory/message-observer.mjs": [
+      "executed-sources/message-observer.mjs"
+    ],
+    "bench/memory/message-observer.test.mjs": [
+      "executed-sources/message-observer.test.mjs"
+    ],
+    "bench/memory/message-worker.mjs": [
+      "executed-sources/message-worker.mjs"
+    ],
+    "bench/memory/runtime-archive.py": [
+      "executed-sources/runtime-archive-v2-256mib.py"
+    ]
+  },
+  "finalIndependentReview": {
+    "path": "docs/evidence/RX-4002-gc-message-review-20261028.json",
+    "sha256": "9b74af0f0b6d9763b1c2949b44cada940212322fa8606f92f58536bbce60f1eb",
+    "verdict": "No blocking findings; final check was pending at review time and subsequently verified by parent."
+  }
+}
