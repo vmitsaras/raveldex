@@ -19,7 +19,10 @@ def unique_members(pairs):
 
 def verify(archive,destination=None):
     expected=None;seen=set();total=0;manifest_hash=None
-    with tarfile.open(archive,'r|gz') as tar:
+    # Lossless XZ keeps repeated full-GC censuses practical to preserve. The
+    # same streamed size/path/digest guards apply to gzip and XZ containers.
+    mode='r|xz' if str(archive).endswith('.tar.xz') else 'r|gz'
+    with tarfile.open(archive,mode) as tar:
         for item in tar:
             safe(item.name)
             if not item.isfile() or item.name in seen:raise ValueError('Non-file or duplicate member')

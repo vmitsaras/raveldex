@@ -62,7 +62,8 @@ class Extents:
 METRICS = ('gross_birth_bytes', 'mutator_occupied_high_water_bytes', 'occupied_at_stop_bytes', 'trimmed_bytes', 'gc_removed_bytes')
 
 
-def audit(path):
+def audit(path, max_stream_mib=256):
+    require(type(max_stream_mib) is int and max_stream_mib in (256, 512, 2048), 'Audit bound must be 256, 512 or 2048MiB')
     digest = hashlib.sha256()
     measured = 0
     state = Extents()
@@ -72,6 +73,7 @@ def audit(path):
     inspections = []
     births = set()
     reused_birth_addresses = 0
+    marks = {}
 
     with Path(path).open('rb') as stream:
         def read(n):
@@ -79,7 +81,7 @@ def audit(path):
             value = stream.read(n)
             require(len(value) == n, 'Truncated stream')
             measured += n
-            require(measured <= 256 * 1024 * 1024, 'Audit input exceeds 256MiB')
+            require(measured <= max_stream_mib * 1024 * 1024, 'Audit input exceeds declared MiB bound')
             digest.update(value)
             return value
 
@@ -124,6 +126,7 @@ def audit(path):
             try:
                 if kind == 1:
                     require(gc is None, 'Birth during GC')
+                    require(gross <= 2**64 - 1 - size, 'Metric overflow')
                     state.add(a, a + size); gross += size; peak = max(peak, state.total)
                     reused_birth_addresses += a in births; births.add(a)
                 elif kind == 2:
@@ -152,6 +155,9 @@ def audit(path):
                                 require(destination + y - source <= a or destination + x - source >= a + old, 'Moved tracked GC shrink')
                 elif kind == 5:
                     require((size, old) == (state.total, peak), 'Mark metric mismatch')
+                    require(marker in marks or len(marks) < 4096, 'Too many distinct marks')
+                    row = marks.setdefault(marker, dict(count=0, firstSequence=count, lastSequence=count))
+                    row['count'] += 1; row['lastSequence'] = count
                 elif kind in (6, 7):
                     inspections.append(dict(seq=count, kind=kind, marker=marker, address=a, size=size,
                                             monitoredBytes=sum(y-x for x, y in state.pieces(a, a+size))))
@@ -199,8 +205,14 @@ def audit(path):
             require(summary['errors'] > 0 and all(summary[key] is None for key in METRICS), 'Invalid footer exposes metrics')
     return dict(path=str(path), sha256=digest.hexdigest(), bytes=measured, events=count, valid=summary['valid'],
                 independentReplay='Pass' if summary['valid'] else 'Invalid window retained; numeric prefix unqualified',
-                prefixFailure=prefix_failure, summary=summary, inspections=inspections, reusedBirthAddresses=reused_birth_addresses)
+                prefixFailure=prefix_failure, summary=summary, inspections=inspections, marks=marks,
+                maxStreamMiB=max_stream_mib, reusedBirthAddresses=reused_birth_addresses)
 
 
 if __name__ == '__main__':
-    print(json.dumps([audit(Path(path)) for path in sys.argv[1:]], indent=2))
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--max-stream-mib', type=int, choices=(256, 512, 2048), default=256)
+    parser.add_argument('paths', nargs='+', type=Path)
+    args = parser.parse_args()
+    print(json.dumps([audit(path, args.max_stream_mib) for path in args.paths], indent=2))

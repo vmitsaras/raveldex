@@ -40,4 +40,32 @@ class Replay(unittest.TestCase):
   raw=literal(rows,fields)
   with self.assertRaises(ValueError):self.run_bytes(raw)
   with self.assertRaises(ValueError):self.run_bytes(raw[:-1])
+ def test_explicit_audit_bounds_and_marker_cardinality(self):
+  fields=dict(zip(m.METRICS,[8,8,8,0,0]),gc_cycles=0,gc_moves=0,census_objects=0,heap_gc_count_start=0,heap_gc_count_stop=0)
+  rows=[(5,0,0,0,0,100),(1,100,0,8,0,0),(5,0,0,8,8,101)]
+  raw=literal(rows,fields)
+  with tempfile.TemporaryDirectory() as directory:
+   p=pathlib.Path(directory)/'literal.rdxgc';p.write_bytes(raw)
+   for bound in (256,512,2048):
+    r=m.audit(p,bound);self.assertEqual(r['maxStreamMiB'],bound)
+    self.assertEqual(r['marks'][100],dict(count=1,firstSequence=1,lastSequence=1))
+    self.assertEqual(r['marks'][101]['lastSequence'],3)
+   for bound in (0,True,255,4096):
+    with self.assertRaises(ValueError):m.audit(p,bound)
+ def test_split_overwritten_range_preserves_unmoved_fragments(self):
+  rows=[(1,100,0,40,0,0),(8,0,0,40,0,0),(2,300,110,8,0,0),
+   (10,100,0,10,0,0),(10,110,0,8,0,0),(10,118,0,22,0,0),(9,0,0,32,40,0),
+   (5,0,0,32,40,101)]
+  r=self.run_bytes(literal(rows,dict(zip(m.METRICS,[40,40,32,0,8]),gc_cycles=1,gc_moves=1,census_objects=3,heap_gc_count_start=0,heap_gc_count_stop=1)))
+  self.assertEqual(r['summary']['occupied_at_stop_bytes'],32)
+ def test_forged_overflow_metrics_and_bad_varints_are_rejected(self):
+  fields=dict(zip(m.METRICS,[8,8,8,0,0]),gc_cycles=0,gc_moves=0,census_objects=0,heap_gc_count_start=0,heap_gc_count_stop=0)
+  raw=literal([(1,2**64-3,0,8,0,0)],fields)
+  with self.assertRaises(ValueError):self.run_bytes(raw)
+  raw=literal([(1,1,0,2**64-2,0,0),(8,0,0,2**64-2,0,0),(9,0,0,0,2**64-2,0),(1,1,0,8,0,0)],
+   dict(zip(m.METRICS,[2**64+6,2**64-2,8,0,2**64-2]),gc_cycles=1,gc_moves=0,census_objects=0,heap_gc_count_start=0,heap_gc_count_stop=1))
+  with self.assertRaises(ValueError):self.run_bytes(raw)
+  header=json.dumps(HEADER).encode()+b'\n'
+  for bad in (b'\x81\0',b'\xff'*10,b'\x81'):
+   with self.assertRaises(ValueError):self.run_bytes(header+bad)
 if __name__=='__main__':unittest.main()

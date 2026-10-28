@@ -815,7 +815,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 Collect the specific environment and resource observations required by the proposed native support claims.
 
-**Blocker or decision:** RX-4002 remains Blocked on the remaining AC03 codec/transport qualification. The GC-aware continuation adds bounded online extent maps, a lossless capped stream and exact internal GC/census reconciliation in a separately calibrated single-threaded/nonincremental runtime. Independent controls verify new/preexisting movement, death, shrink and address reuse; unsupported tracked GC layout changes and loss remain invalid/null. One fresh 1,000-record source export and one fresh source restore yield independently replayed valid windows with 7/52 collections; the earlier 128 MiB restore recording overflow remains null, and a separately recorded 512 MiB receiver repairs that instrumentation cap without changing engine limits. Complete the remaining relevant source/native/positions codec configurations at both admitted sizes with this declared method. Actual cached Chromium 153 instrumentation now binds 16 real four-record session message buffers to unchanged protocol/session/request metadata, exact sender/worker/process identities and matched destructor/final-free returns after explicit GC drains. Native payload-copy routes, an actual in-place control and the 1,000/10,000 browser message matrix remain incomplete; selected growth copies and pair-local extents are not global or physical peaks. Prior failures and source identities remain preserved, including the rejected copied-build output-path mistake; old source/evidence and the preserved prior runtime stay unchanged. No every-VM-byte gate, public contract, dependency, production limit or criterion changes. AC02/AC04 remain accepted with no human repeat pending. RX-4003 waits and N5 stays deferred; no publication or remote write.
+**Blocker or decision:** RX-4002 remains Blocked solely on AC03. Five further complete GC-aware native codec windows are independently replayed: source/phrase and positions/offsets pairs at 1,000, and source/phrase native export at 10,000. The 10,000 native restore passes publicly but a monitored 376→264 pre-move major-GC shrink invalidates all managed metrics; next calibrate exact shrink/tail-reuse/census handling before repeating it. Remaining relevant codec sizes/configurations and repetitions are incomplete. Actual four-record worker messages now bind 222 selected one-byte string copies (including each 3,993-byte snapshot write), growth copies and 16 final frees to protocol/session/request/process/thread/peer identities. Receiver/two-byte coverage, actual in-place calibration and the 1,000/10,000 browser product matrix remain unqualified. The in-place LLDB expression interruption and every raw invalid attempt remain preserved; no physical/global-copy claim, criterion/contract/dependency/production-limit change, AT/physical repeat or support waiver. RX-4003 waits, N5 stays deferred; no publication or remote write.
 
 **Expected affected areas**
 
@@ -1053,6 +1053,16 @@ Collect the specific environment and resource observations required by the propo
 - [bench/memory/gc-runtime-audit.test.py](bench/memory/gc-runtime-audit.test.py)
 - [docs/evidence/RX-4002-gc-message-check-20261028.log](docs/evidence/RX-4002-gc-message-check-20261028.log)
 - [docs/evidence/RX-4002-gc-message-review-20261028.json](docs/evidence/RX-4002-gc-message-review-20261028.json)
+- [docs/evidence/RX-4002-codecs-copy-20261028.md](docs/evidence/RX-4002-codecs-copy-20261028.md)
+- [docs/evidence/RX-4002-codecs-copy-identity-20261028.json](docs/evidence/RX-4002-codecs-copy-identity-20261028.json)
+- [docs/evidence/RX-4002-codecs-copy-reconstruction-20261028.json](docs/evidence/RX-4002-codecs-copy-reconstruction-20261028.json)
+- [docs/evidence/RX-4002-codecs-copy-check-20261028.log](docs/evidence/RX-4002-codecs-copy-check-20261028.log)
+- [docs/evidence/RX-4002-codecs-copy-raw-01-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-01-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-raw-02-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-02-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-raw-03-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-03-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-review-20261028.json](docs/evidence/RX-4002-codecs-copy-review-20261028.json)
 
 
 ## RX-4003
