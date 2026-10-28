@@ -1,0 +1,408 @@
+{
+  "schema": "raveldex-runtime-instrumentation-identity-v1",
+  "localDate": "2026-10-28",
+  "task": "RX-4002",
+  "taskStatus": "blocked",
+  "acceptanceCriteriaChanged": false,
+  "productionChanged": false,
+  "publicContractsChanged": false,
+  "archives": [
+    {
+      "path": "docs/evidence/RX-4002-runtime-public-controls-20261028.json.gz",
+      "bytes": 36818,
+      "sha256": "f9a465d20112d69a1cf64c4eeaf97c3f86f2862a37f4475b8ed4cb6c57591e0a",
+      "rawBytes": 420455,
+      "rawSha256": "252879a7ca018b4024f55fdc694dbe1a9f2a034975ac272f3b87a0dde257a1b8",
+      "schema": "raveldex-runtime-public-controls-archive-v1",
+      "members": 42,
+      "externalReferences": 14
+    },
+    {
+      "path": "docs/evidence/RX-4002-managed-runtime-20261028.json.gz",
+      "bytes": 1550070,
+      "sha256": "1aba294e74e1e752ef8122fe6d79ee298a4e4c6a83d0f9235f66e071288db218",
+      "rawBytes": 30570663,
+      "rawSha256": "92b116aa9d6d631ef73919127baa0ccecaabb7dfe74ec16cb4e784d7e31e3f17",
+      "schema": "raveldex-managed-runtime-archive-v1",
+      "members": 167,
+      "externalReferences": 6
+    }
+  ],
+  "source": {
+    "url": "https://nodejs.org/download/release/v24.21.0/node-v24.21.0.tar.xz",
+    "checksumUrl": "https://nodejs.org/download/release/v24.21.0/SHASUMS256.txt",
+    "tarXzSha256": "a6f54defb6fd7c84f41dba13d61e78e9b4e0961712cf61f29715c05f5ced94fc",
+    "patchSha256": "f0ff62eeb06c42c871ec1017923a52ede89e07a59513a314d9d064bbdac808c6",
+    "files": [
+      {
+        "path": "src/node_v8.cc",
+        "originalBytes": 31920,
+        "originalSha256": "11b664d83de604205d95793e792e268de957e786ed5c146474354ccf2fc78061",
+        "patchedBytes": 35885,
+        "patchedSha256": "9da8adef8e134ee7f8c93e8bc1ba4945a8c8a296bd6671671b340cf6023eed29"
+      },
+      {
+        "path": "deps/v8/src/heap/heap.cc",
+        "originalBytes": 276538,
+        "originalSha256": "5391294b902d421202090167b419a2be7df3392c64fd2d964f2575786c6e1c2e",
+        "patchedBytes": 294661,
+        "patchedSha256": "6a880dc528737e7ffba4e0351efc34da5d5dec7d0194aae7a2dc8c37e920caf8"
+      },
+      {
+        "path": "deps/v8/src/heap/heap.h",
+        "originalBytes": 107118,
+        "originalSha256": "0f7681ad776834ca8f096fcf87637c6a6604c4187c3f5cf4eb122b5d26e9dbd5",
+        "patchedBytes": 107348,
+        "patchedSha256": "d43e4e6fe64da32e48635f654372060bedcc83c025ff009c43118950dba89ff5"
+      },
+      {
+        "path": "deps/v8/src/codegen/optimized-compilation-info.cc",
+        "originalBytes": 8675,
+        "originalSha256": "acd189682a4a99001a45b20de2fc301fd1cef220e2cd91dde4d85ef4cfe28466",
+        "patchedBytes": 9077,
+        "patchedSha256": "a2df32bb58ad453052c531781da517a6edbec5f4e1bed10182a13843753aadc5"
+      }
+    ]
+  },
+  "managed": {
+    "initialRuntime": {
+      "path": "/tmp/raveldex-instrumented-node-20261027.MqKSa6/node-runtime-initial-builtins",
+      "originalPath": "/tmp/raveldex-instrumented-node-20261027.MqKSa6/node-v24.21.0/out/Release/node",
+      "bytes": 86636200,
+      "sha256": "a0b61f7f537b5bee547ff301918517f3f617343359610c68da9e7b9f0efb5a70"
+    },
+    "finalRuntime": {
+      "path": "/tmp/raveldex-instrumented-node-20261027.MqKSa6/node-runtime-builtin-gate",
+      "buildPath": "/tmp/raveldex-instrumented-node-20261027.MqKSa6/node-v24.21.0/out/Release/node",
+      "bytes": 86636200,
+      "sha256": "28d5845f1e59182b5c8d81403836500728972b9816a7195f49e3442fcb9b5e67"
+    },
+    "buildRecord": "runtime-builtin-gate-build-report.json",
+    "buildScope": "Calibration build: no SSL/Inspector/npm; small ICU; no-inline-new at runtime; explicit no-folding builtin generation via source gate. Not installed/default-runtime equivalence.",
+    "controlReport": "managed-control-v3-report.json",
+    "controlChildren": [
+      {
+        "mode": "positive",
+        "pid": 54594,
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "negative",
+        "pid": 54596,
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "aborted",
+        "pid": 54597,
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "flag-guard",
+        "pid": 54598,
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "permission-guard",
+        "pid": 54599,
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "overhead",
+        "pid": 54600,
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      }
+    ],
+    "asyncReport": "managed-async-control-v2-host-report.json",
+    "pilotReport": "managed-engine-pilot-v4-host-report.json",
+    "pilotOutcome": "Observed public operations and valid monitored windows",
+    "operations": [
+      {
+        "name": "public-empty-batch",
+        "status": 0,
+        "record": "summary",
+        "mode": "no-inline-new-main-thread-blocks",
+        "valid_no_gc_window": true,
+        "aborted": false,
+        "events": 288,
+        "attempted_events": 288,
+        "dropped_events": 0,
+        "gc_prologues": 0,
+        "gc_epilogues": 0,
+        "heap_gc_count_start": 1,
+        "heap_gc_count_stop": 1,
+        "ledger_replayed": true,
+        "ledger_errors": 0,
+        "first_ledger_error": "none",
+        "recorded_gross_birth_bytes": 20944,
+        "gross_birth_bytes": 20944,
+        "monitored_non_filler_bytes_at_stop": 20608,
+        "monitored_non_filler_high_water_bytes": 20608,
+        "filler_or_reclaimable_excluded_bytes": 336,
+        "preexisting_or_unmonitored_events": 0,
+        "coverage_calibrated_by_runtime": false
+      },
+      {
+        "name": "public-incremental-replace",
+        "status": 0,
+        "record": "summary",
+        "mode": "no-inline-new-main-thread-blocks",
+        "valid_no_gc_window": true,
+        "aborted": false,
+        "events": 2433,
+        "attempted_events": 2433,
+        "dropped_events": 0,
+        "gc_prologues": 0,
+        "gc_epilogues": 0,
+        "heap_gc_count_start": 2,
+        "heap_gc_count_stop": 2,
+        "ledger_replayed": true,
+        "ledger_errors": 0,
+        "first_ledger_error": "none",
+        "recorded_gross_birth_bytes": 154440,
+        "gross_birth_bytes": 154440,
+        "monitored_non_filler_bytes_at_stop": 139408,
+        "monitored_non_filler_high_water_bytes": 139408,
+        "filler_or_reclaimable_excluded_bytes": 15032,
+        "preexisting_or_unmonitored_events": 0,
+        "coverage_calibrated_by_runtime": false
+      },
+      {
+        "name": "public-source-export",
+        "status": 0,
+        "record": "summary",
+        "mode": "no-inline-new-main-thread-blocks",
+        "valid_no_gc_window": true,
+        "aborted": false,
+        "events": 48551,
+        "attempted_events": 48551,
+        "dropped_events": 0,
+        "gc_prologues": 0,
+        "gc_epilogues": 0,
+        "heap_gc_count_start": 3,
+        "heap_gc_count_stop": 3,
+        "ledger_replayed": true,
+        "ledger_errors": 0,
+        "first_ledger_error": "none",
+        "recorded_gross_birth_bytes": 2007288,
+        "gross_birth_bytes": 2007288,
+        "monitored_non_filler_bytes_at_stop": 1951048,
+        "monitored_non_filler_high_water_bytes": 1951088,
+        "filler_or_reclaimable_excluded_bytes": 56240,
+        "preexisting_or_unmonitored_events": 0,
+        "coverage_calibrated_by_runtime": false
+      },
+      {
+        "name": "public-source-restore",
+        "status": 0,
+        "record": "summary",
+        "mode": "no-inline-new-main-thread-blocks",
+        "valid_no_gc_window": true,
+        "aborted": false,
+        "events": 38067,
+        "attempted_events": 38067,
+        "dropped_events": 0,
+        "gc_prologues": 0,
+        "gc_epilogues": 0,
+        "heap_gc_count_start": 4,
+        "heap_gc_count_stop": 4,
+        "ledger_replayed": true,
+        "ledger_errors": 0,
+        "first_ledger_error": "none",
+        "recorded_gross_birth_bytes": 1788760,
+        "gross_birth_bytes": 1788760,
+        "monitored_non_filler_bytes_at_stop": 1732280,
+        "monitored_non_filler_high_water_bytes": 1732320,
+        "filler_or_reclaimable_excluded_bytes": 56480,
+        "preexisting_or_unmonitored_events": 0,
+        "coverage_calibrated_by_runtime": false
+      }
+    ],
+    "functionalVerification": [
+      {
+        "redIds": [
+          "a",
+          "b"
+        ],
+        "totalRecords": 4,
+        "revision": 1,
+        "complete": true
+      },
+      {
+        "redIds": [
+          "a",
+          "b"
+        ],
+        "totalRecords": 4,
+        "revision": 1,
+        "complete": true
+      },
+      {
+        "redIds": [
+          "a",
+          "b",
+          "c"
+        ],
+        "totalRecords": 4,
+        "revision": 2,
+        "complete": true
+      },
+      {
+        "redIds": [
+          "a",
+          "b",
+          "c"
+        ],
+        "totalRecords": 4,
+        "revision": 2,
+        "complete": true
+      }
+    ],
+    "restore": {
+      "format": "raveldex-source",
+      "originRevision": 2,
+      "revision": 2,
+      "reindexed": true,
+      "receivingAnalyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      }
+    },
+    "productionFilesMatched": 208,
+    "installedTarballSha256": "6ff6e90128f60af39bb8f47800c61ed83d85d4ded7a8e3c96d2bd34467f9c437",
+    "disposed": true,
+    "scope": "New monitored main-thread logical managed allocation extents in declared no-GC variant; includes host/admission/promises/harness/unreachable-until-GC; preexisting state/native/buffers/process/physical/default/browser-copy costs excluded.",
+    "nativeEventBytes": 56,
+    "pilotEventCapacity": 131072,
+    "pilotNativeEventStorageBytes": 7340032
+  },
+  "independent": {
+    "auditorPath": "docs/evidence/RX-4002-managed-runtime-audit-20261028.py",
+    "auditorSha256": "42eb5a7a31b2ec86b857ab2fb962dd786d254f30db535b438d5d92424161500a",
+    "numericalAuditMember": "independent-managed-builtin-gate-audit.json",
+    "reviewMember": "independent-managed-builtin-gate-review.json",
+    "auditedTraces": 22,
+    "auditedEvents": 95273,
+    "validMeasurements": 16,
+    "expectedInvalidMeasurements": 6,
+    "scope": "Includes 19 post-gate traces and 3 earlier invalid async controls; counts are not number of passing product workloads.",
+    "repositoryReview": {
+      "path": "docs/evidence/RX-4002-runtime-final-review-20261028.json",
+      "sha256": "42febf4e7e1ec8cdb85ce24c4aaa956fd16b5bec4af5359b2032c433aca7f044",
+      "bytes": 12901,
+      "outcome": "Ready for bounded calibration slice; no actionable findings. AC03 incomplete."
+    }
+  },
+  "verification": {
+    "projectCheck": {
+      "outcome": "Pass",
+      "command": "npm run check",
+      "exitCode": 0,
+      "log": "docs/evidence/RX-4002-runtime-check-20261028.log",
+      "logBytes": 69731,
+      "logSha256": "32e2868cdf9e1b563ce4964cca42815d0e751c0b6daa1c5692febc4d1fa776f2",
+      "tests": 616,
+      "pass": 616,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "node": "v24.21.0",
+      "v8": "13.6.233.17-node.53",
+      "platform": "darwin",
+      "arch": "arm64",
+      "localhostBrowserAccess": "Approved execution"
+    },
+    "archiveCheck": {
+      "outcome": "Pass",
+      "members": 209,
+      "externalFilesVerified": false,
+      "numericalReplayPerformedByArchiveHelper": false
+    },
+    "archiveReplay": {
+      "outcome": "Pass",
+      "command": {
+        "schema": "raveldex-managed-archive-replay-command-v1",
+        "directory": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P",
+        "extraction": {
+          "pid": 56037,
+          "exitCode": 0
+        },
+        "command": {
+          "executable": "/Users/vasilis/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "args": [
+            "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-managed-runtime-audit-20261028.py",
+            "--self-test",
+            "--output",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/independent-replay.json",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/array-shrink.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/empty.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/large-array-shrink.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/left-trim.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/strings.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/negative/gc-invalid.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/negative/overflow-invalid.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/aborted/cleanup-aborted.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-1.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-2.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-5.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-6.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control/await-resolved.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control/await-value.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control/sync.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control-v2/await-resolved.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control-v2/await-value.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control-v2/sync.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-empty-batch.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-incremental-replace.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-source-export.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-source-restore.jsonl"
+          ],
+          "started": "2026-10-28T00:02:20.019Z",
+          "finished": "2026-10-28T00:04:02.885Z",
+          "pid": 56038,
+          "exitCode": 0,
+          "signal": null,
+          "error": null,
+          "timeoutMs": 120000,
+          "maxBufferBytes": 16777216
+        },
+        "traces": 22
+      },
+      "stderr": "test_aborted_nulls_derived (__main__.LiteralTests.test_aborted_nulls_derived) ... ok\ntest_adjoining_births_are_not_merged (__main__.LiteralTests.test_adjoining_births_are_not_merged) ... ok\ntest_buffer_header_cannot_claim_a_different_record_layout (__main__.LiteralTests.test_buffer_header_cannot_claim_a_different_record_layout) ... ok\ntest_coallocation_interior_trim_and_direct_binding (__main__.LiteralTests.test_coallocation_interior_trim_and_direct_binding) ... ok\ntest_counter_only_gc_invalidates (__main__.LiteralTests.test_counter_only_gc_invalidates) ... ok\ntest_drop_invalidates_prefix (__main__.LiteralTests.test_drop_invalidates_prefix) ... ok\ntest_duplicate_json_members_are_rejected (__main__.LiteralTests.test_duplicate_json_members_are_rejected) ... ok\ntest_empty (__main__.LiteralTests.test_empty) ... ok\ntest_extent_overflow_invalidates (__main__.LiteralTests.test_extent_overflow_invalidates) ... ok\ntest_first_error_text_is_verified (__main__.LiteralTests.test_first_error_text_is_verified) ... ok\ntest_gc_footer_cannot_hide_raw_event (__main__.LiteralTests.test_gc_footer_cannot_hide_raw_event) ... ok\ntest_gc_positive_invalidates (__main__.LiteralTests.test_gc_positive_invalidates) ... ok\ntest_invalid_window_numeric_measurement_is_rejected (__main__.LiteralTests.test_invalid_window_numeric_measurement_is_rejected) ... ok\ntest_left_trim_then_new_birth (__main__.LiteralTests.test_left_trim_then_new_birth) ... ok\ntest_missing_footer_is_rejected (__main__.LiteralTests.test_missing_footer_is_rejected) ... ok\ntest_nonforward_move_invalidates (__main__.LiteralTests.test_nonforward_move_invalidates) ... ok\ntest_partial_overlap_invalidates (__main__.LiteralTests.test_partial_overlap_invalidates) ... ok\ntest_preexisting_not_guessed (__main__.LiteralTests.test_preexisting_not_guessed) ... ok\ntest_reuse_of_excluded_tail_invalidates (__main__.LiteralTests.test_reuse_of_excluded_tail_invalidates) ... ok\ntest_sequence_gap_is_rejected (__main__.LiteralTests.test_sequence_gap_is_rejected) ... ok\ntest_tampered_high_water_is_rejected (__main__.LiteralTests.test_tampered_high_water_is_rejected) ... ok\ntest_two_births (__main__.LiteralTests.test_two_births) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 0.001s\n\nOK\n",
+      "selfTestsPassed": 22,
+      "tracesReplayed": 22,
+      "eventsReplayed": 95273,
+      "allReplayRowsMatchArchivedIndependentAuditExceptLocalPath": true,
+      "replayReportSha256": "706fd227a4aba48fb71c1209cfc212af9cae4b468cf3db2e1b51d7bb4cf61673",
+      "nativeWorkloadRerun": false
+    },
+    "npmCi": {
+      "exitCode": 0,
+      "output": "\nadded 6 packages in 400ms\nnpm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:\nnpm warn install-scripts   esbuild@0.28.2 (postinstall: node install.js)\nnpm warn install-scripts\nnpm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.\n",
+      "sha256": "adb4ce9b0e6a3ee5d3c9cf1632790ed4c6e89624c84ed0e183e9dc1ecda2f4d4"
+    },
+    "documentation": {
+      "docsGenerate": "Pass",
+      "docsCheck": "Pass: generated views and local Markdown targets in 97 files",
+      "handoffStatus": "19/21 done; RX-4002 blocked; RX-4003 waiting; N5 deferred",
+      "trackingPreview": "Pass: local dry run; no remote write"
+    }
+  },
+  "remaining": [
+    "Existing relevant 1,000/10,000 mutation and codec peak scopes are not measured by this tiny pilot.",
+    "Actual browser serializer/backing/copy lifetime instrumentation with per-message ownership/process identity not yet integrated.",
+    "Any GC/drop/unsupported window must remain invalid until method extension and calibration."
+  ],
+  "nextTask": "Resume RX-4002 AC03; RX-4003 waits; N5 deferred; no publication."
+}

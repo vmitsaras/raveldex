@@ -1,0 +1,175 @@
+{
+  "schema": "raveldex-independent-runtime-repository-review-v1",
+  "review_scope": "Read-only final repository, identity, archive and helper review; no builds, Node/workload runs, tracing, UI, repository edits or delegation.",
+  "actionable_findings": [],
+  "ready_for_bounded_slice_after_pending_verification_recorded": true,
+  "full_rx4002_or_ac03_pass": false,
+  "repository_tracked_diff_paths": [
+    "CODEX_HANDOFF.md",
+    "IMPLEMENTATION_TASKS.md",
+    "PROJECT_CONTEXT.md",
+    "ROADMAP.md",
+    "docs/evaluation/RX-4002-memory-method.md",
+    "docs/evidence/RX-4002.md",
+    "docs/planning/roadmap.json",
+    "docs/support/RX-4002.md"
+  ],
+  "tracked_diff_sha256": "10736101d7f9847dd1397de5169df4f961c3bc0ac7e2503473d831bb1bd4ae3e",
+  "identity_at_review": {
+    "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-runtime-instrumentation-identity-20261028.json",
+    "bytes": 19208,
+    "sha256": "2763dd2825001534374a999cccfa4f3d7423e8e4a58a52340d5928f9cb269b9e"
+  },
+  "verification_fields_at_review": {
+    "projectCheck": {
+      "outcome": "Pass",
+      "command": "npm run check",
+      "exitCode": 0,
+      "log": "docs/evidence/RX-4002-runtime-check-20261028.log",
+      "logBytes": 69731,
+      "logSha256": "32e2868cdf9e1b563ce4964cca42815d0e751c0b6daa1c5692febc4d1fa776f2",
+      "tests": 616,
+      "pass": 616,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "node": "v24.21.0",
+      "v8": "13.6.233.17-node.53",
+      "platform": "darwin",
+      "arch": "arm64",
+      "localhostBrowserAccess": "Approved execution"
+    },
+    "archiveCheck": {
+      "outcome": "Pass",
+      "members": 209,
+      "externalFilesVerified": false,
+      "numericalReplayPerformedByArchiveHelper": false
+    },
+    "archiveReplay": {
+      "outcome": "Pass",
+      "command": {
+        "schema": "raveldex-managed-archive-replay-command-v1",
+        "directory": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P",
+        "extraction": {
+          "pid": 56037,
+          "exitCode": 0
+        },
+        "command": {
+          "executable": "/Users/vasilis/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "args": [
+            "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-4002-managed-runtime-audit-20261028.py",
+            "--self-test",
+            "--output",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/independent-replay.json",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/array-shrink.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/empty.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/large-array-shrink.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/left-trim.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/positive/strings.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/negative/gc-invalid.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/negative/overflow-invalid.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/aborted/cleanup-aborted.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-1.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-2.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-5.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-controls-v3/overhead/overhead-6.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control/await-resolved.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control/await-value.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control/sync.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control-v2/await-resolved.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control-v2/await-value.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-async-control-v2/sync.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-empty-batch.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-incremental-replace.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-source-export.jsonl",
+            "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-runtime-archive-replay-0rCR0P/members/managed-engine-pilot-v4/public-source-restore.jsonl"
+          ],
+          "started": "2026-10-28T00:02:20.019Z",
+          "finished": "2026-10-28T00:04:02.885Z",
+          "pid": 56038,
+          "exitCode": 0,
+          "signal": null,
+          "error": null,
+          "timeoutMs": 120000,
+          "maxBufferBytes": 16777216
+        },
+        "traces": 22
+      },
+      "stderr": "test_aborted_nulls_derived (__main__.LiteralTests.test_aborted_nulls_derived) ... ok\ntest_adjoining_births_are_not_merged (__main__.LiteralTests.test_adjoining_births_are_not_merged) ... ok\ntest_buffer_header_cannot_claim_a_different_record_layout (__main__.LiteralTests.test_buffer_header_cannot_claim_a_different_record_layout) ... ok\ntest_coallocation_interior_trim_and_direct_binding (__main__.LiteralTests.test_coallocation_interior_trim_and_direct_binding) ... ok\ntest_counter_only_gc_invalidates (__main__.LiteralTests.test_counter_only_gc_invalidates) ... ok\ntest_drop_invalidates_prefix (__main__.LiteralTests.test_drop_invalidates_prefix) ... ok\ntest_duplicate_json_members_are_rejected (__main__.LiteralTests.test_duplicate_json_members_are_rejected) ... ok\ntest_empty (__main__.LiteralTests.test_empty) ... ok\ntest_extent_overflow_invalidates (__main__.LiteralTests.test_extent_overflow_invalidates) ... ok\ntest_first_error_text_is_verified (__main__.LiteralTests.test_first_error_text_is_verified) ... ok\ntest_gc_footer_cannot_hide_raw_event (__main__.LiteralTests.test_gc_footer_cannot_hide_raw_event) ... ok\ntest_gc_positive_invalidates (__main__.LiteralTests.test_gc_positive_invalidates) ... ok\ntest_invalid_window_numeric_measurement_is_rejected (__main__.LiteralTests.test_invalid_window_numeric_measurement_is_rejected) ... ok\ntest_left_trim_then_new_birth (__main__.LiteralTests.test_left_trim_then_new_birth) ... ok\ntest_missing_footer_is_rejected (__main__.LiteralTests.test_missing_footer_is_rejected) ... ok\ntest_nonforward_move_invalidates (__main__.LiteralTests.test_nonforward_move_invalidates) ... ok\ntest_partial_overlap_invalidates (__main__.LiteralTests.test_partial_overlap_invalidates) ... ok\ntest_preexisting_not_guessed (__main__.LiteralTests.test_preexisting_not_guessed) ... ok\ntest_reuse_of_excluded_tail_invalidates (__main__.LiteralTests.test_reuse_of_excluded_tail_invalidates) ... ok\ntest_sequence_gap_is_rejected (__main__.LiteralTests.test_sequence_gap_is_rejected) ... ok\ntest_tampered_high_water_is_rejected (__main__.LiteralTests.test_tampered_high_water_is_rejected) ... ok\ntest_two_births (__main__.LiteralTests.test_two_births) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 0.001s\n\nOK\n",
+      "selfTestsPassed": 22,
+      "tracesReplayed": 22,
+      "eventsReplayed": 95273,
+      "allReplayRowsMatchArchivedIndependentAuditExceptLocalPath": true,
+      "replayReportSha256": "706fd227a4aba48fb71c1209cfc212af9cae4b468cf3db2e1b51d7bb4cf61673",
+      "nativeWorkloadRerun": false
+    },
+    "npmCi": {
+      "exitCode": 0,
+      "output": "\nadded 6 packages in 400ms\nnpm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:\nnpm warn install-scripts   esbuild@0.28.2 (postinstall: node install.js)\nnpm warn install-scripts\nnpm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.\n",
+      "sha256": "adb4ce9b0e6a3ee5d3c9cf1632790ed4c6e89624c84ed0e183e9dc1ecda2f4d4"
+    }
+  },
+  "archives": [
+    {
+      "path": "docs/evidence/RX-4002-runtime-public-controls-20261028.json.gz",
+      "compressed_sha256": "f9a465d20112d69a1cf64c4eeaf97c3f86f2862a37f4475b8ed4cb6c57591e0a",
+      "raw_sha256": "252879a7ca018b4024f55fdc694dbe1a9f2a034975ac272f3b87a0dde257a1b8",
+      "members_verified": 42,
+      "external_references": 14,
+      "external_files_verified_by_archive_helper": false
+    },
+    {
+      "path": "docs/evidence/RX-4002-managed-runtime-20261028.json.gz",
+      "compressed_sha256": "1aba294e74e1e752ef8122fe6d79ee298a4e4c6a83d0f9235f66e071288db218",
+      "raw_sha256": "92b116aa9d6d631ef73919127baa0ccecaabb7dfe74ec16cb4e784d7e31e3f17",
+      "members_verified": 167,
+      "external_references": 6,
+      "external_files_verified_by_archive_helper": false
+    }
+  ],
+  "archive_members_match_current_original_files": 209,
+  "independent_numerical_trace_hash_bindings_verified": 22,
+  "independent_audited_events": 95273,
+  "copied_python_equals_archived_and_original": true,
+  "source_and_license": {
+    "full_four_file_patch_and_manifest_identity_equal": true,
+    "legacy_three_file_report_limitation_explicit": true,
+    "original_failure_history_and_both_runtime_hashes_preserved": true,
+    "node_license_embedded_and_matches_source": true,
+    "v8_license_embedded_and_matches_source": true,
+    "reproduction_helpers_config_commands_and_path_adaptation_boundary_present": true,
+    "upstream_source_binaries_and_installed_headers_external_hashed_references": true,
+    "expanded_snapshot_command_text_and_hash_preserved_in_independent_review": true
+  },
+  "numeric_and_scope_review": {
+    "managed_table_matches_replayed_values": true,
+    "serializer_table_matches_raw_report": true,
+    "build_times_match_raw_reports": true,
+    "timing_scope_and_fixed_observer_storage_disclosed": true,
+    "default_node_browser_physical_and_exclusive_stage_claims_separated": true,
+    "source_encoding_2736_is_length_only": true,
+    "preexisting_unreachable_gc_and_unsupported_coverage_limits_disclosed": true,
+    "existing_1000_10000_and_per_message_browser_work_remains_incomplete": true,
+    "criteria_status_limits_public_contracts_unchanged": true,
+    "manifest_changes_only_rx4002_evidence_and_blocker": true
+  },
+  "archive_helper_static_review": {
+    "verifies_compressed_raw_and_member_hashes": true,
+    "raw_decompression_bound_bytes": 134217728,
+    "rejects_unsafe_or_duplicate_member_paths": true,
+    "validates_before_optional_extraction": true,
+    "requires_new_absolute_extraction_root_and_exclusive_files": true,
+    "does_not_launch_runtime_or_numerical_replay": true,
+    "reports_external_and_numerical_verification_as_separate": true
+  },
+  "remaining_verification": "None for this bounded calibration/documentation slice. Parent project check passes and extracted archive replay independently matches the prior audit except local paths. Existing larger AC03 and browser-message work remains incomplete.",
+  "ready_for_bounded_calibration_slice": true,
+  "completed_verification_evidence_checked": {
+    "project_log_bytes": 69731,
+    "project_log_sha256": "32e2868cdf9e1b563ce4964cca42815d0e751c0b6daa1c5692febc4d1fa776f2",
+    "project_log_hash_and_counts_match_identity": true,
+    "extracted_replay_sha256": "706fd227a4aba48fb71c1209cfc212af9cae4b468cf3db2e1b51d7bb4cf61673",
+    "extracted_replay_rows_equal_original_except_local_paths": true,
+    "workload_rerun_by_reviewer": false
+  }
+}
