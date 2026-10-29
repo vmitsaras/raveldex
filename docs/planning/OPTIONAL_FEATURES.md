@@ -470,7 +470,7 @@ Compile an explicit user-facing syntax to the existing validated query tree with
 
 **Explicit record patch convenience**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/36)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/36)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -482,7 +482,7 @@ Offer partial record updates by composing authoritative source with the existing
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [RECORD_PATCH.md](../../docs/specs/RECORD_PATCH.md)
 
 **Acceptance criteria**
 
@@ -498,7 +498,31 @@ Offer partial record updates by composing authoritative source with the existing
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A090.md](../../docs/evidence/RX-A090.md)
+- [docs/evidence/RX-A090-artifact-review.json](../../docs/evidence/RX-A090-artifact-review.json)
+- [docs/evidence/RX-A090-artifact-review.log](../../docs/evidence/RX-A090-artifact-review.log)
+- [docs/evidence/RX-A090-baseline-retry-invalidated.log](../../docs/evidence/RX-A090-baseline-retry-invalidated.log)
+- [docs/evidence/RX-A090-baseline-sandbox.log](../../docs/evidence/RX-A090-baseline-sandbox.log)
+- [docs/evidence/RX-A090-build.log](../../docs/evidence/RX-A090-build.log)
+- [docs/evidence/RX-A090-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A090-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A090-candidate.json](../../docs/evidence/RX-A090-candidate.json)
+- [docs/evidence/RX-A090-candidate.log](../../docs/evidence/RX-A090-candidate.log)
+- [docs/evidence/RX-A090-check.log](../../docs/evidence/RX-A090-check.log)
+- [docs/evidence/RX-A090-ci.log](../../docs/evidence/RX-A090-ci.log)
+- [docs/evidence/RX-A090-final-check.log](../../docs/evidence/RX-A090-final-check.log)
+- [docs/evidence/RX-A090-focused.log](../../docs/evidence/RX-A090-focused.log)
+- [docs/evidence/RX-A090-lifecycle.log](../../docs/evidence/RX-A090-lifecycle.log)
+- [docs/evidence/RX-A090-package-initial.json](../../docs/evidence/RX-A090-package-initial.json)
+- [docs/evidence/RX-A090-package-initial.log](../../docs/evidence/RX-A090-package-initial.log)
+- [docs/evidence/RX-A090-package.json](../../docs/evidence/RX-A090-package.json)
+- [docs/evidence/RX-A090-package.log](../../docs/evidence/RX-A090-package.log)
+- [docs/evidence/RX-A090-post-build-audit.json](../../docs/evidence/RX-A090-post-build-audit.json)
+- [docs/evidence/RX-A090-qualification.json](../../docs/evidence/RX-A090-qualification.json)
+- [docs/evidence/RX-A090-runtime-review.json](../../docs/evidence/RX-A090-runtime-review.json)
+- [docs/evidence/RX-A090-runtime-review.log](../../docs/evidence/RX-A090-runtime-review.log)
+- [docs/evidence/RX-A090-syntax-isolation.log](../../docs/evidence/RX-A090-syntax-isolation.log)
+- [docs/evidence/RX-A090-verification-review.json](../../docs/evidence/RX-A090-verification-review.json)
+- [docs/evidence/RX-A090-verification-review.log](../../docs/evidence/RX-A090-verification-review.log)
 
 
 ## RX-A100

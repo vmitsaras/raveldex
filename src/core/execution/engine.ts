@@ -7,6 +7,7 @@ import { emptyDirectory } from '../index/staging.js';
 import type { DocumentEntry, FieldIndex, IndexRoot, TermEntry } from '../index/state.js';
 import type { MutationKind } from '../mutations/capture.js';
 import { MutationOwner } from '../mutations/owner.js';
+import { WorkBudget } from '../limits/work.js';
 import { captureSearch, executeOwnedSearch } from '../query/search.js';
 import type { TransactionParticipant } from '../revision/participant.js';
 import { directHost } from './host.js';
@@ -18,6 +19,12 @@ type Result = unknown;
 export interface AdapterOperation<T> {
   readonly options: OwnedOptions;
   start(root: IndexRoot, check: (phase?: string) => void, publish: (root: IndexRoot) => void): Generator<WorkStep, T>;
+}
+/** Private optional replacement preparation. The existing owner still owns the
+ * complete mutation, its participants and its single publication point. */
+export interface AdapterReplacement {
+  readonly options: OwnedOptions;
+  start(root: IndexRoot, check: (phase?: string) => void): Generator<WorkStep, RecordInput>;
 }
 /** Private trusted adapter control. Applied after caller admission so transport
  * signals and elapsed time do not consume the caller's data-entry allowance. */
@@ -81,6 +88,35 @@ export class ExecutionOwner implements Raveldex {
         return request.start(previous, check, root => owner.publishPrepared(root, previous));
       } };
     }, control) as Promise<T>;
+  }
+
+  adapterReplace(capture: (configuration: OwnedConfiguration) => AdapterReplacement): Promise<MutationResult> {
+    return this.admit(() => {
+      const request = capture(this.#configuration);
+      return { options: request.options, start: check => {
+        const owner = this.#owner!, maximum = this.#configuration.limits.maxMutationWorkUnits;
+        return (function* (): Generator<WorkStep, MutationResult> {
+          const budget = new WorkBudget(maximum);
+          function* metered<T>(cursor: Generator<WorkStep, T>): Generator<WorkStep, T> {
+            let finished = false;
+            try {
+              for (;;) {
+                check('patch'); const step = cursor.next();
+                // A completed mutation has committed. No callback, stop check,
+                // charge or yield may turn that successful commit into failure.
+                if (step.done) { finished = true; return step.value; }
+                check('patch'); budget.charge(step.value.workUnits); yield step.value;
+              }
+            } finally { if (!finished) { try { cursor.return(undefined as never); } catch { /* Preserve the first failure. */ } } }
+          }
+          const record = yield* metered(request.start(owner.root, check));
+          check('patch.replace');
+          const replacement = owner.capture('replace', record, request.options);
+          check('patch.replace');
+          return yield* metered(owner.execute(replacement, { checkStop: check }));
+        })();
+      } };
+    }) as Promise<MutationResult>;
   }
 
   search(query: string | Query, options?: SearchOptions): Promise<SearchResult> {

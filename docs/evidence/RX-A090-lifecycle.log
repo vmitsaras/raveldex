@@ -1,0 +1,18 @@
+✔ one FIFO patch reads the guarded execution root and rejects stale competing patches without lost updates (6.755667ms)
+✔ every observed patch suspension cancels with exact root rollback and later replacement recovery (59.561666ms)
+ℹ {"observedSuspensions":149,"cancellationsWithExactRollbackAndRecovery":149}
+✔ queue capacity, pre-abort, active/queued deadlines and disposal share native cleanup (0.691083ms)
+✔ composition and replacement share one complete work cap and never initialize participants again (1.826667ms)
+ℹ {"fullPatchYieldedWorkUnits":563,"failingCompleteCap":562,"participantInitializations":1,"scope":"Logical yielded work; no heap or copy peak claim"}
+✔ participant preparation failure closes the cursor and leaves all old roots reusable (0.554167ms)
+✔ reentrant stop during replacement preparation wins before publication (0.370792ms)
+✔ 100/1000/10000-record patches prepare only one record through the incremental path (618.3665ms)
+ℹ {"rows":[{"records":100,"replacementRecords":1,"patchWorkUnits":1481,"patchSteps":1090,"patchHostYields":1,"unchangedDocumentBuckets":79},{"records":1000,"replacementRecords":1,"patchWorkUnits":3954,"patchSteps":3275,"patchHostYields":3,"unchangedDocumentBuckets":255},{"records":10000,"replacementRecords":1,"patchWorkUnits":6042,"patchSteps":3623,"patchHostYields":5,"unchangedDocumentBuckets":255}],"scope":"Actual patch-only logical work and immutable bucket sharing; not wall time, allocation peaks or constant update cost."}
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 759.896167

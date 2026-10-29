@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050, RX-A060, RX-A070 and RX-A080
+## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050, RX-A060, RX-A070, RX-A080 and RX-A090
+
+- RX-A090 adds optional `/addons/patch` revision-guarded whole-field set/unset convenience over complete explicit source and native atomic replacement; no new runtime dependency or worker protocol.
 
 - RX-A080 adds explicit `/addons/query-syntax`: bounded Boolean operators, text-field scopes, strict phrase quotes, prefix leaves and escaping, compiled to validated raw native trees. Fixed diagnostics carry original UTF-16 spans; malformed input never falls back. Ordinary strings/UI and core runtime remain unchanged; private local development only.
 

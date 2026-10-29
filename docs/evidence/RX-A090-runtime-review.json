@@ -1,0 +1,241 @@
+{
+  "kind": "raveldex-rx-a090-runtime-review-v1",
+  "recordedAt": "2026-10-29T22:36:15.170Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "authorshipBoundary": "Independent review of other-authored optional patch runtime/admission/source composition and private owner seam. Reviewer-owned evaluation fixtures and tests are excluded and never imported.",
+  "sourceBindings": [
+    {
+      "path": "src/addons/patch/index.ts",
+      "bytes": 1051,
+      "sha256": "c24f7e597604bcb38cd4ced152717cbdd683b1fa9e7459c4dd124c458c444821"
+    },
+    {
+      "path": "src/addons/patch/types.ts",
+      "bytes": 663,
+      "sha256": "947da32c914f72f6bc04924d994d002e134f9ff2e0eb13f5e75a7eae96ef3c85"
+    },
+    {
+      "path": "src/addons/patch/capture.ts",
+      "bytes": 3230,
+      "sha256": "3b854414a661a8d4d1dc7a37315ca94f64bb048eb6e827368e8301b9db17e2fe"
+    },
+    {
+      "path": "src/addons/patch/compose.ts",
+      "bytes": 4153,
+      "sha256": "a458f24c2c6455f0a0df4223132cb5faff31a827fe23026064e76a127499a1b4"
+    },
+    {
+      "path": "src/core/execution/engine.ts",
+      "bytes": 17213,
+      "sha256": "d85b7828b1328f0f93154bf625f19b633a6fed02f8ac3959068e42eec0aeb4e2"
+    },
+    {
+      "path": "src/core/mutations/owner.ts",
+      "bytes": 9147,
+      "sha256": "dc55ef224db86b679e3db32456432e41c2032c3d8d28a2887aa32fb91f50e3f8"
+    },
+    {
+      "path": "src/core/contracts/data.ts",
+      "bytes": 3531,
+      "sha256": "ad5cb3df86d9cda637dfe8528566197f7fce3803699470945526b822b3fc9624"
+    },
+    {
+      "path": "src/core/contracts/options.ts",
+      "bytes": 3503,
+      "sha256": "ae3841544d2aeaa69eebbe5da958e6267420303405c6ba5b9802159bca1ab0ea"
+    },
+    {
+      "path": "src/core/contracts/record.ts",
+      "bytes": 6660,
+      "sha256": "a00f6a66406685994f2bc460908d4114f9b845b36c5b518d46cbccc7872e0ab3"
+    },
+    {
+      "path": "src/core/capabilities/participants.ts",
+      "bytes": 2023,
+      "sha256": "6eab259acb73c6bd924d03ae06a6869239b3ca5fb324aff1d2d9cb936b8735b7"
+    },
+    {
+      "path": "src/addons/phrases/store.ts",
+      "bytes": 9152,
+      "sha256": "26292de8ab5b495481a88e552302e5c082416d1719148d392b3ba610f945644c"
+    },
+    {
+      "path": "dist/addons/patch/index.js",
+      "bytes": 788,
+      "sha256": "829ec82b73cf7aebdc9934e7b71c96ac036db35ff2037f94dc6021a1f8628a94"
+    },
+    {
+      "path": "dist/addons/patch/types.d.ts",
+      "bytes": 680,
+      "sha256": "989df0dc2e83c5edfc71391bee078a877e072c073b1f292e016ada520238efe5"
+    },
+    {
+      "path": "dist/addons/patch/capture.js",
+      "bytes": 2779,
+      "sha256": "66b6be600fc848d31d618edce466bc55e6fc3b516b3850111e75eee115a2283b"
+    },
+    {
+      "path": "dist/addons/patch/compose.js",
+      "bytes": 3979,
+      "sha256": "43af2786e19cdf527e0af415ea9c022f82d73bb2f67fd91364afc8e2a16acba7"
+    },
+    {
+      "path": "dist/core/execution/engine.js",
+      "bytes": 15873,
+      "sha256": "714aef580293293fbb4b6276741986ad7f300632aa617c206f782cbd1f0dc28a"
+    },
+    {
+      "path": "dist/core/mutations/owner.js",
+      "bytes": 8982,
+      "sha256": "fbb904992051ad25c2d640a7056f23d4e43bfd71f791eb6ed8adc8e2f81a188e"
+    },
+    {
+      "path": "dist/core/contracts/data.js",
+      "bytes": 3247,
+      "sha256": "9c2d7594d6c649d9c80b339bc00752ae594debc3a85b52742afe3bdf4300c501"
+    },
+    {
+      "path": "dist/core/contracts/options.js",
+      "bytes": 2921,
+      "sha256": "cfc5360202f98451dab89c204cde917326c1a01af124e90848f10b90baa4cb7d"
+    },
+    {
+      "path": "dist/core/contracts/record.js",
+      "bytes": 5968,
+      "sha256": "e7a83d1ea834c376f033077b40ad6a9572028f1a0fdbf2fff6cd7eb35609b8a1"
+    },
+    {
+      "path": "dist/core/capabilities/participants.js",
+      "bytes": 1969,
+      "sha256": "a0a13989bfbd6efb4cda595721c6ccdb97d1ffd1d4bbe67a3572a47326e32679"
+    },
+    {
+      "path": "dist/addons/phrases/store.js",
+      "bytes": 8131,
+      "sha256": "50b5d85ee9c71965ff6cb77b0f30df851383eb6b634d199cc88f66913d47f877"
+    }
+  ],
+  "bindingAudit": {
+    "status": "Pass",
+    "unchanged": 22,
+    "changed": []
+  },
+  "observations": [
+    {
+      "name": "Borrowed handle does not initialize participants or change ordinary facade",
+      "status": "Pass",
+      "elapsedMs": 5,
+      "participantInitializations": 1,
+      "preparesAcrossAddAndPatch": 2,
+      "rejectedForeignHandles": 4,
+      "ordinaryFacadeUnchanged": true
+    },
+    {
+      "name": "Data descriptor ownership survives queue delay without invoking any caller accessor",
+      "status": "Pass",
+      "elapsedMs": 6,
+      "queuedOwnedReplacement": true,
+      "rejectedAccessorInputs": 3,
+      "callerGetterReads": 0
+    },
+    {
+      "name": "One FIFO admission observes predecessor revision and rejects a competing same-revision patch",
+      "status": "Pass",
+      "elapsedMs": 1,
+      "precursorRevision": 1,
+      "firstPatchRevision": 2,
+      "competingPatch": "REVISION_MISMATCH",
+      "unrelatedWriteMakesExpectedRevisionStale": true,
+      "finalRevision": 3
+    },
+    {
+      "name": "Complete source coverage, provider revision and target originals fail before any publication",
+      "status": "Pass",
+      "elapsedMs": 2,
+      "explicitSourceAndRevisionRefusals": 10,
+      "faultScope": "Trusted source fixture headers/directories deliberately violate producer invariants; no external source authenticity claim."
+    },
+    {
+      "name": "Composition and actual replacement consume one calibrated complete mutation work budget",
+      "status": "Pass",
+      "elapsedMs": 1,
+      "initialAddWorkUnits": 167,
+      "fullReplacementWorkUnits": 223,
+      "completePatchWorkUnits": 260,
+      "compositionAdditionalWorkUnits": 37,
+      "exactBoundary": "Pass at complete total; whole operation fails one unit below",
+      "scope": "Logical charged work; no heap/allocation/copy/latency claim."
+    },
+    {
+      "name": "Every independently observed patch suspension can abort with exact old core and participant identity",
+      "status": "Pass",
+      "elapsedMs": 52,
+      "observedSuspensions": 142,
+      "abortedAndRecovered": 142,
+      "exactOldRootIdentityPreserved": true,
+      "scope": "All suspensions of this fixed independent fixture, not every admitted corpus."
+    },
+    {
+      "name": "Returning and zero-unit participant callbacks cannot bypass cancellation, failure or disposal before commit",
+      "status": "Pass",
+      "elapsedMs": 1,
+      "participantStops": [
+        {
+          "mode": "return-abort",
+          "code": "CANCELLED",
+          "closed": 1,
+          "zeroSteps": 0
+        },
+        {
+          "mode": "zero-abort",
+          "code": "CANCELLED",
+          "closed": 1,
+          "zeroSteps": 1
+        },
+        {
+          "mode": "throw",
+          "code": "INTERNAL_ERROR",
+          "closed": 1,
+          "zeroSteps": 0
+        },
+        {
+          "mode": "return-dispose",
+          "code": "DISPOSED",
+          "closed": 1,
+          "zeroSteps": 0
+        }
+      ]
+    },
+    {
+      "name": "Queue deadlines, disposal and stale host callbacks cannot publish suspended patch state",
+      "status": "Pass",
+      "elapsedMs": 1,
+      "queuedAndActiveDeadlines": 2,
+      "disposedSuspendedOperation": true,
+      "staleCallbacksInvoked": 2
+    },
+    {
+      "name": "A committed native cursor is returned without a subsequent signal read or stop check",
+      "status": "Pass",
+      "elapsedMs": 0,
+      "successfulRevision": 2,
+      "signalReadsAfterCommit": 0,
+      "noAfterCommitFailure": true
+    }
+  ],
+  "passCount": 9,
+  "failCount": 0,
+  "mandatoryFindings": [],
+  "verdict": "Ready with follow-ups",
+  "limitations": [
+    "Trusted source/participant implementations and structural host handles are not hostile-code sandboxes.",
+    "This is current local Node runtime/controlled-host evidence, not installed-browser or physical AT qualification.",
+    "Public package/minified/declaration and artifact qualification are separately executed by the parent.",
+    "Logical work counts do not measure allocation, heap peaks, transport copies or physical latency.",
+    "No remote CI, remote write or publication claim."
+  ]
+}

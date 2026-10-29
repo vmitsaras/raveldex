@@ -113,3 +113,7 @@ The explicit `/addons/identifiers` analyzer preserves whole names and derives se
 ## Explicit query syntax
 
 `/addons/query-syntax` compiles an explicit bounded Boolean/field/phrase/prefix grammar into the existing validated native Query contract. It is a caller-side compiler, not an owner registration or evaluator. Ordinary strings/UI remain unchanged; malformed syntax has fixed diagnostics and UTF-16 spans without a fallback. See [grammar, escaping, bounds and native execution boundary](QUERY_SYNTAX.md).
+
+## Explicit record patches
+
+The optional [`/addons/patch`](RECORD_PATCH.md) entry exports `createPatch`, a direct-owner borrowed handle. Revision-guarded whole-field changes use explicit complete source and the native atomic replacement path. It is not an AddonRegistration and retains no additional source.

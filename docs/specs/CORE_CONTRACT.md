@@ -331,3 +331,7 @@ None blocks RX-1001. Qualified host profiles and broader language analysis are l
 ## Optional query syntax compiler
 
 [Explicit text query syntax](QUERY_SYNTAX.md) compiles to existing raw public Query trees and validates them through native admission/selected analysis. It adds no core evaluator, query kind, owner capability or automatic interpretation of plain strings. Destination execution still validates live providers, revisions and resources. Parser diagnostics and logical bounds are caller-side policy.
+
+## Optional patch convenience
+
+[RX-A090](RECORD_PATCH.md) adds a separate direct-owner handle for whole-field revision-guarded patches. Ordinary core `replace` remains complete replacement; the optional handle requires explicit complete source and compiles through the same mutation owner in one FIFO operation. Core exports, public facade, source retention and snapshot/worker protocols remain unchanged.

@@ -331,7 +331,7 @@ limitations, and is excluded from native compilation and package contents.
 There is no exported legacy search facade. See the
 [migration mapping and provenance](../migration/LOCALSEARCH.md).
 
-RX-A010 provides explicitly selected bounded typo alternatives. RX-A020 provides independent dictionary-backed token suggestions. RX-A030 provides explicit directional single-token synonyms. RX-A040 provides an explicitly selected English analyzer. RX-A050 provides code identifiers and RX-A060 provides explicit raw literal/infix matching. RX-A070 provides explicit ordered proximity. RX-A080 provides explicit bounded text query syntax. Later optional tracks may add patch convenience or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
+RX-A010 provides explicitly selected bounded typo alternatives. RX-A020 provides independent dictionary-backed token suggestions. RX-A030 provides explicit directional single-token synonyms. RX-A040 provides an explicitly selected English analyzer. RX-A050 provides code identifiers and RX-A060 provides explicit raw literal/infix matching. RX-A070 provides explicit ordered proximity. RX-A080 provides explicit bounded text query syntax. RX-A090 provides [explicit revision-guarded patch convenience](../specs/RECORD_PATCH.md) over complete selected source and the existing atomic replacement path. A later optional track may add an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
 
 ## Verification and acceptance criteria
 
@@ -393,3 +393,7 @@ RX-A070 uses the explicit `ordered-token-groups` leaf-refinement kind, with core
 ## Caller-side query syntax
 
 RX-A080 is an explicitly imported compiler to existing public Query trees, not an owner role, AST evaluator, analyzer replacement or UI mode. Captured native configuration/admission/selected analysis validate raw output; destinations retain execution-only provider/revision/state validation. Synchronous syntax/work bounds and fixed safe UTF-16 diagnostics reject complete expressions without fallback. Core/default strings and transports/codecs remain unchanged. See [grammar and ownership](../specs/QUERY_SYNTAX.md).
+
+## Optional record patch owner seam
+
+The `/addons/patch` handle borrows a direct execution owner. A private `adapterReplace` operation captures options/owned field actions once, reads authoritative source/canonical metadata from the FIFO start root under an explicit revision guard, then executes the actual existing MutationOwner replacement. Composition and yielded replacement steps share one outer mutation budget; there is no participant reinitialization, temporary engine, separate replacement queue or second publication. No callback/check follows the completed mutation cursor. This does not add a public core method or worker protocol. See the [patch contract](../specs/RECORD_PATCH.md).

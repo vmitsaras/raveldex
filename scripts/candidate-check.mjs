@@ -15,6 +15,7 @@ const NAME = '@vmitsaras/raveldex';
 // entry or runtime export requires a candidate-review decision here too.
 export const RUNTIME_EXPORTS = Object.freeze({
   '.': ['ERROR_CODES', 'RaveldexError', 'createRaveldex'],
+  './addons/patch': ['createPatch'],
   './addons/phrases': ['createSourcePhrases', 'createSourceProvider'],
   './integrations/languages/english': ['ENGLISH_ANALYZER', 'createEnglishAnalyzer'],
   './addons/query-syntax': ['QUERY_SYNTAX_ERROR_CODES', 'QUERY_SYNTAX_POLICY', 'QuerySyntaxError', 'createQuerySyntax'],
@@ -75,7 +76,7 @@ export function validateCandidateManifest(metadata, files) {
   for (const path of paths) {
     assert.ok(!path.includes('..') && !path.startsWith('/'), `unsafe tarball member ${path}`);
     assert.ok(['README.md', 'LICENSE', 'CHANGELOG.md', 'package.json'].includes(path)
-      || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:query-syntax|proximity|literal|identifiers|synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/(?:localsearch|languages))\/.+\.(?:js|d\.ts|css))$/.test(path)
+      || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:patch|query-syntax|proximity|literal|identifiers|synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/(?:localsearch|languages))\/.+\.(?:js|d\.ts|css))$/.test(path)
       || /^docs\/(?:api\/[^/]+\.md|api\/examples\/(?:[^/]+\.mjs|README\.md)|release\/[^/]+\.md|support\/RX-4003\.md)$/.test(path)
       || path === 'dist/integrations/localsearch/LICENSE.LocalSearch', `unexpected tarball member ${path}`);
     assert.doesNotMatch(path, /(?:^|\/)(?:node_modules|src|test|bench|\.github|\.env)(?:\/|$)|\.map$/);

@@ -27,7 +27,7 @@ Missing declared text values and empty strings/arrays are valid. Text-array elem
 | `search(query: string \| Query, options?: SearchOptions)` | `Promise<SearchResult>` with complete membership, exact total and requested page. |
 | `add(record, options?)` | `Promise<MutationResult>`; existing ID rejects `ID_EXISTS`. |
 | `addMany(records, options?)` | One atomic add-only batch; any conflict/refusal preserves prior state. |
-| `replace(record, options?)` | Complete replacement; missing ID rejects `ID_NOT_FOUND`. No patch API. |
+| `replace(record, options?)` | Complete replacement; missing ID rejects `ID_NOT_FOUND`. Optional direct-owner [patch convenience](RECORD_PATCH.md) compiles to this path. |
 | `remove(idOrIds, options?)` | One string or readonly string array. Missing IDs are no-ops. |
 | `clear(options?)` | Clears the whole collection and selected transactional providers. |
 | `dispose()` | Idempotent `Promise<void>`; closes admission and safely releases owner state/resources. |
