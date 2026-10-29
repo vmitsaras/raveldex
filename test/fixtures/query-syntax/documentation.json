@@ -1,0 +1,364 @@
+{
+  "kind": "raveldex-query-syntax-docs-v1",
+  "corpus": {
+    "path": "test/fixtures/relevance/corpus.json",
+    "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db"
+  },
+  "context": {
+    "authorship": "Source-navigation expressions and explicit native trees authored before production parser execution; full labels derived only from independent original-source reference.",
+    "limitations": [
+      "Machine-authored technical navigation, not human relevance or general syntax usability evidence.",
+      "Frozen 34-section source corpus and basic-v1 semantics only."
+    ]
+  },
+  "judgments": [
+    {
+      "id": "titles",
+      "source": "title:(mutation OR snapshots)",
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "text",
+            "text": "mutation",
+            "fields": [
+              "title"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "snapshots",
+            "fields": [
+              "title"
+            ]
+          }
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior"
+      ]
+    },
+    {
+      "id": "totals",
+      "source": "body:\"exact totals\"",
+      "query": {
+        "kind": "extension",
+        "capability": "phrases",
+        "version": 1,
+        "payload": {
+          "text": "exact totals",
+          "fields": [
+            "body"
+          ]
+        }
+      },
+      "expectedIds": [
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary"
+      ]
+    },
+    {
+      "id": "atomic-revision",
+      "source": "body:atomic AND body:revision",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "text",
+            "text": "atomic",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "revision",
+            "fields": [
+              "body"
+            ]
+          }
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract"
+      ]
+    },
+    {
+      "id": "sources-and-positions",
+      "source": "body:(source AND positions)",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "text",
+            "text": "source",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "positions",
+            "fields": [
+              "body"
+            ]
+          }
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+        "doc:docs/specs/CORE_CONTRACT.md#source-mapping"
+      ]
+    },
+    {
+      "id": "prefix-contract",
+      "source": "title:contr*",
+      "query": {
+        "kind": "group",
+        "variants": [
+          {
+            "text": "contr",
+            "match": "prefix",
+            "weight": 1
+          }
+        ],
+        "fields": [
+          "title"
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/specs/RANKING.md#term-contribution"
+      ]
+    },
+    {
+      "id": "public-contract",
+      "source": "title:\"public API contract\"",
+      "query": {
+        "kind": "extension",
+        "capability": "phrases",
+        "version": 1,
+        "payload": {
+          "text": "public API contract",
+          "fields": [
+            "title"
+          ]
+        }
+      },
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract"
+      ]
+    },
+    {
+      "id": "coordinates",
+      "source": "body:(\"UTF 16\" AND NOT unmatchedword)",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "extension",
+            "capability": "phrases",
+            "version": 1,
+            "payload": {
+              "text": "UTF 16",
+              "fields": [
+                "body"
+              ]
+            }
+          },
+          {
+            "kind": "not",
+            "child": {
+              "kind": "text",
+              "text": "unmatchedword",
+              "fields": [
+                "body"
+              ]
+            }
+          }
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+        "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+        "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+        "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/specs/CORE_CONTRACT.md#record",
+        "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+        "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+        "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+        "doc:docs/specs/RANKING.md#original-groups-and-alternatives"
+      ]
+    },
+    {
+      "id": "execution",
+      "source": "body:(cancellation OR deadline)",
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "text",
+            "text": "cancellation",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "deadline",
+            "fields": [
+              "body"
+            ]
+          }
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+        "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting"
+      ]
+    },
+    {
+      "id": "revisions-without-ranking",
+      "source": "body:(revisions AND NOT ranking)",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "text",
+            "text": "revisions",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "not",
+            "child": {
+              "kind": "text",
+              "text": "ranking",
+              "fields": [
+                "body"
+              ]
+            }
+          }
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary"
+      ]
+    },
+    {
+      "id": "original-sources",
+      "source": "\"original value\" AND source",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "extension",
+            "capability": "phrases",
+            "version": 1,
+            "payload": {
+              "text": "original value"
+            }
+          },
+          {
+            "kind": "text",
+            "text": "source"
+          }
+        ]
+      },
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+      ]
+    },
+    {
+      "id": "missing-word",
+      "source": "unmatchedword",
+      "query": {
+        "kind": "text",
+        "text": "unmatchedword"
+      },
+      "expectedIds": []
+    },
+    {
+      "id": "missing-phrase",
+      "source": "title:\"unmatchedword impossibleword\"",
+      "query": {
+        "kind": "extension",
+        "capability": "phrases",
+        "version": 1,
+        "payload": {
+          "text": "unmatchedword impossibleword",
+          "fields": [
+            "title"
+          ]
+        }
+      },
+      "expectedIds": []
+    },
+    {
+      "id": "missing-conjunction",
+      "source": "body:(impossibleword AND source)",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "text",
+            "text": "impossibleword",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "source",
+            "fields": [
+              "body"
+            ]
+          }
+        ]
+      },
+      "expectedIds": []
+    },
+    {
+      "id": "missing-disjunction",
+      "source": "unmatchedword OR impossibleword",
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "text",
+            "text": "unmatchedword"
+          },
+          {
+            "kind": "text",
+            "text": "impossibleword"
+          }
+        ]
+      },
+      "expectedIds": []
+    }
+  ]
+}

@@ -38,7 +38,7 @@ Missing declared text values and empty strings/arrays are valid. Text-array elem
 
 ## Query shapes
 
-Plain strings are exact-token AND text queries across declared text fields. They never interpret quotes, `AND`, minus signs or other punctuation as a query language.
+Plain strings are exact-token AND text queries across declared text fields. They never interpret quotes, `AND`, minus signs or other punctuation as a query language. An application can explicitly compile [optional query syntax](QUERY_SYNTAX.md) to a typed tree before calling search.
 
 | `Query.kind` | Properties / meaning |
 | --- | --- |

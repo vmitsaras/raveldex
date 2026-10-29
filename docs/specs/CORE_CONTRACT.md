@@ -327,3 +327,7 @@ None blocks RX-1001. Qualified host profiles and broader language analysis are l
 ## Explicit ordered refinement
 
 [Ordered proximity](ORDERED_PROXIMITY.md) is an optional protocol-v1 `ordered-token-groups` refinement kind. Core captures bounded groups/maxGap, analyzes every alternative once in original-query mode, compiles equal-weight native exact groups and supplies immutable group arrays/maxGap only to ordered handlers. Existing exact-token-sequence handlers, default queries, score model and strict phrase semantics are unchanged. Required positions are explicit; no new core side state or automatic source retention follows.
+
+## Optional query syntax compiler
+
+[Explicit text query syntax](QUERY_SYNTAX.md) compiles to existing raw public Query trees and validates them through native admission/selected analysis. It adds no core evaluator, query kind, owner capability or automatic interpretation of plain strings. Destination execution still validates live providers, revisions and resources. Parser diagnostics and logical bounds are caller-side policy.

@@ -1,0 +1,103 @@
+/** Exact grammar examples authored from the contract before parser execution. */
+export const text = (value, fields) => ({kind:'text',text:value,...(fields?{fields}: {})});
+export const prefix = (value, fields) => ({kind:'group',variants:[{text:value,match:'prefix',weight:1}],...(fields?{fields}: {})});
+export const phrase = (value, fields) => ({kind:'extension',capability:'phrases',version:1,payload:{text:value,...(fields?{fields}: {})}});
+export const and = (...children) => ({kind:'and',children});
+export const or = (...children) => ({kind:'or',children});
+export const not = child => ({kind:'not',child});
+export const SYNTAX_SCHEMA = {text:{title:{boost:2},body:{}},metadata:{kind:{type:'string'}}};
+export const syntaxRecords = [
+  {id:'a',text:{title:'red blue',body:'green'}},
+  {id:'b',text:{title:'blue',body:'red green'}},
+  {id:'c',text:{title:'red gap blue',body:'notes'}},
+  {id:'d',text:{title:['red','blue']}},
+  {id:'e',text:{title:'red',body:'blue'}},
+  {id:'f',text:{title:'reddish bluish'}},
+  {id:'g',text:{}},
+  {id:'h',text:{title:'Café ﬁle',body:'δοκιμή'}},
+  {id:'i',text:{title:'red—blue',body:'foo:bar'}},
+  {id:'j',text:{title:'AND OR NOT',body:'XOR NEAR'}},
+  {id:'k',text:{title:'fooBar baz',body:'fooBar'}},
+  {id:'l',text:{title:'foo bar baz',body:'foo bar'}},
+  {id:'m',text:{title:'HTTP identifiers',body:'a/b foo-bar'}},
+  {id:'n',text:{title:'img onerror alert',body:'red'}},
+];
+
+export const validSyntaxCases = [
+  ['empty','',{kind:'none'}],['whitespace',' \t\n ',{kind:'none'}],
+  ['word','red',text('red')],['native-punctuation','red-blue',text('red-blue')],
+  ['Unicode','café',text('café')],['supplementary','😀',text('😀')],
+  ['uppercase-term','HTTP',text('HTTP')],['lowercase-operator-term','and',text('and')],
+  ['and-chain','red AND blue AND green',and(text('red'),text('blue'),text('green'))],
+  ['or-chain','red OR blue OR green',or(text('red'),text('blue'),text('green'))],
+  ['precedence','red OR blue AND green',or(text('red'),and(text('blue'),text('green')))],
+  ['parentheses','(red OR blue) AND green',and(or(text('red'),text('blue')),text('green'))],
+  ['not-precedence','NOT red AND blue',and(not(text('red')),text('blue'))],
+  ['right-not','NOT NOT red',not(not(text('red')))],
+  ['not-group','NOT (red OR blue)',not(or(text('red'),text('blue')))],
+  ['preserve-nested-and','red AND (blue AND green)',and(text('red'),and(text('blue'),text('green')))],
+  ['single-parenthesis','(((red)))',text('red')],
+  ['field-word','title:red',text('red',['title'])],
+  ['field-whitespace','title : red',text('red',['title'])],
+  ['field-group','title:(red OR blue)',or(text('red',['title']),text('blue',['title']))],
+  ['field-nearest','title:(red OR body:blue)',or(text('red',['title']),text('blue',['body']))],
+  ['field-unary','NOT title:red',not(text('red',['title']))],
+  ['field-nested','title:body:red',text('red',['body'])],
+  ['phrase','"red blue"',phrase('red blue')],
+  ['field-phrase','body:"red blue"',phrase('red blue',['body'])],
+  ['empty-phrase','""',phrase('')],
+  ['prefix','re*',prefix('re')],
+  ['field-prefix','title:re *',prefix('re',['title'])],
+  ['phrase-prefix','"red blue" OR bl*',or(phrase('red blue'),prefix('bl'))],
+  ['escaped-operator',String.raw`\AND`,text('AND')],
+  ['escaped-space',String.raw`red\ blue`,text('red blue')],
+  ['escaped-colon',String.raw`foo\:bar`,text('foo:bar')],
+  ['escaped-star',String.raw`foo\*`,text('foo*')],
+  ['escaped-backslash',String.raw`foo\\bar`,text('foo\\bar')],
+  ['escape-not-C',String.raw`foo\nbar`,text('foonbar')],
+  ['escaped-phrase',String.raw`"red \"blue\" \\ green"`,phrase('red "blue" \\ green')],
+  ['escaped-hostile',String.raw`\<img\>`,text('<img>')],
+  ['mixed-whitespace','red\nAND\tblue',and(text('red'),text('blue'))],
+  ['failed-branch','(red AND absentword) OR blue',or(and(text('red'),text('absentword')),text('blue'))],
+  ['repeated-group','red AND red',and(text('red'),text('red'))],
+  ['repeat-phrase','"red red" OR red',or(phrase('red red'),text('red'))],
+].map(([id,source,query])=>({id,source,query}));
+
+export const invalidSyntaxCases = [
+  ['adjacent','red blue','EXPECTED_OPERATOR',4,8],
+  ['missing-operand','red OR','EXPECTED_OPERAND',6,6],
+  ['leading-and','AND red','EXPECTED_OPERAND',0,3],
+  ['operator-in-operand','red AND OR blue','EXPECTED_OPERAND',8,10],
+  ['unknown-field','unknown:red','UNKNOWN_FIELD',0,7],
+  ['metadata-field','kind:red','UNKNOWN_FIELD',0,4],
+  ['field-case','Title:red','UNKNOWN_FIELD',0,5],
+  ['unterminated-quote','"red','UNTERMINATED_QUOTE',0,4],
+  ['unterminated-group','(red','UNTERMINATED_GROUP',0,4],
+  ['unmatched-close','red)','UNEXPECTED_TOKEN',3,4],
+  ['empty-group','()','EXPECTED_OPERAND',1,2],
+  ['empty-group-after-and','red AND ()','EXPECTED_OPERAND',9,10],
+  ['trailing-escape','red\\','INVALID_ESCAPE',3,4],
+  ['quote-trailing-escape','"red\\','INVALID_ESCAPE',4,5],
+  ['unsupported-word','red XOR blue','UNSUPPORTED_OPERATOR',4,7],
+  ['unsupported-punctuation','red | blue','UNSUPPORTED_OPERATOR',4,5],
+  ['unsupported-weight','red^2','UNSUPPORTED_OPERATOR',3,4],
+  ['unsupported-distance','red~1','UNSUPPORTED_OPERATOR',3,4],
+  ['minus-shorthand','-red','UNSUPPORTED_OPERATOR',0,1],
+  ['plus-shorthand','+red','UNSUPPORTED_OPERATOR',0,1],
+  ['star-only','*','UNSUPPORTED_OPERATOR',0,1],
+  ['repeat-star','red**','UNSUPPORTED_OPERATOR',4,5],
+  ['star-embedded','red*blue','UNSUPPORTED_OPERATOR',3,4],
+  ['phrase-star','"red"*','UNSUPPORTED_OPERATOR',5,6],
+  ['group-star','(red)*','UNSUPPORTED_OPERATOR',5,6],
+  ['field-missing-operand','title:','EXPECTED_OPERAND',6,6],
+  ['malformed-high','red \ud800','INVALID_UNICODE',4,5],
+  ['malformed-low','\udc00','INVALID_UNICODE',0,1],
+  ['UTF16-offset','😀 AND \ud800','INVALID_UNICODE',7,8],
+  ['short-prefix','a*','NATIVE_QUERY_ERROR',0,2,'INVALID_QUERY'],
+  ['multi-token-prefix','foo-bar*','NATIVE_QUERY_ERROR',0,8,'INVALID_QUERY'],
+].map(([id,source,code,start,end,nativeCode])=>({id,source,code,span:{start,end},...(nativeCode?{nativeCode}: {})}));
+
+export const reservedFieldCases = ['AND','OR','NOT','XOR'].flatMap(field=>[
+  {source:`${field}:red`,query:text('red',[field])},
+  {source:`${field} : (red OR blue)`,query:or(text('red',[field]),text('blue',[field]))},
+]);

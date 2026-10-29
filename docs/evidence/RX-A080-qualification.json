@@ -1,0 +1,271 @@
+{
+  "kind": "raveldex-rx-a080-local-qualification-v1",
+  "status": "Pass",
+  "recordedAt": "2026-10-29T20:46:51.005792+00:00",
+  "baseCommit": "0f63b2c874b5a403fbff0cfc0b9e5c3ba8d6bfb5",
+  "branch": "codex/rx-a080-query-syntax",
+  "method": "Locked tooling, full check then direct candidate check without rebuilding, final full check after acceptance/manifest/docs synchronization. Not candidate:prepare helper invocation.",
+  "projectChecks": [
+    {
+      "command": "npm run check",
+      "phase": "check",
+      "exitCode": 0,
+      "pass": 819,
+      "batches": [
+        738,
+        30,
+        24,
+        26,
+        1
+      ],
+      "log": "docs/evidence/RX-A080-check.log",
+      "sha256": "9c32fcdfa791f8513d5801ab4b0f9188e616cc88c16cf16a41bee76a92b99bf6"
+    },
+    {
+      "command": "npm run check",
+      "phase": "final-check",
+      "exitCode": 0,
+      "pass": 819,
+      "batches": [
+        738,
+        30,
+        24,
+        26,
+        1
+      ],
+      "log": "docs/evidence/RX-A080-final-check.log",
+      "sha256": "b032c56c29ddeef491f9f8eaf4be400e0fd1d78d1ecbb76226ae181c7f53e2ca"
+    }
+  ],
+  "candidate": {
+    "report": "docs/evidence/RX-A080-candidate.json",
+    "sha256": "3f74b3b5064ad9769020965d49793708417afaf588caf41fe575b3ee0987cc1e",
+    "tarballBytes": 219733,
+    "members": 300,
+    "private": true,
+    "version": "0.1.0-rc.0"
+  },
+  "packageReport": {
+    "path": "docs/evidence/RX-A080-package.json",
+    "sha256": "6fdf4288dbc8d59a39537c41662a19ef028d627ba1a734c945c52649d2a0d4e7",
+    "sameCandidate": true,
+    "documentation": {
+      "status": "Pass",
+      "source": "docs/api/QUERY_SYNTAX.md",
+      "exampleSha256": "ea1b099ff86d1fc261d15483883f04fcd62d26745e430583aca30ae59b366057",
+      "stdout": "1 guide\n",
+      "scope": "Exact first installed fenced JavaScript executed unchanged; no reconstructed example or browser claim"
+    },
+    "coreUnchanged": {
+      "status": "Pass",
+      "baseline": "docs/evidence/RX-A070-package.json",
+      "sha256": "7d1c4474cfebbea1d8918cf40715a9fd9c4b99b728cf6a0149976c1770bd3f44",
+      "gzipSha256": "8c1088c8200af776fc085d218dab2fe01d7d5cc2bd4a8c084358968084f4fcfc"
+    }
+  },
+  "independentReviews": [
+    {
+      "path": "docs/evidence/RX-A080-runtime-review.json",
+      "sha256": "47c889f2922120983097820361fc2615e239d1afeb7c261d909b192bf6e79c87"
+    },
+    {
+      "path": "docs/evidence/RX-A080-oracle-review.json",
+      "sha256": "43b3cc622a9d8f32481e11bc5fe29e1772d25ddcecad4f8c1e5db9ffd6c4c36f"
+    },
+    {
+      "path": "docs/evidence/RX-A080-artifact-review.json",
+      "sha256": "5ad2994d3709cd344b071d9a3d9b3499f682c9b17dae894b7ef6075d31d906af"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "package.json",
+      "bytes": 9891,
+      "sha256": "c69b14a8d1e1855b9fd5deacc6da578bd0f0af64e8bb3a05011ae65226384037"
+    },
+    {
+      "path": "scripts/candidate-check.mjs",
+      "bytes": 28969,
+      "sha256": "51b8171c6d3d1d02eaed49cf876c96cd171c3febd5a73f27371b24d72a903709"
+    },
+    {
+      "path": "src/addons/query-syntax/errors.ts",
+      "bytes": 1632,
+      "sha256": "9f2356fe8d51baa8f50b6205fe5ee92f755c001bcad1d06652756401ea38ddf5"
+    },
+    {
+      "path": "src/addons/query-syntax/index.ts",
+      "bytes": 3744,
+      "sha256": "d31ac7d1f178407f95f4d3fe3a950ba0be37edbf0484ac54893bfd52d6fd2604"
+    },
+    {
+      "path": "src/addons/query-syntax/lexer.ts",
+      "bytes": 3792,
+      "sha256": "ddbce9dcbfe3556536de5f8b5229b2e8e614a7e3274faebf37451919783f6786"
+    },
+    {
+      "path": "src/addons/query-syntax/options.ts",
+      "bytes": 1827,
+      "sha256": "4692a063f913d3d271850c3ab1eb9bb3f4fba7705f4a803db91cf280ce6c0c4e"
+    },
+    {
+      "path": "src/addons/query-syntax/parser.ts",
+      "bytes": 4482,
+      "sha256": "e6a85e1717c96dbce5564371bb7cef31dfad211eb5a62d51eaa20a67c9206d78"
+    },
+    {
+      "path": "src/addons/query-syntax/types.ts",
+      "bytes": 1003,
+      "sha256": "6695d784a2e0332fe1432f7d9f5d42c4b090558b6336180b36a4f0476225e699"
+    },
+    {
+      "path": "test/addons/query-syntax/admission.test.mjs",
+      "bytes": 5357,
+      "sha256": "c46c5201816190be77ea1b789eb074b09eae6fb24301455774fe4846dd4a29c4"
+    },
+    {
+      "path": "test/addons/query-syntax/contract.test.mjs",
+      "bytes": 10140,
+      "sha256": "b77bb648ba62c328dece95d4bc5186231d90b568dd0e6bc0ef9cb634ccb35e1d"
+    },
+    {
+      "path": "test/addons/query-syntax/evaluation.test.mjs",
+      "bytes": 15165,
+      "sha256": "8a2c6b3b0afe99734e2f1816d5c8116fbba013670018d52d2df12e982c8cc94e"
+    },
+    {
+      "path": "test/addons/query-syntax/lifecycle.test.mjs",
+      "bytes": 9389,
+      "sha256": "8d2228fcf029be9bd76ffefa39256f02fc99a6130bbc765ef8e0464a2715f864"
+    },
+    {
+      "path": "test/addons/query-syntax/package.test.mjs",
+      "bytes": 2576,
+      "sha256": "272ed472fc36a320941364eccb89dfb52efe74a40d429b6275f0a1730f0b8ba3"
+    },
+    {
+      "path": "test/consumer/candidate.test.mjs",
+      "bytes": 4167,
+      "sha256": "87c574ac7cb6fff6db127d3503bbfe7267d79af5c14974104d8b87a3c49e5d46"
+    },
+    {
+      "path": "test/fixtures/query-syntax/documentation.json",
+      "bytes": 10077,
+      "sha256": "730c12c9992f119c0ccf226b59795124d6b9afcaff4c40a1604be44e1c909527"
+    },
+    {
+      "path": "test/fixtures/query-syntax/handwritten.mjs",
+      "bytes": 6241,
+      "sha256": "bcc735acebe6c2f0a2e9c7ef38152dc85d5181452ff6515b31c636cdba893bf0"
+    },
+    {
+      "path": "test/measurements/query-syntax-package.mjs",
+      "bytes": 24955,
+      "sha256": "174d0552e9721dcd63462ebba4ebea1ca2e2339981131bdf8eb3b35bcce23078"
+    },
+    {
+      "path": "test/oracle/query-syntax.mjs",
+      "bytes": 2729,
+      "sha256": "bf923bbc36277411153396491682c9ad401876cd81e424d8c7657b55277cb9ed"
+    },
+    {
+      "path": "test/reviews/rx-a080-oracle.mjs",
+      "bytes": 15223,
+      "sha256": "31f3d21bcd5e6ed35c301692ece921ba1664947895f40672bd591a1a3f348a76"
+    },
+    {
+      "path": "test/reviews/rx-a080-runtime.mjs",
+      "bytes": 16768,
+      "sha256": "70cd31e00677bbaf830c01688d501ae9834cd2283f665127102f763a96b017c2"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 1134,
+      "sha256": "49a84def0317191995524d6ba0756ec7d4eb1de6f8889ecaca7956ba7dc72446"
+    }
+  ],
+  "coreSourceAndLockfileChanged": false,
+  "scope": "Finite current local Node and recorded installed headless documentation smoke. No remote CI/push/merge/publication/tag/release/visibility change. No new manual AT/native-browser matrix, heap/copy peaks or universal grammar usability.",
+  "preservedFailure": {
+    "path": "docs/evidence/RX-A080-focused-initial.log",
+    "classification": "Test-author guessed token-span arithmetic, corrected only expected offset without changing input/production.",
+    "gitWhitespaceExclusion": "Exact raw failure log only; two whitespace-only original diagnostic lines55/62 preserved verbatim."
+  },
+  "synchronization": {
+    "log": "docs/evidence/RX-A080-sync.log",
+    "sha256": "ab1ecb3666fed48c4882c673a5363b26b534af86cc70145af9011b31f3ba955b",
+    "commands": [
+      {
+        "command": [
+          "npm",
+          "run",
+          "docs:generate"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "docs:check"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:check"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:status"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:next"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "tracking:preview"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check",
+          "--",
+          ".",
+          ":(exclude)docs/evidence/RX-A080-focused-initial.log"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--check",
+          "--",
+          ".",
+          ":(exclude)docs/evidence/RX-A080-focused-initial.log"
+        ],
+        "exitCode": 0
+      }
+    ]
+  }
+}

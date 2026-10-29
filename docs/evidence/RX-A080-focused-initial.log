@@ -1,0 +1,79 @@
+✔ syntax configuration capture owns bound callbacks and never initializes or prepares selected source providers (4.212792ms)
+✔ every cooperative zero-work native advance consumes parser budget and overrun closes nested analyzer cursors (0.922417ms)
+✔ native exception diagnostics are fixed and never invoke thrown code getters or retain exception text and causes (1.126959ms)
+✔ selected analyzer and native token limits are independent on every parse and never rewrite returned raw text (1.426167ms)
+✔ syntax API exposes a frozen explicit compiler and fixed codes without parser registration or owner initialization (4.394083ms)
+✔ explicit precedence, n-ary chains, nested groups and nearest field scopes preserve exact raw native trees (0.680583ms)
+✔ quoted text, whole-codepoint escapes and prefix groups preserve originals without literal or implicit-AND fallback (2.116709ms)
+✔ reserved operator spellings remain legal text fields before colons while metadata and escaped field names reject (0.306875ms)
+✔ empty input is none and malformed syntax returns bounded original UTF16 diagnostics without raw input (0.342542ms)
+✔ factory options and configuration are captured without getters and finite ceilings only narrow (0.453709ms)
+✖ input, syntax token, nesting and native semantic limits reject complete parses at exact boundaries (1.376708ms)
+✔ work accounting is per parse, includes whole codepoints, closes zero-work analyzer streams and exposes no partial tree (0.878917ms)
+✔ native validation uses installed capabilities and wraps analyzer failures with fixed safe diagnostics only (1.105916ms)
+✔ handwritten trees fix precedence, explicit operators, exact scopes, escapes and prefix/phrase envelopes (4.809375ms)
+ℹ 41 hand-authored exact trees and 8 reserved-field cases; expected trees precede parser execution.
+✔ handwritten diagnostic spans reject malformed syntax/Unicode without fallback or raw diagnostic text (0.9705ms)
+ℹ 31 fixed code/span fixtures, including UTF-16 supplementary offsets, trailing escape, unsupported operators and native prefix refusals.
+✔ handwritten parsed and explicit native trees preserve complete source membership, scores, pages and Boolean participation (936.481333ms)
+ℹ 328 complete parsed/typed/independent-source comparisons across 41 handwritten trees, two insertion orders and four pages.
+✔ generated expressions start from independent typed trees and retain nested Boolean structure and exact native results (2842.470833ms)
+ℹ 96 bounded generated expressions and 576 complete native/source comparisons; renderer does not read production parse output.
+✔ frozen real-document syntax judgments retain exhaustive source membership and native arithmetic (1428.547666ms)
+ℹ {"fixtureSha256":"730c12c9992f119c0ccf226b59795124d6b9afcaff4c40a1604be44e1c909527","corpusSha256":"d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db","completeJudgments":14,"nonempty":10,"empty":4,"limitations":["Machine-authored technical navigation, not human relevance or general syntax usability evidence.","Frozen 34-section source corpus and basic-v1 semantics only."]}
+✔ selected basic, English and identifier analyzers receive raw syntax operands and preserve native source/position phrase semantics (23.436167ms)
+ℹ 14 parsed/typed/source-position comparisons under separately selected basic, English and identifier analysis.
+✔ native limits and capabilities remain authoritative and provider-root failures stay at actual native execution (0.982042ms)
+✔ Inspector facts preserve hand BM25, repeated group deduplication and zero score from double NOT (9.055584ms)
+ℹ Two hand-derived native field facts, exact repeat deduplication and native double-NOT participation.
+✔ creating a parser leaves ordinary string syntax and all 76 existing basic judgments untouched (3907.047333ms)
+ℹ 76 unchanged ordinary results/totals/scores; optional parser creation does not install syntax in engine.search(string).
+✔ parser captures configuration without initializing participants and keeps immutable independent raw query trees (4.734208ms)
+✔ raw syntax and native AST bounds are independent complete refusals and parser remains usable after errors (2.09225ms)
+✔ work ceilings are measured by exact whole-parse admission and selected analyzer cursors close on budget refusal (4.828042ms)
+ℹ {"rows":[{"inputCodeUnits":3,"minimumAdmittedWorkUnits":23},{"inputCodeUnits":12,"minimumAdmittedWorkUnits":64},{"inputCodeUnits":38,"minimumAdmittedWorkUnits":165}],"scope":"Deterministic charged admission thresholds, including native analysis. Not heap/allocation bytes, physical latency or asynchronous cancellation."}
+✔ safe diagnostics do not retain or echo hostile input or trusted analyzer exception text (0.405917ms)
+✔ parsed trees execute against FIFO revisions and mutations without parser corpus retention or hidden string activation (4.698916ms)
+✔ parsed native searches retain all observed cancellation stops, deadlines, cleanup and disposal (3.066084ms)
+ℹ {"observedSearchSuspensions":15,"scope":"Native queued execution after synchronous parsing; no asynchronous parse cancellation claim."}
+✔ destination engine still validates compiled queries against actual installed capabilities (0.892208ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 28
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9241.317458
+
+✖ failing tests:
+
+test at test/addons/query-syntax/contract.test.mjs:61:1
+✖ input, syntax token, nesting and native semantic limits reject complete parses at exact boundaries (1.376708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   end: 579,
+  +   start: 575
+  -   end: 566,
+  -   start: 563
+    }
+  
+      at Object.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/addons/query-syntax/contract.test.mjs:11:200)
+      at expectedException (node:assert:578:17)
+      at expectsError (node:assert:703:21)
+      at strict.throws (node:assert:759:3)
+      at error (file:///Users/vasilis/Documents/GitHub/raveldex/test/addons/query-syntax/contract.test.mjs:11:54)
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/addons/query-syntax/contract.test.mjs:65:74)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { start: 575, end: 579 },
+    expected: { start: 563, end: 566 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

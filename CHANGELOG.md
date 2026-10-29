@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050, RX-A060 and RX-A070
+## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050, RX-A060, RX-A070 and RX-A080
+
+- RX-A080 adds explicit `/addons/query-syntax`: bounded Boolean operators, text-field scopes, strict phrase quotes, prefix leaves and escaping, compiled to validated raw native trees. Fixed diagnostics carry original UTF-16 spans; malformed input never falls back. Ordinary strings/UI and core runtime remain unchanged; private local development only.
 
 - RX-A070: explicit ordered proximity over selected original positions, bounded adjacent gaps/alternatives, native BM25 without a distance bonus and strict zero-gap phrase parity. Token range/snippet requests fail explicitly for ordered leaves. Private local development; no publication.
 

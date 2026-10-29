@@ -1,6 +1,6 @@
 # Optional search capabilities
 
-Factories return `AddonRegistration` objects for `createRaveldex({ schema, addons })`. Their options are validated synchronously. Install providers at owner creation; they participate in the same atomic mutation revision, rollback, clear and disposal as core. They do not change ordinary term statistics or BM25 scores. [addons.mjs](examples/addons.mjs) runs source, position and mixed phrase strategies, typed filters/facets and separate Inspector/range/snippet requests.
+Owner-capability factories return `AddonRegistration` objects for `createRaveldex({ schema, addons })`. The explicit query-syntax compiler instead returns a caller-side parser, as described below. Their options are validated synchronously. Install providers at owner creation; they participate in the same atomic mutation revision, rollback, clear and disposal as core. They do not change ordinary term statistics or BM25 scores. [addons.mjs](examples/addons.mjs) runs source, position and mixed phrase strategies, typed filters/facets and separate Inspector/range/snippet requests.
 
 ## Source, positions and phrases
 
@@ -109,3 +109,7 @@ The explicit `/addons/identifiers` analyzer preserves whole names and derives se
 ## Ordered proximity
 
 `/addons/proximity` refines native exact alternative groups with ordered original positions and a bounded gap per adjacent pair. It requires separately installed position providers, never joins values/fields, consumes repeats distinctly and adds no ranking bonus. Zero gap preserves strict phrase membership and scores. See [payloads, alternatives, costs and evidence limitations](PROXIMITY.md).
+
+## Explicit query syntax
+
+`/addons/query-syntax` compiles an explicit bounded Boolean/field/phrase/prefix grammar into the existing validated native Query contract. It is a caller-side compiler, not an owner registration or evaluator. Ordinary strings/UI remain unchanged; malformed syntax has fixed diagnostics and UTF-16 spans without a fallback. See [grammar, escaping, bounds and native execution boundary](QUERY_SYNTAX.md).

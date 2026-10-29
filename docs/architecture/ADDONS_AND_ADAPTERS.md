@@ -331,7 +331,7 @@ limitations, and is excluded from native compilation and package contents.
 There is no exported legacy search facade. See the
 [migration mapping and provenance](../migration/LOCALSEARCH.md).
 
-RX-A010 provides explicitly selected bounded typo alternatives. RX-A020 provides independent dictionary-backed token suggestions. RX-A030 provides explicit directional single-token synonyms. RX-A040 provides an explicitly selected English analyzer. RX-A050 provides code identifiers and RX-A060 provides explicit raw literal/infix matching. RX-A070 provides explicit ordered proximity. Later optional tracks may add text query syntax, patch convenience, or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
+RX-A010 provides explicitly selected bounded typo alternatives. RX-A020 provides independent dictionary-backed token suggestions. RX-A030 provides explicit directional single-token synonyms. RX-A040 provides an explicitly selected English analyzer. RX-A050 provides code identifiers and RX-A060 provides explicit raw literal/infix matching. RX-A070 provides explicit ordered proximity. RX-A080 provides explicit bounded text query syntax. Later optional tracks may add patch convenience or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
 
 ## Verification and acceptance criteria
 
@@ -389,3 +389,7 @@ First-party `/addons/literal` uses bounded raw case-sensitive KMP with no normal
 ## Ordered positional refinement
 
 RX-A070 uses the explicit `ordered-token-groups` leaf-refinement kind, with core-owned analyzed alternative groups and maximum adjacent gap. Native canonical exact groups form the lexical superset and retain ordinary BM25 participation; only original stored positions establish eligibility. The optional module reads exactly its declared position requirements and adds no participant, codec, source retention or index. Strict phrase handlers retain their existing kind/context. Range/snippet projection rejects ordered leaves rather than treating them as adjacent phrases. See [policy and bounds](../specs/ORDERED_PROXIMITY.md).
+
+## Caller-side query syntax
+
+RX-A080 is an explicitly imported compiler to existing public Query trees, not an owner role, AST evaluator, analyzer replacement or UI mode. Captured native configuration/admission/selected analysis validate raw output; destinations retain execution-only provider/revision/state validation. Synchronous syntax/work bounds and fixed safe UTF-16 diagnostics reject complete expressions without fallback. Core/default strings and transports/codecs remain unchanged. See [grammar and ownership](../specs/QUERY_SYNTAX.md).

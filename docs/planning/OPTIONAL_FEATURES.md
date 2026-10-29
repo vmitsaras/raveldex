@@ -408,7 +408,7 @@ Add selected ordered-gap semantics over positional data without redefining stric
 
 **Bounded text query syntax**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/35)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/35)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -420,7 +420,7 @@ Compile an explicit user-facing syntax to the existing validated query tree with
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [QUERY_SYNTAX.md](../../docs/specs/QUERY_SYNTAX.md)
 
 **Acceptance criteria**
 
@@ -436,7 +436,34 @@ Compile an explicit user-facing syntax to the existing validated query tree with
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A080-admission-initial.log](../../docs/evidence/RX-A080-admission-initial.log)
+- [docs/evidence/RX-A080-artifact-audit.log](../../docs/evidence/RX-A080-artifact-audit.log)
+- [docs/evidence/RX-A080-artifact-review.json](../../docs/evidence/RX-A080-artifact-review.json)
+- [docs/evidence/RX-A080-baseline.log](../../docs/evidence/RX-A080-baseline.log)
+- [docs/evidence/RX-A080-build-initial.log](../../docs/evidence/RX-A080-build-initial.log)
+- [docs/evidence/RX-A080-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A080-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A080-candidate.json](../../docs/evidence/RX-A080-candidate.json)
+- [docs/evidence/RX-A080-candidate.log](../../docs/evidence/RX-A080-candidate.log)
+- [docs/evidence/RX-A080-check.log](../../docs/evidence/RX-A080-check.log)
+- [docs/evidence/RX-A080-ci.log](../../docs/evidence/RX-A080-ci.log)
+- [docs/evidence/RX-A080-contract.log](../../docs/evidence/RX-A080-contract.log)
+- [docs/evidence/RX-A080-final-check.log](../../docs/evidence/RX-A080-final-check.log)
+- [docs/evidence/RX-A080-focused-initial.log](../../docs/evidence/RX-A080-focused-initial.log)
+- [docs/evidence/RX-A080-oracle-review.json](../../docs/evidence/RX-A080-oracle-review.json)
+- [docs/evidence/RX-A080-oracle-review.log](../../docs/evidence/RX-A080-oracle-review.log)
+- [docs/evidence/RX-A080-package-initial.json](../../docs/evidence/RX-A080-package-initial.json)
+- [docs/evidence/RX-A080-package-initial.log](../../docs/evidence/RX-A080-package-initial.log)
+- [docs/evidence/RX-A080-package.json](../../docs/evidence/RX-A080-package.json)
+- [docs/evidence/RX-A080-package.log](../../docs/evidence/RX-A080-package.log)
+- [docs/evidence/RX-A080-parent-artifact-audit.json](../../docs/evidence/RX-A080-parent-artifact-audit.json)
+- [docs/evidence/RX-A080-qualification.json](../../docs/evidence/RX-A080-qualification.json)
+- [docs/evidence/RX-A080-runtime-review-attempt1.json](../../docs/evidence/RX-A080-runtime-review-attempt1.json)
+- [docs/evidence/RX-A080-runtime-review-attempt1.log](../../docs/evidence/RX-A080-runtime-review-attempt1.log)
+- [docs/evidence/RX-A080-runtime-review.json](../../docs/evidence/RX-A080-runtime-review.json)
+- [docs/evidence/RX-A080-runtime-review.log](../../docs/evidence/RX-A080-runtime-review.log)
+- [docs/evidence/RX-A080-sync.log](../../docs/evidence/RX-A080-sync.log)
+- [docs/evidence/RX-A080-typecheck.log](../../docs/evidence/RX-A080-typecheck.log)
+- [docs/evidence/RX-A080.md](../../docs/evidence/RX-A080.md)
 
 
 ## RX-A090
