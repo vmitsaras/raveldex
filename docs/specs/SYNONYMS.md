@@ -1,0 +1,36 @@
+# Directional one-step synonyms — RX-A030
+
+Status: adopted for the owner's explicit October 29, 2026 selection. No other optional track or publication is activated.
+
+## Behavior
+
+`@vmitsaras/raveldex/addons/synonyms` exports `createSynonyms`, `SYNONYMS_POLICY`, and readonly `SynonymsOptions`, `SynonymMapping`, `SynonymsResult`, `SynonymGroup`, `SynonymAlternative` types. The factory owns `{ fields, vocabularyVersion, mappings: [{ from, to }], id?, maxAlternatives?, maxWorkUnits? }`. Default registration ID/capability is `synonyms`, protocol 1. A custom registration ID does not rename the capability.
+
+Only an explicit `{ kind: 'extension', capability: 'synonyms', version: 1, payload: { text, fields? } }` leaf requests expansion. Ordinary strings, typed exact/prefix groups, typo leaves, suggestions and strict phrases are unchanged. Fields default to all schema text fields; every selected field must be enabled, including empty or unexecuted Boolean branches.
+
+The fixed policy is **directional-one-step-v1**. The result's `policy` is `directional-one-step-v1:<vocabularyVersion>`, identifying the caller's vocabulary separately from capability protocol and implementation versions. The caller must change this vocabulary version when its domain meaning changes. Direct/worker compatibility also binds the complete canonical table, fields and limits, so a reused human version cannot mask different data.
+
+- Analyze each raw configuration endpoint once with `basic-v1` (NFKC/lowercase). Require exactly one analyzer token. Surrounding punctuation is allowed; zero/multiple tokens and malformed UTF-16 reject. Normalized dictionary terms never reenter raw analysis: e.g. `½` normalizes to one term `1⁄2` even though its normalized spelling includes a delimiter.
+- Canonicalize sorted normalized edges, removing duplicates and self edges. Configuration order and equivalent normalization have the same semantic identity.
+- For each original analyzed query token, retain its exact weight-1 variant and add every configured direct target which is live in any selected field, at weight **0.5**. Expand even when the original is live. A missing original still remains in the compiled group; configured but absent targets are not applied or returned.
+- Follow only edges whose source equals the original token. Never expand a generated target, invert an edge or traverse a cycle. `a → b → c` permits `a` to reach only `a`/`b`; `b → a` must be configured separately.
+- AND stays between original groups; OR stays within alternatives. Repeated equivalent original groups deduplicate under native query semantics; different originals which share a target remain distinct groups and can both contribute. Existing enclosing AND/OR/NOT and successful-branch rules remain intact.
+- Native field-local BM25 selects the best weighted alternative per field/group and sums participating groups. Exact matches are not guaranteed to outrank every mapped document. No extra synonym/phrase bonus, typo repair, accent folding, stemming or positional graph is introduced.
+
+## Explanation and state
+
+`result.extensions.synonyms = { policy, groups }`. Each group contains `{ term, fields, alternatives, dictionaryEntriesVisited, workUnits }`. Each alternative is `{ term, match: 'exact', weight }`. Join the original `group.term` to each nonself alternative to see the actual applied mapping and vocabulary version. A live original appears at weight 1 and is not a mapping. Output describes materialized alternatives, including ones under failed/negative Boolean paths; it does not claim all contributed to a hit. Optional Inspector facts separately identify selected terms, successful paths, weights, actual frequencies/statistics and arithmetic. Original-range/snippet evidence refers to the actual matched target spelling.
+
+The enclosing search revision binds selected live dictionaries and retrieval/scoring. Add/addMany/replace/remove/clear are immediately reflected; queued search uses its execution revision and owned admitted query. No mutable vocabulary update, participant root, corpus side index, source, positions, codec, cross-request cache or external resource is created. Immutable normalized vocabulary/configuration and its canonical worker identity **are retained by the registration**. `maxRetainedEntries: 0` describes corpus participant state, not zero configuration memory.
+
+## Bounds and execution
+
+Configuration permits at most 128 input mapping objects (before deduplication), 4096 total original endpoint UTF-16 units, 256 units per original endpoint, 32 selected fields, a 32-unit nonempty ASCII vocabulary version and a canonical worker identity of at most 8192 UTF-16 units. Normalization/raw-token/term limits are the default basic-v1 limits at factory capture. These finite synchronous configuration costs are separate from operation work.
+
+`maxAlternatives` defaults to 15 and can narrow 1–15 nonself targets per source. The entire canonical fanout is checked at factory capture even when some targets are absent. One core variant slot is reserved for the original. At runtime reduced core variant, token, group, depth, query input, per-group/whole-query `(field, term)` expansion, output and work ceilings still apply. The complete search rejects instead of selecting an alphabetical/frequency subset. A source without outgoing mappings needs no dictionary scan. A mapped source scans all selected live dictionary entries, deduplicating across fields; each entry is counted even when the same term appears in another field.
+
+`maxWorkUnits` defaults to 10,000,000 and only narrows that cap. Mapping comparisons, full dictionary visits/membership, alternatives and finalization yield charged work. The existing shared search budget additionally covers admission/analysis/compilation/retrieval/scoring/output. One registration budget covers every leaf/cursor in the operation; identical requests reuse operation-local observations only. Stops close provider cursors, release tasks/listeners and preserve the committed root. Output is deeply frozen and bounded by structural own-key counts (arrays include `length`): `3 + Σ(8 + fieldCount + 4 × alternativeCount)`, with original included when live. The manifest cap is `3 + maxQueryGroups × (8 + maxTextFields + 4 × (maxAlternatives + 1))`. All failures use existing sanitized typed errors; no successful partial totals or incomplete mode exist.
+
+## Qualification boundary
+
+Verify independent one-step/Boolean/scoring cases, frozen domain recall and false positives, unchanged original 76-query judgments, cycles/duplicates, ownership/malformed input, phrase/evidence interactions, mutation/cancellation/deadline/disposal, exact configuration/work/output boundaries, installed/minified consumers, isolated types/import graphs and Node-worker identity. Measure logical configuration/dictionary/alternative cardinalities and actual imported minified/gzip code separately. These are not heap/allocation-byte or physical-copy peaks. The finite synthetic English domain judgments are not a user study or language-wide semantic guarantee. Multiword synonyms, phrase-position graphs, recursive/transitive expansion, UI integration and other optional tracks remain outside this version. Browser/native-snapshot qualification and remote CI are not inherited from earlier candidate evidence.

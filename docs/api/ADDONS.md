@@ -89,3 +89,7 @@ The explicit `/addons/typo` factory and query leaf implement one-edit Unicode al
 ## Dictionary-backed token suggestions
 
 The explicit `/addons/suggestions` factory adds independent `options.extensions.suggestions = { text, fields?, limit? }` output. It completes one normalized token from the selected live dictionaries; it never rewrites the search query/input or adds UI behavior. Ranking uses summed field-local document frequency and stable ordinal ties, independent of qualifying hits/filters/pages. See [public types, complete policy, example and bounds](SUGGESTIONS.md).
+
+## Directional one-step synonyms
+
+The explicit `/addons/synonyms` entry applies an owned versioned single-token table only to its requested extension leaf. Original groups remain required, mapped live alternatives receive weight 0.5, and generated targets never expand recursively. The result identifies the policy/vocabulary version and actual source-to-target alternatives; Inspector separately explains selected native arithmetic. Retained configuration is distinct from corpus side indexes. See [public types, example and complete bounds](SYNONYMS.md).

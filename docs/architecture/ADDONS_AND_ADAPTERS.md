@@ -331,7 +331,7 @@ limitations, and is excluded from native compilation and package contents.
 There is no exported legacy search facade. See the
 [migration mapping and provenance](../migration/LOCALSEARCH.md).
 
-RX-A010 provides explicitly selected bounded typo alternatives. RX-A020 provides independent dictionary-backed token suggestions. Later optional tracks may add directional one-step synonyms, language analyzers, code identifiers, literal/infix search, proximity, text query syntax, patch convenience, or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
+RX-A010 provides explicitly selected bounded typo alternatives. RX-A020 provides independent dictionary-backed token suggestions. RX-A030 provides explicit directional single-token synonyms. Later optional tracks may add language analyzers, code identifiers, literal/infix search, proximity, text query syntax, patch convenience, or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
 
 ## Verification and acceptance criteria
 
@@ -356,10 +356,14 @@ None blocks N1. N2/N3 implementation tasks select bounded private representation
 
 ## Explicit bounded typo expansion — RX-A010
 
-The owner selected this N5 feature explicitly after release-track completion. The [adopted typo contract](../specs/TYPO_TOLERANCE.md) implements the reserved term-expansion role with live dictionary scanning, original required groups and complete weighted alternatives. It retains no side index and does not enable typo behavior on ordinary exact/prefix/phrase queries. RX-A020 is separately selected below; the other eight N5 tasks remain deferred.
+The owner selected this N5 feature explicitly after release-track completion. The [adopted typo contract](../specs/TYPO_TOLERANCE.md) implements the reserved term-expansion role with live dictionary scanning, original required groups and complete weighted alternatives. It retains no side index and does not enable typo behavior on ordinary exact/prefix/phrase queries. RX-A020 is separately selected below; RX-A030 is separately selected; seven other N5 tasks remain deferred.
 
 ## Explicit dictionary output — RX-A020
 
 The [adopted suggestions contract](../specs/SUGGESTIONS.md) adds a trusted exclusive `dictionary-output` role with bounded capture/prepare/finish handles. Search options request its separate result without altering compiled queries or evidence trace selection. Its immutable context yields only selected declared text dictionary terms and field-local document frequency at the operation revision. No root/postings/source or mutable owner is exposed. The generic bridge remains in core; core imports no optional suggestion ranking code. The registration has no transaction participant, codec or retained side index.
 
 First-party token completion scans every selected field dictionary, accumulates at most 10,000 matching distinct normalized terms, then selects at most 20 by summed field-local document frequency and ordinal term ties. A temporary selection insertion slot is bounded by 21. Exact total/omitted counts distinguish bounded display from failure; cap/work/stop exhaustion rejects the entire operation. Output structural entries include array lengths. The worker identity includes the owned semantic options. No UI, implicit input rewrite, phrase expansion or filter-dependent completion is added.
+
+## Explicit directional vocabulary — RX-A030
+
+The [adopted synonym contract](../specs/SYNONYMS.md) uses the existing trusted `term-expansion` role without a new core bridge. Only an explicit synonym leaf requests a single direct mapping step. The original exact weight-1 term stays in every required group; live targets use weight 0.5 and never become new expansion sources. Normalized canonical table contents, vocabulary version, fields and budgets bind worker identity. Output uses the existing policy/groups envelope with vocabulary version embedded in policy; nonself alternatives identify mappings and Inspector identifies actual score contributors. The registration retains bounded immutable vocabulary/options/identity, with no corpus participant root/cache/source/positions or import-time work. Multiword graphs and phrase integration remain unavailable.

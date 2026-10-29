@@ -35,7 +35,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N2 — Modular search product** | `RX-2001`–`RX-2006` | 6/6 | Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface. |
 | **N3 — Host and migration parity** | `RX-3001`–`RX-3004` | 4/4 | Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics. |
 | **N4 — Native 0.1 qualification** | `RX-4001`–`RX-4003` | 3/3 | Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior. |
-| **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 2/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
+| **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 3/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
 
 ## Task index
 
@@ -64,7 +64,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003) — Package, public documentation, and independent candidate review | `done` | `RX-4001`, `RX-4002` | [Issue](https://github.com/vmitsaras/raveldex/issues/27) |
 | [RX-A010](docs/planning/OPTIONAL_FEATURES.md#rx-a010) — Bounded typo tolerance | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/28) |
 | [RX-A020](docs/planning/OPTIONAL_FEATURES.md#rx-a020) — Dictionary-backed suggestions | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/29) |
-| [RX-A030](docs/planning/OPTIONAL_FEATURES.md#rx-a030) — Directional one-step synonyms | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/30) |
+| [RX-A030](docs/planning/OPTIONAL_FEATURES.md#rx-a030) — Directional one-step synonyms | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/30) |
 | [RX-A040](docs/planning/OPTIONAL_FEATURES.md#rx-a040) — Evaluated language analyzer pack | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/31) |
 | [RX-A050](docs/planning/OPTIONAL_FEATURES.md#rx-a050) — Code and identifier analysis | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/32) |
 | [RX-A060](docs/planning/OPTIONAL_FEATURES.md#rx-a060) — Explicit literal and infix matching | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/33) |

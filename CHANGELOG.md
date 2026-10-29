@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010 and RX-A020
+## Unreleased — explicitly selected RX-A010, RX-A020 and RX-A030
+
+- RX-A030 adds `/addons/synonyms`: owned versioned single-token directional mappings, one-step live alternatives at weight 0.5, original required groups, transparent mapping/score facts, complete bounds and explicit worker identity. No ordinary-query/phrase/UI change, corpus side index or runtime dependency is added.
 
 - RX-A020 adds `/addons/suggestions`: independent one-token completion from live selected dictionaries, deterministic field-frequency ranking, complete candidate totals, bounded output/work and mutation/cancellation behavior. No automatic input rewrite, side index, UI integration or runtime dependency is added.
 

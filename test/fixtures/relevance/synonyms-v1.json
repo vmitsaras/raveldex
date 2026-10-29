@@ -1,0 +1,496 @@
+{
+  "version": "rx-a030-domain-synonyms-judgments-v1",
+  "frozenDate": "2026-10-29",
+  "policy": "directional-one-step-v1",
+  "mapVersion": "docs-domain-v1",
+  "context": {
+    "author": "Codex /root/synonyms_evaluation, independent source-reading evaluator",
+    "labelMethod": "Authored complete labels before production implementation execution; immutable fixture hash is asserted by tests.",
+    "scope": "Synthetic documentation vocabulary: directional single-token mappings with explicit chain, cycle and repeated-target witnesses. Positive labels identify all relevant title records for each intent.",
+    "limitations": "One evaluator and ten synthetic English documentation records, with one accent witness; no representative user study, language-wide recall claim, or phrase graph claim."
+  },
+  "schema": {
+    "text": {
+      "title": {},
+      "body": {}
+    }
+  },
+  "rules": [
+    {
+      "source": "backup",
+      "targets": [
+        "snapshot",
+        "SNAPSHOT"
+      ]
+    },
+    {
+      "source": "delete",
+      "targets": [
+        "remove"
+      ]
+    },
+    {
+      "source": "record",
+      "targets": [
+        "document"
+      ]
+    },
+    {
+      "source": "revise",
+      "targets": [
+        "replace"
+      ]
+    },
+    {
+      "source": "concurrent",
+      "targets": [
+        "atomic"
+      ]
+    },
+    {
+      "source": "durable",
+      "targets": [
+        "persistent"
+      ]
+    },
+    {
+      "source": "checkpoint",
+      "targets": [
+        "snapshot"
+      ]
+    },
+    {
+      "source": "snapshot",
+      "targets": [
+        "archive"
+      ]
+    },
+    {
+      "source": "archive",
+      "targets": [
+        "snapshot"
+      ]
+    },
+    {
+      "source": "persist",
+      "targets": [
+        "persistent"
+      ]
+    },
+    {
+      "source": "catalog",
+      "targets": [
+        "dictionary"
+      ]
+    },
+    {
+      "source": "lexicon",
+      "targets": [
+        "dictionary"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "snapshot-guide",
+      "text": {
+        "title": "snapshot guide",
+        "body": "Source revisions restore the saved corpus."
+      }
+    },
+    {
+      "id": "archive-log",
+      "text": {
+        "title": "archive log",
+        "body": "An archive is the long term frozen capture."
+      }
+    },
+    {
+      "id": "remove-guide",
+      "text": {
+        "title": "remove guide",
+        "body": "Erase one selected identifier."
+      }
+    },
+    {
+      "id": "document-contract",
+      "text": {
+        "title": "document contract",
+        "body": "Structured source fields and metadata."
+      }
+    },
+    {
+      "id": "replace-record",
+      "text": {
+        "title": "replace document",
+        "body": "Swap the existing entry atomically."
+      }
+    },
+    {
+      "id": "atomic-writes",
+      "text": {
+        "title": "atomic writes",
+        "body": "Commit a coherent revision."
+      }
+    },
+    {
+      "id": "persistent-store",
+      "text": {
+        "title": "persistent store",
+        "body": "Retain a source snapshot for recovery."
+      }
+    },
+    {
+      "id": "dictionary-lookup",
+      "text": {
+        "title": "dictionary lookup",
+        "body": "Find an indexed term."
+      }
+    },
+    {
+      "id": "search-lookup",
+      "text": {
+        "title": "search lookup",
+        "body": "Query strict words."
+      }
+    },
+    {
+      "id": "accent",
+      "text": {
+        "title": "café menu",
+        "body": "Accented spelling remains distinct."
+      }
+    }
+  ],
+  "acceptance": {
+    "positiveQueries": 16,
+    "negativeQueries": 10,
+    "minimumSynonymRecall10": 1,
+    "maximumNegativeMatches": 0,
+    "maximumJudgedFalsePositiveHits": 0,
+    "originalQueryRegressionCount": 76
+  },
+  "judgments": [
+    {
+      "id": "backup-navigation",
+      "text": "backup",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "snapshot-guide"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "A user asks for the snapshot guide using the domain alias backup. The archive document requires another mapping hop and is irrelevant."
+    },
+    {
+      "id": "delete-navigation",
+      "text": "delete",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "remove-guide"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "The remove guide documents the operation called delete in this domain."
+    },
+    {
+      "id": "record-navigation",
+      "text": "record",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "document-contract",
+        "replace-record"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "Both titles contain document, the single-token domain target of record."
+    },
+    {
+      "id": "revise-navigation",
+      "text": "revise",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "replace-record"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "The documented update operation is replace."
+    },
+    {
+      "id": "concurrent-navigation",
+      "text": "concurrent",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "atomic-writes"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "The bounded domain vocabulary calls the atomic write page concurrent."
+    },
+    {
+      "id": "durable-navigation",
+      "text": "durable",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "persistent-store"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "The persistent store is the authored durable-data topic."
+    },
+    {
+      "id": "checkpoint-navigation",
+      "text": "checkpoint",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "snapshot-guide"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "Checkpoint maps directly to snapshot, never through snapshot to archive."
+    },
+    {
+      "id": "catalog-navigation",
+      "text": "catalog",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "dictionary-lookup"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "Catalog is the authored alias for dictionary lookup."
+    },
+    {
+      "id": "lexicon-navigation",
+      "text": "lexicon",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "dictionary-lookup"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "A second original alias reaches dictionary independently."
+    },
+    {
+      "id": "persist-navigation",
+      "text": "persist",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "persistent-store"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "Persist maps directly to the persistent store title."
+    },
+    {
+      "id": "and-original-groups",
+      "text": "record revise",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "replace-record"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "Both original words are required; only replace document satisfies both mapped groups."
+    },
+    {
+      "id": "repeated-original",
+      "text": "backup backup",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "snapshot-guide"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "Repeating one original word canonicalizes once."
+    },
+    {
+      "id": "distinct-originals-shared-target",
+      "text": "backup checkpoint",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "snapshot-guide"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "Two distinct originals remain two required groups even though their target is the same."
+    },
+    {
+      "id": "cycle-from-snapshot",
+      "text": "snapshot",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "snapshot-guide",
+        "archive-log"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "One direct cycle edge adds archive to exact snapshot; it must terminate without revisiting snapshot."
+    },
+    {
+      "id": "cycle-from-archive",
+      "text": "archive",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "archive-log",
+        "snapshot-guide"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "The reverse explicitly configured cycle edge adds snapshot to exact archive; direction is explicit."
+    },
+    {
+      "id": "cycle-selected-and-group",
+      "text": "archive guide",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [
+        "snapshot-guide"
+      ],
+      "expectation": "known-relevant",
+      "labelsComplete": true,
+      "rationale": "The archive-to-snapshot mapping may satisfy the first original group; guide remains required."
+    },
+    {
+      "id": "no-transitive-hop",
+      "text": "backup log",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "Only archive log has log; backup maps only to snapshot, not to archive."
+    },
+    {
+      "id": "required-groups",
+      "text": "delete checkpoint",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "Remove and snapshot are in separate records; alternatives may not turn AND into OR."
+    },
+    {
+      "id": "unconfigured-plural",
+      "text": "backups",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "No automatic stemming/plural or prefix behavior."
+    },
+    {
+      "id": "unconfigured-near-word",
+      "text": "catalogue",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "No typo or undeclared synonym expansion."
+    },
+    {
+      "id": "unconfigured-suffix",
+      "text": "checkpoints",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "No automatic plural-to-checkpoint mapping."
+    },
+    {
+      "id": "accent-strict",
+      "text": "cafe",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "The authored title contains café; synonyms do not add accent folding."
+    },
+    {
+      "id": "absent-word",
+      "text": "unmappedword",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "No exact or configured mapped title term exists."
+    },
+    {
+      "id": "tokenless",
+      "text": "!!! 😀",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "Tokenless input remains none."
+    },
+    {
+      "id": "unrelated-and",
+      "text": "durable remove",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "Persistent and remove occur in different titles."
+    },
+    {
+      "id": "cross-topic-and",
+      "text": "backup atomic",
+      "fields": [
+        "title"
+      ],
+      "expectedIds": [],
+      "expectation": "intended-empty",
+      "labelsComplete": true,
+      "rationale": "Snapshot and atomic occur in different titles."
+    }
+  ]
+}

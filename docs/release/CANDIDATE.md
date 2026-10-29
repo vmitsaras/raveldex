@@ -29,3 +29,5 @@ The recommendation concerns this bounded private candidate. It is not authorizat
 RX-A010 extends the development tree with [optional bounded typo tolerance](../api/TYPO.md). The original candidate recommendation, hashes and remote observations retain their dated scope. This later slice does not silently replace those qualified artifacts, activate other N5 work or authorize publication.
 
 RX-A020 is a later explicitly selected optional change on top of RX-A010. Its dictionary-output protocol, `/addons/suggestions` entry and revised import costs require their own changed-tree evidence. Historical candidate tarball identities and remote CI do not verify these additions. The package stays private and unpublished.
+
+RX-A030 is another explicitly selected optional development change, adding a versioned single-token synonym table through the existing term-expansion role. Its [public contract](../api/SYNONYMS.md), packaged consumers and measured costs need changed-tree evidence. Earlier remote CI/artifact identities do not verify this optional tree. Seven other N5 tasks and publication remain separate.

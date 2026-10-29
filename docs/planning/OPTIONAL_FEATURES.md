@@ -107,7 +107,7 @@ Offer explicit query completions without silently rewriting submitted search sem
 
 **Directional one-step synonyms**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/30)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/30)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -119,7 +119,7 @@ Support transparent, bounded alternatives within original query groups for a jud
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [SYNONYMS.md](../../docs/specs/SYNONYMS.md)
 
 **Acceptance criteria**
 
@@ -135,7 +135,18 @@ Support transparent, bounded alternatives within original query groups for a jud
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A030.md](../../docs/evidence/RX-A030.md)
+- [docs/evidence/RX-A030-behavior.log](../../docs/evidence/RX-A030-behavior.log)
+- [docs/evidence/RX-A030-baseline-sandbox.log](../../docs/evidence/RX-A030-baseline-sandbox.log)
+- [docs/evidence/RX-A030-baseline-loopback.log](../../docs/evidence/RX-A030-baseline-loopback.log)
+- [docs/evidence/RX-A030-package.json](../../docs/evidence/RX-A030-package.json)
+- [docs/evidence/RX-A030-independent-probes.json](../../docs/evidence/RX-A030-independent-probes.json)
+- [docs/evidence/RX-A030-independent-probes.mjs](../../docs/evidence/RX-A030-independent-probes.mjs)
+- [docs/evidence/RX-A030-check.log](../../docs/evidence/RX-A030-check.log)
+- [docs/evidence/RX-A030-preparation.json](../../docs/evidence/RX-A030-preparation.json)
+- [docs/evidence/RX-A030-candidate.json](../../docs/evidence/RX-A030-candidate.json)
+- [docs/evidence/RX-A030-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A030-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A030-review.json](../../docs/evidence/RX-A030-review.json)
 
 
 ## RX-A040

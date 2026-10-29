@@ -1,0 +1,173 @@
+RX-A030 terminal documentation/manifest verification
+{"command":["npm","run","docs:generate"],"exitCode":0}
+Generated roadmap and task documents from the canonical manifest (3 files).
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 docs:generate
+npm notice run node scripts/render-plan.mjs
+
+{"command":["npm","run","docs:check"],"exitCode":0}
+Generated roadmap and task documents match the canonical manifest (3 files).
+Local Markdown link targets checked in 121 files (external URLs and anchors not evaluated).
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 docs:check
+npm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs
+
+{"command":["npm","run","handoff:check"],"exitCode":0}
+Roadmap valid: 31 tasks across 6 milestones; graph and local references checked.
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:check
+npm notice run node scripts/plan.mjs check
+
+{"command":["node","--test","test/tooling/browser-matrix-reporting.test.mjs","test/tooling/packed-consumer.test.mjs","test/tooling/roadmap.test.mjs","test/tooling/tracking.test.mjs"],"exitCode":0}
+✔ matrix journal exclusively creates a capture and binds immutable actual identities (10.442625ms)
+✔ matrix start/result acknowledgements bind UA, session, scenario and operator label (12.625417ms)
+✔ matrix rejects off-origin, wrong host, unsupported methods/content and malformed identities (5.00825ms)
+✔ matrix serializes simultaneous starts and preserves the sole admitted attempt (10.397959ms)
+✔ matrix refuses stale/mismatched results and accepts an exact save retry without rerunning (10.227625ms)
+✔ matrix refuses Pass when cleanup or page execution failed and retains honest Fail (10.958291ms)
+✔ matrix cannot turn incomplete or wrong resource configurations into Pass (10.760375ms)
+✔ matrix requires successful storage database cleanup before Pass (9.860792ms)
+✔ matrix rejects missing observations, noncanonical/backward timestamps and malformed error rows (11.156667ms)
+✔ matrix body capture is bounded before JSON admission (4.619334ms)
+✔ matrix server close records unfinished execution as unknown, never Pass (12.212541ms)
+✔ packed consumer preserves legacy npm pack array metadata (0.571ms)
+✔ packed consumer preserves npm 12 package-keyed metadata (0.060541ms)
+✔ packed consumer rejects missing, ambiguous or unexpected package metadata (0.639833ms)
+✔ selects canonical first ready task and lists every ready release task without changing input (1.227458ms)
+✔ resumes in-progress work before starting another ready task (0.14875ms)
+✔ reports explicit blocked work and dependent unfinished work without claiming completion (0.123334ms)
+✔ shows owner decisions separately from blocked implementation work (0.088666ms)
+✔ mixed blocks and owner decisions remain separately visible (0.070709ms)
+✔ an optional-only deferred backlog never starts work and has no unfinished active release tasks (0.087792ms)
+✔ completed active work stays complete with optional work remaining (0.135084ms)
+✔ deferring a release task does not hide it as completed (0.100917ms)
+✔ waiting on optional dependencies does not automatically activate the optional track (0.096ms)
+▶ rejects malformed required schema data instead of crashing or silently defaulting
+  ✔ unsupported version (0.122458ms)
+  ✔ wrong repository (0.05ms)
+  ✔ missing task list (0.034875ms)
+  ✔ unknown property (0.046542ms)
+  ✔ missing acceptance list (0.034333ms)
+  ✔ empty acceptance list (0.0405ms)
+  ✔ invalid status (0.025417ms)
+  ✔ invalid dependencies (0.02275ms)
+  ✔ missing milestone (0.029458ms)
+  ✔ nonobject task (0.031708ms)
+  ✔ empty text (0.025625ms)
+  ✔ invalid track (0.021125ms)
+✔ rejects malformed required schema data instead of crashing or silently defaulting (0.85975ms)
+✔ rejects duplicate IDs, duplicate dependencies, and unknown dependency references (0.061875ms)
+✔ enforces stable milestone/task ID namespaces used by GitHub ownership markers (0.062542ms)
+✔ rejects self-cycles and multi-task cycles with an actionable path (0.052917ms)
+✔ rejects completed or started tasks with unfinished prerequisites (0.044958ms)
+✔ done needs actual evidence references; block and decision statuses need a reason (0.045125ms)
+✔ checks listed evidence and specs, rejects escaped paths, and leaves future affected paths optional (5.387292ms)
+✔ rejects a specification symlink resolving outside the repository (1.1475ms)
+✔ loading validates real files, surfaces malformed JSON and graph errors, and never rewrites the plan (1.617791ms)
+✔ planner output labels tooling verification without claiming search qualification (0.060083ms)
+✔ status presentation does not duplicate an ID already present in the milestone title (0.071166ms)
+✔ fresh synchronization creates linked tracking, then a second run performs zero mutations (2.829792ms)
+✔ updating managed content preserves human notes and unrelated labels (0.779792ms)
+✔ accepted tasks close their issues and milestones with concrete evidence and dependency links (0.737708ms)
+✔ an issue closed contrary to the manifest refuses synchronization before any write (0.683958ms)
+▶ ambiguous managed ownership and unmanaged collisions fail before all writes
+  ✔ two issues own one ID (0.143917ms)
+  ✔ unmanaged title collision (0.113084ms)
+  ✔ repeated marker within one issue (0.095833ms)
+  ✔ two milestones own one ID (0.11325ms)
+  ✔ unmanaged milestone title collision (0.140208ms)
+  ✔ one issue claims two IDs (0.45275ms)
+  ✔ one milestone claims two IDs (0.280416ms)
+✔ ambiguous managed ownership and unmanaged collisions fail before all writes (1.970417ms)
+✔ pagination finds tracking beyond page one instead of creating duplicates (1.216625ms)
+✔ final issue readback must match the intended state rather than successful write responses (0.295625ms)
+✔ final milestone readback must match the manifest even when a PATCH ignores the requested state (0.3165ms)
+✔ managed-block replacement preserves exact surrounding text and rejects malformed delimiters (0.090709ms)
+✔ task labels distinguish dependency readiness from recorded blocks and decisions (0.047917ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 151.575125
+
+{"command":["npm","run","handoff:status"],"exitCode":0}
+Raveldex roadmap
+Release progress: 21/21 done; 0 in progress; 0 ready.
+
+N0 — Native design adoption: 2/2 done [release]
+N1 — Usable native core alpha: 6/6 done [release]
+N2 — Modular search product: 6/6 done [release]
+N3 — Host and migration parity: 4/4 done [release]
+N4 — Native 0.1 qualification: 3/3 done [release]
+N5 — Selected optional enhancements: 3/10 done [optional]
+
+Active release backlog complete.
+
+Optional backlog — never selected automatically (7):
+- RX-A040 — Evaluated language analyzer pack [deferred]
+- RX-A050 — Code and identifier analysis [deferred]
+- RX-A060 — Explicit literal and infix matching [deferred]
+- RX-A070 — Ordered proximity matching [deferred]
+- RX-A080 — Bounded text query syntax [deferred]
+- RX-A090 — Explicit record patch convenience [deferred]
+- RX-A100 — Static-build and Astro adapter [deferred]
+
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:status
+npm notice run node scripts/plan.mjs status
+
+{"command":["npm","run","handoff:next"],"exitCode":0}
+Active release backlog complete.
+
+Optional backlog — never selected automatically (7):
+- RX-A040 — Evaluated language analyzer pack [deferred]
+- RX-A050 — Code and identifier analysis [deferred]
+- RX-A060 — Explicit literal and infix matching [deferred]
+- RX-A070 — Ordered proximity matching [deferred]
+- RX-A080 — Bounded text query syntax [deferred]
+- RX-A090 — Explicit record patch convenience [deferred]
+- RX-A100 — Static-build and Astro adapter [deferred]
+
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:next
+npm notice run node scripts/plan.mjs next
+
+{"command":["npm","run","tracking:preview"],"exitCode":0}
+Preview only: vmitsaras/raveldex; no network requests or remote mutations.
+6 milestones; 6 overview issues; 31 task issues.
+RX-0001 [done] Repository foundation and native design adoption
+RX-0002 [done] Core contract reconciliation and evaluation plan
+RX-1001 [done] Data, schema, basic analyzer, limits, and errors
+RX-1002 [done] Dictionary, postings, exact retrieval, and independent oracle
+RX-1003 [done] Query evaluation, native BM25, and numerical trace facts
+RX-1004 [done] Incremental atomic mutations
+RX-1005 [done] Revision execution, work limits, and cancellation
+RX-1006 [done] Core-only packaged real-document pilot
+RX-2001 [done] Source-verified phrase add-on
+RX-2002 [done] Optional positions, original offsets, and phrase parity
+RX-2003 [done] Structured filters and exact conjunctive facets
+RX-2004 [done] Factual explain and Inspector data
+RX-2005 [done] Original match ranges and bounded snippets
+RX-2006 [done] Native DOM UI, Inspector, and documentation pilot
+RX-3001 [done] One-owner module-worker adapter
+RX-3002 [done] Versioned source and native snapshots
+RX-3003 [done] IndexedDB persistence, recovery, and namespace erasure
+RX-3004 [done] Companion migration and comparator separation
+RX-4001 [done] Fair correctness, relevance, and cost comparison
+RX-4002 [done] Browser, assistive-technology, memory, and device qualification
+RX-4003 [done] Package, public documentation, and independent candidate review
+RX-A010 [done] Bounded typo tolerance
+RX-A020 [done] Dictionary-backed suggestions
+RX-A030 [done] Directional one-step synonyms
+RX-A040 [deferred] Evaluated language analyzer pack
+RX-A050 [deferred] Code and identifier analysis
+RX-A060 [deferred] Explicit literal and infix matching
+RX-A070 [deferred] Ordered proximity matching
+RX-A080 [deferred] Bounded text query syntax
+RX-A090 [deferred] Explicit record patch convenience
+RX-A100 [deferred] Static-build and Astro adapter
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 tracking:preview
+npm notice run node scripts/sync-github.mjs --dry-run
+
+{"command":["git","diff","--check"],"exitCode":0}
