@@ -1,0 +1,466 @@
+{
+  "kind": "raveldex-rx-a050-independent-runtime-review-v1",
+  "reviewedAt": "2026-10-29T16:15:45.474Z",
+  "reviewer": "Codex /root/identifier_evaluation_design",
+  "verdict": "Ready with follow-ups",
+  "mandatoryFindings": [],
+  "independence": {
+    "ownedImplementation": "Frozen real-symbol fixture, independent identifier oracle and evaluation tests only.",
+    "reviewedOtherAuthoredRuntime": "Core raw analyzer protocol/capture, original/query/phrase modes, scanner, tagged positions/evidence/snippets/native integration and worker identity.",
+    "excluded": "This is not independent assessment of my own oracle, labels or evaluation tests. Full project and installed/minified package checks were run by parent/package agent; I inspected their artifacts and independently ran distinct runtime/worker/provenance/stop probes.",
+    "sideEffects": "Only owned test/evaluation/review artifacts written. No build, Git mutation, remote operation, publication, nested agent or package installation by this reviewer."
+  },
+  "resolvedFindings": [
+    {
+      "id": "R1",
+      "severity": "mandatory",
+      "status": "Resolved and independently reproduced after repair",
+      "before": "Custom raw analyzer ID accepted by core but positions selected v1 and returned INTERNAL_ERROR during add.",
+      "after": "Raw identifier protocol is reserved iff selected ID is code-identifiers-v1; custom ID and one-to-one-transform impersonation fail capture with INCOMPATIBLE_CAPABILITY.",
+      "evidence": [
+        "docs/evidence/RX-A050-runtime-review-initial.json",
+        "docs/evidence/RX-A050-runtime-review-probes.json"
+      ],
+      "repair": "src/core/capabilities/registration.ts"
+    },
+    {
+      "id": "R2",
+      "severity": "mandatory",
+      "status": "Resolved and independently reproduced after repair",
+      "before": "Frozen accessor token switched term after normalized-source validation; public add committed forged frequency from fooBar.",
+      "after": "Core captures bounded own data descriptors for step/token/nested origin, rejects getter/symbol/nonplain fields without invoking getters, emits owned frozen token snapshots and requires positive finite work. Eleven refusal variants have zero getter reads/no publication; source token mutation after emission cannot alter owned token.",
+      "evidence": [
+        "docs/evidence/RX-A050-runtime-review-initial.json",
+        "docs/evidence/RX-A050-runtime-review-probes.json"
+      ],
+      "repair": "src/core/analyzer/identifier.ts"
+    }
+  ],
+  "verification": {
+    "independentRuntimeProbes": {
+      "artifact": {
+        "path": "docs/evidence/RX-A050-runtime-review-probes.json",
+        "bytes": 15403,
+        "sha256": "dd1df3f6e7298948ede0d18d9d3b73057cff5f809ab587a0231173e26474c8d7"
+      },
+      "passCount": 11,
+      "failCount": 0,
+      "sourceAndCompiledBindings": 46,
+      "observations": {
+        "literalPhraseComparisons": 32,
+        "sourceAndNativeComparisons": 12,
+        "sourceFreeNativeComparisons": 19,
+        "actualNodeWorkerComparisons": 8,
+        "atomicNativeIdentityRefusals": 4,
+        "workerIdentityRefusals": 2,
+        "reentrantStopPaths": 5,
+        "rawAccessorOrSymbolRefusals": 11,
+        "rawProtocolIdentityRefusals": 3,
+        "sharedModuleBudget": 196,
+        "sourceAndNativeBothExportAndRestoreFailWholeOperation": true
+      }
+    },
+    "finalArtifact": {
+      "audit": {
+        "path": "docs/evidence/RX-A050-runtime-review-artifact.json",
+        "bytes": 44126,
+        "sha256": "ea48a1ecd4a3b12e0225a9216dd49d3906ca8d3f44af0e35872f64f8593a8868"
+      },
+      "candidateReport": {
+        "path": "/tmp/raveldex-rx-a050-final-candidate/candidate-report.json",
+        "bytes": 233031,
+        "sha256": "3fe9492db90f19bbc76711a23b8d1e49f6240b75380b363d09115458c625d6f4"
+      },
+      "packageMeasurement": {
+        "path": "/tmp/raveldex-rx-a050-final-package.json",
+        "bytes": 320145,
+        "sha256": "be2c3ec07055d6b4c3c854ac5d44ecb7a7d393bc0f806d239f0aa7c7adb2aa9d"
+      },
+      "tarball": {
+        "path": "/private/tmp/raveldex-rx-a050-final-candidate/vmitsaras-raveldex-0.1.0-rc.0.tgz",
+        "bytes": 198813,
+        "sha256": "b1b875c0a4e71309d83ed326e6733ba57c549895dac71c72d2f7a8498627eff1"
+      },
+      "safeFiles": 265,
+      "allFilesMatchCurrentCheckout": true,
+      "allFilesMatchInstalledCandidate": true,
+      "allFilesMatchCandidateReportedHashes": true,
+      "packageAndCandidateTarballSame": true,
+      "private": true,
+      "version": "0.1.0-rc.0",
+      "runtimeDependencies": [],
+      "entryCount": 25,
+      "scope": "Independent in-memory tar member and installed/current/report byte equality audit; no extraction, registry access or publication."
+    },
+    "parentFullCheck": {
+      "log": {
+        "path": "/tmp/raveldex-rx-a050-check-before-candidate.log",
+        "bytes": 166060,
+        "sha256": "e04a0f84fd1e25423c5b5c437c16d0fbc475d22136c1539b5934717e99ec4b77"
+      },
+      "passBlocks": [
+        648,
+        30,
+        24,
+        26,
+        1
+      ],
+      "totalPasses": 729,
+      "allReportedFailuresCancellationsSkipsTodosZero": true,
+      "scope": "Read actual parent-run full check log; this reviewer did not rerun the full suite."
+    },
+    "reviewedCurrentSourceAndRuntime": [
+      {
+        "path": "src/core/analyzer/basic.ts",
+        "sha256": "b041a54000c631748f663b75d30fdfa09002a63be2eb5b19442da05eb8932f54",
+        "modifiedAt": "2026-10-29T16:00:28.603Z",
+        "currentSha256": "b041a54000c631748f663b75d30fdfa09002a63be2eb5b19442da05eb8932f54",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/core/analyzer/basic.js",
+        "sha256": "ac8661d3c5c4e612cd8fc4401cf5497ec35aaf759e63d39eee281ae48e86b98a",
+        "modifiedAt": "2026-10-29T16:09:42.130Z",
+        "currentSha256": "ac8661d3c5c4e612cd8fc4401cf5497ec35aaf759e63d39eee281ae48e86b98a",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/core/analyzer/selected.ts",
+        "sha256": "8186d2e182b505b4a4b9193a88d3d1d43b83d01f8e7e04d13f3c83a4756519a4",
+        "modifiedAt": "2026-10-29T16:00:28.674Z",
+        "currentSha256": "8186d2e182b505b4a4b9193a88d3d1d43b83d01f8e7e04d13f3c83a4756519a4",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/core/analyzer/selected.js",
+        "sha256": "bbe76831025b2bbb75b3de598f2a09a0746c102d2dbe45399d2c79b9bbf0da7e",
+        "modifiedAt": "2026-10-29T16:09:42.130Z",
+        "currentSha256": "bbe76831025b2bbb75b3de598f2a09a0746c102d2dbe45399d2c79b9bbf0da7e",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/core/analyzer/identifier.ts",
+        "sha256": "0e35b636a494492f8c511676f66e1d4188c860f7b63ced62679346000e4ef06f",
+        "modifiedAt": "2026-10-29T16:07:48.879Z",
+        "currentSha256": "0e35b636a494492f8c511676f66e1d4188c860f7b63ced62679346000e4ef06f",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/core/analyzer/identifier.js",
+        "sha256": "b3fc47ad95db5cfe9afece566f551d80c0e0caa44824001d0fa347b2bb7a8a67",
+        "modifiedAt": "2026-10-29T16:09:42.131Z",
+        "currentSha256": "b3fc47ad95db5cfe9afece566f551d80c0e0caa44824001d0fa347b2bb7a8a67",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/core/capabilities/registration.ts",
+        "sha256": "9d3140796dd143cbbb71cbc7fc64accfa017152830d6dd810936d7324e1eff5b",
+        "modifiedAt": "2026-10-29T16:06:12.180Z",
+        "currentSha256": "9d3140796dd143cbbb71cbc7fc64accfa017152830d6dd810936d7324e1eff5b",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/core/capabilities/registration.js",
+        "sha256": "9210ddd2793d8dec11d6346ff39c92cc9cdcb90e2c04d0a50e9e0e1f0938b0de",
+        "modifiedAt": "2026-10-29T16:09:42.131Z",
+        "currentSha256": "9210ddd2793d8dec11d6346ff39c92cc9cdcb90e2c04d0a50e9e0e1f0938b0de",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/core/capabilities/types.ts",
+        "sha256": "f65fae2b0046feb4bb97bca5e2704743efdfbcb0bd9f1fa9b230f625f3383b7d",
+        "modifiedAt": "2026-10-29T16:00:28.627Z",
+        "currentSha256": "f65fae2b0046feb4bb97bca5e2704743efdfbcb0bd9f1fa9b230f625f3383b7d",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/core/capabilities/types.js",
+        "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "modifiedAt": "2026-10-29T16:09:42.131Z",
+        "currentSha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/core/contracts/query.ts",
+        "sha256": "76c84969da851ab01714a4d510a66598f34ec30babd38df495c37c0a1eceef08",
+        "modifiedAt": "2026-10-29T16:00:28.695Z",
+        "currentSha256": "76c84969da851ab01714a4d510a66598f34ec30babd38df495c37c0a1eceef08",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/core/contracts/query.js",
+        "sha256": "6547345794800daa7fc5b8c6659aabb793baa6f68dbf6753934a2932cc94707e",
+        "modifiedAt": "2026-10-29T16:09:42.131Z",
+        "currentSha256": "6547345794800daa7fc5b8c6659aabb793baa6f68dbf6753934a2932cc94707e",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/identifiers/index.ts",
+        "sha256": "e9bb05f49bf3b9d590b3ed533ee211add514b320393045694b0c36e1588f11f9",
+        "modifiedAt": "2026-10-29T16:00:09.035Z",
+        "currentSha256": "e9bb05f49bf3b9d590b3ed533ee211add514b320393045694b0c36e1588f11f9",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/identifiers/index.js",
+        "sha256": "76694714ee5ff4839fbe1e0cdb8da700ae73f134899be7b7d2000af053a28f50",
+        "modifiedAt": "2026-10-29T16:09:41.555Z",
+        "currentSha256": "76694714ee5ff4839fbe1e0cdb8da700ae73f134899be7b7d2000af053a28f50",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/identifiers/scanner.ts",
+        "sha256": "9c2289a92d1cf1c92345b2c03d51567fb4da67c44bbd3d87f6cdd81e1e9ea41b",
+        "modifiedAt": "2026-10-29T16:00:09.033Z",
+        "currentSha256": "9c2289a92d1cf1c92345b2c03d51567fb4da67c44bbd3d87f6cdd81e1e9ea41b",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/identifiers/scanner.js",
+        "sha256": "502289cd8fe0fc79309d438cade1b415a71169c0b4d2ee57ab837b965f17722e",
+        "modifiedAt": "2026-10-29T16:09:41.562Z",
+        "currentSha256": "502289cd8fe0fc79309d438cade1b415a71169c0b4d2ee57ab837b965f17722e",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/phrases/verifier.ts",
+        "sha256": "90fac8cf38765a323301d1433c4f670a702a4b6575d3cb9a94308f98af1bd696",
+        "modifiedAt": "2026-10-29T16:00:34.021Z",
+        "currentSha256": "90fac8cf38765a323301d1433c4f670a702a4b6575d3cb9a94308f98af1bd696",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/phrases/verifier.js",
+        "sha256": "2c5e14398f78463371546350812a64cbe965a7e584da2fdf73cc80222514d9ca",
+        "modifiedAt": "2026-10-29T16:09:41.560Z",
+        "currentSha256": "2c5e14398f78463371546350812a64cbe965a7e584da2fdf73cc80222514d9ca",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/positions/store.ts",
+        "sha256": "3393dc0e059534d7afb08bc94b7d449077159e58f672864c4eebc2998cb84a19",
+        "modifiedAt": "2026-10-29T16:05:36.185Z",
+        "currentSha256": "3393dc0e059534d7afb08bc94b7d449077159e58f672864c4eebc2998cb84a19",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/positions/store.js",
+        "sha256": "24b2d297e769227ce638bd8ea8b02ea0a2eb181cfac1323405a52935d223e83a",
+        "modifiedAt": "2026-10-29T16:09:41.913Z",
+        "currentSha256": "24b2d297e769227ce638bd8ea8b02ea0a2eb181cfac1323405a52935d223e83a",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/positions/tagged.ts",
+        "sha256": "261550cb36cf5b74b8d39caffe9d0af8f7aa7516e9a43819ee28ef74ac0089a0",
+        "modifiedAt": "2026-10-29T16:04:31.226Z",
+        "currentSha256": "261550cb36cf5b74b8d39caffe9d0af8f7aa7516e9a43819ee28ef74ac0089a0",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/positions/tagged.js",
+        "sha256": "bd1a4427c281d724a01e8f9b27f266aa85e9b1f6ea39df819d43a4e403a1ac85",
+        "modifiedAt": "2026-10-29T16:09:41.914Z",
+        "currentSha256": "bd1a4427c281d724a01e8f9b27f266aa85e9b1f6ea39df819d43a4e403a1ac85",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/positions/verifier.ts",
+        "sha256": "5f4afeb2aa37c765fbe97e2c8141858b855953ca0a0bcf1b947f4cb0e7503298",
+        "modifiedAt": "2026-10-29T16:01:15.129Z",
+        "currentSha256": "5f4afeb2aa37c765fbe97e2c8141858b855953ca0a0bcf1b947f4cb0e7503298",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/positions/verifier.js",
+        "sha256": "354bfdbe3797887489cefdc9b64f2e55aea787abb4e8d42eea5f6202fabf5d7e",
+        "modifiedAt": "2026-10-29T16:09:41.565Z",
+        "currentSha256": "354bfdbe3797887489cefdc9b64f2e55aea787abb4e8d42eea5f6202fabf5d7e",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/evidence/builder.ts",
+        "sha256": "d320cf3162b897663813feafa2f0211a3fad72c0ca3d81eefd0328dca93a43d5",
+        "modifiedAt": "2026-10-29T16:05:36.184Z",
+        "currentSha256": "d320cf3162b897663813feafa2f0211a3fad72c0ca3d81eefd0328dca93a43d5",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/evidence/builder.js",
+        "sha256": "f7a04b3acf11993da237ff278ae71d24e4e50e389e970ab623c49e593b62773b",
+        "modifiedAt": "2026-10-29T16:09:41.560Z",
+        "currentSha256": "f7a04b3acf11993da237ff278ae71d24e4e50e389e970ab623c49e593b62773b",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/evidence/occurrences.ts",
+        "sha256": "8312503589ec3e67999af433a4c9186876e069870e278a1e051fcaf704e74921",
+        "modifiedAt": "2026-10-29T16:01:15.130Z",
+        "currentSha256": "8312503589ec3e67999af433a4c9186876e069870e278a1e051fcaf704e74921",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/evidence/occurrences.js",
+        "sha256": "517bad9f2585cda263ebb67ba67cb264c145560602f0bc105bb09f6e5a4a31d7",
+        "modifiedAt": "2026-10-29T16:09:41.560Z",
+        "currentSha256": "517bad9f2585cda263ebb67ba67cb264c145560602f0bc105bb09f6e5a4a31d7",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/evidence/providers.ts",
+        "sha256": "63d7d495d91f5860e95db7ac8280710e1f4903f184f4778e9cd61b9323018173",
+        "modifiedAt": "2026-10-29T16:01:15.129Z",
+        "currentSha256": "63d7d495d91f5860e95db7ac8280710e1f4903f184f4778e9cd61b9323018173",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/evidence/providers.js",
+        "sha256": "dcbee17668927c399436a4e3717b5391308a650e43d0b663dcdfb0ffa8210b48",
+        "modifiedAt": "2026-10-29T16:09:41.565Z",
+        "currentSha256": "dcbee17668927c399436a4e3717b5391308a650e43d0b663dcdfb0ffa8210b48",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/evidence/types.ts",
+        "sha256": "95e5955791467c434f236f2f147354185942bed2219b2cf241514de1136154b8",
+        "modifiedAt": "2026-10-29T16:01:15.130Z",
+        "currentSha256": "95e5955791467c434f236f2f147354185942bed2219b2cf241514de1136154b8",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/evidence/types.js",
+        "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "modifiedAt": "2026-10-29T16:09:41.720Z",
+        "currentSha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/addons/snippets/snippets.ts",
+        "sha256": "96adf80b4f5523ca8d6e03ef5298e28307cf6dec6163faa7b63435ea5e2839f6",
+        "modifiedAt": "2026-10-29T16:01:52.737Z",
+        "currentSha256": "96adf80b4f5523ca8d6e03ef5298e28307cf6dec6163faa7b63435ea5e2839f6",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/addons/snippets/snippets.js",
+        "sha256": "2315c91e7e52a95086ba8a156e27dcb69a17fdfa2a70bba03d883adc99fc0ff3",
+        "modifiedAt": "2026-10-29T16:09:41.565Z",
+        "currentSha256": "2315c91e7e52a95086ba8a156e27dcb69a17fdfa2a70bba03d883adc99fc0ff3",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/adapters/snapshots/native.ts",
+        "sha256": "eaf577c914f821e39bd4560158977c6588d5c0fbb94366db55d242f46e5a1c65",
+        "modifiedAt": "2026-10-29T16:04:31.226Z",
+        "currentSha256": "eaf577c914f821e39bd4560158977c6588d5c0fbb94366db55d242f46e5a1c65",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/adapters/snapshots/native.js",
+        "sha256": "5d0e1326abf4f8111169544a17e554233957f3e96f7be24f955a0c37974a386b",
+        "modifiedAt": "2026-10-29T16:09:41.913Z",
+        "currentSha256": "5d0e1326abf4f8111169544a17e554233957f3e96f7be24f955a0c37974a386b",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/adapters/worker/snapshot-channel.ts",
+        "sha256": "bd31f0b2490295c9f6a2cb0c1abe13cdfdc1d36fec9e0a018230008622a8f941",
+        "modifiedAt": "2026-10-29T14:14:48.015Z",
+        "currentSha256": "bd31f0b2490295c9f6a2cb0c1abe13cdfdc1d36fec9e0a018230008622a8f941",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/adapters/worker/snapshot-channel.js",
+        "sha256": "2f26c2dcd55b138d43198e4c4a3d3d2e80d5f165ddb6628ed7ab60e8580d2a10",
+        "modifiedAt": "2026-10-29T16:09:41.914Z",
+        "currentSha256": "2f26c2dcd55b138d43198e4c4a3d3d2e80d5f165ddb6628ed7ab60e8580d2a10",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/adapters/worker/client.ts",
+        "sha256": "eab4076dcfebbb6b0434b057ac10bbd9b6f4756eedf5565b0101475fdb8de686",
+        "modifiedAt": "2026-10-29T14:14:48.016Z",
+        "currentSha256": "eab4076dcfebbb6b0434b057ac10bbd9b6f4756eedf5565b0101475fdb8de686",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/adapters/worker/client.js",
+        "sha256": "e992d1c610fc40807bbceadeb917590c0aa00265eaa7fc2a17174de41abf26b4",
+        "modifiedAt": "2026-10-29T16:09:41.914Z",
+        "currentSha256": "e992d1c610fc40807bbceadeb917590c0aa00265eaa7fc2a17174de41abf26b4",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/adapters/worker/host.ts",
+        "sha256": "b6404d6dfa20f4a3296c4f85faa2ccf413f7703dd6e4e98d98180668436907ee",
+        "modifiedAt": "2026-10-29T07:53:56.053Z",
+        "currentSha256": "b6404d6dfa20f4a3296c4f85faa2ccf413f7703dd6e4e98d98180668436907ee",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/adapters/worker/host.js",
+        "sha256": "f6c8c87083938ecef5ec5bb571c37c81b3dcea96e6e81a6404a621c0ecf768d9",
+        "modifiedAt": "2026-10-29T16:09:41.915Z",
+        "currentSha256": "f6c8c87083938ecef5ec5bb571c37c81b3dcea96e6e81a6404a621c0ecf768d9",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/adapters/worker/snapshots.ts",
+        "sha256": "a9942658b38e6ab86355cd8e1c3961fb5030909a39b2096ac97a39ddc6ce5ba6",
+        "modifiedAt": "2026-10-29T14:14:48.016Z",
+        "currentSha256": "a9942658b38e6ab86355cd8e1c3961fb5030909a39b2096ac97a39ddc6ce5ba6",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/adapters/worker/snapshots.js",
+        "sha256": "fab022fec75dc1a0c7feb2ff15f557656f530f1430dc4424f40f584086058261",
+        "modifiedAt": "2026-10-29T16:09:41.911Z",
+        "currentSha256": "fab022fec75dc1a0c7feb2ff15f557656f530f1430dc4424f40f584086058261",
+        "matchesCurrent": true
+      },
+      {
+        "path": "src/adapters/worker/snapshots-host.ts",
+        "sha256": "d816c4233b1d1fcb5bd5c01a5baf40084c24699e8c9db9433b4e611318a73dbc",
+        "modifiedAt": "2026-10-29T07:53:56.054Z",
+        "currentSha256": "d816c4233b1d1fcb5bd5c01a5baf40084c24699e8c9db9433b4e611318a73dbc",
+        "matchesCurrent": true
+      },
+      {
+        "path": "dist/adapters/worker/snapshots-host.js",
+        "sha256": "700a750139d75b44d2404d8f36f7b7bade48986cb328c0c211b0673eaf701d45",
+        "modifiedAt": "2026-10-29T16:09:41.914Z",
+        "currentSha256": "700a750139d75b44d2404d8f36f7b7bade48986cb328c0c211b0673eaf701d45",
+        "matchesCurrent": true
+      }
+    ]
+  },
+  "failuresAndHarnessHistory": {
+    "originalProductFailuresRetained": "docs/evidence/RX-A050-runtime-review-initial.{mjs,json} retains both pre-repair cases and exact compiled hashes; source hashes are separate because repairs were already being edited.",
+    "harnessAttemptRetained": "docs/evidence/RX-A050-runtime-review-probes-attempt1.json",
+    "harnessCorrection": "Initial shared-budget probe incorrectly expected source export to bypass native validation; export correctly rejected before generating input. Final probe uses actual generous donor output with independently updated matching receiver budget/header integrity, then proves complete source/native export/restore limits. No product code was changed for that harness mistake.",
+    "otherLocalHarnessCorrections": "One syntax check caught a missing object delimiter before execution; corrected before retained runtime attempt."
+  },
+  "followUps": [
+    {
+      "id": "F1",
+      "scope": "Existing size budget",
+      "finding": "Fixed-method package measurement reports core 19,322 gzip bytes versus unchanged 15,360-byte planning target. This remains a disclosed miss; optional scanner code is excluded from the core graph. No performance or memory improvement is asserted."
+    },
+    {
+      "id": "F2",
+      "scope": "Native provenance",
+      "finding": "Source-free core/position/offset native state was actually round-tripped, including aB with three retained terms in two UTF16 units. Without source, validation proves structural tags/ordinals/frequencies/span bounds, not authentic original source or surrogate boundaries."
+    },
+    {
+      "id": "F3",
+      "scope": "Runtime and relevance qualification",
+      "finding": "Finite exact current Node declaration/probes and AI-authored developer intents do not qualify every Unicode host, browser, physical input or manual AT behavior, representative code relevance, case-sensitive identity, full paths, component phrases or arbitrary graphs."
+    }
+  ],
+  "releaseBoundary": {
+    "remoteCI": "Not run for this changed optional tree",
+    "publication": "Not authorized; package remains private",
+    "otherOptionalTasks": "Remain deferred unless explicitly selected",
+    "noRuntimeHashDrift": true
+  }
+}

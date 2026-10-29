@@ -23,6 +23,10 @@ export interface MatchRange {
   readonly start: number;
   readonly end: number;
   readonly term: string;
+  /** Identifier analysis explicitly distinguishes whole names and fragments. */
+  readonly kind?: 'original' | 'component';
+  /** Full original identifier provenance for a derived component match. */
+  readonly original?: { readonly term: string; readonly start: number; readonly end: number };
 }
 export interface MatchDocument {
   readonly id: string;

@@ -14,13 +14,18 @@ import type { PositionProviderOptions } from './options.js';
 
 export interface PositionOccurrence {
   readonly position: number;
-  /** Supported analyzers emit one token per position. This is not a synonym graph. */
+  /** One original per ordinal. Tagged components share that ordinal and never
+   * supply strict phrase adjacency. This is not a general token graph. */
   readonly positionLength: 1;
+  /** Only tagged identifier v2 values carry this discriminator. */
+  readonly kind?: 'original' | 'component';
   readonly start?: number;
   readonly end?: number;
 }
 export interface PositionValue {
   readonly tokenCount: number;
+  /** In v2, tokenCount includes fragments; ordinals count originals only. */
+  readonly originalCount?: number;
   readonly terms: Readonly<Record<string, readonly PositionOccurrence[]>>;
 }
 export interface PositionCounts {
@@ -33,10 +38,11 @@ export interface PositionCounts {
 export interface PositionRecord extends PositionCounts {
   readonly positions: Readonly<Record<string, readonly PositionValue[]>>;
 }
-/** Private protocol v1: immutable selected occurrences, no original text or
- * metadata. Value index is the array coordinate; term maps have null prototypes. */
+/** Immutable selected occurrences without display text or metadata. v1 keeps
+ * dense one-token ordinals; identifier-only v2 tags co-position components.
+ * Value index is the array coordinate; term maps have null prototypes. */
 export interface PositionRoot extends PositionCounts {
-  readonly kind: 'raveldex-positions-v1';
+  readonly kind: 'raveldex-positions-v1' | 'raveldex-positions-v2';
   readonly revision: number;
   readonly analyzer: AnalyzerDescriptor;
   readonly fields: readonly string[];
@@ -57,7 +63,7 @@ export function requirePositionRoot(input: unknown, field: string, revision: num
   if (input === undefined || input === null) invalid('MISSING_CAPABILITY', 'phrases.positions');
   if (typeof input !== 'object' || !Object.isFrozen(input)) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.positions');
   const root = input as PositionRoot;
-  if (root.kind !== 'raveldex-positions-v1' || !Array.isArray(root.fields) || !Object.isFrozen(root.fields) ||
+  if (root.kind !== (analyzer.id === 'code-identifiers-v1' ? 'raveldex-positions-v2' : 'raveldex-positions-v1') || !Array.isArray(root.fields) || !Object.isFrozen(root.fields) ||
       !root.fields.length || root.fields.length > DEFAULT_LIMITS.maxTextFields ||
       !fieldNames(root.fields) ||
       !Array.isArray(root.offsetFields) || !Object.isFrozen(root.offsetFields) || root.offsetFields.length > root.fields.length ||
@@ -96,7 +102,7 @@ function initialRoot(configuration: OwnedConfiguration, fields: readonly string[
   for (const field of fields) if (!has(configuration.schema.text, field)) invalid('MISSING_CAPABILITY', 'positions.fields');
   const limits = configuration.limits;
   return Object.freeze({
-    kind: 'raveldex-positions-v1', revision: 0,
+    kind: configuration.analyzer.id === 'code-identifiers-v1' ? 'raveldex-positions-v2' : 'raveldex-positions-v1', revision: 0,
     analyzer: Object.freeze({ id: configuration.analyzer.id, environmentProfile: configuration.analyzer.environmentProfile }),
     fields, offsetFields, limits, records: emptyDirectory<PositionRecord>(),
     retainedEntries: 0, occurrenceCount: 0, offsetCount: 0, termEntries: 0, termCodeUnits: 0,
@@ -116,14 +122,21 @@ function* retainRecord(record: OwnedRecord, root: PositionRoot, analyze: Analysi
     for (let valueIndex = 0; valueIndex < record.text[field]!.length; valueIndex++) {
       yield rawCharge(1); retainedEntries++;
       const terms: Record<string, PositionOccurrence[]> = Object.create(null) as typeof terms;
-      let tokenCount = 0;
+      let tokenCount = 0, originalCount = 0;
       for (const step of analyze(record.text[field]![valueIndex]!, valueIndex, root.limits)) {
         yield rawCharge(step.workUnits);
         if (!step.token) continue;
         const token = step.token;
         yield rawCharge(token.term.length + (withOffsets ? 4 : 2));
-        if (token.position !== tokenCount++) invalid('INTERNAL_ERROR', 'positions.order');
+        if (root.kind === 'raveldex-positions-v1') {
+          if (token.kind !== undefined || token.original !== undefined || token.position !== tokenCount) invalid('INTERNAL_ERROR', 'positions.order');
+        } else {
+          if (token.kind === 'original') { if (token.position !== originalCount++) invalid('INTERNAL_ERROR', 'positions.order'); }
+          else if (token.kind !== 'component' || token.position !== originalCount - 1 || !token.original) invalid('INTERNAL_ERROR', 'positions.order');
+        }
+        tokenCount++;
         const occurrence: PositionOccurrence = Object.freeze({ position: token.position, positionLength: 1,
+          ...(root.kind === 'raveldex-positions-v2' ? { kind: token.kind! } : {}),
           ...(withOffsets ? { start: token.start, end: token.end } : {}) });
         if (!has(terms, token.term)) { terms[token.term] = []; termEntries++; termCodeUnits += token.term.length; retainedEntries++; }
         terms[token.term]!.push(occurrence); occurrenceCount++; retainedEntries++;
@@ -135,7 +148,7 @@ function* retainRecord(record: OwnedRecord, root: PositionRoot, analyze: Analysi
         yield rawCharge(term.length + terms[term]!.length + 1);
         Object.freeze(terms[term]);
       }
-      values.push(Object.freeze({ tokenCount, terms: Object.freeze(terms) }));
+      values.push(Object.freeze({ tokenCount, ...(root.kind === 'raveldex-positions-v2' ? { originalCount } : {}), terms: Object.freeze(terms) }));
     }
     positions[field] = Object.freeze(values);
   }

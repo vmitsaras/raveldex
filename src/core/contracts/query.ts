@@ -154,7 +154,7 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
   function* walk(leaf: OwnedQuery): Generator<QueryStep> {
     switch (leaf.kind) {
       case 'text':
-        for (const step of analyze(leaf.text, 0, queryLimits, 'INVALID_QUERY')) {
+        for (const step of analyze(leaf.text, 0, queryLimits, 'INVALID_QUERY', 'query')) {
           if (step.token) {
             bound(++tokens, limits.maxQueryTokens, 'query.tokens');
             addGroup(groupKey(leaf.fields, [[step.token.term, 'exact', 1]]));
@@ -167,7 +167,7 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
         const handler = registration?.refinement ?? registration?.expansion;
         if (!handler) invalid('MISSING_CAPABILITY', 'query.capability');
         let count = 0;
-        for (const step of analyze(leaf.payload.text, 0, queryLimits, 'INVALID_QUERY')) {
+        for (const step of analyze(leaf.payload.text, 0, queryLimits, 'INVALID_QUERY', registration?.refinement ? 'phrase' : 'query')) {
           if (step.token) {
             bound(++count, handler.maxTokens, registration?.refinement ? 'query.phraseTokens' : 'query.expansionTokens');
             bound(++tokens, limits.maxQueryTokens, 'query.tokens');
@@ -182,7 +182,7 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
         for (let i = 0; i < leaf.variants.length; i++) {
           const variant = leaf.variants[i]!;
           let count = 0;
-          for (const step of analyze(variant.text, 0, queryLimits, 'INVALID_QUERY')) {
+          for (const step of analyze(variant.text, 0, queryLimits, 'INVALID_QUERY', 'query')) {
             if (step.token) {
               bound(++tokens, limits.maxQueryTokens, 'query.tokens');
               if (++count > 1) invalid('INVALID_QUERY', 'query.variants');

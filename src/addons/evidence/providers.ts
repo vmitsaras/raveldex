@@ -7,6 +7,7 @@ import { directoryGet } from '../../core/index/directory.js';
 import type { WorkStep } from '../../core/index/directory.js';
 import type { Limits } from '../../core/limits/limits.js';
 import type { SourceRoot } from '../phrases/store.js';
+import { taggedPositionTokens } from '../positions/tagged.js';
 import type { PositionRoot } from '../positions/store.js';
 
 const charge = (workUnits = 1): WorkStep => ({ workUnits });
@@ -96,6 +97,25 @@ export function* offsetTokens(root: PositionRoot, id: string, field: string, lim
   const values = yield* array(fields[field], limits.maxTextValuesPerField, 'evidence.offsets.values');
   const output: (readonly Token[])[] = [];
   let fieldCount = 0;
+  if (root.kind === 'raveldex-positions-v2') {
+    for (let valueIndex = 0; valueIndex < values.length; valueIndex++) {
+      const tokens = yield* taggedPositionTokens(values[valueIndex] as import('../positions/store.js').PositionValue, true, limits);
+      fieldCount += tokens.length;
+      if (fieldCount > data.occurrenceCount || fieldCount > data.offsetCount) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.offsets.counts');
+      const originals = new Map<number, Token>(), result: Token[] = [];
+      for (const token of tokens) {
+        yield charge(token.term.length + 1);
+        const original = originals.get(token.position);
+        if (token.kind === 'component' && !original) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.offsets.original');
+        const value: Token = Object.freeze({ term: token.term, valueIndex, position: token.position, start: token.start!, end: token.end!, kind: token.kind,
+          ...(token.kind === 'component' ? { original: Object.freeze({ term: original!.term, start: original!.start, end: original!.end }) } : {}) });
+        if (token.kind === 'original') originals.set(token.position, value);
+        result.push(value);
+      }
+      output.push(Object.freeze(result));
+    }
+    return Object.freeze(output);
+  }
   for (let valueIndex = 0; valueIndex < values.length; valueIndex++) {
     yield charge();
     const value = object(values[valueIndex], 2, 'evidence.offsets.value');

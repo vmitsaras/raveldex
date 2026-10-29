@@ -1,0 +1,159 @@
+{
+  "kind": "raveldex-rx-a050-independent-runtime-initial-v1",
+  "recordedAt": "2026-10-29T16:07:13.228Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "bindings": [
+    {
+      "path": "src/core/analyzer/identifier.ts",
+      "sha256": "85fb39c56bba23ab7f6520be4263ea9a0527172a7b2a81438adde2e55a634955",
+      "modifiedAt": "2026-10-29T16:05:47.251Z"
+    },
+    {
+      "path": "src/core/capabilities/registration.ts",
+      "sha256": "9d3140796dd143cbbb71cbc7fc64accfa017152830d6dd810936d7324e1eff5b",
+      "modifiedAt": "2026-10-29T16:06:12.180Z"
+    },
+    {
+      "path": "dist/core/analyzer/identifier.js",
+      "sha256": "b5a2be9ca33874865622a192ea0256c67562760cba4d975582810eda821ec100",
+      "modifiedAt": "2026-10-29T16:05:50.026Z"
+    },
+    {
+      "path": "dist/core/capabilities/registration.js",
+      "sha256": "beedecd5c9962ad02410b39e39e826e0aee485ecc53220ec09a75ef8910cd70d",
+      "modifiedAt": "2026-10-29T16:05:50.026Z"
+    }
+  ],
+  "rows": [
+    {
+      "finding": "R1",
+      "positions": false,
+      "result": {
+        "revision": 1,
+        "changed": true,
+        "added": 1,
+        "replaced": 0,
+        "removed": 0
+      }
+    },
+    {
+      "finding": "R1",
+      "positions": true,
+      "error": "INTERNAL_ERROR",
+      "message": "Raveldex: INTERNAL_ERROR"
+    },
+    {
+      "finding": "R2",
+      "flipAfter": "7",
+      "reads": 10,
+      "result": {
+        "revision": 1,
+        "changed": true,
+        "added": 1,
+        "replaced": 0,
+        "removed": 0
+      },
+      "documents": {
+        "size": 1,
+        "buckets": {
+          "44": {
+            "a": {
+              "id": "a",
+              "textCodeUnits": 6,
+              "metadata": {},
+              "fields": {
+                "code": {
+                  "length": 1,
+                  "terms": {
+                    "forged": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "finding": "R2",
+      "flipAfter": "8",
+      "reads": 10,
+      "result": {
+        "revision": 1,
+        "changed": true,
+        "added": 1,
+        "replaced": 0,
+        "removed": 0
+      },
+      "documents": {
+        "size": 1,
+        "buckets": {
+          "44": {
+            "a": {
+              "id": "a",
+              "textCodeUnits": 6,
+              "metadata": {},
+              "fields": {
+                "code": {
+                  "length": 1,
+                  "terms": {
+                    "forged": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "finding": "R2",
+      "flipAfter": "Infinity",
+      "reads": 10,
+      "result": {
+        "revision": 1,
+        "changed": true,
+        "added": 1,
+        "replaced": 0,
+        "removed": 0
+      },
+      "documents": {
+        "size": 1,
+        "buckets": {
+          "44": {
+            "a": {
+              "id": "a",
+              "textCodeUnits": 6,
+              "metadata": {},
+              "fields": {
+                "code": {
+                  "length": 1,
+                  "terms": {
+                    "foobar": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "scope": "Pre-repair built runtime, independent targeted output ownership/protocol probes. Source and compiled hashes are separate because the parent may already be editing repairs. No own evaluation/oracle calls, builds, Git or remote actions.",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "mandatory",
+      "summary": "Arbitrary raw analyzer IDs can index core but selecting positions chooses v1 and fails at runtime with INTERNAL_ERROR. Reserve the bounded protocol to its supported exact analyzer ID."
+    },
+    {
+      "id": "R2",
+      "severity": "mandatory",
+      "summary": "A frozen accessor token can change term after normalized-source validation and commit a forged reverse frequency. Reject accessor/symbol output and capture owned immutable token data before use."
+    }
+  ]
+}

@@ -69,9 +69,14 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     const implementations: Record<string, unknown> = {};
     for (const key of ['participant', 'refinement', 'predicate', 'aggregation', 'evidence', 'expansion', 'dictionary', 'analyzer'] as const) {
       if (!has(data, key)) continue;
-      const methods = key === 'participant' ? ['initialize', 'prepare'] : key === 'refinement' ? ['prepare'] : key === 'evidence' ? ['capture', 'select', 'prepare'] : key === 'expansion' ? ['expand'] : key === 'analyzer' ? ['transform'] : ['capture', 'prepare'];
+      let methods = key === 'participant' ? ['initialize', 'prepare'] : key === 'refinement' ? ['prepare'] : key === 'evidence' ? ['capture', 'select', 'prepare'] : key === 'expansion' ? ['expand'] : key === 'analyzer' ? ['transform', 'analyze'] : ['capture', 'prepare'];
       const attributes = key === 'refinement' ? ['kind', 'maxTokens'] : key === 'aggregation' ? ['fieldType'] : key === 'expansion' ? ['kind', 'maxTokens', 'policy'] : key === 'analyzer' ? ['kind', 'id'] : [];
       const handles = object(data[key], `addons.${key}`, [...methods, ...attributes]);
+      if (key === 'analyzer') {
+        methods = handles.kind === 'single-token-transform' ? ['transform'] : handles.kind === 'identifier-tokenizer' ? ['analyze'] : [];
+        if (!methods.length) invalid(code, 'addons.analyzer');
+        keysOnly(handles, [...methods, ...attributes], code, 'addons.analyzer');
+      }
       for (const method of methods) {
         const callback = handles[method];
         if (typeof callback !== 'function') invalid(code, `addons.${key}`);
@@ -83,9 +88,11 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
         handles.policy = id(handles.policy, 'addons.expansion.policy');
       }
       if (key === 'analyzer') {
-        if (handles.kind !== 'single-token-transform') invalid(code, 'addons.analyzer');
         handles.id = id(handles.id, 'addons.analyzer.id');
         if (handles.id === 'basic-v1') invalid(code, 'addons.analyzer.id');
+        // This raw protocol is the bounded first-party identifier policy. Its
+        // tagged positions/codecs are not an arbitrary analyzer graph registry.
+        if ((handles.kind === 'identifier-tokenizer') !== (handles.id === 'code-identifiers-v1')) invalid(code, 'addons.analyzer.id');
       }
       if (key === 'aggregation' && (handles.fieldType !== 'string' || fields.some(field => schema.metadata[field]?.type !== handles.fieldType))) invalid(code, 'addons.aggregation');
       implementations[key] = Object.freeze(handles);

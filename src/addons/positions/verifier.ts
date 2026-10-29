@@ -4,6 +4,7 @@ import { has } from '../../core/contracts/data.js';
 import { invalid } from '../../core/errors/error.js';
 import { directoryGet } from '../../core/index/directory.js';
 import type { WorkStep } from '../../core/index/directory.js';
+import { taggedPositionTokens } from './tagged.js';
 import { requirePositionRoot } from './store.js';
 import type { PositionOccurrence, PositionValue } from './store.js';
 
@@ -85,6 +86,17 @@ export function* preparePositionField(context: RefinementContext, field: string)
             value.tokenCount > root.limits.maxTokensPerRecord || typeof value.terms !== 'object' || value.terms === null ||
             !Object.isFrozen(value.terms) || Object.getPrototypeOf(value.terms) !== null) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.positions.value');
         const byTerm = new Map<string, readonly PositionOccurrence[]>(), lists: (readonly PositionOccurrence[])[] = [];
+        if (root.kind === 'raveldex-positions-v2') {
+          const tokens = yield* taggedPositionTokens(value, offsets, root.limits);
+          const originals = new Map<string, PositionOccurrence[]>();
+          for (const token of tokens) {
+            yield rawCharge(token.term.length + 1); if (token.kind !== 'original') continue;
+            const list = originals.get(token.term) ?? []; list.push(token); originals.set(token.term, list);
+          }
+          for (const term of terms) { yield rawCharge(term.length + 1); lists.push(originals.get(term) ?? []); }
+          if (yield* intersectOffsets(lists)) matched = true;
+          continue;
+        }
         for (const term of terms) {
           yield rawCharge(term.length + 1);
           let list = byTerm.get(term);

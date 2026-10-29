@@ -1,0 +1,56 @@
+{
+  "kind": "raveldex-rx-a050-local-qualification-v1",
+  "status": "Pass",
+  "method": "Full npm run check followed by node scripts/candidate-check.mjs against that exact existing build; no intervening source rebuild. This is not the separate candidate:prepare helper.",
+  "baseCommit": "3e39e0b",
+  "branch": "codex/rx-a050-identifiers",
+  "projectCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "log": "RX-A050-check.log",
+    "sha256": "e04a0f84fd1e25423c5b5c437c16d0fbc475d22136c1539b5934717e99ec4b77",
+    "batches": [
+      648,
+      30,
+      24,
+      26,
+      1
+    ],
+    "passed": 729,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "candidateCheck": {
+    "command": "node scripts/candidate-check.mjs --output /tmp/raveldex-rx-a050-final-candidate",
+    "exitCode": 0,
+    "report": "RX-A050-candidate.json",
+    "sha256": "3fe9492db90f19bbc76711a23b8d1e49f6240b75380b363d09115458c625d6f4"
+  },
+  "packageMeasurement": {
+    "command": "RAVELDEX_IDENTIFIER_PACKAGE_REPORT=/tmp/raveldex-rx-a050-final-package.json node --test test/addons/identifiers/package.test.mjs",
+    "exitCode": 0,
+    "report": "RX-A050-package.json",
+    "sha256": "be2c3ec07055d6b4c3c854ac5d44ecb7a7d393bc0f806d239f0aa7c7adb2aa9d"
+  },
+  "candidate": {
+    "path": "RX-A050-candidate-0.1.0-rc.0.tgz",
+    "sha256": "b1b875c0a4e71309d83ed326e6733ba57c549895dac71c72d2f7a8498627eff1",
+    "bytes": 198813,
+    "members": 265,
+    "private": true,
+    "version": "0.1.0-rc.0"
+  },
+  "publication": "Not performed; no push, merge, tag, release, remote CI or visibility change.",
+  "finalSynchronizationCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "log": "RX-A050-final-check.log",
+    "sha256": "5550d4266746b8ed7883b8b64331dc2d439d87c56833cbf330ab62f24e24df64",
+    "passed": 729,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "scope": "Final full regression after accepted status/spec/context synchronization; compiled runtime members unchanged from retained candidate."
+  }
+}

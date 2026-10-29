@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030 and RX-A040
+## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040 and RX-A050
+
+- RX-A050 adds explicitly selected `/addons/identifiers`: preserved whole names and searchable camel/acronym/digit/underscore components, original-only strict phrases, tagged source/offset provenance, native BM25 statistics and bounded worker/snapshot compatibility. Default basic/English behavior stays separate; no runtime dependency or automatic UI change is introduced.
 
 - RX-A040 adds explicitly selected `/integrations/languages/english` with original Porter 1980 morphology, one-to-one original spans/positions and shared index/query/phrase/evidence/worker/snapshot analysis. Default basic behavior remains unchanged; English overstemming, finite host qualification and the existing core gzip target miss remain disclosed.
 

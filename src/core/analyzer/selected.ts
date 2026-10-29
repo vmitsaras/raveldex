@@ -6,8 +6,10 @@ import { bound, invalid } from '../errors/error.js';
 import type { ErrorCode } from '../errors/error.js';
 import type { Limits } from '../limits/limits.js';
 import { WorkBudget } from '../limits/work.js';
+import { runIdentifierAnalysis } from './identifier.js';
 
-export type AnalysisRunner = (value: string, valueIndex: number, limits: Limits, code?: ErrorCode) => Generator<AnalysisStep>;
+export type AnalysisMode = 'index' | 'query' | 'phrase';
+export type AnalysisRunner = (value: string, valueIndex: number, limits: Limits, code?: ErrorCode, mode?: AnalysisMode) => Generator<AnalysisStep>;
 
 /** One scope per complete operation, reused by every value/provider reanalysis.
  * Core owns segmentation, dense positions and original coordinates. Optional
@@ -17,6 +19,8 @@ export function createAnalysis(configuration: OwnedConfiguration, check?: () => 
   const registration = configuration.capabilities?.providers[`analyzer:${configuration.analyzer.id}`];
   if (!registration?.analyzer || registration.analyzer.id !== configuration.analyzer.id) invalid('MISSING_CAPABILITY', 'analysis.analyzer');
   const handle = registration.analyzer, budget = new WorkBudget(registration.manifest.limits.maxWorkUnits);
+  if (handle.kind === 'identifier-tokenizer') return (value, valueIndex, limits, code = 'INVALID_RECORD', mode = 'index') =>
+    runIdentifierAnalysis(handle, budget, value, valueIndex, limits, code, mode, check);
   return function* (value, valueIndex, limits, code = 'INVALID_RECORD') {
     for (const step of analyzeValue(value, valueIndex, limits, code)) {
       if (!step.token) { yield step; continue; }

@@ -220,7 +220,7 @@ Select one language with real corpus demand and provide compatible indexing/quer
 
 **Code and identifier analysis**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/32)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/32)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -228,11 +228,11 @@ Search developer identifiers without losing exact original names or inventing ph
 
 **Expected affected areas**
 
-`src/addons/identifiers/`, `test/addons/identifiers/`, `test/fixtures/relevance/`. These are planning boundaries; create files only when this task needs them.
+`src/addons/identifiers/`, `test/addons/identifiers/`, `test/fixtures/relevance/`, `src/core/analyzer/`, `src/core/capabilities/`, `src/addons/phrases/`, `src/addons/positions/`, `src/addons/evidence/`, `src/addons/snippets/`, `src/adapters/snapshots/`, `test/measurements/identifier-package.mjs`, `docs/api/IDENTIFIERS.md`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [IDENTIFIER_ANALYSIS.md](../../docs/specs/IDENTIFIER_ANALYSIS.md)
 
 **Acceptance criteria**
 
@@ -248,7 +248,33 @@ Search developer identifiers without losing exact original names or inventing ph
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A050-analysis-review.json](../../docs/evidence/RX-A050-analysis-review.json)
+- [docs/evidence/RX-A050-analysis-review.mjs](../../docs/evidence/RX-A050-analysis-review.mjs)
+- [docs/evidence/RX-A050-baseline-sandbox-failure.log](../../docs/evidence/RX-A050-baseline-sandbox-failure.log)
+- [docs/evidence/RX-A050-baseline.log](../../docs/evidence/RX-A050-baseline.log)
+- [docs/evidence/RX-A050-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A050-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A050-candidate-check.log](../../docs/evidence/RX-A050-candidate-check.log)
+- [docs/evidence/RX-A050-candidate.json](../../docs/evidence/RX-A050-candidate.json)
+- [docs/evidence/RX-A050-check.log](../../docs/evidence/RX-A050-check.log)
+- [docs/evidence/RX-A050-evaluation-focused.log](../../docs/evidence/RX-A050-evaluation-focused.log)
+- [docs/evidence/RX-A050-final-check.log](../../docs/evidence/RX-A050-final-check.log)
+- [docs/evidence/RX-A050-initial-focused.log](../../docs/evidence/RX-A050-initial-focused.log)
+- [docs/evidence/RX-A050-initial-package.log](../../docs/evidence/RX-A050-initial-package.log)
+- [docs/evidence/RX-A050-npm-ci.log](../../docs/evidence/RX-A050-npm-ci.log)
+- [docs/evidence/RX-A050-package-check.log](../../docs/evidence/RX-A050-package-check.log)
+- [docs/evidence/RX-A050-package.json](../../docs/evidence/RX-A050-package.json)
+- [docs/evidence/RX-A050-providers.log](../../docs/evidence/RX-A050-providers.log)
+- [docs/evidence/RX-A050-qualification.json](../../docs/evidence/RX-A050-qualification.json)
+- [docs/evidence/RX-A050-repaired-focused.log](../../docs/evidence/RX-A050-repaired-focused.log)
+- [docs/evidence/RX-A050-runtime-review-artifact.json](../../docs/evidence/RX-A050-runtime-review-artifact.json)
+- [docs/evidence/RX-A050-runtime-review-initial.json](../../docs/evidence/RX-A050-runtime-review-initial.json)
+- [docs/evidence/RX-A050-runtime-review-initial.mjs](../../docs/evidence/RX-A050-runtime-review-initial.mjs)
+- [docs/evidence/RX-A050-runtime-review-probes-attempt1.json](../../docs/evidence/RX-A050-runtime-review-probes-attempt1.json)
+- [docs/evidence/RX-A050-runtime-review-probes.json](../../docs/evidence/RX-A050-runtime-review-probes.json)
+- [docs/evidence/RX-A050-runtime-review-probes.mjs](../../docs/evidence/RX-A050-runtime-review-probes.mjs)
+- [docs/evidence/RX-A050-runtime-review.json](../../docs/evidence/RX-A050-runtime-review.json)
+- [docs/evidence/RX-A050-sync.log](../../docs/evidence/RX-A050-sync.log)
+- [docs/evidence/RX-A050.md](../../docs/evidence/RX-A050.md)
 
 
 ## RX-A060

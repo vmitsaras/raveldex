@@ -6,7 +6,9 @@ import type { StateCounts } from '../limits/limits.js';
 import type { ScoreTrace, TraceRequest } from '../trace/facts.js';
 import type { SearchResult } from '../contracts/types.js';
 import type { CompiledNode } from '../query/compile.js';
-import type { AnalysisRunner } from '../analyzer/selected.js';
+import type { AnalysisMode, AnalysisRunner } from '../analyzer/selected.js';
+import type { AnalysisStep } from '../analyzer/basic.js';
+import type { ErrorCode } from '../errors/error.js';
 
 export interface CapabilityReference { readonly id: string; readonly contractVersion: number }
 export interface CapabilityManifest {
@@ -128,11 +130,15 @@ export interface AddonRegistration {
   readonly aggregation?: AggregationImplementation;
   readonly evidence?: EvidenceImplementation;
 }
-/** Narrow v1 language role: one output per basic token, no positional graph. */
-export interface AnalyzerImplementation {
+/** Original/component tokenizer is separate from the v1 language transform.
+ * Query/phrase analysis emits originals only; index/evidence can retain components. */
+export type AnalyzerImplementation = {
   readonly kind: 'single-token-transform'; readonly id: string;
   transform(term: string): Generator<WorkStep, string>;
-}
+} | {
+  readonly kind: 'identifier-tokenizer'; readonly id: string;
+  analyze(value: string, valueIndex: number, limits: Limits, code: ErrorCode, mode: AnalysisMode): Generator<AnalysisStep>;
+};
 export interface CapturedRegistration extends AddonRegistration { readonly manifest: CapabilityManifest }
 export interface CapabilitySet {
   readonly ordered: readonly CapturedRegistration[];

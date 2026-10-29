@@ -97,3 +97,7 @@ The explicit `/addons/synonyms` entry applies an owned versioned single-token ta
 ## Selected English analysis
 
 The [English pack](ENGLISH.md) is selected at owner creation through `Configuration.analyzer`, not a query leaf. Source/position/mixed phrases compare adjacent analyzed terms and original evidence/snippets retain complete source token spans. English morphology can make differently spelled words phrase-equivalent. Existing v1 typo/synonym expansion and token suggestions remain basic-only and explicitly reject requests under English. Constant algorithm tables are separate from per-corpus retained state.
+
+## Identifier analysis
+
+The explicit `/addons/identifiers` analyzer preserves whole names and derives searchable components with actual original spans. Queries retain whole original groups; strict phrases use original identifiers only. Tagged ranges distinguish original and component matches, and optional positions use an explicitly tagged representation. See [selection, grouping, scoring and compatibility](IDENTIFIERS.md). Basic and English one-to-one analysis remain separate selections.

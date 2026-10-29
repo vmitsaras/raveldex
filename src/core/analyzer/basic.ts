@@ -11,6 +11,10 @@ export interface Token {
   readonly position: number;
   readonly start: number;
   readonly end: number;
+  /** Present only for selected identifier analysis. Original ordinals stay dense;
+   * derived components share their original's ordinal without phrase adjacency. */
+  readonly kind?: 'original' | 'component';
+  readonly original?: { readonly term: string; readonly start: number; readonly end: number };
 }
 export interface AnalysisStep { readonly workUnits: number; readonly token?: Token }
 const START = /[\p{L}\p{N}]/u;

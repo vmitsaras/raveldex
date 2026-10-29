@@ -9,6 +9,8 @@ import type { Directory, WorkStep } from '../../core/index/directory.js';
 import { inspectIndex } from '../../core/index/invariants.js';
 import type { DocumentEntry, FieldIndex, IndexRoot, TermEntry } from '../../core/index/state.js';
 import type { SourceRoot } from '../../addons/phrases/store.js';
+import { taggedPositionTokens } from '../../addons/positions/tagged.js';
+import type { TaggedPositionToken } from '../../addons/positions/tagged.js';
 import type { PositionRoot, PositionValue } from '../../addons/positions/store.js';
 import { WorkBudget } from '../../core/limits/work.js';
 import { fail } from './error.js';
@@ -96,7 +98,7 @@ export function* validateNative(payload: unknown, configuration: OwnedConfigurat
       if (!Object.keys(terms).length || tokens > limits.maxTokensPerRecord) fail('INVALID_NATIVE_STATE');
       for (const [term, frequency] of Object.entries(terms)) { yield* canonicalTerm(term, limits.maxTermCodeUnits); count(frequency, limits.maxTokensPerRecord, 1); }
     }
-    if (tokens > entry.textCodeUnits) fail('INVALID_NATIVE_STATE');
+    if (tokens > entry.textCodeUnits * (configuration.analyzer.id === 'code-identifiers-v1' ? 2 : 1)) fail('INVALID_NATIVE_STATE');
   }
   for (const name of fieldNames) {
     const field = object(fieldData[name], ['documents', 'length', 'terms'], 'INVALID_NATIVE_STATE');
@@ -188,6 +190,36 @@ function* positions(input: unknown, expected: PositionRoot, core: IndexRoot, ana
       const sourceValues = sourceRoot ? directoryGet(sourceRoot.records, id)?.text[field] : undefined;
       if (sourceRoot && (!sourceValues || sourceValues.length !== rawValues.length)) fail('INVALID_NATIVE_STATE');
       for (let valueIndex = 0; valueIndex < rawValues.length; valueIndex++) {
+        if (expected.kind === 'raveldex-positions-v2') {
+          const value = object(rawValues[valueIndex], ['tokenCount', 'originalCount', 'terms'], 'INVALID_NATIVE_STATE');
+          let tokens: readonly TaggedPositionToken[];
+          try { tokens = yield* taggedPositionTokens(value as unknown as PositionValue, withOffsets, expected.limits); }
+          catch { fail('INVALID_NATIVE_STATE'); }
+          const terms = map(value.terms), tokenCount = count(value.tokenCount, expected.limits.maxTokensPerRecord);
+          for (const [term, occurrences] of Object.entries(terms)) {
+            yield { workUnits: term.length + 1 };
+            counts.termEntries++; counts.termCodeUnits += term.length; counts.retainedEntries++;
+            frequencies[term] = (frequencies[term] ?? 0) + (occurrences as readonly unknown[]).length;
+          }
+          let lastOriginalEnd = 0;
+          for (const token of tokens) {
+            yield { workUnits: token.term.length + 1 }; counts.occurrenceCount++; counts.retainedEntries++;
+            if (withOffsets) { counts.offsetCount++; counts.retainedEntries += 2; if (token.kind === 'original') lastOriginalEnd = token.end!; }
+          }
+          minimumCodeUnits += lastOriginalEnd;
+          if (counts.occurrenceCount > expected.limits.maxTokensPerRecord) fail('INVALID_NATIVE_STATE');
+          if (sourceValues) {
+            const seen: Record<string, number> = Object.create(null) as typeof seen; let analyzed = 0;
+            for (const step of analyze(sourceValues[valueIndex]!, valueIndex, expected.limits)) {
+              yield { workUnits: step.workUnits }; if (!step.token) continue;
+              const token = step.token, occurrence = (value as unknown as PositionValue).terms[token.term]?.[seen[token.term] ?? 0];
+              if (!occurrence || occurrence.position !== token.position || occurrence.kind !== token.kind || withOffsets && (occurrence.start !== token.start || occurrence.end !== token.end)) fail('INVALID_NATIVE_STATE');
+              seen[token.term] = (seen[token.term] ?? 0) + 1; analyzed++;
+            }
+            if (analyzed !== tokenCount) fail('INVALID_NATIVE_STATE');
+          }
+          continue;
+        }
         const value = object(rawValues[valueIndex], ['tokenCount', 'terms'], 'INVALID_NATIVE_STATE'), tokenCount = count(value.tokenCount, expected.limits.maxTokensPerRecord), terms = map(value.terms);
         const ordinals = new Map<number, { start?: number; end?: number }>();
         for (const [term, rawOccurrences] of Object.entries(terms)) {

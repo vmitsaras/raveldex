@@ -30,4 +30,6 @@ The optional LocalSearch integration converts the documented complete source for
 
 ## Deferred work
 
-N5 enhancements remain deferred. Typo tolerance, suggestions, synonyms, language analyzers, proximity, query syntax, partial patching and higher capacities are not silently added to this candidate. A support request or proposal does not activate those tasks.
+The original 625-test candidate and its remote CI predate later explicitly selected optional changes. RX-A010 typo tolerance, RX-A020 suggestions, RX-A030 synonyms, RX-A040 English and RX-A050 identifier analysis have their own local acceptance boundaries; earlier remote CI does not verify these changed trees. Other N5 work stays deferred until explicitly selected. A support request or proposal does not activate it.
+
+Identifier analysis uses reserved `code-identifiers-v1` with `identifier-tokenizer`, separate from the general one-to-one transform role. Other raw-tokenizer IDs and one-to-one handles impersonating that reserved ID reject at configuration capture. Selected code positions use an explicit `raveldex-positions-v2` payload within the existing codec family, bound jointly to that selected analyzer and exact module/worker policy. Dense v1 parsing remains strict; prior runtimes without this role/pack cannot accept the new configuration. Basic and English position data retain their v1 shape. Reindexing/source recovery and exact native qualification requirements remain explicit.

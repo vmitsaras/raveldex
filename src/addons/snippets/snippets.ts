@@ -176,9 +176,25 @@ function* valuesFor(context: EvidenceContext, roots: ReadonlyMap<string, SourceR
         yield charge(raw.length + range.term.length + 1);
         if (context.analyzer.id === 'basic-v1') {
           if (raw.normalize('NFKC').toLowerCase() !== range.term) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.source');
+        } else if (context.analyzer.id === 'code-identifiers-v1' && range.kind === 'component') {
+          const origin = range.original;
+          if (!origin || !Number.isSafeInteger(origin.start) || !Number.isSafeInteger(origin.end) || origin.start < 0 || origin.end > original.length || origin.start > range.start || origin.end < range.end) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.original');
+          const identifier = original.slice(origin.start, origin.end);
+          yield charge(identifier.length + origin.term.length + 1);
+          let originals = 0, matched = false;
+          for (const step of requireAnalysis(context)(identifier, 0, context.limits, 'INCOMPATIBLE_CAPABILITY', 'index')) {
+            yield charge(step.workUnits); if (!step.token) continue;
+            const token = step.token;
+            if (token.kind === 'original') {
+              originals++;
+              if (token.term !== origin.term || token.start !== 0 || token.end !== identifier.length) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.original');
+            } else if (token.kind === 'component' && token.term === range.term && token.start + origin.start === range.start && token.end + origin.start === range.end) matched = true;
+          }
+          if (originals !== 1 || !matched) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.source');
         } else {
+          if (context.analyzer.id === 'code-identifiers-v1' && (range.kind !== 'original' || range.original !== undefined)) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.original');
           let tokens = 0;
-          for (const step of requireAnalysis(context)(raw, 0, context.limits, 'INCOMPATIBLE_CAPABILITY')) {
+          for (const step of requireAnalysis(context)(raw, 0, context.limits, 'INCOMPATIBLE_CAPABILITY', 'query')) {
             yield charge(step.workUnits);
             if (!step.token) continue;
             if (++tokens !== 1 || step.token.start !== 0 || step.token.end !== raw.length || step.token.term !== range.term) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.source');

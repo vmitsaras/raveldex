@@ -1,4 +1,5 @@
 import { workerIdentity } from '../../core/capabilities/worker-identity.js';
+import type { Token } from '../../core/analyzer/basic.js';
 import { requireAnalysis } from '../../core/analyzer/selected.js';
 import { Admission, has, ownObject } from '../../core/contracts/data.js';
 import type { AddonRegistration, AggregationOutput, EvidenceContext, EvidenceResultContext, PayloadContext, PreparedEvidence } from '../../core/capabilities/types.js';
@@ -51,10 +52,10 @@ function* rangesFor(id: string, leaves: readonly ContributingLeaf[], fields: rea
       const tokens = values[valueIndex]!;
       yield charge(); tokenCount += tokens.length;
       if (tokenCount > context.limits.maxTokensPerRecord) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.record.tokens');
-      const selected = new Set<number>();
-      const mark = (position: number): void => {
-        if (selected.has(position)) return;
-        selected.add(position); bound(++counter.value, maximum, 'evidence.ranges');
+      const selected = new Set<Token>();
+      const mark = (token: Token): void => {
+        if (selected.has(token)) return;
+        selected.add(token); bound(++counter.value, maximum, 'evidence.ranges');
       };
       for (const leaf of active) {
         yield charge();
@@ -69,9 +70,25 @@ function* rangesFor(id: string, leaves: readonly ContributingLeaf[], fields: rea
       // Visiting this order avoids a full output sort and deduplicates coordinates.
       for (const token of tokens) {
         yield charge();
-        if (selected.has(token.position)) ranges.push(Object.freeze({ field, valueIndex, position: token.position, start: token.start, end: token.end, term: token.term }));
+        if (selected.has(token)) ranges.push(Object.freeze({ field, valueIndex, position: token.position, start: token.start, end: token.end, term: token.term,
+          ...(token.kind ? { kind: token.kind } : {}), ...(token.original ? { original: token.original } : {}) }));
       }
     }
+  }
+  if (context.analyzer.id === 'code-identifiers-v1') {
+    // Co-position originals/components overlap; preserve truthful coordinates in
+    // source order for snippet projection rather than treating ordinals as keys.
+    const sorted: MatchRange[] = [];
+    for (const range of ranges) {
+      let index = sorted.length;
+      while (index > 0) {
+        yield charge(fields.length * 2 + 1); const prior = sorted[index - 1]!;
+        const order = fields.indexOf(prior.field) - fields.indexOf(range.field) || prior.valueIndex - range.valueIndex || prior.start - range.start || prior.end - range.end || prior.position - range.position;
+        if (order <= 0) break; index--;
+      }
+      sorted.splice(index, 0, range);
+    }
+    return Object.freeze(sorted);
   }
   return Object.freeze(ranges);
 }

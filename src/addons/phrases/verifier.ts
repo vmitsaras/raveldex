@@ -27,7 +27,7 @@ export function* phraseFailureTable(terms: readonly string[]): Generator<WorkSte
 export function* sourceValueMatches(value: string, valueIndex: number, terms: readonly string[], failure: readonly number[], limits: Limits, analyze: AnalysisRunner = analyzeValue): Generator<WorkStep, boolean> {
   if (terms.length === 0) return false;
   let matched = 0;
-  for (const step of analyze(value, valueIndex, limits)) {
+  for (const step of analyze(value, valueIndex, limits, 'INVALID_RECORD', 'phrase')) {
     yield rawCharge(step.workUnits);
     if (!step.token) continue;
     for (;;) {

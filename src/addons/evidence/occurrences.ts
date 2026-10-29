@@ -46,13 +46,13 @@ function* prefix(term: string, query: string): Generator<WorkStep, boolean> {
   }
   return true;
 }
-export function* matchingGroup(tokens: readonly Token[], group: CanonicalGroup, mark: (position: number) => void): Generator<WorkStep> {
+export function* matchingGroup(tokens: readonly Token[], group: CanonicalGroup, mark: (token: Token) => void): Generator<WorkStep> {
   for (const token of tokens) {
     yield charge();
     for (const variant of group.variants) {
       yield charge();
       const matches = variant.match === 'prefix' ? yield* prefix(token.term, variant.term) : yield* equal(token.term, variant.term);
-      if (matches) { mark(token.position); break; }
+      if (matches) { mark(token); break; }
     }
   }
 }
@@ -72,10 +72,16 @@ export function* phraseTable(terms: readonly string[]): Generator<WorkStep, read
   }
   return Object.freeze(failure);
 }
-export function* matchingPhrase(tokens: readonly Token[], terms: readonly string[], failure: readonly number[], mark: (position: number) => void): Generator<WorkStep> {
+export function* matchingPhrase(tokens: readonly Token[], terms: readonly string[], failure: readonly number[], mark: (token: Token) => void): Generator<WorkStep> {
   if (!terms.length) return;
   let matched = 0;
-  for (const token of tokens) {
+  let originals = tokens;
+  if (tokens[0]?.kind === 'original') {
+    const selected: Token[] = [];
+    for (const token of tokens) { yield charge(); if (token.kind === 'original') selected.push(token); }
+    originals = selected;
+  }
+  for (const token of originals) {
     yield charge();
     for (;;) {
       if (yield* equal(token.term, terms[matched]!)) { matched++; break; }
@@ -83,7 +89,7 @@ export function* matchingPhrase(tokens: readonly Token[], terms: readonly string
       yield charge(); matched = failure[matched - 1]!;
     }
     if (matched === terms.length) {
-      for (let offset = terms.length - 1; offset >= 0; offset--) { yield charge(); mark(token.position - offset); }
+      for (let offset = terms.length - 1; offset >= 0; offset--) { yield charge(); mark(originals[token.position - offset]!); }
       matched = failure[matched - 1]!;
     }
   }
