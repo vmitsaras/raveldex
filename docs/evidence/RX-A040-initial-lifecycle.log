@@ -1,0 +1,41 @@
+✔ English source, positions and mixed phrases share analyzed adjacency without crossing values, fields or stop words (226.750333ms)
+ℹ 36 complete page comparisons across three phrase representations; independently hand-literal membership.
+✔ English source and stored-offset evidence use stems with complete original UTF-16 slices and untouched Unicode (35.937417ms)
+✔ English phrase/evidence providers track replacement, removal and new revisions without stale original tokens (22.373292ms)
+✔ English snippets retain original display spelling while validating selected stemmed source and offset ranges (30.897833ms)
+✔ analyzer selection is explicit, captured, bounded and rejects incompatible protocols without executing accessors (5.2005ms)
+✔ selected analysis emits full original spans once and malformed transform output cannot publish (1.993083ms)
+✖ one module budget spans tokens, values, records and provider analysis with complete rollback (2.896708ms)
+✔ basic-only optional requests reject under English even when empty, without altering unrequested searches (1.67225ms)
+✔ queued owned English queries, mutations and retained roots stay at the correct analysis revision (1.324792ms)
+✔ English cancellation closes every observed suspension and precedes a reentrant module-work failure (8.052292ms)
+ℹ {"cancelledSuspensions":23,"providerCursorsClosed":73}
+✔ English operation costs at admitted 100/1000/10000 records are charged logical work, not memory peaks (740.539792ms)
+ℹ {"rows":[{"records":100,"tokens":200,"dictionaryEntries":2,"searchWorkUnits":49821,"searchYieldedSteps":5765,"mutationHostTasks":36,"corpusSideIndexEntries":0},{"records":1000,"tokens":2000,"dictionaryEntries":2,"searchWorkUnits":485740,"searchYieldedSteps":48384,"mutationHostTasks":377,"corpusSideIndexEntries":0},{"records":10000,"tokens":20000,"dictionaryEntries":2,"searchWorkUnits":4915738,"searchYieldedSteps":464382,"mutationHostTasks":5415,"corpusSideIndexEntries":0}],"scope":"Actual cursor work/cardinalities and host task count. Constant optional algorithm tables remain retained module code/data; no heap/allocation/transport peak or physical latency claim."}
+✔ native original-1980 English stemming follows complete literal suffix and measure examples (1.850583ms)
+✔ English stemming preserves non-ASCII/digit terms and explicitly selected short-word behavior (0.140166ms)
+✔ bounded stem cursors expose actual work and close without retaining per-word state (0.6595ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 13
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 820.971792
+
+✖ failing tests:
+
+test at test/integrations/languages/english-lifecycle.test.mjs:54:1
+✖ one module budget spans tokens, values, records and provider analysis with complete rollback (2.896708ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/integrations/languages/english-lifecycle.test.mjs:66:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'WORK_LIMIT_EXCEEDED' },
+    operator: 'rejects',
+    diff: 'simple'
+  }

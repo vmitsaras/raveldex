@@ -1,3 +1,4 @@
+import type { AnalysisRunner } from '../analyzer/selected.js';
 import { Admission, has, keysOnly, ownArray, ownObject, scanUnicode, stringValue } from './data.js';
 import type { ScanStep } from './data.js';
 import { bound, invalid } from '../errors/error.js';
@@ -89,7 +90,7 @@ export interface RecordStep extends ScanStep { readonly field?: string; readonly
 /** Optional private invocation diagnostics, collected at the actual analyzer. */
 export interface RecordAnalysisCounts { records: number; values: number; textCodeUnits: number }
 /** Temporary source is owned until processing finishes; no engine retention here. */
-export function* analyzeRecord(record: OwnedRecord, limits: Limits, counts?: RecordAnalysisCounts): Generator<RecordStep> {
+export function* analyzeRecord(record: OwnedRecord, limits: Limits, counts?: RecordAnalysisCounts, analyze: AnalysisRunner = analyzeValue): Generator<RecordStep> {
   if (counts) counts.records++;
   yield* scanUnicode(record.id, 'INVALID_RECORD', 'record.id');
   for (const [field, value] of Object.entries(record.metadata)) {
@@ -101,7 +102,7 @@ export function* analyzeRecord(record: OwnedRecord, limits: Limits, counts?: Rec
   for (const [field, values] of Object.entries(record.text)) {
     for (let i = 0; i < values.length; i++) {
       if (counts) { counts.values++; counts.textCodeUnits += values[i]!.length; }
-      for (const step of analyzeValue(values[i]!, i, limits)) {
+      for (const step of analyze(values[i]!, i, limits)) {
         if (step.token) {
           bound(++tokens, limits.maxTokensPerRecord, 'record.tokens');
           yield { ...step, field };

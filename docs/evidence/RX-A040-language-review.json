@@ -1,0 +1,265 @@
+{
+  "kind": "raveldex-rx-a040-independent-language-review-v1",
+  "at": "2026-10-29T14:31:34.243Z",
+  "reviewer": "/root/english_evaluation",
+  "status": "Ready with follow-ups",
+  "mandatoryFindings": [],
+  "scope": {
+    "reviewedOtherAuthors": [
+      "src/integrations/languages/english/stem.ts",
+      "src/integrations/languages/english/index.ts",
+      "src/addons/phrases/index.ts",
+      "src/addons/phrases/verifier.ts",
+      "src/addons/positions/store.ts",
+      "src/addons/positions/verifier.ts",
+      "src/addons/evidence/providers.ts",
+      "src/addons/evidence/builder.ts",
+      "src/addons/snippets/snippets.ts",
+      "docs/api/ENGLISH.md",
+      "docs/specs/ENGLISH_ANALYZER.md"
+    ],
+    "excludedFromOwnIndependentReview": [
+      "test/oracle/english.mjs",
+      "test/fixtures/relevance/english-v1.json",
+      "test/integrations/languages/english-evaluation.test.mjs"
+    ],
+    "qualification": "This reviewer authored the independent source oracle and frozen relevance judgments. Their differential is secondary evidence, not an independent audit of those own artifacts or a second human/native-language judgment. Primary source/rule checks and direct hand-literal integration observations resolve correctness.",
+    "notClaimed": [
+      "Full task or candidate review",
+      "Generic analyzer registration/admission/worker/snapshot protocol audit (assigned to separate parent/core reviewer)",
+      "Native-human linguistic review",
+      "New manual AT/browser qualification",
+      "Heap/allocation/physical-copy/latency peaks"
+    ]
+  },
+  "primary": {
+    "title": "The Porter stemming algorithm, original 1980 definition",
+    "url": "https://snowballstem.org/algorithms/porter/stemmer.html",
+    "checkedRules": [
+      "Original ABLI step2 and OU step4, without modern BLI/LOGI extension",
+      "Generic paper double-consonant predicate (including synthetic cc) excluding l/s/z only",
+      "Consonant/vowel classification of y and VC measure",
+      "Longest matching suffix wins even when its predicate fails",
+      "Step1b restoration, vowel test and cvc shortness; steps1c/2/3/4/5 final sequencing"
+    ],
+    "sourceAssessment": "Production tables and conditional longest-match flow match the selected original-paper variant. The explicit ASCII-only and <=2-character passthrough rules are documented pack restrictions, rather than unannounced Porter2 behavior."
+  },
+  "independentExecution": {
+    "command": "node /tmp/raveldex-rx-a040-language-probes.mjs",
+    "status": "Pass",
+    "probes": [
+      {
+        "name": "primary original-paper variant and longest-rule conformance, not modern Porter2/BLI/LOGI behavior",
+        "status": "Pass"
+      },
+      {
+        "name": "finite token bounds, positive charged work and nonASCII/digit passthrough",
+        "status": "Pass"
+      },
+      {
+        "name": "secondary differential against structurally different source reference across real corpus and seeded ASCII words",
+        "status": "Pass"
+      },
+      {
+        "name": "nonidempotent canonical term is never restemmed during retrieval, phrase verification or source/offset evidence",
+        "status": "Pass"
+      },
+      {
+        "name": "source/positions/mixed phrase adjacency preserves boundaries, repeats and stop words",
+        "status": "Pass"
+      },
+      {
+        "name": "English snippet highlights preserve entire original Unicode-aware coordinates for source and offset providers",
+        "status": "Pass"
+      },
+      {
+        "name": "the baseline installed consumer used by the work comparison matches every committed RX-A030 tar member",
+        "status": "Pass"
+      },
+      {
+        "name": "basic snippet path has identical logical search work and complete output to committed RX-A030 installed candidate",
+        "status": "Pass"
+      },
+      {
+        "name": "public English documentation example uses the selected descriptor and preserves the recorded relevance limitation",
+        "status": "Pass"
+      }
+    ],
+    "probeScript": "docs/evidence/RX-A040-language-probes.mjs",
+    "probeScriptSha256": "254bef074c8bfebdb9e9bf7b4ef11a8e0b455e65249089508b6398e7787a12c9",
+    "probeReport": "docs/evidence/RX-A040-language-probes.json",
+    "probeReportSha256": "8f423202eaae6a6023e82dd51f1d4ec91c4bf3e37b592486ebde245e8dec2176",
+    "environment": {
+      "node": "v24.21.0",
+      "platform": "darwin",
+      "arch": "arm64"
+    }
+  },
+  "observations": {
+    "secondaryDifferential": {
+      "comparisons": 13957,
+      "generatedAttempts": 12000,
+      "seed": "0x09f13ab4",
+      "result": "All equal to structurally different regex/source oracle; not a replacement for primary original-paper interpretation."
+    },
+    "nonIdempotence": {
+      "raw": "agreed",
+      "once": "agre",
+      "twice": "agr",
+      "result": "Selected source and offset phrases/evidence retain agre with full raw [0,6) span; raw query agre independently stems to agr and correctly does not match. Canonical terms are not stemmed again."
+    },
+    "phraseSemantics": "Source, stored positions and mixed representations return identical complete results, preserving repeats/stop words and preventing cross-field/value adjacency.",
+    "originalCoordinates": "Source and offset evidence/snippets agree on full original UTF-16 spans for supplementary emoji context, agreed/running inflections, accented café and compatibility ligature ﬁles.",
+    "basicCost": {
+      "baselineTarSha256": "8c610cd51c7df93d52095a92bff10e2f395b01a8aa99d9b53880f073de4177f9",
+      "verifiedInstalledBaselineFiles": 249,
+      "currentAndBaselineSearchWorkUnits": 1850,
+      "currentAndBaselineYieldedSteps": 799,
+      "completeOutput": "Byte/value-equivalent serialized data for selected basic snippet fixture",
+      "scope": "One direct bounded snippet case plus source fast-path inspection; no universal timing/heap claim."
+    },
+    "publicExample": "Exact first JavaScript example from current docs/api/ENGLISH.md executed with imports mapped to the current built entries. This is not the separate installed-candidate example claim.",
+    "frozenRelevanceGoal": {
+      "status": "Fail",
+      "goal": "Zero false-positive matches among frozen intended-empty English navigation intents",
+      "actual": "One of eight intended-empty intents matches: cancell and cancellation both stem to cancel",
+      "correctness": "Matches fixed original-paper morphology; not an implementation failure, not a passed zero-false-positive goal",
+      "scope": "Frozen labels remain unchanged; do not claim native-human review or universal English relevance"
+    }
+  },
+  "sourceAndBuiltHashes": {
+    "dist/integrations/languages/english/stem.js": "b1402be1a5955eac2e121e948e9db705fbce8bd76bda144b738a8f57ff9c0725",
+    "dist/integrations/languages/english/index.js": "01b3fc85f6f1018cc23c578e9690a10fdfc8aac7da2610d74a76d21e1f8a3494",
+    "dist/addons/phrases/index.js": "58abf242c2d8254a33e4432289cfb2283448e3d50f6db8c9c7e59ba46382a72a",
+    "dist/addons/phrases/verifier.js": "0c2cdc519ffc8f654a7aeddef773c5c7830aded644139eeb19543acb88b23186",
+    "dist/addons/positions/store.js": "ad5b9f87578d6c205cdc76fa23bcb0ee11a7505091e3f8cb178a1e169ca0ffcd",
+    "dist/addons/positions/verifier.js": "2581f9a33ebe3feaaff08c443b9e9089fb15a34bf2dc95fe28f5e7ff2fe949b1",
+    "dist/addons/evidence/providers.js": "f539b2bf3980eeb6233ace7b41058fd6fbe3b35ef42c6e461e1f48e6b0e57dd4",
+    "dist/addons/evidence/builder.js": "2063a07136755d1999662af68c6e8312e3c7744836e96149c731d0f1e4bb81bf",
+    "dist/addons/snippets/snippets.js": "a256f524d54403dbf1ca6877930bb020e3e9cac0001a2c0b7504dafdc730b972",
+    "src/integrations/languages/english/stem.ts": "f6cb564087a6a5d99a71b7db9e6bb91a8187e7654cb30e1fe71730834c409c25",
+    "src/integrations/languages/english/index.ts": "11c00b3bc1ad302f7f4e45cbe95d191f944993323f58dd059729677ea6888473",
+    "src/addons/phrases/index.ts": "160bc8016a46e56f650e5457bc32548d53053c79adeaf03b58a945e633d923f9",
+    "src/addons/phrases/verifier.ts": "7326eb93eac29ca948763255972a05e8c0254e257d077a815965d951ccaea9e1",
+    "src/addons/positions/store.ts": "7258962095fc43088baf65b13a37c2c0d5c7ddc61f934dfb4e4309d85512acc7",
+    "src/addons/positions/verifier.ts": "056d5456ec2f2d5ac75b2352cf67f5c816d7c791a8e6f9d94f0bfb2bb211b2db",
+    "src/addons/evidence/providers.ts": "ed909b653d0678513bca955c60e01aa914479467d6f55dbeddb6193aa4b9cecc",
+    "src/addons/evidence/builder.ts": "4622c239f0e5c1cab9f2c6acfa9252831f36684b370da3037b90924a15fb791d",
+    "src/addons/snippets/snippets.ts": "4a8d1f6c3d5963d44f6dbe471387f6c2a4737d44e4f80492a26337c08a0dc2d5",
+    "docs/api/ENGLISH.md": "9b534dc0dbd38127243e17e97b4a58b0515bc5f8c37d3a015e483df4fa1b05ce",
+    "docs/specs/ENGLISH_ANALYZER.md": "a79af508d18f85fafc8937d19c8f662f092911db2ac89d7098952a2c6ce063fa"
+  },
+  "followUps": [
+    {
+      "item": "Frozen relevance limitation",
+      "status": "Known and documented",
+      "reason": "cancell/cancellation collision leaves the intended-empty aspiration unmet; preserve labels and report actual negative outcome."
+    },
+    {
+      "item": "Qualification and cost",
+      "status": "Separate evidence remains required",
+      "reason": "Parent/core reviewer owns full candidate, generic protocol, worker/snapshot and measured import-cost closure; these probes do not claim that work."
+    },
+    {
+      "item": "Linguistic scope",
+      "status": "Intentional limit",
+      "reason": "Technical English self-documentation and one AI evaluator do not establish broad linguistic/user-study or native-human qualification."
+    }
+  ],
+  "recommendation": "Ready for the parent to integrate the separate core/transport/package review. No mandatory stemmer, phrase/source/position/evidence/snippet or reviewed public-contract defect found in the actual inspected artifacts.",
+  "finalCandidateBinding": {
+    "scope": "Updated after R2 packaging correction: independently read current closed full counters/report/log/tar identities and matched the same nine reviewed compiled production modules byte-for-byte. Runtime language/add-on review remains unchanged. Primary auditor owns separately installable package review; no independent standalone-packaging qualification is claimed here. Original source/documentation hashes retain the earlier reviewed snapshot.",
+    "candidateReport": "docs/evidence/RX-A040-candidate.json",
+    "candidateReportSha256": "c50848176abeb145ce3a32f28e5bdcfbc34efd3804af0e3785b0ad9edfc5aff0",
+    "checkLog": "docs/evidence/RX-A040-check.log",
+    "checkLogSha256": "8f94dda83f350a8775ecc2cb0580ba2cb42b3a3fb1cf1e25ef922fecf98ad747",
+    "tar": "docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz",
+    "tarSha256": "e26e5a64ef34735c9c13c8e0745535bb356c090014a7528733d1d21355c8bf16",
+    "tarMembers": 256,
+    "javascriptEntries": 23,
+    "closedCheckCounters": {
+      "tests": [
+        617,
+        30,
+        24,
+        26,
+        1
+      ],
+      "pass": [
+        617,
+        30,
+        24,
+        26,
+        1
+      ],
+      "fail": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "cancelled": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "skipped": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "todo": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "reviewedCompiledMembers": [
+      {
+        "path": "dist/integrations/languages/english/stem.js",
+        "sha256": "b1402be1a5955eac2e121e948e9db705fbce8bd76bda144b738a8f57ff9c0725"
+      },
+      {
+        "path": "dist/integrations/languages/english/index.js",
+        "sha256": "01b3fc85f6f1018cc23c578e9690a10fdfc8aac7da2610d74a76d21e1f8a3494"
+      },
+      {
+        "path": "dist/addons/phrases/index.js",
+        "sha256": "58abf242c2d8254a33e4432289cfb2283448e3d50f6db8c9c7e59ba46382a72a"
+      },
+      {
+        "path": "dist/addons/phrases/verifier.js",
+        "sha256": "0c2cdc519ffc8f654a7aeddef773c5c7830aded644139eeb19543acb88b23186"
+      },
+      {
+        "path": "dist/addons/positions/store.js",
+        "sha256": "ad5b9f87578d6c205cdc76fa23bcb0ee11a7505091e3f8cb178a1e169ca0ffcd"
+      },
+      {
+        "path": "dist/addons/positions/verifier.js",
+        "sha256": "2581f9a33ebe3feaaff08c443b9e9089fb15a34bf2dc95fe28f5e7ff2fe949b1"
+      },
+      {
+        "path": "dist/addons/evidence/providers.js",
+        "sha256": "f539b2bf3980eeb6233ace7b41058fd6fbe3b35ef42c6e461e1f48e6b0e57dd4"
+      },
+      {
+        "path": "dist/addons/evidence/builder.js",
+        "sha256": "2063a07136755d1999662af68c6e8312e3c7744836e96149c731d0f1e4bb81bf"
+      },
+      {
+        "path": "dist/addons/snippets/snippets.js",
+        "sha256": "a256f524d54403dbf1ca6877930bb020e3e9cac0001a2c0b7504dafdc730b972"
+      }
+    ],
+    "runtimeBytesUnchanged": true,
+    "preStandaloneHistoryPrefix": "docs/evidence/RX-A040-pre-standalone-"
+  }
+}

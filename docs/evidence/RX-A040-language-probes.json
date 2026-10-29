@@ -1,0 +1,651 @@
+{
+  "kind": "raveldex-rx-a040-independent-language-probes-v1",
+  "at": "2026-10-29T14:31:34.173Z",
+  "reviewer": "/root/english_evaluation",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "status": "Pass",
+  "sources": {
+    "dist/integrations/languages/english/stem.js": "b1402be1a5955eac2e121e948e9db705fbce8bd76bda144b738a8f57ff9c0725",
+    "dist/integrations/languages/english/index.js": "01b3fc85f6f1018cc23c578e9690a10fdfc8aac7da2610d74a76d21e1f8a3494",
+    "dist/addons/phrases/index.js": "58abf242c2d8254a33e4432289cfb2283448e3d50f6db8c9c7e59ba46382a72a",
+    "dist/addons/phrases/verifier.js": "0c2cdc519ffc8f654a7aeddef773c5c7830aded644139eeb19543acb88b23186",
+    "dist/addons/positions/store.js": "ad5b9f87578d6c205cdc76fa23bcb0ee11a7505091e3f8cb178a1e169ca0ffcd",
+    "dist/addons/positions/verifier.js": "2581f9a33ebe3feaaff08c443b9e9089fb15a34bf2dc95fe28f5e7ff2fe949b1",
+    "dist/addons/evidence/providers.js": "f539b2bf3980eeb6233ace7b41058fd6fbe3b35ef42c6e461e1f48e6b0e57dd4",
+    "dist/addons/evidence/builder.js": "2063a07136755d1999662af68c6e8312e3c7744836e96149c731d0f1e4bb81bf",
+    "dist/addons/snippets/snippets.js": "a256f524d54403dbf1ca6877930bb020e3e9cac0001a2c0b7504dafdc730b972",
+    "src/integrations/languages/english/stem.ts": "f6cb564087a6a5d99a71b7db9e6bb91a8187e7654cb30e1fe71730834c409c25",
+    "src/integrations/languages/english/index.ts": "11c00b3bc1ad302f7f4e45cbe95d191f944993323f58dd059729677ea6888473",
+    "src/addons/phrases/index.ts": "160bc8016a46e56f650e5457bc32548d53053c79adeaf03b58a945e633d923f9",
+    "src/addons/phrases/verifier.ts": "7326eb93eac29ca948763255972a05e8c0254e257d077a815965d951ccaea9e1",
+    "src/addons/positions/store.ts": "7258962095fc43088baf65b13a37c2c0d5c7ddc61f934dfb4e4309d85512acc7",
+    "src/addons/positions/verifier.ts": "056d5456ec2f2d5ac75b2352cf67f5c816d7c791a8e6f9d94f0bfb2bb211b2db",
+    "src/addons/evidence/providers.ts": "ed909b653d0678513bca955c60e01aa914479467d6f55dbeddb6193aa4b9cecc",
+    "src/addons/evidence/builder.ts": "4622c239f0e5c1cab9f2c6acfa9252831f36684b370da3037b90924a15fb791d",
+    "src/addons/snippets/snippets.ts": "4a8d1f6c3d5963d44f6dbe471387f6c2a4737d44e4f80492a26337c08a0dc2d5",
+    "docs/api/ENGLISH.md": "9b534dc0dbd38127243e17e97b4a58b0515bc5f8c37d3a015e483df4fa1b05ce",
+    "docs/specs/ENGLISH_ANALYZER.md": "a79af508d18f85fafc8937d19c8f662f092911db2ac89d7098952a2c6ce063fa"
+  },
+  "results": [
+    {
+      "name": "primary original-paper variant and longest-rule conformance, not modern Porter2/BLI/LOGI behavior",
+      "status": "Pass",
+      "observation": {
+        "primary": "https://snowballstem.org/algorithms/porter/stemmer.html",
+        "scope": "Literal outputs hand-derived from complete original-paper steps; ABLI/OU and generic double-consonant policy explicitly distinguished",
+        "cases": [
+          [
+            "conformabli",
+            "conform"
+          ],
+          [
+            "possibly",
+            "possibli"
+          ],
+          [
+            "analogies",
+            "analogi"
+          ],
+          [
+            "homologou",
+            "homolog"
+          ],
+          [
+            "accing",
+            "ac"
+          ],
+          [
+            "feed",
+            "feed"
+          ],
+          [
+            "sing",
+            "sing"
+          ],
+          [
+            "rate",
+            "rate"
+          ],
+          [
+            "cease",
+            "ceas"
+          ],
+          [
+            "toy",
+            "toi"
+          ],
+          [
+            "syzygy",
+            "syzygi"
+          ],
+          [
+            "sky",
+            "sky"
+          ],
+          [
+            "news",
+            "new"
+          ],
+          [
+            "cancell",
+            "cancel"
+          ],
+          [
+            "cancellation",
+            "cancel"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "finite token bounds, positive charged work and nonASCII/digit passthrough",
+      "status": "Pass",
+      "observation": {
+        "passthrough": [
+          "café",
+          "δοκιμή",
+          "source2",
+          "1⁄2",
+          "𐐨test",
+          "as",
+          "is",
+          "a",
+          ""
+        ],
+        "maximumInputCodeUnits": 256,
+        "workUnitsAtMaximum": 782
+      }
+    },
+    {
+      "name": "secondary differential against structurally different source reference across real corpus and seeded ASCII words",
+      "status": "Pass",
+      "observation": {
+        "comparisons": 13957,
+        "seed": "0x09f13ab4",
+        "generatedAttempts": 12000,
+        "scope": "Secondary algorithmic differential only; oracle authored by this reviewer is not a second human language judgment"
+      }
+    },
+    {
+      "name": "nonidempotent canonical term is never restemmed during retrieval, phrase verification or source/offset evidence",
+      "status": "Pass",
+      "observation": [
+        {
+          "strategy": "source",
+          "result": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1,
+            "hits": [
+              {
+                "id": "a",
+                "score": 0.5753641449035617
+              }
+            ],
+            "extensions": {
+              "match-evidence": {
+                "kind": "raveldex-match-evidence-v1",
+                "revision": 1,
+                "fields": [
+                  "title"
+                ],
+                "scope": "successful-positive-token-occurrences",
+                "complete": true,
+                "documents": [
+                  {
+                    "id": "a",
+                    "eligibility": "matched",
+                    "ranges": [
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 0,
+                        "start": 0,
+                        "end": 6,
+                        "term": "agre"
+                      },
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 1,
+                        "start": 7,
+                        "end": 14,
+                        "term": "run"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "strategy": "positions",
+          "result": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1,
+            "hits": [
+              {
+                "id": "a",
+                "score": 0.5753641449035617
+              }
+            ],
+            "extensions": {
+              "match-evidence": {
+                "kind": "raveldex-match-evidence-v1",
+                "revision": 1,
+                "fields": [
+                  "title"
+                ],
+                "scope": "successful-positive-token-occurrences",
+                "complete": true,
+                "documents": [
+                  {
+                    "id": "a",
+                    "eligibility": "matched",
+                    "ranges": [
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 0,
+                        "start": 0,
+                        "end": 6,
+                        "term": "agre"
+                      },
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 1,
+                        "start": 7,
+                        "end": 14,
+                        "term": "run"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "source/positions/mixed phrase adjacency preserves boundaries, repeats and stop words",
+      "status": "Pass",
+      "observation": [
+        {
+          "strategy": "source",
+          "complete": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 2,
+            "hits": [
+              {
+                "id": "other",
+                "score": 0.39556284962119864
+              },
+              {
+                "id": "adjacent",
+                "score": 0.14487070902951124
+              }
+            ]
+          }
+        },
+        {
+          "strategy": "positions",
+          "complete": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 2,
+            "hits": [
+              {
+                "id": "other",
+                "score": 0.39556284962119864
+              },
+              {
+                "id": "adjacent",
+                "score": 0.14487070902951124
+              }
+            ]
+          }
+        },
+        {
+          "strategy": "mixed",
+          "complete": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 2,
+            "hits": [
+              {
+                "id": "other",
+                "score": 0.39556284962119864
+              },
+              {
+                "id": "adjacent",
+                "score": 0.14487070902951124
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "English snippet highlights preserve entire original Unicode-aware coordinates for source and offset providers",
+      "status": "Pass",
+      "observation": [
+        {
+          "strategy": "source",
+          "documents": [
+            {
+              "id": "a",
+              "eligibility": "matched",
+              "ranges": [
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 0,
+                  "start": 3,
+                  "end": 9,
+                  "term": "agre"
+                },
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 1,
+                  "start": 10,
+                  "end": 17,
+                  "term": "run"
+                },
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 2,
+                  "start": 18,
+                  "end": 22,
+                  "term": "café"
+                },
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 3,
+                  "start": 23,
+                  "end": 27,
+                  "term": "file"
+                }
+              ],
+              "snippets": [
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "start": 0,
+                  "end": 27,
+                  "text": "😀 agreed running café ﬁles",
+                  "highlights": [
+                    {
+                      "start": 3,
+                      "end": 9
+                    },
+                    {
+                      "start": 10,
+                      "end": 17
+                    },
+                    {
+                      "start": 18,
+                      "end": 22
+                    },
+                    {
+                      "start": 23,
+                      "end": 27
+                    }
+                  ],
+                  "omittedBefore": false,
+                  "omittedAfter": false
+                }
+              ],
+              "snippetOmissions": {
+                "unshownMatches": 0,
+                "windowLimit": false,
+                "highlightLimit": false,
+                "matchTooLong": 0,
+                "graphemeTooLong": 0
+              }
+            }
+          ]
+        },
+        {
+          "strategy": "offsets",
+          "documents": [
+            {
+              "id": "a",
+              "eligibility": "matched",
+              "ranges": [
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 0,
+                  "start": 3,
+                  "end": 9,
+                  "term": "agre"
+                },
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 1,
+                  "start": 10,
+                  "end": 17,
+                  "term": "run"
+                },
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 2,
+                  "start": 18,
+                  "end": 22,
+                  "term": "café"
+                },
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "position": 3,
+                  "start": 23,
+                  "end": 27,
+                  "term": "file"
+                }
+              ],
+              "snippets": [
+                {
+                  "field": "title",
+                  "valueIndex": 0,
+                  "start": 0,
+                  "end": 27,
+                  "text": "😀 agreed running café ﬁles",
+                  "highlights": [
+                    {
+                      "start": 3,
+                      "end": 9
+                    },
+                    {
+                      "start": 10,
+                      "end": 17
+                    },
+                    {
+                      "start": 18,
+                      "end": 22
+                    },
+                    {
+                      "start": 23,
+                      "end": 27
+                    }
+                  ],
+                  "omittedBefore": false,
+                  "omittedAfter": false
+                }
+              ],
+              "snippetOmissions": {
+                "unshownMatches": 0,
+                "windowLimit": false,
+                "highlightLimit": false,
+                "matchTooLong": 0,
+                "graphemeTooLong": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "the baseline installed consumer used by the work comparison matches every committed RX-A030 tar member",
+      "status": "Pass",
+      "observation": {
+        "members": 249,
+        "tarSha256": "8c610cd51c7df93d52095a92bff10e2f395b01a8aa99d9b53880f073de4177f9",
+        "installedDirectory": "/tmp/raveldex-rx-a030-final-candidate/consumer/node_modules/@vmitsaras/raveldex"
+      }
+    },
+    {
+      "name": "basic snippet path has identical logical search work and complete output to committed RX-A030 installed candidate",
+      "status": "Pass",
+      "observation": [
+        {
+          "base": "/tmp/raveldex-rx-a030-final-candidate/consumer/node_modules/@vmitsaras/raveldex",
+          "units": 1850,
+          "steps": 799,
+          "result": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1,
+            "hits": [
+              {
+                "id": "a",
+                "score": 0.39556284962119864
+              }
+            ],
+            "extensions": {
+              "snippets": {
+                "kind": "raveldex-match-evidence-v1",
+                "revision": 1,
+                "fields": [
+                  "title"
+                ],
+                "scope": "successful-positive-token-occurrences",
+                "complete": true,
+                "documents": [
+                  {
+                    "id": "a",
+                    "eligibility": "matched",
+                    "ranges": [
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 0,
+                        "start": 3,
+                        "end": 9,
+                        "term": "source"
+                      },
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 2,
+                        "start": 19,
+                        "end": 25,
+                        "term": "source"
+                      }
+                    ],
+                    "snippets": [
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "start": 0,
+                        "end": 30,
+                        "text": "😀 source original source café",
+                        "highlights": [
+                          {
+                            "start": 3,
+                            "end": 9
+                          },
+                          {
+                            "start": 19,
+                            "end": 25
+                          }
+                        ],
+                        "omittedBefore": false,
+                        "omittedAfter": false
+                      }
+                    ],
+                    "snippetOmissions": {
+                      "unshownMatches": 0,
+                      "windowLimit": false,
+                      "highlightLimit": false,
+                      "matchTooLong": 0,
+                      "graphemeTooLong": 0
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "base": "/Users/vasilis/Documents/GitHub/raveldex",
+          "units": 1850,
+          "steps": 799,
+          "result": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1,
+            "hits": [
+              {
+                "id": "a",
+                "score": 0.39556284962119864
+              }
+            ],
+            "extensions": {
+              "snippets": {
+                "kind": "raveldex-match-evidence-v1",
+                "revision": 1,
+                "fields": [
+                  "title"
+                ],
+                "scope": "successful-positive-token-occurrences",
+                "complete": true,
+                "documents": [
+                  {
+                    "id": "a",
+                    "eligibility": "matched",
+                    "ranges": [
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 0,
+                        "start": 3,
+                        "end": 9,
+                        "term": "source"
+                      },
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "position": 2,
+                        "start": 19,
+                        "end": 25,
+                        "term": "source"
+                      }
+                    ],
+                    "snippets": [
+                      {
+                        "field": "title",
+                        "valueIndex": 0,
+                        "start": 0,
+                        "end": 30,
+                        "text": "😀 source original source café",
+                        "highlights": [
+                          {
+                            "start": 3,
+                            "end": 9
+                          },
+                          {
+                            "start": 19,
+                            "end": 25
+                          }
+                        ],
+                        "omittedBefore": false,
+                        "omittedAfter": false
+                      }
+                    ],
+                    "snippetOmissions": {
+                      "unshownMatches": 0,
+                      "windowLimit": false,
+                      "highlightLimit": false,
+                      "matchTooLong": 0,
+                      "graphemeTooLong": 0
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "public English documentation example uses the selected descriptor and preserves the recorded relevance limitation",
+      "status": "Pass",
+      "observation": {
+        "exampleSha256": "2a5d45b42445eed233456031fe568531a6cec3900236e372f89ed1a9e64e521f",
+        "scope": "Exact current documentation source with imports mapped to the current built entries, not an installed-package claim",
+        "frozenGoal": "Retained failed intended-empty aspiration is explicitly documented; AI review is not labeled human"
+      }
+    }
+  ]
+}

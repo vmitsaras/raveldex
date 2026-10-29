@@ -1,0 +1,127 @@
+{
+  "kind": "raveldex-rx-a040-independent-probes-v1",
+  "at": "2026-10-29T14:56:34.940Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "status": "Pass",
+  "probes": 12,
+  "rows": [
+    {
+      "name": "explicit selector and absent or incompatible identity do not silently fall back",
+      "status": "Pass"
+    },
+    {
+      "name": "registered unselected analyzer preserves basic-v1 default and metadata",
+      "status": "Pass"
+    },
+    {
+      "name": "selector and trusted transform function are captured before later caller edits",
+      "status": "Pass"
+    },
+    {
+      "name": "generic transformed terms reject empty malformed and noncanonical data atomically",
+      "status": "Pass"
+    },
+    {
+      "name": "module budget spans tokens values records and resets for a new operation",
+      "status": "Pass"
+    },
+    {
+      "name": "one module allowance spans query analysis and actual provider reanalysis",
+      "status": "Pass"
+    },
+    {
+      "name": "non-idempotent Porter terms and normalized separator terms are not analyzed twice",
+      "status": "Pass"
+    },
+    {
+      "name": "basic-specific expansion and dictionary output reject selected English even for empty requests",
+      "status": "Pass"
+    },
+    {
+      "name": "worker restore and reconciliation validate exact bound selected descriptor",
+      "status": "Pass",
+      "observations": {
+        "scope": "Private branded channel validation, not browser or real worker parity"
+      }
+    },
+    {
+      "name": "stop precedence wins over analyzer module cap during add and source/native restore",
+      "status": "Pass",
+      "observations": [
+        {
+          "operation": "add",
+          "closed": 1
+        },
+        {
+          "operation": "SourceRestore",
+          "closed": 1,
+          "rootPreserved": true
+        },
+        {
+          "operation": "NativeRestore",
+          "closed": 1,
+          "rootPreserved": true
+        }
+      ]
+    },
+    {
+      "name": "snapshot source rebuilding and native source validation share one module budget across all records",
+      "status": "Pass"
+    },
+    {
+      "name": "source and native export preserve stop precedence inside selected reanalysis",
+      "status": "Pass",
+      "observations": [
+        {
+          "operation": "SourceExport",
+          "closed": 2,
+          "rootPreserved": true
+        },
+        {
+          "operation": "NativeExport",
+          "closed": 2,
+          "rootPreserved": true
+        }
+      ]
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "src/core/analyzer/selected.ts",
+      "sha256": "139caf8cc0859efda393dc21dd1ce820c435292e47cea2788dcf4f80457013bd"
+    },
+    {
+      "path": "src/core/contracts/schema.ts",
+      "sha256": "bb7c202b4805578d293f6f17a7d82fafa6152c1f5b061c2e27ec5d2af9c220c0"
+    },
+    {
+      "path": "src/core/capabilities/registration.ts",
+      "sha256": "a75291ffc8180c3188375910e1a57fe3338d0da4dc74fc7964dc0c8e0c3a2229"
+    },
+    {
+      "path": "src/core/mutations/owner.ts",
+      "sha256": "dc55ef224db86b679e3db32456432e41c2032c3d8d28a2887aa32fb91f50e3f8"
+    },
+    {
+      "path": "src/core/query/search.ts",
+      "sha256": "01e9711e48d107f197001fdab0b6ba8c9c52b9238ae5d43842da34b2aff428f6"
+    },
+    {
+      "path": "src/adapters/snapshots/native.ts",
+      "sha256": "ae0a36045e54e354c4c17ca43a61e164c5c470532f8b513b88449c76cea759ef"
+    },
+    {
+      "path": "src/adapters/snapshots/snapshots.ts",
+      "sha256": "d420c463f18fd8223aedc5da6780680f974563ecbf0951123e6929818c8db4e4"
+    },
+    {
+      "path": "src/adapters/worker/snapshots.ts",
+      "sha256": "a9942658b38e6ab86355cd8e1c3961fb5030909a39b2096ac97a39ddc6ce5ba6"
+    }
+  ],
+  "scope": "Independent direct runtime/typed-failure probes of parent-owned selection, work/stop scopes, snapshot validation and worker result channel; no build/network/browser/manual AT claims"
+}

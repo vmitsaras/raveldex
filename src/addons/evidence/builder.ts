@@ -1,5 +1,5 @@
 import { workerIdentity } from '../../core/capabilities/worker-identity.js';
-import { BASIC_ANALYZER } from '../../core/analyzer/basic.js';
+import { requireAnalysis } from '../../core/analyzer/selected.js';
 import { Admission, has, ownObject } from '../../core/contracts/data.js';
 import type { AddonRegistration, AggregationOutput, EvidenceContext, EvidenceResultContext, PayloadContext, PreparedEvidence } from '../../core/capabilities/types.js';
 import { bound, invalid } from '../../core/errors/error.js';
@@ -46,7 +46,7 @@ function* rangesFor(id: string, leaves: readonly ContributingLeaf[], fields: rea
     }
     if (!active.length) continue;
     const provider = providers.get(field)!;
-    const values = provider.kind === 'source' ? yield* sourceTokens(provider.root, id, field, context.limits) : yield* offsetTokens(provider.root, id, field, context.limits);
+    const values = provider.kind === 'source' ? yield* sourceTokens(provider.root, id, field, context.limits, requireAnalysis(context)) : yield* offsetTokens(provider.root, id, field, context.limits);
     for (let valueIndex = 0; valueIndex < values.length; valueIndex++) {
       const tokens = values[valueIndex]!;
       yield charge(); tokenCount += tokens.length;
@@ -65,7 +65,7 @@ function* rangesFor(id: string, leaves: readonly ContributingLeaf[], fields: rea
           yield* matchingPhrase(tokens, leaf.terms, table, mark);
         }
       }
-      // Stored positions and reanalysis are both complete dense basic-v1 values.
+      // Stored positions and selected reanalysis are both complete dense values.
       // Visiting this order avoids a full output sort and deduplicates coordinates.
       for (const token of tokens) {
         yield charge();
@@ -117,7 +117,7 @@ function* project(context: EvidenceContext, finished: EvidenceResultContext, req
 
 function* prepare(context: EvidenceContext, options: CapturedMatchOptions, presentation?: EvidencePresentation): Generator<WorkStep, PreparedEvidence> {
   yield* validatePayload(context.payload, 'INVALID_OPTIONS');
-  if (context.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.analyzer');
+  requireAnalysis(context);
   const request = parseMatchRequest(context.payload, context.limits, options), providers = new Map<string, Provider>();
   for (const field of request.fields) {
     yield charge(field.length + 1);

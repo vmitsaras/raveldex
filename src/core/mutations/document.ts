@@ -1,3 +1,5 @@
+import { analyzeValue } from '../analyzer/basic.js';
+import type { AnalysisRunner } from '../analyzer/selected.js';
 import { analyzeRecord, canonicalMetadata } from '../contracts/record.js';
 import type { RecordAnalysisCounts } from '../contracts/record.js';
 import type { OwnedRecord } from '../contracts/types.js';
@@ -8,13 +10,13 @@ import type { Charge } from '../query/work.js';
 
 export type AnalysisCounts = RecordAnalysisCounts;
 /** Only supplied changed records reach this analyzer, never old source. */
-export function* prepareDocument(record: OwnedRecord, limits: Limits, charge: Charge, counts?: AnalysisCounts): Generator<WorkStep, DocumentEntry> {
+export function* prepareDocument(record: OwnedRecord, limits: Limits, charge: Charge, counts?: AnalysisCounts, analyze: AnalysisRunner = analyzeValue): Generator<WorkStep, DocumentEntry> {
   for (const values of Object.values(record.text)) {
     yield charge(1);
     for (let i = 0; i < values.length; i++) yield charge(1);
   }
   const fields: Record<string, { length: number; terms: Record<string, number> }> = Object.create(null) as typeof fields;
-  for (const step of analyzeRecord(record, limits, counts)) {
+  for (const step of analyzeRecord(record, limits, counts, analyze)) {
     yield charge(step.workUnits);
     if (step.token) {
       yield charge(step.token.term.length + 2);

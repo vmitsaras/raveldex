@@ -1,3 +1,4 @@
+import { createAnalysis } from '../../core/analyzer/selected.js';
 import { Admission, has, keysOnly, ownObject } from '../../core/contracts/data.js';
 import { captureConfiguration } from '../../core/contracts/schema.js';
 import { captureOptions } from '../../core/contracts/options.js';
@@ -64,13 +65,13 @@ function nativeQualification(engine: Raveldex, root: IndexRoot): NativeSnapshotQ
   if (current.profileId !== root.configuration.analyzer.environmentProfile) fail('PROFILE_MISMATCH'); return current;
 }
 
-function* encoded(root: IndexRoot, format: SnapshotFormat, qualification: NativeSnapshotQualification | undefined, maximum: number): Generator<WorkStep, string> {
+function* encoded(root: IndexRoot, format: SnapshotFormat, qualification: NativeSnapshotQualification | undefined, maximum: number, check: () => void): Generator<WorkStep, string> {
   requireCodecs(root.configuration);
   if (format === 'raveldex-source') requireCompleteSource(root);
   const native = Object.freeze({ documents: root.documents, fields: root.fields, counts: root.counts, participants: root.participants });
   // Export cannot silently omit or bless a trusted registration whose claimed
   // codec fails this complete state protocol. Both formats validate first.
-  try { yield* validateNative(native, root.configuration, root.revision); }
+  try { yield* validateNative(native, root.configuration, root.revision, check); }
   catch (error) {
     if (error instanceof SnapshotAdapterError || error instanceof RaveldexError && ['CANCELLED', 'DISPOSED', 'DEADLINE_EXCEEDED', 'WORK_LIMIT_EXCEEDED', 'RESOURCE_EXHAUSTED'].includes(error.code)) throw error;
     fail('INVALID_NATIVE_STATE');
@@ -106,7 +107,7 @@ function checkedHeader(raw: unknown, root: IndexRoot, format: SnapshotFormat, qu
   count(value.originRevision, Number.MAX_SAFE_INTEGER); return value;
 }
 
-function* preparedSource(payload: unknown, configuration: OwnedConfiguration): Generator<WorkStep, IndexRoot> {
+function* preparedSource(payload: unknown, configuration: OwnedConfiguration, check: () => void): Generator<WorkStep, IndexRoot> {
   const data = object(payload, ['records']);
   if (!Array.isArray(data.records) || data.records.length > configuration.limits.maxDocuments) fail('MALFORMED_SNAPSHOT');
   const installed = initializeParticipants(configuration);
@@ -120,12 +121,13 @@ function* preparedSource(payload: unknown, configuration: OwnedConfiguration): G
     } });
   });
   const owner = new MutationOwner(emptyRoot(configuration, installed.states), participants);
+  const analyze = createAnalysis(configuration, check);
   for (const record of data.records) {
     // Capturing one admitted record retains the original live admission bounds;
     // all batches' yielded work also joins the one outer restore budget.
     yield { workUnits: 1 };
     const request = owner.capture('add', record);
-    yield* owner.execute(request);
+    yield* owner.execute(request, { analyze });
   }
   return owner.root;
 }
@@ -154,7 +156,7 @@ function* restoreCursor(engine: Raveldex, root: IndexRoot, encoded: string, maxi
   let prepared: IndexRoot;
   check(format === 'raveldex-native' ? 'snapshot.validation' : 'snapshot.staging');
   try {
-    prepared = format === 'raveldex-native' ? yield* validateNative(body.payload, root.configuration, origin.originRevision as number) : yield* preparedSource(body.payload, root.configuration);
+    prepared = format === 'raveldex-native' ? yield* validateNative(body.payload, root.configuration, origin.originRevision as number, check) : yield* preparedSource(body.payload, root.configuration, check);
   } catch (error) {
     if (error instanceof SnapshotAdapterError || error instanceof RaveldexError && ['CANCELLED', 'DISPOSED', 'DEADLINE_EXCEEDED', 'WORK_LIMIT_EXCEEDED', 'REVISION_EXHAUSTED', 'RESOURCE_EXHAUSTED'].includes(error.code)) throw error;
     fail('INVALID_NATIVE_STATE');
@@ -184,7 +186,7 @@ export function controlledSnapshots(engine: Raveldex, options: SnapshotOptions =
   function exportFormat(format: SnapshotFormat, options?: MutationOptions): Promise<string> {
     return owner!.adapterOperation(configuration => ({ options: captureOptions(options, configuration.limits, false), *start(root, check) {
       const qualification = format === 'raveldex-native' ? nativeQualification(engine, root) : bindings.get(engine);
-      return yield* metered(encoded(root, format, qualification, maximum as number), configuration.limits.maxMutationWorkUnits, check);
+      return yield* metered(encoded(root, format, qualification, maximum as number, check), configuration.limits.maxMutationWorkUnits, check);
     } }), control);
   }
   return Object.freeze({

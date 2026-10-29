@@ -16,6 +16,7 @@ const NAME = '@vmitsaras/raveldex';
 export const RUNTIME_EXPORTS = Object.freeze({
   '.': ['ERROR_CODES', 'RaveldexError', 'createRaveldex'],
   './addons/phrases': ['createSourcePhrases', 'createSourceProvider'],
+  './integrations/languages/english': ['ENGLISH_ANALYZER', 'createEnglishAnalyzer'],
   './addons/synonyms': ['SYNONYMS_POLICY', 'createSynonyms'],
   './addons/suggestions': ['SUGGESTIONS_POLICY', 'createSuggestions'],
   './addons/typo': ['TYPO_POLICY', 'createTypoTolerance'],
@@ -70,7 +71,7 @@ export function validateCandidateManifest(metadata, files) {
   for (const path of paths) {
     assert.ok(!path.includes('..') && !path.startsWith('/'), `unsafe tarball member ${path}`);
     assert.ok(['README.md', 'LICENSE', 'CHANGELOG.md', 'package.json'].includes(path)
-      || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/localsearch)\/.+\.(?:js|d\.ts|css))$/.test(path)
+      || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/(?:localsearch|languages))\/.+\.(?:js|d\.ts|css))$/.test(path)
       || /^docs\/(?:api\/[^/]+\.md|api\/examples\/(?:[^/]+\.mjs|README\.md)|release\/[^/]+\.md|support\/RX-4003\.md)$/.test(path)
       || path === 'dist/integrations/localsearch/LICENSE.LocalSearch', `unexpected tarball member ${path}`);
     assert.doesNotMatch(path, /(?:^|\/)(?:node_modules|src|test|bench|\.github|\.env)(?:\/|$)|\.map$/);

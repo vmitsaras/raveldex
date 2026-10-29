@@ -51,14 +51,18 @@ export function captureConfiguration(input: unknown): OwnedConfiguration {
   const limits = has(config, 'limits') ? resolveLimits(config.limits, admission) : DEFAULT_LIMITS;
   // The configured admission ceiling applies to the whole configuration too.
   const schema = captureSchema(config.schema, limits, admission);
+  let selected = BASIC_ANALYZER.id as string;
   if (has(config, 'analyzer')) {
     const analyzer = ownObject(config.analyzer, 'INVALID_OPTIONS', 'config.analyzer', admission);
     keysOnly(analyzer, ['id', 'environmentProfile'], 'INVALID_OPTIONS', 'config.analyzer');
     if (typeof analyzer.id !== 'string' || typeof analyzer.environmentProfile !== 'string') invalid('INVALID_OPTIONS', 'config.analyzer');
-    if (analyzer.id !== BASIC_ANALYZER.id) invalid('MISSING_CAPABILITY', 'config.analyzer');
+    if (!/^[A-Za-z][A-Za-z0-9:._-]{0,127}$/.test(analyzer.id)) invalid('INVALID_OPTIONS', 'config.analyzer');
+    selected = analyzer.id;
     if (analyzer.environmentProfile !== BASIC_ANALYZER.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'config.analyzer');
   }
   const capabilities = has(config, 'addons') ? captureRegistrations(config.addons, { schema, limits, admission }) : undefined;
+  const provider = capabilities?.providers[`analyzer:${selected}`];
+  if (selected !== BASIC_ANALYZER.id && (!provider?.analyzer || provider.analyzer.id !== selected)) invalid('MISSING_CAPABILITY', 'config.analyzer');
   bound(admission.count, limits.maxAdmissionEntries, 'config');
-  return Object.freeze({ schema, limits, analyzer: BASIC_ANALYZER, ...(capabilities?.ordered.length ? { capabilities } : {}) });
+  return Object.freeze({ schema, limits, analyzer: selected === BASIC_ANALYZER.id ? BASIC_ANALYZER : Object.freeze({ id: selected, environmentProfile: 'unqualified' }), ...(capabilities?.ordered.length ? { capabilities } : {}) });
 }

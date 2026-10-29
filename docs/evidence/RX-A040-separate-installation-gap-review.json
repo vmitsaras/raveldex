@@ -1,0 +1,428 @@
+{
+  "kind": "raveldex-rx-a040-independent-core-review-v1",
+  "at": "2026-10-29T14:39:33.457Z",
+  "reviewer": "/root/language_seam_audit",
+  "routing": "Inherited model and effort; read-only parent core/worker/snapshot implementation review",
+  "status": "Changes required — separate installation evidence pending",
+  "scope": {
+    "base": "f3713af",
+    "included": [
+      "generic analyzer registration/selection",
+      "immutable capture and operation-scoped bounded analysis",
+      "query/mutation/provider runner propagation",
+      "source/native snapshot analyzer validation and work/stop scopes",
+      "worker source restore/reconcile exact selected identity",
+      "optional import boundaries"
+    ],
+    "excluded": [
+      "independent authorship of phrase/positions/evidence implementation (this reviewer authored those files)",
+      "publication",
+      "remote CI",
+      "cross-host/native Unicode qualification beyond actual artifacts",
+      "heap/allocation/physical-copy claims"
+    ],
+    "modifications": "During review only assigned /tmp artifacts and authorized RX-A040 review/probe evidence files; no runtime/source edits, builds, network or Git writes."
+  },
+  "mandatoryFindings": [
+    {
+      "id": "R2",
+      "classification": "Acceptance/packaging evidence gap",
+      "criterion": "RX-A040-AC03",
+      "paths": [
+        "docs/planning/roadmap.json",
+        "package.json",
+        "test/measurements/english-package.mjs"
+      ],
+      "problem": "The completed artifact exports an English subpath in the same root tarball; its import/cost isolation does not establish separately installable language code/data required by the task card.",
+      "evidence": "The inspected package exports ./integrations/languages/english and ships dist/integrations/languages/. The inspected consumer installs the root tarball only. NATIVE_ARCHITECTURE.md permits coordinated subpaths generally but does not waive the selected task's literal separate-installation criterion.",
+      "requiredOutcome": "A real private independently installable English package/tarball with the same functional factory/descriptor, isolated public declarations and explicit compatible core host contract. Verify offline independent package install, core integration, identity/parity and no runtime core/deep import before closing.",
+      "parentPlan": "Private @vmitsaras/raveldex-english alongside convenience root entry; no publication. Implementation owned by /root/english_stemmer."
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "id": "R1",
+      "classification": "Implementation defect",
+      "path": "src/core/analyzer/selected.ts",
+      "problem": "Module work-budget failure ran before a stop triggered synchronously inside transform.next could be observed.",
+      "initialObserved": [
+        {
+          "operation": "add",
+          "actual": "WORK_LIMIT_EXCEEDED",
+          "expected": "CANCELLED"
+        },
+        {
+          "operation": "source restore",
+          "actual": "WORK_LIMIT_EXCEEDED",
+          "expected": "CANCELLED"
+        },
+        {
+          "operation": "native restore",
+          "actual": "WORK_LIMIT_EXCEEDED",
+          "expected": "CANCELLED"
+        }
+      ],
+      "initialSafety": "All three initial probes still closed cursor, preserved revision0/root and released listeners/tasks; the failure classification was incorrect.",
+      "resolution": "Parent supplies an operation check callback and invokes it immediately after transform.next, before module charging or output validation; shared callbacks propagate to query/mutations and source/native export/restore.",
+      "verified": "Re-ran all three exact fault probes on build2: CANCELLED, closed cursor, preserved root/revision0, pending0/listeners0. Independent source/native export checks also pass CANCELLED with cursor closure and root/task/listener preservation."
+    }
+  ],
+  "independentRuntimeProbes": {
+    "status": "Pass",
+    "count": 12,
+    "script": "docs/evidence/RX-A040-independent-probes.mjs",
+    "report": "docs/evidence/RX-A040-independent-probes.json",
+    "reportSha256": "69f049e8120305508d2d66a3984562001adc77fb6b52f469a5f3a38490f38d9e",
+    "rows": [
+      {
+        "name": "explicit selector and absent or incompatible identity do not silently fall back",
+        "status": "Pass"
+      },
+      {
+        "name": "registered unselected analyzer preserves basic-v1 default and metadata",
+        "status": "Pass"
+      },
+      {
+        "name": "selector and trusted transform function are captured before later caller edits",
+        "status": "Pass"
+      },
+      {
+        "name": "generic transformed terms reject empty malformed and noncanonical data atomically",
+        "status": "Pass"
+      },
+      {
+        "name": "module budget spans tokens values records and resets for a new operation",
+        "status": "Pass"
+      },
+      {
+        "name": "one module allowance spans query analysis and actual provider reanalysis",
+        "status": "Pass"
+      },
+      {
+        "name": "non-idempotent Porter terms and normalized separator terms are not analyzed twice",
+        "status": "Pass"
+      },
+      {
+        "name": "basic-specific expansion and dictionary output reject selected English even for empty requests",
+        "status": "Pass"
+      },
+      {
+        "name": "worker restore and reconciliation validate exact bound selected descriptor",
+        "status": "Pass",
+        "observations": {
+          "scope": "Private branded channel validation, not browser or real worker parity"
+        }
+      },
+      {
+        "name": "stop precedence wins over analyzer module cap during add and source/native restore",
+        "status": "Pass",
+        "observations": [
+          {
+            "operation": "add",
+            "closed": 1
+          },
+          {
+            "operation": "SourceRestore",
+            "closed": 1,
+            "rootPreserved": true
+          },
+          {
+            "operation": "NativeRestore",
+            "closed": 1,
+            "rootPreserved": true
+          }
+        ]
+      },
+      {
+        "name": "snapshot source rebuilding and native source validation share one module budget across all records",
+        "status": "Pass"
+      },
+      {
+        "name": "source and native export preserve stop precedence inside selected reanalysis",
+        "status": "Pass",
+        "observations": [
+          {
+            "operation": "SourceExport",
+            "closed": 2,
+            "rootPreserved": true
+          },
+          {
+            "operation": "NativeExport",
+            "closed": 2,
+            "rootPreserved": true
+          }
+        ]
+      }
+    ],
+    "sourceHashes": [
+      {
+        "path": "src/core/analyzer/selected.ts",
+        "sha256": "139caf8cc0859efda393dc21dd1ce820c435292e47cea2788dcf4f80457013bd"
+      },
+      {
+        "path": "src/core/contracts/schema.ts",
+        "sha256": "bb7c202b4805578d293f6f17a7d82fafa6152c1f5b061c2e27ec5d2af9c220c0"
+      },
+      {
+        "path": "src/core/capabilities/registration.ts",
+        "sha256": "a75291ffc8180c3188375910e1a57fe3338d0da4dc74fc7964dc0c8e0c3a2229"
+      },
+      {
+        "path": "src/core/mutations/owner.ts",
+        "sha256": "dc55ef224db86b679e3db32456432e41c2032c3d8d28a2887aa32fb91f50e3f8"
+      },
+      {
+        "path": "src/core/query/search.ts",
+        "sha256": "01e9711e48d107f197001fdab0b6ba8c9c52b9238ae5d43842da34b2aff428f6"
+      },
+      {
+        "path": "src/adapters/snapshots/native.ts",
+        "sha256": "ae0a36045e54e354c4c17ca43a61e164c5c470532f8b513b88449c76cea759ef"
+      },
+      {
+        "path": "src/adapters/snapshots/snapshots.ts",
+        "sha256": "d420c463f18fd8223aedc5da6780680f974563ecbf0951123e6929818c8db4e4"
+      },
+      {
+        "path": "src/adapters/worker/snapshots.ts",
+        "sha256": "a9942658b38e6ab86355cd8e1c3961fb5030909a39b2096ac97a39ddc6ce5ba6"
+      }
+    ],
+    "scriptSha256": "f3645137b9e0a8c6faf89df84a373fe212fd4d59c2ce5dbb7001c75b6ff3727f"
+  },
+  "sourceAssessment": [
+    "Explicit descriptor selects installed provider; unselected registration retains basic default.",
+    "One core-owned basic token is transformed to exactly one nonempty canonical term while preserving original dense position/value/span.",
+    "One module budget spans tokens, values, records and provider reanalysis; source rebuilding/native source validation reuse it across records.",
+    "Already normalized or non-idempotent Porter outputs are not fed through raw analysis/stemming during native validation.",
+    "Worker restore and reconciliation compare against bound selected descriptor rather than accepting any supported analyzer.",
+    "Basic-specific typo/synonym/suggestion contracts continue to reject English explicitly, including empty requests.",
+    "Final core graph contains generic selected-analyzer plumbing but no English implementation/table; optional-only and combined graphs/costs are independently checked against the actual packed report."
+  ],
+  "artifactClosure": "Pass; exact local candidate artifacts and complementary language review inspected after full preparation. The task card was still in progress during review. Parent may perform terminal documentation/manifest/generated-view synchronization without changing the reviewed runtime or package.",
+  "closedArtifactAudit": {
+    "kind": "raveldex-rx-a040-independent-artifact-audit-v1",
+    "at": "2026-10-29T14:32:06.498Z",
+    "status": "Pass",
+    "tarSha256": "47939164a5b6ed928fc82e1ff6272f21c04f0020dada0d29dba492e793b6d375",
+    "integrity": "sha512-rPsx2HIQYMHCnrQBzNwH8MzPE4XodmrhdlbNdW0X2oCS7gAZpIikpV1A/xcFeWZXmHVnJOlUxLCHcc726y89Qg==",
+    "tarballBytes": 187710,
+    "safeByteCurrentRegularFiles": 256,
+    "fullTestBatches": [
+      [
+        615,
+        615,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        30,
+        30,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        24,
+        24,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        26,
+        26,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "totalTests": 696,
+    "entries": 23,
+    "independentCSS": "./dist/addons/ui/styles.css",
+    "preparationSha256": "8225000971b6af9dd46babbee019ebff217d28c2cc906dc82a9e20050d204810",
+    "candidateReportSha256": "942aca58aaae460a3eb9732a9cbf99a4aab782ee4e73d9d5ad8df88ea269bec7",
+    "checkLogSha256": "81c299e727b341828633ea1ab1d7cbd4e86ff6d1a70af3377def9516dd5044fc",
+    "documentation": {
+      "installedPath": "docs/api/ENGLISH.md",
+      "exactExampleSha256": "2a5d45b42445eed233456031fe568531a6cec3900236e372f89ed1a9e64e521f",
+      "executed": "Pass, node --input-type=module --eval exact installed example",
+      "stdout": "english-porter1980-v1\n"
+    },
+    "otherThirtyTaskCards": "Unchanged",
+    "lockfile": "Unchanged",
+    "environment": {
+      "node": "v24.21.0",
+      "platform": "darwin",
+      "arch": "arm64",
+      "release": "27.0.0",
+      "npm": "12.2.0"
+    },
+    "browserScope": "Candidate headless Chrome156 browser/worker docs smoke remains basic-v1; does not claim English browser/manual AT support",
+    "memberInventorySha256": "138e42a0e9c5a5aeca1562f8a644f96f0002cd99de78e22380b55b617b3e2b91",
+    "method": "Independently decoded tar listing and type flags, checked every one of 256 regular safe unique paths and extracted each byte sequence against the current repository file. Independently parsed raw full-check counters and executed exact installed API example. Canonical package/gzip hashes and integrity match copied closed receipts."
+  },
+  "packedConsumerAudit": {
+    "report": "docs/evidence/RX-A040-package.json",
+    "reportSha256": "17a6fba27281ede0678b31fed6f14bae7cd6e730b47478dd482f398f4f774541",
+    "exactSameTarSha256": "47939164a5b6ed928fc82e1ff6272f21c04f0020dada0d29dba492e793b6d375",
+    "source": "Read and checked actual report and test/measurements/english-package.mjs assertions, not re-executing the full package harness",
+    "correctness": {
+      "status": "Pass",
+      "authoredQueries": 10,
+      "fullPageComparisonsPerRun": 30,
+      "unselectedPack": "Pass",
+      "bundledParity": "Pass",
+      "snapshotComparisonsPerRun": 48,
+      "snapshotMismatchRefusalsPerRun": 8
+    },
+    "worker": {
+      "status": "Pass",
+      "transport": "Actual Node worker_threads with structural browser endpoint",
+      "comparisons": 15,
+      "mismatchRefusals": [
+        {
+          "mode": "missing",
+          "code": "MISSING_CAPABILITY"
+        },
+        {
+          "mode": "version",
+          "code": "INCOMPATIBLE_WORKER"
+        },
+        {
+          "mode": "budget",
+          "code": "INCOMPATIBLE_WORKER"
+        },
+        {
+          "mode": "identity",
+          "code": "INCOMPATIBLE_WORKER"
+        }
+      ],
+      "restoreReceipt": {
+        "operationId": "4021e924-7fe6-47ac-93fc-b11d11018e37:22",
+        "status": "committed",
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 3,
+          "revision": 5,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "english-porter1980-v1",
+            "environmentProfile": "unqualified"
+          }
+        }
+      },
+      "foreignAnalyzerReceipt": "INVALID_TRANSPORT",
+      "foreignAnalyzerRestore": "OUTCOME_UNKNOWN",
+      "unknownOutcome": "Rejected foreign analyzer response is not accepted and does not prove rollback",
+      "scope": "Same-host Node protocol/clone/source-restore observations, not browser or cross-host native qualification"
+    },
+    "documentation": {
+      "status": "Pass",
+      "source": "docs/api/ENGLISH.md",
+      "exampleSha256": "2a5d45b42445eed233456031fe568531a6cec3900236e372f89ed1a9e64e521f",
+      "stdout": "english-porter1980-v1\n"
+    },
+    "startupChecks": 5,
+    "hostReads": 0,
+    "graphs": {
+      "core": {
+        "minifiedBytes": 62370,
+        "gzipBytes": 18535,
+        "sha256": "7134d6990eb480d8977a33654bda297d601118f0e7ded47b476befcf2ff27d16",
+        "languageImplementationInputs": 0
+      },
+      "languageOnly": {
+        "minifiedBytes": 5577,
+        "gzipBytes": 2470,
+        "sha256": "d99720c2f69673d804a8371e1c496be93d7984b78d9bc3b5128725a15faba842"
+      },
+      "combined": {
+        "minifiedBytes": 66360,
+        "gzipBytes": 20074,
+        "sha256": "5902294a423ad935796b29dd567060b5ad63b22fe9e140e02f0f8ed61625a13b"
+      }
+    },
+    "logicalState": {
+      "extraRetainedIndexEntries": 0,
+      "retainedRepresentation": "Constant suffix algorithm tables and registration identity only; no corpus vocabulary/cache. Separate source/positions test configurations deliberately retain their declared data.",
+      "basis": "Logical representation/import graph observation; not heap/allocation-byte or physical-copy peaks"
+    }
+  },
+  "complementaryLanguageReview": {
+    "path": "docs/evidence/RX-A040-language-review.json",
+    "sha256": "68bdd8470411a30240ce23863e04622e177fdd2b76175fe35e4ffa91f1d4e7b9",
+    "reviewer": "/root/english_evaluation",
+    "status": "Ready with follow-ups",
+    "mandatoryFindings": [],
+    "scope": {
+      "reviewedOtherAuthors": [
+        "src/integrations/languages/english/stem.ts",
+        "src/integrations/languages/english/index.ts",
+        "src/addons/phrases/index.ts",
+        "src/addons/phrases/verifier.ts",
+        "src/addons/positions/store.ts",
+        "src/addons/positions/verifier.ts",
+        "src/addons/evidence/providers.ts",
+        "src/addons/evidence/builder.ts",
+        "src/addons/snippets/snippets.ts",
+        "docs/api/ENGLISH.md",
+        "docs/specs/ENGLISH_ANALYZER.md"
+      ],
+      "excludedFromOwnIndependentReview": [
+        "test/oracle/english.mjs",
+        "test/fixtures/relevance/english-v1.json",
+        "test/integrations/languages/english-evaluation.test.mjs"
+      ],
+      "qualification": "This reviewer authored the independent source oracle and frozen relevance judgments. Their differential is secondary evidence, not an independent audit of those own artifacts or a second human/native-language judgment. Primary source/rule checks and direct hand-literal integration observations resolve correctness.",
+      "notClaimed": [
+        "Full task or candidate review",
+        "Generic analyzer registration/admission/worker/snapshot protocol audit (assigned to separate parent/core reviewer)",
+        "Native-human linguistic review",
+        "New manual AT/browser qualification",
+        "Heap/allocation/physical-copy/latency peaks"
+      ]
+    },
+    "sourceAndBuiltHashes": "All reviewed hashes independently matched current files by this closing reviewer",
+    "probeReport": "docs/evidence/RX-A040-language-probes.json",
+    "probeReportSha256": "8f423202eaae6a6023e82dd51f1d4ec91c4bf3e37b592486ebde245e8dec2176",
+    "scopeBoundary": "Complementary review inspected this reviewer's authored add-on modules and another author's stemmer. It does not independently re-review its own oracle/frozen labels; AI-only language assessment remains explicit."
+  },
+  "qualificationAndCost": {
+    "frozenEnglishFixtureSha256": "c4aacb5ac0f08ce37eb30eeb4b42999a7fead15abfb9d09177b8af2b7beaa77a",
+    "frozenCorpusSha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+    "relevanceAspiration": {
+      "status": "Fail",
+      "actual": "17 positive intents improve; 7 of 8 intended-empty cases stay empty; cancell/cancellation collision preserves one known false positive",
+      "whyNotMandatoryDefect": "Explicit fixed original-paper morphology matches independent primary-rule/source truth. The task requires evaluation and candid limits, not a universal zero-collision language guarantee; the unmet frozen aspiration must not be relabeled Pass."
+    },
+    "coreGzipTarget": {
+      "status": "Missed",
+      "actual": 18535,
+      "target": 15360,
+      "changeFromA030": 540
+    },
+    "notClaimed": [
+      "New English browser or manual assistive-technology support",
+      "Native-human linguistic review",
+      "Universal/cross-host Unicode equivalence",
+      "Heap/allocation/physical-copy/latency peaks",
+      "Remote CI or publication"
+    ]
+  },
+  "recommendation": "Do not mark RX-A040 done or commit a final acceptance claim until R2 is resolved and its concrete private package evidence is independently reviewed. Previously audited runtime/probes remain valid for their exact source/package artifacts.",
+  "priorVerdictCorrection": "The earlier Ready verdict verified import isolation but overlooked the stronger literal separately-installable AC03 requirement. It is superseded until R2 has actual independent artifact/install evidence."
+}

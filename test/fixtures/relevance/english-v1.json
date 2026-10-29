@@ -1,0 +1,531 @@
+{
+  "version": "rx-a040-english-real-docs-v1",
+  "frozenDate": "2026-10-29",
+  "analyzerId": "english-porter1980-v1",
+  "algorithmSource": "https://snowballstem.org/algorithms/porter/stemmer.html",
+  "corpus": {
+    "path": "test/fixtures/relevance/corpus.json",
+    "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+    "records": 34
+  },
+  "context": {
+    "author": "Codex /root/english_evaluation, independent source-reading evaluator",
+    "selection": "Owner explicitly selected English and the existing Raveldex documentation.",
+    "need": "Existing 34-section English technical documentation corpus uses singular/plural, participle and nominal headings; strict basic-v1 treats these word forms separately. Existing natural-question gaps also show why morphology must not be called semantic answering.",
+    "labelMethod": "Read actual frozen source headings and assign navigation-relevant sources before executing the English production analyzer. Preserve source bytes, labels and hash after freeze.",
+    "limitations": "One English-reading AI evaluator; 34 English technical self-documentation sections; title-only word-form navigation deliberately bounded for complete labels. Not native-human review, representative user study or general English relevance guarantee."
+  },
+  "acceptance": {
+    "positiveQueries": 17,
+    "negativeQueries": 8,
+    "minimumMeanRecall10": 1,
+    "maximumKnownIrrelevantHits": 0,
+    "maximumNegativeMatches": 0,
+    "originalBasicRegressionCount": 76
+  },
+  "judgments": [
+    {
+      "id": "contracts",
+      "query": {
+        "kind": "text",
+        "text": "contracts",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Both headings document contracts; singular and plural are the same requested topic."
+    },
+    {
+      "id": "records",
+      "query": {
+        "kind": "text",
+        "text": "records",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#record"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#record"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "The Record section documents the records accepted by the engine."
+    },
+    {
+      "id": "algorithms",
+      "query": {
+        "kind": "text",
+        "text": "algorithms",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "The singular normative algorithm heading is the relevant language-analysis algorithm."
+    },
+    {
+      "id": "mapped-source",
+      "query": {
+        "kind": "text",
+        "text": "mapped source",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#source-mapping"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#source-mapping"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Source mapping is the original-coordinate answer for mapped source tokens."
+    },
+    {
+      "id": "compatibilities",
+      "query": {
+        "kind": "text",
+        "text": "environment compatibilities",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "The environment compatibility section describes compatible analyzer/runtime boundaries."
+    },
+    {
+      "id": "singular-node",
+      "query": {
+        "kind": "text",
+        "text": "core node",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#core-nodes"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#core-nodes"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Core nodes lists the supported node kinds; singular is natural navigation."
+    },
+    {
+      "id": "singular-results",
+      "query": {
+        "kind": "text",
+        "text": "result error",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#results-and-errors"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#results-and-errors"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Results and errors is the answer for either singular category in this conjunction."
+    },
+    {
+      "id": "singular-statistics",
+      "query": {
+        "kind": "text",
+        "text": "statistic revision",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/RANKING.md#statistics-from-one-revision"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/RANKING.md#statistics-from-one-revision"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Statistics from one revision documents revision-local ranking statistics."
+    },
+    {
+      "id": "singular-alternatives",
+      "query": {
+        "kind": "text",
+        "text": "original group alternative",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/RANKING.md#original-groups-and-alternatives"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/RANKING.md#original-groups-and-alternatives"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Original groups and alternatives explains this exact grouping concept."
+    },
+    {
+      "id": "plural-explanations",
+      "query": {
+        "kind": "text",
+        "text": "explanations fact",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/RANKING.md#explanation-facts"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/RANKING.md#explanation-facts"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Explanation facts is the concrete numerical explanation section."
+    },
+    {
+      "id": "singular-calls",
+      "query": {
+        "kind": "text",
+        "text": "concurrent call",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Admission and concurrent calls documents queued/concurrent call behavior."
+    },
+    {
+      "id": "plural-behaviors",
+      "query": {
+        "kind": "text",
+        "text": "mutation behaviors",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Mutation behavior is the accepted change operation contract."
+    },
+    {
+      "id": "staged-increment",
+      "query": {
+        "kind": "text",
+        "text": "incremental staged",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Incremental staging documents how changed records are staged."
+    },
+    {
+      "id": "singular-transition",
+      "query": {
+        "kind": "text",
+        "text": "state transition cancellation",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation"
+      ],
+      "acceptableIds": [
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "State transitions and cancellation supplies state-transition cancellation rules."
+    },
+    {
+      "id": "singular-snapshot",
+      "query": {
+        "kind": "text",
+        "text": "snapshot",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb"
+      ],
+      "acceptableIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Snapshots and IndexedDB is the snapshot persistence heading."
+    },
+    {
+      "id": "plural-executions",
+      "query": {
+        "kind": "text",
+        "text": "query executions",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline"
+      ],
+      "acceptableIds": [
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Query execution pipeline is the execution sequence heading."
+    },
+    {
+      "id": "plural-capabilities",
+      "query": {
+        "kind": "text",
+        "text": "strict phrase capabilities",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+      ],
+      "acceptableIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+      ],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "known-relevant",
+      "intent": "Navigate to the source heading through a normal English word-form variation.",
+      "sourceRationale": "Strict phrase capability is the optional phrase behavior heading."
+    },
+    {
+      "id": "out-of-corpus-database",
+      "query": {
+        "kind": "text",
+        "text": "PostgreSQL replication",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "No heading documents PostgreSQL replication.",
+      "sourceRationale": "No heading documents PostgreSQL replication."
+    },
+    {
+      "id": "absent-nonce",
+      "query": {
+        "kind": "text",
+        "text": "unmatchedword",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "The nonce does not occur in the corpus.",
+      "sourceRationale": "The nonce does not occur in the corpus."
+    },
+    {
+      "id": "no-transliteration",
+      "query": {
+        "kind": "text",
+        "text": "cafe",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "No heading represents café/cafe; the pack does not invent topics or accent equivalence.",
+      "sourceRationale": "No heading represents café/cafe; the pack does not invent topics or accent equivalence."
+    },
+    {
+      "id": "unconfigured-semantic-topic",
+      "query": {
+        "kind": "text",
+        "text": "vector embeddings",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "No heading describes embeddings or vector search.",
+      "sourceRationale": "No heading describes embeddings or vector search."
+    },
+    {
+      "id": "unsupported-natural-paraphrase",
+      "query": {
+        "kind": "text",
+        "text": "how to stop my operation",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "The exact AND words are not a morphology-only phrase paraphrase.",
+      "sourceRationale": "The exact AND words are not a morphology-only phrase paraphrase."
+    },
+    {
+      "id": "unrelated-conjunction",
+      "query": {
+        "kind": "text",
+        "text": "snapshot schema",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "The two title topics occur in distinct records and remain required AND obligations.",
+      "sourceRationale": "The two title topics occur in distinct records and remain required AND obligations."
+    },
+    {
+      "id": "tokenless",
+      "query": {
+        "kind": "text",
+        "text": "😀 !!!",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "No analyzer token must not become an implicit all query.",
+      "sourceRationale": "No analyzer token must not become an implicit all query."
+    },
+    {
+      "id": "near-prefix",
+      "query": {
+        "kind": "text",
+        "text": "cancell",
+        "fields": [
+          "title"
+        ]
+      },
+      "mustFindIds": [],
+      "acceptableIds": [],
+      "knownIrrelevantIds": [],
+      "labelsComplete": true,
+      "expectation": "intended-empty",
+      "intent": "Keep unrelated, incomplete or tokenless navigation empty.",
+      "emptyReason": "A truncated string is not silently a prefix; Porter is not a typo or prefix expander.",
+      "sourceRationale": "A truncated string is not silently a prefix; Porter is not a typo or prefix expander."
+    }
+  ]
+}

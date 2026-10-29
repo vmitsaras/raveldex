@@ -5,6 +5,8 @@ export type { MetadataContext, PayloadContext, CapturedPayload, AggregationOutpu
 export type { EvidenceContext, EvidenceResultContext, EvidenceImplementation, PreparedEvidence } from './core/capabilities/types.js';
 export type { ExpansionAlternative, DictionaryStep, ExpansionContext, ExpansionImplementation } from './core/capabilities/types.js';
 export type { DictionaryEntryStep, DictionaryContext, DictionaryImplementation, PreparedDictionaryOutput } from './core/capabilities/types.js';
+export type { AnalyzerImplementation } from './core/capabilities/types.js';
+export type { AnalysisRunner } from './core/analyzer/selected.js';
 export { RaveldexError, ERROR_CODES } from './core/errors/error.js';
 export type { ErrorCode, ErrorDetails } from './core/errors/error.js';
 export type {

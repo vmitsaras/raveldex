@@ -153,7 +153,7 @@ Support transparent, bounded alternatives within original query groups for a jud
 
 **Evaluated language analyzer pack**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/31)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/31)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -161,11 +161,11 @@ Select one language with real corpus demand and provide compatible indexing/quer
 
 **Expected affected areas**
 
-`integrations/languages/`, `test/integrations/languages/`, `test/fixtures/relevance/`. These are planning boundaries; create files only when this task needs them.
+`src/integrations/languages/`, `src/core/analyzer/`, `src/core/capabilities/`, `src/core/contracts/`, `src/core/mutations/`, `src/core/query/`, `src/addons/phrases/`, `src/addons/positions/`, `src/addons/evidence/`, `src/addons/snippets/`, `src/adapters/worker/`, `src/adapters/snapshots/`, `test/integrations/languages/`, `test/fixtures/relevance/`, `integrations/languages/english/`, `scripts/pack-english.mjs`, `test/measurements/english-package.mjs`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [ENGLISH_ANALYZER.md](../../docs/specs/ENGLISH_ANALYZER.md)
 
 **Acceptance criteria**
 
@@ -181,7 +181,39 @@ Select one language with real corpus demand and provide compatible indexing/quer
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A040-baseline.log](../../docs/evidence/RX-A040-baseline.log)
+- [docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A040-candidate.json](../../docs/evidence/RX-A040-candidate.json)
+- [docs/evidence/RX-A040-check.log](../../docs/evidence/RX-A040-check.log)
+- [docs/evidence/RX-A040-english-0.1.0-rc.0.tgz](../../docs/evidence/RX-A040-english-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A040-english-pack.log](../../docs/evidence/RX-A040-english-pack.log)
+- [docs/evidence/RX-A040-english-package.json](../../docs/evidence/RX-A040-english-package.json)
+- [docs/evidence/RX-A040-focused.log](../../docs/evidence/RX-A040-focused.log)
+- [docs/evidence/RX-A040-independent-probes.json](../../docs/evidence/RX-A040-independent-probes.json)
+- [docs/evidence/RX-A040-independent-probes.mjs](../../docs/evidence/RX-A040-independent-probes.mjs)
+- [docs/evidence/RX-A040-initial-lifecycle.log](../../docs/evidence/RX-A040-initial-lifecycle.log)
+- [docs/evidence/RX-A040-initial-standalone-tests.log](../../docs/evidence/RX-A040-initial-standalone-tests.log)
+- [docs/evidence/RX-A040-initial-typecheck.log](../../docs/evidence/RX-A040-initial-typecheck.log)
+- [docs/evidence/RX-A040-language-probes.json](../../docs/evidence/RX-A040-language-probes.json)
+- [docs/evidence/RX-A040-language-probes.mjs](../../docs/evidence/RX-A040-language-probes.mjs)
+- [docs/evidence/RX-A040-language-review.json](../../docs/evidence/RX-A040-language-review.json)
+- [docs/evidence/RX-A040-lifecycle.log](../../docs/evidence/RX-A040-lifecycle.log)
+- [docs/evidence/RX-A040-package.json](../../docs/evidence/RX-A040-package.json)
+- [docs/evidence/RX-A040-pre-standalone-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A040-pre-standalone-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A040-pre-standalone-candidate.json](../../docs/evidence/RX-A040-pre-standalone-candidate.json)
+- [docs/evidence/RX-A040-pre-standalone-check.log](../../docs/evidence/RX-A040-pre-standalone-check.log)
+- [docs/evidence/RX-A040-pre-standalone-package.json](../../docs/evidence/RX-A040-pre-standalone-package.json)
+- [docs/evidence/RX-A040-pre-standalone-preparation.json](../../docs/evidence/RX-A040-pre-standalone-preparation.json)
+- [docs/evidence/RX-A040-pre-standalone-sync.log](../../docs/evidence/RX-A040-pre-standalone-sync.log)
+- [docs/evidence/RX-A040-preparation.json](../../docs/evidence/RX-A040-preparation.json)
+- [docs/evidence/RX-A040-review.json](../../docs/evidence/RX-A040-review.json)
+- [docs/evidence/RX-A040-separate-installation-gap-review.json](../../docs/evidence/RX-A040-separate-installation-gap-review.json)
+- [docs/evidence/RX-A040-snapshot-stop-probe.mjs](../../docs/evidence/RX-A040-snapshot-stop-probe.mjs)
+- [docs/evidence/RX-A040-standalone-tests.log](../../docs/evidence/RX-A040-standalone-tests.log)
+- [docs/evidence/RX-A040-stem-typecheck.log](../../docs/evidence/RX-A040-stem-typecheck.log)
+- [docs/evidence/RX-A040-stop-probe.mjs](../../docs/evidence/RX-A040-stop-probe.mjs)
+- [docs/evidence/RX-A040-sync.log](../../docs/evidence/RX-A040-sync.log)
+- [docs/evidence/RX-A040.md](../../docs/evidence/RX-A040.md)
 
 
 ## RX-A050

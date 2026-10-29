@@ -1,3 +1,5 @@
+import { createAnalysis } from '../analyzer/selected.js';
+import type { AnalysisRunner } from '../analyzer/selected.js';
 import type { MetadataContext, RefinementContext, EvidenceResultContext, AggregationOutput } from './types.js';
 import { bound, invalid } from '../errors/error.js';
 import type { OwnedRecord, OwnedSearchOptions } from '../contracts/types.js';
@@ -20,7 +22,7 @@ export interface PreparedExtensions {
 
 /** Prepare every requested leaf and aggregation, including empty/failed branches.
  * One registration budget covers every prepare/test/add/finish cursor. */
-export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge: Charge, options: OwnedSearchOptions): Generator<WorkStep, PreparedExtensions> {
+export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge: Charge, options: OwnedSearchOptions, analyze: AnalysisRunner = createAnalysis(root.configuration)): Generator<WorkStep, PreparedExtensions> {
   const leaves = new Map<CompiledNode, PreparedLeaf>();
   const aggregations: PreparedExtensions['aggregations'][number][] = [], budgets = new Map<string, WorkBudget>();
   const outputs: PreparedExtensions['outputs'][number][] = [];
@@ -55,7 +57,7 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
       let test: (id: string, metadata: Metadata) => Generator<WorkStep, boolean>;
       if (node.kind === 'extension') {
         if (!registration.refinement) invalid('MISSING_CAPABILITY', 'query.refinement');
-        const context: RefinementContext = Object.freeze({ revision: root.revision, analyzer: root.configuration.analyzer, limits: root.configuration.limits, fields: node.fields, terms: node.terms,
+        const context: RefinementContext = Object.freeze({ analyze, revision: root.revision, analyzer: root.configuration.analyzer, limits: root.configuration.limits, fields: node.fields, terms: node.terms,
           state(capability: string): unknown {
             return state(capability, node.capability);
           } });
@@ -102,7 +104,7 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
     }
     if (registration.evidence) {
       if (evidence) invalid('INVALID_OPTIONS', 'options.extensions.evidence');
-      const prepared = yield* run(registration.evidence.prepare(Object.freeze({ ...metadataContext(capability, options.extensions![capability]), analyzer: root.configuration.analyzer,
+      const prepared = yield* run(registration.evidence.prepare(Object.freeze({ ...metadataContext(capability, options.extensions![capability]), analyzer: root.configuration.analyzer, analyze,
         state: (requested: string): unknown => state(requested, capability) })));
       if (!prepared || typeof prepared.finish !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'extensions.evidence');
       const finish = prepared.finish.bind(prepared);

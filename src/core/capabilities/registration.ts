@@ -34,13 +34,13 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     }));
   };
   for (const entry of entries) {
-    const data = object(entry, 'addons.registration', ['manifest', 'participant', 'refinement', 'predicate', 'aggregation', 'evidence', 'expansion', 'dictionary']);
+    const data = object(entry, 'addons.registration', ['manifest', 'participant', 'refinement', 'predicate', 'aggregation', 'evidence', 'expansion', 'dictionary', 'analyzer']);
     const raw = object(data.manifest, 'addons.manifest', ['id', 'version', 'contractVersion', 'roles', 'provides', 'requires', 'dataRequirements', 'indexEffect', 'rebuildPolicy', 'execution', 'limits', 'costs', 'codec']);
     const name = id(raw.id, 'addons.id'), version = string(raw.version, 'addons.version');
     const semanticVersion = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/;
     if (!semanticVersion.test(version) || raw.contractVersion !== 1 || registrations.has(name)) invalid(code, 'addons.identity');
-    const roles = ownArray(raw.roles, 6, code, 'addons.roles', admission);
-    if (!roles.length || new Set(roles).size !== roles.length || roles.some(role => role !== 'leaf-refinement' && role !== 'transaction-participant' && role !== 'aggregation' && role !== 'evidence' && role !== 'term-expansion' && role !== 'dictionary-output')) invalid(code, 'addons.roles');
+    const roles = ownArray(raw.roles, 7, code, 'addons.roles', admission);
+    if (!roles.length || new Set(roles).size !== roles.length || roles.some(role => role !== 'leaf-refinement' && role !== 'transaction-participant' && role !== 'aggregation' && role !== 'evidence' && role !== 'term-expansion' && role !== 'dictionary-output' && role !== 'analyzer')) invalid(code, 'addons.roles');
     const requirements = object(raw.dataRequirements, 'addons.dataRequirements', ['fields', 'source', 'positions', 'offsets', 'metadata']);
     const metadata = flag(requirements.metadata, 'addons.metadata');
     const fields = ownArray(requirements.fields, metadata ? limits.maxMetadataFields : limits.maxTextFields, code, 'addons.fields', admission).map(field => {
@@ -58,17 +58,19 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     const participantRole = roles.includes('transaction-participant'), refinementRole = roles.includes('leaf-refinement'), aggregationRole = roles.includes('aggregation'), evidenceRole = roles.includes('evidence');
     const expansionRole = roles.includes('term-expansion');
     const dictionaryRole = roles.includes('dictionary-output');
+    const analyzerRole = roles.includes('analyzer');
+    if (analyzerRole !== has(data, 'analyzer') || analyzerRole && (roles.length !== 1 || fields.length !== 0 || metadata || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false || has(raw, 'codec'))) invalid(code, 'addons.analyzer');
     if (dictionaryRole !== has(data, 'dictionary') || dictionaryRole && (roles.length !== 1 || metadata || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.dictionary');
     if (expansionRole !== has(data, 'expansion') || expansionRole && (roles.length !== 1 || metadata || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.expansion');
-    if (participantRole !== has(data, 'participant') || refinementRole !== (has(data, 'refinement') || has(data, 'predicate')) || has(data, 'refinement') && has(data, 'predicate') || aggregationRole !== has(data, 'aggregation') || evidenceRole !== has(data, 'evidence') || raw.indexEffect !== (participantRole ? 'transactional' : 'none')) invalid(code, 'addons.roles');
+    if (participantRole !== has(data, 'participant') || refinementRole !== (has(data, 'refinement') || has(data, 'predicate')) || has(data, 'refinement') && has(data, 'predicate') || aggregationRole !== has(data, 'aggregation') || evidenceRole !== has(data, 'evidence') || raw.indexEffect !== (participantRole ? 'transactional' : analyzerRole ? 'analysis' : 'none')) invalid(code, 'addons.roles');
     if ((has(data, 'predicate') || aggregationRole) && (!metadata || participantRole || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.dataRequirements');
     if (evidenceRole && (participantRole || metadata || requirements.offsets === true && requirements.positions !== true)) invalid(code, 'addons.dataRequirements');
     // All handles use the same descriptor capture/type/binding rules.
     const implementations: Record<string, unknown> = {};
-    for (const key of ['participant', 'refinement', 'predicate', 'aggregation', 'evidence', 'expansion', 'dictionary'] as const) {
+    for (const key of ['participant', 'refinement', 'predicate', 'aggregation', 'evidence', 'expansion', 'dictionary', 'analyzer'] as const) {
       if (!has(data, key)) continue;
-      const methods = key === 'participant' ? ['initialize', 'prepare'] : key === 'refinement' ? ['prepare'] : key === 'evidence' ? ['capture', 'select', 'prepare'] : key === 'expansion' ? ['expand'] : ['capture', 'prepare'];
-      const attributes = key === 'refinement' ? ['kind', 'maxTokens'] : key === 'aggregation' ? ['fieldType'] : key === 'expansion' ? ['kind', 'maxTokens', 'policy'] : [];
+      const methods = key === 'participant' ? ['initialize', 'prepare'] : key === 'refinement' ? ['prepare'] : key === 'evidence' ? ['capture', 'select', 'prepare'] : key === 'expansion' ? ['expand'] : key === 'analyzer' ? ['transform'] : ['capture', 'prepare'];
+      const attributes = key === 'refinement' ? ['kind', 'maxTokens'] : key === 'aggregation' ? ['fieldType'] : key === 'expansion' ? ['kind', 'maxTokens', 'policy'] : key === 'analyzer' ? ['kind', 'id'] : [];
       const handles = object(data[key], `addons.${key}`, [...methods, ...attributes]);
       for (const method of methods) {
         const callback = handles[method];
@@ -80,6 +82,11 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
         if (handles.kind !== 'weighted-token-alternatives' || integer(handles.maxTokens, 'addons.maxTokens', 1) > DEFAULT_LIMITS.maxQueryTokens) invalid(code, 'addons.expansion');
         handles.policy = id(handles.policy, 'addons.expansion.policy');
       }
+      if (key === 'analyzer') {
+        if (handles.kind !== 'single-token-transform') invalid(code, 'addons.analyzer');
+        handles.id = id(handles.id, 'addons.analyzer.id');
+        if (handles.id === 'basic-v1') invalid(code, 'addons.analyzer.id');
+      }
       if (key === 'aggregation' && (handles.fieldType !== 'string' || fields.some(field => schema.metadata[field]?.type !== handles.fieldType))) invalid(code, 'addons.aggregation');
       implementations[key] = Object.freeze(handles);
     }
@@ -88,9 +95,10 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     const manifest: CapabilityManifest = Object.freeze({ id: name, version, contractVersion: 1,
       roles: Object.freeze(roles as CapabilityManifest['roles'][number][]), provides: references(raw.provides, 'addons.provides'), requires: references(raw.requires, 'addons.requires'),
       dataRequirements: Object.freeze({ fields: Object.freeze(fields.sort()), source: flag(requirements.source, 'addons.source'), positions: flag(requirements.positions, 'addons.positions'), offsets: flag(requirements.offsets, 'addons.offsets'), metadata }),
-      indexEffect: participantRole ? 'transactional' : 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: execution.worker, ...(workerRegistration ? { workerRegistration } : {}) }), limits: ownedLimits,
+      indexEffect: participantRole ? 'transactional' : analyzerRole ? 'analysis' : 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: execution.worker, ...(workerRegistration ? { workerRegistration } : {}) }), limits: ownedLimits,
       costs: Object.freeze({ importedCode: string(costs.importedCode, 'addons.costs', 1024), retainedRepresentation: string(costs.retainedRepresentation, 'addons.costs', 1024), transientWork: string(costs.transientWork, 'addons.costs', 1024), externalResources: 'none' }), ...(codec ? { codec } : {}) });
     const captured: CapturedRegistration = Object.freeze({ manifest, ...implementations });
+    if (captured.analyzer && (manifest.provides.length !== 1 || manifest.provides[0]!.id !== `analyzer:${captured.analyzer.id}` || manifest.requires.length !== 0)) invalid(code, 'addons.analyzer');
     registrations.set(name, captured);
     if (!manifest.provides.length) invalid(code, 'addons.provides');
     for (const provided of manifest.provides) { if (has(providers, provided.id)) invalid(code, 'addons.providers'); providers[provided.id] = captured; }

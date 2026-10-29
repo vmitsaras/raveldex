@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010, RX-A020 and RX-A030
+## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030 and RX-A040
+
+- RX-A040 adds explicitly selected `/integrations/languages/english` with original Porter 1980 morphology, one-to-one original spans/positions and shared index/query/phrase/evidence/worker/snapshot analysis. Default basic behavior remains unchanged; English overstemming, finite host qualification and the existing core gzip target miss remain disclosed.
 
 - RX-A030 adds `/addons/synonyms`: owned versioned single-token directional mappings, one-step live alternatives at weight 0.5, original required groups, transparent mapping/score facts, complete bounds and explicit worker identity. No ordinary-query/phrase/UI change, corpus side index or runtime dependency is added.
 

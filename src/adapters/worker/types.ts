@@ -20,7 +20,7 @@ export interface WorkerOptions {
   readonly configuration: Configuration;
   readonly ownership: 'owned' | 'external';
   /** Explicitly pair a browser main thread with its own same-host worker.
-   * The adopted basic-v1 unqualified profile does not support cross-host claims. */
+   * The selected analyzer's unqualified profile does not support cross-host claims. */
   readonly sameHost: true;
   readonly maxMessageBytes?: number;
   readonly responseTimeoutMs?: number;

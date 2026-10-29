@@ -1,5 +1,6 @@
 import { analyzeValue } from '../../core/analyzer/basic.js';
 import type { Token } from '../../core/analyzer/basic.js';
+import type { AnalysisRunner } from '../../core/analyzer/selected.js';
 import { Admission, has, keysOnly, ownObject, scanUnicode } from '../../core/contracts/data.js';
 import { invalid } from '../../core/errors/error.js';
 import { directoryGet } from '../../core/index/directory.js';
@@ -42,7 +43,7 @@ function* array(input: unknown, maximum: number, path: string): Generator<WorkSt
 export type ValueTokens = readonly (readonly Token[])[];
 
 /** Complete reanalysis of selected originals, with positions local to each value. */
-export function* sourceTokens(root: SourceRoot, id: string, field: string, limits: Limits): Generator<WorkStep, ValueTokens> {
+export function* sourceTokens(root: SourceRoot, id: string, field: string, limits: Limits, analyze: AnalysisRunner = analyzeValue): Generator<WorkStep, ValueTokens> {
   yield charge(id.length + field.length + 1);
   const record = directoryGet(root.records, id);
   if (!record) invalid('MISSING_CAPABILITY', 'evidence.source.record');
@@ -63,7 +64,7 @@ export function* sourceTokens(root: SourceRoot, id: string, field: string, limit
     yield charge();
     if (typeof value !== 'string' || value.length > limits.maxTextCodeUnitsPerValue) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.source.value');
     const tokens: Token[] = [];
-    for (const step of analyzeValue(value, valueIndex, limits, 'INCOMPATIBLE_CAPABILITY')) {
+    for (const step of analyze(value, valueIndex, limits, 'INCOMPATIBLE_CAPABILITY')) {
       yield charge(step.workUnits);
       if (step.token) {
         if (++tokenCount > limits.maxTokensPerRecord) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.source.tokens');
@@ -75,7 +76,7 @@ export function* sourceTokens(root: SourceRoot, id: string, field: string, limit
   return Object.freeze(output);
 }
 
-/** Reconstruct each basic-v1 value from complete ordered stored occurrences.
+/** Reconstruct each dense analyzed value from complete ordered stored occurrences.
  * Every term/list is validated, including values that provide no query match. */
 export function* offsetTokens(root: PositionRoot, id: string, field: string, limits: Limits): Generator<WorkStep, ValueTokens> {
   yield charge(id.length + field.length + 1);

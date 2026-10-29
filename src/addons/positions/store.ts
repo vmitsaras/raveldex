@@ -1,5 +1,6 @@
 import { workerIdentity } from '../../core/capabilities/worker-identity.js';
-import { BASIC_ANALYZER, analyzeValue } from '../../core/analyzer/basic.js';
+import { createAnalysis, requireAnalysis } from '../../core/analyzer/selected.js';
+import type { AnalysisRunner } from '../../core/analyzer/selected.js';
 import type { AddonRegistration, ParticipantContext } from '../../core/capabilities/types.js';
 import { has } from '../../core/contracts/data.js';
 import type { AnalyzerDescriptor, OwnedConfiguration, OwnedRecord } from '../../core/contracts/types.js';
@@ -13,7 +14,7 @@ import type { PositionProviderOptions } from './options.js';
 
 export interface PositionOccurrence {
   readonly position: number;
-  /** Basic-v1 emits one token per position. This is not a synonym graph. */
+  /** Supported analyzers emit one token per position. This is not a synonym graph. */
   readonly positionLength: 1;
   readonly start?: number;
   readonly end?: number;
@@ -89,9 +90,9 @@ export function requirePositionRoot(input: unknown, field: string, revision: num
 }
 
 function initialRoot(configuration: OwnedConfiguration, fields: readonly string[], offsetFields: readonly string[], requestedEntries: number): PositionRoot {
-  // The optional snapshot factory may qualify this same basic-v1 algorithm for
-  // one explicitly evidenced runtime. Ordinary capture still owns the default.
-  if (configuration.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'positions.analyzer');
+  // Resolve the selected trusted implementation without retaining it in state.
+  // Snapshot headers and the owner continue to bind its data-only identity.
+  createAnalysis(configuration);
   for (const field of fields) if (!has(configuration.schema.text, field)) invalid('MISSING_CAPABILITY', 'positions.fields');
   const limits = configuration.limits;
   return Object.freeze({
@@ -104,7 +105,7 @@ function initialRoot(configuration: OwnedConfiguration, fields: readonly string[
   });
 }
 
-function* retainRecord(record: OwnedRecord, root: PositionRoot): Generator<WorkStep, PositionRecord> {
+function* retainRecord(record: OwnedRecord, root: PositionRoot, analyze: AnalysisRunner): Generator<WorkStep, PositionRecord> {
   const positions: Record<string, readonly PositionValue[]> = Object.create(null) as typeof positions;
   let retainedEntries = 1, occurrenceCount = 0, offsetCount = 0, termEntries = 0, termCodeUnits = 0;
   for (const field of root.fields) {
@@ -116,7 +117,7 @@ function* retainRecord(record: OwnedRecord, root: PositionRoot): Generator<WorkS
       yield rawCharge(1); retainedEntries++;
       const terms: Record<string, PositionOccurrence[]> = Object.create(null) as typeof terms;
       let tokenCount = 0;
-      for (const step of analyzeValue(record.text[field]![valueIndex]!, valueIndex, root.limits)) {
+      for (const step of analyze(record.text[field]![valueIndex]!, valueIndex, root.limits)) {
         yield rawCharge(step.workUnits);
         if (!step.token) continue;
         const token = step.token;
@@ -142,6 +143,7 @@ function* retainRecord(record: OwnedRecord, root: PositionRoot): Generator<WorkS
 }
 
 function* preparePositions(previous: unknown, context: ParticipantContext, fields: readonly string[]): Generator<WorkStep, PositionRoot> {
+  const analyze = requireAnalysis(context);
   const old = requirePositionRoot(previous, fields[0]!, context.previousRevision, context.analyzer);
   if (context.revision !== context.previousRevision + 1 || !Number.isSafeInteger(context.revision)) invalid('REVISION_MISMATCH', 'positions.revision');
   if (context.kind === 'clear') {
@@ -166,7 +168,7 @@ function* preparePositions(previous: unknown, context: ParticipantContext, field
     if (context.kind === 'replace' && !retained) invalid('MISSING_CAPABILITY', 'positions.record');
     if (context.kind !== 'replace' && retained) invalid('INCOMPATIBLE_CAPABILITY', 'positions.record');
     if (retained) adjust(retained, -1);
-    const next = yield* retainRecord(record, old);
+    const next = yield* retainRecord(record, old, analyze);
     adjust(next, 1);
     bound(retainedEntries, old.maxRetainedEntries, 'positions.retainedEntries');
     bound(occurrenceCount, old.maxOccurrences, 'positions.occurrences');

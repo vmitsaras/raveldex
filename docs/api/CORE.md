@@ -117,3 +117,7 @@ Root also exports the trusted extension protocol types. They are implementation 
 The exported declarations are authoritative for exact generator/context shapes. See the repository [extension contract](https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md) before authoring a trusted registration. No private owner/root/scheduler API is supported.
 
 The optional [token suggestions](SUGGESTIONS.md) output is requested through `SearchOptions.extensions.suggestions`. It reads selected whole-corpus dictionaries at the execution revision and never alters query membership, scores or pagination.
+
+## Explicit language analysis
+
+`basic-v1` remains the default. The optional [English analyzer](ENGLISH.md) requires both its registered pack and explicit `Configuration.analyzer` descriptor at new-owner construction. Its one-to-one original-token transform changes lexical terms and native statistics, while preserving original positions/spans; metadata is unchanged. Installed but unselected packs leave ordinary basic results unchanged. Core imports no language implementation/table. Other segmentation graphs/languages remain unavailable as first-party packs.

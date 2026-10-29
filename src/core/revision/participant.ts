@@ -1,3 +1,4 @@
+import type { AnalysisRunner } from '../analyzer/selected.js';
 import type { OwnedRecord } from '../contracts/types.js';
 import type { IndexRoot } from '../index/state.js';
 import type { WorkStep } from '../index/directory.js';
@@ -5,6 +6,7 @@ import type { DocumentDelta } from '../mutations/delta.js';
 import type { MutationKind } from '../mutations/capture.js';
 
 export interface TransactionContext {
+  readonly analyze?: AnalysisRunner;
   readonly kind: MutationKind;
   readonly previous: IndexRoot;
   readonly core: IndexRoot;

@@ -1,3 +1,5 @@
+import { createAnalysis } from '../analyzer/selected.js';
+import type { AnalysisRunner } from '../analyzer/selected.js';
 import { analyzeQuery } from '../contracts/query.js';
 import type { OwnedQuery } from '../contracts/query.js';
 import type { OwnedConfiguration, Scalar } from '../contracts/types.js';
@@ -20,9 +22,9 @@ export type CompiledNode =
 export interface CompiledQuery { readonly node: CompiledNode; readonly groups: ReadonlyMap<string, CanonicalGroup>; readonly key: string }
 
 /** Consume shared analysis once. Normalized output never re-enters raw analysis. */
-export function* compileQuery(query: OwnedQuery, configuration: OwnedConfiguration, charge: Charge, expansion?: ExpansionResolver): Generator<WorkStep, CompiledQuery> {
+export function* compileQuery(query: OwnedQuery, configuration: OwnedConfiguration, charge: Charge, expansion?: ExpansionResolver, analyze: AnalysisRunner = createAnalysis(configuration)): Generator<WorkStep, CompiledQuery> {
   const tokens = new Map<OwnedQuery, string[]>();
-  for (const step of analyzeQuery(query, configuration.schema, configuration.limits, configuration.capabilities)) {
+  for (const step of analyzeQuery(query, configuration.schema, configuration.limits, configuration.capabilities, analyze)) {
     yield charge(step.workUnits);
     if (step.token && step.leaf) {
       yield charge(1);

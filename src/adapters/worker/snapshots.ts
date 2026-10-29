@@ -1,4 +1,4 @@
-import type { MutationOptions } from '../../core/contracts/types.js';
+import type { AnalyzerDescriptor, MutationOptions } from '../../core/contracts/types.js';
 import { SnapshotAdapterError, SNAPSHOT_REASONS } from '../snapshots/error.js';
 import type { SnapshotReason } from '../snapshots/error.js';
 import type { SnapshotRestoreResult } from '../snapshots/types.js';
@@ -16,19 +16,19 @@ export interface WorkerSnapshots {
   restore(encoded: string, options?: MutationOptions): SnapshotRestorePromise;
   reconcile(operationId: string): Promise<SnapshotRestoreReceipt>;
 }
-function result(input: unknown): SnapshotRestoreResult {
+function result(input: unknown, expected: AnalyzerDescriptor): SnapshotRestoreResult {
   const value = object(input, ['format', 'originRevision', 'revision', 'reindexed', 'receivingAnalyzer']);
   if (value.format !== 'raveldex-source' || value.reindexed !== true) fail('snapshot.result');
   integer(value.originRevision); integer(value.revision, Number.MAX_SAFE_INTEGER, 1);
   const analyzer = object(value.receivingAnalyzer, ['id', 'environmentProfile']);
-  if (analyzer.id !== 'basic-v1' || analyzer.environmentProfile !== 'unqualified') fail('snapshot.analyzer');
+  if (analyzer.id !== expected.id || analyzer.environmentProfile !== expected.environmentProfile) fail('snapshot.analyzer');
   return value as unknown as SnapshotRestoreResult;
 }
-function receipt(input: unknown, operationId: string): SnapshotRestoreReceipt {
+function receipt(input: unknown, operationId: string, expected: AnalyzerDescriptor): SnapshotRestoreReceipt {
   const value = object(input, ['operationId', 'status', 'result', 'error']);
   if (value.operationId !== operationId) fail('snapshot.receipt');
   if (value.status === 'pending' || value.status === 'expired') { if (value.result !== undefined || value.error !== undefined) fail('snapshot.receipt'); }
-  else if (value.status === 'committed') { if (value.error !== undefined) fail('snapshot.receipt'); result(value.result); }
+  else if (value.status === 'committed') { if (value.error !== undefined) fail('snapshot.receipt'); result(value.result, expected); }
   else if (value.status === 'rejected') { if (value.result !== undefined) fail('snapshot.receipt'); validateError(value.error); }
   else fail('snapshot.receipt');
   return value as unknown as SnapshotRestoreReceipt;
@@ -48,9 +48,9 @@ export function createWorkerSnapshots(engine: WorkerRaveldex): WorkerSnapshots {
       return channel.invoke('snapshotExportSource', undefined, options, value => { if (typeof value !== 'string') fail('snapshot.encoded'); return value; }).catch(inflate) as Promise<string>;
     },
     restore(encoded: string, options?: MutationOptions): SnapshotRestorePromise {
-      const promise = channel.invoke('snapshotRestore', encoded, options, result), mapped = promise.catch(inflate);
+      const promise = channel.invoke('snapshotRestore', encoded, options, value => result(value, channel.analyzer)), mapped = promise.catch(inflate);
       Object.defineProperty(mapped, 'operationId', { value: promise.operationId ?? '', enumerable: true }); return mapped as SnapshotRestorePromise;
     },
-    reconcile(operationId: string): Promise<SnapshotRestoreReceipt> { return channel.reconcile(operationId, value => receipt(value, operationId)) as Promise<SnapshotRestoreReceipt>; },
+    reconcile(operationId: string): Promise<SnapshotRestoreReceipt> { return channel.reconcile(operationId, value => receipt(value, operationId, channel.analyzer)) as Promise<SnapshotRestoreReceipt>; },
   });
 }

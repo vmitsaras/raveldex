@@ -16,7 +16,7 @@ export function initializeParticipants(configuration: OwnedConfiguration): { rea
       for (const change of context.changes) if (change.previous && !change.next) {
         yield { workUnits: change.previous.id.length + 1 }; removedIds.push(change.previous.id);
       }
-      const request = Object.freeze({ kind: context.kind, previousRevision: context.previous.revision, revision: context.core.revision, analyzer: configuration.analyzer, records: context.records, removedIds: Object.freeze(removedIds) });
+      const request = Object.freeze({ ...(context.analyze ? { analyze: context.analyze } : {}), kind: context.kind, previousRevision: context.previous.revision, revision: context.core.revision, analyzer: configuration.analyzer, records: context.records, removedIds: Object.freeze(removedIds) });
       const cursor = handle.prepare(previous, request);
       try {
         for (;;) { const step = cursor.next(); if (step.done) return step.value; yield step.value; }

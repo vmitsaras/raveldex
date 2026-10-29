@@ -1,4 +1,4 @@
-import { BASIC_ANALYZER } from '../../core/analyzer/basic.js';
+import { requireAnalysis } from '../../core/analyzer/selected.js';
 import type { PreparedRefinement, RefinementContext } from '../../core/capabilities/types.js';
 import { has } from '../../core/contracts/data.js';
 import { invalid } from '../../core/errors/error.js';
@@ -59,7 +59,7 @@ function* intersectOffsets(lists: readonly (readonly PositionOccurrence[])[]): G
 /** One selected field, usable by a mixed-strategy registration. Headers are
  * checked during preparation even if the lexical candidate set will be empty. */
 export function* preparePositionField(context: RefinementContext, field: string): Generator<WorkStep, PreparedRefinement> {
-  if (context.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.positions.analyzer');
+  requireAnalysis(context);
   yield rawCharge(field.length + 1);
   const root = requirePositionRoot(context.state(`positions:${field}`), field, context.revision, context.analyzer);
   yield rawCharge(root.fields.length + root.offsetFields.length + 1);

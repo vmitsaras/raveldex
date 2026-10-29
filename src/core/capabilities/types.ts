@@ -6,20 +6,22 @@ import type { StateCounts } from '../limits/limits.js';
 import type { ScoreTrace, TraceRequest } from '../trace/facts.js';
 import type { SearchResult } from '../contracts/types.js';
 import type { CompiledNode } from '../query/compile.js';
+import type { AnalysisRunner } from '../analyzer/selected.js';
 
 export interface CapabilityReference { readonly id: string; readonly contractVersion: number }
 export interface CapabilityManifest {
   readonly id: string; readonly version: string; readonly contractVersion: number;
-  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation' | 'evidence' | 'term-expansion' | 'dictionary-output')[];
+  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation' | 'evidence' | 'term-expansion' | 'dictionary-output' | 'analyzer')[];
   readonly provides: readonly CapabilityReference[]; readonly requires: readonly CapabilityReference[];
   readonly dataRequirements: { readonly fields: readonly string[]; readonly source: boolean; readonly positions: boolean; readonly offsets: boolean; readonly metadata: boolean };
-  readonly indexEffect: 'none' | 'transactional'; readonly rebuildPolicy: 'new-index';
+  readonly indexEffect: 'none' | 'transactional' | 'analysis'; readonly rebuildPolicy: 'new-index';
   readonly execution: { readonly direct: boolean; readonly worker: boolean; readonly workerRegistration?: string };
   readonly limits: { readonly maxPayloadCodeUnits: number; readonly maxWorkUnits: number; readonly maxRetainedEntries: number; readonly maxOutputEntries: number };
   readonly costs: { readonly importedCode: string; readonly retainedRepresentation: string; readonly transientWork: string; readonly externalResources: 'none' };
   readonly codec?: { readonly id: string; readonly version: number };
 }
 export interface ParticipantContext {
+  readonly analyze?: AnalysisRunner;
   readonly kind: 'add' | 'addMany' | 'replace' | 'remove' | 'clear';
   readonly previousRevision: number; readonly revision: number;
   readonly analyzer: AnalyzerDescriptor;
@@ -30,6 +32,7 @@ export interface ParticipantImplementation {
   prepare(previous: unknown, context: ParticipantContext): Generator<WorkStep, unknown>;
 }
 export interface RefinementContext {
+  readonly analyze?: AnalysisRunner;
   readonly revision: number; readonly analyzer: AnalyzerDescriptor; readonly limits: Limits;
   readonly fields: readonly string[]; readonly terms: readonly string[];
   /** Only declared requirements can be read; no core root or mutable owner. */
@@ -95,6 +98,7 @@ export interface AggregationImplementation {
 }
 /** Opt-in factual evidence receives actual decisions, never a core root/scorer. */
 export interface EvidenceContext extends MetadataContext {
+  readonly analyze?: AnalysisRunner;
   readonly analyzer: AnalyzerDescriptor;
   state(capability: string): unknown;
 }
@@ -119,9 +123,15 @@ export interface AddonRegistration {
   readonly refinement?: RefinementImplementation;
   readonly expansion?: ExpansionImplementation;
   readonly dictionary?: DictionaryImplementation;
+  readonly analyzer?: AnalyzerImplementation;
   readonly predicate?: PredicateImplementation;
   readonly aggregation?: AggregationImplementation;
   readonly evidence?: EvidenceImplementation;
+}
+/** Narrow v1 language role: one output per basic token, no positional graph. */
+export interface AnalyzerImplementation {
+  readonly kind: 'single-token-transform'; readonly id: string;
+  transform(term: string): Generator<WorkStep, string>;
 }
 export interface CapturedRegistration extends AddonRegistration { readonly manifest: CapabilityManifest }
 export interface CapabilitySet {

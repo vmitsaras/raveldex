@@ -9,6 +9,7 @@ Prefix every entry below with `@vmitsaras/raveldex`. The root entry is the packa
 | Entry | Runtime exports / purpose | Reference |
 | --- | --- | --- |
 | root | `createRaveldex`, `RaveldexError`, `ERROR_CODES` | [Core](CORE.md) |
+| `/integrations/languages/english` | `createEnglishAnalyzer`, `ENGLISH_ANALYZER` | [English morphology](ENGLISH.md) |
 | `/addons/synonyms` | `createSynonyms`, `SYNONYMS_POLICY` | [Directional synonyms](SYNONYMS.md) |
 | `/addons/suggestions` | `createSuggestions`, `SUGGESTIONS_POLICY` | [Token suggestions](SUGGESTIONS.md) |
 | `/addons/typo` | `createTypoTolerance`, `TYPO_POLICY` | [Bounded typo tolerance](TYPO.md) |

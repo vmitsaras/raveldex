@@ -1,3 +1,4 @@
+import { createAnalysis } from '../analyzer/selected.js';
 import { Admission, scanUnicode } from '../contracts/data.js';
 import { captureOptions } from '../contracts/options.js';
 import { captureQuery } from '../contracts/query.js';
@@ -73,10 +74,11 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   const collector = trace ? new FactCollector(trace.maxFacts) : undefined;
   boundary('analysis');
   const expansion = root.configuration.capabilities?.ordered.some(registration => registration.expansion) ? createExpansionResolver(root, charge) : undefined;
-  const compiled = yield* compileQuery(query, root.configuration, charge, expansion);
+  const analyze = createAnalysis(root.configuration, check);
+  const compiled = yield* compileQuery(query, root.configuration, charge, expansion, analyze);
   boundary('expansion');
   const expansions = yield* expandGroups(root, compiled.groups, charge, boundary);
-  const extensions = root.configuration.capabilities ? yield* prepareRefinements(compiled.node, root, charge, options) : undefined;
+  const extensions = root.configuration.capabilities ? yield* prepareRefinements(compiled.node, root, charge, options, analyze) : undefined;
   const page = new PageSelection(options.limit ? options.offset + options.limit : 0, charge);
   let total = 0;
   for (const [id, doc] of directoryEntries(root.documents)) {

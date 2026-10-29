@@ -25,6 +25,7 @@ export function createExpansionResolver(root: IndexRoot, charge: Charge): Expans
   let outputEntries = 0;
   return {
     *resolve(capability, fields, terms) {
+      if (root.configuration.analyzer.id !== 'basic-v1') invalid('INCOMPATIBLE_CAPABILITY', 'query.expansion.analyzer');
       const registration = root.configuration.capabilities?.providers[capability];
       if (!registration?.expansion) invalid('MISSING_CAPABILITY', 'query.expansion');
       for (const field of fields) {

@@ -93,3 +93,7 @@ The explicit `/addons/suggestions` factory adds independent `options.extensions.
 ## Directional one-step synonyms
 
 The explicit `/addons/synonyms` entry applies an owned versioned single-token table only to its requested extension leaf. Original groups remain required, mapped live alternatives receive weight 0.5, and generated targets never expand recursively. The result identifies the policy/vocabulary version and actual source-to-target alternatives; Inspector separately explains selected native arithmetic. Retained configuration is distinct from corpus side indexes. See [public types, example and complete bounds](SYNONYMS.md).
+
+## Selected English analysis
+
+The [English pack](ENGLISH.md) is selected at owner creation through `Configuration.analyzer`, not a query leaf. Source/position/mixed phrases compare adjacent analyzed terms and original evidence/snippets retain complete source token spans. English morphology can make differently spelled words phrase-equivalent. Existing v1 typo/synonym expansion and token suggestions remain basic-only and explicitly reject requests under English. Constant algorithm tables are separate from per-corpus retained state.

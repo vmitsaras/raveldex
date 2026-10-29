@@ -31,3 +31,13 @@ Remote CI execution is reported separately from local execution. Running the man
 ## Owner publication decision
 
 After reviewing [candidate scope](CANDIDATE.md), the tarball/report identities and the independent recommendation, the owner may separately authorize publication. That action must choose the final version and registry/tag/access, review credentials/provenance and CI outcomes, deliberately remove the private guard, rebuild/repack/reverify the changed artifact, and review its digest before any upload or tag. No existing artifact is represented as the final public release merely because candidate checks pass.
+
+## Separate private English package
+
+RX-A040 also requires an independently installable language artifact. From a source checkout with locked tooling, prepare it into a new directory:
+
+```sh
+npm run language:pack -- --output /tmp/raveldex-english-private
+```
+
+This builds existing sources and creates the private `@vmitsaras/raveldex-english` ESM tarball/report. It bundles only the native English factory/code and pure support helpers, rewrites compiler-emitted declarations to public core types, and declares the paired exact core peer version. The directory must not already exist; preparation does not overwrite evidence, publish, tag or contact a registry. The main candidate test installs the actual independent tarball offline beside its reviewed core tarball and exercises public types, semantic identity, retrieval/scores, bounds and cancellation. These two closed artifacts and their reports have separate hashes; keep them paired with their actual qualification evidence.

@@ -1,5 +1,5 @@
 import { workerIdentity } from '../../core/capabilities/worker-identity.js';
-import { BASIC_ANALYZER } from '../../core/analyzer/basic.js';
+import { requireAnalysis } from '../../core/analyzer/selected.js';
 import type { AddonRegistration, PreparedRefinement, RefinementContext } from '../../core/capabilities/types.js';
 import { bound, invalid } from '../../core/errors/error.js';
 import { directoryGet } from '../../core/index/directory.js';
@@ -18,7 +18,7 @@ const MAX_PHRASE_TOKENS = 32;
 const rawCharge = (workUnits: number): WorkStep => ({ workUnits });
 
 function* preparePhrase(context: RefinementContext, enabledFields: readonly string[]): Generator<WorkStep, PreparedRefinement> {
-  if (context.analyzer.id !== BASIC_ANALYZER.id) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.analyzer');
+  const analyze = requireAnalysis(context);
   bound(context.terms.length, Math.min(MAX_PHRASE_TOKENS, context.limits.maxQueryTokens), 'phrases.tokens');
   const fields: { readonly name: string; readonly root: SourceRoot }[] = [];
   // Validate every requested field before testing any candidate, including empty
@@ -53,7 +53,7 @@ function* preparePhrase(context: RefinementContext, enabledFields: readonly stri
         for (let i = 0; i < values.length; i++) {
           yield rawCharge(1);
           if (typeof values[i] !== 'string') invalid('INCOMPATIBLE_CAPABILITY', 'phrases.source.values');
-          if (yield* sourceValueMatches(values[i]!, i, terms, failure, limits)) return true;
+          if (yield* sourceValueMatches(values[i]!, i, terms, failure, limits, analyze)) return true;
         }
       }
       return false;

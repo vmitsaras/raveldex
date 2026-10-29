@@ -1,0 +1,880 @@
+{
+  "kind": "raveldex-rx-a040-independent-core-review-v1",
+  "at": "2026-10-29T14:58:06.497Z",
+  "reviewer": "/root/language_seam_audit",
+  "routing": "Inherited model and effort; read-only parent core/worker/snapshot implementation review",
+  "status": "Ready with follow-ups",
+  "scope": {
+    "base": "f3713af",
+    "included": [
+      "generic analyzer registration/selection",
+      "immutable capture and operation-scoped bounded analysis",
+      "query/mutation/provider runner propagation",
+      "source/native snapshot analyzer validation and work/stop scopes",
+      "worker source restore/reconcile exact selected identity",
+      "optional import boundaries",
+      "actual separately installable private English package, preparation script, declarations and paired offline consumer",
+      "new standalone-package documentation and exact installed examples"
+    ],
+    "excluded": [
+      "independent authorship of phrase/positions/evidence implementation (this reviewer authored those files)",
+      "publication",
+      "remote CI",
+      "cross-host/native Unicode qualification beyond actual artifacts",
+      "heap/allocation/physical-copy claims"
+    ],
+    "modifications": "During review only assigned /tmp artifacts and authorized RX-A040 review/probe evidence files; no runtime/source edits, builds, network or Git writes."
+  },
+  "mandatoryFindings": [],
+  "resolvedFindings": [
+    {
+      "id": "R1",
+      "classification": "Implementation defect",
+      "path": "src/core/analyzer/selected.ts",
+      "problem": "Module work-budget failure ran before a stop triggered synchronously inside transform.next could be observed.",
+      "initialObserved": [
+        {
+          "operation": "add",
+          "actual": "WORK_LIMIT_EXCEEDED",
+          "expected": "CANCELLED"
+        },
+        {
+          "operation": "source restore",
+          "actual": "WORK_LIMIT_EXCEEDED",
+          "expected": "CANCELLED"
+        },
+        {
+          "operation": "native restore",
+          "actual": "WORK_LIMIT_EXCEEDED",
+          "expected": "CANCELLED"
+        }
+      ],
+      "initialSafety": "All three initial probes still closed cursor, preserved revision0/root and released listeners/tasks; the failure classification was incorrect.",
+      "resolution": "Parent supplies an operation check callback and invokes it immediately after transform.next, before module charging or output validation; shared callbacks propagate to query/mutations and source/native export/restore.",
+      "verified": "Re-ran all three exact fault probes on build2: CANCELLED, closed cursor, preserved root/revision0, pending0/listeners0. Independent source/native export checks also pass CANCELLED with cursor closure and root/task/listener preservation."
+    },
+    {
+      "id": "R2",
+      "classification": "Acceptance/packaging evidence gap",
+      "criterion": "RX-A040-AC03",
+      "paths": [
+        "docs/planning/roadmap.json",
+        "package.json",
+        "test/measurements/english-package.mjs"
+      ],
+      "problem": "The completed artifact exports an English subpath in the same root tarball; its import/cost isolation does not establish separately installable language code/data required by the task card.",
+      "evidence": "The inspected package exports ./integrations/languages/english and ships dist/integrations/languages/. The inspected consumer installs the root tarball only. NATIVE_ARCHITECTURE.md permits coordinated subpaths generally but does not waive the selected task's literal separate-installation criterion.",
+      "requiredOutcome": "A real private independently installable English package/tarball with the same functional factory/descriptor, isolated public declarations and explicit compatible core host contract. Verify offline independent package install, core integration, identity/parity and no runtime core/deep import before closing.",
+      "parentPlan": "Private @vmitsaras/raveldex-english alongside convenience root entry; no publication. Implementation owned by /root/english_stemmer.",
+      "resolution": "Added a real separately packed private @vmitsaras/raveldex-english tarball, with self-contained ESM, exact public core peer types and no runtime imports. Convenience root entry remains. Independently installed the final immutable paired tarballs offline and verified both package identities and consumer behavior; AC03 separate installation is established rather than waived.",
+      "verified": {
+        "status": "Pass",
+        "coreSha256": "e26e5a64ef34735c9c13c8e0745535bb356c090014a7528733d1d21355c8bf16",
+        "englishSha256": "e9b5b1fda9128bbc22a4ae3d94d3ed23aaa3ac373e6de14d0a9eb47ff0dfe9b5",
+        "files": 5,
+        "fullPageComparisons": 18,
+        "publicCoreTypedFailures": 4,
+        "crossPackageSnapshotRoundtrips": 4,
+        "types": "Strict NodeNext ES2022 isolated consumer Pass",
+        "noCorePeerAtRuntime": "Pass; core peer physically hidden and 19 host globals blocked, zero host reads",
+        "exactInstalledExamples": [
+          {
+            "label": "exact installed core English example",
+            "sourceSha256": "2a5d45b42445eed233456031fe568531a6cec3900236e372f89ed1a9e64e521f",
+            "status": "Pass",
+            "stdout": "english-porter1980-v1\n"
+          },
+          {
+            "label": "exact standalone README example",
+            "sourceSha256": "258f7e6714e78d6f2b5d05c6f017a6d37fc5935b1ac4ed3ed46d9c5ee17d4ec2",
+            "status": "Pass",
+            "stdout": "[ 'guide' ]\n"
+          }
+        ]
+      }
+    }
+  ],
+  "independentRuntimeProbes": {
+    "status": "Pass",
+    "count": 12,
+    "script": "docs/evidence/RX-A040-independent-probes.mjs",
+    "report": "docs/evidence/RX-A040-independent-probes.json",
+    "reportSha256": "0dd4ff0a763ee0228fdee1c14f736b61698b4b2fc04231d57a703ef9ed908b4d",
+    "rows": [
+      {
+        "name": "explicit selector and absent or incompatible identity do not silently fall back",
+        "status": "Pass"
+      },
+      {
+        "name": "registered unselected analyzer preserves basic-v1 default and metadata",
+        "status": "Pass"
+      },
+      {
+        "name": "selector and trusted transform function are captured before later caller edits",
+        "status": "Pass"
+      },
+      {
+        "name": "generic transformed terms reject empty malformed and noncanonical data atomically",
+        "status": "Pass"
+      },
+      {
+        "name": "module budget spans tokens values records and resets for a new operation",
+        "status": "Pass"
+      },
+      {
+        "name": "one module allowance spans query analysis and actual provider reanalysis",
+        "status": "Pass"
+      },
+      {
+        "name": "non-idempotent Porter terms and normalized separator terms are not analyzed twice",
+        "status": "Pass"
+      },
+      {
+        "name": "basic-specific expansion and dictionary output reject selected English even for empty requests",
+        "status": "Pass"
+      },
+      {
+        "name": "worker restore and reconciliation validate exact bound selected descriptor",
+        "status": "Pass",
+        "observations": {
+          "scope": "Private branded channel validation, not browser or real worker parity"
+        }
+      },
+      {
+        "name": "stop precedence wins over analyzer module cap during add and source/native restore",
+        "status": "Pass",
+        "observations": [
+          {
+            "operation": "add",
+            "closed": 1
+          },
+          {
+            "operation": "SourceRestore",
+            "closed": 1,
+            "rootPreserved": true
+          },
+          {
+            "operation": "NativeRestore",
+            "closed": 1,
+            "rootPreserved": true
+          }
+        ]
+      },
+      {
+        "name": "snapshot source rebuilding and native source validation share one module budget across all records",
+        "status": "Pass"
+      },
+      {
+        "name": "source and native export preserve stop precedence inside selected reanalysis",
+        "status": "Pass",
+        "observations": [
+          {
+            "operation": "SourceExport",
+            "closed": 2,
+            "rootPreserved": true
+          },
+          {
+            "operation": "NativeExport",
+            "closed": 2,
+            "rootPreserved": true
+          }
+        ]
+      }
+    ],
+    "sourceHashes": [
+      {
+        "path": "src/core/analyzer/selected.ts",
+        "sha256": "139caf8cc0859efda393dc21dd1ce820c435292e47cea2788dcf4f80457013bd"
+      },
+      {
+        "path": "src/core/contracts/schema.ts",
+        "sha256": "bb7c202b4805578d293f6f17a7d82fafa6152c1f5b061c2e27ec5d2af9c220c0"
+      },
+      {
+        "path": "src/core/capabilities/registration.ts",
+        "sha256": "a75291ffc8180c3188375910e1a57fe3338d0da4dc74fc7964dc0c8e0c3a2229"
+      },
+      {
+        "path": "src/core/mutations/owner.ts",
+        "sha256": "dc55ef224db86b679e3db32456432e41c2032c3d8d28a2887aa32fb91f50e3f8"
+      },
+      {
+        "path": "src/core/query/search.ts",
+        "sha256": "01e9711e48d107f197001fdab0b6ba8c9c52b9238ae5d43842da34b2aff428f6"
+      },
+      {
+        "path": "src/adapters/snapshots/native.ts",
+        "sha256": "ae0a36045e54e354c4c17ca43a61e164c5c470532f8b513b88449c76cea759ef"
+      },
+      {
+        "path": "src/adapters/snapshots/snapshots.ts",
+        "sha256": "d420c463f18fd8223aedc5da6780680f974563ecbf0951123e6929818c8db4e4"
+      },
+      {
+        "path": "src/adapters/worker/snapshots.ts",
+        "sha256": "a9942658b38e6ab86355cd8e1c3961fb5030909a39b2096ac97a39ddc6ce5ba6"
+      }
+    ],
+    "scriptSha256": "f3645137b9e0a8c6faf89df84a373fe212fd4d59c2ce5dbb7001c75b6ff3727f",
+    "at": "2026-10-29T14:56:34.940Z",
+    "finalCandidateRerun": "Pass; all twelve independently rerun against the stable final v2 dist, source hashes unchanged"
+  },
+  "sourceAssessment": [
+    "Explicit descriptor selects installed provider; unselected registration retains basic default.",
+    "One core-owned basic token is transformed to exactly one nonempty canonical term while preserving original dense position/value/span.",
+    "One module budget spans tokens, values, records and provider reanalysis; source rebuilding/native source validation reuse it across records.",
+    "Already normalized or non-idempotent Porter outputs are not fed through raw analysis/stemming during native validation.",
+    "Worker restore and reconciliation compare against bound selected descriptor rather than accepting any supported analyzer.",
+    "Basic-specific typo/synonym/suggestion contracts continue to reject English explicitly, including empty requests.",
+    "Final core graph contains generic selected-analyzer plumbing but no English implementation/table; optional-only and combined graphs/costs are independently checked against the actual packed report."
+  ],
+  "artifactClosure": "Pass; final v2 698-test core and independently installable five-file English tarballs are byte-bound to actual receipts and fresh independent offline installation. Both R1 and R2 are resolved by reproduced behavior and concrete artifacts. Earlier 696 evidence remains explicitly historical. Parent may synchronize terminal evidence/manifest/generated views without changing reviewed runtime/package bytes.",
+  "closedArtifactAudit": {
+    "kind": "raveldex-rx-a040-v2-paired-independent-artifact-audit-v1",
+    "at": "2026-10-29T14:54:12.357Z",
+    "status": "Pass",
+    "core": {
+      "tar": "docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz",
+      "sha256": "e26e5a64ef34735c9c13c8e0745535bb356c090014a7528733d1d21355c8bf16",
+      "integrity": "sha512-yntOpZt71T5NQzNtr6D5G6w+F1safO/L2HsoOY3pzSIp15NCWncxK796PWjCD24odWBcFxwUw+hZpT1m2NK4zg==",
+      "bytes": 188385,
+      "safeRegularFiles": 256,
+      "installedMembersByteCurrent": true,
+      "repositoryMembersByteCurrent": true,
+      "memberInventorySha256": "f291d6402720f3ae9cf928e3ae6571adb94b5ca948370cec24ea4c7b21f79590"
+    },
+    "english": {
+      "tar": "docs/evidence/RX-A040-english-0.1.0-rc.0.tgz",
+      "sha256": "e9b5b1fda9128bbc22a4ae3d94d3ed23aaa3ac373e6de14d0a9eb47ff0dfe9b5",
+      "integrity": "sha512-jVO0cOjAJL6drG9RisQ8VydioyifUWX68fGimUsJsswcPGdocsQSUPC2tz0SriE3zgl5wwC1vVOG+1RKJL78oQ==",
+      "bytes": 4858,
+      "safeRegularFiles": 5,
+      "installedMembersByteCurrent": true,
+      "repositoryMembersByteCurrent": "Not a root-tree path mapping; independently installed five tar members match exact tar bytes. Metadata, README and LICENSE separately match actual source files; bundle/declaration derivation is verified below.",
+      "memberInventorySha256": "6d38dce4bda84fd3317cf34641c33ca43daa68351e08a3c15d9d8eb381ca4631"
+    },
+    "fullTestBatches": [
+      [
+        617,
+        617,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        30,
+        30,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        24,
+        24,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        26,
+        26,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "totalTests": 698,
+    "entries": 23,
+    "independentCSS": "./dist/addons/ui/styles.css",
+    "checkLogSha256": "8f94dda83f350a8775ecc2cb0580ba2cb42b3a3fb1cf1e25ef922fecf98ad747",
+    "preparationSha256": "8ec5cbda3f5b36b29254fdd76a26e5dba91311bda51fe54d4599544d85dc1249",
+    "candidateReportSha256": "c50848176abeb145ce3a32f28e5bdcfbc34efd3804af0e3785b0ad9edfc5aff0",
+    "packagedMeasurementSha256": "11bd52ba01763f63c2d0f75c5b74e8d97736dd7c43c0ba7be4459e96a34eec12",
+    "englishPreparationSha256": "a025e354e7ba834deaaa874a4c5358f3d8f6200d3c879c704183305cd6788d04",
+    "compilerDeclarationRewrite": "Exact compiler output, one public root type-only import replacement; no handwritten declarations/private path",
+    "installation": {
+      "directory": "/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx-a040-review-standalone-v2-uPP56R",
+      "command": "npm install ./core.tgz ./english.tgz --offline --ignore-scripts --omit=dev --no-audit --no-fund --package-lock=false --cache /tmp/raveldex-rx-a040-review-standalone-v2-cache",
+      "exitCode": 0,
+      "packagesAdded": 2,
+      "tree": {
+        "name": "raveldex-english-independent-review",
+        "dependencies": {
+          "@vmitsaras/raveldex-english": {
+            "version": "0.1.0-rc.0",
+            "resolved": "file:/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx-a040-review-standalone-v2-uPP56R/english.tgz",
+            "overridden": false,
+            "dependencies": {
+              "@vmitsaras/raveldex": {
+                "version": "0.1.0-rc.0"
+              }
+            }
+          },
+          "@vmitsaras/raveldex": {
+            "version": "0.1.0-rc.0",
+            "resolved": "file:/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-rx-a040-review-standalone-v2-uPP56R/core.tgz",
+            "overridden": false
+          }
+        }
+      }
+    },
+    "independentRuntime": {
+      "status": "Pass",
+      "comparisons": 18,
+      "typedCoreFailures": [
+        {
+          "code": "LIMIT_EXCEEDED",
+          "publicCoreError": true
+        },
+        {
+          "code": "LIMIT_EXCEEDED",
+          "publicCoreError": true
+        },
+        {
+          "code": "INVALID_RECORD",
+          "publicCoreError": true
+        },
+        {
+          "code": "CANCELLED",
+          "publicCoreError": true
+        }
+      ],
+      "canonicalFactoryAndDescriptorParity": "Pass",
+      "crossPackageSourceNativeRoundtrips": [
+        {
+          "representation": "source",
+          "format": "Source",
+          "completeHitsAndOriginalRanges": "Pass"
+        },
+        {
+          "representation": "source",
+          "format": "Native",
+          "completeHitsAndOriginalRanges": "Pass"
+        },
+        {
+          "representation": "positions",
+          "format": "Source",
+          "completeHitsAndOriginalRanges": "Pass"
+        },
+        {
+          "representation": "positions",
+          "format": "Native",
+          "completeHitsAndOriginalRanges": "Pass"
+        }
+      ],
+      "privateDeepImports": "Refused"
+    },
+    "independentTypes": {
+      "status": "Pass",
+      "compiler": "Existing TypeScript7.0.2",
+      "command": "node_modules/.bin/tsc -p tsconfig.json",
+      "project": {
+        "module": "NodeNext",
+        "target": "ES2022",
+        "lib": [
+          "ES2022"
+        ],
+        "types": [],
+        "strict": true,
+        "noEmit": true
+      },
+      "sourceSha256": "fec1f4f1d20532cac2664f21b11f62f65fc768ae79ebd68f11aa37c7ada54171"
+    },
+    "inertWithoutCore": {
+      "status": "Pass",
+      "corePeerPresentAtRuntime": false,
+      "hostReads": []
+    },
+    "exactExamples": [
+      {
+        "label": "exact installed core English example",
+        "sourceSha256": "2a5d45b42445eed233456031fe568531a6cec3900236e372f89ed1a9e64e521f",
+        "status": "Pass",
+        "stdout": "english-porter1980-v1\n"
+      },
+      {
+        "label": "exact standalone README example",
+        "sourceSha256": "258f7e6714e78d6f2b5d05c6f017a6d37fc5935b1ac4ed3ed46d9c5ee17d4ec2",
+        "status": "Pass",
+        "stdout": "[ 'guide' ]\n"
+      }
+    ],
+    "method": "Independently decoded both tar inventories and regular-file flags, checked all safe unique paths, SHA-256/SHA-512, and extracted each byte sequence against a fresh offline two-package installation. Root members also match current repository bytes. Independently parsed the five closed raw check batches. Ran hand-literal consumer, strict types, exact installed documentation examples and a no-core-peer/blocked-host import experiment. No build, network or publication during review."
+  },
+  "packedConsumerAudit": {
+    "report": "docs/evidence/RX-A040-package.json",
+    "reportSha256": "11bd52ba01763f63c2d0f75c5b74e8d97736dd7c43c0ba7be4459e96a34eec12",
+    "exactSameTarSha256": "e26e5a64ef34735c9c13c8e0745535bb356c090014a7528733d1d21355c8bf16",
+    "source": "Read actual final measurement and preparation assertions. Separately executed an independent fresh offline consumer of both final tarballs; paired audit records its observations rather than inferring them from this report.",
+    "correctness": {
+      "status": "Pass",
+      "authoredQueries": 10,
+      "fullPageComparisonsPerRun": 30,
+      "unselectedPack": "Pass",
+      "bundledParity": "Pass",
+      "snapshotComparisonsPerRun": 48,
+      "snapshotMismatchRefusalsPerRun": 8
+    },
+    "worker": {
+      "status": "Pass",
+      "transport": "Actual Node worker_threads with structural browser endpoint",
+      "comparisons": 15,
+      "mismatchRefusals": [
+        {
+          "mode": "missing",
+          "code": "MISSING_CAPABILITY"
+        },
+        {
+          "mode": "version",
+          "code": "INCOMPATIBLE_WORKER"
+        },
+        {
+          "mode": "budget",
+          "code": "INCOMPATIBLE_WORKER"
+        },
+        {
+          "mode": "identity",
+          "code": "INCOMPATIBLE_WORKER"
+        }
+      ],
+      "restoreReceipt": {
+        "operationId": "4021e924-7fe6-47ac-93fc-b11d11018e37:22",
+        "status": "committed",
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 3,
+          "revision": 5,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "english-porter1980-v1",
+            "environmentProfile": "unqualified"
+          }
+        }
+      },
+      "foreignAnalyzerReceipt": "INVALID_TRANSPORT",
+      "foreignAnalyzerRestore": "OUTCOME_UNKNOWN",
+      "unknownOutcome": "Rejected foreign analyzer response is not accepted and does not prove rollback",
+      "scope": "Same-host Node protocol/clone/source-restore observations, not browser or cross-host native qualification"
+    },
+    "documentation": {
+      "status": "Pass",
+      "source": "docs/api/ENGLISH.md",
+      "exampleSha256": "2a5d45b42445eed233456031fe568531a6cec3900236e372f89ed1a9e64e521f",
+      "stdout": "english-porter1980-v1\n"
+    },
+    "startupChecks": 5,
+    "hostReads": 0,
+    "graphs": {
+      "core": {
+        "minifiedBytes": 62370,
+        "gzipBytes": 18535,
+        "sha256": "7134d6990eb480d8977a33654bda297d601118f0e7ded47b476befcf2ff27d16",
+        "languageImplementationInputs": 0
+      },
+      "languageOnly": {
+        "minifiedBytes": 5577,
+        "gzipBytes": 2470,
+        "sha256": "d99720c2f69673d804a8371e1c496be93d7984b78d9bc3b5128725a15faba842"
+      },
+      "combined": {
+        "minifiedBytes": 66360,
+        "gzipBytes": 20074,
+        "sha256": "5902294a423ad935796b29dd567060b5ad63b22fe9e140e02f0f8ed61625a13b"
+      }
+    },
+    "logicalState": {
+      "extraRetainedIndexEntries": 0,
+      "retainedRepresentation": "Constant suffix algorithm tables and registration identity only; no corpus vocabulary/cache. Separate source/positions test configurations deliberately retain their declared data.",
+      "basis": "Logical representation/import graph observation; not heap/allocation-byte or physical-copy peaks"
+    },
+    "standalone": {
+      "status": "Pass",
+      "preparationSha256": "a025e354e7ba834deaaa874a4c5358f3d8f6200d3c879c704183305cd6788d04",
+      "sha256": "e9b5b1fda9128bbc22a4ae3d94d3ed23aaa3ac373e6de14d0a9eb47ff0dfe9b5",
+      "bytes": 4858,
+      "safeRegularFiles": 5,
+      "fullPageComparisonsInMainHarness": 30,
+      "typedFailures": {
+        "status": "Pass",
+        "count": 4,
+        "rows": [
+          {
+            "name": "narrowed raw record token limit",
+            "code": "LIMIT_EXCEEDED",
+            "publicCoreError": true
+          },
+          {
+            "name": "narrowed raw query token limit",
+            "code": "LIMIT_EXCEEDED",
+            "publicCoreError": true
+          },
+          {
+            "name": "preaborted valid record",
+            "code": "CANCELLED",
+            "publicCoreError": true
+          },
+          {
+            "name": "preaborted valid query",
+            "code": "CANCELLED",
+            "publicCoreError": true
+          }
+        ],
+        "revisionAfterRefusal": 0
+      },
+      "peer": "@vmitsaras/raveldex@0.1.0-rc.0",
+      "runtimeImports": [],
+      "independent": {
+        "status": "Pass",
+        "comparisons": 18,
+        "typedCoreFailures": [
+          {
+            "code": "LIMIT_EXCEEDED",
+            "publicCoreError": true
+          },
+          {
+            "code": "LIMIT_EXCEEDED",
+            "publicCoreError": true
+          },
+          {
+            "code": "INVALID_RECORD",
+            "publicCoreError": true
+          },
+          {
+            "code": "CANCELLED",
+            "publicCoreError": true
+          }
+        ],
+        "canonicalFactoryAndDescriptorParity": "Pass",
+        "crossPackageSourceNativeRoundtrips": [
+          {
+            "representation": "source",
+            "format": "Source",
+            "completeHitsAndOriginalRanges": "Pass"
+          },
+          {
+            "representation": "source",
+            "format": "Native",
+            "completeHitsAndOriginalRanges": "Pass"
+          },
+          {
+            "representation": "positions",
+            "format": "Source",
+            "completeHitsAndOriginalRanges": "Pass"
+          },
+          {
+            "representation": "positions",
+            "format": "Native",
+            "completeHitsAndOriginalRanges": "Pass"
+          }
+        ],
+        "privateDeepImports": "Refused"
+      }
+    }
+  },
+  "complementaryLanguageReview": {
+    "path": "docs/evidence/RX-A040-language-review.json",
+    "sha256": "6ef7dcb2a513d66ea6b2d97211f0ac3fbc4908b47b65b4e2ccf2fcdd4b6830b8",
+    "reviewer": "/root/english_evaluation",
+    "status": "Ready with follow-ups",
+    "mandatoryFindings": [],
+    "scope": {
+      "reviewedOtherAuthors": [
+        "src/integrations/languages/english/stem.ts",
+        "src/integrations/languages/english/index.ts",
+        "src/addons/phrases/index.ts",
+        "src/addons/phrases/verifier.ts",
+        "src/addons/positions/store.ts",
+        "src/addons/positions/verifier.ts",
+        "src/addons/evidence/providers.ts",
+        "src/addons/evidence/builder.ts",
+        "src/addons/snippets/snippets.ts",
+        "docs/api/ENGLISH.md",
+        "docs/specs/ENGLISH_ANALYZER.md"
+      ],
+      "excludedFromOwnIndependentReview": [
+        "test/oracle/english.mjs",
+        "test/fixtures/relevance/english-v1.json",
+        "test/integrations/languages/english-evaluation.test.mjs"
+      ],
+      "qualification": "This reviewer authored the independent source oracle and frozen relevance judgments. Their differential is secondary evidence, not an independent audit of those own artifacts or a second human/native-language judgment. Primary source/rule checks and direct hand-literal integration observations resolve correctness.",
+      "notClaimed": [
+        "Full task or candidate review",
+        "Generic analyzer registration/admission/worker/snapshot protocol audit (assigned to separate parent/core reviewer)",
+        "Native-human linguistic review",
+        "New manual AT/browser qualification",
+        "Heap/allocation/physical-copy/latency peaks"
+      ]
+    },
+    "sourceAndBuiltHashes": "Original language-review hashes retain its earlier source/document snapshot. Independently matched all nine reviewed compiled modules against final v2 files; language finalCandidateBinding agrees on 698 tests and final core identity. This closing reviewer separately reviews and binds the new packaging docs below.",
+    "probeReport": "docs/evidence/RX-A040-language-probes.json",
+    "probeReportSha256": "8f423202eaae6a6023e82dd51f1d4ec91c4bf3e37b592486ebde245e8dec2176",
+    "scopeBoundary": "Complementary review inspected this reviewer's authored add-on modules and another author's stemmer. It does not independently re-review its own oracle/frozen labels; AI-only language assessment remains explicit.",
+    "finalCandidateBinding": {
+      "scope": "Updated after R2 packaging correction: independently read current closed full counters/report/log/tar identities and matched the same nine reviewed compiled production modules byte-for-byte. Runtime language/add-on review remains unchanged. Primary auditor owns separately installable package review; no independent standalone-packaging qualification is claimed here. Original source/documentation hashes retain the earlier reviewed snapshot.",
+      "candidateReport": "docs/evidence/RX-A040-candidate.json",
+      "candidateReportSha256": "c50848176abeb145ce3a32f28e5bdcfbc34efd3804af0e3785b0ad9edfc5aff0",
+      "checkLog": "docs/evidence/RX-A040-check.log",
+      "checkLogSha256": "8f94dda83f350a8775ecc2cb0580ba2cb42b3a3fb1cf1e25ef922fecf98ad747",
+      "tar": "docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz",
+      "tarSha256": "e26e5a64ef34735c9c13c8e0745535bb356c090014a7528733d1d21355c8bf16",
+      "tarMembers": 256,
+      "javascriptEntries": 23,
+      "closedCheckCounters": {
+        "tests": [
+          617,
+          30,
+          24,
+          26,
+          1
+        ],
+        "pass": [
+          617,
+          30,
+          24,
+          26,
+          1
+        ],
+        "fail": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "cancelled": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "skipped": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "todo": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reviewedCompiledMembers": [
+        {
+          "path": "dist/integrations/languages/english/stem.js",
+          "sha256": "b1402be1a5955eac2e121e948e9db705fbce8bd76bda144b738a8f57ff9c0725"
+        },
+        {
+          "path": "dist/integrations/languages/english/index.js",
+          "sha256": "01b3fc85f6f1018cc23c578e9690a10fdfc8aac7da2610d74a76d21e1f8a3494"
+        },
+        {
+          "path": "dist/addons/phrases/index.js",
+          "sha256": "58abf242c2d8254a33e4432289cfb2283448e3d50f6db8c9c7e59ba46382a72a"
+        },
+        {
+          "path": "dist/addons/phrases/verifier.js",
+          "sha256": "0c2cdc519ffc8f654a7aeddef773c5c7830aded644139eeb19543acb88b23186"
+        },
+        {
+          "path": "dist/addons/positions/store.js",
+          "sha256": "ad5b9f87578d6c205cdc76fa23bcb0ee11a7505091e3f8cb178a1e169ca0ffcd"
+        },
+        {
+          "path": "dist/addons/positions/verifier.js",
+          "sha256": "2581f9a33ebe3feaaff08c443b9e9089fb15a34bf2dc95fe28f5e7ff2fe949b1"
+        },
+        {
+          "path": "dist/addons/evidence/providers.js",
+          "sha256": "f539b2bf3980eeb6233ace7b41058fd6fbe3b35ef42c6e461e1f48e6b0e57dd4"
+        },
+        {
+          "path": "dist/addons/evidence/builder.js",
+          "sha256": "2063a07136755d1999662af68c6e8312e3c7744836e96149c731d0f1e4bb81bf"
+        },
+        {
+          "path": "dist/addons/snippets/snippets.js",
+          "sha256": "a256f524d54403dbf1ca6877930bb020e3e9cac0001a2c0b7504dafdc730b972"
+        }
+      ],
+      "runtimeBytesUnchanged": true,
+      "preStandaloneHistoryPrefix": "docs/evidence/RX-A040-pre-standalone-"
+    }
+  },
+  "qualificationAndCost": {
+    "frozenEnglishFixtureSha256": "c4aacb5ac0f08ce37eb30eeb4b42999a7fead15abfb9d09177b8af2b7beaa77a",
+    "frozenCorpusSha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+    "relevanceAspiration": {
+      "status": "Fail",
+      "actual": "17 positive intents improve; 7 of 8 intended-empty cases stay empty; cancell/cancellation collision preserves one known false positive",
+      "whyNotMandatoryDefect": "Explicit fixed original-paper morphology matches independent primary-rule/source truth. The task requires evaluation and candid limits, not a universal zero-collision language guarantee; the unmet frozen aspiration must not be relabeled Pass."
+    },
+    "coreGzipTarget": {
+      "status": "Missed",
+      "actual": 18535,
+      "target": 15360,
+      "changeFromA030": 540
+    },
+    "notClaimed": [
+      "New English browser or manual assistive-technology support",
+      "Native-human linguistic review",
+      "Universal/cross-host Unicode equivalence",
+      "Heap/allocation/physical-copy/latency peaks",
+      "Remote CI or publication"
+    ]
+  },
+  "recommendation": "Ready with follow-ups for this bounded RX-A040 slice. No mandatory defect remains in the independently reviewed core/worker/snapshot and actual standalone packaging scope. Preserve the known frozen relevance aspiration failure, missed core gzip target and AI-only/exact-host qualification limits. Publication and remote CI are not established or authorized by this review.",
+  "priorVerdictCorrection": "The earlier Ready verdict verified import isolation but overlooked the stronger literal separately-installable AC03 requirement. It was superseded by Changes required until a real independent artifact and offline installation were implemented and independently verified. R2 is now resolved on the final paired tarballs; this history is retained rather than erased.",
+  "preStandaloneArtifactAuditHistory": {
+    "scope": "Earlier 696-test artifact prior to the mandatory separate-installation correction; retained for provenance, not final readiness",
+    "kind": "raveldex-rx-a040-independent-artifact-audit-v1",
+    "at": "2026-10-29T14:32:06.498Z",
+    "status": "Pass",
+    "tarSha256": "47939164a5b6ed928fc82e1ff6272f21c04f0020dada0d29dba492e793b6d375",
+    "integrity": "sha512-rPsx2HIQYMHCnrQBzNwH8MzPE4XodmrhdlbNdW0X2oCS7gAZpIikpV1A/xcFeWZXmHVnJOlUxLCHcc726y89Qg==",
+    "tarballBytes": 187710,
+    "safeByteCurrentRegularFiles": 256,
+    "fullTestBatches": [
+      [
+        615,
+        615,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        30,
+        30,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        24,
+        24,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        26,
+        26,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "totalTests": 696,
+    "entries": 23,
+    "independentCSS": "./dist/addons/ui/styles.css",
+    "preparationSha256": "8225000971b6af9dd46babbee019ebff217d28c2cc906dc82a9e20050d204810",
+    "candidateReportSha256": "942aca58aaae460a3eb9732a9cbf99a4aab782ee4e73d9d5ad8df88ea269bec7",
+    "checkLogSha256": "81c299e727b341828633ea1ab1d7cbd4e86ff6d1a70af3377def9516dd5044fc",
+    "documentation": {
+      "installedPath": "docs/api/ENGLISH.md",
+      "exactExampleSha256": "2a5d45b42445eed233456031fe568531a6cec3900236e372f89ed1a9e64e521f",
+      "executed": "Pass, node --input-type=module --eval exact installed example",
+      "stdout": "english-porter1980-v1\n"
+    },
+    "otherThirtyTaskCards": "Unchanged",
+    "lockfile": "Unchanged",
+    "environment": {
+      "node": "v24.21.0",
+      "platform": "darwin",
+      "arch": "arm64",
+      "release": "27.0.0",
+      "npm": "12.2.0"
+    },
+    "browserScope": "Candidate headless Chrome156 browser/worker docs smoke remains basic-v1; does not claim English browser/manual AT support",
+    "memberInventorySha256": "138e42a0e9c5a5aeca1562f8a644f96f0002cd99de78e22380b55b617b3e2b91",
+    "method": "Independently decoded tar listing and type flags, checked every one of 256 regular safe unique paths and extracted each byte sequence against the current repository file. Independently parsed raw full-check counters and executed exact installed API example. Canonical package/gzip hashes and integrity match copied closed receipts."
+  },
+  "separatePackageSourceAndDocumentationAudit": {
+    "status": "Pass",
+    "paths": [
+      {
+        "path": "docs/api/ENGLISH.md",
+        "sha256": "77ba22c89473be4ea5e8bb961f08ea004a6ddf3bf35ed2b977bb266322a8a968"
+      },
+      {
+        "path": "docs/specs/ENGLISH_ANALYZER.md",
+        "sha256": "138fff33ede8c695c9d64d6b485b9b67e119d3f8ef75f8eb6f736e5cc0e6c739"
+      },
+      {
+        "path": "docs/release/PREPARATION.md",
+        "sha256": "1250a1aaa94e3b63ae57673c8ff4bdc22b5a3a49946d3577e552e0b48030ad64"
+      },
+      {
+        "path": "integrations/languages/english/README.md",
+        "sha256": "77bee440d58fc137a06ba2ce556cd78e7bef291685dd97b9834f4096314af41b"
+      },
+      {
+        "path": "integrations/languages/english/package.json",
+        "sha256": "0e7d5998181d60449ca7b0927798a6490b3941724ff9dcba73abfe480e73b002"
+      },
+      {
+        "path": "scripts/pack-english.mjs",
+        "sha256": "9dd4422e0ed4f5ee8ecf444eacba2aab46f5934c67505e9b5b4543ac2a5fecb4"
+      },
+      {
+        "path": "package.json",
+        "sha256": "df45d0042ed44045e3eaa994aa2bdf6e857e3598c40a55bb45b29f606fea2650"
+      }
+    ],
+    "assessment": "Actual preparation builds from stable compiled English inputs, bundles only selected language/pure helpers, emits exactly five members and a compiler-derived public declaration; exclusive output admission refuses existing directories/symlinks. Root command builds then invokes this packer. Public docs distinguish convenience imports from a separately installed private package, explicit selection and exact paired peer/protocol compatibility. Exact installed root and standalone examples ran unchanged. Reports retain actual morphology, cost and qualification limits; no publication or runtime initialization claim.",
+    "declaration": "Exact compiler output, one public root type-only import replacement; no handwritten declarations/private path"
+  },
+  "independentPairedConsumerWitness": {
+    "status": "Pass",
+    "consumerSourceSha256": "e9244536418375f60066e990046511ff2aa909f5353c9f6266b038ad3ac43093",
+    "consumerSource": "import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';\nimport {createRaveldex,RaveldexError} from '@vmitsaras/raveldex';\nimport {createEnglishAnalyzer,ENGLISH_ANALYZER} from '@vmitsaras/raveldex-english';\nimport {createEnglishAnalyzer as fromCore,ENGLISH_ANALYZER as coreDescriptor} from '@vmitsaras/raveldex/integrations/languages/english';\nimport {createSourceProvider,createSourcePhrases} from '@vmitsaras/raveldex/addons/phrases';import {createPositionProvider} from '@vmitsaras/raveldex/addons/positions';import {createPositionPhrases} from '@vmitsaras/raveldex/addons/phrases/positions';import {createMatchEvidence} from '@vmitsaras/raveldex/addons/evidence';import {createSnapshots,createSnapshotRaveldex,currentNodeSnapshotEnvironment} from '@vmitsaras/raveldex/adapters/snapshots';\nassert.deepEqual(ENGLISH_ANALYZER,coreDescriptor);assert.deepEqual(createEnglishAnalyzer().manifest,fromCore().manifest);\nconst records=[{id:'a',text:{title:'😀 Running searches'}},{id:'b',text:{title:'ran searching'}},{id:'c',text:{title:'agreed documents'}},{id:'d',text:{title:'café source'}}],schema={text:{title:{}}},config=factory=>({schema,analyzer:ENGLISH_ANALYZER,addons:[factory()]});\nconst external=createRaveldex(config(createEnglishAnalyzer)),convenience=createRaveldex(config(fromCore));let comparisons=0;\ntry{for(const e of[external,convenience])await e.addMany(records);for(const[text,expected]of[['run search',['a']],['searching',['a','b']],['agreed',['c']],['agre',[]],['cafe',[]],['café',['d']]])for(const page of[{limit:100},{limit:0},{offset:1,limit:1}]){const actual=await external.search(text,page),other=await convenience.search(text,page);assert.deepEqual(actual,other);if(page.limit===100)assert.deepEqual(actual.hits.map(h=>h.id).sort(),expected);comparisons++;}await external.replace({id:'a',text:{title:'walking archives'}});assert.equal((await external.search('run search')).total,0);await external.remove('b');assert.equal((await external.search('searching')).total,0);await external.clear();assert.equal((await external.search({kind:'all'})).total,0)}finally{await external.dispose();await convenience.dispose()}\nconst failures=[],small=createRaveldex({...config(createEnglishAnalyzer),limits:{maxRawTokenCodeUnits:4}});const typed=code=>error=>{assert.ok(error instanceof RaveldexError);assert.equal(error.code,code);failures.push({code,publicCoreError:true});return true};try{await assert.rejects(small.add({id:'a',text:{title:'exceeds'}}),typed('LIMIT_EXCEEDED'));await assert.rejects(small.search('exceeds'),typed('LIMIT_EXCEEDED'));await assert.rejects(small.add({id:'a',text:{title:'\\ud800'}}),typed('INVALID_RECORD'));const controller=new AbortController();controller.abort();await assert.rejects(small.search('run',{signal:controller.signal}),typed('CANCELLED'));assert.equal((await small.search({kind:'all'})).revision,0)}finally{await small.dispose()}\nconst phrase=text=>({kind:'extension',capability:'phrases',version:1,payload:{text,fields:['title']}}),qualification={profileId:'rx-a040-standalone-independent',scope:'exact-node-runtime',environment:currentNodeSnapshotEnvironment(),evidence:['Independent local standalone interoperability fixture only; no cross-host claim']};const observations=[];\nfor(const representation of['source','positions']){const providers=()=>[createSourceProvider({fields:['title']}),...(representation==='source'?[createSourcePhrases({fields:['title']})]:[createPositionProvider({fields:['title'],offsets:['title']}),createPositionPhrases({fields:['title']})]),createMatchEvidence({fields:{title:representation==='source'?'source':'offsets'}})];const donor=createSnapshotRaveldex({schema,analyzer:ENGLISH_ANALYZER,addons:[createEnglishAnalyzer(),...providers()]},{nativeQualification:qualification}),target=createSnapshotRaveldex({schema,analyzer:ENGLISH_ANALYZER,addons:[fromCore(),...providers()]},{nativeQualification:qualification});try{await donor.add({id:'a',text:{title:'😀 Running searches'}});const options={extensions:{'match-evidence':{ids:['a'],fields:['title']}}},before=await donor.search(phrase('run search'),options);assert.deepEqual(before.extensions['match-evidence'].documents[0].ranges.map(r=>({start:r.start,end:r.end,term:r.term})),[{start:3,end:10,term:'run'},{start:11,end:19,term:'search'}]);for(const format of['Source','Native']){const encoded=await createSnapshots(donor)['export'+format]();await createSnapshots(target).restore(encoded);const after=await target.search(phrase('run search'),options);assert.deepEqual(after.hits,before.hits);assert.deepEqual(after.extensions['match-evidence'].documents,before.extensions['match-evidence'].documents);observations.push({representation,format,completeHitsAndOriginalRanges:'Pass'})}}finally{await donor.dispose();await target.dispose()}}\nfor(const specifier of['@vmitsaras/raveldex-english/stem','@vmitsaras/raveldex-english/dist/index.js'])await assert.rejects(import(specifier),{code:'ERR_PACKAGE_PATH_NOT_EXPORTED'});\nconst report={status:'Pass',comparisons,typedCoreFailures:failures,canonicalFactoryAndDescriptorParity:'Pass',crossPackageSourceNativeRoundtrips:observations,privateDeepImports:'Refused'};await writeFile('/tmp/raveldex-rx-a040-standalone-runtime.json',JSON.stringify(report,null,2)+'\\n');console.log(JSON.stringify(report));\n",
+    "typesSourceSha256": "fec1f4f1d20532cac2664f21b11f62f65fc768ae79ebd68f11aa37c7ada54171",
+    "typesSource": "import type { AddonRegistration, AnalyzerDescriptor } from '@vmitsaras/raveldex';\nimport {createRaveldex} from '@vmitsaras/raveldex';\nimport {createEnglishAnalyzer,ENGLISH_ANALYZER} from '@vmitsaras/raveldex-english';\nconst addon:AddonRegistration=createEnglishAnalyzer();const descriptor:AnalyzerDescriptor=ENGLISH_ANALYZER;\nvoid createRaveldex({schema:{text:{title:{}}},addons:[addon],analyzer:descriptor}).search('documents');\n// @ts-expect-error Descriptor is immutable.\nENGLISH_ANALYZER.id='other';\n// @ts-expect-error Factory has no hidden options.\ncreateEnglishAnalyzer({algorithm:'unknown'});\n// @ts-expect-error Private path remains unsupported.\nimport {stemEnglish} from '@vmitsaras/raveldex-english/stem';\n",
+    "typesConfiguration": {
+      "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "target": "ES2022",
+        "lib": [
+          "ES2022"
+        ],
+        "types": [],
+        "noEmit": true,
+        "strict": true,
+        "skipLibCheck": false
+      },
+      "include": [
+        "independent-types.ts"
+      ]
+    },
+    "note": "This durable witness uses only installed public package entries. Its original execution directory and offline installation command are recorded in closedArtifactAudit. No private source imports or rebuilding are needed."
+  }
+}

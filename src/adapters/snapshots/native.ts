@@ -1,4 +1,5 @@
-import { analyzeValue } from '../../core/analyzer/basic.js';
+import { createAnalysis } from '../../core/analyzer/selected.js';
+import type { AnalysisRunner } from '../../core/analyzer/selected.js';
 import { scanUnicode } from '../../core/contracts/data.js';
 import { captureRecord } from '../../core/contracts/record.js';
 import { initializeParticipants } from '../../core/capabilities/participants.js';
@@ -72,8 +73,9 @@ function* metadata(entry: DocumentEntry, configuration: OwnedConfiguration): Gen
 
 /** Validate actual reverse/dictionary/postings/statistical structures. Canonical
  * normalized terms are never passed back through the raw-text analyzer. */
-export function* validateNative(payload: unknown, configuration: OwnedConfiguration, revision: number): Generator<WorkStep, IndexRoot> {
+export function* validateNative(payload: unknown, configuration: OwnedConfiguration, revision: number, check?: () => void): Generator<WorkStep, IndexRoot> {
   requireCodecs(configuration);
+  const analyze = createAnalysis(configuration, check);
   const data = object(payload, ['documents', 'fields', 'counts', 'participants'], 'INVALID_NATIVE_STATE'), limits = configuration.limits;
   const documents = yield* directory<DocumentEntry>(data.documents, limits.maxDocuments, limits.maxIdCodeUnits);
   const fieldData = map(data.fields), fieldNames = Object.keys(configuration.schema.text);
@@ -116,7 +118,7 @@ export function* validateNative(payload: unknown, configuration: OwnedConfigurat
     if (!registration.participant) continue;
     const id = registration.manifest.id;
     const budget = new WorkBudget(Math.min(registration.manifest.limits.maxWorkUnits, limits.maxMutationWorkUnits));
-    const cursor = registration.manifest.codec!.id === 'raveldex-source-v1' ? source(participants[id], expected[id] as SourceRoot, root) : positions(participants[id], expected[id] as PositionRoot, root);
+    const cursor = registration.manifest.codec!.id === 'raveldex-source-v1' ? source(participants[id], expected[id] as SourceRoot, root, analyze) : positions(participants[id], expected[id] as PositionRoot, root, analyze);
     let finished = false;
     try { for (;;) { const step = cursor.next(); if (step.done) { finished = true; break; } budget.charge(step.value.workUnits); yield step.value; } }
     finally { if (!finished) { try { cursor.return(undefined); } catch { /* Preserve validation failure. */ } } }
@@ -133,7 +135,7 @@ export function* validateNative(payload: unknown, configuration: OwnedConfigurat
   return root;
 }
 
-function* source(input: unknown, expected: SourceRoot, core: IndexRoot): Generator<WorkStep, void> {
+function* source(input: unknown, expected: SourceRoot, core: IndexRoot, analyze: AnalysisRunner): Generator<WorkStep, void> {
   const data = object(input, ['kind', 'revision', 'analyzer', 'fields', 'records', 'retainedEntries', 'textCodeUnits', 'maxRetainedEntries', 'maxTextCodeUnits'], 'INVALID_NATIVE_STATE');
   if (data.kind !== expected.kind || data.revision !== core.revision || !equalData(data.analyzer, core.configuration.analyzer) || !fieldsEqual(data.fields, expected.fields) || data.maxRetainedEntries !== expected.maxRetainedEntries || data.maxTextCodeUnits !== expected.maxTextCodeUnits) fail('INVALID_NATIVE_STATE');
   const records = yield* directory<SourceRoot['records'] extends Directory<infer T> ? T : never>(data.records, core.documents.size, core.configuration.limits.maxIdCodeUnits);
@@ -151,7 +153,7 @@ function* source(input: unknown, expected: SourceRoot, core: IndexRoot): Generat
       const terms: Record<string, number> = Object.create(null) as typeof terms;
       for (const value of values) {
         yield* unicode(value, core.configuration.limits.maxTextCodeUnitsPerValue); units += (value as string).length;
-        for (const step of analyzeValue(value as string, 0, core.configuration.limits)) { yield { workUnits: step.workUnits }; if (step.token) terms[step.token.term] = (terms[step.token.term] ?? 0) + 1; }
+        for (const step of analyze(value as string, 0, core.configuration.limits)) { yield { workUnits: step.workUnits }; if (step.token) terms[step.token.term] = (terms[step.token.term] ?? 0) + 1; }
       }
       const reverse = document.fields[field];
       if (Object.keys(terms).length !== Object.keys(reverse?.terms ?? {}).length) fail('INVALID_NATIVE_STATE');
@@ -165,7 +167,7 @@ function* source(input: unknown, expected: SourceRoot, core: IndexRoot): Generat
   if (data.retainedEntries !== retainedEntries || data.textCodeUnits !== textCodeUnits || retainedEntries > expected.maxRetainedEntries || textCodeUnits > expected.maxTextCodeUnits) fail('INVALID_NATIVE_STATE');
 }
 
-function* positions(input: unknown, expected: PositionRoot, core: IndexRoot): Generator<WorkStep, void> {
+function* positions(input: unknown, expected: PositionRoot, core: IndexRoot, analyze: AnalysisRunner): Generator<WorkStep, void> {
   const keys = ['kind', 'revision', 'analyzer', 'fields', 'offsetFields', 'records', 'limits', 'maxRetainedEntries', 'maxOccurrences', 'maxTermCodeUnits', 'retainedEntries', 'occurrenceCount', 'offsetCount', 'termEntries', 'termCodeUnits'];
   const data = object(input, keys, 'INVALID_NATIVE_STATE');
   if (data.kind !== expected.kind || data.revision !== core.revision || !equalData(data.analyzer, core.configuration.analyzer) || !equalData(data.limits, expected.limits) || !fieldsEqual(data.fields, expected.fields) || !fieldsEqual(data.offsetFields, expected.offsetFields) || data.maxRetainedEntries !== expected.maxRetainedEntries || data.maxOccurrences !== expected.maxOccurrences || data.maxTermCodeUnits !== expected.maxTermCodeUnits) fail('INVALID_NATIVE_STATE');
@@ -217,7 +219,7 @@ function* positions(input: unknown, expected: PositionRoot, core: IndexRoot): Ge
         minimumCodeUnits += previousEnd;
         if (sourceValues) {
           const seen: Record<string, number> = Object.create(null) as typeof seen; let analyzed = 0;
-          for (const step of analyzeValue(sourceValues[valueIndex]!, valueIndex, expected.limits)) {
+          for (const step of analyze(sourceValues[valueIndex]!, valueIndex, expected.limits)) {
             yield { workUnits: step.workUnits };
             if (!step.token) continue;
             const token = step.token, occurrence = (value as unknown as PositionValue).terms[token.term]?.[seen[token.term] ?? 0];

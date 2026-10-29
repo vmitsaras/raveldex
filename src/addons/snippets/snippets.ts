@@ -1,4 +1,5 @@
 import type { AddonRegistration, EvidenceContext } from '../../core/capabilities/types.js';
+import { requireAnalysis } from '../../core/analyzer/selected.js';
 import { Admission, has, keysOnly, ownObject, scanUnicode } from '../../core/contracts/data.js';
 import { bound, invalid } from '../../core/errors/error.js';
 import { directoryGet } from '../../core/index/directory.js';
@@ -173,7 +174,17 @@ function* valuesFor(context: EvidenceContext, roots: ReadonlyMap<string, SourceR
         const raw = original.slice(range.start, range.end);
         yield* scanUnicode(raw, 'INCOMPATIBLE_CAPABILITY', 'snippets.range.source');
         yield charge(raw.length + range.term.length + 1);
-        if (raw.normalize('NFKC').toLowerCase() !== range.term) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.source');
+        if (context.analyzer.id === 'basic-v1') {
+          if (raw.normalize('NFKC').toLowerCase() !== range.term) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.source');
+        } else {
+          let tokens = 0;
+          for (const step of requireAnalysis(context)(raw, 0, context.limits, 'INCOMPATIBLE_CAPABILITY')) {
+            yield charge(step.workUnits);
+            if (!step.token) continue;
+            if (++tokens !== 1 || step.token.start !== 0 || step.token.end !== raw.length || step.token.term !== range.term) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.source');
+          }
+          if (tokens !== 1) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.range.source');
+        }
         priorStart = range.start; priorEnd = range.end;
         const start = points[yield* floor(points, range.start)]!;
         const end = points[yield* lower(points, range.end)]!;

@@ -1,3 +1,5 @@
+import { createAnalysis } from '../analyzer/selected.js';
+import type { AnalysisRunner } from '../analyzer/selected.js';
 import type { MutationResult } from '../contracts/types.js';
 import { scanUnicode } from '../contracts/data.js';
 import { invalid } from '../errors/error.js';
@@ -16,6 +18,7 @@ import type { AnalysisCounts } from './document.js';
 export type MutationPhase = 'start' | 'validation' | 'analysis' | 'staging' | 'core' | 'participant' | 'prepared' | 'precommit';
 export interface MutationDiagnostics { analysis: AnalysisCounts; copies: StagingCounts; workUnits: number }
 export interface MutationControl {
+  readonly analyze?: AnalysisRunner;
   /** Private scheduler/fault seam; it may throw only before publication. */
   readonly checkpoint?: (phase: MutationPhase) => void;
   /** Execution owner checks all stop conditions and owns the signal read. */
@@ -67,6 +70,7 @@ export class MutationOwner {
     if (this.#active) invalid('INTERNAL_ERROR', 'mutation.active');
     this.#active = true;
     const old = this.#root, budget = new WorkBudget(old.configuration.limits.maxMutationWorkUnits);
+    const analyze = control.analyze ?? createAnalysis(old.configuration, () => check());
     let phase: MutationPhase = 'start';
     const check = (): void => {
       control.checkpoint?.(phase);
@@ -99,7 +103,7 @@ export class MutationOwner {
           if (request.kind === 'replace') { if (!previous) invalid('ID_NOT_FOUND', 'record.id'); }
           else if (previous) invalid('ID_EXISTS', 'record.id');
           boundary('analysis');
-          const next = yield* prepareDocument(record, old.configuration.limits, charge, control.diagnostics?.analysis);
+          const next = yield* prepareDocument(record, old.configuration.limits, charge, control.diagnostics?.analysis, analyze);
           changes.push(Object.freeze({ ...(previous ? { previous } : {}), next }));
           if (previous) replaced++; else added++;
           boundary('validation');
@@ -121,7 +125,7 @@ export class MutationOwner {
         boundary('core'); coreData = yield* delta.finish();
       }
       const core: IndexRoot = Object.freeze({ ...coreData, revision: old.revision + 1, configuration: old.configuration, participants: old.participants });
-      const context: TransactionContext = Object.freeze({ kind: request.kind, previous: old, core, changes: Object.freeze(changes), records: request.records });
+      const context: TransactionContext = Object.freeze({ analyze, kind: request.kind, previous: old, core, changes: Object.freeze(changes), records: request.records });
       const participants: Record<string, unknown> = Object.create(null) as typeof participants;
       for (const participant of this.participants) {
         boundary('participant'); yield charge(participant.id.length + 1);

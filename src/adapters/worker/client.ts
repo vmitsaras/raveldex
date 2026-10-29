@@ -272,7 +272,7 @@ class Client implements WorkerRaveldex {
   destroy(): Promise<void> { return this.dispose(); }
   facade(): WorkerRaveldex {
     const facade = Object.freeze({ search: this.search.bind(this), add: this.add.bind(this), addMany: this.addMany.bind(this), replace: this.replace.bind(this), remove: this.remove.bind(this), clear: this.clear.bind(this), reconcile: this.reconcile.bind(this), dispose: this.dispose.bind(this), destroy: this.destroy.bind(this) });
-    bindSnapshotChannel(facade, Object.freeze({ invoke: this.snapshot.bind(this), reconcile: this.snapshotReconcile.bind(this) }));
+    bindSnapshotChannel(facade, Object.freeze({ analyzer: this.#configuration.analyzer, invoke: this.snapshot.bind(this), reconcile: this.snapshotReconcile.bind(this) }));
     return facade;
   }
 }

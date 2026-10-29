@@ -1,4 +1,5 @@
 import { analyzeValue } from '../../core/analyzer/basic.js';
+import type { AnalysisRunner } from '../../core/analyzer/selected.js';
 import type { WorkStep } from '../../core/index/directory.js';
 import type { Limits } from '../../core/limits/limits.js';
 import { compareStrings } from '../../core/query/work.js';
@@ -23,10 +24,10 @@ export function* phraseFailureTable(terms: readonly string[]): Generator<WorkSte
 
 /** Streaming KMP keeps at most the phrase-length prefix table, never source tokens.
  * Each original value resets the matched prefix, preserving value boundaries. */
-export function* sourceValueMatches(value: string, valueIndex: number, terms: readonly string[], failure: readonly number[], limits: Limits): Generator<WorkStep, boolean> {
+export function* sourceValueMatches(value: string, valueIndex: number, terms: readonly string[], failure: readonly number[], limits: Limits, analyze: AnalysisRunner = analyzeValue): Generator<WorkStep, boolean> {
   if (terms.length === 0) return false;
   let matched = 0;
-  for (const step of analyzeValue(value, valueIndex, limits)) {
+  for (const step of analyze(value, valueIndex, limits)) {
     yield rawCharge(step.workUnits);
     if (!step.token) continue;
     for (;;) {

@@ -1,3 +1,4 @@
+import type { AnalysisRunner } from '../analyzer/selected.js';
 import { Admission, has, keysOnly, ownArray, ownObject, scanUnicode, stringValue } from './data.js';
 import { bound, invalid } from '../errors/error.js';
 import { analyzeValue } from '../analyzer/basic.js';
@@ -137,7 +138,7 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
 export interface QueryStep extends AnalysisStep { readonly leaf?: OwnedQuery; readonly variantIndex?: number }
 
 /** Validate lexical contents using basic-v1; no retrieval or Boolean evaluator. */
-export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Limits, capabilities?: CapabilitySet): Generator<QueryStep> {
+export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Limits, capabilities?: CapabilitySet, analyze: AnalysisRunner = analyzeValue): Generator<QueryStep> {
   let tokens = 0;
   const groups = new Set<string>();
   const queryLimits = { ...limits, maxTextCodeUnitsPerValue: limits.maxQueryLexicalCodeUnits };
@@ -153,7 +154,7 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
   function* walk(leaf: OwnedQuery): Generator<QueryStep> {
     switch (leaf.kind) {
       case 'text':
-        for (const step of analyzeValue(leaf.text, 0, queryLimits, 'INVALID_QUERY')) {
+        for (const step of analyze(leaf.text, 0, queryLimits, 'INVALID_QUERY')) {
           if (step.token) {
             bound(++tokens, limits.maxQueryTokens, 'query.tokens');
             addGroup(groupKey(leaf.fields, [[step.token.term, 'exact', 1]]));
@@ -166,7 +167,7 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
         const handler = registration?.refinement ?? registration?.expansion;
         if (!handler) invalid('MISSING_CAPABILITY', 'query.capability');
         let count = 0;
-        for (const step of analyzeValue(leaf.payload.text, 0, queryLimits, 'INVALID_QUERY')) {
+        for (const step of analyze(leaf.payload.text, 0, queryLimits, 'INVALID_QUERY')) {
           if (step.token) {
             bound(++count, handler.maxTokens, registration?.refinement ? 'query.phraseTokens' : 'query.expansionTokens');
             bound(++tokens, limits.maxQueryTokens, 'query.tokens');
@@ -181,7 +182,7 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
         for (let i = 0; i < leaf.variants.length; i++) {
           const variant = leaf.variants[i]!;
           let count = 0;
-          for (const step of analyzeValue(variant.text, 0, queryLimits, 'INVALID_QUERY')) {
+          for (const step of analyze(variant.text, 0, queryLimits, 'INVALID_QUERY')) {
             if (step.token) {
               bound(++tokens, limits.maxQueryTokens, 'query.tokens');
               if (++count > 1) invalid('INVALID_QUERY', 'query.variants');

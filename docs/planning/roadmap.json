@@ -1393,7 +1393,7 @@
       "id": "RX-A040",
       "title": "Evaluated language analyzer pack",
       "milestone": "N5",
-      "status": "deferred",
+      "status": "done",
       "dependsOn": [
         "RX-4003"
       ],
@@ -1409,16 +1409,65 @@
         "Record acceptance outcomes, commands, environment, failures, and limitations in docs/evidence/RX-A040.md; add the existing record to this task's evidence only after it has been produced."
       ],
       "affectedPaths": [
-        "integrations/languages/",
+        "src/integrations/languages/",
+        "src/core/analyzer/",
+        "src/core/capabilities/",
+        "src/core/contracts/",
+        "src/core/mutations/",
+        "src/core/query/",
+        "src/addons/phrases/",
+        "src/addons/positions/",
+        "src/addons/evidence/",
+        "src/addons/snippets/",
+        "src/adapters/worker/",
+        "src/adapters/snapshots/",
         "test/integrations/languages/",
-        "test/fixtures/relevance/"
+        "test/fixtures/relevance/",
+        "integrations/languages/english/",
+        "scripts/pack-english.mjs",
+        "test/measurements/english-package.mjs"
       ],
       "specs": [
         "docs/architecture/ADDONS_AND_ADAPTERS.md",
         "docs/specs/CORE_CONTRACT.md",
-        "docs/planning/VERIFICATION_PLAN.md"
+        "docs/planning/VERIFICATION_PLAN.md",
+        "docs/specs/ENGLISH_ANALYZER.md"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/evidence/RX-A040-baseline.log",
+        "docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz",
+        "docs/evidence/RX-A040-candidate.json",
+        "docs/evidence/RX-A040-check.log",
+        "docs/evidence/RX-A040-english-0.1.0-rc.0.tgz",
+        "docs/evidence/RX-A040-english-pack.log",
+        "docs/evidence/RX-A040-english-package.json",
+        "docs/evidence/RX-A040-focused.log",
+        "docs/evidence/RX-A040-independent-probes.json",
+        "docs/evidence/RX-A040-independent-probes.mjs",
+        "docs/evidence/RX-A040-initial-lifecycle.log",
+        "docs/evidence/RX-A040-initial-standalone-tests.log",
+        "docs/evidence/RX-A040-initial-typecheck.log",
+        "docs/evidence/RX-A040-language-probes.json",
+        "docs/evidence/RX-A040-language-probes.mjs",
+        "docs/evidence/RX-A040-language-review.json",
+        "docs/evidence/RX-A040-lifecycle.log",
+        "docs/evidence/RX-A040-package.json",
+        "docs/evidence/RX-A040-pre-standalone-candidate-0.1.0-rc.0.tgz",
+        "docs/evidence/RX-A040-pre-standalone-candidate.json",
+        "docs/evidence/RX-A040-pre-standalone-check.log",
+        "docs/evidence/RX-A040-pre-standalone-package.json",
+        "docs/evidence/RX-A040-pre-standalone-preparation.json",
+        "docs/evidence/RX-A040-pre-standalone-sync.log",
+        "docs/evidence/RX-A040-preparation.json",
+        "docs/evidence/RX-A040-review.json",
+        "docs/evidence/RX-A040-separate-installation-gap-review.json",
+        "docs/evidence/RX-A040-snapshot-stop-probe.mjs",
+        "docs/evidence/RX-A040-standalone-tests.log",
+        "docs/evidence/RX-A040-stem-typecheck.log",
+        "docs/evidence/RX-A040-stop-probe.mjs",
+        "docs/evidence/RX-A040-sync.log",
+        "docs/evidence/RX-A040.md"
+      ],
       "blocker": null
     },
     {

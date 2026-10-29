@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/typo/*.test.mjs test/addons/suggestions/*.test.mjs test/addons/synonyms/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
+    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/typo/*.test.mjs test/addons/suggestions/*.test.mjs test/addons/synonyms/*.test.mjs test/integrations/languages/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -56,7 +56,8 @@
     "measure:memory": "node bench/memory/run.mjs",
     "test:memory-method": "node --test bench/memory/*.test.mjs",
     "candidate:check": "npm run build && node scripts/candidate-check.mjs",
-    "candidate:prepare": "node scripts/prepare-candidate.mjs"
+    "candidate:prepare": "node scripts/prepare-candidate.mjs",
+    "language:pack": "npm run build && node scripts/pack-english.mjs"
   },
   "devDependencies": {
     "axe-core": "4.13.0",
@@ -154,6 +155,10 @@
     "./addons/synonyms": {
       "types": "./dist/addons/synonyms/index.d.ts",
       "import": "./dist/addons/synonyms/index.js"
+    },
+    "./integrations/languages/english": {
+      "types": "./dist/integrations/languages/english/index.d.ts",
+      "import": "./dist/integrations/languages/english/index.js"
     }
   },
   "files": [
@@ -179,7 +184,8 @@
     "CHANGELOG.md",
     "docs/api/",
     "docs/release/",
-    "docs/support/RX-4003.md"
+    "docs/support/RX-4003.md",
+    "dist/integrations/languages/"
   ],
   "sideEffects": [
     "**/*.css"
