@@ -281,7 +281,7 @@ Search developer identifiers without losing exact original names or inventing ph
 
 **Explicit literal and infix matching**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/33)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/33)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -289,11 +289,11 @@ Expose bounded substring semantics as a distinct capability rather than disguisi
 
 **Expected affected areas**
 
-`src/addons/literal/`, `test/addons/literal/`, `bench/`. These are planning boundaries; create files only when this task needs them.
+`src/addons/literal/`, `test/addons/literal/`, `bench/`, `src/core/capabilities/`, `src/core/contracts/query.ts`, `src/index.ts`, `test/oracle/literal.mjs`, `test/fixtures/relevance/literal-v1.json`, `test/measurements/literal-package.mjs`, `docs/api/LITERAL.md`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [LITERAL_MATCHING.md](../../docs/specs/LITERAL_MATCHING.md)
 
 **Acceptance criteria**
 
@@ -309,7 +309,36 @@ Expose bounded substring semantics as a distinct capability rather than disguisi
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A060-baseline.log](../../docs/evidence/RX-A060-baseline.log)
+- [docs/evidence/RX-A060-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A060-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A060-candidate-check.log](../../docs/evidence/RX-A060-candidate-check.log)
+- [docs/evidence/RX-A060-candidate.json](../../docs/evidence/RX-A060-candidate.json)
+- [docs/evidence/RX-A060-check.log](../../docs/evidence/RX-A060-check.log)
+- [docs/evidence/RX-A060-evaluation.log](../../docs/evidence/RX-A060-evaluation.log)
+- [docs/evidence/RX-A060-final-check.log](../../docs/evidence/RX-A060-final-check.log)
+- [docs/evidence/RX-A060-focused.log](../../docs/evidence/RX-A060-focused.log)
+- [docs/evidence/RX-A060-initial-focused.log](../../docs/evidence/RX-A060-initial-focused.log)
+- [docs/evidence/RX-A060-initial-lifecycle-syntax.log](../../docs/evidence/RX-A060-initial-lifecycle-syntax.log)
+- [docs/evidence/RX-A060-initial-package-clone.log](../../docs/evidence/RX-A060-initial-package-clone.log)
+- [docs/evidence/RX-A060-initial-package-headers.log](../../docs/evidence/RX-A060-initial-package-headers.log)
+- [docs/evidence/RX-A060-lifecycle.log](../../docs/evidence/RX-A060-lifecycle.log)
+- [docs/evidence/RX-A060-npm-ci.log](../../docs/evidence/RX-A060-npm-ci.log)
+- [docs/evidence/RX-A060-package-check.log](../../docs/evidence/RX-A060-package-check.log)
+- [docs/evidence/RX-A060-package.json](../../docs/evidence/RX-A060-package.json)
+- [docs/evidence/RX-A060-protocol-review-artifact.json](../../docs/evidence/RX-A060-protocol-review-artifact.json)
+- [docs/evidence/RX-A060-protocol-review-attempt1.json](../../docs/evidence/RX-A060-protocol-review-attempt1.json)
+- [docs/evidence/RX-A060-protocol-review.json](../../docs/evidence/RX-A060-protocol-review.json)
+- [docs/evidence/RX-A060-protocol-review.mjs](../../docs/evidence/RX-A060-protocol-review.mjs)
+- [docs/evidence/RX-A060-qualification.json](../../docs/evidence/RX-A060-qualification.json)
+- [docs/evidence/RX-A060-repaired-package.log](../../docs/evidence/RX-A060-repaired-package.log)
+- [docs/evidence/RX-A060-runtime-review-artifact.json](../../docs/evidence/RX-A060-runtime-review-artifact.json)
+- [docs/evidence/RX-A060-runtime-review-probes-attempt1.json](../../docs/evidence/RX-A060-runtime-review-probes-attempt1.json)
+- [docs/evidence/RX-A060-runtime-review-probes.json](../../docs/evidence/RX-A060-runtime-review-probes.json)
+- [docs/evidence/RX-A060-runtime-review-probes.mjs](../../docs/evidence/RX-A060-runtime-review-probes.mjs)
+- [docs/evidence/RX-A060-runtime-review-setup-failure.log](../../docs/evidence/RX-A060-runtime-review-setup-failure.log)
+- [docs/evidence/RX-A060-runtime-review.json](../../docs/evidence/RX-A060-runtime-review.json)
+- [docs/evidence/RX-A060-sync.log](../../docs/evidence/RX-A060-sync.log)
+- [docs/evidence/RX-A060.md](../../docs/evidence/RX-A060.md)
 
 
 ## RX-A070

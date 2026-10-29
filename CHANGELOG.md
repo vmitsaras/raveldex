@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040 and RX-A050
+## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050 and RX-A060
+
+- RX-A060 adds explicitly requested `/addons/literal`: raw case-sensitive source substrings including punctuation/infixes, exact totals and zero-score predicates, bounded overlapping UTF-16 evidence, source requirements and worker/snapshot identity. No normalization, n-gram side index or automatic source retention is added.
 
 - RX-A050 adds explicitly selected `/addons/identifiers`: preserved whole names and searchable camel/acronym/digit/underscore components, original-only strict phrases, tagged source/offset provenance, native BM25 statistics and bounded worker/snapshot compatibility. Default basic/English behavior stays separate; no runtime dependency or automatic UI change is introduced.
 

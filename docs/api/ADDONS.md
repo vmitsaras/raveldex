@@ -101,3 +101,7 @@ The [English pack](ENGLISH.md) is selected at owner creation through `Configurat
 ## Identifier analysis
 
 The explicit `/addons/identifiers` analyzer preserves whole names and derives searchable components with actual original spans. Queries retain whole original groups; strict phrases use original identifiers only. Tagged ranges distinguish original and component matches, and optional positions use an explicitly tagged representation. See [selection, grouping, scoring and compatibility](IDENTIFIERS.md). Basic and English one-to-one analysis remain separate selections.
+
+## Literal and infix matching
+
+`/addons/literal` provides explicit raw case-sensitive substring predicates over separately selected source fields. Pure literal results have zero score; mixed lexical queries keep native BM25. Its own bounded original-range evidence distinguishes string spans from token/phrase positions, including overlaps and combining marks. See [payloads, source requirements, Unicode and limits](LITERAL.md). Ordinary queries and token evidence remain unchanged.

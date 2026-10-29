@@ -1,0 +1,218 @@
+✖ actual offline-installed and minified literal consumers preserve exact source membership, zero-score predicates and mixed BM25 pages (1599.842834ms)
+✖ literal source/native restore preserves overlaps, raw Unicode spans, Boolean evidence and analyzer-independent membership (0.42025ms)
+✖ actual Node worker messages and source recovery bind literal implementation and exact policy identities (0.054583ms)
+✖ literal code is optional, fresh imports and registration are inert, and readonly public declarations remain isolated (0.024458ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1648.405458
+
+✖ failing tests:
+
+test at test/addons/literal/package.test.mjs:7:1
+✖ actual offline-installed and minified literal consumers preserve exact source membership, zero-score predicates and mixed BM25 pages (1599.842834ms)
+  Error: Command failed: /opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs
+  node:internal/modules/run_main:107
+      triggerUncaughtException(
+      ^
+  
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+      at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+        at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)
+        at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)
+        at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)
+        at restoreCursor.next (<anonymous>)
+        at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)
+        at metered.next (<anonymous>)
+        at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)
+        at start.next (<anonymous>)
+        at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)
+        at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {
+      code: 'INCOMPATIBLE_CAPABILITY',
+      details: { path: 'snapshot' },
+      reason: 'CAPABILITY_MISMATCH'
+    },
+    expected: [Function (anonymous)],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+  
+  Node.js v24.21.0
+  
+      at genericNodeError (node:internal/errors:986:15)
+      at wrappedFn (node:internal/errors:540:14)
+      at ChildProcess.exithandler (node:child_process:417:12)
+      at ChildProcess.emit (node:events:514:28)
+      at maybeClose (node:internal/child_process:1141:16)
+      at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+    code: 1,
+    killed: false,
+    signal: null,
+    cmd: '/opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs',
+    stdout: '',
+    stderr: `node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false\n\nCaught error:\n\nSnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n    at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n      at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)\n      at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)\n      at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)\n      at restoreCursor.next (<anonymous>)\n      at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)\n      at metered.next (<anonymous>)\n      at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)\n      at start.next (<anonymous>)\n      at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)\n      at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {\n    code: 'INCOMPATIBLE_CAPABILITY',\n    details: { path: 'snapshot' },\n    reason: 'CAPABILITY_MISMATCH'\n  },\n  expected: [Function (anonymous)],\n  operator: 'rejects',\n  diff: 'simple'\n}\n\nNode.js v24.21.0\n`
+  }
+
+test at test/addons/literal/package.test.mjs:10:1
+✖ literal source/native restore preserves overlaps, raw Unicode spans, Boolean evidence and analyzer-independent membership (0.42025ms)
+  Error: Command failed: /opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs
+  node:internal/modules/run_main:107
+      triggerUncaughtException(
+      ^
+  
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+      at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+        at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)
+        at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)
+        at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)
+        at restoreCursor.next (<anonymous>)
+        at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)
+        at metered.next (<anonymous>)
+        at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)
+        at start.next (<anonymous>)
+        at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)
+        at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {
+      code: 'INCOMPATIBLE_CAPABILITY',
+      details: { path: 'snapshot' },
+      reason: 'CAPABILITY_MISMATCH'
+    },
+    expected: [Function (anonymous)],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+  
+  Node.js v24.21.0
+  
+      at genericNodeError (node:internal/errors:986:15)
+      at wrappedFn (node:internal/errors:540:14)
+      at ChildProcess.exithandler (node:child_process:417:12)
+      at ChildProcess.emit (node:events:514:28)
+      at maybeClose (node:internal/child_process:1141:16)
+      at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+    code: 1,
+    killed: false,
+    signal: null,
+    cmd: '/opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs',
+    stdout: '',
+    stderr: `node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false\n\nCaught error:\n\nSnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n    at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n      at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)\n      at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)\n      at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)\n      at restoreCursor.next (<anonymous>)\n      at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)\n      at metered.next (<anonymous>)\n      at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)\n      at start.next (<anonymous>)\n      at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)\n      at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {\n    code: 'INCOMPATIBLE_CAPABILITY',\n    details: { path: 'snapshot' },\n    reason: 'CAPABILITY_MISMATCH'\n  },\n  expected: [Function (anonymous)],\n  operator: 'rejects',\n  diff: 'simple'\n}\n\nNode.js v24.21.0\n`
+  }
+
+test at test/addons/literal/package.test.mjs:13:1
+✖ actual Node worker messages and source recovery bind literal implementation and exact policy identities (0.054583ms)
+  Error: Command failed: /opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs
+  node:internal/modules/run_main:107
+      triggerUncaughtException(
+      ^
+  
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+      at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+        at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)
+        at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)
+        at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)
+        at restoreCursor.next (<anonymous>)
+        at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)
+        at metered.next (<anonymous>)
+        at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)
+        at start.next (<anonymous>)
+        at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)
+        at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {
+      code: 'INCOMPATIBLE_CAPABILITY',
+      details: { path: 'snapshot' },
+      reason: 'CAPABILITY_MISMATCH'
+    },
+    expected: [Function (anonymous)],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+  
+  Node.js v24.21.0
+  
+      at genericNodeError (node:internal/errors:986:15)
+      at wrappedFn (node:internal/errors:540:14)
+      at ChildProcess.exithandler (node:child_process:417:12)
+      at ChildProcess.emit (node:events:514:28)
+      at maybeClose (node:internal/child_process:1141:16)
+      at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+    code: 1,
+    killed: false,
+    signal: null,
+    cmd: '/opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs',
+    stdout: '',
+    stderr: `node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false\n\nCaught error:\n\nSnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n    at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n      at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)\n      at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)\n      at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)\n      at restoreCursor.next (<anonymous>)\n      at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)\n      at metered.next (<anonymous>)\n      at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)\n      at start.next (<anonymous>)\n      at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)\n      at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {\n    code: 'INCOMPATIBLE_CAPABILITY',\n    details: { path: 'snapshot' },\n    reason: 'CAPABILITY_MISMATCH'\n  },\n  expected: [Function (anonymous)],\n  operator: 'rejects',\n  diff: 'simple'\n}\n\nNode.js v24.21.0\n`
+  }
+
+test at test/addons/literal/package.test.mjs:16:1
+✖ literal code is optional, fresh imports and registration are inert, and readonly public declarations remain isolated (0.024458ms)
+  Error: Command failed: /opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs
+  node:internal/modules/run_main:107
+      triggerUncaughtException(
+      ^
+  
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+      at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY
+        at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)
+        at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)
+        at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)
+        at restoreCursor.next (<anonymous>)
+        at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)
+        at metered.next (<anonymous>)
+        at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)
+        at start.next (<anonymous>)
+        at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)
+        at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {
+      code: 'INCOMPATIBLE_CAPABILITY',
+      details: { path: 'snapshot' },
+      reason: 'CAPABILITY_MISMATCH'
+    },
+    expected: [Function (anonymous)],
+    operator: 'rejects',
+    diff: 'simple'
+  }
+  
+  Node.js v24.21.0
+  
+      at genericNodeError (node:internal/errors:986:15)
+      at wrappedFn (node:internal/errors:540:14)
+      at ChildProcess.exithandler (node:child_process:417:12)
+      at ChildProcess.emit (node:events:514:28)
+      at maybeClose (node:internal/child_process:1141:16)
+      at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+    code: 1,
+    killed: false,
+    signal: null,
+    cmd: '/opt/homebrew/Cellar/node@24/24.21.0/bin/node packed-literal-integration.mjs',
+    stdout: '',
+    stderr: `node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false\n\nCaught error:\n\nSnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n    at async file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/packed-literal-integration.mjs:25:237 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: SnapshotAdapterError: Raveldex: INCOMPATIBLE_CAPABILITY\n      at fail (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/error.js:16:44)\n      at checkedHeader (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:112:9)\n      at restoreCursor (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:208:20)\n      at restoreCursor.next (<anonymous>)\n      at metered (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:46:33)\n      at metered.next (<anonymous>)\n      at Object.start (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/adapters/snapshots/snapshots.js:267:39)\n      at start.next (<anonymous>)\n      at ExecutionOwner.pump (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:178:48)\n      at Timeout._onTimeout (file:///private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-nMf7pW/node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js:193:97) {\n    code: 'INCOMPATIBLE_CAPABILITY',\n    details: { path: 'snapshot' },\n    reason: 'CAPABILITY_MISMATCH'\n  },\n  expected: [Function (anonymous)],\n  operator: 'rejects',\n  diff: 'simple'\n}\n\nNode.js v24.21.0\n`
+  }

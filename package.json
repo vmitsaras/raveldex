@@ -18,7 +18,7 @@
   },
   "scripts": {
     "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
-    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/identifiers/*.test.mjs test/addons/typo/*.test.mjs test/addons/suggestions/*.test.mjs test/addons/synonyms/*.test.mjs test/integrations/languages/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
+    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/literal/*.test.mjs test/addons/identifiers/*.test.mjs test/addons/typo/*.test.mjs test/addons/suggestions/*.test.mjs test/addons/synonyms/*.test.mjs test/integrations/languages/*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
     "handoff:check": "node scripts/plan.mjs check",
     "handoff:status": "node scripts/plan.mjs status",
     "handoff:next": "node scripts/plan.mjs next",
@@ -163,12 +163,17 @@
     "./addons/identifiers": {
       "types": "./dist/addons/identifiers/index.d.ts",
       "import": "./dist/addons/identifiers/index.js"
+    },
+    "./addons/literal": {
+      "types": "./dist/addons/literal/index.d.ts",
+      "import": "./dist/addons/literal/index.js"
     }
   },
   "files": [
     "dist/index.js",
     "dist/index.d.ts",
     "dist/core/",
+    "dist/addons/literal/",
     "dist/addons/identifiers/",
     "dist/addons/synonyms/",
     "dist/addons/suggestions/",

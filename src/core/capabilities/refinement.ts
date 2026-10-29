@@ -34,7 +34,7 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
     if (!budget) { budget = new WorkBudget(Math.min(registration.manifest.limits.maxWorkUnits, root.configuration.limits.maxSearchWorkUnits)); budgets.set(registration.manifest.id, budget); }
     const shared = budget;
     return { registration, *run<T>(cursor: Generator<WorkStep, T>): Generator<WorkStep, T> {
-      try { for (;;) { const step = cursor.next(); if (step.done) return step.value; const charged = charge(step.value.workUnits); shared.charge(step.value.workUnits); yield charged; } }
+      try { for (;;) { const step = cursor.next(); charge(0); if (step.done) return step.value; const charged = charge(step.value.workUnits); shared.charge(step.value.workUnits); yield charged; } }
       finally { try { cursor.return(undefined as never); } catch { /* Preserve the original stop/failure. */ } }
     } };
   }
@@ -64,6 +64,12 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
         const prepared = yield* run(registration.refinement.prepare(context));
         if (!prepared || typeof prepared.test !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'query.refinement');
         test = prepared.test.bind(prepared);
+      } else if (registration.sourcePredicate) {
+        const prepared = yield* run(registration.sourcePredicate.prepare(Object.freeze({ ...metadataContext(node.capability, node.payload), analyzer: root.configuration.analyzer,
+          state: (requested: string): unknown => state(requested, node.capability) })));
+        if (!prepared || typeof prepared.test !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'query.sourcePredicate');
+        const predicate = prepared.test.bind(prepared);
+        test = (id) => predicate(id);
       } else {
         if (!registration.predicate) invalid('MISSING_CAPABILITY', 'query.predicate');
         const prepared = yield* run(registration.predicate.prepare(metadataContext(node.capability, node.payload)));

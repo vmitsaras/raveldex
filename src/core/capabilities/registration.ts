@@ -34,7 +34,7 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     }));
   };
   for (const entry of entries) {
-    const data = object(entry, 'addons.registration', ['manifest', 'participant', 'refinement', 'predicate', 'aggregation', 'evidence', 'expansion', 'dictionary', 'analyzer']);
+    const data = object(entry, 'addons.registration', ['manifest', 'participant', 'refinement', 'predicate', 'sourcePredicate', 'aggregation', 'evidence', 'expansion', 'dictionary', 'analyzer']);
     const raw = object(data.manifest, 'addons.manifest', ['id', 'version', 'contractVersion', 'roles', 'provides', 'requires', 'dataRequirements', 'indexEffect', 'rebuildPolicy', 'execution', 'limits', 'costs', 'codec']);
     const name = id(raw.id, 'addons.id'), version = string(raw.version, 'addons.version');
     const semanticVersion = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/;
@@ -62,15 +62,17 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     if (analyzerRole !== has(data, 'analyzer') || analyzerRole && (roles.length !== 1 || fields.length !== 0 || metadata || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false || has(raw, 'codec'))) invalid(code, 'addons.analyzer');
     if (dictionaryRole !== has(data, 'dictionary') || dictionaryRole && (roles.length !== 1 || metadata || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.dictionary');
     if (expansionRole !== has(data, 'expansion') || expansionRole && (roles.length !== 1 || metadata || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.expansion');
-    if (participantRole !== has(data, 'participant') || refinementRole !== (has(data, 'refinement') || has(data, 'predicate')) || has(data, 'refinement') && has(data, 'predicate') || aggregationRole !== has(data, 'aggregation') || evidenceRole !== has(data, 'evidence') || raw.indexEffect !== (participantRole ? 'transactional' : analyzerRole ? 'analysis' : 'none')) invalid(code, 'addons.roles');
+    const leafHandles = ['refinement', 'predicate', 'sourcePredicate'].filter(key => has(data, key)).length;
+    if (participantRole !== has(data, 'participant') || refinementRole !== (leafHandles === 1) || leafHandles > 1 || aggregationRole !== has(data, 'aggregation') || evidenceRole !== has(data, 'evidence') || raw.indexEffect !== (participantRole ? 'transactional' : analyzerRole ? 'analysis' : 'none')) invalid(code, 'addons.roles');
     if ((has(data, 'predicate') || aggregationRole) && (!metadata || participantRole || requirements.source !== false || requirements.positions !== false || requirements.offsets !== false)) invalid(code, 'addons.dataRequirements');
+    if (has(data, 'sourcePredicate') && (metadata || participantRole || requirements.source !== true || requirements.positions !== false || requirements.offsets !== false || !fields.length || has(raw, 'codec'))) invalid(code, 'addons.dataRequirements');
     if (evidenceRole && (participantRole || metadata || requirements.offsets === true && requirements.positions !== true)) invalid(code, 'addons.dataRequirements');
     // All handles use the same descriptor capture/type/binding rules.
     const implementations: Record<string, unknown> = {};
-    for (const key of ['participant', 'refinement', 'predicate', 'aggregation', 'evidence', 'expansion', 'dictionary', 'analyzer'] as const) {
+    for (const key of ['participant', 'refinement', 'predicate', 'sourcePredicate', 'aggregation', 'evidence', 'expansion', 'dictionary', 'analyzer'] as const) {
       if (!has(data, key)) continue;
       let methods = key === 'participant' ? ['initialize', 'prepare'] : key === 'refinement' ? ['prepare'] : key === 'evidence' ? ['capture', 'select', 'prepare'] : key === 'expansion' ? ['expand'] : key === 'analyzer' ? ['transform', 'analyze'] : ['capture', 'prepare'];
-      const attributes = key === 'refinement' ? ['kind', 'maxTokens'] : key === 'aggregation' ? ['fieldType'] : key === 'expansion' ? ['kind', 'maxTokens', 'policy'] : key === 'analyzer' ? ['kind', 'id'] : [];
+      const attributes = key === 'refinement' ? ['kind', 'maxTokens'] : key === 'sourcePredicate' ? ['kind'] : key === 'aggregation' ? ['fieldType'] : key === 'expansion' ? ['kind', 'maxTokens', 'policy'] : key === 'analyzer' ? ['kind', 'id'] : [];
       const handles = object(data[key], `addons.${key}`, [...methods, ...attributes]);
       if (key === 'analyzer') {
         methods = handles.kind === 'single-token-transform' ? ['transform'] : handles.kind === 'identifier-tokenizer' ? ['analyze'] : [];
@@ -83,6 +85,7 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
         handles[method] = callback.bind(data[key]);
       }
       if (key === 'refinement' && (handles.kind !== 'exact-token-sequence' || integer(handles.maxTokens, 'addons.maxTokens', 1) > DEFAULT_LIMITS.maxQueryTokens)) invalid(code, 'addons.refinement');
+      if (key === 'sourcePredicate' && handles.kind !== 'source-substring') invalid(code, 'addons.sourcePredicate');
       if (key === 'expansion') {
         if (handles.kind !== 'weighted-token-alternatives' || integer(handles.maxTokens, 'addons.maxTokens', 1) > DEFAULT_LIMITS.maxQueryTokens) invalid(code, 'addons.expansion');
         handles.policy = id(handles.policy, 'addons.expansion.policy');
@@ -125,6 +128,12 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     if ((data.source || data.positions) && registration.refinement) for (const field of data.fields) {
       const present = (kind: string): boolean => manifest.requires.some(ref => ref.id === `${kind}:${field}`) && !!providers[`${kind}:${field}`]?.participant;
       if (!(data.source && present('source') || data.positions && present('positions'))) invalid('MISSING_CAPABILITY', 'addons.data');
+    }
+    if (registration.sourcePredicate) {
+      if (manifest.requires.some(ref => !data.fields.some(field => ref.id === `source:${field}`))) invalid('INCOMPATIBLE_CAPABILITY', 'addons.sourcePredicate.requires');
+      for (const field of data.fields) {
+        if (!manifest.requires.some(ref => ref.id === `source:${field}`) || !providers[`source:${field}`]?.participant) invalid('MISSING_CAPABILITY', 'addons.data');
+      }
     }
     if (registration.evidence && (data.source || data.positions || data.offsets)) for (const field of data.fields) {
       const present = (kind: string): boolean => manifest.requires.some(ref => ref.id === `${kind}:${field}`) && !!providers[`${kind}:${field}`]?.participant;

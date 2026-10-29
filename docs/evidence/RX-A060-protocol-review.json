@@ -1,0 +1,333 @@
+{
+  "kind": "raveldex-rx-a060-independent-protocol-review-v1",
+  "reviewer": "/root/literal_seam",
+  "recordedAt": "2026-10-29T16:52:38.677Z",
+  "status": "Pass",
+  "recommendation": "Ready with follow-ups",
+  "scope": "Independent other-authored core source-predicate protocol, oracle/frozen labels and package proof source review. The reviewer authored src/addons/literal and matching tests; those are excluded from the independent verdict. No build, Git mutation, remote action, publication or nested delegation.",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "commands": [
+    "node docs/evidence/RX-A060-protocol-review.mjs",
+    "node docs/evidence/RX-A060-protocol-review.mjs /tmp/raveldex-rx-a060-final-candidate"
+  ],
+  "rows": [
+    {
+      "name": "R1 exact source-requirement set rejects surplus declared capability access",
+      "status": "Pass",
+      "refusals": [
+        {
+          "extra": "source:other",
+          "code": "INCOMPATIBLE_CAPABILITY",
+          "path": "addons.sourcePredicate.requires"
+        },
+        {
+          "extra": "positions:other",
+          "code": "MISSING_CAPABILITY",
+          "path": "addons.requires"
+        },
+        {
+          "extra": "foreign:participant",
+          "code": "MISSING_CAPABILITY",
+          "path": "addons.requires"
+        }
+      ],
+      "qualification": "The actually installed surplus source provider hits the exact-set guard; absent foreign providers fail the earlier missing-capability check. Static pre-repair inspection found the gap; first executed probe occurred after parent rebuilt the repair. No pre-repair runtime reproduction is claimed."
+    },
+    {
+      "name": "Source predicate handle capture rejects accessors, mixed roles and malformed source declarations",
+      "status": "Pass",
+      "refusals": 10,
+      "getterReads": 0
+    },
+    {
+      "name": "Complete-document predicate iteration includes punctuation-only and missing-field records with zero lexical groups",
+      "status": "Pass",
+      "opaqueIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "qualifyingCalls": 10,
+      "documentsPerSearch": 5,
+      "punctuationOnlyHit": "c",
+      "lexicalFacts": 0,
+      "traceDocument": {
+        "kind": "document",
+        "id": "c",
+        "exists": true,
+        "matched": true,
+        "groups": [],
+        "score": 0
+      }
+    },
+    {
+      "name": "Native mixed scoring and Boolean participation agree with independent hand arithmetic",
+      "status": "Pass",
+      "comparisons": 12,
+      "fieldPopulation": 3,
+      "fieldTotalLength": 4,
+      "documentFrequency": 2,
+      "expectedScores": {
+        "a": 1.1331594348938283,
+        "b": 1.0470966930031578
+      }
+    },
+    {
+      "name": "Context state access refuses undeclared capability names before testing an empty corpus",
+      "status": "Pass",
+      "refusals": 1,
+      "emptyCorpus": true,
+      "qualification": "Capability-name isolation over trusted participant handles, not projection/sandbox isolation within a shared immutable source-provider root."
+    },
+    {
+      "name": "Captured trusted callbacks remain owned after caller changes source predicate methods",
+      "status": "Pass",
+      "sourceCapture": "Original bound callback",
+      "prepare": "Original bound callback"
+    },
+    {
+      "name": "Shared source lexical capture ceiling rejects aggregate payloads before provider preparation",
+      "status": "Pass",
+      "exactAggregateUnits": 2048,
+      "rejectedAggregateUnits": 2053,
+      "prepareCallsAfterRefusal": 2
+    },
+    {
+      "name": "A single registration budget spans every source leaf and optional evidence cursor",
+      "status": "Pass",
+      "singleLeafBudget": 21,
+      "documentTests": 5,
+      "multiLeafRefusal": "WORK_LIMIT_EXCEEDED",
+      "queryPlusEvidenceRefusal": "WORK_LIMIT_EXCEEDED"
+    },
+    {
+      "name": "Evidence finalization shares the exact remaining registration budget and closes on overflow",
+      "status": "Pass",
+      "budget": 22,
+      "prepareAndTestUnits": 22,
+      "finishUnits": 1,
+      "error": "WORK_LIMIT_EXCEEDED",
+      "finishCalls": 1,
+      "closed": 1
+    },
+    {
+      "name": "Stop checks after trusted advancement precede returned-handle/Boolean and module-work failures",
+      "status": "Pass",
+      "observations": [
+        {
+          "when": "prepare-return-invalid",
+          "error": "CANCELLED",
+          "closed": 1
+        },
+        {
+          "when": "prepare-step-overflow",
+          "error": "CANCELLED",
+          "closed": 1
+        },
+        {
+          "when": "test-return-invalid",
+          "error": "CANCELLED",
+          "closed": 1
+        },
+        {
+          "when": "test-step-overflow",
+          "error": "CANCELLED",
+          "closed": 1
+        }
+      ]
+    },
+    {
+      "name": "Independent source oracle matches native raw overlap truth over deterministic Unicode and full-corpus numerical controls",
+      "status": "Pass",
+      "rawOracleComparisons": 4000,
+      "handNumericalFacts": 2,
+      "independence": "Native indexOf overlap scan and fresh hand field statistics; no production literal matcher, tokenizer or scorer supplies oracle truth."
+    },
+    {
+      "name": "All frozen real-document labels have exhaustive independent source membership and exact corpus identity",
+      "status": "Pass",
+      "fixtureSha256": "659e90a5bde2816c13a466c3c2d1402a20935b9a7d5ad4c139fe3a86cde665b1",
+      "corpusSha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "records": 34,
+      "judgments": 22,
+      "positive": 16,
+      "negative": 6,
+      "qualification": "Exhaustive exact-source memberships, not human relevance/usefulness or a user study."
+    }
+  ],
+  "passCount": 12,
+  "failCount": 0,
+  "mandatoryFindings": [],
+  "resolvedFindings": [
+    {
+      "id": "R1",
+      "kind": "Specification/protocol boundary",
+      "finding": "Registration allowed additional declared participant requirements beyond configured source fields, conflicting with its source-only reader contract.",
+      "resolution": "Exact declared source requirement set is checked at registration; an installed surplus source provider hits INCOMPATIBLE_CAPABILITY, while absent foreign requirements fail earlier with MISSING_CAPABILITY.",
+      "beforeEvidence": "Static source inspection before the repair; no executed pre-repair reproduction claimed."
+    }
+  ],
+  "retainedAttempts": [
+    {
+      "path": "docs/evidence/RX-A060-protocol-review-attempt1.json",
+      "classification": "Review harness expectation defect",
+      "description": "The first independent R1 probe demanded INCOMPATIBLE_CAPABILITY even for absent foreign requirements. The correct earlier MISSING_CAPABILITY was retained; expectations now distinguish installed extra source from missing dependency. No product or frozen-label change."
+    }
+  ],
+  "followUps": [
+    "Finite exact-Node and source-corpus qualification; no manual AT/browser-Unicode or peak-memory claim.",
+    "Reader capability-name checks govern trusted immutable participant handles, not hostile-plugin sandbox or field-projection isolation within a shared source root.",
+    "Existing 19,531-byte core gzip observation misses the unchanged 15,360-byte target; package measurement is code size, not memory/latency."
+  ],
+  "inputs": [
+    {
+      "path": "src/core/capabilities/types.ts",
+      "sha256": "4dac6d1e00189fed98b6e17a2d67885788a8a2254ab2f401ef36f9e5c79c083d"
+    },
+    {
+      "path": "dist/core/capabilities/types.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "modifiedAt": "2026-10-29T16:45:25.883Z"
+    },
+    {
+      "path": "src/core/capabilities/registration.ts",
+      "sha256": "6ffcc272dcfec2f54bed990c457ffa54857f44cbcfd3c834c62be8d9001d73bd"
+    },
+    {
+      "path": "dist/core/capabilities/registration.js",
+      "sha256": "64cdeccd7441452ab71aade819b9e8cbdb0995344000a6fdd4b3e8afc81fa097",
+      "modifiedAt": "2026-10-29T16:45:25.884Z"
+    },
+    {
+      "path": "src/core/capabilities/refinement.ts",
+      "sha256": "5a4392dc6a1771021e32fac0a3b97d485cc9835841af45276f6bbdaade7f33a2"
+    },
+    {
+      "path": "dist/core/capabilities/refinement.js",
+      "sha256": "9e9ecaaca17286477d2d1317cda94fa221ba6d6ba7d3ca0842c8def10febafff",
+      "modifiedAt": "2026-10-29T16:45:25.683Z"
+    },
+    {
+      "path": "src/core/contracts/query.ts",
+      "sha256": "dc6e55697217964ab6cf99462a4a6eb7ca000ee5b8bd64d4e36bf0dfa8066521"
+    },
+    {
+      "path": "dist/core/contracts/query.js",
+      "sha256": "7beb4739fd26375bfa058c75136f10f2d33e81ce9c6c9350e215789d74034b69",
+      "modifiedAt": "2026-10-29T16:45:25.884Z"
+    },
+    {
+      "path": "src/core/query/compile.ts",
+      "sha256": "f7cc2b784b494e2d9e1bf136a5d2e560e1f5867816dfd3fea24fb0902b81a269"
+    },
+    {
+      "path": "dist/core/query/compile.js",
+      "sha256": "59f2ab5784ab58295f1a9b04dc21e96aef6d4f8cb4198a0588af441f88b1f23a",
+      "modifiedAt": "2026-10-29T16:45:25.885Z"
+    },
+    {
+      "path": "src/core/query/evaluate.ts",
+      "sha256": "a9fd2fa8b9d4d6360f0c5e9fd59da87bfa8a7f64b50940b8e926d650bd6ad670"
+    },
+    {
+      "path": "dist/core/query/evaluate.js",
+      "sha256": "596fe7bb26e18034dfcf5d001807a50b318c529d9c493b01a3b334260e405ec2",
+      "modifiedAt": "2026-10-29T16:45:25.681Z"
+    },
+    {
+      "path": "src/core/query/search.ts",
+      "sha256": "01e9711e48d107f197001fdab0b6ba8c9c52b9238ae5d43842da34b2aff428f6"
+    },
+    {
+      "path": "dist/core/query/search.js",
+      "sha256": "10519979367a7b167543484e71c2ec30fb354113bea5f9876db02f934a2da593",
+      "modifiedAt": "2026-10-29T16:45:25.681Z"
+    },
+    {
+      "path": "src/index.ts",
+      "sha256": "283b3df627e47d1377a28005765a533178617db8d8a333b933eb1af4185c823e"
+    },
+    {
+      "path": "dist/index.js",
+      "sha256": "640c86a133d3432da6369c8d5de28228988d1d2ad5392519427730595b60d27e",
+      "modifiedAt": "2026-10-29T16:45:25.334Z"
+    },
+    {
+      "path": "test/oracle/literal.mjs",
+      "sha256": "7e6050b56c9aee47b5ec61f46071804dade5ee9455a665fc0473b9b08b331f91"
+    },
+    {
+      "path": "test/fixtures/relevance/literal-v1.json",
+      "sha256": "659e90a5bde2816c13a466c3c2d1402a20935b9a7d5ad4c139fe3a86cde665b1"
+    },
+    {
+      "path": "test/addons/literal/evaluation.test.mjs",
+      "sha256": "baa89942a7a5f29138d7c209b1291faf08060a6ea6a0faf2cbe3fe22dae7b71e"
+    },
+    {
+      "path": "test/addons/literal/lifecycle.test.mjs",
+      "sha256": "e900ea67f955ccfbffa9bebaf1ae0added98d0a330b2b8bae8e158342e31234f"
+    },
+    {
+      "path": "test/measurements/literal-package.mjs",
+      "sha256": "3b58b89859d56e3bdf2b0fac5f8cf7ec199fe8f76a14b2d9de93e040c227f9bf"
+    },
+    {
+      "path": "test/addons/literal/package.test.mjs",
+      "sha256": "bb4df69dc7738d86a39462fc01ebf62e75a07af1c8a9837b1b89d521ca6d9088"
+    },
+    {
+      "path": "docs/specs/LITERAL_MATCHING.md",
+      "sha256": "ae2b73dc84377e8a5792b30d4f615503840b1a69219c1d007a4fb45221c098d6"
+    },
+    {
+      "path": "docs/api/LITERAL.md",
+      "sha256": "019856788d3a57c062e66847f78737c47511787aa332ed44dd7a0f2c49388b9d"
+    }
+  ],
+  "finalArtifact": {
+    "status": "Pass",
+    "tarballSha256": "e82029dfbd7fbed0fe2587104d9414f4ab8c31ae7dad323806792653f1afa2e7",
+    "tarballBytes": 206359,
+    "members": 278,
+    "candidateReportSha256": "ffbd7b0434a380a3553ebc442207493d02c4e85973b7c73a1c1803ac86052e9a",
+    "measurementReportSha256": "2b143586ad39ad7a7bb7fef442a787a8371915a0763b9b95d6a4cfd00a3697b1",
+    "details": "docs/evidence/RX-A060-protocol-review-artifact.json",
+    "documentation": {
+      "status": "Pass",
+      "source": "docs/api/LITERAL.md",
+      "exampleSha256": "8e29289d1cefe4a0ea61eef02977ad98770213807705b2246b662e7767da68d6",
+      "stdout": "1 0\n",
+      "scope": "Actual installed other-authored public example executed; not an independent algorithm verdict over reviewer-authored matcher."
+    },
+    "projectCheck": {
+      "command": "npm run check",
+      "runBy": "Parent",
+      "logSha256": "cd2c281a9301e478ec28c8dfb2be310bc0a136c9855acb430e3c8ba67ebb56f0",
+      "batches": [
+        674,
+        30,
+        24,
+        26,
+        1
+      ],
+      "passed": 755,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "graphs": {
+      "coreGzipBytes": 19531,
+      "literalOnlyGzipBytes": 5345,
+      "combinedGzipBytes": 24136,
+      "coreTargetGzipBytes": 15360,
+      "targetMet": false
+    }
+  }
+}

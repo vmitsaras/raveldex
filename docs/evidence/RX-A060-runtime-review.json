@@ -1,0 +1,75 @@
+{
+  "kind": "raveldex-rx-a060-independent-runtime-review-v1",
+  "reviewer": "Codex /root/literal_oracle",
+  "date": "2026-10-29",
+  "verdict": "Ready with follow-ups",
+  "mandatoryFindings": [],
+  "independence": {
+    "ownedImplementation": "test/oracle/literal.mjs, test/fixtures/relevance/literal-v1.json, test/addons/literal/evaluation.test.mjs only.",
+    "reviewedOtherAuthoredRuntime": "Core sourcePredicate capture, raw source matching/validation/evidence, exact source-state access, zero-score native composition, operation budgets/cancellation, source/native restore and actual Node worker protocol.",
+    "excluded": "This is not an independent assessment of my own oracle, frozen labels or evaluation tests. Parent ran integrated project/package tests; I inspected those artifacts and executed separate direct/worker/source/stop/random-matcher probes plus the installed public example.",
+    "sideEffects": "Only owned evaluation/review artifacts and temporary worker files written. No build, Git mutation, package install, network/remote write, publication or nested delegation."
+  },
+  "probes": {
+    "path": "docs/evidence/RX-A060-runtime-review-probes.json",
+    "sha256": "79874e0729819c01283cc21e0644eb68fde3bcf5e2cd22e13a50e8cb36b09602",
+    "passCount": 11,
+    "failCount": 0,
+    "highlights": [
+      "2000 seeded Unicode/punctuation/case/overlap KMP comparisons against independent raw built-in search; all yielded work units positive finite.",
+      "21 raw literal eligibility/evidence comparisons across basic/English/identifier policy; nine explicit overlap ranges.",
+      "Zero-score literal/native lexical composition and positive-path evidence excludes failed AND/negative branches.",
+      "Five input getter/symbol refusals with zero getter reads; queued payload/evidence IDs remain owned.",
+      "Six missing-source/stale-header/malformed provider-data refusals preserve prior state; getters unexecuted.",
+      "Five empty/UTF16/range-overflow whole-operation refusals; subsequent membership remains usable.",
+      "Four malformed source-role/handle/nonboolean-result refusals; source reader cannot request positions or undeclared source fields.",
+      "One 117-unit module budget fits an exact single leaf and rejects repeated leaves or additional evidence, proving shared scope.",
+      "Five reentrant cancellation phases precede work overflow/nonboolean output, close cursors and preserve roots.",
+      "24 source/native raw-literal comparisons across three analyzers and six exact policy-identity refusals.",
+      "Six actual Node worker comparisons, two identity handshake refusals and committed source restore/reconciliation receipt."
+    ]
+  },
+  "artifactAudit": {
+    "path": "docs/evidence/RX-A060-runtime-review-artifact.json",
+    "sha256": "78b98bd87cdfb367f043248e893c1c6d82204fe6de5c8d64759169f2c1b7522e",
+    "packageSha256": "e82029dfbd7fbed0fe2587104d9414f4ab8c31ae7dad323806792653f1afa2e7",
+    "membersByteCurrent": 278,
+    "sourceRuntimeBindingsUnchanged": 36,
+    "installedExample": "Pass: exact installed example prints 1 0.",
+    "fullCheckPassed": 755
+  },
+  "historicalAttempts": [
+    {
+      "path": "docs/evidence/RX-A060-runtime-review-setup-failure.log",
+      "classification": "Reviewer harness syntax/setup error; no runtime probe executed.",
+      "resolution": "Corrected a missing literal-object brace and the private emptyDirectory import before execution."
+    },
+    {
+      "path": "docs/evidence/RX-A060-runtime-review-probes-attempt1.json",
+      "classification": "Reviewer expected-result defect; eight runtime probes passed and one assertion failed.",
+      "resolution": "The reviewer wrongly assigned document b to literal-only score zero although its body contains the native lexical red term. The implementation correctly preserved positive native BM25; expected literal-only zero-score IDs were corrected to a. No production or frozen-label change."
+    },
+    {
+      "path": "/tmp/raveldex-rx-a060-first-focused.log",
+      "classification": "Authored evaluation test public-AST adapter error, not runtime defect.",
+      "resolution": "Converted nested reference string shorthand to public typed text nodes. The public API only accepts shorthand at the root; frozen real-document labels stayed unchanged."
+    }
+  ],
+  "followUps": [
+    {
+      "topic": "Code budget",
+      "observation": "Current measured core gzip is 19531 bytes against the unchanged 15360-byte target; literal-only gzip 5345, combined 24136 includes explicit source provider.",
+      "disposition": "Preserve the disclosed target miss; no optimization or memory-win claim."
+    },
+    {
+      "topic": "Qualification",
+      "observation": "Exact raw code-point substrings can split graphemes; source/native evidence is finite and exact-node qualified where declared.",
+      "disposition": "No arbitrary normalized/case-insensitive mapping, snippet/AT qualification, global Unicode coverage, broader relevance or heap/transport-peak claim."
+    },
+    {
+      "topic": "Required source cost",
+      "observation": "The literal add-on retains no corpus accelerator but depends on separately selected original source state.",
+      "disposition": "Preserve explicit source-provider requirements and source retention costs; unrequested ordinary behavior remains separate."
+    }
+  ]
+}

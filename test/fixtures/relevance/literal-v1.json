@@ -1,0 +1,342 @@
+{
+  "version": "rx-a060-literal-real-docs-v1",
+  "frozenDate": "2026-10-29",
+  "policy": "raw-substring-v1",
+  "corpus": {
+    "path": "test/fixtures/relevance/corpus.json",
+    "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+    "contentHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+    "records": 34
+  },
+  "context": {
+    "author": "Codex /root/literal_oracle, source-reading evaluator",
+    "need": "Developer documentation contains meaningful punctuation and identifier infixes that basic token equality/prefix semantics do not express.",
+    "labelMethod": "Read frozen Raveldex documentation; select concrete original-spelling navigation intents before production execution and enumerate exact raw substring membership with a standalone source-only includes scan. Freeze all labels without tuning after execution.",
+    "limitations": "One AI-authored technical navigation evaluation over 34 Raveldex sections; exhaustive raw-substring labels are correctness labels, not complete relevance judgments or a human user study."
+  },
+  "acceptance": {
+    "sourceNavigationQueries": 16,
+    "negativeQueries": 6,
+    "maximumUnexpectedMemberships": 0,
+    "originalBasicRegressionCount": 76
+  },
+  "judgments": [
+    {
+      "id": "result-punctuation",
+      "text": "Promise<SearchResult>",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the documented promise result type, including angle brackets.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "batch-call",
+      "text": "addMany(",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the batch method with its opening call punctuation.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "opaque-id",
+      "text": "__proto__",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the literal prototype-like record ID spelling.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#record"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "typed-work-error",
+      "text": "WORK_LIMIT_EXCEEDED",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the complete typed work-limit error code.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "error-infix",
+      "text": "LIMIT_EXCEE",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find an intentional middle fragment of the typed error spelling.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "decimal-parameter",
+      "text": "0.75",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the exact decimal BM25 parameter spelling.",
+      "expectedIds": [
+        "doc:docs/specs/RANKING.md#term-contribution"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "normalization-name",
+      "text": "NFKC",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find this case-sensitive normalization acronym.",
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+        "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "queue-limit-name",
+      "text": "maxQueuedOperations",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the exact documented queue-limit identifier.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "queue-limit-infix",
+      "text": "QueuedOper",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find an internal fragment of the queue-limit identifier.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "position-length",
+      "text": "positionLength",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the exact positional-property identifier.",
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "revision-phrase",
+      "text": "next local revision",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find this exact original multiword substring.",
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "disposal-call",
+      "text": "dispose()",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the disposal method with parentheses.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "utf16-hyphen",
+      "text": "UTF-16",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the exact encoding spelling with hyphen.",
+      "expectedIds": [
+        "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+        "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+        "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+        "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+        "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+        "doc:docs/specs/CORE_CONTRACT.md#record",
+        "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+        "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+        "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+        "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+        "doc:docs/specs/RANKING.md#original-groups-and-alternatives"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "directory-stage",
+      "text": "DirectoryStage",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the actual documented implementation identifier.",
+      "expectedIds": [
+        "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "group-syntax",
+      "text": "`group`",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the exact backtick-quoted query-kind spelling.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#core-nodes"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "finite-number-phrase",
+      "text": "finite numbers",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "source-navigation",
+      "intent": "Find the literal two-word validation phrase.",
+      "expectedIds": [
+        "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+        "doc:docs/specs/CORE_CONTRACT.md#schema"
+      ],
+      "labelsComplete": true
+    },
+    {
+      "id": "wrong-result-case",
+      "text": "promise<SearchResult>",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "intended-empty",
+      "intent": "Case is significant; lowercasing must not happen.",
+      "expectedIds": [],
+      "labelsComplete": true
+    },
+    {
+      "id": "wrong-decimal-punctuation",
+      "text": "0,75",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "intended-empty",
+      "intent": "Comma is not a normalized decimal point.",
+      "expectedIds": [],
+      "labelsComplete": true
+    },
+    {
+      "id": "wrong-proto-case",
+      "text": "__Proto__",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "intended-empty",
+      "intent": "Case is significant inside preserved punctuation.",
+      "expectedIds": [],
+      "labelsComplete": true
+    },
+    {
+      "id": "wrong-error-spacing",
+      "text": "LIMIT EXCEEDED",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "intended-empty",
+      "intent": "A space must not stand for an underscore.",
+      "expectedIds": [],
+      "labelsComplete": true
+    },
+    {
+      "id": "unmatched-nonce",
+      "text": "unmatched-rx-a060-needle",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "intended-empty",
+      "intent": "Legitimate absent literal text.",
+      "expectedIds": [],
+      "labelsComplete": true
+    },
+    {
+      "id": "fullwidth-acronym",
+      "text": "ＮＦＫＣ",
+      "fields": [
+        "title",
+        "body"
+      ],
+      "category": "intended-empty",
+      "intent": "Compatibility normalization must not occur.",
+      "expectedIds": [],
+      "labelsComplete": true
+    }
+  ]
+}

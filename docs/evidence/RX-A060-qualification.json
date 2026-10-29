@@ -1,0 +1,56 @@
+{
+  "kind": "raveldex-rx-a060-local-qualification-v1",
+  "status": "Pass",
+  "method": "Full npm run check followed by direct candidate checker against the existing build; no intermediate source rebuild. Not the distinct candidate:prepare helper.",
+  "baseCommit": "fc58033",
+  "branch": "codex/rx-a060-literal",
+  "projectCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "log": "RX-A060-check.log",
+    "sha256": "cd2c281a9301e478ec28c8dfb2be310bc0a136c9855acb430e3c8ba67ebb56f0",
+    "batches": [
+      674,
+      30,
+      24,
+      26,
+      1
+    ],
+    "passed": 755,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "candidateCheck": {
+    "command": "node scripts/candidate-check.mjs --output /tmp/raveldex-rx-a060-final-candidate",
+    "exitCode": 0,
+    "report": "RX-A060-candidate.json",
+    "sha256": "ffbd7b0434a380a3553ebc442207493d02c4e85973b7c73a1c1803ac86052e9a"
+  },
+  "packageMeasurement": {
+    "command": "RAVELDEX_LITERAL_PACKAGE_REPORT=/tmp/raveldex-rx-a060-final-package.json node --test test/addons/literal/package.test.mjs",
+    "exitCode": 0,
+    "report": "RX-A060-package.json",
+    "sha256": "2b143586ad39ad7a7bb7fef442a787a8371915a0763b9b95d6a4cfd00a3697b1"
+  },
+  "candidate": {
+    "path": "RX-A060-candidate-0.1.0-rc.0.tgz",
+    "sha256": "e82029dfbd7fbed0fe2587104d9414f4ab8c31ae7dad323806792653f1afa2e7",
+    "bytes": 206359,
+    "members": 278,
+    "private": true,
+    "version": "0.1.0-rc.0"
+  },
+  "publication": "No publish, push, merge, tag, release, visibility change or remote CI performed.",
+  "finalSynchronizationCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "log": "RX-A060-final-check.log",
+    "sha256": "32d2af7ad535d66643c2ab55bee48843af1f4260d90e1e46e31f840141c58df0",
+    "passed": 755,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "scope": "Full final regression after accepted status/context/docs synchronization; compiled runtime members unchanged from retained candidate."
+  }
+}

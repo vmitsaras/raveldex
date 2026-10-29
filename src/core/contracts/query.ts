@@ -106,10 +106,13 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
         if (typeof data.capability !== 'string' || !data.capability.length || !Number.isSafeInteger(data.version) || (data.version as number) < 1 || !has(data, 'payload')) invalid('INVALID_QUERY', path);
         const capability = string(data.capability, false, `${path}.capability`);
         const registration = capabilities?.providers[capability];
-        if (!registration?.refinement && !registration?.predicate && !registration?.expansion) invalid('MISSING_CAPABILITY', path);
+        if (!registration?.refinement && !registration?.predicate && !registration?.sourcePredicate && !registration?.expansion) invalid('MISSING_CAPABILITY', path);
         if (data.version !== 1) invalid('INCOMPATIBLE_CAPABILITY', `${path}.version`);
-        if (registration.predicate) {
-          const captured = captureExtension(registration.predicate.capture, data.payload, admission, limits, registration.manifest.limits.maxPayloadCodeUnits);
+        if (registration.predicate || registration.sourcePredicate) {
+          const captured = captureExtension((registration.predicate ?? registration.sourcePredicate)!.capture, data.payload, admission, limits, registration.manifest.limits.maxPayloadCodeUnits);
+          // Raw-source lexical payloads are bounded before token-free execution.
+          // Selected field strings count conservatively within this same ceiling.
+          if (registration.sourcePredicate) { lexicalUnits += captured.codeUnits; bound(lexicalUnits, limits.maxQueryLexicalCodeUnits, 'query.lexical'); }
           stringUnits += captured.codeUnits; bound(stringUnits, limits.maxQueryCodeUnits, 'query.strings');
           result = { kind: 'predicate', capability, payload: captured.value }; break;
         }

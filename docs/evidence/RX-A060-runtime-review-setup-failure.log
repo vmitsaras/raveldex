@@ -1,0 +1,17 @@
+file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-A060-runtime-review-probes.mjs:73
+ const base=createLiteral({fields}),instrumented={...base,sourcePredicate:{...base.sourcePredicate,*prepare(context){const prepared=yield* meter(base.sourcePredicate.prepare(context));return{*test(id){return yield* meter(prepared.test(id));}}}},engine=createRaveldex(configs('basic',instrumented));try{await engine.add({id:'a',text:{title:'prefix needle suffix'}});used=0;assert.equal((await engine.search(q('needle'))).total,1);}finally{await engine.dispose();}
+                                                                                                                                                                                                                                                                                                         ^
+
+SyntaxError: Unexpected token ';'
+    at compileSourceTextModule (node:internal/modules/esm/utils:319:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:89:18)
+    at #translate (node:internal/modules/esm/loader:438:20)
+    at afterLoad (node:internal/modules/esm/loader:506:29)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:511:12)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:564:36)
+    at afterResolve (node:internal/modules/esm/loader:611:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:617:12)
+    at node:internal/modules/esm/loader:636:32
+    at TracingChannel.tracePromise (node:diagnostics_channel:362:14)
+
+Node.js v24.21.0

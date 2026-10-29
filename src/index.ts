@@ -2,6 +2,7 @@
 export { createRaveldex } from './core/execution/engine.js';
 export type { AddonRegistration, CapabilityManifest, CapabilityReference, ParticipantContext, ParticipantImplementation, RefinementContext, RefinementImplementation, PreparedRefinement } from './core/capabilities/types.js';
 export type { MetadataContext, PayloadContext, CapturedPayload, AggregationOutput, PredicateImplementation, PreparedPredicate, AggregationImplementation, PreparedAggregation } from './core/capabilities/types.js';
+export type { SourcePredicateContext, SourcePredicateImplementation, PreparedSourcePredicate } from './core/capabilities/types.js';
 export type { EvidenceContext, EvidenceResultContext, EvidenceImplementation, PreparedEvidence } from './core/capabilities/types.js';
 export type { ExpansionAlternative, DictionaryStep, ExpansionContext, ExpansionImplementation } from './core/capabilities/types.js';
 export type { DictionaryEntryStep, DictionaryContext, DictionaryImplementation, PreparedDictionaryOutput } from './core/capabilities/types.js';

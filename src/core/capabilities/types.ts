@@ -89,6 +89,18 @@ export interface PredicateImplementation {
   capture(input: unknown, context: PayloadContext): CapturedPayload;
   prepare(context: MetadataContext): Generator<WorkStep, PreparedPredicate>;
 }
+/** Source predicates scan declared immutable originals without lexical candidates
+ * or score groups. Source access remains explicit and revision-bound. */
+export interface SourcePredicateContext extends MetadataContext {
+  readonly analyzer: AnalyzerDescriptor;
+  state(capability: string): unknown;
+}
+export interface PreparedSourcePredicate { test(id: string): Generator<WorkStep, boolean> }
+export interface SourcePredicateImplementation {
+  readonly kind: 'source-substring';
+  capture(input: unknown, context: PayloadContext): CapturedPayload;
+  prepare(context: SourcePredicateContext): Generator<WorkStep, PreparedSourcePredicate>;
+}
 export interface PreparedAggregation {
   add(metadata: OwnedRecord['metadata']): Generator<WorkStep, void>;
   finish(): Generator<WorkStep, AggregationOutput>;
@@ -127,6 +139,7 @@ export interface AddonRegistration {
   readonly dictionary?: DictionaryImplementation;
   readonly analyzer?: AnalyzerImplementation;
   readonly predicate?: PredicateImplementation;
+  readonly sourcePredicate?: SourcePredicateImplementation;
   readonly aggregation?: AggregationImplementation;
   readonly evidence?: EvidenceImplementation;
 }
