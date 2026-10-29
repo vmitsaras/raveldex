@@ -84,7 +84,7 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
         if (typeof callback !== 'function') invalid(code, `addons.${key}`);
         handles[method] = callback.bind(data[key]);
       }
-      if (key === 'refinement' && (handles.kind !== 'exact-token-sequence' || integer(handles.maxTokens, 'addons.maxTokens', 1) > DEFAULT_LIMITS.maxQueryTokens)) invalid(code, 'addons.refinement');
+      if (key === 'refinement' && (handles.kind !== 'exact-token-sequence' && handles.kind !== 'ordered-token-groups' || integer(handles.maxTokens, 'addons.maxTokens', 1) > DEFAULT_LIMITS.maxQueryTokens)) invalid(code, 'addons.refinement');
       if (key === 'sourcePredicate' && handles.kind !== 'source-substring') invalid(code, 'addons.sourcePredicate');
       if (key === 'expansion') {
         if (handles.kind !== 'weighted-token-alternatives' || integer(handles.maxTokens, 'addons.maxTokens', 1) > DEFAULT_LIMITS.maxQueryTokens) invalid(code, 'addons.expansion');
@@ -125,6 +125,10 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
     }
     // Declared source/position consumers require an explicit provider per field.
     const data = manifest.dataRequirements;
+    if (registration.refinement?.kind === 'ordered-token-groups') {
+      if (!data.positions || data.source || data.offsets || data.metadata || !data.fields.length || registration.participant || manifest.codec || manifest.requires.some(ref => !data.fields.some(field => ref.id === `positions:${field}`))) invalid(code, 'addons.ordered.data');
+      for (const field of data.fields) if (!manifest.requires.some(ref => ref.id === `positions:${field}`) || !providers[`positions:${field}`]?.participant) invalid('MISSING_CAPABILITY', 'addons.ordered.positions');
+    }
     if ((data.source || data.positions) && registration.refinement) for (const field of data.fields) {
       const present = (kind: string): boolean => manifest.requires.some(ref => ref.id === `${kind}:${field}`) && !!providers[`${kind}:${field}`]?.participant;
       if (!(data.source && present('source') || data.positions && present('positions'))) invalid('MISSING_CAPABILITY', 'addons.data');

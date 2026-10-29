@@ -345,7 +345,7 @@ Expose bounded substring semantics as a distinct capability rather than disguisi
 
 **Ordered proximity matching**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/34)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/34)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -357,7 +357,7 @@ Add selected ordered-gap semantics over positional data without redefining stric
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [ORDERED_PROXIMITY.md](../../docs/specs/ORDERED_PROXIMITY.md)
 
 **Acceptance criteria**
 
@@ -373,7 +373,35 @@ Add selected ordered-gap semantics over positional data without redefining stric
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A070-artifact-review.json](../../docs/evidence/RX-A070-artifact-review.json)
+- [docs/evidence/RX-A070-baseline-permitted.log](../../docs/evidence/RX-A070-baseline-permitted.log)
+- [docs/evidence/RX-A070-baseline.log](../../docs/evidence/RX-A070-baseline.log)
+- [docs/evidence/RX-A070-build.log](../../docs/evidence/RX-A070-build.log)
+- [docs/evidence/RX-A070-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A070-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A070-candidate.json](../../docs/evidence/RX-A070-candidate.json)
+- [docs/evidence/RX-A070-candidate.log](../../docs/evidence/RX-A070-candidate.log)
+- [docs/evidence/RX-A070-check.log](../../docs/evidence/RX-A070-check.log)
+- [docs/evidence/RX-A070-ci.log](../../docs/evidence/RX-A070-ci.log)
+- [docs/evidence/RX-A070-final-check.log](../../docs/evidence/RX-A070-final-check.log)
+- [docs/evidence/RX-A070-focused-initial.log](../../docs/evidence/RX-A070-focused-initial.log)
+- [docs/evidence/RX-A070-matching.log](../../docs/evidence/RX-A070-matching.log)
+- [docs/evidence/RX-A070-package-initial.json](../../docs/evidence/RX-A070-package-initial.json)
+- [docs/evidence/RX-A070-package-initial.log](../../docs/evidence/RX-A070-package-initial.log)
+- [docs/evidence/RX-A070-package.json](../../docs/evidence/RX-A070-package.json)
+- [docs/evidence/RX-A070-package.log](../../docs/evidence/RX-A070-package.log)
+- [docs/evidence/RX-A070-parent-artifact-audit.json](../../docs/evidence/RX-A070-parent-artifact-audit.json)
+- [docs/evidence/RX-A070-protocol-review-attempt1.json](../../docs/evidence/RX-A070-protocol-review-attempt1.json)
+- [docs/evidence/RX-A070-protocol-review-attempt1.log](../../docs/evidence/RX-A070-protocol-review-attempt1.log)
+- [docs/evidence/RX-A070-protocol-review.json](../../docs/evidence/RX-A070-protocol-review.json)
+- [docs/evidence/RX-A070-protocol-review.log](../../docs/evidence/RX-A070-protocol-review.log)
+- [docs/evidence/RX-A070-qualification.json](../../docs/evidence/RX-A070-qualification.json)
+- [docs/evidence/RX-A070-runtime-review-attempt1.json](../../docs/evidence/RX-A070-runtime-review-attempt1.json)
+- [docs/evidence/RX-A070-runtime-review-attempt1.log](../../docs/evidence/RX-A070-runtime-review-attempt1.log)
+- [docs/evidence/RX-A070-runtime-review.json](../../docs/evidence/RX-A070-runtime-review.json)
+- [docs/evidence/RX-A070-runtime-review.log](../../docs/evidence/RX-A070-runtime-review.log)
+- [docs/evidence/RX-A070-sync.log](../../docs/evidence/RX-A070-sync.log)
+- [docs/evidence/RX-A070-typecheck.log](../../docs/evidence/RX-A070-typecheck.log)
+- [docs/evidence/RX-A070.md](../../docs/evidence/RX-A070.md)
 
 
 ## RX-A080

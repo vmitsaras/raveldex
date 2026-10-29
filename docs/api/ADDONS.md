@@ -21,7 +21,7 @@ const phraseQuery = {
 };
 ```
 
-Omitted query `fields` selects all schema text fields, so selecting a subset explicitly matters when only some fields have providers. A phrase is analyzed adjacency inside one original field value; it never crosses values/fields. Punctuation separates tokens and is not a literal phrase constraint. Repeated tokens affect eligibility, and no phrase bonus is added. At most 32 analyzed phrase tokens are allowed (also subject to the lower core query-token bound). Slop, proximity and synonym graphs are unavailable.
+Omitted query `fields` selects all schema text fields, so selecting a subset explicitly matters when only some fields have providers. A phrase is analyzed adjacency inside one original field value; it never crosses values/fields. Punctuation separates tokens and is not a literal phrase constraint. Repeated tokens affect eligibility, and no phrase bonus is added. At most 32 analyzed phrase tokens are allowed (also subject to the lower core query-token bound). Strict phrases expose no slop or synonym graphs. Ordered gaps require the separate explicit [proximity](PROXIMITY.md) leaf.
 
 Positions preserve one position per emitted token. Offsets add half-open original UTF-16 coordinates; they do not imply retained display text. Source and position logical-entry/work ceilings can be reduced through options, and overflow rejects the whole operation. Entry counts are not heap bytes. Source-only and position-only utility imports exclude the unused phrase evaluator.
 
@@ -105,3 +105,7 @@ The explicit `/addons/identifiers` analyzer preserves whole names and derives se
 ## Literal and infix matching
 
 `/addons/literal` provides explicit raw case-sensitive substring predicates over separately selected source fields. Pure literal results have zero score; mixed lexical queries keep native BM25. Its own bounded original-range evidence distinguishes string spans from token/phrase positions, including overlaps and combining marks. See [payloads, source requirements, Unicode and limits](LITERAL.md). Ordinary queries and token evidence remain unchanged.
+
+## Ordered proximity
+
+`/addons/proximity` refines native exact alternative groups with ordered original positions and a bounded gap per adjacent pair. It requires separately installed position providers, never joins values/fields, consumes repeats distinctly and adds no ranking bonus. Zero gap preserves strict phrase membership and scores. See [payloads, alternatives, costs and evidence limitations](PROXIMITY.md).

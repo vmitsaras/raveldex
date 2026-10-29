@@ -37,14 +37,16 @@ export interface RefinementContext {
   readonly analyze?: AnalysisRunner;
   readonly revision: number; readonly analyzer: AnalyzerDescriptor; readonly limits: Limits;
   readonly fields: readonly string[]; readonly terms: readonly string[];
+  /** Supplied only to explicitly declared ordered-token-groups handlers. */
+  readonly groups?: readonly (readonly string[])[]; readonly maxGap?: number;
   /** Only declared requirements can be read; no core root or mutable owner. */
   state(capability: string): unknown;
 }
 export interface PreparedRefinement { test(id: string): Generator<WorkStep, boolean> }
-/** Protocol v1's implemented leaf role refines an exact token-sequence superset.
- * Payload is exactly { text, fields? }; core owns and analyzes it once. */
+/** Protocol v1 leaves refine native lexical groups. Exact sequences use
+ * {text, fields?}; ordered groups use {groups, maxGap, fields?}. Core owns analysis. */
 export interface RefinementImplementation {
-  readonly kind: 'exact-token-sequence'; readonly maxTokens: number;
+  readonly kind: 'exact-token-sequence' | 'ordered-token-groups'; readonly maxTokens: number;
   prepare(context: RefinementContext): Generator<WorkStep, PreparedRefinement>;
 }
 export interface ExpansionAlternative { readonly term: string; readonly weight: number }

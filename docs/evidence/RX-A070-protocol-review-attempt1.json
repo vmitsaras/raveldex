@@ -1,0 +1,185 @@
+{
+  "kind": "raveldex-rx-a070-protocol-review-v1",
+  "timestamp": "2026-10-29T17:56:34.302Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "status": "Fail",
+  "verdict": "Changes required",
+  "mandatoryFindings": [
+    {
+      "name": "AssertionError",
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'a',\n    'c',\n    'other'\n  ]\n",
+      "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'a',\n    'c',\n    'other'\n  ]\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/test/reviews/rx-a070-protocol.mjs:44:130\n    at async run (file:///Users/vasilis/Documents/GitHub/raveldex/test/reviews/rx-a070-protocol.mjs:24:73)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/test/reviews/rx-a070-protocol.mjs:37:1",
+      "code": "ERR_ASSERTION"
+    }
+  ],
+  "scope": "Independent review of other-authored core admission/compiler/refinement/registration, token-evidence refusal, frozen positional oracle/labels and packed consumers. Author-owned proximity runtime/validator extraction/matching tests are excluded.",
+  "findings": [
+    {
+      "id": "R1",
+      "kind": "static-correctness-before-final-verification",
+      "description": "Raw ordered sequence length initially inherited the reducible distinct canonical-group ceiling, unlike strict phrases with repeated terms. Parent removed that coupling before these probes; matching test verifies reduced canonical-group parity. No prerepair runtime failure is claimed.",
+      "resolution": "Resolved in current core source."
+    }
+  ],
+  "probes": [
+    {
+      "name": "Owned canonical ordered contexts and unchanged legacy contexts use distinct declared protocols",
+      "status": "Pass",
+      "elapsedMs": 7,
+      "contexts": 2,
+      "scope": "Core-owned capture/analysis/lexical selection; independent test handler deliberately accepts its lexical candidates."
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "src/core/contracts/query.ts",
+      "bytes": 15104,
+      "sha256": "c76fdf056615d0cc5f53f2d5bb96cc5ed995a70ea8f6aefee4e85df3a6d89932"
+    },
+    {
+      "path": "src/core/query/compile.ts",
+      "bytes": 8213,
+      "sha256": "2a63e0de9a5090d068767e432427007208dd0895c7264a25692eb66b92e636c4"
+    },
+    {
+      "path": "src/core/capabilities/registration.ts",
+      "bytes": 15385,
+      "sha256": "1684aa54e09af203ec6de1103144fdafe5c087f6a91e98c97ca93ca01fe0ab07"
+    },
+    {
+      "path": "src/core/capabilities/refinement.ts",
+      "bytes": 10194,
+      "sha256": "021d05427804d681864d34b7dd3038ef11e15d335598f8f4167f853c29056fc8"
+    },
+    {
+      "path": "src/core/capabilities/types.ts",
+      "bytes": 9399,
+      "sha256": "3f3f019bf770015116afaa3ad69ac88b8956500f2bdee20a3976f348b62e3b75"
+    },
+    {
+      "path": "src/addons/evidence/builder.ts",
+      "bytes": 13081,
+      "sha256": "1c8ea6694b7d4c006835554680af619604f7523216c3eea4b0401824cd92d6ae"
+    },
+    {
+      "path": "test/oracle/proximity.mjs",
+      "bytes": 4769,
+      "sha256": "84a5fa23a160bfee2997fd420d314204214e437ab1d7eabe4508300f5b5b1548"
+    },
+    {
+      "path": "test/oracle/query.mjs",
+      "bytes": 7206,
+      "sha256": "bfccdd9db9650ead172406e5fc75eb0e4baea1a7478c37fd3e06d3eb1bbea773"
+    },
+    {
+      "path": "test/oracle/phrases.mjs",
+      "bytes": 6550,
+      "sha256": "638fd46b1b24c6e079027c80622923dcfdf70d80ab77ef1c057ad3f5b7f99933"
+    },
+    {
+      "path": "test/fixtures/phrases/proximity.mjs",
+      "bytes": 5329,
+      "sha256": "b65b44dae4ddc6ce67e16bb95c2274a1385f77f47bada05f0a21ecc6c8eba9e3"
+    },
+    {
+      "path": "test/fixtures/phrases/proximity-docs.json",
+      "bytes": 5116,
+      "sha256": "bfe18383eeff79853c79158723e21a134450aa250e1105ddad8484aa8d250b80"
+    },
+    {
+      "path": "test/fixtures/relevance/corpus.json",
+      "bytes": 112401,
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db"
+    },
+    {
+      "path": "test/addons/proximity/evaluation.test.mjs",
+      "bytes": 15504,
+      "sha256": "e36c786803c26c364066397d050b3f7163f65c68a66291c450870b02ec97ec60"
+    },
+    {
+      "path": "test/addons/proximity/protocol.test.mjs",
+      "bytes": 5051,
+      "sha256": "8d9aa5d674c7944c466c41a40f3fbc9f2ca74ff73a8befcf8a2c6fdc7109d33a"
+    },
+    {
+      "path": "test/addons/proximity/lifecycle.test.mjs",
+      "bytes": 10150,
+      "sha256": "ae7004ca3698e5dbbe475be873e1d889d7894dc9f37cbb98c8f43c8911cf4cd8"
+    },
+    {
+      "path": "test/addons/proximity/package.test.mjs",
+      "bytes": 2832,
+      "sha256": "e274ea90c3899d866924f68fe27b60e51e9e4abb26a6eb63cf20a898dc180e99"
+    },
+    {
+      "path": "test/measurements/proximity-package.mjs",
+      "bytes": 24496,
+      "sha256": "0843a208f3fd53f2851932e287e386b8118f812015f6f10409c0752e13cae105"
+    },
+    {
+      "path": "scripts/candidate-check.mjs",
+      "bytes": 28835,
+      "sha256": "ea7b3f27546696905cab61c2f5ffb43e9675a5bb336b93f507ced8985801b36e"
+    },
+    {
+      "path": "package.json",
+      "bytes": 9674,
+      "sha256": "c454a1c056f841930022b443bdd673e2616b01d7c2247292fd3402ab8aad35de"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 27712,
+      "sha256": "c564d14738c691a300dc823a4aa6d0b544e26a503e895da7b69ee602b7b3f50b"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 1095,
+      "sha256": "0235210324f8286ed478263fa3bbd1cdbe5aac3c64877a97f08557b31d797dd0"
+    },
+    {
+      "path": "dist/core/contracts/query.js",
+      "bytes": 15915,
+      "sha256": "dfc7e40939e83c9a61696e26f264d85a8ce8a6216cb79ed210667fcfa9d295a2"
+    },
+    {
+      "path": "dist/core/query/compile.js",
+      "bytes": 7113,
+      "sha256": "6806e9ce27cf4d118d497ac6b4e5c3f28fc99781c076b5d6713ba7986c6e9049"
+    },
+    {
+      "path": "dist/core/capabilities/registration.js",
+      "bytes": 16163,
+      "sha256": "206b285fb6c00befedb0c79d85421e034fa604e13b6f8647d12bf184da8b5976"
+    },
+    {
+      "path": "dist/core/capabilities/refinement.js",
+      "bytes": 9713,
+      "sha256": "8c99ea540d8298158bda0dfa39127b6969f233f3c749762f6232e6e18ff8f26a"
+    },
+    {
+      "path": "dist/addons/evidence/builder.js",
+      "bytes": 11670,
+      "sha256": "4ef0af3408f02cb3fc8725b64049fd9e2704d729fbbd51e5e9ffb0593841297c"
+    }
+  ],
+  "bindingAudit": {
+    "status": "Pass",
+    "unchanged": 26
+  },
+  "limitations": [
+    "Trusted add-on implementations are not hostile-code sandboxes.",
+    "Own proximity verifier, options, matching tests and shared validator extraction were not independently reviewed by this author.",
+    "Packed consumer report audit verifies scoped actual results; installed artifact byte-current audit follows the final candidate separately.",
+    "No browser/AT/native physical timing or heap/allocation/copy-peak claim."
+  ],
+  "failure": {
+    "name": "AssertionError",
+    "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'a',\n    'c',\n    'other'\n  ]\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   'a',\n    'c',\n    'other'\n  ]\n\n    at file:///Users/vasilis/Documents/GitHub/raveldex/test/reviews/rx-a070-protocol.mjs:44:130\n    at async run (file:///Users/vasilis/Documents/GitHub/raveldex/test/reviews/rx-a070-protocol.mjs:24:73)\n    at async file:///Users/vasilis/Documents/GitHub/raveldex/test/reviews/rx-a070-protocol.mjs:37:1",
+    "code": "ERR_ASSERTION"
+  }
+}

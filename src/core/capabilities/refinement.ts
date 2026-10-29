@@ -57,7 +57,9 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
       let test: (id: string, metadata: Metadata) => Generator<WorkStep, boolean>;
       if (node.kind === 'extension') {
         if (!registration.refinement) invalid('MISSING_CAPABILITY', 'query.refinement');
+        if ((registration.refinement.kind === 'ordered-token-groups') !== (node.termGroups !== undefined)) invalid('INCOMPATIBLE_CAPABILITY', 'query.refinement.kind');
         const context: RefinementContext = Object.freeze({ analyze, revision: root.revision, analyzer: root.configuration.analyzer, limits: root.configuration.limits, fields: node.fields, terms: node.terms,
+          ...(node.termGroups ? { groups: node.termGroups, maxGap: node.maxGap! } : {}),
           state(capability: string): unknown {
             return state(capability, node.capability);
           } });

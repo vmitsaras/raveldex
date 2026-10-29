@@ -7,6 +7,7 @@ import { bound, invalid } from '../../core/errors/error.js';
 import type { WorkStep } from '../../core/index/directory.js';
 import { DEFAULT_LIMITS } from '../../core/limits/limits.js';
 import type { Fact, TraceRequest } from '../../core/trace/facts.js';
+import type { CompiledNode } from '../../core/query/compile.js';
 import { ownInspectorOutput } from '../inspector/output.js';
 import { validatePayload } from '../metadata/payload.js';
 import { requireSourceRoot } from '../phrases/store.js';
@@ -96,6 +97,15 @@ function* rangesFor(id: string, leaves: readonly ContributingLeaf[], fields: rea
 function* project(context: EvidenceContext, finished: EvidenceResultContext, request: OwnedMatchRequest, options: CapturedMatchOptions, providers: ReadonlyMap<string, Provider>, presentation?: PreparedPresentation): Generator<WorkStep, AggregationOutput> {
   if (finished.trace.revision !== context.revision || finished.result.revision !== context.revision || finished.trace.model !== finished.result.model ||
       finished.trace.analyzer.id !== context.analyzer.id || finished.trace.analyzer.environmentProfile !== context.analyzer.environmentProfile) invalid('REVISION_MISMATCH', 'evidence.revision');
+  // Strict phrase range projection cannot truthfully label ordered-gap paths.
+  // Refuse the complete requested projection even for empty IDs/failed branches.
+  function* supported(node: CompiledNode): Generator<WorkStep> {
+    yield charge();
+    if (node.kind === 'extension' && node.termGroups) invalid('MISSING_CAPABILITY', 'evidence.proximity');
+    if (node.kind === 'and' || node.kind === 'or') for (const child of node.children) yield* supported(child);
+    else if (node.kind === 'not') yield* supported(node.child);
+  }
+  yield* supported(finished.query);
   const documents = new Map<string, DocumentFact>(), nodes = new Map<string, Map<string, NodeFact>>();
   for (const fact of finished.trace.facts) {
     yield charge(fact.id.length + 1);

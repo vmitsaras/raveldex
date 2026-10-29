@@ -2,7 +2,7 @@
 
 ## Current boundary
 
-Raveldex follows the adopted native TypeScript direction. N0–N3 implementation and RX-4001/RX-4002 evaluation/qualification have evidence; RX-4003 verifies the private `0.1.0-rc.0` candidate with 625 passing checks and independent review Ready with follow-ups. All 21 active N0–N4 tasks are complete. The owner explicitly selected and verified RX-A010 bounded typo tolerance, RX-A020 dictionary-backed suggestions and RX-A030 directional one-step synonyms; RX-A040 is verified with the owner-selected English analyzer; RX-A050 is now explicitly selected and verified locally; RX-A060 is now explicitly selected and verified locally; the other four N5 enhancements remain deferred. See [candidate acceptance](docs/evidence/RX-4003.md). Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the canonical task card and its evidence before changing state. The planner determines live task availability.
+Raveldex follows the adopted native TypeScript direction. N0–N3 implementation and RX-4001/RX-4002 evaluation/qualification have evidence; RX-4003 verifies the private `0.1.0-rc.0` candidate with 625 passing checks and independent review Ready with follow-ups. All 21 active N0–N4 tasks are complete. The owner explicitly selected and verified RX-A010 bounded typo tolerance, RX-A020 dictionary-backed suggestions and RX-A030 directional one-step synonyms; RX-A040 is verified with the owner-selected English analyzer; RX-A050 is now explicitly selected and verified locally; RX-A060 is now explicitly selected and verified locally; RX-A070 is now explicitly selected and verified locally; the other three N5 enhancements remain deferred. See [candidate acceptance](docs/evidence/RX-4003.md). Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the canonical task card and its evidence before changing state. The planner determines live task availability.
 
 ```sh
 npm ci
@@ -48,10 +48,14 @@ The independent candidate verdict and actual commands/artifact identities belong
 
 For an explicitly selected later change, inspect existing reality, implement one bounded slice, verify actual behavior, record evidence and independent review where required, synchronize affected docs/manifest and commit the work. Distinguish a specification decision, product defect, instrumentation refusal and environment failure. Do not reopen the companion decision or silently broaden support/resource claims.
 
-## Current selected identifier continuation
+## Historical selected identifier continuation
 
 The owner selected RX-A050 and explicitly approved ordinary component matching with original-only strict phrases. Follow the [identifier contract](docs/specs/IDENTIFIER_ANALYSIS.md) on `codex/rx-a050-identifiers`. [Acceptance](docs/evidence/RX-A050.md) records 729 passing full checks, the actual 265-file private package and two independent Ready-with-follow-ups reviews with no mandatory findings. It is verified locally; earlier remote CI does not verify this tree. Preserve original names/spans, query grouping, v1 basic/English semantics, tagged v2 positions and exact worker/snapshot identities. Four remaining N5 tasks stay deferred. No remote write or publication is authorized.
 
-## Current selected literal continuation
+## Historical selected literal continuation
 
 The owner selected RX-A060 while excluding publication. Follow [literal matching](docs/specs/LITERAL_MATCHING.md) on `codex/rx-a060-literal`: raw case-sensitive source substrings, zero lexical score, separate bounded original ranges and exact declared source requirements. [Acceptance](docs/evidence/RX-A060.md) records 755 passing full checks, a byte-current 278-file private tarball and two independent Ready-with-follow-ups reviews with no mandatory findings. It is verified locally; prior remote CI does not verify this tree. Preserve ordinary queries/analyzers/source codecs and the retained historical failures. Four other N5 tasks stay deferred; no remote write or publication is authorized.
+
+## Current selected ordered proximity continuation
+
+The owner selected RX-A070 while excluding publication. Follow [ordered proximity](docs/specs/ORDERED_PROXIMITY.md) on `codex/rx-a070-proximity`: ordered original-token alternative groups, gap bounded per adjacent pair, exact field/value boundaries and native BM25 without a distance bonus. Require separately selected positions; zero-gap singleton groups preserve strict-phrase eligibility/scores. No ranges/snippets projection is included for ordered leaves; requests fail explicitly. [Acceptance](docs/evidence/RX-A070.md) records 786 passing full checks, a byte-current 287-member private tarball, two independent Ready-with-follow-ups reviews and an artifact audit with no mandatory findings. RX-A070 is verified locally; historical remote CI does not verify this tree. Three other optional tasks remain deferred; no push, merge, remote CI or publication is authorized.

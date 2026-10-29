@@ -2,7 +2,11 @@
 
 Snapshot: 2026-10-29. Repository: `vmitsaras/raveldex`.
 
-## Current optional continuation — RX-A060
+## Current optional continuation — RX-A070
+
+The owner explicitly selected ordered proximity with publication still excluded. Work on `codex/rx-a070-proximity` follows the [bounded adjacent-gap contract](docs/specs/ORDERED_PROXIMITY.md): explicit original-token alternative groups, strictly increasing positions inside one field value, native equal-weight BM25 and zero-gap strict-phrase parity. Core owns admission/one-time analysis and declared immutable ordered context; separate position providers own all transactional state. The slice adds no distance bonus, source retention, corpus cache or codec. Token evidence/snippets fail explicitly for ordered leaves; Inspector remains factual. [Acceptance evidence](docs/evidence/RX-A070.md) records 786 passing full checks, all 14 independently frozen documentation judgments, exhaustive original-position/native-arithmetic/Boolean parity, 76 unchanged ordinary regressions, all observed search/replacement cancellation stops, actual installed/minified/Node-worker/source/native consumers and a byte-current 287-member private package. Both independent reviews and the final artifact audit are Ready with follow-ups with no mandatory findings. RX-A070 is verified locally; remote CI is not run for this tree. Three other N5 tasks remain deferred; no remote write or publication is authorized.
+
+## Previous optional continuation — RX-A060
 
 The owner selected explicit literal/infix matching with publication still excluded. Work on `codex/rx-a060-literal` follows the [adopted raw substring contract](docs/specs/LITERAL_MATCHING.md): case-sensitive originals, no normalization, zero-score predicates, exact overlapping UTF-16 evidence and explicit source requirements. [Acceptance evidence](docs/evidence/RX-A060.md) records 755 passing full checks, all 22 frozen raw-source judgments, unchanged 76 ordinary regressions, independent Boolean/native arithmetic and overlapping positive-path evidence, bounded cancellation/work/source retention observations, actual installed/minified/Node-worker/source/native consumers and a byte-current 278-file private tarball. Runtime and protocol reviews are Ready with follow-ups with no mandatory findings; exact source-only requirements and post-callback stop precedence are verified. RX-A060 is verified locally; remote CI for this tree is not run. RX-A050 remains verified. Four other N5 tasks stay deferred; no push, merge, remote CI or publication is authorized.
 

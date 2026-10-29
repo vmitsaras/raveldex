@@ -13,6 +13,7 @@ export type OwnedQuery = Exclude<Query, { readonly kind: 'extension' | 'and' | '
   | { readonly kind: 'and' | 'or'; readonly children: readonly OwnedQuery[] }
   | { readonly kind: 'not'; readonly child: OwnedQuery }
   | { readonly kind: 'extension'; readonly capability: string; readonly version: 1; readonly payload: { readonly text: string; readonly fields?: readonly string[] } }
+  | { readonly kind: 'ordered'; readonly capability: string; readonly fields: readonly string[]; readonly groups: readonly (readonly string[])[]; readonly maxGap: number }
   | { readonly kind: 'predicate'; readonly capability: string; readonly payload: unknown };
 
 /** Own raw query data now; content analysis/canonical evaluation happen later. */
@@ -117,6 +118,22 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
           result = { kind: 'predicate', capability, payload: captured.value }; break;
         }
         const payload = ownObject(data.payload, 'INVALID_QUERY', `${path}.payload`, admission);
+        if (registration.refinement?.kind === 'ordered-token-groups') {
+          keysOnly(payload, ['groups', 'maxGap', 'fields'], 'INVALID_QUERY', `${path}.payload`);
+          const maxGap = payload.maxGap;
+          if (typeof maxGap !== 'number' || !Number.isSafeInteger(maxGap) || maxGap < 0) invalid('INVALID_QUERY', `${path}.payload.maxGap`);
+          bound(maxGap, 32, `${path}.payload.maxGap`);
+          const rawGroups = ownArray(payload.groups, Math.min(32, registration.refinement.maxTokens), 'INVALID_QUERY', `${path}.payload.groups`, admission);
+          if (!rawGroups.length) invalid('INVALID_QUERY', `${path}.payload.groups`);
+          const groups = Object.freeze(rawGroups.map(rawGroup => {
+            const alternatives = ownArray(rawGroup, Math.min(16, limits.maxVariantsPerGroup), 'INVALID_QUERY', `${path}.payload.group`, admission);
+            if (!alternatives.length) invalid('INVALID_QUERY', `${path}.payload.group`);
+            return Object.freeze(alternatives.map(value => string(value, true, `${path}.payload.alternative`)));
+          }));
+          const selected = has(payload, 'fields') ? fields(payload.fields, `${path}.payload.fields`) : registration.manifest.dataRequirements.fields;
+          bound(groups.reduce((sum, group) => sum + group.reduce((n, text) => n + text.length, 0), 0) + selected.reduce((sum, field) => sum + field.length, 0), registration.manifest.limits.maxPayloadCodeUnits, `${path}.payload`);
+          result = { kind: 'ordered', capability, fields: selected, groups, maxGap }; break;
+        }
         keysOnly(payload, ['text', 'fields'], 'INVALID_QUERY', `${path}.payload`);
         const text = string(payload.text, true, `${path}.payload.text`);
         const selected = has(payload, 'fields') ? fields(payload.fields, `${path}.payload.fields`) : undefined;
@@ -138,7 +155,7 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
   return node(input, 1, 'query');
 }
 
-export interface QueryStep extends AnalysisStep { readonly leaf?: OwnedQuery; readonly variantIndex?: number }
+export interface QueryStep extends AnalysisStep { readonly leaf?: OwnedQuery; readonly variantIndex?: number; readonly groupIndex?: number }
 
 /** Validate lexical contents using basic-v1; no retrieval or Boolean evaluator. */
 export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Limits, capabilities?: CapabilitySet, analyze: AnalysisRunner = analyzeValue): Generator<QueryStep> {
@@ -156,6 +173,29 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
   }
   function* walk(leaf: OwnedQuery): Generator<QueryStep> {
     switch (leaf.kind) {
+      case 'ordered': {
+        const handler = capabilities?.providers[leaf.capability]?.refinement;
+        if (handler?.kind !== 'ordered-token-groups') invalid('MISSING_CAPABILITY', 'query.capability');
+        let count = 0;
+        for (let groupIndex = 0; groupIndex < leaf.groups.length; groupIndex++) {
+          const variants: (readonly [string, string, number])[] = [];
+          for (const text of leaf.groups[groupIndex]!) {
+            let emitted = 0;
+            for (const step of analyze(text, 0, queryLimits, 'INVALID_QUERY', 'phrase')) {
+              if (step.token) {
+                if (++emitted > 1) invalid('INVALID_QUERY', 'query.proximity.alternative');
+                bound(++count, handler.maxTokens, 'query.proximity.tokens');
+                bound(++tokens, limits.maxQueryTokens, 'query.tokens');
+                variants.push([step.token.term, 'exact', 1]);
+              }
+              yield { ...step, leaf, groupIndex };
+            }
+            if (emitted !== 1) invalid('INVALID_QUERY', 'query.proximity.alternative');
+          }
+          addGroup(groupKey(leaf.fields, variants));
+        }
+        break;
+      }
       case 'text':
         for (const step of analyze(leaf.text, 0, queryLimits, 'INVALID_QUERY', 'query')) {
           if (step.token) {

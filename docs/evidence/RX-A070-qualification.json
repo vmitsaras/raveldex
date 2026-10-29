@@ -1,0 +1,270 @@
+{
+  "kind": "raveldex-rx-a070-local-qualification-v1",
+  "status": "Pass",
+  "recordedAt": "2026-10-29T18:05:41.001621+00:00",
+  "baseCommit": "ffc33e43cfddf577d2de494448ea7f55a72933d9",
+  "branch": "codex/rx-a070-proximity",
+  "method": "Existing locked tooling; full check then direct candidate check without rebuilding; final full check after acceptance/docs/manifest synchronization. Not candidate:prepare helper invocation.",
+  "projectChecks": [
+    {
+      "command": "npm run check",
+      "phase": "check",
+      "exitCode": 0,
+      "pass": 786,
+      "batches": [
+        705,
+        30,
+        24,
+        26,
+        1
+      ],
+      "log": "docs/evidence/RX-A070-check.log",
+      "sha256": "b3ec1ec9acc53763fc28b701244165c5777148659b7a4b5d063b9f408233b37d"
+    },
+    {
+      "command": "npm run check",
+      "phase": "final-check",
+      "exitCode": 0,
+      "pass": 786,
+      "batches": [
+        705,
+        30,
+        24,
+        26,
+        1
+      ],
+      "log": "docs/evidence/RX-A070-final-check.log",
+      "sha256": "4f8b05cf2e0ea325776e6e8c2245d10f235cb392180ad972386bea9c155459d9"
+    }
+  ],
+  "candidate": {
+    "report": "docs/evidence/RX-A070-candidate.json",
+    "sha256": "a403f08197607e3e31c08a0ab975242599f07a78c822a75eb512a84473b8f3b1",
+    "tarballBytes": 211493,
+    "members": 287,
+    "private": true,
+    "version": "0.1.0-rc.0"
+  },
+  "packageReport": {
+    "path": "docs/evidence/RX-A070-package.json",
+    "sha256": "aa17e50565f6eed431900f962d417c99a097239b2fb5d5ab6bb07fe3fe4e4533",
+    "sameCandidate": true,
+    "documentation": {
+      "status": "Pass",
+      "source": "docs/api/PROXIMITY.md",
+      "exampleSha256": "49220eb55707d75dd8631fc94e56352b71a203141d84663d4d10144e7f2cee2a",
+      "stdout": "1 guide\n",
+      "scope": "Exact first installed fenced JavaScript example executed as a real installed Node consumer; no reconstructed example or browser claim"
+    }
+  },
+  "independentReviews": [
+    {
+      "path": "docs/evidence/RX-A070-runtime-review.json",
+      "sha256": "d4d93f200af9b64bd9ab35b8057e56b0c9d74593e4fcca2e1db1b22faa32fd69"
+    },
+    {
+      "path": "docs/evidence/RX-A070-protocol-review.json",
+      "sha256": "4aa64888a0eea4d56188603130966c653ca045952b81740db899cc267d376aca"
+    },
+    {
+      "path": "docs/evidence/RX-A070-artifact-review.json",
+      "sha256": "d7e48013e98356c4eb227d02b210f7664a59bad5e92614b3d40ea0f60f227bf2"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "package.json",
+      "bytes": 9674,
+      "sha256": "c454a1c056f841930022b443bdd673e2616b01d7c2247292fd3402ab8aad35de"
+    },
+    {
+      "path": "scripts/candidate-check.mjs",
+      "bytes": 28835,
+      "sha256": "ea7b3f27546696905cab61c2f5ffb43e9675a5bb336b93f507ced8985801b36e"
+    },
+    {
+      "path": "src/addons/evidence/builder.ts",
+      "bytes": 13081,
+      "sha256": "1c8ea6694b7d4c006835554680af619604f7523216c3eea4b0401824cd92d6ae"
+    },
+    {
+      "path": "src/addons/positions/verifier.ts",
+      "bytes": 7356,
+      "sha256": "f52df1eafb9dc9cebf1fa7122e0b7728371f04f6c68cb8c5d49a55d504f1a4d0"
+    },
+    {
+      "path": "src/addons/proximity/index.ts",
+      "bytes": 2580,
+      "sha256": "bab4a8a759245cbe17c169fa8b1fcdadec9a12a2046d83a2593424fcbca13cc1"
+    },
+    {
+      "path": "src/addons/proximity/options.ts",
+      "bytes": 1906,
+      "sha256": "ff1ed23b6ef8b96bf527a898d25976276ecccc5d6b995f1bef0004c8b78fea06"
+    },
+    {
+      "path": "src/addons/proximity/types.ts",
+      "bytes": 510,
+      "sha256": "09e42fdd9745a56137caef084f0b1a03593421584cacddc1626af2fb2874cd1a"
+    },
+    {
+      "path": "src/addons/proximity/verifier.ts",
+      "bytes": 3825,
+      "sha256": "22a6a21d27ca3f128733abdb84719109fa19e59f49fdd7c88e4f6a9903e8d93f"
+    },
+    {
+      "path": "src/core/capabilities/refinement.ts",
+      "bytes": 10194,
+      "sha256": "021d05427804d681864d34b7dd3038ef11e15d335598f8f4167f853c29056fc8"
+    },
+    {
+      "path": "src/core/capabilities/registration.ts",
+      "bytes": 15385,
+      "sha256": "1684aa54e09af203ec6de1103144fdafe5c087f6a91e98c97ca93ca01fe0ab07"
+    },
+    {
+      "path": "src/core/capabilities/types.ts",
+      "bytes": 9399,
+      "sha256": "3f3f019bf770015116afaa3ad69ac88b8956500f2bdee20a3976f348b62e3b75"
+    },
+    {
+      "path": "src/core/contracts/query.ts",
+      "bytes": 15104,
+      "sha256": "c76fdf056615d0cc5f53f2d5bb96cc5ed995a70ea8f6aefee4e85df3a6d89932"
+    },
+    {
+      "path": "src/core/query/compile.ts",
+      "bytes": 8213,
+      "sha256": "2a63e0de9a5090d068767e432427007208dd0895c7264a25692eb66b92e636c4"
+    },
+    {
+      "path": "test/addons/proximity/evaluation.test.mjs",
+      "bytes": 15504,
+      "sha256": "e36c786803c26c364066397d050b3f7163f65c68a66291c450870b02ec97ec60"
+    },
+    {
+      "path": "test/addons/proximity/lifecycle.test.mjs",
+      "bytes": 10150,
+      "sha256": "ae7004ca3698e5dbbe475be873e1d889d7894dc9f37cbb98c8f43c8911cf4cd8"
+    },
+    {
+      "path": "test/addons/proximity/matching.test.mjs",
+      "bytes": 13870,
+      "sha256": "8b2ec5cab61a7a088978fe4e2e895886a54feef00af3f6fe217581ee0759e0ef"
+    },
+    {
+      "path": "test/addons/proximity/package.test.mjs",
+      "bytes": 2832,
+      "sha256": "e274ea90c3899d866924f68fe27b60e51e9e4abb26a6eb63cf20a898dc180e99"
+    },
+    {
+      "path": "test/addons/proximity/protocol.test.mjs",
+      "bytes": 5051,
+      "sha256": "8d9aa5d674c7944c466c41a40f3fbc9f2ca74ff73a8befcf8a2c6fdc7109d33a"
+    },
+    {
+      "path": "test/consumer/candidate.test.mjs",
+      "bytes": 4167,
+      "sha256": "ff502931f089bd71f764950e492a0415aaed47335bc4ec94cf2672f4249dec7d"
+    },
+    {
+      "path": "test/fixtures/phrases/proximity-docs.json",
+      "bytes": 5116,
+      "sha256": "bfe18383eeff79853c79158723e21a134450aa250e1105ddad8484aa8d250b80"
+    },
+    {
+      "path": "test/fixtures/phrases/proximity.mjs",
+      "bytes": 5329,
+      "sha256": "b65b44dae4ddc6ce67e16bb95c2274a1385f77f47bada05f0a21ecc6c8eba9e3"
+    },
+    {
+      "path": "test/measurements/proximity-package.mjs",
+      "bytes": 24496,
+      "sha256": "0843a208f3fd53f2851932e287e386b8118f812015f6f10409c0752e13cae105"
+    },
+    {
+      "path": "test/oracle/proximity.mjs",
+      "bytes": 4769,
+      "sha256": "84a5fa23a160bfee2997fd420d314204214e437ab1d7eabe4508300f5b5b1548"
+    },
+    {
+      "path": "test/reviews/rx-a070-protocol.mjs",
+      "bytes": 18496,
+      "sha256": "60811b37786c407947f36324484ad07e32b9b0606fea22bf84e6c13ca20aafdb"
+    },
+    {
+      "path": "test/reviews/rx-a070-runtime.mjs",
+      "bytes": 17997,
+      "sha256": "0bb7ab4c170f7dc9077c76546f7a7627346dc9792b6b7441fabc6b1909066a08"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 1095,
+      "sha256": "0235210324f8286ed478263fa3bbd1cdbe5aac3c64877a97f08557b31d797dd0"
+    }
+  ],
+  "scope": "Finite current local Node and recorded headless smoke. No remote CI, push, merge, publication, tag, release or visibility change. No new manual AT/browser matrix, heap/copy peaks or universal completion.",
+  "lockfileChanged": false,
+  "synchronization": {
+    "log": "docs/evidence/RX-A070-sync.log",
+    "sha256": "60863dd43f5d3424f46086208da964ecb021ffc3d532b3f5a02926fe4e55bfab",
+    "commands": [
+      {
+        "command": [
+          "npm",
+          "run",
+          "docs:generate"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "docs:check"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:check"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:status"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:next"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "tracking:preview"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exitCode": 0
+      }
+    ]
+  }
+}

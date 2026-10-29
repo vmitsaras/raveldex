@@ -60,11 +60,18 @@ function* intersectOffsets(lists: readonly (readonly PositionOccurrence[])[]): G
 /** One selected field, usable by a mixed-strategy registration. Headers are
  * checked during preparation even if the lexical candidate set will be empty. */
 export function* preparePositionField(context: RefinementContext, field: string): Generator<WorkStep, PreparedRefinement> {
+  return yield* preparePositionFieldWith(context, field, context.terms, intersectOffsets);
+}
+
+/** Share authoritative occurrence validation with optional ordered consumers.
+ * The caller receives only lists for its already analyzed original terms. */
+export function* preparePositionFieldWith(context: RefinementContext, field: string, terms: readonly string[],
+  matches: (lists: readonly (readonly PositionOccurrence[])[]) => Generator<WorkStep, boolean>): Generator<WorkStep, PreparedRefinement> {
   requireAnalysis(context);
   yield rawCharge(field.length + 1);
   const root = requirePositionRoot(context.state(`positions:${field}`), field, context.revision, context.analyzer);
   yield rawCharge(root.fields.length + root.offsetFields.length + 1);
-  const offsets = root.offsetFields.includes(field), terms = context.terms;
+  const offsets = root.offsetFields.includes(field);
   return Object.freeze({
     *test(id: string): Generator<WorkStep, boolean> {
       yield rawCharge(id.length + 1);
@@ -94,7 +101,7 @@ export function* preparePositionField(context: RefinementContext, field: string)
             const list = originals.get(token.term) ?? []; list.push(token); originals.set(token.term, list);
           }
           for (const term of terms) { yield rawCharge(term.length + 1); lists.push(originals.get(term) ?? []); }
-          if (yield* intersectOffsets(lists)) matched = true;
+          if (yield* matches(lists)) matched = true;
           continue;
         }
         for (const term of terms) {
@@ -105,7 +112,7 @@ export function* preparePositionField(context: RefinementContext, field: string)
         }
         // Validate every selected value/query occurrence list before returning a
         // positive result; a later malformed value cannot be hidden by a match.
-        if (yield* intersectOffsets(lists)) matched = true;
+        if (yield* matches(lists)) matched = true;
       }
       return matched;
     },

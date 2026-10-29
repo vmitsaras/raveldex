@@ -15,7 +15,7 @@ export type CompiledNode =
   | { readonly kind: 'group'; readonly group: CanonicalGroup }
   | { readonly kind: 'and' | 'or'; readonly children: readonly CompiledNode[] }
   | { readonly kind: 'not'; readonly child: CompiledNode }
-  | { readonly kind: 'extension'; readonly capability: string; readonly fields: readonly string[]; readonly terms: readonly string[]; readonly groups: readonly CanonicalGroup[] }
+  | { readonly kind: 'extension'; readonly capability: string; readonly fields: readonly string[]; readonly terms: readonly string[]; readonly groups: readonly CanonicalGroup[]; readonly termGroups?: readonly (readonly string[])[]; readonly maxGap?: number }
   | { readonly kind: 'predicate'; readonly capability: string; readonly payload: unknown }
   | { readonly kind: 'eq'; readonly field: string; readonly value: Scalar }
   | { readonly kind: 'all' | 'none' };
@@ -24,10 +24,18 @@ export interface CompiledQuery { readonly node: CompiledNode; readonly groups: R
 /** Consume shared analysis once. Normalized output never re-enters raw analysis. */
 export function* compileQuery(query: OwnedQuery, configuration: OwnedConfiguration, charge: Charge, expansion?: ExpansionResolver, analyze: AnalysisRunner = createAnalysis(configuration)): Generator<WorkStep, CompiledQuery> {
   const tokens = new Map<OwnedQuery, string[]>();
+  const orderedTokens = new Map<OwnedQuery, string[][]>();
   for (const step of analyzeQuery(query, configuration.schema, configuration.limits, configuration.capabilities, analyze)) {
     yield charge(step.workUnits);
     if (step.token && step.leaf) {
       yield charge(1);
+      if (step.groupIndex !== undefined) {
+        let groups = orderedTokens.get(step.leaf);
+        if (!groups) { groups = []; orderedTokens.set(step.leaf, groups); }
+        const list = groups[step.groupIndex] ?? [];
+        list.push(step.token.term); groups[step.groupIndex] = list;
+        continue;
+      }
       let list = tokens.get(step.leaf);
       if (!list) { list = []; tokens.set(step.leaf, list); }
       list.push(step.token.term);
@@ -58,6 +66,16 @@ export function* compileQuery(query: OwnedQuery, configuration: OwnedConfigurati
   function* walk(raw: OwnedQuery): Generator<WorkStep, CompiledNode> {
     yield charge(1);
     switch (raw.kind) {
+      case 'ordered': {
+        const lexical: CanonicalGroup[] = [], termGroups: (readonly string[])[] = [];
+        for (const terms of orderedTokens.get(raw) ?? []) {
+          const node = yield* group(raw.fields, terms.map(term => ({ term, match: 'exact' as const, weight: 1 })));
+          if (node.kind !== 'group') invalid('INTERNAL_ERROR', 'query.proximity.group');
+          lexical.push(node.group);
+          termGroups.push(Object.freeze(node.group.variants.map(variant => variant.term)));
+        }
+        return Object.freeze({ kind: 'extension', capability: raw.capability, fields: Object.freeze(yield* sortedStrings(raw.fields, charge)), terms: Object.freeze(termGroups.flat()), groups: Object.freeze(lexical), termGroups: Object.freeze(termGroups), maxGap: raw.maxGap });
+      }
       case 'text': {
         const children: CompiledNode[] = [];
         for (const term of tokens.get(raw) ?? []) children.push(yield* group(raw.fields, [{ term, match: 'exact', weight: 1 }]));

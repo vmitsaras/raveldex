@@ -9,6 +9,7 @@ Prefix every entry below with `@vmitsaras/raveldex`. The root entry is the packa
 | Entry | Runtime exports / purpose | Reference |
 | --- | --- | --- |
 | root | `createRaveldex`, `RaveldexError`, `ERROR_CODES` | [Core](CORE.md) |
+| `/addons/proximity` | `createProximity`, `PROXIMITY_POLICY` | [Ordered proximity](PROXIMITY.md) |
 | `/addons/literal` | `createLiteral`, `LITERAL_POLICY` | [Literal and infix](LITERAL.md) |
 | `/addons/identifiers` | `createIdentifierAnalyzer`, `IDENTIFIER_ANALYZER` | [Code and identifiers](IDENTIFIERS.md) |
 | `/integrations/languages/english` | `createEnglishAnalyzer`, `ENGLISH_ANALYZER` | [English morphology](ENGLISH.md) |

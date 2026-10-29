@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050 and RX-A060
+## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050, RX-A060 and RX-A070
+
+- RX-A070: explicit ordered proximity over selected original positions, bounded adjacent gaps/alternatives, native BM25 without a distance bonus and strict zero-gap phrase parity. Token range/snippet requests fail explicitly for ordered leaves. Private local development; no publication.
 
 - RX-A060 adds explicitly requested `/addons/literal`: raw case-sensitive source substrings including punctuation/infixes, exact totals and zero-score predicates, bounded overlapping UTF-16 evidence, source requirements and worker/snapshot identity. No normalization, n-gram side index or automatic source retention is added.
 

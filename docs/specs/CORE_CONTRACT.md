@@ -323,3 +323,7 @@ Language dictionaries, a text query-language parser, schema mutation in place, f
 ## Open questions
 
 None blocks RX-1001. Qualified host profiles and broader language analysis are later evidence/design work. If implementation exposes a contradiction in this contract, record a specification finding and resolve that narrow contradiction before changing behavior.
+
+## Explicit ordered refinement
+
+[Ordered proximity](ORDERED_PROXIMITY.md) is an optional protocol-v1 `ordered-token-groups` refinement kind. Core captures bounded groups/maxGap, analyzes every alternative once in original-query mode, compiles equal-weight native exact groups and supplies immutable group arrays/maxGap only to ordered handlers. Existing exact-token-sequence handlers, default queries, score model and strict phrase semantics are unchanged. Required positions are explicit; no new core side state or automatic source retention follows.
