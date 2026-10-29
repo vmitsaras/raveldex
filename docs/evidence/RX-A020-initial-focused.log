@@ -1,0 +1,164 @@
+✖ completion ranks complete cross-field DF sums with ordinal ties, exact candidates and independent search pages (6.443084ms)
+✔ empty/short requests validate fields and Unicode; one original token is normalized exactly once (3.496042ms)
+✔ admission owns request/factory inputs without reading accessors, and mixed roles are refused (0.507375ms)
+✔ dictionary output merges with facets and Inspector without becoming trace-selected search terms (3.13375ms)
+✔ independent source dictionaries count documents per field, preserve normalized terms and use complete ranking (4.88075ms)
+✖ frozen token-completion utility covers twelve authored intents and seven declared misses independently of BM25 hits (23.816208ms)
+✖ complete source ranking is insertion-order stable and independent of query, metadata qualification and page (15.908791ms)
+✔ installing unused suggestions preserves all 76 frozen search queries against the independent source oracle (4490.501542ms)
+ℹ All 76 unchanged frozen queries preserve complete rankings and scores with suggestions installed but unrequested.
+✖ add, replace, remove, clear and queued requests read the execution revision without optional state (5.809ms)
+✖ candidate/output/module/shared work bounds reject whole operations and later searches recover (3.505291ms)
+✔ every host suspension cancels, closes dictionary cursors, preserves root and releases listeners/tasks (10.317625ms)
+ℹ {"cancelledSuspensions":25,"closedDictionaryCursors":25}
+✔ 100/1000/10000 dictionary matches measure complete visits, candidate and output cardinalities (344.796041ms)
+ℹ {"rows":[{"liveDictionaryTerms":100,"dictionaryEntriesVisited":100,"peakMatchingCandidateEntries":100,"returnedItems":5,"outputStructuralEntries":25,"totalSearchWorkUnits":10530,"yieldedSteps":5924,"retainedOptionalIndexEntries":0},{"liveDictionaryTerms":1000,"dictionaryEntriesVisited":1000,"peakMatchingCandidateEntries":1000,"returnedItems":5,"outputStructuralEntries":25,"totalSearchWorkUnits":98609,"yieldedSteps":55267,"retainedOptionalIndexEntries":0},{"liveDictionaryTerms":10000,"dictionaryEntriesVisited":10000,"peakMatchingCandidateEntries":10000,"returnedItems":5,"outputStructuralEntries":25,"totalSearchWorkUnits":944605,"yieldedSteps":505259,"retainedOptionalIndexEntries":0}],"scope":"Actual cursor work and monotonically accumulated logical map cardinalities; no heap/allocation-byte or physical-copy peak claim."}
+ℹ tests 12
+ℹ suites 0
+ℹ pass 7
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4600.06375
+
+✖ failing tests:
+
+test at test/addons/suggestions/contract.test.mjs:9:1
+✖ completion ranks complete cross-field DF sums with ordinal ties, exact candidates and independent search pages (6.443084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [Object: null prototype] {
+  - {
+      dictionaryEntriesVisited: 6,
+      fields: [
+        'body',
+        'title'
+      ],
+      items: [
+  +     [Object: null prototype] {
+  -     {
+          fieldDocumentFrequency: 3,
+          term: 'sound'
+        },
+  +     [Object: null prototype] {
+  -     {
+          fieldDocumentFrequency: 3,
+          term: 'source'
+        },
+  +     [Object: null prototype] {
+  -     {
+          fieldDocumentFrequency: 2,
+          term: 'solar'
+        }
+      ],
+      omitted: 1,
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/addons/suggestions/contract.test.mjs:18:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { policy: 'dictionary-prefix-df-v1', prefix: 'so', fields: [ 'body', 'title' ], total: 4, omitted: 1, items: [ [Object], [Object], [Object] ], dictionaryEntriesVisited: 6 },
+    expected: { policy: 'dictionary-prefix-df-v1', prefix: 'so', fields: [ 'body', 'title' ], total: 4, omitted: 1, items: [ [Object], [Object], [Object] ], dictionaryEntriesVisited: 6 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/addons/suggestions/evaluation.test.mjs:37:1
+✖ frozen token-completion utility covers twelve authored intents and seven declared misses independently of BM25 hits (23.816208ms)
+  AssertionError [ERR_ASSERTION]: source-navigation
+  + actual - expected
+  
+  + [Object: null prototype] {
+  - {
+      dictionaryEntriesVisited: 88,
+      fields: [
+        'body',
+        'title'
+      ],
+      items: [
+  +     [Object: null prototype] {
+  -     {
+          fieldDocumentFrequency: 4,
+          term: 'source'
+        }
+      ],
+      omitted: 0,
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/addons/suggestions/evaluation.test.mjs:51:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { policy: 'dictionary-prefix-df-v1', prefix: 'so', fields: [ 'body', 'title' ], total: 1, omitted: 0, items: [ [Object] ], dictionaryEntriesVisited: 88 },
+    expected: { policy: 'dictionary-prefix-df-v1', prefix: 'so', fields: [ 'body', 'title' ], total: 1, omitted: 0, items: [ [Object] ], dictionaryEntriesVisited: 88 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/addons/suggestions/evaluation.test.mjs:75:1
+✖ complete source ranking is insertion-order stable and independent of query, metadata qualification and page (15.908791ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [Object: null prototype] {
+  - {
+      dictionaryEntriesVisited: 24,
+      fields: [
+        'title'
+      ],
+      items: [],
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/addons/suggestions/evaluation.test.mjs:91:20)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { policy: 'dictionary-prefix-df-v1', prefix: 'in', fields: [ 'title' ], total: 1, omitted: 1, items: [], dictionaryEntriesVisited: 24 },
+    expected: { policy: 'dictionary-prefix-df-v1', prefix: 'in', fields: [ 'title' ], total: 1, omitted: 1, items: [], dictionaryEntriesVisited: 24 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/addons/suggestions/lifecycle.test.mjs:7:1
+✖ add, replace, remove, clear and queued requests read the execution revision without optional state (5.809ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+  +   [Object: null prototype] {
+  -   {
+        fieldDocumentFrequency: 1,
+        term: 'sound'
+      }
+    ]
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/addons/suggestions/lifecycle.test.mjs:12:41)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { term: 'sound', fieldDocumentFrequency: 1 } ],
+    expected: [ { term: 'sound', fieldDocumentFrequency: 1 } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/addons/suggestions/lifecycle.test.mjs:19:1
+✖ candidate/output/module/shared work bounds reject whole operations and later searches recover (3.505291ms)
+  Error [RaveldexError]: Raveldex: WORK_LIMIT_EXCEEDED
+      at invalid (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:24:11)
+      at WorkBudget.charge (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/limits/work.js:16:13)
+      at charge (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/query/search.js:53:53)
+      at expandGroups (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/retrieval/expand.js:62:27)
+      at expandGroups.next (<anonymous>)
+      at executeOwnedSearch (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/query/search.js:70:31)
+      at executeOwnedSearch.next (<anonymous>)
+      at ExecutionOwner.pump (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:178:48)
+      at Object.callback (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:193:97)
+      at FakeHost.runNext (file:///Users/vasilis/Documents/GitHub/raveldex/test/fixtures/execution/host.mjs:37:10) {
+    code: 'WORK_LIMIT_EXCEEDED',
+    details: { path: 'work' }
+  }

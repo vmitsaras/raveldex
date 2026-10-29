@@ -27,3 +27,5 @@ The recommendation concerns this bounded private candidate. It is not authorizat
 ## Later explicitly selected work
 
 RX-A010 extends the development tree with [optional bounded typo tolerance](../api/TYPO.md). The original candidate recommendation, hashes and remote observations retain their dated scope. This later slice does not silently replace those qualified artifacts, activate other N5 work or authorize publication.
+
+RX-A020 is a later explicitly selected optional change on top of RX-A010. Its dictionary-output protocol, `/addons/suggestions` entry and revised import costs require their own changed-tree evidence. Historical candidate tarball identities and remote CI do not verify these additions. The package stays private and unpublished.

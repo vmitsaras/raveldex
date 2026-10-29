@@ -1,0 +1,379 @@
+{
+  "kind": "raveldex-rx-a020-review-v1",
+  "at": "2026-10-29T13:28:53.572Z",
+  "reviewer": "/root/suggestions_contract",
+  "scope": "Read-only source, protocol and direct runtime probes; no build or network actions.",
+  "runtime": "v24.21.0",
+  "sourceSha256": {
+    "src/core/capabilities/types.ts": "07c09a3b209b16ca45f2ab55730b1e0e940edfa4bf8c2e8ba1c2991792e593f7",
+    "src/core/capabilities/registration.ts": "a4cc5cd191840e4197420a1734b3aa6b9f161d7199ac37a3574db9a93fd79591",
+    "src/core/capabilities/refinement.ts": "3410220672fc830350110dddb49d4b904b1274a116febddd945d0aa9583375e8",
+    "src/core/contracts/options.ts": "ae3841544d2aeaa69eebbe5da958e6267420303405c6ba5b9802159bca1ab0ea",
+    "src/core/query/search.ts": "07233f84906516211e8267b3f33bd37416d25ee9cb1fdc9ea05e2390a5e444af",
+    "src/addons/suggestions/index.ts": "a0211a60bb10615ef71680dc40b53dc068d3c9a3bf5e435aa867b169cc5b208a",
+    "src/addons/suggestions/options.ts": "76fd642e2da0fd6adf05cfa6cae20eca7c086fb677740b4801c21be6f746bdca"
+  },
+  "probes": [
+    {
+      "name": "Complete cross-field aggregate winner precedes stronger per-field-only candidates",
+      "status": "Pass"
+    },
+    {
+      "name": "Only selected fields qualify candidates; short invalid/disabled fields reject",
+      "status": "Pass"
+    },
+    {
+      "name": "Empty, short and punctuation-only requests return no dictionary visits",
+      "status": "Pass"
+    },
+    {
+      "name": "NFKC original token is normalized once and astral minimum uses code points",
+      "status": "Pass"
+    },
+    {
+      "name": "Zero output capacity retains full total; candidate overflow rejects even with limit zero",
+      "status": "Pass"
+    },
+    {
+      "name": "Output cap includes object keys, array length, slots and item keys",
+      "status": "Pass"
+    },
+    {
+      "name": "Query lexical capacity does not inherit record-value length ceiling",
+      "status": "Pass"
+    },
+    {
+      "name": "Generic dictionary reader refuses a field outside manifest requirements",
+      "status": "Pass"
+    },
+    {
+      "name": "Aliases of one trusted dictionary registration share one work cap",
+      "status": "Pass"
+    }
+  ],
+  "verdict": "Ready with follow-ups",
+  "findings": [
+    {
+      "id": "RX-A020-R01",
+      "priority": "P2",
+      "status": "Resolved and directly rechecked",
+      "path": "src/addons/suggestions/index.ts",
+      "problem": "Completion analysis inherited record-value length limit instead of query lexical length, refusing valid normalized dictionary prefixes under narrowed record limits.",
+      "reproduction": {
+        "configuration": {
+          "schema": {
+            "text": {
+              "title": {}
+            }
+          },
+          "limits": {
+            "maxTextCodeUnitsPerValue": 1
+          }
+        },
+        "record": {
+          "id": "a",
+          "text": {
+            "title": "ﬃ"
+          }
+        },
+        "strictQuery": {
+          "text": "ffi",
+          "total": 1
+        },
+        "request": {
+          "text": "ff"
+        },
+        "priorError": {
+          "code": "LIMIT_EXCEEDED",
+          "details": {
+            "path": "analysis.value",
+            "limit": 1,
+            "actual": 2
+          }
+        }
+      },
+      "resolution": "Use query-specific maxTextCodeUnitsPerValue=maxQueryLexicalCodeUnits; source regression and independent probe both use U+FB03 ligature, not non-token ℡.",
+      "currentResult": [
+        {
+          "term": "ffi",
+          "fieldDocumentFrequency": 1
+        }
+      ]
+    },
+    {
+      "id": "RX-A020-R02",
+      "priority": "P2",
+      "status": "Resolved and directly rechecked",
+      "path": "docs/api/SUGGESTIONS.md",
+      "problem": "Relative ../specs/SUGGESTIONS.md link is unavailable in npm package because the package files/allowlist excludes docs/specs.",
+      "recommendation": "Keep the self-contained API and included ADDONS.md protocol link, remove broken installed-package relative spec link, or explicitly package this exact spec."
+    }
+  ],
+  "sourceReview": {
+    "selectedFields": "Schema and registration enabled-field validation precedes short-input early return. Generic reader rejects undeclared/duplicate fields.",
+    "ranking": "Complete matching map aggregates all selected field DFs before deterministic bounded list selection; no field-local top-k shortcut.",
+    "ownership": "Generic metadata payload/output copier owns plain finite data without invoking accessors. Factory options and public structures freeze. Exact output formula verified at cap boundary.",
+    "revision": "Reader captures one immutable root at execution. No side roots/cache/participant changes are introduced.",
+    "workAndStops": "Registration shared run wrapper aggregates prepare/finish/aliases and closes cursors. Shared search charge/checkStop remains authoritative. Dedicated parent lifecycle evidence still pending review.",
+    "separation": "Dictionary output path neither compiles query terms nor affects document callbacks/scoring. It merges after ordinary hits/facets and before evidence. Unrequested imports/installations remain inert by source inspection.",
+    "worker": "Existing requested options keys permit dictionary output. Semantic factory identity includes bounded canonical options.",
+    "trustBoundary": "Trusted add-on protocol; callbacks are not hostile-code sandboxed."
+  },
+  "followUps": [
+    "The 15,360-byte gzip core planning target remains missed at 17,995 bytes; no size/performance improvement is claimed.",
+    "No remote CI verifies this changed optional tree. Publication, push/merge and eight remaining optional tracks require separate authorization.",
+    "No new browser/assistive-technology/physical-input or heap/allocation-byte/physical-copy peak qualification follows from these API, logical-work and Node worker checks."
+  ],
+  "limitations": {
+    "notRunByReviewer": [
+      "Builds",
+      "Network operations",
+      "Full project regression",
+      "Browser/AT/physical input qualification"
+    ],
+    "reviewedDirectly": [
+      "Current source/diff",
+      "Nine independent runtime probes",
+      "New API/spec text",
+      "Candidate allowlist and entry-count changes",
+      "Independent source oracle and frozen utility tests"
+    ]
+  },
+  "focusedClosingReview": {
+    "at": "2026-10-29T13:35:20.914Z",
+    "status": "Pass; no remaining mandatory source or focused-evidence findings",
+    "behavioralCounts": {
+      "tests": 12,
+      "pass": 12,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "frozenFixtureSha256": "16b661e3e50074830e189dc335d0dd25c79c1cd02bac0873bb89808b9a05d211",
+    "utility": {
+      "positiveIntents": 12,
+      "intendedTopFiveInclusions": 12,
+      "intendedEmptyCases": 7,
+      "negativeSuggestions": 0,
+      "unchangedOriginalQueries": 76,
+      "independentFieldLimitQueryPageComparisons": 96
+    },
+    "stops": {
+      "actualSelectedHostSuspensions": 25,
+      "closedDictionaryCursors": 25,
+      "scope": "FakeHost deterministic interruption and cleanup witnesses, not physical/browser event qualification"
+    },
+    "logicalCostRows": [
+      {
+        "dictionaryTerms": 100,
+        "visits": 100,
+        "candidates": 100,
+        "returned": 5,
+        "outputEntries": 25,
+        "workUnits": 10530,
+        "steps": 5924
+      },
+      {
+        "dictionaryTerms": 1000,
+        "visits": 1000,
+        "candidates": 1000,
+        "returned": 5,
+        "outputEntries": 25,
+        "workUnits": 98609,
+        "steps": 55267
+      },
+      {
+        "dictionaryTerms": 10000,
+        "visits": 10000,
+        "candidates": 10000,
+        "returned": 5,
+        "outputEntries": 25,
+        "workUnits": 944605,
+        "steps": 505259
+      }
+    ],
+    "package": {
+      "sha256": "e328da20e8d811d47a56a4c8563beb6979fa7173efcca47508c872b479e6813e",
+      "listedFiles": 244,
+      "allCurrentFileSizesMatch": true,
+      "scope": "Cost report records member path/size only; exact bytes and tar identity await final candidate.",
+      "authoredRequests": 9,
+      "installedAndMinifiedPageComparisonsEach": 27,
+      "workerComparisons": 13,
+      "semanticOptionMismatch": "INCOMPATIBLE_WORKER",
+      "noHostImportRows": 5,
+      "exactInstalledExampleSha256": "db1dfa93415e72fc8b1466979181f921976f816ccbcc854ed9f3aa4182acde40"
+    },
+    "costs": {
+      "coreMinified": 60304,
+      "coreGzip": 17995,
+      "suggestionsMinified": 9801,
+      "suggestionsGzip": 3795,
+      "combinedMinified": 66358,
+      "combinedGzip": 19890,
+      "unchangedCoreTarget": 15360,
+      "targetMet": false,
+      "graphScope": "Overlapping fixed esbuild/gzip graphs, not additive or allocation-byte peaks"
+    },
+    "sourceHashesStillMatch": true,
+    "R02Resolved": true,
+    "limits": "Full candidate check log, tar member bytes and finalized manifest remain pending; do not mark them passed from this focused review."
+  },
+  "mandatoryFindings": [],
+  "finalClosingReview": {
+    "kind": "raveldex-rx-a020-closing-artifact-review-v1",
+    "status": "Pass",
+    "counts": {
+      "tests": [
+        576,
+        30,
+        24,
+        26,
+        1
+      ],
+      "pass": [
+        576,
+        30,
+        24,
+        26,
+        1
+      ],
+      "fail": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "cancelled": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "skipped": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "todo": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "totalTests": 657,
+    "identities": {
+      "check": {
+        "path": "docs/evidence/RX-A020-check.log",
+        "bytes": 82548,
+        "sha256": "db0fd94c810f9652b085f550a30aa6f4c35264ff7cd2bff50a9bb60e53665b3a"
+      },
+      "preparation": {
+        "path": "docs/evidence/RX-A020-preparation.json",
+        "bytes": 669,
+        "sha256": "4dce99f447f0c864898dde4fab90e2f9e7fc4cb9463789b9dc9cc16c3d448c83"
+      },
+      "candidate": {
+        "path": "docs/evidence/RX-A020-candidate.json",
+        "bytes": 212696,
+        "sha256": "4173d4fdeb709f472a8778aa7879006e92a95ff48d430ee0c9d3a808b11f2014"
+      },
+      "tarball": {
+        "path": "docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz",
+        "bytes": 176618,
+        "sha256": "e328da20e8d811d47a56a4c8563beb6979fa7173efcca47508c872b479e6813e"
+      },
+      "package": {
+        "path": "docs/evidence/RX-A020-package.json",
+        "bytes": 154284,
+        "sha256": "a946588ea708dd6793028cc8c6e32f113a4584a4bce9d7aa889bc5c925d196a5"
+      },
+      "behavior": {
+        "path": "docs/evidence/RX-A020-behavior.log",
+        "bytes": 7806,
+        "sha256": "d7d880f032a0165422fe53b78e67eedde0a30656da86757cc8d226700004b92a"
+      },
+      "fixture": {
+        "path": "test/fixtures/relevance/suggestions-v1.json",
+        "bytes": 7873,
+        "sha256": "16b661e3e50074830e189dc335d0dd25c79c1cd02bac0873bb89808b9a05d211"
+      },
+      "oracle": {
+        "path": "test/oracle/suggestions.mjs",
+        "bytes": 2410,
+        "sha256": "141f32c732f6f5038de9b314664802fa0939f6b1df8e0536a502aafa739a1c62"
+      },
+      "measurement": {
+        "path": "test/measurements/suggestions-package.mjs",
+        "bytes": 18695,
+        "sha256": "db92c4da76e61d4e340b4a44fe6b684e23b2d874732c919b2fb8080221453e60"
+      },
+      "api": {
+        "path": "docs/api/SUGGESTIONS.md",
+        "bytes": 3459,
+        "sha256": "6a550ab7b22fe09db85e6814befa085045bdd1b07e40e833c7d7e211758f189c"
+      },
+      "spec": {
+        "path": "docs/specs/SUGGESTIONS.md",
+        "bytes": 7340,
+        "sha256": "29dee701d992a50104885f0f63f2e8bcbeeef93329a77e2a7428f8374271bc4d"
+      }
+    },
+    "npmIntegrity": "sha512-zpWZmxxPI/KG+H8RFMvqVlDbwoc6uTWWqD6gFBFAH5xLujjvxkJMgOtAWZr5nIwbqhsjj1J1Puzyyf9BYSWWKg==",
+    "rawCopiesMatch": true,
+    "allTarMembersMatchCurrentBytes": true,
+    "packagedByteTotal": 736206,
+    "publicJavaScriptEntryCount": 21,
+    "separateCSS": "./dist/addons/ui/styles.css",
+    "otherTaskCardsUnchanged": 30,
+    "selectedTaskStatus": "in_progress",
+    "environment": {
+      "node": "v24.21.0",
+      "platform": "darwin",
+      "arch": "arm64",
+      "release": "27.0.0",
+      "npm": "12.2.0"
+    },
+    "browser": {
+      "channel": "chrome",
+      "version": "156.0.8078.49",
+      "headless": true,
+      "playwright": "1.61.1"
+    },
+    "browserPageErrors": [],
+    "browserForeignRequests": [],
+    "at": "2026-10-29T13:37:14.768Z",
+    "reviewMethod": "Independent inspection and reconstruction of closed logs, receipt/report hashes, actual tar member bytes and current source; did not rerun full build/project tests.",
+    "sourceHashesStillMatch": true,
+    "independentProbes": 9,
+    "resolvedFindings": [
+      "RX-A020-R01",
+      "RX-A020-R02"
+    ],
+    "artifactIdentities": {
+      "docs/evidence/RX-A020-independent-probes.json": {
+        "bytes": 2195,
+        "sha256": "b56e8a27955f899f35564d9998f7fddd25a30620053a4a21d90817d24335329d"
+      },
+      "docs/evidence/RX-A020-independent-probes.mjs": {
+        "bytes": 7800,
+        "sha256": "57e52c6846b41bf77dcffb404511bd2701eaf82b6b3a70cab8fad1e7ef230279"
+      },
+      "docs/evidence/RX-A020-initial-focused.log": {
+        "bytes": 8719,
+        "sha256": "96f9201930938aee465ffdd1cc336dce5e724251000f447d61d3ffa3f2e945d3"
+      }
+    },
+    "completeInventorySha256": "ecb15a8f35f4f3019a5046e6306edef733fad739fd2f0b614ce6fc0b2eff0960",
+    "inventoryWitness": "All 244 safe regular package members independently read from the gzip tar and compared byte-for-byte with current repository package files. Candidate per-member hashes and package-cost listed sizes also match.",
+    "currentTaskStateBoundary": "RX-A020 was in_progress during independent review; all other 30 cards exactly match HEAD. Final docs/manifest evidence-only terminal synchronization is the remaining parent action.",
+    "supersedes": "Earlier interim verdicts and pending-full-candidate statements in this record are historical stages; this final closing review establishes completed verification and no mandatory findings."
+  }
+}

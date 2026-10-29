@@ -10,7 +10,7 @@ import type { CompiledNode } from '../query/compile.js';
 export interface CapabilityReference { readonly id: string; readonly contractVersion: number }
 export interface CapabilityManifest {
   readonly id: string; readonly version: string; readonly contractVersion: number;
-  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation' | 'evidence' | 'term-expansion')[];
+  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation' | 'evidence' | 'term-expansion' | 'dictionary-output')[];
   readonly provides: readonly CapabilityReference[]; readonly requires: readonly CapabilityReference[];
   readonly dataRequirements: { readonly fields: readonly string[]; readonly source: boolean; readonly positions: boolean; readonly offsets: boolean; readonly metadata: boolean };
   readonly indexEffect: 'none' | 'transactional'; readonly rebuildPolicy: 'new-index';
@@ -64,6 +64,21 @@ export interface MetadataContext {
 export interface PayloadContext { readonly admission: Admission; readonly limits: Limits; readonly maxCodeUnits: number }
 export interface CapturedPayload { readonly value: unknown; readonly codeUnits: number }
 export interface AggregationOutput { readonly value: unknown; readonly entries: number }
+export interface DictionaryEntryStep extends DictionaryStep {
+  readonly field: string; readonly documentFrequency: number;
+}
+/** Independent output over declared live text dictionaries, never query membership. */
+export interface DictionaryContext extends MetadataContext {
+  readonly analyzer: AnalyzerDescriptor;
+  dictionary(fields: readonly string[]): Generator<DictionaryEntryStep, void>;
+}
+export interface PreparedDictionaryOutput {
+  finish(): Generator<WorkStep, AggregationOutput>;
+}
+export interface DictionaryImplementation {
+  capture(input: unknown, context: PayloadContext): CapturedPayload;
+  prepare(context: DictionaryContext): Generator<WorkStep, PreparedDictionaryOutput>;
+}
 export interface PreparedPredicate { test(metadata: OwnedRecord['metadata']): Generator<WorkStep, boolean> }
 export interface PredicateImplementation {
   capture(input: unknown, context: PayloadContext): CapturedPayload;
@@ -103,6 +118,7 @@ export interface AddonRegistration {
   readonly participant?: ParticipantImplementation;
   readonly refinement?: RefinementImplementation;
   readonly expansion?: ExpansionImplementation;
+  readonly dictionary?: DictionaryImplementation;
   readonly predicate?: PredicateImplementation;
   readonly aggregation?: AggregationImplementation;
   readonly evidence?: EvidenceImplementation;

@@ -115,3 +115,5 @@ Root also exports the trusted extension protocol types. They are implementation 
 | `EvidenceContext`, `EvidenceResultContext`, `EvidenceImplementation`, `PreparedEvidence` | Explicit selected factual trace/evidence, declared provider state and bounded output. |
 
 The exported declarations are authoritative for exact generator/context shapes. See the repository [extension contract](https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md) before authoring a trusted registration. No private owner/root/scheduler API is supported.
+
+The optional [token suggestions](SUGGESTIONS.md) output is requested through `SearchOptions.extensions.suggestions`. It reads selected whole-corpus dictionaries at the execution revision and never alters query membership, scores or pagination.

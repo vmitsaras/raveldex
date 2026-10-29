@@ -182,3 +182,9 @@ N4 ends with a concrete native candidate recommendation. Publication, release ta
 ## Explicitly selected optional typo tolerance
 
 RX-A010 follows the [named policy and verification contract](../specs/TYPO_TOLERANCE.md). Freeze its separate authored typo judgments before evaluation, preserve the original 76-query baseline, compare with a full-matrix independent OSA/source oracle, and measure complete dictionary work/candidate cardinalities and isolated import graphs. Verify complete bound refusal, cancellation, mutation freshness and worker identity. Logical candidate high-waters do not establish heap or physical allocation peaks.
+
+## RX-A020 selected optional token completion
+
+Use the [suggestions contract](../specs/SUGGESTIONS.md) and independent source dictionary/DF/full-sort oracle. Freeze authored completion intents before production execution, report intended top-five inclusion and empty-prefix misses separately from search relevance, and retain the unchanged original 76-query regression corpus. Verify whole-corpus/selected-field scope, deterministic ties, normalized-once Unicode, complete totals with zero/bounded output, captured ownership, field validation on short input, candidate/work/output refusal, live/queued/old-root revisions, every actual selected cancellation suspension and recovery.
+
+Measure complete dictionary visits, monotonic candidate-map high-water, bounded list cardinality/output entries and actual emitted work at 100/1,000/10,000 matches. Logical cardinalities are not allocation-byte peaks. Verify isolated installed/minified consumers, exact public example, no-host imports, ES2022 declarations/private path denial, and actual Node worker semantic identity/parity. UI/IME/AT qualification is not claimed because no UI integration is added.

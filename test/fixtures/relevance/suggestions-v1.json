@@ -1,0 +1,303 @@
+{
+  "version": "rx-a020-token-completion-judgments-v1",
+  "frozenDate": "2026-10-29",
+  "policy": "dictionary-prefix-df-v1",
+  "context": {
+    "author": "Codex /root/suggestions_evaluation, independent source-reading evaluator",
+    "labelMethod": "Small documentation-navigation records and intended normalized token completions authored before executing production suggestions. Labels express completion utility separately from search ranking.",
+    "limitations": "One evaluator and an authored English technical vocabulary plus three Unicode witnesses; synthetic partial-token intents, no frequency logs or representative user study. Top-five inclusion is bounded utility, not a BM25 relevance or automatic-input-rewrite claim."
+  },
+  "schema": {
+    "text": {
+      "title": {},
+      "body": {}
+    },
+    "metadata": {
+      "category": {
+        "type": "string"
+      }
+    }
+  },
+  "records": [
+    {
+      "id": "source-provider",
+      "text": {
+        "title": "Source provider",
+        "body": "Source ownership preserves original text. Source source."
+      },
+      "metadata": {
+        "category": "guide"
+      }
+    },
+    {
+      "id": "source-restore",
+      "text": {
+        "title": "Source snapshots",
+        "body": "Source restore rebuilds records."
+      },
+      "metadata": {
+        "category": "guide"
+      }
+    },
+    {
+      "id": "native-snapshot",
+      "text": {
+        "title": "Native snapshots",
+        "body": "Snapshot restore validates index compatibility."
+      },
+      "metadata": {
+        "category": "reference"
+      }
+    },
+    {
+      "id": "atomic",
+      "text": {
+        "title": "Atomic mutations",
+        "body": "Atomic updates publish one revision. Atomic writes preserve coherent records."
+      },
+      "metadata": {
+        "category": "guide"
+      }
+    },
+    {
+      "id": "cancellation",
+      "text": {
+        "title": "Cancellation checkpoints",
+        "body": "Cancellation stops pending work and keeps the current revision."
+      },
+      "metadata": {
+        "category": "reference"
+      }
+    },
+    {
+      "id": "metadata",
+      "text": {
+        "title": "Metadata filters",
+        "body": "Metadata predicates select records before exact facet counting."
+      },
+      "metadata": {
+        "category": "guide"
+      }
+    },
+    {
+      "id": "positions",
+      "text": {
+        "title": "Optional positions",
+        "body": "Positions verify strict phrases and preserve original offsets."
+      },
+      "metadata": {
+        "category": "reference"
+      }
+    },
+    {
+      "id": "prefix",
+      "text": {
+        "title": "Prefix matching",
+        "body": "Prefix retrieval expands indexed normalized tokens."
+      },
+      "metadata": {
+        "category": "guide"
+      }
+    },
+    {
+      "id": "indexeddb",
+      "text": {
+        "title": "IndexedDB persistence",
+        "body": "Index storage supports recovery after worker failure."
+      },
+      "metadata": {
+        "category": "reference"
+      }
+    },
+    {
+      "id": "worker",
+      "text": {
+        "title": "Worker adapter",
+        "body": "Worker ownership and recovery preserve one engine owner."
+      },
+      "metadata": {
+        "category": "guide"
+      }
+    },
+    {
+      "id": "cafe",
+      "text": {
+        "title": "Café examples",
+        "body": "Café punctuation retains accents."
+      },
+      "metadata": {
+        "category": "guide"
+      }
+    },
+    {
+      "id": "greek",
+      "text": {
+        "title": "Δοκιμή ανάλυσης",
+        "body": "Δοκιμή διατήρησης τόνων."
+      },
+      "metadata": {
+        "category": "reference"
+      }
+    },
+    {
+      "id": "astral",
+      "text": {
+        "title": "𐐀lpha a½bc",
+        "body": "Unicode examples preserve normalized terms."
+      },
+      "metadata": {
+        "category": "reference"
+      }
+    }
+  ],
+  "acceptance": {
+    "positiveQueries": 12,
+    "negativeQueries": 7,
+    "minimumIntendedTopFiveInclusions": 12,
+    "maximumNegativeSuggestions": 0
+  },
+  "judgments": [
+    {
+      "id": "source-navigation",
+      "text": "so",
+      "expectedTerms": [
+        "source"
+      ],
+      "rationale": "Complete source while finding source-provider or source-rebuild documentation."
+    },
+    {
+      "id": "snapshot-navigation",
+      "text": "snap",
+      "expectedTerms": [
+        "snapshot",
+        "snapshots"
+      ],
+      "rationale": "Offer singular and plural normalized snapshot dictionary terms, not a generated sentence."
+    },
+    {
+      "id": "atomic-navigation",
+      "text": "ato",
+      "expectedTerms": [
+        "atomic"
+      ],
+      "rationale": "Complete atomic for mutation documentation."
+    },
+    {
+      "id": "cancel-navigation",
+      "text": "canc",
+      "expectedTerms": [
+        "cancellation"
+      ],
+      "rationale": "Complete cancellation for stop/checkpoint documentation."
+    },
+    {
+      "id": "metadata-navigation",
+      "text": "met",
+      "expectedTerms": [
+        "metadata"
+      ],
+      "rationale": "Complete metadata for predicates and facets."
+    },
+    {
+      "id": "positions-navigation",
+      "text": "pos",
+      "expectedTerms": [
+        "positions"
+      ],
+      "rationale": "Complete positions for phrase and offset documentation."
+    },
+    {
+      "id": "worker-navigation",
+      "text": "wor",
+      "expectedTerms": [
+        "worker",
+        "work"
+      ],
+      "rationale": "Offer actual worker/work terms with corpus frequency then ordinal tie-break."
+    },
+    {
+      "id": "index-navigation",
+      "text": "ind",
+      "expectedTerms": [
+        "index",
+        "indexed",
+        "indexeddb"
+      ],
+      "rationale": "Complete dictionary-backed index vocabulary including IndexedDB after basic normalization."
+    },
+    {
+      "id": "prefix-navigation",
+      "text": "pref",
+      "expectedTerms": [
+        "prefix"
+      ],
+      "rationale": "Complete prefix for matching documentation."
+    },
+    {
+      "id": "cafe-accent-prefix",
+      "text": "caf",
+      "expectedTerms": [
+        "café"
+      ],
+      "rationale": "An unfinished prefix before the accented final letter can complete the existing café term."
+    },
+    {
+      "id": "greek-prefix",
+      "text": "ΔΟΚ",
+      "expectedTerms": [
+        "δοκιμή"
+      ],
+      "rationale": "Case-normalized Greek prefix can complete the existing accented token without accent folding."
+    },
+    {
+      "id": "astral-prefix",
+      "text": "𐐀l",
+      "expectedTerms": [
+        "𐐨lpha"
+      ],
+      "rationale": "Two Unicode code points including a case-mapped astral letter meet minimum length."
+    },
+    {
+      "id": "unknown-prefix",
+      "text": "zzzz",
+      "expectedTerms": [],
+      "rationale": "Unrelated prefix has no dictionary completion."
+    },
+    {
+      "id": "misspelled-prefix",
+      "text": "srce",
+      "expectedTerms": [],
+      "rationale": "No implicit typo repair or search relaxation."
+    },
+    {
+      "id": "accent-mismatch",
+      "text": "cafe",
+      "expectedTerms": [],
+      "rationale": "Exact normalized prefix does not strip café accents."
+    },
+    {
+      "id": "greek-accent-mismatch",
+      "text": "δοκιμη",
+      "expectedTerms": [],
+      "rationale": "Greek tonos remains semantically significant under basic-v1."
+    },
+    {
+      "id": "short-prefix",
+      "text": "s",
+      "expectedTerms": [],
+      "rationale": "Single normalized Unicode code point is below the fixed minimum."
+    },
+    {
+      "id": "empty-prefix",
+      "text": "",
+      "expectedTerms": [],
+      "rationale": "Empty input does not expose the dictionary."
+    },
+    {
+      "id": "punctuation-only",
+      "text": "...",
+      "expectedTerms": [],
+      "rationale": "No analyzer token means no completion request."
+    }
+  ]
+}

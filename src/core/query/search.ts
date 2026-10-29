@@ -115,6 +115,12 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
     additional = Object.freeze({ ...additional, ...result });
   }
   const scoreTrace = collector?.finish(root.revision, root.configuration.analyzer, compiled.key);
+  if (extensions?.outputs.length) {
+    boundary('aggregation');
+    const result: Record<string, unknown> = Object.create(null) as Record<string, unknown>;
+    for (const output of extensions.outputs) result[output.capability] = yield* output.finish();
+    additional = Object.freeze({ ...additional, ...result });
+  }
   if (extensions?.evidence) {
     boundary('aggregation');
     if (!scoreTrace) invalid('INTERNAL_ERROR', 'extensions.evidence');

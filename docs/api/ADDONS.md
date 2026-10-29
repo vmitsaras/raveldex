@@ -85,3 +85,7 @@ Ranges are complete or reject; snippet presentation can omit matches explicitly.
 ## Bounded typo tolerance
 
 The explicit `/addons/typo` factory and query leaf implement one-edit Unicode alternatives under the exact-first policy. Ordinary exact/prefix/phrase searches stay unchanged. See [policy, public types, example and bounds](TYPO.md).
+
+## Dictionary-backed token suggestions
+
+The explicit `/addons/suggestions` factory adds independent `options.extensions.suggestions = { text, fields?, limit? }` output. It completes one normalized token from the selected live dictionaries; it never rewrites the search query/input or adds UI behavior. Ranking uses summed field-local document frequency and stable ordinal ties, independent of qualifying hits/filters/pages. See [public types, complete policy, example and bounds](SUGGESTIONS.md).

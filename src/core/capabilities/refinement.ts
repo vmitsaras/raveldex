@@ -6,6 +6,7 @@ import type { WorkStep } from '../index/directory.js';
 import { WorkBudget } from '../limits/work.js';
 import type { CompiledNode } from '../query/compile.js';
 import type { Charge } from '../query/work.js';
+import { directoryEntries } from '../index/directory.js';
 
 type Metadata = OwnedRecord['metadata'];
 interface PreparedLeaf { test(id: string, metadata: Metadata): Generator<WorkStep, boolean> }
@@ -13,6 +14,7 @@ export type Refinements = ReadonlyMap<CompiledNode, PreparedLeaf>;
 export interface PreparedExtensions {
   readonly leaves: Refinements;
   readonly aggregations: readonly { readonly capability: string; add(metadata: Metadata): Generator<WorkStep, void>; finish(): Generator<WorkStep, unknown> }[];
+  readonly outputs: readonly { readonly capability: string; finish(): Generator<WorkStep, unknown> }[];
   readonly evidence?: { readonly capability: string; finish(context: EvidenceResultContext): Generator<WorkStep, unknown> };
 }
 
@@ -21,6 +23,7 @@ export interface PreparedExtensions {
 export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge: Charge, options: OwnedSearchOptions): Generator<WorkStep, PreparedExtensions> {
   const leaves = new Map<CompiledNode, PreparedLeaf>();
   const aggregations: PreparedExtensions['aggregations'][number][] = [], budgets = new Map<string, WorkBudget>();
+  const outputs: PreparedExtensions['outputs'][number][] = [];
   let evidence: PreparedExtensions['evidence'];
   function setup(capability: string) {
     const set = root.configuration.capabilities, registration = set?.providers[capability];
@@ -78,6 +81,25 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
   for (const capability of Object.keys(options.extensions ?? {}).sort()) {
     yield charge(capability.length + 1);
     const { registration, run } = setup(capability);
+    if (registration.dictionary) {
+      const prepared = yield* run(registration.dictionary.prepare(Object.freeze({ ...metadataContext(capability, options.extensions![capability]), analyzer: root.configuration.analyzer,
+        *dictionary(fields: readonly string[]) {
+          if (!Array.isArray(fields) || !fields.length) invalid('INCOMPATIBLE_CAPABILITY', 'extensions.dictionary.fields');
+          bound(fields.length, root.configuration.limits.maxTextFields, 'extensions.dictionary.fields');
+          const selected = new Set<string>();
+          for (const field of fields) {
+            if (typeof field !== 'string' || !registration.manifest.dataRequirements.fields.includes(field) || selected.has(field)) invalid('MISSING_CAPABILITY', 'extensions.dictionary.fields');
+            selected.add(field);
+          }
+          for (const field of selected) for (const [term, entry] of directoryEntries(root.fields[field]!.terms)) {
+            yield Object.freeze({ workUnits: field.length + term.length + 1, field, term, documentFrequency: entry.df });
+          }
+        } })));
+      if (!prepared || typeof prepared.finish !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'extensions.dictionary');
+      const finish = prepared.finish.bind(prepared);
+      outputs.push(Object.freeze({ capability, *finish(): Generator<WorkStep, unknown> { return output(capability, yield* run(finish())); } }));
+      continue;
+    }
     if (registration.evidence) {
       if (evidence) invalid('INVALID_OPTIONS', 'options.extensions.evidence');
       const prepared = yield* run(registration.evidence.prepare(Object.freeze({ ...metadataContext(capability, options.extensions![capability]), analyzer: root.configuration.analyzer,
@@ -102,5 +124,5 @@ export function* prepareRefinements(node: CompiledNode, root: IndexRoot, charge:
       },
     }));
   }
-  return { leaves, aggregations, ...(evidence ? { evidence } : {}) };
+  return { leaves, aggregations, outputs, ...(evidence ? { evidence } : {}) };
 }

@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010
+## Unreleased — explicitly selected RX-A010 and RX-A020
+
+- RX-A020 adds `/addons/suggestions`: independent one-token completion from live selected dictionaries, deterministic field-frequency ranking, complete candidate totals, bounded output/work and mutation/cancellation behavior. No automatic input rewrite, side index, UI integration or runtime dependency is added.
 
 - Add optional `/addons/typo` with a bounded Unicode distance-one/adjacent-swap policy, exact-first dictionary selection and weighted native alternatives. Original required groups and strict ordinary queries remain intact.
 - Add complete output/budget/group bounds, live mutation coherence, actual expansion metadata, Inspector/original-evidence integration and matching worker identities. No side index or runtime dependency is added.

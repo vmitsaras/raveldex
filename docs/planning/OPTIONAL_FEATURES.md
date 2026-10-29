@@ -62,7 +62,7 @@ Expand eligible tokens under a named edit-distance policy when judged typo queri
 
 **Dictionary-backed suggestions**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/29)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/29)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -74,7 +74,7 @@ Offer explicit query completions without silently rewriting submitted search sem
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [SUGGESTIONS.md](../../docs/specs/SUGGESTIONS.md)
 
 **Acceptance criteria**
 
@@ -90,7 +90,17 @@ Offer explicit query completions without silently rewriting submitted search sem
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A020.md](../../docs/evidence/RX-A020.md)
+- [docs/evidence/RX-A020-behavior.log](../../docs/evidence/RX-A020-behavior.log)
+- [docs/evidence/RX-A020-initial-focused.log](../../docs/evidence/RX-A020-initial-focused.log)
+- [docs/evidence/RX-A020-package.json](../../docs/evidence/RX-A020-package.json)
+- [docs/evidence/RX-A020-independent-probes.json](../../docs/evidence/RX-A020-independent-probes.json)
+- [docs/evidence/RX-A020-independent-probes.mjs](../../docs/evidence/RX-A020-independent-probes.mjs)
+- [docs/evidence/RX-A020-review.json](../../docs/evidence/RX-A020-review.json)
+- [docs/evidence/RX-A020-check.log](../../docs/evidence/RX-A020-check.log)
+- [docs/evidence/RX-A020-preparation.json](../../docs/evidence/RX-A020-preparation.json)
+- [docs/evidence/RX-A020-candidate.json](../../docs/evidence/RX-A020-candidate.json)
+- [docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz)
 
 
 ## RX-A030
