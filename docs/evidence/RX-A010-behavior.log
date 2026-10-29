@@ -1,0 +1,26 @@
+✔ one-edit OSA semantics use code points including adjacent swaps, never multiple edits (0.486833ms)
+✔ factory owns bounded data, declares no retained side index and rejects malformed configuration (1.401709ms)
+✔ explicit requests own query input; missing, incompatible and unauthorized field requests fail (3.826167ms)
+✔ exact-first, query minimum and complete alternatives are explicit and deterministic (2.206125ms)
+✔ original AND groups, repeats and successful OR/NOT branches preserve native score facts (1.394125ms)
+✔ ordinary exact/prefix/strict phrases remain strict; typo output merges with facets and Inspector (5.812417ms)
+✔ the independent full OSA matrix specifies one code-point edit and adjacent transpositions (0.57ms)
+✔ source-derived alternatives independently check exact-first, edits, short candidates and normalized original spellings (17.7625ms)
+✔ the separately frozen typo relevance set recovers ten known title tasks without judged false positives (1294.649667ms)
+ℹ {"fixtureSha256":"8850edea6920107f97341f6cd7a572b5e0301adcd5e4dbe4a745402b04d6c17d","policy":"unicode-osa1-exact-first-v1","exact":{"top1":{"numerator":0,"denominator":10,"value":0},"mrr":{"reciprocalRankSum":0,"denominator":10,"value":0},"recall10":{"recallSum":0,"denominator":10,"value":0}},"typo":{"top1":{"numerator":10,"denominator":10,"value":1},"mrr":{"reciprocalRankSum":10,"denominator":10,"value":1},"recall10":{"recallSum":10,"denominator":10,"value":1},"correctIntendedEmpty":{"numerator":6,"denominator":6,"value":1}},"recoveredQueries":10,"judgedFalsePositiveHits":0,"limitations":"Single evaluator, synthetic spelling mistakes, English technical self-documentation, 34 sections. Not a representative user study or general-language relevance claim."}
+✔ installing the unused typo capability preserves all 76 frozen exact/prefix/phrase/metadata queries (5157.371208ms)
+ℹ All 76 unchanged frozen queries match the independent source/phrase oracle and unused-addon baseline.
+✔ add, replace, remove and clear select only the live dictionary with no optional state (6.279416ms)
+✔ module alternatives, core variants, field-pair expansion, query and work bounds fail whole operations (5.908709ms)
+✔ complete dictionary/edit work cancels at every actual host suspension and recovers (6.379208ms)
+ℹ {"cancelledSuspensions":22,"providerCursorsClosed":25}
+✔ actual complete scans expose work and bounded candidate counts at 100/1000/10000 live terms (286.888792ms)
+ℹ {"rows":[{"liveDictionaryTerms":100,"dictionaryEntriesVisited":100,"addonWorkUnits":3017,"totalSearchWorkUnits":19337,"yieldedSteps":1665,"peakAcceptedCandidates":3,"retainedOptionalIndexEntries":0},{"liveDictionaryTerms":1000,"dictionaryEntriesVisited":1000,"addonWorkUnits":30017,"totalSearchWorkUnits":169637,"yieldedSteps":15165,"peakAcceptedCandidates":3,"retainedOptionalIndexEntries":0},{"liveDictionaryTerms":10000,"dictionaryEntriesVisited":10000,"addonWorkUnits":300017,"totalSearchWorkUnits":1690637,"yieldedSteps":150165,"peakAcceptedCandidates":3,"retainedOptionalIndexEntries":0}],"scope":"Actual cursor work and logical candidate cardinalities. Accepted map grows monotonically to the returned count; no heap, allocation-byte, or physical-copy peak is measured."}
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6536.444209

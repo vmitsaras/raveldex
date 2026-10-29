@@ -81,3 +81,7 @@ The entry exports `InspectorOptions`, `InspectorRequest`, `InspectorSource`, `In
 `SnippetEvidenceData` extends match data. Each `SnippetDocument` adds `snippets` and `snippetOmissions`. A `Snippet` has `{ field, valueIndex, start, end, text, highlights, omittedBefore, omittedAfter }`; its exact original text is ordinary text, never trusted HTML. `SnippetHighlight` coordinates are relative to that slice and expanded to grapheme boundaries. Render text nodes plus explicit marks. `SnippetOmissions` records `{ unshownMatches, windowLimit, highlightLimit, matchTooLong, graphemeTooLong }`.
 
 Ranges are complete or reject; snippet presentation can omit matches explicitly. Maximum/default display bounds are three windows/document, 240 UTF-16 units/window and 32 merged highlights/window. Default/maximum facts and ranges are 4,096 each; selected IDs are at most 128. Output entries, aggregate key/string units and shared work also remain bounded. Requested limits may reduce these bounds. Only one evidence extension (Inspector, ranges or snippets) can be requested in a search; requesting two rejects `INVALID_OPTIONS`. Install multiple providers if useful, then request evidence in separate searches and bind `expectedRevision` when consistency across them matters.
+
+## Bounded typo tolerance
+
+The explicit `/addons/typo` factory and query leaf implement one-edit Unicode alternatives under the exact-first policy. Ordinary exact/prefix/phrase searches stay unchanged. See [policy, public types, example and bounds](TYPO.md).

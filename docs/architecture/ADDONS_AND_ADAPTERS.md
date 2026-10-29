@@ -99,7 +99,7 @@ Before reusing companion phrase code in RX-2001, record the actual source reposi
 
 Public `/addons/phrases` exports `createSourceProvider({ fields, id?, maxRetainedEntries?, maxWorkUnits? })` and `createSourcePhrases({ fields, id?, maxWorkUnits? })`; `/addons/phrases/source` exports only the source factory. Options are owned/frozen. Default registration IDs are `source` and `source-phrases`, providing `source:<field>` and `phrases` with contract version 1. No implicit installation, source getter or live registration/rebuild API exists.
 
-Implemented manifest role names are `transaction-participant`, `leaf-refinement`, (RX-2003) `aggregation` and (RX-2004) `evidence`. Unsupported roles/execution fail `INCOMPATIBLE_CAPABILITY`; direct execution is supported and RX-3001 adds explicit worker registration identities for first-party capabilities. Complete bounded manifests/handles are captured before initialization; dependency order is deterministic and independent of input order. Missing requirements fail `MISSING_CAPABILITY`; duplicate IDs, conflicting providers, cycles, incompatible versions/data/handles fail `INCOMPATIBLE_CAPABILITY`. SemVer module identity is validated; compatibility resolution uses exact protocol versions, not package-version ranges. Arbitrary trusted implementations are not sandboxed.
+Implemented manifest role names are `transaction-participant`, `leaf-refinement`, (RX-2003) `aggregation` and (RX-2004) `evidence`, and (RX-A010) `term-expansion`. Unsupported roles/execution fail `INCOMPATIBLE_CAPABILITY`; direct execution is supported and RX-3001 adds explicit worker registration identities for first-party capabilities. Complete bounded manifests/handles are captured before initialization; dependency order is deterministic and independent of input order. Missing requirements fail `MISSING_CAPABILITY`; duplicate IDs, conflicting providers, cycles, incompatible versions/data/handles fail `INCOMPATIBLE_CAPABILITY`. SemVer module identity is validated; compatibility resolution uses exact protocol versions, not package-version ranges. Arbitrary trusted implementations are not sandboxed.
 
 The initial refinement handle is `exact-token-sequence`. Core validates/owns the whole `{ text, fields? }` payload, counts text plus selected-field strings within payload/global bounds, analyzes it once with `basic-v1`, and passes the ordered normalized terms including repeats. Complete lexical groups do not reanalyze normalized output. Phrase preparation validates every selected field/provider/revision/analyzer, even for empty/unmatched phrases. A missing field on an accepted record is an ordinary nonmatch; a missing authoritative candidate record is a typed consistency failure. RX-2003 now supports requested metadata aggregations; RX-2004 implements selected factual evidence; other unsupported roles fail explicitly.
 
@@ -331,7 +331,7 @@ limitations, and is excluded from native compilation and package contents.
 There is no exported legacy search facade. See the
 [migration mapping and provenance](../migration/LOCALSEARCH.md).
 
-Later optional tracks may add typo alternatives, suggestions, directional one-step synonyms, language analyzers, code identifiers, literal/infix search, proximity, text query syntax, patch convenience, or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
+RX-A010 provides explicitly selected bounded typo alternatives. Later optional tracks may add suggestions, directional one-step synonyms, language analyzers, code identifiers, literal/infix search, proximity, text query syntax, patch convenience, or an Astro/static-build adapter. Each gets its own accepted contract and measured cost. Multiword synonyms require additional graph semantics; reserving a metadata slot does not implement them.
 
 ## Verification and acceptance criteria
 
@@ -353,3 +353,7 @@ Expected affected paths are the module destinations in [NATIVE_ARCHITECTURE.md](
 ## Open questions
 
 None blocks N1. N2/N3 implementation tasks select bounded private representations and adapter packaging within these contracts. A new semantic capability, extra retained data by default, weaker total, hidden dependency, or changed public lifecycle requires an explicit contract update.
+
+## Explicit bounded typo expansion — RX-A010
+
+The owner selected this N5 feature explicitly after release-track completion. The [adopted typo contract](../specs/TYPO_TOLERANCE.md) implements the reserved term-expansion role with live dictionary scanning, original required groups and complete weighted alternatives. It retains no side index and does not enable typo behavior on ordinary exact/prefix/phrase queries. All other N5 tasks remain deferred.

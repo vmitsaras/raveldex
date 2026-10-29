@@ -4,6 +4,7 @@ import { captureConfiguration } from '../../core/contracts/schema.js';
 import { captureOptions } from '../../core/contracts/options.js';
 import { Admission, ownObject, keysOnly } from '../../core/contracts/data.js';
 import { captureQuery } from '../../core/contracts/query.js';
+import type { OwnedQuery } from '../../core/contracts/query.js';
 import { captureMutation } from '../../core/mutations/capture.js';
 import type { MutationKind } from '../../core/mutations/capture.js';
 import type { CancellationSignal, MutationOptions, MutationResult, OwnedConfiguration, OwnedSearchOptions, Query, RecordInput, SearchOptions, SearchResult } from '../../core/contracts/types.js';
@@ -191,9 +192,16 @@ class Client implements WorkerRaveldex {
     try {
       const admission = new Admission(this.#configuration.limits.maxAdmissionEntries);
       const captured = this.options(options, true, admission), page = captured.search!;
-      captureQuery(query, this.#configuration.schema, this.#configuration.limits, admission, this.#configuration.capabilities);
+      const owned = captureQuery(query, this.#configuration.schema, this.#configuration.limits, admission, this.#configuration.capabilities);
+      const requested = new Set(Object.keys(page.extensions ?? {}));
+      const collect = (node: OwnedQuery): void => {
+        if (node.kind === 'extension' && this.#configuration.capabilities?.providers[node.capability]?.expansion) requested.add(node.capability);
+        else if (node.kind === 'and' || node.kind === 'or') for (const child of node.children) collect(child);
+        else if (node.kind === 'not') collect(node.child);
+      };
+      collect(owned);
       if (captured.signal?.aborted) throw new RaveldexError('CANCELLED', { path: 'options.signal' });
-      return this.request('search', { query, options: captured.options, admittedAt: captured.admittedAt }, value => searchResult(value, this.#configuration.limits.maxDocuments, page.offset, page.limit, Object.keys(page.extensions ?? {})), captured.signal) as Promise<SearchResult>;
+      return this.request('search', { query, options: captured.options, admittedAt: captured.admittedAt }, value => searchResult(value, this.#configuration.limits.maxDocuments, page.offset, page.limit, [...requested]), captured.signal) as Promise<SearchResult>;
     } catch (error) { return Promise.reject(nativeFailure(error)); }
   }
   private mutate(operation: Operation, input: unknown, options?: MutationOptions): MutationPromise {

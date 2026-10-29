@@ -61,7 +61,7 @@ const query = {
 };
 ```
 
-Prefix expansion enumerates complete matching dictionary terms. It needs at least two normalized code points; overflow rejects the complete search rather than truncating candidates. Fuzzy, infix, synonyms, proximity and query-string syntax are deferred features.
+Prefix expansion enumerates complete matching dictionary terms. It needs at least two normalized code points; overflow rejects the complete search rather than truncating candidates. [Bounded typo tolerance](TYPO.md) requires its explicit optional extension leaf. Infix, synonyms, proximity and query-string syntax remain deferred.
 
 ## Analysis and ranking
 

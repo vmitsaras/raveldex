@@ -17,6 +17,7 @@ import { compileQuery } from './compile.js';
 import { evaluate } from './evaluate.js';
 import { sortedStrings } from './work.js';
 import { prepareRefinements } from '../capabilities/refinement.js';
+import { createExpansionResolver } from '../capabilities/expansion.js';
 
 export interface SearchEvaluation extends SearchResult { readonly trace?: ScoreTrace }
 
@@ -71,7 +72,8 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   }
   const collector = trace ? new FactCollector(trace.maxFacts) : undefined;
   boundary('analysis');
-  const compiled = yield* compileQuery(query, root.configuration, charge);
+  const expansion = root.configuration.capabilities?.ordered.some(registration => registration.expansion) ? createExpansionResolver(root, charge) : undefined;
+  const compiled = yield* compileQuery(query, root.configuration, charge, expansion);
   boundary('expansion');
   const expansions = yield* expandGroups(root, compiled.groups, charge, boundary);
   const extensions = root.configuration.capabilities ? yield* prepareRefinements(compiled.node, root, charge, options) : undefined;
@@ -105,12 +107,12 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   }
   boundary('selection');
   const hits = yield* page.finish(options.offset, options.limit);
-  let additional: Readonly<Record<string, unknown>> | undefined;
+  let additional: Readonly<Record<string, unknown>> | undefined = expansion?.finish();
   if (extensions?.aggregations.length) {
     boundary('aggregation');
     const result: Record<string, unknown> = Object.create(null) as Record<string, unknown>;
     for (const aggregation of extensions.aggregations) result[aggregation.capability] = yield* aggregation.finish();
-    additional = Object.freeze(result);
+    additional = Object.freeze({ ...additional, ...result });
   }
   const scoreTrace = collector?.finish(root.revision, root.configuration.analyzer, compiled.key);
   if (extensions?.evidence) {

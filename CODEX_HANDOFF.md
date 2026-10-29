@@ -2,7 +2,7 @@
 
 ## Current boundary
 
-Raveldex follows the adopted native TypeScript direction. N0–N3 implementation and RX-4001/RX-4002 evaluation/qualification have evidence; RX-4003 verifies the private `0.1.0-rc.0` candidate with 625 passing checks and independent review Ready with follow-ups. All 21 active N0–N4 tasks are complete; ten N5 enhancements remain deferred. See [candidate acceptance](docs/evidence/RX-4003.md). Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the canonical task card and its evidence before changing state. The planner determines live task availability.
+Raveldex follows the adopted native TypeScript direction. N0–N3 implementation and RX-4001/RX-4002 evaluation/qualification have evidence; RX-4003 verifies the private `0.1.0-rc.0` candidate with 625 passing checks and independent review Ready with follow-ups. All 21 active N0–N4 tasks are complete. The owner explicitly selected RX-A010 bounded typo tolerance; the other nine N5 enhancements remain deferred. See [candidate acceptance](docs/evidence/RX-4003.md). Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the canonical task card and its evidence before changing state. The planner determines live task availability.
 
 ```sh
 npm ci
@@ -11,7 +11,11 @@ npm run handoff:status
 npm run handoff:next
 ```
 
-The canonical state is `docs/planning/roadmap.json`. Run `npm run docs:generate` after manifest changes. A task is done only with actual acceptance evidence and required independent review. Never reset a completed task to manufacture work. The completed active N0–N4 backlog is a legitimate terminal state; all ten N5 enhancements remain deferred unless explicitly selected.
+The canonical state is `docs/planning/roadmap.json`. Run `npm run docs:generate` after manifest changes. A task is done only with actual acceptance evidence and required independent review. Never reset a completed task to manufacture work. The completed active N0–N4 backlog is a legitimate terminal state; N5 enhancements remain deferred unless explicitly selected.
+
+## Explicitly selected optional slice
+
+RX-A010 is verified on `codex/rx-a010-typo`; [acceptance evidence](docs/evidence/RX-A010.md) records 642 passing checks and private tarball verification. The [adopted typo contract](docs/specs/TYPO_TOLERANCE.md) adds `/addons/typo`, normalized Unicode OSA distance one with exact-first selection, at most 15 non-exact alternatives and explicit weighted required groups. Core/default exact/prefix/phrase queries remain strict. The optional slice changes code after the qualified private candidate; previous remote runs do not verify this changed tree. Keep the other nine N5 tasks deferred and do not publish.
 
 ## Latest remote CI
 

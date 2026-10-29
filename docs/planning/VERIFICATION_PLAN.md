@@ -178,3 +178,7 @@ The reviewer returns **Ready**, **Ready with follow-ups**, **Changes required**,
 Missing required qualification keeps the corresponding criterion Blocked. It need not trigger rewriting a completed engine feature. A proposal to narrow a release claim must explicitly amend the release contract and retain the unperformed observation; silently removing an inconvenient criterion is not a pass.
 
 N4 ends with a concrete native candidate recommendation. Publication, release tags, npm credentials, and repository visibility changes are separate owner actions. Completing the active backlog is a legitimate terminal state; deferred N5 ideas do not require endless new work.
+
+## Explicitly selected optional typo tolerance
+
+RX-A010 follows the [named policy and verification contract](../specs/TYPO_TOLERANCE.md). Freeze its separate authored typo judgments before evaluation, preserve the original 76-query baseline, compare with a full-matrix independent OSA/source oracle, and measure complete dictionary work/candidate cardinalities and isolated import graphs. Verify complete bound refusal, cancellation, mutation freshness and worker identity. Logical candidate high-waters do not establish heap or physical allocation peaks.

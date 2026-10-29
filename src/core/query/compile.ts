@@ -4,6 +4,8 @@ import type { OwnedConfiguration, Scalar } from '../contracts/types.js';
 import type { WorkStep } from '../index/directory.js';
 import { sortedStrings } from './work.js';
 import type { Charge } from './work.js';
+import type { ExpansionResolver } from '../capabilities/expansion.js';
+import { bound, invalid } from '../errors/error.js';
 
 export interface CanonicalVariant { readonly term: string; readonly match: 'exact' | 'prefix'; readonly weight: number; readonly key: string }
 export interface CanonicalGroup { readonly key: string; readonly fields: readonly string[]; readonly variants: readonly CanonicalVariant[] }
@@ -18,7 +20,7 @@ export type CompiledNode =
 export interface CompiledQuery { readonly node: CompiledNode; readonly groups: ReadonlyMap<string, CanonicalGroup>; readonly key: string }
 
 /** Consume shared analysis once. Normalized output never re-enters raw analysis. */
-export function* compileQuery(query: OwnedQuery, configuration: OwnedConfiguration, charge: Charge): Generator<WorkStep, CompiledQuery> {
+export function* compileQuery(query: OwnedQuery, configuration: OwnedConfiguration, charge: Charge, expansion?: ExpansionResolver): Generator<WorkStep, CompiledQuery> {
   const tokens = new Map<OwnedQuery, string[]>();
   for (const step of analyzeQuery(query, configuration.schema, configuration.limits, configuration.capabilities)) {
     yield charge(step.workUnits);
@@ -47,6 +49,7 @@ export function* compileQuery(query: OwnedQuery, configuration: OwnedConfigurati
     if (!canonical) {
       canonical = Object.freeze({ key, fields: Object.freeze(names), variants: Object.freeze(keys.map((entry) => entries.get(entry)!)) });
       groups.set(key, canonical);
+      bound(groups.size, configuration.limits.maxQueryGroups, 'query.groups');
     }
     return Object.freeze({ kind: 'group', group: canonical });
   }
@@ -60,6 +63,22 @@ export function* compileQuery(query: OwnedQuery, configuration: OwnedConfigurati
       }
       case 'group': return yield* group(raw.fields, raw.variants.map((variant, i) => ({ term: tokens.get(raw)![i]!, match: variant.match, weight: variant.weight ?? 1 })));
       case 'extension': {
+        if (configuration.capabilities?.providers[raw.capability]?.expansion) {
+          if (!expansion) invalid('MISSING_CAPABILITY', 'query.expansion');
+          const selected = Object.freeze(yield* sortedStrings(raw.payload.fields ?? Object.keys(configuration.schema.text), charge));
+          const terms = tokens.get(raw) ?? [];
+          const alternatives = yield* expansion.resolve(raw.capability, selected, terms);
+          const children: CompiledNode[] = [];
+          for (let i = 0; i < alternatives.length; i++) {
+            // Keep the original token even when absent, so two misspellings
+            // sharing alternatives do not erase original required-group identity.
+            const term = terms[i]!;
+            const variants = [{ term, match: 'exact' as const, weight: 1 }, ...alternatives[i]!.filter(variant => variant.term !== term)];
+            bound(variants.length, configuration.limits.maxVariantsPerGroup, 'query.expansion.variants');
+            children.push(yield* group(selected, variants));
+          }
+          return children.length ? Object.freeze({ kind: 'and', children: Object.freeze(children) }) : Object.freeze({ kind: 'none' });
+        }
         const lexical: CanonicalGroup[] = [], terms = Object.freeze(tokens.get(raw) ?? []);
         for (const term of terms) {
           const node = yield* group(raw.payload.fields, [{ term, match: 'exact', weight: 1 }]);

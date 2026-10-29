@@ -53,9 +53,9 @@ test('offline native candidate installs every entry, checks declarations/isolati
   const result = await verifyCandidate();
   try {
     assert.equal(result.report.status, 'Pass');
-    assert.equal(result.report.startup.outputs.length, 19);
-    assert.equal(result.report.types.surface.length, 19);
-    assert.equal(result.report.graphs.entries.length, 19);
+    assert.equal(result.report.startup.outputs.length, 20);
+    assert.equal(result.report.types.surface.length, 20);
+    assert.equal(result.report.graphs.entries.length, 20);
     assert.equal(result.report.documentation.sources.length, 7);
     assert.equal(result.report.documentation.browser.status, 'Pass');
     assert.equal(result.report.package.private, true);

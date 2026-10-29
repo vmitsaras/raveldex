@@ -4,7 +4,7 @@
 
 The first-party optional modules required for native 0.1 are already in N2/N3: source phrases, positions/offsets, filters/facets, Inspector data, evidence/snippets, DOM UI, workers, snapshots, and IndexedDB. “Optional” describes consumer code/data cost; those release tasks remain part of the proposed product candidate.
 
-The N5 tracks below are deferred enhancements. Select a track because users or the judged query corpus reveal a need. The entire idea list is not an implementation authorization.
+The N5 tracks below require explicit selection; each card records its current state. Select a track because users or the judged query corpus reveal a need. The entire idea list is not an implementation authorization.
 
 ## Selection contract
 
@@ -18,7 +18,7 @@ Live state is in [roadmap.json](roadmap.json); module boundaries are in [Add-ons
 
 **Bounded typo tolerance**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/28)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/28)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -30,7 +30,7 @@ Expand eligible tokens under a named edit-distance policy when judged typo queri
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [TYPO_TOLERANCE.md](../../docs/specs/TYPO_TOLERANCE.md)
 
 **Acceptance criteria**
 
@@ -46,7 +46,16 @@ Expand eligible tokens under a named edit-distance policy when judged typo queri
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A010.md](../../docs/evidence/RX-A010.md)
+- [docs/evidence/RX-A010-package.json](../../docs/evidence/RX-A010-package.json)
+- [docs/evidence/RX-A010-behavior.log](../../docs/evidence/RX-A010-behavior.log)
+- [docs/evidence/RX-A010-baseline-environment.log](../../docs/evidence/RX-A010-baseline-environment.log)
+- [docs/evidence/RX-A010-check.log](../../docs/evidence/RX-A010-check.log)
+- [docs/evidence/RX-A010-candidate.json](../../docs/evidence/RX-A010-candidate.json)
+- [docs/evidence/RX-A010-preparation.json](../../docs/evidence/RX-A010-preparation.json)
+- [docs/evidence/RX-A010-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A010-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A010-review.json](../../docs/evidence/RX-A010-review.json)
+- [docs/evidence/RX-A010-sync.log](../../docs/evidence/RX-A010-sync.log)
 
 
 ## RX-A020

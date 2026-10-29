@@ -105,7 +105,7 @@ export function captureQuery(input: unknown, schema: OwnedSchema, limits: Limits
         if (typeof data.capability !== 'string' || !data.capability.length || !Number.isSafeInteger(data.version) || (data.version as number) < 1 || !has(data, 'payload')) invalid('INVALID_QUERY', path);
         const capability = string(data.capability, false, `${path}.capability`);
         const registration = capabilities?.providers[capability];
-        if (!registration?.refinement && !registration?.predicate) invalid('MISSING_CAPABILITY', path);
+        if (!registration?.refinement && !registration?.predicate && !registration?.expansion) invalid('MISSING_CAPABILITY', path);
         if (data.version !== 1) invalid('INCOMPATIBLE_CAPABILITY', `${path}.version`);
         if (registration.predicate) {
           const captured = captureExtension(registration.predicate.capture, data.payload, admission, limits, registration.manifest.limits.maxPayloadCodeUnits);
@@ -163,11 +163,12 @@ export function* analyzeQuery(query: OwnedQuery, schema: OwnedSchema, limits: Li
         break;
       case 'extension': {
         const registration = capabilities?.providers[leaf.capability];
-        if (!registration?.refinement) invalid('MISSING_CAPABILITY', 'query.capability');
+        const handler = registration?.refinement ?? registration?.expansion;
+        if (!handler) invalid('MISSING_CAPABILITY', 'query.capability');
         let count = 0;
         for (const step of analyzeValue(leaf.payload.text, 0, queryLimits, 'INVALID_QUERY')) {
           if (step.token) {
-            bound(++count, registration.refinement.maxTokens, 'query.phraseTokens');
+            bound(++count, handler.maxTokens, registration?.refinement ? 'query.phraseTokens' : 'query.expansionTokens');
             bound(++tokens, limits.maxQueryTokens, 'query.tokens');
             addGroup(groupKey(leaf.payload.fields, [[step.token.term, 'exact', 1]]));
           }

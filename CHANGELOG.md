@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — explicitly selected RX-A010
+
+- Add optional `/addons/typo` with a bounded Unicode distance-one/adjacent-swap policy, exact-first dictionary selection and weighted native alternatives. Original required groups and strict ordinary queries remain intact.
+- Add complete output/budget/group bounds, live mutation coherence, actual expansion metadata, Inspector/original-evidence integration and matching worker identities. No side index or runtime dependency is added.
+- Historical candidate hashes/remote CI below refer to their recorded artifacts; this later optional slice needs its own verification and does not authorize publication or other N5 work.
+
 ## 0.1.0-rc.0 — local candidate, unpublished
 
 The native 0.1 candidate is prepared as a private ESM tarball. It is not an npm publication, GitHub release or release tag. The [candidate recommendation](docs/release/CANDIDATE.md), [compatibility policy](docs/release/COMPATIBILITY.md) and [preparation workflow](docs/release/PREPARATION.md) separate verified scope from the owner's publication decision.
@@ -12,7 +18,7 @@ The native 0.1 candidate is prepared as a private ESM tarball. It is not an npm 
 
 Known limitations remain part of the candidate: exact-AND natural-language/vocabulary gaps; a 16,829-byte gzip core against the unchanged 15 KiB planning target; large whole-source rebuild work/deadline refusals; truthful unknown worker/storage outcomes; generic UI presentation of transport errors; and earlier VoiceOver announcement interruptions without a proven cause or production fix. The accepted Medium/Words normal-typing observation is bounded, not a required product setting. Ordinary/browser-worker analyzer profiles remain unqualified and native browser/worker snapshots remain unavailable. See [support](docs/support/RX-4003.md) for exact environments and evidence boundaries.
 
-No N5 enhancement is activated, no runtime architecture/API/dependency is changed by candidate preparation, and no universal performance, memory, durability, Unicode or accessibility guarantee is introduced.
+At that original preparation boundary, no N5 enhancement was activated and no runtime architecture/API/dependency was changed by candidate preparation, and no universal performance, memory, durability, Unicode or accessibility guarantee is introduced.
 
 ## Implementation history before the candidate
 

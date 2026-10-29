@@ -203,7 +203,7 @@ function renderOptional(roadmap) {
     '',
     'The first-party optional modules required for native 0.1 are already in N2/N3: source phrases, positions/offsets, filters/facets, Inspector data, evidence/snippets, DOM UI, workers, snapshots, and IndexedDB. “Optional” describes consumer code/data cost; those release tasks remain part of the proposed product candidate.',
     '',
-    'The N5 tracks below are deferred enhancements. Select a track because users or the judged query corpus reveal a need. The entire idea list is not an implementation authorization.',
+    'The N5 tracks below require explicit selection; each card records its current state. Select a track because users or the judged query corpus reveal a need. The entire idea list is not an implementation authorization.',
     '',
     '## Selection contract',
     '',

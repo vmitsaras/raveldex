@@ -23,3 +23,7 @@ RX-4002 completes the declared browser, exact-tool AT, physical and memory metho
 The final RX-4003 acceptance record and independent review in the repository state the actual preparation result, artifact digests, review verdict and remaining blockers. The public tarball's own documentation deliberately contains no self-referential tarball hash. Any later content change requires a new preparation report; local preparation and remote CI have separate outcomes.
 
 The recommendation concerns this bounded private candidate. It is not authorization to publish, a guarantee for every browser/device/runtime, or permission to activate N5. Once the active release-track tasks are verified, the planner must report that backlog complete and leave deferred ideas deferred. Owner publication decisions and any newly discovered concrete defect remain visible instead of manufacturing another implementation task.
+
+## Later explicitly selected work
+
+RX-A010 extends the development tree with [optional bounded typo tolerance](../api/TYPO.md). The original candidate recommendation, hashes and remote observations retain their dated scope. This later slice does not silently replace those qualified artifacts, activate other N5 work or authorize publication.

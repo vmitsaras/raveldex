@@ -10,7 +10,7 @@ import type { CompiledNode } from '../query/compile.js';
 export interface CapabilityReference { readonly id: string; readonly contractVersion: number }
 export interface CapabilityManifest {
   readonly id: string; readonly version: string; readonly contractVersion: number;
-  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation' | 'evidence')[];
+  readonly roles: readonly ('leaf-refinement' | 'transaction-participant' | 'aggregation' | 'evidence' | 'term-expansion')[];
   readonly provides: readonly CapabilityReference[]; readonly requires: readonly CapabilityReference[];
   readonly dataRequirements: { readonly fields: readonly string[]; readonly source: boolean; readonly positions: boolean; readonly offsets: boolean; readonly metadata: boolean };
   readonly indexEffect: 'none' | 'transactional'; readonly rebuildPolicy: 'new-index';
@@ -41,6 +41,18 @@ export interface PreparedRefinement { test(id: string): Generator<WorkStep, bool
 export interface RefinementImplementation {
   readonly kind: 'exact-token-sequence'; readonly maxTokens: number;
   prepare(context: RefinementContext): Generator<WorkStep, PreparedRefinement>;
+}
+export interface ExpansionAlternative { readonly term: string; readonly weight: number }
+export interface DictionaryStep extends WorkStep { readonly term: string }
+/** Only live normalized dictionary terms at the selected operation revision. */
+export interface ExpansionContext {
+  readonly revision: number; readonly analyzer: AnalyzerDescriptor; readonly limits: Limits;
+  readonly fields: readonly string[]; readonly term: string; readonly exact: boolean;
+  dictionary(): Generator<DictionaryStep, void>;
+}
+export interface ExpansionImplementation {
+  readonly kind: 'weighted-token-alternatives'; readonly maxTokens: number; readonly policy: string;
+  expand(context: ExpansionContext): Generator<WorkStep, readonly ExpansionAlternative[]>;
 }
 /** Metadata roles see only an owned payload, immutable schema and one revision.
  * No source, scorer, mutable owner or core root is exposed. */
@@ -90,6 +102,7 @@ export interface AddonRegistration {
   readonly manifest: CapabilityManifest;
   readonly participant?: ParticipantImplementation;
   readonly refinement?: RefinementImplementation;
+  readonly expansion?: ExpansionImplementation;
   readonly predicate?: PredicateImplementation;
   readonly aggregation?: AggregationImplementation;
   readonly evidence?: EvidenceImplementation;
