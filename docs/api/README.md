@@ -45,3 +45,7 @@ Core alone stores frequencies, lengths, statistics and declared equality metadat
 Filters and facets read core metadata and add no metadata side index. Inspector and original evidence are requested per search. The UI borrows a caller-owned engine and display records. Worker, snapshots and storage are separate explicit host selections. Importing core performs no network request, DOM access, worker creation, database open, timer initialization or automatic indexing.
 
 [Runnable examples](examples/README.md) use these public entries and are executed from the installed candidate. [Support and limitations](../support/RX-4003.md) records what the evidence establishes. [Compatibility policy](../release/COMPATIBILITY.md) owns version, snapshot and worker compatibility promises.
+
+## Separate static-build package
+
+[`@vmitsaras/raveldex-astro`](STATIC_ASTRO.md) supplies explicit static artifacts, a build hook and an on-demand loader. It is a separately installed private package with an exact core peer and optional Astro peer; it is not a root Raveldex export.

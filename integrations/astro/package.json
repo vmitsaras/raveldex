@@ -1,0 +1,19 @@
+{
+  "name": "@vmitsaras/raveldex-astro",
+  "version": "0.1.0-rc.0",
+  "private": true,
+  "description": "Explicit static search artifacts and Astro build integration for native Raveldex.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22.12.0" },
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./build": { "types": "./dist/build.d.ts", "import": "./dist/build.js" },
+    "./client": { "types": "./dist/client.d.ts", "import": "./dist/client.js" }
+  },
+  "files": ["dist/", "README.md", "LICENSE"],
+  "sideEffects": false,
+  "peerDependencies": { "@vmitsaras/raveldex": "0.1.0-rc.0", "astro": "7.3.2" },
+  "peerDependenciesMeta": { "astro": { "optional": true } }
+}

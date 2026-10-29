@@ -1,0 +1,20 @@
+---
+import content from '../../content.json';
+import { qualification } from '../../qualification.mjs';
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>Raveldex static documentation search</title></head>
+<body data-build-id={content.buildId} data-native-qualification={JSON.stringify(qualification())}>
+  <main>
+    <h1>Documentation search</h1>
+    <p>Load search data, then open the search controls. The documentation links remain available throughout.</p>
+    <div class="actions"><button id="load-search" type="button">Load search data</button><button id="open-search" type="button" disabled>Open search</button><button id="close-search" type="button" disabled>Close search</button><button id="unload-search" type="button" disabled>Unload search data</button><button id="inject-error" type="button" disabled>Inject next search error</button></div>
+    <p id="fixture-status" role="status" aria-live="polite">Search data has not been loaded.</p>
+    <section id="search-root" aria-label="Documentation search controls"><p data-authored-fallback>Use the documentation links below while search is closed.</p></section>
+    <nav aria-label="Documentation links"><ul>{content.entries.map(entry => <li><a href={base + entry.path.slice(1)}>{entry.title}</a></li>)}</ul></nav>
+  </main>
+  <script>
+    import '../main.mjs';
+  </script>
+</body></html>

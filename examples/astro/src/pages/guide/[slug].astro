@@ -1,0 +1,11 @@
+---
+import content from '../../../content.json';
+export function getStaticPaths() {
+  return [...content.entries.map(entry => ({ params: { slug: entry.slug }, props: { title: entry.title, body: entry.record.text.body } })),
+    { params: { slug: content.excluded.slug }, props: { title: content.excluded.title, body: content.excluded.body } }];
+}
+const { title, body } = Astro.props;
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>{title} — Raveldex</title></head>
+<body><main><h1>{title}</h1><p data-document-body>{body}</p><a href={import.meta.env.BASE_URL}>Back to documentation search</a></main></body></html>

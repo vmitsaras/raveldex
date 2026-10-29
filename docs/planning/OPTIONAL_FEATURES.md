@@ -529,7 +529,7 @@ Offer partial record updates by composing authoritative source with the existing
 
 **Static-build and Astro adapter**
 
-**Milestone:** N5 · **Status:** `deferred` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/37)
+**Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/37)
 
 **Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
 
@@ -541,7 +541,7 @@ Integrate native search artifacts with static content pipelines while keeping ex
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [STATIC_ASTRO.md](../../docs/specs/STATIC_ASTRO.md)
 
 **Acceptance criteria**
 
@@ -557,7 +557,57 @@ Integrate native search artifacts with static content pipelines while keeping ex
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-A100.md](../../docs/evidence/RX-A100.md)
+- [docs/evidence/RX-A100-artifact-attempt1.log](../../docs/evidence/RX-A100-artifact-attempt1.log)
+- [docs/evidence/RX-A100-artifact-audit.json](../../docs/evidence/RX-A100-artifact-audit.json)
+- [docs/evidence/RX-A100-artifact-audit.log](../../docs/evidence/RX-A100-artifact-audit.log)
+- [docs/evidence/RX-A100-artifact-final.log](../../docs/evidence/RX-A100-artifact-final.log)
+- [docs/evidence/RX-A100-astro-0.1.0-rc.0.tgz](../../docs/evidence/RX-A100-astro-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A100-astro-final-package.json](../../docs/evidence/RX-A100-astro-final-package.json)
+- [docs/evidence/RX-A100-astro-final.log](../../docs/evidence/RX-A100-astro-final.log)
+- [docs/evidence/RX-A100-astro-metadata.json](../../docs/evidence/RX-A100-astro-metadata.json)
+- [docs/evidence/RX-A100-astro-package.json](../../docs/evidence/RX-A100-astro-package.json)
+- [docs/evidence/RX-A100-baseline.log](../../docs/evidence/RX-A100-baseline.log)
+- [docs/evidence/RX-A100-build-first.log](../../docs/evidence/RX-A100-build-first.log)
+- [docs/evidence/RX-A100-build-fixed.log](../../docs/evidence/RX-A100-build-fixed.log)
+- [docs/evidence/RX-A100-build-hook-final.log](../../docs/evidence/RX-A100-build-hook-final.log)
+- [docs/evidence/RX-A100-build-initial-failure.log](../../docs/evidence/RX-A100-build-initial-failure.log)
+- [docs/evidence/RX-A100-build-reviewed.log](../../docs/evidence/RX-A100-build-reviewed.log)
+- [docs/evidence/RX-A100-built-sites.json](../../docs/evidence/RX-A100-built-sites.json)
+- [docs/evidence/RX-A100-built-sites.tgz](../../docs/evidence/RX-A100-built-sites.tgz)
+- [docs/evidence/RX-A100-candidate.json](../../docs/evidence/RX-A100-candidate.json)
+- [docs/evidence/RX-A100-candidate.log](../../docs/evidence/RX-A100-candidate.log)
+- [docs/evidence/RX-A100-check.log](../../docs/evidence/RX-A100-check.log)
+- [docs/evidence/RX-A100-ci-locked.log](../../docs/evidence/RX-A100-ci-locked.log)
+- [docs/evidence/RX-A100-ci.log](../../docs/evidence/RX-A100-ci.log)
+- [docs/evidence/RX-A100-core-0.1.0-rc.0.tgz](../../docs/evidence/RX-A100-core-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A100-fetch-receiver-before.log](../../docs/evidence/RX-A100-fetch-receiver-before.log)
+- [docs/evidence/RX-A100-final-check.log](../../docs/evidence/RX-A100-final-check.log)
+- [docs/evidence/RX-A100-focused-fixed.log](../../docs/evidence/RX-A100-focused-fixed.log)
+- [docs/evidence/RX-A100-focused-initial.log](../../docs/evidence/RX-A100-focused-initial.log)
+- [docs/evidence/RX-A100-focused.log](../../docs/evidence/RX-A100-focused.log)
+- [docs/evidence/RX-A100-gzip-before.log](../../docs/evidence/RX-A100-gzip-before.log)
+- [docs/evidence/RX-A100-hook-capture-before.log](../../docs/evidence/RX-A100-hook-capture-before.log)
+- [docs/evidence/RX-A100-inspector-observation.log](../../docs/evidence/RX-A100-inspector-observation.log)
+- [docs/evidence/RX-A100-late-fetch-before.log](../../docs/evidence/RX-A100-late-fetch-before.log)
+- [docs/evidence/RX-A100-node-types.log](../../docs/evidence/RX-A100-node-types.log)
+- [docs/evidence/RX-A100-open-unload-before.log](../../docs/evidence/RX-A100-open-unload-before.log)
+- [docs/evidence/RX-A100-package-attempt1.log](../../docs/evidence/RX-A100-package-attempt1.log)
+- [docs/evidence/RX-A100-package-attempt2.log](../../docs/evidence/RX-A100-package-attempt2.log)
+- [docs/evidence/RX-A100-package-attempt3.log](../../docs/evidence/RX-A100-package-attempt3.log)
+- [docs/evidence/RX-A100-package.json](../../docs/evidence/RX-A100-package.json)
+- [docs/evidence/RX-A100-package.log](../../docs/evidence/RX-A100-package.log)
+- [docs/evidence/RX-A100-qualification.json](../../docs/evidence/RX-A100-qualification.json)
+- [docs/evidence/RX-A100-reentrant-rejection-before.log](../../docs/evidence/RX-A100-reentrant-rejection-before.log)
+- [docs/evidence/RX-A100-runtime-review.json](../../docs/evidence/RX-A100-runtime-review.json)
+- [docs/evidence/RX-A100-runtime-review.log](../../docs/evidence/RX-A100-runtime-review.log)
+- [docs/evidence/RX-A100-tooling.log](../../docs/evidence/RX-A100-tooling.log)
+- [docs/evidence/RX-A100-typecheck-initial-failure.log](../../docs/evidence/RX-A100-typecheck-initial-failure.log)
+- [docs/evidence/RX-A100-typecheck.log](../../docs/evidence/RX-A100-typecheck.log)
+- [docs/evidence/RX-A100-verification-attempt1.json](../../docs/evidence/RX-A100-verification-attempt1.json)
+- [docs/evidence/RX-A100-verification-attempt1.log](../../docs/evidence/RX-A100-verification-attempt1.log)
+- [docs/evidence/RX-A100-verification-review.json](../../docs/evidence/RX-A100-verification-review.json)
+- [docs/evidence/RX-A100-verification-review.log](../../docs/evidence/RX-A100-verification-review.log)
 
 
 ## Research ideas outside the task backlog

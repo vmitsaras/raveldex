@@ -1,0 +1,259 @@
+{
+  "kind": "raveldex-rx-a100-runtime-review-v1",
+  "recordedAt": "2026-10-29T23:23:44.859Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "authorshipBoundary": "Independent review of other-authored static builder/client/helpers and public artifact behavior. This reviewer authored runtime.test.mjs and its fixture; neither is imported or counted as independent evidence. Astro hook, own tests and package/browser helper are outside this verdict.",
+  "sourceBindings": [
+    {
+      "path": "integrations/astro/src/build.ts",
+      "bytes": 4618,
+      "sha256": "9ef47d3cd64d3e5a543970f003ab956d1dfb5d40d53ffe0f817313c5c33a463c"
+    },
+    {
+      "path": "integrations/astro/dist/build.js",
+      "bytes": 4111,
+      "sha256": "b219baee7dfa4c3d78ec9de2c834d260b320cd24a01bc94f18e3ac94a59271a6"
+    },
+    {
+      "path": "integrations/astro/dist/build.d.ts",
+      "bytes": 575,
+      "sha256": "b941f0cd3d15eae098c0149ce4d91dff7b7d6a66ea705acd9dcd237ecb842466"
+    },
+    {
+      "path": "integrations/astro/src/client.ts",
+      "bytes": 14219,
+      "sha256": "c7745c46fe1fe115b9949d8cabf09dc73ebdad5d47f095d25e95c1dd4b24cdfc"
+    },
+    {
+      "path": "integrations/astro/dist/client.js",
+      "bytes": 14887,
+      "sha256": "748dd15cad9e96cf79071e7f8085b1f19e91705cf77fe5baf141779ae10fd1ea"
+    },
+    {
+      "path": "integrations/astro/dist/client.d.ts",
+      "bytes": 608,
+      "sha256": "071e26f367ca5d729a42e6a0cc24dac5306727fe62ad2c68cd3c9ef568b29f43"
+    },
+    {
+      "path": "integrations/astro/src/common.ts",
+      "bytes": 9939,
+      "sha256": "bb3bdc8b9edca5c9a7b3834e6ca514f37cc0e96a224ede82b52fa986dc749699"
+    },
+    {
+      "path": "integrations/astro/dist/common.js",
+      "bytes": 9671,
+      "sha256": "b30dc0f7ebad727032ea6a29c2c807640e87952bbdeb1a2433fbf1747d28614e"
+    },
+    {
+      "path": "integrations/astro/dist/common.d.ts",
+      "bytes": 2087,
+      "sha256": "ab3911227cd10295f45c87279a161629dc47150f3fa8ad092a05c4fe6fd73164"
+    },
+    {
+      "path": "integrations/astro/src/error.ts",
+      "bytes": 660,
+      "sha256": "f6bd51d12e50d08fafabc7611340fb39c580965a5319e573d6d45fbdd4ff6247"
+    },
+    {
+      "path": "integrations/astro/dist/error.js",
+      "bytes": 520,
+      "sha256": "16ad5280db7fdf2b194a735ea28af7ec523fb9cc33c8e9dca180c3b01bff65ca"
+    },
+    {
+      "path": "integrations/astro/dist/error.d.ts",
+      "bytes": 523,
+      "sha256": "3942a7acb0c73242bd1e4e84c33c225ec6416918f3606f3c6e4dd1d7de972d92"
+    },
+    {
+      "path": "integrations/astro/src/types.ts",
+      "bytes": 1917,
+      "sha256": "6efa03cbd127e221cca6d4cbff25bd48ae57ae4470e9e0281691e54eb91529b1"
+    },
+    {
+      "path": "integrations/astro/dist/types.js",
+      "bytes": 11,
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "integrations/astro/dist/types.d.ts",
+      "bytes": 2072,
+      "sha256": "48cb26f1660d7c515650268e88fea6bb1a874be7f62b42aa323b2669e2e46a36"
+    },
+    {
+      "path": "docs/specs/STATIC_ASTRO.md",
+      "bytes": 11025,
+      "sha256": "298acf17b19723b4fd10a24fdccc060609bbc86d109a7e33fc2a60fa95f6929e"
+    },
+    {
+      "path": "integrations/astro/package.json",
+      "bytes": 762,
+      "sha256": "7a8c7639fc60bd4abf0a174cdd2d31374817ef91dd7323233b6c12e6a8263c70"
+    },
+    {
+      "path": "integrations/astro/tsconfig.build.json",
+      "bytes": 398,
+      "sha256": "82bb484458b2104416cbc8e90c9c4d3fd1d98fafed905ad33377226ed2ffa127"
+    }
+  ],
+  "bindingAudit": {
+    "status": "Pass",
+    "unchangedDuringProbes": true,
+    "count": 18
+  },
+  "observations": [
+    {
+      "name": "Imports do not read host startup or load framework/network resources",
+      "status": "Pass",
+      "freshImportEntries": 2,
+      "observedHostReads": 0,
+      "staticImportBoundary": "Public peer and own relative helpers only; no runtime graph-size claim"
+    },
+    {
+      "name": "Pre-await ownership preserves records and receiver configuration/callback references",
+      "status": "Pass",
+      "mutatedRecordLocations": 4,
+      "mutatedReceiverConfigurationLocations": 2,
+      "prematureCallerMutationsObserved": 0
+    },
+    {
+      "name": "Loaded complete results and field scores match separate literal-source arithmetic",
+      "status": "Pass",
+      "independentlyCalculatedPages": 6,
+      "nonemptyPopulation": 3,
+      "totalFieldLength": 6,
+      "average": 2,
+      "lexicalGroups": "Individual exact terms, field boost2, independent tf/df and BM25",
+      "completeAllDocuments": 4
+    },
+    {
+      "name": "Stale, malformed and mixed count/ID/configuration generations never publish an owner",
+      "status": "Pass",
+      "generationRefusals": 4,
+      "normalizedConfigurationRefusal": 1,
+      "partialHandlesReturned": 0
+    },
+    {
+      "name": "Rehashed malformed display bodies cannot substitute foreign IDs, unsafe URLs or duplicate labels",
+      "status": "Pass",
+      "independentlyRehashedInvalidDisplayBodies": 5,
+      "nativeOwnersRemainUsableBeforeDisposal": 5
+    },
+    {
+      "name": "Non-ending streams, late responses, abandoned HTTP bodies and disposal release read resources",
+      "status": "Pass",
+      "oversizedNonEndingStreamCancellations": 1,
+      "lateUnacceptedResponseCancellations": 1,
+      "unopened404BodyCancellations": 1,
+      "pendingDisplayDisposal": "Pass",
+      "idempotentDisposalPromise": true
+    },
+    {
+      "name": "Request timeouts and failed native candidates clear caller listeners and scheduled engine work",
+      "status": "Pass",
+      "failedPrivateRestore": 1,
+      "ignoredHostTimeout": 1,
+      "callerListenersRemaining": 0,
+      "scheduledEngineAndRequestTimersRemaining": 0,
+      "scope": "Observable work/listener cleanup plus source-inspected finally-dispose; no root GC/allocation proof"
+    },
+    {
+      "name": "Reentrant returned fetch/read promise rejections remain observed after cancellation",
+      "status": "Pass",
+      "childRows": [
+        {
+          "phase": "fetch",
+          "code": "CANCELLED",
+          "leaks": 0,
+          "cancels": 0
+        },
+        {
+          "phase": "reader",
+          "code": "CANCELLED",
+          "leaks": 0,
+          "cancels": 1
+        }
+      ]
+    },
+    {
+      "name": "Actual HTTP gzip and Brotli assets use decoded byte integrity and preserve deployment URLs",
+      "status": "Pass",
+      "transport": "Actual temporary localhost HTTP with native Node Fetch decoding",
+      "rows": [
+        {
+          "encoding": "gzip",
+          "requests": 3,
+          "total": 2,
+          "manifestDecodedBytes": 664,
+          "manifestEncodedBytes": 364
+        },
+        {
+          "encoding": "br",
+          "requests": 3,
+          "total": 2,
+          "manifestDecodedBytes": 664,
+          "manifestEncodedBytes": 314
+        }
+      ]
+    },
+    {
+      "name": "Exact current Node native artifacts remain distinct from source rebuilds and incompatible qualification",
+      "status": "Pass",
+      "localNodeResults": [
+        {
+          "format": "source",
+          "total": 2,
+          "requestKind": true
+        },
+        {
+          "format": "native",
+          "total": 2,
+          "requestKind": true
+        }
+      ],
+      "incompatibleProfiles": 1,
+      "absentNativeAsset": 1,
+      "nativeFallbacks": 0,
+      "scope": "Exact current Node only, not browser-native portability"
+    }
+  ],
+  "passCount": 10,
+  "mandatoryFindings": [],
+  "resolvedFindings": [
+    {
+      "path": "/tmp/raveldex-rx-a100-late-fetch-probe.log",
+      "sha256": "601498cbb5679b0c9acf8335b2644fabc72c42ad45bef48e6da789b063d87411",
+      "observedBeforeCorrection": "{\"kind\":\"late-noncooperative-fetch-response-probe\",\"code\":\"CANCELLED\",\"lateResponseBodyCancellations\":0,\"bodyLocked\":false,\"expectedDeterministicLateCancellation\":1}",
+      "finding": "Late unaccepted Response body was not cancelled",
+      "state": "Resolved by the actual final probes above",
+      "limitation": "Pre-fix isolated probes did not capture complete source bindings; final verdict uses bound current sources/dist"
+    },
+    {
+      "path": "/tmp/raveldex-rx-a100-gzip-probe.log",
+      "sha256": "d12a8c9d8f2393f43807dba39ad9314880efc68be663b93a59febce65f079569",
+      "observedBeforeCorrection": "{\"kind\":\"actual-http-gzip-static-artifact-probe\",\"status\":\"Fail\",\"requests\":1,\"code\":\"INTEGRITY_MISMATCH\",\"message\":\"Raveldex static search: INTEGRITY_MISMATCH\",\"manifestDecodedBytes\":659,\"manifestEncodedBytes\":364}",
+      "finding": "Compressed Content-Length was incorrectly compared with decoded bytes",
+      "state": "Resolved by the actual final probes above",
+      "limitation": "Pre-fix isolated probes did not capture complete source bindings; final verdict uses bound current sources/dist"
+    },
+    {
+      "path": "/tmp/raveldex-rx-a100-reentrant-rejection-probe.log",
+      "sha256": "ece187e7bb342afd879b09d7732ad41320c84479254f1fb7c4c4d7edc0cad53d",
+      "observedBeforeCorrection": "{\"kind\":\"reentrant-fetch-abort-rejection-probe\",\"code\":\"CANCELLED\",\"unhandledRejections\":1}",
+      "finding": "Already-created rejected promise was not observed after synchronous abort",
+      "state": "Resolved by the actual final probes above",
+      "limitation": "Pre-fix isolated probes did not capture complete source bindings; final verdict uses bound current sources/dist"
+    }
+  ],
+  "verdict": "Ready with follow-ups",
+  "limitations": [
+    "Trusted callbacks/fetch/structural host signals are not a hostile-code sandbox.",
+    "Failed-candidate cleanup observes timers/listeners and source-inspected finally-dispose; no GC, retained heap, allocation or transport-copy peak is inferred.",
+    "Actual HTTP compression uses current Node Fetch; installed-browser/Astro fixture verification remains separately scoped.",
+    "Native snapshot qualification is exact current Node only; no new browser-native or cross-host support is inferred.",
+    "No build, npm, Git or remote operation performed by this review."
+  ]
+}

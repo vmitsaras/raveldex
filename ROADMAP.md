@@ -35,7 +35,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N2 — Modular search product** | `RX-2001`–`RX-2006` | 6/6 | Add optional phrase strategies, structured queries, evidence, Inspector data, and a usable native search interface. |
 | **N3 — Host and migration parity** | `RX-3001`–`RX-3004` | 4/4 | Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics. |
 | **N4 — Native 0.1 qualification** | `RX-4001`–`RX-4003` | 3/3 | Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior. |
-| **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 9/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
+| **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 10/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
 
 ## Task index
 
@@ -71,7 +71,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-A070](docs/planning/OPTIONAL_FEATURES.md#rx-a070) — Ordered proximity matching | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/34) |
 | [RX-A080](docs/planning/OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/35) |
 | [RX-A090](docs/planning/OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/36) |
-| [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `deferred` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
+| [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
 
 ## Milestone exit conditions
 

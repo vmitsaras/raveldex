@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "types": [
+      "node"
+    ],
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "paths": {
+      "@vmitsaras/raveldex": [
+        "../../src/index.ts"
+      ],
+      "@vmitsaras/raveldex/*": [
+        "../../src/*"
+      ],
+      "@vmitsaras/raveldex/adapters/snapshots": [
+        "../../src/adapters/snapshots/index.ts"
+      ]
+    },
+    "rootDir": "../.."
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}

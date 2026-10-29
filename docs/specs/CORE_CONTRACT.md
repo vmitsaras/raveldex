@@ -335,3 +335,7 @@ None blocks RX-1001. Qualified host profiles and broader language analysis are l
 ## Optional patch convenience
 
 [RX-A090](RECORD_PATCH.md) adds a separate direct-owner handle for whole-field revision-guarded patches. Ordinary core `replace` remains complete replacement; the optional handle requires explicit complete source and compiles through the same mutation owner in one FIFO operation. Core exports, public facade, source retention and snapshot/worker protocols remain unchanged.
+
+## Optional static content integration
+
+[RX-A100](STATIC_ASTRO.md) composes existing public core, source/native snapshot and optional UI APIs from a separate integration package. It does not add a core method/export, framework dependency, parser/crawler, network startup, state representation or codec. Source rebuilds retain receiving-environment semantics under compatible analyzer identity; native state keeps its exact-Node qualification boundary.

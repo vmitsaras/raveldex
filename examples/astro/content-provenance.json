@@ -1,0 +1,23 @@
+{
+  "method": "Three explicitly selected verbatim paragraphs from current Raveldex documentation; copied into shared fixture data before build. No runtime discovery, crawler or parser. Technical self-documentation fixture, not a representative relevance study.",
+  "selections": [
+    {
+      "id": "guide:records",
+      "source": "docs/specs/CORE_CONTRACT.md",
+      "paragraphSha256": "be697af6b4363a960ff989913b53a29590429421c1e9c7a7f0674aae456d1e20",
+      "body": "The only top-level keys are `id`, `text`, and `metadata`. `text` is required and may be empty; `metadata` is optional. Reject unknown field names. A declared text field may be missing, a string, or an array of strings. `null`, `undefined`, mixed arrays, and nested arrays are invalid text values. Empty strings/arrays are valid and emit no tokens. Array values are analyzed separately; their positions and offsets never share a coordinate space."
+    },
+    {
+      "id": "guide:atomic",
+      "source": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "paragraphSha256": "6d6321046a56fc133d83048673114c23cf1c802569ccb9fddf18ab512e0d5c42",
+      "body": "Changes must be atomic and incrementally maintain native index state. A caller must know what a completed operation observed or committed, whether cancellation rolled a change back, and when an external transport failure leaves the outcome unknown."
+    },
+    {
+      "id": "guide:staging",
+      "source": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "paragraphSha256": "eda08e51fbc01a47d3933fc1d5ebfd0c690d6d499ef51f32b020a4648bf19377",
+      "body": "The implementation must not read/re-tokenize unrelated original records, regenerate every posting list, or rebuild the entire dictionary as its routine replace/remove strategy. It may copy affected shared buckets and traverse affected common-term data. Quantify that work rather than claiming constant-time mutation."
+    }
+  ]
+}

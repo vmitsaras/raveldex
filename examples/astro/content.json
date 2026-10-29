@@ -1,0 +1,46 @@
+{
+  "buildId": "rx-a100-docs-v1",
+  "entries": [
+    {
+      "slug": "records",
+      "title": "Record ownership",
+      "path": "/guide/records/",
+      "record": {
+        "id": "guide:records",
+        "text": {
+          "title": "Record ownership",
+          "body": "The only top-level keys are `id`, `text`, and `metadata`. `text` is required and may be empty; `metadata` is optional. Reject unknown field names. A declared text field may be missing, a string, or an array of strings. `null`, `undefined`, mixed arrays, and nested arrays are invalid text values. Empty strings/arrays are valid and emit no tokens. Array values are analyzed separately; their positions and offsets never share a coordinate space."
+        }
+      }
+    },
+    {
+      "slug": "atomic",
+      "title": "Atomic publication",
+      "path": "/guide/atomic/",
+      "record": {
+        "id": "guide:atomic",
+        "text": {
+          "title": "Atomic publication",
+          "body": "Changes must be atomic and incrementally maintain native index state. A caller must know what a completed operation observed or committed, whether cancellation rolled a change back, and when an external transport failure leaves the outcome unknown."
+        }
+      }
+    },
+    {
+      "slug": "staging",
+      "title": "Incremental staging",
+      "path": "/guide/staging/",
+      "record": {
+        "id": "guide:staging",
+        "text": {
+          "title": "Incremental staging",
+          "body": "The implementation must not read/re-tokenize unrelated original records, regenerate every posting list, or rebuild the entire dictionary as its routine replace/remove strategy. It may copy affected shared buckets and traverse affected common-term data. Quantify that work rather than claiming constant-time mutation."
+        }
+      }
+    }
+  ],
+  "excluded": {
+    "slug": "draft",
+    "title": "Unlisted draft",
+    "body": "marzipanprivate is an excluded draft witness. It is rendered but not in the search allowlist."
+  }
+}

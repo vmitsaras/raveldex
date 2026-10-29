@@ -1,0 +1,12 @@
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 build
+npm notice run node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json && tsc -p tsconfig.indexeddb.build.json && tsc -p tsconfig.migration.build.json && node scripts/copy-migration-license.mjs && tsc -p integrations/astro/tsconfig.build.json && node scripts/link-astro-peer.mjs
+integrations/astro/src/build.ts(3,57): error TS2307: Cannot find module '@vmitsaras/raveldex/adapters/snapshots' or its corresponding type declarations.
+integrations/astro/src/build.ts(41,78): error TS18048: 'engine' is possibly 'undefined'.
+integrations/astro/src/client.ts(2,57): error TS2307: Cannot find module '@vmitsaras/raveldex/adapters/snapshots' or its corresponding type declarations.
+integrations/astro/src/client.ts(143,11): error TS2322: Type 'Readonly<{ engine: Raveldex | undefined; manifest: StaticManifest; loadDocuments(input?: LoadDocumentsOptions): Promise<readonly StaticDocument[]>; dispose(): Promise<...>; }>' is not assignable to type 'LoadedStaticSearch'.
+  Types of property 'engine' are incompatible.
+    Type 'Raveldex | undefined' is not assignable to type 'Raveldex'.
+      Type 'undefined' is not assignable to type 'Raveldex'.
+integrations/astro/src/client.ts(163,60): error TS18048: 'owner' is possibly 'undefined'.
+integrations/astro/src/index.ts(6,50): error TS2307: Cannot find module '@vmitsaras/raveldex/adapters/snapshots' or its corresponding type declarations.
+integrations/astro/src/types.ts(2,50): error TS2307: Cannot find module '@vmitsaras/raveldex/adapters/snapshots' or its corresponding type declarations.

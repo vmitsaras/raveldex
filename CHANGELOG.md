@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050, RX-A060, RX-A070, RX-A080 and RX-A090
+## Unreleased — explicitly selected RX-A010, RX-A020, RX-A030, RX-A040, RX-A050, RX-A060, RX-A070, RX-A080, RX-A090 and RX-A100
+
+- RX-A100 adds the separate private `@vmitsaras/raveldex-astro` package: explicit content allowlists, static/Astro source and exact-Node native artifacts, generation/compatibility/integrity checks, bounded on-demand loading and optional display data. Astro/Node declarations are pinned development tooling; core runtime, public exports, codecs and dependencies are unchanged.
 
 - RX-A090 adds optional `/addons/patch` revision-guarded whole-field set/unset convenience over complete explicit source and native atomic replacement; no new runtime dependency or worker protocol.
 
