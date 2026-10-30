@@ -2,7 +2,11 @@
 
 Snapshot: 2026-10-30. Repository: `vmitsaras/raveldex`.
 
-## Current completed-N5 remote verification
+## Current merged main and publication preparation
+
+The owner authorized merging `codex/rx-a100-astro` into main without publication. Main was fast-forwarded to `3407c2a801a27bfd32569619854ff3be510e6116`; [main CI 41008634728](https://github.com/vmitsaras/raveldex/actions/runs/41008634728) passes 860 tests on each of Node 22.23.4 and 24.22.1 / Ubuntu 26.04 x64, with private candidate and separate English/Astro artifacts. [Main tracking 41008634712](https://github.com/vmitsaras/raveldex/actions/runs/41008634712) also passes. All 31 tasks are done. Repository and packages remain private and unpublished. [Publication status](docs/release/PUBLICATION_STATUS.md) records documentation/demo inventory and remaining release preparation. This subsequent documentation update changes packaged bytes and needs fresh artifact verification; main CI above verifies `3407c2a`, not these later edits. Historical sections below preserve their original point-in-time counts and authorization boundaries.
+
+## Historical completed-N5 feature-branch verification
 
 The owner requested remote verification of `codex/rx-a100-astro`, fixes for actual failures, and no publication. [Run 41007010791](https://github.com/vmitsaras/raveldex/actions/runs/41007010791) passes **860/860 on each of Node 22.23.4 and 24.22.1 / Ubuntu 26.04 x64**, exact tested source `18e610ef15be2c4fa68aeb0f90ebd1dfb2fe5698`. All ten completed N5 suites, actual Chromium 149.0.7827.55/Astro 7.3.2 builds and private candidate preparation pass. [Closed evidence](docs/evidence/RX-N5-remote-ci-20261030.md) preserves initial workflow/test failures, fixes and both original successful ZIPs. Independent audit is Ready with zero mandatory findings: all 310 core / 15 Astro / 5 English package members match their accepted artifacts, including all 280 root production files. Only workflow/test harnesses changed; production, public contracts, package metadata and lockfile remain unchanged. Historical gzip measurements are retained; same-runtime baseline comparison closes the Linux difference. The later evidence/documentation/auditor commit is distinct from the tested source. All 31 tasks remain done. Remote main remains `1d52c71`; no merge, tracking sync, tag, release or publication occurred. Historical sections below retain their original point-in-time authorization and verification boundaries.
 

@@ -12,9 +12,9 @@ Exact totals, atomic revision publication, sanitized error categories, native ra
 
 ## Runtime and environment
 
-`engines.node >=22` is the declared package floor. Local candidate verification records its actual Node/V8/ICU/Unicode/OS versions. The preparation workflow is configured for Node 22 and 24 on Linux; configuration is not an executed remote CI result. Browser and assistive-technology support is bounded to the environments and flows in the [support notes](../support/RX-4003.md). Applications must evaluate their own corpus, host, CSP, bundling and resource budgets.
+`engines.node >=22` is the declared package floor. Local candidate verification records its actual Node/V8/ICU/Unicode/OS versions. [Main CI](https://github.com/vmitsaras/raveldex/actions/runs/41008634728) verifies merged source `3407c2a` on Node 22.23.4 and 24.22.1 / Ubuntu 26.04 x64, with 860 passing tests per runner. Later documentation/metadata changes need their own artifact report. Browser and assistive-technology support is bounded to the environments and flows in the [support notes](../support/RX-4003.md). Applications must evaluate their own corpus, host, CSP, bundling and resource budgets.
 
-Core is DOM-free. Browser UI needs a DOM; optional snippets need usable `Intl.Segmenter`; module workers and IndexedDB need their respective host capabilities. Importing a module does not create those hosts or initialize the product. No framework integration or automatic application startup is provided.
+Core is DOM-free. Browser UI needs a DOM; optional snippets need usable `Intl.Segmenter`; module workers and IndexedDB need their respective host capabilities. Importing a module does not create those hosts or initialize the product. The separate optional Astro integration supports explicit static builds and artifact loading; it requires exact core and optional Astro 7.3.2 peers, with Node `>=22.12.0`. No automatic application startup is provided.
 
 `basic-v1` uses NFKC normalization, lowercasing and the specified token rules. It is not accent-insensitive, locale-aware word segmentation, full case folding, fuzzy matching or natural-language retrieval. `cafe` and `café`, and Greek words with different accents, can differ. Changing that behavior requires an explicit future analyzer design, not a candidate-docs patch.
 
@@ -28,9 +28,9 @@ IndexedDB persistence is explicitly namespaced. Retain and compare generation to
 
 The optional LocalSearch integration converts the documented complete source format and rebuilds using ordinary native APIs. It does not import opaque MiniSearch state, preserve foreign scores, or make the old companion's tests native evidence. Existing `0.0.0` artifacts were private development snapshots; no published stable-version migration is assumed.
 
-## Deferred work
+## Completed optional work and historical compatibility boundaries
 
-The original 625-test candidate and its remote CI predate later explicitly selected optional changes. RX-A010 typo tolerance, RX-A020 suggestions, RX-A030 synonyms, RX-A040 English, RX-A050 identifier analysis and RX-A060 literal matching have their own local acceptance boundaries; earlier remote CI does not verify these changed trees. Other N5 work stays deferred until explicitly selected. A support request or proposal does not activate it.
+The original 625-test candidate and its remote CI predate the ten explicitly selected optional changes, which are now complete and included in main CI above. Their individual acceptance records retain exact configuration/semantic and host boundaries; current CI does not imply universal runtime/AT/native snapshot qualification. [Publication status](PUBLICATION_STATUS.md) separates release preparation from the completed feature roadmap.
 
 Identifier analysis uses reserved `code-identifiers-v1` with `identifier-tokenizer`, separate from the general one-to-one transform role. Other raw-tokenizer IDs and one-to-one handles impersonating that reserved ID reject at configuration capture. Selected code positions use an explicit `raveldex-positions-v2` payload within the existing codec family, bound jointly to that selected analyzer and exact module/worker policy. Dense v1 parsing remains strict; prior runtimes without this role/pack cannot accept the new configuration. Basic and English position data retain their v1 shape. Reindexing/source recovery and exact native qualification requirements remain explicit.
 

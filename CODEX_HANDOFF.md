@@ -1,10 +1,14 @@
 # Codex handoff
 
-## Current boundary
+## Current boundary — merged main
+
+All 21 release-track and ten N5 tasks are done. The owner-authorized fast-forward merge put `codex/rx-a100-astro` on main at `3407c2a`. [Main CI](https://github.com/vmitsaras/raveldex/actions/runs/41008634728) passes 860 tests on each Node 22/24 job, including private preparation and separate English/Astro artifacts; [tracking sync](https://github.com/vmitsaras/raveldex/actions/runs/41008634712) also passes. No publication, tag, release or visibility change occurred. [Publication status](docs/release/PUBLICATION_STATUS.md) owns the current documentation/demo inventory and remaining release preparation. The later documentation edits are not covered by that exact-source CI and require a fresh artifact report. Do not invent another implementation task or remove private guards. Historical sections retain their original evidence boundaries.
+
+## Historical pre-merge boundary
 
 Raveldex follows the adopted native TypeScript direction. N0–N3 implementation and RX-4001/RX-4002 evaluation/qualification have evidence; RX-4003 verifies the private `0.1.0-rc.0` candidate with 625 passing checks and independent review Ready with follow-ups. All 21 active N0–N4 tasks are complete. The owner explicitly selected and verified RX-A010 bounded typo tolerance, RX-A020 dictionary-backed suggestions and RX-A030 directional one-step synonyms; RX-A040 is verified with the owner-selected English analyzer; RX-A050 is now explicitly selected and verified locally; RX-A060 is now explicitly selected and verified locally; RX-A070 is now explicitly selected and verified locally; RX-A080 is now explicitly selected and verified locally; RX-A090 is now explicitly selected and verified locally; RX-A100 is now explicitly selected and verified locally; all ten optional tasks are complete. See [candidate acceptance](docs/evidence/RX-4003.md). Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the canonical task card and its evidence before changing state. The planner determines live task availability.
 
-## Current completed-N5 remote CI
+## Historical completed-N5 feature-branch CI
 
 The owner-authorized [remote follow-up](docs/evidence/RX-N5-remote-ci-20261030.md) now verifies all ten N5 features on exact source `18e610e`: [run 41007010791](https://github.com/vmitsaras/raveldex/actions/runs/41007010791), Node 22.23.4 and 24.22.1 / Ubuntu 26.04 x64, **860 passing tests per job**, private candidate and separate English/Astro artifacts. Independent artifact/source review is Ready with zero mandatory findings; all 330 accepted package members match, including 280 root production files. The retained failures are fixed in test/workflow code only. Historical original-candidate CI remains separate. The later evidence/documentation/auditor commit is not represented as tested by that run. Main remains `1d52c71`; no merge, tracking sync or publication was performed. All 31 tasks are done; do not create another implementation task to avoid reporting completion. Any merge or publication needs a separate owner instruction.
 
@@ -15,7 +19,7 @@ npm run handoff:status
 npm run handoff:next
 ```
 
-The canonical state is `docs/planning/roadmap.json`. Run `npm run docs:generate` after manifest changes. A task is done only with actual acceptance evidence and required independent review. Never reset a completed task to manufacture work. The completed active N0–N4 backlog is a legitimate terminal state; N5 enhancements remain deferred unless explicitly selected.
+The canonical state is `docs/planning/roadmap.json`. Run `npm run docs:generate` after manifest changes. A task is done only with actual acceptance evidence and required independent review. Never reset a completed task to manufacture work. N0–N5 are complete; no implementation task remains. Publication preparation does not reactivate a completed task.
 
 ## Historical optional typo, suggestion, synonym and language slices
 
@@ -72,6 +76,6 @@ The owner selected RX-A080 while excluding publication. Follow [bounded query sy
 
 RX-A090 is verified locally on `codex/rx-a090-patch`. Follow the [whole-field revision-guarded patch contract](docs/specs/RECORD_PATCH.md) and [acceptance](docs/evidence/RX-A090.md): `createPatch(engine).patch` borrows a direct native owner, requires complete explicitly selected text source at the required collection revision, and compiles into the actual incremental atomic replacement path in one FIFO operation. Null/empty/arrays/unset semantics, malformed data, shared work, conflicts, precommit failures and all observed cancellation suspensions have behavioral evidence. Full checks pass 844; two independent reviews have no mandatory findings. Core exports/retention, codecs and worker protocols remain unchanged; the private owner seam has a measured +146 gzip byte cost. The local candidate remains private and unpublished; historical remote CI does not verify this optional tree. RX-A100 is the sole remaining optional task and stays deferred unless explicitly selected. Do not reset completed tasks or create work to avoid reporting a complete release backlog.
 
-## Current selected static-build and Astro continuation
+## Historical selected static-build and Astro continuation
 
 RX-A100 is verified locally on `codex/rx-a100-astro`. Follow [the explicit static contract](docs/specs/STATIC_ASTRO.md) and [acceptance](docs/evidence/RX-A100.md). The separate private integration uses existing public native APIs with complete explicit source retention, generation/configuration/integrity checks, safe base URLs, lazy display data and owned candidate cleanup. Source rebuilds remain the browser default; native snapshot qualification stays exact-Node. Genuine packed Astro 7.3.2 builds at root and `/docs/`, actual navigation, native UI keyboard/semantic/error/teardown, compressed HTTP and lifecycle regressions pass. All 860 project tests pass; independent runtime/verification reviews have no mandatory findings. All 280 prior production files and core bundle bytes remain unchanged. Root runtime dependencies stay empty; framework/Node declarations are development tooling and the framework is an optional peer of the separate artifact. All 31 tasks are complete, with no deferred or ready implementation item. The release backlog being complete is a valid terminal state. Historical remote CI does not verify this tree; publication remains an owner decision and no remote write is authorized.

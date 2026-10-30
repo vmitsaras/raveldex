@@ -2,6 +2,8 @@
 
 The local candidate is `@vmitsaras/raveldex@0.1.0-rc.0`, **private and unpublished**. RX-4003 prepares a reviewable package and recommendation. Publication is a separate owner action. Use [preparation](PREPARATION.md), [compatibility](COMPATIBILITY.md), the [API reference](../api/README.md) and [support scope](../support/RX-4003.md).
 
+All 31 tasks, including RX-A010–RX-A100, are now complete and merged. [Main CI](https://github.com/vmitsaras/raveldex/actions/runs/41008634728) verifies source `3407c2a` with 860 tests on each Node 22/24 runner. [Publication status](PUBLICATION_STATUS.md) records the current package/documentation/demo inventory and remaining preparation; this subsequent documentation update requires fresh artifact verification. The original candidate measurements and selection history below retain their recorded scope rather than describing a new public release.
+
 ## Included scope
 
 Core supplies native frequency indexing, exact/prefix/Boolean/scalar-equality queries, `raveldex-bm25-v1`, exact totals, deterministic ordering, incremental atomic mutations, bounded FIFO execution and cooperative cancellation. Optional imports provide source/position/mixed phrases, selected original positions/offsets, filters/facets, factual Inspector, ranges/snippets, native DOM UI/CSS, one-owner module workers, versioned snapshots, explicit IndexedDB persistence and source migration. No foreign search engine implements core.
@@ -24,7 +26,7 @@ The final RX-4003 acceptance record and independent review in the repository sta
 
 The recommendation concerns this bounded private candidate. It is not authorization to publish, a guarantee for every browser/device/runtime, or permission to activate N5. Once the active release-track tasks are verified, the planner must report that backlog complete and leave deferred ideas deferred. Owner publication decisions and any newly discovered concrete defect remain visible instead of manufacturing another implementation task.
 
-## Later explicitly selected work
+## Historical explicitly selected work
 
 RX-A010 extends the development tree with [optional bounded typo tolerance](../api/TYPO.md). The original candidate recommendation, hashes and remote observations retain their dated scope. This later slice does not silently replace those qualified artifacts, activate other N5 work or authorize publication.
 

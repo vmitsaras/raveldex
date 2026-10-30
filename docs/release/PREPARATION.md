@@ -1,5 +1,7 @@
 # Candidate preparation
 
+See [publication status](PUBLICATION_STATUS.md) for the completed roadmap, merged main CI, documentation/demo inventory and remaining release preparation. The commands below intentionally verify private candidate metadata; they are not a final public-release verification mode.
+
 Use a checkout and Node.js 22 or newer with npm. Preparation retains `private: true`; it does not need release credentials. The package publication guard follows the [npm package metadata contract](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private).
 
 ```sh

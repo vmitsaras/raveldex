@@ -12,7 +12,7 @@ npm run pilot:core -- 'atomic mutation'
 npm run pilot:core -- --output /tmp/raveldex-core-pilot 'term contribution'
 ```
 
-The command builds ESM/declarations, packs the private `0.0.0` package, installs only that tarball into a fresh consumer directory with an isolated cache and offline npm, typechecks exported imports, runs valid judged queries and real updates, checks hand arithmetic and minified parity, and records startup/import/cost observations. It prints the temporary consumer path. Node 24.21.0/macOS arm64 is the locally verified host; configured Node 22 CI and browser matrices remain unrun here.
+The command builds ESM/declarations, packs the current private `0.1.0-rc.0` package, installs only that tarball into a fresh consumer directory with an isolated cache and offline npm, typechecks exported imports, runs valid judged queries and real updates, checks hand arithmetic and minified parity, and records startup/import/cost observations. It prints the temporary consumer path. The original RX-1006 measurements below used the earlier `0.0.0` artifact and Node 24.21.0/macOS arm64; they are historical results, not current bundle measurements. Current merged-candidate Node 22/24 CI is recorded in [publication status](../../docs/release/PUBLICATION_STATUS.md).
 
 Inside the printed consumer directory, replay an ordinary text query:
 
@@ -34,4 +34,4 @@ Artifacts include `corpus.json`, `judgments.json`, the actual tarball/install, `
 
 The bundle entry re-exports every public runtime export from the installed package. esbuild 0.28.2 bundles for browser-platform ESM/ES2022 with all minification, tree shaking, ASCII output, no source map or legal comments, and no externals. Node zlib uses gzip level 9, windowBits 15, memLevel 8, default strategy and mtime 0. This keeps mandatory validation, analyzer, query/ranking, mutation and scheduler code. Its inspected 27-input graph excludes optional modules and foreign engines. Fresh package/bundle imports deny host timer/clock, DOM, network, worker and storage reads.
 
-The observed core is 39,702 minified bytes / 12,400 gzip bytes against the 15,360-byte target. Tarball size is recorded separately and includes declarations/unimported internal build files. Neither size proves retained/peak heap cost, physical response time, Unicode cross-host parity or browser support. See [acceptance evidence](../../docs/evidence/RX-1006.md).
+The original RX-1006 core was 39,702 minified bytes / 12,400 gzip bytes against the 15,360-byte target. Later implementation increased the core beyond that target; the current pilot prints its own measurement. Tarball size is recorded separately and includes declarations/unimported internal build files. Neither size proves retained/peak heap cost, physical response time, Unicode cross-host parity or browser support. See [historical acceptance evidence](../../docs/evidence/RX-1006.md).
