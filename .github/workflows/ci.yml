@@ -23,7 +23,6 @@ jobs:
       RAVELDEX_WORKER_BROWSER: chromium
       RAVELDEX_INDEXEDDB_BROWSER: chromium
       RAVELDEX_CANDIDATE_BROWSER: chromium
-      RAVELDEX_ASTRO_PACKAGE_REPORT: ${{ runner.temp }}/raveldex-astro-observations.json
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -42,6 +41,8 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node node_modules/playwright-core/cli.js install --with-deps chromium
       - name: Verify and prepare the private candidate
+        env:
+          RAVELDEX_ASTRO_PACKAGE_REPORT: ${{ runner.temp }}/raveldex-astro-observations.json
         run: npm run candidate:prepare -- --output "${{ runner.temp }}/raveldex-candidate"
       - run: npm run tracking:preview
       - name: Preserve separate private N5 packages from verified compiler output
