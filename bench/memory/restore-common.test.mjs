@@ -39,9 +39,12 @@ test('owned-child watchdog preserves successful, refused, missing executable and
   assert.equal(refused.childExitCode, 7); assert.equal(refused.childSignal, null); assert.notEqual(refused.childPid, successful.childPid);
   const missing = await runBoundedChild('/definitely-missing-rx4002-observer', [], { env: {} }, { timeoutMs: 2000 });
   assert.equal(missing.spawnFailure.code, 'ENOENT'); assert.equal(missing.childTimedOut, false);
-  const timeout = await runBoundedChild(process.execPath, ['-e', 'process.on("SIGTERM",()=>{});setInterval(()=>{},1000)'], { env: {} }, { timeoutMs: 100, killGraceMs: 30 });
+  // Node startup under concurrent CI load can exceed 100ms. Give this fixture
+  // the same startup allowance as the other children and prove its handler ran.
+  const timeout = await runBoundedChild(process.execPath, ['-e', 'process.on("SIGTERM",()=>{});process.stderr.write("ready");setInterval(()=>{},1000)'], { env: {} }, { timeoutMs: 2000, killGraceMs: 30 });
+  assert.equal(timeout.stderr, 'ready', 'the signal-resistant fixture initialized before its watchdog fired');
   assert.equal(timeout.childTimedOut, true); assert.equal(timeout.childExitCode, null); assert.equal(timeout.childSignal, 'SIGKILL');
-  assert.equal(timeout.terminationAttempted, true); assert.equal(timeout.killAttempted, true); assert.ok(timeout.childWallMs < 2000);
+  assert.equal(timeout.terminationAttempted, true); assert.equal(timeout.killAttempted, true); assert.ok(timeout.childWallMs < 5000);
 });
 test('preparation failure is never hidden by unrun receivers; typed refusal remains explicit limitation', () => {
   const pass = () => ({ outcome: 'Pass' }), notRun = () => ({ outcome: 'Not Run' });
