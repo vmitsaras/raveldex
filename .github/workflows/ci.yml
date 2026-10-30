@@ -23,6 +23,7 @@ jobs:
       RAVELDEX_WORKER_BROWSER: chromium
       RAVELDEX_INDEXEDDB_BROWSER: chromium
       RAVELDEX_CANDIDATE_BROWSER: chromium
+      RAVELDEX_ASTRO_PACKAGE_REPORT: ${{ runner.temp }}/raveldex-astro-observations.json
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -43,6 +44,10 @@ jobs:
       - name: Verify and prepare the private candidate
         run: npm run candidate:prepare -- --output "${{ runner.temp }}/raveldex-candidate"
       - run: npm run tracking:preview
+      - name: Preserve separate private N5 packages from verified compiler output
+        run: |
+          node scripts/pack-english.mjs --output "${{ runner.temp }}/raveldex-english"
+          node scripts/pack-astro.mjs --output "${{ runner.temp }}/raveldex-astro"
       - name: Preserve candidate reports and tarball
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -52,5 +57,12 @@ jobs:
             ${{ runner.temp }}/raveldex-candidate/*.json
             ${{ runner.temp }}/raveldex-candidate/*.log
             ${{ runner.temp }}/raveldex-candidate/*.tgz
+            ${{ runner.temp }}/raveldex-english/*.json
+            ${{ runner.temp }}/raveldex-english/*.log
+            ${{ runner.temp }}/raveldex-english/*.tgz
+            ${{ runner.temp }}/raveldex-astro/*.json
+            ${{ runner.temp }}/raveldex-astro/*.log
+            ${{ runner.temp }}/raveldex-astro/*.tgz
+            ${{ runner.temp }}/raveldex-astro-observations.json
           if-no-files-found: ignore
           retention-days: 7
