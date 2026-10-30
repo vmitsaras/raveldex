@@ -56,6 +56,8 @@ Expand eligible tokens under a named edit-distance policy when judged typo queri
 - [docs/evidence/RX-A010-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A010-candidate-0.1.0-rc.0.tgz)
 - [docs/evidence/RX-A010-review.json](../../docs/evidence/RX-A010-review.json)
 - [docs/evidence/RX-A010-sync.log](../../docs/evidence/RX-A010-sync.log)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A020
@@ -101,6 +103,8 @@ Offer explicit query completions without silently rewriting submitted search sem
 - [docs/evidence/RX-A020-preparation.json](../../docs/evidence/RX-A020-preparation.json)
 - [docs/evidence/RX-A020-candidate.json](../../docs/evidence/RX-A020-candidate.json)
 - [docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A030
@@ -147,6 +151,8 @@ Support transparent, bounded alternatives within original query groups for a jud
 - [docs/evidence/RX-A030-candidate.json](../../docs/evidence/RX-A030-candidate.json)
 - [docs/evidence/RX-A030-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A030-candidate-0.1.0-rc.0.tgz)
 - [docs/evidence/RX-A030-review.json](../../docs/evidence/RX-A030-review.json)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A040
@@ -214,6 +220,8 @@ Select one language with real corpus demand and provide compatible indexing/quer
 - [docs/evidence/RX-A040-stop-probe.mjs](../../docs/evidence/RX-A040-stop-probe.mjs)
 - [docs/evidence/RX-A040-sync.log](../../docs/evidence/RX-A040-sync.log)
 - [docs/evidence/RX-A040.md](../../docs/evidence/RX-A040.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A050
@@ -275,6 +283,8 @@ Search developer identifiers without losing exact original names or inventing ph
 - [docs/evidence/RX-A050-runtime-review.json](../../docs/evidence/RX-A050-runtime-review.json)
 - [docs/evidence/RX-A050-sync.log](../../docs/evidence/RX-A050-sync.log)
 - [docs/evidence/RX-A050.md](../../docs/evidence/RX-A050.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A060
@@ -339,6 +349,8 @@ Expose bounded substring semantics as a distinct capability rather than disguisi
 - [docs/evidence/RX-A060-runtime-review.json](../../docs/evidence/RX-A060-runtime-review.json)
 - [docs/evidence/RX-A060-sync.log](../../docs/evidence/RX-A060-sync.log)
 - [docs/evidence/RX-A060.md](../../docs/evidence/RX-A060.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A070
@@ -402,6 +414,8 @@ Add selected ordered-gap semantics over positional data without redefining stric
 - [docs/evidence/RX-A070-sync.log](../../docs/evidence/RX-A070-sync.log)
 - [docs/evidence/RX-A070-typecheck.log](../../docs/evidence/RX-A070-typecheck.log)
 - [docs/evidence/RX-A070.md](../../docs/evidence/RX-A070.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A080
@@ -464,6 +478,8 @@ Compile an explicit user-facing syntax to the existing validated query tree with
 - [docs/evidence/RX-A080-sync.log](../../docs/evidence/RX-A080-sync.log)
 - [docs/evidence/RX-A080-typecheck.log](../../docs/evidence/RX-A080-typecheck.log)
 - [docs/evidence/RX-A080.md](../../docs/evidence/RX-A080.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A090
@@ -523,6 +539,8 @@ Offer partial record updates by composing authoritative source with the existing
 - [docs/evidence/RX-A090-syntax-isolation.log](../../docs/evidence/RX-A090-syntax-isolation.log)
 - [docs/evidence/RX-A090-verification-review.json](../../docs/evidence/RX-A090-verification-review.json)
 - [docs/evidence/RX-A090-verification-review.log](../../docs/evidence/RX-A090-verification-review.log)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A100
@@ -608,6 +626,14 @@ Integrate native search artifacts with static content pipelines while keeping ex
 - [docs/evidence/RX-A100-verification-attempt1.log](../../docs/evidence/RX-A100-verification-attempt1.log)
 - [docs/evidence/RX-A100-verification-review.json](../../docs/evidence/RX-A100-verification-review.json)
 - [docs/evidence/RX-A100-verification-review.log](../../docs/evidence/RX-A100-verification-review.log)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-N5-remote-ci-20261030-review.json](../../docs/evidence/RX-N5-remote-ci-20261030-review.json)
+- [docs/evidence/RX-N5-remote-ci-20261030-raw.tar.gz](../../docs/evidence/RX-N5-remote-ci-20261030-raw.tar.gz)
+- [docs/evidence/RX-N5-remote-ci-20261030-node22.zip](../../docs/evidence/RX-N5-remote-ci-20261030-node22.zip)
+- [docs/evidence/RX-N5-remote-ci-20261030-node24.zip](../../docs/evidence/RX-N5-remote-ci-20261030-node24.zip)
+- [docs/evidence/RX-N5-remote-ci-20261030-failed-node22.zip](../../docs/evidence/RX-N5-remote-ci-20261030-failed-node22.zip)
+- [docs/evidence/RX-N5-remote-ci-20261030-failed-node24.zip](../../docs/evidence/RX-N5-remote-ci-20261030-failed-node24.zip)
 
 
 ## Research ideas outside the task backlog

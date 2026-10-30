@@ -4,6 +4,10 @@
 
 Raveldex follows the adopted native TypeScript direction. N0–N3 implementation and RX-4001/RX-4002 evaluation/qualification have evidence; RX-4003 verifies the private `0.1.0-rc.0` candidate with 625 passing checks and independent review Ready with follow-ups. All 21 active N0–N4 tasks are complete. The owner explicitly selected and verified RX-A010 bounded typo tolerance, RX-A020 dictionary-backed suggestions and RX-A030 directional one-step synonyms; RX-A040 is verified with the owner-selected English analyzer; RX-A050 is now explicitly selected and verified locally; RX-A060 is now explicitly selected and verified locally; RX-A070 is now explicitly selected and verified locally; RX-A080 is now explicitly selected and verified locally; RX-A090 is now explicitly selected and verified locally; RX-A100 is now explicitly selected and verified locally; all ten optional tasks are complete. See [candidate acceptance](docs/evidence/RX-4003.md). Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the canonical task card and its evidence before changing state. The planner determines live task availability.
 
+## Current completed-N5 remote CI
+
+The owner-authorized [remote follow-up](docs/evidence/RX-N5-remote-ci-20261030.md) now verifies all ten N5 features on exact source `18e610e`: [run 41007010791](https://github.com/vmitsaras/raveldex/actions/runs/41007010791), Node 22.23.4 and 24.22.1 / Ubuntu 26.04 x64, **860 passing tests per job**, private candidate and separate English/Astro artifacts. Independent artifact/source review is Ready with zero mandatory findings; all 330 accepted package members match, including 280 root production files. The retained failures are fixed in test/workflow code only. Historical original-candidate CI remains separate. The later evidence/documentation/auditor commit is not represented as tested by that run. Main remains `1d52c71`; no merge, tracking sync or publication was performed. All 31 tasks are done; do not create another implementation task to avoid reporting completion. Any merge or publication needs a separate owner instruction.
+
 ```sh
 npm ci
 npm run check
