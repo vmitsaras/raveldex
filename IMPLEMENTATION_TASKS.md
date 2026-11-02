@@ -1134,6 +1134,851 @@ Prepare a coherent native 0.1 candidate and a concrete release recommendation wh
 - [docs/evidence/RX-4003-remote-ci-sync-20261028.log](docs/evidence/RX-4003-remote-ci-sync-20261028.log)
 
 
+## RX-5001
+
+**Shared site shell and responsive reading styles**
+
+**Milestone:** N6 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5001%22)
+
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
+
+Apply the reference typography, white reading surface, chartreuse actions and shared navigation without changing search or package behavior.
+
+**Expected affected areas**
+
+`site/Layout.astro`, `site/styles.css`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-5001-AC01: Shared header, current-location navigation, footer and skip link are semantic and keyboard reachable.
+- RX-5001-AC02: Documentation remains legible with bounded prose and internally scrollable code/tables across narrow and wide layouts.
+
+**Verification**
+
+- Run focused source/site or browser checks appropriate to this slice, then record exact outcomes and limitations.
+- Write docs/evidence/RX-5001.md before marking done; run docs:generate after state changes.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-5001.md](docs/evidence/RX-5001.md)
+
+
+## RX-5002
+
+**Homepage with real Search Workbench**
+
+**Milestone:** N6 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5002%22)
+
+**Dependencies:** [RX-5001](IMPLEMENTATION_TASKS.md#rx-5001)
+
+Implement the reference homepage using the existing installed-package usage demo, real query buttons and explicit initialization recovery.
+
+**Expected affected areas**
+
+`site/`, `scripts/build-pages.mjs`, `examples/docs-search/main.mjs`, `test/pages/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-5002-AC01: Home shows the selected headline, action, dark workbench and integration follow-through while retaining existing deep links.
+- RX-5002-AC02: Initial and sample queries use real retrieval; filters, totals, pagination, highlights and Inspector are retained.
+- RX-5002-AC03: Bundle-relative assets work at home; unavailable, loading, initialization failure and no-JavaScript paths are understandable.
+
+**Verification**
+
+- Run focused source/site or browser checks appropriate to this slice, then record exact outcomes and limitations.
+- Write docs/evidence/RX-5002.md before marking done; run docs:generate after state changes.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-5002.md](docs/evidence/RX-5002.md)
+
+
+## RX-5003
+
+**Dedicated demo and shared behavior**
+
+**Milestone:** N6 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5003%22)
+
+**Dependencies:** [RX-5002](IMPLEMENTATION_TASKS.md#rx-5002)
+
+Apply the same workbench and navigation to the dedicated demo while preserving direct/worker, representation, phrase and teardown behavior.
+
+**Expected affected areas**
+
+`site/Demo.astro`, `site/SearchWorkbench.astro`, `scripts/build-pages.mjs`, `test/pages/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-5003-AC01: Demo and home share their visual component and assets without duplicating search engines.
+- RX-5003-AC02: Advanced mode/representation/worker switches preserve queries and remain consistent with direct results.
+- RX-5003-AC03: Destroy/reinitialize, errors, empty recovery and Inspector focus restoration remain functional.
+
+**Verification**
+
+- Run focused source/site or browser checks appropriate to this slice, then record exact outcomes and limitations.
+- Write docs/evidence/RX-5003.md before marking done; run docs:generate after state changes.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-5003.md](docs/evidence/RX-5003.md)
+
+
+## RX-5004
+
+**Workbench verification and project synchronization**
+
+**Milestone:** N6 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5004%22)
+
+**Dependencies:** [RX-5003](IMPLEMENTATION_TASKS.md#rx-5003)
+
+Verify the implemented design, record actual evidence and synchronize project guidance and generated plans.
+
+**Expected affected areas**
+
+`test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `site/README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-5004-AC01: Browser checks cover real results, keyboard, no-JavaScript, delayed/failed loading, retry and mobile/desktop reflow.
+- RX-5004-AC02: Actual desktop/mobile screenshots and local commands/environments are recorded with precise manual-test limitations.
+- RX-5004-AC03: Project checks, generated site inventory and documentation agree with completed implementation; no publication is implied.
+
+**Verification**
+
+- Run focused source/site or browser checks appropriate to this slice, then record exact outcomes and limitations.
+- Write docs/evidence/RX-5004.md before marking done; run docs:generate after state changes.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-5004.md](docs/evidence/RX-5004.md)
+- [docs/evidence/RX-5004-check.log](docs/evidence/RX-5004-check.log)
+- [docs/evidence/RX-5004-workbench-browser.log](docs/evidence/RX-5004-workbench-browser.log)
+- [docs/evidence/RX-5004-pages-browser.json](docs/evidence/RX-5004-pages-browser.json)
+- [docs/evidence/RX-5004-images/home-desktop.png](docs/evidence/RX-5004-images/home-desktop.png)
+- [docs/evidence/RX-5004-images/home-mobile.png](docs/evidence/RX-5004-images/home-mobile.png)
+
+
+## RX-5005
+
+**Final-word prefix search in the demo**
+
+**Milestone:** N6 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5005%22)
+
+**Dependencies:** [RX-5004](IMPLEMENTATION_TASKS.md#rx-5004)
+
+Make final-word prefix matching the ordinary demo default, retaining exact-word and strict-phrase advanced modes and existing UI lifecycle.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `examples/docs-search/`, `site/`, `scripts/lib/ui-consumer.mjs`, `test/ui/`, `test/pages/`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-5005-AC01: Home and ordinary demo require exact earlier words and expand the final word from two normalized Unicode code points, with exact fallback for shorter words; core and UI integration defaults remain exact.
+- RX-5005-AC02: Advanced settings retain exact-word and strict adjacent phrase modes, and mode/host/representation changes preserve the query.
+- RX-5005-AC03: Independent-oracle browser checks verify results, full-word highlights, category filters and complete pagination in direct and worker execution with source and offset snippets.
+- RX-5005-AC04: Focus, composition, cancellation, Inspector and teardown regressions pass; package, site, API docs and generated plans agree with recorded evidence.
+
+**Verification**
+
+- Run focused UI and site browser checks plus npm run check, pages generation and inventory validation.
+- Record exact commands/environments, acceptance outcomes, limitations and review in docs/evidence/RX-5005.md before marking done.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-5005.md](docs/evidence/RX-5005.md)
+- [docs/evidence/RX-5005-raw.tar.gz](docs/evidence/RX-5005-raw.tar.gz)
+
+
+## RX-6001
+
+**Consumer inline foundation and compatible preset contract**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6001%22)
+
+**Dependencies:** [RX-5005](IMPLEMENTATION_TASKS.md#rx-5005)
+
+Prove a minimal installed Pagefind-style inline search path and freeze the smallest additive consumer UI, ownership and styling contract before expanding shared internals.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `package.json`, `tsconfig.ui.json`, `tsconfig.ui.build.json`, `test/ui/`, `test/consumer/`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
+
+**Acceptance criteria**
+
+- RX-6001-AC01: An explicit optional inline entry point mounts a labeled form, clear/submit actions, deliberate idle state and real native title/link results with exact totals and order.
+- RX-6001-AC02: The title/link-only consumer works with core alone; snippets, facets, Inspector and rich metadata are not hidden mandatory registrations or retained side state.
+- RX-6001-AC03: Consumer prefix selection preserves exact earlier words, the existing final-word threshold and native refusals; legacy mountRaveldexUI strict options, omitted-mode exact default, Workbench and frozen corpus remain unchanged.
+- RX-6001-AC04: Additive public options/handles, display capture/validation, message overrides and initial scoped CSS properties are documented; IDs, safe URLs, duplicate mounts and independent instances have explicit behavior.
+- RX-6001-AC05: Composition, debouncing, cancellation, stale-response suppression, focus preservation and idempotent destroy/remount work through the real engine; destroying a preset never disposes its borrowed engine.
+- RX-6001-AC06: New preset imports and core-only imports perform no DOM/network/storage/worker/global-shortcut initialization; CSS is a separate optional import and no runtime dependency is added.
+- RX-6001-AC07: Installed public exports/types and legacy/new consumer fixtures verify the exact supported entry points; any shared refactor is limited to helpers required by this vertical slice.
+
+**Verification**
+
+- Run focused installed public-type/export/import-isolation and browser checks for real results, Enter, clear, idle policy, composition, cancellation, duplicate mount and teardown.
+- Compare exact IDs/order/totals with independent fixtures and rerun legacy UI/Workbench-relevant regressions; measure actual optional import graphs rather than asserting size or memory.
+- Finalize the SS-01–07 public boundary in the contract; run applicable consumer/UI checks followed by npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6001.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6001.md](docs/evidence/RX-6001.md)
+- [docs/evidence/RX-6001-browser.json](docs/evidence/RX-6001-browser.json)
+- [docs/evidence/RX-6001-verification.json](docs/evidence/RX-6001-verification.json)
+- [docs/evidence/RX-6001-check.log.gz](docs/evidence/RX-6001-check.log.gz)
+- [docs/evidence/RX-6001-site.log.gz](docs/evidence/RX-6001-site.log.gz)
+- [docs/evidence/RX-6001-desktop.png](docs/evidence/RX-6001-desktop.png)
+- [docs/evidence/RX-6001-mobile.png](docs/evidence/RX-6001-mobile.png)
+- [docs/evidence/RX-6001-initial-site.log.gz](docs/evidence/RX-6001-initial-site.log.gz)
+- [docs/evidence/RX-6001-concurrent-site.log.gz](docs/evidence/RX-6001-concurrent-site.log.gz)
+
+
+## RX-6002
+
+**Pagefind-style inline controls, paging and theming**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6002%22)
+
+**Dependencies:** [RX-6001](IMPLEMENTATION_TASKS.md#rx-6001)
+
+Complete the inline consumer experience with explicitly selected snippets and simple filters, bounded Load more, recovery states and a small useful CSS customization contract.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `test/ui/`, `test/consumer/`, `test/fixtures/`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](docs/api/ADDONS.md)
+
+**Acceptance criteria**
+
+- RX-6002-AC01: Five-hit default batches and user-triggered Load more preserve native IDs/order/exact total, with no duplicate or omitted hits and a documented bounded display/paging continuation.
+- RX-6002-AC02: Query/filter/owner/revision changes invalidate accumulated results and stale snippets/counts; late or failed requests cannot present mixed successful state.
+- RX-6002-AC03: Optional snippets preserve original UTF-16 highlights, source field/value boundaries and omission facts; requested missing providers/capabilities produce useful explicit errors.
+- RX-6002-AC04: Simple string filters show exact native conjunctive counts and preserve selected values outside projected buckets; directory multi-selection is not silently introduced.
+- RX-6002-AC05: Idle, loading/composition, results, no-results, refused/error/retry and destroyed states retain useful input, accessible names, predictable focus and settled announcements; English defaults and message overrides are complete.
+- RX-6002-AC06: Stable component-scoped classes/properties cover typography, colors, focus/highlight, spacing/density, borders/radius and dimensions; small overrides work in light/dark, forced colors, reduced motion, long/RTL labels and narrow/zoomed layouts.
+- RX-6002-AC07: Consumer diagnostics stay off by default through an explicit presentation contract; legacy scores/Inspector and Workbench functional controls remain intact.
+
+**Verification**
+
+- Independently enumerate all hit pages/batches with filters and original snippets in direct and worker execution where installed; exercise mutation/revision races, refusal/retry and stale completion.
+- Run browser keyboard/focus/composition/cleanup checks and source/offset snippet cases; inspect responsive/theme states and record human/physical checks separately.
+- Measure actual rendered-output growth and optional graph bytes, run focused UI/consumer checks and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6002.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6002.md](docs/evidence/RX-6002.md)
+- [docs/evidence/RX-6002-browser.json](docs/evidence/RX-6002-browser.json)
+- [docs/evidence/RX-6002-foundation.json](docs/evidence/RX-6002-foundation.json)
+- [docs/evidence/RX-6002-verification.json](docs/evidence/RX-6002-verification.json)
+- [docs/evidence/RX-6002-check.log.gz](docs/evidence/RX-6002-check.log.gz)
+- [docs/evidence/RX-6002-targeted.log.gz](docs/evidence/RX-6002-targeted.log.gz)
+- [docs/evidence/RX-6002-site.log.gz](docs/evidence/RX-6002-site.log.gz)
+- [docs/evidence/RX-6002-initial-check.log.gz](docs/evidence/RX-6002-initial-check.log.gz)
+- [docs/evidence/RX-6002-desktop.png](docs/evidence/RX-6002-desktop.png)
+- [docs/evidence/RX-6002-mobile-rtl-dark.png](docs/evidence/RX-6002-mobile-rtl-dark.png)
+
+
+## RX-6003
+
+**Installed inline search starters for browser and Astro**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6003%22)
+
+**Dependencies:** [RX-6002](IMPLEMENTATION_TASKS.md#rx-6002), [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100)
+
+Ship complete inline integrations that an external developer can install, supply with their own explicit content and adjust through a few CSS changes.
+
+**Expected affected areas**
+
+`examples/`, `integrations/astro/README.md`, `docs/api/`, `site/`, `scripts/lib/pages.mjs`, `test/consumer/`, `test/pages/`, `test/integrations/astro/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-6003-AC01: Plain browser and Astro starters include complete realistic records/display mapping, required registrations, initialization/disposal, CSS, installation/build instructions and replacement-data guidance.
+- RX-6003-AC02: The exact copied starters run from fresh installed private tarballs without repository-only runtime imports or technical Workbench selectors.
+- RX-6003-AC03: Root and changed subdirectory bases resolve all static assets, workers if selected and result destinations correctly through the existing explicit Astro loader.
+- RX-6003-AC04: Loading, delayed/failed assets, useful retry, no-JavaScript browse guidance and destruction during initialization work without leaking or disposing borrowed owners.
+- RX-6003-AC05: A first inline solution entry links only to existing working starter/source files and accurate CSS recipes; current local-tarball availability and runtime requirements are stated without implying publication.
+- RX-6003-AC06: Existing Workbench, real-document qualification data and strict public inventory/Jekyll exclusions remain preserved.
+
+**Verification**
+
+- Pack/install into fresh temporary consumer directories and execute the exact documented steps with changed sample data and CSS values.
+- Run real static root/subdirectory build/preview, browser navigation, asset failure/delay/retry and ownership/teardown checks.
+- For changed site inventory run pages:build, pages:check and both existing site browser suites; run relevant installed Astro/consumer checks and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6003.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6003-astro-targeted.log.gz](docs/evidence/RX-6003-astro-targeted.log.gz)
+- [docs/evidence/RX-6003-astro.json](docs/evidence/RX-6003-astro.json)
+- [docs/evidence/RX-6003-browser-targeted.log.gz](docs/evidence/RX-6003-browser-targeted.log.gz)
+- [docs/evidence/RX-6003-browser.json](docs/evidence/RX-6003-browser.json)
+- [docs/evidence/RX-6003-desktop.png](docs/evidence/RX-6003-desktop.png)
+- [docs/evidence/RX-6003-gallery.log.gz](docs/evidence/RX-6003-gallery.log.gz)
+- [docs/evidence/RX-6003-initial.log.gz](docs/evidence/RX-6003-initial.log.gz)
+- [docs/evidence/RX-6003-integration-check.log.gz](docs/evidence/RX-6003-integration-check.log.gz)
+- [docs/evidence/RX-6003-jekyll.json](docs/evidence/RX-6003-jekyll.json)
+- [docs/evidence/RX-6003-jekyll.log.gz](docs/evidence/RX-6003-jekyll.log.gz)
+- [docs/evidence/RX-6003-mobile.png](docs/evidence/RX-6003-mobile.png)
+- [docs/evidence/RX-6003-site.json](docs/evidence/RX-6003-site.json)
+- [docs/evidence/RX-6003-site.log.gz](docs/evidence/RX-6003-site.log.gz)
+- [docs/evidence/RX-6003-verification.json](docs/evidence/RX-6003-verification.json)
+- [docs/evidence/RX-6003.md](docs/evidence/RX-6003.md)
+
+
+## RX-6004
+
+**Page and section display contract with static compatibility**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6004%22)
+
+**Dependencies:** [RX-6003](IMPLEMENTATION_TASKS.md#rx-6003)
+
+Freeze the optional page/section mapping, anchored-link, source-evidence and static-artifact rules before implementing grouped documentation presentation.
+
+**Expected affected areas**
+
+`docs/specs/SEARCH_SOLUTIONS.md`, `docs/specs/STATIC_ASTRO.md`, `docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md`, `docs/api/STATIC_ASTRO.md`, `test/fixtures/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[PAGE_SECTIONS.md](docs/specs/PAGE_SECTIONS.md), [SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [ADDONS.md](docs/api/ADDONS.md)
+
+**Acceptance criteria**
+
+- RX-6004-AC01: One native indexed record per page remains the baseline; exact totals mean pages and native page scores/order/ties/pagination remain unchanged; flat section-record demos are not reinterpreted.
+- RX-6004-AC02: The contract defines owned optional page IDs, heading/anchor identity, original field/value source ranges, revision identity and URL resolution, including repeated/missing/invalid sections.
+- RX-6004-AC03: At most three section previews per displayed page are the default; deterministic selection/ties, cross-section page matches, field/value boundaries, incomplete evidence and omission behavior are explicit.
+- RX-6004-AC04: Finite section-map/scan/output limits and provider requirements are concrete before dependent runtime work; bounded previews are never advertised as an exact global matching-section total.
+- RX-6004-AC05: The selected additive or separately versioned optional Astro display artifact defines old/new reader behavior and safe fragment handling without silently changing existing directory-route validation or snapshot semantics.
+- RX-6004-AC06: Independent handwritten fixtures state expected pages/order/anchors/original ranges and failures across Unicode, repeated headings, source/offset providers, stale maps and direct/worker execution.
+- RX-6004-AC07: No unresolved load-bearing mapping or compatibility choice is hidden in the implementation task; any incompatible choice is recorded before dependent work starts.
+
+**Verification**
+
+- Review source/evidence/UI/Astro constraints against the proposed mapping and old/new artifact compatibility cases; inspect deterministic page/section fixture expectations independently of production projection.
+- Verify every contract branch and limit has an observable expected outcome and a named implementation/verification owner; run planning/docs checks and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6004.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6004-contract.log.gz](docs/evidence/RX-6004-contract.log.gz)
+- [docs/evidence/RX-6004-initial-contract.log.gz](docs/evidence/RX-6004-initial-contract.log.gz)
+- [docs/evidence/RX-6004-integration-check.log.gz](docs/evidence/RX-6004-integration-check.log.gz)
+- [docs/evidence/RX-6004-jekyll.json](docs/evidence/RX-6004-jekyll.json)
+- [docs/evidence/RX-6004-pages.log.gz](docs/evidence/RX-6004-pages.log.gz)
+- [docs/evidence/RX-6004-verification.json](docs/evidence/RX-6004-verification.json)
+- [docs/evidence/RX-6004.md](docs/evidence/RX-6004.md)
+
+
+## RX-6005
+
+**Evidence-backed anchored section previews**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6005%22)
+
+**Dependencies:** [RX-6004](IMPLEMENTATION_TASKS.md#rx-6004)
+
+Implement optional Pagefind-style page/heading context using explicit section maps and original match evidence without changing native page retrieval.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `integrations/astro/src/`, `test/ui/`, `test/consumer/`, `test/integrations/astro/`, `test/fixtures/`, `docs/api/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[PAGE_SECTIONS.md](docs/specs/PAGE_SECTIONS.md), [SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md)
+
+**Acceptance criteria**
+
+- RX-6005-AC01: Captured validated section maps project only qualifying original match evidence into safe page/heading links and bounded previews under the frozen contract.
+- RX-6005-AC02: Native page IDs/scores/order/exact totals and every result page are identical with section presentation enabled or disabled; previews do not invent exact section totals.
+- RX-6005-AC03: Original Unicode/prefix highlight ranges and source field/value boundaries agree with independent fixtures in source and offset modes and direct/module-worker execution.
+- RX-6005-AC04: Malformed/stale/mixed maps, unavailable explicitly required evidence, invalid anchors and exhausted bounds follow the documented error/omission rules without false complete context.
+- RX-6005-AC05: The approved optional static display extension and public types work for installed consumers and actual anchored destinations at root/subdirectory bases; legacy artifacts/routes and flat-section demos remain valid.
+- RX-6005-AC06: Section metadata and projection costs remain optional outside core, with finite capture/output/scan limits, cancellation/freshness and cleanup evidence.
+
+**Verification**
+
+- Compare complete native membership/scores/order/totals/pages with projection selected and unselected, using independent original-source and anchor expectations.
+- Run actual source/offset/direct/worker cases, rejected-map and artifact compatibility probes, installed public types and real anchored navigation.
+- Measure optional graph/output/work costs separately from memory or capacity claims; run relevant UI/consumer/Astro regressions and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6005.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6005-astro-targeted.log.gz](docs/evidence/RX-6005-astro-targeted.log.gz)
+- [docs/evidence/RX-6005-browser.json](docs/evidence/RX-6005-browser.json)
+- [docs/evidence/RX-6005-candidate.json.gz](docs/evidence/RX-6005-candidate.json.gz)
+- [docs/evidence/RX-6005-check.log.gz](docs/evidence/RX-6005-check.log.gz)
+- [docs/evidence/RX-6005-compatibility-raw.tar.gz](docs/evidence/RX-6005-compatibility-raw.tar.gz)
+- [docs/evidence/RX-6005-compatibility.json](docs/evidence/RX-6005-compatibility.json)
+- [docs/evidence/RX-6005-gallery.json](docs/evidence/RX-6005-gallery.json)
+- [docs/evidence/RX-6005-initial-checks.log.gz](docs/evidence/RX-6005-initial-checks.log.gz)
+- [docs/evidence/RX-6005-installed.json](docs/evidence/RX-6005-installed.json)
+- [docs/evidence/RX-6005-integration-check.log.gz](docs/evidence/RX-6005-integration-check.log.gz)
+- [docs/evidence/RX-6005-jekyll.json](docs/evidence/RX-6005-jekyll.json)
+- [docs/evidence/RX-6005-jekyll.log.gz](docs/evidence/RX-6005-jekyll.log.gz)
+- [docs/evidence/RX-6005-native-bytes.json](docs/evidence/RX-6005-native-bytes.json)
+- [docs/evidence/RX-6005-pages.log.gz](docs/evidence/RX-6005-pages.log.gz)
+- [docs/evidence/RX-6005-review-fix.log.gz](docs/evidence/RX-6005-review-fix.log.gz)
+- [docs/evidence/RX-6005-site.json](docs/evidence/RX-6005-site.json)
+- [docs/evidence/RX-6005-site.log.gz](docs/evidence/RX-6005-site.log.gz)
+- [docs/evidence/RX-6005-verification.json](docs/evidence/RX-6005-verification.json)
+- [docs/evidence/RX-6005.md](docs/evidence/RX-6005.md)
+
+
+## RX-6006
+
+**Documentation search modal and lifecycle**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6006%22)
+
+**Dependencies:** [RX-6005](IMPLEMENTATION_TASKS.md#rx-6005)
+
+Provide a complete documentation search modal around the verified consumer results, optional section previews and shared style/feedback primitives.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `test/ui/`, `test/consumer/`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_MODAL.md](docs/specs/DOCS_MODAL.md), [SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
+
+**Acceptance criteria**
+
+- RX-6006-AC01: An explicit accessible trigger opens a native dialog with pinned input/header, scrollable actual results, visible close at every size and optional contextual keyboard hints.
+- RX-6006-AC02: Open focuses input, native modal behavior contains focus, Escape and deliberate backdrop activation close, and focus returns to the actual connected opener; drag-through backdrop gestures do not dismiss accidentally.
+- RX-6006-AC03: Close preserves the documented query by default and cancels pending presentation; reset-on-close is explicit, reopen revalidates stale state and late work never reopens a closed/destroyed surface.
+- RX-6006-AC04: Opt-in Cmd/Ctrl+K registration respects composition, editable contexts, already-handled events and independent instances; destroy removes owned bindings and restores owned scroll state.
+- RX-6006-AC05: The modal borrows its engine and uses the same native query/results/section/state contracts without embedding the technical Workbench or requiring Inspector.
+- RX-6006-AC06: Narrow/zoomed layouts keep search/close usable with available dynamic viewport space and contained scrolling; keyboard/links/feedback/themes and failure recovery remain usable.
+- RX-6006-AC07: Repeated trigger/open/close, opener removal, search/worker failure and destroy while open or pending do not leak resources or steal unrelated focus.
+
+**Verification**
+
+- Run installed real-browser keyboard/pointer/open-close-reopen/composition/shortcut/focus/scroll/teardown races, including multiple instances and failed/late work.
+- Check actual links and section destinations, 320-pixel reflow, theme/forced-colors/reduced-motion states; record on-screen-keyboard, physical input and exact human AT observations separately.
+- Run relevant UI/consumer/worker regressions and npm run check; review native-dialog/focus ownership and shared-runtime diff.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6006.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6006-browser-summary.json](docs/evidence/RX-6006-browser-summary.json)
+- [docs/evidence/RX-6006-browser.json](docs/evidence/RX-6006-browser.json)
+- [docs/evidence/RX-6006-browser.log.gz](docs/evidence/RX-6006-browser.log.gz)
+- [docs/evidence/RX-6006-gallery.json](docs/evidence/RX-6006-gallery.json)
+- [docs/evidence/RX-6006-integration-check.log.gz](docs/evidence/RX-6006-integration-check.log.gz)
+- [docs/evidence/RX-6006-jekyll.json](docs/evidence/RX-6006-jekyll.json)
+- [docs/evidence/RX-6006-jekyll.log.gz](docs/evidence/RX-6006-jekyll.log.gz)
+- [docs/evidence/RX-6006-modal-320x240-forced-colors.png](docs/evidence/RX-6006-modal-320x240-forced-colors.png)
+- [docs/evidence/RX-6006-modal-320x240.png](docs/evidence/RX-6006-modal-320x240.png)
+- [docs/evidence/RX-6006-modal-320x568-forced-colors.png](docs/evidence/RX-6006-modal-320x568-forced-colors.png)
+- [docs/evidence/RX-6006-modal-320x568.png](docs/evidence/RX-6006-modal-320x568.png)
+- [docs/evidence/RX-6006-modal-640x320-forced-colors.png](docs/evidence/RX-6006-modal-640x320-forced-colors.png)
+- [docs/evidence/RX-6006-modal-640x320.png](docs/evidence/RX-6006-modal-640x320.png)
+- [docs/evidence/RX-6006-modal-desktop.png](docs/evidence/RX-6006-modal-desktop.png)
+- [docs/evidence/RX-6006-pages-audit.log.gz](docs/evidence/RX-6006-pages-audit.log.gz)
+- [docs/evidence/RX-6006-pages.log.gz](docs/evidence/RX-6006-pages.log.gz)
+- [docs/evidence/RX-6006-review-and-initial-raw.tar.gz](docs/evidence/RX-6006-review-and-initial-raw.tar.gz)
+- [docs/evidence/RX-6006-site.json](docs/evidence/RX-6006-site.json)
+- [docs/evidence/RX-6006-site.log.gz](docs/evidence/RX-6006-site.log.gz)
+- [docs/evidence/RX-6006-verification.json](docs/evidence/RX-6006-verification.json)
+- [docs/evidence/RX-6006.md](docs/evidence/RX-6006.md)
+
+
+## RX-6007
+
+**Installed documentation modal starters**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6007%22)
+
+**Dependencies:** [RX-6006](IMPLEMENTATION_TASKS.md#rx-6006), [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100)
+
+Ship complete browser and Astro documentation-modal integrations with on-demand initialization, real section links and explicit owner lifecycle.
+
+**Expected affected areas**
+
+`examples/`, `integrations/astro/README.md`, `docs/api/`, `site/`, `scripts/lib/pages.mjs`, `test/consumer/`, `test/pages/`, `test/integrations/astro/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DOCS_MODAL.md](docs/specs/DOCS_MODAL.md)
+
+**Acceptance criteria**
+
+- RX-6007-AC01: Plain browser and Astro starters include trigger/dialog setup, realistic explicit page records/section maps, capability/CSS configuration, complete installation/replacement instructions and disposal.
+- RX-6007-AC02: First-open loading is explicit and deduplicated; close/destroy/rapid reopen, late owner creation and retry after asset failure cannot reopen abandoned UI or leak starter-owned engines.
+- RX-6007-AC03: Fresh paired installed packages build/preview and navigate to actual heading IDs at root and changed subdirectory bases without repository-only imports or Workbench selectors.
+- RX-6007-AC04: Preserved/reset query policy, no-JavaScript browse guidance, delayed/stale/mixed artifact handling and borrowed versus starter-owned cleanup are documented and exercised.
+- RX-6007-AC05: Gallery/source links and CSS recipes reference real starter files and current private-tarball availability; automatic HTML extraction or lazy/sharded-index behavior is not implied.
+
+**Verification**
+
+- Execute exact copied installation/build/preview/customization steps in fresh consumers, with independently checked page/section navigation and deployment bases.
+- Delay/fail assets, close before completion, reopen repeatedly and dispose during initialization; verify owner/listener/request cleanup and useful retry.
+- Run relevant installed Astro/UI/site suites, pages checks for inventory changes and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6007.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6007-astro.json](docs/evidence/RX-6007-astro.json)
+- [docs/evidence/RX-6007-astro.log.gz](docs/evidence/RX-6007-astro.log.gz)
+- [docs/evidence/RX-6007-browser.json](docs/evidence/RX-6007-browser.json)
+- [docs/evidence/RX-6007-browser.log.gz](docs/evidence/RX-6007-browser.log.gz)
+- [docs/evidence/RX-6007-gallery-modal-320.png](docs/evidence/RX-6007-gallery-modal-320.png)
+- [docs/evidence/RX-6007-gallery-modal-desktop.png](docs/evidence/RX-6007-gallery-modal-desktop.png)
+- [docs/evidence/RX-6007-gallery.json](docs/evidence/RX-6007-gallery.json)
+- [docs/evidence/RX-6007-gallery.log.gz](docs/evidence/RX-6007-gallery.log.gz)
+- [docs/evidence/RX-6007-inline-gallery.json](docs/evidence/RX-6007-inline-gallery.json)
+- [docs/evidence/RX-6007-integration-check.log.gz](docs/evidence/RX-6007-integration-check.log.gz)
+- [docs/evidence/RX-6007-jekyll.json](docs/evidence/RX-6007-jekyll.json)
+- [docs/evidence/RX-6007-jekyll.log.gz](docs/evidence/RX-6007-jekyll.log.gz)
+- [docs/evidence/RX-6007-pages.log.gz](docs/evidence/RX-6007-pages.log.gz)
+- [docs/evidence/RX-6007-review-and-initial-raw.tar.gz](docs/evidence/RX-6007-review-and-initial-raw.tar.gz)
+- [docs/evidence/RX-6007-review.json](docs/evidence/RX-6007-review.json)
+- [docs/evidence/RX-6007-site.json](docs/evidence/RX-6007-site.json)
+- [docs/evidence/RX-6007-site.log.gz](docs/evidence/RX-6007-site.log.gz)
+- [docs/evidence/RX-6007-verification.json](docs/evidence/RX-6007-verification.json)
+- [docs/evidence/RX-6007.md](docs/evidence/RX-6007.md)
+
+
+## RX-6008
+
+**Inline and modal gallery, qualification and synchronization**
+
+**Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6008%22)
+
+**Dependencies:** [RX-6003](IMPLEMENTATION_TASKS.md#rx-6003), [RX-6007](IMPLEMENTATION_TASKS.md#rx-6007)
+
+Complete the first adoption wave and document the actual verified scope before dropdown, directory and rich-result implementation begins.
+
+**Expected affected areas**
+
+`site/`, `examples/README.md`, `docs/api/`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DOCS_MODAL.md](docs/specs/DOCS_MODAL.md)
+
+**Acceptance criteria**
+
+- RX-6008-AC01: Two working gallery entries provide complete installed starter/source access, required data/capability instructions and a small reproducible CSS customization walkthrough.
+- RX-6008-AC02: Inline and modal have individual acceptance evidence for real native results, exact totals/pages, snippets/sections, states, keyboard/focus/composition and lifecycle/failure behavior.
+- RX-6008-AC03: Responsive/theme screenshots, exact source/browser/OS identities, actual human/physical observations and remaining Not run/Blocked manual scope are recorded without turning automated checks into speech/device claims.
+- RX-6008-AC04: Measured optional graphs, rendered-output growth and relevant work are distinguished from retained/peak memory and universal capacity/latency promises.
+- RX-6008-AC05: Legacy Workbench, frozen corpus, public inventory/Jekyll exclusions, installed APIs and existing site/consumer regression checks remain valid.
+- RX-6008-AC06: API/example/site guides, context/handoff, canonical state and generated plans agree with existing task evidence; implementation, verification and synchronization are reported separately without publication.
+
+**Verification**
+
+- Review the installed inline/modal state and adoption matrix independently of the implementation narrative; fix confirmed defects before accepting the wave.
+- Run fresh installed examples and applicable UI/Astro suites, pages:build, pages:check, both existing site browser suites and npm run check.
+- Collect scoped manual keyboard, exact-tool AT, physical IME/touch/on-screen-keyboard/zoom and theme observations where available; name every remaining qualification boundary.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-6008.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-6008-candidate.json.gz](docs/evidence/RX-6008-candidate.json.gz)
+- [docs/evidence/RX-6008-costs.json](docs/evidence/RX-6008-costs.json)
+- [docs/evidence/RX-6008-inline-320-rtl-dark.png](docs/evidence/RX-6008-inline-320-rtl-dark.png)
+- [docs/evidence/RX-6008-inline-desktop.png](docs/evidence/RX-6008-inline-desktop.png)
+- [docs/evidence/RX-6008-integration-check.log.gz](docs/evidence/RX-6008-integration-check.log.gz)
+- [docs/evidence/RX-6008-jekyll.json](docs/evidence/RX-6008-jekyll.json)
+- [docs/evidence/RX-6008-jekyll.log.gz](docs/evidence/RX-6008-jekyll.log.gz)
+- [docs/evidence/RX-6008-manual.json](docs/evidence/RX-6008-manual.json)
+- [docs/evidence/RX-6008-matrix.json](docs/evidence/RX-6008-matrix.json)
+- [docs/evidence/RX-6008-modal-320x240-forced-colors.png](docs/evidence/RX-6008-modal-320x240-forced-colors.png)
+- [docs/evidence/RX-6008-modal-desktop.png](docs/evidence/RX-6008-modal-desktop.png)
+- [docs/evidence/RX-6008-pages.log.gz](docs/evidence/RX-6008-pages.log.gz)
+- [docs/evidence/RX-6008-raw.tar.gz](docs/evidence/RX-6008-raw.tar.gz)
+- [docs/evidence/RX-6008-review.json](docs/evidence/RX-6008-review.json)
+- [docs/evidence/RX-6008-site.log.gz](docs/evidence/RX-6008-site.log.gz)
+- [docs/evidence/RX-6008-verification.json](docs/evidence/RX-6008-verification.json)
+- [docs/evidence/RX-6008-webkit-inline-320.png](docs/evidence/RX-6008-webkit-inline-320.png)
+- [docs/evidence/RX-6008-webkit-modal-320.png](docs/evidence/RX-6008-webkit-modal-320.png)
+- [docs/evidence/RX-6008.md](docs/evidence/RX-6008.md)
+
+
+## RX-7001
+
+**Accessible compact dropdown search**
+
+**Milestone:** N8 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7001%22)
+
+**Dependencies:** [RX-6008](IMPLEMENTATION_TASKS.md#rx-6008)
+
+Implement a bounded search-result combobox with native editing/link behavior, keyboard selection and a full-results handoff after the first-wave foundation is verified.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `test/ui/`, `test/consumer/`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [DROPDOWN.md](docs/specs/DROPDOWN.md)
+
+**Acceptance criteria**
+
+- RX-7001-AC01: The optional dropdown has APG-aligned combobox/popup/result state, stable active IDs and input focus during text editing; inline and modal semantics remain unchanged.
+- RX-7001-AC02: Arrow keys navigate, Enter follows the active actual result, Escape dismisses and Tab leaves normally; composition, selection/editing keys and modified link activation remain predictable.
+- RX-7001-AC03: A finite result window exposes the exact native total and an explicitly configured full-results destination carrying unchanged query meaning; vocabulary suggestions are not conflated with hits.
+- RX-7001-AC04: Query/result/revision changes clear invalid active IDs atomically, suppress stale completions and provide complete idle/loading/no-results/error/clear/destroy states.
+- RX-7001-AC05: Popup positioning and scrolling remain usable with narrow/zoomed/long-content layouts; optional shortcut/handoff and multiple-instance ownership are explicit without a second engine.
+- RX-7001-AC06: Public exports/types, CSS and teardown remain optional, safe and dependency-free with scoped accessible styling and message overrides.
+
+**Verification**
+
+- Run real installed browser combobox-state, keyboard/pointer/native-editing/composition/modified-link and stale-active-result cases plus teardown/multiple-instance races.
+- Compare bounded hits/exact totals/full-results query handoff with independent native fixtures and check narrow/zoomed popup states; record exact human AT observations separately.
+- Run relevant UI/public-consumer/legacy regressions and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-7001.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-7001.md](docs/evidence/RX-7001.md)
+- [docs/evidence/RX-7001-verification.json](docs/evidence/RX-7001-verification.json)
+- [docs/evidence/RX-7001-review.json](docs/evidence/RX-7001-review.json)
+- [docs/evidence/RX-7001-browser-summary.json](docs/evidence/RX-7001-browser-summary.json)
+- [docs/evidence/RX-7001-costs.json](docs/evidence/RX-7001-costs.json)
+- [docs/evidence/RX-7001-candidate.json.gz](docs/evidence/RX-7001-candidate.json.gz)
+- [docs/evidence/RX-7001-raw.tar.gz](docs/evidence/RX-7001-raw.tar.gz)
+
+
+## RX-7002
+
+**Installed dropdown header starter and gallery**
+
+**Milestone:** N8 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7002%22)
+
+**Dependencies:** [RX-7001](IMPLEMENTATION_TASKS.md#rx-7001)
+
+Deliver a working installed header search integration with a real inline full-results destination and complete customization/ownership guidance.
+
+**Expected affected areas**
+
+`examples/`, `site/`, `scripts/lib/pages.mjs`, `docs/api/`, `test/consumer/`, `test/pages/`, `src/addons/ui/dropdown.ts`, `test/ui/dropdown-browser.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DROPDOWN.md](docs/specs/DROPDOWN.md)
+
+**Acceptance criteria**
+
+- RX-7002-AC01: A complete installed header starter includes actual content/display setup, dropdown mount/CSS, full-results inline route, labels, theme overrides and disposal instructions.
+- RX-7002-AC02: Root/subdirectory result/full-results URLs preserve the query and resolve actual destinations without repository-only runtime dependencies.
+- RX-7002-AC03: Narrow-screen behavior is documented; any modal handoff is explicitly enabled and preserves query/owner state without duplicate engines or competing shortcuts.
+- RX-7002-AC04: Copied setup and small CSS/data replacement steps work in a fresh consumer across loading/failure/clear/outside-dismissal/teardown states.
+- RX-7002-AC05: The working gallery entry, source links and approved public inventory reflect existing starter files and actual package availability.
+
+**Verification**
+
+- Pack/install and execute exact header/full-results walkthroughs with changed content and CSS; verify real navigation and explicit optional modal handoff.
+- Check keyboard/pointer/outside dismissal, long/narrow layouts and light/dark/forced-colors states; run relevant consumer/UI/site suites.
+- For changed site inventory run pages checks and both existing site browser suites, then npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-7002.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-7002.md](docs/evidence/RX-7002.md)
+- [docs/evidence/RX-7002-verification.json](docs/evidence/RX-7002-verification.json)
+- [docs/evidence/RX-7002-browser-summary.json](docs/evidence/RX-7002-browser-summary.json)
+- [docs/evidence/RX-7002-review.json](docs/evidence/RX-7002-review.json)
+- [docs/evidence/RX-7002-costs.json](docs/evidence/RX-7002-costs.json)
+- [docs/evidence/RX-7002-raw.tar.gz](docs/evidence/RX-7002-raw.tar.gz)
+
+
+## RX-7003
+
+**Directory multi-filter queries and explicit URL state**
+
+**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7003%22)
+
+**Dependencies:** [RX-6008](IMPLEMENTATION_TASKS.md#rx-6008), [RX-2003](IMPLEMENTATION_TASKS.md#rx-2003)
+
+Prove complete native directory membership/counts/paging and opt-in browser URL synchronization before implementing the full directory controls.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `test/ui/`, `test/consumer/`, `test/fixtures/`, `docs/api/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](docs/api/ADDONS.md)
+
+**Acceptance criteria**
+
+- RX-7003-AC01: Empty input browses all admitted records; text combines with OR within each selected string-filter group and AND across groups through native query semantics.
+- RX-7003-AC02: Facet counts cover the complete qualifying set before paging and include all active filters including their own group; selected projected-out/zero values remain recoverable.
+- RX-7003-AC03: Exact totals, deterministic native order and all hit pages agree with an independent scan; filter/query changes reset the page and revision changes invalidate stale presentation.
+- RX-7003-AC04: URL integration is explicitly selected, bounds query/filter/page input, owns named parameters only and preserves unrelated parameters/hash; invalid or stale values recover deterministically.
+- RX-7003-AC05: Back/Forward replay restores coherent query/filters/page without history loops; push/replace policy and multi-instance parameter ownership are specified and tested.
+- RX-7003-AC06: No storage/history/telemetry, disjunctive self-excluding counts, displayed-page sorting or new core ranking semantics are introduced.
+
+**Verification**
+
+- Compare full generated and hand-derived text/multi-filter combinations, conjunctive bucket counts and complete pages against independent expected sets/order.
+- Replay valid/invalid/stale URLs and browser Back/Forward with query edits, active work and revised collections; check unrelated URL state and explicitly disabled synchronization.
+- Run applicable filters/facets/UI/consumer regressions and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-7003.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-7004
+
+**Faceted directory controls and installed starter**
+
+**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22)
+
+**Dependencies:** [RX-7003](IMPLEMENTATION_TASKS.md#rx-7003)
+
+Build a complete filterable resource-directory solution using the verified native query and opt-in URL state model.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `examples/`, `site/`, `scripts/lib/pages.mjs`, `docs/api/`, `test/ui/`, `test/consumer/`, `test/pages/`, `test/integrations/astro/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-7004-AC01: Native labeled checkbox groups, exact count summaries, selected-filter chips, named chip removal, clear-all and complete page navigation reflect one coherent directory state.
+- RX-7004-AC02: Browse-all, search/filter/page reset, selected zero/projected-out values and no-results recovery behave according to the native conjunctive count contract.
+- RX-7004-AC03: Mobile filters use a documented disclosure/dialog pattern with logical keyboard order, visible focus and opener restoration; chip/control updates retain or deliberately recover focus.
+- RX-7004-AC04: Realistic installed browser/Astro integration instructions include records, required registrations, optional URL ownership, CSS and lifecycle; copied setup works at root/subdirectory bases.
+- RX-7004-AC05: Loading/refusal/error/retry, Back/Forward, revised collection, long/RTL labels, narrow/zoomed layouts and forced-colors/reduced-motion states remain usable.
+- RX-7004-AC06: The gallery and public starter inventory link complete existing files; full-set sorting, numeric range controls and unrelated directory features remain outside scope.
+
+**Verification**
+
+- Run installed end-to-end query/filter/chip/clear/page/Back-Forward and zero-result recovery cases against independent native membership/counts.
+- Verify mobile disclosure/dialog, focus after removal, labels/status and dark/forced-colors/reduced-motion/zoom/reflow with separately scoped human checks.
+- Execute exact copied setup/data/CSS replacement walkthroughs, relevant consumer/UI/Astro/site suites and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-7004.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-7005
+
+**Rich directory result cards and grid presentation**
+
+**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22)
+
+**Dependencies:** [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004)
+
+Add optional safe metadata/image presentation for editorial and catalogue results while preserving the directory engine, query state and semantic reading order.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `examples/`, `site/`, `scripts/lib/pages.mjs`, `docs/api/`, `test/ui/`, `test/consumer/`, `test/pages/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
+
+**Acceptance criteria**
+
+- RX-7005-AC01: A declared optional display projection supplies title/excerpt, category/breadcrumb/date or named text fields and validated image/alternative data without arbitrary HTML templates.
+- RX-7005-AC02: List/card/grid presentation preserves native IDs/order/exact totals, query/filters/page and selection; DOM reading order matches the visible sequence.
+- RX-7005-AC03: Missing/long/localized/hostile metadata and broken images have safe readable recovery; image requests are explicit and reserve dimensions with appropriate alternatives.
+- RX-7005-AC04: Responsive semantic lists and scoped density/image/layout CSS support narrow/zoomed/light/dark/forced-colors/reduced-motion views without an interactive ARIA grid.
+- RX-7005-AC05: A complete installed rich-results starter and gallery example demonstrate actual metadata mapping/customization/disposal; any necessary static artifact extension preserves existing compatibility rules.
+- RX-7005-AC06: Optional import/DOM/image costs are measured separately from baseline and memory/capacity claims; commerce actions and full-set sort changes are not added.
+
+**Verification**
+
+- Compare IDs/order/totals/pages across list/grid/theme changes and independently check safe metadata/URL/image alternatives and native link behavior.
+- Run actual copied installed examples plus missing/broken-image, hostile/long/RTL metadata, keyboard reading-order and responsive/theme probes.
+- Measure optional graph/render/image behavior, run relevant UI/consumer/static/site regressions and npm run check.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-7005.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-7006
+
+**Complete solution gallery and family qualification**
+
+**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22)
+
+**Dependencies:** [RX-7002](IMPLEMENTATION_TASKS.md#rx-7002), [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004), [RX-7005](IMPLEMENTATION_TASKS.md#rx-7005)
+
+Finish the complete adoption path and verify shared correctness, interaction, optionality and documented support scope across inline, modal, dropdown, directory and rich-result solutions.
+
+**Expected affected areas**
+
+`site/`, `examples/`, `docs/api/`, `integrations/astro/README.md`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+
+**Acceptance criteria**
+
+- RX-7006-AC01: A usable solution chooser links five working presentations, complete installed starter/source files, exact data/capability requirements and short CSS customization recipes.
+- RX-7006-AC02: Every solution has current independent result/state/interaction evidence, including complete totals/pages, query meaning, snippets/sections where configured, failure/recovery and lifecycle.
+- RX-7006-AC03: Fresh copied browser/Astro consumers and root/subdirectory builds verify exact documented steps without repository-only runtime imports or changes to private/publication guards.
+- RX-7006-AC04: Per-surface responsive/theme screenshots and exact-tool human/physical observations are distinguished from automated checks; every remaining manual/platform limitation and unsupported claim is explicit.
+- RX-7006-AC05: Optional import graphs, work/rendered-output and image costs are measured honestly without serialized-byte-to-memory or admission-to-capacity inference; old UI/Workbench/corpus regressions remain valid.
+- RX-7006-AC06: Public API/example/integration/site guidance, context/handoff, canonical statuses and generated task views match actual existing acceptance evidence and independent review; no deployment or publication is implied.
+
+**Verification**
+
+- Review the complete installed adoption and interaction/capability matrix independently and repair confirmed defects before accepting completion.
+- Run each fresh starter, relevant UI/filter/facet/worker/consumer/Astro suites, pages:build, pages:check, both site browser suites and npm run check.
+- Collect exact browser/OS/AT and physical-input/zoom/mobile/theme observations for claimed support, preserving unavailable outcomes and actual optional graph/output measurements.
+- Record actual acceptance outcomes, commands, source/environment identity, review and limitations in docs/evidence/RX-7006.md before marking done; add only existing evidence and regenerate the readable roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
 ## Deferred enhancement tasks
 
 The `RX-A*` tasks are in [Optional features](docs/planning/OPTIONAL_FEATURES.md). Their dependency on `RX-4003` is only a prerequisite. They remain deferred until selected and do not block the N0–N4 candidate.

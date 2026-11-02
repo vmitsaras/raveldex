@@ -1,0 +1,182 @@
+{
+  "kind": "raveldex-natural-docs-verification-v1",
+  "date": "2026-10-30",
+  "status": "Pass",
+  "sourceCommit": "87fb5c30eeef055359f2767bf8b802f785f4abed",
+  "workingTree": "Uncommitted documentation changes over pre-existing uncommitted documentation and site work.",
+  "publicContractsChanged": false,
+  "publicationPerformed": false,
+  "remoteWritesPerformed": false,
+  "projectTests": {
+    "passed": 868,
+    "batches": [
+      784,
+      30,
+      24,
+      26,
+      1,
+      3
+    ],
+    "failures": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "siteBrowserTests": {
+    "passed": 2,
+    "failures": 0
+  },
+  "commands": [
+    "npm ci --offline --cache /tmp/raveldex-docs-npm-cache",
+    "npm run candidate:prepare -- --output /tmp/raveldex-natural-docs-20261030/candidate-local",
+    "node /tmp/raveldex-natural-docs-20261030/follow.mjs REPOSITORY STAGE",
+    "node /tmp/raveldex-natural-docs-20261030/blocks.mjs REPOSITORY STAGE",
+    "node /tmp/raveldex-natural-docs-20261030/astro-snippets.mjs REPOSITORY STAGE",
+    "npm run pages:generate (twice)",
+    "npm run pages:check",
+    "RAVELDEX_PAGES_REPORT=STAGE/pages-browser.json node --test --test-concurrency=1 test/pages/browser.test.mjs test/pages/ui-example.test.mjs",
+    "GEM_HOME=/tmp/raveldex-pages-20261030/gems GEM_PATH=/tmp/raveldex-pages-20261030/gems GEM_SPEC_CACHE=/tmp/raveldex-pages-20261030/gem-spec-cache ruby /tmp/raveldex-pages-20261030/gems/bin/jekyll build --safe --source REPOSITORY/docs --destination STAGE/jekyll-output",
+    "node /tmp/raveldex-natural-docs-20261030/layout.mjs REPOSITORY STAGE",
+    "python3 /tmp/raveldex-natural-docs-20261030/audit.py"
+  ],
+  "audit": {
+    "status": "Pass",
+    "publicSourcesChanged": [
+      "README.md",
+      "docs/api/ADDONS.md",
+      "docs/api/COMPATIBILITY.md",
+      "docs/api/CORE.md",
+      "docs/api/ENGLISH.md",
+      "docs/api/GETTING_STARTED.md",
+      "docs/api/HOSTS.md",
+      "docs/api/IDENTIFIERS.md",
+      "docs/api/LIMITATIONS.md",
+      "docs/api/LITERAL.md",
+      "docs/api/PROXIMITY.md",
+      "docs/api/QUERY_SYNTAX.md",
+      "docs/api/README.md",
+      "docs/api/RECORD_PATCH.md",
+      "docs/api/STATIC_ASTRO.md",
+      "docs/api/SUGGESTIONS.md",
+      "docs/api/SYNONYMS.md",
+      "docs/api/TYPO.md",
+      "docs/api/examples/README.md",
+      "examples/README.md",
+      "examples/astro/README.md",
+      "examples/core-docs/README.md",
+      "examples/docs-search/README.md",
+      "examples/docs-search/index.html",
+      "examples/migration/README.md",
+      "integrations/astro/README.md",
+      "integrations/languages/english/README.md",
+      "site/404.md",
+      "site/guides.md",
+      "site/index.md"
+    ],
+    "existingHeadingsPreserved": true,
+    "markdownCodeBlocksUnchanged": 43,
+    "demoCodeBlocksUnchanged": 2,
+    "protectedRecordsUnchanged": 979,
+    "fixedSourceMetadataAndTestsUnchanged": true,
+    "sourceSnapshotsMatchCurrentPackages": true,
+    "packageComparisons": [
+      {
+        "name": "core",
+        "private": true,
+        "version": "0.1.0-rc.0",
+        "members": 315,
+        "productionMembersUnchanged": 280,
+        "bytes": 234727,
+        "sha256": "a36d16db008451147939cebf8196dcb4444f89342e998cfe446b65ebbf629648"
+      },
+      {
+        "name": "english",
+        "private": true,
+        "version": "0.1.0-rc.0",
+        "members": 5,
+        "productionMembersUnchanged": 2,
+        "bytes": 5089,
+        "sha256": "ec81da5e1a1ae8d1356a2eef533e2c656382558ffdd685225fcd04ede5daf6e4"
+      },
+      {
+        "name": "astro",
+        "private": true,
+        "version": "0.1.0-rc.0",
+        "members": 15,
+        "productionMembersUnchanged": 12,
+        "bytes": 14784,
+        "sha256": "daa0d682473b061d3b6e17e79bd41133eeb8ec0e4234be15342c9067a8d2496f"
+      }
+    ],
+    "htmlPages": 29,
+    "publicFiles": 44,
+    "publicBytes": 650802,
+    "deterministicOutput": true,
+    "jekyllExactInventoryAndBytes": true,
+    "routeInventoryUnchanged": true,
+    "manifestSha256": "634ef500132b3d399ee05ca28e232572222d21a8478257436b9750582a4c183a",
+    "usageCorpus": "daad81964095e2bd40cac46077d7f0924b3cd1c90e74c29a510a0aabb29c1161"
+  },
+  "environmentFailures": [
+    {
+      "action": "Initial npm ci with an empty task cache",
+      "category": "Environment",
+      "result": "ENOTFOUND registry.npmjs.org",
+      "resolution": "Locked offline cache; dependency installation passed."
+    },
+    {
+      "action": "Initial candidate preparation in sandbox",
+      "category": "Environment",
+      "result": "Two browser servers could not bind 127.0.0.1: EPERM. No candidate packed.",
+      "resolution": "Complete unchanged suite passed with loopback permission."
+    }
+  ],
+  "limitations": [
+    "Local verification only; no hosted Pages or remote CI for the uncommitted bytes.",
+    "Viewport emulation, native browser zoom and human AT remain separate scopes.",
+    "Native Safari was agent-operated; no new human screen-reader or physical-input observations.",
+    "Offline audit metadata is not a current registry security assessment."
+  ],
+  "archive": {
+    "path": "docs/evidence/NATURAL-DOCS-20261030-raw.tar.gz",
+    "bytes": 1715263,
+    "members": 147,
+    "sha256": "f1c047f5550d4a90573e44ebec4c0023d95c6d2a39103191c31bb5d6b28d5f31",
+    "memberIntegrity": "Pass"
+  },
+  "codeContextReview": {
+    "markdownBlocks": 43,
+    "htmlBlocks": 2,
+    "unchanged": true,
+    "details": "verification/audit.json inside the raw archive."
+  },
+  "finalChecks": {
+    "docs": {
+      "status": "Pass",
+      "stdout": "npm notice run @vmitsaras/raveldex@0.1.0-rc.0 docs:check\nnpm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs\nGenerated roadmap and task documents match the canonical manifest (3 files).\nLocal Markdown link targets checked in 159 files (external URLs and anchors not evaluated).\n"
+    },
+    "pages": {
+      "status": "Pass",
+      "stdout": "npm notice run @vmitsaras/raveldex@0.1.0-rc.0 pages:check\nnpm notice run node scripts/check-pages.mjs\n{\"status\":\"Pass\",\"pages\":29,\"links\":431,\"exposedFiles\":44,\"bytes\":650802,\"boundary\":\"Local inventory/links only; actual Jekyll and live Pages require separate verification.\"}\n"
+    },
+    "roadmap": {
+      "status": "Pass",
+      "stdout": "npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:status\nnpm notice run node scripts/plan.mjs status\nRaveldex roadmap\nRelease progress: 21/21 done; 0 in progress; 0 ready.\n\nN0 \u2014 Native design adoption: 2/2 done [release]\nN1 \u2014 Usable native core alpha: 6/6 done [release]\nN2 \u2014 Modular search product: 6/6 done [release]\nN3 \u2014 Host and migration parity: 4/4 done [release]\nN4 \u2014 Native 0.1 qualification: 3/3 done [release]\nN5 \u2014 Selected optional enhancements: 10/10 done [optional]\n\nActive release backlog complete.\n\nScope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.\n"
+    },
+    "diff": {
+      "status": "Pass",
+      "command": "git diff --check",
+      "stdout": ""
+    },
+    "jekyllAfterEvidenceCreation": {
+      "status": "Pass",
+      "publicFiles": 44,
+      "allBytesMatchManagedInventory": true,
+      "stdout": "Configuration file: /Users/vasilis/Documents/GitHub/raveldex/docs/_config.yml\n            Source: /Users/vasilis/Documents/GitHub/raveldex/docs\n       Destination: /tmp/raveldex-natural-docs-20261030/jekyll-final\n Incremental build: disabled. Enable with --incremental\n      Generating... \n                    done in 0.021 seconds.\n Auto-regeneration: disabled. Use --watch to enable.\n"
+    },
+    "preservationAudit": {
+      "status": "Pass",
+      "stdout": "{\"status\": \"Pass\", \"existingHeadingsPreserved\": true, \"markdownCodeBlocksUnchanged\": 43, \"demoCodeBlocksUnchanged\": 2, \"protectedRecordsUnchanged\": 979, \"fixedSourceMetadataAndTestsUnchanged\": true, \"sourceSnapshotsMatchCurrentPackages\": true, \"packageComparisons\": [{\"name\": \"core\", \"private\": true, \"version\": \"0.1.0-rc.0\", \"members\": 315, \"productionMembersUnchanged\": 280, \"bytes\": 234727, \"sha256\": \"a36d16db008451147939cebf8196dcb4444f89342e998cfe446b65ebbf629648\"}, {\"name\": \"english\", \"private\": true, \"version\": \"0.1.0-rc.0\", \"members\": 5, \"productionMembersUnchanged\": 2, \"bytes\": 5089, \"sha256\": \"ec81da5e1a1ae8d1356a2eef533e2c656382558ffdd685225fcd04ede5daf6e4\"}, {\"name\": \"astro\", \"private\": true, \"version\": \"0.1.0-rc.0\", \"members\": 15, \"productionMembersUnchanged\": 12, \"bytes\": 14784, \"sha256\": \"daa0d682473b061d3b6e17e79bd41133eeb8ec0e4234be15342c9067a8d2496f\"}], \"htmlPages\": 29, \"publicFiles\": 44, \"publicBytes\": 650802, \"deterministicOutput\": true, \"jekyllExactInventoryAndBytes\": true, \"routeInventoryUnchanged\": true, \"manifestSha256\": \"634ef500132b3d399ee05ca28e232572222d21a8478257436b9750582a4c183a\", \"usageCorpus\": \"daad81964095e2bd40cac46077d7f0924b3cd1c90e74c29a510a0aabb29c1161\"}\n"
+    }
+  }
+}

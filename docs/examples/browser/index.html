@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Browser demo instructions · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="search-the-usage-guides">Search the usage guides</h1>
+<p>Use this demo to find instructions for adding search to your application. It searches sections from five guides: getting started, core usage, search add-ons, host integration and Astro. Each result links to the full guide.</p>
+<h2 id="run-locally">Run locally</h2>
+<p>From a source checkout, use Node 24 and npm:</p>
+<pre><code class="language-sh">npm ci
+npm run pilot:ui
+</code></pre>
+<p>Open the HTTP URL printed in the terminal. You should see a search field and the guide collection, ready to search. The command builds and installs a local package, bundles the browser and worker code, then serves the demo. Stop it with Ctrl+C. Use <code>--port 4175</code> if the default port is occupied.</p>
+<h2 id="try-a-search">Try a search</h2>
+<ol>
+<li>Search <code>source provide</code> or <code>source prov</code>. Final-word prefix search completes the last word; earlier words must match exactly. Look for <strong>Source, positions and phrases</strong>, which explains how to keep original text.</li>
+<li>Search <code>typed filters</code> to find <strong>Typed filters and exact facets</strong>.</li>
+<li>Search <code>module worker</code> to find <strong>One-owner module worker</strong>.</li>
+<li>Search <code>unmatchedword</code> to see <strong>No results.</strong>, then enter a sample query again to recover.</li>
+<li>Choose a <strong>Category</strong> to narrow the matches, or <strong>All</strong> to clear the filter. Changing page shows more hits without changing the total.</li>
+<li>Follow a result to read its guide. Open <strong>Inspect results</strong> to see matching terms and score calculations; Close or Escape returns focus to that button.</li>
+</ol>
+<p>Tab moves through native controls and links. Return in the search field submits. Search/filter/page updates retain focus on the control used. The Inspector uses a native modal dialog.</p>
+<h2 id="advanced-demo-settings">Advanced demo settings</h2>
+<p>Expand <strong>Advanced demo settings</strong> to compare:</p>
+<ul>
+<li><strong>Query meaning:</strong> complete the final word (default), require all exact words, or require an adjacent phrase.</li>
+<li><strong>Representation:</strong> reanalyze original text, or use stored positions and offsets.</li>
+<li><strong>Execution:</strong> run directly, or in one module worker.</li>
+</ul>
+<p>Changing a setting rebuilds the engine, keeps your query and resets the category and page. <strong>Destroy interface</strong> removes the controls. <strong>Reinitialize search</strong> rebuilds the collection and mounts them again.</p>
+<p>The demo enables phrases, facets, snippets and Inspector explicitly. It keeps data in memory and opens no database. A worker failure does not retry mutations automatically; Reinitialize search creates a fresh engine from the guide collection.</p>
+<h2 id="add-the-interface-to-your-own-application">Add the interface to your own application</h2>
+<p>Start with <a href="/raveldex/example-files/ui.mjs">the minimal UI recipe</a> and the <a href="/raveldex/reference/hosts/#mount-a-minimal-search-form">complete markup and initialization</a>. Provide an element for the controls and import <code>@vmitsaras/raveldex/addons/ui/styles.css</code>.</p>
+<p>That recipe indexes one document. Searching <code>atomic</code> shows <strong>Atomic updates</strong>. Call its returned <code>dispose()</code> when removing the component.</p>
+<p>For snippets/highlights, select original-text or offset providers and the snippet add-on before creating the engine. For filters, select the filter/facet add-ons and declare your metadata fields. Keep display text as text; snippets are bounded excerpts, and result links open the full guide.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

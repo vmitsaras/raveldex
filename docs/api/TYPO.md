@@ -1,6 +1,8 @@
 # Optional bounded typo tolerance
 
-Import `createTypoTolerance` and `TYPO_POLICY` from `@vmitsaras/raveldex/addons/typo`. Merely importing or installing the registration leaves ordinary searches unchanged.
+Use typo tolerance when a search should accept one missing, extra, replaced or swapped character. Import `createTypoTolerance` and `TYPO_POLICY` from `@vmitsaras/raveldex/addons/typo`. You must both register the add-on and request a typo query; ordinary searches stay exact.
+
+Run this example in an installed ESM application. It indexes **Source ownership**, then searches for the misspelling `sorce`:
 
 ```js
 import { createRaveldex } from '@vmitsaras/raveldex';
@@ -22,14 +24,24 @@ try {
 }
 ```
 
-`TypoOptions` is `{ fields: readonly string[], id?: string, maxAlternatives?: number, maxWorkUnits?: number }`. Fields must be schema text fields. Query fields default to **all schema text fields**, and every requested field must be enabled. Supply `payload.fields` when enabling only part of a larger schema. Options and queries are owned before deferred work.
+You should get a total of `1`. `result.extensions.typo` shows the normalized alternative `source` that made the record match. The example disposes the engine after printing the result.
 
-`TYPO_POLICY` is `unicode-osa1-exact-first-v1`: one normalized Unicode code-point insertion, deletion, substitution or adjacent swap; query tokens need at least four code points. If a term already exists exactly in any selected field, only exact matches are selected at weight 1. Otherwise all live distance-one alternatives receive weight 0.5. A candidate may have three code points. There is no accent folding: `cafe` can repair to `café` only when exact `cafe` is absent.
+`TypoOptions` takes `{ fields: readonly string[], id?: string, maxAlternatives?: number, maxWorkUnits?: number }`. Declare those text fields in the schema. Query fields default to all schema text fields, so supply `payload.fields` if you enabled only some of them. Raveldex copies the accepted options and query before queued work starts.
 
-Original words remain AND requirements with OR alternatives inside each group. Repeats deduplicate; distinct misspellings remain separate even if they share repairs. Native BM25 uses actual alternatives and discounts. Exact-first selects dictionary terms per token; it does not guarantee ranking for mixed Boolean queries. Ordinary text, exact/prefix groups and strict phrases stay strict.
+The policy is `unicode-osa1-exact-first-v1`:
 
-The alternative ceiling defaults to 15, maximum 15, with an additional core slot for the original term. Lower core variant/group/expansion limits also apply. The default/max add-on work cap is 10,000,000 work-v1 units across all its leaves, additionally limited by shared search work, deadline and cancellation. Alternatives/output/core-expansion overflow rejects `LIMIT_EXCEEDED`; work overflow rejects `WORK_LIMIT_EXCEEDED`. No incomplete mode exists.
+- A query term needs at least four normalized Unicode code points.
+- If the exact term exists in any selected field, it is the only alternative and has weight `1`.
+- Otherwise, indexed terms one insertion, deletion, substitution or adjacent swap away have weight `0.5`. An alternative may have three code points.
+
+There is no accent folding. For example, `cafe` can repair to `café` only when an exact `cafe` term is absent.
+
+Every original query word still needs a match, with alternatives allowed for that word. Repeating the same word does not multiply it; different misspellings stay separate even if they lead to the same repair. BM25 uses the actual matched alternatives and their weights. Exact-first selection works per word and does not guarantee an overall ranking order in a mixed Boolean query.
+
+You can allow up to 15 alternatives per term, which is also the default. Core reserves another slot for the original term, and lower core variant, group or expansion limits still apply. The default and maximum add-on work budget is 10,000,000 work-v1 units across the whole search. Shared work limits, deadlines and cancellation also apply.
+
+Too many alternatives or output entries reject with `LIMIT_EXCEEDED`; too much work rejects with `WORK_LIMIT_EXCEEDED`. Neither returns an incomplete search.
 
 An explicit leaf returns `result.extensions.typo` with `TypoResult` shape `{ policy, groups: TypoGroup[] }`. A group has `{ term, fields, alternatives, dictionaryEntriesVisited, workUnits }`; each `TypoAlternative` has `{ term, match: 'exact', weight }`. These are actual live normalized terms, excluding an absent original variant. Repeated identical requests share one output group. Empty input returns no matches and an empty groups array. Output is owned/immutable and merges with facets or one evidence request. Visits/work are logical counters, not latency or heap measurements.
 
-No optional side index, source or cross-search cache is retained. Searches use the current atomic revision; workers require matching host options. Actual alternatives feed Inspector and original-range/snippet providers without becoming phrases. See the repository [complete policy and bounds](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/TYPO_TOLERANCE.md). This selected optional development slice extends the historical private candidate; earlier artifact hashes/remote qualification do not verify changed code.
+Typo tolerance reads the live dictionary at the search revision and keeps no extra source, side index or cross-search cache. In a worker, install matching options on the host. Inspector and original-range/snippet providers can explain the alternatives that matched; those alternatives do not become phrases. See [practical matching limits](LIMITATIONS.md#matching-text).

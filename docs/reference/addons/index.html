@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ADDONS · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="optional-search-capabilities">Optional search capabilities</h1>
+<p>Add only the search features your application needs. Most factories below return an <code>AddonRegistration</code> that you pass to <code>createRaveldex({ schema, addons })</code>. They check their options immediately, and their state is updated, cleared and disposed together with the engine. The phrase, filter and evidence providers described here leave ordinary term statistics and BM25 scores unchanged.</p>
+<p>The query-syntax parser and record-patch helper work separately, as explained in their sections. To try phrases, filters, facets and result explanations together, copy <a href="/raveldex/example-files/addons.mjs">addons.mjs</a> and call <code>runAddonsExample()</code>.</p>
+<h2 id="source-positions-and-phrases">Source, positions and phrases</h2>
+<p>A source provider keeps the original text for selected fields. A position provider keeps where tokens occur, with optional character offsets. For phrase search, choose a phrase evaluator that uses one of those providers, or a mixed strategy for different fields.</p>
+<table>
+<thead>
+<tr>
+<th>Import and factory</th>
+<th>Options / returned registration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/addons/phrases/source</code>: <code>createSourceProvider(options)</code></td>
+<td><code>SourceProviderOptions</code>: <code>{ fields: string[], id?, maxRetainedEntries?, maxWorkUnits? }</code>. Retains selected exact original text values. Also re-exported from <code>/addons/phrases</code>.</td>
+</tr>
+<tr>
+<td><code>/addons/phrases</code>: <code>createSourcePhrases(options)</code></td>
+<td><code>SourcePhraseOptions</code>: <code>{ fields: string[], id?, maxWorkUnits? }</code>. Reanalyzes retained originals to verify strict token adjacency.</td>
+</tr>
+<tr>
+<td><code>/addons/positions</code>: <code>createPositionProvider(options)</code></td>
+<td><code>PositionProviderOptions</code>: <code>{ fields: string[], offsets?: string[], id?, maxRetainedEntries?, maxWorkUnits? }</code>. Retains occurrences for selected fields; offsets must be a subset of those fields.</td>
+</tr>
+<tr>
+<td><code>/addons/phrases/positions</code>: <code>createPositionPhrases(options)</code></td>
+<td><code>PositionPhraseOptions</code>: <code>{ fields: string[], id?, maxWorkUnits? }</code>. Verifies adjacency with stored positions; requires no originals or offsets.</td>
+</tr>
+<tr>
+<td><code>/addons/phrases/mixed</code>: <code>createPhrases(options)</code></td>
+<td><code>MixedPhraseOptions</code>: <code>{ fields: Record&lt;string, 'source' | 'positions'&gt;, id?, maxWorkUnits? }</code>. Selects a declared strategy per field.</td>
+</tr>
+</tbody>
+</table>
+<p>Choose one phrase registration per engine; duplicate providers conflict. All phrase registrations provide capability <code>phrases</code>, version <code>1</code>. Each field you search must have its required provider, even when the phrase is empty or no terms match.</p>
+<p>This query fragment looks for adjacent <code>red</code> and <code>car</code> terms in <code>title</code> or <code>body</code>. First create an engine with those fields and a matching phrase registration, then pass <code>phraseQuery</code> to <code>engine.search</code>:</p>
+<pre><code class="language-js">const phraseQuery = {
+  kind: 'extension', capability: 'phrases', version: 1,
+  payload: { text: 'red car', fields: ['title', 'body'] },
+};
+</code></pre>
+<p>A value containing <code>red car</code> can match; <code>red fast car</code> cannot. The two words must appear next to each other within one field value. This block creates a query only; it does not run a search or print a count.</p>
+<p>Keep these phrase rules in mind:</p>
+<ul>
+<li>Omitted <code>fields</code> means all schema text fields. Select fields explicitly if only some have providers.</li>
+<li>Punctuation separates tokens. A token phrase is not a punctuation-sensitive literal string.</li>
+<li>Repeated terms must occur as required; a phrase never joins separate fields or array values.</li>
+<li>Phrases add no ranking bonus. They allow at most 32 analyzed tokens, or a lower configured core limit.</li>
+</ul>
+<p>Use <a href="/raveldex/reference/proximity/">proximity</a> to allow ordered gaps. Strict phrases do not accept gaps or synonym graphs.</p>
+<p>Positions record token locations; offsets also record the original UTF-16 start and exclusive end. Offsets alone do not keep text for display. You can lower the providers’ entry and work limits through their options. Exceeding a limit rejects the operation. Entry counts describe stored items, not heap bytes.</p>
+<p>Use the source-only or position-only import when you do not need its phrase evaluator.</p>
+<h2 id="typed-filters-and-exact-facets">Typed filters and exact facets</h2>
+<p>Use typed filters to narrow results by declared metadata without changing their lexical scores. Register <code>createFilters({ fields, id?, maxWorkUnits? })</code> from <code>/addons/filters</code>, then use either of these version-1 extension queries:</p>
+<table>
+<thead>
+<tr>
+<th>Capability / exported payload type</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>numeric-range</code> / <code>NumericRangePayload</code></td>
+<td><code>{ field, gt?, gte?, lt?, lte? }</code>. Numeric field; at least one finite endpoint. Do not supply both lower operators or both upper operators.</td>
+</tr>
+<tr>
+<td><code>set-membership</code> / <code>SetMembershipPayload</code></td>
+<td><code>{ field, values: Scalar[] }</code>. Nonempty, correctly typed scalar set; maximum 128 values, bounded by core metadata limits.</td>
+</tr>
+</tbody>
+</table>
+<p>For a multi-valued numeric field, at least one value must satisfy the whole range. Set membership matches if any supplied value equals a stored value. Missing fields do not match; nullable fields can explicitly match <code>null</code>.</p>
+<p>Wrap the payload in <code>{ kind: 'extension', capability, version: 1, payload }</code> and combine it with text queries using <code>and</code>, <code>or</code> or <code>not</code>. Filters read core metadata and keep no extra side index.</p>
+<p>Facets give you counts for categories such as <code>kind</code>. Register <code>createFacets({ fields, id?, maxWorkUnits?, maxDistinctValuesPerField?, maxBucketsPerField? })</code> from <code>/addons/facets</code> for string metadata fields.</p>
+<p>The following options fragment requests up to ten <code>kind</code> buckets plus a missing-value bucket. It assumes your engine declares <code>kind</code> as string metadata and has the facet registration. Pass <code>options</code> as the second argument to <code>engine.search(query, options)</code>:</p>
+<pre><code class="language-js">const options = {
+  extensions: { facets: { fields: [{ field: 'kind', limit: 10, missing: true }] } },
+};
+</code></pre>
+<p>Read the counts from <code>result.extensions.facets.fields</code>. They cover all matches before pagination and include every active filter, including a filter on <code>kind</code> itself. Changing the hit page does not change these counts.</p>
+<p><code>FacetRequest.fields</code> takes <code>{ field, limit?, missing? }</code> selections. Each returned field contains <code>{ field, buckets, distinctValueTotal, omittedBucketCount }</code>. A bucket is either <code>{ kind: 'value', value: string | null, count }</code> or <code>{ kind: 'missing', count }</code>.</p>
+<p>A document counts once per distinct value. <code>null</code> and missing are separate buckets, and an empty multi-value array adds no value. Buckets sort by descending count with deterministic value ties. If you want a category’s counts to exclude its own active filter, compute that through a separate query.</p>
+<p>The default and maximum limits are 10,000 distinct values per field and 100 returned buckets. The bucket limit can be zero. When you request fewer buckets, <code>omittedBucketCount</code> tells you how many are not shown; displayed counts remain exact. Exceeding a distinct-value, work or output limit rejects the search.</p>
+<h2 id="native-inspector">Native Inspector</h2>
+<p>Use Inspector to explain why a record matched and how its score was calculated. Register <code>createInspector({ id?, sourceFields?, maxFacts?, maxWorkUnits?, maxOutputEntries? })</code> from <code>/addons/inspector</code>. To include source text, install a source provider, allow the field in <code>sourceFields</code>, and request it on the search.</p>
+<p>This options fragment asks about <code>guide:updates</code> at revision <code>1</code>. It needs an engine with Inspector and a source provider for <code>title</code>. Pass it as the second argument to <code>engine.search(query, options)</code>:</p>
+<pre><code class="language-js">const options = {
+  extensions: {
+    inspector: { ids: ['guide:updates'], expectedRevision: 1, sourceFields: ['title'] },
+  },
+};
+</code></pre>
+<p>The result appears in <code>result.extensions.inspector</code>. Look there for the selected record’s matching terms, score calculation and requested title text. If the collection is no longer at revision <code>1</code>, the request rejects with <code>REVISION_MISMATCH</code> instead of explaining a different revision. In your application, use a revision returned by a completed search or update.</p>
+<p><code>InspectorRequest</code> takes <code>{ ids, maxFacts?, expectedRevision?, sourceFields? }</code>. You can select up to 128 unique IDs and 4,096 facts, subject to lower configured limits. <code>InspectorData</code> includes <code>kind: 'raveldex-inspector-v1'</code>, revision/model, configuration, selected <code>ScoreTrace</code>, documents, result counts, resources and numerical tolerance. Inspector does not retain historical index state.</p>
+<p>The facts describe the search that actually ran. They include participating Boolean branches, the winning alternative for each group and field, term/document frequencies (<code>tf</code> and <code>df</code>), field lengths and populations, boosts, weights and the BM25 arithmetic. Use these to understand a score; they are not relevance percentages.</p>
+<p>Selected <code>InspectorDocument</code> entries distinguish <code>matched</code>, <code>excluded</code> and <code>absent</code>, and <code>returned</code> versus <code>outside-page</code> placement. Score is null where unavailable. Absolute rank and all losing alternatives are explicitly <code>unavailable: not-collected</code>. <code>InspectorSource</code> distinguishes not-requested, absent record and available/absent fields. <code>InspectorResources</code> exposes work-v1/count scope before evidence projection; heap bytes are explicitly <code>unavailable: not-measured</code>. The tolerance is absolute/relative <code>1e-12</code>, not a cross-engine bit-identity promise.</p>
+<p><code>exportDiagnostics(data: InspectorData, options?: DiagnosticOptions): DiagnosticExport</code> returns <code>{ json, complete, omitted }</code>. Options are <code>{ maxCodeUnits?, includeFacts?, includeSource? }</code>. Defaults include metadata and exclude facts/IDs/canonical query and source. Source inclusion can only include source already selected in the request. The default/maximum output budget is 262,144 UTF-16 units. If selected facts/source do not fit, entire sections may be omitted with <code>complete: false</code> and their names in <code>omitted</code>; if even metadata does not fit, the export rejects. Unrequested sections are not reported as omissions. Output is valid JSON, never a truncated string. Review diagnostic content before sharing it.</p>
+<p>The entry exports <code>InspectorOptions</code>, <code>InspectorRequest</code>, <code>InspectorSource</code>, <code>InspectorDocument</code>, <code>InspectorConfiguration</code>, <code>InspectorResources</code>, <code>InspectorData</code>, <code>DiagnosticOptions</code>, <code>DiagnosticExport</code>, <code>ScoreTrace</code>, <code>Fact</code> and <code>FieldFact</code> types. Ordinary searches do not request full trace trees.</p>
+<h2 id="original-ranges-and-snippets">Original ranges and snippets</h2>
+<p>Use match evidence when you need the original text ranges that matched. Register <code>createMatchEvidence</code> from <code>/addons/evidence</code> with <code>{ fields: Record&lt;string, 'source' | 'offsets'&gt;, id?, maxFacts?, maxRanges?, maxWorkUnits?, maxOutputEntries? }</code>. Choose whether each field uses original-source reanalysis or stored offsets.</p>
+<p>Request <code>{ ids, fields?, expectedRevision?, maxFacts?, maxRanges? }</code> at <code>extensions['match-evidence']</code>. You receive original ranges for the selected documents, not ready-made HTML.</p>
+<p><code>MatchEvidenceData</code> is <code>{ kind: 'raveldex-match-evidence-v1', revision, fields, scope: 'successful-positive-token-occurrences', complete: true, documents }</code>. Each <code>MatchDocument</code> has <code>{ id, eligibility, ranges }</code>. A <code>MatchRange</code> is <code>{ field, valueIndex, position, start, end, term }</code>; the range is half-open, local to the original value and uses UTF-16 coordinates. <code>term</code> is normalized search data; use the original value for display. Prefix evidence highlights the complete matching original token. Successful positive Boolean branches contribute occurrences; failed/negative branches do not.</p>
+<p><code>createSnippetEvidence(SnippetOptions)</code> from <code>/addons/snippets</code> extends those options with <code>{ maxSnippets?, maxCodeUnits?, maxHighlights? }</code>. It provides <code>snippets</code>, using <code>SnippetEvidenceRequest</code> (the same request shape). Originals are required even when occurrences use offsets; snippets do not silently retain them. Missing usable <code>Intl.Segmenter</code> rejects <code>UNSUPPORTED_ENVIRONMENT</code> when snippets are requested.</p>
+<p><code>SnippetEvidenceData</code> extends match data. Each <code>SnippetDocument</code> adds <code>snippets</code> and <code>snippetOmissions</code>. A <code>Snippet</code> has <code>{ field, valueIndex, start, end, text, highlights, omittedBefore, omittedAfter }</code>; its exact original text is ordinary text, never trusted HTML. <code>SnippetHighlight</code> coordinates are relative to that slice and expanded to grapheme boundaries. Render text nodes plus explicit marks. <code>SnippetOmissions</code> records <code>{ unshownMatches, windowLimit, highlightLimit, matchTooLong, graphemeTooLong }</code>.</p>
+<p>Range requests either return complete ranges or reject. Snippets can leave matches out of their displayed excerpts, and report those omissions. The default and maximum display limits are three windows per document, 240 UTF-16 units per window and 32 merged highlights per window. Facts and ranges each allow at most 4,096, and selected IDs at most 128. Output size and shared work limits also apply; request options can lower them.</p>
+<p>Request only one evidence extension per search: Inspector, ranges or snippets. Asking for two rejects with <code>INVALID_OPTIONS</code>. You can install all of their providers, then make separate searches. Use <code>expectedRevision</code> if those explanations must refer to the same collection revision.</p>
+<h2 id="anchored-page-context">Anchored page context</h2>
+<p>Use <code>createSectionEvidence</code> from <code>@vmitsaras/raveldex/addons/sections</code> when a result represents a whole page and you want links to matching headings. Index one record per page. The optional projection preserves native page scores, order, totals and pagination; it does not compute a global matching-section count or extract headings from HTML.</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
+import { createSectionEvidence } from '@vmitsaras/raveldex/addons/sections';
+
+const original = 'Replace a bicycle chain.';
+const engine = createRaveldex({
+  schema: { text: { body: {} } },
+  addons: [
+    createSourceProvider({ fields: ['body'] }),
+    createSectionEvidence({ fields: { body: 'source' } }),
+  ],
+});
+const written = await engine.add({ id: 'repair', text: { body: original } });
+const result = await engine.search('chain', {
+  extensions: {
+    'section-evidence': {
+      ids: ['repair'], expectedRevision: written.revision,
+      sections: [{ sectionIndex: 0, field: 'body', valueIndex: 0, start: 0, end: original.length }],
+      maxPreviews: 3,
+    },
+  },
+});
+console.log(result.extensions['section-evidence']);
+await engine.dispose();
+</code></pre>
+<p>Each request selects exactly one ID and carries the complete canonical descriptor list for that page, up to 64 entries. Indexes must be consecutive from zero in field/value/start/end source order. <code>expectedRevision</code> is required. Original UTF-16 half-open spans must be nonempty, disjoint, in a configured field/value and end at actual grapheme boundaries. Scalar text uses value index zero; arrays preserve their original indexes. An absent or excluded selected ID returns its native eligibility with empty ranges/previews and zero local omissions. Empty descriptors declare no mapped scope and produce no previews or scoped omission counts.</p>
+<p><code>fields</code> selects explicit source or offsets strategies. Both need source for display; offsets additionally need the original-offset positions provider. Factory options reuse match-evidence ID/fact/range/work/output limits and add <code>maxCodeUnits</code> (1–240, default 240) and <code>maxHighlights</code> (1–32, default 32). <code>maxPreviews</code> belongs to each request (1–3, default 3). Register the same factory/options explicitly in a worker; no new worker command is needed. Import and factory creation perform no source segmentation or host initialization.</p>
+<p>The response keeps the match-evidence header and original positive ranges. Its selected document adds <code>sectionPreviews: [{ sectionIndex, snippet, snippetOmissions }]</code> and <code>sectionOmissions: { omittedSections, unmappedRanges, boundaryRanges }</code>. A section qualifies only when it contains a complete positive occurrence. The first qualifying sections in source order win, even when an oversized match makes a selected excerpt null. Cross-boundary occurrences are counted separately and never clipped into a fabricated token. The page may match different query clauses in different sections.</p>
+<p>Excerpts stay within their section and original value. They use at most 240 UTF-16 units and 32 merged grapheme-safe marks, with explicit existing snippet omissions; omitted-before/after flags refer to the section’s text. The complete response refuses rather than silently truncating evidence. Fixed ceilings include 4,096 facts/ranges, 262,144 section/range pair visits, 10,000,000 shared work units, 16,384 output entries and an additional 262,144 serialized UTF-8 bytes; lower native/configured bounds still apply. These are admission/output bounds, not memory or latency guarantees.</p>
+<p>For heading metadata and links, use the <a href="/raveldex/reference/hosts/#inline-anchored-sections">inline section options</a>. For build-time delivery, use the <a href="/raveldex/reference/static-astro/#optional-heading-maps">optional Astro companion</a>. The <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/specs/PAGE_SECTIONS.md">page/section contract (repository access)</a> specifies exact validation, clipping, limits and failure behavior.</p>
+<h2 id="bounded-typo-tolerance">Bounded typo tolerance</h2>
+<p>Choose <code>/addons/typo</code> when you want a query to accept a single character edit or adjacent swap. Exact terms take priority, and ordinary exact, prefix and phrase searches keep their existing rules. See <a href="/raveldex/reference/typo/">the example, policy and limits</a>.</p>
+<h2 id="dictionary-backed-token-suggestions">Dictionary-backed token suggestions</h2>
+<p>Use <code>/addons/suggestions</code> to offer word completions from your indexed vocabulary. Request them through <code>options.extensions.suggestions = { text, fields?, limit? }</code>. Suggestions are separate from hits and use word frequency across the selected fields, regardless of the current filters or page. Your application decides whether and how to show or apply them. See <a href="/raveldex/reference/suggestions/">the example and complete rules</a>.</p>
+<h2 id="directional-one-step-synonyms">Directional one-step synonyms</h2>
+<p>Use <code>/addons/synonyms</code> to define your own one-way word mappings, such as <code>backup</code> to <code>snapshot</code>. A requested synonym query keeps each original word as a requirement, with mapped alternatives at weight <code>0.5</code>. Expansion stops after one step. The result lists the mappings used and the vocabulary version. See <a href="/raveldex/reference/synonyms/">the example, public types and limits</a>.</p>
+<h2 id="selected-english-analysis">Selected English analysis</h2>
+<p>Select the <a href="/raveldex/reference/english/">English analyzer</a> through <code>Configuration.analyzer</code> when creating the engine. It joins some related word forms, so differently spelled words can also match in phrases. Highlights still refer to complete original tokens. The current typo, synonym and suggestion requests support only <code>basic-v1</code> and reject under English analysis. The language rules do not create another per-corpus index.</p>
+<h2 id="identifier-analysis">Identifier analysis</h2>
+<p>Choose <code>/addons/identifiers</code> for names such as <code>maxQueuedOperations</code>. Ordinary searches can find the whole name or its components; strict phrases still use original identifiers. Match ranges distinguish the whole name from a component. See <a href="/raveldex/reference/identifiers/">setup, examples and compatibility</a>. Choose basic, English or identifier analysis for an engine rather than mixing them automatically.</p>
+<h2 id="literal-and-infix-matching">Literal and infix matching</h2>
+<p>Use <code>/addons/literal</code> to match original text exactly, including case, punctuation and substrings inside a word. It needs source providers for the selected fields. A literal-only query returns zero-scored matches; combining it with a text query keeps that text query’s BM25 scoring. Its own range output can show overlapping matches. See <a href="/raveldex/reference/literal/">the example and Unicode rules</a>.</p>
+<h2 id="ordered-proximity">Ordered proximity</h2>
+<p>Use <code>/addons/proximity</code> when words must appear in order but may have a limited gap between them. Install position providers first. Matches stay within one field value, repeated words need distinct positions, and distance adds no score bonus. With a zero gap, singleton groups behave like a strict phrase. See <a href="/raveldex/reference/proximity/">the example and evidence restrictions</a>.</p>
+<h2 id="explicit-query-syntax">Explicit query syntax</h2>
+<p>Use <code>/addons/query-syntax</code> when your search box should accept operators, field names, phrases and prefixes. Parse the input in your application, then pass the resulting typed query to the engine. The parser does not change ordinary strings or the built-in UI. Invalid syntax returns an error with a source span rather than falling back to plain search. See <a href="/raveldex/reference/query-syntax/">the grammar and example</a>.</p>
+<h2 id="explicit-record-patches">Explicit record patches</h2>
+<p>Use <a href="/raveldex/reference/record-patch/"><code>createPatch</code></a> to change selected whole fields without assembling the rest of a record yourself. It needs a direct engine, source providers for every text field and the revision you observed. It uses the ordinary atomic replacement operation and keeps no extra source copy. It is a helper, not an <code>AddonRegistration</code>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

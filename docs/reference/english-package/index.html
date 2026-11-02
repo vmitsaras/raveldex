@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>English package · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="raveldex-english-analyzer">Raveldex English analyzer</h1>
+<p>Use this package to match English word forms such as <code>indexed</code>, <code>indexing</code> and <code>index</code>. It exports <code>createEnglishAnalyzer</code> and <code>ENGLISH_ANALYZER</code>, using the original Porter 1980 stemming rules.</p>
+<p>The JavaScript bundle contains its language rules and helpers, with no runtime import of core. Its TypeScript declarations use public core types through an exact-version peer dependency.</p>
+<h2 id="install">Install</h2>
+<p>In an ESM application with Node <code>&gt;=22</code>, install matching local files:</p>
+<pre><code class="language-sh">npm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/english/vmitsaras-raveldex-english-0.1.0-rc.0.tgz
+</code></pre>
+<p>Replace both absolute paths with your local files. The command installs core and the English package, which must both be version <code>0.1.0-rc.0</code>. To build them from a checkout, compile with <code>npm run build</code>, pack core with <code>npm pack --ignore-scripts</code>, then run <code>node scripts/pack-english.mjs --output NEW_DIRECTORY</code>.</p>
+<h2 id="search-english-word-forms">Search English word forms</h2>
+<p>Save this as an <code>.mjs</code> file in your installed application and run it with Node. Set both <code>analyzer</code> and the add-on registration to select English analysis:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createEnglishAnalyzer, ENGLISH_ANALYZER } from '@vmitsaras/raveldex-english';
+
+const engine = createRaveldex({
+  schema: { text: { title: {} } },
+  analyzer: ENGLISH_ANALYZER,
+  addons: [createEnglishAnalyzer()],
+});
+try {
+  await engine.add({ id: 'guide', text: { title: 'Indexed documents' } });
+  const result = await engine.search('indexing document');
+  console.log(result.hits.map(hit =&gt; hit.id));
+} finally { await engine.dispose(); }
+</code></pre>
+<p>The example prints <code>[ 'guide' ]</code>: <code>indexing document</code> finds the title <strong>Indexed documents</strong>. The engine is disposed when it finishes.</p>
+<h2 id="matching-rules">Matching rules</h2>
+<p>Importing or registering the pack alone does not select it. When selected, it uses basic token boundaries and NFKC/lowercase, then applies the original Porter 1980 rules to ASCII alphabetic tokens longer than two letters. Short terms and normalized terms containing non-ASCII characters or digits pass through.</p>
+<p>Every original token keeps one position and its full original UTF-16 span. Stop words are not removed, and no multiword graphs or extra corpus index are created. The constant rules and registration identity remain part of the package.</p>
+<p>Stemming can join distinct words, so check your application’s vocabulary and expected results. It does not understand meaning or preserve original spellings as extra exact terms. Queries, phrases and evidence all use the selected analyzer.</p>
+<h2 id="workers-and-snapshots">Workers and snapshots</h2>
+<p>Use the same language-pack identity in the worker. Snapshots check analyzer, pack and environment compatibility. Source snapshots rebuild at the receiver; native snapshots require an exact, application-qualified Node environment. The convenience subpath in core exports the same factory and descriptor, so choose one import path rather than registering both.</p>
+<p>The analyzer implements the original 1980 algorithm described at
+<a href="https://snowballstem.org/algorithms/porter/stemmer.html">the original algorithm description</a>. It is not Porter2 or the
+later BLI/LOGI variant. No external stemmer implementation is included.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

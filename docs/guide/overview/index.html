@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Getting started · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="getting-started">Getting started</h1>
+<p>Raveldex adds search to data you already have. Tell it which fields to search, add your records and use the matching IDs to look up titles, URLs or other details in your application.</p>
+<h2 id="install-the-package">Install the package</h2>
+<p>The packages are currently unpublished and supplied as local <code>.tgz</code> files. In a new application directory, run these commands to create a package, enable ESM imports and install core. Replace the absolute path with the file you received or built:</p>
+<pre><code class="language-sh">npm init -y
+npm pkg set type=module
+npm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz
+</code></pre>
+<p>You can now import <code>@vmitsaras/raveldex</code> in that application. Core and the English analyzer require Node 22 or later; the Astro integration requires Node 22.12 or later. In a browser application, let your existing bundler resolve the imports. See <a href="/raveldex/guide/compatibility/">compatibility</a> for optional feature requirements.</p>
+<h2 id="smallest-core-example">Smallest core example</h2>
+<p>Save the following as <code>search.mjs</code> beside your application’s <code>package.json</code>, then run <code>node search.mjs</code>. It indexes a single document and searches for <code>atomic</code>.</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+
+const engine = createRaveldex({
+  schema: { text: { title: { boost: 2 }, body: {} } },
+});
+try {
+  await engine.add({
+    id: 'guide:updates',
+    text: { title: 'Atomic updates', body: 'Replace one complete record.' },
+  });
+  const result = await engine.search('atomic');
+  console.log(result.total); // 1
+  console.log(result.hits[0].id); // guide:updates
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>The example prints <code>1</code> and <code>guide:updates</code>: one document matched, and that is its ID. It then disposes the engine.</p>
+<p>A few details matter when you add more records:</p>
+<ul>
+<li><code>boost: 2</code> gives matches in the title more weight than matches in the body.</li>
+<li><code>total</code> counts every matching record; <code>hits</code> contains the requested page of IDs and scores.</li>
+<li>Keep your display data in your application and look it up by ID.</li>
+<li>Plain string searches require every complete term. <code>atomic updates</code> matches the title above; <code>atom</code> does not. Use a <a href="/raveldex/reference/core/#query-shapes">prefix query</a> to match the beginning of a word.</li>
+</ul>
+<h2 id="update-your-collection">Update your collection</h2>
+<p>Use the method that matches the change you want to make:</p>
+<ul>
+<li><code>addMany</code> adds a batch of new records.</li>
+<li><code>replace</code> replaces one complete record.</li>
+<li><code>remove</code> deletes records by ID.</li>
+<li><code>clear</code> empties the collection.</li>
+</ul>
+<p>Await an update before searching when the results need to include it. Each successful change creates a new collection revision, and each search result tells you which revision it used. See <a href="/raveldex/reference/core/">records, mutations and query shapes</a>.</p>
+<h2 id="add-a-search-interface">Add a search interface</h2>
+<p>For a complete project to adapt, choose a <a href="/raveldex/examples/inline/">browser or Astro inline starter</a>. Each includes explicit sample content, source snippets, a topic filter, paging, CSS, loading/retry and cleanup. The browser starter builds an engine from its records; Astro builds static search artifacts and loads them on demand. Both use the current local tarballs.</p>
+<p>For search behind a button, choose a <a href="/raveldex/examples/modal/">documentation modal starter</a>. The browser and Astro projects include cancelable first-open loading, real page/heading links, retry, query preservation and owned-engine cleanup. Replace their explicit authored content and adjust the theme CSS.</p>
+<p>Both galleries provide complete project downloads and a short edit/build/preview CSS walkthrough. Keep the starter’s source/snippet/facet or section registrations aligned with its UI options; these are explicit optional capabilities. The <a href="/raveldex/reference/hosts/#starter-adoption-and-local-checks">adoption checklist</a> lists browser requirements, ownership and the remaining checks to run after replacing data or styles.</p>
+<p>The <a href="/raveldex/reference/hosts/#native-dom-ui-and-css">native DOM UI</a> adds a labeled search field, results and pagination to an element you provide. Import its CSS separately. You still own the engine: remove the UI with <code>destroy()</code> before disposing that engine.</p>
+<p>If you want <a href="/raveldex/reference/addons/">phrases, snippets or highlights</a>, choose the required source or position providers when creating the engine. These keep the original text or word locations that core alone does not store. For static Astro pages, follow <a href="/raveldex/reference/static-astro/">the Astro guide</a>.</p>
+<h2 id="build-tarballs-from-a-source-checkout">Build tarballs from a source checkout</h2>
+<p>You only need this step if you are building the packages yourself. With repository access, Node 24 and npm, run the following from the repository root. It compiles the code once and creates matching core, English and Astro tarballs:</p>
+<pre><code class="language-sh">export RAVELDEX_REPOSITORY="$(pwd -P)"
+export RAVELDEX_ARTIFACTS="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-artifacts.XXXXXX")"
+npm ci
+npm run build
+mkdir "$RAVELDEX_ARTIFACTS/core"
+npm pack --ignore-scripts --pack-destination "$RAVELDEX_ARTIFACTS/core"
+node scripts/pack-english.mjs --output "$RAVELDEX_ARTIFACTS/english"
+node scripts/pack-astro.mjs --output "$RAVELDEX_ARTIFACTS/astro"
+</code></pre>
+<p>The files are written beneath <code>$RAVELDEX_ARTIFACTS</code>, in <code>core/</code>, <code>english/</code> and <code>astro/</code>. Each pack output directory must be new. You can now install those files in a separate application.</p>
+<p>Keep both shell variables set when following the <a href="/raveldex/examples/astro/">Astro example</a>. Install the matching core tarball alongside either optional package. The Astro build hook also needs <code>astro@7.3.2</code>.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/raveldex/reference/addons/">Choose optional capabilities</a>: phrases, facets, typo tolerance, suggestions and more.</li>
+<li><a href="/raveldex/reference/">Use the public API</a>: options, defaults, methods and result types.</li>
+<li><a href="/raveldex/examples/api/">Run the example modules</a> in your own installed application.</li>
+<li><a href="/raveldex/guide/limitations/">Handle practical limits</a>: analysis, operation bounds and recovery.</li>
+</ul>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

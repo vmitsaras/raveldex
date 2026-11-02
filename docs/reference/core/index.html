@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CORE · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="core-api">Core API</h1>
+<p>Use core to define your searchable fields, add records and retrieve matches. Import its functions and TypeScript types from <code>@vmitsaras/raveldex</code>. Start with the <a href="/raveldex/guide/overview/">complete quick start</a>, or copy <a href="/raveldex/example-files/core.mjs">core.mjs</a> and call <code>runCoreExample()</code> to get a result you can inspect.</p>
+<h2 id="configuration-and-records">Configuration and records</h2>
+<p>Create an engine with <code>createRaveldex(configuration: Configuration): Raveldex</code>. Pass <code>{ schema, limits?, analyzer?, addons? }</code>. The function checks your configuration immediately and returns an empty engine at revision <code>0</code>. Invalid configuration throws before an engine is returned.</p>
+<table>
+<thead>
+<tr>
+<th>Type / property</th>
+<th>Contract</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Schema.text</code></td>
+<td>Nonempty map of field names to <code>TextField</code> (<code>{ boost?: number }</code>). Boost defaults to 1; finite <code>(0,16]</code>.</td>
+</tr>
+<tr>
+<td><code>Schema.metadata?</code></td>
+<td>Map to <code>MetadataField</code> (<code>{ type: 'string' | 'number' | 'boolean', multi?: boolean, nullable?: boolean }</code>). Both flags default to false.</td>
+</tr>
+<tr>
+<td><code>RecordInput</code></td>
+<td><code>{ id: string, text: Record&lt;string, string | readonly string[]&gt;, metadata?: Record&lt;string, Scalar | readonly Scalar[]&gt; }</code>. Only declared fields are accepted.</td>
+</tr>
+<tr>
+<td><code>Scalar</code></td>
+<td><code>string | number | boolean | null</code>. Null requires a nullable field; numbers are finite. A multi field requires an array. Missing is distinct from null.</td>
+</tr>
+<tr>
+<td><code>AnalyzerDescriptor</code></td>
+<td><code>{ id, environmentProfile }</code>; ordinary default is <code>{ id: 'basic-v1', environmentProfile: 'unqualified' }</code>. This is an identity descriptor, not a custom tokenizer function.</td>
+</tr>
+<tr>
+<td><code>LimitOverrides</code></td>
+<td>Partial <code>Limits</code>. Limits may be reduced from the defaults below; <code>minPrefixCodePoints</code> can be raised.</td>
+</tr>
+<tr>
+<td><code>addons</code></td>
+<td>Explicit readonly <code>AddonRegistration[]</code>; source, positions and other capabilities are absent unless selected.</td>
+</tr>
+</tbody>
+</table>
+<p>Choose field names that match <code>[A-Za-z][A-Za-z0-9_]{0,63}</code>. Do not use <code>constructor</code> or <code>prototype</code>, or reuse a name for both text and metadata.</p>
+<p>Give each record a well-formed Unicode ID of 1–256 UTF-16 code units. IDs are used exactly as supplied, including case and whitespace. Pass plain data objects, including null-prototype objects; getters, arbitrary class instances, executable values and unknown properties are rejected. Raveldex copies accepted input when you submit it, so changing your object later does not alter queued work.</p>
+<p>You may omit a declared text field or give it an empty string or array. Each item in a text array remains a separate value. Core stores the index, IDs and declared metadata, but not the original text. Keep display titles and URLs in your application. Add a <a href="/raveldex/reference/addons/#source-positions-and-phrases">source provider</a> if you also need Raveldex to keep original field values.</p>
+<h2 id="methods-and-results">Methods and results</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>search(query: string | Query, options?: SearchOptions)</code></td>
+<td><code>Promise&lt;SearchResult&gt;</code> with complete membership, exact total and requested page.</td>
+</tr>
+<tr>
+<td><code>add(record, options?)</code></td>
+<td><code>Promise&lt;MutationResult&gt;</code>; existing ID rejects <code>ID_EXISTS</code>.</td>
+</tr>
+<tr>
+<td><code>addMany(records, options?)</code></td>
+<td>One atomic add-only batch; any conflict/refusal preserves prior state.</td>
+</tr>
+<tr>
+<td><code>replace(record, options?)</code></td>
+<td>Complete replacement; missing ID rejects <code>ID_NOT_FOUND</code>. Optional direct-owner <a href="/raveldex/reference/record-patch/">patch convenience</a> compiles to this path.</td>
+</tr>
+<tr>
+<td><code>remove(idOrIds, options?)</code></td>
+<td>One string or readonly string array. Missing IDs are no-ops.</td>
+</tr>
+<tr>
+<td><code>clear(options?)</code></td>
+<td>Clears the whole collection and selected transactional providers.</td>
+</tr>
+<tr>
+<td><code>dispose()</code></td>
+<td>Idempotent <code>Promise&lt;void&gt;</code>; closes admission and safely releases owner state/resources.</td>
+</tr>
+</tbody>
+</table>
+<p>Updates return <code>MutationResult</code>: <code>{ revision, changed, added, replaced, removed }</code>. A change is applied completely across core and its installed providers, then gets one new revision. An operation that changes nothing keeps the existing revision.</p>
+<p>Searches return <code>SearchResult</code>: <code>{ revision, model: 'raveldex-bm25-v1', completeness: 'complete', total, hits, extensions? }</code>. Read it as follows:</p>
+<ul>
+<li><code>revision</code> identifies the collection used for this search.</li>
+<li><code>total</code> counts all matching records, regardless of the page you requested.</li>
+<li><code>hits</code> contains readonly <code>{ id, score }</code> entries for that page.</li>
+<li><code>extensions</code> contains any optional output you requested.</li>
+</ul>
+<p>Hits are ordered by descending, finite, unrounded score. Ties use ascending ID order with UTF-16 comparison.</p>
+<p>Pass <code>MutationOptions</code> (<code>{ signal?: CancellationSignal, deadlineMs?: number }</code>) to control cancellation and deadlines. For searches, <code>SearchOptions</code> also accepts <code>{ limit?: number, offset?: number, extensions?: Record&lt;string, unknown&gt; }</code>.</p>
+<p>Pagination starts at offset <code>0</code>. The default page size is <code>min(20, maxHits, maxDocuments - offset)</code>. Set <code>limit: 0</code> if you only need the exact total. When you supply a limit, <code>offset + limit</code> must fit the configured document capacity.</p>
+<h2 id="query-shapes">Query shapes</h2>
+<p>A plain string searches all declared text fields and requires every complete analyzed term to match. Quotes, the word <code>AND</code> and minus signs do not enable a query language. Use a typed query below for more control, or explicitly parse <a href="/raveldex/reference/query-syntax/">query syntax</a> before calling <code>search</code>.</p>
+<table>
+<thead>
+<tr>
+<th><code>Query.kind</code></th>
+<th>Properties / meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td><code>{ text, operator?: 'and' | 'or', fields?: string[] }</code>; default AND.</td>
+</tr>
+<tr>
+<td><code>group</code></td>
+<td><code>{ variants: Variant[], fields?: string[] }</code>; alternative terms/fields. <code>Variant</code> is <code>{ text, match: 'exact' | 'prefix', weight?: number }</code>. Each text analyzes to exactly one token; finite weight <code>(0,1]</code>, default 1.</td>
+</tr>
+<tr>
+<td><code>and</code>, <code>or</code></td>
+<td><code>{ children: Query[] }</code>; nonempty Boolean groups.</td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td><code>{ child: Query }</code>; complement against all live IDs, contributes no lexical score.</td>
+</tr>
+<tr>
+<td><code>eq</code></td>
+<td><code>{ field, value: Scalar }</code>; strict declared metadata equality, including any matching member of multi metadata.</td>
+</tr>
+<tr>
+<td><code>all</code>, <code>none</code></td>
+<td>No additional properties; explicit browse-all or match-none.</td>
+</tr>
+<tr>
+<td><code>extension</code></td>
+<td><code>{ capability, version, payload }</code>; requires a matching installed capability.</td>
+</tr>
+</tbody>
+</table>
+<p>Leave out <code>fields</code> to search all text fields, or provide a nonempty list without duplicates. Text that produces no terms matches nothing.</p>
+<p>Metadata equality uses the original type, case and spacing: it does not turn <code>"1"</code> into <code>1</code>. Missing values differ from <code>null</code>, and <code>not(eq(...))</code> includes records where the field is missing. Queries containing only metadata or exclusions can return matches with a score of zero.</p>
+<p>This is a query fragment for an engine with a <code>title</code> field. Pass it to <code>engine.search(query)</code> to find title terms beginning with <code>atom</code>:</p>
+<pre><code class="language-js">const query = {
+  kind: 'group', fields: ['title'],
+  variants: [{ text: 'atom', match: 'prefix', weight: 0.8 }],
+};
+</code></pre>
+<p>For example, a title containing <code>Atomic updates</code> can match this query. The <code>0.8</code> weight reduces that alternative’s score contribution. This block only creates the query; it does not create an engine or print results.</p>
+<p>A prefix needs at least two normalized Unicode code points. Raveldex finds every matching complete term in the dictionary; if expansion exceeds a limit, the search rejects rather than silently dropping terms.</p>
+<p>Choose <a href="/raveldex/reference/typo/">typo tolerance</a>, <a href="/raveldex/reference/synonyms/">synonyms</a>, <a href="/raveldex/reference/literal/">literal/infix matching</a>, <a href="/raveldex/reference/proximity/">ordered proximity</a> or <a href="/raveldex/reference/query-syntax/">query syntax</a> explicitly when you need those behaviors. A plain string does not turn them on.</p>
+<h2 id="analysis-and-ranking">Analysis and ranking</h2>
+<p>The default analyzer, <code>basic-v1</code>, finds words and numbers with boundaries equivalent to <code>/[\p{L}\p{N}][\p{L}\p{N}\p{M}]*/gu</code>. It applies NFKC normalization and locale-independent lowercase once to each original token. It does not split the normalized result again.</p>
+<p>Accents and word forms remain significant: <code>café</code> differs from <code>cafe</code>, and <code>Straße</code> differs from <code>strasse</code>. The analyzer does not remove stop words, stem words or perform linguistic Japanese segmentation. When you request positions or offsets, each source token keeps its full original UTF-16 span; the end offset is exclusive. Positions start again for each text-array value.</p>
+<p><code>raveldex-bm25-v1</code> uses field-local positive-length populations, <code>k1 = 1.2</code>, <code>b = 0.75</code>, explicit field boosts and <code>ln(1 + (N - df + 0.5)/(df + 0.5))</code> IDF. It selects the best weighted alternative per canonical group/field and sums participating groups/fields deterministically. Only positive groups in successful Boolean branches score; repeated equivalent groups contribute once. Phrases add no hidden bonus. Metadata/facets do not recompute IDF. The repository <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md">ranking contract (repository access)</a> gives normative arithmetic and hand-derived cases. <a href="/raveldex/reference/addons/#native-inspector">Inspector</a> returns selected actual arithmetic.</p>
+<h2 id="execution-errors-and-bounds">Execution, errors and bounds</h2>
+<p>Operations run through one bounded queue in submission order. Each uses the collection revision available when it starts. A deadline includes time spent waiting in that queue; the default is <code>min(30_000, maxDeadlineMs)</code> and the maximum is 60,000 ms.</p>
+<p>Cancellation takes effect at work checkpoints, so it is not an immediate real-time interruption. If several stop conditions apply, the order is disposal, caller cancellation, deadline, then work limit. A change that already committed still returns its committed result. A failure before commit leaves the previous revision in place. Disposing rejects pending and new work; it does not undo completed updates.</p>
+<p>Catch configuration errors around <code>createRaveldex</code> itself, and catch operation errors around your awaited calls. <code>RaveldexError</code> provides a fixed <code>message</code>, a <code>code</code> and frozen <code>details: { path?, limit?, actual? }</code>. Its diagnostics do not include your record or query text.</p>
+<p>The following is the list exported as <code>ERROR_CODES</code>, not a command to run. Use a code to choose the appropriate recovery action:</p>
+<pre><code class="language-text">INVALID_SCHEMA INVALID_RECORD INVALID_QUERY INVALID_OPTIONS
+ID_EXISTS ID_NOT_FOUND LIMIT_EXCEEDED QUEUE_FULL WORK_LIMIT_EXCEEDED
+DEADLINE_EXCEEDED CANCELLED DISPOSED MISSING_CAPABILITY INCOMPATIBLE_CAPABILITY
+REVISION_MISMATCH REVISION_EXHAUSTED RESOURCE_EXHAUSTED UNSUPPORTED_ENVIRONMENT INTERNAL_ERROR
+</code></pre>
+<p>For example, <code>CANCELLED</code> can mean a newer search replaced an older request, while <code>QUEUE_FULL</code> means you need to reduce pending work. A work or deadline error does not contain a successful partial search.</p>
+<p>The defaults below bound input and work; they are not promises about memory, response time or usable document capacity. One limit can be reached before another, even below the maximum record count.</p>
+<table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>Defaults</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>maxDocuments</code>, <code>maxTextFields</code>, <code>maxMetadataFields</code></td>
+<td>10,000; 32; 32</td>
+</tr>
+<tr>
+<td><code>maxFieldNameCodeUnits</code>, <code>maxIdCodeUnits</code>, <code>maxTextValuesPerField</code></td>
+<td>64; 256; 64</td>
+</tr>
+<tr>
+<td><code>maxMetadataValuesPerField</code>, <code>maxMetadataStringCodeUnits</code>, <code>maxMetadataCodeUnitsPerRecord</code></td>
+<td>128; 1,024; 32,768</td>
+</tr>
+<tr>
+<td><code>maxTextCodeUnitsPerValue</code>, <code>maxTextCodeUnitsPerRecord</code>, <code>maxCorpusTextCodeUnits</code></td>
+<td>65,536; 262,144; 67,108,864</td>
+</tr>
+<tr>
+<td><code>maxRawTokenCodeUnits</code>, <code>maxTermCodeUnits</code>, <code>maxTokensPerRecord</code>, <code>maxCorpusTokens</code></td>
+<td>256; 256; 32,768; 4,000,000</td>
+</tr>
+<tr>
+<td><code>maxDictionaryEntries</code>, <code>maxPostingEntries</code>, <code>maxMutationBatch</code>, <code>maxAdmissionEntries</code></td>
+<td>250,000; 2,000,000; 256; 16,384</td>
+</tr>
+<tr>
+<td><code>maxQueryNodes</code>, <code>maxQueryDepth</code>, <code>maxQueryLexicalCodeUnits</code>, <code>maxQueryCodeUnits</code></td>
+<td>128; 16; 2,048; 16,384</td>
+</tr>
+<tr>
+<td><code>maxQueryTokens</code>, <code>maxQueryGroups</code>, <code>maxVariantsPerGroup</code></td>
+<td>64; 64; 16</td>
+</tr>
+<tr>
+<td><code>maxExpansionsPerGroup</code>, <code>maxQueryExpansions</code>, <code>minPrefixCodePoints</code></td>
+<td>256; 1,024; 2</td>
+</tr>
+<tr>
+<td><code>maxHits</code>, <code>maxQueuedOperations</code></td>
+<td>100; 32</td>
+</tr>
+<tr>
+<td><code>maxSearchWorkUnits</code>, <code>maxMutationWorkUnits</code>, <code>checkpointWorkUnits</code>, <code>maxDeadlineMs</code></td>
+<td>10,000,000; 50,000,000; 2,048; 60,000</td>
+</tr>
+</tbody>
+</table>
+<p>The structural <code>CancellationSignal</code> type requires <code>aborted</code>, <code>addEventListener('abort', listener, options?)</code> and <code>removeEventListener('abort', listener)</code>. A native <code>AbortSignal</code> is usable; core declarations require neither DOM nor Node type libraries.</p>
+<h2 id="registration-types">Registration types</h2>
+<p>Most applications can use the provided add-on factories. If you are writing an extension, the root package also exports the protocol types below. Extensions run as trusted code; this protocol does not sandbox them or allow arbitrary replacement of the scorer or analyzer.</p>
+<table>
+<thead>
+<tr>
+<th>Exported types</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AddonRegistration</code>, <code>CapabilityManifest</code>, <code>CapabilityReference</code></td>
+<td>Manifest identity/version, roles, provides/requires, selected data, direct/worker execution, limits, codec and costs; optional trusted role handles.</td>
+</tr>
+<tr>
+<td><code>ParticipantContext</code>, <code>ParticipantImplementation</code></td>
+<td>Initialize selected state; resumably prepare next state for atomic mutation publication.</td>
+</tr>
+<tr>
+<td><code>RefinementContext</code>, <code>RefinementImplementation</code>, <code>PreparedRefinement</code></td>
+<td>Exact-token-sequence leaf refinement; selected declared state, fields and terms; resumable membership test.</td>
+</tr>
+<tr>
+<td><code>MetadataContext</code>, <code>PayloadContext</code>, <code>CapturedPayload</code></td>
+<td>Owned payload, schema/revision/limits and bounded capture.</td>
+</tr>
+<tr>
+<td><code>PredicateImplementation</code>, <code>PreparedPredicate</code></td>
+<td>Capture and prepare a resumable predicate over owned metadata.</td>
+</tr>
+<tr>
+<td><code>AggregationImplementation</code>, <code>PreparedAggregation</code>, <code>AggregationOutput</code></td>
+<td>Capture string-field aggregation, consume complete matches, finish bounded owned output.</td>
+</tr>
+<tr>
+<td><code>EvidenceContext</code>, <code>EvidenceResultContext</code>, <code>EvidenceImplementation</code>, <code>PreparedEvidence</code></td>
+<td>Explicit selected factual trace/evidence, declared provider state and bounded output.</td>
+</tr>
+</tbody>
+</table>
+<p>The exported declarations are authoritative for exact generator/context shapes. See the repository <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md">extension contract (repository access)</a> before authoring a trusted registration. No private owner/root/scheduler API is supported.</p>
+<p>To request <a href="/raveldex/reference/suggestions/">token suggestions</a>, use <code>SearchOptions.extensions.suggestions</code>. Suggestions read the selected dictionaries at the search revision. They do not change which records match, their scores or the page of hits.</p>
+<h2 id="explicit-language-analysis">Explicit language analysis</h2>
+<p>Use <code>basic-v1</code> unless you deliberately choose another analyzer. To select <a href="/raveldex/reference/english/">English analysis</a>, pass both its registration in <code>addons</code> and its descriptor in <code>Configuration.analyzer</code> when creating the engine.</p>
+<p>English analysis changes the terms and ranking statistics, while keeping original token positions and spans. Metadata stays unchanged. Installing the pack without selecting it leaves basic analysis active. Core itself imports no language implementation or language tables, and no other first-party language or segmentation-graph pack is available.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

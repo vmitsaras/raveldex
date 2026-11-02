@@ -1,0 +1,47 @@
+---
+import Layout from './Layout.astro';
+import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+const base = '/raveldex/';
+---
+<Layout frontmatter={{ title: 'Documentation search modal starters' }}>
+  <h1>Documentation search modal starters</h1>
+  <p>Open search from a button, find a matching page and jump to the heading that contains the match. Copy a complete browser or Astro project, replace its explicit page content and adjust the CSS.</p>
+  <p>Use the modal for search behind a button. Choose <a href={base + 'examples/inline/'}>inline search</a> when the field and results should stay in the page.</p>
+  <p>For a compact field in an ordinary header, choose the <a href={base + 'examples/dropdown/'}>dropdown header starter</a>, with a real inline full-results destination.</p>
+  <p>Each project uses the native documentation modal and one indexed record per page. Optional source evidence and section maps provide anchored previews while native page totals, order and paging stay authoritative. These projects load a complete local index on first open; they do not crawl HTML or load index shards.</p>
+  <h2 id="try-modal">Try the browser starter</h2>
+  <p>Select <strong>Search documentation</strong>, search <code>bobbin</code> and follow the threading preview to its actual heading. Try <code>workshop</code> to page through all six guides. Close during loading to cancel the attempt. Ordinary browse links work before loading and without JavaScript.</p>
+  <p><a href={base + 'examples/modal-preview/'}>Open the full modal preview</a></p>
+  <iframe src={base + 'examples/modal-preview/'} title="Documentation modal starter preview" loading="lazy" height="720" style="width: 100%; max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem); border: 1px solid currentColor; border-radius: .5rem;"></iframe>
+  <h2 id="copy-modal">Choose a complete starter</h2>
+  <p>Core and Astro packages are currently private and unpublished. Use the matching local package tarballs described in each guide. The browser starter uses pinned esbuild tooling; the Astro starter builds versioned source, display and section artifacts from an explicit allowlist.</p>
+  <p>Both projects need native <code>dialog</code>, <code>Intl.Segmenter</code> and Web Crypto over HTTPS or localhost. Supply public page records and exact original section text/ranges, with raw anchors that match real heading IDs. The same explicit content renders those targets in each starter. Sections require the selected source/section providers; the Topic filter requires its facet registration. Deploy each rebuilt set of pages and search assets together.</p>
+  {STARTERS.filter(starter => starter.family === 'modal').map(starter => <section aria-labelledby={'starter-' + starter.id}>
+    <h3 id={'starter-' + starter.id}>{starter.title}</h3>
+    <p><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base + starterArchive(starter.id)} download>Download the complete starter</a></p>
+    <p>Extract into an empty directory with <code>tar -xzf starter.tar.gz --strip-components=1</code>, replacing the archive name with your download. Read <code>README.md</code> before installing the local packages.</p>
+    <details><summary>View exact source files</summary><ul>{starter.files.map(path => <li><a href={base + starterSource(starter.id, path)}>{path}</a></li>)}</ul></details>
+  </section>)}
+  <h2 id="modal-theme">Change the appearance</h2>
+  <ol>
+    <li>Copy and install one complete starter using its setup guide. Open search and try <code>workshop</code> before changing the CSS.</li>
+    <li>Edit the existing rules in the browser's <code>theme.css</code> or Astro's <code>src/style.css</code>, loaded after the package's explicit <code>modal.css</code>. Set modal layout properties on the dialog and shared input/result properties on the inner inline surface:</li>
+  </ol>
+  <pre tabindex="0" aria-label="Documentation modal theme properties"><code>{`.raveldex-modal {
+  --raveldex-modal-max-width: 40rem;
+  --raveldex-modal-radius: .75rem;
+}
+.raveldex-inline {
+  --raveldex-inline-accent: #145b45;
+  --raveldex-inline-gap: 1rem;
+}`}</code></pre>
+  <ol start="3">
+    <li>Stop the preview, run <code>npm run build</code> in the copied project and restart its documented preview command with the same deployment base. Reload, open search and inspect the narrower surface, rounded corners and green accent.</li>
+    <li>Search <code>workshop</code>: six pages still match and Load more shows all six. Search <code>bobbin</code> and follow its section link. Use Tab to inspect visible focus, close with Close search and reopen to check the preserved query.</li>
+  </ol>
+  <p>The starter theme files also style the authored loading dialog. Keep loading, failure and ready states visually consistent. Check contrast and visible focus after changing colors. See <a href={base + 'reference/hosts/#documentation-search-modal'}>modal options and CSS properties</a>.</p>
+  <p>Some browsers clear a focused search field on the first Escape. Press Escape again or use <strong>Close search</strong> to dismiss the window.</p>
+  <p>The wrappers own newly created search engines and destroy the borrowed UI before disposing them. To use an engine owned elsewhere, mount the modal directly and keep disposal with that existing owner. Query preservation, reset policy, retry and close/destroy behavior are described in both guides.</p>
+  <h2 id="modal-support">Before using your own theme</h2>
+  <p>Local automated Chrome checks cover installed examples, native dialog keyboard/focus behavior, scripted composition, first-open cancellation/retry, owner cleanup and emulated narrow/theme layouts. Human screen-reader speech, physical IME/touch/on-screen keyboards, actual browser zoom and other browser/device combinations need separate checks in your application. See <a href={base + 'reference/hosts/#starter-adoption-and-local-checks'}>starter adoption and local checks</a>.</p>
+</Layout>

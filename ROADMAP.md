@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 21/21 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 36/40 done · 0 in progress · 1 dependency-ready.
 
-**Planner state:** `complete`.
+**Planner state:** `ready`.
 
-**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
+**Next or resumable release task:** [RX-7003](IMPLEMENTATION_TASKS.md#rx-7003) — Directory multi-filter queries and explicit URL state.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -36,6 +36,9 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N3 — Host and migration parity** | `RX-3001`–`RX-3004` | 4/4 | Support native workers, explicit snapshots and persistence, and a bounded migration route without changing search semantics. |
 | **N4 — Native 0.1 qualification** | `RX-4001`–`RX-4003` | 3/3 | Produce an independently reviewed release candidate whose documented claims match observed correctness, usability, environment support, and resource behavior. |
 | **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 10/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
+| **N6 — Search Workbench documentation site** | `RX-5001`–`RX-5005` | 5/5 | Implement the owner-selected Search Workbench design in the existing static documentation site, with real packed search and preserved publication boundaries. |
+| **N7 — Inline and documentation search solutions** | `RX-6001`–`RX-6008` | 8/8 | Provide ready-to-use Pagefind-style inline search and a documentation modal with optional native UI, complete installed starters, CSS customization and evidence-backed page/section presentation. |
+| **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 2/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
 
 ## Task index
 
@@ -72,6 +75,25 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-A080](docs/planning/OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/35) |
 | [RX-A090](docs/planning/OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/36) |
 | [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
+| [RX-5001](IMPLEMENTATION_TASKS.md#rx-5001) — Shared site shell and responsive reading styles | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5001%22) |
+| [RX-5002](IMPLEMENTATION_TASKS.md#rx-5002) — Homepage with real Search Workbench | `done` | `RX-5001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5002%22) |
+| [RX-5003](IMPLEMENTATION_TASKS.md#rx-5003) — Dedicated demo and shared behavior | `done` | `RX-5002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5003%22) |
+| [RX-5004](IMPLEMENTATION_TASKS.md#rx-5004) — Workbench verification and project synchronization | `done` | `RX-5003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5004%22) |
+| [RX-5005](IMPLEMENTATION_TASKS.md#rx-5005) — Final-word prefix search in the demo | `done` | `RX-5004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5005%22) |
+| [RX-6001](IMPLEMENTATION_TASKS.md#rx-6001) — Consumer inline foundation and compatible preset contract | `done` | `RX-5005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6001%22) |
+| [RX-6002](IMPLEMENTATION_TASKS.md#rx-6002) — Pagefind-style inline controls, paging and theming | `done` | `RX-6001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6002%22) |
+| [RX-6003](IMPLEMENTATION_TASKS.md#rx-6003) — Installed inline search starters for browser and Astro | `done` | `RX-6002`, `RX-A100` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6003%22) |
+| [RX-6004](IMPLEMENTATION_TASKS.md#rx-6004) — Page and section display contract with static compatibility | `done` | `RX-6003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6004%22) |
+| [RX-6005](IMPLEMENTATION_TASKS.md#rx-6005) — Evidence-backed anchored section previews | `done` | `RX-6004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6005%22) |
+| [RX-6006](IMPLEMENTATION_TASKS.md#rx-6006) — Documentation search modal and lifecycle | `done` | `RX-6005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6006%22) |
+| [RX-6007](IMPLEMENTATION_TASKS.md#rx-6007) — Installed documentation modal starters | `done` | `RX-6006`, `RX-A100` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6007%22) |
+| [RX-6008](IMPLEMENTATION_TASKS.md#rx-6008) — Inline and modal gallery, qualification and synchronization | `done` | `RX-6003`, `RX-6007` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6008%22) |
+| [RX-7001](IMPLEMENTATION_TASKS.md#rx-7001) — Accessible compact dropdown search | `done` | `RX-6008` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7001%22) |
+| [RX-7002](IMPLEMENTATION_TASKS.md#rx-7002) — Installed dropdown header starter and gallery | `done` | `RX-7001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7002%22) |
+| [RX-7003](IMPLEMENTATION_TASKS.md#rx-7003) — Directory multi-filter queries and explicit URL state | `planned` | `RX-6008`, `RX-2003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7003%22) |
+| [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004) — Faceted directory controls and installed starter | `planned` | `RX-7003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22) |
+| [RX-7005](IMPLEMENTATION_TASKS.md#rx-7005) — Rich directory result cards and grid presentation | `planned` | `RX-7004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22) |
+| [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006) — Complete solution gallery and family qualification | `planned` | `RX-7002`, `RX-7004`, `RX-7005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22) |
 
 ## Milestone exit conditions
 
@@ -113,6 +135,24 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 - Every selected enhancement has a concrete user/query need, a bounded semantic contract, explicit optional costs, and a native compatibility assessment.
 - Selected enhancements pass their own relevance, correctness, packaging, and lifecycle checks; unselected ideas remain deferred.
 - No N5 feature is required to declare the N0–N4 native candidate complete.
+
+### N6 — Search Workbench documentation site
+
+- Home, guides and demo share a responsive accessible visual language matching the approved reference.
+- Real packed search, examples, filters, Inspector and lifecycle remain verified at the project base.
+- Local checks, browser evidence and documentation are synchronized without publishing.
+
+### N7 — Inline and documentation search solutions
+
+- Inline search can be adopted independently through installed plain browser and Astro starters, with truthful totals, bounded paging, complete states and documented CSS overrides.
+- Documentation modal behavior, explicit triggers, keyboard/focus lifecycle, optional anchored section previews and on-demand starters are verified without changing native page ranking or legacy UI defaults.
+- First-wave gallery, public contracts, examples and task evidence agree; core/optional import boundaries, existing Workbench and publication guards remain intact; manual/platform limitations are explicit.
+
+### N8 — Dropdown, directory and rich search results
+
+- A bounded accessible search-result dropdown supports native editing/link behavior, keyboard selection and an explicit full-results destination.
+- Directory multi-selection, exact conjunctive counts, complete paging and explicitly selected URL state work consistently with native queries and browser navigation.
+- Rich list/card/grid presentation preserves membership, native order, totals and safe metadata/image handling; the complete solution gallery, installed examples and scoped qualification records are synchronized without publication.
 
 ## Execution and authorization
 

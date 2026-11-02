@@ -1,8 +1,10 @@
 import { createRaveldex, RaveldexError } from '@vmitsaras/raveldex';
 import { createSnapshotRaveldex, createSnapshots } from '@vmitsaras/raveldex/adapters/snapshots';
 import { buildId, captureManifest, cloneOwned, configurationIdentity, digest, DOCUMENTS_LIMIT, ENTRY_LIMIT, idIdentity, MANIFEST_LIMIT, object, parse, safePath, SNAPSHOT_LIMIT, sourceUrl, string } from './common.js';
+import { captureSectionManifest, captureSectionPages, runtimeSections, SECTIONS_LIMIT, validateReceivingSections } from './sections.js';
 import { fail, StaticSearchError } from './error.js';
 import type { StaticSearchErrorCode } from './error.js';
+import type { PageSections } from '@vmitsaras/raveldex/addons/sections';
 import type { LoadedStaticSearch, LoadDocumentsOptions, StaticAsset, StaticDocument, StaticLoadOptions } from './types.js';
 export { StaticSearchError, STATIC_SEARCH_ERROR_CODES } from './error.js';
 export type { StaticSearchErrorCode } from './error.js';
@@ -180,6 +182,62 @@ export async function loadStaticSearch(input: StaticLoadOptions): Promise<Loaded
         } catch (error) {
           if (error instanceof StaticSearchError || error instanceof RaveldexError) throw error;
           return fail('INVALID_INPUT');
+        }
+      },
+      async loadSections(input: LoadDocumentsOptions = {}): Promise<PageSections> {
+        let external: AbortSignal | undefined, stop: (() => void) | undefined;
+        try {
+          if (disposed) fail('DISPOSED');
+          const data = object(input, ['signal', 'timeoutMs']);
+          external = signal(data.signal);
+          const milliseconds = timeout(Object.hasOwn(data, 'timeoutMs') ? data.timeoutMs : requestTimeout);
+          check(external, ownedLifetime.signal);
+          if (format !== 'source') fail('INCOMPATIBLE_ARTIFACT');
+          // Both queued native work and fetch share this method's explicit
+          // lifetime. No source/display cache survives a successful call.
+          const controller = new AbortController();
+          stop = (): void => controller.abort();
+          external?.addEventListener('abort', stop, { once: true });
+          ownedLifetime.signal.addEventListener('abort', stop, { once: true });
+          check(external, ownedLifetime.signal);
+          const mutationOptions = { signal: controller.signal };
+          const before = await owner.search({ kind: 'none' }, { limit: 0, ...mutationOptions });
+          check(external, ownedLifetime.signal);
+          if (before.revision !== restored.revision) fail('INCOMPATIBLE_ARTIFACT');
+          const sectionReading: ReadOptions = { fetch: fetchHandle, timeoutMs: milliseconds, lifetime: ownedLifetime.signal, ...(external ? { signal: external } : {}) };
+          const companion = captureSectionManifest(parse(await readText(new URL('sections-manifest.json', url).href, MANIFEST_LIMIT, sectionReading)), manifest);
+          const text = await readText(new URL(companion.asset.file, url).href, SECTIONS_LIMIT, sectionReading, companion.asset);
+          const envelope = object(parse(text), ['kind', 'version', 'buildId', 'pages'], 'INVALID_ARTIFACT');
+          if (envelope.kind !== 'raveldex-page-sections' || envelope.version !== 1) fail('INVALID_ARTIFACT');
+          if (buildId(envelope.buildId, 'INVALID_ARTIFACT') !== manifest.buildId) fail('STALE_BUILD');
+          const pages = captureSectionPages(envelope.pages, undefined, { count: 0, maximum: 1_000_000 }, 'INVALID_ARTIFACT');
+          if (pages.length !== manifest.recordCount) fail('INVALID_ARTIFACT');
+          // A serialized companion is already canonical; accepting reordered
+          // pages/sections would hide a malformed artifact generation.
+          const rawPages = envelope.pages as readonly { readonly pageId: unknown; readonly sections: readonly { readonly anchor: unknown }[] }[];
+          for (let index = 0; index < pages.length; index++) {
+            const page = pages[index]!, raw = rawPages[index]!;
+            if (raw.pageId !== page.pageId || raw.sections.some((section, ordinal) => section.anchor !== page.sections[ordinal]!.anchor)) fail('INVALID_ARTIFACT');
+          }
+          if (await idIdentity(pages.map(page => page.pageId)) !== manifest.documentIdsSha256) fail('INCOMPATIBLE_ARTIFACT');
+          check(external, ownedLifetime.signal);
+          validateReceivingSections(await snapshots.exportSource(mutationOptions), pages, restored.revision);
+          check(external, ownedLifetime.signal);
+          const after = await owner.search({ kind: 'none' }, { limit: 0, ...mutationOptions });
+          check(external, ownedLifetime.signal);
+          if (after.revision !== restored.revision) fail('INCOMPATIBLE_ARTIFACT');
+          // No await follows the last revision/cancellation checks. A later
+          // queued mutation does not restamp this captured receiving revision.
+          return runtimeSections(pages, restored.revision);
+        } catch (error) {
+          check(external, ownedLifetime.signal);
+          if (error instanceof StaticSearchError || error instanceof RaveldexError) throw error;
+          return fail('INVALID_INPUT');
+        } finally {
+          if (stop) {
+            try { external?.removeEventListener('abort', stop); } catch { /* Preserve outcome. */ }
+            try { ownedLifetime.signal.removeEventListener('abort', stop); } catch { /* Preserve outcome. */ }
+          }
         }
       },
       dispose(): Promise<void> {

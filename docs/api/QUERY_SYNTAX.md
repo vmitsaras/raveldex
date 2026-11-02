@@ -1,6 +1,8 @@
 # Explicit text query syntax
 
-`/addons/query-syntax` exports `createQuerySyntax`, `QuerySyntaxError`, `QUERY_SYNTAX_ERROR_CODES` and `QUERY_SYNTAX_POLICY` (`explicit-boolean-fields-v1`). It compiles an explicitly selected syntax to ordinary native query trees. It installs no engine capability or side state and changes neither ordinary string searches nor UI input handling.
+Use this parser when your application should accept expressions such as `title:"atomic updates" AND body:replac*`. Parse the input yourself, then pass the resulting typed query to the engine. Ordinary string searches and the built-in UI do not enable this syntax automatically.
+
+`/addons/query-syntax` exports `createQuerySyntax`, `QuerySyntaxError`, `QUERY_SYNTAX_ERROR_CODES` and `QUERY_SYNTAX_POLICY` (`explicit-boolean-fields-v1`). Run this example in an installed ESM application:
 
 ```js
 import { createRaveldex } from '@vmitsaras/raveldex';
@@ -23,7 +25,11 @@ try {
 }
 ```
 
-`createQuerySyntax({ configuration, maxInputCodeUnits?, maxTokens?, maxDepth?, maxWorkUnits? })` returns a frozen `QuerySyntaxParser` with synchronous `parse(input: string): Query`. Supply the same configuration as the destination engine. The factory captures schema, limits, analyzer and declared capability handles without initializing participants; it cannot introspect an engine or prove live provider state. Returned raw query trees and arrays are deeply frozen. The destination engine admits/analyzes the raw tree again and retains its ordinary revision/work/cancellation contract.
+The example prints `1 guide`. The title matches the phrase `atomic updates`, and the body contains a term beginning with `replac`. Both conditions must match. The phrase providers are installed for `title`, where this example uses a phrase.
+
+`createQuerySyntax({ configuration, maxInputCodeUnits?, maxTokens?, maxDepth?, maxWorkUnits? })` returns a frozen parser with synchronous `parse(input: string): Query`. Give it the same configuration as the engine. It copies the schema, limits, analyzer and declared capability handles, but does not initialize providers or inspect a live engine.
+
+The returned query and arrays are deeply frozen. The engine still validates and analyzes that query when you submit it, using its normal revision, work, cancellation and deadline rules.
 
 | Syntax | Native meaning |
 | --- | --- |
@@ -36,13 +42,15 @@ try {
 | `"red blue"` | Existing strict `phrases` extension, version 1; no raw substring semantics. |
 | `replac*` | Native prefix group, exact weight 1; native single-token/minimum-prefix limits apply. |
 
-Whitespace can surround operators, parentheses, colons and a terminal prefix star. Adjacent operands such as `red blue` are errors. Operators are uppercase whole unescaped words; lowercase `and` is a search term. Valid field names followed by a colon take precedence over reserved operator names, so a declared field named `NOT` can use `NOT:red`. Metadata fields are outside this grammar. Bare words can include dots, slashes, internal hyphens and Unicode; native token analysis still applies and may produce multiple required terms.
+Write operators explicitly: `red blue` is an error, while `red AND blue` is valid. Operators are uppercase, whole, unescaped words; lowercase `and` is an ordinary search term. Whitespace may surround operators, parentheses, colons and a final prefix star.
+
+A declared text-field name followed by a colon takes precedence over an operator name, so a text field named `NOT` can use `NOT:red`. Metadata fields are not part of this grammar. Bare words may include dots, slashes, internal hyphens and Unicode, but the selected analyzer still determines their terms and may require more than one.
 
 A backslash quotes the following complete code point literally, including whitespace or an operator letter. Inside quotes it permits embedded quotes/backslashes. It is not JSON/C escaping: backslash followed by `n` yields the letter `n`. Escaped words are neither operators nor field names. A trailing backslash, unmatched quote/group, missing operand/operator, unknown field or malformed UTF-16 is an explicit error, without a fallback to plain search. Empty/whitespace-only input returns `{ kind: 'none' }`, matching no records.
 
 Only one terminal star after an unquoted word is supported. Embedded/repeated stars, wildcard-all, quoted/group postfix stars and the unescaped operator words `XOR`, `NAND`, `NOR`, `NEAR`, `WITHIN` reject. Operator-like punctuation `! & | ~ ^ [ ] { } = < > ?` and leading unescaped `+`/`-` reject; escape a character when it is intended as ordinary native text. No metadata/range, literal/infix, proximity, fuzzy, synonym or weighting syntax is added. Existing typed query APIs remain available separately.
 
-The selected native admission/analyzer validates each complete output tree, including installed phrase capability presence. Native execution prepares selected provider fields and revision-bound state; execution-only failures remain ordinary native errors. A parser configured with a phrase provider for `body` can compile a `title` phrase tree, but that engine rejects the search when no selected `title` phrase provider exists. Parsing is not a search or a live capability probe.
+A successful parse does not prove that the engine can execute every requested field or capability. For example, the parser may compile a `title` phrase when only `body` has a phrase provider. The engine then rejects that search because `title` lacks the required provider. Parse errors and execution errors remain separate, so handle both.
 
 Defaults/maxima are 2,048 raw UTF-16 units, 128 syntax tokens, nesting 16 and 100,000 work units; options only narrow. Captured lower core input/depth bounds apply. Syntax tokens include operators, fields, colons, parentheses, prefix stars and quoted/word operands; EOF is excluded. Nesting counts parentheses, field scopes and NOT from root zero. Native AST/node/token/group/lexical limits also apply independently. Every native-analysis iterator advance is charged even when a trusted analyzer yields zero work; overruns close cursors and return no partial tree. These are synchronous logical bounds, not elapsed-time or heap guarantees. Parsing has no async cancellation; executing the resulting query retains normal cancellation and deadlines.
 
@@ -50,4 +58,4 @@ Parsing throws `QuerySyntaxError`: fixed `code` and `message`, frozen `details.s
 
 Exported readonly types are `QuerySyntaxOptions`, `QuerySyntaxParser`, `QuerySyntaxErrorCode`, `QuerySyntaxSpan` and `QuerySyntaxErrorDetails`. The fixed codes are `INVALID_INPUT`, `INVALID_UNICODE`, `UNEXPECTED_TOKEN`, `EXPECTED_OPERAND`, `EXPECTED_OPERATOR`, `UNKNOWN_FIELD`, `UNSUPPORTED_OPERATOR`, `UNTERMINATED_QUOTE`, `UNTERMINATED_GROUP`, `INVALID_ESCAPE`, `LIMIT_EXCEEDED`, `WORK_LIMIT_EXCEEDED` and `NATIVE_QUERY_ERROR`.
 
-Workers receive the existing native AST envelope; no parser host registration or snapshot codec is needed. Snapshot/analyzer/provider compatibility remains native. Importing or creating the parser starts no host work and retains no corpus. Trusted callbacks are not sandboxed. Installed/package and logical cost evidence does not imply new manual AT/browser qualification or memory/copy peaks. See the [adopted grammar and bounds](../specs/QUERY_SYNTAX.md).
+For a worker, parse on the calling side and send the resulting typed query through the ordinary query API. No parser registration or snapshot codec is needed on the host. Analyzer, provider and snapshot compatibility rules still apply. Creating the parser starts no host work and keeps no corpus; trusted callbacks are not sandboxed. See [query execution and errors](CORE.md#execution-errors-and-bounds).

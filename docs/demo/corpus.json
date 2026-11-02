@@ -1,0 +1,992 @@
+{
+  "algorithmVersion": "raveldex-usage-guides-v1",
+  "hashAlgorithm": "sha256",
+  "schema": {
+    "text": {
+      "title": {
+        "boost": 2
+      },
+      "body": {
+        "boost": 1
+      }
+    },
+    "metadata": {
+      "sourcePath": {
+        "type": "string",
+        "multi": false,
+        "nullable": false
+      },
+      "category": {
+        "type": "string",
+        "multi": false,
+        "nullable": false
+      }
+    }
+  },
+  "records": [
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#install-the-package",
+      "text": {
+        "title": "Install the package",
+        "body": "\nThe packages are currently unpublished and supplied as local `.tgz` files. In a new application directory, run these commands to create a package, enable ESM imports and install core. Replace the absolute path with the file you received or built:\n\n```sh\nnpm init -y\nnpm pkg set type=module\nnpm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz\n```\n\nYou can now import `@vmitsaras/raveldex` in that application. Core and the English analyzer require Node 22 or later; the Astro integration requires Node 22.12 or later. In a browser application, let your existing bundler resolve the imports. See [compatibility](COMPATIBILITY.md) for optional feature requirements.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/GETTING_STARTED.md",
+        "category": "Getting started"
+      }
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#smallest-core-example",
+      "text": {
+        "title": "Smallest core example",
+        "body": "\nSave the following as `search.mjs` beside your application's `package.json`, then run `node search.mjs`. It indexes a single document and searches for `atomic`.\n\n```js\nimport { createRaveldex } from '@vmitsaras/raveldex';\n\nconst engine = createRaveldex({\n  schema: { text: { title: { boost: 2 }, body: {} } },\n});\ntry {\n  await engine.add({\n    id: 'guide:updates',\n    text: { title: 'Atomic updates', body: 'Replace one complete record.' },\n  });\n  const result = await engine.search('atomic');\n  console.log(result.total); // 1\n  console.log(result.hits[0].id); // guide:updates\n} finally {\n  await engine.dispose();\n}\n```\n\nThe example prints `1` and `guide:updates`: one document matched, and that is its ID. It then disposes the engine.\n\nA few details matter when you add more records:\n\n- `boost: 2` gives matches in the title more weight than matches in the body.\n- `total` counts every matching record; `hits` contains the requested page of IDs and scores.\n- Keep your display data in your application and look it up by ID.\n- Plain string searches require every complete term. `atomic updates` matches the title above; `atom` does not. Use a [prefix query](CORE.md#query-shapes) to match the beginning of a word.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/GETTING_STARTED.md",
+        "category": "Getting started"
+      }
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#update-your-collection",
+      "text": {
+        "title": "Update your collection",
+        "body": "\nUse the method that matches the change you want to make:\n\n- `addMany` adds a batch of new records.\n- `replace` replaces one complete record.\n- `remove` deletes records by ID.\n- `clear` empties the collection.\n\nAwait an update before searching when the results need to include it. Each successful change creates a new collection revision, and each search result tells you which revision it used. See [records, mutations and query shapes](CORE.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/GETTING_STARTED.md",
+        "category": "Getting started"
+      }
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#add-a-search-interface",
+      "text": {
+        "title": "Add a search interface",
+        "body": "\nFor a complete project to adapt, choose a [browser or Astro inline starter](../../site/Inline.astro). Each includes explicit sample content, source snippets, a topic filter, paging, CSS, loading/retry and cleanup. The browser starter builds an engine from its records; Astro builds static search artifacts and loads them on demand. Both use the current local tarballs.\n\nFor search behind a button, choose a [documentation modal starter](../../site/Modal.astro). The browser and Astro projects include cancelable first-open loading, real page/heading links, retry, query preservation and owned-engine cleanup. Replace their explicit authored content and adjust the theme CSS.\n\nBoth galleries provide complete project downloads and a short edit/build/preview CSS walkthrough. Keep the starter's source/snippet/facet or section registrations aligned with its UI options; these are explicit optional capabilities. The [adoption checklist](HOSTS.md#starter-adoption-and-local-checks) lists browser requirements, ownership and the remaining checks to run after replacing data or styles.\n\nThe [native DOM UI](HOSTS.md#native-dom-ui-and-css) adds a labeled search field, results and pagination to an element you provide. Import its CSS separately. You still own the engine: remove the UI with `destroy()` before disposing that engine.\n\nIf you want [phrases, snippets or highlights](ADDONS.md), choose the required source or position providers when creating the engine. These keep the original text or word locations that core alone does not store. For static Astro pages, follow [the Astro guide](STATIC_ASTRO.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/GETTING_STARTED.md",
+        "category": "Getting started"
+      }
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#build-tarballs-from-a-source-checkout",
+      "text": {
+        "title": "Build tarballs from a source checkout",
+        "body": "\nYou only need this step if you are building the packages yourself. With repository access, Node 24 and npm, run the following from the repository root. It compiles the code once and creates matching core, English and Astro tarballs:\n\n```sh\nexport RAVELDEX_REPOSITORY=\"$(pwd -P)\"\nexport RAVELDEX_ARTIFACTS=\"$(mktemp -d \"${TMPDIR:-/tmp}/raveldex-artifacts.XXXXXX\")\"\nnpm ci\nnpm run build\nmkdir \"$RAVELDEX_ARTIFACTS/core\"\nnpm pack --ignore-scripts --pack-destination \"$RAVELDEX_ARTIFACTS/core\"\nnode scripts/pack-english.mjs --output \"$RAVELDEX_ARTIFACTS/english\"\nnode scripts/pack-astro.mjs --output \"$RAVELDEX_ARTIFACTS/astro\"\n```\n\nThe files are written beneath `$RAVELDEX_ARTIFACTS`, in `core/`, `english/` and `astro/`. Each pack output directory must be new. You can now install those files in a separate application.\n\nKeep both shell variables set when following the [Astro example](https://github.com/vmitsaras/raveldex/blob/main/examples/astro/README.md). Install the matching core tarball alongside either optional package. The Astro build hook also needs `astro@7.3.2`.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/GETTING_STARTED.md",
+        "category": "Getting started"
+      }
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#next-steps",
+      "text": {
+        "title": "Next steps",
+        "body": "\n- [Choose optional capabilities](ADDONS.md): phrases, facets, typo tolerance, suggestions and more.\n- [Use the public API](README.md): options, defaults, methods and result types.\n- [Run the example modules](examples/README.md) in your own installed application.\n- [Handle practical limits](LIMITATIONS.md): analysis, operation bounds and recovery.\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/GETTING_STARTED.md",
+        "category": "Getting started"
+      }
+    },
+    {
+      "id": "usage:docs/api/CORE.md#configuration-and-records",
+      "text": {
+        "title": "Configuration and records",
+        "body": "\nCreate an engine with `createRaveldex(configuration: Configuration): Raveldex`. Pass `{ schema, limits?, analyzer?, addons? }`. The function checks your configuration immediately and returns an empty engine at revision `0`. Invalid configuration throws before an engine is returned.\n\n| Type / property | Contract |\n| --- | --- |\n| `Schema.text` | Nonempty map of field names to `TextField` (`{ boost?: number }`). Boost defaults to 1; finite `(0,16]`. |\n| `Schema.metadata?` | Map to `MetadataField` (`{ type: 'string' \\| 'number' \\| 'boolean', multi?: boolean, nullable?: boolean }`). Both flags default to false. |\n| `RecordInput` | `{ id: string, text: Record<string, string \\| readonly string[]>, metadata?: Record<string, Scalar \\| readonly Scalar[]> }`. Only declared fields are accepted. |\n| `Scalar` | `string \\| number \\| boolean \\| null`. Null requires a nullable field; numbers are finite. A multi field requires an array. Missing is distinct from null. |\n| `AnalyzerDescriptor` | `{ id, environmentProfile }`; ordinary default is `{ id: 'basic-v1', environmentProfile: 'unqualified' }`. This is an identity descriptor, not a custom tokenizer function. |\n| `LimitOverrides` | Partial `Limits`. Limits may be reduced from the defaults below; `minPrefixCodePoints` can be raised. |\n| `addons` | Explicit readonly `AddonRegistration[]`; source, positions and other capabilities are absent unless selected. |\n\nChoose field names that match `[A-Za-z][A-Za-z0-9_]{0,63}`. Do not use `constructor` or `prototype`, or reuse a name for both text and metadata.\n\nGive each record a well-formed Unicode ID of 1–256 UTF-16 code units. IDs are used exactly as supplied, including case and whitespace. Pass plain data objects, including null-prototype objects; getters, arbitrary class instances, executable values and unknown properties are rejected. Raveldex copies accepted input when you submit it, so changing your object later does not alter queued work.\n\nYou may omit a declared text field or give it an empty string or array. Each item in a text array remains a separate value. Core stores the index, IDs and declared metadata, but not the original text. Keep display titles and URLs in your application. Add a [source provider](ADDONS.md#source-positions-and-phrases) if you also need Raveldex to keep original field values.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/CORE.md",
+        "category": "Core"
+      }
+    },
+    {
+      "id": "usage:docs/api/CORE.md#methods-and-results",
+      "text": {
+        "title": "Methods and results",
+        "body": "\n| Method | Behavior |\n| --- | --- |\n| `search(query: string \\| Query, options?: SearchOptions)` | `Promise<SearchResult>` with complete membership, exact total and requested page. |\n| `add(record, options?)` | `Promise<MutationResult>`; existing ID rejects `ID_EXISTS`. |\n| `addMany(records, options?)` | One atomic add-only batch; any conflict/refusal preserves prior state. |\n| `replace(record, options?)` | Complete replacement; missing ID rejects `ID_NOT_FOUND`. Optional direct-owner [patch convenience](RECORD_PATCH.md) compiles to this path. |\n| `remove(idOrIds, options?)` | One string or readonly string array. Missing IDs are no-ops. |\n| `clear(options?)` | Clears the whole collection and selected transactional providers. |\n| `dispose()` | Idempotent `Promise<void>`; closes admission and safely releases owner state/resources. |\n\nUpdates return `MutationResult`: `{ revision, changed, added, replaced, removed }`. A change is applied completely across core and its installed providers, then gets one new revision. An operation that changes nothing keeps the existing revision.\n\nSearches return `SearchResult`: `{ revision, model: 'raveldex-bm25-v1', completeness: 'complete', total, hits, extensions? }`. Read it as follows:\n\n- `revision` identifies the collection used for this search.\n- `total` counts all matching records, regardless of the page you requested.\n- `hits` contains readonly `{ id, score }` entries for that page.\n- `extensions` contains any optional output you requested.\n\nHits are ordered by descending, finite, unrounded score. Ties use ascending ID order with UTF-16 comparison.\n\nPass `MutationOptions` (`{ signal?: CancellationSignal, deadlineMs?: number }`) to control cancellation and deadlines. For searches, `SearchOptions` also accepts `{ limit?: number, offset?: number, extensions?: Record<string, unknown> }`.\n\nPagination starts at offset `0`. The default page size is `min(20, maxHits, maxDocuments - offset)`. Set `limit: 0` if you only need the exact total. When you supply a limit, `offset + limit` must fit the configured document capacity.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/CORE.md",
+        "category": "Core"
+      }
+    },
+    {
+      "id": "usage:docs/api/CORE.md#query-shapes",
+      "text": {
+        "title": "Query shapes",
+        "body": "\nA plain string searches all declared text fields and requires every complete analyzed term to match. Quotes, the word `AND` and minus signs do not enable a query language. Use a typed query below for more control, or explicitly parse [query syntax](QUERY_SYNTAX.md) before calling `search`.\n\n| `Query.kind` | Properties / meaning |\n| --- | --- |\n| `text` | `{ text, operator?: 'and' \\| 'or', fields?: string[] }`; default AND. |\n| `group` | `{ variants: Variant[], fields?: string[] }`; alternative terms/fields. `Variant` is `{ text, match: 'exact' \\| 'prefix', weight?: number }`. Each text analyzes to exactly one token; finite weight `(0,1]`, default 1. |\n| `and`, `or` | `{ children: Query[] }`; nonempty Boolean groups. |\n| `not` | `{ child: Query }`; complement against all live IDs, contributes no lexical score. |\n| `eq` | `{ field, value: Scalar }`; strict declared metadata equality, including any matching member of multi metadata. |\n| `all`, `none` | No additional properties; explicit browse-all or match-none. |\n| `extension` | `{ capability, version, payload }`; requires a matching installed capability. |\n\nLeave out `fields` to search all text fields, or provide a nonempty list without duplicates. Text that produces no terms matches nothing.\n\nMetadata equality uses the original type, case and spacing: it does not turn `\"1\"` into `1`. Missing values differ from `null`, and `not(eq(...))` includes records where the field is missing. Queries containing only metadata or exclusions can return matches with a score of zero.\n\nThis is a query fragment for an engine with a `title` field. Pass it to `engine.search(query)` to find title terms beginning with `atom`:\n\n```js\nconst query = {\n  kind: 'group', fields: ['title'],\n  variants: [{ text: 'atom', match: 'prefix', weight: 0.8 }],\n};\n```\n\nFor example, a title containing `Atomic updates` can match this query. The `0.8` weight reduces that alternative's score contribution. This block only creates the query; it does not create an engine or print results.\n\nA prefix needs at least two normalized Unicode code points. Raveldex finds every matching complete term in the dictionary; if expansion exceeds a limit, the search rejects rather than silently dropping terms.\n\nChoose [typo tolerance](TYPO.md), [synonyms](SYNONYMS.md), [literal/infix matching](LITERAL.md), [ordered proximity](PROXIMITY.md) or [query syntax](QUERY_SYNTAX.md) explicitly when you need those behaviors. A plain string does not turn them on.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/CORE.md",
+        "category": "Core"
+      }
+    },
+    {
+      "id": "usage:docs/api/CORE.md#analysis-and-ranking",
+      "text": {
+        "title": "Analysis and ranking",
+        "body": "\nThe default analyzer, `basic-v1`, finds words and numbers with boundaries equivalent to `/[\\p{L}\\p{N}][\\p{L}\\p{N}\\p{M}]*/gu`. It applies NFKC normalization and locale-independent lowercase once to each original token. It does not split the normalized result again.\n\nAccents and word forms remain significant: `café` differs from `cafe`, and `Straße` differs from `strasse`. The analyzer does not remove stop words, stem words or perform linguistic Japanese segmentation. When you request positions or offsets, each source token keeps its full original UTF-16 span; the end offset is exclusive. Positions start again for each text-array value.\n\n`raveldex-bm25-v1` uses field-local positive-length populations, `k1 = 1.2`, `b = 0.75`, explicit field boosts and `ln(1 + (N - df + 0.5)/(df + 0.5))` IDF. It selects the best weighted alternative per canonical group/field and sums participating groups/fields deterministically. Only positive groups in successful Boolean branches score; repeated equivalent groups contribute once. Phrases add no hidden bonus. Metadata/facets do not recompute IDF. The repository [ranking contract](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md) gives normative arithmetic and hand-derived cases. [Inspector](ADDONS.md#native-inspector) returns selected actual arithmetic.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/CORE.md",
+        "category": "Core"
+      }
+    },
+    {
+      "id": "usage:docs/api/CORE.md#execution-errors-and-bounds",
+      "text": {
+        "title": "Execution, errors and bounds",
+        "body": "\nOperations run through one bounded queue in submission order. Each uses the collection revision available when it starts. A deadline includes time spent waiting in that queue; the default is `min(30_000, maxDeadlineMs)` and the maximum is 60,000 ms.\n\nCancellation takes effect at work checkpoints, so it is not an immediate real-time interruption. If several stop conditions apply, the order is disposal, caller cancellation, deadline, then work limit. A change that already committed still returns its committed result. A failure before commit leaves the previous revision in place. Disposing rejects pending and new work; it does not undo completed updates.\n\nCatch configuration errors around `createRaveldex` itself, and catch operation errors around your awaited calls. `RaveldexError` provides a fixed `message`, a `code` and frozen `details: { path?, limit?, actual? }`. Its diagnostics do not include your record or query text.\n\nThe following is the list exported as `ERROR_CODES`, not a command to run. Use a code to choose the appropriate recovery action:\n\n```text\nINVALID_SCHEMA INVALID_RECORD INVALID_QUERY INVALID_OPTIONS\nID_EXISTS ID_NOT_FOUND LIMIT_EXCEEDED QUEUE_FULL WORK_LIMIT_EXCEEDED\nDEADLINE_EXCEEDED CANCELLED DISPOSED MISSING_CAPABILITY INCOMPATIBLE_CAPABILITY\nREVISION_MISMATCH REVISION_EXHAUSTED RESOURCE_EXHAUSTED UNSUPPORTED_ENVIRONMENT INTERNAL_ERROR\n```\n\nFor example, `CANCELLED` can mean a newer search replaced an older request, while `QUEUE_FULL` means you need to reduce pending work. A work or deadline error does not contain a successful partial search.\n\nThe defaults below bound input and work; they are not promises about memory, response time or usable document capacity. One limit can be reached before another, even below the maximum record count.\n\n| Keys | Defaults |\n| --- | --- |\n| `maxDocuments`, `maxTextFields`, `maxMetadataFields` | 10,000; 32; 32 |\n| `maxFieldNameCodeUnits`, `maxIdCodeUnits`, `maxTextValuesPerField` | 64; 256; 64 |\n| `maxMetadataValuesPerField`, `maxMetadataStringCodeUnits`, `maxMetadataCodeUnitsPerRecord` | 128; 1,024; 32,768 |\n| `maxTextCodeUnitsPerValue`, `maxTextCodeUnitsPerRecord`, `maxCorpusTextCodeUnits` | 65,536; 262,144; 67,108,864 |\n| `maxRawTokenCodeUnits`, `maxTermCodeUnits`, `maxTokensPerRecord`, `maxCorpusTokens` | 256; 256; 32,768; 4,000,000 |\n| `maxDictionaryEntries`, `maxPostingEntries`, `maxMutationBatch`, `maxAdmissionEntries` | 250,000; 2,000,000; 256; 16,384 |\n| `maxQueryNodes`, `maxQueryDepth`, `maxQueryLexicalCodeUnits`, `maxQueryCodeUnits` | 128; 16; 2,048; 16,384 |\n| `maxQueryTokens`, `maxQueryGroups`, `maxVariantsPerGroup` | 64; 64; 16 |\n| `maxExpansionsPerGroup`, `maxQueryExpansions`, `minPrefixCodePoints` | 256; 1,024; 2 |\n| `maxHits`, `maxQueuedOperations` | 100; 32 |\n| `maxSearchWorkUnits`, `maxMutationWorkUnits`, `checkpointWorkUnits`, `maxDeadlineMs` | 10,000,000; 50,000,000; 2,048; 60,000 |\n\nThe structural `CancellationSignal` type requires `aborted`, `addEventListener('abort', listener, options?)` and `removeEventListener('abort', listener)`. A native `AbortSignal` is usable; core declarations require neither DOM nor Node type libraries.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/CORE.md",
+        "category": "Core"
+      }
+    },
+    {
+      "id": "usage:docs/api/CORE.md#registration-types",
+      "text": {
+        "title": "Registration types",
+        "body": "\nMost applications can use the provided add-on factories. If you are writing an extension, the root package also exports the protocol types below. Extensions run as trusted code; this protocol does not sandbox them or allow arbitrary replacement of the scorer or analyzer.\n\n| Exported types | Role |\n| --- | --- |\n| `AddonRegistration`, `CapabilityManifest`, `CapabilityReference` | Manifest identity/version, roles, provides/requires, selected data, direct/worker execution, limits, codec and costs; optional trusted role handles. |\n| `ParticipantContext`, `ParticipantImplementation` | Initialize selected state; resumably prepare next state for atomic mutation publication. |\n| `RefinementContext`, `RefinementImplementation`, `PreparedRefinement` | Exact-token-sequence leaf refinement; selected declared state, fields and terms; resumable membership test. |\n| `MetadataContext`, `PayloadContext`, `CapturedPayload` | Owned payload, schema/revision/limits and bounded capture. |\n| `PredicateImplementation`, `PreparedPredicate` | Capture and prepare a resumable predicate over owned metadata. |\n| `AggregationImplementation`, `PreparedAggregation`, `AggregationOutput` | Capture string-field aggregation, consume complete matches, finish bounded owned output. |\n| `EvidenceContext`, `EvidenceResultContext`, `EvidenceImplementation`, `PreparedEvidence` | Explicit selected factual trace/evidence, declared provider state and bounded output. |\n\nThe exported declarations are authoritative for exact generator/context shapes. See the repository [extension contract](https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md) before authoring a trusted registration. No private owner/root/scheduler API is supported.\n\nTo request [token suggestions](SUGGESTIONS.md), use `SearchOptions.extensions.suggestions`. Suggestions read the selected dictionaries at the search revision. They do not change which records match, their scores or the page of hits.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/CORE.md",
+        "category": "Core"
+      }
+    },
+    {
+      "id": "usage:docs/api/CORE.md#explicit-language-analysis",
+      "text": {
+        "title": "Explicit language analysis",
+        "body": "\nUse `basic-v1` unless you deliberately choose another analyzer. To select [English analysis](ENGLISH.md), pass both its registration in `addons` and its descriptor in `Configuration.analyzer` when creating the engine.\n\nEnglish analysis changes the terms and ranking statistics, while keeping original token positions and spans. Metadata stays unchanged. Installing the pack without selecting it leaves basic analysis active. Core itself imports no language implementation or language tables, and no other first-party language or segmentation-graph pack is available.\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/CORE.md",
+        "category": "Core"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#source-positions-and-phrases",
+      "text": {
+        "title": "Source, positions and phrases",
+        "body": "\nA source provider keeps the original text for selected fields. A position provider keeps where tokens occur, with optional character offsets. For phrase search, choose a phrase evaluator that uses one of those providers, or a mixed strategy for different fields.\n\n| Import and factory | Options / returned registration |\n| --- | --- |\n| `/addons/phrases/source`: `createSourceProvider(options)` | `SourceProviderOptions`: `{ fields: string[], id?, maxRetainedEntries?, maxWorkUnits? }`. Retains selected exact original text values. Also re-exported from `/addons/phrases`. |\n| `/addons/phrases`: `createSourcePhrases(options)` | `SourcePhraseOptions`: `{ fields: string[], id?, maxWorkUnits? }`. Reanalyzes retained originals to verify strict token adjacency. |\n| `/addons/positions`: `createPositionProvider(options)` | `PositionProviderOptions`: `{ fields: string[], offsets?: string[], id?, maxRetainedEntries?, maxWorkUnits? }`. Retains occurrences for selected fields; offsets must be a subset of those fields. |\n| `/addons/phrases/positions`: `createPositionPhrases(options)` | `PositionPhraseOptions`: `{ fields: string[], id?, maxWorkUnits? }`. Verifies adjacency with stored positions; requires no originals or offsets. |\n| `/addons/phrases/mixed`: `createPhrases(options)` | `MixedPhraseOptions`: `{ fields: Record<string, 'source' \\| 'positions'>, id?, maxWorkUnits? }`. Selects a declared strategy per field. |\n\nChoose one phrase registration per engine; duplicate providers conflict. All phrase registrations provide capability `phrases`, version `1`. Each field you search must have its required provider, even when the phrase is empty or no terms match.\n\nThis query fragment looks for adjacent `red` and `car` terms in `title` or `body`. First create an engine with those fields and a matching phrase registration, then pass `phraseQuery` to `engine.search`:\n\n```js\nconst phraseQuery = {\n  kind: 'extension', capability: 'phrases', version: 1,\n  payload: { text: 'red car', fields: ['title', 'body'] },\n};\n```\n\nA value containing `red car` can match; `red fast car` cannot. The two words must appear next to each other within one field value. This block creates a query only; it does not run a search or print a count.\n\nKeep these phrase rules in mind:\n\n- Omitted `fields` means all schema text fields. Select fields explicitly if only some have providers.\n- Punctuation separates tokens. A token phrase is not a punctuation-sensitive literal string.\n- Repeated terms must occur as required; a phrase never joins separate fields or array values.\n- Phrases add no ranking bonus. They allow at most 32 analyzed tokens, or a lower configured core limit.\n\nUse [proximity](PROXIMITY.md) to allow ordered gaps. Strict phrases do not accept gaps or synonym graphs.\n\nPositions record token locations; offsets also record the original UTF-16 start and exclusive end. Offsets alone do not keep text for display. You can lower the providers' entry and work limits through their options. Exceeding a limit rejects the operation. Entry counts describe stored items, not heap bytes.\n\nUse the source-only or position-only import when you do not need its phrase evaluator.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#typed-filters-and-exact-facets",
+      "text": {
+        "title": "Typed filters and exact facets",
+        "body": "\nUse typed filters to narrow results by declared metadata without changing their lexical scores. Register `createFilters({ fields, id?, maxWorkUnits? })` from `/addons/filters`, then use either of these version-1 extension queries:\n\n| Capability / exported payload type | Payload |\n| --- | --- |\n| `numeric-range` / `NumericRangePayload` | `{ field, gt?, gte?, lt?, lte? }`. Numeric field; at least one finite endpoint. Do not supply both lower operators or both upper operators. |\n| `set-membership` / `SetMembershipPayload` | `{ field, values: Scalar[] }`. Nonempty, correctly typed scalar set; maximum 128 values, bounded by core metadata limits. |\n\nFor a multi-valued numeric field, at least one value must satisfy the whole range. Set membership matches if any supplied value equals a stored value. Missing fields do not match; nullable fields can explicitly match `null`.\n\nWrap the payload in `{ kind: 'extension', capability, version: 1, payload }` and combine it with text queries using `and`, `or` or `not`. Filters read core metadata and keep no extra side index.\n\nFacets give you counts for categories such as `kind`. Register `createFacets({ fields, id?, maxWorkUnits?, maxDistinctValuesPerField?, maxBucketsPerField? })` from `/addons/facets` for string metadata fields.\n\nThe following options fragment requests up to ten `kind` buckets plus a missing-value bucket. It assumes your engine declares `kind` as string metadata and has the facet registration. Pass `options` as the second argument to `engine.search(query, options)`:\n\n```js\nconst options = {\n  extensions: { facets: { fields: [{ field: 'kind', limit: 10, missing: true }] } },\n};\n```\n\nRead the counts from `result.extensions.facets.fields`. They cover all matches before pagination and include every active filter, including a filter on `kind` itself. Changing the hit page does not change these counts.\n\n`FacetRequest.fields` takes `{ field, limit?, missing? }` selections. Each returned field contains `{ field, buckets, distinctValueTotal, omittedBucketCount }`. A bucket is either `{ kind: 'value', value: string | null, count }` or `{ kind: 'missing', count }`.\n\nA document counts once per distinct value. `null` and missing are separate buckets, and an empty multi-value array adds no value. Buckets sort by descending count with deterministic value ties. If you want a category's counts to exclude its own active filter, compute that through a separate query.\n\nThe default and maximum limits are 10,000 distinct values per field and 100 returned buckets. The bucket limit can be zero. When you request fewer buckets, `omittedBucketCount` tells you how many are not shown; displayed counts remain exact. Exceeding a distinct-value, work or output limit rejects the search.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#native-inspector",
+      "text": {
+        "title": "Native Inspector",
+        "body": "\nUse Inspector to explain why a record matched and how its score was calculated. Register `createInspector({ id?, sourceFields?, maxFacts?, maxWorkUnits?, maxOutputEntries? })` from `/addons/inspector`. To include source text, install a source provider, allow the field in `sourceFields`, and request it on the search.\n\nThis options fragment asks about `guide:updates` at revision `1`. It needs an engine with Inspector and a source provider for `title`. Pass it as the second argument to `engine.search(query, options)`:\n\n```js\nconst options = {\n  extensions: {\n    inspector: { ids: ['guide:updates'], expectedRevision: 1, sourceFields: ['title'] },\n  },\n};\n```\n\nThe result appears in `result.extensions.inspector`. Look there for the selected record's matching terms, score calculation and requested title text. If the collection is no longer at revision `1`, the request rejects with `REVISION_MISMATCH` instead of explaining a different revision. In your application, use a revision returned by a completed search or update.\n\n`InspectorRequest` takes `{ ids, maxFacts?, expectedRevision?, sourceFields? }`. You can select up to 128 unique IDs and 4,096 facts, subject to lower configured limits. `InspectorData` includes `kind: 'raveldex-inspector-v1'`, revision/model, configuration, selected `ScoreTrace`, documents, result counts, resources and numerical tolerance. Inspector does not retain historical index state.\n\nThe facts describe the search that actually ran. They include participating Boolean branches, the winning alternative for each group and field, term/document frequencies (`tf` and `df`), field lengths and populations, boosts, weights and the BM25 arithmetic. Use these to understand a score; they are not relevance percentages.\n\nSelected `InspectorDocument` entries distinguish `matched`, `excluded` and `absent`, and `returned` versus `outside-page` placement. Score is null where unavailable. Absolute rank and all losing alternatives are explicitly `unavailable: not-collected`. `InspectorSource` distinguishes not-requested, absent record and available/absent fields. `InspectorResources` exposes work-v1/count scope before evidence projection; heap bytes are explicitly `unavailable: not-measured`. The tolerance is absolute/relative `1e-12`, not a cross-engine bit-identity promise.\n\n`exportDiagnostics(data: InspectorData, options?: DiagnosticOptions): DiagnosticExport` returns `{ json, complete, omitted }`. Options are `{ maxCodeUnits?, includeFacts?, includeSource? }`. Defaults include metadata and exclude facts/IDs/canonical query and source. Source inclusion can only include source already selected in the request. The default/maximum output budget is 262,144 UTF-16 units. If selected facts/source do not fit, entire sections may be omitted with `complete: false` and their names in `omitted`; if even metadata does not fit, the export rejects. Unrequested sections are not reported as omissions. Output is valid JSON, never a truncated string. Review diagnostic content before sharing it.\n\nThe entry exports `InspectorOptions`, `InspectorRequest`, `InspectorSource`, `InspectorDocument`, `InspectorConfiguration`, `InspectorResources`, `InspectorData`, `DiagnosticOptions`, `DiagnosticExport`, `ScoreTrace`, `Fact` and `FieldFact` types. Ordinary searches do not request full trace trees.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#original-ranges-and-snippets",
+      "text": {
+        "title": "Original ranges and snippets",
+        "body": "\nUse match evidence when you need the original text ranges that matched. Register `createMatchEvidence` from `/addons/evidence` with `{ fields: Record<string, 'source' | 'offsets'>, id?, maxFacts?, maxRanges?, maxWorkUnits?, maxOutputEntries? }`. Choose whether each field uses original-source reanalysis or stored offsets.\n\nRequest `{ ids, fields?, expectedRevision?, maxFacts?, maxRanges? }` at `extensions['match-evidence']`. You receive original ranges for the selected documents, not ready-made HTML.\n\n`MatchEvidenceData` is `{ kind: 'raveldex-match-evidence-v1', revision, fields, scope: 'successful-positive-token-occurrences', complete: true, documents }`. Each `MatchDocument` has `{ id, eligibility, ranges }`. A `MatchRange` is `{ field, valueIndex, position, start, end, term }`; the range is half-open, local to the original value and uses UTF-16 coordinates. `term` is normalized search data; use the original value for display. Prefix evidence highlights the complete matching original token. Successful positive Boolean branches contribute occurrences; failed/negative branches do not.\n\n`createSnippetEvidence(SnippetOptions)` from `/addons/snippets` extends those options with `{ maxSnippets?, maxCodeUnits?, maxHighlights? }`. It provides `snippets`, using `SnippetEvidenceRequest` (the same request shape). Originals are required even when occurrences use offsets; snippets do not silently retain them. Missing usable `Intl.Segmenter` rejects `UNSUPPORTED_ENVIRONMENT` when snippets are requested.\n\n`SnippetEvidenceData` extends match data. Each `SnippetDocument` adds `snippets` and `snippetOmissions`. A `Snippet` has `{ field, valueIndex, start, end, text, highlights, omittedBefore, omittedAfter }`; its exact original text is ordinary text, never trusted HTML. `SnippetHighlight` coordinates are relative to that slice and expanded to grapheme boundaries. Render text nodes plus explicit marks. `SnippetOmissions` records `{ unshownMatches, windowLimit, highlightLimit, matchTooLong, graphemeTooLong }`.\n\nRange requests either return complete ranges or reject. Snippets can leave matches out of their displayed excerpts, and report those omissions. The default and maximum display limits are three windows per document, 240 UTF-16 units per window and 32 merged highlights per window. Facts and ranges each allow at most 4,096, and selected IDs at most 128. Output size and shared work limits also apply; request options can lower them.\n\nRequest only one evidence extension per search: Inspector, ranges or snippets. Asking for two rejects with `INVALID_OPTIONS`. You can install all of their providers, then make separate searches. Use `expectedRevision` if those explanations must refer to the same collection revision.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#anchored-page-context",
+      "text": {
+        "title": "Anchored page context",
+        "body": "\nUse `createSectionEvidence` from `@vmitsaras/raveldex/addons/sections` when a result represents a whole page and you want links to matching headings. Index one record per page. The optional projection preserves native page scores, order, totals and pagination; it does not compute a global matching-section count or extract headings from HTML.\n\n```js\nimport { createRaveldex } from '@vmitsaras/raveldex';\nimport { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';\nimport { createSectionEvidence } from '@vmitsaras/raveldex/addons/sections';\n\nconst original = 'Replace a bicycle chain.';\nconst engine = createRaveldex({\n  schema: { text: { body: {} } },\n  addons: [\n    createSourceProvider({ fields: ['body'] }),\n    createSectionEvidence({ fields: { body: 'source' } }),\n  ],\n});\nconst written = await engine.add({ id: 'repair', text: { body: original } });\nconst result = await engine.search('chain', {\n  extensions: {\n    'section-evidence': {\n      ids: ['repair'], expectedRevision: written.revision,\n      sections: [{ sectionIndex: 0, field: 'body', valueIndex: 0, start: 0, end: original.length }],\n      maxPreviews: 3,\n    },\n  },\n});\nconsole.log(result.extensions['section-evidence']);\nawait engine.dispose();\n```\n\nEach request selects exactly one ID and carries the complete canonical descriptor list for that page, up to 64 entries. Indexes must be consecutive from zero in field/value/start/end source order. `expectedRevision` is required. Original UTF-16 half-open spans must be nonempty, disjoint, in a configured field/value and end at actual grapheme boundaries. Scalar text uses value index zero; arrays preserve their original indexes. An absent or excluded selected ID returns its native eligibility with empty ranges/previews and zero local omissions. Empty descriptors declare no mapped scope and produce no previews or scoped omission counts.\n\n`fields` selects explicit source or offsets strategies. Both need source for display; offsets additionally need the original-offset positions provider. Factory options reuse match-evidence ID/fact/range/work/output limits and add `maxCodeUnits` (1–240, default 240) and `maxHighlights` (1–32, default 32). `maxPreviews` belongs to each request (1–3, default 3). Register the same factory/options explicitly in a worker; no new worker command is needed. Import and factory creation perform no source segmentation or host initialization.\n\nThe response keeps the match-evidence header and original positive ranges. Its selected document adds `sectionPreviews: [{ sectionIndex, snippet, snippetOmissions }]` and `sectionOmissions: { omittedSections, unmappedRanges, boundaryRanges }`. A section qualifies only when it contains a complete positive occurrence. The first qualifying sections in source order win, even when an oversized match makes a selected excerpt null. Cross-boundary occurrences are counted separately and never clipped into a fabricated token. The page may match different query clauses in different sections.\n\nExcerpts stay within their section and original value. They use at most 240 UTF-16 units and 32 merged grapheme-safe marks, with explicit existing snippet omissions; omitted-before/after flags refer to the section's text. The complete response refuses rather than silently truncating evidence. Fixed ceilings include 4,096 facts/ranges, 262,144 section/range pair visits, 10,000,000 shared work units, 16,384 output entries and an additional 262,144 serialized UTF-8 bytes; lower native/configured bounds still apply. These are admission/output bounds, not memory or latency guarantees.\n\nFor heading metadata and links, use the [inline section options](HOSTS.md#inline-anchored-sections). For build-time delivery, use the [optional Astro companion](STATIC_ASTRO.md#optional-heading-maps). The [page/section contract](../specs/PAGE_SECTIONS.md) specifies exact validation, clipping, limits and failure behavior.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#bounded-typo-tolerance",
+      "text": {
+        "title": "Bounded typo tolerance",
+        "body": "\nChoose `/addons/typo` when you want a query to accept a single character edit or adjacent swap. Exact terms take priority, and ordinary exact, prefix and phrase searches keep their existing rules. See [the example, policy and limits](TYPO.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#dictionary-backed-token-suggestions",
+      "text": {
+        "title": "Dictionary-backed token suggestions",
+        "body": "\nUse `/addons/suggestions` to offer word completions from your indexed vocabulary. Request them through `options.extensions.suggestions = { text, fields?, limit? }`. Suggestions are separate from hits and use word frequency across the selected fields, regardless of the current filters or page. Your application decides whether and how to show or apply them. See [the example and complete rules](SUGGESTIONS.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#directional-one-step-synonyms",
+      "text": {
+        "title": "Directional one-step synonyms",
+        "body": "\nUse `/addons/synonyms` to define your own one-way word mappings, such as `backup` to `snapshot`. A requested synonym query keeps each original word as a requirement, with mapped alternatives at weight `0.5`. Expansion stops after one step. The result lists the mappings used and the vocabulary version. See [the example, public types and limits](SYNONYMS.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#selected-english-analysis",
+      "text": {
+        "title": "Selected English analysis",
+        "body": "\nSelect the [English analyzer](ENGLISH.md) through `Configuration.analyzer` when creating the engine. It joins some related word forms, so differently spelled words can also match in phrases. Highlights still refer to complete original tokens. The current typo, synonym and suggestion requests support only `basic-v1` and reject under English analysis. The language rules do not create another per-corpus index.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#identifier-analysis",
+      "text": {
+        "title": "Identifier analysis",
+        "body": "\nChoose `/addons/identifiers` for names such as `maxQueuedOperations`. Ordinary searches can find the whole name or its components; strict phrases still use original identifiers. Match ranges distinguish the whole name from a component. See [setup, examples and compatibility](IDENTIFIERS.md). Choose basic, English or identifier analysis for an engine rather than mixing them automatically.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#literal-and-infix-matching",
+      "text": {
+        "title": "Literal and infix matching",
+        "body": "\nUse `/addons/literal` to match original text exactly, including case, punctuation and substrings inside a word. It needs source providers for the selected fields. A literal-only query returns zero-scored matches; combining it with a text query keeps that text query's BM25 scoring. Its own range output can show overlapping matches. See [the example and Unicode rules](LITERAL.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#ordered-proximity",
+      "text": {
+        "title": "Ordered proximity",
+        "body": "\nUse `/addons/proximity` when words must appear in order but may have a limited gap between them. Install position providers first. Matches stay within one field value, repeated words need distinct positions, and distance adds no score bonus. With a zero gap, singleton groups behave like a strict phrase. See [the example and evidence restrictions](PROXIMITY.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#explicit-query-syntax",
+      "text": {
+        "title": "Explicit query syntax",
+        "body": "\nUse `/addons/query-syntax` when your search box should accept operators, field names, phrases and prefixes. Parse the input in your application, then pass the resulting typed query to the engine. The parser does not change ordinary strings or the built-in UI. Invalid syntax returns an error with a source span rather than falling back to plain search. See [the grammar and example](QUERY_SYNTAX.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#explicit-record-patches",
+      "text": {
+        "title": "Explicit record patches",
+        "body": "\nUse [`createPatch`](RECORD_PATCH.md) to change selected whole fields without assembling the rest of a record yourself. It needs a direct engine, source providers for every text field and the revision you observed. It uses the ordinary atomic replacement operation and keeps no extra source copy. It is a helper, not an `AddonRegistration`.\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/ADDONS.md",
+        "category": "Add-ons"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#native-dom-ui-and-css",
+      "text": {
+        "title": "Native DOM UI and CSS",
+        "body": "\nUse `mountRaveldexUI(options: UIOptions): UIHandle` from `/addons/ui` to put search controls into an element on your page. You supply the engine and keep responsibility for disposing it. Import the UI and its stylesheet through a bundler that handles CSS:\n\n```js\nimport { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';\nimport '@vmitsaras/raveldex/addons/ui/styles.css';\n```\n\nThese imports make the function and styles available; they do not mount anything yet.\n\n### Mount a minimal search form\n\nAdd this element to your page where you want the search controls to appear:\n\n```html\n<section id=\"search\" aria-label=\"Documentation search\"></section>\n```\n\nThe element starts empty. Copy [ui.mjs](examples/ui.mjs) into your application, then put the following in a browser module processed by your bundler. Run it after the element exists:\n\n```js\nimport { createSearchUI } from './ui.mjs';\nimport '@vmitsaras/raveldex/addons/ui/styles.css';\n\nconst search = await createSearchUI(document.querySelector('#search'));\n// Call this when your application removes the search component:\n// await search.dispose();\n```\n\nYou should now see a search field and results. Type `atomic` to get one result, **Atomic updates**, linked to `/guide/updates/`. The example supplies that URL; your application needs to provide the destination page.\n\nThe recipe creates one title/body record and a matching display entry. To use real documents, replace both entries and keep their IDs equal. It keeps data in memory and opens no database. Call the returned `dispose()` when removing the component; it destroys the UI first, then disposes the engine.\n\n| `UIOptions` | Contract |\n| --- | --- |\n| `root`, `engine`, `documents` | Provide a root element, your engine and a readonly list of `{ id, title, url }` display documents. IDs connect results to this list, which is copied at mount. URLs must resolve to HTTP(S) without credentials. |\n| `facets?` | Up to eight `UIFacet` selections `{ field, label }`; requires installed exact string facets. |\n| `snippetFields?` | Explicit fields for installed snippets and source providers. |\n| `mode?` | `'text'` (default), `'prefix'` (complete the final word), or `'phrase'` (requires phrase capability for selected fields). |\n| `pageSize?`, `debounceMs?`, `label?` | Defaults 5, 150 ms and `Search documentation`; page size 1–100 and debounce 0–2,000 ms. Core's configured page bounds still apply. |\n\nThe returned handle gives you two methods:\n\n- `search(): Promise<void>` runs the current controls immediately instead of waiting for the debounce timer. It resolves after the result is presented.\n- `destroy(): void` cancels UI work, removes its listeners and restores the original DOM nodes. You can call it more than once. It does not dispose your engine.\n\nMounting on an already mounted root returns the existing handle. Always destroy the UI before separately disposing its engine.\n\nThe UI renders text safely, marks highlights explicitly and supplies visible focus and reduced-motion styles. It shows exact totals, pagination, empty results, errors and retry controls. An empty search browses all documents; entered text uses the selected mode.\n\nSet `mode: 'prefix'` to require earlier words exactly and allow the final word to match the beginning of an indexed word. For example, `source provide` can match `source provider`; `sour provide` still requires the exact word `sour`. The UI splits raw words at the basic analyzer's Unicode letter/number boundaries, preserving original text for the engine's selected analyzer. The final word needs at least two normalized Unicode code points; shorter endings use exact-word search. Trailing spaces or punctuation do not disable completion. Prefix expansion keeps native limits, errors and exact totals, and snippets highlight the complete matched word. A stricter engine prefix limit or a selected analyzer's transformed term can still cause a native query refusal. Ordinary demo pages enable this mode; integrations that omit `mode` continue to search exact words.\n\nWhile you compose text with an input method, pending searches wait until composition ends. Outdated requests are cancelled and stale replies are ignored. The display list is copied when you mount, so destroy and remount the UI when replacing that list. The [browser example](examples/browser.mjs) also shows explicit search calls, cleanup and source persistence.\n\n### Keyboard, focus and status\n\nYou provide the root element, engine and display list; the UI creates its own labeled controls, ordered results and named native modal `dialog`. You do not need to author its internal markup.\n\n- Typing schedules a search after the configured delay.\n- Return in the search field or the **Search** button submits immediately.\n- Selects and result links use the browser's normal keyboard behavior.\n- Search, filter and page updates do not deliberately move focus.\n\nOpening Inspector puts keyboard focus on **Close Inspector**. Use that button or Escape to close it and return focus to **Inspect results**, provided the opener is still on the page. Tab navigation follows the browser's native dialog behavior; the UI adds neither a custom Tab loop nor a focusable heading.\n\nStatus messages use `role=\"status\"` and `aria-atomic=\"true\"`. The search section is `aria-busy` during a search, and Inspector is busy while facts load. Unavailable page, retry and Inspector buttons use `aria-disabled=\"true\"`: they remain in the tab order, but activation is guarded.\n\nTyping feedback can interrupt spoken status messages. Check important flows with your target browser and screen reader, without requiring users to change their settings. The UI does not change those settings and exposes no public custom-event API.\n\n### CSS customization\n\nImport `@vmitsaras/raveldex/addons/ui/styles.css` separately, then use the five public properties below to adjust the generated `.raveldex-ui` block. The `data-raveldex-*` attributes identify internal elements; do not use them as an alternative application markup API.\n\n| Property | Default | Purpose |\n| --- | --- | --- |\n| `--raveldex-ui-accent` | `#174ea6` | Link color |\n| `--raveldex-ui-background` | `#fff` | Surface background |\n| `--raveldex-ui-color` | `#17212b` | Text color |\n| `--raveldex-ui-border` | `#596b7d` | Control and structural borders |\n| `--raveldex-ui-focus` | `#7a2600` | Visible focus outline |\n\nSet overrides on `.raveldex-ui` itself, where the defaults are declared. For example, `.my-search .raveldex-ui { --raveldex-ui-accent: #174ea6; }` sets the link color inside your `.my-search` container. It leaves the current default unchanged; choose a different accessible color to see a difference. Properties beginning with `--_` are private.\n\nKeep the stylesheet's visible focus, disabled-state borders, scrolling dialog and narrow-screen wrapping usable when customizing it. Reduced-motion rules disable animation, transitions and smooth scrolling. Forced-colors rules use system colors for focus, borders and highlights. Check contrast after changing colors. There is no separate theme or variant registration API.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#inline-search-foundation",
+      "text": {
+        "title": "Inline search foundation",
+        "body": "\nTo start with a complete project, use the [browser](../../examples/inline-browser/README.md) or [Astro](../../examples/inline-astro/README.md) inline starter. The [solution gallery](../../site/Inline.astro) provides a working preview, exact source files and complete starter downloads. Each guide includes local package installation, replacement content, deployment bases, CSS and cleanup.\n\nImport `mountRaveldexInline` from `@vmitsaras/raveldex/addons/ui/inline` and its stylesheet separately from `@vmitsaras/raveldex/addons/ui/inline.css`. The inline preset provides a labeled search form, clear/submit controls, linked titles, optional snippets and simple filters, and bounded Load more/navigation. Title/link search works with core alone. It never installs snippets, facets, Inspector, workers or storage automatically.\n\nSupply your existing engine and display documents with matching IDs, just as in the DOM recipe above. `InlineUIOptions` accepts only these properties:\n\n| Option | Meaning |\n| --- | --- |\n| `root`, `engine`, `documents` | Required element, borrowed engine and readonly `{ id, title, url }` entries. Display data is copied at mount with the same validation/limits as the legacy UI: up to 10,000 entries and 4,000,000 aggregate ID/title/URL UTF-16 units; ID/title/URL caps are 256/1,024/2,048. Navigation URLs must resolve to HTTP(S) without credentials. |\n| `mode?` | `prefix` by default or explicit `text`. Prefix completes only the final word using the existing two-normalized-code-point threshold. Earlier words remain exact; shorter endings remain exact. |\n| `pageSize?` | Batch size, default 5, from 1 to 100 within native engine bounds. The summary reports the exact total and displayed count. |\n| `maxRenderedResults?` | Maximum hits in a visible result window; default 100, integer from `pageSize` to 1,000. Load more appends only within this cap; Next/Previous results reach the other windows. |\n| `facets?` | Up to eight `{ field, label }` string selections, as `UIFacet` entries. Install facets for those metadata fields when creating the engine; the scalar selections use core equality and need no structured-filters add-on. Counts include all active filters, including their own group. |\n| `snippetFields?` | Up to 32 distinct source field names. Install snippets and the required source/offset providers explicitly; a core-only UI needs none of these. |\n| `pageSections?` | Captured revision-bound `PageSections` metadata for optional heading previews. Requires the explicit section-evidence factory and source providers when context is requested; mutually exclusive with `snippetFields`. |\n| `maxSectionPreviews?` | Default 3, integer 1–3. Requires `pageSections`; selects source-ordered previews per displayed page. |\n| `debounceMs?` | Default 150 ms, from 0 to 2,000. Enter and `search()` flush the debounce. |\n| `messages?` | A captured partial `InlineUIMessages` bundle; nonempty plain strings up to 512 UTF-16 units each. Unknown keys, accessor properties and malformed strings are rejected before changing the root. |\n\nThe frozen `InlineUIHandle` has `search(text?: string): Promise<void>`, `clear(): void` and `destroy(): void`. With text supplied, `search` replaces the input then searches; without text it submits the current field. Native search failures are presented with a retry action and resolve after presentation. A non-string argument is rejected. After destroy, methods are harmless no-ops. Clear cancels pending work, clears text and facet selections, and restores idle without deliberately moving focus. Original root Node objects are restored on destroy; the application separately disposes the borrowed engine afterward.\n\nMount starts idle and makes no search request. Nonempty input submits after debounce or Enter; an explicit facet selection can browse that category even with no text. Empty input with no active selections returns to idle. Composition waits until it ends; cancelled or stale replies cannot replace current results. Capability/provider checks occur when an actual search is made, including searches with zero matching IDs; requesting a feature that is not installed produces an explicit native error. Result replacement recovers focus to the search input if it would otherwise remove the focused result link. Controls remain in place during updates.\n\nMounting inline again on the same root returns the existing handle without applying new options. Destroy/remount to replace configuration or display data. Legacy and inline presets cannot own the same root at once: a conflicting mount fails with `INVALID_OPTIONS` before replacing DOM. Independent roots have independent state and label IDs. Neither preset registers a global keyboard shortcut.\n\n### Inline text and styling\n\nThe original messages are `label`, `placeholder`, `submit`, `clear`, `idle`, `searching`, `noResults`, `resultsLabel`, `resultsOne`, `resultsMany`, `error` and `retry`. Additive optional keys are `composing`, `loadMore`, `previous`, `next`, `paginationLabel`, `pageSummary`, `windowLimit`, `revisionChanged`, `all`, `emptyValue`, `nullValue`, `missingValue`, `unlistedValue`, `facetSummary`, `snippetOmissions` and `snippetLimits`. Existing complete original bundles remain valid; unspecified new keys use English defaults.\n\nSummary templates substitute `{total}` and `{count}`; `pageSummary` also supports `{start}`/`{end}`, and `windowLimit` supports `{remaining}`. `unlistedValue` uses `{value}`, `facetSummary` uses `{total}`/`{omitted}`, and `snippetOmissions` uses `{count}`. The error template substitutes a sanitized native `{code}` (unrecognized failures use `INTERNAL_ERROR`); a revision mismatch uses `revisionChanged`. Every message, title, selection and excerpt is inserted as text, never HTML. UI messages do not select a different engine analyzer. The polite status region announces actual searching, composition and settled outcomes without repeating unchanged messages on each keystroke.\n\nThe optional stylesheet uses `.raveldex-inline` and scoped `__form`, `__label`, `__field`, `__icon`, `__input`, `__submit`, `__clear`, `__status`, `__results-heading`, `__results`, `__result`, `__result-heading`, `__result-title` and `__retry` classes. Additional style hooks are `__facets`, `__facet-group`, `__facet-label`, `__facet`, `__facet-summary`, `__snippet`, `__highlight`, `__snippet-omissions`, `__navigation`, `__load-more`, `__previous`, `__next` and `__page-summary`. `data-raveldex-inline-*` hooks are internal; they are not a caller-authored markup API.\n\n| Public CSS property | Default |\n| --- | --- |\n| `--raveldex-inline-background`, `--raveldex-inline-color` | `#fff`, `#17212b` |\n| `--raveldex-inline-muted`, `--raveldex-inline-accent` | `#465563`, `#174ea6` |\n| `--raveldex-inline-border`, `--raveldex-inline-focus` | `#637383`, `#7a2600` |\n| `--raveldex-inline-font`, `--raveldex-inline-font-size` | inherited font family, `1rem` |\n| `--raveldex-inline-gap`, `--raveldex-inline-radius` | `.75rem`, `.5rem` |\n| `--raveldex-inline-max-width` | `48rem` |\n| `--raveldex-inline-line-height`, `--raveldex-inline-title-size` | `1.6`, `1.15em` |\n| `--raveldex-inline-control-height`, `--raveldex-inline-control-padding` | `2.75rem` minimum, `.6rem .85rem` |\n| `--raveldex-inline-border-width`, `--raveldex-inline-result-padding` | `2px` controls, current gap / `0` |\n| `--raveldex-inline-highlight-background`, `--raveldex-inline-highlight-color` | `#ffe59a`, `#17212b` |\n| `--raveldex-inline-error` | `#9b1c1c` |\n\nSet properties on the search root or an ancestor. For a small branding change, override the accent, radius and gap; the host's font is inherited. For a dark host theme, supply suitable surface, text, muted, link, border, focus and error colors together; set highlight foreground/background together if overriding them. Private `--_` properties are not customization API. Keep visible focus, contrast, reflow and control targets usable. The stylesheet includes scoped reduced-motion and forced-colors behavior and never injects itself from JavaScript.\n\n### Inline result pages, filters and snippets\n\nLoad more appends the next native batch without changing its order or exact total. A partial batch can fill a window whose cap is not a multiple of `pageSize`. At the cap, Load more becomes unavailable and Next results starts the following window. Previous results reloads the first batch of the previous window; Load more can then expand that window again. The range summary states which matches are visible and how many remain. All matches remain reachable, while at most `maxRenderedResults` hit elements are retained. Navigation controls stay mounted once shown and use guarded `aria-disabled` states so an asynchronous update does not remove the focused button.\n\nChanging the query or a filter resets accumulation. Paging checks the native revision; if the index changed, the UI clears old hits/counts and offers Retry from the first window with the query and selections retained. It also requires the snippet reply to match the main reply's revision, IDs, scores and total before committing hits or counts. It does not subscribe to external mutations; a later search/paging action revalidates current state. Native search/provider/transport failure is shown as failure, never as a successful empty result.\n\nEach string facet uses a native select with an All choice. Empty strings are valid distinct values; null/missing buckets are informational unavailable options. Counts apply before hit paging and include every active filter. At most 100 buckets per field are displayed; the summary exposes omitted buckets. A selected value stays available when outside the displayed projection, without an invented count. Multi-selection and own-group-excluding counts belong to a later directory solution.\n\nExplicit snippets use only the new batch of IDs, never all accumulated IDs. Returned text is original source, with validated marks at returned UTF-16 offsets and visible omission notices for undisplayed matches, window/highlight limits and oversized matches. Offsets alone do not supply the original text. A snippet failure clears the whole attempted presentation rather than mixing stale or incomplete context with a successful result list.\n\nThe default inline presentation includes neither numerical scores nor Inspector controls. For the developer-oriented presentation, explicitly use the existing native DOM UI instead of hiding controls with CSS. Complete [browser](../../examples/inline-browser/README.md) and [Astro](../../examples/inline-astro/README.md) starters include copy/install steps and explicit ownership. The existing `/addons/ui` Workbench API retains its exact-word default, full navigation and Inspector. No Pagefind runtime/API or indexing/loading compatibility is implied.\n\n### Inline anchored sections\n\nSupply explicit heading metadata from the same originals indexed by your borrowed engine. Import the readonly `PageSections`, `PageSectionPage` and `PageSection` types from `@vmitsaras/raveldex/addons/sections`. Register [section evidence](ADDONS.md#anchored-page-context) when constructing the engine; mounting never installs it.\n\n```js\nconst pageSections = {\n  kind: 'raveldex-page-sections', version: 1, revision: written.revision,\n  pages: [{\n    pageId: 'repair',\n    sections: [{ anchor: 'chain', heading: 'Replace the chain', headingLevel: 2,\n      field: 'body', valueIndex: 0, start: 0, end: original.length }],\n  }],\n};\nconst ui = mountRaveldexInline({\n  root, engine, documents: [{ id: 'repair', title: 'Bicycle repairs', url: '/repair/' }],\n  pageSections, maxSectionPreviews: 3,\n});\n```\n\nHere `written` is the completed index mutation and `original` is its exact body string. Render the corresponding heading with `id=\"chain\"` on `/repair/`. The library does not discover headings or inspect destination pages. Maps are copied, validated and frozen before authored DOM changes. IDs must exist in display records; duplicates, overlapping ranges, accessors, malformed Unicode and invalid headings/anchors reject capture. Whole-source/grapheme validation occurs inside native context requests. A map may cover only some pages; missing/empty entries retain the parent link without inventing context counts.\n\nUse exact raw IDs for `anchor`, with no slugging, decoding or normalization. They must be 1–256 UTF-16 units without control characters, ASCII whitespace or `:~:`. Literal `%`, `#` and Unicode are encoded once: `%#café` becomes `#%25%23caf%C3%A9`. Mapped parent URLs must have no existing fragment delimiter, including an empty trailing `#`; direct URL queries remain intact. The final absolute URL must fit 2,048 UTF-16 units. Keep page text and target documents correctly encoded as UTF-8.\n\nThe UI keeps native page totals/order and projects only newly displayed mapped hits, with one detailed request in flight and an atomic batch commit. It shows up to three heading links beneath “Matching text in this page”; any known omitted context gets “More matching context is not shown.” A heading can have no excerpt when its contributing match cannot fit. The optional message keys `sectionCaption`, `sectionOmissions`, `sectionUnavailable` and `sectionStale` customize these texts without changing existing bundles. Section CSS uses `__sections`, `__section`, `__section-title`, `__section-caption`, `__section-omissions` and `__section-unavailable` alongside the existing snippet/theme hooks.\n\nA stale map retains validated parent pages with a visible warning and makes no context requests. Remount with fresh metadata to restore previews; old ranges are never restamped automatically. A typed context-only provider, source-bound, environment or resource refusal retains parents with visible unavailable context. Main search failures, mismatched revisions, malformed/incomplete replies and transport failures reject the whole attempted window and offer Retry. Clear, replacement searches and destroy suppress late work; destroy releases owned maps/previews, restores original nodes and leaves disposal of the borrowed engine to you. Human accessibility/platform qualification remains separate from these automated lifecycle checks.\n\nMaps are bounded to 10,000 pages, 16,384 sections total, 64 per page and 4 MiB serialized UTF-8. There is no import-time map retention or extra core index. At the existing 1,000-parent DOM ceiling, section mode adds at most 3,000 previews, 720,000 excerpt UTF-16 units and 96,000 marks. These are output ceilings, not measured memory usage.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#documentation-search-modal",
+      "text": {
+        "title": "Documentation search modal",
+        "body": "\nUse the modal when documentation search should open from an explicit button. It reuses inline search, feedback, paging and optional anchored previews inside a native dialog. Supply an already created engine and matching display data; the modal borrows that owner and starts closed without searching. For first-open loading and complete owned application lifecycle, copy the [browser](../../examples/modal-browser/README.md) or [Astro](../../examples/modal-astro/README.md) starter. The [modal gallery](../../site/Modal.astro) includes an installed preview, exact source downloads and CSS recipes.\n\n```html\n<button id=\"docs-search-trigger\" type=\"button\">Search documentation</button>\n<div id=\"docs-search\"><a href=\"/guide/\">Browse the documentation</a></div>\n```\n\n```js\nimport { mountRaveldexModal } from '@vmitsaras/raveldex/addons/ui/modal';\nimport '@vmitsaras/raveldex/addons/ui/modal.css';\n\nconst modal = mountRaveldexModal({\n  root: document.querySelector('#docs-search'),\n  trigger: document.querySelector('#docs-search-trigger'),\n  engine, documents,\n  shortcut: true,\n  // pageSections, // Optional maps from the same indexed originals and revision.\n});\n// modal.open();\n// await modal.search('source prov');\n// modal.close();\n// modal.destroy();\n// await engine.dispose(); // The application owns this separate step.\n```\n\nHere `engine` and `documents` come from your ordinary inline setup or explicit static loader. The single modal stylesheet includes inline styling through a local CSS import; JavaScript imports no stylesheet automatically. Keep normal browse links available before initialization and make the existing trigger an accessible named native button. Root and trigger must be connected in the same document, with the trigger outside root. The library preserves the trigger's authored label rather than attempting to recreate the browser's complete accessible-name algorithm.\n\n`ModalUIOptions` includes the existing inline options, including partial inline `messages`, facets, snippets or `pageSections`/`maxSectionPreviews`. Existing bounds and the snippets/maps exclusion still apply. The additional options are:\n\n| Option | Meaning |\n| --- | --- |\n| `trigger` | Required existing `HTMLButtonElement`. Trigger ownership cannot be shared by two mounted modals. |\n| `resetOnClose?` | Default false. Preserve input and facet values; true clears both on close. Results/counts/errors are discarded on every close. |\n| `shortcut?` | Default false. Coordinate Ctrl+K or Meta+K within this document. |\n| `keyboardHints?` | Default true. Show contextual Escape and, when selected, shortcut hints. Hiding hints does not disable an opted-in shortcut. |\n| `modalMessages?` | Partial `ModalUIMessages` with `title`, `close`, `escapeHint`, `shortcutHint`. Plain nonblank text up to 512 UTF-16 units each. Defaults are “Search documentation”, “Close search”, “Esc to close”, “Ctrl/⌘ K”. |\n\nThe readonly `ModalUIHandle` has `open()`, `close()`, `search(text?)`, `clear()` and `destroy()`. Open focuses the search input and reruns the first native page from preserved controls; an empty unfiltered query remains idle. Repeated open is harmless. Search while closed changes the stored text without searching or reopening; clear also works while closed. Close aborts debounce/main/context work and prevents late replies from publishing. If application code calls the native dialog’s `close()` directly, cleanup follows its queued close event; preexisting hidden feedback may persist until then, while late replies still cannot publish. Reopen checks the current revision/maps again. Reset-on-close clears input/filter values. Destroy cancels work, removes bindings, restores original root Node objects and owned trigger/scroll state, and never disposes the borrowed engine. Methods after destroy do nothing.\n\nNative Escape cancellation, the visible close button and deliberate backdrop activation share cleanup. Some browsers first clear a focused search field on Escape; press Escape again or use **Close search** to dismiss. Backdrop dismissal requires the same primary pointer to press and release outside the dialog, then click there; dragging through the backdrop does not dismiss. Ordinary result links keep their native navigation and modifier behavior. Native dialog behavior contains page focus; a browser may move keyboard focus into its own chrome during Tab traversal. There is no custom Tab loop. Close returns to the connected actual opener when it still owns the focus transition; removed openers, unrelated focus and other modal sessions are respected.\n\nThe optional shortcut ignores already handled/repeated events, composition, editables and visible editable shadow paths, Alt/Shift and simultaneous Control+Meta. Unknown focused shadow-capable hosts are conservatively excluded, including ordinary focusable `div`/`main`/`section` regions that cannot be distinguished from concealed shadow content. Root/trigger shadow trees are captured explicitly; their actual editable controls are respected. The active eligible modal wins; otherwise the first connected enabled opt-in instance wins. An unrelated native modal found in the document or active/known shadow trees blocks opening. This does not discover every externally concealed/inactive shadow tree; coordinate those external modal lifecycles in the application. Destroy unregisters its binding, and the final opt-in instance removes the shared document listener. Merely importing or mounting inline search captures no keyboard shortcut.\n\nStyle `.raveldex-modal` and its scoped `__header`, `__title`, `__close`, `__search`, `__body`, `__footer` and `__hint` hooks. The shared inline properties continue to control input/results; modal background/color/border/focus default to those same values. Modal-specific `--raveldex-modal-*` properties include `background`, `color`, `border`, `focus`, `gap`, `padding`, `gutter`, `max-width`, `height`, `border-width`, `radius`, `shadow`, `backdrop`, `title-size` and `control-radius`. Layout defaults are 48rem maximum width, 42rem preferred height, .75rem gutter/gap and 1rem padding. Set public overrides on the dialog or an inherited wrapper; properties starting `--_` are private.\n\nThe header/input remain reachable as results and facets scroll in the contained body. Short screens use a compact input row and keep the associated label available to assistive technology. Dynamic viewport/safe-area rules, visible focus, forced colors and reduced motion are included; check contrast and geometry after customization. Automated viewport checks do not establish physical on-screen-keyboard, actual zoom or human AT support. See the [modal contract](../specs/DOCS_MODAL.md) for exact ownership and lifecycle rules. Native/worker failures remain visible errors with Retry; the modal does not load assets, create another engine or silently change execution hosts.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#compact-dropdown-search",
+      "text": {
+        "title": "Compact dropdown search",
+        "body": "\nUse `mountRaveldexDropdown` from `/addons/ui/dropdown` when a compact field should offer a few real page links. Import `/addons/ui/dropdown.css` separately. It uses core alone, borrows your existing engine and creates no index, snippets, suggestions, worker or storage. Native manual popover support is required; unsupported environments fail before replacing your browse content. Packages remain private and unpublished.\n\nFor a complete project, copy the [browser header starter](../../examples/dropdown-browser/README.md). Its [gallery](../../site/Dropdown.astro) has an installed preview, all source files and a CSS walkthrough. The starter builds a real `/search/` inline destination and guide pages at root or a subdirectory base.\n\nThis wiring fragment expects your `engine` and `documents`, a connected `#header-search` element, and an existing `/search/` page that accepts `q` and selects the same prefix mode, analyzer and content. The runtime entry itself does not create that destination:\n\n```js\nimport { mountRaveldexDropdown } from '@vmitsaras/raveldex/addons/ui/dropdown';\nimport '@vmitsaras/raveldex/addons/ui/dropdown.css';\n\nconst dropdown = mountRaveldexDropdown({\n  root: document.querySelector('#header-search'),\n  engine, documents,\n  fullResults: { url: '/search/?mode=prefix#results', queryParameter: 'q' },\n  maxResults: 5,\n  messages: { label: 'Find a guide', fullResults: 'Search every guide' },\n});\n// dropdown.open();                 // Focus and refresh a preserved query.\n// await dropdown.search('source prov'); // Search without moving focus.\n// dropdown.close();                // Keep the words; cancel presentation.\n// dropdown.clear();                // Return to idle without a query.\n// dropdown.destroy();              // Restore the original nodes.\n// await engine.dispose();          // Separate application-owned cleanup.\n```\n\n`DropdownUIOptions` requires `root`, `engine`, `documents` and `fullResults`. `maxResults` defaults to 5 and accepts integers 1..20; `debounceMs` defaults to 150 and accepts 0..2000; `mode` is `prefix` by default or `text`; `shortcut` is false by default. Display capture uses the existing finite ID/title/safe-URL limits. A detached root can be prepared, but search/open are inactive until it is connected to its original document. Same-kind duplicate mount returns its existing handle; destroy/remount to change configuration. A different UI preset cannot own that root simultaneously.\n\nThe popup is a one-column grid of real native links. Input focus stays in the labeled text field; `aria-activedescendant` identifies only a visible current gridcell. Results never replace your words with a title. The exact native total and shown count are separate from the finite grid. No pagination or vocabulary suggestions are mixed into these hits. The ordinary full-results link is outside the popup and remains in normal Tab order.\n\n| Interaction | Behavior |\n| --- | --- |\n| Down / Up | Enter first/last actual result, then stop at the boundary. If needed, flush the query and retain that explicit navigation intent for its current reply. |\n| Enter with an active result | Follow its actual link without rewriting the field. |\n| Enter without an active result / Search | Flush the current search and reopen current results. |\n| Escape / Tab / Shift+Tab | Dismiss/cancel; Tab leaves normally. The query is preserved. |\n| Editing, selection and modified input keys | Clear virtual selection and retain native editing; modified input Enter does not activate a hit. |\n| Composition / Clear | No interim query or activation; committed text schedules search. Clear cancels and returns to idle, retaining input/action/external focus; a focused Retry/full-results/popup-link control that must disappear returns focus to input. |\n| Result pointer/context menu / full-results link | Native links retain ordinary and modified activation. |\n\nNative Tab movement follows the browser's keyboard-navigation preferences; the component does not add a Tab loop or force skipped native links/buttons into the sequence.\n\n`fullResults.url` is a captured HTTP(S) URL without credentials, at most 2048 UTF-16 units. Its optional `queryParameter` defaults to `q` and matches `[A-Za-z][A-Za-z0-9_-]{0,63}`. The link replaces that parameter with the exact current field value and preserves other parameters/hash. It does not trim, normalize, autocomplete or silently change query mode. Whitespace-only input is idle; malformed/oversized text has no handoff URL. Programmatic `search(text)` rejects CR/LF rather than silently joining words in a single-line field. Native refusal or transport failure stays visible with Retry; there is no fallback engine.\n\nEvery edit/new reply clears old virtual selection before replacing rows. Close, outside pointer/focus, native popup closure, removal and destroy suppress old work. A programmatic search does not steal focus; a later outside interaction can cancel it. There is no live index-mutation subscription: reopen or refresh to obtain a new revision. Destroy restores original Node identities and never disposes your borrowed engine.\n\nOnly one owned dropdown popup per document is shown. `shortcut: true` opts into the modal's existing Ctrl/Meta+K coordinator; editing/composition/repeat/modifier/already-handled events and unrelated modality are respected. No global shortcut is registered otherwise. Known owned shadow ancestry is supported; external concealed shadow/modal lifecycles still require application coordination. Automatic modal handoff is not part of this entry.\n\nStyle `.raveldex-dropdown` and its scoped `__form`, `__label`, `__input`, `__submit`, `__clear`, `__status`, `__retry`, `__full-results`, `__popup`, `__row`, `__cell` and `__link` classes. `.is-active` marks the current cell. Public `--raveldex-dropdown-*` properties include `background`, `color`, `muted`, `accent`, `border`, `focus`, `active-background`, `active-color`, `error`, `font`, `font-size`, `line-height`, `gap`, `padding`, `radius`, `border-width`, `max-width`, `max-height` and `shadow`; `--_` geometry values are private. Defaults use a readable light surface, 44px controls, 40rem maximum component width and 20rem maximum popup height. Native top-layer placement escapes clipping ancestors and uses available viewport space with contained scrolling. If a short or enlarged viewport cannot fit a usable result row without covering controls, the popup collapses with the exact total, a space/recovery message and the full-results link. Keep visible focus, non-color active indication, contrast and full-results access when changing a theme.\n\nPlain-text `DropdownUIMessages` keys are `label`, `placeholder`, `submit`, `clear`, `idle`, `composing`, `searching`, `noResults`, `resultsLabel`, `resultsOne`, `resultsMany`, `error`, `retry`, `fullResults`, `closed` and `noSpace`. Overrides are captured strings of at most 512 UTF-16 units. Counts use `{total}`/`{count}` tokens and errors use `{code}`. UI language does not select another analyzer. [The concrete contract](../specs/DROPDOWN.md) records keyboard, focus, placement, lifecycle and finite bounds. Scripted keyboard/composition, computed accessibility trees and emulated layouts are separate from human AT, physical input/mobile keyboard and actual zoom observations.\n\nThe complete [header starter](../../examples/dropdown-browser/README.md) uses `configuration.mjs` to select prefix mode, three compact results and a three-result inline batch with a six-result window. Its `/search/` page reads a single `q` value once, preserves the decoded raw words and refuses duplicate, multiline, malformed or overlong input with a recovery message. Header and destination use the same records and query configuration; the starter does not add URL history synchronization. Both pages keep ordinary browse links. Build and preview with the same `RAVELDEX_DROPDOWN_BASE` when deploying under a subdirectory.\n\nSet the starter's `modalHandoff` flag to `true` only when you want its explicit larger-search button. The button transfers the committed header text to a modal using the same page owner, display records and mode. It adds no global shortcut, second engine or automatic width switch. The supplied bundle imports all three optional UI styles and presenters so this flag needs only a configuration edit and rebuild; this is the starter's selected bundle cost, not the cost of importing `/addons/ui/dropdown` alone. A new page navigation loads that page's own owner; the controller destroys its borrowed surfaces before releasing it.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#starter-adoption-and-local-checks",
+      "text": {
+        "title": "Starter adoption and local checks",
+        "body": "\nChoose the [inline gallery](../../site/Inline.astro) for results in a page, the [modal gallery](../../site/Modal.astro) for documentation search behind a button, or the [header gallery](../../site/Dropdown.astro) for a compact field and full-results route. Inline and documentation-modal galleries offer browser/Astro projects; the header gallery offers one plain-browser project. Each has complete source downloads, a live installed preview and a small CSS walkthrough. Packages remain private and unpublished: install the matching local tarballs in the setup guide, with its pinned build tooling, before building the copied project.\n\n| Starter | Selected capabilities and application requirements |\n| --- | --- |\n| Browser inline | Browser ESM/fetch, original body source, snippet evidence, string category facets and `Intl.Segmenter`. Explicit records build actual guide pages. |\n| Astro inline | The same snippets/facets plus the static source loader, matching core/Astro packages and Web Crypto over HTTPS or localhost. Retain original values for every declared text field when reconstructing source snapshots. |\n| Browser modal | Native `dialog`, `Intl.Segmenter` and Web Crypto over HTTPS or localhost. Explicit original body/section evidence, page maps, string category facets and real authored heading IDs. |\n| Astro modal | The same modal requirements plus the static source loader and matching core/Astro packages. Source, display and the source-only section companion must belong to the same build/base; maps bind to the receiving owner revision. |\n| Browser dropdown header | Browser ESM/fetch and native Popover; core-only linked titles, one owner per page and the same prefix mode on its real inline full-results route. Optional explicit modal handoff additionally requires native `dialog`. No source/snippet/facet/section provider or Web Crypto requirement. |\n\nReplace public sample records with your own IDs, original text and real destinations. Keep maps, ranges and heading IDs aligned; native totals, scores and paging still count pages. Do not add private content to generated assets. Title/link-only search can omit snippet/section/facet UI options and their matching optional registrations together. Astro source reconstruction still needs original values for all declared text fields. Deploy the complete rebuilt output with one consistent base and build identity.\n\nThe starter wrappers own newly created engines or static handles. Destroy their borrowed UI before releasing those owners, and await wrapper destruction before replacing a view. For an engine owned elsewhere, mount the public UI directly and keep engine disposal with its existing owner. The complete projects show retry and late-owner cleanup; importing a UI entry alone does not create or load an engine. The header starter shares one newly loaded owner across its dropdown, full-page inline surface and explicitly enabled modal; it never creates a second owner merely to change presentation.\n\nLocal automated Chrome checks exercise installed bytes, actual native results/counts/pages, snippets/sections, scripted keyboard/composition, cancellation/retry and lifecycle races. Theme/reflow checks use emulated viewports, forced colors and reduced motion. These results do not establish human screen-reader speech, physical IME/touch/on-screen-keyboard behavior, actual 200%/400% browser zoom, other browser/device combinations or universal performance. Check those combinations in your application after replacing data, labels, layout or colors. Keep visible focus, contrast, native links and browse navigation usable in success, no-results, loading and failure states.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#one-owner-module-worker",
+      "text": {
+        "title": "One-owner module worker",
+        "body": "\nUse a module worker to run a complete engine off the main thread. Create the `Worker` yourself, then pass it to `createWorkerRaveldex` from `/adapters/worker`. The [worker example](examples/worker.mjs) and [host module](examples/worker-host.mjs) show both sides.\n\n`createWorkerRaveldex(options: WorkerOptions): Promise<WorkerRaveldex>` takes `{ worker, configuration, ownership: 'owned' | 'external', sameHost: true, maxMessageBytes?, responseTimeoutMs? }`. The initial handshake checks the implementation, analyzer, ranking model and selected registrations. `sameHost: true` describes your browser and its own worker; it does not qualify other environments, and the default analyzer profile stays unqualified.\n\nIn the worker module, call `serveRaveldexWorker(scope, options?)` from `/adapters/worker/host`. Its options are `{ addons?, maxMessageBytes? }`. Install matching add-ons in the client configuration and worker host: functions and live registration handles cannot be sent as cloneable data.\n\n`WorkerScope` needs `postMessage`, `addEventListener` and `removeEventListener`; `WorkerEndpoint` also needs `terminate`. The host returns a `WorkerHostHandle` with an asynchronous `dispose()` method.\n\n`WorkerRaveldex` has ordinary methods plus `reconcile(operationId)` and `destroy()` (the disposal alias). Mutation methods return `MutationPromise`, a Promise with a captured `operationId`. `MutationReceipt` is `{ operationId, status: 'pending' | 'expired' }`, `{ operationId, status: 'committed', result }` or `{ operationId, status: 'rejected', error: WireError }`. Reconciliation uses the same owner/session and a bounded 256-receipt window. It is not durable deduplication across worker loss.\n\nMessages default to a maximum of 8 MiB, which you can lower to 1 KiB. Message structure is bounded too, and at most 64 requests can be pending. The default response timeout is 65,000 ms, configurable from 1 to 120,000 ms. Engine deadlines and work limits apply separately.\n\nIf a reply is lost or late, an update may already have committed. Check its receipt while the worker survives. If the owner is gone or the receipt has expired, rebuild a new engine from your authoritative source instead of blindly repeating an add, replace or remove. An expired receipt proves neither success nor failure.\n\n`WorkerAdapterError` has `code`, sanitized `details` and optional `operationId`; `WORKER_ERROR_CODES` includes `INVALID_TRANSPORT`, `TRANSPORT_LIMIT`, `INCOMPATIBLE_WORKER`, `TIMEOUT`, `TERMINATED`, `STARTUP_FAILED`, `OUTCOME_UNKNOWN` and `DISPOSED`. Authoritative native errors remain `RaveldexError`; snapshot errors carry their reason. `WireError` preserves the declared category/code rather than serializing an arbitrary Error/cause. `WorkerErrorCode` and `WorkerErrorDetails` are exported types.\n\nCall `destroy()` or `dispose()` when you are done. The adapter asks the owner to acknowledge cleanup, releases client listeners and settles pending work. It terminates an `owned` endpoint; you remain responsible for an `external` one. An acknowledgement timeout still reports an error after local cleanup. Searches never silently fall back to the main thread.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#source-and-native-snapshots",
+      "text": {
+        "title": "Source and native snapshots",
+        "body": "\nUse snapshots to export an engine's state and restore it later. Call `createSnapshots(engine, options?)` from `/adapters/snapshots` with a supported direct engine. The helper uses your engine without owning it or adding methods to it.\n\nIts methods are `exportSource(options?)`, `exportNative(options?)` and `restore(encoded: string, options?)`. Each returns a promise and accepts core mutation signal/deadline options. `SnapshotOptions` lets you set `maxEncodedBytes`, from 1 KiB to the default and maximum 64 MiB.\n\n| Format | Requirements / meaning |\n| --- | --- |\n| `raveldex-source` | Selected originals for every schema text field; exports owned source/configuration and rebuilds under the receiving analyzer. Does not promise prior membership, rank or score equivalence across environments. |\n| `raveldex-native` | Explicit exact-Node-runtime qualification from owner creation; validates compatible native index/statistics/provider structures, configuration, analyzer/model, codecs and limits. It is not an arbitrary engine dump or a browser portability promise. |\n\nBoth formats export versioned JSON strings with size, structure and corruption checks. Checksums detect changed bytes; they do not authenticate who sent them.\n\nA successful restore replaces the receiving engine's state in one atomic update at its next local revision. It returns `{ format, originRevision, revision, reindexed, receivingAnalyzer }`. `originRevision` records where the snapshot came from; it does not become the local revision. `reindexed` is `true` for a source rebuild and `false` for native state.\n\nCancellation or a validation, compatibility, work or deadline failure before commit leaves the previous state intact. A complete source rebuild can exceed a single operation's budget even if the original data was added successfully in smaller batches.\n\nFor source snapshots, use ordinary `createRaveldex`, source providers for every text field and `createSnapshots`. Choose this path unless you have an exact-runtime native qualification for your application.\n\nFor native snapshots, create the engine with `createSnapshotRaveldex(configuration, { nativeQualification })`. You cannot add native qualification to an ordinary engine afterward. The declaration is `NativeSnapshotQualification`: `{ profileId, scope: 'exact-node-runtime', environment, evidence: string[] }`. Its environment includes `{ runtime: 'node', version, v8, icu, unicode, platform, arch }`.\n\n`currentNodeSnapshotEnvironment()` reads the current runtime identity, but detecting versions does not qualify it. The evidence references are declarations supplied and trusted by your application, not proofs executed by the library.\n\n[snapshots.mjs](examples/snapshots.mjs) takes the application's declaration as an argument and exercises source and native round trips. The receiving native owner must match the exact declared profile/environment/evidence and compatible configuration. Use source snapshots when your application does not supply an exact-runtime native declaration.\n\n`SnapshotAdapterError extends RaveldexError` adds `reason: SnapshotReason`. `SNAPSHOT_REASONS` is `MALFORMED_SNAPSHOT`, `ENCODED_LIMIT_EXCEEDED`, `INTEGRITY_MISMATCH`, `UNSUPPORTED_FORMAT`, `UNSUPPORTED_CODEC`, `SCHEMA_MISMATCH`, `ANALYZER_MISMATCH`, `RANKING_MISMATCH`, `CAPABILITY_MISMATCH`, `INDEX_DETAIL_MISMATCH`, `LIMITS_MISMATCH`, `SOURCE_UNAVAILABLE`, `UNQUALIFIED_PROFILE`, `PROFILE_MISMATCH`, `INVALID_NATIVE_STATE`, `UNSUPPORTED_ENGINE`. Reasons distinguish compatibility from the ordinary error code.\n\nBrowser workers use the separate source-only bridge: `createWorkerSnapshots(engine)` from `/adapters/worker/snapshots` and `serveSnapshotRaveldexWorker(scope, options?)` from `/adapters/worker/snapshots/host`. [worker.mjs](examples/worker.mjs) and [worker-host.mjs](examples/worker-host.mjs) show a matched pair. `WorkerSnapshots` exposes `exportSource`, `restore` and its own `reconcile`. Restore returns `SnapshotRestorePromise` with `operationId`; its `SnapshotRestoreReceipt` is `pending`, `expired`, `committed` with a restore result, or `rejected` with a wire error. Pending/expired cannot resolve an unknown outcome. Ordinary mutation reconciliation is separate. Browser/worker native export and restore remain unavailable.\n\nThe snapshot entry also exports `SnapshotEngineOptions`, `SnapshotOptions`, `SnapshotFormat`, `SnapshotRestoreResult` and `Snapshots` types. Worker snapshot/client/host types are available from their corresponding subpaths; no private control-channel import is supported.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#indexeddb-persistence-and-recovery",
+      "text": {
+        "title": "IndexedDB persistence and recovery",
+        "body": "\nUse `createIndexedDBPersistence(snapshots, options)` from `/adapters/indexeddb` to save and load snapshots explicitly. It manages its own database connections while borrowing the snapshot export/restore handles. Disposing storage does not dispose your engine.\n\nSupply `{ databaseName, namespace }` for a database owned by this adapter, not an unrelated application database. Optional settings are `{ indexedDB?, format?: 'source' | 'native', openTimeoutMs?, operationTimeoutMs? }`. The factory can be supplied directly or found when needed, and the default format is source. Native format requires the qualified direct-engine path; workers support source only.\n\n| Method | Required options / result |\n| --- | --- |\n| `save(options: PersistenceWriteOptions)` | `{ expectedGeneration: string | null, signal?, deadlineMs? }`; returns `PersistenceSaveResult` `{ generation, format, encodedBytes, durable: true }`. Null explicitly expects an empty namespace. |\n| `load(options?: PersistenceOptions)` | `{ signal?, deadlineMs? }`; returns `PersistenceLoadResult` `{ status: 'missing', generation: null }` or `{ status: 'restored', generation, restore }`. |\n| `erase(options: PersistenceWriteOptions)` | Same expected-generation requirement; returns `PersistenceEraseResult` `{ erased, generation: null, durable: true }` after deleting the namespace's snapshot and metadata rows. |\n| `dispose()` | Releases connections/actions without erasing storage or disposing the borrowed engine. |\n\nKeep the generation returned by a save or load and supply it on your next save or erase. This prevents one writer from silently overwriting another. `GENERATION_CONFLICT` means you need to read the current generation and decide how to resolve the change. A loaded generation describes the snapshot you read, not a lock on later writes.\n\n`durable: true` means the strict-hint IndexedDB transaction completed. It does not guarantee survival of power loss or browser eviction. Saving bytes and later restoring an engine are separate operations.\n\nOpen timeout defaults to 5,000 ms (maximum 30,000); action timeout defaults to 30,000 ms (maximum 60,000), with at most 64 pending actions and a 64 MiB encoded ceiling. Actions include queue time, encoding and restore. A timeout during an uncertain restore can return `OUTCOME_UNKNOWN`, including selected generation and operation identity when available. Do not automatically repeat that restore or call it rolled back. Use worker snapshot receipts when available, inspect the surviving owner separately, or explicitly recover into a new owner from authoritative data.\n\n`IndexedDBAdapterError` is separate from core/snapshot errors, with `code` and frozen `details: IndexedDBErrorDetails` (`phase?`, generation fields, `operationId?`, `snapshotReason?`, `selectedGeneration?`). `INDEXEDDB_ERROR_CODES` is `INVALID_OPTIONS`, `UNAVAILABLE`, `QUOTA_EXCEEDED`, `INCOMPATIBLE_DATABASE`, `BLOCKED`, `VERSION_CHANGED`, `GENERATION_CONFLICT`, `CORRUPT_DATA`, `INCOMPATIBLE_SNAPSHOT`, `TRANSACTION_FAILED`, `CANCELLED`, `TIMEOUT`, `DISPOSED`, `OUTCOME_UNKNOWN`, `QUEUE_FULL`. `IndexedDBErrorCode` is exported with the option/result/interface types above. No automatic save, startup restore, retry or namespace deletion occurs on import.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#localsearch-source-migration",
+      "text": {
+        "title": "LocalSearch source migration",
+        "body": "\nUse `convertLocalSearchSnapshot(bytes)` from `/integrations/localsearch` to convert a supported companion source export before rebuilding a separate Raveldex engine. It checks the snapshot, checksum and supported data mapping.\n\nThe supported input identity is companion-v1, format 1, MiniSearch 7.2.0. Arbitrary MiniSearch indexes, worker messages and storage rows are rejected. Conversion needs `crypto.subtle`, accepts at most 32 MiB and includes bounded synchronous work. It is not a queued, cancellable engine operation.\n\nThe returned plan contains `{ configuration, records, origin, sourceRevision, returnFields, identity, differences }`. Read `identity` and `differences` for changes in analysis and ranking. `origin` and `sourceRevision` describe the old collection; they do not become the new engine's revision or a storage generation.\n\nThe [migration recipe](examples/migration.mjs) rebuilds a separate engine with bounded `addMany` calls, inspects it and disposes it. In your application, switch to the new engine only after the whole rebuild succeeds. Each batch is atomic, but the entire migration is not one transaction.\n\n`MigrationError` has sanitized `code` and `details: { reason, nativeCode? }`. `MIGRATION_ERROR_CODES` is `INVALID_BYTES`, `INVALID_SNAPSHOT`, `INCOMPATIBLE_SNAPSHOT`, `NONCANONICAL_SNAPSHOT`, `CHECKSUM_MISMATCH`, `NATIVE_INCOMPATIBLE`, `CAPABILITY_REQUIRED`. The entry exports `MigrationErrorCode`, `MigrationErrorDetails`, `MigrationReason`, `LocalSearchMigration`, `LocalSearchMigrationIdentity` and `LocalSearchMigrationOrigin`. Foreign indexes, scores, live handles and namespaces are never reused. The repository [migration guide](https://github.com/vmitsaras/raveldex/blob/main/docs/migration/LOCALSEARCH.md) gives mapping and provenance details.\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/HOSTS.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#install-matching-packages",
+      "text": {
+        "title": "Install matching packages",
+        "body": "\nIn your ESM application, install the core and integration tarballs together. Replace both absolute paths with your prepared files. The integration requires core `0.1.0-rc.0`, Node `>=22.12.0` and Astro `7.3.2` for its build hook:\n\n```sh\nnpm install --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz astro@7.3.2\n```\n\nThis installs core, the integration and the pinned Astro version. Astro and its dependencies need registry access or a suitable npm cache. If you only use the static builder and client loader, you can omit Astro itself. See [building tarballs](GETTING_STARTED.md#build-tarballs-from-a-source-checkout) if you need to prepare the local files.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/STATIC_ASTRO.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#build-static-search",
+      "text": {
+        "title": "Build static search",
+        "body": "\nStart by listing the records you want people to find. Include each record's text, display title and directory-style route. The builder does not crawl your pages or parse Markdown or HTML, so leave drafts and private content out of this list. Add a source provider for every indexed text field.\n\nSave the following as `search-content.mjs` in your application. The later build and browser examples import this shared configuration:\n\n```js\nimport { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';\n\nexport const configuration = {\n  schema: { text: { title: {}, body: {} } },\n  addons: [createSourceProvider({ fields: ['title', 'body'] })],\n};\nexport const entries = [{\n    record: { id: 'updates', text: { title: 'Atomic updates', body: 'Replace a complete record.' } },\n    title: 'Atomic updates',\n    path: '/guide/updates/',\n  }];\n```\n\nThis file defines one searchable document, **Atomic updates**, at `/guide/updates/`. Importing it alone does not build an index or create that page; your site must provide the page.\n\nSave the next block in a Node `.mjs` build module beside `search-content.mjs`, then run it with Node:\n\n```js\nimport { buildStaticSearch } from '@vmitsaras/raveldex-astro/build';\nimport { configuration, entries } from './search-content.mjs';\n\nconst artifacts = await buildStaticSearch({\n  configuration,\n  buildId: 'docs-v1',\n  base: '/docs/',\n  entries,\n});\nconsole.log(artifacts.manifest.recordCount); // 1\n```\n\nIt prints `1`, the number of records in the generated manifest. The returned `{ manifest, files }` holds the JSON data in memory; this example does not write it to disk. File names include content hashes.\n\nIf you use the builder directly, write all content files into your own `raveldex/` directory before writing `manifest.json`. Use a new build ID and a complete generation when content changes. Base paths must be safe directory-style ASCII paths ending in `/`. Changing the deployment base does not change record IDs. The Astro hook below handles file writing for you.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/STATIC_ASTRO.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#use-the-astro-hook",
+      "text": {
+        "title": "Use the Astro hook",
+        "body": "\nTo build the files automatically with Astro, use the `raveldexAstro` integration in `astro.config.mjs`. It takes your shared configuration, a build ID and a callback returning the records. Use static output and directory-style routes.\n\nCreate `astro.config.mjs` beside `search-content.mjs`:\n\n```js\nimport { defineConfig } from 'astro/config';\nimport raveldexAstro from '@vmitsaras/raveldex-astro';\nimport { configuration, entries } from './search-content.mjs';\n\nexport default defineConfig({\n  output: 'static',\n  base: '/docs/',\n  trailingSlash: 'always',\n  integrations: [raveldexAstro({ configuration, buildId: 'docs-v1', getEntries: () => entries })],\n});\n```\n\nAfter an Astro static build, the hook writes search files under `dist/raveldex/`, including `manifest.json`. With this `/docs/` base, the browser requests them beneath `/docs/raveldex/`. The hook does not run in `astro dev`.\n\nFor complete copy, install, build and preview commands at both `/` and `/docs/`, follow [the runnable Astro example](https://github.com/vmitsaras/raveldex/blob/main/examples/astro/README.md).\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/STATIC_ASTRO.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#load-search-on-demand",
+      "text": {
+        "title": "Load search on demand",
+        "body": "\nAdd a `<section id=\"search\" aria-label=\"Documentation search\"></section>` to your page. Put the following in a browser module handled by your bundler and run it after that element exists.\n\nThe loader needs the manifest URL, the build ID you expect and the same configuration used by the builder. It loads the search index first; `loadDocuments()` fetches the separate title/URL list needed by the UI:\n\n```js\nimport { loadStaticSearch } from '@vmitsaras/raveldex-astro/client';\nimport { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';\nimport '@vmitsaras/raveldex/addons/ui/styles.css';\nimport { configuration } from './search-content.mjs';\n\nconst loaded = await loadStaticSearch({\n  manifestUrl: new URL('/docs/raveldex/manifest.json', location.origin).href,\n  expectedBuildId: 'docs-v1',\n  configuration,\n});\nconst ui = mountRaveldexUI({\n  root: document.querySelector('#search'),\n  engine: loaded.engine,\n  documents: await loaded.loadDocuments(),\n});\n// When removing the search component:\n// ui.destroy();\n// await loaded.dispose();\n```\n\nYou should see search controls in `#search`. Searching `atomic` returns **Atomic updates**, linked to `/docs/guide/updates/`. The UI uses the loaded engine; it does not fetch the destination page until you follow the link.\n\nResolve the manifest from the deployment base, as above, so it also works on nested pages. Keep ordinary documentation links available while search loads. If loading fails, offer a retry and keep any working engine until its replacement is ready. The loader checks build/configuration identity, file sizes and hashes. SHA-256 detects corruption or mixed generations, but does not establish whether the sender is trustworthy.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/STATIC_ASTRO.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#optional-heading-maps",
+      "text": {
+        "title": "Optional heading maps",
+        "body": "\nAdd `pageSections` alongside `entries` in `buildStaticSearch`, or alongside `getEntries` in the Astro hook. It is an array of readonly `PageSectionPage` values from `@vmitsaras/raveldex/addons/sections`; it is not a field on a record or display document:\n\n```js\nconst pageSections = [{\n  pageId: 'updates',\n  sections: [{ anchor: 'atomic-writes', heading: 'Atomic writes', headingLevel: 2,\n    field: 'body', valueIndex: 0, start: 0, end: entries[0].record.text.body.length }],\n}];\nconst artifacts = await buildStaticSearch({\n  configuration, entries, buildId: 'docs-v2', base: '/docs/', pageSections,\n});\n```\n\nThis example assumes the first entry is the `updates` page with a scalar body. Derive real ranges from the exact originals and render `id=\"atomic-writes\"` on its target page. The builder validates all maps, fields, original values and grapheme boundaries before producing artifacts. It fills absent page maps with empty section lists. Omit `pageSections` to emit no companion; an explicit empty array emits empty lists for every allowlisted page.\n\nFor previews, explicitly register `createSectionEvidence({ fields: { body: 'source' } })` in both build and restore configuration, alongside the existing complete source providers. Maps may be serialized without that factory, but the owner cannot project them until its configuration supports section evidence. Adding a factory only at restore is an incompatible configuration.\n\nThe two extra files are `sections-manifest.json` and content-addressed `sections-<sha256>.json`. The separate metadata binds build ID, base, record count, configuration, sorted IDs, source asset and display asset. Existing v1 files are byte-identical for the same configuration, entries and build ID. Existing readers ignore the additional files. The Astro hook writes contents first, companion metadata next and `manifest.json` last in its exclusively owned output namespace.\n\nCall the optional method explicitly after loading a source handle:\n\n```js\nimport { mountRaveldexInline } from '@vmitsaras/raveldex/addons/ui/inline';\nimport '@vmitsaras/raveldex/addons/ui/inline.css';\n\nconst pageSections = await loaded.loadSections();\nconst documents = await loaded.loadDocuments();\nconst ui = mountRaveldexInline({ root, engine: loaded.engine, documents, pageSections });\n// ui.destroy();\n// await loaded.dispose();\n```\n\nNew handles always supply `loadSections`; its public type is optional to preserve application-authored legacy handle objects. TypeScript consumers of the general handle type should narrow that property before calling it. Each call is uncached, reads only the two companion files and validates a transient public source export against the actual restored receiver revision. It does not request display data or destination pages. `loadSections({ signal, timeoutMs })` uses the existing timeout/stream/hash/UTF-8/cancellation rules and shares the owner's disposal lifetime.\n\nSource validation is an additional bounded full-source codec pass and may refuse. A mutation observed before, during or after loading refuses the map; revision probes do not lock the engine. A mutation queued after the final check can make a returned map stale, and the inline UI checks that stamp again before context. Native-format handles reject section loading with `INCOMPATIBLE_ARTIFACT` before companion I/O while remaining usable for ordinary search.\n\nMissing companion files use `MISSING_ARTIFACT`; a changed build ID uses `STALE_BUILD`; incompatible source/display/configuration identity uses `INCOMPATIBLE_ARTIFACT`. Malformed maps use `INVALID_ARTIFACT`, hash/byte mismatches use `INTEGRITY_MISMATCH`, and size ceilings use `ASSET_LIMIT`. Missing or broken grapheme segmentation remains a native `UNSUPPORTED_ENVIRONMENT`. A failed optional load leaves the ordinary loaded engine usable. An application may visibly choose page-only search after a failure; the loader does not silently fall back or retry.\n\nCompanion metadata is bounded to 256 KiB and data to 4 MiB, with at most 10,000 pages, 16,384 sections total and 64 per page. Parent paths keep existing ASCII directory validation. Anchors are encoded once; the builder checks the encoded base/path/fragment against 2,048 UTF-16 units, and the UI also checks the real absolute URL including its deployment origin. See [inline section behavior](HOSTS.md#inline-anchored-sections) for map ownership, visible states and theming.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/STATIC_ASTRO.md",
+        "category": "Integrations"
+      }
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#release-resources-and-choose-formats",
+      "text": {
+        "title": "Release resources and choose formats",
+        "body": "\nWhen removing the component, call `ui.destroy()` first, then `await loaded.dispose()`, as shown in the comments. The controls disappear, pending display requests are aborted and the owned engine is disposed.\n\nUse source snapshots in browsers. Native loading requires an exact, application-qualified Node runtime and a matching declaration. A browser rejects native loading rather than silently rebuilding it.\n\nThe hook supports static builds, not `astro dev`, SSR, route crawling or watchers. Whole-source rebuilds and output sizes remain bounded. See [snapshot requirements](COMPATIBILITY.md#snapshot-compatibility), [operation limits](LIMITATIONS.md#handle-operation-limits) and the [full builder/loader API](https://github.com/vmitsaras/raveldex/blob/main/integrations/astro/README.md).\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/api/STATIC_ASTRO.md",
+        "category": "Integrations"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#install-the-package",
+      "title": "Install the package",
+      "sourcePath": "docs/api/GETTING_STARTED.md",
+      "category": "Getting started",
+      "anchor": "install-the-package",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#install-the-package",
+      "startLine": 5,
+      "endLine": 16,
+      "contentHash": "37eab4d0286258fb25c1338c8445e51017d8b0648447e96e27e4f5f49a2a609a"
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#smallest-core-example",
+      "title": "Smallest core example",
+      "sourcePath": "docs/api/GETTING_STARTED.md",
+      "category": "Getting started",
+      "anchor": "smallest-core-example",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#smallest-core-example",
+      "startLine": 17,
+      "endLine": 48,
+      "contentHash": "7e173eba29e3035cab3c2e4146b16d68804f04f0fc6da2feb093da738f81bb32"
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#update-your-collection",
+      "title": "Update your collection",
+      "sourcePath": "docs/api/GETTING_STARTED.md",
+      "category": "Getting started",
+      "anchor": "update-your-collection",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#update-your-collection",
+      "startLine": 49,
+      "endLine": 59,
+      "contentHash": "6801800a7b5118de43cbdda09900ccba8ecd07119ce41d75972bdf1d7aad82d4"
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#add-a-search-interface",
+      "title": "Add a search interface",
+      "sourcePath": "docs/api/GETTING_STARTED.md",
+      "category": "Getting started",
+      "anchor": "add-a-search-interface",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#add-a-search-interface",
+      "startLine": 60,
+      "endLine": 71,
+      "contentHash": "8dc1e8fe58a28f08634596a3e72b0869eda2ef508d8040d96b343678eca746fd"
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#build-tarballs-from-a-source-checkout",
+      "title": "Build tarballs from a source checkout",
+      "sourcePath": "docs/api/GETTING_STARTED.md",
+      "category": "Getting started",
+      "anchor": "build-tarballs-from-a-source-checkout",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#build-tarballs-from-a-source-checkout",
+      "startLine": 72,
+      "endLine": 90,
+      "contentHash": "b6c167aaada91dbb4bc5b092adaf2204ca0609556a092a258f331bff731c0a14"
+    },
+    {
+      "id": "usage:docs/api/GETTING_STARTED.md#next-steps",
+      "title": "Next steps",
+      "sourcePath": "docs/api/GETTING_STARTED.md",
+      "category": "Getting started",
+      "anchor": "next-steps",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#next-steps",
+      "startLine": 91,
+      "endLine": 96,
+      "contentHash": "f1028a5f26c397659f4626ae284a4676a281f170405e599e178b9fe84b57b4b6"
+    },
+    {
+      "id": "usage:docs/api/CORE.md#configuration-and-records",
+      "title": "Configuration and records",
+      "sourcePath": "docs/api/CORE.md",
+      "category": "Core",
+      "anchor": "configuration-and-records",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#configuration-and-records",
+      "startLine": 5,
+      "endLine": 24,
+      "contentHash": "a02d79fed3cb23ed23ada3e05916623d3cb2d565cf31dfc4f89100c3434589b3"
+    },
+    {
+      "id": "usage:docs/api/CORE.md#methods-and-results",
+      "title": "Methods and results",
+      "sourcePath": "docs/api/CORE.md",
+      "category": "Core",
+      "anchor": "methods-and-results",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#methods-and-results",
+      "startLine": 25,
+      "endLine": 51,
+      "contentHash": "c0be9a5c2173f7e10bf6a2479dcfc4d50b56b1ad7399c830055044e1a3cff2ac"
+    },
+    {
+      "id": "usage:docs/api/CORE.md#query-shapes",
+      "title": "Query shapes",
+      "sourcePath": "docs/api/CORE.md",
+      "category": "Core",
+      "anchor": "query-shapes",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#query-shapes",
+      "startLine": 52,
+      "endLine": 84,
+      "contentHash": "c96a1bb5a3d49a8d3f300671f201ae166eb1afc4db63533205e6b8b94867f05c"
+    },
+    {
+      "id": "usage:docs/api/CORE.md#analysis-and-ranking",
+      "title": "Analysis and ranking",
+      "sourcePath": "docs/api/CORE.md",
+      "category": "Core",
+      "anchor": "analysis-and-ranking",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#analysis-and-ranking",
+      "startLine": 85,
+      "endLine": 92,
+      "contentHash": "2669da0633276b20db2942446342be142502605c6879d742f7e83c6fb9e899c1"
+    },
+    {
+      "id": "usage:docs/api/CORE.md#execution-errors-and-bounds",
+      "title": "Execution, errors and bounds",
+      "sourcePath": "docs/api/CORE.md",
+      "category": "Core",
+      "anchor": "execution-errors-and-bounds",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#execution-errors-and-bounds",
+      "startLine": 93,
+      "endLine": 129,
+      "contentHash": "f4bf3596ce020851e8497e63e30a4ab90ba0664812820536d25d77ca2d1a1f8e"
+    },
+    {
+      "id": "usage:docs/api/CORE.md#registration-types",
+      "title": "Registration types",
+      "sourcePath": "docs/api/CORE.md",
+      "category": "Core",
+      "anchor": "registration-types",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#registration-types",
+      "startLine": 130,
+      "endLine": 147,
+      "contentHash": "2b3b26ba93bbb759da5288c57aa9e4ca43d4e1e0f970820f50bf63cfdcd74227"
+    },
+    {
+      "id": "usage:docs/api/CORE.md#explicit-language-analysis",
+      "title": "Explicit language analysis",
+      "sourcePath": "docs/api/CORE.md",
+      "category": "Core",
+      "anchor": "explicit-language-analysis",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#explicit-language-analysis",
+      "startLine": 148,
+      "endLine": 152,
+      "contentHash": "c08d48e33915962576bf28b1b2d3e063009bff8ce975622a9d8c07aebff8f549"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#source-positions-and-phrases",
+      "title": "Source, positions and phrases",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "source-positions-and-phrases",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#source-positions-and-phrases",
+      "startLine": 7,
+      "endLine": 44,
+      "contentHash": "0aaf55873fff8176635e35d37019bff2c1ffbc524149383c8f819d5a3e61d5c0"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#typed-filters-and-exact-facets",
+      "title": "Typed filters and exact facets",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "typed-filters-and-exact-facets",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#typed-filters-and-exact-facets",
+      "startLine": 45,
+      "endLine": 75,
+      "contentHash": "a34e08b442bcbb7889e557af5e1c727a18caf6c63cd56ae9f079ccc8b723054d"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#native-inspector",
+      "title": "Native Inspector",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "native-inspector",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#native-inspector",
+      "startLine": 76,
+      "endLine": 101,
+      "contentHash": "7cb42ae4d2068b427aecf41658f8f1155cede1a2458ec52f2ff878b7f1f36a80"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#original-ranges-and-snippets",
+      "title": "Original ranges and snippets",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "original-ranges-and-snippets",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#original-ranges-and-snippets",
+      "startLine": 102,
+      "endLine": 117,
+      "contentHash": "b73e6635b33ba2ad60f50bfa4a71dc28a549bb000eb64ad2359071ed2743d37f"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#anchored-page-context",
+      "title": "Anchored page context",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "anchored-page-context",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#anchored-page-context",
+      "startLine": 118,
+      "endLine": 158,
+      "contentHash": "6bf24d344093386216db643dc7eca44969d0e328d883d40cf081da091ac2c20e"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#bounded-typo-tolerance",
+      "title": "Bounded typo tolerance",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "bounded-typo-tolerance",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#bounded-typo-tolerance",
+      "startLine": 159,
+      "endLine": 162,
+      "contentHash": "39c1cbc98b2ddd3a2c1a824fd775b6f362eb4a448899494e1da00cfdf5a25773"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#dictionary-backed-token-suggestions",
+      "title": "Dictionary-backed token suggestions",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "dictionary-backed-token-suggestions",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#dictionary-backed-token-suggestions",
+      "startLine": 163,
+      "endLine": 166,
+      "contentHash": "582bff52f638d22cef41df51b0a661fba4252b8e2c97b2c4bc6a117c3fe8290e"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#directional-one-step-synonyms",
+      "title": "Directional one-step synonyms",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "directional-one-step-synonyms",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#directional-one-step-synonyms",
+      "startLine": 167,
+      "endLine": 170,
+      "contentHash": "6919322afb1f80ed7752d00b45ea15006bef3ab139dc45c630c2e338d7dc7ca2"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#selected-english-analysis",
+      "title": "Selected English analysis",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "selected-english-analysis",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#selected-english-analysis",
+      "startLine": 171,
+      "endLine": 174,
+      "contentHash": "79c60051bbeeec4cbdaa5ceb3b37277304c703459fb5bb9e14bf953f4e13742a"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#identifier-analysis",
+      "title": "Identifier analysis",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "identifier-analysis",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#identifier-analysis",
+      "startLine": 175,
+      "endLine": 178,
+      "contentHash": "deb1ace07653c089d7844f3bafae8e391d33fb43e25ad7ba31355fbc451ae9d5"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#literal-and-infix-matching",
+      "title": "Literal and infix matching",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "literal-and-infix-matching",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#literal-and-infix-matching",
+      "startLine": 179,
+      "endLine": 182,
+      "contentHash": "8e9636de4cea83b33e10db90e826d2d45e4282c95df27c7c5a35016f769266c1"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#ordered-proximity",
+      "title": "Ordered proximity",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "ordered-proximity",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#ordered-proximity",
+      "startLine": 183,
+      "endLine": 186,
+      "contentHash": "9273ccb44741231830b54b24a2c6afeceab9ec8409aea49ac43c0786dea7a834"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#explicit-query-syntax",
+      "title": "Explicit query syntax",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "explicit-query-syntax",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#explicit-query-syntax",
+      "startLine": 187,
+      "endLine": 190,
+      "contentHash": "645cc474230a03e5fdc8deeaa9d69541068cfdc4dcc48b7013adaf7471c64d6f"
+    },
+    {
+      "id": "usage:docs/api/ADDONS.md#explicit-record-patches",
+      "title": "Explicit record patches",
+      "sourcePath": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "anchor": "explicit-record-patches",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md#explicit-record-patches",
+      "startLine": 191,
+      "endLine": 193,
+      "contentHash": "ef841dcd6f325415cea2158669638ff5c19c24928f0f787e0c1bd2cca822d2ef"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#native-dom-ui-and-css",
+      "title": "Native DOM UI and CSS",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "native-dom-ui-and-css",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#native-dom-ui-and-css",
+      "startLine": 5,
+      "endLine": 90,
+      "contentHash": "6a6eb3d87e9d253fb553cbcdeb6020976d04e3cc3699cf666c8a0806b6474432"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#inline-search-foundation",
+      "title": "Inline search foundation",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "inline-search-foundation",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#inline-search-foundation",
+      "startLine": 91,
+      "endLine": 182,
+      "contentHash": "940f33b35d5a086aab6d4081ebf4f3f4c0aeda7fa48746275483619ffc9a871b"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#documentation-search-modal",
+      "title": "Documentation search modal",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "documentation-search-modal",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#documentation-search-modal",
+      "startLine": 183,
+      "endLine": 231,
+      "contentHash": "2ee49ed3d823df3be75bb226888efcccd7abbd1a6163663f55b04ff94a4e71bb"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#compact-dropdown-search",
+      "title": "Compact dropdown search",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "compact-dropdown-search",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#compact-dropdown-search",
+      "startLine": 232,
+      "endLine": 288,
+      "contentHash": "09e2b4282bff29d60c9cea6ff6a6f936c87390d87bf33378f9c9cd4dbf8acee2"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#starter-adoption-and-local-checks",
+      "title": "Starter adoption and local checks",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "starter-adoption-and-local-checks",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#starter-adoption-and-local-checks",
+      "startLine": 289,
+      "endLine": 306,
+      "contentHash": "376f5afd58cd00e19f9395bd974abef8604bff16c631505858af5cd25634b32c"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#one-owner-module-worker",
+      "title": "One-owner module worker",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "one-owner-module-worker",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#one-owner-module-worker",
+      "startLine": 307,
+      "endLine": 326,
+      "contentHash": "78af49471f8ef487ec2ebffa1fec06624df7e3733f146f8e41538104217f881b"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#source-and-native-snapshots",
+      "title": "Source and native snapshots",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "source-and-native-snapshots",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#source-and-native-snapshots",
+      "startLine": 327,
+      "endLine": 357,
+      "contentHash": "5a41bd59caf56c2a5c5f09e81f01e2ddacd45393c48798778c8bc7813a522188"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#indexeddb-persistence-and-recovery",
+      "title": "IndexedDB persistence and recovery",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "indexeddb-persistence-and-recovery",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#indexeddb-persistence-and-recovery",
+      "startLine": 358,
+      "endLine": 378,
+      "contentHash": "f69e118d4f5059cb239dd4df62a2cb7417ce12a63b9ce36f3621a2bcd8148fc0"
+    },
+    {
+      "id": "usage:docs/api/HOSTS.md#localsearch-source-migration",
+      "title": "LocalSearch source migration",
+      "sourcePath": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "anchor": "localsearch-source-migration",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#localsearch-source-migration",
+      "startLine": 379,
+      "endLine": 389,
+      "contentHash": "c9598af6b874c467197d8afba5f206cad4ff4d15c366761de1c92630b2e8e0cb"
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#install-matching-packages",
+      "title": "Install matching packages",
+      "sourcePath": "docs/api/STATIC_ASTRO.md",
+      "category": "Integrations",
+      "anchor": "install-matching-packages",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md#install-matching-packages",
+      "startLine": 7,
+      "endLine": 16,
+      "contentHash": "c15fe5e7b85371cab13f2ceca3acdd000b5b3b6c9702794358632052be947b30"
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#build-static-search",
+      "title": "Build static search",
+      "sourcePath": "docs/api/STATIC_ASTRO.md",
+      "category": "Integrations",
+      "anchor": "build-static-search",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md#build-static-search",
+      "startLine": 17,
+      "endLine": 57,
+      "contentHash": "1638e44e16c232db3b5c5ce096023200e3d62b3adcc4cbc6e72d5380f74bc578"
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#use-the-astro-hook",
+      "title": "Use the Astro hook",
+      "sourcePath": "docs/api/STATIC_ASTRO.md",
+      "category": "Integrations",
+      "anchor": "use-the-astro-hook",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md#use-the-astro-hook",
+      "startLine": 58,
+      "endLine": 80,
+      "contentHash": "2ed20972f8367e4439ad84793a743f5c6a69af954a958707536094dde22d88c7"
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#load-search-on-demand",
+      "title": "Load search on demand",
+      "sourcePath": "docs/api/STATIC_ASTRO.md",
+      "category": "Integrations",
+      "anchor": "load-search-on-demand",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md#load-search-on-demand",
+      "startLine": 81,
+      "endLine": 111,
+      "contentHash": "15fc29adda9c4688b894b2ed59180c635a73c835747d42f34dae73d1237fdef1"
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#optional-heading-maps",
+      "title": "Optional heading maps",
+      "sourcePath": "docs/api/STATIC_ASTRO.md",
+      "category": "Integrations",
+      "anchor": "optional-heading-maps",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md#optional-heading-maps",
+      "startLine": 112,
+      "endLine": 153,
+      "contentHash": "e6a8e38f384bea256441675553c0643f34ab1f3f7420e1c570100b8461a0bed0"
+    },
+    {
+      "id": "usage:docs/api/STATIC_ASTRO.md#release-resources-and-choose-formats",
+      "title": "Release resources and choose formats",
+      "sourcePath": "docs/api/STATIC_ASTRO.md",
+      "category": "Integrations",
+      "anchor": "release-resources-and-choose-formats",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md#release-resources-and-choose-formats",
+      "startLine": 154,
+      "endLine": 160,
+      "contentHash": "96559715198a7c0d655a27ee1efcc2481f97efa3cc7de0b2aa1e35e3566c3108"
+    }
+  ],
+  "sources": [
+    {
+      "path": "docs/api/GETTING_STARTED.md",
+      "category": "Getting started",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md",
+      "sha256": "080615ce965505dd7388bc6e19b69df1f2533343d149c90875316ea163668eff",
+      "bytes": 5797
+    },
+    {
+      "path": "docs/api/CORE.md",
+      "category": "Core",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md",
+      "sha256": "8a5ab3d48d92c5a779c9287306246427c583ced1a0898fbb5fc498245b22d43d",
+      "bytes": 14445
+    },
+    {
+      "path": "docs/api/ADDONS.md",
+      "category": "Add-ons",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md",
+      "sha256": "bad49c4f7754298c859e7981fbccf8163b22184c91f75a4146bea3ae215fd79f",
+      "bytes": 20320
+    },
+    {
+      "path": "docs/api/HOSTS.md",
+      "category": "Integrations",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md",
+      "sha256": "9b55f387f94ac54d99c0a0d025433e18218ad74fe97c804de14daccdb1df1b06",
+      "bytes": 54195
+    },
+    {
+      "path": "docs/api/STATIC_ASTRO.md",
+      "category": "Integrations",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md",
+      "sha256": "bd4d48a007e3bf7dd63b68b79876090cd3ed14a93ae9b93f2739ef534207f194",
+      "bytes": 11522
+    }
+  ],
+  "hash": "64456a01ab2ba0c8a7bb176966d10a1741ee82650b67702f721aa5af1f94db44"
+}

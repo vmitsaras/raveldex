@@ -1,0 +1,79 @@
+.raveldex-dropdown {
+  --_surface: var(--raveldex-dropdown-background, #fff);
+  --_text: var(--raveldex-dropdown-color, #17212b);
+  --_muted: var(--raveldex-dropdown-muted, #465563);
+  --_accent: var(--raveldex-dropdown-accent, #174ea6);
+  --_border: var(--raveldex-dropdown-border, #637383);
+  --_focus: var(--raveldex-dropdown-focus, #7a2600);
+  --_active: var(--raveldex-dropdown-active-background, #e9f1ff);
+  --_active-text: var(--raveldex-dropdown-active-color, var(--_text));
+  --_error: var(--raveldex-dropdown-error, #9b1c1c);
+  --_gap: var(--raveldex-dropdown-gap, .5rem);
+  --_padding: var(--raveldex-dropdown-padding, .65rem .85rem);
+  --_radius: var(--raveldex-dropdown-radius, .5rem);
+  --_border-width: var(--raveldex-dropdown-border-width, 2px);
+  box-sizing: border-box;
+  inline-size: 100%; min-inline-size: 0;
+  max-inline-size: var(--raveldex-dropdown-max-width, 40rem);
+  color: var(--_text); background: var(--_surface);
+  font-family: var(--raveldex-dropdown-font, inherit);
+  font-size: var(--raveldex-dropdown-font-size, 1rem);
+  line-height: var(--raveldex-dropdown-line-height, 1.5);
+  overflow-wrap: anywhere;
+}
+.raveldex-dropdown *, .raveldex-dropdown *::before, .raveldex-dropdown *::after { box-sizing: border-box; }
+.raveldex-dropdown [hidden] { display: none; }
+.raveldex-dropdown__form { display: flex; flex-wrap: wrap; align-items: center; gap: var(--_gap); }
+.raveldex-dropdown__label { flex-basis: 100%; font-weight: 650; }
+.raveldex-dropdown__input, .raveldex-dropdown button {
+  min-inline-size: 0; max-inline-size: 100%; min-block-size: 2.75rem;
+  padding: var(--_padding); border: var(--_border-width) solid var(--_border);
+  border-radius: var(--_radius); background: var(--_surface); color: var(--_text); font: inherit;
+}
+.raveldex-dropdown__input { flex: 1 1 14rem; inline-size: 100%; }
+.raveldex-dropdown button { cursor: pointer; font-weight: 600; }
+.raveldex-dropdown button[aria-disabled=true], .raveldex-dropdown button:disabled { cursor: default; border-style: dashed; }
+.raveldex-dropdown :is(input, button, a):focus-visible { outline: 3px solid var(--_focus); outline-offset: 3px; }
+.raveldex-dropdown__status { margin-block: var(--_gap); color: var(--_muted); }
+.raveldex-dropdown[aria-busy=true] .raveldex-dropdown__status { font-weight: 600; }
+.raveldex-dropdown[data-state=error] .raveldex-dropdown__status { color: var(--_error); font-weight: 600; }
+.raveldex-dropdown__full-results { display: inline-flex; align-items: center; min-block-size: 2.75rem; color: var(--_accent); text-underline-offset: .2em; }
+.raveldex-dropdown__popup {
+  position: fixed; inset: auto; left: var(--_left, 0px); top: var(--_top, 0px);
+  width: var(--_width, 0px); min-width: 0;
+  max-width: calc(100vw - 16px);
+  max-height: min(var(--_max-height, 20rem), var(--raveldex-dropdown-max-height, 20rem));
+  margin: 0; padding: 0;
+  border: var(--_border-width) solid var(--_border); border-radius: var(--_radius);
+  background: var(--_surface); color: var(--_text);
+  font: inherit; line-height: inherit;
+  box-shadow: var(--raveldex-dropdown-shadow, 0 .5rem 1.5rem #17212b26);
+  overflow: auto; overscroll-behavior: contain; overflow-wrap: anywhere;
+}
+.raveldex-dropdown__popup:popover-open { display: block; }
+.raveldex-dropdown__row + .raveldex-dropdown__row { border-block-start: 1px solid var(--_border); }
+.raveldex-dropdown__cell { border-inline-start: 3px solid transparent; }
+.raveldex-dropdown__cell.is-active {
+  border-inline-start-color: var(--_accent);
+  background: var(--_active); color: var(--_active-text);
+  outline: 2px solid var(--_accent); outline-offset: -2px;
+}
+.raveldex-dropdown__link {
+  display: flex; align-items: center; min-block-size: 2.75rem;
+  padding: var(--_padding); color: var(--_accent);
+  text-underline-offset: .2em; white-space: normal;
+}
+.raveldex-dropdown__cell.is-active .raveldex-dropdown__link { color: inherit; font-weight: 650; }
+.raveldex-dropdown__link:focus-visible { outline-offset: -4px; }
+@media (max-width: 25rem) { .raveldex-dropdown__input { flex-basis: 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .raveldex-dropdown, .raveldex-dropdown * { animation: none; transition: none; scroll-behavior: auto; }
+}
+@media (forced-colors: active) {
+  .raveldex-dropdown {
+    --_surface: Canvas; --_text: CanvasText; --_muted: CanvasText; --_accent: LinkText;
+    --_border: ButtonText; --_focus: Highlight; --_error: CanvasText;
+    --_active: Highlight; --_active-text: HighlightText;
+  }
+  .raveldex-dropdown__cell.is-active { forced-color-adjust: none; }
+}

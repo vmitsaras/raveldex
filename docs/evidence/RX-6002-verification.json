@@ -1,0 +1,97 @@
+{
+  "fullCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "tests": 900,
+    "batches": [
+      786,
+      60,
+      24,
+      26,
+      1,
+      3
+    ],
+    "log": "RX-6002-check.log.gz"
+  },
+  "priorParallelRun": {
+    "outcome": "Failed/timed out in browser-file cleanup; own stalled processes terminated. Assertions/timeouts preserved; npm UI test-file concurrency bounded to1 before successful full rerun.",
+    "log": "RX-6002-initial-check.log.gz"
+  },
+  "sourceFilesSha256": {
+    "src/addons/ui/inline.ts": "37fc3c8cd68642edf77a504cb3027d54d0aa64675b762c6d24da2ec96802de3e",
+    "src/addons/ui/inline-render.ts": "09ab74099aa5a084b42c0200f47ed5c019b42af0d6c2d57a0dd88e718457bd91",
+    "src/addons/ui/inline.css": "1e5eb038ccdcdc3abc11e93e9a35ab3867dfa4b7c5a7dab3b14726f715e43415",
+    "test/ui/inline-controls.test.mjs": "62b6556ad903d3dc3a913f564db1531b697df051b0a40b10f174fc59c4838d1f",
+    "test/ui/inline-controls-fixture.mjs": "d3580c1adaf363b391f66aca52d77565a1dcf064d2826fa7c6321ef7dae53c27",
+    "test/ui/inline-controls-worker.mjs": "c553833a46327a29317aeb317cc0d1aa2524b46232fa9181b1437b2493a8f26e",
+    "test/consumer/inline-types.ts": "3bb93760ae67a5726b8ee2736f245c9201586fbdcccf421c90f27aa8760671f7",
+    "package.json": "a9b24aa6901b639dbaca7993b2c40e69053542a9a80cf5f96f8902e8bbe14236",
+    "docs/api/HOSTS.md": "31e16320bb5302e64c8051c010eb792b0f6c7dc9fed875c8ee9b6a8a753d4808"
+  },
+  "installedFullCheckUI": [
+    {
+      "kind": "raveldex-inline-foundation-browser-v1",
+      "packageSha256": "dbfbd4041c8b53056b021dc49df1fe8d435aaaee048a4b875124710c7bc389f6",
+      "graph": {
+        "inputs": [
+          "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/query.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/render.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/inline-render.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/mounts.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/inline.js",
+          "inline-entry.mjs"
+        ],
+        "minifiedBytes": 18709,
+        "gzipBytes": 6753,
+        "sha256": "73f5a1d03bb01c9ce18cdac88b341ac20254f8377c875b943abad065bf989644",
+        "cssBytes": 5587,
+        "cssSha256": "1e5eb038ccdcdc3abc11e93e9a35ab3867dfa4b7c5a7dab3b14726f715e43415",
+        "startup": {
+          "reads": []
+        },
+        "publicTypes": "Pass"
+      },
+      "browser": {
+        "channel": "chrome",
+        "version": "156.0.8078.74",
+        "headless": true
+      }
+    },
+    {
+      "kind": "raveldex-inline-controls-browser-v1",
+      "graph": {
+        "inputs": [
+          "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/query.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/render.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/inline-render.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/mounts.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/inline.js",
+          "inline-entry.mjs"
+        ],
+        "minifiedBytes": 18709,
+        "gzipBytes": 6753,
+        "sha256": "73f5a1d03bb01c9ce18cdac88b341ac20254f8377c875b943abad065bf989644",
+        "cssBytes": 5587,
+        "cssSha256": "1e5eb038ccdcdc3abc11e93e9a35ab3867dfa4b7c5a7dab3b14726f715e43415",
+        "publicTypes": "Pass"
+      },
+      "browser": {
+        "channel": "chrome",
+        "version": "156.0.8078.74",
+        "headless": true
+      }
+    }
+  ],
+  "targeted": "RX-6002-browser.json",
+  "note": "Standalone target package predates only test-script file concurrency selection; runtime/CSS graph identities match the fresh full-check package.",
+  "siteRegression": {
+    "command": "node --test --test-concurrency=1 --test-timeout=180000 test/pages/browser.test.mjs test/pages/workbench.test.mjs",
+    "exitCode": 0,
+    "tests": 7,
+    "log": "RX-6002-site.log.gz"
+  }
+}

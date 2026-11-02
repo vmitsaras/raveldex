@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>STATIC ASTRO · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="static-search-and-astro">Static search and Astro</h1>
+<p>Use <code>@vmitsaras/raveldex-astro</code> to add search to a static site. You choose the content during the build, and the browser loads the resulting search files when needed. The package includes a static builder, an Astro build hook and a browser loader; core still works without Astro.</p>
+<p>For links to matching headings, supply the <a href="#optional-heading-maps">optional heading maps</a>. The adapter accepts explicit page records, titles and fragment-free directory routes; your application supplies source ranges and renders the target IDs.</p>
+<h2 id="install-matching-packages">Install matching packages</h2>
+<p>In your ESM application, install the core and integration tarballs together. Replace both absolute paths with your prepared files. The integration requires core <code>0.1.0-rc.0</code>, Node <code>&gt;=22.12.0</code> and Astro <code>7.3.2</code> for its build hook:</p>
+<pre><code class="language-sh">npm install --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz astro@7.3.2
+</code></pre>
+<p>This installs core, the integration and the pinned Astro version. Astro and its dependencies need registry access or a suitable npm cache. If you only use the static builder and client loader, you can omit Astro itself. See <a href="/raveldex/guide/overview/#build-tarballs-from-a-source-checkout">building tarballs</a> if you need to prepare the local files.</p>
+<h2 id="build-static-search">Build static search</h2>
+<p>Start by listing the records you want people to find. Include each record’s text, display title and directory-style route. The builder does not crawl your pages or parse Markdown or HTML, so leave drafts and private content out of this list. Add a source provider for every indexed text field.</p>
+<p>Save the following as <code>search-content.mjs</code> in your application. The later build and browser examples import this shared configuration:</p>
+<pre><code class="language-js">import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
+
+export const configuration = {
+  schema: { text: { title: {}, body: {} } },
+  addons: [createSourceProvider({ fields: ['title', 'body'] })],
+};
+export const entries = [{
+    record: { id: 'updates', text: { title: 'Atomic updates', body: 'Replace a complete record.' } },
+    title: 'Atomic updates',
+    path: '/guide/updates/',
+  }];
+</code></pre>
+<p>This file defines one searchable document, <strong>Atomic updates</strong>, at <code>/guide/updates/</code>. Importing it alone does not build an index or create that page; your site must provide the page.</p>
+<p>Save the next block in a Node <code>.mjs</code> build module beside <code>search-content.mjs</code>, then run it with Node:</p>
+<pre><code class="language-js">import { buildStaticSearch } from '@vmitsaras/raveldex-astro/build';
+import { configuration, entries } from './search-content.mjs';
+
+const artifacts = await buildStaticSearch({
+  configuration,
+  buildId: 'docs-v1',
+  base: '/docs/',
+  entries,
+});
+console.log(artifacts.manifest.recordCount); // 1
+</code></pre>
+<p>It prints <code>1</code>, the number of records in the generated manifest. The returned <code>{ manifest, files }</code> holds the JSON data in memory; this example does not write it to disk. File names include content hashes.</p>
+<p>If you use the builder directly, write all content files into your own <code>raveldex/</code> directory before writing <code>manifest.json</code>. Use a new build ID and a complete generation when content changes. Base paths must be safe directory-style ASCII paths ending in <code>/</code>. Changing the deployment base does not change record IDs. The Astro hook below handles file writing for you.</p>
+<h2 id="use-the-astro-hook">Use the Astro hook</h2>
+<p>To build the files automatically with Astro, use the <code>raveldexAstro</code> integration in <code>astro.config.mjs</code>. It takes your shared configuration, a build ID and a callback returning the records. Use static output and directory-style routes.</p>
+<p>Create <code>astro.config.mjs</code> beside <code>search-content.mjs</code>:</p>
+<pre><code class="language-js">import { defineConfig } from 'astro/config';
+import raveldexAstro from '@vmitsaras/raveldex-astro';
+import { configuration, entries } from './search-content.mjs';
+
+export default defineConfig({
+  output: 'static',
+  base: '/docs/',
+  trailingSlash: 'always',
+  integrations: [raveldexAstro({ configuration, buildId: 'docs-v1', getEntries: () =&gt; entries })],
+});
+</code></pre>
+<p>After an Astro static build, the hook writes search files under <code>dist/raveldex/</code>, including <code>manifest.json</code>. With this <code>/docs/</code> base, the browser requests them beneath <code>/docs/raveldex/</code>. The hook does not run in <code>astro dev</code>.</p>
+<p>For complete copy, install, build and preview commands at both <code>/</code> and <code>/docs/</code>, follow <a href="/raveldex/examples/astro/">the runnable Astro example</a>.</p>
+<h2 id="load-search-on-demand">Load search on demand</h2>
+<p>Add a <code>&lt;section id="search" aria-label="Documentation search"&gt;&lt;/section&gt;</code> to your page. Put the following in a browser module handled by your bundler and run it after that element exists.</p>
+<p>The loader needs the manifest URL, the build ID you expect and the same configuration used by the builder. It loads the search index first; <code>loadDocuments()</code> fetches the separate title/URL list needed by the UI:</p>
+<pre><code class="language-js">import { loadStaticSearch } from '@vmitsaras/raveldex-astro/client';
+import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
+import '@vmitsaras/raveldex/addons/ui/styles.css';
+import { configuration } from './search-content.mjs';
+
+const loaded = await loadStaticSearch({
+  manifestUrl: new URL('/docs/raveldex/manifest.json', location.origin).href,
+  expectedBuildId: 'docs-v1',
+  configuration,
+});
+const ui = mountRaveldexUI({
+  root: document.querySelector('#search'),
+  engine: loaded.engine,
+  documents: await loaded.loadDocuments(),
+});
+// When removing the search component:
+// ui.destroy();
+// await loaded.dispose();
+</code></pre>
+<p>You should see search controls in <code>#search</code>. Searching <code>atomic</code> returns <strong>Atomic updates</strong>, linked to <code>/docs/guide/updates/</code>. The UI uses the loaded engine; it does not fetch the destination page until you follow the link.</p>
+<p>Resolve the manifest from the deployment base, as above, so it also works on nested pages. Keep ordinary documentation links available while search loads. If loading fails, offer a retry and keep any working engine until its replacement is ready. The loader checks build/configuration identity, file sizes and hashes. SHA-256 detects corruption or mixed generations, but does not establish whether the sender is trustworthy.</p>
+<h2 id="optional-heading-maps">Optional heading maps</h2>
+<p>Add <code>pageSections</code> alongside <code>entries</code> in <code>buildStaticSearch</code>, or alongside <code>getEntries</code> in the Astro hook. It is an array of readonly <code>PageSectionPage</code> values from <code>@vmitsaras/raveldex/addons/sections</code>; it is not a field on a record or display document:</p>
+<pre><code class="language-js">const pageSections = [{
+  pageId: 'updates',
+  sections: [{ anchor: 'atomic-writes', heading: 'Atomic writes', headingLevel: 2,
+    field: 'body', valueIndex: 0, start: 0, end: entries[0].record.text.body.length }],
+}];
+const artifacts = await buildStaticSearch({
+  configuration, entries, buildId: 'docs-v2', base: '/docs/', pageSections,
+});
+</code></pre>
+<p>This example assumes the first entry is the <code>updates</code> page with a scalar body. Derive real ranges from the exact originals and render <code>id="atomic-writes"</code> on its target page. The builder validates all maps, fields, original values and grapheme boundaries before producing artifacts. It fills absent page maps with empty section lists. Omit <code>pageSections</code> to emit no companion; an explicit empty array emits empty lists for every allowlisted page.</p>
+<p>For previews, explicitly register <code>createSectionEvidence({ fields: { body: 'source' } })</code> in both build and restore configuration, alongside the existing complete source providers. Maps may be serialized without that factory, but the owner cannot project them until its configuration supports section evidence. Adding a factory only at restore is an incompatible configuration.</p>
+<p>The two extra files are <code>sections-manifest.json</code> and content-addressed <code>sections-&lt;sha256&gt;.json</code>. The separate metadata binds build ID, base, record count, configuration, sorted IDs, source asset and display asset. Existing v1 files are byte-identical for the same configuration, entries and build ID. Existing readers ignore the additional files. The Astro hook writes contents first, companion metadata next and <code>manifest.json</code> last in its exclusively owned output namespace.</p>
+<p>Call the optional method explicitly after loading a source handle:</p>
+<pre><code class="language-js">import { mountRaveldexInline } from '@vmitsaras/raveldex/addons/ui/inline';
+import '@vmitsaras/raveldex/addons/ui/inline.css';
+
+const pageSections = await loaded.loadSections();
+const documents = await loaded.loadDocuments();
+const ui = mountRaveldexInline({ root, engine: loaded.engine, documents, pageSections });
+// ui.destroy();
+// await loaded.dispose();
+</code></pre>
+<p>New handles always supply <code>loadSections</code>; its public type is optional to preserve application-authored legacy handle objects. TypeScript consumers of the general handle type should narrow that property before calling it. Each call is uncached, reads only the two companion files and validates a transient public source export against the actual restored receiver revision. It does not request display data or destination pages. <code>loadSections({ signal, timeoutMs })</code> uses the existing timeout/stream/hash/UTF-8/cancellation rules and shares the owner’s disposal lifetime.</p>
+<p>Source validation is an additional bounded full-source codec pass and may refuse. A mutation observed before, during or after loading refuses the map; revision probes do not lock the engine. A mutation queued after the final check can make a returned map stale, and the inline UI checks that stamp again before context. Native-format handles reject section loading with <code>INCOMPATIBLE_ARTIFACT</code> before companion I/O while remaining usable for ordinary search.</p>
+<p>Missing companion files use <code>MISSING_ARTIFACT</code>; a changed build ID uses <code>STALE_BUILD</code>; incompatible source/display/configuration identity uses <code>INCOMPATIBLE_ARTIFACT</code>. Malformed maps use <code>INVALID_ARTIFACT</code>, hash/byte mismatches use <code>INTEGRITY_MISMATCH</code>, and size ceilings use <code>ASSET_LIMIT</code>. Missing or broken grapheme segmentation remains a native <code>UNSUPPORTED_ENVIRONMENT</code>. A failed optional load leaves the ordinary loaded engine usable. An application may visibly choose page-only search after a failure; the loader does not silently fall back or retry.</p>
+<p>Companion metadata is bounded to 256 KiB and data to 4 MiB, with at most 10,000 pages, 16,384 sections total and 64 per page. Parent paths keep existing ASCII directory validation. Anchors are encoded once; the builder checks the encoded base/path/fragment against 2,048 UTF-16 units, and the UI also checks the real absolute URL including its deployment origin. See <a href="/raveldex/reference/hosts/#inline-anchored-sections">inline section behavior</a> for map ownership, visible states and theming.</p>
+<h2 id="release-resources-and-choose-formats">Release resources and choose formats</h2>
+<p>When removing the component, call <code>ui.destroy()</code> first, then <code>await loaded.dispose()</code>, as shown in the comments. The controls disappear, pending display requests are aborted and the owned engine is disposed.</p>
+<p>Use source snapshots in browsers. Native loading requires an exact, application-qualified Node runtime and a matching declaration. A browser rejects native loading rather than silently rebuilding it.</p>
+<p>The hook supports static builds, not <code>astro dev</code>, SSR, route crawling or watchers. Whole-source rebuilds and output sizes remain bounded. See <a href="/raveldex/guide/compatibility/#snapshot-compatibility">snapshot requirements</a>, <a href="/raveldex/guide/limitations/#handle-operation-limits">operation limits</a> and the <a href="/raveldex/reference/astro-package/">full builder/loader API</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

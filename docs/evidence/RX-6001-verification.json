@@ -1,0 +1,73 @@
+{
+  "sourceFilesSha256": {
+    "src/addons/ui/inline.ts": "8910ceab94380f81d7b0276c2768f14d10b73391affaa77c061cf3da11efe0e1",
+    "src/addons/ui/inline.css": "1cf409c308b9e523f282b701e9526bb4a81bda0aef0dcf6c145d168750d9da41",
+    "src/addons/ui/mounts.ts": "faa0ae190e8e728763bcdf49d7b3630607e42c497344bf39649b3e2efe8ed652",
+    "src/addons/ui/options.ts": "acab6fe698bd2f7fcdae782c66863414e11f8d93d0f61121ddd44ef6e5b65c8c",
+    "src/addons/ui/ui.ts": "3e0a0fe767ded0eba26e846fe9edc1adb848ba57dde59736ec903eadbf1bd53e",
+    "src/addons/ui/query.ts": "654136a3091f83f6991fdca9c6cde0bb7fa4ed17b5b441a5ddd709e1849530ce",
+    "src/addons/ui/render.ts": "140784f6759871d746493863e194846ed54360bd377c3ca1747b0dd52a304e0f",
+    "package.json": "080717d0ba35721536b557f0223a8a930973c6bbc38009303bea201b9484ed1a",
+    "scripts/candidate-check.mjs": "869722825d7453e7d44e0809ad55f5f5cd9181a8f3405124bf25a5719318395b",
+    "scripts/copy-ui-css.mjs": "0f3458467174f949d5c849b45e972a1aab1f25f810c30d9fe421985d268342eb",
+    "test/ui/inline-browser.test.mjs": "7ca48d072f39551e071c569a37e00e7fee565143e7286400defcf92eb00517a8",
+    "test/ui/inline-fixture-entry.mjs": "a2295e5bacbfc0e786c6c88e9a4c4b7aab422bbf9acda5efb7df89017f2fbc82",
+    "test/consumer/inline-types.ts": "7edcc63e5670d373f5503af91bf26b4fcf3e3d36cdfb022b212cd8e3ba792983",
+    "docs/api/HOSTS.md": "2923dda2084600ae17eeb3f5e5393150a2704fa4ad7e584d82f08f0fb00563c1",
+    "docs/api/README.md": "c70129e949b6b02423619b299363f365d20e038a76e2e3bf8d34d086b9397850"
+  },
+  "fullCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "tests": 884,
+    "batches": [
+      786,
+      44,
+      24,
+      26,
+      1,
+      3
+    ],
+    "log": "RX-6001-check.log.gz"
+  },
+  "fullCheckInlineObservation": [
+    {
+      "kind": "raveldex-inline-foundation-browser-v1",
+      "packageSha256": "3c769360a9813cee7a35d45a71b69a92bd71e64677c349b9acfe210a49591ff5",
+      "graph": {
+        "inputs": [
+          "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/query.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/render.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/mounts.js",
+          "node_modules/@vmitsaras/raveldex/dist/addons/ui/inline.js",
+          "inline-entry.mjs"
+        ],
+        "minifiedBytes": 10139,
+        "gzipBytes": 4033,
+        "sha256": "73de6dbbe2e02d56baa362196699ff17d7d1207ae9e3357959befd9bcc591dec",
+        "cssBytes": 3140,
+        "cssSha256": "1cf409c308b9e523f282b701e9526bb4a81bda0aef0dcf6c145d168750d9da41",
+        "startup": {
+          "reads": []
+        },
+        "publicTypes": "Pass"
+      },
+      "browser": {
+        "channel": "chrome",
+        "version": "156.0.8078.74",
+        "headless": true
+      }
+    }
+  ],
+  "targetedRecord": "RX-6001-browser.json",
+  "note": "The standalone browser record predates only the correction of internal task IDs in public guide prose. The full-check inline observation and fresh candidate/site checks qualify the corrected installed documentation; the measured inline graph/CSS are unchanged.",
+  "siteRegression": {
+    "command": "node --test --test-concurrency=1 --test-timeout=180000 test/pages/browser.test.mjs test/pages/workbench.test.mjs",
+    "exitCode": 0,
+    "tests": 7,
+    "log": "RX-6001-site.log.gz",
+    "earlierFailure": "Concurrent run timed out in cleanup after its assertions; serial run passed with original per-test timeouts and unchanged assertions."
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>QUERY SYNTAX · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="explicit-text-query-syntax">Explicit text query syntax</h1>
+<p>Use this parser when your application should accept expressions such as <code>title:"atomic updates" AND body:replac*</code>. Parse the input yourself, then pass the resulting typed query to the engine. Ordinary string searches and the built-in UI do not enable this syntax automatically.</p>
+<p><code>/addons/query-syntax</code> exports <code>createQuerySyntax</code>, <code>QuerySyntaxError</code>, <code>QUERY_SYNTAX_ERROR_CODES</code> and <code>QUERY_SYNTAX_POLICY</code> (<code>explicit-boolean-fields-v1</code>). Run this example in an installed ESM application:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createSourceProvider, createSourcePhrases } from '@vmitsaras/raveldex/addons/phrases';
+import { createQuerySyntax } from '@vmitsaras/raveldex/addons/query-syntax';
+
+const configuration = {
+  schema: { text: { title: {}, body: {} } },
+  addons: [createSourceProvider({ fields: ['title'] }), createSourcePhrases({ fields: ['title'] })],
+};
+const parser = createQuerySyntax({ configuration });
+const engine = createRaveldex(configuration);
+try {
+  await engine.add({ id: 'guide', text: { title: 'Atomic updates', body: 'Replace one complete record.' } });
+  const query = parser.parse('title:"atomic updates" AND body:replac*');
+  const page = await engine.search(query);
+  console.log(page.total, page.hits[0].id); // 1 guide
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>The example prints <code>1 guide</code>. The title matches the phrase <code>atomic updates</code>, and the body contains a term beginning with <code>replac</code>. Both conditions must match. The phrase providers are installed for <code>title</code>, where this example uses a phrase.</p>
+<p><code>createQuerySyntax({ configuration, maxInputCodeUnits?, maxTokens?, maxDepth?, maxWorkUnits? })</code> returns a frozen parser with synchronous <code>parse(input: string): Query</code>. Give it the same configuration as the engine. It copies the schema, limits, analyzer and declared capability handles, but does not initialize providers or inspect a live engine.</p>
+<p>The returned query and arrays are deeply frozen. The engine still validates and analyzes that query when you submit it, using its normal revision, work, cancellation and deadline rules.</p>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Native meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>red</code></td>
+<td>A native text leaf, retaining raw text for the selected analyzer.</td>
+</tr>
+<tr>
+<td><code>red AND blue</code></td>
+<td>Both operands required. Operators must be explicit.</td>
+</tr>
+<tr>
+<td><code>red OR blue AND green</code></td>
+<td>OR of red and the AND group; AND binds more tightly.</td>
+</tr>
+<tr>
+<td><code>NOT red</code></td>
+<td>Native complement; NOT binds most tightly and contributes no score.</td>
+</tr>
+<tr>
+<td><code>(red OR blue) AND green</code></td>
+<td>Parenthesized grouping. Same-level operator chains form n-ary native nodes.</td>
+</tr>
+<tr>
+<td><code>title:red</code> or <code>title:(red OR blue)</code></td>
+<td>Exact declared text-field scope; nearest nested field scope wins.</td>
+</tr>
+<tr>
+<td><code>"red blue"</code></td>
+<td>Existing strict <code>phrases</code> extension, version 1; no raw substring semantics.</td>
+</tr>
+<tr>
+<td><code>replac*</code></td>
+<td>Native prefix group, exact weight 1; native single-token/minimum-prefix limits apply.</td>
+</tr>
+</tbody>
+</table>
+<p>Write operators explicitly: <code>red blue</code> is an error, while <code>red AND blue</code> is valid. Operators are uppercase, whole, unescaped words; lowercase <code>and</code> is an ordinary search term. Whitespace may surround operators, parentheses, colons and a final prefix star.</p>
+<p>A declared text-field name followed by a colon takes precedence over an operator name, so a text field named <code>NOT</code> can use <code>NOT:red</code>. Metadata fields are not part of this grammar. Bare words may include dots, slashes, internal hyphens and Unicode, but the selected analyzer still determines their terms and may require more than one.</p>
+<p>A backslash quotes the following complete code point literally, including whitespace or an operator letter. Inside quotes it permits embedded quotes/backslashes. It is not JSON/C escaping: backslash followed by <code>n</code> yields the letter <code>n</code>. Escaped words are neither operators nor field names. A trailing backslash, unmatched quote/group, missing operand/operator, unknown field or malformed UTF-16 is an explicit error, without a fallback to plain search. Empty/whitespace-only input returns <code>{ kind: 'none' }</code>, matching no records.</p>
+<p>Only one terminal star after an unquoted word is supported. Embedded/repeated stars, wildcard-all, quoted/group postfix stars and the unescaped operator words <code>XOR</code>, <code>NAND</code>, <code>NOR</code>, <code>NEAR</code>, <code>WITHIN</code> reject. Operator-like punctuation <code>! &amp; | ~ ^ [ ] { } = &lt; &gt; ?</code> and leading unescaped <code>+</code>/<code>-</code> reject; escape a character when it is intended as ordinary native text. No metadata/range, literal/infix, proximity, fuzzy, synonym or weighting syntax is added. Existing typed query APIs remain available separately.</p>
+<p>A successful parse does not prove that the engine can execute every requested field or capability. For example, the parser may compile a <code>title</code> phrase when only <code>body</code> has a phrase provider. The engine then rejects that search because <code>title</code> lacks the required provider. Parse errors and execution errors remain separate, so handle both.</p>
+<p>Defaults/maxima are 2,048 raw UTF-16 units, 128 syntax tokens, nesting 16 and 100,000 work units; options only narrow. Captured lower core input/depth bounds apply. Syntax tokens include operators, fields, colons, parentheses, prefix stars and quoted/word operands; EOF is excluded. Nesting counts parentheses, field scopes and NOT from root zero. Native AST/node/token/group/lexical limits also apply independently. Every native-analysis iterator advance is charged even when a trusted analyzer yields zero work; overruns close cursors and return no partial tree. These are synchronous logical bounds, not elapsed-time or heap guarantees. Parsing has no async cancellation; executing the resulting query retains normal cancellation and deadlines.</p>
+<p>Parsing throws <code>QuerySyntaxError</code>: fixed <code>code</code> and <code>message</code>, frozen <code>details.span = { start, end }</code> in original half-open UTF-16 units, and optional numeric <code>limit</code>/<code>actual</code> or whitelisted <code>nativeCode</code>. EOF errors may have a zero-width span. Native admission/analysis failures use <code>NATIVE_QUERY_ERROR</code> over the whole expression; syntax errors identify the offending token or unterminated construct. Missing operands take priority, including a standalone closing parenthesis or an empty opener at EOF; a trailing closing parenthesis is unexpected. An escaped word followed by colon is an invalid field attempt (<code>UNKNOWN_FIELD</code>). Diagnostics retain no input, arbitrary exception message/path or cause. Render diagnostic text with text APIs. Factory configuration/option failures retain existing typed <code>RaveldexError</code> behavior.</p>
+<p>Exported readonly types are <code>QuerySyntaxOptions</code>, <code>QuerySyntaxParser</code>, <code>QuerySyntaxErrorCode</code>, <code>QuerySyntaxSpan</code> and <code>QuerySyntaxErrorDetails</code>. The fixed codes are <code>INVALID_INPUT</code>, <code>INVALID_UNICODE</code>, <code>UNEXPECTED_TOKEN</code>, <code>EXPECTED_OPERAND</code>, <code>EXPECTED_OPERATOR</code>, <code>UNKNOWN_FIELD</code>, <code>UNSUPPORTED_OPERATOR</code>, <code>UNTERMINATED_QUOTE</code>, <code>UNTERMINATED_GROUP</code>, <code>INVALID_ESCAPE</code>, <code>LIMIT_EXCEEDED</code>, <code>WORK_LIMIT_EXCEEDED</code> and <code>NATIVE_QUERY_ERROR</code>.</p>
+<p>For a worker, parse on the calling side and send the resulting typed query through the ordinary query API. No parser registration or snapshot codec is needed on the host. Analyzer, provider and snapshot compatibility rules still apply. Creating the parser starts no host work and keeps no corpus; trusted callbacks are not sandboxed. See <a href="/raveldex/reference/core/#execution-errors-and-bounds">query execution and errors</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

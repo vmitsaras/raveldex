@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Astro setup, build and preview · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="add-search-to-astro-pages">Add search to Astro pages</h1>
+<p>Try a small Astro site that loads search when you ask for it. Three documentation pages are searchable; a rendered draft is deliberately left out. The example shows how to choose the records, display titles and routes yourself.</p>
+<h2 id="prepare-artifacts">Prepare artifacts</h2>
+<p>Use Node 24 and npm. First follow <a href="/raveldex/guide/overview/#build-tarballs-from-a-source-checkout">build tarballs from a source checkout</a>. You should then have matching core and integration files, with <code>RAVELDEX_REPOSITORY</code> and <code>RAVELDEX_ARTIFACTS</code> set in the same shell.</p>
+<p>If you open another terminal, set those variables again to the actual absolute paths before continuing.</p>
+<h2 id="copy-and-install-the-fixture">Copy and install the fixture</h2>
+<p>Run the following to copy the example to a new temporary directory and install its packages there. The second line resolves the physical path, so build and preview agree on the project root even when macOS uses a temporary-directory alias:</p>
+<pre><code class="language-sh">export RAVELDEX_EXAMPLE="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-astro-example.XXXXXX")"
+export RAVELDEX_EXAMPLE="$(cd "$RAVELDEX_EXAMPLE" &amp;&amp; pwd -P)"
+cp -R "$RAVELDEX_REPOSITORY/examples/astro/." "$RAVELDEX_EXAMPLE/"
+printf '%s\n' '{"name":"raveldex-astro-example","private":true,"type":"module"}' &gt; "$RAVELDEX_EXAMPLE/package.json"
+npm --prefix "$RAVELDEX_EXAMPLE" install --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/core/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$RAVELDEX_ARTIFACTS/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz" astro@7.3.2
+</code></pre>
+<p>You now have an independent example project at <code>$RAVELDEX_EXAMPLE</code>, with local core and integration packages plus Astro <code>7.3.2</code> installed. The repository copy is unchanged. Resolving Astro and its dependencies needs registry access or a suitable npm cache.</p>
+<h2 id="build-and-preview-at-the-root">Build and preview at the root</h2>
+<p>Build the static pages, then start a local preview:</p>
+<pre><code class="language-sh">ASTRO_TELEMETRY_DISABLED=1 node "$RAVELDEX_EXAMPLE/node_modules/astro/bin/astro.mjs" build --root "$RAVELDEX_EXAMPLE"
+ASTRO_TELEMETRY_DISABLED=1 node "$RAVELDEX_EXAMPLE/node_modules/astro/bin/astro.mjs" preview --background --root "$RAVELDEX_EXAMPLE" --host 127.0.0.1 --port 4321
+</code></pre>
+<p>After a successful build, you should have <code>dist/raveldex/manifest.json</code> and its source and display files. Open the URL Astro prints, normally <code>http://127.0.0.1:4321/</code>, to see the documentation links and search controls.</p>
+<p><code>--background</code> keeps the preview running after the command returns. Leave it running while you try the example. Use the HTTP URL rather than opening <code>dist/index.html</code> as a file: search needs to fetch assets from the same origin.</p>
+<p>When you finish either preview session, run this command before rebuilding. It stops the preview registered for this example’s project root:</p>
+<pre><code class="language-sh">ASTRO_TELEMETRY_DISABLED=1 node "$RAVELDEX_EXAMPLE/node_modules/astro/bin/astro.mjs" preview stop --root "$RAVELDEX_EXAMPLE"
+</code></pre>
+<p>The preview should now be stopped; the built files remain. If port <code>4321</code> was busy, use the actual URL Astro reported instead of replacing an unrelated server with <code>--force</code>.</p>
+<h2 id="rebuild-for-a-subdirectory">Rebuild for a subdirectory</h2>
+<p>After stopping the root preview, rebuild with <code>/docs/</code> as the base. Set the same base for preview so its routes match the generated URLs:</p>
+<pre><code class="language-sh">RAVELDEX_ASTRO_BASE=/docs/ ASTRO_TELEMETRY_DISABLED=1 node "$RAVELDEX_EXAMPLE/node_modules/astro/bin/astro.mjs" build --root "$RAVELDEX_EXAMPLE"
+RAVELDEX_ASTRO_BASE=/docs/ ASTRO_TELEMETRY_DISABLED=1 node "$RAVELDEX_EXAMPLE/node_modules/astro/bin/astro.mjs" preview --background --root "$RAVELDEX_EXAMPLE" --host 127.0.0.1 --port 4321
+</code></pre>
+<p>Open <code>http://127.0.0.1:4321/docs/</code>, or use the actual port Astro reports. You should see the same site, with page links and search-file requests beneath <code>/docs/</code>. Stop this preview with the command above when finished.</p>
+<p>Let the hook create the fresh build’s <code>raveldex/</code> directory. Copying an old one into the output causes a collision, which fails the build rather than overwriting it.</p>
+<h2 id="what-to-try">What to try</h2>
+<ol>
+<li>Follow an ordinary documentation link before loading search. The site remains useful without the search interface.</li>
+<li>Activate <strong>Load search data</strong>. The manifest and source snapshot load; titles, URLs and the search UI wait until you open search.</li>
+<li>Activate <strong>Open search</strong> and search <code>atomic</code>. You should get one result, <strong>Atomic publication</strong>. Follow it to read the page. Search <code>marzipanprivate</code> to see <strong>No results.</strong> because the draft was not indexed.</li>
+<li>Use the labeled controls and open Inspector to read matching and scoring facts. Close it with its button or Escape.</li>
+<li>Activate <strong>Inject next search error</strong>, submit a search and use <strong>Retry search</strong> to recover. <strong>Close search</strong> restores the original content; <strong>Unload search data</strong> releases the engine. Unloading while search is opening should leave it unloaded.</li>
+<li>Repeat at <code>/docs/</code>. Result links and source/display requests should keep that base.</li>
+</ol>
+<h2 id="use-the-pattern-in-your-application">Use the pattern in your application</h2>
+<p>Define the records you want indexed, configure the Astro hook and load the source manifest from your client module. Keep draft/private content out of the index allowlist. See <a href="/raveldex/reference/static-astro/">the Astro integration guide</a> for the public imports, configuration and loader lifecycle.</p>
+<p>The browser path uses source snapshots and rebuilds them with its configured analyzer. The example also contains <code>qualification.mjs</code> for its native-snapshot test path. You do not need that declaration for ordinary source loading, and you cannot reuse it to qualify a different application.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

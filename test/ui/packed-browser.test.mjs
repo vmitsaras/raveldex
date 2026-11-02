@@ -232,6 +232,51 @@ test('partial final page respects a stricter real engine document limit in main,
       offset: 3, hits: 2, inspectorDocuments: 2 }, backwardPageHits: 3 });
 });
 
+test('prefix mode keeps focus/composition, suppresses stale replies and restores authored content', async () => {
+  await page.evaluate(async () => { await window.harness.cleanup(); await window.createFixture({ mode: 'prefix' }); });
+  await settled();
+  await search('red app');
+  assert.deepEqual((await results().evaluateAll(nodes => nodes.map(node => node.dataset.raveldexResult))).sort(), ['alpha', 'delta', 'gamma']);
+  assert.ok((await page.locator('[data-raveldex-highlight]').allTextContents()).includes('apple'));
+  assert.ok(await input().evaluate(node => node === document.activeElement));
+  await search('re app');
+  assert.equal(await status().innerText(), 'No results.');
+  await search('red a');
+  assert.equal(await status().innerText(), '1 results. Showing 1–1.');
+  assert.equal(await row('alpha').count(), 1); // The actual single-letter word, not apple/atomic.
+  const beforeCount = (await calls()).length;
+  await page.evaluate(() => {
+    const node = document.querySelector('[data-raveldex-input]');
+    node.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true }));
+    node.value = 'red ap'; node.dispatchEvent(new InputEvent('input', { bubbles: true, isComposing: true }));
+    node.form.dispatchEvent(new SubmitEvent('submit', { bubbles: true, cancelable: true }));
+  });
+  await page.waitForTimeout(80);
+  assert.equal((await calls()).length, beforeCount);
+  await page.evaluate(() => document.querySelector('[data-raveldex-input]').dispatchEvent(new CompositionEvent('compositionend', { bubbles: true })));
+  await page.waitForFunction(() => document.querySelector('[data-raveldex-status]').textContent.includes('3 results'));
+  await page.evaluate(() => { window.harness.state.holdNext = true; });
+  await input().fill('red app'); await input().press('Enter');
+  await page.waitForFunction(() => window.harness.state.pending.length === 1);
+  await search('blue ban');
+  assert.equal(await row('beta').count(), 1);
+  await page.evaluate(() => window.harness.release());
+  await page.waitForFunction(() => window.harness.state.calls.every(call => call.completed));
+  assert.equal(await row('beta').count(), 1);
+  assert.equal(await row('alpha').count(), 0);
+  await page.locator(hooks('inspect')).click();
+  await page.waitForFunction(() => document.querySelector('[data-raveldex-inspector]').getAttribute('aria-busy') === 'false');
+  assert.equal(await page.locator(hooks('inspector-error')).isVisible(), false);
+  await page.keyboard.press('Escape');
+  assert.ok(await page.locator(hooks('inspect')).evaluate(node => node === document.activeElement));
+  const restored = await page.evaluate(() => {
+    window.harness.destroy();
+    return window.harness.root.firstChild === window.harness.originalNodes[0];
+  });
+  assert.equal(restored, true);
+  record('prefix composition/focus/stale/Inspector/teardown', { matched: ['alpha', 'delta', 'gamma'], laterQuery: 'blue ban', restored });
+});
+
 test('debounced rapid typing admits the last value once', async () => {
   const beforeCount = (await calls()).length;
   await input().focus();
@@ -479,7 +524,8 @@ test('real documentation pilot supports judged tasks and source/offset phrase pr
   await page.goto(`${origin}/pilot/index.html`);
   await page.waitForFunction(() => document.querySelector('[data-pilot-search]')?.dataset.pilotState === 'ready');
   await settled();
-  assert.match(await page.locator('[data-pilot-identity]').innerText(), /34 complete documentation sections from 5 allowlisted files/);
+  assert.equal(await page.locator('[data-pilot-identity]').innerText(), 'Searches 34 sections from 5 guides.');
+  await page.getByText('Advanced demo settings', { exact: true }).click();
   const observations = [];
   for (const query of ['term contribution', 'original source', 'atomic batch', 'PostgreSQL replication']) {
     await search(query);

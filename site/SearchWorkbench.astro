@@ -1,0 +1,31 @@
+---
+const { initialQuery = '', advanced = false, pageSize = 5 } = Astro.props;
+const base = '/raveldex/';
+---
+<section class="search-workbench" aria-labelledby="workbench-title">
+  <div class="search-workbench__heading">
+    <h2 id="workbench-title">Search the usage guides</h2>
+    <p class="search-workbench__identity" data-pilot-identity>Five usage guides · Loading sections…</p>
+  </div>
+  <div class="search-workbench__queries" aria-label="Example queries">
+    <span>Example queries:</span>
+    {['source provider', 'typed filters', 'module worker'].map(query => <button type="button" data-pilot-query={query} disabled>{query}</button>)}
+  </div>
+  <p>Start typing: <code>source prov</code> finds words beginning with <code>prov</code>. Earlier words must match exactly.</p>
+  <div class="search-workbench__search" data-pilot-search data-pilot-initial-query={initialQuery} data-pilot-page-size={pageSize} data-pilot-compact={pageSize === 1 ? 'true' : undefined}></div>
+  <p class="search-workbench__status" data-pilot-status role="status">Loading guides and preparing search…</p>
+  <button class="search-workbench__retry" type="button" data-pilot-retry hidden>Retry loading guides</button>
+  <noscript><style is:inline>.search-workbench__status, .search-workbench__identity, .search-workbench__queries { display: none; }</style><p>JavaScript is required for this search demo. Read <a href={base + 'guide/overview/'}>Getting started</a> or <a href={base + 'guide/'}>browse the guides</a>.</p></noscript>
+  {advanced && <details class="search-workbench__settings">
+    <summary>Advanced demo settings</summary>
+    <p>Changing a setting rebuilds the collection, keeps your query and resets the category and page.</p>
+    <div class="search-workbench__controls">
+      <label>Representation<select data-pilot-representation><option value="source">Original source reanalysis</option><option value="offsets">Stored positions and original offsets</option></select></label>
+      <label>Execution<select data-pilot-execution><option value="direct">Direct execution</option><option value="worker">One module worker</option></select></label>
+      <label>Query meaning<select data-pilot-mode><option value="prefix">Final-word prefix</option><option value="text">All exact terms</option><option value="phrase">Strict adjacent phrase</option></select></label>
+      <button type="button" data-pilot-initialize>Reinitialize search</button>
+      <button type="button" data-pilot-destroy>Destroy interface</button>
+    </div>
+    <p>Destroy interface removes the controls. Reinitialize search rebuilds the collection and brings them back.</p>
+  </details>}
+</section>

@@ -2,6 +2,7 @@ import { createRaveldex, RaveldexError } from '@vmitsaras/raveldex';
 import type { RecordInput } from '@vmitsaras/raveldex';
 import { createSnapshotRaveldex, createSnapshots } from '@vmitsaras/raveldex/adapters/snapshots';
 import { asset, batchSize, buildId, cloneOwned, configurationIdentity, DOCUMENTS_LIMIT, MANIFEST_LIMIT, ENTRY_LIMIT, idIdentity, object, safePath, sourceUrl, string, bytes } from './common.js';
+import { captureSectionPages, sectionManifest, sourceSectionData, validateSectionSources } from './sections.js';
 import type { OwnershipBudget } from './common.js';
 import { fail, StaticSearchError } from './error.js';
 import type { StaticArtifacts, StaticBuildOptions, StaticDocument, StaticManifest } from './types.js';
@@ -14,7 +15,7 @@ export type { StaticArtifacts, StaticAsset, StaticBuildOptions, StaticEntry, Sta
 export async function buildStaticSearch(input: StaticBuildOptions): Promise<StaticArtifacts> {
   let engine: ReturnType<typeof createRaveldex> | undefined;
   try {
-    const options = object(input, ['configuration', 'entries', 'buildId', 'base', 'nativeQualification']);
+    const options = object(input, ['configuration', 'entries', 'buildId', 'base', 'nativeQualification', 'pageSections']);
     const generation = buildId(options.buildId), base = safePath(Object.hasOwn(options, 'base') ? options.base : '/');
     if (!Array.isArray(options.entries) || options.entries.length > ENTRY_LIMIT) fail('INVALID_INPUT');
     const budget: OwnershipBudget = { count: 0, maximum: 1_000_000 };
@@ -30,6 +31,7 @@ export async function buildStaticSearch(input: StaticBuildOptions): Promise<Stat
       ids.add(id); records.push(record as unknown as RecordInput);
       documents.push(Object.freeze({ id, title, url: sourceUrl(base, path) }));
     }
+    const sectionPages = Object.hasOwn(options, 'pageSections') ? captureSectionPages(options.pageSections, ids, budget, 'INVALID_INPUT') : undefined;
     const documentsText = JSON.stringify({ kind: 'raveldex-static-documents', version: 1, buildId: generation, documents });
     bytes(documentsText, DOCUMENTS_LIMIT);
     // Native factories synchronously capture schema, limits and trusted handles.
@@ -48,6 +50,17 @@ export async function buildStaticSearch(input: StaticBuildOptions): Promise<Stat
     const files: Record<string, string> = Object.create(null) as Record<string, string>;
     files[source.file] = sourceText; files[display.file] = documentsText;
     if (native && nativeText !== undefined) files[native.file] = nativeText;
+    if (sectionPages !== undefined) {
+      const captured = new Map(sectionPages.map(page => [page.pageId, page.sections]));
+      const pages = Object.freeze([...ids].sort().map(pageId => Object.freeze({ pageId, sections: captured.get(pageId) ?? Object.freeze([]) })));
+      const originals = sourceSectionData(sourceText);
+      validateSectionSources(pages, originals.records, originals.fields, 'INVALID_INPUT', new Map(documents.map(document => [document.id, document.url])));
+      const sectionsText = JSON.stringify({ kind: 'raveldex-page-sections', version: 1, buildId: generation, pages });
+      const sections = await asset('sections', sectionsText);
+      files[sections.file] = sectionsText;
+      files['sections-manifest.json'] = JSON.stringify(sectionManifest(manifest, sections));
+      bytes(files['sections-manifest.json'], MANIFEST_LIMIT);
+    }
     files['manifest.json'] = JSON.stringify(manifest); bytes(files['manifest.json'], MANIFEST_LIMIT);
     return Object.freeze({ manifest, files: Object.freeze(files) });
   } catch (error) {

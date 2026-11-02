@@ -1,0 +1,49 @@
+---
+import Layout from './Layout.astro';
+import SearchWorkbench from './SearchWorkbench.astro';
+const { example } = Astro.props;
+const base = '/raveldex/';
+---
+<Layout wide frontmatter={{ title: 'Raveldex documentation' }}>
+  <Fragment slot="head">
+    <link rel="stylesheet" href={base + 'demo/ui.css'} />
+    <link rel="stylesheet" href={base + 'site-assets/workbench.css'} />
+    <script is:inline type="module" src={base + 'demo/main.mjs'}></script>
+  </Fragment>
+  <section class="search-home__intro" aria-labelledby="add-local-search-to-your-application">
+    <h1 id="add-local-search-to-your-application">Add local search to your application.</h1>
+    <p>Index your records. Find matching IDs. Add capabilities when you need them.</p>
+    <a class="site-button" href={base + 'guide/overview/'}>Get started <span aria-hidden="true">→</span></a>
+  </section>
+  <SearchWorkbench initialQuery="module worker" pageSize={1} />
+  <section class="search-home__follow" aria-labelledby="build-the-search">
+    <div>
+      <h2 id="build-the-search">Build the search you just tried</h2>
+      <div class="search-home__links">
+        <a href={base + 'reference/hosts/#mount-a-minimal-search-form'}>UI integration example <span aria-hidden="true">→</span></a>
+        <a href={base + 'guide/overview/'}>Getting started <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <figure class="search-home__code">
+      <figcaption>JavaScript · From an initialized engine</figcaption>
+      <pre tabindex="0" aria-label="Search code example"><code><span class="search-home__keyword">const</span> result = <span class="search-home__keyword">await</span> engine.search(<span class="search-home__string">'module worker'</span>);</code></pre>
+    </figure>
+  </section>
+  <section class="search-home__example site-main--article" aria-labelledby="a-small-working-example">
+    <h2 id="a-small-working-example">A small working example</h2>
+    <p>After <a href={base + 'guide/overview/#install-the-package'}>installing core</a>, save this as <code>search.mjs</code> and run <code>node search.mjs</code>. It adds one document and searches for <code>atomic</code>.</p>
+    <details><summary>View the complete core example</summary><pre tabindex="0" aria-label="Complete core example"><code>{example}</code></pre></details>
+    <p>You should see revision <code>1</code>, a total of <code>1</code> and one hit with ID <code>guide:updates</code>. Look up that ID in your application to get its title and URL. The example disposes the engine when it finishes.</p>
+  </section>
+  <section class="search-home__tasks site-main--article" aria-labelledby="what-would-you-like-to-build">
+    <h2 id="what-would-you-like-to-build">What would you like to build?</h2>
+    <ul>
+      <li><a href={base + 'reference/core/'}>Add records, search and update a collection</a>.</li>
+      <li><a href={base + 'reference/hosts/#native-dom-ui-and-css'}>Mount a browser search form and style it</a>.</li>
+      <li><a href={base + 'reference/addons/'}>Add phrases, filters, facets and snippets</a>.</li>
+      <li><a href={base + 'reference/hosts/#one-owner-module-worker'}>Run a module worker</a> or <a href={base + 'reference/hosts/#source-and-native-snapshots'}>save source snapshots</a>.</li>
+      <li><a href={base + 'reference/static-astro/'}>Add search to Astro pages</a> with the <a href={base + 'examples/astro/'}>setup/build/preview example</a>.</li>
+    </ul>
+    <p>Read the <a href={base + 'guide/compatibility/'}>runtime requirements</a> and <a href={base + 'guide/limitations/'}>practical limits</a> before choosing optional capabilities.</p>
+  </section>
+</Layout>

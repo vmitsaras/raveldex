@@ -1,0 +1,941 @@
+{
+  "kind": "raveldex-page-sections-window-fixture-v1",
+  "role": "Handwritten section-clipped window and cap expectations for future RX-6005 projection; all coordinates are original UTF-16.",
+  "cases": [
+    {
+      "id": "oversized-first-section-not-skipped",
+      "record": {
+        "id": "page:oversized",
+        "text": {
+          "body": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa alpha alpha alpha"
+        }
+      },
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "text",
+            "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "alpha",
+            "fields": [
+              "body"
+            ]
+          }
+        ]
+      },
+      "sections": [
+        {
+          "anchor": "long",
+          "heading": "Long original match",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 241
+        },
+        {
+          "anchor": "second",
+          "heading": "Second",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 242,
+          "end": 247
+        },
+        {
+          "anchor": "third",
+          "heading": "Third",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 248,
+          "end": 253
+        },
+        {
+          "anchor": "fourth",
+          "heading": "Fourth",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 254,
+          "end": 259
+        }
+      ],
+      "positiveRanges": [
+        [
+          0,
+          241
+        ],
+        [
+          242,
+          247
+        ],
+        [
+          248,
+          253
+        ],
+        [
+          254,
+          259
+        ]
+      ],
+      "maxCodeUnits": 240,
+      "maxPreviews": 3,
+      "expected": {
+        "nativeTotal": 1,
+        "nativeIDs": [
+          "page:oversized"
+        ],
+        "selectedAnchors": [
+          "long",
+          "second",
+          "third"
+        ],
+        "omittedMatchingAnchors": [
+          "fourth"
+        ],
+        "previews": [
+          {
+            "anchor": "long",
+            "snippet": null,
+            "snippetOmissions": {
+              "unshownMatches": 1,
+              "windowLimit": false,
+              "highlightLimit": false,
+              "matchTooLong": 1,
+              "graphemeTooLong": 0
+            }
+          },
+          {
+            "anchor": "second",
+            "snippet": {
+              "start": 242,
+              "end": 247,
+              "text": "alpha",
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ],
+              "omittedBefore": false,
+              "omittedAfter": false
+            }
+          },
+          {
+            "anchor": "third",
+            "snippet": {
+              "start": 248,
+              "end": 253,
+              "text": "alpha",
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ],
+              "omittedBefore": false,
+              "omittedAfter": false
+            }
+          }
+        ],
+        "sectionOmissions": {
+          "omittedSections": 1,
+          "unmappedRanges": 0,
+          "boundaryRanges": 0
+        }
+      }
+    },
+    {
+      "id": "grapheme-240-fits",
+      "record": {
+        "id": "page:cluster-fit",
+        "text": {
+          "body": "a‍́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́"
+        }
+      },
+      "query": {
+        "kind": "text",
+        "text": "a",
+        "fields": [
+          "body"
+        ]
+      },
+      "sections": [
+        {
+          "anchor": "cluster",
+          "heading": "A whole cluster",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 240
+        }
+      ],
+      "positiveRanges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "maxCodeUnits": 240,
+      "expected": {
+        "selectedAnchors": [
+          "cluster"
+        ],
+        "snippet": {
+          "start": 0,
+          "end": 240,
+          "text": "a‍́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́",
+          "highlights": [
+            [
+              0,
+              240
+            ]
+          ],
+          "omittedBefore": false,
+          "omittedAfter": false
+        },
+        "snippetOmissions": {
+          "unshownMatches": 0,
+          "windowLimit": false,
+          "highlightLimit": false,
+          "matchTooLong": 0,
+          "graphemeTooLong": 0
+        }
+      }
+    },
+    {
+      "id": "grapheme-241-no-clipping",
+      "record": {
+        "id": "page:cluster-long",
+        "text": {
+          "body": "a‍́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́́"
+        }
+      },
+      "query": {
+        "kind": "text",
+        "text": "a",
+        "fields": [
+          "body"
+        ]
+      },
+      "sections": [
+        {
+          "anchor": "cluster",
+          "heading": "An oversized cluster",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 241
+        }
+      ],
+      "positiveRanges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "maxCodeUnits": 240,
+      "expected": {
+        "selectedAnchors": [
+          "cluster"
+        ],
+        "snippet": null,
+        "snippetOmissions": {
+          "unshownMatches": 1,
+          "windowLimit": false,
+          "highlightLimit": false,
+          "matchTooLong": 0,
+          "graphemeTooLong": 1
+        }
+      }
+    },
+    {
+      "id": "highlight-32-fits",
+      "record": {
+        "id": "page:marks-fit",
+        "text": {
+          "body": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a "
+        }
+      },
+      "query": {
+        "kind": "text",
+        "text": "a",
+        "fields": [
+          "body"
+        ]
+      },
+      "sections": [
+        {
+          "anchor": "marks",
+          "heading": "Thirty-two marks",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 64
+        }
+      ],
+      "positiveRanges": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          24,
+          25
+        ],
+        [
+          26,
+          27
+        ],
+        [
+          28,
+          29
+        ],
+        [
+          30,
+          31
+        ],
+        [
+          32,
+          33
+        ],
+        [
+          34,
+          35
+        ],
+        [
+          36,
+          37
+        ],
+        [
+          38,
+          39
+        ],
+        [
+          40,
+          41
+        ],
+        [
+          42,
+          43
+        ],
+        [
+          44,
+          45
+        ],
+        [
+          46,
+          47
+        ],
+        [
+          48,
+          49
+        ],
+        [
+          50,
+          51
+        ],
+        [
+          52,
+          53
+        ],
+        [
+          54,
+          55
+        ],
+        [
+          56,
+          57
+        ],
+        [
+          58,
+          59
+        ],
+        [
+          60,
+          61
+        ],
+        [
+          62,
+          63
+        ]
+      ],
+      "maxCodeUnits": 240,
+      "maxHighlights": 32,
+      "expected": {
+        "selectedAnchors": [
+          "marks"
+        ],
+        "snippet": {
+          "start": 0,
+          "end": 64,
+          "text": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a ",
+          "highlights": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              10,
+              11
+            ],
+            [
+              12,
+              13
+            ],
+            [
+              14,
+              15
+            ],
+            [
+              16,
+              17
+            ],
+            [
+              18,
+              19
+            ],
+            [
+              20,
+              21
+            ],
+            [
+              22,
+              23
+            ],
+            [
+              24,
+              25
+            ],
+            [
+              26,
+              27
+            ],
+            [
+              28,
+              29
+            ],
+            [
+              30,
+              31
+            ],
+            [
+              32,
+              33
+            ],
+            [
+              34,
+              35
+            ],
+            [
+              36,
+              37
+            ],
+            [
+              38,
+              39
+            ],
+            [
+              40,
+              41
+            ],
+            [
+              42,
+              43
+            ],
+            [
+              44,
+              45
+            ],
+            [
+              46,
+              47
+            ],
+            [
+              48,
+              49
+            ],
+            [
+              50,
+              51
+            ],
+            [
+              52,
+              53
+            ],
+            [
+              54,
+              55
+            ],
+            [
+              56,
+              57
+            ],
+            [
+              58,
+              59
+            ],
+            [
+              60,
+              61
+            ],
+            [
+              62,
+              63
+            ]
+          ],
+          "omittedBefore": false,
+          "omittedAfter": false
+        },
+        "snippetOmissions": {
+          "unshownMatches": 0,
+          "windowLimit": false,
+          "highlightLimit": false,
+          "matchTooLong": 0,
+          "graphemeTooLong": 0
+        }
+      }
+    },
+    {
+      "id": "highlight-33-reports-omission",
+      "record": {
+        "id": "page:marks-long",
+        "text": {
+          "body": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a "
+        }
+      },
+      "query": {
+        "kind": "text",
+        "text": "a",
+        "fields": [
+          "body"
+        ]
+      },
+      "sections": [
+        {
+          "anchor": "marks",
+          "heading": "Thirty-three occurrences",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 66
+        }
+      ],
+      "positiveRanges": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          24,
+          25
+        ],
+        [
+          26,
+          27
+        ],
+        [
+          28,
+          29
+        ],
+        [
+          30,
+          31
+        ],
+        [
+          32,
+          33
+        ],
+        [
+          34,
+          35
+        ],
+        [
+          36,
+          37
+        ],
+        [
+          38,
+          39
+        ],
+        [
+          40,
+          41
+        ],
+        [
+          42,
+          43
+        ],
+        [
+          44,
+          45
+        ],
+        [
+          46,
+          47
+        ],
+        [
+          48,
+          49
+        ],
+        [
+          50,
+          51
+        ],
+        [
+          52,
+          53
+        ],
+        [
+          54,
+          55
+        ],
+        [
+          56,
+          57
+        ],
+        [
+          58,
+          59
+        ],
+        [
+          60,
+          61
+        ],
+        [
+          62,
+          63
+        ],
+        [
+          64,
+          65
+        ]
+      ],
+      "maxCodeUnits": 240,
+      "maxHighlights": 32,
+      "expected": {
+        "selectedAnchors": [
+          "marks"
+        ],
+        "snippet": {
+          "start": 0,
+          "end": 66,
+          "text": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a ",
+          "highlights": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              10,
+              11
+            ],
+            [
+              12,
+              13
+            ],
+            [
+              14,
+              15
+            ],
+            [
+              16,
+              17
+            ],
+            [
+              18,
+              19
+            ],
+            [
+              20,
+              21
+            ],
+            [
+              22,
+              23
+            ],
+            [
+              24,
+              25
+            ],
+            [
+              26,
+              27
+            ],
+            [
+              28,
+              29
+            ],
+            [
+              30,
+              31
+            ],
+            [
+              32,
+              33
+            ],
+            [
+              34,
+              35
+            ],
+            [
+              36,
+              37
+            ],
+            [
+              38,
+              39
+            ],
+            [
+              40,
+              41
+            ],
+            [
+              42,
+              43
+            ],
+            [
+              44,
+              45
+            ],
+            [
+              46,
+              47
+            ],
+            [
+              48,
+              49
+            ],
+            [
+              50,
+              51
+            ],
+            [
+              52,
+              53
+            ],
+            [
+              54,
+              55
+            ],
+            [
+              56,
+              57
+            ],
+            [
+              58,
+              59
+            ],
+            [
+              60,
+              61
+            ],
+            [
+              62,
+              63
+            ]
+          ],
+          "omittedBefore": false,
+          "omittedAfter": false
+        },
+        "snippetOmissions": {
+          "unshownMatches": 1,
+          "windowLimit": true,
+          "highlightLimit": true,
+          "matchTooLong": 0,
+          "graphemeTooLong": 0
+        }
+      }
+    },
+    {
+      "id": "forty-units-before-contained-match",
+      "record": {
+        "id": "page:context",
+        "text": {
+          "body": "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp alpha qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+        }
+      },
+      "query": {
+        "kind": "text",
+        "text": "alpha",
+        "fields": [
+          "body"
+        ]
+      },
+      "sections": [
+        {
+          "anchor": "context",
+          "heading": "Bounded section context",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 307
+        }
+      ],
+      "positiveRanges": [
+        [
+          101,
+          106
+        ]
+      ],
+      "maxCodeUnits": 240,
+      "expected": {
+        "selectedAnchors": [
+          "context"
+        ],
+        "snippet": {
+          "start": 61,
+          "end": 301,
+          "text": "ppppppppppppppppppppppppppppppppppppppp alpha qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+          "highlights": [
+            [
+              40,
+              45
+            ]
+          ],
+          "omittedBefore": true,
+          "omittedAfter": true
+        },
+        "snippetOmissions": {
+          "unshownMatches": 0,
+          "windowLimit": false,
+          "highlightLimit": false,
+          "matchTooLong": 0,
+          "graphemeTooLong": 0
+        }
+      }
+    }
+  ]
+}

@@ -14,14 +14,14 @@ import type { Snippet, SnippetHighlight, SnippetOmissions, SnippetOptions } from
 
 const charge = (workUnits = 1): WorkStep => ({ workUnits });
 interface Caps { readonly windows: number; readonly codeUnits: number; readonly highlights: number }
-interface ExpandedRange {
+export interface ExpandedRange {
   readonly range: MatchRange;
   readonly start: number;
   readonly end: number;
   readonly unavailable: 'match-too-long' | 'grapheme-too-long' | null;
   shown: boolean;
 }
-interface ValueProjection {
+export interface ValueProjection {
   readonly field: string;
   readonly valueIndex: number;
   readonly source: string;
@@ -42,7 +42,7 @@ function cap(input: unknown, maximum: number, path: string): number {
 }
 
 /** Host access is deferred until requested preparation, including empty requests. */
-function segmenter(): Intl.Segmenter {
+export function segmenter(): Intl.Segmenter {
   try {
     if (typeof Intl !== 'object' || Intl === null || typeof Intl.Segmenter !== 'function') invalid('UNSUPPORTED_ENVIRONMENT', 'snippets.segmenter');
     const result = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
@@ -54,7 +54,7 @@ function segmenter(): Intl.Segmenter {
 }
 
 /** Segmenter is a bounded native primitive, followed by charged resumable steps. */
-function* boundaries(source: string, host: Intl.Segmenter): Generator<WorkStep, readonly number[]> {
+export function* boundaries(source: string, host: Intl.Segmenter): Generator<WorkStep, readonly number[]> {
   yield* scanUnicode(source, 'INCOMPATIBLE_CAPABILITY', 'snippets.source.text');
   yield charge(source.length + 1);
   let iterator: Iterator<Intl.SegmentData>, next: Iterator<Intl.SegmentData>['next'], close: Iterator<Intl.SegmentData>['return'];
@@ -100,7 +100,7 @@ function* boundaries(source: string, host: Intl.Segmenter): Generator<WorkStep, 
 }
 
 /** First boundary >= coordinate. At most log2(65537) charged comparisons. */
-function* lower(points: readonly number[], coordinate: number): Generator<WorkStep, number> {
+export function* lower(points: readonly number[], coordinate: number): Generator<WorkStep, number> {
   let low = 0, high = points.length;
   while (low < high) {
     yield charge();
@@ -110,12 +110,12 @@ function* lower(points: readonly number[], coordinate: number): Generator<WorkSt
   }
   return low;
 }
-function* floor(points: readonly number[], coordinate: number): Generator<WorkStep, number> {
+export function* floor(points: readonly number[], coordinate: number): Generator<WorkStep, number> {
   const index = yield* lower(points, coordinate);
   return points[index] === coordinate ? index : index - 1;
 }
 
-function* sourceValue(context: EvidenceContext, root: SourceRoot, id: string, field: string, valueIndex: number): Generator<WorkStep, string> {
+export function* sourceValue(context: EvidenceContext, root: SourceRoot, id: string, field: string, valueIndex: number, missingCode: 'INVALID_OPTIONS' | 'INCOMPATIBLE_CAPABILITY' = 'INCOMPATIBLE_CAPABILITY'): Generator<WorkStep, string> {
   yield charge(id.length + field.length + 1);
   const record = directoryGet(root.records, id);
   if (!record) invalid('MISSING_CAPABILITY', 'snippets.source.record');
@@ -126,7 +126,7 @@ function* sourceValue(context: EvidenceContext, root: SourceRoot, id: string, fi
   if (typeof data.text !== 'object' || data.text === null || !Object.isFrozen(data.text)) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.source.record');
   const text = ownObject(data.text, 'INCOMPATIBLE_CAPABILITY', 'snippets.source.text', new Admission(context.limits.maxTextFields));
   yield charge(Object.keys(text).length + 1);
-  if (!has(text, field)) invalid('MISSING_CAPABILITY', 'snippets.source.field');
+  if (!has(text, field)) invalid(missingCode === 'INVALID_OPTIONS' ? missingCode : 'MISSING_CAPABILITY', 'snippets.source.field');
   const values = text[field];
   if (!Array.isArray(values) || !Object.isFrozen(values) || values.length > context.limits.maxTextValuesPerField) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.source.values');
   for (let index = 0; index < values.length; index++) {
@@ -136,11 +136,11 @@ function* sourceValue(context: EvidenceContext, root: SourceRoot, id: string, fi
     const value: unknown = descriptor.value;
     if (typeof value !== 'string' || value.length > context.limits.maxTextCodeUnitsPerValue) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.source.values');
   }
-  if (!Number.isSafeInteger(valueIndex) || valueIndex < 0 || valueIndex >= values.length) invalid('INCOMPATIBLE_CAPABILITY', 'snippets.source.valueIndex');
+  if (!Number.isSafeInteger(valueIndex) || valueIndex < 0 || valueIndex >= values.length) invalid(missingCode, 'snippets.source.valueIndex');
   return Object.getOwnPropertyDescriptor(values, String(valueIndex))!.value as string;
 }
 
-function* valuesFor(context: EvidenceContext, roots: ReadonlyMap<string, SourceRoot>, fields: readonly string[], id: string, ranges: readonly MatchRange[], host: Intl.Segmenter, caps: Caps): Generator<WorkStep, readonly ValueProjection[]> {
+export function* valuesFor(context: EvidenceContext, roots: ReadonlyMap<string, SourceRoot>, fields: readonly string[], id: string, ranges: readonly MatchRange[], host: Intl.Segmenter, caps: Caps, references: readonly { readonly field: string; readonly valueIndex: number }[] = []): Generator<WorkStep, readonly ValueProjection[]> {
   const groups = new Map<string, Map<number, MatchRange[]>>();
   for (const range of ranges) {
     yield charge(range.field.length + 1);
@@ -153,6 +153,14 @@ function* valuesFor(context: EvidenceContext, roots: ReadonlyMap<string, SourceR
     if (!value) { value = []; values.set(range.valueIndex, value); }
     value.push(range);
   }
+  const referenced = new Set<string>();
+  for (const ref of references) {
+    yield charge(ref.field.length + 1);
+    if (!roots.has(ref.field)) invalid('INVALID_OPTIONS', 'sections.field');
+    let values=groups.get(ref.field);if(!values){values=new Map();groups.set(ref.field,values);}
+    if(!values.has(ref.valueIndex))values.set(ref.valueIndex,[]);
+    referenced.add(ref.field+':'+ref.valueIndex);
+  }
   const result: ValueProjection[] = [];
   for (const field of fields) {
     yield charge(field.length + 1);
@@ -162,7 +170,7 @@ function* valuesFor(context: EvidenceContext, roots: ReadonlyMap<string, SourceR
     yield charge(values.size + 1);
     const indexes = [...values.keys()].sort((a, b) => a - b);
     for (const valueIndex of indexes) {
-      const original = yield* sourceValue(context, roots.get(field)!, id, field, valueIndex);
+      const original = yield* sourceValue(context, roots.get(field)!, id, field, valueIndex, referenced.has(field+':'+valueIndex) ? 'INVALID_OPTIONS' : 'INCOMPATIBLE_CAPABILITY');
       const points = yield* boundaries(original, host);
       const expanded: ExpandedRange[] = [];
       let priorStart = -1, priorEnd = -1;

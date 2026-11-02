@@ -1,0 +1,43 @@
+---
+import Layout from './Layout.astro';
+import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+const base = '/raveldex/';
+---
+<Layout frontmatter={{ title: 'Compact header search starter' }}>
+  <h1>Compact header search starter</h1>
+  <p>Put a search field in your header, show a few matching pages and link to a complete results page. Copy the browser project, replace its public guide records and adjust the scoped CSS.</p>
+  <p>Choose this starter for a compact title-and-link search. Use <a href={base + 'examples/inline/'}>inline search</a> for results that stay in the page, or the <a href={base + 'examples/modal/'}>documentation modal</a> for search opened from a button with anchored section previews.</p>
+  <h2 id="try-dropdown">Try the installed header starter</h2>
+  <p>Search <code>walking guide</code>: seven pages match and the header shows up to three. Use the arrow keys to select a result and Enter to follow its actual link, or choose <strong>See all results</strong> to open the inline results page. Load more and Next results reach all seven pages. Escape dismisses the popup; Tab leaves it normally.</p>
+  <p><a href={base + 'examples/dropdown-preview/'}>Open the full header preview</a></p>
+  <iframe src={base + 'examples/dropdown-preview/'} title="Dropdown header starter preview" loading="lazy" height="720" style="width: 100%; border: 1px solid currentColor; border-radius: .5rem;"></iframe>
+  <h2 id="copy-dropdown">Copy the complete project</h2>
+  <p>Core is currently private and unpublished. Use the supplied local package tarball and the pinned esbuild tooling in the setup guide. This title/link example uses core directly; it needs no snippet, facet, section, worker or storage registration. Native Popover support is required for the header popup.</p>
+  {STARTERS.filter(starter => starter.family === 'dropdown').map(starter => <section aria-labelledby={'starter-' + starter.id}>
+    <h3 id={'starter-' + starter.id}>{starter.title}</h3>
+    <p><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base + starterArchive(starter.id)} download>Download the complete starter</a></p>
+    <p>Extract into an empty directory with <code>tar -xzf starter.tar.gz --strip-components=1</code>, replacing the archive name with your download. Read <code>README.md</code> before installing the local package.</p>
+    <details><summary>View exact source files</summary><ul>{starter.files.map(path => <li><a href={base + starterSource(starter.id, path)}>{path}</a></li>)}</ul></details>
+  </section>)}
+  <h2 id="dropdown-theme">Change the appearance</h2>
+  <ol>
+    <li>Copy, install, build and preview the complete project using its guide. Search the sample records before changing them.</li>
+    <li>Edit the existing <code>.raveldex-dropdown</code> rule in <code>theme.css</code>, loaded after the package styles. Change the accent, corners and spacing:</li>
+  </ol>
+  <pre tabindex="0" aria-label="Dropdown search theme properties"><code>{`.raveldex-dropdown {
+  --raveldex-dropdown-accent: #145b45;
+  --raveldex-dropdown-radius: .75rem;
+  --raveldex-dropdown-gap: .75rem;
+}`}</code></pre>
+  <ol start="3">
+    <li>Stop the preview, run <code>npm run build</code> in the copied project and restart its documented preview command with the same deployment base. Reload to see the green accent, rounder corners and wider spacing.</li>
+    <li>Search <code>walking guide</code> again. Seven pages still match; the compact window still shows up to three. Follow See all results, check the unchanged query, load the other pages and follow a real guide link. Use Tab to inspect visible focus.</li>
+  </ol>
+  <p>Set the background, text, muted, border, focus and active-result colors together for dark themes. The full-results page uses <code>--raveldex-inline-*</code> properties. See <a href={base + 'reference/hosts/#compact-dropdown-search'}>dropdown options and styling</a>.</p>
+  <h2 id="dropdown-narrow">Narrow headers and an optional larger search</h2>
+  <p>The native top-layer popup can escape an overflow-clipped header. Controls wrap at narrow widths. When the viewport cannot fit a usable result row, the exact total and full-results link stay available; this does not turn into a false no-results state. Nothing automatically opens another search surface.</p>
+  <p>For an explicit larger-search button, set <code>modalHandoff: true</code> in <code>configuration.mjs</code>, rebuild and use <strong>Open expanded search</strong>. It transfers the current header query into the existing native modal, sharing the page's owner, records and prefix mode. It adds no competing global shortcut or second engine. The default is <code>false</code>. The supplied build includes the modal code and explicit stylesheet so this switch can be tried without changing imports; its setup guide explains that cost and how the surfaces share ownership.</p>
+  <p>Keep the complete results route and browse links usable before loading, after a loading failure and without JavaScript. Rebuild and deploy the pages, content and assets together when changing the base or records.</p>
+  <h2 id="dropdown-support">Before using your own theme</h2>
+  <p>Installed-consumer checks and the acceptance record describe the tested browser, lifecycle and emulated layout scope. Human screen-reader speech, physical IME/touch/on-screen keyboards, actual browser zoom and other browser/device combinations need separate checks in your application. See <a href={base + 'reference/hosts/#starter-adoption-and-local-checks'}>starter adoption and local checks</a>. Playwright WebKit observations do not establish Safari support.</p>
+</Layout>

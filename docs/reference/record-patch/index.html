@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RECORD PATCH · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="explicit-record-patches">Explicit record patches</h1>
+<p>Use <code>createPatch</code> when you want to change a few whole fields while preserving the rest of a record. It needs a direct engine and source providers for every text field, so it can assemble the complete replacement safely.</p>
+<p>Run this example in an installed ESM application. It changes the body of <strong>Atomic updates</strong> without replacing the title yourself:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
+import { createPatch } from '@vmitsaras/raveldex/addons/patch';
+
+const engine = createRaveldex({
+  schema: { text: { title: {}, body: {} } },
+  addons: [createSourceProvider({ fields: ['title', 'body'] })],
+});
+try {
+  const added = await engine.add({ id: 'guide', text: { title: 'Atomic updates', body: 'Old content' } });
+  const patches = createPatch(engine);
+  const changed = await patches.patch({
+    id: 'guide', expectedRevision: added.revision,
+    set: { text: { body: 'Revised content' } },
+  });
+  const result = await engine.search('revised');
+  console.log(changed.revision, result.total, result.hits[0].id);
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>This prints <code>2 1 guide</code>: the patch creates revision <code>2</code>, and searching <code>revised</code> finds the updated record. The title stays <strong>Atomic updates</strong>. The engine is disposed afterward.</p>
+<p><code>createPatch(engine)</code> returns a frozen <code>Patches</code> helper with <code>patch(request, options?)</code>. It borrows your engine without retaining extra data or adding engine methods. Worker clients and foreign facades reject with <code>MISSING_CAPABILITY</code>. The helper does no work until called and cannot be used after engine disposal.</p>
+<p>Include the record <code>id</code> and an <code>expectedRevision</code> from a completed search or update. When the patch starts, that revision must still be current. Any intervening committed write, even to another record, causes <code>REVISION_MISMATCH</code>.</p>
+<p>Read the latest application state before preparing another patch. The helper does not retry or rebase automatically: the revision guard prevents an earlier read from overwriting newer data.</p>
+<p>Use <code>set: { text?: { [field]: string | readonly string[] }, metadata?: { [field]: Scalar | readonly Scalar[] } }</code> to assign whole fields. Use <code>unset: { text?: readonly string[], metadata?: readonly string[] }</code> to remove a field. Fields you leave out keep their current values.</p>
+<ul>
+<li>An array replaces the complete array. Nested paths, append/splice, increments, ID changes and schema migration are not supported.</li>
+<li><code>null</code> assigns a nullable metadata value; it does not delete the field. Empty strings and arrays stay present.</li>
+<li>Unsetting an already absent declared field is valid.</li>
+<li>Unknown fields or keys, duplicate unset names, and setting and unsetting the same field in one namespace are rejected. Include at least one field action.</li>
+</ul>
+<p>A successful patch still follows complete replacement, even when assigning an identical value or unsetting an absent field: it creates one next revision with <code>changed: true</code> and <code>replaced: 1</code>.</p>
+<p>Every schema text field needs a <code>raveldex-source-v1</code> provider, even for a metadata-only patch or when replacing every text value. Sources must match the current revision and analyzer. Unchanged metadata comes from the same core record with its normal canonicalization.</p>
+<p>Validation checks the expected revision, then source coverage, then the ID. Missing coverage gives <code>MISSING_CAPABILITY</code>, incompatible provider state gives <code>INCOMPATIBLE_CAPABILITY</code>, stale state gives <code>REVISION_MISMATCH</code>, and an absent ID gives <code>ID_NOT_FOUND</code>. If you do not retain source, use ordinary <code>replace</code> with a complete record instead.</p>
+<p>The exported readonly types are <code>RecordPatch</code>, <code>RecordPatchSet</code>, <code>RecordPatchUnset</code> and <code>Patches</code>. Pass ordinary <code>MutationOptions</code> and read an ordinary <code>MutationResult</code>. Errors use existing <code>RaveldexError</code> codes: malformed patch data, including an invalid or missing expected revision, gives <code>INVALID_RECORD</code>; invalid options give <code>INVALID_OPTIONS</code>.</p>
+<p>The complete replacement must fit the normal input, Unicode, record, schema, analysis, work and provider limits. Accepted inputs are copied before queueing without invoking getters. Assembling and applying the patch share one mutation budget, queue, deadline and cancellation lifecycle. Core and provider changes commit together or leave the previous state untouched.</p>
+<p>The helper adds no hidden source cache, provider initialization, snapshot-format change or worker protocol. Capability implementations still run as trusted code.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

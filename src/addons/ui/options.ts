@@ -5,7 +5,7 @@ import type { UIDocument, UIFacet, UIOptions } from './types.js';
 export function fail(code: 'INVALID_OPTIONS' | 'INCOMPATIBLE_CAPABILITY' | 'REVISION_MISMATCH' | 'UNSUPPORTED_ENVIRONMENT' | 'LIMIT_EXCEEDED', path: string): never {
   throw new RaveldexError(code, { path: `ui.${path}` });
 }
-function record(value: unknown, allowed: readonly string[], path: string): Record<string, unknown> {
+export function record(value: unknown, allowed: readonly string[], path: string): Record<string, unknown> {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) fail('INVALID_OPTIONS', path);
   const proto = Object.getPrototypeOf(value);
   if (proto !== Object.prototype && proto !== null) fail('INVALID_OPTIONS', path);
@@ -49,7 +49,7 @@ function field(value: unknown, path: string): string {
   if (!/^[A-Za-z][A-Za-z0-9_]{0,63}$/.test(name) || name === 'constructor' || name === 'prototype') fail('INVALID_OPTIONS', path);
   return name;
 }
-function displayName(value: unknown, cap: number, path: string): string {
+export function displayName(value: unknown, cap: number, path: string): string {
   const name = string(value, cap, path);
   if (!name.trim().length) fail('INVALID_OPTIONS', path);
   return name;
@@ -67,7 +67,7 @@ export interface CapturedUIOptions {
   readonly snippetFields: readonly string[];
   readonly pageSize: number;
   readonly debounceMs: number;
-  readonly mode: 'text' | 'phrase';
+  readonly mode: 'text' | 'prefix' | 'phrase';
   readonly label: string;
 }
 export function captureOptions(input: UIOptions): CapturedUIOptions {
@@ -105,7 +105,7 @@ export function captureOptions(input: UIOptions): CapturedUIOptions {
     sourceFields.add(name); return name;
   });
   const mode = o.mode ?? 'text';
-  if (mode !== 'text' && mode !== 'phrase') fail('INVALID_OPTIONS', 'mode');
+  if (mode !== 'text' && mode !== 'prefix' && mode !== 'phrase') fail('INVALID_OPTIONS', 'mode');
   return Object.freeze({ root, engine, documents, facets: Object.freeze(facets), snippetFields: Object.freeze(snippetFields),
     pageSize: integer(o.pageSize, 5, 1, 100, 'pageSize'), debounceMs: integer(o.debounceMs, 150, 0, 2_000, 'debounceMs'),
     mode, label: o.label === undefined ? 'Search documentation' : displayName(o.label, 256, 'label') });

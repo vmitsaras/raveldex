@@ -1,0 +1,497 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HOSTS · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="ui-workers-snapshots-storage-and-migration">UI, workers, snapshots, storage and migration</h1>
+<p>Use these integrations to add a browser interface, move work to a module worker or save and restore an index. You decide when each integration starts and when to clean it up. Importing a module does not start a worker, mount controls, open a database or restore data. The <a href="/raveldex/examples/api/">example modules</a> show complete small setups.</p>
+<h2 id="native-dom-ui-and-css">Native DOM UI and CSS</h2>
+<p>Use <code>mountRaveldexUI(options: UIOptions): UIHandle</code> from <code>/addons/ui</code> to put search controls into an element on your page. You supply the engine and keep responsibility for disposing it. Import the UI and its stylesheet through a bundler that handles CSS:</p>
+<pre><code class="language-js">import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
+import '@vmitsaras/raveldex/addons/ui/styles.css';
+</code></pre>
+<p>These imports make the function and styles available; they do not mount anything yet.</p>
+<h3 id="mount-a-minimal-search-form">Mount a minimal search form</h3>
+<p>Add this element to your page where you want the search controls to appear:</p>
+<pre><code class="language-html">&lt;section id="search" aria-label="Documentation search"&gt;&lt;/section&gt;
+</code></pre>
+<p>The element starts empty. Copy <a href="/raveldex/example-files/ui.mjs">ui.mjs</a> into your application, then put the following in a browser module processed by your bundler. Run it after the element exists:</p>
+<pre><code class="language-js">import { createSearchUI } from './ui.mjs';
+import '@vmitsaras/raveldex/addons/ui/styles.css';
+
+const search = await createSearchUI(document.querySelector('#search'));
+// Call this when your application removes the search component:
+// await search.dispose();
+</code></pre>
+<p>You should now see a search field and results. Type <code>atomic</code> to get one result, <strong>Atomic updates</strong>, linked to <code>/guide/updates/</code>. The example supplies that URL; your application needs to provide the destination page.</p>
+<p>The recipe creates one title/body record and a matching display entry. To use real documents, replace both entries and keep their IDs equal. It keeps data in memory and opens no database. Call the returned <code>dispose()</code> when removing the component; it destroys the UI first, then disposes the engine.</p>
+<table>
+<thead>
+<tr>
+<th><code>UIOptions</code></th>
+<th>Contract</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>root</code>, <code>engine</code>, <code>documents</code></td>
+<td>Provide a root element, your engine and a readonly list of <code>{ id, title, url }</code> display documents. IDs connect results to this list, which is copied at mount. URLs must resolve to HTTP(S) without credentials.</td>
+</tr>
+<tr>
+<td><code>facets?</code></td>
+<td>Up to eight <code>UIFacet</code> selections <code>{ field, label }</code>; requires installed exact string facets.</td>
+</tr>
+<tr>
+<td><code>snippetFields?</code></td>
+<td>Explicit fields for installed snippets and source providers.</td>
+</tr>
+<tr>
+<td><code>mode?</code></td>
+<td><code>'text'</code> (default), <code>'prefix'</code> (complete the final word), or <code>'phrase'</code> (requires phrase capability for selected fields).</td>
+</tr>
+<tr>
+<td><code>pageSize?</code>, <code>debounceMs?</code>, <code>label?</code></td>
+<td>Defaults 5, 150 ms and <code>Search documentation</code>; page size 1–100 and debounce 0–2,000 ms. Core’s configured page bounds still apply.</td>
+</tr>
+</tbody>
+</table>
+<p>The returned handle gives you two methods:</p>
+<ul>
+<li><code>search(): Promise&lt;void&gt;</code> runs the current controls immediately instead of waiting for the debounce timer. It resolves after the result is presented.</li>
+<li><code>destroy(): void</code> cancels UI work, removes its listeners and restores the original DOM nodes. You can call it more than once. It does not dispose your engine.</li>
+</ul>
+<p>Mounting on an already mounted root returns the existing handle. Always destroy the UI before separately disposing its engine.</p>
+<p>The UI renders text safely, marks highlights explicitly and supplies visible focus and reduced-motion styles. It shows exact totals, pagination, empty results, errors and retry controls. An empty search browses all documents; entered text uses the selected mode.</p>
+<p>Set <code>mode: 'prefix'</code> to require earlier words exactly and allow the final word to match the beginning of an indexed word. For example, <code>source provide</code> can match <code>source provider</code>; <code>sour provide</code> still requires the exact word <code>sour</code>. The UI splits raw words at the basic analyzer’s Unicode letter/number boundaries, preserving original text for the engine’s selected analyzer. The final word needs at least two normalized Unicode code points; shorter endings use exact-word search. Trailing spaces or punctuation do not disable completion. Prefix expansion keeps native limits, errors and exact totals, and snippets highlight the complete matched word. A stricter engine prefix limit or a selected analyzer’s transformed term can still cause a native query refusal. Ordinary demo pages enable this mode; integrations that omit <code>mode</code> continue to search exact words.</p>
+<p>While you compose text with an input method, pending searches wait until composition ends. Outdated requests are cancelled and stale replies are ignored. The display list is copied when you mount, so destroy and remount the UI when replacing that list. The <a href="/raveldex/example-files/browser.mjs">browser example</a> also shows explicit search calls, cleanup and source persistence.</p>
+<h3 id="keyboard-focus-and-status">Keyboard, focus and status</h3>
+<p>You provide the root element, engine and display list; the UI creates its own labeled controls, ordered results and named native modal <code>dialog</code>. You do not need to author its internal markup.</p>
+<ul>
+<li>Typing schedules a search after the configured delay.</li>
+<li>Return in the search field or the <strong>Search</strong> button submits immediately.</li>
+<li>Selects and result links use the browser’s normal keyboard behavior.</li>
+<li>Search, filter and page updates do not deliberately move focus.</li>
+</ul>
+<p>Opening Inspector puts keyboard focus on <strong>Close Inspector</strong>. Use that button or Escape to close it and return focus to <strong>Inspect results</strong>, provided the opener is still on the page. Tab navigation follows the browser’s native dialog behavior; the UI adds neither a custom Tab loop nor a focusable heading.</p>
+<p>Status messages use <code>role="status"</code> and <code>aria-atomic="true"</code>. The search section is <code>aria-busy</code> during a search, and Inspector is busy while facts load. Unavailable page, retry and Inspector buttons use <code>aria-disabled="true"</code>: they remain in the tab order, but activation is guarded.</p>
+<p>Typing feedback can interrupt spoken status messages. Check important flows with your target browser and screen reader, without requiring users to change their settings. The UI does not change those settings and exposes no public custom-event API.</p>
+<h3 id="css-customization">CSS customization</h3>
+<p>Import <code>@vmitsaras/raveldex/addons/ui/styles.css</code> separately, then use the five public properties below to adjust the generated <code>.raveldex-ui</code> block. The <code>data-raveldex-*</code> attributes identify internal elements; do not use them as an alternative application markup API.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--raveldex-ui-accent</code></td>
+<td><code>#174ea6</code></td>
+<td>Link color</td>
+</tr>
+<tr>
+<td><code>--raveldex-ui-background</code></td>
+<td><code>#fff</code></td>
+<td>Surface background</td>
+</tr>
+<tr>
+<td><code>--raveldex-ui-color</code></td>
+<td><code>#17212b</code></td>
+<td>Text color</td>
+</tr>
+<tr>
+<td><code>--raveldex-ui-border</code></td>
+<td><code>#596b7d</code></td>
+<td>Control and structural borders</td>
+</tr>
+<tr>
+<td><code>--raveldex-ui-focus</code></td>
+<td><code>#7a2600</code></td>
+<td>Visible focus outline</td>
+</tr>
+</tbody>
+</table>
+<p>Set overrides on <code>.raveldex-ui</code> itself, where the defaults are declared. For example, <code>.my-search .raveldex-ui { --raveldex-ui-accent: #174ea6; }</code> sets the link color inside your <code>.my-search</code> container. It leaves the current default unchanged; choose a different accessible color to see a difference. Properties beginning with <code>--_</code> are private.</p>
+<p>Keep the stylesheet’s visible focus, disabled-state borders, scrolling dialog and narrow-screen wrapping usable when customizing it. Reduced-motion rules disable animation, transitions and smooth scrolling. Forced-colors rules use system colors for focus, borders and highlights. Check contrast after changing colors. There is no separate theme or variant registration API.</p>
+<h2 id="inline-search-foundation">Inline search foundation</h2>
+<p>To start with a complete project, use the <a href="/raveldex/examples/inline-browser/">browser</a> or <a href="/raveldex/examples/inline-astro/">Astro</a> inline starter. The <a href="/raveldex/examples/inline/">solution gallery</a> provides a working preview, exact source files and complete starter downloads. Each guide includes local package installation, replacement content, deployment bases, CSS and cleanup.</p>
+<p>Import <code>mountRaveldexInline</code> from <code>@vmitsaras/raveldex/addons/ui/inline</code> and its stylesheet separately from <code>@vmitsaras/raveldex/addons/ui/inline.css</code>. The inline preset provides a labeled search form, clear/submit controls, linked titles, optional snippets and simple filters, and bounded Load more/navigation. Title/link search works with core alone. It never installs snippets, facets, Inspector, workers or storage automatically.</p>
+<p>Supply your existing engine and display documents with matching IDs, just as in the DOM recipe above. <code>InlineUIOptions</code> accepts only these properties:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>root</code>, <code>engine</code>, <code>documents</code></td>
+<td>Required element, borrowed engine and readonly <code>{ id, title, url }</code> entries. Display data is copied at mount with the same validation/limits as the legacy UI: up to 10,000 entries and 4,000,000 aggregate ID/title/URL UTF-16 units; ID/title/URL caps are 256/1,024/2,048. Navigation URLs must resolve to HTTP(S) without credentials.</td>
+</tr>
+<tr>
+<td><code>mode?</code></td>
+<td><code>prefix</code> by default or explicit <code>text</code>. Prefix completes only the final word using the existing two-normalized-code-point threshold. Earlier words remain exact; shorter endings remain exact.</td>
+</tr>
+<tr>
+<td><code>pageSize?</code></td>
+<td>Batch size, default 5, from 1 to 100 within native engine bounds. The summary reports the exact total and displayed count.</td>
+</tr>
+<tr>
+<td><code>maxRenderedResults?</code></td>
+<td>Maximum hits in a visible result window; default 100, integer from <code>pageSize</code> to 1,000. Load more appends only within this cap; Next/Previous results reach the other windows.</td>
+</tr>
+<tr>
+<td><code>facets?</code></td>
+<td>Up to eight <code>{ field, label }</code> string selections, as <code>UIFacet</code> entries. Install facets for those metadata fields when creating the engine; the scalar selections use core equality and need no structured-filters add-on. Counts include all active filters, including their own group.</td>
+</tr>
+<tr>
+<td><code>snippetFields?</code></td>
+<td>Up to 32 distinct source field names. Install snippets and the required source/offset providers explicitly; a core-only UI needs none of these.</td>
+</tr>
+<tr>
+<td><code>pageSections?</code></td>
+<td>Captured revision-bound <code>PageSections</code> metadata for optional heading previews. Requires the explicit section-evidence factory and source providers when context is requested; mutually exclusive with <code>snippetFields</code>.</td>
+</tr>
+<tr>
+<td><code>maxSectionPreviews?</code></td>
+<td>Default 3, integer 1–3. Requires <code>pageSections</code>; selects source-ordered previews per displayed page.</td>
+</tr>
+<tr>
+<td><code>debounceMs?</code></td>
+<td>Default 150 ms, from 0 to 2,000. Enter and <code>search()</code> flush the debounce.</td>
+</tr>
+<tr>
+<td><code>messages?</code></td>
+<td>A captured partial <code>InlineUIMessages</code> bundle; nonempty plain strings up to 512 UTF-16 units each. Unknown keys, accessor properties and malformed strings are rejected before changing the root.</td>
+</tr>
+</tbody>
+</table>
+<p>The frozen <code>InlineUIHandle</code> has <code>search(text?: string): Promise&lt;void&gt;</code>, <code>clear(): void</code> and <code>destroy(): void</code>. With text supplied, <code>search</code> replaces the input then searches; without text it submits the current field. Native search failures are presented with a retry action and resolve after presentation. A non-string argument is rejected. After destroy, methods are harmless no-ops. Clear cancels pending work, clears text and facet selections, and restores idle without deliberately moving focus. Original root Node objects are restored on destroy; the application separately disposes the borrowed engine afterward.</p>
+<p>Mount starts idle and makes no search request. Nonempty input submits after debounce or Enter; an explicit facet selection can browse that category even with no text. Empty input with no active selections returns to idle. Composition waits until it ends; cancelled or stale replies cannot replace current results. Capability/provider checks occur when an actual search is made, including searches with zero matching IDs; requesting a feature that is not installed produces an explicit native error. Result replacement recovers focus to the search input if it would otherwise remove the focused result link. Controls remain in place during updates.</p>
+<p>Mounting inline again on the same root returns the existing handle without applying new options. Destroy/remount to replace configuration or display data. Legacy and inline presets cannot own the same root at once: a conflicting mount fails with <code>INVALID_OPTIONS</code> before replacing DOM. Independent roots have independent state and label IDs. Neither preset registers a global keyboard shortcut.</p>
+<h3 id="inline-text-and-styling">Inline text and styling</h3>
+<p>The original messages are <code>label</code>, <code>placeholder</code>, <code>submit</code>, <code>clear</code>, <code>idle</code>, <code>searching</code>, <code>noResults</code>, <code>resultsLabel</code>, <code>resultsOne</code>, <code>resultsMany</code>, <code>error</code> and <code>retry</code>. Additive optional keys are <code>composing</code>, <code>loadMore</code>, <code>previous</code>, <code>next</code>, <code>paginationLabel</code>, <code>pageSummary</code>, <code>windowLimit</code>, <code>revisionChanged</code>, <code>all</code>, <code>emptyValue</code>, <code>nullValue</code>, <code>missingValue</code>, <code>unlistedValue</code>, <code>facetSummary</code>, <code>snippetOmissions</code> and <code>snippetLimits</code>. Existing complete original bundles remain valid; unspecified new keys use English defaults.</p>
+<p>Summary templates substitute <code>{total}</code> and <code>{count}</code>; <code>pageSummary</code> also supports <code>{start}</code>/<code>{end}</code>, and <code>windowLimit</code> supports <code>{remaining}</code>. <code>unlistedValue</code> uses <code>{value}</code>, <code>facetSummary</code> uses <code>{total}</code>/<code>{omitted}</code>, and <code>snippetOmissions</code> uses <code>{count}</code>. The error template substitutes a sanitized native <code>{code}</code> (unrecognized failures use <code>INTERNAL_ERROR</code>); a revision mismatch uses <code>revisionChanged</code>. Every message, title, selection and excerpt is inserted as text, never HTML. UI messages do not select a different engine analyzer. The polite status region announces actual searching, composition and settled outcomes without repeating unchanged messages on each keystroke.</p>
+<p>The optional stylesheet uses <code>.raveldex-inline</code> and scoped <code>__form</code>, <code>__label</code>, <code>__field</code>, <code>__icon</code>, <code>__input</code>, <code>__submit</code>, <code>__clear</code>, <code>__status</code>, <code>__results-heading</code>, <code>__results</code>, <code>__result</code>, <code>__result-heading</code>, <code>__result-title</code> and <code>__retry</code> classes. Additional style hooks are <code>__facets</code>, <code>__facet-group</code>, <code>__facet-label</code>, <code>__facet</code>, <code>__facet-summary</code>, <code>__snippet</code>, <code>__highlight</code>, <code>__snippet-omissions</code>, <code>__navigation</code>, <code>__load-more</code>, <code>__previous</code>, <code>__next</code> and <code>__page-summary</code>. <code>data-raveldex-inline-*</code> hooks are internal; they are not a caller-authored markup API.</p>
+<table>
+<thead>
+<tr>
+<th>Public CSS property</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--raveldex-inline-background</code>, <code>--raveldex-inline-color</code></td>
+<td><code>#fff</code>, <code>#17212b</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-muted</code>, <code>--raveldex-inline-accent</code></td>
+<td><code>#465563</code>, <code>#174ea6</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-border</code>, <code>--raveldex-inline-focus</code></td>
+<td><code>#637383</code>, <code>#7a2600</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-font</code>, <code>--raveldex-inline-font-size</code></td>
+<td>inherited font family, <code>1rem</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-gap</code>, <code>--raveldex-inline-radius</code></td>
+<td><code>.75rem</code>, <code>.5rem</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-max-width</code></td>
+<td><code>48rem</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-line-height</code>, <code>--raveldex-inline-title-size</code></td>
+<td><code>1.6</code>, <code>1.15em</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-control-height</code>, <code>--raveldex-inline-control-padding</code></td>
+<td><code>2.75rem</code> minimum, <code>.6rem .85rem</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-border-width</code>, <code>--raveldex-inline-result-padding</code></td>
+<td><code>2px</code> controls, current gap / <code>0</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-highlight-background</code>, <code>--raveldex-inline-highlight-color</code></td>
+<td><code>#ffe59a</code>, <code>#17212b</code></td>
+</tr>
+<tr>
+<td><code>--raveldex-inline-error</code></td>
+<td><code>#9b1c1c</code></td>
+</tr>
+</tbody>
+</table>
+<p>Set properties on the search root or an ancestor. For a small branding change, override the accent, radius and gap; the host’s font is inherited. For a dark host theme, supply suitable surface, text, muted, link, border, focus and error colors together; set highlight foreground/background together if overriding them. Private <code>--_</code> properties are not customization API. Keep visible focus, contrast, reflow and control targets usable. The stylesheet includes scoped reduced-motion and forced-colors behavior and never injects itself from JavaScript.</p>
+<h3 id="inline-result-pages-filters-and-snippets">Inline result pages, filters and snippets</h3>
+<p>Load more appends the next native batch without changing its order or exact total. A partial batch can fill a window whose cap is not a multiple of <code>pageSize</code>. At the cap, Load more becomes unavailable and Next results starts the following window. Previous results reloads the first batch of the previous window; Load more can then expand that window again. The range summary states which matches are visible and how many remain. All matches remain reachable, while at most <code>maxRenderedResults</code> hit elements are retained. Navigation controls stay mounted once shown and use guarded <code>aria-disabled</code> states so an asynchronous update does not remove the focused button.</p>
+<p>Changing the query or a filter resets accumulation. Paging checks the native revision; if the index changed, the UI clears old hits/counts and offers Retry from the first window with the query and selections retained. It also requires the snippet reply to match the main reply’s revision, IDs, scores and total before committing hits or counts. It does not subscribe to external mutations; a later search/paging action revalidates current state. Native search/provider/transport failure is shown as failure, never as a successful empty result.</p>
+<p>Each string facet uses a native select with an All choice. Empty strings are valid distinct values; null/missing buckets are informational unavailable options. Counts apply before hit paging and include every active filter. At most 100 buckets per field are displayed; the summary exposes omitted buckets. A selected value stays available when outside the displayed projection, without an invented count. Multi-selection and own-group-excluding counts belong to a later directory solution.</p>
+<p>Explicit snippets use only the new batch of IDs, never all accumulated IDs. Returned text is original source, with validated marks at returned UTF-16 offsets and visible omission notices for undisplayed matches, window/highlight limits and oversized matches. Offsets alone do not supply the original text. A snippet failure clears the whole attempted presentation rather than mixing stale or incomplete context with a successful result list.</p>
+<p>The default inline presentation includes neither numerical scores nor Inspector controls. For the developer-oriented presentation, explicitly use the existing native DOM UI instead of hiding controls with CSS. Complete <a href="/raveldex/examples/inline-browser/">browser</a> and <a href="/raveldex/examples/inline-astro/">Astro</a> starters include copy/install steps and explicit ownership. The existing <code>/addons/ui</code> Workbench API retains its exact-word default, full navigation and Inspector. No Pagefind runtime/API or indexing/loading compatibility is implied.</p>
+<h3 id="inline-anchored-sections">Inline anchored sections</h3>
+<p>Supply explicit heading metadata from the same originals indexed by your borrowed engine. Import the readonly <code>PageSections</code>, <code>PageSectionPage</code> and <code>PageSection</code> types from <code>@vmitsaras/raveldex/addons/sections</code>. Register <a href="/raveldex/reference/addons/#anchored-page-context">section evidence</a> when constructing the engine; mounting never installs it.</p>
+<pre><code class="language-js">const pageSections = {
+  kind: 'raveldex-page-sections', version: 1, revision: written.revision,
+  pages: [{
+    pageId: 'repair',
+    sections: [{ anchor: 'chain', heading: 'Replace the chain', headingLevel: 2,
+      field: 'body', valueIndex: 0, start: 0, end: original.length }],
+  }],
+};
+const ui = mountRaveldexInline({
+  root, engine, documents: [{ id: 'repair', title: 'Bicycle repairs', url: '/repair/' }],
+  pageSections, maxSectionPreviews: 3,
+});
+</code></pre>
+<p>Here <code>written</code> is the completed index mutation and <code>original</code> is its exact body string. Render the corresponding heading with <code>id="chain"</code> on <code>/repair/</code>. The library does not discover headings or inspect destination pages. Maps are copied, validated and frozen before authored DOM changes. IDs must exist in display records; duplicates, overlapping ranges, accessors, malformed Unicode and invalid headings/anchors reject capture. Whole-source/grapheme validation occurs inside native context requests. A map may cover only some pages; missing/empty entries retain the parent link without inventing context counts.</p>
+<p>Use exact raw IDs for <code>anchor</code>, with no slugging, decoding or normalization. They must be 1–256 UTF-16 units without control characters, ASCII whitespace or <code>:~:</code>. Literal <code>%</code>, <code>#</code> and Unicode are encoded once: <code>%#café</code> becomes <code>#%25%23caf%C3%A9</code>. Mapped parent URLs must have no existing fragment delimiter, including an empty trailing <code>#</code>; direct URL queries remain intact. The final absolute URL must fit 2,048 UTF-16 units. Keep page text and target documents correctly encoded as UTF-8.</p>
+<p>The UI keeps native page totals/order and projects only newly displayed mapped hits, with one detailed request in flight and an atomic batch commit. It shows up to three heading links beneath “Matching text in this page”; any known omitted context gets “More matching context is not shown.” A heading can have no excerpt when its contributing match cannot fit. The optional message keys <code>sectionCaption</code>, <code>sectionOmissions</code>, <code>sectionUnavailable</code> and <code>sectionStale</code> customize these texts without changing existing bundles. Section CSS uses <code>__sections</code>, <code>__section</code>, <code>__section-title</code>, <code>__section-caption</code>, <code>__section-omissions</code> and <code>__section-unavailable</code> alongside the existing snippet/theme hooks.</p>
+<p>A stale map retains validated parent pages with a visible warning and makes no context requests. Remount with fresh metadata to restore previews; old ranges are never restamped automatically. A typed context-only provider, source-bound, environment or resource refusal retains parents with visible unavailable context. Main search failures, mismatched revisions, malformed/incomplete replies and transport failures reject the whole attempted window and offer Retry. Clear, replacement searches and destroy suppress late work; destroy releases owned maps/previews, restores original nodes and leaves disposal of the borrowed engine to you. Human accessibility/platform qualification remains separate from these automated lifecycle checks.</p>
+<p>Maps are bounded to 10,000 pages, 16,384 sections total, 64 per page and 4 MiB serialized UTF-8. There is no import-time map retention or extra core index. At the existing 1,000-parent DOM ceiling, section mode adds at most 3,000 previews, 720,000 excerpt UTF-16 units and 96,000 marks. These are output ceilings, not measured memory usage.</p>
+<h2 id="documentation-search-modal">Documentation search modal</h2>
+<p>Use the modal when documentation search should open from an explicit button. It reuses inline search, feedback, paging and optional anchored previews inside a native dialog. Supply an already created engine and matching display data; the modal borrows that owner and starts closed without searching. For first-open loading and complete owned application lifecycle, copy the <a href="/raveldex/examples/modal-browser/">browser</a> or <a href="/raveldex/examples/modal-astro/">Astro</a> starter. The <a href="/raveldex/examples/modal/">modal gallery</a> includes an installed preview, exact source downloads and CSS recipes.</p>
+<pre><code class="language-html">&lt;button id="docs-search-trigger" type="button"&gt;Search documentation&lt;/button&gt;
+&lt;div id="docs-search"&gt;&lt;a href="/guide/"&gt;Browse the documentation&lt;/a&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">import { mountRaveldexModal } from '@vmitsaras/raveldex/addons/ui/modal';
+import '@vmitsaras/raveldex/addons/ui/modal.css';
+
+const modal = mountRaveldexModal({
+  root: document.querySelector('#docs-search'),
+  trigger: document.querySelector('#docs-search-trigger'),
+  engine, documents,
+  shortcut: true,
+  // pageSections, // Optional maps from the same indexed originals and revision.
+});
+// modal.open();
+// await modal.search('source prov');
+// modal.close();
+// modal.destroy();
+// await engine.dispose(); // The application owns this separate step.
+</code></pre>
+<p>Here <code>engine</code> and <code>documents</code> come from your ordinary inline setup or explicit static loader. The single modal stylesheet includes inline styling through a local CSS import; JavaScript imports no stylesheet automatically. Keep normal browse links available before initialization and make the existing trigger an accessible named native button. Root and trigger must be connected in the same document, with the trigger outside root. The library preserves the trigger’s authored label rather than attempting to recreate the browser’s complete accessible-name algorithm.</p>
+<p><code>ModalUIOptions</code> includes the existing inline options, including partial inline <code>messages</code>, facets, snippets or <code>pageSections</code>/<code>maxSectionPreviews</code>. Existing bounds and the snippets/maps exclusion still apply. The additional options are:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trigger</code></td>
+<td>Required existing <code>HTMLButtonElement</code>. Trigger ownership cannot be shared by two mounted modals.</td>
+</tr>
+<tr>
+<td><code>resetOnClose?</code></td>
+<td>Default false. Preserve input and facet values; true clears both on close. Results/counts/errors are discarded on every close.</td>
+</tr>
+<tr>
+<td><code>shortcut?</code></td>
+<td>Default false. Coordinate Ctrl+K or Meta+K within this document.</td>
+</tr>
+<tr>
+<td><code>keyboardHints?</code></td>
+<td>Default true. Show contextual Escape and, when selected, shortcut hints. Hiding hints does not disable an opted-in shortcut.</td>
+</tr>
+<tr>
+<td><code>modalMessages?</code></td>
+<td>Partial <code>ModalUIMessages</code> with <code>title</code>, <code>close</code>, <code>escapeHint</code>, <code>shortcutHint</code>. Plain nonblank text up to 512 UTF-16 units each. Defaults are “Search documentation”, “Close search”, “Esc to close”, “Ctrl/⌘ K”.</td>
+</tr>
+</tbody>
+</table>
+<p>The readonly <code>ModalUIHandle</code> has <code>open()</code>, <code>close()</code>, <code>search(text?)</code>, <code>clear()</code> and <code>destroy()</code>. Open focuses the search input and reruns the first native page from preserved controls; an empty unfiltered query remains idle. Repeated open is harmless. Search while closed changes the stored text without searching or reopening; clear also works while closed. Close aborts debounce/main/context work and prevents late replies from publishing. If application code calls the native dialog’s <code>close()</code> directly, cleanup follows its queued close event; preexisting hidden feedback may persist until then, while late replies still cannot publish. Reopen checks the current revision/maps again. Reset-on-close clears input/filter values. Destroy cancels work, removes bindings, restores original root Node objects and owned trigger/scroll state, and never disposes the borrowed engine. Methods after destroy do nothing.</p>
+<p>Native Escape cancellation, the visible close button and deliberate backdrop activation share cleanup. Some browsers first clear a focused search field on Escape; press Escape again or use <strong>Close search</strong> to dismiss. Backdrop dismissal requires the same primary pointer to press and release outside the dialog, then click there; dragging through the backdrop does not dismiss. Ordinary result links keep their native navigation and modifier behavior. Native dialog behavior contains page focus; a browser may move keyboard focus into its own chrome during Tab traversal. There is no custom Tab loop. Close returns to the connected actual opener when it still owns the focus transition; removed openers, unrelated focus and other modal sessions are respected.</p>
+<p>The optional shortcut ignores already handled/repeated events, composition, editables and visible editable shadow paths, Alt/Shift and simultaneous Control+Meta. Unknown focused shadow-capable hosts are conservatively excluded, including ordinary focusable <code>div</code>/<code>main</code>/<code>section</code> regions that cannot be distinguished from concealed shadow content. Root/trigger shadow trees are captured explicitly; their actual editable controls are respected. The active eligible modal wins; otherwise the first connected enabled opt-in instance wins. An unrelated native modal found in the document or active/known shadow trees blocks opening. This does not discover every externally concealed/inactive shadow tree; coordinate those external modal lifecycles in the application. Destroy unregisters its binding, and the final opt-in instance removes the shared document listener. Merely importing or mounting inline search captures no keyboard shortcut.</p>
+<p>Style <code>.raveldex-modal</code> and its scoped <code>__header</code>, <code>__title</code>, <code>__close</code>, <code>__search</code>, <code>__body</code>, <code>__footer</code> and <code>__hint</code> hooks. The shared inline properties continue to control input/results; modal background/color/border/focus default to those same values. Modal-specific <code>--raveldex-modal-*</code> properties include <code>background</code>, <code>color</code>, <code>border</code>, <code>focus</code>, <code>gap</code>, <code>padding</code>, <code>gutter</code>, <code>max-width</code>, <code>height</code>, <code>border-width</code>, <code>radius</code>, <code>shadow</code>, <code>backdrop</code>, <code>title-size</code> and <code>control-radius</code>. Layout defaults are 48rem maximum width, 42rem preferred height, .75rem gutter/gap and 1rem padding. Set public overrides on the dialog or an inherited wrapper; properties starting <code>--_</code> are private.</p>
+<p>The header/input remain reachable as results and facets scroll in the contained body. Short screens use a compact input row and keep the associated label available to assistive technology. Dynamic viewport/safe-area rules, visible focus, forced colors and reduced motion are included; check contrast and geometry after customization. Automated viewport checks do not establish physical on-screen-keyboard, actual zoom or human AT support. See the <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/specs/DOCS_MODAL.md">modal contract (repository access)</a> for exact ownership and lifecycle rules. Native/worker failures remain visible errors with Retry; the modal does not load assets, create another engine or silently change execution hosts.</p>
+<h2 id="compact-dropdown-search">Compact dropdown search</h2>
+<p>Use <code>mountRaveldexDropdown</code> from <code>/addons/ui/dropdown</code> when a compact field should offer a few real page links. Import <code>/addons/ui/dropdown.css</code> separately. It uses core alone, borrows your existing engine and creates no index, snippets, suggestions, worker or storage. Native manual popover support is required; unsupported environments fail before replacing your browse content. Packages remain private and unpublished.</p>
+<p>For a complete project, copy the <a href="/raveldex/examples/dropdown-browser/">browser header starter</a>. Its <a href="/raveldex/examples/dropdown/">gallery</a> has an installed preview, all source files and a CSS walkthrough. The starter builds a real <code>/search/</code> inline destination and guide pages at root or a subdirectory base.</p>
+<p>This wiring fragment expects your <code>engine</code> and <code>documents</code>, a connected <code>#header-search</code> element, and an existing <code>/search/</code> page that accepts <code>q</code> and selects the same prefix mode, analyzer and content. The runtime entry itself does not create that destination:</p>
+<pre><code class="language-js">import { mountRaveldexDropdown } from '@vmitsaras/raveldex/addons/ui/dropdown';
+import '@vmitsaras/raveldex/addons/ui/dropdown.css';
+
+const dropdown = mountRaveldexDropdown({
+  root: document.querySelector('#header-search'),
+  engine, documents,
+  fullResults: { url: '/search/?mode=prefix#results', queryParameter: 'q' },
+  maxResults: 5,
+  messages: { label: 'Find a guide', fullResults: 'Search every guide' },
+});
+// dropdown.open();                 // Focus and refresh a preserved query.
+// await dropdown.search('source prov'); // Search without moving focus.
+// dropdown.close();                // Keep the words; cancel presentation.
+// dropdown.clear();                // Return to idle without a query.
+// dropdown.destroy();              // Restore the original nodes.
+// await engine.dispose();          // Separate application-owned cleanup.
+</code></pre>
+<p><code>DropdownUIOptions</code> requires <code>root</code>, <code>engine</code>, <code>documents</code> and <code>fullResults</code>. <code>maxResults</code> defaults to 5 and accepts integers 1..20; <code>debounceMs</code> defaults to 150 and accepts 0..2000; <code>mode</code> is <code>prefix</code> by default or <code>text</code>; <code>shortcut</code> is false by default. Display capture uses the existing finite ID/title/safe-URL limits. A detached root can be prepared, but search/open are inactive until it is connected to its original document. Same-kind duplicate mount returns its existing handle; destroy/remount to change configuration. A different UI preset cannot own that root simultaneously.</p>
+<p>The popup is a one-column grid of real native links. Input focus stays in the labeled text field; <code>aria-activedescendant</code> identifies only a visible current gridcell. Results never replace your words with a title. The exact native total and shown count are separate from the finite grid. No pagination or vocabulary suggestions are mixed into these hits. The ordinary full-results link is outside the popup and remains in normal Tab order.</p>
+<table>
+<thead>
+<tr>
+<th>Interaction</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Down / Up</td>
+<td>Enter first/last actual result, then stop at the boundary. If needed, flush the query and retain that explicit navigation intent for its current reply.</td>
+</tr>
+<tr>
+<td>Enter with an active result</td>
+<td>Follow its actual link without rewriting the field.</td>
+</tr>
+<tr>
+<td>Enter without an active result / Search</td>
+<td>Flush the current search and reopen current results.</td>
+</tr>
+<tr>
+<td>Escape / Tab / Shift+Tab</td>
+<td>Dismiss/cancel; Tab leaves normally. The query is preserved.</td>
+</tr>
+<tr>
+<td>Editing, selection and modified input keys</td>
+<td>Clear virtual selection and retain native editing; modified input Enter does not activate a hit.</td>
+</tr>
+<tr>
+<td>Composition / Clear</td>
+<td>No interim query or activation; committed text schedules search. Clear cancels and returns to idle, retaining input/action/external focus; a focused Retry/full-results/popup-link control that must disappear returns focus to input.</td>
+</tr>
+<tr>
+<td>Result pointer/context menu / full-results link</td>
+<td>Native links retain ordinary and modified activation.</td>
+</tr>
+</tbody>
+</table>
+<p>Native Tab movement follows the browser’s keyboard-navigation preferences; the component does not add a Tab loop or force skipped native links/buttons into the sequence.</p>
+<p><code>fullResults.url</code> is a captured HTTP(S) URL without credentials, at most 2048 UTF-16 units. Its optional <code>queryParameter</code> defaults to <code>q</code> and matches <code>[A-Za-z][A-Za-z0-9_-]{0,63}</code>. The link replaces that parameter with the exact current field value and preserves other parameters/hash. It does not trim, normalize, autocomplete or silently change query mode. Whitespace-only input is idle; malformed/oversized text has no handoff URL. Programmatic <code>search(text)</code> rejects CR/LF rather than silently joining words in a single-line field. Native refusal or transport failure stays visible with Retry; there is no fallback engine.</p>
+<p>Every edit/new reply clears old virtual selection before replacing rows. Close, outside pointer/focus, native popup closure, removal and destroy suppress old work. A programmatic search does not steal focus; a later outside interaction can cancel it. There is no live index-mutation subscription: reopen or refresh to obtain a new revision. Destroy restores original Node identities and never disposes your borrowed engine.</p>
+<p>Only one owned dropdown popup per document is shown. <code>shortcut: true</code> opts into the modal’s existing Ctrl/Meta+K coordinator; editing/composition/repeat/modifier/already-handled events and unrelated modality are respected. No global shortcut is registered otherwise. Known owned shadow ancestry is supported; external concealed shadow/modal lifecycles still require application coordination. Automatic modal handoff is not part of this entry.</p>
+<p>Style <code>.raveldex-dropdown</code> and its scoped <code>__form</code>, <code>__label</code>, <code>__input</code>, <code>__submit</code>, <code>__clear</code>, <code>__status</code>, <code>__retry</code>, <code>__full-results</code>, <code>__popup</code>, <code>__row</code>, <code>__cell</code> and <code>__link</code> classes. <code>.is-active</code> marks the current cell. Public <code>--raveldex-dropdown-*</code> properties include <code>background</code>, <code>color</code>, <code>muted</code>, <code>accent</code>, <code>border</code>, <code>focus</code>, <code>active-background</code>, <code>active-color</code>, <code>error</code>, <code>font</code>, <code>font-size</code>, <code>line-height</code>, <code>gap</code>, <code>padding</code>, <code>radius</code>, <code>border-width</code>, <code>max-width</code>, <code>max-height</code> and <code>shadow</code>; <code>--_</code> geometry values are private. Defaults use a readable light surface, 44px controls, 40rem maximum component width and 20rem maximum popup height. Native top-layer placement escapes clipping ancestors and uses available viewport space with contained scrolling. If a short or enlarged viewport cannot fit a usable result row without covering controls, the popup collapses with the exact total, a space/recovery message and the full-results link. Keep visible focus, non-color active indication, contrast and full-results access when changing a theme.</p>
+<p>Plain-text <code>DropdownUIMessages</code> keys are <code>label</code>, <code>placeholder</code>, <code>submit</code>, <code>clear</code>, <code>idle</code>, <code>composing</code>, <code>searching</code>, <code>noResults</code>, <code>resultsLabel</code>, <code>resultsOne</code>, <code>resultsMany</code>, <code>error</code>, <code>retry</code>, <code>fullResults</code>, <code>closed</code> and <code>noSpace</code>. Overrides are captured strings of at most 512 UTF-16 units. Counts use <code>{total}</code>/<code>{count}</code> tokens and errors use <code>{code}</code>. UI language does not select another analyzer. <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/specs/DROPDOWN.md">The concrete contract (repository access)</a> records keyboard, focus, placement, lifecycle and finite bounds. Scripted keyboard/composition, computed accessibility trees and emulated layouts are separate from human AT, physical input/mobile keyboard and actual zoom observations.</p>
+<p>The complete <a href="/raveldex/examples/dropdown-browser/">header starter</a> uses <code>configuration.mjs</code> to select prefix mode, three compact results and a three-result inline batch with a six-result window. Its <code>/search/</code> page reads a single <code>q</code> value once, preserves the decoded raw words and refuses duplicate, multiline, malformed or overlong input with a recovery message. Header and destination use the same records and query configuration; the starter does not add URL history synchronization. Both pages keep ordinary browse links. Build and preview with the same <code>RAVELDEX_DROPDOWN_BASE</code> when deploying under a subdirectory.</p>
+<p>Set the starter’s <code>modalHandoff</code> flag to <code>true</code> only when you want its explicit larger-search button. The button transfers the committed header text to a modal using the same page owner, display records and mode. It adds no global shortcut, second engine or automatic width switch. The supplied bundle imports all three optional UI styles and presenters so this flag needs only a configuration edit and rebuild; this is the starter’s selected bundle cost, not the cost of importing <code>/addons/ui/dropdown</code> alone. A new page navigation loads that page’s own owner; the controller destroys its borrowed surfaces before releasing it.</p>
+<h2 id="starter-adoption-and-local-checks">Starter adoption and local checks</h2>
+<p>Choose the <a href="/raveldex/examples/inline/">inline gallery</a> for results in a page, the <a href="/raveldex/examples/modal/">modal gallery</a> for documentation search behind a button, or the <a href="/raveldex/examples/dropdown/">header gallery</a> for a compact field and full-results route. Inline and documentation-modal galleries offer browser/Astro projects; the header gallery offers one plain-browser project. Each has complete source downloads, a live installed preview and a small CSS walkthrough. Packages remain private and unpublished: install the matching local tarballs in the setup guide, with its pinned build tooling, before building the copied project.</p>
+<table>
+<thead>
+<tr>
+<th>Starter</th>
+<th>Selected capabilities and application requirements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Browser inline</td>
+<td>Browser ESM/fetch, original body source, snippet evidence, string category facets and <code>Intl.Segmenter</code>. Explicit records build actual guide pages.</td>
+</tr>
+<tr>
+<td>Astro inline</td>
+<td>The same snippets/facets plus the static source loader, matching core/Astro packages and Web Crypto over HTTPS or localhost. Retain original values for every declared text field when reconstructing source snapshots.</td>
+</tr>
+<tr>
+<td>Browser modal</td>
+<td>Native <code>dialog</code>, <code>Intl.Segmenter</code> and Web Crypto over HTTPS or localhost. Explicit original body/section evidence, page maps, string category facets and real authored heading IDs.</td>
+</tr>
+<tr>
+<td>Astro modal</td>
+<td>The same modal requirements plus the static source loader and matching core/Astro packages. Source, display and the source-only section companion must belong to the same build/base; maps bind to the receiving owner revision.</td>
+</tr>
+<tr>
+<td>Browser dropdown header</td>
+<td>Browser ESM/fetch and native Popover; core-only linked titles, one owner per page and the same prefix mode on its real inline full-results route. Optional explicit modal handoff additionally requires native <code>dialog</code>. No source/snippet/facet/section provider or Web Crypto requirement.</td>
+</tr>
+</tbody>
+</table>
+<p>Replace public sample records with your own IDs, original text and real destinations. Keep maps, ranges and heading IDs aligned; native totals, scores and paging still count pages. Do not add private content to generated assets. Title/link-only search can omit snippet/section/facet UI options and their matching optional registrations together. Astro source reconstruction still needs original values for all declared text fields. Deploy the complete rebuilt output with one consistent base and build identity.</p>
+<p>The starter wrappers own newly created engines or static handles. Destroy their borrowed UI before releasing those owners, and await wrapper destruction before replacing a view. For an engine owned elsewhere, mount the public UI directly and keep engine disposal with its existing owner. The complete projects show retry and late-owner cleanup; importing a UI entry alone does not create or load an engine. The header starter shares one newly loaded owner across its dropdown, full-page inline surface and explicitly enabled modal; it never creates a second owner merely to change presentation.</p>
+<p>Local automated Chrome checks exercise installed bytes, actual native results/counts/pages, snippets/sections, scripted keyboard/composition, cancellation/retry and lifecycle races. Theme/reflow checks use emulated viewports, forced colors and reduced motion. These results do not establish human screen-reader speech, physical IME/touch/on-screen-keyboard behavior, actual 200%/400% browser zoom, other browser/device combinations or universal performance. Check those combinations in your application after replacing data, labels, layout or colors. Keep visible focus, contrast, native links and browse navigation usable in success, no-results, loading and failure states.</p>
+<h2 id="one-owner-module-worker">One-owner module worker</h2>
+<p>Use a module worker to run a complete engine off the main thread. Create the <code>Worker</code> yourself, then pass it to <code>createWorkerRaveldex</code> from <code>/adapters/worker</code>. The <a href="/raveldex/example-files/worker.mjs">worker example</a> and <a href="/raveldex/example-files/worker-host.mjs">host module</a> show both sides.</p>
+<p><code>createWorkerRaveldex(options: WorkerOptions): Promise&lt;WorkerRaveldex&gt;</code> takes <code>{ worker, configuration, ownership: 'owned' | 'external', sameHost: true, maxMessageBytes?, responseTimeoutMs? }</code>. The initial handshake checks the implementation, analyzer, ranking model and selected registrations. <code>sameHost: true</code> describes your browser and its own worker; it does not qualify other environments, and the default analyzer profile stays unqualified.</p>
+<p>In the worker module, call <code>serveRaveldexWorker(scope, options?)</code> from <code>/adapters/worker/host</code>. Its options are <code>{ addons?, maxMessageBytes? }</code>. Install matching add-ons in the client configuration and worker host: functions and live registration handles cannot be sent as cloneable data.</p>
+<p><code>WorkerScope</code> needs <code>postMessage</code>, <code>addEventListener</code> and <code>removeEventListener</code>; <code>WorkerEndpoint</code> also needs <code>terminate</code>. The host returns a <code>WorkerHostHandle</code> with an asynchronous <code>dispose()</code> method.</p>
+<p><code>WorkerRaveldex</code> has ordinary methods plus <code>reconcile(operationId)</code> and <code>destroy()</code> (the disposal alias). Mutation methods return <code>MutationPromise</code>, a Promise with a captured <code>operationId</code>. <code>MutationReceipt</code> is <code>{ operationId, status: 'pending' | 'expired' }</code>, <code>{ operationId, status: 'committed', result }</code> or <code>{ operationId, status: 'rejected', error: WireError }</code>. Reconciliation uses the same owner/session and a bounded 256-receipt window. It is not durable deduplication across worker loss.</p>
+<p>Messages default to a maximum of 8 MiB, which you can lower to 1 KiB. Message structure is bounded too, and at most 64 requests can be pending. The default response timeout is 65,000 ms, configurable from 1 to 120,000 ms. Engine deadlines and work limits apply separately.</p>
+<p>If a reply is lost or late, an update may already have committed. Check its receipt while the worker survives. If the owner is gone or the receipt has expired, rebuild a new engine from your authoritative source instead of blindly repeating an add, replace or remove. An expired receipt proves neither success nor failure.</p>
+<p><code>WorkerAdapterError</code> has <code>code</code>, sanitized <code>details</code> and optional <code>operationId</code>; <code>WORKER_ERROR_CODES</code> includes <code>INVALID_TRANSPORT</code>, <code>TRANSPORT_LIMIT</code>, <code>INCOMPATIBLE_WORKER</code>, <code>TIMEOUT</code>, <code>TERMINATED</code>, <code>STARTUP_FAILED</code>, <code>OUTCOME_UNKNOWN</code> and <code>DISPOSED</code>. Authoritative native errors remain <code>RaveldexError</code>; snapshot errors carry their reason. <code>WireError</code> preserves the declared category/code rather than serializing an arbitrary Error/cause. <code>WorkerErrorCode</code> and <code>WorkerErrorDetails</code> are exported types.</p>
+<p>Call <code>destroy()</code> or <code>dispose()</code> when you are done. The adapter asks the owner to acknowledge cleanup, releases client listeners and settles pending work. It terminates an <code>owned</code> endpoint; you remain responsible for an <code>external</code> one. An acknowledgement timeout still reports an error after local cleanup. Searches never silently fall back to the main thread.</p>
+<h2 id="source-and-native-snapshots">Source and native snapshots</h2>
+<p>Use snapshots to export an engine’s state and restore it later. Call <code>createSnapshots(engine, options?)</code> from <code>/adapters/snapshots</code> with a supported direct engine. The helper uses your engine without owning it or adding methods to it.</p>
+<p>Its methods are <code>exportSource(options?)</code>, <code>exportNative(options?)</code> and <code>restore(encoded: string, options?)</code>. Each returns a promise and accepts core mutation signal/deadline options. <code>SnapshotOptions</code> lets you set <code>maxEncodedBytes</code>, from 1 KiB to the default and maximum 64 MiB.</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Requirements / meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raveldex-source</code></td>
+<td>Selected originals for every schema text field; exports owned source/configuration and rebuilds under the receiving analyzer. Does not promise prior membership, rank or score equivalence across environments.</td>
+</tr>
+<tr>
+<td><code>raveldex-native</code></td>
+<td>Explicit exact-Node-runtime qualification from owner creation; validates compatible native index/statistics/provider structures, configuration, analyzer/model, codecs and limits. It is not an arbitrary engine dump or a browser portability promise.</td>
+</tr>
+</tbody>
+</table>
+<p>Both formats export versioned JSON strings with size, structure and corruption checks. Checksums detect changed bytes; they do not authenticate who sent them.</p>
+<p>A successful restore replaces the receiving engine’s state in one atomic update at its next local revision. It returns <code>{ format, originRevision, revision, reindexed, receivingAnalyzer }</code>. <code>originRevision</code> records where the snapshot came from; it does not become the local revision. <code>reindexed</code> is <code>true</code> for a source rebuild and <code>false</code> for native state.</p>
+<p>Cancellation or a validation, compatibility, work or deadline failure before commit leaves the previous state intact. A complete source rebuild can exceed a single operation’s budget even if the original data was added successfully in smaller batches.</p>
+<p>For source snapshots, use ordinary <code>createRaveldex</code>, source providers for every text field and <code>createSnapshots</code>. Choose this path unless you have an exact-runtime native qualification for your application.</p>
+<p>For native snapshots, create the engine with <code>createSnapshotRaveldex(configuration, { nativeQualification })</code>. You cannot add native qualification to an ordinary engine afterward. The declaration is <code>NativeSnapshotQualification</code>: <code>{ profileId, scope: 'exact-node-runtime', environment, evidence: string[] }</code>. Its environment includes <code>{ runtime: 'node', version, v8, icu, unicode, platform, arch }</code>.</p>
+<p><code>currentNodeSnapshotEnvironment()</code> reads the current runtime identity, but detecting versions does not qualify it. The evidence references are declarations supplied and trusted by your application, not proofs executed by the library.</p>
+<p><a href="/raveldex/example-files/snapshots.mjs">snapshots.mjs</a> takes the application’s declaration as an argument and exercises source and native round trips. The receiving native owner must match the exact declared profile/environment/evidence and compatible configuration. Use source snapshots when your application does not supply an exact-runtime native declaration.</p>
+<p><code>SnapshotAdapterError extends RaveldexError</code> adds <code>reason: SnapshotReason</code>. <code>SNAPSHOT_REASONS</code> is <code>MALFORMED_SNAPSHOT</code>, <code>ENCODED_LIMIT_EXCEEDED</code>, <code>INTEGRITY_MISMATCH</code>, <code>UNSUPPORTED_FORMAT</code>, <code>UNSUPPORTED_CODEC</code>, <code>SCHEMA_MISMATCH</code>, <code>ANALYZER_MISMATCH</code>, <code>RANKING_MISMATCH</code>, <code>CAPABILITY_MISMATCH</code>, <code>INDEX_DETAIL_MISMATCH</code>, <code>LIMITS_MISMATCH</code>, <code>SOURCE_UNAVAILABLE</code>, <code>UNQUALIFIED_PROFILE</code>, <code>PROFILE_MISMATCH</code>, <code>INVALID_NATIVE_STATE</code>, <code>UNSUPPORTED_ENGINE</code>. Reasons distinguish compatibility from the ordinary error code.</p>
+<p>Browser workers use the separate source-only bridge: <code>createWorkerSnapshots(engine)</code> from <code>/adapters/worker/snapshots</code> and <code>serveSnapshotRaveldexWorker(scope, options?)</code> from <code>/adapters/worker/snapshots/host</code>. <a href="/raveldex/example-files/worker.mjs">worker.mjs</a> and <a href="/raveldex/example-files/worker-host.mjs">worker-host.mjs</a> show a matched pair. <code>WorkerSnapshots</code> exposes <code>exportSource</code>, <code>restore</code> and its own <code>reconcile</code>. Restore returns <code>SnapshotRestorePromise</code> with <code>operationId</code>; its <code>SnapshotRestoreReceipt</code> is <code>pending</code>, <code>expired</code>, <code>committed</code> with a restore result, or <code>rejected</code> with a wire error. Pending/expired cannot resolve an unknown outcome. Ordinary mutation reconciliation is separate. Browser/worker native export and restore remain unavailable.</p>
+<p>The snapshot entry also exports <code>SnapshotEngineOptions</code>, <code>SnapshotOptions</code>, <code>SnapshotFormat</code>, <code>SnapshotRestoreResult</code> and <code>Snapshots</code> types. Worker snapshot/client/host types are available from their corresponding subpaths; no private control-channel import is supported.</p>
+<h2 id="indexeddb-persistence-and-recovery">IndexedDB persistence and recovery</h2>
+<p>Use <code>createIndexedDBPersistence(snapshots, options)</code> from <code>/adapters/indexeddb</code> to save and load snapshots explicitly. It manages its own database connections while borrowing the snapshot export/restore handles. Disposing storage does not dispose your engine.</p>
+<p>Supply <code>{ databaseName, namespace }</code> for a database owned by this adapter, not an unrelated application database. Optional settings are <code>{ indexedDB?, format?: 'source' | 'native', openTimeoutMs?, operationTimeoutMs? }</code>. The factory can be supplied directly or found when needed, and the default format is source. Native format requires the qualified direct-engine path; workers support source only.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Required options / result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>save(options: PersistenceWriteOptions)</code></td>
+<td>`{ expectedGeneration: string</td>
+</tr>
+<tr>
+<td><code>load(options?: PersistenceOptions)</code></td>
+<td><code>{ signal?, deadlineMs? }</code>; returns <code>PersistenceLoadResult</code> <code>{ status: 'missing', generation: null }</code> or <code>{ status: 'restored', generation, restore }</code>.</td>
+</tr>
+<tr>
+<td><code>erase(options: PersistenceWriteOptions)</code></td>
+<td>Same expected-generation requirement; returns <code>PersistenceEraseResult</code> <code>{ erased, generation: null, durable: true }</code> after deleting the namespace’s snapshot and metadata rows.</td>
+</tr>
+<tr>
+<td><code>dispose()</code></td>
+<td>Releases connections/actions without erasing storage or disposing the borrowed engine.</td>
+</tr>
+</tbody>
+</table>
+<p>Keep the generation returned by a save or load and supply it on your next save or erase. This prevents one writer from silently overwriting another. <code>GENERATION_CONFLICT</code> means you need to read the current generation and decide how to resolve the change. A loaded generation describes the snapshot you read, not a lock on later writes.</p>
+<p><code>durable: true</code> means the strict-hint IndexedDB transaction completed. It does not guarantee survival of power loss or browser eviction. Saving bytes and later restoring an engine are separate operations.</p>
+<p>Open timeout defaults to 5,000 ms (maximum 30,000); action timeout defaults to 30,000 ms (maximum 60,000), with at most 64 pending actions and a 64 MiB encoded ceiling. Actions include queue time, encoding and restore. A timeout during an uncertain restore can return <code>OUTCOME_UNKNOWN</code>, including selected generation and operation identity when available. Do not automatically repeat that restore or call it rolled back. Use worker snapshot receipts when available, inspect the surviving owner separately, or explicitly recover into a new owner from authoritative data.</p>
+<p><code>IndexedDBAdapterError</code> is separate from core/snapshot errors, with <code>code</code> and frozen <code>details: IndexedDBErrorDetails</code> (<code>phase?</code>, generation fields, <code>operationId?</code>, <code>snapshotReason?</code>, <code>selectedGeneration?</code>). <code>INDEXEDDB_ERROR_CODES</code> is <code>INVALID_OPTIONS</code>, <code>UNAVAILABLE</code>, <code>QUOTA_EXCEEDED</code>, <code>INCOMPATIBLE_DATABASE</code>, <code>BLOCKED</code>, <code>VERSION_CHANGED</code>, <code>GENERATION_CONFLICT</code>, <code>CORRUPT_DATA</code>, <code>INCOMPATIBLE_SNAPSHOT</code>, <code>TRANSACTION_FAILED</code>, <code>CANCELLED</code>, <code>TIMEOUT</code>, <code>DISPOSED</code>, <code>OUTCOME_UNKNOWN</code>, <code>QUEUE_FULL</code>. <code>IndexedDBErrorCode</code> is exported with the option/result/interface types above. No automatic save, startup restore, retry or namespace deletion occurs on import.</p>
+<h2 id="localsearch-source-migration">LocalSearch source migration</h2>
+<p>Use <code>convertLocalSearchSnapshot(bytes)</code> from <code>/integrations/localsearch</code> to convert a supported companion source export before rebuilding a separate Raveldex engine. It checks the snapshot, checksum and supported data mapping.</p>
+<p>The supported input identity is companion-v1, format 1, MiniSearch 7.2.0. Arbitrary MiniSearch indexes, worker messages and storage rows are rejected. Conversion needs <code>crypto.subtle</code>, accepts at most 32 MiB and includes bounded synchronous work. It is not a queued, cancellable engine operation.</p>
+<p>The returned plan contains <code>{ configuration, records, origin, sourceRevision, returnFields, identity, differences }</code>. Read <code>identity</code> and <code>differences</code> for changes in analysis and ranking. <code>origin</code> and <code>sourceRevision</code> describe the old collection; they do not become the new engine’s revision or a storage generation.</p>
+<p>The <a href="/raveldex/example-files/migration.mjs">migration recipe</a> rebuilds a separate engine with bounded <code>addMany</code> calls, inspects it and disposes it. In your application, switch to the new engine only after the whole rebuild succeeds. Each batch is atomic, but the entire migration is not one transaction.</p>
+<p><code>MigrationError</code> has sanitized <code>code</code> and <code>details: { reason, nativeCode? }</code>. <code>MIGRATION_ERROR_CODES</code> is <code>INVALID_BYTES</code>, <code>INVALID_SNAPSHOT</code>, <code>INCOMPATIBLE_SNAPSHOT</code>, <code>NONCANONICAL_SNAPSHOT</code>, <code>CHECKSUM_MISMATCH</code>, <code>NATIVE_INCOMPATIBLE</code>, <code>CAPABILITY_REQUIRED</code>. The entry exports <code>MigrationErrorCode</code>, <code>MigrationErrorDetails</code>, <code>MigrationReason</code>, <code>LocalSearchMigration</code>, <code>LocalSearchMigrationIdentity</code> and <code>LocalSearchMigrationOrigin</code>. Foreign indexes, scores, live handles and namespaces are never reused. The repository <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/migration/LOCALSEARCH.md">migration guide (repository access)</a> gives mapping and provenance details.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

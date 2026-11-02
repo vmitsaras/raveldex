@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SYNONYMS · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="directional-token-synonyms">Directional token synonyms</h1>
+<p>Use synonyms to connect words your users search for with words in your documents. You supply the one-way mappings and a vocabulary version. Registering them does not change ordinary searches; request a synonym query when you want to use them.</p>
+<p>Run this example in an installed Node ESM application. It maps <code>backup</code> to <code>snapshot</code> and searches for <code>backup guide</code>:</p>
+<pre><code class="language-js">import assert from 'node:assert/strict';
+import { createRaveldex } from '@vmitsaras/raveldex';
+import { createSynonyms, SYNONYMS_POLICY } from '@vmitsaras/raveldex/addons/synonyms';
+
+const engine = createRaveldex({
+  schema: { text: { title: {} } },
+  addons: [createSynonyms({ fields: ['title'], vocabularyVersion: 'docs-v1', mappings: [
+    { from: 'backup', to: 'snapshot' },
+    { from: 'snapshot', to: 'archive' },
+  ] })],
+});
+try {
+  await engine.addMany([
+    { id: 'saved', text: { title: 'snapshot guide' } },
+    { id: 'old', text: { title: 'archive guide' } },
+  ]);
+  assert.equal((await engine.search('backup')).total, 0);
+  const result = await engine.search({ kind: 'extension', capability: 'synonyms', version: 1,
+    payload: { text: 'backup guide', fields: ['title'] } });
+  assert.deepEqual(result.hits.map(hit =&gt; hit.id), ['saved']);
+  assert.equal(result.extensions.synonyms.policy, `${SYNONYMS_POLICY}:docs-v1`);
+  console.log(result.extensions.synonyms.policy);
+} finally { await engine.dispose(); }
+</code></pre>
+<p>The ordinary <code>backup</code> search finds nothing. The synonym query finds only record <code>saved</code>, whose title is <code>snapshot guide</code>, then prints <code>directional-one-step-v1:docs-v1</code>. It does not also find <code>archive guide</code>: mappings are followed for one step only.</p>
+<p>Register <code>createSynonyms({ fields, vocabularyVersion, mappings, id?, maxAlternatives?, maxWorkUnits? })</code>. The factory copies its finite plain-data input. Each mapping is directional <code>{ from, to }</code>. Endpoints must each produce exactly one <code>basic-v1</code> token; NFKC/lowercase is applied once, with duplicate and self edges ignored. Zero/multiple tokens or malformed UTF-16 reject. <code>fields</code> is a nonempty set of enabled schema text fields. The explicit query payload is exactly <code>{ text, fields? }</code>; omitted fields selects all schema text fields, each of which must be enabled. Default registration ID/provided capability is <code>synonyms</code>; protocol version is 1. Custom <code>id</code> changes only registration identity.</p>
+<p>Under <code>directional-one-step-v1</code>, original terms have weight <code>1</code> and indexed direct targets have weight <code>0.5</code>, even when the original term exists. Each original word still needs a match, but one of its mapped alternatives can supply that match. BM25 selects the best alternative per field and group, then sums the participating groups.</p>
+<p>Repeating the same original group does not multiply its score. Different aliases stay separate even if they share a target. These weights do not guarantee that every exact match ranks above every synonym match.</p>
+<p>Mappings are directional and stop after one step. Add a reverse mapping yourself if you need it; cycles never recurse. Targets absent from the current dictionary are left out. Ordinary exact, prefix, typo and phrase queries keep their separate rules.</p>
+<p>This add-on does not support multiword synonyms, positional graphs or accent folding, and it does not change the UI’s input. It retains your immutable vocabulary and worker identity as configuration, but no extra corpus index, cache, source text or positions. Searches use the dictionaries at their execution revision.</p>
+<p>Bounds: 128 input mapping objects, 4096 total raw endpoint UTF-16 units, 256 per endpoint, at most 15 normalized nonself targets/source (narrow with <code>maxAlternatives</code> 1–15), 32 fields and 32 ASCII version units. A canonical identity exceeding 8192 UTF-16 units rejects. Empty mapping arrays are permitted. A fanout overflow rejects during factory capture even if targets would be absent. Work defaults to 10,000,000 units and can narrow via <code>maxWorkUnits</code>; shared core/query/output/expansion limits may be stricter. Complete bound/cancellation/deadline failure returns no partial result.</p>
+<p><code>result.extensions.synonyms</code> is deeply frozen <code>{ policy, groups }</code>; <code>policy</code> includes <code>:&lt;vocabularyVersion&gt;</code>. Each group has <code>{ term, fields, alternatives, dictionaryEntriesVisited, workUnits }</code>; each alternative has <code>{ term, match: 'exact', weight }</code>. Nonself alternatives identify applied <code>group.term → alternative.term</code> mappings. A live original is reported at weight 1. Groups include materialized branches, not only score contributors. <a href="/raveldex/reference/addons/#native-inspector">Inspector</a> supplies actual selected term, weight, frequency and arithmetic facts; <a href="/raveldex/reference/addons/#original-ranges-and-snippets">match evidence</a> can locate the matched target’s original spelling. Dictionary visits count selected field entries including repeats; work counts only add-on yielded units. Neither represents memory bytes or physical transport copies.</p>
+<p>For workers, install the same fields, vocabulary version, normalized mappings and limits on the host. Reordered or equivalent duplicate input is compatible; different mappings are rejected even with the same version label. Create a new engine to change the vocabulary. See <a href="/raveldex/reference/addons/">optional search capabilities</a> for setup and execution details.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

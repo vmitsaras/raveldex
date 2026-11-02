@@ -34,7 +34,11 @@ export const RUNTIME_EXPORTS = Object.freeze({
   './addons/inspector': ['createInspector', 'exportDiagnostics'],
   './addons/evidence': ['createMatchEvidence'],
   './addons/snippets': ['createSnippetEvidence'],
+  './addons/sections': ['createSectionEvidence'],
   './addons/ui': ['mountRaveldexUI'],
+  './addons/ui/inline': ['mountRaveldexInline'],
+  './addons/ui/modal': ['mountRaveldexModal'],
+  './addons/ui/dropdown': ['mountRaveldexDropdown'],
   './adapters/worker': ['WORKER_ERROR_CODES', 'WorkerAdapterError', 'createWorkerRaveldex'],
   './adapters/worker/host': ['serveRaveldexWorker'],
   './adapters/snapshots': ['SNAPSHOT_REASONS', 'SnapshotAdapterError', 'createSnapshotRaveldex', 'createSnapshots', 'currentNodeSnapshotEnvironment'],
@@ -44,7 +48,11 @@ export const RUNTIME_EXPORTS = Object.freeze({
   './integrations/localsearch': ['MIGRATION_ERROR_CODES', 'MigrationError', 'convertLocalSearchSnapshot'],
 });
 const CSS = './addons/ui/styles.css';
-const PUBLIC_PATHS = [...Object.keys(RUNTIME_EXPORTS), CSS].sort();
+const INLINE_CSS = './addons/ui/inline.css';
+const MODAL_CSS = './addons/ui/modal.css';
+const DROPDOWN_CSS = './addons/ui/dropdown.css';
+const CSS_PATHS = [CSS, INLINE_CSS, MODAL_CSS, DROPDOWN_CSS];
+const PUBLIC_PATHS = [...Object.keys(RUNTIME_EXPORTS), ...CSS_PATHS].sort();
 const specifier = path => path === '.' ? NAME : NAME + path.slice(1);
 const readJSON = async path => JSON.parse(await readFile(path, 'utf8'));
 
@@ -63,8 +71,8 @@ export function validateCandidateManifest(metadata, files) {
   assert.equal(metadata.types, './dist/index.d.ts');
   const paths = new Set(files.map(file => file.path));
   for (const [path, target] of Object.entries(metadata.exports)) {
-    if (path === CSS) {
-      assert.equal(target, './dist/addons/ui/styles.css');
+    if (CSS_PATHS.includes(path)) {
+      assert.equal(target, './dist' + path.slice(1));
       assert.ok(paths.has(target.slice(2)), 'separate published CSS');
       continue;
     }
@@ -76,7 +84,7 @@ export function validateCandidateManifest(metadata, files) {
   for (const path of paths) {
     assert.ok(!path.includes('..') && !path.startsWith('/'), `unsafe tarball member ${path}`);
     assert.ok(['README.md', 'LICENSE', 'CHANGELOG.md', 'package.json'].includes(path)
-      || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:patch|query-syntax|proximity|literal|identifiers|synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/(?:localsearch|languages))\/.+\.(?:js|d\.ts|css))$/.test(path)
+      || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:patch|query-syntax|proximity|literal|identifiers|synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|sections|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/(?:localsearch|languages))\/.+\.(?:js|d\.ts|css))$/.test(path)
       || /^docs\/(?:api\/[^/]+\.md|api\/examples\/(?:[^/]+\.mjs|README\.md)|release\/[^/]+\.md|support\/RX-4003\.md)$/.test(path)
       || path === 'dist/integrations/localsearch/LICENSE.LocalSearch', `unexpected tarball member ${path}`);
     assert.doesNotMatch(path, /(?:^|\/)(?:node_modules|src|test|bench|\.github|\.env)(?:\/|$)|\.map$/);
@@ -146,7 +154,7 @@ async function checkImports(directory) {
 async function checkTypes(directory, metadata) {
   const surface = [];
   for (const [path, target] of Object.entries(metadata.exports)) {
-    if (path === CSS) continue;
+    if (CSS_PATHS.includes(path)) continue;
     const declarations = await readFile(join(directory, 'node_modules', NAME, target.types.slice(2)), 'utf8');
     const names = [];
     // Compiled declarations use only named export lists and named declarations.
@@ -166,7 +174,7 @@ async function checkTypes(directory, metadata) {
   }
   const projects = [
     { name: 'core', libraries: ['ES2022'], files: ['test/consumer/public-types.ts', 'test/adapters/snapshots/public-types.ts', 'test/migration/public-types.ts'] },
-    { name: 'browser', libraries: ['ES2022', 'DOM'], files: ['test/consumer/ui-types.ts', 'test/consumer/worker-types.ts', 'test/adapters/indexeddb/public-types.ts'] },
+    { name: 'browser', libraries: ['ES2022', 'DOM'], files: ['test/consumer/ui-types.ts', 'test/consumer/inline-types.ts', 'test/consumer/sections-types.ts', 'test/consumer/modal-types.ts', 'test/consumer/dropdown-types.ts', 'test/consumer/worker-types.ts', 'test/adapters/indexeddb/public-types.ts'] },
     { name: 'worker', libraries: ['ES2022', 'WebWorker'], files: ['test/consumer/worker-host-types.ts', 'test/adapters/indexeddb/worker-host-types.ts'] },
   ];
   const results = [];
@@ -218,21 +226,27 @@ async function checkGraphs(directory) {
     const item = await graph(directory, `entry-${index}.mjs`, `export * from '${specifier(path)}';\n`);
     const paths = item.inputs.map(input => input.path);
     if (path === '.') assert.ok(paths.every(value => !/(?:addons|adapters|integrations|construction|invariants|oracle)/.test(value)), 'core imports no optional implementations');
-    if (path === './addons/ui') assert.ok(paths.every(value => value === item.entry || value.includes('/addons/ui/') || value.endsWith('/core/errors/error.js')), 'UI has no engine/evidence implementation');
+    if (path === './addons/ui' || path === './addons/ui/inline' || path === './addons/ui/modal' || path === './addons/ui/dropdown') assert.ok(paths.every(value => value === item.entry || value.includes('/addons/ui/') || value.endsWith('/addons/sections/validation.js') || value.endsWith('/core/contracts/data.js') || value.endsWith('/core/errors/error.js')), 'UI has no engine/evidence implementation');
     if (path === './addons/phrases/source') assert.ok(paths.every(value => !/verifier|positions|adapters|integrations/.test(value)), 'source utility excludes phrase verifier and other providers');
     if (path === './addons/positions') assert.ok(paths.every(value => !/verifier|\/phrases\/|adapters|integrations/.test(value)), 'positions utility excludes phrase verifier and source provider');
     if (path === './adapters/worker') assert.ok(paths.every(value => !/execution\/engine|\/addons\/|\/snapshots\/|indexeddb|integrations/.test(value)), 'ordinary worker client excludes engine/addons/codecs/storage');
     result.push({ specifier: specifier(path), ...item,
       ...(path === '.' ? { planningGzipTargetBytes: 15 * 1024, planningTargetMet: item.gzipBytes <= 15 * 1024 } : {}) });
   }
-  await writeFile(join(directory, 'css-entry.mjs'), `import '${specifier(CSS)}';\n`);
-  const cssBuild = await build({ absWorkingDir: directory, entryPoints: ['css-entry.mjs'], bundle: true, format: 'esm', platform: 'browser',
-    metafile: true, write: false, outdir: join(directory, 'css-selection'), logLevel: 'silent' });
-  assert.deepEqual(Object.keys(cssBuild.metafile.inputs).sort(), ['css-entry.mjs', 'node_modules/@vmitsaras/raveldex/dist/addons/ui/styles.css']);
-  const cssOutput = cssBuild.outputFiles.find(file => file.path.endsWith('.css')); assert.ok(cssOutput);
-  assert.ok(cssOutput.contents.length > 0);
-  const css = { status: 'Pass', specifier: specifier(CSS), inputs: Object.keys(cssBuild.metafile.inputs), bytes: cssOutput.contents.length, sha256: digest(cssOutput.contents) };
-  return { status: 'Pass', esbuild: esbuildVersion, entries: result, css };
+  const styles = [];
+  for (const [index, path] of CSS_PATHS.entries()) {
+    const entry = `css-entry-${index}.mjs`;
+    await writeFile(join(directory, entry), `import '${specifier(path)}';\n`);
+    const cssBuild = await build({ absWorkingDir: directory, entryPoints: [entry], bundle: true, format: 'esm', platform: 'browser',
+      metafile: true, write: false, outdir: join(directory, `css-selection-${index}`), logLevel: 'silent' });
+    const expectedInputs = [entry, 'node_modules/@vmitsaras/raveldex/dist' + path.slice(1),
+      ...(path === MODAL_CSS ? ['node_modules/@vmitsaras/raveldex/dist/addons/ui/inline.css'] : [])];
+    assert.deepEqual(Object.keys(cssBuild.metafile.inputs).sort(), expectedInputs.sort());
+    const cssOutput = cssBuild.outputFiles.find(file => file.path.endsWith('.css')); assert.ok(cssOutput);
+    assert.ok(cssOutput.contents.length > 0);
+    styles.push({ status: 'Pass', specifier: specifier(path), inputs: Object.keys(cssBuild.metafile.inputs), bytes: cssOutput.contents.length, sha256: digest(cssOutput.contents) });
+  }
+  return { status: 'Pass', esbuild: esbuildVersion, entries: result, css: styles[0], inlineCSS: styles[1], modalCSS: styles[2], dropdownCSS: styles[3] };
 }
 
 async function checkDocumentation(consumer, reportPath) {

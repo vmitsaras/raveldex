@@ -2,12 +2,13 @@ import type { Query, SearchResult } from '../../core/contracts/types.js';
 import { ERROR_CODES } from '../../core/errors/error.js';
 import type { InspectorData } from '../inspector/types.js';
 import { captureOptions, fail } from './options.js';
+import { queryFromText } from './query.js';
 import { assertResult, button, element, facetUpdates, resultNodes, snippetDocuments, unavailable } from './render.js';
 import type { FacetControl } from './render.js';
 import type { UIHandle, UIOptions } from './types.js';
+import { mounted } from './mounts.js';
 
 // Host-independent bookkeeping only. Nothing reads document/window on import.
-const mounted = new WeakMap<HTMLElement, UIHandle>();
 let mountNumber = 0;
 interface DisplaySnapshot {
   readonly query: Query;
@@ -26,7 +27,10 @@ export function mountRaveldexUI(options: UIOptions): UIHandle {
   const rootDescriptor = options && typeof options === 'object' ? Object.getOwnPropertyDescriptor(options, 'root') : undefined;
   if (!rootDescriptor || !('value' in rootDescriptor)) fail('INVALID_OPTIONS', 'root');
   const existing = mounted.get(rootDescriptor.value as HTMLElement);
-  if (existing) return existing;
+  if (existing) {
+    if (existing.kind !== 'legacy') fail('INVALID_OPTIONS', 'root');
+    return existing.handle;
+  }
   const captured = captureOptions(options);
   const doc = captured.root.ownerDocument, win = doc.defaultView;
   if (!win || typeof win.AbortController !== 'function' || typeof win.setTimeout !== 'function') fail('UNSUPPORTED_ENVIRONMENT', 'host');
@@ -94,9 +98,7 @@ export function mountRaveldexUI(options: UIOptions): UIHandle {
   };
   const queryFromControls = (): Query => {
     const text = input.value.trim();
-    const base: Query = !text ? { kind: 'all' } : captured.mode === 'phrase'
-      ? { kind: 'extension', capability: 'phrases', version: 1, payload: { text } }
-      : { kind: 'text', text };
+    const base = queryFromText(text, captured.mode);
     const selections: Query[] = [];
     for (const facet of facets) {
       const value = facet.values.get(facet.select.value);
@@ -210,8 +212,14 @@ export function mountRaveldexUI(options: UIOptions): UIHandle {
       snapshot = undefined;
     },
   });
-  captured.root.replaceChildren(shell);
-  mounted.set(captured.root, handle);
+  mounted.set(captured.root, { kind: 'legacy', handle });
+  try { captured.root.replaceChildren(shell); }
+  catch (reason) {
+    if (mounted.get(captured.root)?.handle === handle) {
+      try { handle.destroy(); } catch { /* Preserve the original host mutation failure. */ }
+    }
+    throw reason;
+  }
   void execute();
   return handle;
 }

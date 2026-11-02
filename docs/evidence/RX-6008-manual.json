@@ -1,0 +1,97 @@
+{
+  "kind": "raveldex-rx6008-attached-native-observations-v1",
+  "date": "2026-11-01",
+  "status": "Scoped tool observations; no human or physical observations collected",
+  "environment": {
+    "os": "macOS27.0.1 build26A434 Darwin27.0.0 arm64",
+    "browser": "attached Google Chrome156.0.8078.74; same recorded installed Chrome version",
+    "tool": "cua_repl Chrome extension native input and accessibility tree",
+    "url": "http://127.0.0.1:4188/raveldex/examples/modal-preview/",
+    "sourceIdentity": "pre-focus-fix generated preview; observation is native field Escape priority, not final starter focus regression proof"
+  },
+  "observations": [
+    {
+      "name": "native trigger and ready focus",
+      "status": "Observed",
+      "steps": [
+        "Activate Search documentation through AX button",
+        "Read loading dialog tree then ready dialog tree"
+      ],
+      "result": "Loading Cancel focused, then ready native search field focused; typed workshop and submitted actual6results."
+    },
+    {
+      "name": "focused search field Escape",
+      "status": "Observed",
+      "steps": [
+        "With workshop in the focused native search field press Escape",
+        "Read actual accessibility tree",
+        "Press Escape again and read tree"
+      ],
+      "result": "First Escape clears native search value and leaves ready dialog open; next Escape closes and focus is Search documentation. UI routes native cancel and preserves field editing; guides now describe native priority."
+    },
+    {
+      "name": "actual browser zoom",
+      "status": "Blocked",
+      "steps": [
+        "Read baseline DPR2, viewport1589x971, outerWidth1589",
+        "Attempt native Chrome app binding twice; both time out",
+        "Reset with super+0; five super+equal commands",
+        "Read unchanged DPR2 and viewport1589x971"
+      ],
+      "result": "No zoom change established. No200%/400% claim; temporary tab closed and no zoom override retained."
+    }
+  ],
+  "provenance": "Transcription of current cua_repl command/results in this chat, not raw instrumented stdout or human testing. No screenshot was saved for these attached-native observations; separate automated screenshots have their own source identities.",
+  "manualQualification": [
+    {
+      "area": "Human keyboard-only walkthrough",
+      "status": "Not run",
+      "reason": "No human operator observed; scripted native keyboard and AX observations are separate."
+    },
+    {
+      "area": "Human screen reader",
+      "status": "Not run",
+      "reason": "No named AT/browser/OS speech session; no AT version or speech claim."
+    },
+    {
+      "area": "Physical IME composition",
+      "status": "Not run",
+      "reason": "CompositionEvent tests are synthetic."
+    },
+    {
+      "area": "Physical touch and on-screen keyboard",
+      "status": "Not run",
+      "reason": "No physical device/input observation collected."
+    },
+    {
+      "area": "Actual200%/400% native zoom",
+      "status": "Blocked",
+      "reason": "Attached native shortcut attempts made no measurable zoom change; app binding timed out."
+    },
+    {
+      "area": "Firefox automation",
+      "status": "Blocked",
+      "reason": "Existing engine failed launch under restricted process environment; authorized launch timed out with sandbox-extension/framebuffer errors."
+    },
+    {
+      "area": "Safari native engine",
+      "status": "Not run",
+      "reason": "Playwright WebKit26.5 is a separate engine build."
+    },
+    {
+      "area": "Other devices/OS/engines",
+      "status": "Not run",
+      "reason": "Only recorded Chrome and finite Playwright WebKit cases executed."
+    },
+    {
+      "area": "Calibrated retained/peak memory, latency and physical paint",
+      "status": "Not run",
+      "reason": "Only exact graph/output and DOM/work counters measured."
+    },
+    {
+      "area": "Fresh remote CI and hosted deployment",
+      "status": "Not run",
+      "reason": "No remote write or deployment in task scope."
+    }
+  ]
+}

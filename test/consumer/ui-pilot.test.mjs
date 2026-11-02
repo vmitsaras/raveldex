@@ -64,6 +64,7 @@ test('real packaged documentation UI preserves judged tasks, source links, Inspe
   page.on('pageerror', error => errors.push(String(error)));
   page.on('request', request => { if (!request.url().startsWith(origin)) external.push(request.url()); });
   await page.goto(origin); await settled();
+  await page.getByText('Advanced demo settings', { exact: true }).click();
   const scan = scanSourceCorpus(pilot.corpus.records, pilot.corpus.schema);
   for (const query of ['term contribution', 'original source', 'atomic batch', 'How do I stop an operation that is waiting in the queue?']) {
     await submit(query); const actual = await observed();
@@ -99,6 +100,7 @@ test('real packaged documentation UI preserves judged tasks, source links, Inspe
   observations.push({ name: 'native source-link navigation', href, remotePageFetched: false,
     boundary: 'Navigation observed; target response intercepted locally, GitHub source rendering unrun.' });
   await page.goto(origin); await settled();
+  await page.getByText('Advanced demo settings', { exact: true }).click();
   await page.locator('[data-pilot-destroy]').click();
   await page.waitForFunction(() => document.querySelector('[data-pilot-search]')?.dataset.pilotState === 'stopped');
   assert.equal(await page.locator('[data-raveldex-ui]').count(), 0);

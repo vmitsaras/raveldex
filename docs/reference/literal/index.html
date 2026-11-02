@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LITERAL · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="literal-and-infix-search">Literal and infix search</h1>
+<p>Use literal search when the exact spelling matters, including punctuation, case, spaces or a substring inside a word. It scans original text kept by a source provider. Ordinary word searches keep their usual rules.</p>
+<p>Run this example in an installed ESM application. It looks for <code>&lt;Search</code> inside <code>Promise&lt;SearchResult&gt;</code>:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
+import { createLiteral } from '@vmitsaras/raveldex/addons/literal';
+
+const engine = createRaveldex({
+  schema: { text: { body: {} } },
+  addons: [createSourceProvider({ fields: ['body'] }), createLiteral({ fields: ['body'] })],
+});
+try {
+  await engine.add({ id: 'api', text: { body: 'Promise&lt;SearchResult&gt;' } });
+  const page = await engine.search({
+    kind: 'extension', capability: 'literal', version: 1,
+    payload: { text: '&lt;Search', fields: ['body'] },
+  });
+  console.log(page.total, page.hits[0].score); // 1 0
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>The example prints <code>1 0</code>: one record matched, with a score of zero because this is a literal-only query. It then disposes the engine.</p>
+<p>Register <code>createLiteral({ fields, id?, maxWorkUnits?, maxRanges?, maxOutputEntries? })</code> and a source provider for every enabled field. The literal add-on does not retain source automatically, and missing providers produce an error. It adds no n-gram index, source cache or host activity.</p>
+<p><code>LITERAL_POLICY</code> is <code>raw-substring-v1</code>. The registration ID defaults to <code>literal</code>; changing it does not rename the fixed <code>literal</code> query and evidence capability.</p>
+<h2 id="matching-and-ranking">Matching and ranking</h2>
+<p>The payload is <code>{ text, fields? }</code>. Leave out <code>fields</code> to scan all fields enabled in the factory, or select a nonempty subset without duplicates. Empty text is invalid.</p>
+<p>Matching is raw and case-sensitive, without normalization, stemming, accent folding or locale rules:</p>
+<ul>
+<li><code>red—blue</code> differs from <code>red blue</code>.</li>
+<li><code>café</code> differs from the decomposed spelling <code>café</code>.</li>
+<li><code>ﬃ</code> differs from <code>ffi</code>.</li>
+</ul>
+<p>You can search inside an identifier or for punctuation alone. This differs from token-prefix search and works against the same originals under basic, English or identifier analysis.</p>
+<p>A literal query matches a document once if any selected field value contains the text. It never joins separate values or fields. You can combine separate literal queries with AND, OR or NOT as usual.</p>
+<p>Literal matches add zero to the score, so literal-only ties sort by record ID. When combined with word queries, BM25 scores the successful word groups normally. The number or length of substring matches adds no bonus. Totals and pagination remain exact.</p>
+<h2 id="original-ranges">Original ranges</h2>
+<p>Request <code>extensions.literal = { ids, maxRanges?, expectedRevision?, maxFacts? }</code> in search options. The output has <code>kind: 'raveldex-literal-evidence-v1'</code>, <code>policy</code>, <code>revision</code>, <code>scope: 'successful-positive-literal-occurrences'</code>, <code>complete: true</code>, <code>leaves</code> and <code>documents</code>. Leaf descriptors <code>{ path, text, fields }</code> include all compiled literal leaves for context. Each requested document has <code>{ id, eligibility: 'matched' | 'excluded' | 'absent', ranges }</code>. Each range <code>{ leaf, field, valueIndex, start, end }</code> identifies its successful positive leaf and actual half-open original UTF-16 span. NOT and failed Boolean branches contribute no ranges. Overlaps are retained: <code>aba</code> in <code>ababa</code> gives <code>[0,3)</code> and <code>[2,5)</code>.</p>
+<p>Malformed UTF-16 rejects. Ranges respect code-point boundaries but can divide a grapheme: raw <code>cafe</code> matches before the combining acute in <code>café</code>; the combining mark can be a needle itself. There is no synthetic token position, normalized offset or token-snippet projection. The existing single evidence-request limit applies; request Inspector or token evidence in a separate operation when needed.</p>
+<h2 id="bounds-and-compatibility">Bounds and compatibility</h2>
+<p>Factory work defaults to 10,000,000 work-v1 units and can only be narrowed. One module budget covers all leaves and evidence in the complete search; the shared core work/deadline/cancellation ceilings remain stricter when applicable. Membership scans can stop on a document’s first occurrence, while totals still qualify every document. Requested ranges enumerate all selected positive occurrences and reject the operation on overflow, with no silent truncation.</p>
+<p>Default range cap is 256; factory configuration permits 1–1024, and request caps only narrow it. Output defaults to 16,384 structural entries and may be narrowed; factual output also has a 262,144 aggregate UTF-16 text cap. Evidence IDs are limited to 128 and facts to 4,096, further reduced by core limits. Literal text plus selected field strings is capped at 2,048 UTF-16 units and reduced lexical limits; captured source-predicate strings count conservatively toward the shared lexical ceiling. Original source values keep existing core limits.</p>
+<p>Payloads/options are owned before queued execution. Source and core mutations remain atomic; queries/evidence use the execution revision. Worker configuration binds policy, fields and limits. Existing source/native codecs are reused, with exact qualified-Node restrictions for native state; version strings alone do not qualify changed artifacts. See <a href="/raveldex/guide/compatibility/">runtime and snapshot requirements</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

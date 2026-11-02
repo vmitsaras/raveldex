@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TYPO · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="optional-bounded-typo-tolerance">Optional bounded typo tolerance</h1>
+<p>Use typo tolerance when a search should accept one missing, extra, replaced or swapped character. Import <code>createTypoTolerance</code> and <code>TYPO_POLICY</code> from <code>@vmitsaras/raveldex/addons/typo</code>. You must both register the add-on and request a typo query; ordinary searches stay exact.</p>
+<p>Run this example in an installed ESM application. It indexes <strong>Source ownership</strong>, then searches for the misspelling <code>sorce</code>:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createTypoTolerance } from '@vmitsaras/raveldex/addons/typo';
+
+const engine = createRaveldex({
+  schema: { text: { title: {} } },
+  addons: [createTypoTolerance({ fields: ['title'] })],
+});
+try {
+  await engine.add({ id: 'guide', text: { title: 'Source ownership' } });
+  const result = await engine.search({
+    kind: 'extension', capability: 'typo', version: 1,
+    payload: { text: 'sorce', fields: ['title'] },
+  });
+  console.log(result.total, result.extensions?.typo);
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>You should get a total of <code>1</code>. <code>result.extensions.typo</code> shows the normalized alternative <code>source</code> that made the record match. The example disposes the engine after printing the result.</p>
+<p><code>TypoOptions</code> takes <code>{ fields: readonly string[], id?: string, maxAlternatives?: number, maxWorkUnits?: number }</code>. Declare those text fields in the schema. Query fields default to all schema text fields, so supply <code>payload.fields</code> if you enabled only some of them. Raveldex copies the accepted options and query before queued work starts.</p>
+<p>The policy is <code>unicode-osa1-exact-first-v1</code>:</p>
+<ul>
+<li>A query term needs at least four normalized Unicode code points.</li>
+<li>If the exact term exists in any selected field, it is the only alternative and has weight <code>1</code>.</li>
+<li>Otherwise, indexed terms one insertion, deletion, substitution or adjacent swap away have weight <code>0.5</code>. An alternative may have three code points.</li>
+</ul>
+<p>There is no accent folding. For example, <code>cafe</code> can repair to <code>café</code> only when an exact <code>cafe</code> term is absent.</p>
+<p>Every original query word still needs a match, with alternatives allowed for that word. Repeating the same word does not multiply it; different misspellings stay separate even if they lead to the same repair. BM25 uses the actual matched alternatives and their weights. Exact-first selection works per word and does not guarantee an overall ranking order in a mixed Boolean query.</p>
+<p>You can allow up to 15 alternatives per term, which is also the default. Core reserves another slot for the original term, and lower core variant, group or expansion limits still apply. The default and maximum add-on work budget is 10,000,000 work-v1 units across the whole search. Shared work limits, deadlines and cancellation also apply.</p>
+<p>Too many alternatives or output entries reject with <code>LIMIT_EXCEEDED</code>; too much work rejects with <code>WORK_LIMIT_EXCEEDED</code>. Neither returns an incomplete search.</p>
+<p>An explicit leaf returns <code>result.extensions.typo</code> with <code>TypoResult</code> shape <code>{ policy, groups: TypoGroup[] }</code>. A group has <code>{ term, fields, alternatives, dictionaryEntriesVisited, workUnits }</code>; each <code>TypoAlternative</code> has <code>{ term, match: 'exact', weight }</code>. These are actual live normalized terms, excluding an absent original variant. Repeated identical requests share one output group. Empty input returns no matches and an empty groups array. Output is owned/immutable and merges with facets or one evidence request. Visits/work are logical counters, not latency or heap measurements.</p>
+<p>Typo tolerance reads the live dictionary at the search revision and keeps no extra source, side index or cross-search cache. In a worker, install matching options on the host. Inspector and original-range/snippet providers can explain the alternatives that matched; those alternatives do not become phrases. See <a href="/raveldex/guide/limitations/#matching-text">practical matching limits</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

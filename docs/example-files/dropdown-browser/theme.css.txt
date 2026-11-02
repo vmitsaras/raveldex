@@ -1,0 +1,96 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #18332b; background: #f7faf7; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #145c43; text-underline-offset: .2em; }
+p, li { line-height: 1.6; overflow-wrap: anywhere; }
+a { overflow-wrap: anywhere; }
+li { margin-block: .5rem; }
+button { min-height: 2.75rem; max-inline-size: 100%; padding: .6rem .9rem; font: inherit; overflow-wrap: anywhere; }
+:focus-visible { outline: 3px solid #755000; outline-offset: 3px; }
+.skip { position: absolute; z-index: 2; left: 1rem; top: 1rem; transform: translateY(-180%); }
+.skip:focus { transform: none; }
+.guide-header { border-block-end: 1px solid #a4b9ad; background: #fff; }
+.guide-header__inner { max-width: 66rem; margin-inline: auto; padding: 1rem; display: flex; align-items: start; gap: 1.5rem; }
+.guide-header__brand { flex: 0 0 auto; font-size: 1.2rem; font-weight: 750; padding-block: .8rem; }
+.header-search { min-width: 0; flex: 1; max-width: 45rem; }
+.header-search__status { font-size: .875rem; margin-block: .5rem; }
+main, footer { max-width: 52rem; margin-inline: auto; padding: 2rem 1rem; }
+h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.12; overflow-wrap: anywhere; }
+.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; }
+.browse { margin-block-start: 2.5rem; }
+.browse ul { padding-inline-start: 1.4rem; }
+[data-full-results-root] { margin-block: 2rem; }
+/* Public dropdown properties: this rule loads after the installed UI CSS. */
+.raveldex-dropdown {
+  --raveldex-dropdown-accent: #145c43;
+  --raveldex-dropdown-background: #fff;
+  --raveldex-dropdown-color: #18332b;
+  --raveldex-dropdown-muted: #415e51;
+  --raveldex-dropdown-border: #81998b;
+  --raveldex-dropdown-focus: #755000;
+  --raveldex-dropdown-active-background: #dbeee2;
+  --raveldex-dropdown-active-color: #102c20;
+  --raveldex-dropdown-radius: .5rem;
+  --raveldex-dropdown-gap: 1rem;
+  --raveldex-dropdown-max-width: 45rem;
+  --raveldex-dropdown-max-height: 18rem;
+}
+.raveldex-inline {
+  --raveldex-inline-accent: #145c43;
+  --raveldex-inline-background: #fff;
+  --raveldex-inline-color: #18332b;
+  --raveldex-inline-muted: #415e51;
+  --raveldex-inline-border: #81998b;
+  --raveldex-inline-focus: #755000;
+  --raveldex-inline-radius: .5rem;
+  --raveldex-inline-gap: 1rem;
+}
+.raveldex-modal {
+  --raveldex-modal-max-width: 46rem;
+  --raveldex-modal-background: #fff;
+  --raveldex-modal-color: #18332b;
+  --raveldex-modal-border: #81998b;
+  --raveldex-modal-focus: #755000;
+}
+@media (max-width: 42rem) {
+  .guide-header__inner { flex-direction: column; gap: .5rem; }
+  .guide-header__brand { padding-block: .25rem; }
+  .header-search { width: 100%; }
+}
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; color: #edf5ef; background: #14231b; }
+  a { color: #a4e0bd; }
+  :focus-visible { outline-color: #f9ce77; }
+  .guide-header { background: #1c3025; border-color: #7fa28b; }
+  .raveldex-dropdown {
+    --raveldex-dropdown-accent: #a4e0bd;
+    --raveldex-dropdown-background: #1c3025;
+    --raveldex-dropdown-color: #edf5ef;
+    --raveldex-dropdown-muted: #c1d8c8;
+    --raveldex-dropdown-border: #7fa28b;
+    --raveldex-dropdown-focus: #f9ce77;
+    --raveldex-dropdown-error: #ffb4b4;
+    --raveldex-dropdown-active-background: #355c43;
+    --raveldex-dropdown-active-color: #fff;
+  }
+  .raveldex-modal {
+    --raveldex-modal-background: #1c3025;
+    --raveldex-modal-color: #edf5ef;
+    --raveldex-modal-border: #7fa28b;
+    --raveldex-modal-focus: #f9ce77;
+  }
+  .raveldex-inline {
+    --raveldex-inline-accent: #a4e0bd;
+    --raveldex-inline-background: #1c3025;
+    --raveldex-inline-color: #edf5ef;
+    --raveldex-inline-muted: #c1d8c8;
+    --raveldex-inline-border: #7fa28b;
+    --raveldex-inline-focus: #f9ce77;
+    --raveldex-inline-error: #ffb4b4;
+  }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+@media (forced-colors: active) {
+  :focus-visible { outline-color: Highlight; }
+  .guide-header { border-color: CanvasText; }
+}

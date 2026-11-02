@@ -3,62 +3,82 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <title>Raveldex documentation search</title>
+    <title>Raveldex · Search the usage guides</title>
     <link rel="stylesheet" href="./ui.css">
     <link rel="stylesheet" href="./pilot.css">
     <script type="module" src="./main.mjs"></script>
   </head>
   <body class="docs-pilot">
-    <main class="docs-pilot__main">
-      <header class="docs-pilot__header">
-        <p class="docs-pilot__eyebrow">Raveldex · native documentation pilot</p>
-        <h1>Search the implementation contracts</h1>
-        <p>Find complete sections from the current search, ranking, mutation, and add-on documentation. Open a result to read its GitHub source, or inspect the native facts behind its score.</p>
+    <a class="skip" href="#main">Skip to content</a>
+    <main id="main" class="docs-pilot__main" tabindex="-1">
+      <header>
+        <h1>Search the usage guides</h1>
+        <p>Looking for a way to add search to your application? Search these usage guides, narrow the results by category and open a guide to read the full instructions.</p>
       </header>
-
-      <section class="docs-pilot__settings" aria-labelledby="pilot-settings-title">
-        <h2 id="pilot-settings-title">Search setup</h2>
+      <section aria-labelledby="pilot-search-title">
+        <h2 id="pilot-search-title">Find a guide</h2>
+        <p>Start with one of these searches:</p>
+        <ul>
+          <li><strong>source provider</strong> finds instructions for keeping original text.</li>
+          <li><strong>typed filters</strong> finds the guide to metadata filters and category counts.</li>
+          <li><strong>module worker</strong> finds worker setup.</li>
+        </ul>
+        <p>To try an empty search, enter <strong>unmatchedword</strong>. You should see “No results.” Enter a sample query again to bring the results back.</p>
+        <p>Start typing: <strong>source prov</strong> finds words beginning with <strong>prov</strong>. Earlier words must match exactly.</p>
+        <div data-pilot-search></div>
+        <noscript>JavaScript is required for this demo. Read <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md">Getting started</a> instead.</noscript>
+      </section>
+      <details class="docs-pilot__settings">
+        <summary>Advanced demo settings</summary>
+        <p>Use these settings to compare how search runs. Changing a setting rebuilds the collection, keeps your query and resets the category and page.</p>
+        <ul>
+          <li><strong>Representation:</strong> check phrases from original text, or use stored word positions and offsets.</li>
+          <li><strong>Execution:</strong> run directly, or move the engine to a module worker.</li>
+          <li><strong>Query meaning:</strong> complete the final word, require all exact words, or require an adjacent phrase.</li>
+        </ul>
         <div class="docs-pilot__controls">
-          <label class="docs-pilot__control">
-            Representation
-            <select data-pilot-representation>
-              <option value="source">Original source reanalysis</option>
-              <option value="offsets">Stored positions and original offsets</option>
-            </select>
+          <label class="docs-pilot__control">Representation
+            <select data-pilot-representation><option value="source">Original source reanalysis</option><option value="offsets">Stored positions and original offsets</option></select>
           </label>
-          <label class="docs-pilot__control">
-            Execution
-            <select data-pilot-execution>
-              <option value="direct">Direct execution</option>
-              <option value="worker">One module worker</option>
-            </select>
+          <label class="docs-pilot__control">Execution
+            <select data-pilot-execution><option value="direct">Direct execution</option><option value="worker">One module worker</option></select>
           </label>
-          <label class="docs-pilot__control">
-            Query meaning
-            <select data-pilot-mode>
-              <option value="text">All exact terms</option>
-              <option value="phrase">Strict adjacent phrase</option>
-            </select>
+          <label class="docs-pilot__control">Query meaning
+            <select data-pilot-mode><option value="prefix">Final-word prefix</option><option value="text">All exact terms</option><option value="phrase">Strict adjacent phrase</option></select>
           </label>
           <button type="button" data-pilot-initialize>Reinitialize search</button>
           <button type="button" data-pilot-destroy>Destroy interface</button>
         </div>
-        <p>Changing setup rebuilds the owner from the same original corpus and preserves the search text. Filters and the current page reset. Original source remains available for display in both representations.</p>
-        <p class="docs-pilot__status" data-pilot-status role="status">Preparing documentation search…</p>
+        <p><strong>Destroy interface</strong> removes the controls. Use <strong>Reinitialize search</strong> to rebuild the collection and bring them back.</p>
+      </details>
+      <p data-pilot-status role="status">Loading guides…</p>
+      <p data-pilot-identity></p>
+      <section aria-labelledby="demo-keyboard">
+        <h2 id="demo-keyboard">Use the controls</h2>
+        <p>Press Tab to move between controls and result links, or Return to submit from the search field. Choose a Category to narrow the matches and All to clear it. Changing page shows more results without changing the total. These updates keep focus on the control you used.</p>
+        <p>Open <strong>Inspect results</strong> to see which terms matched and how scores were calculated. Close Inspector or press Escape to return focus to that button. The highlighted snippets are short excerpts; follow a result link to read the complete guide.</p>
       </section>
+      <section aria-labelledby="demo-copy">
+        <h2 id="demo-copy">Add search to your application</h2>
+        <p>For a small starting point, copy <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/api/examples/ui.mjs">ui.mjs</a> into an application where you installed Raveldex. It creates an engine, adds one document and supplies its display title and URL.</p>
+        <h3>Give the controls a place on the page</h3>
+        <p>Add this HTML where you want search to appear. It stays empty until the JavaScript runs.</p>
+        <pre><code>&lt;section id="search" aria-label="Documentation search"&gt;&lt;/section&gt;</code></pre>
+        <h3>Initialize search and load its styles</h3>
+        <p>Put this in a browser module processed by your bundler. Run it after the search element exists.</p>
+        <pre><code>import { createSearchUI } from './ui.mjs';
+import '@vmitsaras/raveldex/addons/ui/styles.css';
 
-      <section aria-labelledby="pilot-search-title">
-        <h2 id="pilot-search-title">Documentation</h2>
-        <p class="docs-pilot__help">Try <strong>term contribution</strong>, <strong>atomic mutation</strong>, or <strong>original source</strong>. Exact-term mode requires every analyzed term; strict phrase mode also requires adjacency in one original value. Category facets count fully qualified matches, including the selected category.</p>
-        <div data-pilot-search></div>
-        <noscript>This pilot requires JavaScript. Read the <a href="https://github.com/vmitsaras/raveldex/tree/main/docs/specs">source specifications</a> directly.</noscript>
+const search = await createSearchUI(document.querySelector('#search'));
+// When removing the component:
+// await search.dispose();</code></pre>
+        <p>You should see a styled search field and results. Search <strong>atomic</strong> to find one result, <strong>Atomic updates</strong>, with a link to <code>/guide/updates/</code>. Your application supplies that destination page.</p>
+        <h3>Clean up and add features when needed</h3>
+        <p>Call <code>await search.dispose()</code> when removing the component. It removes the controls before disposing the engine. This example keeps data in memory and needs no database.</p>
+        <p>The demo above also enables phrases, facets, snippets and Inspector, using source or offset providers. You can add those later. See <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/api/HOSTS.md#mount-a-minimal-search-form">UI setup and CSS</a> and <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/api/ADDONS.md">optional capabilities</a>.</p>
       </section>
-
-      <footer class="docs-pilot__footer">
-        <p data-pilot-identity>Only the local allowlisted documentation corpus is loaded.</p>
-        <p>Inspector data is requested when opened. Display snippets are bounded original text; omitted context is indicated separately. This local pilot does not establish screen-reader or cross-browser qualification.</p>
-        <a href="https://github.com/vmitsaras/raveldex">Raveldex repository</a>
+      <footer>
+        <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md">Getting started</a> · <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/api/README.md">API</a> · <a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a>
       </footer>
     </main>
   </body>

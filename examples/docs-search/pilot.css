@@ -1,134 +1,14 @@
-.docs-pilot {
-  --docs-pilot-background: #f6f5f0;
-  --docs-pilot-text: #202622;
-  --docs-pilot-border: #59655e;
-  --docs-pilot-link: #175a42;
-  --docs-pilot-focus: #794100;
-  margin: 0;
-  background: var(--docs-pilot-background);
-  color: var(--docs-pilot-text);
-  font: 1rem/1.6 system-ui, sans-serif;
-}
-
-.docs-pilot__main {
-  max-inline-size: 68rem;
-  margin-inline: auto;
-  padding: clamp(1rem, 4vw, 3rem);
-}
-
-.docs-pilot h1,
-.docs-pilot h2 {
-  line-height: 1.2;
-  text-wrap: balance;
-}
-
-.docs-pilot h1 {
-  max-inline-size: 22ch;
-  margin-block: 0.4rem 1rem;
-  font-size: clamp(2rem, 5vw, 3.6rem);
-}
-
-.docs-pilot__eyebrow {
-  font-weight: 650;
-  letter-spacing: 0.04em;
-}
-
-.docs-pilot__header > p:last-child {
-  max-inline-size: 70ch;
-}
-
-.docs-pilot__settings {
-  margin-block: 2rem;
-  padding-block: 0.75rem;
-  border-block: 1px solid var(--docs-pilot-border);
-}
-
-.docs-pilot__controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 0.75rem 1rem;
-}
-
-.docs-pilot__control {
-  display: grid;
-  gap: 0.25rem;
-  font-weight: 600;
-}
-
-.docs-pilot__controls button,
-.docs-pilot__controls select {
-  min-block-size: 2.75rem;
-  max-inline-size: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--docs-pilot-border);
-  border-radius: 0.2rem;
-  background: var(--docs-pilot-background);
-  color: inherit;
-  font: inherit;
-}
-
-.docs-pilot__controls button {
-  cursor: pointer;
-}
-
-.docs-pilot__controls :focus-visible,
-.docs-pilot__footer a:focus-visible,
-.docs-pilot noscript a:focus-visible {
-  outline: 3px solid var(--docs-pilot-focus);
-  outline-offset: 3px;
-}
-
-.docs-pilot__status {
-  min-block-size: 1.6em;
-  font-weight: 600;
-}
-
-.docs-pilot__help {
-  max-inline-size: 76ch;
-}
-
-.docs-pilot__footer {
-  margin-block-start: 2.5rem;
-  padding-block-start: 1rem;
-  border-block-start: 1px solid var(--docs-pilot-border);
-  overflow-wrap: anywhere;
-  font-size: 0.9rem;
-}
-
-.docs-pilot__footer a,
-.docs-pilot noscript a {
-  color: var(--docs-pilot-link);
-  text-underline-offset: 0.2em;
-}
-
-@media (prefers-color-scheme: dark) {
-  .docs-pilot {
-    --docs-pilot-background: #171e1a;
-    --docs-pilot-text: #edf2eb;
-    --docs-pilot-border: #a4b3a8;
-    --docs-pilot-link: #9dddbb;
-    --docs-pilot-focus: #ffcf77;
-  }
-}
-
-@media (max-width: 30rem) {
-  .docs-pilot__controls {
-    align-items: stretch;
-  }
-
-  .docs-pilot__control {
-    inline-size: 100%;
-    min-inline-size: 0;
-  }
-}
-
-@media (forced-colors: active) {
-  .docs-pilot {
-    --docs-pilot-background: Canvas;
-    --docs-pilot-text: CanvasText;
-    --docs-pilot-border: ButtonBorder;
-    --docs-pilot-link: LinkText;
-    --docs-pilot-focus: Highlight;
-  }
-}
+.docs-pilot { margin: 0 auto; padding: 1rem; max-width: 72rem; font: 1rem/1.6 system-ui, sans-serif; background: #fff; color: #20242a; color-scheme: light; overflow-wrap: anywhere; }
+.docs-pilot h1, .docs-pilot h2 { line-height: 1.25; }
+.docs-pilot a { color: #164a96; text-underline-offset: .15em; }
+.docs-pilot :focus-visible { outline: 3px solid #9a4000; outline-offset: 3px; }
+.docs-pilot .skip { position: absolute; inset-inline-start: -10000px; }
+.docs-pilot .skip:focus { position: static; }
+.docs-pilot__settings, .docs-pilot section, .docs-pilot footer { margin-block: 1.5rem; }
+.docs-pilot__controls { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: end; }
+.docs-pilot__control { display: grid; gap: .25rem; }
+.docs-pilot__controls :is(button, select) { min-height: 2.75rem; padding: .4rem; font: inherit; max-width: 100%; }
+.docs-pilot pre { overflow-x: auto; overflow-wrap: normal; padding: .75rem; background: #f2f3f5; }
+.docs-pilot [data-pilot-status] { min-height: 1.6em; }
+@media (max-width: 30rem) { .docs-pilot__control { width: 100%; min-width: 0; } }
+@media (forced-colors: active) { .docs-pilot :focus-visible { outline-color: Highlight; } }

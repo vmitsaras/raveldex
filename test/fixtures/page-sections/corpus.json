@@ -1,0 +1,411 @@
+{
+  "kind": "raveldex-page-sections-contract-fixture-v1",
+  "role": "Handwritten native page and original-source expectations; not a production display artifact or exported API.",
+  "schema": {
+    "text": {
+      "title": {},
+      "body": {}
+    }
+  },
+  "records": [
+    {
+      "id": "page:a",
+      "text": {
+        "title": "alpha gamma",
+        "body": [
+          "😀 café alpha beta. gamma delta.",
+          "alpha beta. alpha gamma."
+        ]
+      }
+    },
+    {
+      "id": "page:b",
+      "text": {
+        "title": "alpha gamma",
+        "body": [
+          "😀 café alpha beta. gamma delta.",
+          "alpha beta. alpha gamma."
+        ]
+      }
+    },
+    {
+      "id": "page:c",
+      "text": {
+        "title": "alpha gamma",
+        "body": [
+          "😀 café alpha beta. gamma delta.",
+          "alpha beta. alpha gamma."
+        ]
+      }
+    },
+    {
+      "id": "page:d",
+      "text": {
+        "title": "alpha gamma",
+        "body": [
+          "😀 café alpha beta. gamma delta.",
+          "alpha beta. alpha gamma."
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "page:a",
+      "title": "Repeated headings and Unicode",
+      "url": "https://docs.example/help/guide/a/"
+    },
+    {
+      "id": "page:b",
+      "title": "A page without a section map",
+      "url": "https://docs.example/help/guide/b/"
+    },
+    {
+      "id": "page:c",
+      "title": "Partial explicit coverage",
+      "url": "https://docs.example/help/guide/c/"
+    },
+    {
+      "id": "page:d",
+      "title": "Separate fields and values",
+      "url": "https://docs.example/help/guide/d/"
+    }
+  ],
+  "sourceSlices": [
+    {
+      "field": "title",
+      "valueIndex": 0,
+      "start": 0,
+      "end": 11,
+      "text": "alpha gamma"
+    },
+    {
+      "field": "body",
+      "valueIndex": 0,
+      "start": 0,
+      "end": 20,
+      "text": "😀 café alpha beta."
+    },
+    {
+      "field": "body",
+      "valueIndex": 0,
+      "start": 21,
+      "end": 33,
+      "text": "gamma delta."
+    },
+    {
+      "field": "body",
+      "valueIndex": 1,
+      "start": 0,
+      "end": 11,
+      "text": "alpha beta."
+    },
+    {
+      "field": "body",
+      "valueIndex": 1,
+      "start": 12,
+      "end": 24,
+      "text": "alpha gamma."
+    }
+  ],
+  "allOriginalTokens": [
+    {
+      "field": "title",
+      "valueIndex": 0,
+      "position": 0,
+      "start": 0,
+      "end": 5,
+      "term": "alpha",
+      "text": "alpha"
+    },
+    {
+      "field": "title",
+      "valueIndex": 0,
+      "position": 1,
+      "start": 6,
+      "end": 11,
+      "term": "gamma",
+      "text": "gamma"
+    },
+    {
+      "field": "body",
+      "valueIndex": 0,
+      "position": 0,
+      "start": 3,
+      "end": 8,
+      "term": "café",
+      "text": "café"
+    },
+    {
+      "field": "body",
+      "valueIndex": 0,
+      "position": 1,
+      "start": 9,
+      "end": 14,
+      "term": "alpha",
+      "text": "alpha"
+    },
+    {
+      "field": "body",
+      "valueIndex": 0,
+      "position": 2,
+      "start": 15,
+      "end": 19,
+      "term": "beta",
+      "text": "beta"
+    },
+    {
+      "field": "body",
+      "valueIndex": 0,
+      "position": 3,
+      "start": 21,
+      "end": 26,
+      "term": "gamma",
+      "text": "gamma"
+    },
+    {
+      "field": "body",
+      "valueIndex": 0,
+      "position": 4,
+      "start": 27,
+      "end": 32,
+      "term": "delta",
+      "text": "delta"
+    },
+    {
+      "field": "body",
+      "valueIndex": 1,
+      "position": 0,
+      "start": 0,
+      "end": 5,
+      "term": "alpha",
+      "text": "alpha"
+    },
+    {
+      "field": "body",
+      "valueIndex": 1,
+      "position": 1,
+      "start": 6,
+      "end": 10,
+      "term": "beta",
+      "text": "beta"
+    },
+    {
+      "field": "body",
+      "valueIndex": 1,
+      "position": 2,
+      "start": 12,
+      "end": 17,
+      "term": "alpha",
+      "text": "alpha"
+    },
+    {
+      "field": "body",
+      "valueIndex": 1,
+      "position": 3,
+      "start": 18,
+      "end": 23,
+      "term": "gamma",
+      "text": "gamma"
+    }
+  ],
+  "expectedPages": {
+    "total": 4,
+    "ids": [
+      "page:a",
+      "page:b",
+      "page:c",
+      "page:d"
+    ],
+    "tieReason": "All indexed field values and lengths are identical; scores tie and native ascending ID order decides.",
+    "pages": [
+      {
+        "offset": 0,
+        "limit": 2,
+        "ids": [
+          "page:a",
+          "page:b"
+        ]
+      },
+      {
+        "offset": 2,
+        "limit": 2,
+        "ids": [
+          "page:c",
+          "page:d"
+        ]
+      },
+      {
+        "offset": 4,
+        "limit": 2,
+        "ids": []
+      },
+      {
+        "offset": 0,
+        "limit": 0,
+        "ids": []
+      }
+    ]
+  },
+  "queries": [
+    {
+      "id": "cross-section",
+      "query": {
+        "kind": "text",
+        "text": "alpha delta",
+        "fields": [
+          "body"
+        ]
+      },
+      "expectedScore": 0.270927040262982,
+      "handFormula": "ln(10/9) * (11/7 + 1)",
+      "meaning": "The page qualifies across sections; no individual a-section contains both alpha and delta.",
+      "expectedTokenIndices": [
+        3,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "id": "two-groups",
+      "query": {
+        "kind": "text",
+        "text": "alpha gamma",
+        "fields": [
+          "body"
+        ]
+      },
+      "expectedScore": 0.3104372336346669,
+      "handFormula": "ln(10/9) * (11/7 + 11/8)",
+      "meaning": "Repeated qualifying occurrences still produce one page hit.",
+      "expectedTokenIndices": [
+        3,
+        5,
+        7,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "prefix",
+      "query": {
+        "kind": "group",
+        "fields": [
+          "body"
+        ],
+        "variants": [
+          {
+            "text": "alph",
+            "match": "prefix"
+          }
+        ]
+      },
+      "expectedScore": 0.1655665246051557,
+      "handFormula": "ln(10/9) * 11/7",
+      "meaning": "Highlights cover the full original alpha tokens, not the four-letter typed prefix.",
+      "expectedTokenIndices": [
+        3,
+        7,
+        9
+      ]
+    },
+    {
+      "id": "unicode",
+      "query": {
+        "kind": "text",
+        "text": "café",
+        "fields": [
+          "body"
+        ]
+      },
+      "expectedScore": 0.10536051565782635,
+      "handFormula": "ln(10/9)",
+      "meaning": "Normalized café points to original decomposed cafe-plus-combining-acute at UTF-16 [3,8), after a two-unit emoji.",
+      "expectedTokenIndices": [
+        2
+      ]
+    },
+    {
+      "id": "title-only",
+      "query": {
+        "kind": "text",
+        "text": "alpha",
+        "fields": [
+          "title"
+        ]
+      },
+      "expectedScore": 0.10536051565782635,
+      "handFormula": "ln(10/9)",
+      "meaning": "Body text happens to contain alpha, but failed/unselected body paths provide no evidence.",
+      "expectedTokenIndices": [
+        0
+      ]
+    },
+    {
+      "id": "mixed-fields",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "text",
+            "text": "alpha",
+            "fields": [
+              "title"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "delta",
+            "fields": [
+              "body"
+            ]
+          }
+        ]
+      },
+      "expectedScore": 0.2107210313156527,
+      "handFormula": "2 * ln(10/9)",
+      "meaning": "The successful page path spans fields; coordinates remain field-local.",
+      "expectedTokenIndices": [
+        6,
+        0
+      ]
+    },
+    {
+      "id": "no-positive-ranges",
+      "query": {
+        "kind": "all"
+      },
+      "expectedScore": 0,
+      "handFormula": "0",
+      "meaning": "A matching page is navigable without inventing lexical or section evidence.",
+      "expectedTokenIndices": []
+    }
+  ],
+  "executionMatrix": [
+    {
+      "execution": "direct",
+      "provider": "source",
+      "expected": "same literal native pages, ranges and later preview expectations"
+    },
+    {
+      "execution": "direct",
+      "provider": "offsets-plus-original-source",
+      "expected": "same literal native pages, ranges and later preview expectations"
+    },
+    {
+      "execution": "module-worker",
+      "provider": "source",
+      "expected": "same literal native pages, ranges and later preview expectations"
+    },
+    {
+      "execution": "module-worker",
+      "provider": "offsets-plus-original-source",
+      "expected": "same literal native pages, ranges and later preview expectations"
+    }
+  ],
+  "evidenceFields": [
+    "body",
+    "title"
+  ]
+}

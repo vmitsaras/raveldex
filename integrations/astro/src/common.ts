@@ -123,8 +123,8 @@ export function batchSize(source: string): number {
   return size;
 }
 export async function idIdentity(ids: readonly string[]): Promise<string> { return hashText(JSON.stringify([...ids].sort()), DOCUMENTS_LIMIT); }
-export async function asset(prefix: 'source' | 'native' | 'documents', text: string): Promise<StaticAsset> {
-  const encoded = bytes(text, prefix === 'documents' ? DOCUMENTS_LIMIT : SNAPSHOT_LIMIT), sha256 = await digest(encoded);
+export async function asset(prefix: 'source' | 'native' | 'documents' | 'sections', text: string): Promise<StaticAsset> {
+  const encoded = bytes(text, prefix === 'documents' || prefix === 'sections' ? DOCUMENTS_LIMIT : SNAPSHOT_LIMIT), sha256 = await digest(encoded);
   return Object.freeze({ file: `${prefix}-${sha256}.json`, bytes: encoded.length, sha256 });
 }
 export function captureManifest(raw: unknown): StaticManifest {

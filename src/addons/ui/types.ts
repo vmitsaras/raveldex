@@ -21,7 +21,8 @@ export interface UIOptions {
   readonly snippetFields?: readonly string[];
   readonly pageSize?: number;
   readonly debounceMs?: number;
-  readonly mode?: 'text' | 'phrase';
+  /** Exact words by default; prefix expands only the final basic word. */
+  readonly mode?: 'text' | 'prefix' | 'phrase';
   readonly label?: string;
 }
 export interface UIHandle {

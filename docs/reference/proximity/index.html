@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PROXIMITY · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="ordered-proximity">Ordered proximity</h1>
+<p>Use ordered proximity when words must appear in order but do not have to be adjacent. Import <code>createProximity</code> from <code>/addons/proximity</code> and install a position provider for the fields you want to search. The add-on uses those positions without keeping another corpus copy.</p>
+<p>The entry also exports <code>PROXIMITY_POLICY</code> (<code>ordered-adjacent-gap-v1</code>) and readonly <code>ProximityOptions</code> / <code>ProximityPayload</code> types. Run this example in an installed ESM application:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createPositionProvider } from '@vmitsaras/raveldex/addons/positions';
+import { createProximity } from '@vmitsaras/raveldex/addons/proximity';
+
+const engine = createRaveldex({
+  schema: { text: { body: {} } },
+  addons: [createPositionProvider({ fields: ['body'] }), createProximity({ fields: ['body'] })],
+});
+try {
+  await engine.add({ id: 'guide', text: { body: 'red small apple' } });
+  const page = await engine.search({
+    kind: 'extension', capability: 'proximity', version: 1,
+    payload: { groups: [['red'], ['apple', 'pear']], maxGap: 1 },
+  });
+  console.log(page.total, page.hits[0].id); // 1 guide
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>The example prints <code>1 guide</code>. <code>red small apple</code> matches because <code>red</code> appears before <code>apple</code> with one skipped word between them. The alternative <code>pear</code> would also be accepted in the second group. The engine is disposed when the example finishes.</p>
+<p>Factory options are <code>{ fields: readonly string[], id?: string, maxWorkUnits?: number }</code>. Fields must be unique declared text fields. Capability is always <code>proximity</code>, independent of the registration ID. Query <code>fields</code> defaults to these enabled fields; an explicit selection must be a nonempty subset. Missing required position providers fail with <code>MISSING_CAPABILITY</code>; incompatible providers fail explicitly. Source alone is insufficient.</p>
+<p>Payload is <code>{ groups: readonly (readonly string[])[], maxGap: number, fields?: readonly string[] }</code>. Each nonempty alternative must analyze to exactly one original query token. The selected basic, English or identifier analyzer is used once. Empty and multi-token alternatives reject <code>INVALID_QUERY</code>; normalized duplicate alternatives deduplicate for scoring while still counting toward admission/token limits. Prefixes and automatic typo/synonym expansions are not supported here.</p>
+<p>Set <code>maxGap</code> from <code>0</code> to <code>32</code>. It limits skipped original tokens between each neighboring pair, not the total gaps in the sequence. For example, <code>[['a'], ['b'], ['c']]</code> with gap <code>1</code> matches <code>a x b y c</code>.</p>
+<p>Each group must use a later position in the same original value. Repeated groups cannot reuse a position, and values or fields never join. Identifier components are not original positions: <code>foo</code>, <code>bar</code> do not match inside <code>fooBar</code>, but a whole <code>fooBar</code> alternative can match that name.</p>
+<p>Gap zero with singleton groups has the same eligibility and unrounded native scores as strict phrases. Equal-weight exact alternative groups use native BM25, including the existing best-alternative-per-field rule, deterministic UTF-16 ID ties and canonical group deduplication. Successful Boolean branches supply groups; failed branches and NOT do not. Gap length adds no score or ranking bonus. Ordinary strings, typed exact/prefix groups and strict phrases retain their contracts.</p>
+<p>At most 32 ordered groups and 16 alternatives per group are accepted, subject to lower configured limits. All raw alternatives together count against the shared 64-query-token default, 2,048 lexical UTF-16 units and existing query-node/string/group limits. Factory <code>maxWorkUnits</code> defaults to 10,000,000 and can only narrow it; one budget covers every proximity leaf in the search. Shared work, deadlines, cancellation and disposal can reject the complete operation, with no partial results. Position providers retain and atomically replace their own state; proximity retains none.</p>
+<p>Use Inspector to explain matching and scoring. Token ranges and snippets are not available for proximity queries: requesting either on a query containing a proximity leaf rejects with <code>MISSING_CAPABILITY</code>, even for failed or negative branches or an empty ID selection. Make a separate ordinary search if you need its token evidence.</p>
+<p>This add-on supplies ordered matching only. It does not add UI, text syntax, unordered distance, multiword synonyms, distance-based scores or an automatic n-gram index.</p>
+<p>Worker identities bind policy/options/providers; source/native snapshots reuse the selected position providers and exact analyzer/capability compatibility. Native snapshots retain their explicit qualified-Node restrictions. See <a href="/raveldex/guide/compatibility/#snapshot-compatibility">snapshot requirements</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

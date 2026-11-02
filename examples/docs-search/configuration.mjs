@@ -8,7 +8,7 @@ import { createSnippetEvidence } from '@vmitsaras/raveldex/addons/snippets';
 
 // Reconstructed independently in the page and worker; implementation handles
 // stay local. The adapter compares their complete captured data manifests.
-export function makeAddons(strategy) {
+export function makeAddons(strategy, snippetOptions = {}) {
   const fields = ['title', 'body'];
   const positions = strategy === 'offsets';
   return [
@@ -17,6 +17,6 @@ export function makeAddons(strategy) {
     createPhrases({ fields: Object.fromEntries(fields.map(field => [field, positions ? 'positions' : 'source'])) }),
     createFilters({ fields: ['category'] }), createFacets({ fields: ['category'] }),
     createInspector(),
-    createSnippetEvidence({ fields: Object.fromEntries(fields.map(field => [field, positions ? 'offsets' : 'source'])) }),
+    createSnippetEvidence({ ...snippetOptions, fields: Object.fromEntries(fields.map(field => [field, positions ? 'offsets' : 'source'])) }),
   ];
 }

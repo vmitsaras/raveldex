@@ -1,6 +1,8 @@
 # Literal and infix search
 
-Use an explicit literal query when punctuation, case, spaces or a substring inside a token matters. Literal search scans retained original text; ordinary token queries remain unchanged.
+Use literal search when the exact spelling matters, including punctuation, case, spaces or a substring inside a word. It scans original text kept by a source provider. Ordinary word searches keep their usual rules.
+
+Run this example in an installed ESM application. It looks for `<Search` inside `Promise<SearchResult>`:
 
 ```js
 import { createRaveldex } from '@vmitsaras/raveldex';
@@ -23,13 +25,27 @@ try {
 }
 ```
 
-`createLiteral({ fields, id?, maxWorkUnits?, maxRanges?, maxOutputEntries? })` exports the versioned `LITERAL_POLICY = 'raw-substring-v1'`. The default registration ID and fixed query/evidence capability are `literal`; changing registration ID does not rename the capability. Source providers for every enabled field are required explicitly. Missing providers reject instead of pretending to support source-free literal search. No source retention, n-gram index, source cache, host or worker is created by this add-on automatically.
+The example prints `1 0`: one record matched, with a score of zero because this is a literal-only query. It then disposes the engine.
+
+Register `createLiteral({ fields, id?, maxWorkUnits?, maxRanges?, maxOutputEntries? })` and a source provider for every enabled field. The literal add-on does not retain source automatically, and missing providers produce an error. It adds no n-gram index, source cache or host activity.
+
+`LITERAL_POLICY` is `raw-substring-v1`. The registration ID defaults to `literal`; changing it does not rename the fixed `literal` query and evidence capability.
 
 ## Matching and ranking
 
-Query payload is `{ text, fields? }`. Omit fields to scan the factory's enabled fields; an explicit subset must be nonempty, unique and enabled. Text is an exact raw case-sensitive substring, including punctuation and whitespace, with no normalization, token analysis, stemming, accent folding or locale rules. Reject empty text. `red—blue` differs from `red blue`, `café` differs from decomposed `café`, and `ﬃ` differs from `ffi`. Infixes inside identifiers and punctuation-only needles are valid. This is separate from token prefix search and matches identically against originals under basic, English and identifier analyzers.
+The payload is `{ text, fields? }`. Leave out `fields` to scan all fields enabled in the factory, or select a nonempty subset without duplicates. Empty text is invalid.
 
-A leaf cannot cross values or fields. It matches a document once if any selected original value contains the needle. AND/OR/NOT keep their native meaning; separate leaves can match independent values. Exact totals and deterministic pages are preserved. Literal leaves contribute **zero score**; pure literal ties sort by record ID. Mixed lexical/literal queries retain the successful lexical groups' native BM25 with no occurrence-count or substring-length bonus.
+Matching is raw and case-sensitive, without normalization, stemming, accent folding or locale rules:
+
+- `red—blue` differs from `red blue`.
+- `café` differs from the decomposed spelling `café`.
+- `ﬃ` differs from `ffi`.
+
+You can search inside an identifier or for punctuation alone. This differs from token-prefix search and works against the same originals under basic, English or identifier analysis.
+
+A literal query matches a document once if any selected field value contains the text. It never joins separate values or fields. You can combine separate literal queries with AND, OR or NOT as usual.
+
+Literal matches add zero to the score, so literal-only ties sort by record ID. When combined with word queries, BM25 scores the successful word groups normally. The number or length of substring matches adds no bonus. Totals and pagination remain exact.
 
 ## Original ranges
 
@@ -43,4 +59,4 @@ Factory work defaults to 10,000,000 work-v1 units and can only be narrowed. One 
 
 Default range cap is 256; factory configuration permits 1–1024, and request caps only narrow it. Output defaults to 16,384 structural entries and may be narrowed; factual output also has a 262,144 aggregate UTF-16 text cap. Evidence IDs are limited to 128 and facts to 4,096, further reduced by core limits. Literal text plus selected field strings is capped at 2,048 UTF-16 units and reduced lexical limits; captured source-predicate strings count conservatively toward the shared lexical ceiling. Original source values keep existing core limits.
 
-Payloads/options are owned before queued execution. Source and core mutations remain atomic; queries/evidence use the execution revision. Worker configuration binds policy, fields and limits. Existing source/native codecs are reused, with exact qualified-Node restrictions for native state; prior remote CI does not qualify this changed feature. Logical work and code-size measurements do not establish heap/allocation peaks or physical latency. There is no UI/announcement change, normalization mapping, automatic acceleration or additional runtime dependency. See the [adopted specification](../specs/LITERAL_MATCHING.md).
+Payloads/options are owned before queued execution. Source and core mutations remain atomic; queries/evidence use the execution revision. Worker configuration binds policy, fields and limits. Existing source/native codecs are reused, with exact qualified-Node restrictions for native state; version strings alone do not qualify changed artifacts. See [runtime and snapshot requirements](COMPATIBILITY.md).

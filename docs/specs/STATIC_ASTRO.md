@@ -1,5 +1,11 @@
 # Explicit static-build and Astro integration — RX-A100
 
+## Optional page/section companion — RX-6005
+
+The frozen [page/section contract](PAGE_SECTIONS.md#7-separate-optional-static-artifact) selects a separate version-1 companion for RX-6005. It is implemented as an optional parallel builder/hook input and explicit source-handle `loadSections` method. Existing manifest, display-record, safe directory-route and source/native snapshot formats below remain unchanged. The input is a separate optional map list; full-ID companion pages bind to build/base/configuration/source/display identity. Explicit source-handle section loading validates original ranges through a transient public source export and stamps the receiving revision; it does not use the builder's origin revision. Native handles refuse that optional operation while ordinary qualified-native loading/search remains valid. No automatic source retention, HTML extraction, extra initial fetch or weakening of current strict readers is authorized.
+
+## Current implementation
+
 The owner explicitly selected RX-A100. A separately installed private ESM package `@vmitsaras/raveldex-astro` exposes `.` (Node Astro integration), `/build` (explicit artifact builder), and `/client` (explicit browser/Node loader). It uses only existing public Raveldex imports. The root package, core source/public facade, analyzer/scorer, source/native codecs, UI and worker protocols remain unchanged. Astro is a pinned development tool for real consumer verification and an optional framework peer of the separate package; it is never a runtime dependency of core. No crawler, Markdown/HTML parser, inferred content discovery, framework initialization or network access is added to core. Importing any entry performs no I/O, indexing or fetch.
 
 ## Explicit content and generation

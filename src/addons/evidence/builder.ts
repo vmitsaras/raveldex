@@ -2,9 +2,10 @@ import { workerIdentity } from '../../core/capabilities/worker-identity.js';
 import type { Token } from '../../core/analyzer/basic.js';
 import { requireAnalysis } from '../../core/analyzer/selected.js';
 import { Admission, has, ownObject } from '../../core/contracts/data.js';
-import type { AddonRegistration, AggregationOutput, EvidenceContext, EvidenceResultContext, PayloadContext, PreparedEvidence } from '../../core/capabilities/types.js';
+import type { AddonRegistration, AggregationOutput, CapturedPayload, EvidenceContext, EvidenceResultContext, PayloadContext, PreparedEvidence } from '../../core/capabilities/types.js';
 import { bound, invalid } from '../../core/errors/error.js';
 import type { WorkStep } from '../../core/index/directory.js';
+import type { Limits } from '../../core/limits/limits.js';
 import { DEFAULT_LIMITS } from '../../core/limits/limits.js';
 import type { Fact, TraceRequest } from '../../core/trace/facts.js';
 import type { CompiledNode } from '../../core/query/compile.js';
@@ -21,10 +22,13 @@ import type { CapturedMatchOptions, OwnedMatchRequest } from './options.js';
 import { offsetTokens, sourceTokens } from './providers.js';
 import type { MatchDocument, MatchEvidenceData, MatchEvidenceOptions, MatchRange } from './types.js';
 
-/** Internal composition seam. Only /addons/snippets supplies presentation. */
+/** Internal optional composition seam for snippets and section presentation. */
 export interface EvidencePresentation {
   readonly capability: string;
   readonly workerOptions: Readonly<Record<string, number>>;
+  readonly maxSerializedBytes?: number;
+  capture?(input: unknown, context: PayloadContext, options: CapturedMatchOptions): CapturedPayload;
+  parse?(input: unknown, limits: Limits, options: CapturedMatchOptions): OwnedMatchRequest;
   prepare(context: EvidenceContext, fields: readonly string[]): Generator<WorkStep, PreparedPresentation>;
 }
 export interface PreparedPresentation {
@@ -94,7 +98,7 @@ function* rangesFor(id: string, leaves: readonly ContributingLeaf[], fields: rea
   return Object.freeze(ranges);
 }
 
-function* project(context: EvidenceContext, finished: EvidenceResultContext, request: OwnedMatchRequest, options: CapturedMatchOptions, providers: ReadonlyMap<string, Provider>, presentation?: PreparedPresentation): Generator<WorkStep, AggregationOutput> {
+function* project(context: EvidenceContext, finished: EvidenceResultContext, request: OwnedMatchRequest, options: CapturedMatchOptions, providers: ReadonlyMap<string, Provider>, presentation?: PreparedPresentation, maxSerializedBytes?: number): Generator<WorkStep, AggregationOutput> {
   if (finished.trace.revision !== context.revision || finished.result.revision !== context.revision || finished.trace.model !== finished.result.model ||
       finished.trace.analyzer.id !== context.analyzer.id || finished.trace.analyzer.environmentProfile !== context.analyzer.environmentProfile) invalid('REVISION_MISMATCH', 'evidence.revision');
   // Strict phrase range projection cannot truthfully label ordered-gap paths.
@@ -139,13 +143,18 @@ function* project(context: EvidenceContext, finished: EvidenceResultContext, req
   }
   const data: MatchEvidenceData = { kind: 'raveldex-match-evidence-v1', revision: context.revision, fields: request.fields,
     scope: 'successful-positive-token-occurrences', complete: true, documents: output };
-  return yield* ownInspectorOutput(data, Math.min(options.maxOutputEntries, context.limits.maxAdmissionEntries));
+  const owned = yield* ownInspectorOutput(data, Math.min(options.maxOutputEntries, context.limits.maxAdmissionEntries));
+  if (maxSerializedBytes !== undefined) {
+    const serialized=JSON.stringify(owned.value); yield charge(serialized.length+1);let bytes=0;
+    for(const char of serialized){yield charge();const point=char.codePointAt(0)!;bytes+=point<=0x7f?1:point<=0x7ff?2:point<=0xffff?3:4;bound(bytes,maxSerializedBytes,'evidence.output.bytes');}
+  }
+  return owned;
 }
 
 function* prepare(context: EvidenceContext, options: CapturedMatchOptions, presentation?: EvidencePresentation): Generator<WorkStep, PreparedEvidence> {
   yield* validatePayload(context.payload, 'INVALID_OPTIONS');
   requireAnalysis(context);
-  const request = parseMatchRequest(context.payload, context.limits, options), providers = new Map<string, Provider>();
+  const request = presentation?.parse ? presentation.parse(context.payload, context.limits, options) : parseMatchRequest(context.payload, context.limits, options), providers = new Map<string, Provider>();
   for (const field of request.fields) {
     yield charge(field.length + 1);
     if (!has(context.schema.text, field)) invalid('INVALID_OPTIONS', 'evidence.fields');
@@ -159,7 +168,7 @@ function* prepare(context: EvidenceContext, options: CapturedMatchOptions, prese
   }
   const prepared = presentation ? yield* presentation.prepare(context, request.fields) : undefined;
   if (prepared && typeof prepared.project !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'evidence.presentation');
-  return Object.freeze({ finish: (finished: EvidenceResultContext): Generator<WorkStep, AggregationOutput> => project(context, finished, request, options, providers, prepared) });
+  return Object.freeze({ finish: (finished: EvidenceResultContext): Generator<WorkStep, AggregationOutput> => project(context, finished, request, options, providers, prepared, presentation?.maxSerializedBytes) });
 }
 
 /** Internal shared builder, with no presentation or host API import. */
@@ -180,7 +189,7 @@ export function buildMatchEvidence(input: MatchEvidenceOptions, presentation?: E
         transientWork: 'Selected source analysis or validated stored occurrences, complete bounded range union, actual native facts and owned output; shared operation budget.', externalResources: 'none' }),
     }),
     evidence: Object.freeze({
-      capture: (value: unknown, context: PayloadContext) => captureMatchRequest(value, context, options),
+      capture: (value: unknown, context: PayloadContext) => presentation?.capture ? presentation.capture(value, context, options) : captureMatchRequest(value, context, options),
       select: (value: unknown): TraceRequest => {
         const request = value as OwnedMatchRequest;
         return Object.freeze({ ids: request.ids, maxFacts: request.maxFacts, ...(request.expectedRevision === undefined ? {} : { expectedRevision: request.expectedRevision }) });

@@ -1,45 +1,89 @@
-# Candidate preparation
+# Prepare and install private evaluation artifacts
 
-See [publication status](PUBLICATION_STATUS.md) for the completed roadmap, merged main CI, documentation/demo inventory and remaining release preparation. The commands below intentionally verify private candidate metadata; they are not a final public-release verification mode.
+These commands verify private `0.1.0-rc.0` packages. They do not publish, tag, create a release, read npm release credentials, change repository visibility or synchronize GitHub. [Publication status](PUBLICATION_STATUS.md) separates this evaluation workflow from final release preparation.
 
-Use a checkout and Node.js 22 or newer with npm. Preparation retains `private: true`; it does not need release credentials. The package publication guard follows the [npm package metadata contract](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private).
+## Prerequisites
+
+Use a repository checkout, npm and Node 24 for the full development toolchain. Core/English declare Node `>=22`; the Astro integration declares `>=22.12.0`. Runtime floors are not universal host qualification. See [compatibility](COMPATIBILITY.md).
+
+The full check uses a locally installed Chrome by default. If using Playwright Chromium instead, install it after `npm ci` and set all four existing selectors in the same shell:
+
+```sh
+node node_modules/playwright-core/cli.js install chromium
+export RAVELDEX_UI_BROWSER=chromium
+export RAVELDEX_WORKER_BROWSER=chromium
+export RAVELDEX_INDEXEDDB_BROWSER=chromium
+export RAVELDEX_CANDIDATE_BROWSER=chromium
+```
+
+The download needs network access; Linux also needs the browser's system libraries. Installing a browser is separate from installing the JavaScript tooling. Missing browser/process/localhost permissions are environment failures, not a passing UI check. Keep Chrome defaults when that is the host being evaluated.
+
+## Prepare all three packages
+
+Run from the repository root. Keep these exported paths if following later examples in the same shell:
 
 ```sh
 npm ci
-npm run candidate:prepare -- --output /tmp/raveldex-candidate-review
+export RAVELDEX_REPOSITORY="$PWD"
+export RAVELDEX_ARTIFACTS="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-artifacts.XXXXXX")"
+npm run candidate:prepare -- --output "$RAVELDEX_ARTIFACTS/core"
+node scripts/pack-english.mjs --output "$RAVELDEX_ARTIFACTS/english"
+node scripts/pack-astro.mjs --output "$RAVELDEX_ARTIFACTS/astro"
 ```
 
-The output must be a **new directory with an existing parent**. Existing directories, files and symlinks are refused before verification, so a prior report is not overwritten. Omit `--output` for a fresh temporary path. A failed attempt retains its available reports; use a different output path after correcting the failure.
+If using Chromium, perform the prerequisite download/exports **between `npm ci` and candidate preparation**. Every output child must be a new directory with an existing parent. Existing files/directories/symlinks are refused; failed attempts retain available reports. Reuse neither an old output directory nor an old report for changed bytes.
 
-`candidate:prepare` requires the declared private `0.1.0-rc.0` metadata, runs the full `npm run check`, then verifies the resulting built files without rebuilding between the check and pack. It uses `npm pack --offline --ignore-scripts`, installs the tarball into an isolated offline consumer without lifecycle scripts, and exercises the public contract and documentation. [npm's pack documentation](https://docs.npmjs.com/cli/v11/commands/npm-pack/#ignore-scripts) explains that script suppression; the preceding explicit build is required.
+`candidate:prepare` requires private `0.1.0-rc.0` metadata, runs `npm run check`, then packs and verifies the same compiler output without rebuilding. The direct separate-pack commands consume that stable output. `npm run language:pack` and `npm run astro:pack` are convenient independent preparations that rebuild first; do not use them between a closed full check and packs intended to describe that exact build.
 
-The output contains:
+Artifacts are:
 
-- The candidate `.tgz`, its file inventory/digests and environment in `candidate-report.json`.
-- `verification.log` from the completed project check.
-- `preparation.json` binding the closed check and candidate report.
-- The isolated consumer used to execute the checks. It is a verification workspace, not an additional package dependency.
+| Directory | Tarball / reports |
+| --- | --- |
+| `core` | `vmitsaras-raveldex-0.1.0-rc.0.tgz`, `candidate-report.json`, closed `verification.log`, `preparation.json` and isolated installed consumer. |
+| `english` | `vmitsaras-raveldex-english-0.1.0-rc.0.tgz`, `english-package.json`, `verification.log` and package staging. |
+| `astro` | `vmitsaras-raveldex-astro-0.1.0-rc.0.tgz`, `astro-package.json`, `verification.log` and package staging. |
 
-`npm run candidate:check -- --output NEW_DIRECTORY` builds and checks the package without the preceding full suite. It is useful for focused package work, but does not replace `candidate:prepare` acceptance. Neither command runs `npm publish`, even with `--dry-run`, creates a tag/release, changes visibility, reads an npm token, or synchronizes remote tracking.
+Packing/installing uses local artifacts with scripts suppressed. Existing explicit compilation is required. Reports bind package members, hashes, imports/declarations and actual environment. They are not public-release attestations. See [npm pack](https://docs.npmjs.com/cli/v11/commands/npm-pack/#ignore-scripts) and [the private package guard](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private).
 
-## Manual workflow
+## Install core in a fresh ESM application
 
-`.github/workflows/candidate.yml` is a manual `workflow_dispatch` preparation job, with Node 22/24, pinned actions, read-only repository permission and checkout credential persistence disabled. It installs the development/browser tooling, runs preparation and preserves only the reports/log/tarball as short-lived workflow artifacts. It has no publishing or tag step, npm credentials, OIDC publishing permission or release-write token. A workflow artifact is not a public package release. A failure report is not a verified candidate.
+Assuming the exported artifact path above, create an isolated directory rather than overwriting an application manifest:
 
-This repository also has a separate main-branch roadmap synchronization workflow with narrowly scoped issue-writing permission. It mirrors the committed manifest; candidate preparation does not invoke it. `npm run tracking:preview` remains a local dry run.
+```sh
+export RAVELDEX_CONSUMER="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-consumer.XXXXXX")"
+printf '%s\n' '{"name":"raveldex-evaluation","private":true,"type":"module"}' > "$RAVELDEX_CONSUMER/package.json"
+cd "$RAVELDEX_CONSUMER"
+npm install --offline --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/core/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+```
 
-Remote CI execution is reported separately from local execution. Running the manual workflow later does not retroactively change the recorded local environment or the exact-tool accessibility evidence.
-
-## Owner publication decision
-
-After reviewing [candidate scope](CANDIDATE.md), the tarball/report identities and the independent recommendation, the owner may separately authorize publication. That action must choose the final version and registry/tag/access, review credentials/provenance and CI outcomes, deliberately remove the private guard, rebuild/repack/reverify the changed artifact, and review its digest before any upload or tag. No existing artifact is represented as the final public release merely because candidate checks pass.
+Copy the [README example](../../README.md#smallest-core-example) into a `.mjs` file and run it with `node`. Expected result: revision 1, one hit for `guide:updates`. Dispose the engine after use. The [API modules](../api/examples/README.md) supply further complete scenarios.
 
 ## Separate private English package
 
-RX-A040 also requires an independently installable language artifact. From a source checkout with locked tooling, prepare it into a new directory:
+In the same fresh consumer, install the matching independent artifact alongside core:
 
 ```sh
-npm run language:pack -- --output /tmp/raveldex-english-private
+npm install --offline --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/english/vmitsaras-raveldex-english-0.1.0-rc.0.tgz"
 ```
 
-This builds existing sources and creates the private `@vmitsaras/raveldex-english` ESM tarball/report. It bundles only the native English factory/code and pure support helpers, rewrites compiler-emitted declarations to public core types, and declares the paired exact core peer version. The directory must not already exist; preparation does not overwrite evidence, publish, tag or contact a registry. The main candidate test installs the actual independent tarball offline beside its reviewed core tarball and exercises public types, semantic identity, retrieval/scores, bounds and cancellation. These two closed artifacts and their reports have separate hashes; keep them paired with their actual qualification evidence.
+Import `createEnglishAnalyzer` and `ENGLISH_ANALYZER` from `@vmitsaras/raveldex-english` and explicitly select/register them at new-owner creation, as in the [English guide](../api/ENGLISH.md#separate-private-package). Its exact core peer must already be installed. Choose one analyzer factory import; duplicate registrations conflict. A reused private version string alone does not establish compatibility.
+
+## Separate private Astro package
+
+Install the integration beside core, adding the pinned framework only when using its Astro build hook:
+
+```sh
+npm install --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz" astro@7.3.2
+```
+
+Unlike local tarball installation alone, resolving Astro/transitive dependencies needs a registry or an adequate npm cache. Static builder/client users can omit the optional Astro peer. [The static guide](../api/STATIC_ASTRO.md) describes public imports. Repository users can follow the [complete Astro fixture procedure](https://github.com/vmitsaras/raveldex/blob/main/examples/astro/README.md), which requires repository access and preserves its explicit fixture-only native qualification.
+
+## Focused and remote verification
+
+`npm run candidate:check -- --output NEW_DIRECTORY` builds and verifies the package without the preceding full suite; it does not replace full preparation. The full check includes genuine paired-package Astro root and `/docs/` static builds, installed public examples and independently expected results. Passing fixtures does not add human AT, all-browser or native-portability qualification.
+
+The read-only manual candidate workflow and main CI run Node 22/24 with pinned actions and short-lived private artifacts. Neither has publishing/tag steps or release credentials. The separate main-branch tracking workflow can write issues/milestones; candidate preparation does not invoke it. `npm run tracking:preview` is local.
+
+## Owner publication decision
+
+Final publication must separately choose version, package set, registry/dist-tag/access and credentials/provenance. Current verification intentionally requires private candidate metadata and exact peers; simply changing `private` or version will fail its guards. A separate release-verification path must review final metadata and newly packed bytes without bypassing those checks. No prepared private artifact is represented as the final public release.

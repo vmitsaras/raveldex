@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { build, version } from 'esbuild';
 import { gzipSync } from 'node:zlib';
 import { buildCorpus } from '../../examples/core-docs/corpus.mjs';
+import { buildUsageCorpus } from '../../examples/docs-search/usage-corpus.mjs';
 import { DOCS_JUDGMENTS } from '../../test/fixtures/docs/judgments.mjs';
 import { verifyPilot, judgeResults } from '../../test/consumer/verify.mjs';
 import { prepareConsumer, bundleConsumer, executePilot, checkStartup, digest, command, REPO_ROOT } from './packed-consumer.mjs';
@@ -25,6 +26,24 @@ async function graph(directory, entry, output, source) {
     gzipBytes: compressed.length, sha256: digest(bytes), inputs, metafile: built.metafile };
 }
 
+/** Ordinary developer demo; qualification continues to use prepareUIPilot. */
+export async function prepareUsageDemo() {
+  const corpus = buildUsageCorpus(REPO_ROOT);
+  const consumer = await prepareConsumer(corpus, []);
+  const { directory, installed } = consumer;
+  for (const name of ['index.html', 'pilot.css', 'main.mjs', 'configuration.mjs', 'engine-worker.mjs']) {
+    await copyFile(join(REPO_ROOT, 'examples/docs-search', name), join(directory, name === 'main.mjs' ? 'pilot-entry.mjs' : name));
+  }
+  await copyFile(join(installed, 'dist/addons/ui/styles.css'), join(directory, 'ui.css'));
+  const product = await graph(directory, 'pilot-entry.mjs', 'main.mjs');
+  const worker = await graph(directory, 'engine-worker.mjs', 'engine-worker-bundle.mjs');
+  await copyFile(join(directory, 'engine-worker-bundle.mjs'), join(directory, 'engine-worker.mjs'));
+  const report = { package: consumer.package, corpus: { hash: corpus.hash, records: corpus.records.length,
+    sources: corpus.sources }, product, worker };
+  await writeFile(join(directory, 'demo-build.json'), JSON.stringify(report, null, 2) + '\n');
+  return { ...consumer, corpus, report };
+}
+
 /** Real tarball installation; the workspace is used only for application assets. */
 export async function prepareUIPilot() {
   const corpus = buildCorpus(REPO_ROOT);
@@ -33,6 +52,9 @@ export async function prepareUIPilot() {
   for (const file of ['index.html', 'pilot.css', 'main.mjs', 'configuration.mjs', 'engine-worker.mjs']) {
     await copyFile(join(REPO_ROOT, 'examples/docs-search', file), join(directory, file === 'main.mjs' ? 'pilot-entry.mjs' : file));
   }
+  // Qualification retains its exact-word baseline; ordinary demos use prefixes.
+  const pilotHTML = await readFile(join(directory, 'index.html'), 'utf8');
+  await writeFile(join(directory, 'index.html'), pilotHTML.replace('<option value="text">', '<option value="text" selected>'));
   await copyFile(join(installed, 'dist/addons/ui/styles.css'), join(directory, 'ui.css'));
   const ui = await graph(directory, 'ui-entry.mjs', 'ui-bundle.mjs', "export { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';\n");
   assert.ok(ui.inputs.every(input => input.path === 'ui-entry.mjs' || input.path.includes('/addons/ui/')

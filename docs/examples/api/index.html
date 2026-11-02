@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Installed API recipes · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="runnable-api-examples">Runnable API examples</h1>
+<p>Copy these modules into an ESM application where you installed the local package tarball. They use public imports and show small, complete integrations. Most functions create and dispose their own example engine and return results you can inspect. The UI recipe instead returns a handle you dispose when removing the component. Errors are passed back to your application.</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Invocation / environment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/raveldex/example-files/core.mjs">core.mjs</a></td>
+<td><code>await runCoreExample()</code> in Node; one record and exact result.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/addons.mjs">addons.mjs</a></td>
+<td><code>await runAddonsExample()</code> in Node with usable <code>Intl.Segmenter</code>; phrases, filters/facets, Inspector, diagnostics, ranges/snippets and source/position/mixed parity.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/snapshots.mjs">snapshots.mjs</a></td>
+<td><code>await runSnapshotsExample(applicationQualification)</code> in the application’s exactly declared Node environment. The application must supply its own <code>NativeSnapshotQualification</code> evidence; version detection alone is insufficient.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/migration.mjs">migration.mjs</a></td>
+<td><code>await runMigrationExample(bytes)</code> with the companion’s canonical public source-export <code>Uint8Array</code>; conversion/rebuild only.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/ui.mjs">ui.mjs</a></td>
+<td><code>await createSearchUI(root)</code> on an HTTP(S) page; a minimal search form with no storage. Call the returned <code>dispose()</code> when removing it.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/browser.mjs">browser.mjs</a></td>
+<td><code>await runBrowserExample(document.querySelector('#example-root'))</code> on an HTTP(S) page with a dedicated empty fixture storage namespace and usable IndexedDB/<code>Intl.Segmenter</code>. Mounts, searches and destroys UI; explicitly saves, loads and erases its example namespace.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/worker.mjs">worker.mjs</a>, <a href="/raveldex/example-files/worker-host.mjs">worker-host.mjs</a></td>
+<td>Bundle/serve the host as a module-worker URL, then <code>await runWorkerExample(workerURL)</code> in the browser; mutation and source-restore receipt reconciliation.</td>
+</tr>
+</tbody>
+</table>
+<p>For a first run, copy <code>core.mjs</code> beside your application’s <code>package.json</code>, then run this command from that directory:</p>
+<pre><code class="language-sh">node --input-type=module -e "import('./core.mjs').then(async ({ runCoreExample }) =&gt; console.log(await runCoreExample()))"
+</code></pre>
+<p>It prints an object with revision <code>1</code>, total <code>1</code> and one hit with ID <code>guide:updates</code>. The engine has already been disposed when the function returns.</p>
+<h3 id="browser-recipes">Browser recipes</h3>
+<p>The browser example expects a real root such as <code>&lt;main id="example-root"&gt;&lt;/main&gt;</code>. It uses adapter-owned database <code>raveldex-candidate-example</code> and namespace equal to the root ID; the initial save explicitly expects that namespace to be empty. Successful completion erases its rows, then disposes its borrowed resources. A failed run may leave a saved fixture generation: inspect/recover that generation or select a fresh explicit fixture namespace before rerunning. No general application data is erased automatically. Load <a href="/raveldex/reference/hosts/#native-dom-ui-and-css">the CSS</a> separately; the JavaScript module does not inject styling.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

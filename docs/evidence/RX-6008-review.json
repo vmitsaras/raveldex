@@ -1,0 +1,134 @@
+{
+  "reviewStatus": "Pass",
+  "sourceHashes": {
+    "examples/inline-browser/controller.mjs": "414ff79da2fb2529df7af3365d390eb0f0bed83cb54dac1b0a8d2aaebdb43453",
+    "examples/inline-astro/src/search.mjs": "f8cf01ef27f418ba16e39f1702072a51d0ab3f7c11ae0cd48403567b8092ff81",
+    "examples/inline-browser/main.mjs": "4fbb0a91b28326042be38bf00b690e3bdd17faa22f938ee77d3e246f1175cff2",
+    "examples/inline-astro/src/main.mjs": "5dbcd376084b48b5925fa7061f483f0c8339506660c150e8dcfcaf8301dace09",
+    "examples/modal-browser/controller.mjs": "473a3e6e328f954749ba33768819bcf7144183b1fc473377dc5c0e682d0e57da",
+    "examples/modal-astro/src/search.mjs": "044c70374a72ffaabf33172da38e917aa16c11159a3bb9edf3268de8aaddd09e",
+    "site/Inline.astro": "ca20f81f19199bfbd9e73a081dc8f2a43d760ee36d3dc25c850e0b3900f71954",
+    "site/Modal.astro": "cdbc9e7529c1f9a6700f66e55eb6f2c399b1780e9d80bfe4de51fbaa3a60124e",
+    "site/starters.mjs": "1a6a23ef68fad2109ef9797c67a57668964f8da860949cc38c91a17e8508d8a5",
+    "scripts/lib/inline-starters.mjs": "dd489ad32c854a22e420ae290eddb384409ccfc0e120f9fd7ddee90076f916d6",
+    "scripts/lib/pages.mjs": "f1021e66383fc8fe871f3482a54f15bf49bd0bda1db945408e5d6a7079600f9f",
+    "test/pages/solutions-qualification.test.mjs": "eb85491e8d00b8e263e080e60327ca1f46b3c28b65f4bafab307fe42d9128580",
+    "docs/api/HOSTS.md": "ec2e2104c50ecc68a592799d5f644cd20ed978c73b857c4d3354b4c7f527bc74",
+    "examples/README.md": "c2b06cdbcd05e16cb118c6edf7bf20667c613f1cbc59549e68de5c2f48d2888d",
+    "test/consumer/inline-browser-starter.test.mjs": "cd3bef01381cf88cd3f7a6649ce5d1c7595b378ba34ccf4b6ad4ecd803f0194a",
+    "test/consumer/inline-astro-starter.test.mjs": "3374789f3c549467aa92f2abd5541173b34076290d6152028860c2a7af7616c5",
+    "test/consumer/modal-browser-starter.test.mjs": "2fb8506d11232abe89d5503e671f56efe9dc4ac6156a4fa8c9a3ea93e009dc08",
+    "test/consumer/modal-astro-starter.test.mjs": "91ba728ca54696d625cf8ed2d32af092ac683f16e5a4edf138d43b6f458bce35",
+    "test/consumer/solutions-qualification.test.mjs": "c037b516e9d9a40d5f3d7f022fbad4e81f47e20c0df2736d7f4d1ef4a2dc0ceb",
+    "src/addons/ui/modal.ts": "b38608a7b47a0472d0c699b889f713959be0da78c1e51c4c87d1759e52dee7b9",
+    "src/addons/ui/inline.ts": "47319de27dafa8372cf79d133666f9028d514e8ce02fe2f048d9958308d4af29",
+    "src/addons/ui/modal.css": "f54f1bad7ba23d5097f38de3db26e15df2913522725d5d3c28e06a1065edcf27",
+    "src/addons/ui/inline.css": "ea19ea2cb572d9395d35659564bb950d357e5dea371ab2ef3d73e85c0b3cbf08"
+  },
+  "confirmedFindings": [
+    {
+      "id": "inline-start-status-reentrancy",
+      "originalFiles": [
+        "examples/inline-browser/controller.mjs:14-18",
+        "examples/inline-astro/src/search.mjs:16-21"
+      ],
+      "impact": "Authored status disconnection could destroy before pending publication; a new loader still started and destroy settled before its late owner cleanup.",
+      "evidence": "initial-inline-probe.json",
+      "current": "Fixed by publishing pending before authored DOM work and checking lifetime before loader; 8-group final probe passes."
+    },
+    {
+      "id": "inline-failure-status-reentrancy",
+      "originalFiles": [
+        "examples/inline-browser/controller.mjs:35"
+      ],
+      "impact": "Failure-status disconnection could destroy, then old finally revealed Retry on the closed view.",
+      "evidence": "initial-inline-probe.json",
+      "current": "Fixed by a post-callback lifetime guard; final failure-status group passes."
+    },
+    {
+      "id": "modal-loading-logical-opener-webkit",
+      "originalFiles": [
+        "examples/modal-browser/controller.mjs:11",
+        "examples/modal-browser/controller.mjs:35",
+        "examples/modal-astro/src/search.mjs:17-25"
+      ],
+      "impact": "WebKit pointer activation did not focus trigger. Closing loading shell retained focus in its hidden cancel control; programmatic ready opening captured that hidden opener. First ready close and loading-failure cancel could leave focus in closed dialogs.",
+      "evidence": [
+        "webkit-focus-probe.json",
+        "webkit-focus-instrumented.json",
+        "webkit-loading-cancel.json"
+      ],
+      "current": "Fixed in both application wrappers by recording logical trigger/programmatic opener and conditionally restoring owned loading-shell focus. Public UI runtime unchanged. Final independent 28-group Chrome/WebKit source probe and actual installed browser preview first/second/keyboard close and loading-cancel regressions pass."
+    }
+  ],
+  "otherReview": [
+    {
+      "topic": "Inline bfcache mains",
+      "basis": "Source trace only",
+      "finding": "No confirmed delayed restoration revival. Restore currently executes synchronously; prior UI/DOM teardown is synchronous and old initializer finalizers guard ended state. A delayed teardown callback of the modal shape does not exist here. No rewrite recommended from this evidence."
+    },
+    {
+      "topic": "Adoption guidance and gallery test",
+      "basis": "Source review",
+      "finding": "Complete allowlisted archives/source, data/capabilities, private packages, CSS edit-build-preview walkthrough, base/build identity, crosslinks, ownership and scoped automation/manual statements align with task."
+    },
+    {
+      "topic": "Gallery normal pointer activation after outer-frame scroll",
+      "basis": "Independent source/raw log review of gallery-qualification-final.log and gallery-qualification.json",
+      "finding": "Final 1/1 test passes; explicit iframe scrolling precedes ordinary native Load more click. No force click or runtime CSS change. Actual published CSS changes preserve result IDs/counts and a visible native keyboard outline."
+    },
+    {
+      "topic": "Native Escape priority",
+      "basis": "Contract/source review; parent reports separate attached native Chrome observation",
+      "finding": "Preserve native cancel and search-field editing. A browser may consume first Escape to clear focused nonempty search input before a later Escape cancels the dialog. Documentation clarification is appropriate; no keydown override recommended. No human/physical observation by reviewer."
+    },
+    {
+      "topic": "Final installed modal consumers",
+      "basis": "Reviewed qualification-modal-final command manifests, raw logs and final source hashes",
+      "finding": "Chrome12/12 and Playwright WebKit12/12 pass with zero failures/skips/cancellations; actual browser/Astro root/help and first pointer held/failed/ready cases qualify repaired source."
+    },
+    {
+      "topic": "Measured quantities and manual provenance",
+      "basis": "Reviewed measurements/report.json, candidate-report.json, manual-observations.json, jekyll-comparison.json and provisional RX-6008.md",
+      "finding": "Both engine DOM/serialized counters exactly match written quantities; candidate graphs distinguish shared bundles from memory and latency; native tool transcript and zoom/Firefox blocked outcomes are scoped; exact117-file Jekyll output remains local-only."
+    },
+    {
+      "topic": "Final combined acceptance matrix",
+      "basis": "Current durable matrix parsed and all65 exact case references independently verified",
+      "finding": "Final94-case source/report count, final modal reruns, qualified copy identities and manual scope are now consistent. Initial reports remain raw historical baseline only."
+    }
+  ],
+  "provenance": "Initial and final probes bundle actual application wrapper source against existing compiled Raveldex; they are independent source probes, distinct from fresh installed consumer tests. Exact scripts and raw stdout are preserved. Initial restricted localhost listen failed EPERM; approved local invocation completed. No source or generated output modified by reviewer.",
+  "probeResults": {
+    "inline": {
+      "report": "final-inline-probe.json",
+      "assertedGroups": 8,
+      "status": "Pass"
+    },
+    "modalFocus": {
+      "report": "final-modal-focus.json",
+      "assertedGroups": 28,
+      "status": "Pass"
+    },
+    "installedWebKitFocus": {
+      "report": "webkit-focus-installed-final.json",
+      "status": "Pass"
+    },
+    "installedWebKitLoadingCancel": {
+      "report": "webkit-loading-cancel-final.json",
+      "status": "Pass"
+    }
+  },
+  "remainingReviewItems": [],
+  "matrixReview": {
+    "file": "docs/evidence/RX-6008-matrix.json",
+    "sha256": "09c57a3eda53cd07d59b27a9e62ad0426b59fa5513aa55cc88af988632b853af",
+    "caseReferencesVerified": 65,
+    "result": "Pass. All file/line/caseSource references match current source;94 unique focused Chrome cases identified without double counting; final modal Chrome/WebKit source/report identities supersede pre-repair baseline. Copied-project provenance and agent-only manual scope are distinguished."
+  },
+  "statusScope": "Independent final implementation, focused runtime/installed evidence, gallery/adoption guidance, final combined matrix and measured/manual scope review. Parent separately owns completion of full repository check and roadmap/context synchronization.",
+  "remainingIntegrationItemsOutsideReviewerScope": [
+    "Parent full npm check actual completion result",
+    "Parent final canonical/generated roadmap, context/handoff and evidence synchronization"
+  ]
+}

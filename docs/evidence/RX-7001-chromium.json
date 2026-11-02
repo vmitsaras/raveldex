@@ -1,0 +1,2463 @@
+{
+  "kind": "raveldex-installed-dropdown-browser-v1",
+  "startedAt": "2026-11-01T22:42:01.512Z",
+  "environment": {
+    "node": "v24.21.0",
+    "os": {
+      "platform": "darwin",
+      "release": "27.0.0",
+      "arch": "arm64"
+    },
+    "esbuild": "0.28.2",
+    "engine": "chromium",
+    "browser": "149.0.7827.55"
+  },
+  "observations": [
+    {
+      "name": "core idle / native finite hits / semantic hierarchy",
+      "status": "Pass",
+      "evidence": {
+        "IDs": [
+          "a",
+          "b",
+          "c",
+          "d",
+          "e"
+        ],
+        "total": 7,
+        "limit": 5,
+        "offset": 0,
+        "DOMARIA": {
+          "method": "Playwright locator.ariaSnapshot(), derived in page from DOM/ARIA; not a native platform AX capture",
+          "text": "- search \"Search this site\":\n  - text: Search this site\n  - combobox \"Search this site\" [expanded]: shared\n  - button \"Search\"\n  - button \"Clear\"\n  - link \"See all results\":\n    - /url: http://127.0.0.1:64078/search/?lang=de&mode=prefix&q=shared#results\n- status: 7 results. Showing 5.\n- grid \"Search results\":\n  - row \"Alpha guide\":\n    - gridcell \"Alpha guide\":\n      - link \"Alpha guide\":\n        - /url: http://127.0.0.1:64078/guide/a/#details\n  - row \"Bravo guide\":\n    - gridcell \"Bravo guide\":\n      - link \"Bravo guide\":\n        - /url: http://127.0.0.1:64078/guide/b/#details\n  - row \"Charlie guide\":\n    - gridcell \"Charlie guide\":\n      - link \"Charlie guide\":\n        - /url: http://127.0.0.1:64078/guide/c/#details\n  - row \"Delta guide\":\n    - gridcell \"Delta guide\":\n      - link \"Delta guide\":\n        - /url: http://127.0.0.1:64078/guide/d/#details\n  - row \"Echo guide\":\n    - gridcell \"Echo guide\":\n      - link \"Echo guide\":\n        - /url: http://127.0.0.1:64078/guide/e/#details"
+        },
+        "nativeAX": {
+          "status": "Pass",
+          "method": "Chrome CDP Accessibility.getFullAXTree; native browser AX tree, not human speech/OS AT testing",
+          "nodes": [
+            {
+              "nodeId": "11",
+              "backendDOMNodeId": 11,
+              "role": "grid",
+              "name": "Search results",
+              "properties": {
+                "multiselectable": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "readonly": {
+                  "type": "boolean",
+                  "value": false
+                }
+              }
+            },
+            {
+              "nodeId": "12",
+              "backendDOMNodeId": 12,
+              "role": "combobox",
+              "name": "Search this site",
+              "properties": {
+                "invalid": {
+                  "type": "token",
+                  "value": "false"
+                },
+                "focusable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "focused": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "editable": {
+                  "type": "token",
+                  "value": "plaintext"
+                },
+                "settable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "autocomplete": {
+                  "type": "token",
+                  "value": "list"
+                },
+                "hasPopup": {
+                  "type": "token",
+                  "value": "grid"
+                },
+                "required": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "expanded": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "activedescendant": {
+                  "type": "idref",
+                  "relatedNodes": [
+                    {
+                      "backendDOMNodeId": 37,
+                      "idref": "raveldex-dropdown-1-result-0"
+                    }
+                  ]
+                },
+                "controls": {
+                  "type": "idrefList",
+                  "value": "raveldex-dropdown-1-popup",
+                  "relatedNodes": [
+                    {
+                      "backendDOMNodeId": 11,
+                      "idref": "raveldex-dropdown-1-popup"
+                    }
+                  ]
+                },
+                "labelledby": {
+                  "type": "nodeList",
+                  "relatedNodes": [
+                    {
+                      "backendDOMNodeId": 30,
+                      "text": "Search this site"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "nodeId": "33",
+              "backendDOMNodeId": 33,
+              "role": "link",
+              "name": "See all results",
+              "properties": {
+                "focusable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "url": {
+                  "type": "string",
+                  "value": "http://127.0.0.1:64078/search/?lang=de&mode=prefix&q=shared#results"
+                }
+              }
+            },
+            {
+              "nodeId": "36",
+              "backendDOMNodeId": 36,
+              "role": "row",
+              "name": "Alpha guide",
+              "properties": {}
+            },
+            {
+              "nodeId": "39",
+              "backendDOMNodeId": 39,
+              "role": "row",
+              "name": "Bravo guide",
+              "properties": {}
+            },
+            {
+              "nodeId": "42",
+              "backendDOMNodeId": 42,
+              "role": "row",
+              "name": "Charlie guide",
+              "properties": {}
+            },
+            {
+              "nodeId": "45",
+              "backendDOMNodeId": 45,
+              "role": "row",
+              "name": "Delta guide",
+              "properties": {}
+            },
+            {
+              "nodeId": "48",
+              "backendDOMNodeId": 48,
+              "role": "row",
+              "name": "Echo guide",
+              "properties": {}
+            },
+            {
+              "nodeId": "37",
+              "backendDOMNodeId": 37,
+              "role": "gridcell",
+              "name": "Alpha guide",
+              "properties": {
+                "readonly": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "required": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "selected": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                }
+              }
+            },
+            {
+              "nodeId": "40",
+              "backendDOMNodeId": 40,
+              "role": "gridcell",
+              "name": "Bravo guide",
+              "properties": {
+                "readonly": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "required": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "selected": {
+                  "type": "booleanOrUndefined",
+                  "value": false
+                }
+              }
+            },
+            {
+              "nodeId": "43",
+              "backendDOMNodeId": 43,
+              "role": "gridcell",
+              "name": "Charlie guide",
+              "properties": {
+                "readonly": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "required": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "selected": {
+                  "type": "booleanOrUndefined",
+                  "value": false
+                }
+              }
+            },
+            {
+              "nodeId": "46",
+              "backendDOMNodeId": 46,
+              "role": "gridcell",
+              "name": "Delta guide",
+              "properties": {
+                "readonly": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "required": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "selected": {
+                  "type": "booleanOrUndefined",
+                  "value": false
+                }
+              }
+            },
+            {
+              "nodeId": "49",
+              "backendDOMNodeId": 49,
+              "role": "gridcell",
+              "name": "Echo guide",
+              "properties": {
+                "readonly": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "required": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "selected": {
+                  "type": "booleanOrUndefined",
+                  "value": false
+                }
+              }
+            },
+            {
+              "nodeId": "38",
+              "backendDOMNodeId": 38,
+              "role": "link",
+              "name": "Alpha guide",
+              "properties": {
+                "focusable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "url": {
+                  "type": "string",
+                  "value": "http://127.0.0.1:64078/guide/a/#details"
+                }
+              }
+            },
+            {
+              "nodeId": "41",
+              "backendDOMNodeId": 41,
+              "role": "link",
+              "name": "Bravo guide",
+              "properties": {
+                "focusable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "url": {
+                  "type": "string",
+                  "value": "http://127.0.0.1:64078/guide/b/#details"
+                }
+              }
+            },
+            {
+              "nodeId": "44",
+              "backendDOMNodeId": 44,
+              "role": "link",
+              "name": "Charlie guide",
+              "properties": {
+                "focusable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "url": {
+                  "type": "string",
+                  "value": "http://127.0.0.1:64078/guide/c/#details"
+                }
+              }
+            },
+            {
+              "nodeId": "47",
+              "backendDOMNodeId": 47,
+              "role": "link",
+              "name": "Delta guide",
+              "properties": {
+                "focusable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "url": {
+                  "type": "string",
+                  "value": "http://127.0.0.1:64078/guide/d/#details"
+                }
+              }
+            },
+            {
+              "nodeId": "50",
+              "backendDOMNodeId": 50,
+              "role": "link",
+              "name": "Echo guide",
+              "properties": {
+                "focusable": {
+                  "type": "booleanOrUndefined",
+                  "value": true
+                },
+                "url": {
+                  "type": "string",
+                  "value": "http://127.0.0.1:64078/guide/e/#details"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "literal modes, Unicode and real full-results handoff",
+      "status": "Pass",
+      "evidence": {
+        "prefix": [
+          "a"
+        ],
+        "earlierPartial": [],
+        "Unicode": [
+          "unicode"
+        ],
+        "customQuery": "  shared alph!!  ",
+        "customHref": "http://127.0.0.1:64078/search/?lang=de&mode=prefix&query=++shared+alph%21%21++&q=unrelated#results",
+        "raw": "  shared alpha!!  ",
+        "href": "http://127.0.0.1:64078/search/?lang=de&mode=text&q=++shared+alpha%21%21++#results",
+        "destinationIDs": [
+          "a"
+        ]
+      }
+    },
+    {
+      "name": "virtual selection and stable identity",
+      "status": "Pass",
+      "evidence": {
+        "first": "raveldex-dropdown-1-result-0",
+        "last": "raveldex-dropdown-1-result-4",
+        "automaticSelection": false,
+        "clamps": true,
+        "rawPreserved": true
+      }
+    },
+    {
+      "name": "native editing/modifiers",
+      "status": "Pass",
+      "evidence": {
+        "selection": [
+          5,
+          6
+        ],
+        "nativeHome": [
+          0,
+          0
+        ],
+        "nativeEnd": [
+          6,
+          6
+        ],
+        "documentFocused": true,
+        "matchedBaseline": "Same document/control state with deliberate outer-page scroll removed; original scroll confound and native-only probes preserved separately.",
+        "modifiedNavigationActivation": false,
+        "modifiedEnterSearches": 1,
+        "selectAll": true
+      }
+    },
+    {
+      "name": "Enter search versus actual result activation",
+      "status": "Pass",
+      "evidence": {
+        "withoutSelection": "native query",
+        "selectedHref": "/guide/a/#details",
+        "titleNotInserted": true
+      }
+    },
+    {
+      "name": "native anchor activation",
+      "status": "Pass",
+      "evidence": {
+        "mainURLUnchanged": true,
+        "newTabHrefs": [
+          "/guide/a/#details",
+          "/guide/b/#details"
+        ],
+        "trace": [
+          {
+            "type": "auxclick",
+            "prevented": false,
+            "trusted": true,
+            "button": 1,
+            "meta": false,
+            "ctrl": false
+          },
+          {
+            "type": "click",
+            "prevented": false,
+            "trusted": true,
+            "button": 0,
+            "meta": true,
+            "ctrl": false
+          },
+          {
+            "type": "contextmenu",
+            "prevented": false,
+            "trusted": true,
+            "button": 2,
+            "meta": false,
+            "ctrl": false
+          },
+          {
+            "type": "auxclick",
+            "prevented": false,
+            "trusted": true,
+            "button": 2,
+            "meta": false,
+            "ctrl": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Escape and normal Tab / full-results access",
+      "status": "Pass",
+      "evidence": {
+        "preservedQuery": true,
+        "ordinaryTabDestination": {
+          "tag": "BUTTON",
+          "id": ""
+        },
+        "controlTraversal": "Tab",
+        "traversed": [
+          {
+            "tag": "BUTTON",
+            "cls": "raveldex-dropdown__submit",
+            "text": "Search"
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "raveldex-dropdown__clear",
+            "text": "Clear"
+          },
+          {
+            "tag": "A",
+            "cls": "raveldex-dropdown__full-results",
+            "text": "See all results"
+          }
+        ],
+        "nativeMethod": "Ordinary Tab",
+        "fullResultsOutsideGrid": true
+      }
+    },
+    {
+      "name": "synthetic composition",
+      "status": "Pass",
+      "evidence": {
+        "interimRequests": 0,
+        "committedRequests": 1,
+        "committedIDs": [
+          "a"
+        ],
+        "closedCompositionRequests": 0,
+        "closedFinalRoute": "http://127.0.0.1:64078/search/?lang=de&mode=prefix&q=shared+bravo#results",
+        "physicalIME": "Not run"
+      }
+    },
+    {
+      "name": "early navigation intent",
+      "status": "Pass",
+      "evidence": {
+        "pendingRequests": 1,
+        "repeatedArrowRequests": 0,
+        "finalIntent": "last",
+        "ordinaryReplyAutoSelection": false
+      }
+    },
+    {
+      "name": "stale requests and revision replacement",
+      "status": "Pass",
+      "evidence": {
+        "afterLate": [
+          "unicode"
+        ],
+        "afterRefresh": [
+          "b",
+          "c",
+          "d",
+          "e",
+          "f"
+        ],
+        "total": 6,
+        "revision": 2
+      }
+    },
+    {
+      "name": "outside pending dismissal",
+      "status": "Pass",
+      "evidence": {
+        "pointerWithSameOutsideFocus": true,
+        "focusChange": true,
+        "latePublication": false
+      }
+    },
+    {
+      "name": "typed errors / malformed / no-results / clear",
+      "status": "Pass",
+      "evidence": {
+        "malformed": [
+          "total",
+          "revision",
+          "model",
+          "hits"
+        ],
+        "retry": true,
+        "retryTraversal": "Tab",
+        "retryTabs": [
+          {
+            "tag": "BUTTON",
+            "cls": "raveldex-dropdown__submit",
+            "text": "Search"
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "raveldex-dropdown__clear",
+            "text": "Clear"
+          },
+          {
+            "tag": "A",
+            "cls": "raveldex-dropdown__full-results",
+            "text": "See all results"
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "raveldex-dropdown__retry",
+            "text": "Retry search"
+          }
+        ],
+        "pointerClear": {
+          "preserved": true,
+          "tag": "BUTTON",
+          "cls": "raveldex-dropdown__clear"
+        },
+        "clearRequests": 0,
+        "clearFocus": [
+          {
+            "from": "retry",
+            "after": "input"
+          },
+          {
+            "from": "full-results",
+            "after": "input"
+          },
+          {
+            "from": "popup-link",
+            "after": "input"
+          },
+          {
+            "from": "input",
+            "after": "input"
+          },
+          {
+            "from": "submit",
+            "after": "submit"
+          },
+          {
+            "from": "clear",
+            "after": "clear"
+          },
+          {
+            "from": "external",
+            "after": "external"
+          }
+        ]
+      }
+    },
+    {
+      "name": "single-line validation / raw refusal / safe text",
+      "status": "Pass",
+      "evidence": {
+        "refused": [
+          {
+            "code": "INVALID_OPTIONS",
+            "unchanged": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "unchanged": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "unchanged": true
+          }
+        ],
+        "malformedAndOversizedVisible": true,
+        "unsafeTitleRenderedAsText": true
+      }
+    },
+    {
+      "name": "capture and exclusive ownership",
+      "status": "Pass",
+      "evidence": {
+        "results": [
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          },
+          {
+            "code": "INVALID_OPTIONS",
+            "preserved": true
+          }
+        ],
+        "getters": 0,
+        "duplicate": true,
+        "collisions": [
+          "INVALID_OPTIONS",
+          "INVALID_OPTIONS"
+        ],
+        "modalCode": "INVALID_OPTIONS",
+        "unsupported": "UNSUPPORTED_ENVIRONMENT",
+        "capabilityPreserved": true,
+        "queries": 0
+      }
+    },
+    {
+      "name": "pending destroy and borrowed ownership",
+      "status": "Pass",
+      "evidence": {
+        "restored": true,
+        "borrowedDisposals": 0,
+        "currentTotal": 7,
+        "searches": 1,
+        "aborted": true,
+        "UI": 0,
+        "detached": [
+          {
+            "phase": "removed",
+            "noLateRows": true,
+            "restored": true,
+            "newQueries": 0,
+            "borrowedDisposals": 0
+          },
+          {
+            "phase": "adopted",
+            "noLateRows": true,
+            "restored": true,
+            "newQueries": 0,
+            "borrowedDisposals": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "authored duplicate mount and abort replacement",
+      "status": "Pass",
+      "evidence": {
+        "duplicateSame": true,
+        "preserved": true,
+        "replacementIDs": [
+          "unicode"
+        ],
+        "oldReplyPublication": false
+      }
+    },
+    {
+      "name": "native popover lifecycle",
+      "status": "Pass",
+      "evidence": {
+        "canceledOpen": "collapsed",
+        "externalClose": "active cleared synchronously",
+        "oldQueuedToggle": "cannot close current reply"
+      }
+    },
+    {
+      "name": "multiple instances / one borrowed owner",
+      "status": "Pass",
+      "evidence": {
+        "IDs": [
+          "raveldex-dropdown-1-query",
+          "raveldex-dropdown-2-query"
+        ],
+        "ownerCreations": 1,
+        "disposed": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "opt-in coordinated shortcut",
+      "status": "Pass",
+      "evidence": {
+        "ignored": [
+          {
+            "prevented": false,
+            "inside": false
+          },
+          {
+            "prevented": false,
+            "inside": false
+          },
+          {
+            "prevented": false,
+            "inside": false
+          },
+          {
+            "prevented": false,
+            "inside": false
+          },
+          {
+            "prevented": false,
+            "inside": false
+          }
+        ],
+        "preventedStillOutside": true,
+        "shortcutBounds": {
+          "x": 16,
+          "y": 574.875,
+          "width": 228.59375,
+          "height": 48.78125
+        },
+        "offscreenShortcutRevealsInput": true,
+        "editingContextsRetained": true,
+        "modalRegistrationSurvivesDropdownDestroy": true
+      }
+    },
+    {
+      "name": "captured shadow and ancestor modality",
+      "status": "Pass",
+      "evidence": {
+        "observations": [
+          {
+            "mode": "open",
+            "inputFocused": true,
+            "hostFocused": true,
+            "validActive": true,
+            "open": true
+          },
+          {
+            "mode": "closed",
+            "inputFocused": true,
+            "hostFocused": true,
+            "validActive": true,
+            "open": true
+          }
+        ],
+        "foreignModalClearsOldCounts": true,
+        "firstEscape": "dropdown",
+        "secondEscape": "native dialog"
+      }
+    },
+    {
+      "name": "real worker parity and loss",
+      "status": "Pass",
+      "evidence": {
+        "total": 7,
+        "IDs": [
+          "a",
+          "b",
+          "c",
+          "d",
+          "e"
+        ],
+        "ownerCreationsBeforeAndAfterLoss": 2,
+        "fallbackOwners": 0,
+        "error": "Search could not complete (DISPOSED). Try again.",
+        "workerErrors": [
+          "Uncaught Error: Intentional dropdown fixture worker failure"
+        ]
+      }
+    },
+    {
+      "name": "finite native projection / top-layer geometry / active visibility",
+      "status": "Pass",
+      "evidence": {
+        "total": 40,
+        "rendered": 20,
+        "geometry": {
+          "top": 346.4375,
+          "bottom": 474.4375,
+          "left": 16,
+          "right": 286,
+          "width": 270,
+          "height": 128,
+          "scrollTop": 3150,
+          "activeTop": 348.28125,
+          "activeBottom": 561.0625,
+          "activeHeight": 212.78125,
+          "clientHeight": 124,
+          "viewport": [
+            1100,
+            850
+          ],
+          "elements": 60,
+          "serializedBytes": 12340
+        },
+        "edge": {
+          "top": 258.4375,
+          "bottom": 386.4375,
+          "left": 8,
+          "right": 308,
+          "anchor": 418.4375
+        },
+        "controls": [
+          {
+            "text": "Search",
+            "inViewport": true,
+            "hit": true
+          },
+          {
+            "text": "Clear",
+            "inViewport": true,
+            "hit": true
+          },
+          {
+            "text": "See all results",
+            "inViewport": true,
+            "hit": true
+          }
+        ],
+        "explicitBounds": {
+          "x": 16,
+          "y": 522.875,
+          "width": 228.59375,
+          "height": 48.78125
+        },
+        "explicitOpenRevealsFooterInput": true,
+        "noAsyncRefocusAfterOutside": true,
+        "quantity": "DOM/serialized bytes only; not heap/paint/latency"
+      }
+    },
+    {
+      "name": "long labels / RTL / dark / text scaling / forced colors",
+      "status": "Pass",
+      "evidence": {
+        "labelUnits": 340,
+        "viewport": [
+          320,
+          568
+        ],
+        "focus": {
+          "width": "3px",
+          "style": "solid",
+          "label": "Search the complete documentation Search the complete documentation Search the complete documentation Search the complete documentation Search the complete documentation Search the complete documentation Search the complete documentation Search the complete documentation Search the complete documentation Search the complete documentation ",
+          "motion": "0s"
+        },
+        "longLabelRecovery": {
+          "popup": false,
+          "status": "40 results. Showing 0. Not enough space for this result list. Open the full-results page.",
+          "fullResults": true
+        },
+        "axeViolations": [],
+        "forcedColors": "Browser media emulation; not physical high-contrast observation",
+        "actualZoom": "Not run; root CSS font-size200% is text scaling"
+      }
+    },
+    {
+      "name": "no-space recovery",
+      "status": "Pass",
+      "evidence": {
+        "viewport": [
+          320,
+          240
+        ],
+        "total": 7,
+        "shown": 0,
+        "noFakeEmptyError": true,
+        "controlTraversal": "Tab",
+        "fullResultsHref": "http://127.0.0.1:64078/search/?lang=de&mode=prefix&q=shared#results",
+        "linkHit": {
+          "x": 261.65625,
+          "y": 177.171875,
+          "hit": true
+        },
+        "resizeQueries": 0,
+        "explicitArrowReopens": true
+      }
+    }
+  ],
+  "limits": {
+    "humanAT": "Not run; role snapshots and selected axe checks are automated supporting evidence.",
+    "physicalIME": "Not run; composition events are synthetic.",
+    "actualZoomTouchKeyboard": "Not run; viewport/text scaling and scripted input are separate.",
+    "memory": "Not measured; bundle/serialized/DOM quantities are not retained or peak heap.",
+    "WebKit": "Playwright WebKit is not native Safari or all WebKit versions."
+  },
+  "package": {
+    "name": "@vmitsaras/raveldex",
+    "version": "0.1.0-rc.0",
+    "private": true,
+    "sha256": "0eec75388d669ad02c526485366420b36fff38b567aaed9658f877b6417fc750",
+    "npmIntegrity": "sha512-/RfPkYOUKcaezl5mnb2sCWeEEe1MyI/xed7CYWiUp4nYOtNyX/FlSse5i6kS0VKJvZuek4tYLpaK2h2w2NKidg==",
+    "tarballBytes": 287415,
+    "unpackedBytes": 1158858,
+    "files": [
+      {
+        "path": "CHANGELOG.md",
+        "size": 6594
+      },
+      {
+        "path": "LICENSE",
+        "size": 1075
+      },
+      {
+        "path": "README.md",
+        "size": 5885
+      },
+      {
+        "path": "dist/adapters/indexeddb/error.d.ts",
+        "size": 975
+      },
+      {
+        "path": "dist/adapters/indexeddb/error.js",
+        "size": 622
+      },
+      {
+        "path": "dist/adapters/indexeddb/index.d.ts",
+        "size": 514
+      },
+      {
+        "path": "dist/adapters/indexeddb/index.js",
+        "size": 226
+      },
+      {
+        "path": "dist/adapters/indexeddb/persistence.d.ts",
+        "size": 331
+      },
+      {
+        "path": "dist/adapters/indexeddb/persistence.js",
+        "size": 28239
+      },
+      {
+        "path": "dist/adapters/indexeddb/types.d.ts",
+        "size": 2114
+      },
+      {
+        "path": "dist/adapters/indexeddb/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/adapters/snapshots/error.d.ts",
+        "size": 840
+      },
+      {
+        "path": "dist/adapters/snapshots/error.js",
+        "size": 1038
+      },
+      {
+        "path": "dist/adapters/snapshots/index.d.ts",
+        "size": 440
+      },
+      {
+        "path": "dist/adapters/snapshots/index.js",
+        "size": 212
+      },
+      {
+        "path": "dist/adapters/snapshots/json.d.ts",
+        "size": 1613
+      },
+      {
+        "path": "dist/adapters/snapshots/json.js",
+        "size": 12832
+      },
+      {
+        "path": "dist/adapters/snapshots/native.d.ts",
+        "size": 914
+      },
+      {
+        "path": "dist/adapters/snapshots/native.js",
+        "size": 24715
+      },
+      {
+        "path": "dist/adapters/snapshots/qualification.d.ts",
+        "size": 606
+      },
+      {
+        "path": "dist/adapters/snapshots/qualification.js",
+        "size": 3251
+      },
+      {
+        "path": "dist/adapters/snapshots/snapshots.d.ts",
+        "size": 1381
+      },
+      {
+        "path": "dist/adapters/snapshots/snapshots.js",
+        "size": 14844
+      },
+      {
+        "path": "dist/adapters/snapshots/source.d.ts",
+        "size": 628
+      },
+      {
+        "path": "dist/adapters/snapshots/source.js",
+        "size": 2268
+      },
+      {
+        "path": "dist/adapters/snapshots/types.d.ts",
+        "size": 1567
+      },
+      {
+        "path": "dist/adapters/snapshots/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/adapters/worker/client.d.ts",
+        "size": 223
+      },
+      {
+        "path": "dist/adapters/worker/client.js",
+        "size": 24399
+      },
+      {
+        "path": "dist/adapters/worker/error.d.ts",
+        "size": 758
+      },
+      {
+        "path": "dist/adapters/worker/error.js",
+        "size": 626
+      },
+      {
+        "path": "dist/adapters/worker/host-entry.d.ts",
+        "size": 200
+      },
+      {
+        "path": "dist/adapters/worker/host-entry.js",
+        "size": 117
+      },
+      {
+        "path": "dist/adapters/worker/host.d.ts",
+        "size": 1195
+      },
+      {
+        "path": "dist/adapters/worker/host.js",
+        "size": 13505
+      },
+      {
+        "path": "dist/adapters/worker/index.d.ts",
+        "size": 393
+      },
+      {
+        "path": "dist/adapters/worker/index.js",
+        "size": 196
+      },
+      {
+        "path": "dist/adapters/worker/protocol.d.ts",
+        "size": 2195
+      },
+      {
+        "path": "dist/adapters/worker/protocol.js",
+        "size": 13001
+      },
+      {
+        "path": "dist/adapters/worker/snapshot-channel.d.ts",
+        "size": 789
+      },
+      {
+        "path": "dist/adapters/worker/snapshot-channel.js",
+        "size": 279
+      },
+      {
+        "path": "dist/adapters/worker/snapshots-host.d.ts",
+        "size": 392
+      },
+      {
+        "path": "dist/adapters/worker/snapshots-host.js",
+        "size": 754
+      },
+      {
+        "path": "dist/adapters/worker/snapshots.d.ts",
+        "size": 1086
+      },
+      {
+        "path": "dist/adapters/worker/snapshots.js",
+        "size": 3143
+      },
+      {
+        "path": "dist/adapters/worker/types.d.ts",
+        "size": 2830
+      },
+      {
+        "path": "dist/adapters/worker/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/evidence/builder.d.ts",
+        "size": 1372
+      },
+      {
+        "path": "dist/addons/evidence/builder.js",
+        "size": 12364
+      },
+      {
+        "path": "dist/addons/evidence/index.d.ts",
+        "size": 430
+      },
+      {
+        "path": "dist/addons/evidence/index.js",
+        "size": 220
+      },
+      {
+        "path": "dist/addons/evidence/occurrences.d.ts",
+        "size": 1353
+      },
+      {
+        "path": "dist/addons/evidence/occurrences.js",
+        "size": 4091
+      },
+      {
+        "path": "dist/addons/evidence/options.d.ts",
+        "size": 1114
+      },
+      {
+        "path": "dist/addons/evidence/options.js",
+        "size": 4808
+      },
+      {
+        "path": "dist/addons/evidence/providers.d.ts",
+        "size": 969
+      },
+      {
+        "path": "dist/addons/evidence/providers.js",
+        "size": 10822
+      },
+      {
+        "path": "dist/addons/evidence/types.d.ts",
+        "size": 1752
+      },
+      {
+        "path": "dist/addons/evidence/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/facets/facets.d.ts",
+        "size": 288
+      },
+      {
+        "path": "dist/addons/facets/facets.js",
+        "size": 10267
+      },
+      {
+        "path": "dist/addons/facets/index.d.ts",
+        "size": 152
+      },
+      {
+        "path": "dist/addons/facets/index.js",
+        "size": 44
+      },
+      {
+        "path": "dist/addons/facets/options.d.ts",
+        "size": 1180
+      },
+      {
+        "path": "dist/addons/facets/options.js",
+        "size": 2083
+      },
+      {
+        "path": "dist/addons/filters/index.d.ts",
+        "size": 690
+      },
+      {
+        "path": "dist/addons/filters/index.js",
+        "size": 7427
+      },
+      {
+        "path": "dist/addons/filters/options.d.ts",
+        "size": 365
+      },
+      {
+        "path": "dist/addons/filters/options.js",
+        "size": 1818
+      },
+      {
+        "path": "dist/addons/identifiers/index.d.ts",
+        "size": 456
+      },
+      {
+        "path": "dist/addons/identifiers/index.js",
+        "size": 2374
+      },
+      {
+        "path": "dist/addons/identifiers/scanner.d.ts",
+        "size": 597
+      },
+      {
+        "path": "dist/addons/identifiers/scanner.js",
+        "size": 4906
+      },
+      {
+        "path": "dist/addons/inspector/diagnostics.d.ts",
+        "size": 280
+      },
+      {
+        "path": "dist/addons/inspector/diagnostics.js",
+        "size": 12871
+      },
+      {
+        "path": "dist/addons/inspector/index.d.ts",
+        "size": 384
+      },
+      {
+        "path": "dist/addons/inspector/index.js",
+        "size": 104
+      },
+      {
+        "path": "dist/addons/inspector/inspector.d.ts",
+        "size": 300
+      },
+      {
+        "path": "dist/addons/inspector/inspector.js",
+        "size": 7614
+      },
+      {
+        "path": "dist/addons/inspector/options.d.ts",
+        "size": 998
+      },
+      {
+        "path": "dist/addons/inspector/options.js",
+        "size": 4125
+      },
+      {
+        "path": "dist/addons/inspector/output.d.ts",
+        "size": 573
+      },
+      {
+        "path": "dist/addons/inspector/output.js",
+        "size": 2201
+      },
+      {
+        "path": "dist/addons/inspector/types.d.ts",
+        "size": 3849
+      },
+      {
+        "path": "dist/addons/inspector/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/literal/evidence.d.ts",
+        "size": 346
+      },
+      {
+        "path": "dist/addons/literal/evidence.js",
+        "size": 5943
+      },
+      {
+        "path": "dist/addons/literal/index.d.ts",
+        "size": 500
+      },
+      {
+        "path": "dist/addons/literal/index.js",
+        "size": 4083
+      },
+      {
+        "path": "dist/addons/literal/options.d.ts",
+        "size": 1339
+      },
+      {
+        "path": "dist/addons/literal/options.js",
+        "size": 5553
+      },
+      {
+        "path": "dist/addons/literal/scanner.d.ts",
+        "size": 675
+      },
+      {
+        "path": "dist/addons/literal/scanner.js",
+        "size": 1655
+      },
+      {
+        "path": "dist/addons/literal/source.d.ts",
+        "size": 479
+      },
+      {
+        "path": "dist/addons/literal/source.js",
+        "size": 2370
+      },
+      {
+        "path": "dist/addons/literal/types.d.ts",
+        "size": 1326
+      },
+      {
+        "path": "dist/addons/literal/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/metadata/payload.d.ts",
+        "size": 892
+      },
+      {
+        "path": "dist/addons/metadata/payload.js",
+        "size": 2964
+      },
+      {
+        "path": "dist/addons/patch/capture.d.ts",
+        "size": 566
+      },
+      {
+        "path": "dist/addons/patch/capture.js",
+        "size": 2779
+      },
+      {
+        "path": "dist/addons/patch/compose.d.ts",
+        "size": 466
+      },
+      {
+        "path": "dist/addons/patch/compose.js",
+        "size": 3979
+      },
+      {
+        "path": "dist/addons/patch/index.d.ts",
+        "size": 343
+      },
+      {
+        "path": "dist/addons/patch/index.js",
+        "size": 788
+      },
+      {
+        "path": "dist/addons/patch/types.d.ts",
+        "size": 680
+      },
+      {
+        "path": "dist/addons/patch/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/phrases/index.d.ts",
+        "size": 432
+      },
+      {
+        "path": "dist/addons/phrases/index.js",
+        "size": 5066
+      },
+      {
+        "path": "dist/addons/phrases/mixed.d.ts",
+        "size": 423
+      },
+      {
+        "path": "dist/addons/phrases/mixed.js",
+        "size": 4370
+      },
+      {
+        "path": "dist/addons/phrases/options.d.ts",
+        "size": 796
+      },
+      {
+        "path": "dist/addons/phrases/options.js",
+        "size": 2706
+      },
+      {
+        "path": "dist/addons/phrases/source.d.ts",
+        "size": 186
+      },
+      {
+        "path": "dist/addons/phrases/source.js",
+        "size": 127
+      },
+      {
+        "path": "dist/addons/phrases/store.d.ts",
+        "size": 1373
+      },
+      {
+        "path": "dist/addons/phrases/store.js",
+        "size": 8131
+      },
+      {
+        "path": "dist/addons/phrases/verifier.d.ts",
+        "size": 755
+      },
+      {
+        "path": "dist/addons/phrases/verifier.js",
+        "size": 1837
+      },
+      {
+        "path": "dist/addons/positions/index.d.ts",
+        "size": 192
+      },
+      {
+        "path": "dist/addons/positions/index.js",
+        "size": 131
+      },
+      {
+        "path": "dist/addons/positions/options.d.ts",
+        "size": 1019
+      },
+      {
+        "path": "dist/addons/positions/options.js",
+        "size": 3285
+      },
+      {
+        "path": "dist/addons/positions/phrases.d.ts",
+        "size": 368
+      },
+      {
+        "path": "dist/addons/positions/phrases.js",
+        "size": 3099
+      },
+      {
+        "path": "dist/addons/positions/store.d.ts",
+        "size": 2497
+      },
+      {
+        "path": "dist/addons/positions/store.js",
+        "size": 13721
+      },
+      {
+        "path": "dist/addons/positions/tagged.d.ts",
+        "size": 734
+      },
+      {
+        "path": "dist/addons/positions/tagged.js",
+        "size": 6931
+      },
+      {
+        "path": "dist/addons/positions/verifier.d.ts",
+        "size": 912
+      },
+      {
+        "path": "dist/addons/positions/verifier.js",
+        "size": 7493
+      },
+      {
+        "path": "dist/addons/proximity/index.d.ts",
+        "size": 434
+      },
+      {
+        "path": "dist/addons/proximity/index.js",
+        "size": 2404
+      },
+      {
+        "path": "dist/addons/proximity/options.d.ts",
+        "size": 271
+      },
+      {
+        "path": "dist/addons/proximity/options.js",
+        "size": 1765
+      },
+      {
+        "path": "dist/addons/proximity/types.d.ts",
+        "size": 521
+      },
+      {
+        "path": "dist/addons/proximity/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/proximity/verifier.d.ts",
+        "size": 303
+      },
+      {
+        "path": "dist/addons/proximity/verifier.js",
+        "size": 3674
+      },
+      {
+        "path": "dist/addons/query-syntax/errors.d.ts",
+        "size": 721
+      },
+      {
+        "path": "dist/addons/query-syntax/errors.js",
+        "size": 1484
+      },
+      {
+        "path": "dist/addons/query-syntax/index.d.ts",
+        "size": 533
+      },
+      {
+        "path": "dist/addons/query-syntax/index.js",
+        "size": 4035
+      },
+      {
+        "path": "dist/addons/query-syntax/lexer.d.ts",
+        "size": 827
+      },
+      {
+        "path": "dist/addons/query-syntax/lexer.js",
+        "size": 3720
+      },
+      {
+        "path": "dist/addons/query-syntax/options.d.ts",
+        "size": 535
+      },
+      {
+        "path": "dist/addons/query-syntax/options.js",
+        "size": 1476
+      },
+      {
+        "path": "dist/addons/query-syntax/parser.d.ts",
+        "size": 388
+      },
+      {
+        "path": "dist/addons/query-syntax/parser.js",
+        "size": 4473
+      },
+      {
+        "path": "dist/addons/query-syntax/types.d.ts",
+        "size": 1024
+      },
+      {
+        "path": "dist/addons/query-syntax/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/sections/index.d.ts",
+        "size": 334
+      },
+      {
+        "path": "dist/addons/sections/index.js",
+        "size": 136
+      },
+      {
+        "path": "dist/addons/sections/sections.d.ts",
+        "size": 316
+      },
+      {
+        "path": "dist/addons/sections/sections.js",
+        "size": 10907
+      },
+      {
+        "path": "dist/addons/sections/types.d.ts",
+        "size": 1829
+      },
+      {
+        "path": "dist/addons/sections/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/sections/validation.d.ts",
+        "size": 843
+      },
+      {
+        "path": "dist/addons/sections/validation.js",
+        "size": 4759
+      },
+      {
+        "path": "dist/addons/snippets/index.d.ts",
+        "size": 291
+      },
+      {
+        "path": "dist/addons/snippets/index.js",
+        "size": 133
+      },
+      {
+        "path": "dist/addons/snippets/snippets.d.ts",
+        "size": 2239
+      },
+      {
+        "path": "dist/addons/snippets/snippets.js",
+        "size": 19825
+      },
+      {
+        "path": "dist/addons/snippets/types.d.ts",
+        "size": 2076
+      },
+      {
+        "path": "dist/addons/snippets/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/suggestions/index.d.ts",
+        "size": 480
+      },
+      {
+        "path": "dist/addons/suggestions/index.js",
+        "size": 7022
+      },
+      {
+        "path": "dist/addons/suggestions/options.d.ts",
+        "size": 1077
+      },
+      {
+        "path": "dist/addons/suggestions/options.js",
+        "size": 2084
+      },
+      {
+        "path": "dist/addons/synonyms/index.d.ts",
+        "size": 1012
+      },
+      {
+        "path": "dist/addons/synonyms/index.js",
+        "size": 3725
+      },
+      {
+        "path": "dist/addons/synonyms/options.d.ts",
+        "size": 802
+      },
+      {
+        "path": "dist/addons/synonyms/options.js",
+        "size": 4005
+      },
+      {
+        "path": "dist/addons/typo/distance.d.ts",
+        "size": 333
+      },
+      {
+        "path": "dist/addons/typo/distance.js",
+        "size": 1264
+      },
+      {
+        "path": "dist/addons/typo/index.d.ts",
+        "size": 480
+      },
+      {
+        "path": "dist/addons/typo/index.js",
+        "size": 3307
+      },
+      {
+        "path": "dist/addons/typo/options.d.ts",
+        "size": 434
+      },
+      {
+        "path": "dist/addons/typo/options.js",
+        "size": 2035
+      },
+      {
+        "path": "dist/addons/typo/types.d.ts",
+        "size": 655
+      },
+      {
+        "path": "dist/addons/typo/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/ui/dropdown.css",
+        "size": 4549
+      },
+      {
+        "path": "dist/addons/ui/dropdown.d.ts",
+        "size": 1782
+      },
+      {
+        "path": "dist/addons/ui/dropdown.js",
+        "size": 32712
+      },
+      {
+        "path": "dist/addons/ui/index.d.ts",
+        "size": 119
+      },
+      {
+        "path": "dist/addons/ui/index.js",
+        "size": 43
+      },
+      {
+        "path": "dist/addons/ui/inline-lifecycle.d.ts",
+        "size": 819
+      },
+      {
+        "path": "dist/addons/ui/inline-lifecycle.js",
+        "size": 247
+      },
+      {
+        "path": "dist/addons/ui/inline-render.d.ts",
+        "size": 1353
+      },
+      {
+        "path": "dist/addons/ui/inline-render.js",
+        "size": 10915
+      },
+      {
+        "path": "dist/addons/ui/inline-sections.d.ts",
+        "size": 1297
+      },
+      {
+        "path": "dist/addons/ui/inline-sections.js",
+        "size": 13636
+      },
+      {
+        "path": "dist/addons/ui/inline.css",
+        "size": 6277
+      },
+      {
+        "path": "dist/addons/ui/inline.d.ts",
+        "size": 2928
+      },
+      {
+        "path": "dist/addons/ui/inline.js",
+        "size": 23902
+      },
+      {
+        "path": "dist/addons/ui/modal-scroll.d.ts",
+        "size": 154
+      },
+      {
+        "path": "dist/addons/ui/modal-scroll.js",
+        "size": 1492
+      },
+      {
+        "path": "dist/addons/ui/modal-shortcuts.d.ts",
+        "size": 326
+      },
+      {
+        "path": "dist/addons/ui/modal-shortcuts.js",
+        "size": 1618
+      },
+      {
+        "path": "dist/addons/ui/modal.css",
+        "size": 6858
+      },
+      {
+        "path": "dist/addons/ui/modal.d.ts",
+        "size": 792
+      },
+      {
+        "path": "dist/addons/ui/modal.js",
+        "size": 17474
+      },
+      {
+        "path": "dist/addons/ui/mounts.d.ts",
+        "size": 195
+      },
+      {
+        "path": "dist/addons/ui/mounts.js",
+        "size": 117
+      },
+      {
+        "path": "dist/addons/ui/options.d.ts",
+        "size": 970
+      },
+      {
+        "path": "dist/addons/ui/options.js",
+        "size": 5673
+      },
+      {
+        "path": "dist/addons/ui/query.d.ts",
+        "size": 428
+      },
+      {
+        "path": "dist/addons/ui/query.js",
+        "size": 1101
+      },
+      {
+        "path": "dist/addons/ui/render.d.ts",
+        "size": 1301
+      },
+      {
+        "path": "dist/addons/ui/render.js",
+        "size": 8570
+      },
+      {
+        "path": "dist/addons/ui/styles.css",
+        "size": 3582
+      },
+      {
+        "path": "dist/addons/ui/types.d.ts",
+        "size": 1318
+      },
+      {
+        "path": "dist/addons/ui/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/addons/ui/ui.d.ts",
+        "size": 199
+      },
+      {
+        "path": "dist/addons/ui/ui.js",
+        "size": 16706
+      },
+      {
+        "path": "dist/core/analyzer/basic.d.ts",
+        "size": 1059
+      },
+      {
+        "path": "dist/core/analyzer/basic.js",
+        "size": 1617
+      },
+      {
+        "path": "dist/core/analyzer/identifier.d.ts",
+        "size": 773
+      },
+      {
+        "path": "dist/core/analyzer/identifier.js",
+        "size": 5356
+      },
+      {
+        "path": "dist/core/analyzer/selected.d.ts",
+        "size": 1103
+      },
+      {
+        "path": "dist/core/analyzer/selected.js",
+        "size": 3455
+      },
+      {
+        "path": "dist/core/capabilities/capture.d.ts",
+        "size": 460
+      },
+      {
+        "path": "dist/core/capabilities/capture.js",
+        "size": 724
+      },
+      {
+        "path": "dist/core/capabilities/expansion.d.ts",
+        "size": 700
+      },
+      {
+        "path": "dist/core/capabilities/expansion.js",
+        "size": 7013
+      },
+      {
+        "path": "dist/core/capabilities/participants.d.ts",
+        "size": 418
+      },
+      {
+        "path": "dist/core/capabilities/participants.js",
+        "size": 1969
+      },
+      {
+        "path": "dist/core/capabilities/refinement.d.ts",
+        "size": 1520
+      },
+      {
+        "path": "dist/core/capabilities/refinement.js",
+        "size": 9713
+      },
+      {
+        "path": "dist/core/capabilities/registration.d.ts",
+        "size": 264
+      },
+      {
+        "path": "dist/core/capabilities/registration.js",
+        "size": 16163
+      },
+      {
+        "path": "dist/core/capabilities/types.d.ts",
+        "size": 9914
+      },
+      {
+        "path": "dist/core/capabilities/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/capabilities/worker-identity.d.ts",
+        "size": 227
+      },
+      {
+        "path": "dist/core/capabilities/worker-identity.js",
+        "size": 604
+      },
+      {
+        "path": "dist/core/contracts/data.d.ts",
+        "size": 1274
+      },
+      {
+        "path": "dist/core/contracts/data.js",
+        "size": 3247
+      },
+      {
+        "path": "dist/core/contracts/options.d.ts",
+        "size": 534
+      },
+      {
+        "path": "dist/core/contracts/options.js",
+        "size": 2921
+      },
+      {
+        "path": "dist/core/contracts/query.d.ts",
+        "size": 1723
+      },
+      {
+        "path": "dist/core/contracts/query.js",
+        "size": 15915
+      },
+      {
+        "path": "dist/core/contracts/record.d.ts",
+        "size": 1754
+      },
+      {
+        "path": "dist/core/contracts/record.js",
+        "size": 5968
+      },
+      {
+        "path": "dist/core/contracts/schema.d.ts",
+        "size": 346
+      },
+      {
+        "path": "dist/core/contracts/schema.js",
+        "size": 5099
+      },
+      {
+        "path": "dist/core/contracts/types.d.ts",
+        "size": 4793
+      },
+      {
+        "path": "dist/core/contracts/types.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/errors/error.d.ts",
+        "size": 1008
+      },
+      {
+        "path": "dist/core/errors/error.js",
+        "size": 1300
+      },
+      {
+        "path": "dist/core/execution/engine.d.ts",
+        "size": 4230
+      },
+      {
+        "path": "dist/core/execution/engine.js",
+        "size": 15873
+      },
+      {
+        "path": "dist/core/execution/host.d.ts",
+        "size": 332
+      },
+      {
+        "path": "dist/core/execution/host.js",
+        "size": 703
+      },
+      {
+        "path": "dist/core/index/construction.d.ts",
+        "size": 850
+      },
+      {
+        "path": "dist/core/index/construction.js",
+        "size": 8470
+      },
+      {
+        "path": "dist/core/index/directory.d.ts",
+        "size": 948
+      },
+      {
+        "path": "dist/core/index/directory.js",
+        "size": 1906
+      },
+      {
+        "path": "dist/core/index/invariants.d.ts",
+        "size": 257
+      },
+      {
+        "path": "dist/core/index/invariants.js",
+        "size": 4747
+      },
+      {
+        "path": "dist/core/index/staging.d.ts",
+        "size": 1080
+      },
+      {
+        "path": "dist/core/index/staging.js",
+        "size": 3537
+      },
+      {
+        "path": "dist/core/index/state.d.ts",
+        "size": 1248
+      },
+      {
+        "path": "dist/core/index/state.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/limits/limits.d.ts",
+        "size": 1787
+      },
+      {
+        "path": "dist/core/limits/limits.js",
+        "size": 3039
+      },
+      {
+        "path": "dist/core/limits/work.d.ts",
+        "size": 521
+      },
+      {
+        "path": "dist/core/limits/work.js",
+        "size": 1054
+      },
+      {
+        "path": "dist/core/mutations/capture.d.ts",
+        "size": 505
+      },
+      {
+        "path": "dist/core/mutations/capture.js",
+        "size": 1323
+      },
+      {
+        "path": "dist/core/mutations/delta.d.ts",
+        "size": 1350
+      },
+      {
+        "path": "dist/core/mutations/delta.js",
+        "size": 7817
+      },
+      {
+        "path": "dist/core/mutations/document.d.ts",
+        "size": 707
+      },
+      {
+        "path": "dist/core/mutations/document.js",
+        "size": 1752
+      },
+      {
+        "path": "dist/core/mutations/owner.d.ts",
+        "size": 1975
+      },
+      {
+        "path": "dist/core/mutations/owner.js",
+        "size": 8982
+      },
+      {
+        "path": "dist/core/query/compile.d.ts",
+        "size": 1877
+      },
+      {
+        "path": "dist/core/query/compile.js",
+        "size": 7113
+      },
+      {
+        "path": "dist/core/query/evaluate.d.ts",
+        "size": 813
+      },
+      {
+        "path": "dist/core/query/evaluate.js",
+        "size": 4365
+      },
+      {
+        "path": "dist/core/query/search.d.ts",
+        "size": 1414
+      },
+      {
+        "path": "dist/core/query/search.js",
+        "size": 7704
+      },
+      {
+        "path": "dist/core/query/work.d.ts",
+        "size": 468
+      },
+      {
+        "path": "dist/core/query/work.js",
+        "size": 866
+      },
+      {
+        "path": "dist/core/ranking/bm25.d.ts",
+        "size": 600
+      },
+      {
+        "path": "dist/core/ranking/bm25.js",
+        "size": 3368
+      },
+      {
+        "path": "dist/core/ranking/page.d.ts",
+        "size": 600
+      },
+      {
+        "path": "dist/core/ranking/page.js",
+        "size": 2514
+      },
+      {
+        "path": "dist/core/retrieval/exact.d.ts",
+        "size": 318
+      },
+      {
+        "path": "dist/core/retrieval/exact.js",
+        "size": 2300
+      },
+      {
+        "path": "dist/core/retrieval/expand.d.ts",
+        "size": 858
+      },
+      {
+        "path": "dist/core/retrieval/expand.js",
+        "size": 3816
+      },
+      {
+        "path": "dist/core/revision/participant.d.ts",
+        "size": 1052
+      },
+      {
+        "path": "dist/core/revision/participant.js",
+        "size": 11
+      },
+      {
+        "path": "dist/core/trace/facts.d.ts",
+        "size": 2441
+      },
+      {
+        "path": "dist/core/trace/facts.js",
+        "size": 2084
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 1750
+      },
+      {
+        "path": "dist/index.js",
+        "size": 209
+      },
+      {
+        "path": "dist/integrations/languages/english/index.d.ts",
+        "size": 441
+      },
+      {
+        "path": "dist/integrations/languages/english/index.js",
+        "size": 2087
+      },
+      {
+        "path": "dist/integrations/languages/english/stem.d.ts",
+        "size": 374
+      },
+      {
+        "path": "dist/integrations/languages/english/stem.js",
+        "size": 5367
+      },
+      {
+        "path": "dist/integrations/localsearch/codec.d.ts",
+        "size": 377
+      },
+      {
+        "path": "dist/integrations/localsearch/codec.js",
+        "size": 18108
+      },
+      {
+        "path": "dist/integrations/localsearch/error.d.ts",
+        "size": 1017
+      },
+      {
+        "path": "dist/integrations/localsearch/error.js",
+        "size": 732
+      },
+      {
+        "path": "dist/integrations/localsearch/index.d.ts",
+        "size": 337
+      },
+      {
+        "path": "dist/integrations/localsearch/index.js",
+        "size": 129
+      },
+      {
+        "path": "dist/integrations/localsearch/legacy.d.ts",
+        "size": 1558
+      },
+      {
+        "path": "dist/integrations/localsearch/legacy.js",
+        "size": 6714
+      },
+      {
+        "path": "dist/integrations/localsearch/LICENSE.LocalSearch",
+        "size": 1075
+      },
+      {
+        "path": "dist/integrations/localsearch/migration.d.ts",
+        "size": 476
+      },
+      {
+        "path": "dist/integrations/localsearch/migration.js",
+        "size": 4565
+      },
+      {
+        "path": "dist/integrations/localsearch/types.d.ts",
+        "size": 1133
+      },
+      {
+        "path": "dist/integrations/localsearch/types.js",
+        "size": 11
+      },
+      {
+        "path": "docs/api/ADDONS.md",
+        "size": 20320
+      },
+      {
+        "path": "docs/api/COMPATIBILITY.md",
+        "size": 2803
+      },
+      {
+        "path": "docs/api/CORE.md",
+        "size": 14445
+      },
+      {
+        "path": "docs/api/ENGLISH.md",
+        "size": 6096
+      },
+      {
+        "path": "docs/api/examples/addons.mjs",
+        "size": 3493
+      },
+      {
+        "path": "docs/api/examples/browser.mjs",
+        "size": 1755
+      },
+      {
+        "path": "docs/api/examples/core.mjs",
+        "size": 510
+      },
+      {
+        "path": "docs/api/examples/migration.mjs",
+        "size": 708
+      },
+      {
+        "path": "docs/api/examples/README.md",
+        "size": 2896
+      },
+      {
+        "path": "docs/api/examples/snapshots.mjs",
+        "size": 1531
+      },
+      {
+        "path": "docs/api/examples/ui.mjs",
+        "size": 649
+      },
+      {
+        "path": "docs/api/examples/worker-host.mjs",
+        "size": 355
+      },
+      {
+        "path": "docs/api/examples/worker.mjs",
+        "size": 1204
+      },
+      {
+        "path": "docs/api/GETTING_STARTED.md",
+        "size": 5797
+      },
+      {
+        "path": "docs/api/HOSTS.md",
+        "size": 51984
+      },
+      {
+        "path": "docs/api/IDENTIFIERS.md",
+        "size": 6944
+      },
+      {
+        "path": "docs/api/LIMITATIONS.md",
+        "size": 3208
+      },
+      {
+        "path": "docs/api/LITERAL.md",
+        "size": 5297
+      },
+      {
+        "path": "docs/api/PROXIMITY.md",
+        "size": 4726
+      },
+      {
+        "path": "docs/api/QUERY_SYNTAX.md",
+        "size": 7293
+      },
+      {
+        "path": "docs/api/README.md",
+        "size": 7049
+      },
+      {
+        "path": "docs/api/RECORD_PATCH.md",
+        "size": 4531
+      },
+      {
+        "path": "docs/api/STATIC_ASTRO.md",
+        "size": 11522
+      },
+      {
+        "path": "docs/api/SUGGESTIONS.md",
+        "size": 4033
+      },
+      {
+        "path": "docs/api/SYNONYMS.md",
+        "size": 5270
+      },
+      {
+        "path": "docs/api/TYPO.md",
+        "size": 3866
+      },
+      {
+        "path": "docs/release/CANDIDATE.md",
+        "size": 4257
+      },
+      {
+        "path": "docs/release/COMPATIBILITY.md",
+        "size": 7417
+      },
+      {
+        "path": "docs/release/PREPARATION.md",
+        "size": 6939
+      },
+      {
+        "path": "docs/release/PUBLICATION_STATUS.md",
+        "size": 4313
+      },
+      {
+        "path": "docs/support/RX-4003.md",
+        "size": 11191
+      },
+      {
+        "path": "package.json",
+        "size": 11511
+      }
+    ]
+  },
+  "consumer": {
+    "directory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-wGcYfk",
+    "installed": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-wGcYfk/node_modules/@vmitsaras/raveldex",
+    "dropdownJavaScriptSHA256": "07965b187a0aeac5de26cc462cb329ff9a56253824fcb079352874819911ce1e",
+    "copiedFixtureSHA256": "8a1ff152604daae8f8c616a24ce136c391d2d8e9d578936bb1e59ac2f7245ca1"
+  },
+  "graph": {
+    "selectedInputs": [
+      "node_modules/@vmitsaras/raveldex/dist/core/errors/error.js",
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/options.js",
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/render.js",
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/query.js",
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/mounts.js",
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/modal-shortcuts.js",
+      "node_modules/@vmitsaras/raveldex/dist/addons/ui/dropdown.js",
+      "dropdown-entry.mjs"
+    ],
+    "minifiedBytes": 19719,
+    "gzipBytes": 7468,
+    "sha256": "4fb199689bc14b6dc00c55ac0a79c8106e2d6b604eb5fb624fcc0cc3bdcf4206",
+    "CSS": {
+      "bytes": 4549,
+      "sha256": "acef9af7c581dbaaf74eb365450d1540978321e3f1d0dee42fce41c31b1072be"
+    }
+  },
+  "sourceHashes": {
+    "test/ui/dropdown-browser.test.mjs": "b76779c02504277c5922d535e9f52877f2f2cf68c2e96595063e076044252905",
+    "test/ui/dropdown-fixture.mjs": "8a1ff152604daae8f8c616a24ce136c391d2d8e9d578936bb1e59ac2f7245ca1",
+    "test/ui/dropdown-worker.mjs": "423e0ce7cf3b03f9fa926bb7e9f581efb3ac6b40b000e252c6e09808254e0400",
+    "src/addons/ui/dropdown.ts": "6518154660f1937749fc8ddc3b9a4da6e22a391947af373413e70b6dde380940",
+    "src/addons/ui/dropdown.css": "acef9af7c581dbaaf74eb365450d1540978321e3f1d0dee42fce41c31b1072be"
+  },
+  "screenshots": [
+    {
+      "name": "desktop",
+      "path": "/private/tmp/raveldex-rx7001-d5l7vtnp/tests/final-chromium-ci-desktop.png",
+      "viewport": {
+        "width": 1100,
+        "height": 850
+      }
+    },
+    {
+      "name": "320-bottom-clipped-header",
+      "path": "/private/tmp/raveldex-rx7001-d5l7vtnp/tests/final-chromium-ci-320-bottom-clipped-header.png",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      }
+    },
+    {
+      "name": "320-rtl-long-label-text200",
+      "path": "/private/tmp/raveldex-rx7001-d5l7vtnp/tests/final-chromium-ci-320-rtl-long-label-text200.png",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      }
+    },
+    {
+      "name": "320-rtl-dark-text200",
+      "path": "/private/tmp/raveldex-rx7001-d5l7vtnp/tests/final-chromium-ci-320-rtl-dark-text200.png",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      }
+    },
+    {
+      "name": "320-forced-colors-text200",
+      "path": "/private/tmp/raveldex-rx7001-d5l7vtnp/tests/final-chromium-ci-320-forced-colors-text200.png",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      }
+    },
+    {
+      "name": "320x240-no-space",
+      "path": "/private/tmp/raveldex-rx7001-d5l7vtnp/tests/final-chromium-ci-320x240-no-space.png",
+      "viewport": {
+        "width": 320,
+        "height": 240
+      }
+    }
+  ],
+  "finishedAt": "2026-11-01T22:42:05.982Z"
+}

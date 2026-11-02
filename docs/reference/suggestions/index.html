@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SUGGESTIONS · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="token-suggestions">Token suggestions</h1>
+<p>Use token suggestions to offer completions from words that are already indexed. Register the add-on from <code>@vmitsaras/raveldex/addons/suggestions</code>, then request suggestions separately from the search query. Your application decides whether to display or apply them.</p>
+<p>Run this example in an installed ESM application. It searches for <code>source</code> while asking for completions of <code>so</code>:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createSuggestions } from '@vmitsaras/raveldex/addons/suggestions';
+
+const engine = createRaveldex({
+  schema: { text: { title: {} } },
+  addons: [createSuggestions({ fields: ['title'] })],
+});
+try {
+  await engine.addMany([
+    { id: 'a', text: { title: 'Source snapshots' } },
+    { id: 'b', text: { title: 'Source recovery' } },
+  ]);
+  const result = await engine.search('source', {
+    extensions: { suggestions: { text: 'so', limit: 5 } },
+  });
+  console.log(result.extensions.suggestions);
+  // policy: dictionary-prefix-df-v1; source has fieldDocumentFrequency 2.
+  // result.total/hits still describe the ordinary submitted query "source".
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>The printed suggestions include <code>source</code> with <code>fieldDocumentFrequency: 2</code>, because it appears in both indexed titles. The search still returns the two records matching the submitted query <code>source</code>; requesting completions does not replace that query.</p>
+<p>Register <code>createSuggestions({ fields, id?, maxSuggestions?, maxCandidates?, maxWorkUnits? })</code>. The factory copies and freezes its options, and the capability stays named <code>suggestions</code> even if you change the registration ID. The default result limit is 10 and the maximum is 20. Matching candidates are limited to 10,000 by default and at most 10,000; the work budget defaults to 10,000,000 units. Candidate and work options can only lower those maxima.</p>
+<p>Request <code>{ text, fields?, limit? }</code> through <code>SearchOptions.extensions.suggestions</code>. The text must produce no more than one <code>basic-v1</code> token. Surrounding punctuation is fine. Empty text, punctuation alone or a prefix shorter than two normalized Unicode code points gives no suggestions. Multiple tokens reject with <code>INVALID_OPTIONS</code>.</p>
+<p>Fields default to all schema text fields, and every requested field must be enabled. An explicit list cannot be empty, duplicated or contain unknown names. Set <code>limit: 0</code> if you only need the exact suggestion total; any limit must fit the installed cap.</p>
+<p><code>SuggestionsResult</code> contains <code>{ policy, prefix, fields, total, omitted, items, dictionaryEntriesVisited }</code>. Items are readonly <code>{ term, fieldDocumentFrequency }</code>. Terms/prefix are normalized once by existing NFKC/lowercase rules. Candidate prefix matching includes exact terms; it adds no accent folding or typo correction. Rank is descending summed field-local document frequency, then ordinal UTF-16 term order. A document can contribute in multiple selected fields. Counts are not BM25 scores or unique-document counts across fields.</p>
+<p>Suggestions use all selected indexed fields, not just records matching the current query, filters or page. The enclosing search revision identifies the dictionary used. Updates, replacements, removals and clear operations update that dictionary too.</p>
+<p><code>omitted</code> counts matching terms outside the returned list. Exceeding candidate, output, work or deadline limits rejects the operation rather than returning a partial total. Cancellation and disposal work as usual. The add-on keeps no extra retained index or cross-operation cache.</p>
+<p>Exports: <code>createSuggestions</code>, <code>SUGGESTIONS_POLICY</code>; types <code>SuggestionsOptions</code>, <code>SuggestionRequest</code>, <code>Suggestion</code>, <code>SuggestionsResult</code>. No new engine method is added. Optional worker use requires matching explicit host/client registration options.</p>
+<p>This add-on supplies data, not a suggestion widget. In your interface, handle stale results, input-method composition, announcements and the user’s choice to apply a suggestion. The built-in UI is unchanged. See <a href="/raveldex/reference/addons/">optional search capabilities</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

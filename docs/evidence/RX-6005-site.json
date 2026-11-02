@@ -1,0 +1,59 @@
+{
+  "status": "Pass",
+  "browser": "156.0.8078.74",
+  "node": "v24.21.0",
+  "observations": [
+    {
+      "name": "onboarding, deep-link refresh, exact recipe and private-path refusal",
+      "status": "Pass"
+    },
+    {
+      "name": "real packed demo navigation, pagination, facets, phrase/offset/worker parity, Inspector, empty recovery, teardown",
+      "status": "Pass",
+      "direct": [
+        {
+          "id": "usage:docs/api/ADDONS.md#source-positions-and-phrases",
+          "score": "Score 7.178773599384961",
+          "text": [
+            "\nA source provider keeps the original text for selected fields. A position provider keeps where tokens occur, with optional character offsets. For phrase search, choose a phrase evaluator that uses one of those providers, or a mixed strateg…"
+          ]
+        },
+        {
+          "id": "usage:docs/api/ADDONS.md#native-inspector",
+          "score": "Score 2.9354922679932907",
+          "text": [
+            "…Fields?, maxFacts?, maxWorkUnits?, maxOutputEntries? })` from `/addons/inspector`. To include source text, install a source provider, allow the field in `sourceFields`, and request it on the search.\n\nThis options fragment asks about `guide:…",
+            "…e search.\n\nThis options fragment asks about `guide:updates` at revision `1`. It needs an engine with Inspector and a source provider for `title`. Pass it as the second argument to `engine.search(query, options)`:\n\n```js\nconst options = {\n  …"
+          ]
+        },
+        {
+          "id": "usage:docs/api/CORE.md#configuration-and-records",
+          "score": "Score 2.405234078794008",
+          "text": [
+            "…es the index, IDs and declared metadata, but not the original text. Keep display titles and URLs in your application. Add a [source provider](ADDONS.md#source-positions-and-phrases) if you also need Raveldex to keep original field values.\n\n"
+          ]
+        },
+        {
+          "id": "usage:docs/api/STATIC_ASTRO.md#build-static-search",
+          "score": "Score 2.371399238707769",
+          "text": [
+            "…der does not crawl your pages or parse Markdown or HTML, so leave drafts and private content out of this list. Add a source provider for every indexed text field.\n\nSave the following as `search-content.mjs` in your application. The later bu…"
+          ]
+        },
+        {
+          "id": "usage:docs/api/HOSTS.md#native-dom-ui-and-css",
+          "score": "Score 1.4855089751507182",
+          "text": [
+            "…exactly and allow the final word to match the beginning of an indexed word. For example, `source provide` can match `source provider`; `sour provide` still requires the exact word `sour`. The UI splits raw words at the basic analyzer's Unic…"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "320/390/768/1024/1280px reflow; viewport emulation, not physical browser zoom",
+      "status": "Pass"
+    }
+  ],
+  "failures": [],
+  "scope": "One automated Chrome/Chromium session; no human AT, physical input, real zoom, heap/copy peaks or live deployment qualification."
+}

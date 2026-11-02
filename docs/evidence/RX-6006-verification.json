@@ -1,0 +1,203 @@
+{
+  "task": "RX-6006",
+  "date": "2026-11-01",
+  "status": "Pass",
+  "dirtyWorktree": true,
+  "repositoryHeadObserved": "87fb5c30eeef055359f2767bf8b802f785f4abed",
+  "environment": {
+    "node": "v24.21.0",
+    "npm": "12.2.0",
+    "platform": "darwin",
+    "release": "27.0.0",
+    "arch": "arm64",
+    "browser": "156.0.8078.74",
+    "typescript": "7.0.2",
+    "esbuild": "0.28.2",
+    "astro": "7.3.2"
+  },
+  "checks": {
+    "runtimeIntegration": {
+      "command": "npm run check",
+      "tests": 984,
+      "phases": [
+        829,
+        101,
+        24,
+        26,
+        1,
+        3
+      ],
+      "fail": 0,
+      "skip": 0,
+      "cancelled": 0
+    },
+    "newModalBrowser": {
+      "tests": 26,
+      "fail": 0,
+      "skip": 0,
+      "cancelled": 0,
+      "report": "docs/evidence/RX-6006-browser.json"
+    },
+    "toolingRegression": {
+      "command": "node --test test/tooling/pages.test.mjs",
+      "tests": 7,
+      "fail": 0
+    },
+    "siteBrowser": {
+      "command": "node --test --test-concurrency=1 test/pages/*.test.mjs",
+      "tests": 9,
+      "fail": 0
+    },
+    "pages": {
+      "html": 42,
+      "links": 513,
+      "exposedFiles": 80,
+      "bytes": 983815
+    },
+    "jekyll": {
+      "status": "Pass",
+      "jekyll": "3.10.0",
+      "ruby": "2.6.10",
+      "safe": true,
+      "files": 80,
+      "bytes": 983815,
+      "byteIdenticalToApprovedInventory": true,
+      "scope": "Actual local Jekyll core, not hosted Pages/plugins/deployment."
+    },
+    "postRoadmapSynchronization": {
+      "command": "RAVELDEX_CANDIDATE_TEST_KEEP=1 npm run check",
+      "status": "Pass",
+      "exitCode": 0,
+      "tests": 985,
+      "phases": [
+        830,
+        101,
+        24,
+        26,
+        1,
+        3
+      ],
+      "fail": 0,
+      "skip": 0,
+      "cancelled": 0,
+      "log": "docs/evidence/RX-6006-synchronized-check.log.gz"
+    }
+  },
+  "review": {
+    "result": "No remaining actionable finding reported within reviewed scope",
+    "independentProbeProvenance": "Archive includes exact executed stdin reconstructed from tool transcript and captured stdout transcription; original independent stdout was not persisted. Actual installed browser process logs are separate.",
+    "fixed": [
+      "native-close scroll overlap",
+      "destroy actual opener",
+      "closed control nativequery gap",
+      "late nativeclose microtask reply",
+      "opaque closed-shadow modal admission",
+      "unfocusable static longtext scrollers"
+    ]
+  },
+  "limitations": [
+    "Human AT, physical input/on-screen keyboard, actual zoom and other engines/devices not run.",
+    "No calibrated memory/latency/throughput/physical paint evidence.",
+    "Conservative unknown opaque focused host refusals include ordinary page regions; BODY fallback and inactive unknown closed trees need application coordination.",
+    "Native queued close can leave existing hidden feedback until closeevent; late work cannot write new presentation.",
+    "No first-open asset loading wrapper in this slice, no remoteCI/deployment/publication/commit."
+  ],
+  "sourceHashes": {
+    "README.md": "88c2b0f6c6dbfefce4489cb3cb432354710777c3be72f3067e373066e1f3750d",
+    "docs/api/HOSTS.md": "723af4625ddd9cf2c95e95e447b22d800b634fab786da70d0bf8402e9fa6e402",
+    "docs/api/README.md": "55b47110a9b962dcd0d09ef86a71f633472e3dc90d7a93277957b132b7ebd72d",
+    "docs/specs/DOCS_MODAL.md": "799ccc336fb797ede87a161c3b7fd1175634632575d06bd7235cc9c3a09c1119",
+    "package.json": "71c45dc074f1b3d0b3bd0c52632c18e2112aba725296931e22577f3436637625",
+    "scripts/candidate-check.mjs": "2e5324c1caa636f702e7c601d1bc8e5d04f467c3237dd372a819f8dd8d6e94e7",
+    "scripts/copy-ui-css.mjs": "c5a26e1e3c6f15c1e19c73f568f63eb49d5bbad11d43b8d4fca655660c514f96",
+    "scripts/lib/pages.mjs": "f1021e66383fc8fe871f3482a54f15bf49bd0bda1db945408e5d6a7079600f9f",
+    "src/addons/ui/inline-lifecycle.ts": "576e57bd35cf47d5fb19c1428f418c42d1d96add1a8794684fb3a8d55e32e8b7",
+    "src/addons/ui/inline.ts": "47319de27dafa8372cf79d133666f9028d514e8ce02fe2f048d9958308d4af29",
+    "src/addons/ui/modal-scroll.ts": "62a59798c3d5b1ac53b88c3bd4869797beb62e69fa4b835a9f741d5931f275a8",
+    "src/addons/ui/modal-shortcuts.ts": "0793385946f9ddf14a6c9810181dfe9d78966119181403463a4ecef52ec6d045",
+    "src/addons/ui/modal.css": "f54f1bad7ba23d5097f38de3db26e15df2913522725d5d3c28e06a1065edcf27",
+    "src/addons/ui/modal.ts": "b38608a7b47a0472d0c699b889f713959be0da78c1e51c4c87d1759e52dee7b9",
+    "src/addons/ui/mounts.ts": "62343ddbca32559e8723d11f2949afd747de4a704f187d38b5fbb94573a1c7b4",
+    "test/consumer/candidate.test.mjs": "ec45c8a50ff208d115e3fadd8e1a9e27e4f5b1e55b5d50bc7f42c46094cffdd7",
+    "test/consumer/modal-types.ts": "fd773b4939fab9c8ab8eb0872cbe9f045a8850e8cb19439501650152d35e029e",
+    "test/tooling/pages.test.mjs": "cce9544051ce5f5a5cf2beea8babd76fef3332da7753a554a80460da64c0158f",
+    "test/ui/modal-browser.test.mjs": "094e693b5e4842e9ca189f92a732c518dc9df2593eba2ddf036ca1a03b506270",
+    "test/ui/modal-configuration.mjs": "917dfd27084feacf46ed17f0a08ca5d65b19d8966dedc83ab24d1f5fbafcfa90",
+    "test/ui/modal-fixture.mjs": "6a4ec832ff1aef5bae3090486f6a9d63e5358a833026818b1e01125fd02e4c3a",
+    "test/ui/modal-worker.mjs": "940fb320c44ea8e3d0256e9a225c3734b19e5e5d8c816386ef67f606951ae925"
+  },
+  "scopeAudit": {
+    "baselineFiles": 1804,
+    "protectedExistingFilesUnchanged": 1183,
+    "unexpectedChanges": [],
+    "changedBaselineFiles": [
+      "PROJECT_CONTEXT.md",
+      "CODEX_HANDOFF.md",
+      "CHANGELOG.md",
+      "README.md",
+      "IMPLEMENTATION_TASKS.md",
+      "ROADMAP.md",
+      "package.json",
+      "test/tooling/pages.test.mjs",
+      "test/consumer/candidate.test.mjs",
+      "docs/_pages-manifest.json",
+      "docs/demo/corpus.json",
+      "docs/specs/SEARCH_SOLUTIONS.md",
+      "docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md",
+      "docs/planning/roadmap.json",
+      "docs/examples/inline-preview/assets/main.js",
+      "docs/api/README.md",
+      "docs/api/HOSTS.md",
+      "docs/reference/index.html",
+      "docs/reference/hosts/index.html",
+      "scripts/candidate-check.mjs",
+      "scripts/copy-ui-css.mjs",
+      "scripts/lib/pages.mjs",
+      "src/addons/ui/inline.ts",
+      "src/addons/ui/mounts.ts"
+    ],
+    "missingBaselineFiles": [],
+    "otherTaskObjectsUnchanged": 49,
+    "milestoneObjectsUnchanged": 9,
+    "selectedAcceptanceAndDependenciesUnchanged": true
+  },
+  "candidate": {
+    "status": "Pass",
+    "runtimeEntrypoints": 31,
+    "publicTypes": "Pass",
+    "inertImports": "Pass",
+    "packageSHA256": "7da4f8e3f7f106041ac806121b74bebd800cd8ffb4c0a1380da0e8e76cf9458d",
+    "graphs": [
+      {
+        "specifier": "@vmitsaras/raveldex",
+        "minifiedBytes": 69483,
+        "gzipBytes": 20296,
+        "sha256": "55554c4ffac0ac81398d7f7d1aa1df9a0df328f294a4ca61ade3228448607043"
+      },
+      {
+        "specifier": "@vmitsaras/raveldex/addons/ui/inline",
+        "minifiedBytes": 33679,
+        "gzipBytes": 11113,
+        "sha256": "2d3b3d769a4ceb6f5b3888a7dab6d37c2a354132f218020d82cf9db69b65581e"
+      },
+      {
+        "specifier": "@vmitsaras/raveldex/addons/ui/modal",
+        "minifiedBytes": 42336,
+        "gzipBytes": 14090,
+        "sha256": "f0f6cebea98c3cca20571e4fb64dc101f4b21c7d087980d995b8ec679b99e336"
+      }
+    ],
+    "modalCSS": {
+      "status": "Pass",
+      "specifier": "@vmitsaras/raveldex/addons/ui/modal.css",
+      "inputs": [
+        "node_modules/@vmitsaras/raveldex/dist/addons/ui/inline.css",
+        "node_modules/@vmitsaras/raveldex/dist/addons/ui/modal.css",
+        "css-entry-2.mjs"
+      ],
+      "bytes": 13395,
+      "sha256": "240f061f0634bc7904a1384272e72e847785dfa1ba826fb833f9783b31126aa7"
+    },
+    "report": "docs/evidence/RX-6006-candidate.json.gz"
+  }
+}

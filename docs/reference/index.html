@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>API reference · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/" aria-current="page">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="public-api-reference">Public API reference</h1>
+<p>Start with <a href="/raveldex/guide/overview/">installation and your first search</a>, then use this page to find the import you need. Every JavaScript entry uses ESM and includes TypeScript declarations. Use the public paths listed here rather than importing from <code>dist/</code> or <code>src/</code>. CommonJS is not supported.</p>
+<h2 id="export-map">Export map</h2>
+<p>Add <code>@vmitsaras/raveldex</code> before each subpath below. For example, <code>/addons/ui</code> means <code>@vmitsaras/raveldex/addons/ui</code>; the root entry is just <code>@vmitsaras/raveldex</code>. Importing a factory makes it available to call but does not enable its feature. TypeScript types are removed at runtime.</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Runtime exports / purpose</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root</td>
+<td><code>createRaveldex</code>, <code>RaveldexError</code>, <code>ERROR_CODES</code></td>
+<td><a href="/raveldex/reference/core/">Core</a></td>
+</tr>
+<tr>
+<td><code>/addons/patch</code></td>
+<td><code>createPatch</code></td>
+<td><a href="/raveldex/reference/record-patch/">Explicit record patches</a></td>
+</tr>
+<tr>
+<td><code>/addons/query-syntax</code></td>
+<td><code>createQuerySyntax</code>, <code>QuerySyntaxError</code>, <code>QUERY_SYNTAX_POLICY</code>, <code>QUERY_SYNTAX_ERROR_CODES</code></td>
+<td><a href="/raveldex/reference/query-syntax/">Explicit query syntax</a></td>
+</tr>
+<tr>
+<td><code>/addons/proximity</code></td>
+<td><code>createProximity</code>, <code>PROXIMITY_POLICY</code></td>
+<td><a href="/raveldex/reference/proximity/">Ordered proximity</a></td>
+</tr>
+<tr>
+<td><code>/addons/literal</code></td>
+<td><code>createLiteral</code>, <code>LITERAL_POLICY</code></td>
+<td><a href="/raveldex/reference/literal/">Literal and infix</a></td>
+</tr>
+<tr>
+<td><code>/addons/identifiers</code></td>
+<td><code>createIdentifierAnalyzer</code>, <code>IDENTIFIER_ANALYZER</code></td>
+<td><a href="/raveldex/reference/identifiers/">Code and identifiers</a></td>
+</tr>
+<tr>
+<td><code>/integrations/languages/english</code></td>
+<td><code>createEnglishAnalyzer</code>, <code>ENGLISH_ANALYZER</code></td>
+<td><a href="/raveldex/reference/english/">English morphology</a></td>
+</tr>
+<tr>
+<td><code>/addons/synonyms</code></td>
+<td><code>createSynonyms</code>, <code>SYNONYMS_POLICY</code></td>
+<td><a href="/raveldex/reference/synonyms/">Directional synonyms</a></td>
+</tr>
+<tr>
+<td><code>/addons/suggestions</code></td>
+<td><code>createSuggestions</code>, <code>SUGGESTIONS_POLICY</code></td>
+<td><a href="/raveldex/reference/suggestions/">Token suggestions</a></td>
+</tr>
+<tr>
+<td><code>/addons/typo</code></td>
+<td><code>createTypoTolerance</code>, <code>TYPO_POLICY</code></td>
+<td><a href="/raveldex/reference/typo/">Bounded typo tolerance</a></td>
+</tr>
+<tr>
+<td><code>/addons/phrases</code></td>
+<td><code>createSourceProvider</code>, <code>createSourcePhrases</code></td>
+<td><a href="/raveldex/reference/addons/#source-positions-and-phrases">Source phrases</a></td>
+</tr>
+<tr>
+<td><code>/addons/phrases/source</code></td>
+<td><code>createSourceProvider</code> without phrase evaluation</td>
+<td><a href="/raveldex/reference/addons/#source-positions-and-phrases">Source</a></td>
+</tr>
+<tr>
+<td><code>/addons/positions</code></td>
+<td><code>createPositionProvider</code> without phrase evaluation</td>
+<td><a href="/raveldex/reference/addons/#source-positions-and-phrases">Positions</a></td>
+</tr>
+<tr>
+<td><code>/addons/phrases/positions</code></td>
+<td><code>createPositionPhrases</code></td>
+<td><a href="/raveldex/reference/addons/#source-positions-and-phrases">Position phrases</a></td>
+</tr>
+<tr>
+<td><code>/addons/phrases/mixed</code></td>
+<td><code>createPhrases</code></td>
+<td><a href="/raveldex/reference/addons/#source-positions-and-phrases">Mixed phrases</a></td>
+</tr>
+<tr>
+<td><code>/addons/filters</code></td>
+<td><code>createFilters</code></td>
+<td><a href="/raveldex/reference/addons/#typed-filters-and-exact-facets">Typed predicates</a></td>
+</tr>
+<tr>
+<td><code>/addons/facets</code></td>
+<td><code>createFacets</code></td>
+<td><a href="/raveldex/reference/addons/#typed-filters-and-exact-facets">Facets</a></td>
+</tr>
+<tr>
+<td><code>/addons/inspector</code></td>
+<td><code>createInspector</code>, <code>exportDiagnostics</code></td>
+<td><a href="/raveldex/reference/addons/#native-inspector">Native Inspector</a></td>
+</tr>
+<tr>
+<td><code>/addons/evidence</code></td>
+<td><code>createMatchEvidence</code></td>
+<td><a href="/raveldex/reference/addons/#original-ranges-and-snippets">Original ranges</a></td>
+</tr>
+<tr>
+<td><code>/addons/snippets</code></td>
+<td><code>createSnippetEvidence</code></td>
+<td><a href="/raveldex/reference/addons/#original-ranges-and-snippets">Snippets</a></td>
+</tr>
+<tr>
+<td><code>/addons/sections</code></td>
+<td><code>createSectionEvidence</code> and readonly page/section types</td>
+<td><a href="/raveldex/reference/addons/#anchored-page-context">Anchored page context</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui</code></td>
+<td><code>mountRaveldexUI</code></td>
+<td><a href="/raveldex/reference/hosts/#native-dom-ui-and-css">DOM UI</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/styles.css</code></td>
+<td>Independent CSS asset</td>
+<td><a href="/raveldex/reference/hosts/#native-dom-ui-and-css">CSS</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/inline</code></td>
+<td><code>mountRaveldexInline</code></td>
+<td><a href="/raveldex/reference/hosts/#inline-search-foundation">Inline foundation</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/inline.css</code></td>
+<td>Independent inline CSS asset</td>
+<td><a href="/raveldex/reference/hosts/#inline-text-and-styling">Inline styling</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/modal</code></td>
+<td><code>mountRaveldexModal</code> and readonly modal types</td>
+<td><a href="/raveldex/reference/hosts/#documentation-search-modal">Documentation modal</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/modal.css</code></td>
+<td>Explicit modal CSS, including shared inline CSS</td>
+<td><a href="/raveldex/reference/hosts/#documentation-search-modal">Modal styling</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/dropdown</code></td>
+<td><code>mountRaveldexDropdown</code> and readonly dropdown types</td>
+<td><a href="/raveldex/reference/hosts/#compact-dropdown-search">Compact dropdown</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/dropdown.css</code></td>
+<td>Independent dropdown CSS asset</td>
+<td><a href="/raveldex/reference/hosts/#compact-dropdown-search">Dropdown styling</a></td>
+</tr>
+<tr>
+<td><code>/adapters/worker</code></td>
+<td><code>createWorkerRaveldex</code>, <code>WorkerAdapterError</code>, <code>WORKER_ERROR_CODES</code></td>
+<td><a href="/raveldex/reference/hosts/#one-owner-module-worker">Worker client</a></td>
+</tr>
+<tr>
+<td><code>/adapters/worker/host</code></td>
+<td><code>serveRaveldexWorker</code></td>
+<td><a href="/raveldex/reference/hosts/#one-owner-module-worker">Ordinary worker host</a></td>
+</tr>
+<tr>
+<td><code>/adapters/snapshots</code></td>
+<td><code>createSnapshots</code>, <code>createSnapshotRaveldex</code>, <code>currentNodeSnapshotEnvironment</code>, <code>SnapshotAdapterError</code>, <code>SNAPSHOT_REASONS</code></td>
+<td><a href="/raveldex/reference/hosts/#source-and-native-snapshots">Snapshots</a></td>
+</tr>
+<tr>
+<td><code>/adapters/indexeddb</code></td>
+<td><code>createIndexedDBPersistence</code>, <code>IndexedDBAdapterError</code>, <code>INDEXEDDB_ERROR_CODES</code></td>
+<td><a href="/raveldex/reference/hosts/#indexeddb-persistence-and-recovery">Persistence</a></td>
+</tr>
+<tr>
+<td><code>/adapters/worker/snapshots</code></td>
+<td><code>createWorkerSnapshots</code></td>
+<td><a href="/raveldex/reference/hosts/#source-and-native-snapshots">Worker source bridge</a></td>
+</tr>
+<tr>
+<td><code>/adapters/worker/snapshots/host</code></td>
+<td><code>serveSnapshotRaveldexWorker</code></td>
+<td><a href="/raveldex/reference/hosts/#source-and-native-snapshots">Snapshot worker host</a></td>
+</tr>
+<tr>
+<td><code>/integrations/localsearch</code></td>
+<td><code>convertLocalSearchSnapshot</code>, <code>MigrationError</code>, <code>MIGRATION_ERROR_CODES</code></td>
+<td><a href="/raveldex/reference/hosts/#localsearch-source-migration">Source migration</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="choose-the-cost-you-need">Choose the cost you need</h2>
+<p>Core stores the information needed for word matching and ranking, plus your declared equality metadata. Choose extra data only when you need it:</p>
+<ul>
+<li>A source provider keeps the original text of selected fields.</li>
+<li>A position provider keeps token locations. Select offset fields separately if you need original character ranges.</li>
+<li>Core alone keeps neither original text, positions nor offsets.</li>
+</ul>
+<p>Pass the registrations in <code>Configuration.addons</code> when creating the engine. To change providers later, create a new engine and rebuild.</p>
+<p>Filters and facets read existing core metadata without adding another metadata index. Request Inspector or original match evidence only for searches that need it. The UI uses an engine you own and a display list you provide.</p>
+<p>Set up workers, snapshots and storage separately. Importing core makes no network request, accesses no DOM, creates no worker, opens no database and starts no timer or automatic indexing.</p>
+<p><a href="/raveldex/examples/api/">Runnable examples</a> use these public entries. Read <a href="/raveldex/guide/compatibility/">compatibility</a> for host requirements and <a href="/raveldex/guide/limitations/">practical limits</a> for matching and recovery behavior.</p>
+<h2 id="separate-static-build-package">Separate static-build package</h2>
+<p>Install <a href="/raveldex/reference/static-astro/"><code>@vmitsaras/raveldex-astro</code></a> separately to build search files during a static build and load them on demand. It needs the matching core version and, for its build hook, the optional Astro peer. It is not an export of the core package.</p>
+<h2 id="installation-and-evaluation-routes">Installation and evaluation routes</h2>
+<p>Use <a href="/raveldex/guide/overview/">Getting started</a> for installation, <a href="/raveldex/reference/core/">Core</a> for records and queries, and <a href="/raveldex/reference/hosts/">UI and host integrations</a> for browser controls, workers and storage. If you prefer to learn by running code, start with the <a href="/raveldex/examples/api/">example modules</a>.</p>
+<p>The separately installable <code>@vmitsaras/raveldex-english</code> uses the same analyzer policy as the convenience subpath; choose one factory import. See <a href="/raveldex/reference/english/#separate-package">English installation</a>. The Astro integration is a separate package; see <a href="/raveldex/reference/static-astro/">static search and Astro</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{TITLE}} · Walking guides</title>
+    <link rel="stylesheet" href="{{BASE}}assets/main.css">
+    <script type="module" src="{{BASE}}assets/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="guide-header">
+      <div class="guide-header__inner">
+        <a class="guide-header__brand" href="{{BASE}}">Walking guides</a>
+        <div class="header-search">
+          <button type="button" data-search-modal-trigger hidden>Open expanded search</button>
+          <p class="header-search__status" data-search-status role="status">Browse the guides below while search becomes available.</p>
+          <button type="button" data-search-retry hidden>Load search again</button>
+          <div data-search-root><p>Search needs JavaScript. Browse the guide links below.</p></div>
+        </div>
+      </div>
+    </header>
+    <div data-search-modal-root></div>
+    <main id="main" tabindex="-1">
+      {{PAGE_CONTENT}}
+      <nav class="browse" aria-label="Browse all guides"><h2>Browse all guides</h2><ul>{{BROWSE_LINKS}}</ul></nav>
+    </main>
+    <footer><p>Explicit public guide records · <a href="{{BASE}}search/">Open the full search page</a></p></footer>
+  </body>
+</html>

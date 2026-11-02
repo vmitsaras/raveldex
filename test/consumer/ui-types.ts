@@ -9,6 +9,7 @@ const handle = mountRaveldexUI({ root, engine, documents,
   snippetFields: ['title', 'body'] as const, pageSize: 5, debounceMs: 150, mode: 'text', label: 'Search documentation' });
 const pending: Promise<void> = handle.search();
 const stopped: void = handle.destroy();
+mountRaveldexUI({ root, engine, documents, mode: 'prefix' });
 void pending; void stopped;
 // @ts-expect-error Returned methods are readonly.
 handle.destroy = () => {};

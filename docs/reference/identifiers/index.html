@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>IDENTIFIERS · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="code-and-identifier-analysis">Code and identifier analysis</h1>
+<p>Choose the identifier analyzer for developer-facing text such as <code>maxQueuedOperations</code>, <code>HTTP2Response</code> and <code>WORK_LIMIT_EXCEEDED</code>. It makes components searchable while keeping the whole name. Register it and select its descriptor when creating the engine; importing it alone leaves <code>basic-v1</code> selected.</p>
+<p>Run this example in an installed ESM application. It searches the same identifier by two of its components and by its whole name:</p>
+<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+import { createIdentifierAnalyzer, IDENTIFIER_ANALYZER } from '@vmitsaras/raveldex/addons/identifiers';
+
+const engine = createRaveldex({
+  schema: { text: { name: {} } },
+  analyzer: IDENTIFIER_ANALYZER,
+  addons: [createIdentifierAnalyzer()],
+});
+try {
+  await engine.add({ id: 'queue', text: { name: 'maxQueuedOperations' } });
+  const components = await engine.search('queued operations'); // total: 1
+  const original = await engine.search('maxQueuedOperations'); // total: 1
+  console.log(components.total, original.total);
+} finally {
+  await engine.dispose();
+}
+</code></pre>
+<p>The example prints <code>1 1</code>: both <code>queued operations</code> and <code>maxQueuedOperations</code> find record <code>queue</code>. It then disposes the engine. No source or position provider is needed for these searches.</p>
+<p><code>createIdentifierAnalyzer()</code> takes no options. Use the frozen descriptor <code>{ id: 'code-identifiers-v1', environmentProfile: 'unqualified' }</code>. Its registration ID is <code>identifier-analyzer</code>; its exclusive analyzer role and exact worker policy identify the implementation. Changing the analyzer requires a new index and rebuild.</p>
+<h2 id="whole-names-and-components">Whole names and components</h2>
+<p>An original starts with a Unicode letter or number and continues through letters, numbers, combining marks and underscores. Derived components split original spelling at underscores, lowercase-to-uppercase camel transitions, acronym-to-capitalized-word transitions, and letter/number transitions. Uppercase includes Lu/Lt, lowercase Ll and numbers all N categories. Uncased letters have no camel transition. Combining marks stay with their base; an orphan mark after an underscore stays in the whole name but does not start a component. Normalize each original/component span with NFKC followed by default lowercase.</p>
+<table>
+<thead>
+<tr>
+<th>Text</th>
+<th>Retained dictionary terms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>maxQueuedOperations</code></td>
+<td><code>maxqueuedoperations</code>, <code>max</code>, <code>queued</code>, <code>operations</code></td>
+</tr>
+<tr>
+<td><code>HTTP2Response</code></td>
+<td><code>http2response</code>, <code>http</code>, <code>2</code>, <code>response</code></td>
+</tr>
+<tr>
+<td><code>WORK_LIMIT_EXCEEDED</code></td>
+<td><code>work_limit_exceeded</code>, <code>work</code>, <code>limit</code>, <code>exceeded</code></td>
+</tr>
+<tr>
+<td><code>fooFoo</code></td>
+<td><code>foofoo</code>, <code>foo</code> (earliest component span)</td>
+</tr>
+<tr>
+<td><code>src/core/query/search.ts</code></td>
+<td><code>src</code>, <code>core</code>, <code>query</code>, <code>search</code>, <code>ts</code></td>
+</tr>
+</tbody>
+</table>
+<p>Slashes, backslashes, dots, dollar signs, hyphens and other punctuation delimit names. Leading underscores before a letter/number delimit; underscores after the start remain in the whole name. Full paths and literal punctuation are not a distinct exact-name matching feature. Use <a href="/raveldex/reference/literal/">literal matching</a> for raw punctuation-sensitive strings. Case/NFKC-equivalent whole spellings intentionally collide; this is not a case-sensitive identifier comparison API. Accents remain significant; there is no stemming, accent folding, transliteration or automatic language detection.</p>
+<p>Queries keep the names you type:</p>
+<ul>
+<li><code>fooBar</code> searches the whole normalized name <code>foobar</code>; it does not expand into <code>foo</code> and <code>bar</code>.</li>
+<li><code>foo</code> can match a component inside <code>fooBar</code>.</li>
+<li><code>foo bar</code> requires both terms and can find both components in that same identifier.</li>
+</ul>
+<p>OR, NOT, field selection, weighted exact/prefix groups, pagination and totals work as usual. Prefix queries can match whole names or components, but do not match arbitrary substrings.</p>
+<p>Every retained whole/component term has weight 1. Native BM25 counts the distinct emitted term occurrences in TF, DF and field lengths. A canonical term occurs at most once per original identifier; repeated components keep the earliest component span and a component equal to the canonical whole is suppressed. Whole-name hits have no hidden bonus or guaranteed ranking over a different query’s component hits. Explicit Inspector traces report actual field/group arithmetic.</p>
+<h2 id="phrases-and-original-evidence">Phrases and original evidence</h2>
+<p>Phrases use original identifiers, whether checked from source, positions or a mixed provider. The phrase <code>foo bar</code> does not match inside <code>fooBar</code>, while <code>fooBar next</code> can match those two adjacent names in one value. Components share the original name’s position; they do not create new adjacent words. Phrases never cross fields or array values.</p>
+<p>Explicit match evidence exposes a range with <code>kind: 'original'</code> or <code>kind: 'component'</code>. Component ranges include <code>original: { term, start, end }</code> for the whole original identifier; the range’s own start/end refer to its actual component. Coordinates are half-open original UTF-16 indices with the existing field/value/position coordinates. Repeated normalized components report their earliest retained span only. Snippets keep original spelling and truthful highlight ranges. Without an explicitly selected source or offset provider, source evidence is unavailable as usual.</p>
+<p>Selected code positions use tagged <code>raveldex-positions-v2</code> data under the explicit existing positions codec family. Parsing requires the selected code analyzer and distinguishes original counts from all retained occurrences. Old dense v1 position parsing stays strict; co-position/overlapping component data is never treated as v1. The analyzer/manifest/root tag jointly bind compatibility. Existing basic and English position data keep v1 shape.</p>
+<h2 id="limits-and-compatibility">Limits and compatibility</h2>
+<p>Existing raw span (256 UTF-16 units), normalized term (256), value (65,536), record/corpus tokens, dictionary/postings, query, work, deadline and output bounds apply. Derived occurrences count toward record/corpus limits; a short original can therefore generate more than one retained token. Reject a complete operation when a bound is exceeded; never truncate alternatives, ranges or totals. The analyzer has one 50,000,000-unit module ceiling shared across the complete operation and provider reanalysis; existing search/mutation ceilings can be stricter. Charge scanning, classification, normalization, deduplication and validation through resumable work. Input capture owns bounded raw data before queued execution.</p>
+<p>The current typo, synonym and suggestion requests support only basic analysis and reject under this analyzer, even with empty input. Installing those modules without requesting them leaves identifier searches unchanged.</p>
+<p>Choose English or identifier analysis for the whole engine; they are not mixed automatically or selected per field. Metadata and record IDs stay unchanged.</p>
+<p>Workers and source/native snapshots require exact analyzer/profile/module policy compatibility. Native restore retains its existing explicit exact-Node qualification boundary. See <a href="/raveldex/guide/compatibility/">runtime and snapshot requirements</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

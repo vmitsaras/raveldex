@@ -1,4 +1,5 @@
 import type { Configuration, Raveldex, RecordInput } from '@vmitsaras/raveldex';
+import type { PageSectionPage, PageSections } from '@vmitsaras/raveldex/addons/sections';
 import type { NativeSnapshotQualification } from '@vmitsaras/raveldex/adapters/snapshots';
 
 export interface StaticEntry { readonly record: RecordInput; readonly title: string; readonly path: string }
@@ -8,6 +9,7 @@ export interface StaticBuildOptions {
   readonly buildId: string;
   readonly base?: string;
   readonly nativeQualification?: NativeSnapshotQualification;
+  readonly pageSections?: readonly PageSectionPage[];
 }
 export interface StaticAsset { readonly file: string; readonly bytes: number; readonly sha256: string }
 export interface StaticManifest {
@@ -27,5 +29,6 @@ export interface LoadDocumentsOptions { readonly signal?: AbortSignal; readonly 
 export interface LoadedStaticSearch {
   readonly engine: Raveldex; readonly manifest: StaticManifest;
   readonly loadDocuments: (options?: LoadDocumentsOptions) => Promise<readonly StaticDocument[]>;
+  readonly loadSections?: (options?: LoadDocumentsOptions) => Promise<PageSections>;
   readonly dispose: () => Promise<void>;
 }

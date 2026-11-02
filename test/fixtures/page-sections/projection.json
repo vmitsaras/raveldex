@@ -1,0 +1,828 @@
+{
+  "kind": "raveldex-page-sections-projection-fixture-v1",
+  "role": "Handwritten later-projection expectations, not a production API or runnable projector.",
+  "binding": {
+    "ownerLabel": "fixture-owner-one",
+    "revision": 1
+  },
+  "maxPreviews": 3,
+  "pages": [
+    {
+      "pageId": "page:a",
+      "sections": [
+        {
+          "anchor": "details",
+          "heading": "Details",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 20
+        },
+        {
+          "anchor": "details-2",
+          "heading": "Details",
+          "headingLevel": 3,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 21,
+          "end": 33
+        },
+        {
+          "anchor": "next-steps",
+          "heading": "Next steps",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 1,
+          "start": 0,
+          "end": 11
+        },
+        {
+          "anchor": "%#café",
+          "heading": "Further details",
+          "headingLevel": 3,
+          "field": "body",
+          "valueIndex": 1,
+          "start": 12,
+          "end": 24
+        }
+      ]
+    },
+    {
+      "pageId": "page:c",
+      "sections": [
+        {
+          "anchor": "covered",
+          "heading": "Covered portion",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 21,
+          "end": 33
+        }
+      ]
+    },
+    {
+      "pageId": "page:d",
+      "sections": [
+        {
+          "anchor": "title",
+          "heading": "Title context",
+          "headingLevel": 1,
+          "field": "title",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 11
+        },
+        {
+          "anchor": "later-value",
+          "heading": "Later value",
+          "headingLevel": 3,
+          "field": "body",
+          "valueIndex": 1,
+          "start": 12,
+          "end": 24
+        },
+        {
+          "anchor": "early-value",
+          "heading": "Earlier value",
+          "headingLevel": 2,
+          "field": "body",
+          "valueIndex": 0,
+          "start": 0,
+          "end": 20
+        }
+      ]
+    }
+  ],
+  "expectedURLs": [
+    {
+      "pageId": "page:a",
+      "anchor": "details",
+      "url": "https://docs.example/help/guide/a/#details"
+    },
+    {
+      "pageId": "page:a",
+      "anchor": "details-2",
+      "url": "https://docs.example/help/guide/a/#details-2"
+    },
+    {
+      "pageId": "page:a",
+      "anchor": "next-steps",
+      "url": "https://docs.example/help/guide/a/#next-steps"
+    },
+    {
+      "pageId": "page:a",
+      "anchor": "%#café",
+      "url": "https://docs.example/help/guide/a/#%25%23caf%C3%A9"
+    },
+    {
+      "pageId": "page:c",
+      "anchor": "covered",
+      "url": "https://docs.example/help/guide/c/#covered"
+    },
+    {
+      "pageId": "page:d",
+      "anchor": "title",
+      "url": "https://docs.example/help/guide/d/#title"
+    },
+    {
+      "pageId": "page:d",
+      "anchor": "later-value",
+      "url": "https://docs.example/help/guide/d/#later-value"
+    },
+    {
+      "pageId": "page:d",
+      "anchor": "early-value",
+      "url": "https://docs.example/help/guide/d/#early-value"
+    }
+  ],
+  "cases": [
+    {
+      "id": "cross-section",
+      "queryId": "cross-section",
+      "expected": [
+        {
+          "pageId": "page:a",
+          "state": "previews",
+          "selectedAnchors": [
+            "details",
+            "details-2",
+            "next-steps"
+          ],
+          "excerpts": [
+            {
+              "anchor": "details",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  9,
+                  14
+                ]
+              ]
+            },
+            {
+              "anchor": "details-2",
+              "sourceSliceIndex": 2,
+              "highlights": [
+                [
+                  6,
+                  11
+                ]
+              ]
+            },
+            {
+              "anchor": "next-steps",
+              "sourceSliceIndex": 3,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [
+            "%#café"
+          ],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:b",
+          "state": "no-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        },
+        {
+          "pageId": "page:c",
+          "state": "previews",
+          "selectedAnchors": [
+            "covered"
+          ],
+          "excerpts": [
+            {
+              "anchor": "covered",
+              "sourceSliceIndex": 2,
+              "highlights": [
+                [
+                  6,
+                  11
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            3,
+            7,
+            9
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:d",
+          "state": "previews",
+          "selectedAnchors": [
+            "early-value",
+            "later-value"
+          ],
+          "excerpts": [
+            {
+              "anchor": "early-value",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  9,
+                  14
+                ]
+              ]
+            },
+            {
+              "anchor": "later-value",
+              "sourceSliceIndex": 4,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            6,
+            7
+          ],
+          "crossingTokenIndices": []
+        }
+      ]
+    },
+    {
+      "id": "two-groups",
+      "queryId": "two-groups",
+      "expected": [
+        {
+          "pageId": "page:a",
+          "state": "previews",
+          "selectedAnchors": [
+            "details",
+            "details-2",
+            "next-steps"
+          ],
+          "excerpts": [
+            {
+              "anchor": "details",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  9,
+                  14
+                ]
+              ]
+            },
+            {
+              "anchor": "details-2",
+              "sourceSliceIndex": 2,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            },
+            {
+              "anchor": "next-steps",
+              "sourceSliceIndex": 3,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [
+            "%#café"
+          ],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:b",
+          "state": "no-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        },
+        {
+          "pageId": "page:c",
+          "state": "previews",
+          "selectedAnchors": [
+            "covered"
+          ],
+          "excerpts": [
+            {
+              "anchor": "covered",
+              "sourceSliceIndex": 2,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            3,
+            7,
+            9,
+            10
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:d",
+          "state": "previews",
+          "selectedAnchors": [
+            "early-value",
+            "later-value"
+          ],
+          "excerpts": [
+            {
+              "anchor": "early-value",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  9,
+                  14
+                ]
+              ]
+            },
+            {
+              "anchor": "later-value",
+              "sourceSliceIndex": 4,
+              "highlights": [
+                [
+                  0,
+                  5
+                ],
+                [
+                  6,
+                  11
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            5,
+            7
+          ],
+          "crossingTokenIndices": []
+        }
+      ]
+    },
+    {
+      "id": "prefix",
+      "queryId": "prefix",
+      "expected": [
+        {
+          "pageId": "page:a",
+          "state": "previews",
+          "selectedAnchors": [
+            "details",
+            "next-steps",
+            "%#café"
+          ],
+          "excerpts": [
+            {
+              "anchor": "details",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  9,
+                  14
+                ]
+              ]
+            },
+            {
+              "anchor": "next-steps",
+              "sourceSliceIndex": 3,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            },
+            {
+              "anchor": "%#café",
+              "sourceSliceIndex": 4,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:b",
+          "state": "no-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        },
+        {
+          "pageId": "page:c",
+          "state": "no-matching-section",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            3,
+            7,
+            9
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:d",
+          "state": "previews",
+          "selectedAnchors": [
+            "early-value",
+            "later-value"
+          ],
+          "excerpts": [
+            {
+              "anchor": "early-value",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  9,
+                  14
+                ]
+              ]
+            },
+            {
+              "anchor": "later-value",
+              "sourceSliceIndex": 4,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            7
+          ],
+          "crossingTokenIndices": []
+        }
+      ]
+    },
+    {
+      "id": "unicode",
+      "queryId": "unicode",
+      "expected": [
+        {
+          "pageId": "page:a",
+          "state": "previews",
+          "selectedAnchors": [
+            "details"
+          ],
+          "excerpts": [
+            {
+              "anchor": "details",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  3,
+                  8
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:b",
+          "state": "no-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        },
+        {
+          "pageId": "page:c",
+          "state": "no-matching-section",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            2
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:d",
+          "state": "previews",
+          "selectedAnchors": [
+            "early-value"
+          ],
+          "excerpts": [
+            {
+              "anchor": "early-value",
+              "sourceSliceIndex": 1,
+              "highlights": [
+                [
+                  3,
+                  8
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        }
+      ]
+    },
+    {
+      "id": "title-only",
+      "queryId": "title-only",
+      "expected": [
+        {
+          "pageId": "page:a",
+          "state": "no-matching-section",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            0
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:b",
+          "state": "no-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        },
+        {
+          "pageId": "page:c",
+          "state": "no-matching-section",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            0
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:d",
+          "state": "previews",
+          "selectedAnchors": [
+            "title"
+          ],
+          "excerpts": [
+            {
+              "anchor": "title",
+              "sourceSliceIndex": 0,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        }
+      ]
+    },
+    {
+      "id": "mixed-fields",
+      "queryId": "mixed-fields",
+      "expected": [
+        {
+          "pageId": "page:a",
+          "state": "previews",
+          "selectedAnchors": [
+            "details-2"
+          ],
+          "excerpts": [
+            {
+              "anchor": "details-2",
+              "sourceSliceIndex": 2,
+              "highlights": [
+                [
+                  6,
+                  11
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            0
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:b",
+          "state": "no-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        },
+        {
+          "pageId": "page:c",
+          "state": "previews",
+          "selectedAnchors": [
+            "covered"
+          ],
+          "excerpts": [
+            {
+              "anchor": "covered",
+              "sourceSliceIndex": 2,
+              "highlights": [
+                [
+                  6,
+                  11
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            0
+          ],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:d",
+          "state": "previews",
+          "selectedAnchors": [
+            "title"
+          ],
+          "excerpts": [
+            {
+              "anchor": "title",
+              "sourceSliceIndex": 0,
+              "highlights": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            6
+          ],
+          "crossingTokenIndices": []
+        }
+      ]
+    },
+    {
+      "id": "no-positive-ranges",
+      "queryId": "no-positive-ranges",
+      "expected": [
+        {
+          "pageId": "page:a",
+          "state": "no-positive-evidence",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:b",
+          "state": "no-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        },
+        {
+          "pageId": "page:c",
+          "state": "no-positive-evidence",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        },
+        {
+          "pageId": "page:d",
+          "state": "no-positive-evidence",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [],
+          "crossingTokenIndices": []
+        }
+      ]
+    },
+    {
+      "id": "empty-explicit-map",
+      "queryId": "cross-section",
+      "mapOverride": {
+        "pageId": "page:c",
+        "sections": []
+      },
+      "expected": [
+        {
+          "pageId": "page:c",
+          "state": "empty-map",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": null,
+          "outsideMapTokenIndices": null,
+          "crossingTokenIndices": null,
+          "nativeCounts": "unknown-not-requested"
+        }
+      ]
+    },
+    {
+      "id": "whole-token-containment",
+      "queryId": "prefix",
+      "mapOverride": {
+        "pageId": "page:c",
+        "sections": [
+          {
+            "anchor": "partial-token",
+            "heading": "Partial token is not a hit",
+            "headingLevel": 2,
+            "field": "body",
+            "valueIndex": 0,
+            "start": 10,
+            "end": 14
+          }
+        ]
+      },
+      "expected": [
+        {
+          "pageId": "page:c",
+          "state": "no-matching-section",
+          "selectedAnchors": [],
+          "excerpts": [],
+          "omittedMatchingAnchors": [],
+          "outsideMapTokenIndices": [
+            7,
+            9
+          ],
+          "crossingTokenIndices": [
+            3
+          ]
+        }
+      ]
+    }
+  ],
+  "invariants": [
+    "Every case preserves expectedPages.total/IDs/order/scores/paging from corpus.json; preview counts never replace page totals.",
+    "selectedAnchors are in lexical field, valueIndex, start, end, anchor order, not density, heading label, input-array order or score order.",
+    "Each small excerpt is the exact sourceSlices text; highlights are section-relative original UTF-16 coordinates.",
+    "Repeated heading labels remain distinct anchors; raw anchor percent/hash characters are encoded exactly once.",
+    "omittedMatchingAnchors lists only known qualifying descriptors omitted for this displayed page; it is not a global matching-section total.",
+    "A page qualifies across source sections or fields without any claim that one preview satisfies every page-level query clause.",
+    "Identical original coordinates in different fields or values cannot be joined, deduplicated or clipped across boundaries."
+  ]
+}

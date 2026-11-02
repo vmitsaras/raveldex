@@ -1,0 +1,1229 @@
+{
+  "kind": "raveldex-page-sections-failure-fixture-v1",
+  "role": "Observable negative/boundary descriptors to instantiate in RX-6005; not production wire input.",
+  "baseCorpus": "corpus.json",
+  "baseProjection": "projection.json",
+  "failureCases": [
+    {
+      "id": "duplicate-page",
+      "stage": "capture",
+      "change": {
+        "appendPageId": "page:a"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; authored DOM and borrowed owner unchanged"
+      }
+    },
+    {
+      "id": "unknown-display-page",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:unknown"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; no silent insertion or dropping of a map page"
+      }
+    },
+    {
+      "id": "captured-engine-reference",
+      "stage": "ownership",
+      "change": {
+        "capturedEngineLabel": "fixture-owner-one",
+        "laterCallerOptionsEngineLabel": "fixture-owner-two",
+        "sameNumericRevision": 1
+      },
+      "expected": {
+        "presentation": "existing mount retains exact captured engine one; later options mutation cannot retarget it; plain-map provenance remains a caller obligation, not authentication"
+      }
+    },
+    {
+      "id": "duplicate-anchor",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 1,
+        "anchor": "details"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected, even though source ranges are disjoint"
+      }
+    },
+    {
+      "id": "blank-heading",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "heading": ""
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; missing heading labels are not invented from source"
+      }
+    },
+    {
+      "id": "missing-heading",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "delete": "heading"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected"
+      }
+    },
+    {
+      "id": "heading-level",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "headingLevel": 7
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; permitted levels are integers 1 through 6"
+      }
+    },
+    {
+      "id": "same-value-overlap",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 1,
+        "start": 19
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; nested parent spans are not a second overlapping preview region"
+      }
+    },
+    {
+      "id": "empty-range",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "start": 20,
+        "end": 20
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected"
+      }
+    },
+    {
+      "id": "reversed-range",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "start": 20,
+        "end": 0
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected"
+      }
+    },
+    {
+      "id": "fractional-index",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "valueIndex": 0.5
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected"
+      }
+    },
+    {
+      "id": "negative-coordinate",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "start": -1
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected"
+      }
+    },
+    {
+      "id": "unknown-property",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "extraProperty": true
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; no silently ignored extension metadata"
+      }
+    },
+    {
+      "id": "anchor-empty",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "anchor": ""
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; missing anchors are not slugged or inferred"
+      }
+    },
+    {
+      "id": "anchor-ascii-whitespace",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "anchor": "two words"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; not trimmed or normalized"
+      }
+    },
+    {
+      "id": "anchor-control",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "anchor": "bad\u0085id"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected for Unicode Cc control"
+      }
+    },
+    {
+      "id": "anchor-unpaired-surrogate",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "anchor": "\ud800"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected for ill-formed Unicode"
+      }
+    },
+    {
+      "id": "anchor-text-fragment-directive",
+      "stage": "capture",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "anchor": "heading:~:text=alpha"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "capture rejected; explicit section anchors do not create text-fragment directives"
+      }
+    },
+    {
+      "id": "unknown-native-field",
+      "stage": "native-section-projection",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "field": "unknown"
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "retain validated native page list; visible context-unavailable; no child preview"
+      }
+    },
+    {
+      "id": "missing-source-value",
+      "stage": "native-section-projection",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "valueIndex": 2
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "retain validated native page list; visible context-unavailable; no child preview"
+      }
+    },
+    {
+      "id": "out-of-source-end",
+      "stage": "native-section-projection",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 1,
+        "end": 34
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "retain validated native page list; visible context-unavailable; no clamping"
+      }
+    },
+    {
+      "id": "split-surrogate",
+      "stage": "native-section-projection",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "start": 1
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "retain validated native page list; visible context-unavailable; do not split the emoji"
+      }
+    },
+    {
+      "id": "split-combining-grapheme",
+      "stage": "native-section-projection",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 0,
+        "start": 7
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "retain validated native page list; visible context-unavailable; do not start at the detached acute mark"
+      }
+    },
+    {
+      "id": "offsets-without-original-source",
+      "stage": "native-section-projection",
+      "change": {
+        "provider": "offsets",
+        "sourceProvider": false
+      },
+      "expected": {
+        "code": "MISSING_CAPABILITY",
+        "presentation": "retain validated native page list; visible context-unavailable; offsets never become display text"
+      }
+    },
+    {
+      "id": "positions-without-offsets",
+      "stage": "native-section-projection",
+      "change": {
+        "provider": "positions",
+        "originalOffsets": false
+      },
+      "expected": {
+        "code": "MISSING_CAPABILITY",
+        "presentation": "retain validated native page list; visible context-unavailable"
+      }
+    },
+    {
+      "id": "stale-map-before-search",
+      "stage": "query-start",
+      "change": {
+        "mapRevision": 1,
+        "mainRevision": 2,
+        "sourceChanged": true
+      },
+      "expected": {
+        "presentation": "retain current validated page results with context-unavailable-stale-map; require fresh map and remount for context; never auto-restamp"
+      }
+    },
+    {
+      "id": "main-evidence-race",
+      "stage": "presentation-attempt",
+      "change": {
+        "mapRevision": 1,
+        "mainRevision": 1,
+        "evidenceRevision": 2
+      },
+      "expected": {
+        "presentation": "clear attempted visible window and offer first-page retry retaining query/filters; never mix main and context revisions"
+      }
+    },
+    {
+      "id": "tampered-reply-id",
+      "stage": "presentation-attempt",
+      "change": {
+        "requestedPageId": "page:a",
+        "replyPageId": "page:d",
+        "sameRevision": 1
+      },
+      "expected": {
+        "presentation": "fail the whole attempt; do not downgrade malformed output into missing context"
+      }
+    },
+    {
+      "id": "truncated-evidence-reply",
+      "stage": "presentation-attempt",
+      "change": {
+        "expectedComplete": true,
+        "receivedComplete": false
+      },
+      "expected": {
+        "presentation": "fail the whole attempt; no successful partial-scan evidence or guessed section count"
+      }
+    },
+    {
+      "id": "same-ids-new-source",
+      "stage": "static-companion",
+      "change": {
+        "sourceSha256Matches": false,
+        "documentsSha256Matches": true,
+        "documentIdsSha256Matches": true
+      },
+      "expected": {
+        "code": "INCOMPATIBLE_ARTIFACT",
+        "presentation": "reject explicit section load; preserve usable main owner and ordinary documents"
+      }
+    },
+    {
+      "id": "same-source-new-display",
+      "stage": "static-companion",
+      "change": {
+        "sourceSha256Matches": true,
+        "documentsSha256Matches": false,
+        "documentIdsSha256Matches": true
+      },
+      "expected": {
+        "code": "INCOMPATIBLE_ARTIFACT",
+        "presentation": "reject explicit section load; IDs alone do not bind routes or titles"
+      }
+    },
+    {
+      "id": "unsupported-companion-version",
+      "stage": "static-companion",
+      "change": {
+        "version": 2
+      },
+      "expected": {
+        "code": "INVALID_ARTIFACT",
+        "presentation": "reject explicit optional load, without silently treating it as empty"
+      }
+    },
+    {
+      "id": "missing-requested-companion",
+      "stage": "static-companion",
+      "change": {
+        "httpStatus": 404
+      },
+      "expected": {
+        "code": "MISSING_ARTIFACT",
+        "presentation": "reject explicit optional load; ordinary source search and documents remain usable"
+      }
+    },
+    {
+      "id": "native-format-companion-load",
+      "stage": "static-companion",
+      "change": {
+        "loadedSnapshotFormat": "native"
+      },
+      "expected": {
+        "code": "INCOMPATIBLE_ARTIFACT",
+        "presentation": "explicit loadSections refuses; native owner remains usable"
+      }
+    },
+    {
+      "id": "missing-wire-page",
+      "stage": "static-companion",
+      "change": {
+        "omitPageId": "page:b"
+      },
+      "expected": {
+        "code": "INVALID_ARTIFACT",
+        "presentation": "reject companion even for a page without authored maps; wire sections:[] must cover every allowlisted ID"
+      }
+    },
+    {
+      "id": "wire-page-count",
+      "stage": "static-companion",
+      "change": {
+        "recordCount": 3,
+        "actualPages": 4
+      },
+      "expected": {
+        "code": "INVALID_ARTIFACT",
+        "presentation": "reject companion"
+      }
+    },
+    {
+      "id": "static-parent-fragment",
+      "stage": "static-build",
+      "change": {
+        "parentPath": "/guide/a/#details"
+      },
+      "expected": {
+        "code": "INVALID_INPUT",
+        "presentation": "existing directory parent path validation still rejects a fragment; anchor lives only in the optional map"
+      }
+    },
+    {
+      "id": "static-parent-traversal",
+      "stage": "static-build",
+      "change": {
+        "parentPath": "/guide/../a/"
+      },
+      "expected": {
+        "code": "INVALID_INPUT",
+        "presentation": "existing safe parent path validation remains unchanged"
+      }
+    },
+    {
+      "id": "static-parent-encoded-separator",
+      "stage": "static-build",
+      "change": {
+        "parentPath": "/guide/a%2Fb/"
+      },
+      "expected": {
+        "code": "INVALID_INPUT",
+        "presentation": "existing safe parent path validation remains unchanged"
+      }
+    },
+    {
+      "id": "missing-segmenter",
+      "stage": "native-section-projection",
+      "change": {
+        "Intl.Segmenter": "unavailable"
+      },
+      "expected": {
+        "code": "UNSUPPORTED_ENVIRONMENT",
+        "presentation": "retain validated main page list; context unavailable, no approximate grapheme fallback"
+      }
+    },
+    {
+      "id": "missing-segmenter-static-build",
+      "stage": "static-build",
+      "change": {
+        "Intl.Segmenter": "unavailable"
+      },
+      "expected": {
+        "code": "UNSUPPORTED_ENVIRONMENT",
+        "presentation": "refuse complete requested optional build; do not publish approximate section metadata"
+      }
+    },
+    {
+      "id": "missing-segmenter-static-load",
+      "stage": "static-companion",
+      "change": {
+        "Intl.Segmenter": "unavailable"
+      },
+      "expected": {
+        "code": "UNSUPPORTED_ENVIRONMENT",
+        "presentation": "refuse explicit optional load; ordinary source owner remains usable"
+      }
+    },
+    {
+      "id": "mutation-observed-before-final-probe",
+      "stage": "static-companion",
+      "change": {
+        "savedReceiverRevision": 1,
+        "finalObservedRevision": 2
+      },
+      "expected": {
+        "code": "INCOMPATIBLE_ARTIFACT",
+        "presentation": "reject optional load; do not stamp original maps with revision2"
+      }
+    },
+    {
+      "id": "mutation-after-final-probe",
+      "stage": "static-companion",
+      "change": {
+        "savedReceiverRevision": 1,
+        "finalObservedRevision": 1,
+        "callerContinuationRevision": 2
+      },
+      "expected": {
+        "returnedMapRevision": 1,
+        "presentation": "map keeps old stamp; next main revision2 yields page-only stale-map until fresh map/remount; no mutation lock or Promise-freshness guarantee"
+      }
+    },
+    {
+      "id": "mutation-after-coherent-detail-before-dom",
+      "stage": "presentation-attempt",
+      "change": {
+        "mapRevision": 1,
+        "mainRevision": 1,
+        "detailRevision": 1,
+        "engineRevisionAtDOMCommit": 2
+      },
+      "expected": {
+        "presentation": "coherent captured revision1 may be published; next action detects revision2/stale-map; do not promise a lock or hidden mutation subscription"
+      }
+    },
+    {
+      "id": "zero-preview-cap",
+      "stage": "capture",
+      "change": {
+        "maxSectionPreviews": 0
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "reject nonpositive UI preview cap before replacing authored DOM"
+      }
+    },
+    {
+      "id": "empty-native-id-list",
+      "stage": "native-section-projection",
+      "change": {
+        "ids": []
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "native section request requires exactly one selected page ID"
+      }
+    },
+    {
+      "id": "absent-direct-section-request",
+      "stage": "native-section-projection",
+      "change": {
+        "requestedID": "page:absent",
+        "queryID": "cross-section",
+        "descriptorsFrom": "page:a"
+      },
+      "expected": {
+        "eligibility": "absent",
+        "ranges": [],
+        "sectionPreviews": [],
+        "sectionOmissions": {
+          "omittedSections": 0,
+          "unmappedRanges": 0,
+          "boundaryRanges": 0
+        },
+        "sourceValueReads": 0,
+        "presentation": "direct request reports absent without inventing text; global payload/field/provider/Segmenter validation still applies"
+      }
+    },
+    {
+      "id": "excluded-direct-section-request",
+      "stage": "native-section-projection",
+      "change": {
+        "requestedID": "page:a",
+        "query": {
+          "kind": "none"
+        },
+        "descriptorsFrom": "page:a"
+      },
+      "expected": {
+        "eligibility": "excluded",
+        "ranges": [],
+        "sectionPreviews": [],
+        "sectionOmissions": {
+          "omittedSections": 0,
+          "unmappedRanges": 0,
+          "boundaryRanges": 0
+        },
+        "sourceValueReads": 0,
+        "presentation": "direct request reports excluded without source-value reads; global validation still applies"
+      }
+    },
+    {
+      "id": "excluded-reply-for-known-main-hit",
+      "stage": "presentation-attempt",
+      "change": {
+        "mainHitID": "page:a",
+        "replyID": "page:a",
+        "replyEligibility": "excluded",
+        "mainRevision": 1,
+        "detailRevision": 1
+      },
+      "expected": {
+        "presentation": "reject whole attempted window as incompatible evidence; no context-only downgrade for a main hit incorrectly labeled excluded"
+      }
+    },
+    {
+      "id": "absent-reply-for-known-main-hit",
+      "stage": "presentation-attempt",
+      "change": {
+        "mainHitID": "page:a",
+        "replyID": "page:a",
+        "replyEligibility": "absent",
+        "mainRevision": 1,
+        "detailRevision": 1
+      },
+      "expected": {
+        "presentation": "reject whole attempted window as incompatible evidence; no fabricated unavailable child"
+      }
+    },
+    {
+      "id": "invalid-source-map-static-builder",
+      "stage": "static-build",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 1,
+        "end": 34
+      },
+      "expected": {
+        "code": "INVALID_INPUT",
+        "presentation": "complete requested optional build rejects before publication; map is not silently truncated"
+      }
+    },
+    {
+      "id": "invalid-source-map-static-reader",
+      "stage": "static-companion",
+      "change": {
+        "pageId": "page:a",
+        "sectionIndex": 1,
+        "end": 34,
+        "assetIntegrityCorrect": true
+      },
+      "expected": {
+        "code": "INVALID_ARTIFACT",
+        "presentation": "explicit optional load refuses semantic invalidity despite correct byte hash; ordinary owner remains usable"
+      }
+    },
+    {
+      "id": "companion-byte-hash-corruption",
+      "stage": "static-companion",
+      "change": {
+        "descriptorDigestMatchesAsset": false
+      },
+      "expected": {
+        "code": "INTEGRITY_MISMATCH",
+        "presentation": "reject optional load; ordinary owner remains usable"
+      }
+    },
+    {
+      "id": "companion-build-mismatch",
+      "stage": "static-companion",
+      "change": {
+        "buildId": "another-build"
+      },
+      "expected": {
+        "code": "STALE_BUILD",
+        "presentation": "reject optional load; never join otherwise equal IDs under a different build"
+      }
+    },
+    {
+      "id": "sections-and-legacy-snippet-options",
+      "stage": "capture",
+      "change": {
+        "pageSections": "projection.json",
+        "snippetFields": [
+          "body"
+        ]
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "reject mutually exclusive optional modes before authored DOM replacement"
+      }
+    },
+    {
+      "id": "preview-cap-without-map",
+      "stage": "capture",
+      "change": {
+        "pageSectionsOmitted": true,
+        "maxSectionPreviews": 3
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "reject a section preview cap without section mode; ordinary omitted mode remains unchanged"
+      }
+    },
+    {
+      "id": "factory-preview-setting-is-not-supported",
+      "stage": "factory-capture",
+      "change": {
+        "maxPreviews": 3
+      },
+      "expected": {
+        "code": "INVALID_OPTIONS",
+        "presentation": "factory owns source/window/highlight limits only; preview count belongs to the native request/UI option"
+      }
+    },
+    {
+      "id": "unsupported-positive-ordered-path",
+      "stage": "native-section-projection",
+      "change": {
+        "mainSearchSucceedsWithRegisteredOrderedCapability": true,
+        "positiveEvidencePath": "ordered proximity without range projection"
+      },
+      "expected": {
+        "code": "INCOMPATIBLE_CAPABILITY",
+        "presentation": "retain validated native parent pages and show context unavailable; do not invent token/section evidence for an unsupported positive path"
+      }
+    }
+  ],
+  "limitCases": [
+    {
+      "id": "map-pages",
+      "subject": "mapped page entries",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 10000,
+      "oneBeyond": 10001,
+      "owner": "RX-6005",
+      "unit": "count"
+    },
+    {
+      "id": "sections-per-page",
+      "subject": "descriptors on one page",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 64,
+      "oneBeyond": 65,
+      "owner": "RX-6005",
+      "unit": "count"
+    },
+    {
+      "id": "sections-total",
+      "subject": "descriptors across the map",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 16384,
+      "oneBeyond": 16385,
+      "owner": "RX-6005",
+      "unit": "count"
+    },
+    {
+      "id": "map-utf8-bytes",
+      "subject": "serialized complete map UTF-8 bytes",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 4194304,
+      "oneBeyond": 4194305,
+      "owner": "RX-6005",
+      "unit": "UTF-8 bytes"
+    },
+    {
+      "id": "heading-code-units",
+      "subject": "heading UTF-16 code units",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 512,
+      "oneBeyond": 513,
+      "owner": "RX-6005",
+      "unit": "UTF-16 code units"
+    },
+    {
+      "id": "anchor-code-units",
+      "subject": "anchor UTF-16 code units",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 256,
+      "oneBeyond": 257,
+      "owner": "RX-6005",
+      "unit": "UTF-16 code units"
+    },
+    {
+      "id": "resolved-url-code-units",
+      "subject": "encoded resolved URL UTF-16 code units",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 2048,
+      "oneBeyond": 2049,
+      "owner": "RX-6005",
+      "unit": "UTF-16 code units"
+    },
+    {
+      "id": "previews-per-page",
+      "subject": "UI maxSectionPreviews / native request maxPreviews",
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 3,
+      "oneBeyond": 4,
+      "owner": "RX-6005",
+      "unit": "count",
+      "minimum": 1,
+      "belowMinimum": 0,
+      "default": 3
+    },
+    {
+      "id": "native-request-pages",
+      "subject": "page IDs per native section-projection request",
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 1,
+      "oneBeyond": 2,
+      "owner": "RX-6005",
+      "unit": "count"
+    },
+    {
+      "id": "complete-native-ranges",
+      "subject": "positive canonical ranges for one page",
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "withinThisLimit": 4096,
+      "oneBeyond": 4097,
+      "owner": "RX-6005",
+      "unit": "count"
+    },
+    {
+      "id": "map-ownership-entries",
+      "subject": "captured map ownership entries",
+      "unit": "entries",
+      "withinThisLimit": 1000000,
+      "oneBeyond": 1000001,
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "map-ownership-depth",
+      "subject": "captured map ownership nesting depth",
+      "unit": "levels",
+      "withinThisLimit": 16,
+      "oneBeyond": 17,
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "page-id-code-units",
+      "subject": "mapped opaque page ID",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 256,
+      "oneBeyond": 257,
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "field-name-code-units",
+      "subject": "declared text field name",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 64,
+      "oneBeyond": 65,
+      "stage": "capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "native-descriptors",
+      "subject": "compact descriptors in one native projection request",
+      "unit": "descriptors",
+      "withinThisLimit": 64,
+      "oneBeyond": 65,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "descriptor-index",
+      "subject": "highest canonical compact descriptor index (zero-based)",
+      "unit": "index",
+      "withinThisLimit": 63,
+      "oneBeyond": 64,
+      "stage": "native-section-projection",
+      "code": "INVALID_OPTIONS",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "payload-key-string-units",
+      "subject": "native aggregate payload key/string accounting",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 16384,
+      "oneBeyond": 16385,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "payload-structure",
+      "subject": "native payload structural entries",
+      "unit": "entries",
+      "withinThisLimit": 16384,
+      "oneBeyond": 16385,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "payload-depth",
+      "subject": "native payload nesting depth",
+      "unit": "levels",
+      "withinThisLimit": 16,
+      "oneBeyond": 17,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "native-complete-facts",
+      "subject": "complete native positive-path evidence facts",
+      "unit": "facts",
+      "withinThisLimit": 4096,
+      "oneBeyond": 4097,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "source-value",
+      "subject": "one referenced original source value",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 65536,
+      "oneBeyond": 65537,
+      "stage": "source-admission",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "source-record",
+      "subject": "all original values of one source record",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 262144,
+      "oneBeyond": 262145,
+      "stage": "source-admission",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "membership-scan",
+      "subject": "64 descriptors times4096 canonical ranges",
+      "unit": "charged descriptor/range pair visits",
+      "withinThisLimit": 262144,
+      "oneBeyond": 262145,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "outcome": "Derived product bound: dimensions are enforced before successful output; no extra result is silently admitted or partial scan accepted. oneBeyond need not be independently reachable while every earlier dimension stays valid."
+    },
+    {
+      "id": "work",
+      "subject": "native and optional shared operation work",
+      "unit": "charged work units",
+      "withinThisLimit": 10000000,
+      "oneBeyond": 10000001,
+      "stage": "native-section-projection",
+      "code": "WORK_LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "output-structure",
+      "subject": "complete native response structural output",
+      "unit": "entries",
+      "withinThisLimit": 16384,
+      "oneBeyond": 16385,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "output-key-string-units",
+      "subject": "complete native response key/string output",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 262144,
+      "oneBeyond": 262145,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "section-extension-bytes",
+      "subject": "serialized section extension alone",
+      "unit": "UTF-8 bytes",
+      "withinThisLimit": 262144,
+      "oneBeyond": 262145,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "excerpt-window",
+      "subject": "factory maxCodeUnits for one section excerpt",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 240,
+      "oneBeyond": 241,
+      "stage": "factory-capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "minimum": 1,
+      "belowMinimum": 0,
+      "default": 240
+    },
+    {
+      "id": "excerpt-highlights",
+      "subject": "factory maxHighlights for one section excerpt",
+      "unit": "merged marks",
+      "withinThisLimit": 32,
+      "oneBeyond": 33,
+      "stage": "factory-capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "minimum": 1,
+      "belowMinimum": 0,
+      "default": 32
+    },
+    {
+      "id": "page-excerpt-text",
+      "subject": "3 times240 section excerpt text units on one displayed page",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 720,
+      "oneBeyond": 721,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "outcome": "Derived product bound: dimensions are enforced before successful output; no extra result is silently admitted or partial scan accepted. oneBeyond need not be independently reachable while every earlier dimension stays valid."
+    },
+    {
+      "id": "page-excerpt-marks",
+      "subject": "3 times32 marks on one displayed page",
+      "unit": "marks",
+      "withinThisLimit": 96,
+      "oneBeyond": 97,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "outcome": "Derived product bound: dimensions are enforced before successful output; no extra result is silently admitted or partial scan accepted. oneBeyond need not be independently reachable while every earlier dimension stays valid."
+    },
+    {
+      "id": "parent-dom-hits",
+      "subject": "configured maxRenderedResults and retained parent-hit DOM",
+      "unit": "parent hits",
+      "withinThisLimit": 1000,
+      "oneBeyond": 1001,
+      "stage": "UI-capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "outcome": "Bound retained DOM/configuration only; global native page totals above1000 remain valid and fully pageable.",
+      "default": 100
+    },
+    {
+      "id": "child-dom-previews",
+      "subject": "1000 retained parent hits times3 previews",
+      "unit": "child previews",
+      "withinThisLimit": 3000,
+      "oneBeyond": 3001,
+      "stage": "UI-output",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "outcome": "Derived product bound: dimensions are enforced before successful output; no extra result is silently admitted or partial scan accepted. oneBeyond need not be independently reachable while every earlier dimension stays valid."
+    },
+    {
+      "id": "accumulated-excerpt-text",
+      "subject": "1000 retained parent hits times720 excerpt units",
+      "unit": "UTF-16 code units",
+      "withinThisLimit": 720000,
+      "oneBeyond": 720001,
+      "stage": "UI-output",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "outcome": "Derived product bound: dimensions are enforced before successful output; no extra result is silently admitted or partial scan accepted. oneBeyond need not be independently reachable while every earlier dimension stays valid."
+    },
+    {
+      "id": "accumulated-excerpt-marks",
+      "subject": "1000 retained parent hits times96 marks",
+      "unit": "marks",
+      "withinThisLimit": 96000,
+      "oneBeyond": 96001,
+      "stage": "UI-output",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "outcome": "Derived product bound: dimensions are enforced before successful output; no extra result is silently admitted or partial scan accepted. oneBeyond need not be independently reachable while every earlier dimension stays valid."
+    },
+    {
+      "id": "new-page-batch",
+      "subject": "existing maximum pageSize for one new result batch",
+      "unit": "parent hits",
+      "withinThisLimit": 100,
+      "oneBeyond": 101,
+      "stage": "UI-capture",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "section-requests-in-flight",
+      "subject": "active section detail operations per UI instance",
+      "unit": "requests",
+      "withinThisLimit": 1,
+      "oneBeyond": 2,
+      "stage": "UI-scheduler",
+      "code": null,
+      "owner": "RX-6005",
+      "outcome": "Serialize: a second section operation waits rather than being issued concurrently; cancellation removes abandoned work. No new native error is invented."
+    },
+    {
+      "id": "companion-metadata-bytes",
+      "subject": "sections-manifest JSON ceiling",
+      "unit": "UTF-8 bytes",
+      "withinThisLimit": 262144,
+      "oneBeyond": 262145,
+      "stage": "static-companion",
+      "code": "ASSET_LIMIT",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "companion-asset-bytes",
+      "subject": "content-addressed sections JSON ceiling",
+      "unit": "UTF-8 bytes",
+      "withinThisLimit": 4194304,
+      "oneBeyond": 4194305,
+      "stage": "static-companion",
+      "code": "ASSET_LIMIT",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "transient-source-export-bytes",
+      "subject": "existing full-source export codec ceiling",
+      "unit": "UTF-8 bytes",
+      "withinThisLimit": 67108864,
+      "oneBeyond": 67108865,
+      "stage": "static-companion-source-export",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005",
+      "nativeErrorOwner": "SnapshotAdapterError; preserve existing typed codec refusal"
+    },
+    {
+      "id": "reader-advances",
+      "subject": "existing per-response reader advance bound including empty chunks",
+      "unit": "reader advances",
+      "withinThisLimit": 1000000,
+      "oneBeyond": 1000001,
+      "stage": "static-companion",
+      "code": "ASSET_LIMIT",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "read-timeout",
+      "subject": "maximum configurable per-read timeout",
+      "unit": "milliseconds",
+      "withinThisLimit": 120000,
+      "oneBeyond": 120001,
+      "stage": "static-companion-options",
+      "code": "INVALID_INPUT",
+      "owner": "RX-6005",
+      "minimum": 1,
+      "belowMinimum": 0,
+      "default": 30000
+    },
+    {
+      "id": "source-snapshot-fetch-bytes",
+      "subject": "existing main source snapshot streamed-read ceiling",
+      "unit": "UTF-8 bytes",
+      "withinThisLimit": 67108864,
+      "oneBeyond": 67108865,
+      "stage": "base-static-load",
+      "code": "ASSET_LIMIT",
+      "owner": "RX-6005 regression of unchanged base loader"
+    },
+    {
+      "id": "output-depth",
+      "subject": "existing native output ownership nesting depth",
+      "unit": "levels",
+      "withinThisLimit": 16,
+      "oneBeyond": 17,
+      "stage": "native-section-projection",
+      "code": "LIMIT_EXCEEDED",
+      "owner": "RX-6005"
+    },
+    {
+      "id": "safe-integer-domain",
+      "subject": "revision/valueIndex/start/end structural integer domain, before source checks",
+      "unit": "integer",
+      "withinThisLimit": 9007199254740991,
+      "oneBeyond": 9007199254740992,
+      "stage": "capture",
+      "code": "INVALID_OPTIONS",
+      "owner": "RX-6005"
+    }
+  ],
+  "runtimeOwner": "RX-6005 capture/projection/UI and static adapter tests; no RX-6004 runtime projection exists.",
+  "axisPolicy": "withinThisLimit is one numeric budget axis, NOT a promise the whole operation is admitted or completes. Other shape/provider/core/work/output/byte limits may refuse earlier. Derivative product bounds are enforced through their dimensions; no giant allocation is executed in RX-6004."
+}

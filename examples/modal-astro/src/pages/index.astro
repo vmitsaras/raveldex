@@ -1,0 +1,22 @@
+---
+import content from '../../content.json';
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>The neighbourhood workshop guide</title></head>
+<body><main>
+  <h1>The neighbourhood workshop guide</h1>
+  <p>Plan a visit, book a session and find the right tools.</p>
+  <button id="search-trigger" type="button" hidden>Search the guide</button>
+  <section id="search-root" aria-label="Workshop guide search" data-build-id={content.buildId}>
+    <p>Browse the guide below. Search needs JavaScript.</p>
+  </section>
+  <dialog id="search-loading" class="search-loading" aria-labelledby="loading-title" closedby="closerequest">
+    <header><h2 id="loading-title">Search the guide</h2><button type="button" data-loading-close>Close search</button></header>
+    <p id="search-status" role="status">Loading search. You can browse the guide after closing this window.</p>
+    <button id="search-retry" type="button" hidden>Retry loading search</button>
+  </dialog>
+  <nav aria-label="Workshop guide pages"><h2>Browse the guide</h2><ul>
+    {content.entries.map(entry => <li><a href={base + 'guide/' + entry.slug + '/'}>{entry.title}</a></li>)}
+  </ul></nav>
+</main><script>import '../main.mjs';</script></body></html>

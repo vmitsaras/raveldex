@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Core terminal example · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="search-documentation-from-the-terminal">Search documentation from the terminal</h1>
+<p>Try core search from the terminal, without a browser or database. This example indexes selected implementation-contract sections and prints their matching IDs, scores and exact total. For guides about using Raveldex, use the browser demo linked below.</p>
+<h2 id="run">Run</h2>
+<p>From a source checkout, use Node 24 and npm:</p>
+<pre><code class="language-sh">npm ci
+npm run pilot:core -- 'atomic mutation'
+</code></pre>
+<p>You should see the temporary consumer directory followed by results for <code>atomic mutation</code>. Each hit has an ID and relevance score; <code>total</code> counts all matches. The command compiles and installs a local core tarball, then disposes its engine when finished. It creates no browser UI or database.</p>
+<h2 id="search-another-term">Search another term</h2>
+<p>Change into the temporary consumer directory printed above, then run:</p>
+<pre><code class="language-sh">node run.mjs corpus.json judgments.json 'original source'
+</code></pre>
+<p>This starts a new search for <code>original source</code> and prints its results, without rebuilding the package. Both complete analyzed terms must match. Queries use exact analyzed terms by default. Use the typed query shapes in <a href="/raveldex/reference/core/#query-shapes">core usage</a> for prefixes, fields, Boolean groups and metadata equality.</p>
+<h2 id="use-your-own-records">Use your own records</h2>
+<p>Start from <a href="/raveldex/example-files/core.mjs">the core recipe</a>: define the schema, add your records and call <code>search</code>. Keep titles/URLs in your application and join them to returned IDs. Use <code>replace</code>, <code>remove</code> or <code>clear</code> to update the collection, then dispose the engine when finished.</p>
+<p>For an interactive search example, use <a href="/raveldex/examples/browser/">the usage-guide browser demo</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

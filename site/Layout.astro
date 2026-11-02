@@ -1,0 +1,29 @@
+---
+const { frontmatter = {}, wide = false } = Astro.props;
+const base = '/raveldex/';
+const links = [['Guides', 'guide/'], ['API', 'reference/'], ['Examples', 'examples/'], ['Demo', 'demo/']];
+const current = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{frontmatter.title} · Raveldex</title>
+    <meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application." />
+    <link rel="stylesheet" href={base + 'site-assets/styles.css'} />
+    <slot name="head" />
+  </head>
+  <body class="site">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="site-header__brand" href={base} aria-label="Raveldex home">Raveldex</a>
+      <nav class="site-header__nav" aria-label="Main navigation"><ul>{links.map(([label, path]) => <li><a href={base + path} aria-current={current === base + path ? 'page' : undefined}>{label}</a></li>)}</ul></nav>
+    </header>
+    <main id="main" class:list={['site-main', { 'site-main--article': !wide }]} tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <p>Private preview · Packages not yet published</p>
+      <p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href={base + 'site-assets/LICENSE.txt'}>MIT license</a></p>
+    </footer>
+  </body>
+</html>

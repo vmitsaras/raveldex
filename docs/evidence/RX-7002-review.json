@@ -1,0 +1,222 @@
+{
+  "kind": "raveldex-rx7002-independent-final-review-v1",
+  "date": "2026-11-02",
+  "status": "Pass within reviewed implementation and final independent automated scope",
+  "scope": "One installed plain-browser header starter, real inline full-results route, explicit optional same-owner modal, bounded source/download/gallery integration. Parent owns full installed-consumer/25-case runtime/site/candidate/fullcheck/canonical evidence. No repository writes by reviewer.",
+  "sourceSHA256": {
+    "examples/dropdown-browser/README.md": "8d535ffc53231f8a2e45e7645ed81c64c6699333c529bbd9dfe38cd1c14715e0",
+    "examples/dropdown-browser/build.mjs": "3c2884f8616ebf462e1b191d13886ec08bc197d4541741f71bb08172b079a271",
+    "examples/dropdown-browser/configuration.mjs": "cef617ebaf7b77ca6d2ebcf682692df3bc54467191e8ff882352780555db78c8",
+    "examples/dropdown-browser/content.json": "91bf9c9b5f0df5fb9e1078c482faab8cb5892a72ef1527b77c1d6e85188948a5",
+    "examples/dropdown-browser/content.mjs": "d6617c9e3ac584472575335d864564e0aed51f06b55554ea64b510071c3561b2",
+    "examples/dropdown-browser/controller.mjs": "bea2c245facb6d55f6169e7533999f754cbd8418b47d248d9537357b4d6cd019",
+    "examples/dropdown-browser/index.html": "3d4ddbf9156e193c0dffb94ed9987affc264e6bff3dccfe3b7c5fc755762b97c",
+    "examples/dropdown-browser/load.mjs": "683e6a4bbd176cd0afcc8bed6418f861b4357be12246009b04d2a6678d10cfc5",
+    "examples/dropdown-browser/main.mjs": "6b48f8ae83369718795a7bcc690c572b2b17c4ac7385836d03c6865d303ceb38",
+    "examples/dropdown-browser/package.json": "41a421c22b8e45e383a19de388aa11f07b4430d3a4a8d4fc0f569de2aad675b5",
+    "examples/dropdown-browser/preview.mjs": "aa574bca34ef7ec98eeef8029e8a5068240008bd105fcef4aec8ec91eae34a2b",
+    "examples/dropdown-browser/theme.css": "bc883da73d77d92b3e172646c65f6413fb6490f09ce510f35ae4758a577c43d3",
+    "src/addons/ui/dropdown.ts": "7357a1be6be582f14ed6a6f9a5d45b5c05c58c059843bfaca06b0bed0285fc53",
+    "dist/addons/ui/dropdown.js": "d1383306c72942913831e2630786b2ed2654e6fd7acad64ea666bddd66dc739e",
+    "test/ui/dropdown-browser.test.mjs": "a0e2fb13c5640246ca8d060f9c0cf858bfbf43c1fa00665a9607dd1d93c969f0",
+    "site/Dropdown.astro": "3a9f6f659dcc84688e0728a09eb8872918c5994480f264d010804a9f3a24ffdd",
+    "site/starters.mjs": "123f7ea0cd9e848dc52d058e30f7c5ca79e592a6c7088bc3639cc3735a12a3bb",
+    "site/pages.mjs": "2c4da48114f77ca203973e856d7512bf6ab86f2339836135f1b2427e107500c0",
+    "scripts/build-pages.mjs": "1aa491a1b204395d0730a452c04e80408be316bf1fa4d1a3427ef0ee8beedc58",
+    "scripts/lib/inline-starters.mjs": "efe9d06a7a03c64bd3e84f68b7e9d6b45dad7a79fea4470b3894c0a30f6835c4"
+  },
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin arm64",
+    "Chrome": "156.0.8078.74",
+    "PlaywrightWebKit": "26.5",
+    "WebKitIsSafari": false
+  },
+  "finalChecks": {
+    "handoffReentry": {
+      "status": "Pass",
+      "groups": 6,
+      "perEngine": 3,
+      "report": "final-reentry.json",
+      "script": "final-reentry-probe.mjs"
+    },
+    "nativeDialogFailureRetry": {
+      "status": "Pass",
+      "groups": 4,
+      "perEngine": 2,
+      "report": "final-unsupported.json",
+      "script": "final-unsupported-probe.mjs"
+    },
+    "lifecycleAndDarkFocus": {
+      "status": "Pass",
+      "groups": 14,
+      "perEngine": 7,
+      "report": "final-lifecycle.json",
+      "script": "final-lifecycle-probe.mjs"
+    },
+    "trustedNativeResultLinks": {
+      "status": "Pass",
+      "groups": 4,
+      "perEngine": 2,
+      "report": "final-native-links.json",
+      "script": "native-link-probe.mjs"
+    },
+    "groupsTotal": 28,
+    "sourceUnchangedDuringEveryRun": true,
+    "pageErrors": [],
+    "graphIdentity": "Every final report contains actual source and compiled UI hashes plus per-input graph hashes. Reviewer probes are source-bundled with the real compiled core/UI; they are not relabeled fresh installed consumers."
+  },
+  "resolvedFindings": [
+    {
+      "id": "retained-modal-trigger-bypasses-refusal",
+      "severity": "medium",
+      "status": "resolved",
+      "target": "examples/dropdown-browser/controller.mjs onModal/openModal",
+      "provenance": "Source identified and repaired before old-runtime reproduction. Do not relabel as a reproduced old bug.",
+      "impact": "A preset trigger listener retained after first modal mount could bypass the wrapper composition/invalid-query admission guard.",
+      "repair": "The explicit application button owns its click admission and stops the retained preset handler from reopening a refused handoff; native anchors remain unintercepted.",
+      "evidence": [
+        "initial-source-findings.json",
+        "initial-controller.mjs"
+      ],
+      "finalVerification": "Final source read; parent installed controller tests own the durable first-open/close then composing/invalid actual-click case."
+    },
+    {
+      "id": "pending-initial-query-dedupe",
+      "severity": "medium",
+      "status": "resolved",
+      "target": "examples/dropdown-browser/controller.mjs start",
+      "provenance": "Source identified and repaired before old-runtime reproduction.",
+      "impact": "Ready owner was checked before pending initial-query readiness, so a second start could settle eagerly rather than join current initialization.",
+      "repair": "Check pending first; retain pending through complete initialization/finally cleanup.",
+      "evidence": [
+        "initial-source-findings.json",
+        "initial-controller.mjs",
+        "final-lifecycle.json"
+      ],
+      "finalVerification": "Final source reads pending before owner. Independent loading-status reentry confirms same pending Promise and zero loader calls after synchronous destroy; parent installed suite owns the held initial-query case."
+    },
+    {
+      "id": "failure-cleanup-absent-from-destroy",
+      "severity": "medium",
+      "status": "resolved",
+      "target": "examples/dropdown-browser/controller.mjs initialization finally/jobs/destroy",
+      "provenance": "Source identified and repaired before old-runtime reproduction.",
+      "impact": "Clearing pending/jobs before committed owner disposal completed allowed destroy/retry to miss still-owned cleanup.",
+      "repair": "Keep pending and job registration through complete cleanup; remove jobs only on actual Promise settlement.",
+      "evidence": [
+        "initial-source-findings.json",
+        "initial-controller.mjs",
+        "final-lifecycle.json"
+      ],
+      "finalVerification": "Actual native core dispose plus deliberately held application disposal, ready-status refusal, stable destroy Promise; both engines remain unsettled until release and dispose exactly once."
+    },
+    {
+      "id": "older-handoff-overwrites-newer-close-or-refusal",
+      "severity": "medium",
+      "status": "resolved",
+      "target": "examples/dropdown-browser/controller.mjs openModal focus/mount callbacks",
+      "provenance": "Old defect independently reproduced in Chrome and Playwright WebKit before repair, with matched raw fields and genuine native results.",
+      "impact": "Nested focus-triggered handoff then actual Close, or a newer refused oversize handoff, was overwritten by the older outer action reopening stale alpha while header showed beta/invalid text.",
+      "repair": "Per-handoff epoch invalidates older work even on newer refusal; exact field/raw/composition and owner checks surround close/mount/focus/open/search boundaries.",
+      "evidence": [
+        "before-handoff-fix-independent-reentry.json",
+        "before-handoff-fix-independent-reentry.log",
+        "before-handoff-fix-independent-probe.mjs",
+        "final-reentry.json",
+        "final-reentry.log",
+        "final-reentry-probe.mjs"
+      ],
+      "finalVerification": "Plain nested valid handoff keeps beta; nested close/refusal remain closed with zero modal hits in both engines."
+    },
+    {
+      "id": "modal-capability-refusal-unhandled",
+      "severity": "medium",
+      "status": "resolved",
+      "target": "examples/dropdown-browser/controller.mjs openModal",
+      "provenance": "Independently reproduced old failure under controlled native capability removal and native showModal DOMException injection in both engines; not a claim that these installed browsers lack dialog support.",
+      "impact": "Optional button emitted pageerrors and left false ready feedback on expanded-search failure.",
+      "repair": "Local guarded failure recovery reports a readable larger-search failure, preserves owner/header/full-results, and permits retry when native capability recovers.",
+      "evidence": [
+        "before-error-fix-independent-unsupported.json",
+        "before-error-fix-independent-unsupported.log",
+        "before-error-fix-unsupported-probe.mjs",
+        "final-unsupported.json",
+        "final-unsupported.log",
+        "final-unsupported-probe.mjs"
+      ],
+      "finalVerification": "No pageerrors; actual native query remains usable, full route stays available, restored native API reopens exact alpha with the same owner, one disposal."
+    },
+    {
+      "id": "stale-handoff-failure-feedback-after-success",
+      "severity": "medium",
+      "status": "resolved",
+      "target": "examples/dropdown-browser/controller.mjs successful openModal recovery",
+      "provenance": "Independently reproduced on controller20291 source in both engines after prior capability-error recovery.",
+      "impact": "A successful retry opened correct results but still told users that expanded search could not open.",
+      "repair": "Only this wrapper's current handoff refusal/failure feedback resets on successful current open; lifetime/raw/epoch/dialog guards repeat around authored status callbacks.",
+      "evidence": [
+        "after-refusal-retry-feedback.json",
+        "after-refusal-retry-feedback.log",
+        "retry-feedback-probe.mjs",
+        "final-unsupported.json"
+      ],
+      "finalVerification": "Actual capability restore/retry retains alpha and updates app feedback to Search is ready in both engines."
+    },
+    {
+      "id": "dark-native-action-focus-color",
+      "severity": "medium",
+      "status": "resolved",
+      "target": "examples/dropdown-browser/theme.css dark focus palette",
+      "provenance": "Source/computed-color finding, not a human visual/AT observation.",
+      "impact": "The global brown light-theme outline remained on ordinary native actions against dark starter backgrounds.",
+      "repair": "Dark scheme gives global native focus a gold outline; UI/theme error palettes remain coherent.",
+      "evidence": [
+        "final-lifecycle.json",
+        "final-lifecycle.log"
+      ],
+      "finalVerification": "Actual computed native action focus is rgb(249,206,119), solid3px, focused in both engines."
+    },
+    {
+      "id": "dropdown-pointer-target-removed-during-native-focus",
+      "severity": "high",
+      "status": "resolved",
+      "target": "src/addons/ui/dropdown.ts input blur handler",
+      "provenance": "Old trusted native-pointer reproduction belongs to tests agent and parent, independently inspected here. This reviewer did not independently execute the old pointer reproducer; final native-link proof is independent.",
+      "impact": "During genuine pointer input\u2192owned anchor focus transition, native activeElement transiently became BODY. The queued blur check removed the anchor before pointerup/click, so result navigation failed. relatedTarget was the owned connected anchor.",
+      "repair": "Honor connected same-document owned relatedTarget before fallback blur microtask; retain null/outside dismissal and window/document outside handling. No forced focus or click interception.",
+      "evidence": [
+        "../tests/pointer-probe.mjs",
+        "../tests/pointer-probe.json",
+        "../tests/runtime-before.log",
+        "final-native-links.json",
+        "final-native-links.log",
+        "native-link-probe.mjs"
+      ],
+      "finalVerification": "Both direct standalone dropdown and wrapper after a failed-load retry follow the actual /guide/alpha/ URL by trusted ordinary pointer click in both engines; no preventDefault or force-click workaround."
+    }
+  ],
+  "remainingActionableFindings": [],
+  "sourceReview": {
+    "queryMeaning": "One shared mode/configuration and same owner/documents within each page; one-time strict q parsing, no history or hidden state synchronization.",
+    "ownership": "Presenters borrow; controller owns one newly transferred owner and teardown. No foreign search engine or runtime dependency.",
+    "safeContent": "Explicit finite data schema and paths, escaped HTML/plain UI text, streamed4MiB loader and original browse routes.",
+    "site": "Additive explicit starter/file/page allowlists; actual installed preview construction; Jekyll exclusions preserved. Generated runtime/source downloads need parent execution evidence.",
+    "nativeBoundary": "Real result/full-results links and editing remain native; explicit modal button is application-owned admission. Compact/no-space fallback remains full-results; no automatic size transition."
+  },
+  "manualAndPlatformGaps": [
+    "No human screen-reader speech or complete WCAG conformance claim.",
+    "No physical IME/touch/on-screen keyboard or actual browser zoom.",
+    "No Safari or general WebKit qualification; modified-new-tab platform proof remains separately scoped by RX-7001/parent tests.",
+    "No remote CI, hosted deployment or publication.",
+    "No memory/latency/physical-paint measurement.",
+    "These independent probes do not replace fresh copied installed starter, generated gallery, full runtime and repository regression evidence."
+  ],
+  "provenanceNotes": [
+    "First three lifecycle/trigger findings were source-identified and fixed before old-runtime reproduction; original source saved.",
+    "Per-handoff reentry, deliberate native-dialog error handling and stale recovery feedback were independently reproduced before repair.",
+    "Old native-pointer bug was independently reviewed from the test agent's genuine event/script artifacts; final direct and post-retry pointer navigation independently executed here.",
+    "Earlier passing controller2e93/20291 reports remain under before-format/before-runtime-fix names; final reports bind controllerbea2 and the repaired compiled dropdown.",
+    "Read-only reviewer created only task-temp artifacts; no code/docs/package/dependency/lockfile/runtime changes or nested agents."
+  ]
+}

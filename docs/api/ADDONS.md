@@ -1,8 +1,12 @@
 # Optional search capabilities
 
-Owner-capability factories return `AddonRegistration` objects for `createRaveldex({ schema, addons })`. The explicit query-syntax compiler instead returns a caller-side parser, as described below. Their options are validated synchronously. Install providers at owner creation; they participate in the same atomic mutation revision, rollback, clear and disposal as core. They do not change ordinary term statistics or BM25 scores. [addons.mjs](examples/addons.mjs) runs source, position and mixed phrase strategies, typed filters/facets and separate Inspector/range/snippet requests.
+Add only the search features your application needs. Most factories below return an `AddonRegistration` that you pass to `createRaveldex({ schema, addons })`. They check their options immediately, and their state is updated, cleared and disposed together with the engine. The phrase, filter and evidence providers described here leave ordinary term statistics and BM25 scores unchanged.
+
+The query-syntax parser and record-patch helper work separately, as explained in their sections. To try phrases, filters, facets and result explanations together, copy [addons.mjs](examples/addons.mjs) and call `runAddonsExample()`.
 
 ## Source, positions and phrases
+
+A source provider keeps the original text for selected fields. A position provider keeps where tokens occur, with optional character offsets. For phrase search, choose a phrase evaluator that uses one of those providers, or a mixed strategy for different fields.
 
 | Import and factory | Options / returned registration |
 | --- | --- |
@@ -12,7 +16,9 @@ Owner-capability factories return `AddonRegistration` objects for `createRavelde
 | `/addons/phrases/positions`: `createPositionPhrases(options)` | `PositionPhraseOptions`: `{ fields: string[], id?, maxWorkUnits? }`. Verifies adjacency with stored positions; requires no originals or offsets. |
 | `/addons/phrases/mixed`: `createPhrases(options)` | `MixedPhraseOptions`: `{ fields: Record<string, 'source' \| 'positions'>, id?, maxWorkUnits? }`. Selects a declared strategy per field. |
 
-All phrase registrations provide `phrases` contract version 1. Choose one phrase registration per owner; duplicate providers conflict. Every query-selected field must have the declared provider, even for an empty phrase or no lexical candidates. Query using:
+Choose one phrase registration per engine; duplicate providers conflict. All phrase registrations provide capability `phrases`, version `1`. Each field you search must have its required provider, even when the phrase is empty or no terms match.
+
+This query fragment looks for adjacent `red` and `car` terms in `title` or `body`. First create an engine with those fields and a matching phrase registration, then pass `phraseQuery` to `engine.search`:
 
 ```js
 const phraseQuery = {
@@ -21,22 +27,37 @@ const phraseQuery = {
 };
 ```
 
-Omitted query `fields` selects all schema text fields, so selecting a subset explicitly matters when only some fields have providers. A phrase is analyzed adjacency inside one original field value; it never crosses values/fields. Punctuation separates tokens and is not a literal phrase constraint. Repeated tokens affect eligibility, and no phrase bonus is added. At most 32 analyzed phrase tokens are allowed (also subject to the lower core query-token bound). Strict phrases expose no slop or synonym graphs. Ordered gaps require the separate explicit [proximity](PROXIMITY.md) leaf.
+A value containing `red car` can match; `red fast car` cannot. The two words must appear next to each other within one field value. This block creates a query only; it does not run a search or print a count.
 
-Positions preserve one position per emitted token. Offsets add half-open original UTF-16 coordinates; they do not imply retained display text. Source and position logical-entry/work ceilings can be reduced through options, and overflow rejects the whole operation. Entry counts are not heap bytes. Source-only and position-only utility imports exclude the unused phrase evaluator.
+Keep these phrase rules in mind:
+
+- Omitted `fields` means all schema text fields. Select fields explicitly if only some have providers.
+- Punctuation separates tokens. A token phrase is not a punctuation-sensitive literal string.
+- Repeated terms must occur as required; a phrase never joins separate fields or array values.
+- Phrases add no ranking bonus. They allow at most 32 analyzed tokens, or a lower configured core limit.
+
+Use [proximity](PROXIMITY.md) to allow ordered gaps. Strict phrases do not accept gaps or synonym graphs.
+
+Positions record token locations; offsets also record the original UTF-16 start and exclusive end. Offsets alone do not keep text for display. You can lower the providers' entry and work limits through their options. Exceeding a limit rejects the operation. Entry counts describe stored items, not heap bytes.
+
+Use the source-only or position-only import when you do not need its phrase evaluator.
 
 ## Typed filters and exact facets
 
-`createFilters(FilterOptions)` from `/addons/filters` accepts `{ fields: string[], id?, maxWorkUnits? }` and provides two version-1 query leaves over declared enabled metadata:
+Use typed filters to narrow results by declared metadata without changing their lexical scores. Register `createFilters({ fields, id?, maxWorkUnits? })` from `/addons/filters`, then use either of these version-1 extension queries:
 
 | Capability / exported payload type | Payload |
 | --- | --- |
 | `numeric-range` / `NumericRangePayload` | `{ field, gt?, gte?, lt?, lte? }`. Numeric field; at least one finite endpoint. Do not supply both lower operators or both upper operators. |
 | `set-membership` / `SetMembershipPayload` | `{ field, values: Scalar[] }`. Nonempty, correctly typed scalar set; maximum 128 values, bounded by core metadata limits. |
 
-A range on multi numeric metadata requires at least one individual value satisfying all endpoints. Set membership requires any strict equality intersection. Missing values fail the predicate; nullable fields can explicitly match null. These leaves use the ordinary `{ kind: 'extension', capability, version: 1, payload }` envelope and combine with lexical queries using `and`/`or`/`not`. They contribute no lexical score and retain no side index.
+For a multi-valued numeric field, at least one value must satisfy the whole range. Set membership matches if any supplied value equals a stored value. Missing fields do not match; nullable fields can explicitly match `null`.
 
-`createFacets(FacetOptions)` from `/addons/facets` accepts `{ fields: string[], id?, maxWorkUnits?, maxDistinctValuesPerField?, maxBucketsPerField? }`. Enabled fields must be string metadata. Request facets separately from query membership:
+Wrap the payload in `{ kind: 'extension', capability, version: 1, payload }` and combine it with text queries using `and`, `or` or `not`. Filters read core metadata and keep no extra side index.
+
+Facets give you counts for categories such as `kind`. Register `createFacets({ fields, id?, maxWorkUnits?, maxDistinctValuesPerField?, maxBucketsPerField? })` from `/addons/facets` for string metadata fields.
+
+The following options fragment requests up to ten `kind` buckets plus a missing-value bucket. It assumes your engine declares `kind` as string metadata and has the facet registration. Pass `options` as the second argument to `engine.search(query, options)`:
 
 ```js
 const options = {
@@ -44,13 +65,19 @@ const options = {
 };
 ```
 
-`FacetRequest.fields` contains `{ field, limit?, missing? }` selections. Facets count complete query membership before pagination, including all active filters: this is conjunctive counting, not an automatic disjunctive/self-excluding facet calculation. A document counts once per distinct value. Null and missing are separate tagged buckets; empty multi arrays contain no value. Results at `result.extensions.facets` have `FacetResult` shape `{ fields: FacetFieldResult[] }`. Each field has `{ field, buckets, distinctValueTotal, omittedBucketCount }`; each `FacetBucket` is `{ kind: 'value', value: string | null, count }` or `{ kind: 'missing', count }`. Order is count descending with deterministic value ties; the missing bucket remains distinctly tagged.
+Read the counts from `result.extensions.facets.fields`. They cover all matches before pagination and include every active filter, including a filter on `kind` itself. Changing the hit page does not change these counts.
 
-The default/maximum distinct-value ceiling is 10,000 per field and bucket ceiling is 100; the latter can be zero. A requested smaller bucket limit reports omitted buckets rather than an approximate count. Exceeding the distinct-value/work/output bound rejects the requested operation. Exact facets do not imply every bucket is displayed.
+`FacetRequest.fields` takes `{ field, limit?, missing? }` selections. Each returned field contains `{ field, buckets, distinctValueTotal, omittedBucketCount }`. A bucket is either `{ kind: 'value', value: string | null, count }` or `{ kind: 'missing', count }`.
+
+A document counts once per distinct value. `null` and missing are separate buckets, and an empty multi-value array adds no value. Buckets sort by descending count with deterministic value ties. If you want a category's counts to exclude its own active filter, compute that through a separate query.
+
+The default and maximum limits are 10,000 distinct values per field and 100 returned buckets. The bucket limit can be zero. When you request fewer buckets, `omittedBucketCount` tells you how many are not shown; displayed counts remain exact. Exceeding a distinct-value, work or output limit rejects the search.
 
 ## Native Inspector
 
-`createInspector(InspectorOptions = {})` from `/addons/inspector` installs factual evidence, with `{ id?, sourceFields?, maxFacts?, maxWorkUnits?, maxOutputEntries? }`. Source fields require matching source providers and only permit source selection; a search still must request them explicitly.
+Use Inspector to explain why a record matched and how its score was calculated. Register `createInspector({ id?, sourceFields?, maxFacts?, maxWorkUnits?, maxOutputEntries? })` from `/addons/inspector`. To include source text, install a source provider, allow the field in `sourceFields`, and request it on the search.
+
+This options fragment asks about `guide:updates` at revision `1`. It needs an engine with Inspector and a source provider for `title`. Pass it as the second argument to `engine.search(query, options)`:
 
 ```js
 const options = {
@@ -60,9 +87,11 @@ const options = {
 };
 ```
 
-`InspectorRequest` is `{ ids, maxFacts?, expectedRevision?, sourceFields? }`. At most 128 unique selected IDs and 4,096 facts are permitted, subject to configured lower limits. A mismatching expected revision rejects `REVISION_MISMATCH`; no historical root is retained for later explanations. Results at `extensions.inspector` are `InspectorData` with `kind: 'raveldex-inspector-v1'`, revision/model, configuration, selected `ScoreTrace`, documents, result counts, resources and numerical tolerance.
+The result appears in `result.extensions.inspector`. Look there for the selected record's matching terms, score calculation and requested title text. If the collection is no longer at revision `1`, the request rejects with `REVISION_MISMATCH` instead of explaining a different revision. In your application, use a revision returned by a completed search or update.
 
-Facts come from executed native membership/scoring decisions. They show successful Boolean participation, winning alternative per group/field, `tf`, `df`, field population/lengths, boosts/weights, IDF, normalizer, TF part, selected contribution and summed score. This explains the actual `raveldex-bm25-v1` result, without guessed relevance percentages or a foreign scorer.
+`InspectorRequest` takes `{ ids, maxFacts?, expectedRevision?, sourceFields? }`. You can select up to 128 unique IDs and 4,096 facts, subject to lower configured limits. `InspectorData` includes `kind: 'raveldex-inspector-v1'`, revision/model, configuration, selected `ScoreTrace`, documents, result counts, resources and numerical tolerance. Inspector does not retain historical index state.
+
+The facts describe the search that actually ran. They include participating Boolean branches, the winning alternative for each group and field, term/document frequencies (`tf` and `df`), field lengths and populations, boosts, weights and the BM25 arithmetic. Use these to understand a score; they are not relevance percentages.
 
 Selected `InspectorDocument` entries distinguish `matched`, `excluded` and `absent`, and `returned` versus `outside-page` placement. Score is null where unavailable. Absolute rank and all losing alternatives are explicitly `unavailable: not-collected`. `InspectorSource` distinguishes not-requested, absent record and available/absent fields. `InspectorResources` exposes work-v1/count scope before evidence projection; heap bytes are explicitly `unavailable: not-measured`. The tolerance is absolute/relative `1e-12`, not a cross-engine bit-identity promise.
 
@@ -72,7 +101,9 @@ The entry exports `InspectorOptions`, `InspectorRequest`, `InspectorSource`, `In
 
 ## Original ranges and snippets
 
-`createMatchEvidence(MatchEvidenceOptions)` from `/addons/evidence` accepts `{ fields: Record<string, 'source' | 'offsets'>, id?, maxFacts?, maxRanges?, maxWorkUnits?, maxOutputEntries? }`. Each field explicitly uses source reanalysis or stored original offsets. `MatchEvidenceRequest` is `{ ids, fields?, expectedRevision?, maxFacts?, maxRanges? }`, requested at `extensions['match-evidence']`.
+Use match evidence when you need the original text ranges that matched. Register `createMatchEvidence` from `/addons/evidence` with `{ fields: Record<string, 'source' | 'offsets'>, id?, maxFacts?, maxRanges?, maxWorkUnits?, maxOutputEntries? }`. Choose whether each field uses original-source reanalysis or stored offsets.
+
+Request `{ ids, fields?, expectedRevision?, maxFacts?, maxRanges? }` at `extensions['match-evidence']`. You receive original ranges for the selected documents, not ready-made HTML.
 
 `MatchEvidenceData` is `{ kind: 'raveldex-match-evidence-v1', revision, fields, scope: 'successful-positive-token-occurrences', complete: true, documents }`. Each `MatchDocument` has `{ id, eligibility, ranges }`. A `MatchRange` is `{ field, valueIndex, position, start, end, term }`; the range is half-open, local to the original value and uses UTF-16 coordinates. `term` is normalized search data; use the original value for display. Prefix evidence highlights the complete matching original token. Successful positive Boolean branches contribute occurrences; failed/negative branches do not.
 
@@ -80,40 +111,83 @@ The entry exports `InspectorOptions`, `InspectorRequest`, `InspectorSource`, `In
 
 `SnippetEvidenceData` extends match data. Each `SnippetDocument` adds `snippets` and `snippetOmissions`. A `Snippet` has `{ field, valueIndex, start, end, text, highlights, omittedBefore, omittedAfter }`; its exact original text is ordinary text, never trusted HTML. `SnippetHighlight` coordinates are relative to that slice and expanded to grapheme boundaries. Render text nodes plus explicit marks. `SnippetOmissions` records `{ unshownMatches, windowLimit, highlightLimit, matchTooLong, graphemeTooLong }`.
 
-Ranges are complete or reject; snippet presentation can omit matches explicitly. Maximum/default display bounds are three windows/document, 240 UTF-16 units/window and 32 merged highlights/window. Default/maximum facts and ranges are 4,096 each; selected IDs are at most 128. Output entries, aggregate key/string units and shared work also remain bounded. Requested limits may reduce these bounds. Only one evidence extension (Inspector, ranges or snippets) can be requested in a search; requesting two rejects `INVALID_OPTIONS`. Install multiple providers if useful, then request evidence in separate searches and bind `expectedRevision` when consistency across them matters.
+Range requests either return complete ranges or reject. Snippets can leave matches out of their displayed excerpts, and report those omissions. The default and maximum display limits are three windows per document, 240 UTF-16 units per window and 32 merged highlights per window. Facts and ranges each allow at most 4,096, and selected IDs at most 128. Output size and shared work limits also apply; request options can lower them.
+
+Request only one evidence extension per search: Inspector, ranges or snippets. Asking for two rejects with `INVALID_OPTIONS`. You can install all of their providers, then make separate searches. Use `expectedRevision` if those explanations must refer to the same collection revision.
+
+## Anchored page context
+
+Use `createSectionEvidence` from `@vmitsaras/raveldex/addons/sections` when a result represents a whole page and you want links to matching headings. Index one record per page. The optional projection preserves native page scores, order, totals and pagination; it does not compute a global matching-section count or extract headings from HTML.
+
+```js
+import { createRaveldex } from '@vmitsaras/raveldex';
+import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
+import { createSectionEvidence } from '@vmitsaras/raveldex/addons/sections';
+
+const original = 'Replace a bicycle chain.';
+const engine = createRaveldex({
+  schema: { text: { body: {} } },
+  addons: [
+    createSourceProvider({ fields: ['body'] }),
+    createSectionEvidence({ fields: { body: 'source' } }),
+  ],
+});
+const written = await engine.add({ id: 'repair', text: { body: original } });
+const result = await engine.search('chain', {
+  extensions: {
+    'section-evidence': {
+      ids: ['repair'], expectedRevision: written.revision,
+      sections: [{ sectionIndex: 0, field: 'body', valueIndex: 0, start: 0, end: original.length }],
+      maxPreviews: 3,
+    },
+  },
+});
+console.log(result.extensions['section-evidence']);
+await engine.dispose();
+```
+
+Each request selects exactly one ID and carries the complete canonical descriptor list for that page, up to 64 entries. Indexes must be consecutive from zero in field/value/start/end source order. `expectedRevision` is required. Original UTF-16 half-open spans must be nonempty, disjoint, in a configured field/value and end at actual grapheme boundaries. Scalar text uses value index zero; arrays preserve their original indexes. An absent or excluded selected ID returns its native eligibility with empty ranges/previews and zero local omissions. Empty descriptors declare no mapped scope and produce no previews or scoped omission counts.
+
+`fields` selects explicit source or offsets strategies. Both need source for display; offsets additionally need the original-offset positions provider. Factory options reuse match-evidence ID/fact/range/work/output limits and add `maxCodeUnits` (1–240, default 240) and `maxHighlights` (1–32, default 32). `maxPreviews` belongs to each request (1–3, default 3). Register the same factory/options explicitly in a worker; no new worker command is needed. Import and factory creation perform no source segmentation or host initialization.
+
+The response keeps the match-evidence header and original positive ranges. Its selected document adds `sectionPreviews: [{ sectionIndex, snippet, snippetOmissions }]` and `sectionOmissions: { omittedSections, unmappedRanges, boundaryRanges }`. A section qualifies only when it contains a complete positive occurrence. The first qualifying sections in source order win, even when an oversized match makes a selected excerpt null. Cross-boundary occurrences are counted separately and never clipped into a fabricated token. The page may match different query clauses in different sections.
+
+Excerpts stay within their section and original value. They use at most 240 UTF-16 units and 32 merged grapheme-safe marks, with explicit existing snippet omissions; omitted-before/after flags refer to the section's text. The complete response refuses rather than silently truncating evidence. Fixed ceilings include 4,096 facts/ranges, 262,144 section/range pair visits, 10,000,000 shared work units, 16,384 output entries and an additional 262,144 serialized UTF-8 bytes; lower native/configured bounds still apply. These are admission/output bounds, not memory or latency guarantees.
+
+For heading metadata and links, use the [inline section options](HOSTS.md#inline-anchored-sections). For build-time delivery, use the [optional Astro companion](STATIC_ASTRO.md#optional-heading-maps). The [page/section contract](../specs/PAGE_SECTIONS.md) specifies exact validation, clipping, limits and failure behavior.
 
 ## Bounded typo tolerance
 
-The explicit `/addons/typo` factory and query leaf implement one-edit Unicode alternatives under the exact-first policy. Ordinary exact/prefix/phrase searches stay unchanged. See [policy, public types, example and bounds](TYPO.md).
+Choose `/addons/typo` when you want a query to accept a single character edit or adjacent swap. Exact terms take priority, and ordinary exact, prefix and phrase searches keep their existing rules. See [the example, policy and limits](TYPO.md).
 
 ## Dictionary-backed token suggestions
 
-The explicit `/addons/suggestions` factory adds independent `options.extensions.suggestions = { text, fields?, limit? }` output. It completes one normalized token from the selected live dictionaries; it never rewrites the search query/input or adds UI behavior. Ranking uses summed field-local document frequency and stable ordinal ties, independent of qualifying hits/filters/pages. See [public types, complete policy, example and bounds](SUGGESTIONS.md).
+Use `/addons/suggestions` to offer word completions from your indexed vocabulary. Request them through `options.extensions.suggestions = { text, fields?, limit? }`. Suggestions are separate from hits and use word frequency across the selected fields, regardless of the current filters or page. Your application decides whether and how to show or apply them. See [the example and complete rules](SUGGESTIONS.md).
 
 ## Directional one-step synonyms
 
-The explicit `/addons/synonyms` entry applies an owned versioned single-token table only to its requested extension leaf. Original groups remain required, mapped live alternatives receive weight 0.5, and generated targets never expand recursively. The result identifies the policy/vocabulary version and actual source-to-target alternatives; Inspector separately explains selected native arithmetic. Retained configuration is distinct from corpus side indexes. See [public types, example and complete bounds](SYNONYMS.md).
+Use `/addons/synonyms` to define your own one-way word mappings, such as `backup` to `snapshot`. A requested synonym query keeps each original word as a requirement, with mapped alternatives at weight `0.5`. Expansion stops after one step. The result lists the mappings used and the vocabulary version. See [the example, public types and limits](SYNONYMS.md).
 
 ## Selected English analysis
 
-The [English pack](ENGLISH.md) is selected at owner creation through `Configuration.analyzer`, not a query leaf. Source/position/mixed phrases compare adjacent analyzed terms and original evidence/snippets retain complete source token spans. English morphology can make differently spelled words phrase-equivalent. Existing v1 typo/synonym expansion and token suggestions remain basic-only and explicitly reject requests under English. Constant algorithm tables are separate from per-corpus retained state.
+Select the [English analyzer](ENGLISH.md) through `Configuration.analyzer` when creating the engine. It joins some related word forms, so differently spelled words can also match in phrases. Highlights still refer to complete original tokens. The current typo, synonym and suggestion requests support only `basic-v1` and reject under English analysis. The language rules do not create another per-corpus index.
 
 ## Identifier analysis
 
-The explicit `/addons/identifiers` analyzer preserves whole names and derives searchable components with actual original spans. Queries retain whole original groups; strict phrases use original identifiers only. Tagged ranges distinguish original and component matches, and optional positions use an explicitly tagged representation. See [selection, grouping, scoring and compatibility](IDENTIFIERS.md). Basic and English one-to-one analysis remain separate selections.
+Choose `/addons/identifiers` for names such as `maxQueuedOperations`. Ordinary searches can find the whole name or its components; strict phrases still use original identifiers. Match ranges distinguish the whole name from a component. See [setup, examples and compatibility](IDENTIFIERS.md). Choose basic, English or identifier analysis for an engine rather than mixing them automatically.
 
 ## Literal and infix matching
 
-`/addons/literal` provides explicit raw case-sensitive substring predicates over separately selected source fields. Pure literal results have zero score; mixed lexical queries keep native BM25. Its own bounded original-range evidence distinguishes string spans from token/phrase positions, including overlaps and combining marks. See [payloads, source requirements, Unicode and limits](LITERAL.md). Ordinary queries and token evidence remain unchanged.
+Use `/addons/literal` to match original text exactly, including case, punctuation and substrings inside a word. It needs source providers for the selected fields. A literal-only query returns zero-scored matches; combining it with a text query keeps that text query's BM25 scoring. Its own range output can show overlapping matches. See [the example and Unicode rules](LITERAL.md).
 
 ## Ordered proximity
 
-`/addons/proximity` refines native exact alternative groups with ordered original positions and a bounded gap per adjacent pair. It requires separately installed position providers, never joins values/fields, consumes repeats distinctly and adds no ranking bonus. Zero gap preserves strict phrase membership and scores. See [payloads, alternatives, costs and evidence limitations](PROXIMITY.md).
+Use `/addons/proximity` when words must appear in order but may have a limited gap between them. Install position providers first. Matches stay within one field value, repeated words need distinct positions, and distance adds no score bonus. With a zero gap, singleton groups behave like a strict phrase. See [the example and evidence restrictions](PROXIMITY.md).
 
 ## Explicit query syntax
 
-`/addons/query-syntax` compiles an explicit bounded Boolean/field/phrase/prefix grammar into the existing validated native Query contract. It is a caller-side compiler, not an owner registration or evaluator. Ordinary strings/UI remain unchanged; malformed syntax has fixed diagnostics and UTF-16 spans without a fallback. See [grammar, escaping, bounds and native execution boundary](QUERY_SYNTAX.md).
+Use `/addons/query-syntax` when your search box should accept operators, field names, phrases and prefixes. Parse the input in your application, then pass the resulting typed query to the engine. The parser does not change ordinary strings or the built-in UI. Invalid syntax returns an error with a source span rather than falling back to plain search. See [the grammar and example](QUERY_SYNTAX.md).
 
 ## Explicit record patches
 
-The optional [`/addons/patch`](RECORD_PATCH.md) entry exports `createPatch`, a direct-owner borrowed handle. Revision-guarded whole-field changes use explicit complete source and the native atomic replacement path. It is not an AddonRegistration and retains no additional source.
+Use [`createPatch`](RECORD_PATCH.md) to change selected whole fields without assembling the rest of a record yourself. It needs a direct engine, source providers for every text field and the revision you observed. It uses the ordinary atomic replacement operation and keeps no extra source copy. It is a helper, not an `AddonRegistration`.

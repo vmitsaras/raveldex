@@ -1,0 +1,93 @@
+{
+  "kind": "RX6007-independent-review-probe",
+  "scope": "Actual Chrome wrapper lifecycle probes bundled from current application source and existing compiled Raveldex; not fresh installed consumer proof.",
+  "browser": "156.0.8078.74",
+  "hashes": {
+    "/Users/vasilis/Documents/GitHub/raveldex/examples/modal-browser/controller.mjs": "2a87bc80a35d2dc4db566847d3382e4fcab6f9a803c34d30800937aee71c7c9f",
+    "/Users/vasilis/Documents/GitHub/raveldex/examples/modal-astro/src/search.mjs": "58ed316b28420f6de472e47c84736b1cabf4b4d5f02857eea0b9ca0cc4921369"
+  },
+  "observations": [
+    {
+      "kind": "browser",
+      "case": "raw close abort reentry",
+      "calls": 2,
+      "loadingOpen": true,
+      "newPromise": true,
+      "reentered": true,
+      "returnedCurrent": true
+    },
+    {
+      "kind": "browser",
+      "case": "cleanup",
+      "disposals": [
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "astro",
+      "case": "raw close abort reentry",
+      "calls": 2,
+      "loadingOpen": true,
+      "newPromise": true,
+      "reentered": true,
+      "returnedCurrent": true
+    },
+    {
+      "kind": "astro",
+      "case": "cleanup",
+      "disposals": [
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "browser",
+      "case": "mount failure",
+      "before": {
+        "modals": 0,
+        "dialogs": [
+          {
+            "open": false,
+            "connected": true
+          }
+        ]
+      },
+      "called": 1,
+      "loadingOpen": true,
+      "retryVisible": true,
+      "status": "Search could not load. Retry or close to browse the guides.",
+      "disposed": 1
+    },
+    {
+      "kind": "astro",
+      "case": "mount failure",
+      "before": {
+        "modals": 0,
+        "dialogs": [
+          {
+            "open": false,
+            "connected": true
+          }
+        ]
+      },
+      "called": 1,
+      "loadingOpen": true,
+      "retryVisible": true,
+      "status": "Search could not load. Retry, or close this window and browse the guide.",
+      "disposed": 1
+    },
+    {
+      "kind": "browser",
+      "case": "destroy during authored status disconnection",
+      "calls": 0,
+      "loadingOpen": false
+    },
+    {
+      "kind": "astro",
+      "case": "destroy during authored status disconnection",
+      "calls": 0,
+      "loadingOpen": false
+    }
+  ]
+}

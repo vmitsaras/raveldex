@@ -1,0 +1,179 @@
+{
+  "kind": "raveldex-rx7001-independent-review-v1",
+  "date": "2026-11-01",
+  "status": "Pass for final implementation and focused independent evidence",
+  "finalRuntimeSHA256": "6518154660f1937749fc8ddc3b9a4da6e22a391947af373413e70b6dde380940",
+  "pattern": {
+    "classification": "Coherent editable search-result combobox with one-column grid popup and native anchors",
+    "focusModel": "Input DOM focus plus current gridcell aria-activedescendant; manual selection; no automatic title insertion",
+    "nativeBoundary": "Native text editing and links retained; popup links outside Tab sequence; full-results ordinary native anchor outside popup",
+    "semanticsEvidence": "Actual Chrome CDP Accessibility.getFullAXTree, separate from DOM-derived Playwright ariaSnapshot and from human speech"
+  },
+  "environment": {
+    "node": "v24.21.0",
+    "os": "27.0.0",
+    "arch": "arm64"
+  },
+  "finalChecks": {
+    "independentLifecycle": {
+      "status": "Pass",
+      "ChromeVersion": "156.0.8078.74",
+      "WebKitVersion": "26.5",
+      "assertedGroups": 18,
+      "groupsPerEngine": 9,
+      "report": "final-independent.json",
+      "stdout": "final-independent.log",
+      "script": "independent-probe.mjs"
+    },
+    "nativeChromeAXAndKeyboard": {
+      "status": "Pass",
+      "nativeCDPTrees": 4,
+      "reportedCheckpoints": 7,
+      "report": "final-native-AX.json",
+      "stdout": "final-native-AX.log",
+      "script": "native-ax-retry.mjs",
+      "method": "Actual Accessibility.getFullAXTree nodes/relationships plus real keyboard Tab/Arrow/Escape/Enter. Not Playwright DOM snapshots."
+    },
+    "edgeRepairs": {
+      "status": "Pass",
+      "assertedGroups": 8,
+      "groupsPerEngine": 4,
+      "report": "final-edges.json",
+      "stdout": "final-edges.log",
+      "script": "edge-probe.mjs",
+      "sourceUnchangedDuringRun": true
+    }
+  },
+  "resolvedFindings": [
+    {
+      "id": "dropdown-clear-abort-reentry",
+      "target": "src/addons/ui/dropdown.ts clearInput/setComposing",
+      "evidence": "initial-source-findings.json; initial-dropdown-source.ts; final-independent.json clear abort replacement cases",
+      "user_impact": "An abort listener could start newer work which outer clear then suppressed.",
+      "status": "resolved",
+      "severity": "medium",
+      "confidence": "high within named evidence",
+      "framework_mappings": [],
+      "recommendation": "Publish intent before callback boundary or only modify it when returned generation remains current.",
+      "verification": "Final genuine-engine replacement search renders2rows, original held reply cannot publish; Chrome/WebKit.",
+      "source_skill": "complex-widget-pattern-audit",
+      "provenance": "Source-identified and fixed before the first native probe. No old runtime reproduction claim."
+    },
+    {
+      "id": "dropdown-error-retry-tab",
+      "target": "src/addons/ui/dropdown.ts input keydown Tab",
+      "evidence": "initial-source-findings.json; final-native-AX.json native keyboard Retry traversal",
+      "user_impact": "A Tab from error input could hide its recovery button before keyboard users reached it.",
+      "status": "resolved",
+      "severity": "medium",
+      "confidence": "high within named evidence",
+      "framework_mappings": [],
+      "recommendation": "Dismiss popup/pending work while preserving stable error recovery controls in normal native traversal.",
+      "verification": "Actual Chrome Tab reaches Search, Clear, full-results, Retry; Enter on Retry focuses input before hiding and real disposed-owner error remains explicit.",
+      "source_skill": "complex-widget-pattern-audit",
+      "provenance": "Source-identified and fixed before first native run; initial AX harness used a wrong hard-coded Tab ordinal and was corrected without source changes."
+    },
+    {
+      "id": "dropdown-foreign-modal-feedback",
+      "target": "src/addons/ui/dropdown.ts close",
+      "evidence": "foreign-dialog-independent.json/.log; final-independent.json actual foreign dialog cases",
+      "user_impact": "Returning from a foreign native dialog exposed obsolete result counts despite zero rendered rows.",
+      "status": "resolved",
+      "severity": "medium",
+      "confidence": "high within named evidence",
+      "framework_mappings": [],
+      "recommendation": "Clear owned feedback using mount/generation ownership even when foreign modality blocks new presentation.",
+      "verification": "Chrome/WebKit actual dialog show/close now leaves collapsed rows0 and closed feedback.",
+      "source_skill": "complex-widget-pattern-audit",
+      "provenance": "Old defect reproduced in both engines, then final repair verified."
+    },
+    {
+      "id": "dropdown-clear-removed-control-focus",
+      "target": "src/addons/ui/dropdown.ts clearInput",
+      "evidence": "after-feedback-fix-native-AX.json; before-anchor-fix-final-edges.json; final-native-AX.json; final-edges.json",
+      "user_impact": "Explicit clear while a removable owned Retry/full-results/popup anchor held DOM focus moved focus to BODY.",
+      "status": "resolved",
+      "severity": "medium",
+      "confidence": "high within named evidence",
+      "framework_mappings": [],
+      "recommendation": "Conditionally recover input only for currently focused owned controls that clear removes; preserve generation and actual-focus guards. Keep native anchor activation unchanged.",
+      "verification": "Final Chrome real Retry/full-result recovery checks and Chrome/WebKit native-focused popup-anchor clear all finish with input focus and idle/closed-popup state.",
+      "source_skill": "complex-widget-pattern-audit",
+      "provenance": "Retry/full-results focus loss reproduced in Chrome; popup-anchor focus loss reproduced in Chrome/WebKit; all final repair checks pass."
+    },
+    {
+      "id": "dropdown-suppressed-composition-handoff",
+      "target": "src/addons/ui/dropdown.ts handoff/compositionend",
+      "evidence": "initial-edges.json compositionHandoff; final-edges.json",
+      "user_impact": "Committed visible text could disagree with the full-results URL, navigating to a different native result set.",
+      "status": "resolved",
+      "severity": "medium",
+      "confidence": "high within named evidence",
+      "framework_mappings": [],
+      "recommendation": "Hide handoff while composition is suppressed; update exact committed raw URL on suppressed end without querying or reopening.",
+      "verification": "Interim discard stays hidden; committed alpha URL equals field,0UIqueries, native current and handoff totals3/3 in Chrome/WebKit.",
+      "source_skill": "complex-widget-pattern-audit",
+      "provenance": "Old bug reproduced in both engines; synthetic composition only, not physical IME."
+    },
+    {
+      "id": "dropdown-explicit-offscreen-focus",
+      "target": "src/addons/ui/dropdown.ts focusAndSearch",
+      "evidence": "initial-edges.json offscreenShortcut/offscreenAPI; final-edges.json",
+      "user_impact": "An explicit shortcut or open could move keyboard focus to an input more than1500px outside the viewport.",
+      "status": "resolved",
+      "severity": "medium",
+      "confidence": "high within named evidence",
+      "framework_mappings": [],
+      "recommendation": "Use native focus reveal for the explicit user-requested focus action; retain lifetime and focus guards.",
+      "verification": "Stabilized footer-scroll preconditions then actual Meta+K or public open reveal the focused input in Chrome/WebKit with0idle queries.",
+      "source_skill": "complex-widget-pattern-audit",
+      "provenance": "Chrome old offscreen preconditions matched; initial WebKit footer scroll was asynchronous and is explicitly not an equivalent precondition. Final matched-precondition proof passes both engines."
+    }
+  ],
+  "remainingActionableFindings": [],
+  "nativeBehaviorClassification": [
+    {
+      "id": "home-end-scroll-stress",
+      "status": "not-reproduced implementation defect",
+      "artifacts": [
+        "matched-home-probe.json",
+        "../tests/native-popover-keys-probe.json",
+        "../tests/dropdown-home-no-scroll-probe.json"
+      ],
+      "conclusion": "Native-only controls with no Raveldex listener reproduce the deliberate scroll-stress divergence; removing only min-height1500px restores matched native/dropdown Home0 End6. Keep native caret behavior; do not call this a runtime caret repair. Layout/scroll remains a separate test workload."
+    },
+    {
+      "id": "webkit-native-control-traversal",
+      "status": "Observed platform boundary",
+      "artifact": "../tests/webkit-native-baseline.json",
+      "conclusion": "Playwright WebKit26.5 plain Tab skips native button/anchor stops; native Option+Tab reaches them. Do not claim ordinary unmodified Tab traversal of those stops in this environment or change OS settings."
+    },
+    {
+      "id": "webkit-modified-new-tab",
+      "status": "Blocked proof in this engine",
+      "artifact": "../tests/webkit-native-baseline.json",
+      "conclusion": "Plain native middle click follows href in same page and Meta-click new-tab proof is not exposed by this engine. Chrome actual new-tab assertions are separate. No synthetic activation workaround."
+    }
+  ],
+  "coverageGaps": [
+    "No human screen-reader speech session or complete WCAG/conformance claim.",
+    "No physical IME, touch, on-screen keyboard or actual200%/400%browser zoom.",
+    "Actual Chrome AX tree captured; no equivalent native WebKit AX tree or Safari claim.",
+    "No other engine/OS/device qualification in reviewer probes.",
+    "Source-bundled review probes are not relabeled fresh installed consumers. Parent owns final installed suites, optional graph/candidate checks, broader regressions and canonical synchronization."
+  ],
+  "sourceHashes": {
+    "src/addons/ui/dropdown.ts": "6518154660f1937749fc8ddc3b9a4da6e22a391947af373413e70b6dde380940",
+    "src/addons/ui/dropdown.css": "acef9af7c581dbaaf74eb365450d1540978321e3f1d0dee42fce41c31b1072be",
+    "src/addons/ui/mounts.ts": "8d93b3c4c9bcad8e2687fcde13e051b27d6c79efd0741dd44547564d403b5780",
+    "docs/specs/DROPDOWN.md": "cfe659b92de7f75dd1bf6403fb398ce49711440f1ece5a2ce8740ecae0bda8c3",
+    "test/consumer/dropdown-types.ts": "c53f3f902b96b440196f7294e10bd4f25498bb55460156b6c3c97038c76bac40"
+  },
+  "provenanceNotes": [
+    "Initial localhost EPERM before browser behavior is preserved as initial-sandbox-refusal.log; approved native-process reruns executed.",
+    "The initial native-AX Retry script assumed a wrong Tab ordinal and failed after successful AX checkpoints; corrected bounded traversal uses observed focus.",
+    "Earlier869b286 reports/scripts/bundles are copied under before-anchor-fix-* before final651815 reports replace final names.",
+    "The initial composition-stuck inference did not reproduce: explicit close/Tab/clear suppression permits reopen and ordinary edits, with0/1/2genuine UIquery counts. The distinct handoff URL mismatch was actually reproduced and fixed.",
+    "No production source, tests, package files, docs or dependencies modified by this read-only reviewer. Only temp scripts/artifacts created."
+  ]
+}

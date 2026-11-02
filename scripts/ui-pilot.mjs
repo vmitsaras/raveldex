@@ -1,7 +1,7 @@
 import { createServer } from 'node:http';
 import { readFile, copyFile, mkdir } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
-import { prepareUIPilot } from './lib/ui-consumer.mjs';
+import { prepareUsageDemo } from './lib/ui-consumer.mjs';
 
 const args = process.argv.slice(2);
 let output, port = 4173, serve = true;
@@ -12,15 +12,13 @@ for (let i = 0; i < args.length; i++) {
   else throw new Error(`Unknown pilot option: ${args[i]}`);
 }
 if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid local port');
-const pilot = await prepareUIPilot();
+const pilot = await prepareUsageDemo();
 if (output) {
   await mkdir(output, { recursive: true });
-  for (const file of ['RX-2006-package.json', 'corpus.json', 'judgments.json']) await copyFile(join(pilot.directory, file), join(output, file));
+  for (const file of ['demo-build.json', 'corpus.json']) await copyFile(join(pilot.directory, file), join(output, file));
 }
-console.log(`Packed documentation pilot: ${pilot.directory}`);
-console.log(`Corpus: ${pilot.corpus.records.length} sections; ${pilot.corpus.hash}`);
-console.log(`Core: ${pilot.report.core.gzipBytes} gzip bytes (15 KiB target: ${pilot.report.core.targetMet ? 'Pass' : 'Fail'})`);
-console.log(`Judged relevance: Top-1 ${pilot.report.relevance.metrics.top1}/${pilot.report.relevance.metrics.rankedQueries}; Top-3 ${pilot.report.relevance.metrics.top3}/${pilot.report.relevance.metrics.rankedQueries}`);
+console.log(`Search example: ${pilot.directory}`);
+console.log(`Searches ${pilot.corpus.records.length} sections from five usage guides.`);
 if (serve) {
   // Serve exactly these local artifacts, never arbitrary repository/cache files.
   const files = { '/': ['index.html', 'text/html'], '/index.html': ['index.html', 'text/html'],

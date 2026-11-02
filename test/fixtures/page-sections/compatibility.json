@@ -1,0 +1,184 @@
+{
+  "kind": "raveldex-page-sections-static-compatibility-fixture-v1",
+  "role": "Handwritten old/new reader and optional companion expectations, not executable runtime or an artifact schema.",
+  "cases": [
+    {
+      "id": "old-reader-old-build",
+      "reader": "current-v1",
+      "artifacts": "ordinary-v1-only",
+      "explicitSectionsLoad": false,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "sectionRequests": 0,
+        "sectionPresentation": false
+      }
+    },
+    {
+      "id": "old-reader-new-build",
+      "reader": "current-v1",
+      "artifacts": "ordinary-v1-plus-separate-v1-companion",
+      "explicitSectionsLoad": false,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "sectionRequests": 0,
+        "sectionPresentation": false,
+        "reason": "The ordinary strict manifest and documents envelope are unchanged; old readers never discover extra companion files."
+      }
+    },
+    {
+      "id": "new-reader-old-build-default",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-only",
+      "explicitSectionsLoad": false,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "sectionRequests": 0,
+        "sectionPresentation": false,
+        "reason": "Adding a reader does not opt ordinary source/title-link consumers into extra fetch or retention."
+      }
+    },
+    {
+      "id": "new-reader-old-build-explicit",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-only",
+      "explicitSectionsLoad": true,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "code": "MISSING_ARTIFACT",
+        "sectionPresentation": false,
+        "reason": "Explicitly requested absence is an optional-load refusal, never fabricated empty sections."
+      }
+    },
+    {
+      "id": "new-reader-new-source-build",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-plus-separate-v1-companion",
+      "loadedFormat": "source",
+      "explicitSectionsLoad": true,
+      "sourceSha256Matches": true,
+      "documentsSha256Matches": true,
+      "documentIdsSha256Matches": true,
+      "receiverRevision": 1,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "loadedPageIds": [
+          "page:a",
+          "page:b",
+          "page:c",
+          "page:d"
+        ],
+        "emptyWirePages": [
+          "page:b"
+        ],
+        "bindingRevision": 1,
+        "sectionPresentation": "Only after explicit UI opt-in and native source/evidence checks; metadata load is not a search or preview."
+      }
+    },
+    {
+      "id": "builder-origin-is-not-receiver-binding",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-plus-separate-v1-companion",
+      "loadedFormat": "source",
+      "explicitSectionsLoad": true,
+      "builderOriginRevision": 7,
+      "receiverRevision": 1,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "bindingRevision": 1,
+        "reason": "Builder-origin revision is not copied/restamped into the receiving owner; hashes bind immutable generation, receiver revision binds live projection."
+      }
+    },
+    {
+      "id": "new-reader-new-native-build",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-plus-separate-v1-companion",
+      "loadedFormat": "native",
+      "explicitSectionsLoad": true,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "code": "INCOMPATIBLE_ARTIFACT",
+        "sectionPresentation": false
+      }
+    },
+    {
+      "id": "new-reader-unsupported-companion",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-plus-companion-version-2",
+      "loadedFormat": "source",
+      "explicitSectionsLoad": true,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "code": "INVALID_ARTIFACT",
+        "sectionPresentation": false
+      }
+    },
+    {
+      "id": "same-ids-mixed-source-generation",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-plus-separate-v1-companion",
+      "loadedFormat": "source",
+      "explicitSectionsLoad": true,
+      "sourceSha256Matches": false,
+      "documentsSha256Matches": true,
+      "documentIdsSha256Matches": true,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "code": "INCOMPATIBLE_ARTIFACT",
+        "sectionPresentation": false
+      }
+    },
+    {
+      "id": "same-ids-mixed-display-generation",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-plus-separate-v1-companion",
+      "loadedFormat": "source",
+      "explicitSectionsLoad": true,
+      "sourceSha256Matches": true,
+      "documentsSha256Matches": false,
+      "documentIdsSha256Matches": true,
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "code": "INCOMPATIBLE_ARTIFACT",
+        "sectionPresentation": false
+      }
+    },
+    {
+      "id": "full-wire-id-coverage",
+      "reader": "RX-6005",
+      "artifacts": "ordinary-v1-plus-separate-v1-companion",
+      "loadedFormat": "source",
+      "explicitSectionsLoad": true,
+      "wirePageIds": [
+        "page:a",
+        "page:c",
+        "page:d"
+      ],
+      "expected": {
+        "searchUsable": true,
+        "documentsUsable": true,
+        "code": "INVALID_ARTIFACT",
+        "sectionPresentation": false,
+        "reason": "An absent authored map still serializes an empty sections array for its allowlisted page. No retained extra ID side index is introduced."
+      }
+    },
+    {
+      "id": "old-builder-new-option",
+      "builder": "current-v1",
+      "optionsInclude": "pageSections",
+      "expected": {
+        "code": "INVALID_INPUT",
+        "reason": "Existing strict old option allowlist rejects new input; extra companion files are ignored by old readers, not silently generated by old builders."
+      }
+    }
+  ]
+}

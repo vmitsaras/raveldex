@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Compatibility · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="runtime-and-integration-requirements">Runtime and integration requirements</h1>
+<h2 id="modules-and-runtimes">Modules and runtimes</h2>
+<p>Use Raveldex in an ESM application. JavaScript imports and TypeScript declarations are available through the public package exports. Do not import implementation files from <code>dist/</code> or <code>src/</code>; there is no CommonJS entry.</p>
+<table>
+<thead>
+<tr>
+<th>Package or feature</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core and English analyzer</td>
+<td>Node <code>&gt;=22</code> for Node applications. Core has no DOM dependency.</td>
+</tr>
+<tr>
+<td>Astro integration</td>
+<td>Node <code>&gt;=22.12.0</code>, exact core peer <code>0.1.0-rc.0</code>; the build hook requires Astro <code>7.3.2</code>.</td>
+</tr>
+<tr>
+<td>Native DOM UI</td>
+<td>A browser DOM and a bundler or static build that resolves the public ESM imports. Import UI CSS separately.</td>
+</tr>
+<tr>
+<td>Snippets</td>
+<td>Usable <code>Intl.Segmenter</code> for grapheme-safe display boundaries.</td>
+</tr>
+<tr>
+<td>Worker adapter</td>
+<td>Module workers and matching client/host configuration and add-ons.</td>
+</tr>
+<tr>
+<td>IndexedDB adapter</td>
+<td>An available IndexedDB factory and an application-selected database/namespace.</td>
+</tr>
+</tbody>
+</table>
+<p>You can import core without starting a UI, worker, database or network request. Create only the integrations your application needs.</p>
+<h2 id="analyzer-compatibility">Analyzer compatibility</h2>
+<p>The default analyzer applies NFKC normalization and lowercase. It keeps accents significant, so <code>cafe</code> and <code>café</code> can give different results. Choose <a href="/raveldex/reference/english/">English analysis</a> for English word forms, or <a href="/raveldex/reference/identifiers/">identifier analysis</a> for code names, when those rules fit your content. Rebuild the index if you change its analyzer.</p>
+<p>For a worker, use matching analyzer, schema, limits and capabilities on both sides. Install functions and live add-on handles inside each host; they cannot be sent as cloneable configuration.</p>
+<h2 id="snapshot-compatibility">Snapshot compatibility</h2>
+<p>Use source snapshots when rebuilding in a browser or worker. Select source providers for every text field you need to export. Restore runs in the receiving analyzer and runtime, so tokenization and scores may differ across runtimes.</p>
+<p>Native snapshots require an application-supplied <code>NativeSnapshotQualification</code> at engine creation and the exact declared Node/V8/ICU/Unicode/platform/architecture environment. Version detection alone does not establish that qualification. Browser and worker native loading is unavailable. See <a href="/raveldex/reference/hosts/#source-and-native-snapshots">snapshot setup and methods</a>.</p>
+<h2 id="ui-integration">UI integration</h2>
+<p>The UI uses native forms, selects, links and dialogs. Result updates do not deliberately move focus. Closing Inspector returns focus to the button that opened it, while that button remains connected.</p>
+<p>Spoken status messages depend on the browser and screen reader, and typing feedback can interrupt them. Check your application’s target combination without requiring users to change their screen-reader settings.</p>
+<p>See <a href="/raveldex/reference/hosts/#keyboard-focus-and-status">keyboard, focus and status</a> and <a href="/raveldex/guide/limitations/">practical limits</a>.</p>
+</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
