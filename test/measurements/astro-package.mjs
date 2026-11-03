@@ -203,6 +203,10 @@ export async function measurePackedAstro() {
   const corpus = { schema: { text: { title: { boost: 2 }, body: {} } }, records: fixture.entries.map(entry => entry.record) }, model = scanSourceCorpus(corpus.records, corpus.schema), expected = queries.map(query => pages.map(page => sourceQueryResult(model, query, page)));
   const consumer = await prepareConsumer(corpus, []); let browser;
   try {
+    // The adapter must leave this selected core unchanged. Historical releases
+    // remain independently hash-bound below, but can legitimately precede a
+    // later native-core change such as query candidate planning.
+    const beforeIntegration = await bundleConsumer(consumer.directory);
     const integration = await packAstro({ output: join(consumer.directory, 'astro-package') });
     await command('npm', ['install', integration.tarball, '--offline', '--ignore-scripts', '--omit=dev', '--no-audit', '--no-fund', '--cache', join(consumer.directory, '.npm-cache')], consumer.directory);
     const installed = join(consumer.directory, 'node_modules/@vmitsaras/raveldex-astro'); assert.equal(await realpath(installed), installed, 'Actual standalone integration tarball; no workspace symlink'); assert.equal(await realpath(consumer.installed), consumer.installed);
@@ -221,11 +225,13 @@ export async function measurePackedAstro() {
     await cp(join(consumer.directory, 'run.mjs'), join(baselineDirectory, 'run.mjs'));
     const sameRuntimeCore = await bundleConsumer(baselineDirectory);
     for (const key of ['minifiedBytes', 'sha256']) assert.equal(sameRuntimeCore[key], previous[key], `Accepted raw core unchanged ${key}`);
-    for (const key of ['minifiedBytes', 'gzipBytes', 'sha256', 'gzipSha256']) assert.equal(core[key], sameRuntimeCore[key], `Same-runtime core byte unchanged ${key}`);
+    for (const key of ['minifiedBytes', 'gzipBytes', 'sha256', 'gzipSha256']) assert.equal(core[key], beforeIntegration[key], `Current core unchanged by adapter installation ${key}`);
+    const bytes = value => ({ minifiedBytes: value.minifiedBytes, sha256: value.sha256, gzipBytes: value.gzipBytes, gzipSha256: value.gzipSha256 });
     const coreUnchanged = { status: 'Pass', baseline: 'docs/evidence/RX-A090-package.json', archiveSha256: previousReport.package.sha256,
-      historical: { minifiedBytes: previous.minifiedBytes, sha256: previous.sha256, gzipBytes: previous.gzipBytes, gzipSha256: previous.gzipSha256 },
-      sameRuntime: { minifiedBytes: sameRuntimeCore.minifiedBytes, sha256: sameRuntimeCore.sha256, gzipBytes: sameRuntimeCore.gzipBytes, gzipSha256: sameRuntimeCore.gzipSha256 },
-      method: 'Hash-bound accepted package installed offline and bundled/compressed on the current runtime; raw bundle identity also checked against the historical report.' };
+      currentPackageSha256: consumer.package.sha256, currentBeforeIntegration: bytes(beforeIntegration), currentAfterIntegration: bytes(core),
+      historical: bytes(previous), sameRuntime: bytes(sameRuntimeCore),
+      currentVsHistorical: { sameRawBundle: core.sha256 === sameRuntimeCore.sha256, minifiedByteDelta: core.minifiedBytes - sameRuntimeCore.minifiedBytes, gzipByteDelta: core.gzipBytes - sameRuntimeCore.gzipBytes },
+      method: 'Exact current-core bundle bytes are compared before/after adapter installation. Separately, the hash-bound accepted historical package is installed offline and bundled/compressed on this runtime; its raw identity is checked against its historical report. Later core changes need not equal that older release.' };
     const graphs = { client: await graph(consumer.directory, 'astro-client', "export {loadStaticSearch,StaticSearchError,STATIC_SEARCH_ERROR_CODES} from '@vmitsaras/raveldex-astro/client';"), builder: await graph(consumer.directory, 'astro-builder', "export {buildStaticSearch,StaticSearchError,STATIC_SEARCH_ERROR_CODES} from '@vmitsaras/raveldex-astro/build';"), hook: await graph(consumer.directory, 'astro-hook', "export {default} from '@vmitsaras/raveldex-astro';", 'node') };
     assert.ok(graphs.client.inputs.every(item => !/\/astro\/|\/src\/index\.js|\/dist\/index\.js$/.test(item.path.replace('node_modules/@vmitsaras/raveldex/dist/index.js', 'core-public-index'))));
     const startup = [];

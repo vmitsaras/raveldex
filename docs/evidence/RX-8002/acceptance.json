@@ -1,0 +1,139 @@
+{
+  "kind": "rx8002-acceptance-v1",
+  "sourceHead": "861b7ed9e8079f0bb0b3a6f3bd6731978f82f192",
+  "runtimePackageSha256": "3f4f31eb03951f13366256dd019710f0bd5c58b29d7ae687d8a96f0ea5ecec11",
+  "normalPackageInventorySha256": "fb189e847381cb55b8d640d63b430c4db6b98e760043fac12e2dbba7d78ad144",
+  "normalPackageUnchanged": true,
+  "children": 27,
+  "exactParityCells": 9,
+  "normal": {
+    "observations": 374,
+    "outcomes": {
+      "Pass": 300,
+      "Refused": 56,
+      "Rejected": 18
+    }
+  },
+  "diagnostic": {
+    "observations": 115,
+    "outcomes": {
+      "Pass": 86,
+      "Refused": 20,
+      "Rejected": 9
+    }
+  },
+  "largeWorkloads": [
+    {
+      "family": "real-docs",
+      "commonFirstCallMedianWallMs": 1458.3862295000072,
+      "normalSamples": 2,
+      "rareCandidates": 10000,
+      "rareDocumentsEvaluated": 10000,
+      "rareDocumentsScored": 294,
+      "recovery": [
+        {
+          "operation": "exportSource",
+          "outcome": "Refused",
+          "error": {
+            "name": "RaveldexError",
+            "code": "WORK_LIMIT_EXCEEDED",
+            "reason": null,
+            "details": {
+              "path": "work"
+            },
+            "message": "Raveldex: WORK_LIMIT_EXCEEDED"
+          }
+        }
+      ]
+    },
+    {
+      "family": "high-cardinality",
+      "commonFirstCallMedianWallMs": 1891.8666039999953,
+      "normalSamples": 2,
+      "rareCandidates": 10000,
+      "rareDocumentsEvaluated": 10000,
+      "rareDocumentsScored": 11,
+      "recovery": [
+        {
+          "operation": "exportSource",
+          "outcome": "Refused",
+          "error": {
+            "name": "RaveldexError",
+            "code": "WORK_LIMIT_EXCEEDED",
+            "reason": null,
+            "details": {
+              "path": "work"
+            },
+            "message": "Raveldex: WORK_LIMIT_EXCEEDED"
+          }
+        }
+      ]
+    },
+    {
+      "family": "adversarial",
+      "commonFirstCallMedianWallMs": 1789.2667919999985,
+      "normalSamples": 2,
+      "rareCandidates": 10000,
+      "rareDocumentsEvaluated": 10000,
+      "rareDocumentsScored": 11,
+      "recovery": [
+        {
+          "operation": "exportSource",
+          "outcome": "Pass"
+        },
+        {
+          "operation": "restoreSource",
+          "outcome": "Refused",
+          "error": {
+            "name": "RaveldexError",
+            "code": "WORK_LIMIT_EXCEEDED",
+            "reason": null,
+            "details": {
+              "path": "work"
+            },
+            "message": "Raveldex: WORK_LIMIT_EXCEEDED"
+          },
+          "oldStatePreserved": true
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "candidate": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 432.900018792
+    },
+    "siteGeneration": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 7.918558708
+    },
+    "siteInventory": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 0.328141959
+    },
+    "siteBrowser": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 342.69989120800005
+    },
+    "lifecycle": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 5.347580583
+    },
+    "independentCorrectness": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 4.910047417
+    },
+    "repositoryTests": 1159,
+    "siteBrowserCases": 14,
+    "focusedLifecycleCases": 30,
+    "focusedLifecycleOverlapsRepositorySuite": true,
+    "independentReview": "Pass; docs/evidence/RX-8002/review.md"
+  },
+  "status": "Pass"
+}

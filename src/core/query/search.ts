@@ -5,7 +5,7 @@ import { captureQuery } from '../contracts/query.js';
 import type { OwnedQuery } from '../contracts/query.js';
 import type { OwnedConfiguration, OwnedSearchOptions, SearchResult } from '../contracts/types.js';
 import { invalid } from '../errors/error.js';
-import { directoryEntries, directoryGet } from '../index/directory.js';
+import { directoryGet } from '../index/directory.js';
 import type { WorkStep } from '../index/directory.js';
 import type { IndexRoot } from '../index/state.js';
 import { WorkBudget } from '../limits/work.js';
@@ -19,11 +19,12 @@ import { evaluate } from './evaluate.js';
 import { sortedStrings } from './work.js';
 import { prepareRefinements } from '../capabilities/refinement.js';
 import { createExpansionResolver } from '../capabilities/expansion.js';
+import { candidateBound, candidateDocuments } from './candidates.js';
 
 export interface SearchEvaluation extends SearchResult { readonly trace?: ScoreTrace }
 
 export interface OwnedSearch { readonly query: OwnedQuery; readonly options: OwnedSearchOptions; readonly trace?: OwnedTraceRequest; readonly evidence?: string }
-export type SearchPhase = 'start' | 'analysis' | 'expansion' | 'dictionary' | 'postings' | 'evaluation' | 'scoring' | 'aggregation' | 'selection' | 'result';
+export type SearchPhase = 'start' | 'analysis' | 'expansion' | 'dictionary' | 'postings' | 'candidates' | 'evaluation' | 'scoring' | 'aggregation' | 'selection' | 'result';
 export interface SearchControl {
   readonly checkpoint?: (phase: SearchPhase) => void;
   readonly checkStop?: (phase: SearchPhase) => void;
@@ -79,9 +80,13 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   boundary('expansion');
   const expansions = yield* expandGroups(root, compiled.groups, charge, boundary);
   const extensions = root.configuration.capabilities ? yield* prepareRefinements(compiled.node, root, charge, options, analyze) : undefined;
+  boundary('candidates');
+  const bound = yield* candidateBound(compiled.node, expansions, charge);
+  const documents = yield* candidateDocuments(root, bound, selected, charge);
   const page = new PageSelection(options.limit ? options.offset + options.limit : 0, charge);
   let total = 0;
-  for (const [id, doc] of directoryEntries(root.documents)) {
+  for (const [id, doc] of documents) {
+    const candidate = !bound || bound.has(id);
     boundary('evaluation');
     yield charge(id.length + 1);
     if (doc.id !== id) invalid('INTERNAL_ERROR', 'index.documents');
@@ -89,7 +94,7 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
     const qualified = yield* evaluate(compiled.node, doc, expansions, charge, facts, 'query', extensions?.leaves);
     boundary('scoring');
     const score = qualified.matched ? yield* scoreDocument(root, doc, qualified.groups, expansions, charge, facts) : 0;
-    if (qualified.matched) {
+    if (candidate && qualified.matched) {
       total++;
       if (extensions?.aggregations.length) {
         boundary('aggregation');

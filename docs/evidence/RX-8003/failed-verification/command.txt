@@ -1,0 +1,142 @@
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 candidate:prepare
+npm notice run node scripts/prepare-candidate.mjs --output /tmp/raveldex-rx8003-20261103/final-candidate
+node:internal/errors:986
+  const err = new Error(message);
+              ^
+
+Error: Command failed: /opt/homebrew/Cellar/node@24/24.21.0/bin/node /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js run check
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 check
+npm notice run npm run handoff:check && npm run docs:check && npm run typecheck && npm test
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:check
+npm notice run node scripts/plan.mjs check
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 docs:check
+npm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 typecheck
+npm notice run tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.indexeddb.json && tsc -p tsconfig.migration.json && tsc -p integrations/astro/tsconfig.json
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 test
+npm notice run npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/patch/*.test.mjs test/addons/query-syntax/*.test.mjs test/addons/proximity/*.test.mjs test/addons/literal/*.test.mjs test/addons/identifiers/*.test.mjs test/addons/typo/*.test.mjs test/addons/suggestions/*.test.mjs test/addons/synonyms/*.test.mjs test/integrations/languages/*.test.mjs test/integrations/astro/runtime.test.mjs test/integrations/astro/sections*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/addons/sections/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-concurrency=1 --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs && node --test --test-timeout=180000 test/integrations/astro/browser.test.mjs
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 build
+npm notice run node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json && tsc -p tsconfig.indexeddb.build.json && tsc -p tsconfig.migration.build.json && node scripts/copy-migration-license.mjs && tsc -p integrations/astro/tsconfig.build.json && node scripts/link-astro-peer.mjs
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:514:28)
+    at maybeClose (node:internal/child_process:1141:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+  code: 1,
+  killed: false,
+  signal: null,
+  cmd: '/opt/homebrew/Cellar/node@24/24.21.0/bin/node /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js run check',
+  stdout: 'Roadmap valid: 61 tasks across 10 milestones; graph and local references checked.\n' +
+    'Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.\n' +
+    'Generated roadmap and task documents match the canonical manifest (3 files).\n' +
+    'Local Markdown link targets checked in 214 files (external URLs and anchors not evaluated).\n' +
+    '✔ worker CDP demultiplexes out-of-order replies, excludes foreign sessions and rejects protocol errors (1.700375ms)\n' +
+    '✔ worker CDP detach, transport failure and timeout settle pending commands and clean up listeners (10.752667ms)\n' +
+    '✔ heap fields reject missing/nonfinite data and maxima remain separate per isolate (3.064ms)\n' +
+    '✔ statistical profile keeps unresolved allocating nodes explicit instead of dropping or attributing them (0.228875ms)\n' +
+    '✔ prejoin hand sums deduplicate payload/state, frozen backing and string parents without counting excluded edges (2.225375ms)\n' +
+    '✔ primitive sliced and complete strings share backing within a snapshot; lengths are not heap or copy counts (0.273125ms)\n' +
+    '✔ nine-role receiving masks preserve bit256 and actual decoded/candidate reuse (0.32825ms)\n' +
+    '✔ wrong stage/aliases, duplicate or absent marker and malformed/unsafe graphs refuse attribution (1.915041ms)\n' +
+    '✔ literal cohort includes frozen-array/string backing data and overlapping roles, excluding prototypes/weak edges (1.626625ms)\n' +
+    '✔ later ID presence is raw arithmetic only; even matching descriptors leave attribution blocked (0.756584ms)\n' +
+    '✔ same-ID object-to-code/name changes are rejected as identity evidence, including unchanged sizes (0.179042ms)\n' +
+    '✔ no-op churn and unexpected ID reappearance remain explicit (0.558709ms)\n' +
+    '✔ malformed schema, duplicate IDs and invalid edge targets reject rather than inventing sizes (1.024208ms)\n' +
+    '✔ selected-data graph keeps backing stores, counts shared strings once and excludes prototypes/maps/weak edges (1.405834ms)\n' +
+    '✔ missing graph marker fails instead of returning an invented zero measurement (4.189667ms)\n' +
+    '✔ a three-way shared node contributes once to union rather than sum minus one overlap (0.172916ms)\n' +
+    '✔ message observer forwards original native arguments/events and binds only primitive protocol metadata (1.502125ms)\n' +
+    '✔ refusal and bounded observation loss preserve actual transport behavior (2.112125ms)\n' +
+    '✔ one-dump old/candidate/request/change groups have hand-derived sharing and deduplicated sums (1.540125ms)\n' +
+    '✔ literal frozen-array backing contents and string parents are selected; maps/weak/hidden/prototypes are excluded (0.483334ms)\n' +
+    '✔ wrong lexical aliases and missing/duplicate marker refuse graph attribution (0.864833ms)\n' +
+    '✔ malformed fields, duplicate IDs, target/count bounds and unsafe sums refuse analysis (0.980875ms)\n' +
+    '✔ sampling summary preserves literal statistical quantities and source groups without peak/retained labels (1.242625ms)\n' +
+    '✔ malformed/cyclic/duplicate sampling trees and invalid allocation references fail explicitly (0.741417ms)\n' +
+    '✔ observed maxima select only the measured operation and preserve absent observations as null (0.1675ms)\n' +
+    '✔ root witnesses contain WeakRefs and primitive labels; returned readings hold no target objects (0.170708ms)\n' +
+    '✔ owned-child watchdog preserves successful, refused, missing executable and timeout outcomes (2105.719667ms)\n' +
+    '✔ preparation failure is never hidden by unrun receivers; typed refusal remains explicit limitation (0.232208ms)\n' +
+    '✔ unchanged ordinary and encoded bounds remain refusals while malformed/profile/integrity failures do not (0.091459ms)\n' +
+    '✔ only explicit empty capture matching both stdio handles is mutable; other logs remain immutable (5.986584ms)\n' +
+    '✔ capture aliases cannot exclude an existing protected artifact through symlinks or hardlinks (2.370541ms)\n' +
+    '✔ literal cycles and three-way sharing: individual effects are not summed as a joint effect (1.915083ms)\n' +
+    '✔ complete graph preserves an outside hidden/context path to a descendant (0.910541ms)\n' +
+    '✔ hypothetical node deletion removes every seed alias, unlike releasing one owner property (0.589208ms)\n' +
+    '✔ marker-owned PropertyArray aliases are neutralized; unrelated outside paths survive (0.230583ms)\n' +
+    '✔ ambiguous externally retained marker backing store fails rather than deleting that retainer (0.534959ms)\n' +
+    '✔ weak edges never become strong; non-root shortcuts produce explicit sensitivity (0.456375ms)\n' +
+    '✔ labelled ephemeron table/key edges change graph sensitivity without pretending conditional GC (0.333375ms)\n' +
+    '✔ missing, duplicate, malformed and unreachable seeds fail with reasons, not invented zeros (0.618125ms)\n' +
+    '✔ missing or ambiguous observation marker is an error (0.611708ms)\n' +
+    '✔ malformed schema/count/target/self-size and unfamiliar edge types fail explicitly (0.770208ms)\n' +
+    '✔ component labels must agree with the actual marked index root property targets (0.480084ms)\n' +
+    '✔ exported string marker accepts string families and rejects a mislabeled object (0.327166ms)\n' +
+    '✔ aliased component seeds have overlapping individual effects and a deduplicated joint cut (0.204ms)\n' +
+    '✔ malformed, incomplete and incorrect-target ephemeron encodings fail explicitly (0.4315ms)\n' +
+    '✔ 48 deterministic generated graphs match the independent fixed-point removal oracle (20.672375ms)\n' +
+    '✔ output guard rejects normalized, symlink and hardlink aliases using only disposable scratch files (7.624417ms)\n' +
+    '✔ literal send/read brackets correlate native elapsed intervals, distinct realms and exact adapter peers (1.87825ms)\n' +
+    '✔ dropped/absent/duplicate marks, truncated observations and same-thread realms reject rather than inventing timing (0.929ms)\n' +
+    '✔ missing/extra/outside or non-complete native spans, unsafe timings and mismatched peers reject attribution (0.72875ms)\n' +
+    '✔ endpoint wrapper preserves actual posts, first data access, duplicate listener identity and removal without retaining envelopes (1.156417ms)\n' +
+    '✔ format, codec and every compatibility header/version produce specific reasons and preserve old state (979.282583ms)\n' +
+    'ℹ {"compatibilityCases":36}\n' +
+    '✔ unknown or absent participant codecs fail explicitly instead of dropping selected transactional state (3.082375ms)\n' +
+    '✔ malformed, truncated, duplicate-property and damaged JSON snapshots never modify a visible revision (130.767333ms)\n' +
+    'ℹ {"malformedCases":10,"integrityCases":2}\n' +
+    '✔ source and offset participant corruption cannot bypass native side-state validation with a recomputed checksum (1050.981083ms)\n' +
+    'ℹ {"nativeSideStateCorruptions":26}\n' +
+    '✔ qualified factory strictly owns and validates the attestation without promoting ordinary engines (6.418083ms)\n' +
+    '✔ valid-integrity native corruption fails reverse, postings, statistics and directory invariants atomically (505.045708ms)\n' +
+    'ℹ {"nativeCoreCorruptions":16}\n' +
+    '✔ snapshot calls share ordinary FIFO, read execution-start roots and own admitted strings/options (28.748209ms)\n' +
+    '✔ snapshot encode/decode/staging cancellation at multiple suspensions preserves exact old core and participant roots (104.240875ms)\n' +
+    'ℹ {"controlledSuspensionCancellations":10}\n' +
+    '✔ queued deadlines, aborts and overflow release slots while successful restore advances exactly once (17.30375ms)\n' +
+    '✔ active deadlines, work caps and encoded byte caps fail honestly without side-state publication (10.673875ms)\n' +
+    '✔ early stop and disposal skip untrusted snapshot/options access and release pending adapter work (1.508958ms)\n' +
+    '✔ successful empty restore is a new local revision even when both origin and target are empty (74.450208ms)\n' +
+    '✔ genuinely qualified native encode and restore cancellation preserve exact old roots and permit recovery (88.978166ms)\n' +
+    'ℹ {"qualifiedNativeSuspensionCancellations":10}\n' +
+    '✔ source and native final-precommit stops roll back, and no signal read after publication can revoke success (34.557625ms)\n' +
+    '✔ whole source restore accumulates participant work across private batches and preserves old state on a late failure (28.065459ms)\n' +
+    'ℹ {"individuallyAdmittedDonorWrites":100,"wholeRestoreParticipantWorkCap":4000,"validSnapshotPrivateRecordsBeyondMutationBatch":3}\n' +
+    '✔ qualified native decoding, integrity and structural validation phases can each stop without publication (25.78075ms)\n' +
+    'ℹ {"qualifiedNativePhaseStops":[{"phase":"snapshot.decode","postBoundarySignalChecks":8},{"phase":"snapshot.integrity","postBoundarySignalChecks":8},{"phase":"snapshot.validation","postBoundarySignalChecks":8}]}\n' +
+    '✔ a genuine maximum-revision native owner rejects source restore and preserves its actual immutable root (11.437792ms)\n' +
+    '✔ complete UTF-8 envelope byte boundary includes multibyte source and all header/checksum overhead (22.349041ms)\n' +
+    '✔ installed public codec declarations and complete minified native/source consumers preserve actual behavior (39004.450167ms)\n' +
+    '✔ snapshots stay optional and public imports do not inspect host/storage/startup capabilities (0.29275ms)\n' +
+    '✔ source roundtrip preserves source representation, exact semantic output and subsequent writes (187.610041ms)\n' +
+    'ℹ {"format":"source","representation":"source","completeComparisons":101}\n' +
+    '✔ source roundtrip preserves positions representation, exact semantic output and subsequent writes (124.405833ms)\n' +
+    'ℹ {"format":"source","representation":"positions","completeComparisons":76}\n' +
+    '✔ source roundtrip preserves offsets representation, exact semantic output and subsequent writes (166.508958ms)\n' +
+    'ℹ {"format":"source","representation":"offsets","completeComparisons":101}\n' +
+    '✔ source roundtrip preserves mixed representation, exact semantic output and subsequent writes (160.428625ms)\n' +
+    'ℹ {"format":"source","representation":"mixed","completeComparisons":101}\n' +
+    '✔ native roundtrip preserves core representation, exact semantic output and subsequent writes (32.532709ms)\n' +
+    'ℹ {"format":"native","representation":"core","completeComparisons":41}\n' +
+    '✔ native roundtrip preserves source representation, exact semantic output and subsequent writes (164.399041ms)\n' +
+    'ℹ {"format":"native","representation":"source","completeComparisons":101}\n' +
+    '✔ native roundtrip preserves positions representation, exact semantic output and subsequent writes (150.682833ms)\n' +
+    'ℹ '... 220504 more characters,
+  stderr: 'npm notice run @vmitsaras/raveldex@0.1.0-rc.0 check\n' +
+    'npm notice run npm run handoff:check && npm run docs:check && npm run typecheck && npm test\n' +
+    'npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:check\n' +
+    'npm notice run node scripts/plan.mjs check\n' +
+    'npm notice run @vmitsaras/raveldex@0.1.0-rc.0 docs:check\n' +
+    'npm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs\n' +
+    'npm notice run @vmitsaras/raveldex@0.1.0-rc.0 typecheck\n' +
+    'npm notice run tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.indexeddb.json && tsc -p tsconfig.migration.json && tsc -p integrations/astro/tsconfig.json\n' +
+    'npm notice run @vmitsaras/raveldex@0.1.0-rc.0 test\n' +
+    'npm notice run npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/patch/*.test.mjs test/addons/query-syntax/*.test.mjs test/addons/proximity/*.test.mjs test/addons/literal/*.test.mjs test/addons/identifiers/*.test.mjs test/addons/typo/*.test.mjs test/addons/suggestions/*.test.mjs test/addons/synonyms/*.test.mjs test/integrations/languages/*.test.mjs test/integrations/astro/runtime.test.mjs test/integrations/astro/sections*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/addons/sections/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-concurrency=1 --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs && node --test --test-timeout=180000 test/integrations/astro/browser.test.mjs\n' +
+    'npm notice run @vmitsaras/raveldex@0.1.0-rc.0 build\n' +
+    'npm notice run node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json && tsc -p tsconfig.indexeddb.build.json && tsc -p tsconfig.migration.build.json && node scripts/copy-migration-license.mjs && tsc -p integrations/astro/tsconfig.build.json && node scripts/link-astro-peer.mjs\n'
+}
+
+Node.js v24.21.0

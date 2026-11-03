@@ -12,6 +12,14 @@ Current exact-head CI stopped before tests because two historical RX-5004 log pa
 
 [Fresh baseline evidence](../evidence/RX-8001.md) records a reproduced stale generated-plan failure on `6b6f131`, then a clean-install Astro sections-type resolution failure. Both are repaired locally. An immutable base-plus-patch snapshot and the final worktree each pass all 1,147 repository tests and installed candidate checks; the frozen site passes all 14 browser cases, with separate independent oracle/lifecycle checks and artifact review. This freezes source/package/model/limit identities without changing native runtime or claiming faster queries. Original `6b6f131` remains a recorded failure. Subsequent clean committed `919c9ed133b1dd004e3059cb15ddac18f474ef08` now passes the actual full/installed/site/focused checks with unchanged HEAD/status and explicit source hashes. RX-8001 is accepted locally; RX-8002 is next. Completion documentation is committed separately. Fresh remote Node 22/24 CI remains unrun.
 
+## RX-8002 execution checkpoint — 3 November 2026
+
+[RX-8002 evidence](../evidence/RX-8002.md) and [method](../evaluation/RX-8002-method.md) freeze nine labeled workloads and independent membership judgments. Twenty-seven installed Node processes keep ordinary wall/CPU measurements separate from diagnostic copies; nine cells pass exact page/error parity and the normal installed package remains byte-identical. Full membership at 100 records and larger exact totals/top-twenty checks have distinct scope. The existing 10k query, export and restore work refusals remain recorded: adversarial source restore reaches its cap during staging and preserves prior state. This task supplies instrumentation and inputs without changing native runtime, limits or model. RX-8003 is next dependency-ready; later tasks own optimization, restore diagnosis/repair and paired comparisons.
+
+## RX-8003 execution checkpoint — 3 November 2026
+
+[RX-8003 evidence](../evidence/RX-8003.md) records conservative group/AND/OR posting bounds, native-order touched-bucket traversal and requested Inspector nonmatch evaluation. Whole-query fallback for opaque predicates and compound refinements preserves per-record typed errors; NOT/browse/unknown OR branches remain conservative. Eighteen paired installed Node processes preserve exact native pages/errors at frozen adversarial 100/1,000/10,000 sizes. Rare 10k queries evaluate 11 documents rather than 10,000 and show measured work/latency improvement; source-phrase planning adds work and core gzip increases 554 bytes. Broader paired optimization claims remain RX-8009. RX-8004 is next dependency-ready.
+
 ## Priorities and prerequisites
 
 - **RX-8001** — genuine current-head baseline and truthful evidence availability; preserve previous accepted work.

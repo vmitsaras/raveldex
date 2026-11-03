@@ -1,0 +1,40 @@
+✔ factory validation throws synchronously; ordinary operational failures reject promises (8.926584ms)
+✔ every operation converts validation failures without changing state or running getters (2.03325ms)
+✔ already aborted and disposed calls skip caller data, queue slots and host handles (0.413875ms)
+✔ search, batch and removal options share each call admission counter (0.837084ms)
+✔ zero queue capacity still accepts an idle operation and rejects concurrent waiting calls (1.022333ms)
+✔ default queue keeps 32 FIFO waiters, rejects the 33rd and never supersedes a search (4.567875ms)
+✔ FIFO selects revisions and conflicts at start; a failed operation preserves the next read (1.326166ms)
+✔ admission owns nested record/query/options and removal inputs before a queued call returns (1.316542ms)
+✔ queued abort removes its listener/timer and immediately frees a bounded queue slot (0.869333ms)
+✔ deadline starts at admission; an expired queue entry releases its slot before active work completes (2.345584ms)
+✔ delayed timer delivery cannot allow an expired operation to execute successfully (0.260708ms)
+✔ silent queued abort is rechecked when its operation starts (0.473834ms)
+✔ active search cancellation closes owned work at different host opportunities and preserves later recovery (19.574292ms)
+✔ active mutation cancellation unwinds participant staging and keeps the previous coherent root (0.459375ms)
+✔ no-op operations still perform final cancellation/deadline checks (0.296375ms)
+✔ abort in participant finalization is observed before publication even below one whole work quantum (0.14925ms)
+✔ every precommit signal read preserves disposal and an observed abort event even if its getter returns false (11.578584ms)
+✔ a committed response keeps its actual revision after late abort, a newer write and disposal (0.221625ms)
+✔ dispose immediately rejects active/queued work, unregisters resources and shares one promise (0.170625ms)
+✔ disposal requested inside active trusted preparation waits for unwinding and prevents commit (0.262375ms)
+✔ participant failures and throwing abandonment cleanup preserve the original typed outcome and permit reuse (0.423291ms)
+✔ unknown participant failures become sanitized rejections and release all scheduling resources (0.192833ms)
+✔ host timer/continuation and signal-registration failures reject safely and permit later operations (0.486292ms)
+✔ search and addMany retain one work budget across analysis, selection, records and participants (3.237292ms)
+✔ visible stop precedence is disposed, caller abort, deadline, work; a settled first error is retained (0.271292ms)
+✔ late malformed content rejects the whole queued batch after charged work and preserves later reads (0.20275ms)
+✔ four task yield quanta preserve full source-oracle membership, pages, order and BM25 after queued mutations (273.681041ms)
+✔ query stop checks run inside dictionary, postings, analysis, evaluation, scoring, selection and final result (3.691917ms)
+✔ every search and replacement yield can abort and recover with identical published state (10.713542ms)
+ℹ Exhaustive cancellation positions: 57
+ℹ Exhaustive cancellation positions: 86
+✔ actual direct factory yields to host timers during complete common-term search and atomic staging (4483.131708ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4866.128375

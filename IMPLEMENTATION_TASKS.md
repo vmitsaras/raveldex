@@ -2028,7 +2028,7 @@ Document untracked RX-5004 log references without inventing historical test resu
 
 **Freeze matched corpora and instrument query/recovery costs**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8002%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8002%22)
 
 **Dependencies:** [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001)
 
@@ -2056,14 +2056,18 @@ Build reproducible real-doc, realistic high-cardinality and adversarial 100/1,00
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8002.md](docs/evidence/RX-8002.md)
+- [docs/evidence/RX-8002/acceptance.json](docs/evidence/RX-8002/acceptance.json)
+- [docs/evidence/RX-8002/matrix/report.json](docs/evidence/RX-8002/matrix/report.json)
+- [docs/evaluation/RX-8002-method.md](docs/evaluation/RX-8002-method.md)
+- [test/fixtures/n9/freeze.json](test/fixtures/n9/freeze.json)
 
 
 ## RX-8003
 
 **Introduce conservative postings-based query candidate bounds**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8003%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8003%22)
 
 **Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
@@ -2091,7 +2095,10 @@ Use complete posting-derived candidate sets for positive Boolean queries while f
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8003.md](docs/evidence/RX-8003.md)
+- [docs/evidence/RX-8003/acceptance.json](docs/evidence/RX-8003/acceptance.json)
+- [docs/evidence/RX-8003/paired/report.json](docs/evidence/RX-8003/paired/report.json)
+- [docs/evidence/RX-8003/artifacts.json](docs/evidence/RX-8003/artifacts.json)
 
 
 ## RX-8004

@@ -1,0 +1,699 @@
+{
+  "kind": "rx8003-acceptance-v1",
+  "state": "Pass",
+  "children": 18,
+  "parity": [
+    {
+      "size": 100,
+      "owners": 6,
+      "equalResults": 70,
+      "equalErrors": 10,
+      "resourceOutcomeChanges": []
+    },
+    {
+      "size": 1000,
+      "owners": 6,
+      "equalResults": 70,
+      "equalErrors": 10,
+      "resourceOutcomeChanges": []
+    },
+    {
+      "size": 10000,
+      "owners": 6,
+      "equalResults": 70,
+      "equalErrors": 10,
+      "resourceOutcomeChanges": []
+    }
+  ],
+  "artifacts": {
+    "sourceHead": "861b7ed9e8079f0bb0b3a6f3bd6731978f82f192",
+    "sourceFiles": {
+      "src/core/query/search.ts": "ec6de6e3e8a811c74371ead3958d280ad228b0984550316429d08c1cac406ca5",
+      "src/core/query/candidates.ts": "5238338adbbf134b4ef580f5b051ee2f16b7d8cd4896527fd93cbcce0dbe19fe"
+    },
+    "artifacts": {
+      "baseline": {
+        "path": "docs/evidence/RX-8001/head-919c9ed/core.tar.gz",
+        "sha256": "3f4f31eb03951f13366256dd019710f0bd5c58b29d7ae687d8a96f0ea5ecec11",
+        "members": 372
+      },
+      "candidate": {
+        "path": "/tmp/raveldex-rx8003-20261103/artifacts/vmitsaras-raveldex-0.1.0-rc.0.tgz",
+        "sha256": "a0d46278a567bd5365e0f7d60df067876c7ec2676092946493775055730a6dbf",
+        "members": 374
+      }
+    },
+    "changedMembers": [
+      "package/dist/core/query/candidates.d.ts",
+      "package/dist/core/query/candidates.js",
+      "package/dist/core/query/search.d.ts",
+      "package/dist/core/query/search.js",
+      "package/docs/release/PUBLICATION_STATUS.md"
+    ]
+  },
+  "sourceChanged": [
+    "src/core/query/search.ts",
+    "src/core/query/candidates.ts"
+  ],
+  "largeQueryTiming": [
+    {
+      "size": 10000,
+      "operation": "build",
+      "phase": null,
+      "baselineMedianWallMs": 32824.5027495,
+      "candidateMedianWallMs": 32758.916916500002,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.9980019245531145,
+      "deltaPercent": -0.1998075446885461,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:common",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": 1771.5314999999991,
+      "candidateMedianWallMs": 1704.9526870000009,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.9624173699423362,
+      "deltaPercent": -3.7582630057663824,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:common",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": 1742.0923545000005,
+      "candidateMedianWallMs": 1712.280666499999,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.9828874238940347,
+      "deltaPercent": -1.7112576105965283,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:rare",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": 441.5688334999977,
+      "candidateMedianWallMs": 8.037374999999884,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.018201862065973743,
+      "deltaPercent": -98.17981379340263,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:rare",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": 450.0530624999992,
+      "candidateMedianWallMs": 8.010729500001617,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.017799522250782664,
+      "deltaPercent": -98.22004777492174,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:overlapping-or",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": 1336.194729499999,
+      "candidateMedianWallMs": 946.5162294999973,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.708366983197263,
+      "deltaPercent": -29.1633016802737,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:overlapping-or",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": 1351.1306254999981,
+      "candidateMedianWallMs": 960.6817919999994,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.7110206621543276,
+      "deltaPercent": -28.897933784567243,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:negative-only",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": 592.1642294999983,
+      "candidateMedianWallMs": 590.2500624999993,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.9967675065384898,
+      "deltaPercent": -0.3232493461510222,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:negative-only",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": 586.9878124999996,
+      "candidateMedianWallMs": 595.2203544999975,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 1.0140250646175009,
+      "deltaPercent": 1.402506461750086,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:filtered",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": 1663.0453960000013,
+      "candidateMedianWallMs": 1654.7747915,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.9950268317870973,
+      "deltaPercent": -0.4973168212902723,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:filtered",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": 1660.1514999999963,
+      "candidateMedianWallMs": 1659.3668124999967,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.9995273398241067,
+      "deltaPercent": -0.047266017589331355,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:narrow-prefix",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": 663.334479000001,
+      "candidateMedianWallMs": 226.09302100000423,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.34084316156887706,
+      "deltaPercent": -65.91568384311229,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:narrow-prefix",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": 651.9768960000001,
+      "candidateMedianWallMs": 225.74933350000356,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.34625357874645224,
+      "deltaPercent": -65.37464212535478,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:broad-prefix-refusal",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": null,
+      "candidateMedianWallMs": null,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": null,
+      "deltaPercent": null,
+      "baselineOutcomes": {
+        "Refused": 2
+      },
+      "candidateOutcomes": {
+        "Refused": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:broad-prefix-refusal",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": null,
+      "candidateMedianWallMs": null,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": null,
+      "deltaPercent": null,
+      "baselineOutcomes": {
+        "Refused": 2
+      },
+      "candidateOutcomes": {
+        "Refused": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:source-phrase",
+      "phase": "first-call-for-query",
+      "baselineMedianWallMs": 4251.259229000003,
+      "candidateMedianWallMs": 4270.157166500001,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 1.004445256448039,
+      "deltaPercent": 0.4445256448039059,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:source-phrase",
+      "phase": "repeat-same-owner",
+      "baselineMedianWallMs": 4176.671604500003,
+      "candidateMedianWallMs": 4167.621083500002,
+      "baselineAttempts": 2,
+      "candidateAttempts": 2,
+      "candidateOverBaseline": 0.9978330781404384,
+      "deltaPercent": -0.2166921859561577,
+      "baselineOutcomes": {
+        "Pass": 2
+      },
+      "candidateOutcomes": {
+        "Pass": 2
+      }
+    }
+  ],
+  "largeQueryDiagnostics": [
+    {
+      "size": 10000,
+      "operation": "query:common",
+      "baselineOutcome": "Pass",
+      "baseline": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 10000,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 10000,
+        "emittedSteps": 180651,
+        "emittedWorkUnits": 2951096,
+        "maxStepWorkUnits": 230,
+        "hostYields": 1430,
+        "continuationsScheduled": 1430,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Pass",
+      "candidate": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 10000,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 10000,
+        "emittedSteps": 180656,
+        "emittedWorkUnits": 2951101,
+        "maxStepWorkUnits": 230,
+        "hostYields": 1430,
+        "continuationsScheduled": 1430,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:rare",
+      "baselineOutcome": "Pass",
+      "baseline": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 11,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 11,
+        "emittedSteps": 40546,
+        "emittedWorkUnits": 773073,
+        "maxStepWorkUnits": 224,
+        "hostYields": 371,
+        "continuationsScheduled": 371,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Pass",
+      "candidate": {
+        "candidates": 11,
+        "documentsEvaluated": 11,
+        "documentsScored": 11,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 11,
+        "emittedSteps": 1312,
+        "emittedWorkUnits": 12479,
+        "maxStepWorkUnits": 224,
+        "hostYields": 6,
+        "continuationsScheduled": 6,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:overlapping-or",
+      "baselineOutcome": "Pass",
+      "baseline": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 3342,
+        "exactDictionaryProbes": 2,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 3345,
+        "emittedSteps": 167103,
+        "emittedWorkUnits": 2230656,
+        "maxStepWorkUnits": 475,
+        "hostYields": 1080,
+        "continuationsScheduled": 1080,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Pass",
+      "candidate": {
+        "candidates": 3342,
+        "documentsEvaluated": 3342,
+        "documentsScored": 3342,
+        "exactDictionaryProbes": 2,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 3345,
+        "emittedSteps": 130794,
+        "emittedWorkUnits": 1619144,
+        "maxStepWorkUnits": 475,
+        "hostYields": 786,
+        "continuationsScheduled": 786,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:negative-only",
+      "baselineOutcome": "Pass",
+      "baseline": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 9989,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 11,
+        "emittedSteps": 214208,
+        "emittedWorkUnits": 946010,
+        "maxStepWorkUnits": 247,
+        "hostYields": 460,
+        "continuationsScheduled": 460,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Pass",
+      "candidate": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 9989,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 11,
+        "emittedSteps": 214212,
+        "emittedWorkUnits": 946014,
+        "maxStepWorkUnits": 247,
+        "hostYields": 460,
+        "continuationsScheduled": 460,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:filtered",
+      "baselineOutcome": "Pass",
+      "baseline": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 2000,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 10000,
+        "emittedSteps": 157346,
+        "emittedWorkUnits": 2831862,
+        "maxStepWorkUnits": 301,
+        "hostYields": 1371,
+        "continuationsScheduled": 1371,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Pass",
+      "candidate": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 2000,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 10000,
+        "emittedSteps": 157357,
+        "emittedWorkUnits": 2831873,
+        "maxStepWorkUnits": 301,
+        "hostYields": 1371,
+        "continuationsScheduled": 1371,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:narrow-prefix",
+      "baselineOutcome": "Pass",
+      "baseline": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 10,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 30007,
+        "postingsVisited": 30,
+        "emittedSteps": 307348,
+        "emittedWorkUnits": 1101899,
+        "maxStepWorkUnits": 211,
+        "hostYields": 527,
+        "continuationsScheduled": 527,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Pass",
+      "candidate": {
+        "candidates": 10,
+        "documentsEvaluated": 10,
+        "documentsScored": 10,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 30007,
+        "postingsVisited": 30,
+        "emittedSteps": 278096,
+        "emittedWorkUnits": 301247,
+        "maxStepWorkUnits": 211,
+        "hostYields": 147,
+        "continuationsScheduled": 147,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:broad-prefix-refusal",
+      "baselineOutcome": "Refused",
+      "baseline": {
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 257,
+        "postingsVisited": 0,
+        "emittedSteps": 2072,
+        "emittedWorkUnits": 9624,
+        "maxStepWorkUnits": 196,
+        "hostYields": 4,
+        "continuationsScheduled": 4,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Refused",
+      "candidate": {
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 257,
+        "postingsVisited": 0,
+        "emittedSteps": 2072,
+        "emittedWorkUnits": 9624,
+        "maxStepWorkUnits": 196,
+        "hostYields": 4,
+        "continuationsScheduled": 4,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "size": 10000,
+      "operation": "query:source-phrase",
+      "baselineOutcome": "Pass",
+      "baseline": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 3334,
+        "exactDictionaryProbes": 2,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 20000,
+        "emittedSteps": 1675784,
+        "emittedWorkUnits": 6286870,
+        "maxStepWorkUnits": 439,
+        "hostYields": 3052,
+        "continuationsScheduled": 3052,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "candidateOutcome": "Pass",
+      "candidate": {
+        "candidates": 10000,
+        "documentsEvaluated": 10000,
+        "documentsScored": 3334,
+        "exactDictionaryProbes": 2,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 20000,
+        "emittedSteps": 1705787,
+        "emittedWorkUnits": 6486873,
+        "maxStepWorkUnits": 439,
+        "hostYields": 3149,
+        "continuationsScheduled": 3149,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    }
+  ],
+  "graphGzipBytes": {
+    "baseline": 20304,
+    "candidate": 20858,
+    "increase": 554
+  },
+  "verification": {
+    "candidate": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 430.933640416
+    },
+    "siteGeneration": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 9.006982709
+    },
+    "siteInventory": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 0.550191916
+    },
+    "siteBrowser": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 297.172313917
+    },
+    "lifecycle": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 5.082751958
+    },
+    "independentCorrectness": {
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "elapsedSeconds": 4.126628290999999
+    },
+    "repositoryTests": 1171,
+    "siteBrowserCases": 14,
+    "overlappingFocusedLifecycleCases": 30,
+    "independentReview": "Pass",
+    "initialFullAttempt": "Fail, preserved; obsolete Astro historical-core equality guard repaired and independently reviewed",
+    "verifiedArtifactSha256": "1957253706c87c511c9f8aadba060c8d8fc5e89ec43d1117259d0cc5aa148dcc",
+    "generatedSiteChangedAsExpected": true
+  }
+}
