@@ -2,11 +2,11 @@
 
 ## New N9 milestone — 2026-11-03
 
-The owner has requested a new tracked **N9 query-performance/recovery benchmark** milestone. All previous 50 tasks remain accepted; **RX-8001 is in progress and ten RX-8002–RX-8011 tasks remain planned**. RX-8001 must be accepted before RX-8002 becomes eligible. Read [N9 scope](docs/specs/N9_PERFORMANCE_RECOVERY.md). This registration does not run an optimization, publish a package, or verify a new performance claim.
+The owner-selected **N9 query-performance/recovery benchmark** milestone now has **RX-8001 accepted and ten tasks planned**. The previous 50 tasks remain accepted. **RX-8002 is next dependency-ready**; read [N9 scope](docs/specs/N9_PERFORMANCE_RECOVERY.md) and [baseline evidence](docs/evidence/RX-8001.md).
 
-RX-8001 is now **in progress**. The local original `6b6f131` baseline failed generated-document validation; a clean install then exposed Astro sections-type resolution depending on existing build output. The working tree regenerates the plans, clarifies unavailable historical logs and adds explicit source/declaration mappings. [Fresh verification and source identities](docs/evidence/RX-8001.md) record 1,147 passing repository tests on both frozen corrected source and final worktree, all 14 site-browser cases, independent installed oracle/lifecycle checks, private artifacts and independent review. The original committed head failed; committed-head verification and fresh remote Node 22/24 CI remain open. RX-8001 stays in progress.
+Clean committed baseline `919c9ed133b1dd004e3059cb15ddac18f474ef08` passes 1,147 repository tests, installed private-candidate checks, all 14 site-browser cases and focused installed-oracle/lifecycle checks on local Node 24/macOS. Before/after HEAD/status guards and 2,280 explicit file hashes establish unchanged source; private core/English/Astro artifacts, lockfile/models/limits, known historical costs and unresolved 10k restore refusals are frozen. Completion documentation is a separate local commit. Remote Node 22/24 CI and tracking synchronization remain unrun; no performance improvement or publication is claimed.
 
-The reviewed `f523d9d` CI was blocked on missing historical RX-5004 logs. [Evidence availability](docs/evidence/RX-5004-AVAILABILITY-20261103.md) records their absence without fabricating an old pass; fresh current-head verification belongs to RX-8001. Prior statements of “zero planned” below describe an earlier completed backlog.
+Original `6b6f131` failed stale generated-plan validation; an intermediate clean install exposed Astro sections-type resolution depending on prior build output. The reviewed baseline repairs both and clarifies unavailable RX-5004 logs. Genuine failures, earlier snapshot/worktree passes and new committed-head results remain separately inspectable. Prior statements of “zero planned” below describe an earlier completed backlog.
 
 Snapshot: 2026-11-02. Repository: `vmitsaras/raveldex`.
 

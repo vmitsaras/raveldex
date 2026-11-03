@@ -1,6 +1,6 @@
 # Publication status
 
-The earlier implementation backlog is complete: **50 accepted tasks**, including the documentation-site and five search presentations. The selected [N9 performance/recovery milestone](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/N9_PERFORMANCE_RECOVERY.md) adds eleven tasks; RX-8001 is in progress and its baseline verification is separate from historical acceptance. Core, English and Astro packages stay private `0.1.0-rc.0`; the [Unreleased notes](../../CHANGELOG.md) choose no public version or release date.
+The earlier implementation backlog is complete: **50 accepted tasks**, including the documentation-site and five search presentations. The selected [N9 performance/recovery milestone](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/N9_PERFORMANCE_RECOVERY.md) adds eleven tasks; RX-8001 is accepted after clean committed-head local verification of `919c9ed`, and ten tasks remain planned. Its local baseline evidence is separate from historical acceptance and unrun fresh remote CI. Core, English and Astro packages stay private `0.1.0-rc.0`; the [Unreleased notes](../../CHANGELOG.md) choose no public version or release date.
 
 ## Documentation and evaluation
 

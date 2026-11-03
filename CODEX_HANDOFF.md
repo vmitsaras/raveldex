@@ -2,11 +2,11 @@
 
 ## New tracked N9 scope — 2026-11-03
 
-The N0–N8 backlog is complete; the owner has added **N9 with RX-8001 in progress and ten planned tasks**. Read [the N9 contract](docs/specs/N9_PERFORMANCE_RECOVERY.md) and run `npm run handoff:next` on the actual checkout. Old “zero planned” text below is historical. RX-8001 establishes a new verified baseline before optimization; publication and new performance claims remain separate.
+The N0–N8 backlog remains complete. **RX-8001 is accepted; ten N9 tasks remain planned and RX-8002 is next dependency-ready.** Read the [N9 contract](docs/specs/N9_PERFORMANCE_RECOVERY.md) and run `npm run handoff:next` on the actual checkout. Older “zero planned” text below is historical.
 
-RX-8001 has reproduced a stale generated task document on `6b6f131`, then a clean-install Astro type-resolution failure for the sections addon. Both are repaired locally. Frozen corrected-source and final-worktree candidate checks each pass all 1,147 tests; all 14 site cases and focused installed-oracle/lifecycle checks pass. Source/package identities and actual failed attempts are preserved. RX-8001 stays in progress pending a committed source checkpoint and exact-head verification; fresh remote Node 22/24 CI is unrun. Follow the [RX-8001 record](docs/evidence/RX-8001.md). Preserve its base commit, patch, full file hashes and actual failed attempts; do not call a passing snapshot a passing committed HEAD.
+[RX-8001 evidence](docs/evidence/RX-8001.md) now verifies actual clean committed head `919c9ed133b1dd004e3059cb15ddac18f474ef08`: 1,147 tests, installed private candidate, all 14 site cases, independent installed oracle and thirty focused lifecycle tests. Git HEAD/status guards and full source hashes remain unchanged throughout verification. Core/English/Astro artifacts, lockfile/model/limit identities and known historical costs/refusals are frozen; no optimization or 10k restore-capacity improvement is claimed.
 
-The initial reviewed head's two missing RX-5004 logs are transparently recorded in [evidence availability](docs/evidence/RX-5004-AVAILABILITY-20261103.md); obtain fresh exact-head CI evidence in RX-8001.
+Original `6b6f131` failed generated-document validation, and an intermediate clean install exposed Astro sections-type resolution depending on existing build output. Both repairs and truthful historical-log disclosure are included in the reviewed baseline. Preserve all failed attempts and distinguish earlier snapshot/worktree tests from actual committed-head evidence. Completion/status documentation is committed separately. Fresh remote Node 22/24 CI and tracking sync remain unrun; publication is separate.
 
 ## Current boundary
 

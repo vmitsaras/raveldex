@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 40/51 done · 1 in progress · 0 dependency-ready.
+**Release progress:** 41/51 done · 0 in progress · 1 dependency-ready.
 
-**Planner state:** `in_progress`.
+**Planner state:** `ready`.
 
-**Next or resumable release task:** [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001) — Reconcile missing historical evidence and establish a green exact-head baseline.
+**Next or resumable release task:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002) — Freeze matched corpora and instrument query/recovery costs.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -39,7 +39,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N6 — Search Workbench documentation site** | `RX-5001`–`RX-5005` | 5/5 | Implement the owner-selected Search Workbench design in the existing static documentation site, with real packed search and preserved publication boundaries. |
 | **N7 — Inline and documentation search solutions** | `RX-6001`–`RX-6008` | 8/8 | Provide ready-to-use Pagefind-style inline search and a documentation modal with optional native UI, complete installed starters, CSS customization and evidence-backed page/section presentation. |
 | **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 6/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
-| **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 0/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
+| **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 1/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
 
 ## Task index
 
@@ -95,7 +95,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004) — Faceted directory controls and installed starter | `done` | `RX-7003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22) |
 | [RX-7005](IMPLEMENTATION_TASKS.md#rx-7005) — Rich directory result cards and grid presentation | `done` | `RX-7004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22) |
 | [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006) — Complete solution gallery and family qualification | `done` | `RX-7002`, `RX-7004`, `RX-7005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22) |
-| [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001) — Reconcile missing historical evidence and establish a green exact-head baseline | `in_progress` | `RX-7006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22) |
+| [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001) — Reconcile missing historical evidence and establish a green exact-head baseline | `done` | `RX-7006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22) |
 | [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002) — Freeze matched corpora and instrument query/recovery costs | `planned` | `RX-8001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8002%22) |
 | [RX-8003](IMPLEMENTATION_TASKS.md#rx-8003) — Introduce conservative postings-based query candidate bounds | `planned` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8003%22) |
 | [RX-8004](IMPLEMENTATION_TASKS.md#rx-8004) — Optimize resumable continuation scheduling without starving hosts | `planned` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8004%22) |

@@ -1986,7 +1986,7 @@ Finish the complete adoption path and verify shared correctness, interaction, op
 
 **Reconcile missing historical evidence and establish a green exact-head baseline**
 
-**Milestone:** N9 · **Status:** `in_progress` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22)
 
 **Dependencies:** [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006)
 
@@ -2018,6 +2018,10 @@ Document untracked RX-5004 log references without inventing historical test resu
 - [docs/evidence/RX-8001.md](docs/evidence/RX-8001.md)
 - [docs/evidence/RX-8001/verified-source-freeze.json](docs/evidence/RX-8001/verified-source-freeze.json)
 - [docs/evidence/RX-8001/environment.json](docs/evidence/RX-8001/environment.json)
+- [docs/evidence/RX-8001/head-919c9ed/acceptance.json](docs/evidence/RX-8001/head-919c9ed/acceptance.json)
+- [docs/evidence/RX-8001/head-919c9ed/source.json](docs/evidence/RX-8001/head-919c9ed/source.json)
+- [docs/evidence/RX-8001/head-919c9ed/preparation.json](docs/evidence/RX-8001/head-919c9ed/preparation.json)
+- [docs/evidence/RX-8001/head-919c9ed/pages-browser.json](docs/evidence/RX-8001/head-919c9ed/pages-browser.json)
 
 
 ## RX-8002
