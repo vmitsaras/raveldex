@@ -1989,9 +1989,7 @@ Finish the complete adoption path and verify shared correctness, interaction, op
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22)
 
-**Dependencies**
-
-[RX-7006](IMPLEMENTATION_TASKS.md#rx-7006)
+**Dependencies:** [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006)
 
 Document untracked RX-5004 log references without inventing historical test results; verify a clean pinned current-head candidate before optimization.
 
@@ -1999,24 +1997,24 @@ Document untracked RX-5004 log references without inventing historical test resu
 
 `docs/evidence/`, `docs/planning/roadmap.json`, `docs/release/`, `scripts/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8001-AC01: Keep original RX-5004 evidence and unavailable-log disclosure distinct from newly measured passes.
 - RX-8001-AC02: Pass the actual planner/docs/types/tests/installed-consumer and required browser checks on an immutable current head.
 - RX-8001-AC03: Freeze source, lockfile, package, model, configuration, known costs and refusals for subsequent paired measurement.
 
-**Verification**
+**Verification
 
 - Investigate log provenance; do not create placeholder pass logs or weaken evidence validation.
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2027,9 +2025,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8002%22)
 
-**Dependencies**
-
-[RX-8001](IMPLEMENTATION_TASKS.md#rx-8001)
+**Dependencies:** [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001)
 
 Build reproducible real-doc, realistic high-cardinality and adversarial 100/1,000/10,000-record workloads with diagnostic execution accounting.
 
@@ -2037,23 +2033,23 @@ Build reproducible real-doc, realistic high-cardinality and adversarial 100/1,00
 
 `bench/`, `scripts/`, `test/fixtures/`, `docs/evaluation/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8002-AC01: Pin corpus/query/judgment hashes, packages and analyzer/model identities, including independent expected matches.
 - RX-8002-AC02: Instrument candidates, documents evaluated and scored, dictionary visits, host yields, emitted work and restore phases without mixing instrumentation into normal timings.
 - RX-8002-AC03: Record CPU/wall, sample counts, rotated fresh owners, deadline/refusal/unknown outcomes and correct comparison scopes.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2064,9 +2060,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8003%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Use complete posting-derived candidate sets for positive Boolean queries while falling back to the universe where NOT, opaque predicates or browse require it.
 
@@ -2074,23 +2068,23 @@ Use complete posting-derived candidate sets for positive Boolean queries while f
 
 `src/core/query/`, `src/core/retrieval/`, `test/core/`, `test/addons/`, `bench/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8003-AC01: Selective lexical queries skip irrelevant document evaluation and show measured work/latency improvement.
 - RX-8003-AC02: AND/OR/NOT, filters, facets, extensions, negative-only, browse and requested nonmatch Inspector explanations retain exact semantics.
 - RX-8003-AC03: Native scores/order, exact totals, phrase-source/position/mixed parity, typed errors and cancellation pass independent regressions.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2101,9 +2095,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8004%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Profile and separate execution continuation from deadline timers using host-appropriate genuinely yielding scheduling, retaining stop and commit precedence.
 
@@ -2111,23 +2103,23 @@ Profile and separate execution continuation from deadline timers using host-appr
 
 `src/core/execution/`, `src/adapters/worker/`, `test/core/`, `test/adapters/worker/`, `bench/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8004-AC01: Compare real host yields/task durations and query p50/p95 before/after on actual Node and supported browsers/workers.
 - RX-8004-AC02: Abort, deadline, FIFO, teardown and committed receipts remain correct under deterministic stop/reentry tests.
 - RX-8004-AC03: No endless microtask loops, unsafe cross-host assumptions or changed work-unit charging; retain measured safe fallback.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2138,9 +2130,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8005%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Evaluate sorted-range seeking or another compact prefix lookup against existing full-dictionary iteration on high-cardinality vocabularies.
 
@@ -2148,23 +2138,23 @@ Evaluate sorted-range seeking or another compact prefix lookup against existing 
 
 `src/core/retrieval/`, `src/core/index/`, `test/core/`, `bench/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8005-AC01: Selected-field prefix sets equal the independent oracle, including duplicate terms and the exact spelling.
 - RX-8005-AC02: Boundary 256/257 expansion errors, metadata, field restriction, deterministic scores/ties and all mutation/restore cases remain unchanged.
 - RX-8005-AC03: Measured visits/time improve on declared high-cardinality workloads without unbounded retained side caches.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2175,9 +2165,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8006%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Cache per-query/per-field length averages and IDF inputs where applicable without modifying the native scoring model or public trace meaning.
 
@@ -2185,23 +2173,23 @@ Cache per-query/per-field length averages and IDF inputs where applicable withou
 
 `src/core/ranking/`, `src/core/query/`, `src/core/trace/`, `test/core/`, `bench/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8006-AC01: Actual scores, alternative contributions and ties match independent arithmetic under the existing numeric tolerance.
 - RX-8006-AC02: Changes to document frequencies and field lengths invalidate stale values; filters never change corpus statistics.
 - RX-8006-AC03: Fewer redundant computations and actual cost impact are measured independently from candidate and scheduler changes.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2212,9 +2200,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8007%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Reproduce and isolate source codec, validation, token and staging costs before proposing bounded bulk reconstruction.
 
@@ -2222,23 +2208,23 @@ Reproduce and isolate source codec, validation, token and staging costs before p
 
 `src/adapters/snapshots/`, `src/core/mutations/`, `bench/`, `docs/evaluation/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8007-AC01: Replicate source-rebuild errors on pinned actual Node and worker configurations without reclassifying refusals as passes.
 - RX-8007-AC02: Record phase/work and old/new state coexistence with source/position variants; distinguish encoded bytes from retained/peak heap.
 - RX-8007-AC03: Review an atomic bounded bulk-builder contract with exact source/index/sidecar verification and no silent cap increase.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2249,9 +2235,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22)
 
-**Dependencies**
-
-[RX-8007](IMPLEMENTATION_TASKS.md#rx-8007)
+**Dependencies:** [RX-8007](IMPLEMENTATION_TASKS.md#rx-8007)
 
 Reduce redundant restore preparation while preserving source/position/native-state participants, revision and single-publication semantics.
 
@@ -2259,23 +2243,23 @@ Reduce redundant restore preparation while preserving source/position/native-sta
 
 `src/adapters/snapshots/`, `src/adapters/indexeddb/`, `src/adapters/worker/`, `src/core/mutations/`, `test/adapters/`, `bench/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8008-AC01: The previously refused representative admitted 10k source restore succeeds under existing limits, or remains blocked pending a genuine reviewed capacity decision.
 - RX-8008-AC02: Failure, abort, deadline and uncertain worker/storage outcomes preserve authoritative state/receipts and never pretend success.
 - RX-8008-AC03: Before/after phase work, wall/CPU and bounded memory observations are captured with exact restored source/query parity.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2286,9 +2270,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22)
 
-**Dependencies**
-
-[RX-8003](IMPLEMENTATION_TASKS.md#rx-8003), [RX-8004](IMPLEMENTATION_TASKS.md#rx-8004), [RX-8005](IMPLEMENTATION_TASKS.md#rx-8005), [RX-8006](IMPLEMENTATION_TASKS.md#rx-8006), [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008)
+**Dependencies:** [RX-8003](IMPLEMENTATION_TASKS.md#rx-8003), [RX-8004](IMPLEMENTATION_TASKS.md#rx-8004), [RX-8005](IMPLEMENTATION_TASKS.md#rx-8005), [RX-8006](IMPLEMENTATION_TASKS.md#rx-8006), [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008)
 
 Repeat frozen matched workloads against separate installed baseline and candidate artifacts, reporting independent and combined improvements and regressions.
 
@@ -2296,23 +2278,23 @@ Repeat frozen matched workloads against separate installed baseline and candidat
 
 `bench/`, `docs/evaluation/`, `docs/evidence/`, `scripts/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8009-AC01: Complete membership, score/trace/order, totals, facets, revisions, budgets and source/position/mixed outcomes agree.
 - RX-8009-AC02: Report p50/p95 sample counts, CPU/wall/work/yields, selected browser/worker cases, sizes and failure rates for every intervention.
 - RX-8009-AC03: Any unproven speedup, correctness regression or changed capacity meaning remains a finding rather than a release claim.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2323,9 +2305,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8010%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Build pinned isolated comparisons for MiniSearch, FlexSearch, Orama and Lunr where query semantics align; keep Fuse fuzzy and Pagefind static-site cases separate.
 
@@ -2333,23 +2313,23 @@ Build pinned isolated comparisons for MiniSearch, FlexSearch, Orama and Lunr whe
 
 `bench/`, `test/comparison/`, `integrations/`, `docs/evaluation/`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8010-AC01: Record version/hash/content/field/matching/total/output equivalence for every comparable row.
 - RX-8010-AC02: Unsupported operators, different fuzzy metrics, application phrase work and nontransactional updates are Not comparable instead of silent drop or apparent wins.
 - RX-8010-AC03: Use independent relevance labels and reproducible workloads; do not present unrelated published benchmarks as local measurements.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
@@ -2360,9 +2340,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8011%22)
 
-**Dependencies**
-
-[RX-8009](IMPLEMENTATION_TASKS.md#rx-8009), [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010)
+**Dependencies:** [RX-8009](IMPLEMENTATION_TASKS.md#rx-8009), [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010)
 
 Consolidate measured differences, reproducibility, safe capacity/latency guidance and remaining browser/AT/physical limitations without authorizing publication.
 
@@ -2370,23 +2348,23 @@ Consolidate measured differences, reproducibility, safe capacity/latency guidanc
 
 `docs/evaluation/`, `docs/release/`, `docs/support/`, `README.md`, `CODEX_HANDOFF.md`. These are planning boundaries; create files only when this task needs them.
 
-**Contracts**
+**Contracts
 
 [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
 
-**Acceptance criteria**
+**Acceptance criteria
 
 - RX-8011-AC01: Independent review checks consequential math, source/corpus identities, comparator fairness, selected raw runs and failed/unknown outcomes.
 - RX-8011-AC02: Practical workload guidance distinguishes fast updates from broad exact-count retrieval and supported restore capacities.
 - RX-8011-AC03: Core and add-on boundaries remain intact; publication, version bump and new capabilities require a separate owner decision.
 
-**Verification**
+**Verification
 
 - Run focused independent correctness and failure/lifecycle tests plus the pinned full verification on the exact changed checkout.
 - Record actual commands, environment, source/artifact identity, before/after diagnostic and normal timings and any unrun checks.
 - Preserve native results, complete counts, numeric facts, original phrase/offset semantics, atomic revisions and installed package boundaries.
 
-**Recorded evidence**
+**Recorded evidence
 
 None recorded. A future report destination in the verification steps is not evidence.
 
