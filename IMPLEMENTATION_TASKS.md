@@ -1267,11 +1267,10 @@ Verify the implemented design, record actual evidence and synchronize project gu
 **Recorded evidence**
 
 - [docs/evidence/RX-5004.md](docs/evidence/RX-5004.md)
-- [docs/evidence/RX-5004-check.log](docs/evidence/RX-5004-check.log)
-- [docs/evidence/RX-5004-workbench-browser.log](docs/evidence/RX-5004-workbench-browser.log)
 - [docs/evidence/RX-5004-pages-browser.json](docs/evidence/RX-5004-pages-browser.json)
 - [docs/evidence/RX-5004-images/home-desktop.png](docs/evidence/RX-5004-images/home-desktop.png)
 - [docs/evidence/RX-5004-images/home-mobile.png](docs/evidence/RX-5004-images/home-mobile.png)
+- [docs/evidence/RX-5004-AVAILABILITY-20261103.md](docs/evidence/RX-5004-AVAILABILITY-20261103.md)
 
 
 ## RX-5005
