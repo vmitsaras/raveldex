@@ -1,5 +1,11 @@
 # Codex handoff
 
+## New tracked N9 scope — 2026-11-03
+
+The N0–N8 backlog is complete; the owner has added **N9 with 11 planned tasks**, starting at **RX-8001**. Read [the N9 contract](docs/specs/N9_PERFORMANCE_RECOVERY.md) and run `npm run handoff:next` on the actual checkout. Old “zero planned” text below is historical. This is tracking registration, not authorization to publish or pretend benchmark improvements.
+
+The initial reviewed head's two missing RX-5004 logs are transparently recorded in [evidence availability](docs/evidence/RX-5004-AVAILABILITY-20261103.md); obtain fresh exact-head CI evidence in RX-8001.
+
 ## Current boundary
 
 The selected implementation backlog is complete: original 36 tasks, RX-6001–RX-6008 and RX-7001–RX-7006 are done, **50 complete / zero planned**. [RX-7006](docs/evidence/RX-7006.md) owns the final five-presentation chooser, eight-project data/capability/keyboard/cleanup guidance and current local family qualification. Twenty state groups pass per Chrome/Chromium/WebKit; all eight copied projects pass 44 groups per Chrome/Chromium and six projects pass 34 WebKit groups. The selected Chromium provider matrix passes 57; all 14 site cases and actual byte-exact Jekyll checks pass. Thirty viewport screenshots and bounded DOM/image/output observations retain their precise automated scope. Required post-roadmap full-check/build and source-scope results are in the evidence.

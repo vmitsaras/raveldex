@@ -1,5 +1,11 @@
 # Project context
 
+## New N9 milestone — 2026-11-03
+
+The owner has requested a new tracked **N9 query-performance/recovery benchmark** milestone. All previous 50 tasks remain accepted; **11 new RX-8001–RX-8011 tasks are planned**. After registration the next eligible work is RX-8001. Read [N9 scope](docs/specs/N9_PERFORMANCE_RECOVERY.md). This registration does not run an optimization, publish a package, or verify a new performance claim.
+
+The reviewed `f523d9d` CI was blocked on missing historical RX-5004 logs. [Evidence availability](docs/evidence/RX-5004-AVAILABILITY-20261103.md) records their absence without fabricating an old pass; fresh current-head verification belongs to RX-8001. Prior statements of “zero planned” below describe an earlier completed backlog.
+
 Snapshot: 2026-11-02. Repository: `vmitsaras/raveldex`.
 
 ## Current state

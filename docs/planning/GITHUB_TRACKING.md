@@ -4,18 +4,18 @@ The [milestone list](https://github.com/vmitsaras/raveldex/milestones) and [issu
 
 ## Structure
 
-- Six milestones: N0 native design, N1 core alpha, N2 modular product, N3 hosts/migration, N4 qualification, N5 deferred enhancements.
-- Six milestone overview issues with linked task checklists, deliberately not assigned to any GitHub milestone.
-- Twenty-one release-track task issues and ten deferred optional-task issues.
+- Ten milestone definitions now span N0–N9; N9 tracks performance/recovery and retains a separate task checklist.
+- One overview issue per milestone with linked task checklists, deliberately excluded from GitHub milestone membership.
+- Task issue counts come from the current manifest; N9 introduces 11 release-track tasks, while N5 optional tasks remain historically complete.
 - Type, track, and status labels expose ready, waiting, in-progress, blocked, needs-decision, deferred, and done states.
 
 Every task issue includes its objective, prerequisite links, measurable acceptance checklist, governing specs, expected paths, verification method, and actual evidence links when complete. No arbitrary dates or assignees are inferred.
 
 ## Milestone membership and progress
 
-Only managed `RX-*` task issues are assigned to their corresponding GitHub milestone. The `N0` through `N5` overview issues summarize their tasks but are not additional work items. They must have `milestone: null`, including when their associated milestone is already complete. Keep their checklist links, labels, human notes, and normal completion rules; do not delete or prematurely close them to change a progress bar.
+Only managed `RX-*` task issues are assigned to their corresponding GitHub milestone. The `N0` through `N9` overview issues summarize their tasks but are not additional work items. They must have `milestone: null`, including when their associated milestone is already complete. Keep their checklist links, labels, human notes, and normal completion rules; do not delete or prematurely close them to change a progress bar.
 
-For the current roadmap, the managed task membership is N0: 2, N1: 6, N2: 6, N3: 4, N4: 3, and N5: 10. For example, two accepted N2 tasks mean 2/6 task progress, not 2/7 including the overview. Derive live counts from the manifest and the actual issue inventory; these examples are not stored completion percentages.
+The N9 milestone has 11 managed task issues (0 completed at registration); other milestone counts derive from the canonical manifest. For example, two accepted N2 tasks mean 2/6 task progress, not 2/7 including the overview. Derive live counts from the manifest and the actual issue inventory; these examples are not stored completion percentages.
 
 GitHub's milestone display includes associated issues and pull requests, not just our managed task IDs. Unrelated items can therefore change its denominator. Do not detach unrelated issues or pull requests automatically. The overview checklist continues to report accepted manifest tasks only.
 
