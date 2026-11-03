@@ -6,6 +6,7 @@ on:
     paths:
       - docs/planning/roadmap.json
       - IMPLEMENTATION_TASKS.md
+      - scripts/link-native-subissues.mjs
       - scripts/sync-github.mjs
       - scripts/lib/roadmap.mjs
       - .github/workflows/sync-roadmap.yml
@@ -47,5 +48,9 @@ jobs:
       - run: npm run check
       - name: Create or update repository milestones and task issues
         run: npm run tracking:sync
+      - name: Link N9 task issues as native GitHub sub-issues
+        run: node scripts/link-native-subissues.mjs --apply
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         env:
           GITHUB_TOKEN: ${{ github.token }}

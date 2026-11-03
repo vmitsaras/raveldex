@@ -13,6 +13,13 @@ Every task issue includes its objective, prerequisite links, measurable acceptan
 
 ## Milestone membership and progress
 
+### Native N9 sub-issue hierarchy
+
+For the owner-selected N9 scope, the synchronization workflow also runs `scripts/link-native-subissues.mjs --apply` **after** creating/checking the managed milestone and task issues. It attaches the 11 N9 tasks to the N9 overview through GitHub's native sub-issue API (distinct from their milestone assignment). The overview stays outside the GitHub milestone, so the progress denominator remains the 11 task issues.
+
+The linker is idempotent, verifies final read-back, does not replace an existing different parent, and preserves other issue relationships. `test/tooling/native-subissues.test.mjs` checks no-duplicate reruns and invalid/falsely successful API responses. Only N9 is explicitly in scope; older completed overview issues are unchanged.
+
+
 Only managed `RX-*` task issues are assigned to their corresponding GitHub milestone. The `N0` through `N9` overview issues summarize their tasks but are not additional work items. They must have `milestone: null`, including when their associated milestone is already complete. Keep their checklist links, labels, human notes, and normal completion rules; do not delete or prematurely close them to change a progress bar.
 
 The N9 milestone has 11 managed task issues (0 completed at registration); other milestone counts derive from the canonical manifest. For example, two accepted N2 tasks mean 2/6 task progress, not 2/7 including the overview. Derive live counts from the manifest and the actual issue inventory; these examples are not stored completion percentages.
