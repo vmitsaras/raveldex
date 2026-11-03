@@ -48,9 +48,9 @@ jobs:
       - run: npm run check
       - name: Create or update repository milestones and task issues
         run: npm run tracking:sync
-      - name: Link N9 task issues as native GitHub sub-issues
-        run: node scripts/link-native-subissues.mjs --apply
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Link N9 task issues as native GitHub sub-issues
+        run: node scripts/link-native-subissues.mjs --apply
         env:
           GITHUB_TOKEN: ${{ github.token }}
