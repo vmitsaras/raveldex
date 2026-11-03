@@ -2,7 +2,9 @@
 
 ## New N9 milestone — 2026-11-03
 
-The owner has requested a new tracked **N9 query-performance/recovery benchmark** milestone. All previous 50 tasks remain accepted; **11 new RX-8001–RX-8011 tasks are planned**. After registration the next eligible work is RX-8001. Read [N9 scope](docs/specs/N9_PERFORMANCE_RECOVERY.md). This registration does not run an optimization, publish a package, or verify a new performance claim.
+The owner has requested a new tracked **N9 query-performance/recovery benchmark** milestone. All previous 50 tasks remain accepted; **RX-8001 is in progress and ten RX-8002–RX-8011 tasks remain planned**. RX-8001 must be accepted before RX-8002 becomes eligible. Read [N9 scope](docs/specs/N9_PERFORMANCE_RECOVERY.md). This registration does not run an optimization, publish a package, or verify a new performance claim.
+
+RX-8001 is now **in progress**. The local original `6b6f131` baseline failed generated-document validation; a clean install then exposed Astro sections-type resolution depending on existing build output. The working tree regenerates the plans, clarifies unavailable historical logs and adds explicit source/declaration mappings. [Fresh verification and source identities](docs/evidence/RX-8001.md) record 1,147 passing repository tests on both frozen corrected source and final worktree, all 14 site-browser cases, independent installed oracle/lifecycle checks, private artifacts and independent review. The original committed head failed; committed-head verification and fresh remote Node 22/24 CI remain open. RX-8001 stays in progress.
 
 The reviewed `f523d9d` CI was blocked on missing historical RX-5004 logs. [Evidence availability](docs/evidence/RX-5004-AVAILABILITY-20261103.md) records their absence without fabricating an old pass; fresh current-head verification belongs to RX-8001. Prior statements of “zero planned” below describe an earlier completed backlog.
 

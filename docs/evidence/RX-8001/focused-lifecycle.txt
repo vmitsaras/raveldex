@@ -1,0 +1,41 @@
+{"command": ["node", "--test", "test/core/execution-lifecycle.test.mjs", "test/core/execution-parity.test.mjs"], "cwd": "/tmp/raveldex-rx8001-20261103/source", "startedAtUnix": 1793733697.7850811}
+✔ factory validation throws synchronously; ordinary operational failures reject promises (6.08825ms)
+✔ every operation converts validation failures without changing state or running getters (1.732625ms)
+✔ already aborted and disposed calls skip caller data, queue slots and host handles (0.374375ms)
+✔ search, batch and removal options share each call admission counter (1.425667ms)
+✔ zero queue capacity still accepts an idle operation and rejects concurrent waiting calls (1.376042ms)
+✔ default queue keeps 32 FIFO waiters, rejects the 33rd and never supersedes a search (3.826208ms)
+✔ FIFO selects revisions and conflicts at start; a failed operation preserves the next read (1.365083ms)
+✔ admission owns nested record/query/options and removal inputs before a queued call returns (1.451541ms)
+✔ queued abort removes its listener/timer and immediately frees a bounded queue slot (1.129583ms)
+✔ deadline starts at admission; an expired queue entry releases its slot before active work completes (0.69225ms)
+✔ delayed timer delivery cannot allow an expired operation to execute successfully (0.690459ms)
+✔ silent queued abort is rechecked when its operation starts (0.515375ms)
+✔ active search cancellation closes owned work at different host opportunities and preserves later recovery (16.897416ms)
+✔ active mutation cancellation unwinds participant staging and keeps the previous coherent root (0.453917ms)
+✔ no-op operations still perform final cancellation/deadline checks (0.296125ms)
+✔ abort in participant finalization is observed before publication even below one whole work quantum (0.148542ms)
+✔ every precommit signal read preserves disposal and an observed abort event even if its getter returns false (10.046375ms)
+✔ a committed response keeps its actual revision after late abort, a newer write and disposal (0.280584ms)
+✔ dispose immediately rejects active/queued work, unregisters resources and shares one promise (0.145333ms)
+✔ disposal requested inside active trusted preparation waits for unwinding and prevents commit (0.164833ms)
+✔ participant failures and throwing abandonment cleanup preserve the original typed outcome and permit reuse (0.430084ms)
+✔ unknown participant failures become sanitized rejections and release all scheduling resources (0.35875ms)
+✔ host timer/continuation and signal-registration failures reject safely and permit later operations (0.524625ms)
+✔ search and addMany retain one work budget across analysis, selection, records and participants (3.24275ms)
+✔ visible stop precedence is disposed, caller abort, deadline, work; a settled first error is retained (0.361167ms)
+✔ late malformed content rejects the whole queued batch after charged work and preserves later reads (0.285208ms)
+✔ four task yield quanta preserve full source-oracle membership, pages, order and BM25 after queued mutations (284.926584ms)
+✔ query stop checks run inside dictionary, postings, analysis, evaluation, scoring, selection and final result (5.708167ms)
+✔ every search and replacement yield can abort and recover with identical published state (23.64025ms)
+ℹ Exhaustive cancellation positions: 52
+ℹ Exhaustive cancellation positions: 86
+✔ actual direct factory yields to host timers during complete common-term search and atomic staging (4510.951875ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4891.888416

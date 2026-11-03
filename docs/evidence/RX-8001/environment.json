@@ -1,0 +1,136 @@
+{
+  "os": "macOS-27.0.1-arm64-arm-64bit",
+  "architecture": "arm64",
+  "node": {
+    "version": "v24.21.0",
+    "versions": {
+      "node": "24.21.0",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.8",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.3",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "137",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "3.6.4",
+      "simdjson": "4.6.11",
+      "simdutf": "6.4.0",
+      "sqlite": "3.53.4",
+      "tz": "2026a",
+      "undici": "7.29.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "13.6.233.17-node.53",
+      "zlib": "1.2.12",
+      "zstd": "1.5.7"
+    },
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "npm": "12.2.0",
+  "installedDependencies": {
+    "version": "0.1.0-rc.0",
+    "name": "@vmitsaras/raveldex",
+    "dependencies": {
+      "@types/node": {
+        "version": "24.10.1",
+        "resolved": "https://registry.npmjs.org/@types/node/-/node-24.10.1.tgz",
+        "overridden": false
+      },
+      "astro": {
+        "version": "7.3.2",
+        "resolved": "https://registry.npmjs.org/astro/-/astro-7.3.2.tgz",
+        "overridden": false
+      },
+      "axe-core": {
+        "version": "4.13.0",
+        "resolved": "https://registry.npmjs.org/axe-core/-/axe-core-4.13.0.tgz",
+        "overridden": false
+      },
+      "esbuild": {
+        "version": "0.28.2",
+        "resolved": "https://registry.npmjs.org/esbuild/-/esbuild-0.28.2.tgz",
+        "overridden": false
+      },
+      "playwright-core": {
+        "version": "1.61.1",
+        "resolved": "https://registry.npmjs.org/playwright-core/-/playwright-core-1.61.1.tgz",
+        "overridden": false
+      },
+      "typescript": {
+        "version": "7.0.2",
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz",
+        "overridden": false
+      }
+    }
+  },
+  "commandEnvironment": {
+    "browserSelectors": "Default repository selectors; Chrome for UI/worker/indexeddb/candidate; no selector overrides",
+    "npmInstall": "npm ci --offline --ignore-scripts --no-audit --no-fund"
+  },
+  "source": "42871ef415767ee7ad86715850572d4e77cc84bd727ff2f313b155c5b3b7aa23",
+  "identity": {
+    "package-lock.json": {
+      "sha256": "9d96668e2740bec08e7cd7edac1f0a94035681b070d900199f48a6760b2a68d1",
+      "bytes": 163756
+    },
+    "package.json": {
+      "sha256": "fa866f78cd23d285886ed810fb6509118a9b0eb9dacd25624f4fefb0e6f417a1",
+      "bytes": 12098
+    },
+    "src/core/ranking/bm25.ts": {
+      "sha256": "3794987a08ee6949f752fe8251f2ef2973071be571289adcbce559667d85d44a",
+      "bytes": 3398
+    },
+    "src/core/limits/limits.ts": {
+      "sha256": "41c5a3ecf85128ffdfcaa6e140eea0463daafb34d7488853bda588df8d0fdf58",
+      "bytes": 3324
+    },
+    "src/core/limits/work.ts": {
+      "sha256": "7681a435b9f8298bbe89bfd0a2b70b4b5044b8d5402f25e7bf7ae85c3db61316",
+      "bytes": 1069
+    },
+    "src/core/execution/host.ts": {
+      "sha256": "d787db43ad885e3aaccbac4a4deb6c439c56b301b91a57706ebcb57cde891fe6",
+      "bytes": 1076
+    },
+    "docs/evidence/RX-4001-costs.json": {
+      "sha256": "bb4ed1165e3191107487c0ce3c9ed3e65f1b5764709f9ed954647528fac47c11",
+      "bytes": 1264575
+    },
+    "docs/evidence/RX-3002-costs.json": {
+      "sha256": "13ef44ec14f470bc1016bf10a7c8a6b46eb17acda312fd04e0cf0248842a42f8",
+      "bytes": 65184
+    }
+  },
+  "models": {
+    "ranking": "raveldex-bm25-v1",
+    "k1": 1.2,
+    "b": 0.75,
+    "analyzer": "basic-v1 (optional analyzers selected explicitly by tests)",
+    "work": "work-v1"
+  },
+  "knownLimitations": {
+    "historicalCostSource": "docs/evidence/RX-4001-costs.json (historical, not measured anew)",
+    "sourceRestore": "Historical 10,000-record source rebuild work-limit/deadline refusals remain; RX-8007 owns diagnosis, RX-8008 bounded atomic recovery",
+    "memory": "No new retained/peak memory measurement",
+    "timing": "Command elapsed durations are verification timings, not search latency or benchmark samples"
+  },
+  "hardware": {
+    "cpuModels": [
+      "Apple M5 Pro"
+    ],
+    "logicalCPUs": 18,
+    "systemMemoryBytes": 25769803776
+  }
+}

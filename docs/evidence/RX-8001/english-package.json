@@ -1,0 +1,265 @@
+{
+  "kind": "raveldex-english-standalone-package-v1",
+  "status": "Pass",
+  "startedAt": "2026-11-03T19:18:27.537Z",
+  "completedAt": "2026-11-03T19:18:27.707Z",
+  "package": {
+    "name": "@vmitsaras/raveldex-english",
+    "version": "0.1.0-rc.0",
+    "private": true,
+    "tarball": "/private/tmp/raveldex-rx8001-20261103/english/vmitsaras-raveldex-english-0.1.0-rc.0.tgz",
+    "sha256": "ec81da5e1a1ae8d1356a2eef533e2c656382558ffdd685225fcd04ede5daf6e4",
+    "integrity": "sha512-hH5qO0TYf+P42EQEVOJqp4fAwPqAsW5VfgtcrNKWKJvyGbS+nMlCOSTBFsssBtagJ42dEm+WY8uGK09B9JiGzA==",
+    "tarballBytes": 5089,
+    "unpackedBytes": 10949,
+    "peerDependencies": {
+      "@vmitsaras/raveldex": "0.1.0-rc.0"
+    },
+    "runtimeDependencies": [],
+    "files": [
+      {
+        "path": "LICENSE",
+        "bytes": 1075,
+        "sha256": "725220e34f62b1a21a6455157b433e466e3255141eea6157040779ddc2e384ee"
+      },
+      {
+        "path": "README.md",
+        "bytes": 3298,
+        "sha256": "e88bd0a032189bac35dec381bf41550bff0ec7a8ac335dec7008b5468f5aea85"
+      },
+      {
+        "path": "dist/index.d.ts",
+        "bytes": 425,
+        "sha256": "1a3cbfb30337f11abaf053a949ddda98794c33306150809ad1a4e5640b2f8c95"
+      },
+      {
+        "path": "dist/index.js",
+        "bytes": 5577,
+        "sha256": "ae02ab69c99f8e502f8a4851c349680a647adf4fc76fdec7bc792f4962e57f5f"
+      },
+      {
+        "path": "package.json",
+        "bytes": 574,
+        "sha256": "0e7d5998181d60449ca7b0927798a6490b3941724ff9dcba73abfe480e73b002"
+      }
+    ]
+  },
+  "source": {
+    "entry": "dist/integrations/languages/english/index.js",
+    "sha256": "01b3fc85f6f1018cc23c578e9690a10fdfc8aac7da2610d74a76d21e1f8a3494"
+  },
+  "declarations": {
+    "source": "dist/integrations/languages/english/index.d.ts",
+    "sourceSha256": "ef48077d057a97ffa9208664a1357bdbe1e1fa6eaff816042692b85f2824543f",
+    "outputSha256": "1a3cbfb30337f11abaf053a949ddda98794c33306150809ad1a4e5640b2f8c95",
+    "rewrittenImports": [
+      {
+        "from": "../../../core/capabilities/types.js",
+        "to": "@vmitsaras/raveldex",
+        "count": 1
+      }
+    ],
+    "method": "Compiler-emitted declaration with its one private type-only registration import rewritten to the exact public core peer; no handwritten declaration."
+  },
+  "graph": {
+    "esbuild": "0.28.2",
+    "settings": {
+      "bundle": true,
+      "platform": "browser",
+      "format": "esm",
+      "target": "es2022",
+      "minify": true,
+      "treeShaking": true,
+      "legalComments": "none",
+      "charset": "ascii",
+      "sourcemap": false,
+      "metafile": true,
+      "write": false
+    },
+    "minifiedBytes": 5577,
+    "gzipBytes": 2470,
+    "sha256": "ae02ab69c99f8e502f8a4851c349680a647adf4fc76fdec7bc792f4962e57f5f",
+    "gzipSha256": "02dbac1eda6a189d59ec84933260c4865ab641465794b45b116f5a62380875da",
+    "gzip": {
+      "level": 9,
+      "windowBits": 15,
+      "memLevel": 8,
+      "strategy": 0,
+      "mtime": 0
+    },
+    "inputs": [
+      {
+        "path": "dist/core/capabilities/worker-identity.js",
+        "bytes": 604,
+        "imports": []
+      },
+      {
+        "path": "dist/core/errors/error.js",
+        "bytes": 1300,
+        "imports": []
+      },
+      {
+        "path": "dist/core/contracts/data.js",
+        "bytes": 3247,
+        "imports": [
+          {
+            "path": "dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "dist/core/limits/limits.js",
+        "bytes": 3039,
+        "imports": [
+          {
+            "path": "dist/core/contracts/data.js",
+            "kind": "import-statement",
+            "original": "../contracts/data.js"
+          },
+          {
+            "path": "dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "dist/integrations/languages/english/stem.js",
+        "bytes": 5367,
+        "imports": [
+          {
+            "path": "dist/core/errors/error.js",
+            "kind": "import-statement",
+            "original": "../../../core/errors/error.js"
+          }
+        ]
+      },
+      {
+        "path": "dist/integrations/languages/english/index.js",
+        "bytes": 2087,
+        "imports": [
+          {
+            "path": "dist/core/capabilities/worker-identity.js",
+            "kind": "import-statement",
+            "original": "../../../core/capabilities/worker-identity.js"
+          },
+          {
+            "path": "dist/core/limits/limits.js",
+            "kind": "import-statement",
+            "original": "../../../core/limits/limits.js"
+          },
+          {
+            "path": "dist/integrations/languages/english/stem.js",
+            "kind": "import-statement",
+            "original": "./stem.js"
+          }
+        ]
+      }
+    ],
+    "runtimeImports": [],
+    "metafile": {
+      "inputs": {
+        "dist/core/capabilities/worker-identity.js": {
+          "bytes": 604,
+          "imports": [],
+          "format": "esm"
+        },
+        "dist/core/errors/error.js": {
+          "bytes": 1300,
+          "imports": [],
+          "format": "esm"
+        },
+        "dist/core/contracts/data.js": {
+          "bytes": 3247,
+          "imports": [
+            {
+              "path": "dist/core/errors/error.js",
+              "kind": "import-statement",
+              "original": "../errors/error.js"
+            }
+          ],
+          "format": "esm"
+        },
+        "dist/core/limits/limits.js": {
+          "bytes": 3039,
+          "imports": [
+            {
+              "path": "dist/core/contracts/data.js",
+              "kind": "import-statement",
+              "original": "../contracts/data.js"
+            },
+            {
+              "path": "dist/core/errors/error.js",
+              "kind": "import-statement",
+              "original": "../errors/error.js"
+            }
+          ],
+          "format": "esm"
+        },
+        "dist/integrations/languages/english/stem.js": {
+          "bytes": 5367,
+          "imports": [
+            {
+              "path": "dist/core/errors/error.js",
+              "kind": "import-statement",
+              "original": "../../../core/errors/error.js"
+            }
+          ],
+          "format": "esm"
+        },
+        "dist/integrations/languages/english/index.js": {
+          "bytes": 2087,
+          "imports": [
+            {
+              "path": "dist/core/capabilities/worker-identity.js",
+              "kind": "import-statement",
+              "original": "../../../core/capabilities/worker-identity.js"
+            },
+            {
+              "path": "dist/core/limits/limits.js",
+              "kind": "import-statement",
+              "original": "../../../core/limits/limits.js"
+            },
+            {
+              "path": "dist/integrations/languages/english/stem.js",
+              "kind": "import-statement",
+              "original": "./stem.js"
+            }
+          ],
+          "format": "esm"
+        }
+      },
+      "outputs": {
+        "../english/package/dist/index.js": {
+          "imports": [],
+          "exports": [
+            "ENGLISH_ANALYZER",
+            "createEnglishAnalyzer"
+          ],
+          "entryPoint": "dist/integrations/languages/english/index.js",
+          "inputs": {
+            "dist/core/capabilities/worker-identity.js": {
+              "bytesInOutput": 240
+            },
+            "dist/core/errors/error.js": {
+              "bytesInOutput": 751
+            },
+            "dist/core/limits/limits.js": {
+              "bytesInOutput": 873
+            },
+            "dist/integrations/languages/english/stem.js": {
+              "bytesInOutput": 2311
+            },
+            "dist/integrations/languages/english/index.js": {
+              "bytesInOutput": 1344
+            }
+          },
+          "bytes": 5577
+        }
+      }
+    }
+  },
+  "publication": "Not performed. Private local pack only; no publish, registry lookup, release credentials, tag or remote write."
+}

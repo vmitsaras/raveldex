@@ -1267,11 +1267,10 @@ Verify the implemented design, record actual evidence and synchronize project gu
 **Recorded evidence**
 
 - [docs/evidence/RX-5004.md](docs/evidence/RX-5004.md)
-- [docs/evidence/RX-5004-check.log](docs/evidence/RX-5004-check.log)
-- [docs/evidence/RX-5004-workbench-browser.log](docs/evidence/RX-5004-workbench-browser.log)
 - [docs/evidence/RX-5004-pages-browser.json](docs/evidence/RX-5004-pages-browser.json)
 - [docs/evidence/RX-5004-images/home-desktop.png](docs/evidence/RX-5004-images/home-desktop.png)
 - [docs/evidence/RX-5004-images/home-mobile.png](docs/evidence/RX-5004-images/home-mobile.png)
+- [docs/evidence/RX-5004-AVAILABILITY-20261103.md](docs/evidence/RX-5004-AVAILABILITY-20261103.md)
 
 
 ## RX-5005
@@ -1987,11 +1986,9 @@ Finish the complete adoption path and verify shared correctness, interaction, op
 
 **Reconcile missing historical evidence and establish a green exact-head baseline**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22)
+**Milestone:** N9 · **Status:** `in_progress` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22)
 
-**Dependencies**
-
-[RX-7006](IMPLEMENTATION_TASKS.md#rx-7006)
+**Dependencies:** [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006)
 
 Document untracked RX-5004 log references without inventing historical test results; verify a clean pinned current-head candidate before optimization.
 
@@ -2018,7 +2015,9 @@ Document untracked RX-5004 log references without inventing historical test resu
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8001.md](docs/evidence/RX-8001.md)
+- [docs/evidence/RX-8001/verified-source-freeze.json](docs/evidence/RX-8001/verified-source-freeze.json)
+- [docs/evidence/RX-8001/environment.json](docs/evidence/RX-8001/environment.json)
 
 
 ## RX-8002
@@ -2027,9 +2026,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8002%22)
 
-**Dependencies**
-
-[RX-8001](IMPLEMENTATION_TASKS.md#rx-8001)
+**Dependencies:** [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001)
 
 Build reproducible real-doc, realistic high-cardinality and adversarial 100/1,000/10,000-record workloads with diagnostic execution accounting.
 
@@ -2064,9 +2061,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8003%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Use complete posting-derived candidate sets for positive Boolean queries while falling back to the universe where NOT, opaque predicates or browse require it.
 
@@ -2101,9 +2096,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8004%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Profile and separate execution continuation from deadline timers using host-appropriate genuinely yielding scheduling, retaining stop and commit precedence.
 
@@ -2138,9 +2131,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8005%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Evaluate sorted-range seeking or another compact prefix lookup against existing full-dictionary iteration on high-cardinality vocabularies.
 
@@ -2175,9 +2166,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8006%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Cache per-query/per-field length averages and IDF inputs where applicable without modifying the native scoring model or public trace meaning.
 
@@ -2212,9 +2201,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8007%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Reproduce and isolate source codec, validation, token and staging costs before proposing bounded bulk reconstruction.
 
@@ -2249,9 +2236,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22)
 
-**Dependencies**
-
-[RX-8007](IMPLEMENTATION_TASKS.md#rx-8007)
+**Dependencies:** [RX-8007](IMPLEMENTATION_TASKS.md#rx-8007)
 
 Reduce redundant restore preparation while preserving source/position/native-state participants, revision and single-publication semantics.
 
@@ -2286,9 +2271,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22)
 
-**Dependencies**
-
-[RX-8003](IMPLEMENTATION_TASKS.md#rx-8003), [RX-8004](IMPLEMENTATION_TASKS.md#rx-8004), [RX-8005](IMPLEMENTATION_TASKS.md#rx-8005), [RX-8006](IMPLEMENTATION_TASKS.md#rx-8006), [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008)
+**Dependencies:** [RX-8003](IMPLEMENTATION_TASKS.md#rx-8003), [RX-8004](IMPLEMENTATION_TASKS.md#rx-8004), [RX-8005](IMPLEMENTATION_TASKS.md#rx-8005), [RX-8006](IMPLEMENTATION_TASKS.md#rx-8006), [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008)
 
 Repeat frozen matched workloads against separate installed baseline and candidate artifacts, reporting independent and combined improvements and regressions.
 
@@ -2323,9 +2306,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8010%22)
 
-**Dependencies**
-
-[RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
+**Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
 Build pinned isolated comparisons for MiniSearch, FlexSearch, Orama and Lunr where query semantics align; keep Fuse fuzzy and Pagefind static-site cases separate.
 
@@ -2360,9 +2341,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8011%22)
 
-**Dependencies**
-
-[RX-8009](IMPLEMENTATION_TASKS.md#rx-8009), [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010)
+**Dependencies:** [RX-8009](IMPLEMENTATION_TASKS.md#rx-8009), [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010)
 
 Consolidate measured differences, reproducibility, safe capacity/latency guidance and remaining browser/AT/physical limitations without authorizing publication.
 

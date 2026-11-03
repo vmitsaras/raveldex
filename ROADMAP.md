@@ -8,9 +8,9 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 40/51 done · 0 in progress · 1 dependency-ready.
+**Release progress:** 40/51 done · 1 in progress · 0 dependency-ready.
 
-**Planner state:** `ready`.
+**Planner state:** `in_progress`.
 
 **Next or resumable release task:** [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001) — Reconcile missing historical evidence and establish a green exact-head baseline.
 
@@ -95,7 +95,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004) — Faceted directory controls and installed starter | `done` | `RX-7003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22) |
 | [RX-7005](IMPLEMENTATION_TASKS.md#rx-7005) — Rich directory result cards and grid presentation | `done` | `RX-7004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22) |
 | [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006) — Complete solution gallery and family qualification | `done` | `RX-7002`, `RX-7004`, `RX-7005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22) |
-| [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001) — Reconcile missing historical evidence and establish a green exact-head baseline | `planned` | `RX-7006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22) |
+| [RX-8001](IMPLEMENTATION_TASKS.md#rx-8001) — Reconcile missing historical evidence and establish a green exact-head baseline | `in_progress` | `RX-7006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8001%22) |
 | [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002) — Freeze matched corpora and instrument query/recovery costs | `planned` | `RX-8001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8002%22) |
 | [RX-8003](IMPLEMENTATION_TASKS.md#rx-8003) — Introduce conservative postings-based query candidate bounds | `planned` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8003%22) |
 | [RX-8004](IMPLEMENTATION_TASKS.md#rx-8004) — Optimize resumable continuation scheduling without starving hosts | `planned` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8004%22) |

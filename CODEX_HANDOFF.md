@@ -2,7 +2,9 @@
 
 ## New tracked N9 scope — 2026-11-03
 
-The N0–N8 backlog is complete; the owner has added **N9 with 11 planned tasks**, starting at **RX-8001**. Read [the N9 contract](docs/specs/N9_PERFORMANCE_RECOVERY.md) and run `npm run handoff:next` on the actual checkout. Old “zero planned” text below is historical. This is tracking registration, not authorization to publish or pretend benchmark improvements.
+The N0–N8 backlog is complete; the owner has added **N9 with RX-8001 in progress and ten planned tasks**. Read [the N9 contract](docs/specs/N9_PERFORMANCE_RECOVERY.md) and run `npm run handoff:next` on the actual checkout. Old “zero planned” text below is historical. RX-8001 establishes a new verified baseline before optimization; publication and new performance claims remain separate.
+
+RX-8001 has reproduced a stale generated task document on `6b6f131`, then a clean-install Astro type-resolution failure for the sections addon. Both are repaired locally. Frozen corrected-source and final-worktree candidate checks each pass all 1,147 tests; all 14 site cases and focused installed-oracle/lifecycle checks pass. Source/package identities and actual failed attempts are preserved. RX-8001 stays in progress pending a committed source checkpoint and exact-head verification; fresh remote Node 22/24 CI is unrun. Follow the [RX-8001 record](docs/evidence/RX-8001.md). Preserve its base commit, patch, full file hashes and actual failed attempts; do not call a passing snapshot a passing committed HEAD.
 
 The initial reviewed head's two missing RX-5004 logs are transparently recorded in [evidence availability](docs/evidence/RX-5004-AVAILABILITY-20261103.md); obtain fresh exact-head CI evidence in RX-8001.
 

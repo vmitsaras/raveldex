@@ -8,6 +8,10 @@ Reviewed source: main `f523d9dafeed842de6a423c1a85eac60a9daf9ed`. Existing histo
 
 Current exact-head CI stopped before tests because two historical RX-5004 log paths were absent. The correction note `docs/evidence/RX-5004-AVAILABILITY-20261103.md` discloses their nonavailability. RX-8001 must independently pass exact-head full verification before optimizations are compared.
 
+## RX-8001 execution checkpoint — 3 November 2026
+
+[Fresh baseline evidence](../evidence/RX-8001.md) records a reproduced stale generated-plan failure on `6b6f131`, then a clean-install Astro sections-type resolution failure. Both are repaired locally. An immutable base-plus-patch snapshot and the final worktree each pass all 1,147 repository tests and installed candidate checks; the frozen site passes all 14 browser cases, with separate independent oracle/lifecycle checks and artifact review. This freezes source/package/model/limit identities without changing native runtime or claiming faster queries. The original committed head remains a failure, and RX-8001 stays in progress until committed-head verification is established. Fresh remote Node 22/24 CI remains unrun.
+
 ## Priorities and prerequisites
 
 - **RX-8001** — genuine current-head baseline and truthful evidence availability; preserve previous accepted work.
