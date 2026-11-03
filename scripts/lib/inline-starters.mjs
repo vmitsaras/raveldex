@@ -28,7 +28,7 @@ export async function prepareInlineStarters(output, work) {
         // A static escaped view preserves the source text; the archive retains
         // the exact original file and path for copying into an application.
         const family = starter.family;
-        const label = { modal: 'Documentation modal starters', inline: 'Inline search starters', dropdown: 'Compact header search starter' }[family];
+        const label = { modal: 'Documentation modal starters', inline: 'Inline search starters', dropdown: 'Compact header search starter', directory: 'Resource directory starters', cards: 'Rich resource result cards' }[family];
         await writeFile(publicSource, `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(starter.id + '/' + path)}</title></head><body><main><h1>${escape(starter.id + '/' + path)}</h1><p><a href="${BASE}examples/${family}/">${label}</a> · <a href="${BASE + starterArchive(starter.id)}">Download complete original source</a></p><pre tabindex="0" style="overflow:auto"><code>${escape(bytes.toString('utf8'))}</code></pre></main></body></html>`);
       } else {
         assert.ok(!/^---\r?\n/.test(bytes.toString('utf8')), 'raw public source must not become Jekyll frontmatter');
@@ -43,7 +43,7 @@ export async function prepareInlineStarters(output, work) {
   }
 
   const packages = [];
-  for (const family of ['inline', 'modal', 'dropdown']) {
+  for (const family of ['inline', 'modal', 'dropdown', 'directory', 'cards']) {
     const consumer = await prepareConsumer({ records: [], schema: { text: { body: {} } } }, []);
     const browser = STARTERS.find(item => item.id === `${family}-browser`);
     for (const path of browser.files) {

@@ -17,7 +17,7 @@ const output = join(work, 'output');
 await rm(work, { recursive: true, force: true }); // Only this script's scratch tree.
 await mkdir(join(source, 'src/pages'), { recursive: true });
 await copyFile(join(root, 'site/Layout.astro'), join(source, 'src/Layout.astro'));
-for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'starters.mjs']) {
+for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs']) {
   await copyFile(join(root, 'site', name), join(source, 'src', name));
 }
 await writeFile(join(source, 'package.json'), '{"private":true,"type":"module"}\n');
@@ -36,7 +36,7 @@ routes.set('examples/docs-search/index.html', BASE + 'demo/');
 routes.set('README.md', href('guide/overview'));
 routes.set('site/index.md', href(''));
 for (const [path, route, title] of PAGES) {
-  if (['site/Inline.astro', 'site/Modal.astro', 'site/Dropdown.astro'].includes(path)) {
+  if (['site/Inline.astro', 'site/Modal.astro', 'site/Dropdown.astro', 'site/Directory.astro', 'site/Cards.astro'].includes(path)) {
     const component = path.slice('site/'.length, -'.astro'.length);
     const route = component.toLowerCase();
     await mkdir(join(source, 'src/pages/examples', route), { recursive: true });
@@ -54,6 +54,7 @@ for (const [path, route, title] of PAGES) {
     await writeFile(join(source, 'src/pages/index.astro'), `---\nimport Home from '../Home.astro';\n---\n<Home example={${JSON.stringify(example[1])}} />\n`);
     continue;
   }
+  assert.ok(!path.endsWith('.astro'), 'Astro pages require explicit compiled component handling');
   const destination = join(source, 'src/pages', route ? route + '.md' : 'index.md');
   await mkdir(dirname(destination), { recursive: true });
   const layout = relative(dirname(destination), join(source, 'src/Layout.astro')).replaceAll('\\', '/');
@@ -97,7 +98,7 @@ const { walk } = await import('./lib/pages.mjs');
 const staged = { files: (await walk(output)).map(path => ({ path })) };
 const links = await auditLinks(output, staged);
 const inputPaths = new Set([...PAGES.map(x => x[0]), ...RECIPES.map(name => `docs/api/examples/${name}.mjs`),
-  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
+  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
   'scripts/lib/ui-consumer.mjs', 'scripts/lib/packed-consumer.mjs', 'examples/core-docs/corpus.mjs',
   'scripts/lib/inline-starters.mjs', 'site/starters.mjs', ...starters.sourceInputs,
   'README.md', 'package.json', 'package-lock.json', 'LICENSE',

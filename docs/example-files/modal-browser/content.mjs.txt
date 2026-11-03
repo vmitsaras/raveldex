@@ -4,6 +4,7 @@ export function preparePages(entries) {
   const ids = new Set(), paths = new Set();
   return entries.map(entry => {
     if (!entry || !['id', 'title', 'category', 'path'].every(key => typeof entry[key] === 'string' && entry[key])
+      || !entry.title.trim() || entry.title.length > 1024 || !entry.title.isWellFormed()
       || entry.id.length > 256 || ids.has(entry.id) || paths.has(entry.path)
       || !/^\/guide\/[a-z0-9-]+\/$/.test(entry.path) || !Array.isArray(entry.sections)
       || !entry.sections.length || entry.sections.length > 64) throw new Error('Invalid or duplicate page');
@@ -11,7 +12,7 @@ export function preparePages(entries) {
     let body = ''; const anchors = new Set(), sections = [];
     for (const section of entry.sections) {
       if (!section || !['anchor', 'heading', 'body'].every(key => typeof section[key] === 'string' && section[key])
-        || !section.anchor.isWellFormed() || !section.heading.isWellFormed() || !section.body.isWellFormed()
+        || !section.heading.trim() || !section.anchor.isWellFormed() || !section.heading.isWellFormed() || !section.body.isWellFormed()
         || section.anchor.length > 256 || section.heading.length > 512 || /[\p{Cc}\s]/u.test(section.anchor)
         || section.anchor.includes(':~:') || anchors.has(section.anchor)) throw new Error('Invalid or duplicate section');
       anchors.add(section.anchor);

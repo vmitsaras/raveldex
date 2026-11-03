@@ -1,0 +1,20 @@
+---
+const { current } = Astro.props;
+const base = '/raveldex/';
+const solutions = [
+  ['inline', 'Inline'],
+  ['modal', 'Documentation modal'],
+  ['dropdown', 'Compact dropdown'],
+  ['directory', 'Directory'],
+  ['cards', 'Rich results'],
+];
+---
+<nav class="solution-chooser" aria-label="Search solutions">
+  <ul>{solutions.map(([id, label]) => <li><a href={base + `examples/${id}/`} aria-current={current === id ? 'page' : undefined}>{label}</a></li>)}</ul>
+</nav>
+<p><a href={base + 'examples/#choose-a-search-solution'}>Compare solutions and requirements</a></p>
+<style>
+  .solution-chooser ul { display: flex; flex-wrap: wrap; gap: .5rem 1rem; list-style: none; padding: 0; }
+  .solution-chooser a[aria-current="page"] { font-weight: 700; text-decoration-thickness: .15em; }
+  .solution-chooser a:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+</style>

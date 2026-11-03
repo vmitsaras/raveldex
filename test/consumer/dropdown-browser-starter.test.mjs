@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { before, after, test } from 'node:test';
 import { cp, readFile, writeFile, realpath, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
 import { once } from 'node:events';
@@ -474,6 +475,7 @@ test('loading/failure status reentry and shared header/full/modal ownership rema
 });
 
 test('changed CSS, long RTL labels and dark/forced-colors narrow layouts keep actual full-results recovery usable', async () => {
+  await verifyNarrowSkipLink();
   const site = sites[0], observations = [];
   for (const forcedColors of ['none', 'active']) {
     const context = await browser.newContext({ viewport: { width: 320, height: 568 }, colorScheme: 'dark', forcedColors, reducedMotion: 'reduce' });
@@ -500,4 +502,72 @@ test('changed CSS, long RTL labels and dark/forced-colors narrow layouts keep ac
     await context.close();
   }
   record('emulated narrow theme recovery', { observations, physicalZoomTouchKeyboard: 'Not run' });
+});
+
+
+async function verifyNarrowSkipLink() {
+  const observations = [];
+  for (const site of sites) for (const media of [{ colorScheme: 'light', forcedColors: 'none' }, { colorScheme: 'dark', forcedColors: 'none' }, { colorScheme: 'dark', forcedColors: 'active' }]) {
+    const context = await browser.newContext({ viewport: { width: 320, height: 568 }, ...media, reducedMotion: 'reduce' });
+    const page = await context.newPage(); page.setDefaultTimeout(10_000);
+    try {
+      await page.goto(site.origin + site.base); await ready(page);
+      const skip = page.getByRole('link', { name: 'Skip to content', exact: true });
+      await skip.focus();
+      const state = await skip.evaluate(element => {
+        const style = getComputedStyle(element), rect = element.getBoundingClientRect();
+        const top = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        return { focused: element === document.activeElement, focusVisible: element.matches(':focus-visible'),
+          background: style.backgroundColor, color: style.color, outline: style.outlineStyle, outlineWidth: style.outlineWidth,
+          rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height, right: rect.right, bottom: rect.bottom },
+          ownsHit: top === element || element.contains(top), horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
+          actualMedia: { dark: matchMedia('(prefers-color-scheme: dark)').matches, forcedColors: matchMedia('(forced-colors: active)').matches } };
+      });
+      (report.skipLinkAttempts ??= []).push({ base: site.base, media, ...state });
+      if (process.env.RAVELDEX_DROPDOWN_BROWSER_STARTER_SCREENSHOTS) {
+        await mkdir(process.env.RAVELDEX_DROPDOWN_BROWSER_STARTER_SCREENSHOTS, { recursive: true });
+        await page.screenshot({ path: join(process.env.RAVELDEX_DROPDOWN_BROWSER_STARTER_SCREENSHOTS, `skip-${site.base === '/' ? 'root' : 'help'}-${media.colorScheme}-${media.forcedColors}.png`) });
+      }
+      assert.equal(state.focused, true); assert.equal(state.focusVisible, true);
+      assert.notEqual(state.background, 'rgba(0, 0, 0, 0)', 'A focused skip link needs its own opaque surface over the mobile header.');
+      assert.notEqual(state.background, 'transparent'); assert.notEqual(state.outline, 'none'); assert.notEqual(state.outlineWidth, '0px');
+      assert.ok(state.rect.width >= 24 && state.rect.height >= 24, 'The focused target must meet the minimum target dimensions.');
+      assert.ok(state.rect.x >= 0 && state.rect.y >= 0 && state.rect.right <= 320 && state.rect.bottom <= 568);
+      assert.equal(state.ownsHit, true); assert.equal(state.horizontalOverflow, false);
+      assert.deepEqual(state.actualMedia, { dark: media.colorScheme === 'dark', forcedColors: media.forcedColors === 'active' });
+      await page.addScriptTag({ path: join(REPO_ROOT, 'node_modules/axe-core/axe.min.js') });
+      const violations = await page.evaluate(async () => (await window.axe.run({ runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } })).violations.map(({ id, nodes }) => ({ id, nodes: nodes.map(node => node.target) })));
+      assert.deepEqual(violations, []);
+      await skip.press('Enter');
+      assert.equal(new URL(page.url()).hash, '#main');
+      assert.equal(await page.locator('main#main').evaluate(element => element === document.activeElement), true);
+      observations.push({ base: site.base, media, ...state, axeViolations: violations.length, nativeEnterDestination: '#main' });
+    } finally { await context.close(); }
+  }
+  record('narrow focused skip link', { observations, actualZoomOrAT: 'Not run', focusSetup: 'Native link.focus; genuine keyboard Enter activation.' });
+}
+
+
+test('copied content preparation and build refuse unusable display titles without replacing useful pages', async () => {
+  const site = sites[0], contentPath = join(site.directory, 'content.json');
+  const original = await readFile(contentPath, 'utf8');
+  const output = await readFile(join(site.directory, 'dist/index.html'), 'utf8');
+  const { prepareGuides } = await import(pathToFileURL(join(site.directory, 'content.mjs')).href);
+  const valid = JSON.parse(original); valid[0].title = '  A valid authored title  ';
+  assert.equal(prepareGuides(valid)[0].title, valid[0].title, 'Valid title whitespace is preserved');
+  try {
+    for (const title of ['', ' \t ', 'x'.repeat(1025), '\ud800']) {
+      const content = JSON.parse(original); content[0].title = title;
+      assert.throws(() => prepareGuides(content), /Invalid guide title/);
+      await writeFile(contentPath, JSON.stringify(content));
+      await assert.rejects(command(process.execPath, ['build.mjs'], site.directory), /Invalid guide title/);
+      assert.equal(await readFile(join(site.directory, 'dist/index.html'), 'utf8'), output);
+    }
+  } finally {
+    await writeFile(contentPath, original);
+    await command(process.execPath, ['build.mjs'], site.directory);
+    await build({ absWorkingDir: site.directory, entryPoints: ['lifecycle-entry.mjs'], outfile: 'dist/assets/lifecycle.js',
+      bundle: true, platform: 'browser', format: 'esm', target: 'es2022', logLevel: 'silent' });
+  }
+  record('unusable title content/build refusal', { cases: ['empty', 'whitespace', 'overlong', 'malformed UTF-16'], priorOutputPreserved: true, validWhitespacePreserved: true, sharedBuildAndLoadValidation: true });
 });

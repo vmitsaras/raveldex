@@ -8,6 +8,10 @@ For a complete interface to copy, use the [Astro inline starter](../../examples/
 
 For documentation search opened from a button, use the [Astro modal starter](../../examples/modal-astro/README.md). It renders the same explicit sections it indexes, builds the separate source-only section companion, and loads the matching artifacts on first open. Its wrapper handles loading cancellation, retry and disposal; the [modal solutions page](../../site/Modal.astro) links complete sources and a browser preview.
 
+For a filterable resource library, use the [Astro directory starter](../../examples/directory-astro/README.md). It renders real resource pages, builds matching original title/body source and display artifacts, and waits for **Enable directory** before loading. Native multi-selection filters/facets, exact totals, complete pages and explicit URL replay share one controller; it does not select snippets or sections. The [directory gallery](../../site/Directory.astro) links its exact sources and complete browser preview.
+
+The [solution chooser](../../examples/README.md) compares all five presentations and their required data. Three complete Astro projects are supplied: inline, documentation modal and directory. The header and rich-results projects are plain-browser examples; no separate Astro starter or rich display artifact format is supplied for them. Keep each Astro source/display/optional-section generation, configuration and deployment base together. A source loader reconstructs every declared text field, so retain the original values for all of them.
+
 ## Install matching packages
 
 In an ESM application with Node `>=22.12.0`, install matching local tarballs; core and integration must both be version `0.1.0-rc.0`:

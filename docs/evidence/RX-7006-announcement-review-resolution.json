@@ -1,0 +1,98 @@
+{
+  "kind": "raveldex-rx7006-independent-announcement-test-resolution-v1",
+  "recordedAt": "2026-11-02T21:52:34.982189+00:00",
+  "classification": "Resolved test/evaluation timing defect; no production defect found",
+  "originalDiagnosis": "announcement-review-diagnosis.json",
+  "repoEditedByReviewer": false,
+  "reviewedRepair": {
+    "path": "test/ui/announcements-browser.test.mjs",
+    "sourceSHA256": "6bda94ba82f60df914af87103b9abfae47b6e2f35b19b1bb7da6c455b9c133dc",
+    "preservedOriginalSHA256": "cc3d9856adc4165e5ae43db7216558f4d6fcd05e6fde6c8a9e055846513f1f21",
+    "changes": [
+      "Helper fill+Enter becomes one real Playwright fill command, following the UI documented debounce.",
+      "Helper accepts only a newer expected publication with requestedBusy=false and publication generation equal to current main generation.",
+      "Four other one-operation fill+Enter pairs around held work or a one-shot error choose fill only.",
+      "Intentional standalone Enter that checks repeated submissions remains byte-for-byte present."
+    ],
+    "intentionalRepeatedEnterPreserved": true,
+    "assertionsPreserved": [
+      "Visible injected error, error publication kind and input focus",
+      "Real enabled Retry click and successful result publication",
+      "Held reply suppression, destroy/remount, external Node identity and assertive semantics",
+      "No timeout increase, sleeps, forced clicks, fixture policy or production bypass introduced"
+    ],
+    "unchangedRelatedSourcesCompared": 6,
+    "relatedSourceChanges": []
+  },
+  "verification": {
+    "reviewer": [
+      {
+        "command": "node --check test/ui/announcements-browser.test.mjs",
+        "status": "Pass"
+      },
+      {
+        "command": "git diff --check -- test/ui/announcements-browser.test.mjs",
+        "status": "Pass"
+      }
+    ],
+    "independentControlledProbes": {
+      "announcement-race-probe.json": {
+        "status": "Pass",
+        "sha256": "a944d0ff31efe466baa4a12c1fa8cf019e31989ec564225fab3061f00a410e58",
+        "meaning": "Exact old synchronized installed bundle demonstrates historical error publication can overlap a second actual Enter query and disabled Retry."
+      },
+      "announcement-fill-only-probe.json": {
+        "status": "Pass",
+        "sha256": "4104dd1e714a8c762c5a7cd729fd68b25de923256a9203e597ba4ae91a341291",
+        "repetitions": 8,
+        "meaning": "Single real fill yields exactly one failed main, enabled Retry and actual Retry click yielding native main/snippet totals1/1 and a newer settled publication."
+      }
+    },
+    "parentFocusedLogs": {
+      "announcements-repaired-chrome.log": {
+        "sha256": "2af5d628ca362761db28025b7057992db053bf0c1540a6c7c0b0606570b65ce0",
+        "counts": {
+          "tests": 7,
+          "pass": 7,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "status": "Pass",
+        "identities": [
+          {
+            "qualification": "Announcement policy DOM regression; no speech/AT observation.",
+            "installedDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-8xhj7F",
+            "browser": "156.0.8078.74",
+            "headless": true,
+            "bundleSha256": "b868c762922dc2996389d0c854e1d9a5db19193d20e6b5364aa420c304049e39"
+          }
+        ]
+      },
+      "announcements-repaired-chromium.log": {
+        "sha256": "08a95453512b0852a08c5bd82c9e022369343155b9ecaf0e92969df3eaa15650",
+        "counts": {
+          "tests": 7,
+          "pass": 7,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "status": "Pass",
+        "identities": [
+          {
+            "qualification": "Announcement policy DOM regression; no speech/AT observation.",
+            "installedDirectory": "/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-ctgiSD",
+            "browser": "149.0.7827.55",
+            "headless": true,
+            "bundleSha256": "b868c762922dc2996389d0c854e1d9a5db19193d20e6b5364aa420c304049e39"
+          }
+        ]
+      }
+    }
+  },
+  "remaining": "Parent must rerun the required complete check on the final repository state. Initial synchronized failure remains retained; this resolution is focused evidence and does not substitute for that run.",
+  "limitations": "DOM/native-call and synthetic automated input evidence only. No human speech/AT, physical IME, actual zoom/device, publication or deployment claim."
+}

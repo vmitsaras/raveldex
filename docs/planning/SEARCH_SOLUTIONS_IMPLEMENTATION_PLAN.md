@@ -1,12 +1,12 @@
 # Search solutions implementation plan
 
-Prepared: 2026-10-30; updated 2026-11-02. RX-6001–RX-6008 and RX-7001/RX-7002 are implemented. The [frozen page/section contract](../specs/PAGE_SECTIONS.md) retains its optional evidence projection, inline mode and separate source-only Astro companion. [First-wave evidence](../evidence/RX-6008.md) records complete inline/modal adoption and scoped qualification. [RX-7001](../evidence/RX-7001.md) implements the compact dropdown under its [concrete contract](../specs/DROPDOWN.md), with scoped installed/browser review evidence. [RX-7002](../evidence/RX-7002.md) delivers the complete installed browser header/full-results project and gallery. Four N8 tasks remain planned; RX-7003 directory queries/URL state is recommended next. The canonical manifest owns completion/dependency state; each task retains its own verification evidence.
+Prepared: 2026-10-30; updated 2026-11-02. RX-6001–RX-6008 and RX-7001–RX-7006 are implemented. The [frozen page/section contract](../specs/PAGE_SECTIONS.md) retains its optional evidence projection, inline mode and separate source-only Astro companion. [First-wave evidence](../evidence/RX-6008.md) records complete inline/modal adoption and scoped qualification. [RX-7001](../evidence/RX-7001.md) implements the compact dropdown under its [concrete contract](../specs/DROPDOWN.md), with scoped installed/browser review evidence. [RX-7002](../evidence/RX-7002.md) delivers the complete installed browser header/full-results project and gallery. [RX-7003](../evidence/RX-7003.md) delivers the nonvisual query/URL foundation under its [concrete directory contract](../specs/DIRECTORY.md). [RX-7004](../evidence/RX-7004.md) adds the separate directory view/CSS, complete browser/Astro projects and gallery with native control, URL, lifecycle and copied-install evidence. [RX-7005](../evidence/RX-7005.md) delivers optional rich metadata/images, semantic list/card/grid presentation and a complete installed browser project/gallery under its [display contract](../specs/DIRECTORY_CARDS.md). [RX-7006](../evidence/RX-7006.md) completes the chooser, all eight installed adoption paths and scoped local family qualification. No selected N7/N8 implementation task remains; human/device/real-zoom and publication observations retain their separate scope. The canonical manifest owns completion/dependency state; each task retains its own verification evidence.
 
 ## Objective and authority
 
 Deliver complete optional search experiences that a developer can adopt with a working starter, their own explicitly selected content and a few CSS changes. Start with Pagefind-style inline search and the documentation modal, then add dropdown, faceted directory and card/grid presentation.
 
-The original request authorized the plan and local roadmap updates only. Successive owner instructions authorized RX-6001, RX-6002 and RX-6003 implementation, followed by the RX-6004 contract, RX-6005 implementation, RX-6006 modal, RX-6007 installed modal starters, RX-6008 first-wave qualification, RX-7001 compact dropdown and RX-7002 installed header adoption. New tasks began as `planned` with empty evidence; a task is advanced only with its own real acceptance record. A later instruction to implement/continue is sufficient to start the next dependency-ready task; ordinary implementation details do not require another approval gate.
+The original request authorized the plan and local roadmap updates only. Successive owner instructions authorized RX-6001, RX-6002 and RX-6003 implementation, followed by the RX-6004 contract, RX-6005 implementation, RX-6006 modal, RX-6007 installed modal starters, RX-6008 first-wave qualification, RX-7001 compact dropdown, RX-7002 installed header adoption, RX-7003 directory queries/URL state RX-7004 directory controls/adoption RX-7005 rich result presentation and RX-7006 final family qualification. New tasks began as `planned` with empty evidence; a task is advanced only with its own real acceptance record. A later instruction to implement/continue is sufficient to start the next dependency-ready task; ordinary implementation details do not require another approval gate.
 
 The [canonical manifest](roadmap.json) owns task state, dependency order and stable task-specific acceptance criteria. [Generated task cards](../../IMPLEMENTATION_TASKS.md#rx-6001) expand those criteria. The [search-solutions contract](../specs/SEARCH_SOLUTIONS.md) owns required behavior and boundaries. This plan supplies execution details rather than competing task states.
 
@@ -211,6 +211,8 @@ Risk/recovery: header embedding may clip the popup or register competing shortcu
 
 Goal: prove exact multi-selection and navigation state before building the full directory controls.
 
+Implemented; [acceptance evidence](../evidence/RX-7003.md). The separate `/addons/ui/directory` entry supplies a nonvisual borrowed-engine controller and explicit structural-host URL binding. The [owning contract](../specs/DIRECTORY.md) defines captured state/results, native conjunctive counts, bounded page/revision recovery, opt-in name ownership and push/replace semantics. No DOM, CSS, starter or gallery is added here; those remain RX-7004.
+
 Work: compose native text plus OR-within/AND-across string filters, browse-all policy, native conjunctive facet requests and complete paging; add explicit bounded URL encoding/decoding, unrelated parameter/hash preservation, push/replace policy, Back/Forward replay and loop suppression. Preserve selected values outside the projected buckets and explicit ownership across instances.
 
 Likely areas: optional UI/state helpers, filters/facets public boundary, `test/consumer/`, `test/ui/` and contract/API documentation. Do not modify the core scorer or introduce persistence.
@@ -222,6 +224,8 @@ Risk/recovery: own-filter counts can be confused with disjunctive counts, and UR
 ### RX-7004 — Directory controls and starter
 
 Goal: complete a usable filterable resource library around the verified state model.
+
+The [concrete view/adoption contract](../specs/DIRECTORY_VIEW.md) defines the separate DOM entry, explicit CSS, borrowed-controller lifecycle, native disclosure, focus/IME recovery and complete installed browser/Astro projects. The nonvisual RX-7003 entry remains DOM-free. Delivered with scoped [acceptance evidence](../evidence/RX-7004.md), actual browser/source identities and a separately unrun human/device handoff.
 
 Work: native grouped checkboxes, exact counts and selected states, removable chips, clear-all, page navigation, mobile filter disclosure/dialog and sensible empty-query browsing. Supply realistic content, plain browser/Astro integration instructions and a working installed gallery example.
 
@@ -235,6 +239,8 @@ Risk/recovery: rebuilding controls can discard focus or silently remove selected
 
 Goal: support editorial/catalogue result presentation with the same directory state.
 
+The [concrete rich display contract](../specs/DIRECTORY_CARDS.md) and [acceptance evidence](../evidence/RX-7005.md) record the separate optional entry/CSS, finite safe projection, unchanged native state, image opt-in/failure/lifecycle and complete browser project/gallery.
+
 Work: optional declared metadata/image projection, safe URLs and text, appropriate image alternatives/dimensions/error state, semantic list/grid CSS and compact/comfortable theme recipes. Preserve native order and query/filter/page state across view changes. Avoid arbitrary HTML templates, commerce actions and displayed-page sorting.
 
 Likely areas: UI result presentation/styles, display validation, examples/gallery, consumer/browser fixtures and guides. Add a static display extension only if it is required and versioned under the existing compatibility rules.
@@ -246,6 +252,8 @@ Risk/recovery: images/metadata can change layout or introduce unsafe rendering. 
 ### RX-7006 — Full gallery and family qualification
 
 Goal: finish the adoption path and verify shared behavior across all prepared solutions.
+
+Delivered with scoped [family evidence](../evidence/RX-7006.md), a [per-surface/project matrix](../evidence/RX-7006-matrix.md), current source identities and a separately unrun [manual handoff](../evidence/RX-7006-manual.md). The five static gallery links, complete eight-project capability/keyboard guidance, independently expected native results/states, actual copied projects and bounded output/image observations are verified locally; this is not publication or universal browser/AT qualification.
 
 Work: complete the solution chooser, working previews, exact starter/source links, CSS recipes, capability/data matrix and state/keyboard guidance. Run fresh installed examples, family regressions, source/offset/direct/worker matrices where applicable, actual browser checks and measured optional graphs/output costs. Review the resulting boundaries and synchronize planning/context/docs without publication.
 
@@ -307,9 +315,9 @@ Manual checks per new surface include keyboard/focus/modified links, deliberate 
 | Overstated accessibility/resource support | Public claims exceed observations | Per-task command/environment/source evidence; distinguish automated, human, bytes/work and memory/device results |
 | Scope growth | Inline/modal delayed by unrelated features | First-wave gate before dropdown/directory/cards; keep sorting, crawling, arbitrary templates and release outside this plan |
 
-## Remaining specification work
+## Resolved specification inputs
 
-These are explicit task inputs to finalize before the affected implementation, not additional owner-approval gates:
+These task-owned inputs were finalized by their implemented contracts and acceptance records; they are not outstanding owner-approval gates:
 
 | Detail to freeze | Owning task | Constraint already selected |
 | --- | --- | --- |
@@ -320,7 +328,7 @@ These are explicit task inputs to finalize before the affected implementation, n
 | Dropdown narrow-screen layout and optional modal handoff wiring | RX-7001/7002 | Explicit handoff preserves one owner/query; no automatic second engine |
 | URL parameter namespace, encoding, push/replace behavior and replay recovery | RX-7003 | Explicit opt-in, finite input, unrelated state preserved, no history loop |
 
-No currently missing owner input blocks RX-6001. If source inspection shows that a selected behavior requires an incompatible legacy/artifact change, new runtime dependency, different data ownership or engine semantics, record that specific decision before dependent implementation rather than silently expanding the plan.
+All selected implementation tasks are complete; no specification input in this table remains open. If source inspection shows that a selected behavior requires an incompatible legacy/artifact change, new runtime dependency, different data ownership or engine semantics, record that specific decision before dependent implementation rather than silently expanding the plan.
 
 ## Delivery, recovery and completion rules
 
@@ -334,6 +342,6 @@ No currently missing owner input blocks RX-6001. If source inspection shows that
 ## Immediate next actions
 
 1. Read the selected task card, owning behavior contract and current evidence; recheck the worktree and `npm run handoff:next`.
-2. RX-6001–RX-6008 delivered the inline/modal foundation, controls, all four complete installed starters, the frozen page/section contract, optional section presentation and first-wave gallery/qualification. RX-7001 now delivers the compact dropdown runtime. RX-7002 now delivers the complete installed browser header/full-results project and gallery. On a later continuation, RX-7003 is the recommended native directory query/URL-state slice. Do not repeat completed N7 work or change native page semantics.
+2. RX-6001–RX-6008 delivered the inline/modal foundation, controls, all four complete installed starters, the frozen page/section contract, optional section presentation and first-wave gallery/qualification. RX-7001 now delivers the compact dropdown runtime. RX-7002 now delivers the complete installed browser header/full-results project and gallery. RX-7003 delivers native directory query/URL state. RX-7004 adds directory controls, complete browser/Astro projects and gallery. RX-7005 adds rich result projection and a complete browser project/gallery. RX-7006 completes the five-solution chooser and scoped local family qualification. All selected tasks are complete; a later continuation should reconcile remaining manual/platform/release decisions or an explicitly selected optional task rather than repeat completed implementation. Do not repeat completed N7 work or change native page semantics.
 3. When asked to continue, mark the next dependency-ready task in progress and regenerate before implementation. Preserve legacy behavior and do not repeat the completed foundation.
 4. Collect that task's own acceptance evidence, resolve review findings and synchronize docs before marking it done; later tasks and publication are not part of the current slice.

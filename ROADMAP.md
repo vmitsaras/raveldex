@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 36/40 done · 0 in progress · 1 dependency-ready.
+**Release progress:** 40/40 done · 0 in progress · 0 dependency-ready.
 
-**Planner state:** `ready`.
+**Planner state:** `complete`.
 
-**Next or resumable release task:** [RX-7003](IMPLEMENTATION_TASKS.md#rx-7003) — Directory multi-filter queries and explicit URL state.
+**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -38,7 +38,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N5 — Selected optional enhancements** | `RX-A010`–`RX-A100` | 10/10 | Select one evidence-backed add-on at a time after the native candidate; avoid treating the entire idea backlog as release scope. |
 | **N6 — Search Workbench documentation site** | `RX-5001`–`RX-5005` | 5/5 | Implement the owner-selected Search Workbench design in the existing static documentation site, with real packed search and preserved publication boundaries. |
 | **N7 — Inline and documentation search solutions** | `RX-6001`–`RX-6008` | 8/8 | Provide ready-to-use Pagefind-style inline search and a documentation modal with optional native UI, complete installed starters, CSS customization and evidence-backed page/section presentation. |
-| **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 2/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
+| **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 6/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
 
 ## Task index
 
@@ -90,10 +90,10 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-6008](IMPLEMENTATION_TASKS.md#rx-6008) — Inline and modal gallery, qualification and synchronization | `done` | `RX-6003`, `RX-6007` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6008%22) |
 | [RX-7001](IMPLEMENTATION_TASKS.md#rx-7001) — Accessible compact dropdown search | `done` | `RX-6008` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7001%22) |
 | [RX-7002](IMPLEMENTATION_TASKS.md#rx-7002) — Installed dropdown header starter and gallery | `done` | `RX-7001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7002%22) |
-| [RX-7003](IMPLEMENTATION_TASKS.md#rx-7003) — Directory multi-filter queries and explicit URL state | `planned` | `RX-6008`, `RX-2003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7003%22) |
-| [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004) — Faceted directory controls and installed starter | `planned` | `RX-7003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22) |
-| [RX-7005](IMPLEMENTATION_TASKS.md#rx-7005) — Rich directory result cards and grid presentation | `planned` | `RX-7004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22) |
-| [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006) — Complete solution gallery and family qualification | `planned` | `RX-7002`, `RX-7004`, `RX-7005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22) |
+| [RX-7003](IMPLEMENTATION_TASKS.md#rx-7003) — Directory multi-filter queries and explicit URL state | `done` | `RX-6008`, `RX-2003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7003%22) |
+| [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004) — Faceted directory controls and installed starter | `done` | `RX-7003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22) |
+| [RX-7005](IMPLEMENTATION_TASKS.md#rx-7005) — Rich directory result cards and grid presentation | `done` | `RX-7004` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22) |
+| [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006) — Complete solution gallery and family qualification | `done` | `RX-7002`, `RX-7004`, `RX-7005` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22) |
 
 ## Milestone exit conditions
 

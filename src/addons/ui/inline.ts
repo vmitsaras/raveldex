@@ -184,9 +184,12 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
   const announce = (text: string): void => { if (status.textContent !== text) status.textContent = text; };
   const cancelTimer = (): void => { if (timer !== undefined) { win.clearTimeout(timer); timer = undefined; } };
   const disableNavigation = (): void => { for (const button of [loadMore, previous, next]) unavailable(button, true); };
+  // Document focus is retargeted to the host when this surface is in a shadow
+  // tree. Inspect only our own tree, including closed/nested authored roots.
+  const resultFocused = (): boolean => results.contains((results.getRootNode() as Document | ShadowRoot).activeElement);
   const clearPresentation = (): void => {
     snapshot = undefined;
-    if (activePresentation() && results.contains(doc.activeElement)) input.focus();
+    if (activePresentation() && resultFocused()) input.focus();
     results.replaceChildren(); results.hidden = true; heading.hidden = true; pageSummary.textContent = '';
     resetInlineFacets(doc, facets, messages); disableNavigation();
   };
@@ -196,7 +199,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
     if (destroyed || ticket !== sequence) return ticket;
     if (!preserve) {
       // Focus callbacks may synchronously search or destroy. Do not discard newer work.
-      if (activePresentation() && results.contains(doc.activeElement)) input.focus();
+      if (activePresentation() && resultFocused()) input.focus();
       if (destroyed || ticket !== sequence) return ticket;
       clearPresentation();
     }
@@ -297,7 +300,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
       const descriptor = typeof reason === 'object' && reason !== null ? Object.getOwnPropertyDescriptor(reason, 'code') : undefined;
       const code = descriptor && 'value' in descriptor && (ERROR_CODES as readonly unknown[]).includes(descriptor.value) ? String(descriptor.value) : 'INTERNAL_ERROR';
       // Recover before clearing focused result content, then recheck synchronous reentry.
-      if (activePresentation() && results.contains(doc.activeElement)) input.focus();
+      if (activePresentation() && resultFocused()) input.focus();
       if (!current(ticket, active)) return;
       clearPresentation(); shell.dataset.state = 'error';
       announce(code === 'REVISION_MISMATCH' ? messages.revisionChanged : message(messages.error, { code }));

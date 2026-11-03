@@ -1,0 +1,39 @@
+---
+import Layout from './Layout.astro';
+import SolutionChooser from './SolutionChooser.astro';
+import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+const base='/raveldex/';
+---
+<Layout frontmatter={{title:'Faceted resource directory starters'}}>
+  <h1>Faceted resource directory starters</h1>
+  <SolutionChooser current="directory" />
+  <p>Let visitors search a resource library, choose several filters, remove selected choices and reach every matching page. Copy a complete browser or Astro project, replace its explicit public records and adjust a few CSS properties.</p>
+  <p>Use this directory for persistent resource lists. Choose <a href={base+'examples/inline/'}>inline search</a> for simple page results, the <a href={base+'examples/modal/'}>documentation modal</a> for button-opened search or the <a href={base+'examples/dropdown/'}>compact header</a> for a few quick page links.</p>
+  <h2 id="try-directory">Try the installed browser project</h2>
+  <p>Search <code>walking resource</code>: seven pages match, three per page. Open <strong>Filter resources</strong>, choose Guides and Safety, then remove a selected chip or Clear all. Counts describe the current matching set, including each group's own selections. Choices within one group combine with OR; different groups and text combine with AND. A zero-count choice stays usable.</p>
+  <p><a href={base+'examples/directory-preview/'}>Open the complete resource directory preview</a></p>
+  <iframe src={base+'examples/directory-preview/'} title="Resource directory starter preview" loading="lazy" height="820" style="width:100%;border:1px solid currentColor;border-radius:.5rem;"></iframe>
+  <h2 id="copy-directory">Copy the complete project</h2>
+  <p>Packages remain private and unpublished; the setup guides install matching local tarballs. Browser uses esbuild 0.28.2; Astro uses Astro 7.3.2 and the source-format static loader. Both explicitly install native filters/facets. Astro also retains original title/body source for artifact reconstruction and needs Web Crypto over HTTPS or localhost. Neither example uses snippets, a worker, a crawler or storage.</p>
+  {STARTERS.filter(s=>s.family==='directory').map(starter=><section aria-labelledby={'starter-'+starter.id}>
+    <h3 id={'starter-'+starter.id}>{starter.title}</h3>
+    <p><a href={base+`examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base+starterArchive(starter.id)} download>Download the complete starter</a></p>
+    <p>Extract into an empty directory with <code>tar -xzf starter.tar.gz --strip-components=1</code>, replacing the archive name, then follow its README. Each project includes all records, build configuration, application lifecycle, styles and real resource routes.</p>
+    <details><summary>View exact source files</summary><ul>{starter.files.map(path=><li><a href={base+starterSource(starter.id,path)}>{path}</a></li>)}</ul></details>
+  </section>)}
+  <h2 id="directory-theme">Change the appearance</h2>
+  <ol><li>Copy, install, build and preview one complete project. In Astro, choose Enable directory first.</li><li>Edit the existing <code>.raveldex-directory</code> rule in browser <code>theme.css</code> or Astro <code>src/style.css</code>, loaded after the package stylesheet:</li></ol>
+  <pre role="region" tabindex="0" aria-label="Resource directory theme properties"><code>{`.raveldex-directory {
+  --raveldex-directory-accent: #145b45;
+  --raveldex-directory-button-color: #fff;
+  --raveldex-directory-radius: .75rem;
+  --raveldex-directory-gap: 1.25rem;
+}`}</code></pre>
+  <ol start="3"><li>Stop preview, rebuild and restart it with the same deployment base. Reload to see the green accent, rounder corners and wider spacing. Update the matching dark-theme rule too.</li><li>Search <code>walking resource</code> again: seven pages still match. Use Next page to reach every match, change filters, inspect Tab focus and follow a real resource link. Theme changes keep the same query, totals and native order.</li></ol>
+  <p>Set background, color, muted, border, focus and button colors together when building another palette. See <a href={base+'reference/hosts/#directory-controls-and-styling'}>directory controls and styling</a> for the component API.</p>
+  <h2 id="directory-navigation">Mobile filters and URL state</h2>
+  <p>Filter resources is a native disclosure, closed initially at every width. Open/close it with the summary; Close filters or Escape inside it restores summary focus. Resizing keeps its current choice. Removing a focused chip moves to an adjacent chip or the search field; native checkboxes stay in place as counts change.</p>
+  <p>Both starters explicitly select URL synchronization and push for committed edits/pages. Back/Forward replays query, selections and page without new entries. Use replace for live edits in one entry, or turn URL state off in configuration for an in-memory directory. Unrelated parameters/hash survive. No local search-history store or telemetry is created. Empty searches browse all resources; no-results, initialization failure, native refusal and changed revisions have visible recovery.</p>
+  <h2 id="directory-checks">Before adopting your own content and theme</h2>
+  <p>Run the copied root/subdirectory build with changed data and CSS. Check every page, filter combinations, zero-result recovery, loading/Retry, Back/Forward, native links, long/RTL labels and dark/forced colors. Scripted keyboard/composition, selected axe and emulated layout results are distinct from human AT speech, physical IME/touch/on-screen keyboards, actual browser zoom, Safari/device support and hosted deployment. Follow <a href={base+'reference/hosts/#starter-adoption-and-local-checks'}>starter adoption and local checks</a>.</p>
+</Layout>

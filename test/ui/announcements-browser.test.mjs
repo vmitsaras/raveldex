@@ -15,10 +15,13 @@ async function open(mode, busyScope = 'shell') {
 }
 async function search(text, expected) {
   const before = await snapshot();
-  await page.locator(hook('input')).fill(text); await page.locator(hook('input')).press('Enter');
+  // Choose one debounced typing operation; a later Enter is another request.
+  await page.locator(hook('input')).fill(text);
   await page.waitForFunction(({ count, expected }) => {
     const actual = window.announcementProbe.snapshot();
-    return actual.publishedCount > count && actual.lastPublication?.text === expected;
+    return actual.publishedCount > count && actual.lastPublication?.text === expected
+      && actual.current.requestedBusy === 'false'
+      && actual.lastPublication.generation === actual.current.generation;
   }, { count: before.publishedCount, expected });
   return snapshot();
 }
@@ -90,7 +93,7 @@ for (const busyScope of ['off', 'results']) test(`${busyScope} intercepts busy b
   for (const mode of ['original', 'settled-polite', 'settled-assertive']) {
     await open(mode, busyScope);
     await page.evaluate(() => { window.harness.state.holdNext = true; });
-    await page.locator(hook('input')).fill('red'); await page.locator(hook('input')).press('Enter');
+    await page.locator(hook('input')).fill('red');
     await page.waitForFunction(() => window.harness.state.pending.length === 1);
     const held = await snapshot();
     assert.equal(held.current.busy, null);
@@ -118,7 +121,7 @@ for (const busyScope of ['off', 'results']) test(`${busyScope} intercepts busy b
     assert.equal((await snapshot()).current.busy, null);
     assert.deepEqual(await page.evaluate(() => window.shellBusyMutations), []);
     await page.locator('#inject-error').click();
-    await page.locator(hook('input')).fill('blue'); await page.locator(hook('input')).press('Enter');
+    await page.locator(hook('input')).fill('blue');
     await page.waitForFunction(() => window.announcementProbe.snapshot().current.requestedBusy === 'false'
       && document.querySelector('[data-raveldex-status]').textContent === 'Search failed. Retry is available.');
     if (mode !== 'original') assert.equal((await snapshot()).lastPublication.kind, 'error');
@@ -133,7 +136,7 @@ for (const busyScope of ['off', 'results']) test(`${busyScope} intercepts busy b
 test('settled polite skips waiting, stale replies and composing work, republishes repeated submissions and bounds its trace', async () => {
   await open('settled-polite');
   await page.evaluate(() => { window.harness.state.holdNext = true; });
-  await page.locator(hook('input')).fill('red'); await page.locator(hook('input')).press('Enter');
+  await page.locator(hook('input')).fill('red');
   await page.waitForFunction(() => window.harness.state.pending.length === 1);
   assert.equal((await snapshot()).publishedCount, 1);
   assert.equal(await page.locator(hook('status')).innerText(), 'Searching…');
@@ -188,7 +191,7 @@ test('settled assertive publishes empty/errors/retry and keeps the external node
   await page.waitForFunction(() => window.announcementProbe.snapshot().lastPublication?.text === '1 results. Showing 1–1.');
   const node = await page.locator('#announcement-output').elementHandle();
   await page.evaluate(() => { window.harness.state.holdNext = true; });
-  await page.locator(hook('input')).fill('red'); await page.locator(hook('input')).press('Enter');
+  await page.locator(hook('input')).fill('red');
   await page.waitForFunction(() => window.harness.state.pending.length === 1);
   const before = await snapshot();
   await page.locator('#destroy-ui').click();

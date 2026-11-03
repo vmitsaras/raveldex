@@ -39,6 +39,9 @@ export const RUNTIME_EXPORTS = Object.freeze({
   './addons/ui/inline': ['mountRaveldexInline'],
   './addons/ui/modal': ['mountRaveldexModal'],
   './addons/ui/dropdown': ['mountRaveldexDropdown'],
+  './addons/ui/directory': ['connectDirectoryURL', 'createDirectory'],
+  './addons/ui/directory/view': ['mountRaveldexDirectory'],
+  './addons/ui/directory/cards': ['mountRaveldexDirectoryCards'],
   './adapters/worker': ['WORKER_ERROR_CODES', 'WorkerAdapterError', 'createWorkerRaveldex'],
   './adapters/worker/host': ['serveRaveldexWorker'],
   './adapters/snapshots': ['SNAPSHOT_REASONS', 'SnapshotAdapterError', 'createSnapshotRaveldex', 'createSnapshots', 'currentNodeSnapshotEnvironment'],
@@ -51,7 +54,9 @@ const CSS = './addons/ui/styles.css';
 const INLINE_CSS = './addons/ui/inline.css';
 const MODAL_CSS = './addons/ui/modal.css';
 const DROPDOWN_CSS = './addons/ui/dropdown.css';
-const CSS_PATHS = [CSS, INLINE_CSS, MODAL_CSS, DROPDOWN_CSS];
+const DIRECTORY_CSS = './addons/ui/directory.css';
+const DIRECTORY_CARDS_CSS = './addons/ui/directory-cards.css';
+const CSS_PATHS = [CSS, INLINE_CSS, MODAL_CSS, DROPDOWN_CSS, DIRECTORY_CSS, DIRECTORY_CARDS_CSS];
 const PUBLIC_PATHS = [...Object.keys(RUNTIME_EXPORTS), ...CSS_PATHS].sort();
 const specifier = path => path === '.' ? NAME : NAME + path.slice(1);
 const readJSON = async path => JSON.parse(await readFile(path, 'utf8'));
@@ -173,8 +178,8 @@ async function checkTypes(directory, metadata) {
     surface.push({ specifier: specifier(path), declarations: target.types, exports: names.sort() });
   }
   const projects = [
-    { name: 'core', libraries: ['ES2022'], files: ['test/consumer/public-types.ts', 'test/adapters/snapshots/public-types.ts', 'test/migration/public-types.ts'] },
-    { name: 'browser', libraries: ['ES2022', 'DOM'], files: ['test/consumer/ui-types.ts', 'test/consumer/inline-types.ts', 'test/consumer/sections-types.ts', 'test/consumer/modal-types.ts', 'test/consumer/dropdown-types.ts', 'test/consumer/worker-types.ts', 'test/adapters/indexeddb/public-types.ts'] },
+    { name: 'core', libraries: ['ES2022'], files: ['test/consumer/directory-types.ts', 'test/consumer/public-types.ts', 'test/adapters/snapshots/public-types.ts', 'test/migration/public-types.ts'] },
+    { name: 'browser', libraries: ['ES2022', 'DOM'], files: ['test/consumer/directory-cards-types.ts', 'test/consumer/directory-view-types.ts', 'test/consumer/directory-browser-types.ts', 'test/consumer/ui-types.ts', 'test/consumer/inline-types.ts', 'test/consumer/sections-types.ts', 'test/consumer/modal-types.ts', 'test/consumer/dropdown-types.ts', 'test/consumer/worker-types.ts', 'test/adapters/indexeddb/public-types.ts'] },
     { name: 'worker', libraries: ['ES2022', 'WebWorker'], files: ['test/consumer/worker-host-types.ts', 'test/adapters/indexeddb/worker-host-types.ts'] },
   ];
   const results = [];
@@ -226,7 +231,8 @@ async function checkGraphs(directory) {
     const item = await graph(directory, `entry-${index}.mjs`, `export * from '${specifier(path)}';\n`);
     const paths = item.inputs.map(input => input.path);
     if (path === '.') assert.ok(paths.every(value => !/(?:addons|adapters|integrations|construction|invariants|oracle)/.test(value)), 'core imports no optional implementations');
-    if (path === './addons/ui' || path === './addons/ui/inline' || path === './addons/ui/modal' || path === './addons/ui/dropdown') assert.ok(paths.every(value => value === item.entry || value.includes('/addons/ui/') || value.endsWith('/addons/sections/validation.js') || value.endsWith('/core/contracts/data.js') || value.endsWith('/core/errors/error.js')), 'UI has no engine/evidence implementation');
+    if (path === './addons/ui' || path === './addons/ui/inline' || path === './addons/ui/modal' || path === './addons/ui/dropdown' || path === './addons/ui/directory' || path === './addons/ui/directory/view' || path === './addons/ui/directory/cards') assert.ok(paths.every(value => value === item.entry || value.includes('/addons/ui/') || value.endsWith('/addons/sections/validation.js') || value.endsWith('/core/contracts/data.js') || value.endsWith('/core/errors/error.js')), 'UI has no engine/evidence implementation');
+    if (path !== './addons/ui/directory/cards') assert.ok(paths.every(value => !value.includes('/directory-cards')), 'rich projection and images remain outside earlier runtime graphs');
     if (path === './addons/phrases/source') assert.ok(paths.every(value => !/verifier|positions|adapters|integrations/.test(value)), 'source utility excludes phrase verifier and other providers');
     if (path === './addons/positions') assert.ok(paths.every(value => !/verifier|\/phrases\/|adapters|integrations/.test(value)), 'positions utility excludes phrase verifier and source provider');
     if (path === './adapters/worker') assert.ok(paths.every(value => !/execution\/engine|\/addons\/|\/snapshots\/|indexeddb|integrations/.test(value)), 'ordinary worker client excludes engine/addons/codecs/storage');
@@ -246,7 +252,7 @@ async function checkGraphs(directory) {
     assert.ok(cssOutput.contents.length > 0);
     styles.push({ status: 'Pass', specifier: specifier(path), inputs: Object.keys(cssBuild.metafile.inputs), bytes: cssOutput.contents.length, sha256: digest(cssOutput.contents) });
   }
-  return { status: 'Pass', esbuild: esbuildVersion, entries: result, css: styles[0], inlineCSS: styles[1], modalCSS: styles[2], dropdownCSS: styles[3] };
+  return { status: 'Pass', esbuild: esbuildVersion, entries: result, css: styles[0], inlineCSS: styles[1], modalCSS: styles[2], dropdownCSS: styles[3], directoryCSS: styles[4], directoryCardsCSS: styles[5] };
 }
 
 async function checkDocumentation(consumer, reportPath) {

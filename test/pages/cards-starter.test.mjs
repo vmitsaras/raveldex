@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { spawn } from 'node:child_process';
+import { once } from 'node:events';
+import { readFile, writeFile, mkdir, mkdtemp } from 'node:fs/promises';
+import { join, dirname } from 'node:path';
+import { tmpdir } from 'node:os';
+import { chromium } from 'playwright-core';
+import { STARTERS, starterSource, starterArchive } from '../../site/starters.mjs';
+import { command, REPO_ROOT } from '../../scripts/lib/packed-consumer.mjs';
+import { walk } from '../../scripts/lib/pages.mjs';
+import { directoryExpected } from '../oracle/directory.mjs';
+
+test('rich-result gallery publishes exact complete source and an installed native opt-in image preview',{timeout:120000},async()=>{
+ const server=spawn(process.execPath,['scripts/preview-pages.mjs','--port','0'],{stdio:['ignore','pipe','pipe']});const exited=once(server,'exit');let log='',browser;server.stdout.on('data',b=>log+=b);server.stderr.on('data',b=>log+=b);
+ try{
+  const deadline=Date.now()+20000;while(!/Open http:\/\/127\.0\.0\.1:\d+\/raveldex\//.test(log)){assert.equal(server.exitCode,null,log);assert.ok(Date.now()<deadline,log);await new Promise(r=>setTimeout(r,50));}
+  const base=/Open (http:\/\/127\.0\.0\.1:\d+\/raveldex\/)/.exec(log)[1];browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(new URL('examples/cards/',base).href);assert.equal(await page.getByRole('heading',{level:1}).innerText(),'Rich resource result cards');const starter=STARTERS.find(s=>s.id==='cards-browser');assert.ok(starter);
+  const work=await mkdtemp(join(tmpdir(),'raveldex-cards-gallery-'));
+  for(const path of starter.files){const expected=await readFile(join(REPO_ROOT,'examples',starter.id,path)),response=await fetch(new URL(starterSource(starter.id,path),base));assert.equal(response.status,200);assert.deepEqual(new Uint8Array(await response.arrayBuffer()),new Uint8Array(expected),path);}
+  const response=await fetch(new URL(starterArchive(starter.id),base));assert.equal(response.status,200);const tarball=join(work,'cards-browser.tgz'),output=join(work,'source');await mkdir(output);await writeFile(tarball,new Uint8Array(await response.arrayBuffer()));await command('tar',['-xzf',tarball,'--strip-components=1','-C',output]);assert.deepEqual(await walk(output),[...starter.files].sort());for(const path of starter.files)assert.deepEqual(await readFile(join(output,path)),await readFile(join(REPO_ROOT,'examples',starter.id,path)),path);
+  const frame=page.frameLocator('iframe[title="Rich resource results starter preview"]');await frame.getByText('Directory is ready.',{exact:true}).waitFor();const input=frame.getByRole('searchbox',{name:'Search walking resources',exact:true});await input.fill('walking resource');await input.press('Enter');await frame.getByText('7 results. Showing 1–3.',{exact:true}).waitFor();assert.equal(await frame.locator('[data-directory-root] img').count(),0);
+  const entries=JSON.parse(await readFile(join(REPO_ROOT,'examples/cards-browser/content.json'),'utf8')),schema={text:{title:{boost:2},body:{}},metadata:{format:{type:'string'},topics:{type:'string',multi:true}}},groups=[{field:'format'},{field:'topics'}],data=entries.map(e=>({id:e.id,text:{title:e.title,body:e.body},metadata:{format:e.format,topics:e.topics}})),query={kind:'and',children:[{kind:'text',text:'walking'},{kind:'group',variants:[{text:'resource',match:'prefix'}]}]},expected=directoryExpected(data,schema,query,{},groups,3),all=[];
+  await frame.getByLabel('Layout',{exact:true}).selectOption('grid');await frame.getByLabel('Density',{exact:true}).selectOption('compact');
+  for(let n=1;n<=3;n++){all.push(...await frame.locator('[data-raveldex-directory-result]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-raveldex-directory-result'))));if(n<3){await frame.getByRole('button',{name:'Next page',exact:true}).click();await frame.getByText(`Page ${n+1} of 3.`,{exact:true}).waitFor();}}
+  assert.deepEqual(all,expected.allIDs);const before=await frame.locator('[data-raveldex-directory-result]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-raveldex-directory-result'))),recipe=await page.locator('pre[aria-label="Rich result theme properties"] code').innerText();await input.focus();await frame.locator('body').evaluate((_,css)=>{const style=document.createElement('style');style.textContent=css;document.head.append(style);},recipe);assert.ok(await input.evaluate(n=>n===document.activeElement));const styles=await frame.locator('.raveldex-directory').evaluate(n=>({accent:getComputedStyle(n.querySelector('a')).color,gap:getComputedStyle(n).getPropertyValue('--raveldex-directory-card-gap').trim(),radius:getComputedStyle(n).getPropertyValue('--raveldex-directory-card-radius').trim()}));assert.deepEqual(styles,{accent:'rgb(20, 91, 69)',gap:'1.25rem',radius:'1rem'});assert.deepEqual(await frame.locator('[data-raveldex-directory-result]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-raveldex-directory-result'))),before);
+  await input.fill('symbols');await input.press('Enter');await frame.getByText('1 result. Showing 1–1.',{exact:true}).waitFor();await frame.getByRole('checkbox',{name:'Show images',exact:true}).check();await frame.locator('[data-directory-root] img').waitFor();await frame.locator('[data-raveldex-directory-result-link]').click();assert.equal(await frame.getByRole('heading',{level:1}).innerText(),entries.find(e=>e.id==='maps').title);assert.deepEqual(errors,[]);
+  if(process.env.RAVELDEX_CARDS_GALLERY_SCREENSHOT){await mkdir(dirname(process.env.RAVELDEX_CARDS_GALLERY_SCREENSHOT),{recursive:true});await page.screenshot({path:process.env.RAVELDEX_CARDS_GALLERY_SCREENSHOT,fullPage:true});}
+  const noJS=await browser.newContext({javaScriptEnabled:false,viewport:{width:320,height:850}});const fallback=await noJS.newPage();await fallback.goto(new URL('examples/cards-preview/',base).href);assert.equal(await fallback.getByRole('navigation',{name:'Browse all resources'}).getByRole('link').count(),7);assert.equal(await fallback.locator('.raveldex-directory').count(),0);assert.equal(await fallback.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);await noJS.close();
+  console.log(JSON.stringify({status:'Pass',browser:browser.version(),completeProjects:1,sourceFiles:starter.files.length,nativeIDs:all,styles,scope:'Exact installed source/downloads, native pages, image opt-in, focus, routes and emulated 320px no-JS layout; no human AT/physical input/actual zoom.'}));
+ }finally{await browser?.close();if(server.exitCode===null&&server.signalCode===null)server.kill('SIGTERM');await exited;}
+});

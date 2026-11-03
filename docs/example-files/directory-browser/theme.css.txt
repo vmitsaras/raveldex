@@ -1,0 +1,15 @@
+:root { font-family: system-ui, sans-serif; color: #182339; background: #f5f7fb; color-scheme: light dark; }
+body { margin: 0; } main { max-width: 64rem; margin-inline: auto; padding: 2rem 1rem 4rem; }
+h1 { font-size: clamp(2rem,6vw,3.5rem); line-height: 1.12; } p,li { line-height: 1.6; }
+a { color: #1544a3; text-underline-offset: .2em; } button { font: inherit; min-block-size: 2.75rem; padding: .6rem .9rem; }
+:focus-visible { outline: 3px solid #1544a3; outline-offset: 3px; } .eyebrow { text-transform: uppercase; letter-spacing: .1em; }
+[data-directory-root] { margin-block: 2rem; }
+/* Load after directory.css. Change these component properties, then rebuild. */
+.raveldex-directory {
+  --raveldex-directory-accent: #1544a3;
+  --raveldex-directory-button-color: #fff;
+  --raveldex-directory-radius: .5rem;
+  --raveldex-directory-gap: 1rem;
+}
+@media (prefers-color-scheme: dark) { :root { color: #f3f5ff; background: #111a2b; } a { color: #a8c6ff; } :focus-visible { outline-color: #a8c6ff; } .raveldex-directory { --raveldex-directory-accent: #a8c6ff; --raveldex-directory-button-color: #111a2b; } }
+@media (forced-colors: active) { :root { color: CanvasText; background: Canvas; } a { color: LinkText; } :focus-visible { outline-color: Highlight; } }

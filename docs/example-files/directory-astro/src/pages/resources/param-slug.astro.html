@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>directory-astro/src/pages/resources/[slug].astro</title></head><body><main><h1>directory-astro/src/pages/resources/[slug].astro</h1><p><a href="/raveldex/examples/directory/">Resource directory starters</a> · <a href="/raveldex/example-files/directory-astro.tar.gz">Download complete original source</a></p><pre tabindex="0" style="overflow:auto"><code>---
+import content from &#39;../../../content.json&#39;;
+import &#39;../../style.css&#39;;
+export function getStaticPaths(){return content.entries.map(entry=&gt;({params:{slug:entry.path.slice(&#39;/resources/&#39;.length,-1)},props:{entry}}));}
+const {entry}=Astro.props;
+---
+&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;/&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;/&gt;&lt;title&gt;{entry.title}&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;main&gt;&lt;a href={import.meta.env.BASE_URL}&gt;Back to the resource directory&lt;/a&gt;&lt;p&gt;{entry.format} · {entry.topics.join(&#39;, &#39;)}&lt;/p&gt;&lt;h1&gt;{entry.title}&lt;/h1&gt;&lt;p&gt;{entry.body}&lt;/p&gt;&lt;/main&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre></main></body></html>

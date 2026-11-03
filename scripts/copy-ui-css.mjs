@@ -7,3 +7,5 @@ await copyFile(new URL('../src/addons/ui/styles.css', import.meta.url), new URL(
 await copyFile(new URL('../src/addons/ui/inline.css', import.meta.url), new URL('inline.css', directory));
 await copyFile(new URL('../src/addons/ui/modal.css', import.meta.url), new URL('modal.css', directory));
 await copyFile(new URL('../src/addons/ui/dropdown.css', import.meta.url), new URL('dropdown.css', directory));
+await copyFile(new URL('../src/addons/ui/directory.css', import.meta.url), new URL('directory.css', directory));
+await copyFile(new URL('../src/addons/ui/directory-cards.css', import.meta.url), new URL('directory-cards.css', directory));

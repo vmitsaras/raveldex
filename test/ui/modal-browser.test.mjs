@@ -129,7 +129,8 @@ test('root/help encoded destinations navigate natively and modified links keep t
     await mount({}, { base }); await show(); await search('gamma');
     const link = root().locator('[data-raveldex-inline-section="%#café"] a');
     assert.equal(await link.getAttribute('href'), origin + base + 'guide/a/#%25%23caf%C3%A9');
-    const popupPromise = context.waitForEvent('page'); await link.click({ button: 'middle' }); const popup = await popupPromise; await popup.waitForLoadState();
+    const popupPromise = context.waitForEvent('page'); await link.click({ button: 'middle' }); const popup = await popupPromise;
+    await popup.waitForURL(origin + base + 'guide/a/#%25%23caf%C3%A9'); await popup.waitForLoadState();
     assert.equal(popup.url(), origin + base + 'guide/a/#%25%23caf%C3%A9'); assert.equal(await popup.locator('h2[id="%#café"]').count(), 1); await popup.close();
     assert.equal(await opened(), true); await link.click(); await page.waitForURL(origin + base + 'guide/a/#%25%23caf%C3%A9');
     assert.equal(await page.evaluate(() => document.getElementById(decodeURIComponent(location.hash.slice(1)))?.textContent), '%#café');

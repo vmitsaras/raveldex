@@ -8,7 +8,7 @@ export function prepareGuides(entries) {
       || Object.keys(entry).sort().join(',') !== 'body,category,id,path,title') throw new Error('Invalid guide record');
     for (const [name, maximum] of [['id', 256], ['title', 1024], ['body', 50000], ['category', 120], ['path', 128]]) {
       const value = entry[name];
-      if (typeof value !== 'string' || !value.length || value.length > maximum || !value.isWellFormed()) throw new Error('Invalid guide ' + name);
+      if (typeof value !== 'string' || !value.length || value.length > maximum || !value.isWellFormed() || name === 'title' && !value.trim()) throw new Error('Invalid guide ' + name);
       units += value.length;
     }
     if (units > 4000000 || ids.has(entry.id) || paths.has(entry.path) || !/^\/guides\/[a-z0-9-]+\/$/.test(entry.path))

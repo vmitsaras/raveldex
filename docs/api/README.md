@@ -37,6 +37,11 @@ Add `@vmitsaras/raveldex` before each subpath below. For example, `/addons/ui` m
 | `/addons/ui/modal.css` | Explicit modal CSS, including shared inline CSS | [Modal styling](HOSTS.md#documentation-search-modal) |
 | `/addons/ui/dropdown` | `mountRaveldexDropdown` and readonly dropdown types | [Compact dropdown](HOSTS.md#compact-dropdown-search) |
 | `/addons/ui/dropdown.css` | Independent dropdown CSS asset | [Dropdown styling](HOSTS.md#compact-dropdown-search) |
+| `/addons/ui/directory` | `createDirectory`, `connectDirectoryURL` and readonly state/URL types | [Directory queries and URL state](HOSTS.md#directory-queries-and-url-state) |
+| `/addons/ui/directory/view` | `mountRaveldexDirectory` and readonly view types | [Directory controls](HOSTS.md#directory-controls-and-styling) |
+| `/addons/ui/directory.css` | Independent directory CSS asset | [Directory styling](HOSTS.md#directory-controls-and-styling) |
+| `/addons/ui/directory/cards` | `mountRaveldexDirectoryCards` and readonly display/presentation types | [Rich directory results](HOSTS.md#rich-directory-results) |
+| `/addons/ui/directory-cards.css` | Explicit rich-result CSS, used with directory CSS | [Rich directory styling](HOSTS.md#rich-directory-results) |
 | `/adapters/worker` | `createWorkerRaveldex`, `WorkerAdapterError`, `WORKER_ERROR_CODES` | [Worker client](HOSTS.md#one-owner-module-worker) |
 | `/adapters/worker/host` | `serveRaveldexWorker` | [Ordinary worker host](HOSTS.md#one-owner-module-worker) |
 | `/adapters/snapshots` | `createSnapshots`, `createSnapshotRaveldex`, `currentNodeSnapshotEnvironment`, `SnapshotAdapterError`, `SNAPSHOT_REASONS` | [Snapshots](HOSTS.md#source-and-native-snapshots) |
@@ -65,6 +70,10 @@ Set up workers, snapshots and storage separately. Importing core makes no networ
 
 Install [`@vmitsaras/raveldex-astro`](STATIC_ASTRO.md) separately to build search files during a static build and load them on demand. It needs the matching core version and, for its build hook, the optional Astro peer. It is not an export of the core package.
 
+
+## Complete search interfaces
+
+The [solution chooser](../../examples/README.md) links five presentations and eight installed browser/Astro projects. Compare the explicit data/capability, loading and CSS requirements before copying one. [Starter adoption](HOSTS.md#starter-adoption-and-local-checks) explains shared query/paging behavior, keyboard recovery and ownership. Core and the UI remain separately selected; images, sections, URL replay and workers require their own explicit choices.
 
 ## Installation and evaluation routes
 

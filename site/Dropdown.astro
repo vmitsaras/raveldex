@@ -1,10 +1,12 @@
 ---
 import Layout from './Layout.astro';
+import SolutionChooser from './SolutionChooser.astro';
 import { STARTERS, starterSource, starterArchive } from './starters.mjs';
 const base = '/raveldex/';
 ---
 <Layout frontmatter={{ title: 'Compact header search starter' }}>
   <h1>Compact header search starter</h1>
+  <SolutionChooser current="dropdown" />
   <p>Put a search field in your header, show a few matching pages and link to a complete results page. Copy the browser project, replace its public guide records and adjust the scoped CSS.</p>
   <p>Choose this starter for a compact title-and-link search. Use <a href={base + 'examples/inline/'}>inline search</a> for results that stay in the page, or the <a href={base + 'examples/modal/'}>documentation modal</a> for search opened from a button with anchored section previews.</p>
   <h2 id="try-dropdown">Try the installed header starter</h2>
@@ -24,7 +26,7 @@ const base = '/raveldex/';
     <li>Copy, install, build and preview the complete project using its guide. Search the sample records before changing them.</li>
     <li>Edit the existing <code>.raveldex-dropdown</code> rule in <code>theme.css</code>, loaded after the package styles. Change the accent, corners and spacing:</li>
   </ol>
-  <pre tabindex="0" aria-label="Dropdown search theme properties"><code>{`.raveldex-dropdown {
+  <pre role="region" tabindex="0" aria-label="Dropdown search theme properties"><code>{`.raveldex-dropdown {
   --raveldex-dropdown-accent: #145b45;
   --raveldex-dropdown-radius: .75rem;
   --raveldex-dropdown-gap: .75rem;

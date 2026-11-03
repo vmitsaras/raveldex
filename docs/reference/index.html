@@ -157,6 +157,31 @@
 <td><a href="/raveldex/reference/hosts/#compact-dropdown-search">Dropdown styling</a></td>
 </tr>
 <tr>
+<td><code>/addons/ui/directory</code></td>
+<td><code>createDirectory</code>, <code>connectDirectoryURL</code> and readonly state/URL types</td>
+<td><a href="/raveldex/reference/hosts/#directory-queries-and-url-state">Directory queries and URL state</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/directory/view</code></td>
+<td><code>mountRaveldexDirectory</code> and readonly view types</td>
+<td><a href="/raveldex/reference/hosts/#directory-controls-and-styling">Directory controls</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/directory.css</code></td>
+<td>Independent directory CSS asset</td>
+<td><a href="/raveldex/reference/hosts/#directory-controls-and-styling">Directory styling</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/directory/cards</code></td>
+<td><code>mountRaveldexDirectoryCards</code> and readonly display/presentation types</td>
+<td><a href="/raveldex/reference/hosts/#rich-directory-results">Rich directory results</a></td>
+</tr>
+<tr>
+<td><code>/addons/ui/directory-cards.css</code></td>
+<td>Explicit rich-result CSS, used with directory CSS</td>
+<td><a href="/raveldex/reference/hosts/#rich-directory-results">Rich directory styling</a></td>
+</tr>
+<tr>
 <td><code>/adapters/worker</code></td>
 <td><code>createWorkerRaveldex</code>, <code>WorkerAdapterError</code>, <code>WORKER_ERROR_CODES</code></td>
 <td><a href="/raveldex/reference/hosts/#one-owner-module-worker">Worker client</a></td>
@@ -206,6 +231,8 @@
 <p><a href="/raveldex/examples/api/">Runnable examples</a> use these public entries. Read <a href="/raveldex/guide/compatibility/">compatibility</a> for host requirements and <a href="/raveldex/guide/limitations/">practical limits</a> for matching and recovery behavior.</p>
 <h2 id="separate-static-build-package">Separate static-build package</h2>
 <p>Install <a href="/raveldex/reference/static-astro/"><code>@vmitsaras/raveldex-astro</code></a> separately to build search files during a static build and load them on demand. It needs the matching core version and, for its build hook, the optional Astro peer. It is not an export of the core package.</p>
+<h2 id="complete-search-interfaces">Complete search interfaces</h2>
+<p>The <a href="/raveldex/examples/">solution chooser</a> links five presentations and eight installed browser/Astro projects. Compare the explicit data/capability, loading and CSS requirements before copying one. <a href="/raveldex/reference/hosts/#starter-adoption-and-local-checks">Starter adoption</a> explains shared query/paging behavior, keyboard recovery and ownership. Core and the UI remain separately selected; images, sections, URL replay and workers require their own explicit choices.</p>
 <h2 id="installation-and-evaluation-routes">Installation and evaluation routes</h2>
 <p>Use <a href="/raveldex/guide/overview/">Getting started</a> for installation, <a href="/raveldex/reference/core/">Core</a> for records and queries, and <a href="/raveldex/reference/hosts/">UI and host integrations</a> for browser controls, workers and storage. If you prefer to learn by running code, start with the <a href="/raveldex/examples/api/">example modules</a>.</p>
 <p>The separately installable <code>@vmitsaras/raveldex-english</code> uses the same analyzer policy as the convenience subpath; choose one factory import. See <a href="/raveldex/reference/english/#separate-package">English installation</a>. The Astro integration is a separate package; see <a href="/raveldex/reference/static-astro/">static search and Astro</a>.</p>

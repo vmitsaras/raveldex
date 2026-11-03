@@ -1,6 +1,123 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Runnable examples · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/" aria-current="page">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="examples">Examples</h1>
-<p>For a complete interface to copy into your application, choose <a href="/raveldex/examples/inline/">inline search</a>, a <a href="/raveldex/examples/modal/">documentation search modal</a>, or <a href="/raveldex/examples/dropdown/">compact header search</a>. Inline and modal have browser and Astro projects; the header starter is a plain-browser project. Each includes explicit content, controls, styles and cleanup. The browser demo below is also available for exploring query and execution details.</p>
-<p>Use inline search for a field and results that stay in the page; use the modal for search opened from a button. The compact header offers a few page links and a complete inline results route. All three galleries include a working installed preview, complete source downloads and an edit/build/preview CSS walkthrough. The current packages are private and unpublished, so each setup guide uses supplied matching local tarballs.</p>
+<p>For a complete interface to copy into your application, choose <a href="/raveldex/examples/inline/">inline search</a>, a <a href="/raveldex/examples/modal/">documentation search modal</a>, <a href="/raveldex/examples/dropdown/">compact header search</a>, a <a href="/raveldex/examples/directory/">faceted resource directory</a>, or <a href="/raveldex/examples/cards/">rich directory results</a>. Inline, modal and directory have browser and Astro projects; header and rich-results starters are plain-browser projects. Each includes explicit content, controls, styles and cleanup. The browser demo below is also available for exploring query and execution details.</p>
+<p>Use inline search for a field and results that stay in the page; use the modal for search opened from a button. The compact header offers a few page links and a complete inline results route. The directory supplies multi-selection checkboxes, chips, complete pages and explicit URL replay. Rich results add declared metadata and optional images with list/card/grid layouts over that directory state. All five galleries include a working installed preview, complete source downloads and an edit/build/preview CSS walkthrough. The current packages are private and unpublished, so each setup guide uses supplied matching local tarballs.</p>
+<h2 id="choose-a-search-solution">Choose a search solution</h2>
+<p>Choose the presentation that fits the task, then use its gallery to try the installed preview, download every original source file and copy its CSS recipe. The eight projects below include indexing/loading, real destination pages and cleanup; the smaller API recipes are separate examples.</p>
+<table>
+<thead>
+<tr>
+<th>Presentation</th>
+<th>Choose it when</th>
+<th>Complete projects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/raveldex/examples/inline/">Open inline gallery</a></td>
+<td>A field, filters and highlighted page excerpts should stay in the page.</td>
+<td><a href="/raveldex/examples/inline-browser/">Browser inline</a>, <a href="/raveldex/examples/inline-astro/">Astro inline</a></td>
+</tr>
+<tr>
+<td><a href="/raveldex/examples/modal/">Open documentation modal gallery</a></td>
+<td>Search opens from a button and results should reach matching documentation headings.</td>
+<td><a href="/raveldex/examples/modal-browser/">Browser modal</a>, <a href="/raveldex/examples/modal-astro/">Astro modal</a></td>
+</tr>
+<tr>
+<td><a href="/raveldex/examples/dropdown/">Open compact dropdown gallery</a></td>
+<td>A header needs a few quick page links and a complete full-results route.</td>
+<td><a href="/raveldex/examples/dropdown-browser/">Browser header</a></td>
+</tr>
+<tr>
+<td><a href="/raveldex/examples/directory/">Open directory gallery</a></td>
+<td>Visitors browse a library with several filter choices, selected chips and shareable pages.</td>
+<td><a href="/raveldex/examples/directory-browser/">Browser directory</a>, <a href="/raveldex/examples/directory-astro/">Astro directory</a></td>
+</tr>
+<tr>
+<td><a href="/raveldex/examples/cards/">Open rich-results gallery</a></td>
+<td>The same directory needs excerpts, named metadata and optional images in list/card/grid layouts.</td>
+<td><a href="/raveldex/examples/cards-browser/">Browser rich results</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-and-capabilities">Data and capabilities</h2>
+<p>These are the capabilities selected by the complete projects. Core and each presenter remain separately usable with the smaller data/capability set documented in the API. Every project indexes an explicit public allowlist; none crawls a site or adds a remote search service.</p>
+<table>
+<thead>
+<tr>
+<th>Presentation</th>
+<th>Explicit data and registrations</th>
+<th>Browser/platform needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inline</td>
+<td>Stable page IDs, title/body, real path and category. Original body source, snippet evidence and a string facet are selected.</td>
+<td>Browser ESM/fetch and <code>Intl.Segmenter</code>. Astro adds matching source/display artifacts and Web Crypto over HTTPS/localhost.</td>
+</tr>
+<tr>
+<td>Documentation modal</td>
+<td>The same page data plus original section text/ranges and exact real heading anchors. Source/section evidence and a category facet are selected; native totals still count pages.</td>
+<td>Native <code>dialog</code>, <code>Intl.Segmenter</code> and Web Crypto over HTTPS/localhost. Astro also needs matching core/adapter packages and the source-only section companion from the same build/base.</td>
+</tr>
+<tr>
+<td>Compact dropdown</td>
+<td>Stable ID/title/body/path records. The header displays title/links from core; the full-results route uses the same prefix meaning. No snippet/facet/section registration is selected.</td>
+<td>Native Popover. The optional expanded-search button additionally needs <code>dialog</code>; it defaults off. Its code/CSS is included in the complete demonstration and shares one page owner.</td>
+</tr>
+<tr>
+<td>Directory</td>
+<td>Stable ID/title/body/path plus scalar format and multi-value topics. Explicit native set filters/facets supply complete matching counts before paging.</td>
+<td>Native form controls and <code>details</code>. URL replay is an explicit application choice. Astro adds matching source/display artifacts, original values for title/body reconstruction and Web Crypto over HTTPS/localhost.</td>
+</tr>
+<tr>
+<td>Rich results</td>
+<td>Directory data plus an application-owned plain-text projection: optional excerpt/category/breadcrumb/date/named fields, and image URL/alt/width/height. The separate rich presenter/CSS is selected.</td>
+<td>Directory requirements. Images start off and are requested only after explicit opt-in for the displayed page; no new static artifact format or source/snippet registration is required.</td>
+</tr>
+</tbody>
+</table>
+<p>Browser inline, header, directory and rich-results projects start loading during page initialization. Astro inline/directory projects use their Enable button. Documentation modals load the complete index on first open and reuse that owner on reopen. First-open loading is not index sharding or a query-specific network backend. All these starters run directly on the main thread; workers are a separate explicit integration.</p>
+<p>Browser projects use esbuild 0.28.2; Astro projects use Astro 7.3.2. Their setup guides use Node 24/npm and matching unpublished local tarballs, then show root/subdirectory builds and actual previews. Deploy the complete rebuilt page/content/asset set with a consistent base. Do not place private content in public assets.</p>
+<h2 id="keyboard-and-cleanup">Keyboard and cleanup</h2>
+<table>
+<thead>
+<tr>
+<th>Presentation</th>
+<th>Interaction to keep when changing the CSS</th>
+<th>Ownership and recovery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inline</td>
+<td>Native field, submit/Clear/filter controls, Load more and bounded Next/Previous windows; ordinary result links. Composition waits before searching.</td>
+<td>The application wrapper owns the loaded engine; the UI borrows it. Loading/Retry, no-results/Clear and destroy remain usable.</td>
+</tr>
+<tr>
+<td>Documentation modal</td>
+<td>Native trigger/dialog, deliberate close, opener restoration and preserved query on reopen. Some browsers clear a focused search field on the first Escape; Close search remains available.</td>
+<td>First-open loading can be cancelled or retried. The wrapper destroys the UI before disposing its owner; late loads cannot reopen a closed attempt.</td>
+</tr>
+<tr>
+<td>Compact dropdown</td>
+<td>Arrow keys select a virtual result while editing stays in the field. Enter follows the selected link; Escape dismisses; Tab leaves normally. See all results keeps the raw query.</td>
+<td>A page has one owner for header/full results and the optional modal. Keep the full-results route and ordinary browse links available after loading failure.</td>
+</tr>
+<tr>
+<td>Directory</td>
+<td>Stable native checkboxes, named chip removal, Clear all, complete pages and native filter disclosure. Close filters/Escape restores the summary; Back/Forward replays explicit URL state.</td>
+<td>Destroy the borrowed view, URL binding and controller before releasing the application engine. Zero or projected-out selections remain removable; visible status/Refresh handles failures or changed revisions.</td>
+</tr>
+<tr>
+<td>Rich results</td>
+<td>The directory keyboard model and ordinary link reading order. Layout/density/image changes preserve the same native state and link Nodes; CSS grid adds no ARIA grid keyboard model.</td>
+<td>Image callbacks are removed on page replacement/destroy. Failed images keep text and links usable. Disabling images cannot undo a request already sent.</td>
+</tr>
+</tbody>
+</table>
+<p>Use your browser/OS’s native link-traversal settings; for example, macOS WebKit may use Option+Tab. Keep visible focus, non-color state and readable long/RTL content. Automated browser events, selected axe checks and emulated narrow/light/dark/forced-color/reduced-motion layouts do not establish human AT speech, physical IME/touch/on-screen keyboards, actual 200%/400% zoom, native Safari/device support or hosted deployment. Recheck those combinations after replacing content, controls, colors or image alternatives.</p>
+<h2 id="complete-projects-and-smaller-examples">Complete projects and smaller examples</h2>
 <table>
 <thead>
 <tr>
@@ -36,6 +153,21 @@
 <td>Search from a compact header, follow the real full-results route, change CSS and explicitly enable a shared-owner modal button.</td>
 </tr>
 <tr>
+<td><a href="/raveldex/examples/directory-browser/">Browser directory</a></td>
+<td>Copy, install local core and run <code>npm run build</code></td>
+<td>Replace resource records and filters, change CSS and try chips/pages/Back-Forward.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/examples/directory-astro/">Astro directory</a></td>
+<td>Copy, install paired local packages and run <code>npm run build</code></td>
+<td>Build an explicit resource allowlist, enable the directory and follow native filtered results at your deployment base.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/examples/cards-browser/">Browser rich results</a></td>
+<td>Copy, install local core and run <code>npm run build</code></td>
+<td>Map resource metadata, opt into local images, switch list/card/grid without changing the native result page, and adjust CSS density.</td>
+</tr>
+<tr>
 <td><a href="/raveldex/examples/browser/">Browser search</a></td>
 <td><code>npm run pilot:ui</code></td>
 <td>Search usage guides, filter results, inspect scores and compare direct/worker execution.</td>
@@ -63,6 +195,6 @@
 </tbody>
 </table>
 <p>Repository commands need a source checkout, repository access, Node 24 and an initial <code>npm ci</code>. If you only have package tarballs, follow <a href="/raveldex/guide/overview/">installation</a> and use the copied API recipes instead.</p>
-<p>The five starters index explicit public records rather than crawling pages. The header uses core-only title/link results and native Popover; its optional larger-search button also needs native <code>dialog</code>. Snippets and section previews in the inline/documentation-modal projects need <code>Intl.Segmenter</code>; their section/static asset verification needs Web Crypto over HTTPS or localhost. Each guide explains its selected capabilities and how to replace the sample data. Review <a href="/raveldex/reference/hosts/#starter-adoption-and-local-checks">starter adoption and local checks</a> before changing those capabilities or claiming support for your target browsers and assistive technology.</p>
+<p>The eight starters index explicit public records rather than crawling pages. The header uses core-only title/link results and native Popover; its optional larger-search button also needs native <code>dialog</code>. Snippets and section previews in the inline/documentation-modal projects need <code>Intl.Segmenter</code>; their section/static asset verification needs Web Crypto over HTTPS or localhost. Directory examples explicitly register filters/facets; Astro directory also retains original title/body source for static reconstruction. Each guide explains its selected capabilities and how to replace the sample data. Review <a href="/raveldex/reference/hosts/#starter-adoption-and-local-checks">starter adoption and local checks</a> before changing those capabilities or claiming support for your target browsers and assistive technology.</p>
 <p>Each walkthrough explains what you should see and how to clean up. Stop ordinary preview servers with Ctrl+C. The Astro example uses its documented project-scoped stop command.</p>
 </main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

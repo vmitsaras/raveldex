@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>directory-astro/src/pages/index.astro</title></head><body><main><h1>directory-astro/src/pages/index.astro</h1><p><a href="/raveldex/examples/directory/">Resource directory starters</a> · <a href="/raveldex/example-files/directory-astro.tar.gz">Download complete original source</a></p><pre tabindex="0" style="overflow:auto"><code>---
+import content from &#39;../../content.json&#39;;
+const base=import.meta.env.BASE_URL;
+---
+&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;/&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;/&gt;&lt;title&gt;Walking resource directory&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;main&gt;&lt;p class=&quot;eyebrow&quot;&gt;Community field notes&lt;/p&gt;&lt;h1&gt;Resources for a day outdoors&lt;/h1&gt;&lt;p&gt;Find a guide, checklist or tool. Search words and select several topics.&lt;/p&gt;
+&lt;p data-directory-status role=&quot;status&quot;&gt;Browse the resources below. Search needs JavaScript.&lt;/p&gt;&lt;button type=&quot;button&quot; data-directory-retry hidden&gt;Enable directory&lt;/button&gt;
+&lt;p data-directory-url-status role=&quot;status&quot; hidden&gt;&lt;/p&gt;&lt;button type=&quot;button&quot; data-directory-url-retry hidden&gt;Update search link&lt;/button&gt;
+&lt;section data-directory-root aria-label=&quot;Walking resource directory&quot; data-build-id={content.buildId}&gt;&lt;p&gt;All resources remain available in the list below.&lt;/p&gt;&lt;/section&gt;
+&lt;nav aria-label=&quot;Browse all resources&quot;&gt;&lt;h2&gt;All resources&lt;/h2&gt;&lt;ul&gt;{content.entries.map(entry=&gt;&lt;li&gt;&lt;a href={base+entry.path.slice(1)}&gt;{entry.title}&lt;/a&gt;&lt;/li&gt;)}&lt;/ul&gt;&lt;/nav&gt;
+&lt;/main&gt;&lt;script&gt;import &#39;../main.mjs&#39;;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre></main></body></html>

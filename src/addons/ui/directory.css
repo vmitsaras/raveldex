@@ -1,0 +1,54 @@
+.raveldex-directory {
+  --_accent: var(--raveldex-directory-accent, #1544a3);
+  --_background: var(--raveldex-directory-background, #fff);
+  --_color: var(--raveldex-directory-color, #182339);
+  --_muted: var(--raveldex-directory-muted, #46526b);
+  --_border: var(--raveldex-directory-border, #778398);
+  --_button-color: var(--raveldex-directory-button-color, #fff);
+  --_focus: var(--raveldex-directory-focus, #1544a3);
+  --_radius: var(--raveldex-directory-radius, .5rem);
+  --_gap: var(--raveldex-directory-gap, 1rem);
+  --_padding: var(--raveldex-directory-padding, 1rem);
+  color: var(--_color); background: var(--_background); padding: var(--_padding);
+  border: 1px solid var(--_border); border-radius: var(--_radius); font: inherit;
+  overflow-wrap: anywhere; text-align: start;
+}
+.raveldex-directory *, .raveldex-directory *::before, .raveldex-directory *::after { box-sizing: border-box; }
+.raveldex-directory [hidden] { display: none !important; }
+.raveldex-directory__form, .raveldex-directory__navigation { display: flex; flex-wrap: wrap; gap: .75rem; align-items: end; }
+.raveldex-directory__search-label { flex: 1 1 15rem; min-inline-size: 0; font-weight: 650; }
+.raveldex-directory__input { display: block; inline-size: 100%; min-inline-size: 0; margin-block-start: .4rem; padding: .65rem; }
+.raveldex-directory button, .raveldex-directory__input { font: inherit; color: var(--_color); background: var(--_background); border: 1px solid var(--_border); border-radius: var(--_radius); min-block-size: 2.75rem; }
+.raveldex-directory button { padding: .6rem .85rem; cursor: pointer; max-inline-size: 100%; overflow-wrap: anywhere; }
+.raveldex-directory .raveldex-directory__submit { color: var(--_button-color); background: var(--_accent); }
+.raveldex-directory [aria-disabled="true"] { cursor: default; border-style: dashed; color: var(--_muted); }
+.raveldex-directory a { color: var(--_accent); text-underline-offset: .2em; }
+.raveldex-directory :is(button, input, summary, a):focus-visible { outline: 3px solid var(--_focus); outline-offset: 3px; }
+.raveldex-directory__filters { margin-block: var(--_gap); border-block: 1px solid var(--_border); }
+.raveldex-directory__filters-summary { cursor: pointer; padding-block: .8rem; font-weight: 650; }
+.raveldex-directory__hint, .raveldex-directory__omitted { color: var(--_muted); font-size: .9em; }
+.raveldex-directory__filter-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--_gap); margin-block: var(--_gap); }
+.raveldex-directory__group { min-inline-size: 0; border: 1px solid var(--_border); border-radius: var(--_radius); padding: .75rem; margin: 0; }
+.raveldex-directory__legend { font-weight: 650; padding-inline: .3rem; }
+.raveldex-directory__choice { display: flex; align-items: center; gap: .5rem; min-block-size: 2.75rem; cursor: pointer; }
+.raveldex-directory__checkbox { flex: 0 0 auto; inline-size: 1.15rem; block-size: 1.15rem; accent-color: var(--_accent); }
+.raveldex-directory__count { color: var(--_muted); margin-inline-start: auto; text-align: end; }
+.raveldex-directory__close-filters { margin-block-end: .75rem; }
+.raveldex-directory__chips { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: var(--_gap) 0; padding: 0; }
+.raveldex-directory__chip { max-inline-size: 100%; }
+.raveldex-directory__status { min-block-size: 1.5em; margin-block: var(--_gap); }
+.raveldex-directory__heading { font-size: 1.2em; margin-block: var(--_gap); }
+.raveldex-directory__results { padding-inline-start: 1.75rem; }
+.raveldex-directory__result { padding-block: .7rem; border-block-end: 1px solid var(--_border); }
+.raveldex-directory__result-link { display: inline-block; padding-block: .25rem; font-weight: 650; }
+.raveldex-directory__navigation { align-items: center; margin-block-start: var(--_gap); }
+.raveldex-directory__page { flex: 1 1 auto; margin: .5rem 0; }
+@media (prefers-color-scheme: dark) {
+  .raveldex-directory { --_accent: var(--raveldex-directory-accent, #9bbdff); --_background: var(--raveldex-directory-background, #152033); --_color: var(--raveldex-directory-color, #f3f5ff); --_muted: var(--raveldex-directory-muted, #c1cadd); --_border: var(--raveldex-directory-border, #8c9ab3); --_focus: var(--raveldex-directory-focus, #b0ceff); }
+  .raveldex-directory { --_button-color: var(--raveldex-directory-button-color, #101c30); }
+}
+@media (forced-colors: active) {
+  .raveldex-directory { --_accent: LinkText; --_background: Canvas; --_color: CanvasText; --_muted: CanvasText; --_border: CanvasText; --_focus: Highlight; }
+  .raveldex-directory .raveldex-directory__submit { background: ButtonFace; color: ButtonText; }
+}
+@media (prefers-reduced-motion: reduce) { .raveldex-directory { scroll-behavior: auto; } }

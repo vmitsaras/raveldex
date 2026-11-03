@@ -38,7 +38,7 @@ Open `http://127.0.0.1:4176/help/`. The base must begin and end with `/`. Deploy
 
 ## Replace the sample content
 
-Edit `content.json`, then rebuild. Each entry has a unique `id`, a plain-text `title` and `body`, a string `category` and a unique local `/guides/slug/` path. This starter allows up to 1,000 explicit entries and adds them in batches of 100. Those are starter bounds, not a capacity or speed guarantee. `build.mjs` creates the corresponding browse list and static guide pages, escaping text rather than treating it as HTML. Do not put secrets in this public file or in indexed text.
+Edit `content.json`, then rebuild. Each entry has a unique `id`, a plain-text `title` and `body`, a string `category` and a unique local `/guides/slug/` path. Titles must contain non-whitespace text, be well-formed UTF-16 and fit within 1,024 UTF-16 units; invalid titles are refused before replacing generated pages or creating a loaded search owner. This starter allows up to 1,000 explicit entries and adds them in batches of 100. Those are starter bounds, not a capacity or speed guarantee. `build.mjs` creates the corresponding browse list and static guide pages, escaping text rather than treating it as HTML. Do not put secrets in this public file or in indexed text.
 
 `load.mjs` maps the same entries to `{ id, text: { title, body }, metadata: { category } }` search records and `{ id, title, url }` display records. If you index existing pages instead, supply their real canonical URLs and preserve the relationship between IDs, original source text and display records. This starter does not extract HTML or invent section anchors. Keep the authored browse links available while data loads and when it fails.
 

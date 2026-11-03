@@ -1,10 +1,12 @@
 ---
 import Layout from './Layout.astro';
+import SolutionChooser from './SolutionChooser.astro';
 import { STARTERS, starterSource, starterArchive } from './starters.mjs';
 const base = '/raveldex/';
 ---
 <Layout frontmatter={{ title: 'Documentation search modal starters' }}>
   <h1>Documentation search modal starters</h1>
+  <SolutionChooser current="modal" />
   <p>Open search from a button, find a matching page and jump to the heading that contains the match. Copy a complete browser or Astro project, replace its explicit page content and adjust the CSS.</p>
   <p>Use the modal for search behind a button. Choose <a href={base + 'examples/inline/'}>inline search</a> when the field and results should stay in the page.</p>
   <p>For a compact field in an ordinary header, choose the <a href={base + 'examples/dropdown/'}>dropdown header starter</a>, with a real inline full-results destination.</p>
@@ -27,7 +29,7 @@ const base = '/raveldex/';
     <li>Copy and install one complete starter using its setup guide. Open search and try <code>workshop</code> before changing the CSS.</li>
     <li>Edit the existing rules in the browser's <code>theme.css</code> or Astro's <code>src/style.css</code>, loaded after the package's explicit <code>modal.css</code>. Set modal layout properties on the dialog and shared input/result properties on the inner inline surface:</li>
   </ol>
-  <pre tabindex="0" aria-label="Documentation modal theme properties"><code>{`.raveldex-modal {
+  <pre role="region" tabindex="0" aria-label="Documentation modal theme properties"><code>{`.raveldex-modal {
   --raveldex-modal-max-width: 40rem;
   --raveldex-modal-radius: .75rem;
 }

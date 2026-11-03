@@ -441,6 +441,23 @@ export function mountRaveldexDropdown(options: DropdownUIOptions): DropdownUIHan
       key.preventDefault(); close();
     } else if (['ArrowLeft', 'ArrowRight', 'Home', 'End', 'Backspace', 'Delete'].includes(key.key) || key.key.length === 1 || modified) clearActive();
   });
+  listen(shell, 'keydown', event => {
+    const key = event as KeyboardEvent;
+    if (key.defaultPrevented || key.altKey || key.ctrlKey || key.metaKey) return;
+    const tab = key.key === 'Tab' && (visible() || ['waiting', 'loading', 'composing'].includes(shell.dataset.state ?? ''));
+    const escape = key.key === 'Escape' && !key.shiftKey && !composing && !key.isComposing && key.keyCode !== 229 &&
+      (wanted || timer !== undefined || controller !== undefined || visible());
+    if (!tab && !escape) return;
+    if (escape) key.preventDefault();
+    const ticket = sequence, active = focused();
+    if (escape && active && popup.contains(active)) {
+      // A pointer-focused native result disappears on dismissal. Return to
+      // editing before removing it, respecting authored focus callbacks.
+      input.focus();
+      if (!usable() || sequence !== ticket || focused() !== input) return;
+    }
+    close();
+  });
   listen(input, 'blur', event => {
     // Native blur precedes the next control receiving DOM focus. Its related
     // target is already authoritative; transient BODY must not erase a link

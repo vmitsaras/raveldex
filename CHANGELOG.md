@@ -11,6 +11,8 @@ This draft describes the complete implemented product. All packages remain priva
 
 ### Optional search and interface capabilities
 
+- Preserve inline/modal result focus inside authored Shadow DOM, dismiss dropdowns from owned controls without changing native Tab destinations, retain directory paging/Retry focus through loading and recovery, and refuse rich-card mounts if option capture destroys their controller. Browser starters reject invalid display titles and blank modal section headings before generating output or transferring an engine.
+
 - Selected source, positions/original offsets, strict source/position/mixed phrases, numeric/set filters, exact conjunctive facets, numerical Inspector facts, original match ranges and bounded grapheme-safe snippets.
 - Explicit bounded typo tolerance, dictionary-backed token suggestions and one-step directional synonyms; ordinary queries do not enable these automatically.
 - Explicit English Porter 1980 analysis and code/identifier components with original-only strict phrases.
@@ -23,6 +25,10 @@ This draft describes the complete implemented product. All packages remain priva
 
 ### Hosts and separate packages
 
+- Optional `/addons/ui/directory` supplies nonvisual multi-selection, exact native conjunctive counts and revision-safe paging. Its explicit URL binding owns named parameters, preserves unrelated query/hash/history state and supports bounded correction and native Back/Forward.
+- Separate `/addons/ui/directory/view` and explicit `/addons/ui/directory.css` add native checkbox groups, selected chips, Clear all, complete pages and mobile disclosure over that borrowed controller. Complete browser/Astro resource-directory starters and gallery provide real routes, optional URL state with visible recovery, loading/Retry/disposal and CSS recipes.
+- Separate `/addons/ui/directory/cards` and explicit `/addons/ui/directory-cards.css` add captured plain-text metadata, opt-in validated images and semantic list/card/grid presentation. Layout/density/image changes retain the native page, filters, IDs, order, totals and link focus. A complete browser starter and gallery provide real routes, local image assets, image-failure recovery, exact downloads and CSS recipes.
+
 - Separate `/addons/ui/modal` documentation dialog reuses inline search and optional section previews. It provides an explicit native trigger/dialog, query/filter preservation or reset, close cancellation, opener/scroll restoration, coordinated opt-in shortcuts and explicit `/addons/ui/modal.css`. The engine stays borrowed; first-open asset loading belongs to the application. Complete browser/Astro modal starters add cancelable first-open loading, explicit page/section content, strict generation/base binding, retry and ownership-safe disposal. The modal gallery provides an installed preview, exact sources/downloads and CSS recipes.
 
 - Separate `/addons/ui/dropdown` provides a native-popover combobox/grid of bounded actual page links, exact totals, raw-query full-results handoff, native editing/composition, coordinated opt-in shortcuts and guarded focus/lifecycle recovery. It borrows the application engine, has explicit `/addons/ui/dropdown.css` and no engine or DOM initialization on import.
@@ -34,6 +40,8 @@ This draft describes the complete implemented product. All packages remain priva
 - Separate `@vmitsaras/raveldex-english` analyzer package and `@vmitsaras/raveldex-astro` explicit static allowlist/build-hook/on-demand-loader package. Both require the exact core `0.1.0-rc.0` peer. Astro has an optional exact `astro@7.3.2` peer and Node `>=22.12.0`; core/English declare Node `>=22`.
 
 ### Documentation and evaluation
+
+- Five-presentation solution chooser and eight-project browser/Astro capability, loading, keyboard and cleanup guidance. Family qualification records installed native result/state/revision/lifecycle checks and scoped local gallery/CSS evidence separately from unrun human AT, physical input, actual zoom and deployment.
 
 - Inline/modal galleries explain complete browser/Astro adoption and reproducible CSS changes. Starter teardown guards authored status callbacks; modal loading handoffs and cancellation restore their logical opener, including closed loading-shell focus in WebKit.
 - Current [API reference](docs/api/README.md), executable installed-package examples, local documentation pilots, complete private-artifact setup instructions and scoped [support notes](docs/support/RX-4003.md).

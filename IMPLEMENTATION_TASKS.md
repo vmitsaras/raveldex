@@ -1827,7 +1827,7 @@ Deliver a working installed header search integration with a real inline full-re
 
 **Directory multi-filter queries and explicit URL state**
 
-**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7003%22)
+**Milestone:** N8 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7003%22)
 
 **Dependencies:** [RX-6008](IMPLEMENTATION_TASKS.md#rx-6008), [RX-2003](IMPLEMENTATION_TASKS.md#rx-2003)
 
@@ -1835,11 +1835,11 @@ Prove complete native directory membership/counts/paging and opt-in browser URL 
 
 **Expected affected areas**
 
-`src/addons/ui/`, `test/ui/`, `test/consumer/`, `test/fixtures/`, `docs/api/`. These are planning boundaries; create files only when this task needs them.
+`src/addons/ui/`, `test/ui/`, `test/consumer/`, `test/fixtures/`, `docs/api/`, `package.json`, `scripts/candidate-check.mjs`, `test/oracle/`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](docs/api/ADDONS.md)
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](docs/api/ADDONS.md), [DIRECTORY.md](docs/specs/DIRECTORY.md)
 
 **Acceptance criteria**
 
@@ -1859,14 +1859,15 @@ Prove complete native directory membership/counts/paging and opt-in browser URL 
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-7003.md](docs/evidence/RX-7003.md)
+- [docs/evidence/RX-7003-verification.json](docs/evidence/RX-7003-verification.json)
 
 
 ## RX-7004
 
 **Faceted directory controls and installed starter**
 
-**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22)
+**Milestone:** N8 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7004%22)
 
 **Dependencies:** [RX-7003](IMPLEMENTATION_TASKS.md#rx-7003)
 
@@ -1874,11 +1875,11 @@ Build a complete filterable resource-directory solution using the verified nativ
 
 **Expected affected areas**
 
-`src/addons/ui/`, `examples/`, `site/`, `scripts/lib/pages.mjs`, `docs/api/`, `test/ui/`, `test/consumer/`, `test/pages/`, `test/integrations/astro/`. These are planning boundaries; create files only when this task needs them.
+`src/addons/ui/`, `examples/`, `site/`, `scripts/lib/pages.mjs`, `docs/api/`, `test/ui/`, `test/consumer/`, `test/pages/`, `test/integrations/astro/`, `package.json`, `scripts/candidate-check.mjs`, `scripts/copy-ui-css.mjs`, `scripts/build-pages.mjs`, `scripts/lib/inline-starters.mjs`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DIRECTORY.md](docs/specs/DIRECTORY.md), [DIRECTORY_VIEW.md](docs/specs/DIRECTORY_VIEW.md)
 
 **Acceptance criteria**
 
@@ -1898,14 +1899,15 @@ Build a complete filterable resource-directory solution using the verified nativ
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-7004.md](docs/evidence/RX-7004.md)
+- [docs/evidence/RX-7004-verification.json](docs/evidence/RX-7004-verification.json)
 
 
 ## RX-7005
 
 **Rich directory result cards and grid presentation**
 
-**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22)
+**Milestone:** N8 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7005%22)
 
 **Dependencies:** [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004)
 
@@ -1913,11 +1915,11 @@ Add optional safe metadata/image presentation for editorial and catalogue result
 
 **Expected affected areas**
 
-`src/addons/ui/`, `examples/`, `site/`, `scripts/lib/pages.mjs`, `docs/api/`, `test/ui/`, `test/consumer/`, `test/pages/`. These are planning boundaries; create files only when this task needs them.
+`src/addons/ui/`, `examples/`, `site/`, `scripts/lib/pages.mjs`, `docs/api/`, `test/ui/`, `test/consumer/`, `test/pages/`, `package.json`, `scripts/candidate-check.mjs`, `scripts/copy-ui-css.mjs`, `scripts/preview-pages.mjs`, `scripts/build-pages.mjs`, `scripts/lib/inline-starters.mjs`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [DIRECTORY_CARDS.md](docs/specs/DIRECTORY_CARDS.md), [DIRECTORY_VIEW.md](docs/specs/DIRECTORY_VIEW.md)
 
 **Acceptance criteria**
 
@@ -1937,14 +1939,15 @@ Add optional safe metadata/image presentation for editorial and catalogue result
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-7005.md](docs/evidence/RX-7005.md)
+- [docs/evidence/RX-7005-verification.json](docs/evidence/RX-7005-verification.json)
 
 
 ## RX-7006
 
 **Complete solution gallery and family qualification**
 
-**Milestone:** N8 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22)
+**Milestone:** N8 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-7006%22)
 
 **Dependencies:** [RX-7002](IMPLEMENTATION_TASKS.md#rx-7002), [RX-7004](IMPLEMENTATION_TASKS.md#rx-7004), [RX-7005](IMPLEMENTATION_TASKS.md#rx-7005)
 
@@ -1952,11 +1955,11 @@ Finish the complete adoption path and verify shared correctness, interaction, op
 
 **Expected affected areas**
 
-`site/`, `examples/`, `docs/api/`, `integrations/astro/README.md`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+`site/`, `examples/`, `docs/api/`, `integrations/astro/README.md`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`, `scripts/build-pages.mjs`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [PAGE_SECTIONS.md](docs/specs/PAGE_SECTIONS.md), [DROPDOWN.md](docs/specs/DROPDOWN.md), [DIRECTORY.md](docs/specs/DIRECTORY.md), [DIRECTORY_VIEW.md](docs/specs/DIRECTORY_VIEW.md), [DIRECTORY_CARDS.md](docs/specs/DIRECTORY_CARDS.md)
 
 **Acceptance criteria**
 
@@ -1976,7 +1979,8 @@ Finish the complete adoption path and verify shared correctness, interaction, op
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-7006.md](docs/evidence/RX-7006.md)
+- [docs/evidence/RX-7006-verification.json](docs/evidence/RX-7006-verification.json)
 
 
 ## Deferred enhancement tasks

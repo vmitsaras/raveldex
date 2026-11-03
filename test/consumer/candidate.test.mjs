@@ -19,6 +19,8 @@ test('candidate package gate rejects public export expansion and missing exporte
   assert.throws(() => validateCandidateManifest(metadata, selectedFiles().filter(file => !file.path.endsWith('.css'))), /separate published CSS/);
   assert.throws(() => validateCandidateManifest(metadata, selectedFiles().filter(file => !file.path.endsWith('/inline.css'))), /separate published CSS/);
   assert.throws(() => validateCandidateManifest(metadata, selectedFiles().filter(file => !file.path.endsWith('/dropdown.css'))), /separate published CSS/);
+  assert.throws(() => validateCandidateManifest(metadata, selectedFiles().filter(file => !file.path.endsWith('/directory.css'))), /separate published CSS/);
+  assert.throws(() => validateCandidateManifest(metadata, selectedFiles().filter(file => !file.path.endsWith('/directory-cards.css'))), /separate published CSS/);
 });
 
 test('candidate package gate rejects hidden dependencies, publication exposure and bundled JS side effects', () => {
@@ -55,9 +57,9 @@ test('offline native candidate installs every entry, checks declarations/isolati
   const result = await verifyCandidate();
   try {
     assert.equal(result.report.status, 'Pass');
-    assert.equal(result.report.startup.outputs.length, 32);
-    assert.equal(result.report.types.surface.length, 32);
-    assert.equal(result.report.graphs.entries.length, 32);
+    assert.equal(result.report.startup.outputs.length, 35);
+    assert.equal(result.report.types.surface.length, 35);
+    assert.equal(result.report.graphs.entries.length, 35);
     assert.equal(result.report.documentation.sources.length, 7);
     assert.equal(result.report.documentation.browser.status, 'Pass');
     assert.equal(result.report.package.private, true);

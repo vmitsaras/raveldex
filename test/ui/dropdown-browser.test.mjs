@@ -354,6 +354,64 @@ test('Escape preserves the field; Tab leaves normally and the separate full-resu
     fullResultsOutsideGrid: await part('full-results').evaluate(n => !n.closest('[role="grid"]')) });
 });
 
+test('Escape dismisses from every owned control and restores editing focus when a result is removed', async () => {
+  for (const name of ['submit', 'clear', 'full-results', 'result-link']) {
+    await search('shared'); await matchIDs(['a', 'b', 'c', 'd', 'e']);
+    const target = name === 'result-link' ? popup().getByRole('link', { name: 'Alpha guide', exact: true }) : part(name);
+    await target.focus(); assert.equal(await expanded(), true);
+    await target.press('Escape');
+    assert.equal(await expanded(), false, `Escape dismisses from ${name}`);
+    assert.equal(await input().inputValue(), 'shared'); await clearActive();
+    assert.equal(await (name === 'result-link' ? input() : target).evaluate(node => node === document.activeElement), true);
+  }
+  observe('Escape across owned controls', { controls: ['submit', 'clear', 'full-results', 'result-link'], queryPreserved: true, removedResultFocusRecovered: true });
+});
+
+test('Tab dismisses from owned actions without preventing native traversal', async () => {
+  for (const name of ['submit', 'clear', 'full-results']) {
+    await search('shared'); await matchIDs(['a', 'b', 'c', 'd', 'e']);
+    const target = part(name); await target.focus();
+    await page.evaluate(() => { window.dismissalTabPrevented = undefined; document.addEventListener('keydown', event => { if (event.key === 'Tab') window.dismissalTabPrevented = event.defaultPrevented; }, { once: true }); });
+    await target.press('Tab');
+    assert.equal(await expanded(), false, `Tab dismisses from ${name}`);
+    assert.equal(await page.evaluate(() => window.dismissalTabPrevented), false);
+    assert.equal(await input().inputValue(), 'shared'); await clearActive();
+  }
+  observe('Tab across owned actions', { controls: ['submit', 'clear', 'full-results'], defaultPrevented: false, queryPreserved: true });
+});
+
+test('result dismissal cannot close a newer search started by an authored focus callback', async () => {
+  await search('shared'); await matchIDs(['a', 'b', 'c', 'd', 'e']);
+  const link = popup().getByRole('link', { name: 'Alpha guide', exact: true }); await link.focus();
+  await input().evaluate(node => node.addEventListener('focus', () => { void window.dropdownHarness.handle.search('other'); }, { once: true }));
+  await link.press('Escape'); await matchIDs(['other']);
+  assert.equal(await expanded(), true); assert.equal(await input().inputValue(), 'other');
+  assert.equal(await input().evaluate(node => node === document.activeElement), true); await clearActive();
+  observe('dismissal focus reentry', { newerQuery: 'other', currentIDs: ['other'], expanded: true });
+});
+
+test('Tab from a focused result preserves the same native destination as the plain document', async () => {
+  const destination = target => target.evaluate(() => ({ tag: document.activeElement.tagName, id: document.activeElement.id, classes: document.activeElement.className }));
+  for (const chord of ['Tab', 'Shift+Tab']) {
+    await search('shared'); await matchIDs(['a', 'b', 'c', 'd', 'e']);
+    const html = await page.evaluate(() => { const clone = document.documentElement.cloneNode(true); clone.querySelectorAll('script').forEach(script => script.remove()); return '<!doctype html>' + clone.outerHTML; });
+    const native = await context.newPage();
+    let expected;
+    try {
+      await native.goto(origin + '/native-controls/'); await native.setContent(html);
+      await native.locator('.raveldex-dropdown__popup').evaluate(node => node.showPopover());
+      await native.locator('.raveldex-dropdown__link').first().focus(); await native.keyboard.press(chord); expected = await destination(native);
+    } finally { await native.close(); }
+    await page.bringToFront(); await search('shared'); await matchIDs(['a', 'b', 'c', 'd', 'e']);
+    await popup().getByRole('link', { name: 'Alpha guide', exact: true }).focus();
+    await page.keyboard.press(chord);
+    assert.equal(await expanded(), false, `${chord} dismisses the popup`);
+    assert.deepEqual(await destination(page), expected, `${chord} retains the ordinary browser traversal destination`);
+    assert.equal(await input().inputValue(), 'shared');
+    observe('native result traversal ' + chord, { expected, actual: await destination(page), plainBaselineHasNoRaveldexHandlers: true });
+  }
+});
+
 test('composition suppresses interim submit/navigation and performs one committed native search', async () => {
   await search('shared'); await input().press('ArrowDown'); const before = (await calls()).length;
   await input().evaluate(node => {

@@ -145,7 +145,7 @@ Load more appends the next native batch without changing its order or exact tota
 
 Changing the query or a filter resets accumulation. Paging checks the native revision; if the index changed, the UI clears old hits/counts and offers Retry from the first window with the query and selections retained. It also requires the snippet reply to match the main reply's revision, IDs, scores and total before committing hits or counts. It does not subscribe to external mutations; a later search/paging action revalidates current state. Native search/provider/transport failure is shown as failure, never as a successful empty result.
 
-Each string facet uses a native select with an All choice. Empty strings are valid distinct values; null/missing buckets are informational unavailable options. Counts apply before hit paging and include every active filter. At most 100 buckets per field are displayed; the summary exposes omitted buckets. A selected value stays available when outside the displayed projection, without an invented count. Multi-selection and own-group-excluding counts belong to a later directory solution.
+Each string facet uses a native select with an All choice. Empty strings are valid distinct values; null/missing buckets are informational unavailable options. Counts apply before hit paging and include every active filter. At most 100 buckets per field are displayed; the summary exposes omitted buckets. A selected value stays available when outside the displayed projection, without an invented count. The separate [directory controller](#directory-queries-and-url-state) supports multi-selection; own-group-excluding counts remain outside its scope.
 
 Explicit snippets use only the new batch of IDs, never all accumulated IDs. Returned text is original source, with validated marks at returned UTF-16 offsets and visible omission notices for undisplayed matches, window/highlight limits and oversized matches. Offsets alone do not supply the original text. A snippet failure clears the whole attempted presentation rather than mixing stale or incomplete context with a successful result list.
 
@@ -286,9 +286,207 @@ The complete [header starter](../../examples/dropdown-browser/README.md) uses `c
 
 Set the starter's `modalHandoff` flag to `true` only when you want its explicit larger-search button. The button transfers the committed header text to a modal using the same page owner, display records and mode. It adds no global shortcut, second engine or automatic width switch. The supplied bundle imports all three optional UI styles and presenters so this flag needs only a configuration edit and rebuild; this is the starter's selected bundle cost, not the cost of importing `/addons/ui/dropdown` alone. A new page navigation loads that page's own owner; the controller destroys its borrowed surfaces before releasing it.
 
+## Directory queries and URL state
+
+Import `createDirectory` from `/addons/ui/directory` to compose text, multi-selected string filters and native pages around an existing engine. This nonvisual entry exposes state and results. The separate [directory view](#directory-controls-and-styling) supplies controls and explicit CSS; [complete browser/Astro projects](../../site/Directory.astro) provide installed adoption. Install filters and facets explicitly for the configured groups. With no groups, core alone is enough.
+
+Save this complete example as an ESM module in your installed application and run it with Node. Both `guide` and `manual` are selected within the same group, so either may match. Additional groups combine with AND, as does the text query.
+
+```js
+import { createRaveldex } from '@vmitsaras/raveldex';
+import { createFilters } from '@vmitsaras/raveldex/addons/filters';
+import { createFacets } from '@vmitsaras/raveldex/addons/facets';
+import { createDirectory } from '@vmitsaras/raveldex/addons/ui/directory';
+
+const engine = createRaveldex({
+  schema: { text: { title: {} }, metadata: { kind: { type: 'string' } } },
+  addons: [createFilters({ fields: ['kind'] }), createFacets({ fields: ['kind'] })],
+});
+const directory = createDirectory({
+  engine, groups: [{ field: 'kind', values: ['guide', 'manual'] }], pageSize: 20,
+});
+try {
+  await engine.addMany([
+    { id: 'a', text: { title: 'Install guide' }, metadata: { kind: 'guide' } },
+    { id: 'b', text: { title: 'Install manual' }, metadata: { kind: 'manual' } },
+  ]);
+  await directory.update({ text: 'inst', filters: { kind: ['guide', 'manual'] } });
+  const snapshot = directory.getSnapshot();
+  if (snapshot.status !== 'ready') throw new Error(snapshot.error ?? snapshot.status);
+  console.log(snapshot.result.total, snapshot.result.hits.map(hit => hit.id));
+} finally {
+  directory.destroy();
+  await engine.dispose();
+}
+```
+
+This prints `2` and the IDs `a`, `b`. Construction is inert. `refresh()` starts an empty browse or refreshes the current query at page one. The default mode completes the final word; `mode: 'text'` selects exact words. `update({ text?, filters? })` applies effective edits and resets to page one. A supplied filters object replaces all selections; omitted groups become empty. Equivalent ready/loading state is inert. `setPage(2)` requests the second native page; `restore({ text, filters, page })` admits a complete external state. These operations return Promises; read failures from the resulting snapshot. Invalid command input throws before changing state.
+
+Snapshots contain captured readonly state, status, change reason and a result only when ready. `result.total` and `result.hits` retain native totals, ranking and tie order. `result.facets` counts the complete qualifying set before paging, including each group's own active selections. Counts describe the current conjunction, not the effect of adding another choice. `result.selected[field]` retains selected strings with a count of zero when absent from a complete projection, or `null` when the truncated buckets cannot establish their count. Null/missing metadata buckets are informational, not selectable strings.
+
+Use `subscribe(snapshot => { ... })` to observe transitions; subscription does not invoke an initial callback. At most 64 distinct listeners are supported, including a connected URL binding. Exceptions from an observer do not cancel search. Old responses cannot overwrite newer intent. Paging/replaying the same query across a changed revision reports `stale` with `REVISION_MISMATCH`, clears results and resets page one; explicitly call `refresh()` to accept the new revision. Out-of-range restored pages recover once to page one. Destroy cancels work and releases observers; dispose the borrowed engine separately.
+
+### Connect URL state explicitly
+
+For a long-lived browser controller, add this fragment after creating it and before its initial query. Keep the returned binding for cleanup. Use a real HTTP(S) `window`; there is no ambient URL discovery.
+
+```js
+import { connectDirectoryURL } from '@vmitsaras/raveldex/addons/ui/directory';
+
+const url = connectDirectoryURL({
+  controller: directory,
+  host: window,
+  parameters: { query: 'q', page: 'page', filters: { kind: 'kind' } },
+  history: 'replace',
+});
+await url.read();
+// When removing this integration, before destroying directory:
+// url.destroy();
+```
+
+Connection claims names/listens without reading or searching. `read()` admits initial state; native Back/Forward subsequently replays it. The default policy replaces the current entry. Choose `history: 'push'` for explicit committed edits/page changes when traversable entries are wanted; the application controls when to call `update`, so avoid committing every keystroke with that policy. Replay and corrections always replace, with no new traversal entries. `url.write()` retries the current state with replace after a refused write; it does not query or reload an older URL.
+
+Only the mapped query/page/filter names are owned. Unrelated raw query bytes/order, path, hash and `history.state` survive. A controller can have one binding; multiple controllers may use disjoint names on the same host. Overlap rejects before mutation. Destroying a binding releases its claims/listener while retaining the URL and in-memory controller; controller destruction also disconnects it.
+
+Admission bounds are eight groups, 128 allowed strings per group, sixteen selected per group, 1,024 units per string, 65,536 aggregate configuration units and 8,192 selected units. Raw single-line text is at most 2,048 UTF-16 units; page size is 1..100 and pages stay inside the 10,000-document native ceiling. Selected empty strings are valid. URL names are unique bounded ASCII identifiers; href is at most 65,536 units and owned encoded segments at most 16,384. Native reduced limits/capability errors remain explicit.
+
+Invalid/duplicate query or page values reset that field; unknown/duplicate filter values are dropped, excess selections reset their group, and aggregate selection overflow clears filters while retaining admitted text. Any correction resets page one and records bounded `url.getSnapshot().issues`. An oversized owned encoding resets all owned state; a whole-URL or history failure leaves the URL unchanged and reports an error. In-memory search stays usable. There is no storage, telemetry, search-history feature, disjunctive counting or new sorting. The [concrete directory contract](../specs/DIRECTORY.md) records recovery, ownership and lifecycle details.
+
+## Directory controls and styling
+
+Copy the [complete browser or Astro resource directory](../../site/Directory.astro) for a working project with explicit records, actual destination pages, checkbox groups, chips and native page navigation. The browser example indexes its own public JSON; Astro builds an explicit static allowlist and loads matching source/display artifacts on Enable. Both use the same native controller semantics and include loading/Retry, optional URL ownership and teardown.
+
+To add controls to an existing long-lived browser controller, use this fragment after creating it. Supply your own connected HTML `root`, live `directory`, matching `{id,title,url}` `documents` and labels for its configured groups. The complete projects above include that setup; this fragment is not a standalone application.
+
+```js
+import { mountRaveldexDirectory } from '@vmitsaras/raveldex/addons/ui/directory/view';
+import '@vmitsaras/raveldex/addons/ui/directory.css';
+
+const view = mountRaveldexDirectory({
+  root,
+  controller: directory,
+  documents,
+  groups: [{ field: 'kind', label: 'Resource type', values: [
+    { value: 'guide', label: 'Guides' },
+    { value: 'manual', label: 'Manuals' },
+  ] }],
+});
+await directory.refresh();
+// When removing the controls, before separately destroying directory:
+// view.destroy();
+```
+
+Mount reads the current snapshot and starts no query. It borrows the controller; destroying the view never destroys the controller or engine. Destroy restores the original Node objects when its shell still owns the root, leaves an application's foreign replacement intact and stops timers/listeners/observation. Controller destruction also tears down the view. Same-kind duplicate mount returns its existing handle; destroy/remount to change options. Another UI preset cannot own that root at the same time. Foreign-document adoption suspends commands/presentation; teardown stays available. Focus reads the supplied root's own document/shadow tree; a shadow-root caller also supplies its stylesheet inside that tree.
+
+`DirectoryViewOptions` requires `root`, `controller`, `documents` and `groups`. Supply exactly one `{field,label,values?}` label group for every configured controller field. `values` is an optional list of `{value,label}` mappings for allowed strings; other visible strings keep their raw labels and an empty string has an explicit empty label. Supply a readable mapping for a nonempty whitespace/control-only value. `debounceMs` defaults to 150, integer 0..2000. `filtersOpen` defaults false at every width; native disclosure state is not changed on resize. A `messages` partial bundle supplies captured plain-text labels/status templates, including `label`, `placeholder`, `clear`, `filters`, `remove`, `results`, `resultOne`, `page`, `error`, `stale` and `retry`. Unknown keys, getters and invalid strings refuse before replacing authored content. Messages/explicit value labels are at most 512 UTF-16 units; group labels at most 256. Default raw value labels retain the controller's 1,024-unit value bound. Display documents retain 10,000-entry / 4,000,000 aggregate units and 256/1,024/2,048 ID/title/URL limits. URLs must resolve to HTTP(S) without credentials.
+
+The handle has `search(text?)`, `clear()` and `destroy()`. Search with no argument flushes current controls after composition; explicit validated text cancels draft composition and preserves committed filters. Clear removes text and all selections, resets page one and browses resources. Both return operation Promises; later commands after destroy do nothing. Controller/native errors appear as visible status with Refresh results. A missing display ID refuses visibly, preserving exact totals rather than silently dropping a result. An over-limit selection restores the last admitted controls with a readable message.
+
+Native labeled checkboxes remain in place while counts/results update. Counts include all active filters and the group's own selections before paging; an absent bucket is zero only with a complete projection, otherwise its count is unavailable. Zero choices remain enabled, and selected zero/omitted values stay removable. The permanent count explanation distinguishes the current conjunction from the effect of adding another OR choice. Missing/null buckets are not selectable strings.
+
+Selected filters form a list of named removal buttons. Removing a focused or activated chip focuses the next surviving chip, previous chip or search input. Stable checkbox/page/Clear controls preserve existing focus. If a removed result held focus, focus recovers to the search input, with reentry checked before presentation continues. Filter resources uses native details/summary: open it normally, then Close filters or Escape inside it closes and restores summary focus. There is no focus trap or automatic resize dismissal. Waiting/composition/loading, exact current totals, no results, invalid selections, native failures and stale revisions have deliberate status outside the busy result section. An older asynchronous recovery cannot discard newer provisional text; external controller/URL replay wins over a pending draft.
+
+Import CSS explicitly, then override the component's public properties in your own stylesheet:
+
+```css
+.raveldex-directory {
+  --raveldex-directory-accent: #145b45;
+  --raveldex-directory-button-color: #fff;
+  --raveldex-directory-radius: .75rem;
+  --raveldex-directory-gap: 1.25rem;
+}
+```
+
+| Public property | Light default | Purpose |
+| --- | --- | --- |
+| `--raveldex-directory-accent` | `#1544a3` | Links, submit background and checkbox accent |
+| `--raveldex-directory-background` | `#fff` | Surface/control background |
+| `--raveldex-directory-color` | `#182339` | Main text |
+| `--raveldex-directory-muted` | `#46526b` | Counts and explanations |
+| `--raveldex-directory-border` | `#778398` | Borders and separators |
+| `--raveldex-directory-focus` | `#1544a3` | Visible focus outline |
+| `--raveldex-directory-button-color` | `#fff` | Text on the accent submit button |
+| `--raveldex-directory-radius` | `.5rem` | Control/surface corners |
+| `--raveldex-directory-gap` | `1rem` | Group/chip/result spacing |
+| `--raveldex-directory-padding` | `1rem` | Surface padding |
+
+Dark media uses a dark surface, light text and a light accent with dark submit text. Forced colors retains the native system palette. There is no animated transition; reduced-motion styling remains static. Set related colors together when changing the palette. Public classes use `.raveldex-directory__*`; private `--_` variables and data hooks are implementation details. The [concrete view contract](../specs/DIRECTORY_VIEW.md) owns precise lifecycle, focus and finite bounds.
+
+The complete starters explicitly select URL synchronization and push for committed edits/pages. Choose replace for live edits in one entry, or turn `urlState` off for an in-memory directory. They keep unrelated parameters/hash/history state, show a notice for corrected links, and expose **Update search link** when writing the URL fails; this retries current state without querying again. Native Back/Forward is separate from the scripted pagehide/persisted-pageshow cleanup probes. No storage, telemetry, search-history feature, rich cards/images or new sorting is selected. Human AT speech, physical input/mobile keyboards, actual browser zoom and Safari/device support need separate application checks.
+
+## Rich directory results
+
+Copy the [complete rich-results browser project](../../site/Cards.astro) to start with real resource pages, metadata mapping, local image assets and CSS you can edit. Its layout, density and image controls keep the same directory page and filter selection. Images start off. The basic browser/Astro directories remain available when you need linked titles and controls alone.
+
+For an existing browser controller, use this fragment after creating your own connected HTML `root`, live `directory`, matching display records and group labels. The complete project above includes indexing, loading/Retry, optional URL replay and ownership-safe cleanup; this fragment supplies just the rich view.
+
+```js
+import { mountRaveldexDirectoryCards } from '@vmitsaras/raveldex/addons/ui/directory/cards';
+import '@vmitsaras/raveldex/addons/ui/directory.css';
+import '@vmitsaras/raveldex/addons/ui/directory-cards.css';
+
+const view = mountRaveldexDirectoryCards({
+  root,
+  controller: directory,
+  documents: [{
+    id: 'route:river', title: 'Riverside walking guide', url: '/resources/river/',
+    excerpt: 'Plan a route with level paths and rest stops.',
+    category: 'Route guide', breadcrumb: ['Resources', 'Walking'],
+    date: 'Updated November 2026',
+    fields: [{ name: 'Distance', value: '5 km' }],
+    image: { src: '/images/river.jpg', alt: 'Level path beside the river', width: 640, height: 400 },
+  }],
+  groups,
+  presentation: { layout: 'cards', density: 'comfortable', images: false },
+  imageUnavailable: 'Image unavailable',
+});
+await directory.refresh();
+view.setPresentation({ layout: 'grid', density: 'compact' });
+// Only this explicit change permits image requests for the current result page:
+view.setPresentation({ images: true });
+console.log(view.getPresentation());
+// When removing the view, before separately destroying its controller:
+// view.destroy();
+```
+
+Map your public content to `DirectoryCardDocument` records: required `{id,title,url}`, optional `excerpt`, `category`, ordered plain-text `breadcrumb`, already localized `date`, at most four `{name,value}` fields, and an optional `{src,alt,width,height}` image. Optional empty excerpt/category/date strings produce no output. Omit unavailable breadcrumb/field entries. Dates are shown as supplied text; the view does not parse dates or invent ancestor links. It accepts no HTML templates or renderer callbacks. Keep a matching display record for every possible native match.
+
+Admission happens before replacing authored content. Titles and metadata are inserted as text. Result and image URLs resolve to HTTP(S) without credentials, including image data captured while images are disabled. Every image needs a deliberate alternative: `alt: ''` is decorative, otherwise use readable descriptive text. Width/height are required integers 1..4096 and reserve aspect ratio. There are at most 10,000 records and 4,000,000 captured string units, with finite admission work. ID/title/URL limits remain 256/1024/2048 UTF-16 units; excerpts allow 4096, category/date 256, up to eight breadcrumb parts of 256, field names 128 and values 1024, image source 2048 and alt 1024. Unknown keys, getters, duplicate IDs/field names, unreadable nonempty text and invalid image data refuse. `imageUnavailable` is readable localized text of at most 512 units. The [display contract](../specs/DIRECTORY_CARDS.md) records exact bounds and lifecycle behavior.
+
+`presentation` is a partial `{layout,density,images}`. Defaults are `list`, `comfortable`, false. Layout choices are `list`, `cards`, `grid`; density choices are `compact`, `comfortable`. `getPresentation()` returns a frozen complete snapshot. `setPresentation(partial)` validates first, then changes presentation synchronously without another search/history entry, without reordering results and without losing the existing title-link Nodes/focus. Query, filters, selected chips, page and exact totals remain native. CSS grid uses the same ordered list and ordinary links, with no interactive ARIA grid or extra keyboard model.
+
+Images use native lazy loading, asynchronous decoding and no-referrer policy. Only the current displayed page can create image elements after explicit opt-in. Disabling removes them and their callbacks; it cannot undo a request already sent. Enabling again may create a new request. The browser controls lazy-load timing and caching. A failed informative image shows localized failure text with its authored alternative; a failed decorative image disappears silently. Titles, metadata and links remain usable. There is no automatic alternate source or retry. Teardown clears image listeners as well as the base controls; late detached image events cannot update a newer page or restored/foreign markup. Controller and engine ownership stay with the application.
+
+Import both stylesheets, then edit your own CSS. These properties control the rich layer; the existing directory palette, font, focus and control properties still apply:
+
+```css
+.raveldex-directory-cards {
+  --raveldex-directory-card-min-width: 18rem;
+  --raveldex-directory-card-radius: .85rem;
+  --raveldex-directory-card-gap: 1.25rem;
+  --raveldex-directory-card-padding: 1.25rem;
+  --raveldex-directory-card-compact-padding: .75rem;
+  --raveldex-directory-card-image-fit: contain;
+}
+```
+
+| Public property | Default | Purpose |
+| --- | --- | --- |
+| `--raveldex-directory-card-min-width` | `16rem` | Preferred grid column minimum, bounded by available width |
+| `--raveldex-directory-card-gap` | `1rem`; `.65rem` compact | Card/grid spacing |
+| `--raveldex-directory-card-radius` | `.5rem` | Card/image corners |
+| `--raveldex-directory-card-padding` | `1rem` | Comfortable card padding |
+| `--raveldex-directory-card-compact-padding` | `.6rem` | Compact card padding |
+| `--raveldex-directory-card-background` | Directory surface | Card surface |
+| `--raveldex-directory-card-border` | Directory border | Card/image borders |
+| `--raveldex-directory-card-image-height` | `auto` | Optional image-frame height; auto uses authored aspect ratio |
+| `--raveldex-directory-card-image-fit` | `cover` | Image fitting within reserved space |
+
+The public rich classes use `.raveldex-directory-cards__*` alongside the base `.raveldex-directory__*`. Keep internal `--_` variables and data hooks private. Long text/RTL, narrow layout, dark/forced colors and reduced motion retain semantic source order and visible focus. Check your actual colors, image crops/alternatives, browser zoom, devices and assistive technology after changing content or CSS. Graph/CSS bytes, DOM counts and observed requests are separate measurements from memory, latency or paint.
+
 ## Starter adoption and local checks
 
-Choose the [inline gallery](../../site/Inline.astro) for results in a page, the [modal gallery](../../site/Modal.astro) for documentation search behind a button, or the [header gallery](../../site/Dropdown.astro) for a compact field and full-results route. Inline and documentation-modal galleries offer browser/Astro projects; the header gallery offers one plain-browser project. Each has complete source downloads, a live installed preview and a small CSS walkthrough. Packages remain private and unpublished: install the matching local tarballs in the setup guide, with its pinned build tooling, before building the copied project.
+Choose the [inline gallery](../../site/Inline.astro) for simple results in a page, the [modal gallery](../../site/Modal.astro) for documentation search behind a button, the [header gallery](../../site/Dropdown.astro) for a compact field and full-results route, the [directory gallery](../../site/Directory.astro) for checkbox groups/chips/pages and optional URL replay, or [rich directory results](../../site/Cards.astro) for metadata and explicit images in list/card/grid layouts. Inline, modal and directory offer complete browser/Astro projects; the header and rich-results galleries offer browser projects. Each has complete source downloads, a live installed preview and a CSS walkthrough. Packages remain private and unpublished: install the matching local tarballs in the setup guide, with its pinned build tooling, before building the copied project.
 
 | Starter | Selected capabilities and application requirements |
 | --- | --- |
@@ -297,6 +495,23 @@ Choose the [inline gallery](../../site/Inline.astro) for results in a page, the 
 | Browser modal | Native `dialog`, `Intl.Segmenter` and Web Crypto over HTTPS or localhost. Explicit original body/section evidence, page maps, string category facets and real authored heading IDs. |
 | Astro modal | The same modal requirements plus the static source loader and matching core/Astro packages. Source, display and the source-only section companion must belong to the same build/base; maps bind to the receiving owner revision. |
 | Browser dropdown header | Browser ESM/fetch and native Popover; core-only linked titles, one owner per page and the same prefix mode on its real inline full-results route. Optional explicit modal handoff additionally requires native `dialog`. No source/snippet/facet/section provider or Web Crypto requirement. |
+| Browser directory | Browser ESM/fetch, native details/form controls, explicitly installed set filters/facets, one controller and optional named URL binding. No snippet/source provider, worker, storage or Web Crypto requirement. |
+| Astro directory | The same directory controls plus the source-format static loader and paired core/Astro packages. Original title/body source is retained for reconstruction; Web Crypto over HTTPS/localhost validates matching artifacts. |
+| Browser rich directory | The browser directory controller plus explicitly mapped metadata and the optional cards renderer/CSS. Native image loading requires an explicit image-view choice; local authored assets and complete resource routes are included. |
+
+The [solution chooser](../../examples/README.md) compares all five presentations and all eight complete projects, with their exact data, loading, CSS and keyboard requirements. Every supplied project uses direct main-thread execution. Browser inline/header/directory/rich projects start loading on page initialization; Astro inline/directory wait for their Enable button; documentation modals load on first open. These are complete local indexes, with no route crawling, index shards or automatic worker fallback.
+
+All starters select final-word prefix matching. Complete earlier terms remain exact; a final term with fewer than two normalized code points also stays exact. Empty inline/modal/header search is idle; directory/rich search deliberately browses all records. Selecting a filter may browse without text. Inline/modal results use bounded Load more windows and continuation; header results are a bounded window with a real full-results route, while directory/rich controls use complete native pages. Result totals always count matching native records/pages; section previews do not add matches. Layout, density and image choices preserve directory state.
+
+| Presentation | Ordinary keyboard/focus behavior | Recovery and ownership |
+| --- | --- | --- |
+| Inline | Native input editing, composition, Tab, form submission and ordinary result links | Clear returns to idle; Retry search restarts against the current collection. Destroy restores authored content and leaves a borrowed engine usable. |
+| Documentation modal | Trigger opens native dialog; closing restores its logical opener. Escape follows native search/dialog behavior and may clear a focused search field first; Close search remains available. Optional shortcut bindings are explicit. | First-open loading can cancel/retry; closing retains or resets query as configured. Destroy the dialog before disposing its owner. |
+| Compact header | Native editing/composition, virtual arrow selection, Enter on the current link, Escape dismissal and ordinary Tab exit | See all results preserves the raw query in the full-results route. Loading/Retry and optional modal handoff share the page owner. |
+| Directory | Native grouped checkboxes, named chip removal, complete-page buttons; Close/Escape restores the filter disclosure summary | Unknown counts stay unknown; selected zero/omitted values stay removable. Explicit URL replay wins over drafts, with visible address-write recovery. |
+| Rich directory | The same directory behavior with ordinary list links and native presentation controls; CSS grid adds no ARIA grid keyboard model | Presentation changes retain anchor focus and native state. Images require explicit opt-in; failure keeps text/links usable. |
+
+Native link traversal follows the browser/OS keyboard preference. In the automated macOS WebKit environment, Option+Tab traverses ordinary links; this is measured in an unstyled baseline without changing preferences. Check the behavior and speech in your actual browser/assistive-technology combination.
 
 Replace public sample records with your own IDs, original text and real destinations. Keep maps, ranges and heading IDs aligned; native totals, scores and paging still count pages. Do not add private content to generated assets. Title/link-only search can omit snippet/section/facet UI options and their matching optional registrations together. Astro source reconstruction still needs original values for all declared text fields. Deploy the complete rebuilt output with one consistent base and build identity.
 

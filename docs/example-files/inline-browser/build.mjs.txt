@@ -13,6 +13,7 @@ const escape = text => String(text).replaceAll('&', '&amp;').replaceAll('<', '&l
 const seen = new Set(), paths = new Set();
 for (const entry of entries) {
   if (!entry || !['id', 'title', 'body', 'category', 'path'].every(key => typeof entry[key] === 'string')
+    || !entry.title.trim() || entry.title.length > 1024 || !entry.title.isWellFormed()
     || !entry.id || seen.has(entry.id) || paths.has(entry.path) || !/^\/guides\/[a-z0-9-]+\/$/.test(entry.path)) throw new Error('Invalid or duplicate guide');
   seen.add(entry.id); paths.add(entry.path);
 }

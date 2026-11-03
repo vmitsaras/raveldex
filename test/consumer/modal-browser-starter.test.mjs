@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { before, after, test } from 'node:test';
 import { cp, readFile, writeFile, realpath } from 'node:fs/promises';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
 import { once } from 'node:events';
@@ -337,4 +338,34 @@ test('authored status disconnection can destroy during initial or failure text w
   },site.base);
   assert.deepEqual(cases,[{stage:'initial',loads:0,open:false,retryHidden:true,stable:true,mounted:0,loadsAfterTrigger:0},{stage:'failure',loads:1,open:false,retryHidden:true,stable:true,mounted:0,loadsAfterTrigger:1},{stage:'raw close abort destroy',loads:1,disposed:1,open:false,retryHidden:true,afterAbort:'Destroyed by abort'}]);
   record('authored status reentry',cases);await page.close();
+});
+
+
+test('copied content preparation and build refuse unusable titles and blank section headings without replacing useful pages', async () => {
+  const site = sites[0], contentPath = join(site.directory, 'content.json');
+  const original = await readFile(contentPath, 'utf8');
+  const output = await readFile(join(site.directory, 'dist/index.html'), 'utf8');
+  const { preparePages } = await import(pathToFileURL(join(site.directory, 'content.mjs')).href);
+  const valid = JSON.parse(original); valid[0].title = '  A valid authored title  ';
+  assert.equal(preparePages(valid)[0].title, valid[0].title, 'Valid title whitespace is preserved');
+  try {
+    for (const title of ['', ' \t ', 'x'.repeat(1025), '\ud800']) {
+      const content = JSON.parse(original); content[0].title = title;
+      assert.throws(() => preparePages(content), /Invalid or duplicate page/);
+      await writeFile(contentPath, JSON.stringify(content));
+      await assert.rejects(command(process.execPath, ['build.mjs'], site.directory), /Invalid or duplicate page/);
+      assert.equal(await readFile(join(site.directory, 'dist/index.html'), 'utf8'), output);
+    }
+    const invalidHeading = JSON.parse(original); invalidHeading[0].sections[0].heading = ' \t ';
+    assert.throws(() => preparePages(invalidHeading), /Invalid or duplicate section/);
+    await writeFile(contentPath, JSON.stringify(invalidHeading));
+    await assert.rejects(command(process.execPath, ['build.mjs'], site.directory), /Invalid or duplicate section/);
+    assert.equal(await readFile(join(site.directory, 'dist/index.html'), 'utf8'), output);
+  } finally {
+    await writeFile(contentPath, original);
+    await command(process.execPath, ['build.mjs'], site.directory);
+    await build({ absWorkingDir: site.directory, entryPoints: ['lifecycle-entry.mjs'], outfile: 'dist/assets/lifecycle.js',
+      bundle: true, platform: 'browser', format: 'esm', target: 'es2022', logLevel: 'silent' });
+  }
+  record('unusable title content/build refusal', { cases: ['empty', 'whitespace', 'overlong', 'malformed UTF-16'], priorOutputPreserved: true, validWhitespacePreserved: true, sharedBuildAndLoadValidation: true, blankSectionHeadingRefused: true });
 });

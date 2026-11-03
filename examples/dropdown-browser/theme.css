@@ -8,7 +8,7 @@ li { margin-block: .5rem; }
 button { min-height: 2.75rem; max-inline-size: 100%; padding: .6rem .9rem; font: inherit; overflow-wrap: anywhere; }
 :focus-visible { outline: 3px solid #755000; outline-offset: 3px; }
 .skip { position: absolute; z-index: 2; left: 1rem; top: 1rem; transform: translateY(-180%); }
-.skip:focus { transform: none; }
+.skip:focus { transform: none; display: inline-flex; align-items: center; inline-size: calc(100% - 2rem); min-block-size: 2.75rem; padding: .5rem .75rem; background: #fff; }
 .guide-header { border-block-end: 1px solid #a4b9ad; background: #fff; }
 .guide-header__inner { max-width: 66rem; margin-inline: auto; padding: 1rem; display: flex; align-items: start; gap: 1.5rem; }
 .guide-header__brand { flex: 0 0 auto; font-size: 1.2rem; font-weight: 750; padding-block: .8rem; }
@@ -60,6 +60,7 @@ h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.12; overflow-wrap: anyw
 @media (prefers-color-scheme: dark) {
   :root { color-scheme: dark; color: #edf5ef; background: #14231b; }
   a { color: #a4e0bd; }
+  .skip:focus { background: #1c3025; }
   :focus-visible { outline-color: #f9ce77; }
   .guide-header { background: #1c3025; border-color: #7fa28b; }
   .raveldex-dropdown {
@@ -92,5 +93,6 @@ h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.12; overflow-wrap: anyw
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
 @media (forced-colors: active) {
   :focus-visible { outline-color: Highlight; }
+  .skip:focus { color: LinkText; background: Canvas; }
   .guide-header { border-color: CanvasText; }
 }

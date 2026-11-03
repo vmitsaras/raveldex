@@ -11,6 +11,7 @@ export async function loadGuides(contentUrl, signal) {
   const seen = new Set();
   for (const entry of entries) {
     if (!entry || !['id', 'title', 'body', 'category', 'path'].every(key => typeof entry[key] === 'string')
+      || !entry.title.trim() || entry.title.length > 1024 || !entry.title.isWellFormed()
       || !entry.id || seen.has(entry.id) || !/^\/guides\/[a-z0-9-]+\/$/.test(entry.path)) throw new Error('Invalid guide record');
     seen.add(entry.id);
   }

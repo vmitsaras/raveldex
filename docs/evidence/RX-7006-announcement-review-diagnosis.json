@@ -1,0 +1,102 @@
+{
+  "kind": "raveldex-rx7006-independent-announcement-test-diagnosis-v1",
+  "recordedAt": "2026-11-02T21:51:49.277223+00:00",
+  "classification": "test/evaluation defect: the test issues two legitimate search commands against a one-shot injected failure and may accept a prior publication while the second command is running",
+  "productionDefectFound": false,
+  "repoEditedByReviewer": false,
+  "sourceSHA256": {
+    "test/ui/announcements-browser.test.mjs": "6bda94ba82f60df914af87103b9abfae47b6e2f35b19b1bb7da6c455b9c133dc",
+    "test/qualification/browser-announcements.mjs": "4344f5ed33fba6395022fef78644218e1673a0bad44f21acfa83aa58887fcb4a",
+    "test/ui/fixture-entry.mjs": "fddbebc75c2ed0ecf25ffee7d283f4d73e595b65a9f15821338789791a820b5b",
+    "test/qualification/browser-ui-driver.mjs": "ecc4021f60ff7cc7e358113429355ff16bc597add5986ef2341b0b5ad9a13f92",
+    "test/qualification/browser-serve.mjs": "f502da5d5820570255176ca94e0c2c7a3df51780da7a72af57922bdd60d1146c",
+    "src/addons/ui/ui.ts": "3e0a0fe767ded0eba26e846fe9edc1adb848ba57dde59736ec903eadbf1bd53e",
+    "src/addons/ui/options.ts": "acab6fe698bd2f7fcdae782c66863414e11f8d93d0f61121ddd44ef6e5b65c8c"
+  },
+  "artifacts": {
+    "announcement-race-probe.mjs": "dffd60a693307acb41ce3cf65c81dcfd9f4b2e54bc0f6d4a2a68289a7aa2e4a5",
+    "announcement-race-probe.json": "a944d0ff31efe466baa4a12c1fa8cf019e31989ec564225fab3061f00a410e58",
+    "announcement-fill-only-probe.mjs": "1f36837b34e98ed9cae049ef20ce72936e7389026b20f92c5a3325f3b3113b05",
+    "announcement-fill-only-probe.json": "4104dd1e714a8c762c5a7cd729fd68b25de923256a9203e597ba4ae91a341291"
+  },
+  "originalFailure": {
+    "log": "synchronized-check.log",
+    "case": "settled assertive publishes empty/errors/retry and keeps the external node through destroy/remount",
+    "test": "test/ui/announcements-browser.test.mjs:180",
+    "location": "test/ui/announcements-browser.test.mjs:187",
+    "observed": "Retry click timed out after 30 seconds with aria-disabled=true. The original synchronized run did not capture per-call chronology; controlled probe below proves the scheduling mechanism, not the exact historical original event timeline."
+  },
+  "sourceFacts": [
+    {
+      "path": "test/ui/announcements-browser.test.mjs:16",
+      "fact": "search helper awaits native fill, then separately awaits Enter, and accepts an increased publication count plus expected historical lastPublication text."
+    },
+    {
+      "path": "test/ui/fixture-entry.mjs:40",
+      "fact": "failNext is reset and throws once before native engine execution; fixture debounceMs is 35 at line60."
+    },
+    {
+      "path": "src/addons/ui/ui.ts:90",
+      "fact": "Every invalidation cancels only a still-pending timer, suppresses older work and keeps previously offered Retry mounted with aria-disabled=true."
+    },
+    {
+      "path": "src/addons/ui/ui.ts:148",
+      "fact": "A current failed query exposes/enables Retry. A new actual Enter query calls execute again via form submit line192; this is valid behavior."
+    },
+    {
+      "path": "test/qualification/browser-announcements.mjs:112",
+      "fact": "lastPublication persists as the latest completed experimental announcement until another settled publication replaces it."
+    }
+  ],
+  "raceProbe": {
+    "status": "Pass",
+    "browser": "Chrome156.0.8078.74 headless",
+    "bundleSHA256": "b868c762922dc2996389d0c854e1d9a5db19193d20e6b5364aa420c304049e39",
+    "bundleSource": "Exact existing synchronized-check installed browser-announcements-bundle.mjs; no package rebuild or runtime change",
+    "controlledOrder": [
+      "Initial no-results completed:4 native calls and2 publications.",
+      "Playwright fill blue, deliberate80ms pause exceeding35ms debounce: injected failed main index4, publication1:5 error, busy=false, Retry visible/enabled.",
+      "Set holdNext then actual Enter: second main index5 obtains genuine native1-hit reply and is held. Busy=true and Retry disabled; lastPublication remains prior1:5 error. Existing helper predicate evaluates true despite new pending main.",
+      "Release genuine second reply: native main and snippets complete(total1 each), publication1:6 result, busy=false, Retry still intentionallydisabled."
+    ],
+    "meaning": "The test can reach its Retry assertion after accepting a historical error from the first of its own two commands. This does not show a product Retry failure."
+  },
+  "candidateRepairs": {
+    "minimalChosen": {
+      "change": "Keep real Playwright fill(text), remove the extra Enter from the helper so it chooses one normal debounced input command. Preserve actual Retry.click and the explicit standalone Enter test that deliberately verifies repeated submission.",
+      "validation": "announcement-fill-only-probe.json",
+      "repetitions": 8,
+      "everyAttempt": {
+        "failedMainCalls": 1,
+        "failureRequestedBusy": "false",
+        "failureRetryHidden": false,
+        "failureRetryAriaDisabled": "false",
+        "inputFocusRetained": true,
+        "realRetryClick": true,
+        "recoveryNativeCalls": 2,
+        "recoveryMainAndSnippetTotals": [
+          1,
+          1
+        ],
+        "newerResultPublication": true,
+        "recoveryRequestedBusy": "false",
+        "recoveryRetryAriaDisabled": "true"
+      },
+      "noAddedSleepOrTimeoutIncrease": true,
+      "noSyntheticSubmitOrProductionBypass": true
+    },
+    "alternativeVerified": {
+      "change": "Atomic input event plus native form.requestSubmit in one browser task",
+      "validation": "announcement-race-probe.json observations[1]",
+      "repetitions": 8,
+      "status": "Pass; larger test-only change than fill-only"
+    }
+  },
+  "adjacentPattern": "Other fill+Enter pairs around held work/one-shot errors in this announcement file share the same potential semantics. Parent was notified. Keep the intentional standalone Enter assertion for repeated submissions. No unrelated UI behavior change is required.",
+  "remainingWork": "Parent owns exact minimal repository test repair, focused announcement rerun and required full check. This diagnosis does not itself mark the synchronized full check passing.",
+  "scopeLimitations": [
+    "DOM call/publication/Retry observations, not speech or human AT.",
+    "Controlled pause/held reply is used only to expose a permitted event order; no arbitrary pause or larger timeout is part of the proposed repair.",
+    "Reviewer ran isolated Chrome probes only; no broad build/full suite or repository edit."
+  ]
+}

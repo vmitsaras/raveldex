@@ -1,0 +1,11 @@
+# Rich directory manual qualification handoff
+
+Status: **Not run**. Automated installed/browser-engine checks are recorded separately in [RX-7005 evidence](RX-7005.md). Record exact OS/device/browser/assistive-technology versions, keyboard preferences and actual outcomes before making support claims.
+
+1. With a screen reader, browse the same filtered non-first page in List, Cards and Grid. Confirm result/list/link reading order remains native, the exact total/page announcement is understandable, named text fields have a useful relationship, and focus stays on the same link when presentation changes. Test Clear, filter/chip removal, paging, Back/Forward and loading/failure recovery.
+2. Enable images deliberately. Verify informative alternatives, silent decorative images, missing metadata and a real failed image with a long localized alternative. Confirm the failure text is readable, the title/link survives, and disabling images leaves text navigation usable. Test blocked images/slow network in the actual application; native lazy loading/caching is browser-controlled.
+3. Use physical keyboard input, IME and mobile/on-screen keyboards with long localized/RTL content. Exercise filter disclosure, layout/density/image controls and ordinary link navigation. Record native link traversal preferences; the automated WebKit environment uses Option+Tab, which is separate from human keyboard qualification.
+4. At actual 200% and 400% browser zoom, and on physical narrow/touch devices, inspect labels, metadata, long alternatives, focus and list/card/grid layout. Repeat actual dark/high-contrast settings and enlarged text. Viewport/media emulation does not prove real zoom, OS rendering or device behavior.
+5. Recheck application colors, custom density/image dimensions/fit, image alternatives and destinations after replacing the starter data/CSS. Confirm no JavaScript still offers every browse link. Test leaving/re-entering pages using the application's actual navigation/cache lifecycle.
+
+Native Safari, other OS/device combinations, human AT speech, physical input and real browser zoom remain unqualified. No hosted deployment, remote CI or release/publication is implied by local checks.

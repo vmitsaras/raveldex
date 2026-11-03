@@ -22,6 +22,19 @@ export const STARTERS = [
     'README.md', 'package.json', 'configuration.mjs', 'content.json', 'content.mjs',
     'build.mjs', 'preview.mjs', 'index.html', 'main.mjs', 'controller.mjs', 'load.mjs', 'theme.css',
   ] },
+  { id: 'directory-browser', family: 'directory', title: 'Plain browser resource directory', files: [
+    'README.md', 'package.json', 'configuration.mjs', 'content.json', 'content.mjs',
+    'build.mjs', 'preview.mjs', 'index.html', 'main.mjs', 'controller.mjs', 'load.mjs', 'theme.css',
+  ] },
+  { id: 'directory-astro', family: 'directory', title: 'Astro resource directory', files: [
+    'README.md', 'package.json', 'astro.config.mjs', 'configuration.mjs', 'content.json', 'content.mjs',
+    'src/main.mjs', 'src/search.mjs', 'src/style.css', 'src/pages/index.astro', 'src/pages/resources/[slug].astro',
+  ] },
+  { id: 'cards-browser', family: 'cards', title: 'Plain browser rich resource results', files: [
+    'README.md', 'package.json', 'configuration.mjs', 'content.json', 'content.mjs',
+    'build.mjs', 'preview.mjs', 'index.html', 'main.mjs', 'controller.mjs', 'load.mjs', 'theme.css',
+    'images/map.svg', 'images/weather.svg',
+  ] },
 ];
 export const starterSource = (id, path) => `example-files/${id}/${path.replaceAll('[', 'param-').replaceAll(']', '')}.${path.endsWith('.astro') ? 'html' : 'txt'}`;
 export const starterArchive = id => `example-files/${id}.tar.gz`;

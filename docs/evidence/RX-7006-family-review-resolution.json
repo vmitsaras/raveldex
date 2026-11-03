@@ -1,0 +1,489 @@
+{
+  "kind": "raveldex-rx7006-independent-family-review-resolution-v1",
+  "recordedAt": "2026-11-02T21:26:02.162268+00:00",
+  "scope": "Read-only bounded source/evidence review. Original family-review.json and both earlier source snapshots preserved. No repository edits, runtime installs, browsers or builds executed by this reviewer. Parent owns final full check, source audit and acceptance record.",
+  "sourceIdentity": "family-review-resolution-source-snapshot.json",
+  "resolvedFindings": [
+    {
+      "original": "family-review.json findings[0]",
+      "path": "docs/api/HOSTS.md",
+      "line": 509,
+      "status": "Resolved",
+      "verification": "Current row says closing restores logical opener, Escape follows native search/dialog behavior and may clear a focused field first; Close search remains available."
+    }
+  ],
+  "newRuntimeFindings": [],
+  "newEvidenceFindings": [
+    {
+      "path": "capabilities-chromium.log",
+      "status": "Initial run failed 56/57; retained",
+      "classification": "test/evaluation observation timing defect",
+      "repair": "Verified diff adds exact popup.waitForURL(expected encoded destination) before existing load, exact URL, heading and original-modal assertions. Existing native click, href and destination expectations are unchanged. A page event alone can expose the initial about:blank load; exact destination waiting strengthens the original requirement.",
+      "productionChange": false,
+      "rerun": "capabilities-final-chromium.log; status captured below"
+    }
+  ],
+  "harnessHistory": [
+    {
+      "log": "family-initial-chrome.log",
+      "result": {
+        "status": "Fail",
+        "counts": {
+          "tests": 20,
+          "pass": 0,
+          "fail": 20,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "sha256": "1e4191e227a4d56726df0db9f7d6df2315e9b16919d1fc4950ad3bd854faebf0"
+      },
+      "classification": "before hook rejected shared source-free section-map validation module; no per-surface behavior ran. Final allowlist only admits sections/validation.js; section provider/evidence remain excluded."
+    },
+    {
+      "log": "family-qualified-chrome.log",
+      "result": {
+        "status": "Fail",
+        "counts": {
+          "tests": 20,
+          "pass": 16,
+          "fail": 4,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "sha256": "f361c682df952ab296ecee742b4bd7ffef7bde241c269475c4b07048b1102668"
+      },
+      "classification": "16/20 passed; four dropdown groups used an input[type=search] selector while the combobox is type=text. Final selector also admits input[role=combobox]; no result/query expectation weakened."
+    }
+  ],
+  "evidenceResults": {
+    "installed-chrome.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 44,
+        "pass": 44,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "3c2051a854da3aa5b532a622d0e47335909301078c30cd4581f2fefba5ab0a38"
+    },
+    "installed-chromium.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 44,
+        "pass": 44,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "cbd5a877f0728cb58cfbc51c82fe9b26f37ec2634f0e1308345db41d981db308"
+    },
+    "installed-webkit.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 34,
+        "pass": 34,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "0a5bf022cf015ac62e958183fc209b3851d83002ec109f4d8b00b101e59aeab9"
+    },
+    "family-final-chrome.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 20,
+        "pass": 20,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "e60ac2ec7344abe77d5dc85bf18c218fb5ac8359da002c4837115c70ecd5c18b"
+    },
+    "family-final-chromium.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 20,
+        "pass": 20,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "2bec442f2aabe1bb6ac6d03176c24576c2ed391da1923bba902abc3c69ebdc60"
+    },
+    "family-final-webkit.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 20,
+        "pass": 20,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "6ce2969c947646d8611363196bd7874da9882a56aac64e0fb94157b5158e35ea"
+    },
+    "gallery-final.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "a4ae676bc0af231c9ab0f72ab15d78860f777f94acec58830e1e6b4546562111"
+    },
+    "capabilities-chromium.log": {
+      "status": "Fail",
+      "counts": {
+        "tests": 57,
+        "pass": 56,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "e15e6a400b89f928de691eee5f28065fb77762d3b3c3ef1da4dc12605a905726"
+    },
+    "capabilities-final-chromium.log": {
+      "status": "Pass",
+      "counts": {
+        "tests": 57,
+        "pass": 57,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sha256": "ebe8b53f1f7ce8f5a4d061de8299c19ab7da3c4b16c876d60313128898324cc9"
+    },
+    "site.log": {
+      "status": "In progress; no final summary observed",
+      "counts": {}
+    }
+  },
+  "sourceChecks": {
+    "currentProductionSourcesComparedWithTaskStart": 173,
+    "productionSourceChanges": [],
+    "starterFilesComparedWithTaskStart": 114,
+    "starterSourceChanges": [],
+    "testedSiteManifestInputs": 492,
+    "testedSiteManifestInputMismatches": [],
+    "familyReportCurrentSourceComparisons": {
+      "family-final-chrome.json": {
+        "hashesCompared": 8,
+        "mismatches": [],
+        "observations": 20,
+        "allObservationsPass": true,
+        "environment": {
+          "node": "v24.21.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "release": "27.0.0",
+          "selected": "chrome",
+          "browser": "156.0.8078.74"
+        },
+        "reportSHA256": "ccceff131c75d13b71ab32f41409daa9970c11cfe1b8389876a738b702fa96cb"
+      },
+      "family-final-chromium.json": {
+        "hashesCompared": 8,
+        "mismatches": [],
+        "observations": 20,
+        "allObservationsPass": true,
+        "environment": {
+          "node": "v24.21.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "release": "27.0.0",
+          "selected": "chromium",
+          "browser": "149.0.7827.55"
+        },
+        "reportSHA256": "b04c1e5fcffcb660051d11a0695a54787fe081e9bc3cd05a9ab290cf4fee38b3"
+      },
+      "family-final-webkit.json": {
+        "hashesCompared": 8,
+        "mismatches": [],
+        "observations": 20,
+        "allObservationsPass": true,
+        "environment": {
+          "node": "v24.21.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "release": "27.0.0",
+          "selected": "webkit",
+          "browser": "26.5"
+        },
+        "reportSHA256": "93a7d29e248ce5ba97ec6d483ed9d29948daeab1c36e00044936215b3a757abf"
+      }
+    },
+    "copiedProjectCurrentSourceComparisons": [
+      {
+        "report": "installed-chrome-cards-browser.json",
+        "case": "copied build /",
+        "project": "cards-browser",
+        "files": 14,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-cards-browser.json",
+        "case": "copied build /help/",
+        "project": "cards-browser",
+        "files": 14,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-directory-both.json",
+        "case": "copied installed build directory-browser /",
+        "project": "directory-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-directory-both.json",
+        "case": "copied installed build directory-browser /help/",
+        "project": "directory-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-directory-both.json",
+        "case": "copied installed build directory-astro /",
+        "project": "directory-astro",
+        "files": 11,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-directory-both.json",
+        "case": "copied installed build directory-astro /help/",
+        "project": "directory-astro",
+        "files": 11,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-dropdown-browser.json",
+        "project": "dropdown-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-cards-browser.json",
+        "case": "copied build /",
+        "project": "cards-browser",
+        "files": 14,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-cards-browser.json",
+        "case": "copied build /help/",
+        "project": "cards-browser",
+        "files": 14,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-directory-both.json",
+        "case": "copied installed build directory-browser /",
+        "project": "directory-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-directory-both.json",
+        "case": "copied installed build directory-browser /help/",
+        "project": "directory-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-directory-both.json",
+        "case": "copied installed build directory-astro /",
+        "project": "directory-astro",
+        "files": 11,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-directory-both.json",
+        "case": "copied installed build directory-astro /help/",
+        "project": "directory-astro",
+        "files": 11,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-dropdown-browser.json",
+        "project": "dropdown-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-cards-browser.json",
+        "case": "copied build /",
+        "project": "cards-browser",
+        "files": 14,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-cards-browser.json",
+        "case": "copied build /help/",
+        "project": "cards-browser",
+        "files": 14,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-directory-both.json",
+        "case": "copied installed build directory-browser /",
+        "project": "directory-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-directory-both.json",
+        "case": "copied installed build directory-browser /help/",
+        "project": "directory-browser",
+        "files": 12,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-directory-both.json",
+        "case": "copied installed build directory-astro /",
+        "project": "directory-astro",
+        "files": 11,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-directory-both.json",
+        "case": "copied installed build directory-astro /help/",
+        "project": "directory-astro",
+        "files": 11,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-dropdown-browser.json",
+        "project": "dropdown-browser",
+        "files": 12,
+        "mismatches": []
+      }
+    ],
+    "installedCurrentRuntimeComparisons": [
+      {
+        "report": "installed-chrome-cards-browser.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-directory-both.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-dropdown-browser.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-inline-astro.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chrome-modal-astro.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-cards-browser.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-directory-both.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-dropdown-browser.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-inline-astro.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-chromium-modal-astro.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-cards-browser.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-directory-both.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-dropdown-browser.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "installed-webkit-modal-astro.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "family-final-chrome.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "family-final-chromium.json",
+        "filesCompared": 337,
+        "mismatches": []
+      },
+      {
+        "report": "family-final-webkit.json",
+        "filesCompared": 337,
+        "mismatches": []
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "node --check test/ui/modal-browser.test.mjs",
+      "result": "Pass"
+    },
+    {
+      "command": "node --check test/consumer/family-qualification-fixture.mjs",
+      "result": "Pass"
+    },
+    {
+      "command": "node --check test/consumer/family-qualification.test.mjs",
+      "result": "Pass"
+    },
+    {
+      "command": "node --check test/pages/solutions-qualification.test.mjs",
+      "result": "Pass"
+    }
+  ],
+  "claimBoundaries": [
+    "Completed Chrome/Chromium installed logs cover eight fresh root/help starter projects through seven suites. Completed WebKit installed log covers six projects (modal browser/Astro, header, directory browser/Astro, cards), not the two inline projects.",
+    "Family final reports support 20 body-only scripted state groups for five surfaces in each recorded engine; directory/cards register filters/facets, while inline/modal/dropdown owners are core-only.",
+    "WORK_LIMIT_EXCEEDED in this family fixture is deliberately injected before native execution. Held successful replies are real native results delayed after completion and ignoring abort. Dedicated source/offset/snippet/section/direct-worker tests remain separate.",
+    "Gallery report supports five generated galleries and all eight source/archive routes, complete independent native result sequences, CSS/focus, raw handoff and explicit image decoding; it does not by itself establish fresh installation or all-engine gallery behavior.",
+    "Package tarball identities may differ after packed documentation changes. Checked installed runtime file bytes match current dist; report private flags/0.1.0-rc.0 and unchanged package/lockfile are the publication boundary.",
+    "Playwright WebKit is not Safari qualification. Scripted keyboard/composition, axe, screenshots and emulated media/reflow are separate from human AT speech, physical input/mobile keyboards, actual 200/400 percent zoom and physical devices.",
+    "No publication, hosted deployment, memory/paint/universal latency or device-capacity conclusion follows. Pending/failing provider/site logs cannot be counted as passing until their final summaries exist."
+  ]
+}

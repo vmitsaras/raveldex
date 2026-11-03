@@ -6,6 +6,8 @@ Raveldex is written in TypeScript, uses ESM imports and has no core runtime depe
 
 [Get started](docs/api/GETTING_STARTED.md) · [API reference](docs/api/README.md) · [Runnable examples](https://github.com/vmitsaras/raveldex/blob/main/examples/README.md)
 
+For a complete interface to copy, use the [solution chooser](examples/README.md): inline search, documentation modal, compact header, faceted directory or rich results. It links eight complete browser/Astro projects, working previews, exact source downloads and CSS recipes. Replace the explicit sample content and edit the component properties in your own stylesheet.
+
 ## Install
 
 The packages are currently unpublished, so you install them from local `.tgz` files. In a new application directory, run the following commands to create a package, enable ESM imports and install core. Replace the absolute path with the tarball you received or built:
@@ -61,6 +63,9 @@ By default, every complete search term must match. For example, `atomic updates`
 | Open documentation search from a button | [Documentation modal](docs/api/HOSTS.md#documentation-search-modal) |
 | Offer compact header results and a full-results route | [Dropdown search](docs/api/HOSTS.md#compact-dropdown-search) |
 | Copy a complete header and full-results page | [Installed dropdown starter](site/Dropdown.astro) |
+| Compose directory filters, pages and optional URL state | [Directory state](docs/api/HOSTS.md#directory-queries-and-url-state) |
+| Copy a filterable resource directory with checkbox groups | [Browser and Astro directory starters](site/Directory.astro) |
+| Show directory metadata with optional images and list/card/grid layouts | [Rich results and complete browser starter](site/Cards.astro) |
 | Copy a complete documentation search modal project | [Browser and Astro modal starters](site/Modal.astro) |
 | Choose English morphology or identifier components | [English](docs/api/ENGLISH.md) · [Identifiers](docs/api/IDENTIFIERS.md) |
 | Offer explicit spelling and query tools | [Typos](docs/api/TYPO.md) · [Suggestions](docs/api/SUGGESTIONS.md) · [Synonyms](docs/api/SYNONYMS.md) · [Query syntax](docs/api/QUERY_SYNTAX.md) |

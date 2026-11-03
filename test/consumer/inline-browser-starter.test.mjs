@@ -65,7 +65,7 @@ before(async () => {
     assert.ok(Object.keys(graph.inputs).some(path => path.includes('node_modules/@vmitsaras/raveldex/dist/')));
     // Separate test entry exercises the exact copied lifecycle module with real
     // installed engines, without adding debug hooks to the starter product.
-    await writeFile(join(directory, 'lifecycle-entry.mjs'), "export {createInlineSearch} from './controller.mjs';export {createRaveldex} from '@vmitsaras/raveldex';\n");
+    await writeFile(join(directory, 'lifecycle-entry.mjs'), "export {createInlineSearch} from './controller.mjs';export {createRaveldex} from '@vmitsaras/raveldex';export {loadGuides} from './load.mjs';\n");
     await build({ absWorkingDir: directory, entryPoints: ['lifecycle-entry.mjs'], outfile: 'dist/assets/lifecycle.js',
       bundle: true, platform: 'browser', format: 'esm', target: 'es2022', logLevel: 'silent' });
     const site = await startPreview(directory, base); sites.push(site);
@@ -280,4 +280,59 @@ test('copied browser controller publishes pending work before loading and failur
     { phase: 'failure-destroy', loads: 1, disposals: 0, deduplicated: true, stableDestroy: true, retryHidden: true, closed: true, mounted: 0 },
   ]);
   await page.close(); record('loading and failure status reentry', outcomes);
+});
+
+
+test('copied starter refuses unusable display titles before replacing generated pages', async () => {
+  const site = sites[0], contentPath = join(site.directory, 'content.json');
+  const original = await readFile(contentPath, 'utf8');
+  const output = await readFile(join(site.directory, 'dist/index.html'), 'utf8');
+  const invalidTitles = ['', ' \t ', 'x'.repeat(1025), '\ud800'];
+  try {
+    for (const title of invalidTitles) {
+      const content = JSON.parse(original); content[0].title = title;
+      await writeFile(contentPath, JSON.stringify(content));
+      await assert.rejects(command(process.execPath, ['build.mjs'], site.directory), /Invalid or duplicate guide/);
+      assert.equal(await readFile(join(site.directory, 'dist/index.html'), 'utf8'), output,
+        'An invalid title cannot replace the existing useful browse output');
+    }
+  } finally {
+    await writeFile(contentPath, original);
+    await command(process.execPath, ['build.mjs'], site.directory);
+    await build({ absWorkingDir: site.directory, entryPoints: ['lifecycle-entry.mjs'], outfile: 'dist/assets/lifecycle.js',
+      bundle: true, platform: 'browser', format: 'esm', target: 'es2022', logLevel: 'silent' });
+  }
+  record('unusable title build refusal', { cases: ['empty', 'whitespace', 'overlong', 'malformed UTF-16'], priorOutputPreserved: true });
+});
+
+test('copied loader refuses unusable fetched titles before handing out an owner and retains recovery', async () => {
+  const site = sites[0], page = await browser.newPage();
+  const original = JSON.parse(await readFile(join(site.directory, 'content.json'), 'utf8'));
+  await page.goto(site.origin + site.base);
+  await page.getByRole('searchbox', { name: 'Search walking guides' }).waitFor();
+  for (const title of ['', ' \t ', 'x'.repeat(1025), '\ud800']) {
+    const content = structuredClone(original); content[0].title = title;
+    await page.route('**/content.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(content) }));
+    const result = await page.evaluate(async base => {
+      const { loadGuides } = await import(base + 'assets/lifecycle.js');
+      let owner;
+      try { owner = await loadGuides(new URL(base + 'content.json', location.origin), new AbortController().signal); return 'owner returned'; }
+      catch (error) { return error.message; }
+      finally { await owner?.dispose(); }
+    }, site.base);
+    assert.equal(result, 'Invalid guide record', 'The data loader refuses before creating/returning an engine owner');
+    await page.unroute('**/content.json');
+  }
+  const malformed = structuredClone(original); malformed[0].title = '';
+  await page.route('**/content.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(malformed) }));
+  await page.reload();
+  await page.getByRole('button', { name: 'Retry loading search' }).waitFor();
+  assert.equal(await page.locator('.raveldex-inline').count(), 0);
+  assert.match(await page.locator('[data-search-root]').textContent(), /guide links below are always available/);
+  assert.equal(await page.getByRole('navigation', { name: 'Browse all guides' }).getByRole('link').count(), 7);
+  await page.unroute('**/content.json');
+  await page.getByRole('button', { name: 'Retry loading search' }).click();
+  await page.getByRole('searchbox', { name: 'Search walking guides' }).waitFor();
+  await page.close();
+  record('unusable title fetch refusal and recovery', { cases: ['empty', 'whitespace', 'overlong', 'malformed UTF-16'], returnedOwners: 0, partialUI: false, browseLinks: 7, retryLoadsValidData: true });
 });

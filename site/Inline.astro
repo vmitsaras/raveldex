@@ -1,14 +1,17 @@
 ---
 import Layout from './Layout.astro';
+import SolutionChooser from './SolutionChooser.astro';
 import { STARTERS, starterSource, starterArchive } from './starters.mjs';
 const base = '/raveldex/';
 ---
 <Layout frontmatter={{ title: 'Ready to use inline search' }}>
   <h1>Ready to use inline search</h1>
+  <SolutionChooser current="inline" />
   <p>Add a search field, highlighted excerpts, topic filters and more results to an ordinary page. Start with a complete browser or Astro project, replace its explicit guide records and adjust a few CSS properties.</p>
   <p>Use inline search when results belong in the page. For search that opens from a button, choose the <a href={base + 'examples/modal/'}>documentation modal</a>.</p>
   <p>For a header field with a few page links and a complete results route, choose the <a href={base + 'examples/dropdown/'}>compact header starter</a>.</p>
   <p>These starters use the optional inline interface with direct execution, source snippets and string facets. They keep one result per supplied page and exact matching totals. They do not crawl HTML. Core and the Astro integration are currently private, unpublished packages supplied as matching local tarballs.</p>
+  <p>For a resource library with checkbox groups, selected chips, complete native pages and optional URL replay, use the <a href={base + 'examples/directory/'}>faceted directory</a>.</p>
   <h2 id="try-inline">Try the browser starter</h2>
   <p>Try <code>walking guide</code>, choose a type of guide to narrow the matches, and follow a result to its complete page. The guide links also work without JavaScript. This preview runs the installed browser starter shown below.</p>
   <p><a href={base + 'examples/inline-preview/'}>Open the full preview</a></p>
@@ -27,7 +30,7 @@ const base = '/raveldex/';
     <li>Copy and install one complete starter using its setup guide. Run it once and search the sample content before changing the CSS.</li>
     <li>Edit the existing <code>.raveldex-inline</code> rule in the browser's <code>theme.css</code> or Astro's <code>src/style.css</code>. Those files load after the package stylesheet. Use these values for the accent, corners and result spacing:</li>
   </ol>
-  <pre tabindex="0" aria-label="Inline search theme properties"><code>{`.raveldex-inline {
+  <pre role="region" tabindex="0" aria-label="Inline search theme properties"><code>{`.raveldex-inline {
   --raveldex-inline-accent: #145b45;
   --raveldex-inline-radius: .75rem;
   --raveldex-inline-gap: 1.25rem;
