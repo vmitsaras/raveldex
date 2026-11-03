@@ -44,8 +44,11 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node node_modules/playwright-core/cli.js install --with-deps chromium
-      - run: npm run check
+      # The tracker has no browser/runtime dependency. Full candidate checks remain
+      # in ci.yml and RX-8001; they must not silently block a valid task graph.
+      - run: npm run handoff:check
+      - run: npm run docs:check
+      - run: node --test test/tooling/tracking.test.mjs test/tooling/native-subissues.test.mjs
       - name: Create or update repository milestones and task issues
         run: npm run tracking:sync
         env:
