@@ -841,7 +841,9 @@ test('long RTL/dark/text-scaled and forced-color layouts retain controls, active
 test('a short viewport with no usable row retains truthful totals and an accessible full-results recovery without auto-reopening', async () => {
   await page.setViewportSize({ width: 320, height: 240 });
   await page.locator('#clip-host').evaluate(n => { n.style.cssText = 'position:fixed;top:32px;left:8px;width:304px;height:auto'; });
-  await page.addStyleTag({ content: '.raveldex-dropdown{--raveldex-dropdown-gap:1.5rem}' });
+  // Wider font metrics must not push the recovery link below the fixed host's
+  // viewport while the complete shell still leaves no usable popup row.
+  await page.addStyleTag({ content: '.raveldex-dropdown{font-family:Arial,sans-serif;--raveldex-dropdown-gap:.75rem}' });
   await search('shared');
   assert.equal((await calls()).at(-1).result.total, 7); assert.equal(await expanded(), false); assert.deepEqual(await ids(), []); await clearActive();
   assert.notEqual(await root().locator('.raveldex-dropdown').getAttribute('data-state'), 'empty');
@@ -857,8 +859,11 @@ test('a short viewport with no usable row retains truthful totals and an accessi
   assert.match(await root().textContent(), /Not enough space for this result list\. Open the full-results page\./);
   const linkHit = await part('full-results').evaluate(n => {
     const r = n.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
-    return { x, y, hit: n === document.elementFromPoint(x, y) || n.contains(document.elementFromPoint(x, y)) };
+    return { x, y, bounds: r.toJSON(), viewport: { width: innerWidth, height: innerHeight },
+      hit: n === document.elementFromPoint(x, y) || n.contains(document.elementFromPoint(x, y)) };
   });
+  assert.ok(linkHit.bounds.left >= 0 && linkHit.bounds.top >= 0 && linkHit.bounds.right <= linkHit.viewport.width && linkHit.bounds.bottom <= linkHit.viewport.height,
+    'The complete focused full-results link remains inside the short viewport');
   assert.equal(linkHit.hit, true); await screenshot('320x240-no-space');
   const count = (await calls()).length; await page.setViewportSize({ width: 1100, height: 850 }); await page.waitForTimeout(50);
   assert.equal(await expanded(), false); assert.equal((await calls()).length, count);

@@ -37,6 +37,29 @@ const input = () => page.locator(hooks('input'));
 const results = () => page.locator(hooks('result'));
 const row = id => page.locator(`[data-raveldex-result="${id}"]`);
 const record = (name, evidence) => records.push({ name, status: 'Pass', evidence });
+// Keep initialization and its result owned by the page. Chromium 149's CDP
+// awaitPromise path can report 'Promise was collected' for the evaluation
+// wrapper; no navigation, retry or successful fixture result is inferred.
+async function initializeFixture(options = {}, fixtureOptions = {}) {
+  await page.evaluate(({ options, fixtureOptions }) => {
+    const initialization = window.fixtureInitialization = { status: 'pending' };
+    initialization.promise = window.createFixture(options, fixtureOptions);
+    initialization.promise.then(value => {
+      initialization.value = value; initialization.status = 'fulfilled';
+    }, error => {
+      initialization.error = { name: error.name, message: error.message, stack: error.stack };
+      initialization.status = 'rejected';
+    });
+  }, { options, fixtureOptions });
+  await page.waitForFunction(() => window.fixtureInitialization.status !== 'pending');
+  const initialized = await page.evaluate(() => {
+    const { status, value, error } = window.fixtureInitialization;
+    return { status, value, error };
+  });
+  assert.equal(initialized.status, 'fulfilled', initialized.error?.stack ?? initialized.error?.message);
+  assert.deepEqual(initialized.value, { frozen: true });
+  await page.evaluate(() => { delete window.fixtureInitialization; });
+}
 async function settled() {
   await page.waitForFunction(() => document.querySelector('[data-raveldex-ui]')?.getAttribute('aria-busy') !== 'true');
   await page.waitForFunction(() => /results|failed/i.test(document.querySelector('[data-raveldex-status]')?.textContent ?? '') || !document.querySelector('[data-raveldex-error]')?.hidden);
@@ -131,7 +154,7 @@ beforeEach(async t => {
   page.fixtureErrors = errors;
   await page.goto(origin);
   await page.waitForFunction(() => typeof window.createFixture === 'function');
-  assert.deepEqual(await page.evaluate(() => window.createFixture()), { frozen: true });
+  await initializeFixture();
   await settled();
   await page.addScriptTag({ path: join(REPO_ROOT, 'node_modules/axe-core/axe.min.js') });
   await checkpoint('beforeEach:done', { test: t.name });
@@ -207,7 +230,8 @@ test('facet counts follow exact conjunctive membership and selection resets pagi
 });
 
 test('partial final page respects a stricter real engine document limit in main, snippets, and Inspector', async () => {
-  await page.evaluate(async () => { await window.harness.cleanup(); await window.createFixture({ pageSize: 3 }, { maxDocuments: 5 }); });
+  await page.evaluate(() => window.harness.cleanup());
+  await initializeFixture({ pageSize: 3 }, { maxDocuments: 5 });
   await settled();
   assert.match(await status().innerText(), /5 results.*1.*3/);
   await page.locator(hooks('next')).click(); await settled();
@@ -233,7 +257,8 @@ test('partial final page respects a stricter real engine document limit in main,
 });
 
 test('prefix mode keeps focus/composition, suppresses stale replies and restores authored content', async () => {
-  await page.evaluate(async () => { await window.harness.cleanup(); await window.createFixture({ mode: 'prefix' }); });
+  await page.evaluate(() => window.harness.cleanup());
+  await initializeFixture({ mode: 'prefix' });
   await settled();
   await search('red app');
   assert.deepEqual((await results().evaluateAll(nodes => nodes.map(node => node.dataset.raveldexResult))).sort(), ['alpha', 'delta', 'gamma']);
