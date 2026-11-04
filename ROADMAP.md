@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 51/51 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 51/58 done · 0 in progress · 1 dependency-ready.
 
-**Planner state:** `complete`.
+**Planner state:** `ready`.
 
-**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
+**Next or resumable release task:** [RX-9001](IMPLEMENTATION_TASKS.md#rx-9001) — Freeze post-N9 artifacts and a validated comparison method.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -20,7 +20,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 - [Canonical task state](docs/planning/roadmap.json): IDs, dependencies, status, acceptance, specifications, and actual evidence.
 - [Implementation task cards](IMPLEMENTATION_TASKS.md): the release tasks and verification requirements.
-- [Optional feature tracks](docs/planning/OPTIONAL_FEATURES.md): deliberately deferred add-ons and unscheduled research ideas.
+- [Optional feature tracks](docs/planning/OPTIONAL_FEATURES.md): current optional-task states and separately unscheduled research ideas.
 - [Verification plan](docs/planning/VERIFICATION_PLAN.md): what must be observed before a capability is called verified.
 - [GitHub milestones](https://github.com/vmitsaras/raveldex/milestones) and [issues](https://github.com/vmitsaras/raveldex/issues): the human tracking view, using the same IDs and acceptance conditions.
 
@@ -40,6 +40,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N7 — Inline and documentation search solutions** | `RX-6001`–`RX-6008` | 8/8 | Provide ready-to-use Pagefind-style inline search and a documentation modal with optional native UI, complete installed starters, CSS customization and evidence-backed page/section presentation. |
 | **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 6/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
 | **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 11/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
+| **N10 — Post-N9 hardening and performance review** | `RX-9001`–`RX-9007` | 0/7 | Verify whether the latest native changes improve matched workloads, harden demonstrated combined failure paths, and document gains, regressions and bounded costs without new capabilities or limit increases. |
 
 ## Task index
 
@@ -106,6 +107,13 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-8009](IMPLEMENTATION_TASKS.md#rx-8009) — Run paired baseline-versus-optimized native benchmark | `done` | `RX-8003`, `RX-8004`, `RX-8005`, `RX-8006`, `RX-8008` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22) |
 | [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010) — Benchmark equivalently configured search-library alternatives | `done` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8010%22) |
 | [RX-8011](IMPLEMENTATION_TASKS.md#rx-8011) — Independently review optimization evidence and practical limits | `done` | `RX-8009`, `RX-8010` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8011%22) |
+| [RX-9001](IMPLEMENTATION_TASKS.md#rx-9001) — Freeze post-N9 artifacts and a validated comparison method | `planned` | `RX-8011` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9001%22) |
+| [RX-9002](IMPLEMENTATION_TASKS.md#rx-9002) — Audit combined lifecycle and recovery hardening coverage | `planned` | `RX-9001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9002%22) |
+| [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003) — Repair confirmed defects and verify the measurement candidate | `planned` | `RX-9002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9003%22) |
+| [RX-9004](IMPLEMENTATION_TASKS.md#rx-9004) — Measure matched native build and query performance | `planned` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9004%22) |
+| [RX-9005](IMPLEMENTATION_TASKS.md#rx-9005) — Measure incremental update costs and state preservation | `planned` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9005%22) |
+| [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006) — Verify host, recovery, deadline and resource tradeoffs | `planned` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22) |
+| [RX-9007](IMPLEMENTATION_TASKS.md#rx-9007) — Review whether Raveldex improved and synchronize guidance | `planned` | `RX-9004`, `RX-9005`, `RX-9006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9007%22) |
 
 ## Milestone exit conditions
 
@@ -173,6 +181,13 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 - Source recovery has an accepted bounded atomic path for the target workload; unresolved capacity decisions remain explicitly blocked, not hidden behind limit increases.
 - A version-pinned, semantics-matched competitive report separates true work/latency, exact counts, recovery outcomes, product overhead and unsupported modes.
 - Independent review records supported performance and recovery claims without publishing, changing the native scoring policy or activating new optional features.
+
+### N10 — Post-N9 hardening and performance review
+
+- Reviewed current and pre-N9 artifacts, immutable inputs, measurement cohorts and complete-run validation are frozen before accepted collection.
+- Demonstrated correctness/lifecycle defects are repaired or their absence is independently verified; source, atomicity, limits, receipt and optionality contracts remain intact.
+- Fresh matched query, incremental-update and installed host/recovery observations retain complete outcomes, statistical limits, adverse cells and resource-cost scope.
+- Independent review answers where the implementation is faster, slower, more capable or inconclusive; guidance, actual evidence and task state agree without publication.
 
 ## Execution and authorization
 

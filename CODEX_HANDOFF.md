@@ -1,6 +1,16 @@
 # Codex handoff
 
-## New tracked N9 scope — 2026-11-03
+## Next selected milestone: N10 planning — 4 November 2026
+
+Read the [post-N9 reconciliation](docs/evidence/N9-POST-20261104.md) and [N10 hardening/performance contract](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md). The owner's latest request selects a plan to verify whether the changes actually helped. **RX-9001 is next dependency-ready; RX-9001–RX-9007 are planned, not implemented or measured.** Run `npm run handoff:next` and take one bounded task only when execution is requested.
+
+All prior 61 tasks remain done, including all ten N5 optional tracks and all eleven N9 tasks. Exact `5b40646` remote CI and tracking passed; each Node 22/24 job reports 1,308 passed, eight intentional foreign-comparator skips and zero failures/cancellations. N9 has eleven closed task issues/native sub-issues; its contradictory REST aggregate counters remain disclosed. These historical CI results do not automatically verify later plan/documentation bytes.
+
+Freeze the untouched pre-N9 artifact and current post-N9 control, preserve matched semantics, ordinary-30s versus explicit-60s deadline cohorts, adverse/refused cells and same-runtime variation. Begin hardening with a coverage/delta audit; fix only reproduced violations. New incremental-update distributions and selected larger/real-host observations fill actual evidence gaps. No benchmark collector or runtime change was executed as part of this plan. Keep independent review, finite sample budgets and serial measurement ownership. Do not reopen completed tasks or infer publication, scope expansion or remote-write authorization.
+
+The older statements below are dated checkpoints, not the current next-task or remote-CI state.
+
+## Historical N9 local checkpoints — 2026-11-03/04
 
 The **61 selected tasks are complete locally**, including all eleven N9 tasks. There is no next selected task. Read the [final N9 review](docs/evidence/RX-8011.md) and [workload/recovery guidance](docs/support/RX-8011.md); run `npm run handoff:next` against the actual checkout. Deferred optional work, fresh remote CI and publication remain separate owner decisions. Older backlog statements below describe dated checkpoints.
 

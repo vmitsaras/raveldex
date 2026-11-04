@@ -2,6 +2,10 @@
 
 **Planning scope selected 3 November 2026.** This registers 11 dependency-linked tasks; it does not authorize publication or automatically implement all tasks.
 
+## Closure and later planning — 4 November 2026
+
+All eleven N9 tasks are accepted. The [post-N9 record](../evidence/N9-POST-20261104.md) preserves exact-head remote CI/tracking and the completed-backlog review, separately from the original local execution checkpoints below. The owner then selected [N10 hardening/performance-review planning](N10_HARDENING_PERFORMANCE_REVIEW.md) to verify current matched gains, regressions and missing update/default-deadline coverage. Its tasks are planned; N9 is not reopened and no new performance result is asserted.
+
 ## RX-8011 deadline clarification
 
 The ordinary no-option operation deadline is 30 seconds, or a lower configured maximum. N9 timed operations explicitly requested the allowed 60-second ceiling. Historical “default 60s” wording refers to that measured setting, not the ordinary default; see the [correction record](../evidence/RX-8011/corrections.md). No runtime, raw result, cap or matched timing changes.

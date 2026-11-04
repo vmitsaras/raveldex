@@ -2410,8 +2410,261 @@ Consolidate measured differences, reproducibility, safe capacity/latency guidanc
 - [docs/evidence/RX-8011/corrections.md](docs/evidence/RX-8011/corrections.md)
 - [docs/evaluation/RX-8011.md](docs/evaluation/RX-8011.md)
 - [docs/support/RX-8011.md](docs/support/RX-8011.md)
+- [docs/evidence/N9-POST-20261104.md](docs/evidence/N9-POST-20261104.md)
 
 
-## Deferred enhancement tasks
+## RX-9001
 
-The `RX-A*` tasks are in [Optional features](docs/planning/OPTIONAL_FEATURES.md). Their dependency on `RX-4003` is only a prerequisite. They remain deferred until selected and do not block the N0–N4 candidate.
+**Freeze post-N9 artifacts and a validated comparison method**
+
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9001%22)
+
+**Dependencies:** [RX-8011](IMPLEMENTATION_TASKS.md#rx-8011)
+
+Pin the before-N9/current/control artifacts and complete finite workload, host, deadline, sample and comparison contract; validate orchestration before accepted measurements.
+
+**Expected affected areas**
+
+`bench/n9/`, `test/fixtures/n9/`, `test/tooling/`, `docs/evaluation/`, `docs/evidence/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md), [RX-8009-method.md](docs/evaluation/RX-8009-method.md)
+
+**Acceptance criteria**
+
+- RX-9001-AC01: Actual source, lockfile, environment, package and runtime-member identities distinguish pre-N9, accepted N9, reviewed current and any future hardened candidate; identical runtime payloads are not labeled a new optimization.
+- RX-9001-AC02: The frozen nine workloads, query/output/configuration cohorts, 30s-default versus explicit-60s deadlines, update sequences, selected tail cells, process/sample budget and outcome/comparison rules are fixed before accepted collection.
+- RX-9001-AC03: Reviewed bounded orchestration reuses frozen N9 primitives without silently weakening six-stage completeness checks; missing/duplicate cells, changed hashes, wrong artifacts and unexpected errors fail closed.
+- RX-9001-AC04: A finite pilot and independent method review validate semantic/output checks, ordinary-versus-diagnostic separation and run manifests; pilot observations are not presented as full performance results.
+
+**Verification**
+
+- Verify archived SHA-256 identities and complete runtime/declaration/CSS member maps; capture immutable current source and private installed candidates.
+- Test orchestration negative fixtures and run the declared reduced pilot with independent membership/arithmetic checks; preserve failures and the frozen execution budget.
+- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9001.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9002
+
+**Audit combined lifecycle and recovery hardening coverage**
+
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9002%22)
+
+**Dependencies:** [RX-9001](IMPLEMENTATION_TASKS.md#rx-9001)
+
+Review the optimized paths in composition, reuse existing safety evidence and reproduce only actual missing combined failure cases before proposing repairs.
+
+**Expected affected areas**
+
+`src/core/execution/`, `src/core/query/`, `src/core/index/`, `src/core/ranking/`, `src/adapters/`, `test/core/`, `test/adapters/`, `docs/evidence/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+
+**Acceptance criteria**
+
+- RX-9002-AC01: A source/test coverage map distinguishes already verified N9 scenarios from missing continuation/deadline, bulk-worker/storage, dictionary/ranking churn and resource-lifetime combinations.
+- RX-9002-AC02: Bounded deterministic and actual-host probes retain both legal timer/continuation orderings, first terminal outcomes, stale-work suppression, queue/deadline semantics and observable owned-resource cleanup.
+- RX-9002-AC03: Bulk-path eligibility is demonstrated for selected worker/storage failure combinations; old roots/sidecars, one committed publication, receipt/Unknown classification and safe subsequent recovery match independent expectations.
+- RX-9002-AC04: Every finding has a reproduction and violated contract or an explicit inconclusive/not-observed status; known refusals, noisy timing and existing test coverage are not fabricated into new defects.
+
+**Verification**
+
+- Inspect existing continuation-host, bulk-source, prefix-seek, ranking-context, worker and IndexedDB tests before adding a probe.
+- Exercise only demonstrated coverage gaps with independent result/error/state checks; separate real hosts from deterministic scheduling and retained-heap hypotheses.
+- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9002.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9003
+
+**Repair confirmed defects and verify the measurement candidate**
+
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9003%22)
+
+**Dependencies:** [RX-9002](IMPLEMENTATION_TASKS.md#rx-9002)
+
+Apply bounded fixes only to reproduced contract violations and establish a reviewed, fully verified candidate before measuring production changes.
+
+**Expected affected areas**
+
+`src/`, `test/`, `scripts/`, `docs/evidence/`, `docs/api/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+
+**Acceptance criteria**
+
+- RX-9003-AC01: Only confirmed RX-9002 defects receive minimal repairs; no finding means a verified unchanged runtime, with no manufactured refactor or claimed speed gain.
+- RX-9003-AC02: Complete results, numerical facts, offsets, revisions, first-terminal behavior, cleanup, optionality, limits and receipt/Unknown semantics remain intact; unresolved load-bearing choices block dependent work.
+- RX-9003-AC03: Independent regression/oracle/lifecycle review and relevant full project/installed-candidate checks pass on the pinned actual candidate; prior failures and unavailable environments remain explicit.
+- RX-9003-AC04: The resulting private artifact and every implementation member are frozen; production differences versus the reviewed current control are listed, or exact equality is demonstrated.
+
+**Verification**
+
+- Reproduce each finding before its repair and run focused negative/recovery checks, independent semantic/arithmetic expectations and relevant full checks.
+- Review the final diff independently and prepare/install the actual candidate; compare payload identities and preserve all failed attempts.
+- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9003.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9004
+
+**Measure matched native build and query performance**
+
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9004%22)
+
+**Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
+
+Recheck net before-N9-to-current performance on frozen native workloads while preserving regressions, refusals and same-runtime control variation.
+
+**Expected affected areas**
+
+`bench/n9/`, `test/fixtures/n9/`, `docs/evaluation/`, `docs/evidence/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+
+**Acceptance criteria**
+
+- RX-9004-AC01: The complete declared family/size/query matrix runs on actual installed artifacts with identical inputs, outputs, configuration, limits and deadline options; missing coverage and unexpected errors fail.
+- RX-9004-AC02: All successful pages/totals/order/scores and selected facts match independent expectations; typed refusals and unsupported comparisons remain separate from successful latency and capacity gains.
+- RX-9004-AC03: Serial rotated fresh-process ordinary runs retain first/repeated/per-owner wall and CPU data; diagnostics remain separate and p95 is reported only for sufficiently sampled same-cell observations.
+- RX-9004-AC04: Absolute/relative changes and repeat variation include every adverse cell; same-runtime noise, conditional-stage effects and small/timer-floor samples cannot create an overall speedup claim.
+
+**Verification**
+
+- Use the RX-9001 frozen orchestration and inventory, preserving normal raw rows, process/order metadata, diagnostics and full semantic captures.
+- Independently reconstruct all denominators, summaries and eligible quantiles; rerun intermediate stages only for a specific attribution question and preserve inconclusive outcomes.
+- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9004.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9005
+
+**Measure incremental update costs and state preservation**
+
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9005%22)
+
+**Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
+
+Fill the missing current update-latency evidence with matched bounded mutations and independent complete-state verification.
+
+**Expected affected areas**
+
+`bench/n9/`, `test/fixtures/n9/`, `test/core/`, `docs/evaluation/`, `docs/evidence/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+
+**Acceptance criteria**
+
+- RX-9005-AC01: Frozen add/replace/delete/reinsert sequences distinguish unchanged/new/removed vocabulary, actual pre-operation sizes and selected batch sizes within existing caps; both artifacts execute equivalent work.
+- RX-9005-AC02: Independent untimed checks verify source/positions, atomic revisions, exact counts/pages/order/scores and later searches after each selected mutation or refusal.
+- RX-9005-AC03: Fresh-process rotated timing separates initialization, queue/admission/operation windows, single-record calls and batch throughput; wall/CPU/sample counts and statistical limits remain explicit.
+- RX-9005-AC04: Update findings distinguish gains, regressions, capacity and inconclusive effects without importing historical RX-4001 values as current guarantees or silently growing only one side of a pair.
+
+**Verification**
+
+- Validate mutation traces and expected post-states independently, including newly created/deleted terms and failed operations.
+- Collect the frozen ordinary and separate diagnostic cohorts serially; reconstruct distributions and state captures independently, then run relevant mutation/index/ranking regressions.
+- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9005.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9006
+
+**Verify host, recovery, deadline and resource tradeoffs**
+
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22)
+
+**Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
+
+Measure selected real direct/worker and source-recovery configurations under truthful deadlines and cost boundaries, including actual failure and delivery outcomes.
+
+**Expected affected areas**
+
+`bench/n9/`, `test/adapters/`, `docs/evaluation/`, `docs/evidence/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+
+**Acceptance criteria**
+
+- RX-9006-AC01: Installed browser direct/real-worker and source/source-positions recovery pairs use the declared equal inputs/configuration/output, separating startup/transport/operation costs and preserving nonempty prior receivers.
+- RX-9006-AC02: Ordinary omitted-30s and explicit-60s cohorts remain distinct; work/queue/task-span diagnostics preserve actual timeout/cancellation/Unknown outcomes, refusal-to-success capacity and Not-run dependent restores.
+- RX-9006-AC03: Complete old/new root, source/offset and subsequent-write checks establish atomicity and receipt classification; the prior high-cardinality timeout and retry remain distinct observations unless a new cause is proved.
+- RX-9006-AC04: Identical-recipe graph costs, logical work and owned resources are reported separately from process samples and unmeasured retained/peak/browser heap, physical input or platform claims.
+
+**Verification**
+
+- Run only the frozen bounded host/recovery/tail cells on actual installed direct/worker implementations; retain every refused, unknown and unavailable outcome.
+- Replay source/state/receipt checks and resource-accounting summaries independently; keep timing collectors serial and any intrusive retention diagnosis in a separate controlled lane.
+- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9006.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9007
+
+**Review whether Raveldex improved and synchronize guidance**
+
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9007%22)
+
+**Dependencies:** [RX-9004](IMPLEMENTATION_TASKS.md#rx-9004), [RX-9005](IMPLEMENTATION_TASKS.md#rx-9005), [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006)
+
+Independently decide what the latest implementation improves, regresses or leaves inconclusive, with practical guidance grounded in complete fresh observations.
+
+**Expected affected areas**
+
+`docs/evaluation/`, `docs/support/`, `docs/api/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+
+**Acceptance criteria**
+
+- RX-9007-AC01: Independent source/raw-artifact review reconstructs identities, outcomes, sample denominators, numerical/semantic checks, summaries and actual cost scopes without hiding unfavorable or missing cells.
+- RX-9007-AC02: A per-workload/host/configuration verdict states faster, slower, capacity improved/regressed, unchanged within observed variation or inconclusive; no weighted overall winner or invented SLA replaces the evidence.
+- RX-9007-AC03: The report explains build/update/query/recovery tradeoffs, same-runtime controls, fixed defects and remaining refusals/regressions; material unexplained findings remain explicit rather than being relabeled Pass.
+- RX-9007-AC04: Support/evaluation/context/roadmap guidance matches actual results and preserved raw failures; no new capability, limit change, package version, deployment, registry publication or broad platform claim is implied.
+
+**Verification**
+
+- Give independent reviewers raw artifacts, source identities and the frozen method; verify adverse cells and historical-versus-current attribution as well as favorable summaries.
+- Run relevant final project/installed-consumer and changed-site checks, validate all evidence references and regenerate the readable roadmap before completion.
+- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9007.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## Optional enhancement tasks
+
+The `RX-A*` task cards in [Optional features](docs/planning/OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.

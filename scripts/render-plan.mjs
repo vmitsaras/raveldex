@@ -106,7 +106,7 @@ function renderRoadmap(roadmap) {
     '',
     '- [Canonical task state](docs/planning/roadmap.json): IDs, dependencies, status, acceptance, specifications, and actual evidence.',
     '- [Implementation task cards](IMPLEMENTATION_TASKS.md): the release tasks and verification requirements.',
-    '- [Optional feature tracks](docs/planning/OPTIONAL_FEATURES.md): deliberately deferred add-ons and unscheduled research ideas.',
+    '- [Optional feature tracks](docs/planning/OPTIONAL_FEATURES.md): current optional-task states and separately unscheduled research ideas.',
     '- [Verification plan](docs/planning/VERIFICATION_PLAN.md): what must be observed before a capability is called verified.',
     '- [GitHub milestones](https://github.com/' + roadmap.repository + '/milestones) and [issues](https://github.com/' + roadmap.repository + '/issues): the human tracking view, using the same IDs and acceptance conditions.',
     '',
@@ -187,9 +187,9 @@ function renderTasks(roadmap) {
     if (milestone.track === 'release') lines.push(taskCard(roadmap, task), '');
   }
   lines.push(
-    '## Deferred enhancement tasks',
+    '## Optional enhancement tasks',
     '',
-    'The `RX-A*` tasks are in [Optional features](docs/planning/OPTIONAL_FEATURES.md). Their dependency on `RX-4003` is only a prerequisite. They remain deferred until selected and do not block the N0–N4 candidate.',
+    'The `RX-A*` task cards in [Optional features](docs/planning/OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.',
     '',
   );
   return lines.join('\n');

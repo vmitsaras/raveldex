@@ -1,6 +1,14 @@
 # Project context
 
-## New N9 milestone — 2026-11-03
+## N10 selected planning scope — 4 November 2026
+
+The owner selected a **hardening, benchmark and performance-review plan to check whether Raveldex actually improved** after N9. The [N10 contract](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md) adds seven **planned** tasks, RX-9001–RX-9007; no new implementation or benchmark collection is claimed. RX-9001 is dependency-ready and first. It freezes source/artifacts, matched workloads and a validated finite method before hardening and measurement; later tasks cover combined failure paths, demonstrated repairs, query/update/host/recovery costs and an independent verdict.
+
+All prior **61 tasks remain done: 51 release-track and ten N5 optional tasks**. Fresh [post-N9 reconciliation](docs/evidence/N9-POST-20261104.md) records successful remote Node 22/24 CI and N9 tracking on exact source `5b40646`; each CI job has 1,308 passed tests, eight intentional comparator skips and zero failures/cancellations. All eleven N9 issues/native children are closed. REST aggregate milestone counters remain inconsistent and are explicitly disclosed.
+
+Current runtime matches the accepted N9 implementation; later tracking/evidence/test repairs are not new optimizations. Existing N9 results show gains and regressions, not a uniform speedup. Preserve all completed tasks, archived controls and historical measurements. N10 is planning only in this turn; publication, new capabilities, higher caps and remote tracking changes are outside it. The historical checkpoints below retain their original local/uncommitted/next-task scope and are superseded for current status by this section.
+
+## Historical N9 execution checkpoints — 2026-11-03/04
 
 The owner-selected **N9 query-performance/recovery benchmark is complete locally: all eleven tasks are accepted**, alongside the prior 50 selected tasks. There is no next dependency-ready selected task. See the [final review](docs/evidence/RX-8011.md), [practical guidance](docs/support/RX-8011.md) and [N9 scope](docs/specs/N9_PERFORMANCE_RECOVERY.md). Deferred optional work and publication require separate owner decisions.
 
