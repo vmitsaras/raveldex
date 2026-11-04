@@ -1,0 +1,144 @@
+✔ format, codec and every compatibility header/version produce specific reasons and preserve old state (297.166333ms)
+ℹ {"compatibilityCases":36}
+✔ unknown or absent participant codecs fail explicitly instead of dropping selected transactional state (2.265292ms)
+✔ malformed, truncated, duplicate-property and damaged JSON snapshots never modify a visible revision (38.306375ms)
+ℹ {"malformedCases":10,"integrityCases":2}
+✔ source and offset participant corruption cannot bypass native side-state validation with a recomputed checksum (267.339291ms)
+ℹ {"nativeSideStateCorruptions":26}
+✔ qualified factory strictly owns and validates the attestation without promoting ordinary engines (2.266958ms)
+✔ valid-integrity native corruption fails reverse, postings, statistics and directory invariants atomically (126.275625ms)
+ℹ {"nativeCoreCorruptions":16}
+✔ snapshot calls share ordinary FIFO, read execution-start roots and own admitted strings/options (33.73875ms)
+✔ snapshot encode/decode/staging cancellation at multiple suspensions preserves exact old core and participant roots (81.86525ms)
+ℹ {"controlledSuspensionCancellations":10}
+✔ queued deadlines, aborts and overflow release slots while successful restore advances exactly once (12.025ms)
+✔ active deadlines, work caps and encoded byte caps fail honestly without side-state publication (8.598917ms)
+✔ early stop and disposal skip untrusted snapshot/options access and release pending adapter work (0.395542ms)
+✔ successful empty restore is a new local revision even when both origin and target are empty (23.176208ms)
+✔ genuinely qualified native encode and restore cancellation preserve exact old roots and permit recovery (95.109209ms)
+ℹ {"qualifiedNativeSuspensionCancellations":10}
+✔ source and native final-precommit stops roll back, and no signal read after publication can revoke success (34.974291ms)
+✔ whole source restore accumulates participant work across private batches and preserves old state on a late failure (27.984917ms)
+ℹ {"individuallyAdmittedDonorWrites":100,"wholeRestoreParticipantWorkCap":4000,"validSnapshotPrivateRecordsBeyondMutationBatch":3}
+✔ qualified native decoding, integrity and structural validation phases can each stop without publication (25.064208ms)
+ℹ {"qualifiedNativePhaseStops":[{"phase":"snapshot.decode","postBoundarySignalChecks":8},{"phase":"snapshot.integrity","postBoundarySignalChecks":8},{"phase":"snapshot.validation","postBoundarySignalChecks":8}]}
+✔ a genuine maximum-revision native owner rejects source restore and preserves its actual immutable root (9.816042ms)
+✔ complete UTF-8 envelope byte boundary includes multibyte source and all header/checksum overhead (16.339333ms)
+✔ installed public codec declarations and complete minified native/source consumers preserve actual behavior (11220.6075ms)
+✔ snapshots stay optional and public imports do not inspect host/storage/startup capabilities (0.307958ms)
+✔ source roundtrip preserves source representation, exact semantic output and subsequent writes (112.623917ms)
+ℹ {"format":"source","representation":"source","completeComparisons":101}
+✔ source roundtrip preserves positions representation, exact semantic output and subsequent writes (57.884709ms)
+ℹ {"format":"source","representation":"positions","completeComparisons":76}
+✔ source roundtrip preserves offsets representation, exact semantic output and subsequent writes (76.962458ms)
+ℹ {"format":"source","representation":"offsets","completeComparisons":101}
+✔ source roundtrip preserves mixed representation, exact semantic output and subsequent writes (64.023792ms)
+ℹ {"format":"source","representation":"mixed","completeComparisons":101}
+✔ native roundtrip preserves core representation, exact semantic output and subsequent writes (13.616959ms)
+ℹ {"format":"native","representation":"core","completeComparisons":41}
+✔ native roundtrip preserves source representation, exact semantic output and subsequent writes (65.417333ms)
+ℹ {"format":"native","representation":"source","completeComparisons":101}
+✔ native roundtrip preserves positions representation, exact semantic output and subsequent writes (47.794083ms)
+ℹ {"format":"native","representation":"positions","completeComparisons":76}
+✔ native roundtrip preserves offsets representation, exact semantic output and subsequent writes (60.563083ms)
+ℹ {"format":"native","representation":"offsets","completeComparisons":96}
+✔ native roundtrip preserves mixed representation, exact semantic output and subsequent writes (56.633167ms)
+ℹ {"format":"native","representation":"mixed","completeComparisons":96}
+✔ source export requires originals for every indexed field and never fabricates source-free text (33.049417ms)
+✔ unqualified ordinary engines reject native state and source restore reports explicit receiving reindex (34.389333ms)
+✔ literal hand BM25 arithmetic survives both formats and deletion without calling the native scorer (9.109416ms)
+✔ four task yield quanta preserve full source-oracle membership, pages, order and BM25 after queued mutations (281.857167ms)
+✔ query stop checks run inside dictionary, postings, analysis, evaluation, scoring, selection and final result (3.078167ms)
+✔ every search and replacement yield can abort and recover with identical published state (12.095417ms)
+ℹ Exhaustive cancellation positions: 57
+ℹ Exhaustive cancellation positions: 107
+✔ actual direct factory yields to host timers during complete common-term search and atomic staging (670.446333ms)
+✔ field-local frequency, positive-length populations and reverse records are exact and frozen (4.219542ms)
+✔ empty index has all declared empty field indexes and empty complete exact membership (0.306083ms)
+✔ exact term lookup unions selected fields and values once per ID; returns complete owned membership (0.69725ms)
+✔ admitted input is owned before execution and core retains only frequency/equality structures (0.378417ms)
+✔ duplicate batches, existing IDs and malformed late records never expose partially constructed roots (0.503083ms)
+✔ construction cursors must be exhausted; abandonment is terminal before/after first step (0.919125ms)
+✔ live corpus limits count tokens, field/term dictionary pairs and distinct postings before publication (1.321375ms)
+✔ construction and exact traversal work guards reject complete results rather than returning a subset (2.409833ms)
+✔ opaque keys and adversarial same-bucket collisions preserve every posting and reverse record (8.257583ms)
+✔ metadata work charges original duplicate entries before canonicalization and enforces its budget (0.423166ms)
+✔ invariant inspection detects frequency, reverse, dangling, field/corpus and directory corruption (1.285167ms)
+✔ admission owns records, removals and options; conflict selection uses execution-start state (6.719375ms)
+✔ malformed late input and duplicate offending paths preserve all state and permit reuse (2.790959ms)
+✔ one publication selects core/source/side roots together; old readers cannot see staging (5.317583ms)
+✔ batch stages source once, clear resets every participant, noops never call prepare (1.01275ms)
+✔ faults at every phase roll back prepared roots and preserve the specific first error (3.675042ms)
+✔ failure in a later participant cannot publish an earlier prepared root; cleanup preserves original error (0.467958ms)
+✔ abort at every yielded boundary including final precommit leaves root unchanged; late abort stays success (28.092208ms)
+ℹ 144 abort injection positions, including immediately before commit
+✔ abandoning every cursor position releases the owner, including unstarted and participant preparation (13.704083ms)
+ℹ 144 abandonment injection positions
+✔ only one cursor can run; unstarted captures and abandoned cursors do not claim the owner (0.303917ms)
+✔ net live-state bounds are inclusive; replacement does not reject temporary old/new overlap (1.559584ms)
+✔ one work budget covers analysis, core copying and participant work through final publication (1.349416ms)
+✔ replacement shares unrelated records, dictionary buckets and common posting buckets (4.664292ms)
+✔ collision buckets copy once per whole batch and remove empty term/posting buckets (2.006959ms)
+✔ directory stage caches an empty touched bucket across delete/set and seals terminally (0.155416ms)
+✔ revision exhaustion rejects changing operations, while noops preserve maximum revision (1.32425ms)
+✔ live configuration stays immutable and incompatible participant roots/handlers fail explicitly (1.294959ms)
+✔ affected invalid reverse/term/statistics fail before publication rather than clamping (0.780083ms)
+✔ independent query reference reads original Unicode spans without normalizing or retokenizing the whole source (3.085541ms)
+✔ hand-stated query membership and source-derived participation agree with complete native results (16.049541ms)
+✔ failed Boolean branches, duplicate groups, and double NOT have independently stated participation (2.051875ms)
+✔ hand-derived numerical constants: one field (0.518875ms)
+✔ hand-derived numerical constants: multiple fields and tokenless/missing values (1.075625ms)
+✔ source-derived field populations exclude missing, empty arrays, whitespace and tokenless fields (0.636708ms)
+✔ duplicate alternatives and exact/prefix overlap retain only the greatest contribution within each field (1.284791ms)
+✔ different explicit weights and field selections are separate scoring groups (0.6715ms)
+✔ reordered normalized variants and selected fields preserve canonical deduplication and exact arithmetic (1.426583ms)
+✔ empty corpus is complete for all, negative-only, lexical and equality queries (0.49925ms)
+✔ generated query fixtures reproduce seeds and cover varied source structures (2.727625ms)
+✔ complete Boolean/field/equality/prefix/numerical parity, seed 0x5eed1003 (121.770625ms)
+✔ complete Boolean/field/equality/prefix/numerical parity, seed 0xc0ffee03 (88.285584ms)
+✔ complete Boolean/field/equality/prefix/numerical parity, seed 0x1003 (84.676667ms)
+✔ hand-derived single-field BM25 and alternative term ties match unrounded arithmetic (5.353375ms)
+✔ field populations, boosts and best weighted term differ by field; filters preserve full-corpus IDF (1.404209ms)
+✔ positive groups only participate in successful branches; double NOT remains unscored (2.399458ms)
+✔ empty analysis, strict equality, missing/null and value/field group boundaries are preserved (1.263167ms)
+✔ prefix/exact overlap has no multiplicity bonus and normalized output is not retokenized (0.912708ms)
+✔ expansion caps include fields, deduplicate all query pairs and fail even in unevaluated branches (0.901708ms)
+✔ UTF-16 score ties and pagination are exact over all candidates and insertion orders (37.040042ms)
+✔ query, page and trace inputs are captured before execution; returned trees are frozen (0.496542ms)
+✔ complete trace reports revision/model/analyzer, off-page predicates and missing documents (0.503375ms)
+✔ trace bounds are inclusive and explicit; malformed requests fail without truncation (7.749916ms)
+✔ ordinary searches bypass fact recording/finalization and the guarded collector allocation (1.196333ms)
+✔ underflow weights retain a deterministic selected term fact without altering zero score (0.262458ms)
+✔ one work budget spans analysis, expansion, evaluation, scoring and selection; failures leave root usable (1.648375ms)
+✔ invalid ranking statistics and dangling/corrupt postings fail safely rather than clamping (2.040042ms)
+✔ ordered term updates balance sorted/reverse/random input and preserve old roots through all deletions (109.486042ms)
+✖ prefix lower bound visits bounded nodes, includes exact/UTF16 endpoints and never scans the full vocabulary (118.1145ms)
+✔ full index diagnostics and native export validation reject stale, cyclic and malformed live order roots (3.680291ms)
+ℹ tests 95
+ℹ suites 0
+ℹ pass 94
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11298.032375
+
+✖ failing tests:
+
+test at test/core/term-order.test.mjs:24:1
+✖ prefix lower bound visits bounded nodes, includes exact/UTF16 endpoints and never scans the full vocabulary (118.1145ms)
+  AssertionError [ERR_ASSERTION]: vocab001: 214
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/core/term-order.test.mjs:28:208)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

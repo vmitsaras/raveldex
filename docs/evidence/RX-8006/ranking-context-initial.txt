@@ -1,0 +1,50 @@
+✖ hand arithmetic and actual field facts survive preparation by an earlier untraced document (4.647958ms)
+✔ shared terms across weighted groups, boosted fields, ties and filtered pages retain independent source arithmetic (15.517959ms)
+✔ each mutation revision refreshes DF and field averages while old roots and failed/noop writes remain stable (7.778958ms)
+✖ interleaved and reentrant searches on distinct roots cannot share ranking statistics (0.564542ms)
+✔ unused malformed field statistics stay lazy and per-document validation still runs after a previous hit (0.676625ms)
+✔ source/native restore and later churn rebuild query-local ranking inputs without stale donor or receiver values (20.27ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 4
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 119.982958
+
+✖ failing tests:
+
+test at test/core/ranking-context.test.mjs:46:1
+✖ hand arithmetic and actual field facts survive preparation by an earlier untraced document (4.647958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '["ca","prefix",1]'
+  - '["car","exact",1]'
+         ^
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/core/ranking-context.test.mjs:62:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '["ca","prefix",1]',
+    expected: '["car","exact",1]',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/core/ranking-context.test.mjs:109:1
+✖ interleaved and reentrant searches on distinct roots cannot share ranking statistics (0.564542ms)
+  TypeError: Cannot read properties of undefined (reading 'completeness')
+      at compare (file:///Users/vasilis/Documents/GitHub/raveldex/test/core/ranking-context.test.mjs:29:23)
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/core/ranking-context.test.mjs:118:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

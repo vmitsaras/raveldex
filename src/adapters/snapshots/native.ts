@@ -6,6 +6,8 @@ import { initializeParticipants } from '../../core/capabilities/participants.js'
 import type { OwnedConfiguration } from '../../core/contracts/types.js';
 import { bucketOf, directoryEntries, directoryGet } from '../../core/index/directory.js';
 import type { Directory, WorkStep } from '../../core/index/directory.js';
+import { updateTermOrder } from '../../core/index/term-order.js';
+import type { TermOrder } from '../../core/index/term-order.js';
 import { inspectIndex } from '../../core/index/invariants.js';
 import type { DocumentEntry, FieldIndex, IndexRoot, TermEntry } from '../../core/index/state.js';
 import type { SourceRoot } from '../../addons/phrases/store.js';
@@ -75,7 +77,7 @@ function* metadata(entry: DocumentEntry, configuration: OwnedConfiguration): Gen
 
 /** Validate actual reverse/dictionary/postings/statistical structures. Canonical
  * normalized terms are never passed back through the raw-text analyzer. */
-export function* validateNative(payload: unknown, configuration: OwnedConfiguration, revision: number, check?: () => void): Generator<WorkStep, IndexRoot> {
+export function* validateNative(payload: unknown, configuration: OwnedConfiguration, revision: number, check?: () => void, liveFields?: Readonly<Record<string, FieldIndex>>): Generator<WorkStep, IndexRoot> {
   requireCodecs(configuration);
   const analyze = createAnalysis(configuration, check);
   const data = object(payload, ['documents', 'fields', 'counts', 'participants'], 'INVALID_NATIVE_STATE'), limits = configuration.limits;
@@ -100,21 +102,26 @@ export function* validateNative(payload: unknown, configuration: OwnedConfigurat
     }
     if (tokens > entry.textCodeUnits * (configuration.analyzer.id === 'code-identifiers-v1' ? 2 : 1)) fail('INVALID_NATIVE_STATE');
   }
+  const restoredFields: Record<string, FieldIndex> = Object.create(null) as Record<string, FieldIndex>;
   for (const name of fieldNames) {
     const field = object(fieldData[name], ['documents', 'length', 'terms'], 'INVALID_NATIVE_STATE');
     count(field.documents, limits.maxDocuments); count(field.length, limits.maxCorpusTokens);
     const terms = yield* directory<TermEntry>(field.terms, limits.maxDictionaryEntries, limits.maxTermCodeUnits);
-    for (const [, entry] of directoryEntries(terms)) {
+    if (liveFields && liveFields[name]?.terms !== terms) fail('INVALID_NATIVE_STATE');
+    let order: TermOrder | null = liveFields ? liveFields[name]!.order : null;
+    for (const [key, entry] of directoryEntries(terms)) {
+      if (!liveFields) order = yield* updateTermOrder(order, key, true, workUnits => ({ workUnits }));
       object(entry, ['df', 'frequency', 'postings'], 'INVALID_NATIVE_STATE');
       count(entry.df, limits.maxDocuments, 1); count(entry.frequency, limits.maxCorpusTokens, 1);
       const postings = yield* directory<number>(entry.postings, limits.maxDocuments, limits.maxIdCodeUnits);
       for (const [, frequency] of directoryEntries(postings)) { yield { workUnits: 1 }; count(frequency, limits.maxTokensPerRecord, 1); }
     }
+    restoredFields[name] = Object.freeze({ documents: field.documents as number, length: field.length as number, terms, order });
   }
   const participants = map(data.participants);
   const expected = initializeParticipants(configuration).states;
   if (Object.keys(participants).length !== Object.keys(expected).length || Object.keys(expected).some(id => !Object.hasOwn(participants, id))) fail('INVALID_NATIVE_STATE');
-  const root: IndexRoot = Object.freeze({ revision, configuration, documents, fields: fieldData as unknown as Readonly<Record<string, FieldIndex>>, counts: counts as unknown as IndexRoot['counts'], participants });
+  const root: IndexRoot = Object.freeze({ revision, configuration, documents, fields: Object.freeze(restoredFields), counts: counts as unknown as IndexRoot['counts'], participants });
   yield* inspectIndex(root);
   for (const registration of configuration.capabilities?.ordered ?? []) {
     if (!registration.participant) continue;

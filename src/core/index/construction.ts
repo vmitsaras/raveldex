@@ -4,6 +4,8 @@ import type { OwnedConfiguration, OwnedRecord } from '../contracts/types.js';
 import { invalid } from '../errors/error.js';
 import { validateStateCounts } from '../limits/limits.js';
 import { WorkBudget } from '../limits/work.js';
+import { updateTermOrder } from './term-order.js';
+import type { TermOrder } from './term-order.js';
 import { DirectoryBuilder } from './directory.js';
 import type { Directory, WorkStep } from './directory.js';
 import type { DocumentEntry, FieldIndex, IndexRoot, ReverseField, TermEntry } from './state.js';
@@ -159,14 +161,16 @@ export class IndexConstruction {
       const fields: Record<string, FieldIndex> = Object.create(null) as typeof fields;
       for (const [name, field] of Object.entries(this.fields)) {
         const terms = new DirectoryBuilder<TermEntry>();
+        let order: TermOrder | null = null;
         for (const key of field.keys) {
           yield charge({ workUnits: key.length + 1 });
           const term = field.terms.get(key)!;
+          order = yield* updateTermOrder(order, key, true, units => charge({ workUnits: units }));
           const postings = yield* seal(term.postings);
           terms.set(key, Object.freeze({ df: term.df, frequency: term.frequency, postings }));
           yield charge({ workUnits: key.length + 1 });
         }
-        fields[name] = Object.freeze({ documents: field.documents, length: field.length, terms: yield* seal(terms) });
+        fields[name] = Object.freeze({ documents: field.documents, length: field.length, terms: yield* seal(terms), order });
         yield charge({ workUnits: 1 });
       }
       const documents = yield* seal(this.documents);

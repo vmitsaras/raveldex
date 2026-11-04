@@ -116,7 +116,7 @@
       "id": "usage:docs/api/CORE.md#query-shapes",
       "text": {
         "title": "Query shapes",
-        "body": "\nA plain string searches all declared text fields and requires every complete analyzed term to match. Quotes, the word `AND` and minus signs do not enable a query language. Use a typed query below for more control, or explicitly parse [query syntax](QUERY_SYNTAX.md) before calling `search`.\n\n| `Query.kind` | Properties / meaning |\n| --- | --- |\n| `text` | `{ text, operator?: 'and' \\| 'or', fields?: string[] }`; default AND. |\n| `group` | `{ variants: Variant[], fields?: string[] }`; alternative terms/fields. `Variant` is `{ text, match: 'exact' \\| 'prefix', weight?: number }`. Each text analyzes to exactly one token; finite weight `(0,1]`, default 1. |\n| `and`, `or` | `{ children: Query[] }`; nonempty Boolean groups. |\n| `not` | `{ child: Query }`; complement against all live IDs, contributes no lexical score. |\n| `eq` | `{ field, value: Scalar }`; strict declared metadata equality, including any matching member of multi metadata. |\n| `all`, `none` | No additional properties; explicit browse-all or match-none. |\n| `extension` | `{ capability, version, payload }`; requires a matching installed capability. |\n\nLeave out `fields` to search all text fields, or provide a nonempty list without duplicates. Text that produces no terms matches nothing.\n\nMetadata equality uses the original type, case and spacing: it does not turn `\"1\"` into `1`. Missing values differ from `null`, and `not(eq(...))` includes records where the field is missing. Queries containing only metadata or exclusions can return matches with a score of zero.\n\nThis is a query fragment for an engine with a `title` field. Pass it to `engine.search(query)` to find title terms beginning with `atom`:\n\n```js\nconst query = {\n  kind: 'group', fields: ['title'],\n  variants: [{ text: 'atom', match: 'prefix', weight: 0.8 }],\n};\n```\n\nFor example, a title containing `Atomic updates` can match this query. The `0.8` weight reduces that alternative's score contribution. This block only creates the query; it does not create an engine or print results.\n\nA prefix needs at least two normalized Unicode code points. Raveldex finds every matching complete term in the dictionary; if expansion exceeds a limit, the search rejects rather than silently dropping terms.\n\nChoose [typo tolerance](TYPO.md), [synonyms](SYNONYMS.md), [literal/infix matching](LITERAL.md), [ordered proximity](PROXIMITY.md) or [query syntax](QUERY_SYNTAX.md) explicitly when you need those behaviors. A plain string does not turn them on.\n\n"
+        "body": "\nA plain string searches all declared text fields and requires every complete analyzed term to match. Quotes, the word `AND` and minus signs do not enable a query language. Use a typed query below for more control, or explicitly parse [query syntax](QUERY_SYNTAX.md) before calling `search`.\n\n| `Query.kind` | Properties / meaning |\n| --- | --- |\n| `text` | `{ text, operator?: 'and' \\| 'or', fields?: string[] }`; default AND. |\n| `group` | `{ variants: Variant[], fields?: string[] }`; alternative terms/fields. `Variant` is `{ text, match: 'exact' \\| 'prefix', weight?: number }`. Each text analyzes to exactly one token; finite weight `(0,1]`, default 1. |\n| `and`, `or` | `{ children: Query[] }`; nonempty Boolean groups. |\n| `not` | `{ child: Query }`; complement against all live IDs, contributes no lexical score. |\n| `eq` | `{ field, value: Scalar }`; strict declared metadata equality, including any matching member of multi metadata. |\n| `all`, `none` | No additional properties; explicit browse-all or match-none. |\n| `extension` | `{ capability, version, payload }`; requires a matching installed capability. |\n\nLeave out `fields` to search all text fields, or provide a nonempty list without duplicates. Text that produces no terms matches nothing.\n\nMetadata equality uses the original type, case and spacing: it does not turn `\"1\"` into `1`. Missing values differ from `null`, and `not(eq(...))` includes records where the field is missing. Queries containing only metadata or exclusions can return matches with a score of zero.\n\nThis is a query fragment for an engine with a `title` field. Pass it to `engine.search(query)` to find title terms beginning with `atom`:\n\n```js\nconst query = {\n  kind: 'group', fields: ['title'],\n  variants: [{ text: 'atom', match: 'prefix', weight: 0.8 }],\n};\n```\n\nFor example, a title containing `Atomic updates` can match this query. The `0.8` weight reduces that alternative's score contribution. This block only creates the query; it does not create an engine or print results.\n\nA prefix needs at least two normalized Unicode code points. Raveldex finds every matching complete term in the dictionary; if expansion exceeds a limit, the search rejects rather than silently dropping terms. Ordinary lexical prefix lookup seeks an ordered live-term index. Near expansion caps it can retain a full dictionary scan to preserve exact error precedence. The ordered index adds one node per live field term and charged maintenance/restore work; existing work and deadline bounds still apply.\n\nChoose [typo tolerance](TYPO.md), [synonyms](SYNONYMS.md), [literal/infix matching](LITERAL.md), [ordered proximity](PROXIMITY.md) or [query syntax](QUERY_SYNTAX.md) explicitly when you need those behaviors. A plain string does not turn them on.\n\n"
       },
       "metadata": {
         "sourcePath": "docs/api/CORE.md",
@@ -127,7 +127,7 @@
       "id": "usage:docs/api/CORE.md#analysis-and-ranking",
       "text": {
         "title": "Analysis and ranking",
-        "body": "\nThe default analyzer, `basic-v1`, finds words and numbers with boundaries equivalent to `/[\\p{L}\\p{N}][\\p{L}\\p{N}\\p{M}]*/gu`. It applies NFKC normalization and locale-independent lowercase once to each original token. It does not split the normalized result again.\n\nAccents and word forms remain significant: `café` differs from `cafe`, and `Straße` differs from `strasse`. The analyzer does not remove stop words, stem words or perform linguistic Japanese segmentation. When you request positions or offsets, each source token keeps its full original UTF-16 span; the end offset is exclusive. Positions start again for each text-array value.\n\n`raveldex-bm25-v1` uses field-local positive-length populations, `k1 = 1.2`, `b = 0.75`, explicit field boosts and `ln(1 + (N - df + 0.5)/(df + 0.5))` IDF. It selects the best weighted alternative per canonical group/field and sums participating groups/fields deterministically. Only positive groups in successful Boolean branches score; repeated equivalent groups contribute once. Phrases add no hidden bonus. Metadata/facets do not recompute IDF. The repository [ranking contract](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md) gives normative arithmetic and hand-derived cases. [Inspector](ADDONS.md#native-inspector) returns selected actual arithmetic.\n\n"
+        "body": "\nThe default analyzer, `basic-v1`, finds words and numbers with boundaries equivalent to `/[\\p{L}\\p{N}][\\p{L}\\p{N}\\p{M}]*/gu`. It applies NFKC normalization and locale-independent lowercase once to each original token. It does not split the normalized result again.\n\nAccents and word forms remain significant: `café` differs from `cafe`, and `Straße` differs from `strasse`. The analyzer does not remove stop words, stem words or perform linguistic Japanese segmentation. When you request positions or offsets, each source token keeps its full original UTF-16 span; the end offset is exclusive. Positions start again for each text-array value.\n\n`raveldex-bm25-v1` uses field-local positive-length populations, `k1 = 1.2`, `b = 0.75`, explicit field boosts and `ln(1 + (N - df + 0.5)/(df + 0.5))` IDF. It selects the best weighted alternative per canonical group/field and sums participating groups/fields deterministically. Only positive groups in successful Boolean branches score; repeated equivalent groups contribute once. Phrases add no hidden bonus. Metadata/facets do not recompute IDF. A search lazily reuses field averages and IDF from its selected immutable revision; these values are not cached across searches or revisions. The repository [ranking contract](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md) gives normative arithmetic and hand-derived cases. [Inspector](ADDONS.md#native-inspector) returns selected actual arithmetic.\n\n"
       },
       "metadata": {
         "sourcePath": "docs/api/CORE.md",
@@ -618,7 +618,7 @@
       "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#query-shapes",
       "startLine": 52,
       "endLine": 84,
-      "contentHash": "c96a1bb5a3d49a8d3f300671f201ae166eb1afc4db63533205e6b8b94867f05c"
+      "contentHash": "bf65c396ab8d6ec50d12c4cab797b0ee1bfafb4426a66b71b36ff5ed2c21a096"
     },
     {
       "id": "usage:docs/api/CORE.md#analysis-and-ranking",
@@ -629,7 +629,7 @@
       "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md#analysis-and-ranking",
       "startLine": 85,
       "endLine": 92,
-      "contentHash": "2669da0633276b20db2942446342be142502605c6879d742f7e83c6fb9e899c1"
+      "contentHash": "1c7acd4b82115b03505376eef9a3ea6aed524c749f14a43974aef5c13618db8e"
     },
     {
       "id": "usage:docs/api/CORE.md#execution-errors-and-bounds",
@@ -1029,8 +1029,8 @@
       "path": "docs/api/CORE.md",
       "category": "Core",
       "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/api/CORE.md",
-      "sha256": "8a5ab3d48d92c5a779c9287306246427c583ced1a0898fbb5fc498245b22d43d",
-      "bytes": 14445
+      "sha256": "42be5f0bbec70da59cf8e9700fe64865bc4345512c3cfaa0010dcefd048addfd",
+      "bytes": 14882
     },
     {
       "path": "docs/api/ADDONS.md",
@@ -1054,5 +1054,5 @@
       "bytes": 11522
     }
   ],
-  "hash": "fcc7e0f81591b173063899708dfe849b69988177cd159637656d69ff809dd683"
+  "hash": "e95e504ad68df26e6b221165b6e12c7efd930b419b8078c37debfd34a9d3b6f2"
 }

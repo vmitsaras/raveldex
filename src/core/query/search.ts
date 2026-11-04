@@ -9,7 +9,7 @@ import { directoryGet } from '../index/directory.js';
 import type { WorkStep } from '../index/directory.js';
 import type { IndexRoot } from '../index/state.js';
 import { WorkBudget } from '../limits/work.js';
-import { scoreDocument } from '../ranking/bm25.js';
+import { rankingContext, scoreDocument } from '../ranking/bm25.js';
 import { PageSelection } from '../ranking/page.js';
 import { expandGroups } from '../retrieval/expand.js';
 import { captureTrace, FactCollector } from '../trace/facts.js';
@@ -84,6 +84,7 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
   const bound = yield* candidateBound(compiled.node, expansions, charge);
   const documents = yield* candidateDocuments(root, bound, selected, charge);
   const page = new PageSelection(options.limit ? options.offset + options.limit : 0, charge);
+  const ranking = rankingContext(root);
   let total = 0;
   for (const [id, doc] of documents) {
     const candidate = !bound || bound.has(id);
@@ -93,7 +94,7 @@ export function* executeOwnedSearch(root: IndexRoot, request: OwnedSearch, contr
     const facts = selected.has(id) ? collector : undefined;
     const qualified = yield* evaluate(compiled.node, doc, expansions, charge, facts, 'query', extensions?.leaves);
     boundary('scoring');
-    const score = qualified.matched ? yield* scoreDocument(root, doc, qualified.groups, expansions, charge, facts) : 0;
+    const score = qualified.matched ? yield* scoreDocument(root, doc, qualified.groups, expansions, charge, facts, ranking) : 0;
     if (candidate && qualified.matched) {
       total++;
       if (extensions?.aggregations.length) {

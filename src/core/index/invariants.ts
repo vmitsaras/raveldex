@@ -3,6 +3,8 @@ import { validateStateCounts } from '../limits/limits.js';
 import { WorkBudget } from '../limits/work.js';
 import { bucketOf, directoryEntries, directoryGet, DIRECTORY_SLOTS } from './directory.js';
 import type { Directory, WorkStep } from './directory.js';
+import { compareStrings } from '../query/work.js';
+import type { TermOrder } from './term-order.js';
 import type { IndexRoot } from './state.js';
 
 function check(value: boolean, path: string): asserts value {
@@ -68,6 +70,23 @@ export function* inspectIndex(root: IndexRoot): Generator<WorkStep, void> {
     check(expected !== undefined, 'fields.name');
     check(field.documents === expected.documents && field.length === expected.length, 'fields.statistics');
     yield* directory(field.terms);
+    const seen = new Set<TermOrder>();
+    function* order(node: TermOrder | null, lower?: string, upper?: string): Generator<WorkStep, number> {
+      yield charge(1);
+      if (node === null) return 0;
+      check(typeof node === 'object' && node !== null && Object.isFrozen(node) && !seen.has(node), 'order.node');
+      seen.add(node);
+      check(typeof node.key === 'string', 'order.key');
+      yield charge(node.key.length + 1);
+      check(directoryGet(field.terms, node.key) !== undefined, 'order.term');
+      if (lower !== undefined) check((yield* compareStrings(lower, node.key, charge)) < 0, 'order.lower');
+      if (upper !== undefined) check((yield* compareStrings(node.key, upper, charge)) < 0, 'order.upper');
+      const left = yield* order(node.left, lower, node.key), right = yield* order(node.right, node.key, upper);
+      check(node.height === 1 + Math.max(left, right) && Math.abs(left - right) <= 1, 'order.height');
+      return node.height;
+    }
+    yield* order(field.order);
+    check(seen.size === field.terms.size, 'order.size');
     for (const [term, entry] of directoryEntries(field.terms)) {
       yield charge(term.length + 1);
       count(entry.df, 'terms.df', true);

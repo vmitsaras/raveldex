@@ -26,7 +26,9 @@ const load = (directory, path) => import(pathToFileURL(join(directory, path)).hr
 test('private instrumentation counts executed paths independently and preserves complete results and scores', async t => {
   const directory = await fixture(t), sourceBefore = await readFile(new URL('dist/core/query/search.js', repository));
   const report = await instrumentPackage(directory);
-  assert.equal(report.patches.length, 4);
+  assert.equal(report.patches.length, 5);
+  assert.equal(report.prefixProfile, 'ordered-seek-with-cap-fallback');
+  assert.equal(report.rankingProfile, 'query-local-statistics');
   assert.ok(report.patches.every(row => row.originalSha256 !== row.instrumentedSha256));
   const patched = await load(directory, 'dist/index.js');
   const normal = createRaveldex({ schema, limits: { checkpointWorkUnits: 32 } });
@@ -46,6 +48,9 @@ test('private instrumentation counts executed paths independently and preserves 
     assert.equal(counts.prefixDictionaryVisits, query.kind === 'group' ? 3 : 0);
     assert.ok(counts.emittedSteps > 0); assert.ok(counts.emittedWorkUnits > counts.emittedSteps);
     assert.ok(counts.hostYields > 0); assert.equal(counts.hostYields, counts.continuationsScheduled);
+    assert.equal(counts.averageLengthComputations, query.kind === 'not' ? 0 : 1);
+    assert.equal(counts.idfComputations, query.kind === 'not' ? 0 : 1);
+    assert.equal(counts.fieldsPrepared, query.kind === 'not' ? 0 : 1);
     assert.equal(counts.deadlineCallbacks, 0); assert.deepEqual(counts.restorePhases, {});
   }
   assert.deepEqual(await readFile(new URL('dist/core/query/search.js', repository)), sourceBefore);

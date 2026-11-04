@@ -1,5 +1,7 @@
 import { invalid } from '../errors/error.js';
 import { validateStateCounts } from '../limits/limits.js';
+import { updateTermOrder } from '../index/term-order.js';
+import type { TermOrder } from '../index/term-order.js';
 import { directoryGet } from '../index/directory.js';
 import type { WorkStep } from '../index/directory.js';
 import { DirectoryStage, emptyDirectory } from '../index/staging.js';
@@ -16,7 +18,7 @@ export interface StagingCounts {
   fieldUpdates: number; termUpdates: number;
 }
 interface StagedTerm { readonly original?: TermEntry; df: number; frequency: number; postings: DirectoryStage<number> }
-interface StagedField { documents: number; length: number; terms: DirectoryStage<TermEntry>; cache: Map<string, StagedTerm> }
+interface StagedField { documents: number; length: number; terms: DirectoryStage<TermEntry>; order: TermOrder | null; cache: Map<string, StagedTerm> }
 function nonnegative(value: number, path: string): void {
   if (!Number.isSafeInteger(value) || value < 0) invalid('INTERNAL_ERROR', path);
 }
@@ -39,7 +41,7 @@ export class CoreDelta {
       if (!original) invalid('INTERNAL_ERROR', 'reverse.field');
       nonnegative(original.documents, 'field.documents'); nonnegative(original.length, 'field.length');
       if (original.documents > this.old.documents.size || original.length < original.documents) invalid('INTERNAL_ERROR', 'field.statistics');
-      field = { documents: original.documents, length: original.length, terms: new DirectoryStage(original.terms, this.charge, this.diagnostics?.dictionary), cache: new Map() };
+      field = { documents: original.documents, length: original.length, order: original.order, terms: new DirectoryStage(original.terms, this.charge, this.diagnostics?.dictionary), cache: new Map() };
       this.fields.set(name, field);
     }
     return field;
@@ -104,18 +106,18 @@ export class CoreDelta {
         nonnegative(term.df, 'term.df'); nonnegative(term.frequency, 'term.frequency');
         if (term.df !== term.postings.size || term.df > field.documents || term.frequency < term.df || term.frequency > field.length || (!term.df && term.frequency !== 0)) invalid('INTERNAL_ERROR', 'term.statistics');
         if (!term.df) {
-          if (term.original) { yield* field.terms.delete(key); this.counts.dictionaryEntries--; }
+          if (term.original) { yield* field.terms.delete(key); field.order = yield* updateTermOrder(field.order, key, false, this.charge); this.counts.dictionaryEntries--; }
         } else {
           const postings = yield* term.postings.finish();
           yield* field.terms.set(key, Object.freeze({ df: term.df, frequency: term.frequency, postings }));
-          if (!term.original) this.counts.dictionaryEntries++;
+          if (!term.original) { field.order = yield* updateTermOrder(field.order, key, true, this.charge); this.counts.dictionaryEntries++; }
         }
       }
       nonnegative(field.documents, 'field.documents'); nonnegative(field.length, 'field.length');
       if (field.documents > this.counts.documents || field.length < field.documents || (!field.documents && field.length !== 0)) invalid('INTERNAL_ERROR', 'field.statistics');
       const terms = yield* field.terms.finish();
       if ((field.documents === 0) !== (terms.size === 0)) invalid('INTERNAL_ERROR', 'field.terms');
-      fields[name] = Object.freeze({ documents: field.documents, length: field.length, terms });
+      fields[name] = Object.freeze({ documents: field.documents, length: field.length, terms, order: field.order });
     }
     const documents = yield* this.documents.finish();
     yield this.charge(5);
@@ -130,7 +132,7 @@ export function* clearedCore(old: IndexRoot, charge: Charge): Generator<WorkStep
   const fields: Record<string, FieldIndex> = Object.create(null) as typeof fields;
   for (const name of Object.keys(old.fields)) {
     yield charge(1);
-    fields[name] = Object.freeze({ documents: 0, length: 0, terms: emptyDirectory<TermEntry>() });
+    fields[name] = Object.freeze({ documents: 0, length: 0, terms: emptyDirectory<TermEntry>(), order: null });
   }
   yield charge(5);
   return { documents: emptyDirectory<DocumentEntry>(), fields: Object.freeze(fields), counts: Object.freeze({ documents: 0, textCodeUnits: 0, tokens: 0, dictionaryEntries: 0, postingEntries: 0 }) };

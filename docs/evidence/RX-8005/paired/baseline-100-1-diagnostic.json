@@ -1,0 +1,393 @@
+{
+  "kind": "rx8005-prefix-child-v1",
+  "pid": 6923,
+  "variant": "baseline",
+  "mode": "diagnostic",
+  "rotation": 1,
+  "size": 100,
+  "identity": {
+    "version": "rx8002-workloads-v1",
+    "family": "adversarial",
+    "size": 100,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "8ba8718059fb9b81777b1cdae185664aff8d776c3201ca73acf54d0c057fa538",
+    "labelsSha256": "c63e9a2ed2fc874b73ddc06c5d7494b48f60870fbf0a5f38836c8a7ed67c8538",
+    "queriesSha256": "620a9f2951d685f6bf58559819a93bfa10ec52fa0d1f08d7dd5acfb78ad8c7a4",
+    "judgmentsSha256": "4a73dc3c6ef404c7000bd5349a2be0171560c5dc6ef711ecbafb317885af471b",
+    "dictionaryTerms": 307,
+    "judgmentCounts": {
+      "common": 100,
+      "rare": 1,
+      "overlapping-or": 35,
+      "negative-only": 99,
+      "filtered": 20,
+      "narrow-prefix": 10,
+      "broad-prefix-refusal": 100,
+      "source-phrase": 34
+    }
+  },
+  "samples": [],
+  "observations": [
+    {
+      "operation": "build",
+      "outcome": "Pass",
+      "wallMs": 23.469291000000005,
+      "cpuUserMs": 29.816,
+      "cpuSystemMs": 1.698,
+      "counters": {
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 20049,
+        "emittedWorkUnits": 122146,
+        "maxStepWorkUnits": 33,
+        "hostYields": 59,
+        "continuationsScheduled": 59,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "result": {
+        "revision": 1,
+        "records": 100,
+        "admittedBatches": 1
+      }
+    },
+    {
+      "operation": "query:narrow-prefix",
+      "repetition": 0,
+      "outcome": "Pass",
+      "wallMs": 6.868583000000001,
+      "cpuUserMs": 9.798,
+      "cpuSystemMs": 0.559,
+      "counters": {
+        "candidates": 10,
+        "documentsEvaluated": 10,
+        "documentsScored": 10,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 307,
+        "postingsVisited": 30,
+        "emittedSteps": 7494,
+        "emittedWorkUnits": 23369,
+        "maxStepWorkUnits": 211,
+        "hostYields": 11,
+        "continuationsScheduled": 11,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 10,
+        "hits": [
+          {
+            "id": "adversarial:00002",
+            "score": 4.322236649344206
+          },
+          {
+            "id": "adversarial:00005",
+            "score": 4.322236649344206
+          },
+          {
+            "id": "adversarial:00008",
+            "score": 4.322236649344206
+          },
+          {
+            "id": "adversarial:00000",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00001",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00003",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00004",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00006",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00009",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00007",
+            "score": 4.007051672483909
+          }
+        ]
+      },
+      "resultSha256": "8f67d15a181f71f9e055e726d57dc8460f9e8c89d95d117e831735821b139eca",
+      "expectedMembershipSha256": "b754348b8be1d1eff14ccd77821d728ae7ce682ae26dd97c3f376256e7c575db"
+    },
+    {
+      "operation": "query:broad-prefix-refusal",
+      "repetition": 0,
+      "outcome": "Refused",
+      "wallMs": 2.5589999999999975,
+      "cpuUserMs": 3.931,
+      "cpuSystemMs": 0.136,
+      "error": {
+        "name": "RaveldexError",
+        "code": "LIMIT_EXCEEDED",
+        "reason": null,
+        "details": {
+          "path": "expansions.group",
+          "limit": 256,
+          "actual": 257
+        },
+        "message": "Raveldex: LIMIT_EXCEEDED"
+      },
+      "counters": {
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 262,
+        "postingsVisited": 0,
+        "emittedSteps": 2092,
+        "emittedWorkUnits": 9644,
+        "maxStepWorkUnits": 196,
+        "hostYields": 4,
+        "continuationsScheduled": 4,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      }
+    },
+    {
+      "operation": "query:absent-prefix",
+      "repetition": 0,
+      "outcome": "Pass",
+      "wallMs": 0.6339169999999967,
+      "cpuUserMs": 1.187,
+      "cpuSystemMs": 0.024,
+      "counters": {
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 307,
+        "postingsVisited": 0,
+        "emittedSteps": 1232,
+        "emittedWorkUnits": 1654,
+        "maxStepWorkUnits": 214,
+        "hostYields": 0,
+        "continuationsScheduled": 0,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 0,
+        "hits": []
+      },
+      "resultSha256": "ce22f4c9c29d6ad6da31985443c7a21d6167eb4d54c5fdb6adbf9d9a99e11838",
+      "expectedMembershipSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "operation": "query:selected-field-overlap",
+      "repetition": 0,
+      "outcome": "Pass",
+      "wallMs": 4.710208000000009,
+      "cpuUserMs": 11.516,
+      "cpuSystemMs": 0.252,
+      "counters": {
+        "candidates": 10,
+        "documentsEvaluated": 10,
+        "documentsScored": 10,
+        "exactDictionaryProbes": 1,
+        "prefixDictionaryVisits": 307,
+        "postingsVisited": 30,
+        "emittedSteps": 7553,
+        "emittedWorkUnits": 24808,
+        "maxStepWorkUnits": 344,
+        "hostYields": 11,
+        "continuationsScheduled": 11,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 10,
+        "hits": [
+          {
+            "id": "adversarial:00002",
+            "score": 4.322236649344206
+          },
+          {
+            "id": "adversarial:00005",
+            "score": 4.322236649344206
+          },
+          {
+            "id": "adversarial:00008",
+            "score": 4.322236649344206
+          },
+          {
+            "id": "adversarial:00000",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00001",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00003",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00004",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00006",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00009",
+            "score": 4.158680772098588
+          },
+          {
+            "id": "adversarial:00007",
+            "score": 4.007051672483909
+          }
+        ]
+      },
+      "resultSha256": "8f67d15a181f71f9e055e726d57dc8460f9e8c89d95d117e831735821b139eca",
+      "expectedMembershipSha256": "b754348b8be1d1eff14ccd77821d728ae7ce682ae26dd97c3f376256e7c575db"
+    },
+    {
+      "operation": "mutation:replace-new-term",
+      "outcome": "Pass",
+      "wallMs": 1.4121250000000032,
+      "cpuUserMs": 5.713,
+      "cpuSystemMs": 0.297,
+      "counters": {
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 1730,
+        "emittedWorkUnits": 4151,
+        "maxStepWorkUnits": 37,
+        "hostYields": 2,
+        "continuationsScheduled": 2,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "result": {
+        "revision": 2,
+        "changed": true,
+        "added": 0,
+        "replaced": 1,
+        "removed": 0
+      }
+    },
+    {
+      "operation": "mutation:replace-original",
+      "outcome": "Pass",
+      "wallMs": 2.270916999999997,
+      "cpuUserMs": 5.624,
+      "cpuSystemMs": 0.176,
+      "counters": {
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 1709,
+        "emittedWorkUnits": 4066,
+        "maxStepWorkUnits": 37,
+        "hostYields": 1,
+        "continuationsScheduled": 1,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "result": {
+        "revision": 3,
+        "changed": true,
+        "added": 0,
+        "replaced": 1,
+        "removed": 0
+      }
+    }
+  ],
+  "warmups": [],
+  "runtime": {
+    "node": "v24.21.0",
+    "versions": {
+      "node": "24.21.0",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.8",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.3",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "137",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "3.6.4",
+      "simdjson": "4.6.11",
+      "simdutf": "6.4.0",
+      "sqlite": "3.53.4",
+      "tz": "2026a",
+      "undici": "7.29.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "13.6.233.17-node.53",
+      "zlib": "1.2.12",
+      "zstd": "1.5.7"
+    },
+    "execArgv": []
+  },
+  "scope": "Fresh Node direct source+source-phrase owner, real installed package. Normal query windows exclude warmups, imports, fixture generation, owner construction and result checking.",
+  "outcome": "Pass",
+  "packageMetadataSha256": "fa866f78cd23d285886ed810fb6509118a9b0eb9dacd25624f4fefb0e6f417a1"
+}

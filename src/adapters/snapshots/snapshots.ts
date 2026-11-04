@@ -68,10 +68,16 @@ function nativeQualification(engine: Raveldex, root: IndexRoot): NativeSnapshotQ
 function* encoded(root: IndexRoot, format: SnapshotFormat, qualification: NativeSnapshotQualification | undefined, maximum: number, check: () => void): Generator<WorkStep, string> {
   requireCodecs(root.configuration);
   if (format === 'raveldex-source') requireCompleteSource(root);
-  const native = Object.freeze({ documents: root.documents, fields: root.fields, counts: root.counts, participants: root.participants });
+  // Order is derived execution state, not part of the native v1 wire schema.
+  const fields: Record<string, unknown> = Object.create(null) as Record<string, unknown>;
+  for (const [name, field] of Object.entries(root.fields)) {
+    yield { workUnits: name.length + 1 };
+    fields[name] = Object.freeze({ documents: field.documents, length: field.length, terms: field.terms });
+  }
+  const native = Object.freeze({ documents: root.documents, fields: Object.freeze(fields), counts: root.counts, participants: root.participants });
   // Export cannot silently omit or bless a trusted registration whose claimed
   // codec fails this complete state protocol. Both formats validate first.
-  try { yield* validateNative(native, root.configuration, root.revision, check); }
+  try { yield* validateNative(native, root.configuration, root.revision, check, root.fields); }
   catch (error) {
     if (error instanceof SnapshotAdapterError || error instanceof RaveldexError && ['CANCELLED', 'DISPOSED', 'DEADLINE_EXCEEDED', 'WORK_LIMIT_EXCEEDED', 'RESOURCE_EXHAUSTED'].includes(error.code)) throw error;
     fail('INVALID_NATIVE_STATE');

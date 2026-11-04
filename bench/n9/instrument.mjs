@@ -44,8 +44,17 @@ export async function instrumentPackage(packageRoot) {
   const bounded = search.includes('for (const [id, doc] of documents) {');
   const execution = await readFile(resolve(directory, 'dist/core/execution/engine.js'), 'utf8');
   const separateContinuation = execution.includes('op.resume = this.#host.continuation(');
+  let orderedPrefix = false;
+  try { await readFile(resolve(directory, 'dist/core/index/term-order.js')); orderedPrefix = true; }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
+  const ranking = await readFile(resolve(directory, 'dist/core/ranking/bm25.js'), 'utf8');
+  const queryRanking = ranking.includes('context = rankingContext(root)');
+  const selectedPatches = [...patches];
+  if (orderedPrefix) selectedPatches.push({ path: 'dist/core/index/term-order.js', anchors: [
+    ['prefix-seek-node', 'checkpoint?.();', "n9Count('prefixDictionaryVisits'); checkpoint?.();", 3],
+  ] });
   const staged = [];
-  for (const patch of patches) {
+  for (const patch of selectedPatches) {
     const path = resolve(directory, patch.path), original = await readFile(path, 'utf8');
     let anchors = patch.path === 'dist/core/query/search.js' && bounded ? [
       ['candidate-loop', 'const candidate = !bound || bound.has(id);', 'const candidate = !bound || bound.has(id);\n        if (candidate) n9Count(\'candidates\');'],
@@ -53,6 +62,16 @@ export async function instrumentPackage(packageRoot) {
     ] : patch.anchors;
     if (patch.path === 'dist/core/execution/engine.js' && separateContinuation) anchors = anchors.map(anchor => anchor[0] === 'continuation-callback' ?
       ['continuation-callback', 'op.resume = this.#host.continuation(() => { op.resume = undefined; this.pump(); });', 'n9Count(\'continuationsScheduled\');\n                            op.resume = this.#host.continuation(() => { n9Count(\'hostYields\'); op.resume = undefined; this.pump(); });'] : anchor);
+    if (patch.path === 'dist/core/ranking/bm25.js') {
+      if (queryRanking) anchors = [
+        ['scorer-entry', 'export function* scoreDocument(root, doc, participating, expansions, charge, facts, context = rankingContext(root)) {', "export function* scoreDocument(root, doc, participating, expansions, charge, facts, context = rankingContext(root)) {\n    n9Count('documentsScored');"],
+      ];
+      anchors = [...anchors,
+        ['average-calculation', 'const avgLength = totalLength / N;', "n9Count('averageLengthComputations'); const avgLength = totalLength / N;"],
+        ['idf-calculation', 'const idf = Math.log(1 + (N - df + 0.5) / (df + 0.5));', "n9Count('idfComputations'); const idf = Math.log(1 + (N - df + 0.5) / (df + 0.5));"],
+      ];
+      if (queryRanking) anchors.push(['field-cache-miss', 'context.fields.set(field, prepared);', "n9Count('fieldsPrepared'); context.fields.set(field, prepared);"]);
+    }
     let changed = original;
     for (const [name, from, to, occurrences = 1] of anchors) {
       assert.equal(changed.split(from).length - 1, occurrences, `Instrumentation anchor drift: ${patch.path} ${name}`);
@@ -63,12 +82,12 @@ export async function instrumentPackage(packageRoot) {
       anchors: anchors.map(([name, , , occurrences = 1]) => ({ name, occurrences })) } });
   }
   for (const file of staged) await writeFile(file.path, file.changed);
-  return { version: 'rx8004-private-observer-v3', continuationProfile: separateContinuation ? 'separate' : 'timer', candidateProfile: bounded ? 'postings-bound' : 'document-universe', patches: staged.map(file => file.report) };
+  return { version: 'rx8006-private-observer-v5', rankingProfile: queryRanking ? 'query-local-statistics' : 'per-posting-statistics', prefixProfile: orderedPrefix ? 'ordered-seek-with-cap-fallback' : 'full-field-scan', continuationProfile: separateContinuation ? 'separate' : 'timer', candidateProfile: bounded ? 'postings-bound' : 'document-universe', patches: staged.map(file => file.report) };
 }
 
 export async function collectDiagnostics(call) {
   assert.equal(globalThis[diagnosticKey], undefined, 'Diagnostic observations must be serial and non-nested');
-  const counters = { candidates: 0, documentsEvaluated: 0, documentsScored: 0, exactDictionaryProbes: 0, prefixDictionaryVisits: 0,
+  const counters = { idfComputations: 0, averageLengthComputations: 0, fieldsPrepared: 0, candidates: 0, documentsEvaluated: 0, documentsScored: 0, exactDictionaryProbes: 0, prefixDictionaryVisits: 0,
     postingsVisited: 0, emittedSteps: 0, emittedWorkUnits: 0, maxStepWorkUnits: 0, hostYields: 0, continuationsScheduled: 0,
     deadlineCallbacks: 0, restorePhase: null, restorePhases: {} };
   globalThis[diagnosticKey] = counters;

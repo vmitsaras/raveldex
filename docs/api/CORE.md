@@ -78,7 +78,7 @@ const query = {
 
 For example, a title containing `Atomic updates` can match this query. The `0.8` weight reduces that alternative's score contribution. This block only creates the query; it does not create an engine or print results.
 
-A prefix needs at least two normalized Unicode code points. Raveldex finds every matching complete term in the dictionary; if expansion exceeds a limit, the search rejects rather than silently dropping terms.
+A prefix needs at least two normalized Unicode code points. Raveldex finds every matching complete term in the dictionary; if expansion exceeds a limit, the search rejects rather than silently dropping terms. Ordinary lexical prefix lookup seeks an ordered live-term index. Near expansion caps it can retain a full dictionary scan to preserve exact error precedence. The ordered index adds one node per live field term and charged maintenance/restore work; existing work and deadline bounds still apply.
 
 Choose [typo tolerance](TYPO.md), [synonyms](SYNONYMS.md), [literal/infix matching](LITERAL.md), [ordered proximity](PROXIMITY.md) or [query syntax](QUERY_SYNTAX.md) explicitly when you need those behaviors. A plain string does not turn them on.
 
@@ -88,7 +88,7 @@ The default analyzer, `basic-v1`, finds words and numbers with boundaries equiva
 
 Accents and word forms remain significant: `café` differs from `cafe`, and `Straße` differs from `strasse`. The analyzer does not remove stop words, stem words or perform linguistic Japanese segmentation. When you request positions or offsets, each source token keeps its full original UTF-16 span; the end offset is exclusive. Positions start again for each text-array value.
 
-`raveldex-bm25-v1` uses field-local positive-length populations, `k1 = 1.2`, `b = 0.75`, explicit field boosts and `ln(1 + (N - df + 0.5)/(df + 0.5))` IDF. It selects the best weighted alternative per canonical group/field and sums participating groups/fields deterministically. Only positive groups in successful Boolean branches score; repeated equivalent groups contribute once. Phrases add no hidden bonus. Metadata/facets do not recompute IDF. The repository [ranking contract](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md) gives normative arithmetic and hand-derived cases. [Inspector](ADDONS.md#native-inspector) returns selected actual arithmetic.
+`raveldex-bm25-v1` uses field-local positive-length populations, `k1 = 1.2`, `b = 0.75`, explicit field boosts and `ln(1 + (N - df + 0.5)/(df + 0.5))` IDF. It selects the best weighted alternative per canonical group/field and sums participating groups/fields deterministically. Only positive groups in successful Boolean branches score; repeated equivalent groups contribute once. Phrases add no hidden bonus. Metadata/facets do not recompute IDF. A search lazily reuses field averages and IDF from its selected immutable revision; these values are not cached across searches or revisions. The repository [ranking contract](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md) gives normative arithmetic and hand-derived cases. [Inspector](ADDONS.md#native-inspector) returns selected actual arithmetic.
 
 ## Execution, errors and bounds
 

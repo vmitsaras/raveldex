@@ -1,3 +1,4 @@
+import { prefixTerms } from '../index/term-order.js';
 import { directoryEntries, directoryGet } from '../index/directory.js';
 import type { WorkStep } from '../index/directory.js';
 import type { IndexRoot, TermEntry } from '../index/state.js';
@@ -42,15 +43,28 @@ export function* expandGroups(root: IndexRoot, groups: ReadonlyMap<string, Canon
           const entry = directoryGet(field.terms, variant.term);
           if (entry) yield* add(variant.term, entry, variant.weight, variant.key);
         } else {
-          for (const [term, entry] of directoryEntries(field.terms)) {
-            checkpoint?.('dictionary');
-            yield charge(1);
-            let matches = term.length >= variant.term.length;
-            for (let i = 0; matches && i < variant.term.length; i++) {
-              yield charge(1);
-              matches = term.charCodeAt(i) === variant.term.charCodeAt(i);
+          const headroom = Math.min(root.configuration.limits.maxExpansionsPerGroup - perGroup, root.configuration.limits.maxQueryExpansions - queryPairs.size);
+          const selected = yield* prefixTerms(field.order, variant.term, headroom, charge, () => checkpoint?.('dictionary'));
+          if (!selected.overflow) {
+            for (const term of selected.keys) {
+              yield charge(term.length + 1);
+              const entry = directoryGet(field.terms, term);
+              if (!entry) invalid('INTERNAL_ERROR', 'index.order');
+              yield* add(term, entry, variant.weight, variant.key);
             }
-            if (matches) yield* add(term, entry, variant.weight, variant.key);
+          } else {
+            // Near a cap, duplicate pairs can make group/query error precedence
+            // depend on native hash encounter order. Keep that order exactly.
+            for (const [term, entry] of directoryEntries(field.terms)) {
+              checkpoint?.('dictionary');
+              yield charge(1);
+              let matches = term.length >= variant.term.length;
+              for (let i = 0; matches && i < variant.term.length; i++) {
+                yield charge(1);
+                matches = term.charCodeAt(i) === variant.term.charCodeAt(i);
+              }
+              if (matches) yield* add(term, entry, variant.weight, variant.key);
+            }
           }
         }
       }

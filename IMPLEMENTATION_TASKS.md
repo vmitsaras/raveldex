@@ -2142,7 +2142,7 @@ Profile and separate execution continuation from deadline timers using host-appr
 
 **Replace exhaustive prefix dictionary scans with bounded seek**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8005%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8005%22)
 
 **Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
@@ -2170,14 +2170,16 @@ Evaluate sorted-range seeking or another compact prefix lookup against existing 
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8005.md](docs/evidence/RX-8005.md)
+- [docs/evidence/RX-8005/acceptance.json](docs/evidence/RX-8005/acceptance.json)
+- [docs/evidence/RX-8005/review.md](docs/evidence/RX-8005/review.md)
 
 
 ## RX-8006
 
 **Hoist revision-invariant BM25 calculations**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8006%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8006%22)
 
 **Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
@@ -2205,7 +2207,9 @@ Cache per-query/per-field length averages and IDF inputs where applicable withou
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8006.md](docs/evidence/RX-8006.md)
+- [docs/evidence/RX-8006/acceptance.json](docs/evidence/RX-8006/acceptance.json)
+- [docs/evidence/RX-8006/review.md](docs/evidence/RX-8006/review.md)
 
 
 ## RX-8007

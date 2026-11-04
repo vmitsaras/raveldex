@@ -52,7 +52,7 @@ interface Operation {
 
 export function emptyRoot(configuration: OwnedConfiguration, states: Readonly<Record<string, unknown>> = Object.freeze(Object.create(null)) as Readonly<Record<string, unknown>>): IndexRoot {
   const fields: Record<string, FieldIndex> = Object.create(null) as typeof fields;
-  for (const name of Object.keys(configuration.schema.text)) fields[name] = Object.freeze({ documents: 0, length: 0, terms: emptyDirectory<TermEntry>() });
+  for (const name of Object.keys(configuration.schema.text)) fields[name] = Object.freeze({ documents: 0, length: 0, terms: emptyDirectory<TermEntry>(), order: null });
   return Object.freeze({ configuration, revision: 0, documents: emptyDirectory<DocumentEntry>(), fields: Object.freeze(fields),
     counts: Object.freeze({ documents: 0, textCodeUnits: 0, tokens: 0, dictionaryEntries: 0, postingEntries: 0 }),
     participants: states });

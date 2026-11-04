@@ -1,7 +1,7 @@
 import { invalid } from '../errors/error.js';
 import { directoryGet } from '../index/directory.js';
 import type { WorkStep } from '../index/directory.js';
-import type { DocumentEntry, IndexRoot } from '../index/state.js';
+import type { DocumentEntry, IndexRoot, TermEntry } from '../index/state.js';
 import type { ExpandedGroup } from '../retrieval/expand.js';
 import { sortedStrings } from '../query/work.js';
 import type { Charge } from '../query/work.js';
@@ -9,8 +9,17 @@ import type { FactCollector, FieldFact } from '../trace/facts.js';
 
 const positiveInteger = (value: number): boolean => Number.isSafeInteger(value) && value > 0;
 
+interface FieldStatistics {
+  readonly N: number; readonly totalLength: number; readonly boost: number; readonly avgLength: number;
+  readonly terms: Map<TermEntry, { readonly df: number; readonly idf: number }>;
+}
+/** A search owns this cache; no entry survives its selected immutable root. */
+export interface RankingContext { readonly root: IndexRoot; readonly fields: Map<string, FieldStatistics> }
+export function rankingContext(root: IndexRoot): RankingContext { return { root, fields: new Map() }; }
+
 /** Native model v1. The optional facts path captures these actual intermediates. */
-export function* scoreDocument(root: IndexRoot, doc: DocumentEntry, participating: ReadonlySet<string>, expansions: ReadonlyMap<string, ExpandedGroup>, charge: Charge, facts?: FactCollector): Generator<WorkStep, number> {
+export function* scoreDocument(root: IndexRoot, doc: DocumentEntry, participating: ReadonlySet<string>, expansions: ReadonlyMap<string, ExpandedGroup>, charge: Charge, facts?: FactCollector, context: RankingContext = rankingContext(root)): Generator<WorkStep, number> {
+  if (context.root !== root) invalid('INTERNAL_ERROR', 'ranking.root');
   let score = 0;
   for (const key of yield* sortedStrings(participating, charge)) {
     const expanded = expansions.get(key)!;
@@ -19,20 +28,35 @@ export function* scoreDocument(root: IndexRoot, doc: DocumentEntry, participatin
       let best = 0;
       let found = false;
       let selected: FieldFact | undefined;
+      let prepared = context.fields.get(field);
       for (const alternative of expanded.fields.get(field)!) {
         yield charge(doc.id.length + field.length + alternative.term.length + 3);
         const tf = directoryGet(alternative.entry.postings, doc.id);
         if (tf === undefined) continue;
         yield charge(1);
-        const statistics = root.fields[field]!;
+        // Keep preparation lazy: unused or nonmatching fields never acquire
+        // new validation failures. The existing coarse scoring step above
+        // covers cache access and remaining document-dependent arithmetic.
+        if (!prepared) {
+          const statistics = root.fields[field]!;
+          const N = statistics.documents, totalLength = statistics.length;
+          const boost = root.configuration.schema.text[field]!.boost;
+          if (!positiveInteger(N) || !positiveInteger(totalLength) || N > root.documents.size || totalLength < N || !Number.isFinite(boost) || boost <= 0 || boost > 16) invalid('INTERNAL_ERROR', 'ranking.statistics');
+          const avgLength = totalLength / N;
+          prepared = { N, totalLength, boost, avgLength, terms: new Map() };
+          context.fields.set(field, prepared);
+        }
+        const { N, totalLength, boost, avgLength } = prepared;
         const length = doc.fields[field]?.length ?? 0;
-        const N = statistics.documents;
-        const totalLength = statistics.length;
-        const df = alternative.entry.df;
-        const boost = root.configuration.schema.text[field]!.boost;
-        if (!positiveInteger(tf) || !positiveInteger(df) || !positiveInteger(N) || !positiveInteger(totalLength) || !positiveInteger(length) || tf > length || df > N || N > root.documents.size || totalLength < N || length > totalLength || !Number.isFinite(boost) || boost <= 0 || boost > 16) invalid('INTERNAL_ERROR', 'ranking.statistics');
-        const avgLength = totalLength / N;
-        const idf = Math.log(1 + (N - df + 0.5) / (df + 0.5));
+        if (!positiveInteger(tf) || !positiveInteger(length) || tf > length || length > totalLength) invalid('INTERNAL_ERROR', 'ranking.statistics');
+        let term = prepared.terms.get(alternative.entry);
+        if (!term) {
+          const df = alternative.entry.df;
+          if (!positiveInteger(df) || df > N) invalid('INTERNAL_ERROR', 'ranking.statistics');
+          const idf = Math.log(1 + (N - df + 0.5) / (df + 0.5));
+          term = { df, idf }; prepared.terms.set(alternative.entry, term);
+        }
+        const { df, idf } = term;
         const normalizer = 1.2 * (1 - 0.75 + 0.75 * length / avgLength);
         const tfPart = (tf * (1.2 + 1)) / (tf + normalizer);
         const base = boost * idf * tfPart;

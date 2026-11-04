@@ -1,6 +1,7 @@
 import type { OwnedConfiguration, OwnedRecord } from '../contracts/types.js';
 import type { StateCounts } from '../limits/limits.js';
 import type { Directory } from './directory.js';
+import type { TermOrder } from './term-order.js';
 
 export interface ReverseField {
   readonly length: number;
@@ -21,6 +22,7 @@ export interface FieldIndex {
   readonly documents: number;
   readonly length: number;
   readonly terms: Directory<TermEntry>;
+  readonly order: TermOrder | null;
 }
 /** Internal root. Mandatory data is frequency-only; side roots are explicit. */
 export interface IndexRoot {
