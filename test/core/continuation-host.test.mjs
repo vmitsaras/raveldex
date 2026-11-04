@@ -96,8 +96,10 @@ test('real Node continuations run after microtasks and allow a previously regist
     const fired = new Promise(resolve => setTimeout(() => { timer = true; resolve(); }, 0));
     await new Promise((resolve, reject) => {
       const next = () => {
+        // A ready timer may run before the first continuation.
+        calls++;
         if (timer) { resolve(); return; }
-        if (++calls > 10_000) { reject(new Error('host timer starved by continuation chain')); return; }
+        if (calls > 10_000) { reject(new Error('host timer starved by continuation chain')); return; }
         host.continuation(next);
       };
       host.continuation(next);
