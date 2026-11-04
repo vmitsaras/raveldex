@@ -2216,7 +2216,7 @@ Cache per-query/per-field length averages and IDF inputs where applicable withou
 
 **Diagnose admitted 10k source restore work/deadline failures**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8007%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8007%22)
 
 **Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
@@ -2244,7 +2244,10 @@ Reproduce and isolate source codec, validation, token and staging costs before p
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8007.md](docs/evidence/RX-8007.md)
+- [docs/evidence/RX-8007/acceptance.json](docs/evidence/RX-8007/acceptance.json)
+- [docs/evidence/RX-8007/review.md](docs/evidence/RX-8007/review.md)
+- [docs/evaluation/RX-8007-bulk-contract.md](docs/evaluation/RX-8007-bulk-contract.md)
 
 
 ## RX-8008

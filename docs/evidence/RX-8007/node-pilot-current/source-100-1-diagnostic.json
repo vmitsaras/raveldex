@@ -1,0 +1,2927 @@
+{
+  "kind": "rx8007-restore-node-child-v1",
+  "pid": 48163,
+  "variant": "source",
+  "mode": "diagnostic",
+  "owner": 1,
+  "size": 100,
+  "identity": {
+    "version": "rx8002-workloads-v1",
+    "family": "adversarial",
+    "size": 100,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "8ba8718059fb9b81777b1cdae185664aff8d776c3201ca73acf54d0c057fa538",
+    "labelsSha256": "c63e9a2ed2fc874b73ddc06c5d7494b48f60870fbf0a5f38836c8a7ed67c8538",
+    "queriesSha256": "620a9f2951d685f6bf58559819a93bfa10ec52fa0d1f08d7dd5acfb78ad8c7a4",
+    "judgmentsSha256": "4a73dc3c6ef404c7000bd5349a2be0171560c5dc6ef711ecbafb317885af471b",
+    "dictionaryTerms": 307,
+    "judgmentCounts": {
+      "common": 100,
+      "rare": 1,
+      "overlapping-or": 35,
+      "negative-only": 99,
+      "filtered": 20,
+      "narrow-prefix": 10,
+      "broad-prefix-refusal": 100,
+      "source-phrase": 34
+    }
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "versions": {
+      "node": "24.21.0",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.8",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.3",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "137",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "3.6.4",
+      "simdjson": "4.6.11",
+      "simdutf": "6.4.0",
+      "sqlite": "3.53.4",
+      "tz": "2026a",
+      "undici": "7.29.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "13.6.233.17-node.53",
+      "zlib": "1.2.12",
+      "zstd": "1.5.7"
+    },
+    "execArgv": []
+  },
+  "configuration": {
+    "schema": {
+      "text": {
+        "body": {}
+      },
+      "metadata": {
+        "group": {
+          "type": "string"
+        }
+      }
+    },
+    "addons": [
+      {
+        "id": "source",
+        "version": "0.0.0",
+        "contractVersion": 1,
+        "roles": [
+          "transaction-participant"
+        ],
+        "provides": [
+          {
+            "id": "source:body",
+            "contractVersion": 1
+          }
+        ],
+        "requires": [],
+        "dataRequirements": {
+          "fields": [
+            "body"
+          ],
+          "source": true,
+          "positions": false,
+          "offsets": false,
+          "metadata": false
+        },
+        "indexEffect": "transactional",
+        "rebuildPolicy": "new-index",
+        "execution": {
+          "direct": true,
+          "worker": true,
+          "workerRegistration": "raveldex:source:1:{\"fields\":[\"body\"],\"id\":\"source\",\"maxRetainedEntries\":660000,\"maxWorkUnits\":50000000}"
+        },
+        "limits": {
+          "maxPayloadCodeUnits": 16384,
+          "maxWorkUnits": 50000000,
+          "maxRetainedEntries": 660000,
+          "maxOutputEntries": 0
+        },
+        "costs": {
+          "importedCode": "Selected-source capture and copy-on-write directory staging; no phrase verifier.",
+          "retainedRepresentation": "One entry per record, present selected field and original value; selected original UTF-16 strings only.",
+          "transientWork": "Changed selected-field values and touched source-directory buckets; shared mutation budget.",
+          "externalResources": "none"
+        },
+        "codec": {
+          "id": "raveldex-source-v1",
+          "version": 1
+        }
+      },
+      {
+        "id": "source-phrases",
+        "version": "0.0.0",
+        "contractVersion": 1,
+        "roles": [
+          "leaf-refinement"
+        ],
+        "provides": [
+          {
+            "id": "phrases",
+            "contractVersion": 1
+          }
+        ],
+        "requires": [
+          {
+            "id": "source:body",
+            "contractVersion": 1
+          }
+        ],
+        "dataRequirements": {
+          "fields": [
+            "body"
+          ],
+          "source": true,
+          "positions": false,
+          "offsets": false,
+          "metadata": false
+        },
+        "indexEffect": "none",
+        "rebuildPolicy": "new-index",
+        "execution": {
+          "direct": true,
+          "worker": true,
+          "workerRegistration": "raveldex:source-phrases:1:{\"fields\":[\"body\"],\"id\":\"source-phrases\",\"maxRetainedEntries\":0,\"maxWorkUnits\":10000000}"
+        },
+        "limits": {
+          "maxPayloadCodeUnits": 16384,
+          "maxWorkUnits": 10000000,
+          "maxRetainedEntries": 0,
+          "maxOutputEntries": 0
+        },
+        "costs": {
+          "importedCode": "Native analyzer, resumable source phrase verifier and selected-source protocol.",
+          "retainedRepresentation": "No additional index state; source providers retain declared originals.",
+          "transientWork": "At most 32 phrase-prefix entries plus one current token; complete lexical candidates are scanned under the shared search budget.",
+          "externalResources": "none"
+        }
+      }
+    ],
+    "defaultLimits": true
+  },
+  "scope": "Actual installed Node source restore. process.memoryUsage observations include harness, inputs, donor and receiver; phase samples are not retained/peak/exclusive engine heap.",
+  "exercise": {
+    "mode": "diagnostic",
+    "size": 100,
+    "priorRecords": 100,
+    "samples": [],
+    "observations": [
+      {
+        "operation": "build",
+        "outcome": "Pass",
+        "wallMs": 30.060708999999996,
+        "cpuUserMs": 43.478,
+        "cpuSystemMs": 1.502,
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 46218,
+          "emittedWorkUnits": 148315,
+          "maxStepWorkUnits": 33,
+          "hostYields": 72,
+          "continuationsScheduled": 72,
+          "deadlineCallbacks": 0,
+          "restorePhase": null,
+          "restorePhases": {},
+          "restore": {
+            "operation": "build",
+            "phase": "none",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [],
+            "phaseWork": {
+              "none": {
+                "steps": 46218,
+                "workUnits": 148315
+              }
+            },
+            "detailWork": {
+              "none": {
+                "steps": 46218,
+                "workUnits": 148315
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {},
+            "tokens": {},
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "mutation.record": 1,
+              "mutation.participant:source": 1
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 33.664375,
+                "value": {
+                  "rss": 67305472,
+                  "heapTotal": 18956288,
+                  "heapUsed": 10252064,
+                  "external": 2578600,
+                  "arrayBuffers": 209183
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 63.785167,
+                "value": {
+                  "rss": 73039872,
+                  "heapTotal": 29442048,
+                  "heapUsed": 14054944,
+                  "external": 2578616,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": null,
+            "observerErrors": []
+          }
+        },
+        "result": {
+          "revision": 1,
+          "changed": true,
+          "added": 100,
+          "replaced": 0,
+          "removed": 0
+        },
+        "admittedBatches": 1
+      },
+      {
+        "operation": "exportSource",
+        "outcome": "Pass",
+        "wallMs": 63.58479200000001,
+        "cpuUserMs": 79.632,
+        "cpuSystemMs": 1.473,
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 86821,
+          "emittedWorkUnits": 291912,
+          "maxStepWorkUnits": 256,
+          "hostYields": 141,
+          "continuationsScheduled": 141,
+          "deadlineCallbacks": 0,
+          "restorePhase": null,
+          "restorePhases": {},
+          "restore": {
+            "operation": "exportSource",
+            "phase": "snapshot.export.utf8",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.export.validation",
+                "at": 87.922833,
+                "emittedWorkUnits": 5
+              },
+              {
+                "phase": "snapshot.export.source",
+                "at": 135.447958,
+                "emittedWorkUnits": 191252
+              },
+              {
+                "phase": "snapshot.export.encode",
+                "at": 137.048917,
+                "emittedWorkUnits": 207260
+              },
+              {
+                "phase": "snapshot.export.checksum",
+                "at": 146.913917,
+                "emittedWorkUnits": 250999
+              },
+              {
+                "phase": "snapshot.export.utf8",
+                "at": 149.640042,
+                "emittedWorkUnits": 271375
+              }
+            ],
+            "phaseWork": {
+              "none": {
+                "steps": 1,
+                "workUnits": 5
+              },
+              "snapshot.export.validation": {
+                "steps": 64895,
+                "workUnits": 191247
+              },
+              "snapshot.export.source": {
+                "steps": 466,
+                "workUnits": 16008
+              },
+              "snapshot.export.encode": {
+                "steps": 21298,
+                "workUnits": 43739
+              },
+              "snapshot.export.checksum": {
+                "steps": 80,
+                "workUnits": 20376
+              },
+              "snapshot.export.utf8": {
+                "steps": 81,
+                "workUnits": 20537
+              }
+            },
+            "detailWork": {
+              "none": {
+                "steps": 1,
+                "workUnits": 5
+              },
+              "snapshot.export.validation:nonparticipant-structural": {
+                "steps": 42493,
+                "workUnits": 145188
+              },
+              "snapshot.export.validation:source": {
+                "steps": 22402,
+                "workUnits": 46059
+              },
+              "snapshot.export.source": {
+                "steps": 466,
+                "workUnits": 16008
+              },
+              "snapshot.export.encode": {
+                "steps": 21298,
+                "workUnits": 43739
+              },
+              "snapshot.export.checksum": {
+                "steps": 80,
+                "workUnits": 20376
+              },
+              "snapshot.export.utf8": {
+                "steps": 81,
+                "workUnits": 20537
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {
+              "native-validation:source": 166
+            },
+            "tokens": {
+              "native-validation:source": 1068
+            },
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1,
+              "native.validation.participant:source": 1
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 87.589042,
+                "value": {
+                  "rss": 79298560,
+                  "heapTotal": 30228480,
+                  "heapUsed": 10411880,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.validation",
+                "phase": "snapshot.export.validation",
+                "recordsCompleted": 0,
+                "at": 87.927,
+                "value": {
+                  "rss": 79364096,
+                  "heapTotal": 30490624,
+                  "heapUsed": 10460280,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.source",
+                "phase": "snapshot.export.source",
+                "recordsCompleted": 0,
+                "at": 135.45125,
+                "value": {
+                  "rss": 80461824,
+                  "heapTotal": 31277056,
+                  "heapUsed": 14418480,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.encode",
+                "phase": "snapshot.export.encode",
+                "recordsCompleted": 0,
+                "at": 137.050792,
+                "value": {
+                  "rss": 80494592,
+                  "heapTotal": 31277056,
+                  "heapUsed": 14613504,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.checksum",
+                "phase": "snapshot.export.checksum",
+                "recordsCompleted": 0,
+                "at": 146.915792,
+                "value": {
+                  "rss": 80740352,
+                  "heapTotal": 31539200,
+                  "heapUsed": 13955184,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.utf8",
+                "phase": "snapshot.export.utf8",
+                "recordsCompleted": 0,
+                "at": 149.643958,
+                "value": {
+                  "rss": 80773120,
+                  "heapTotal": 31539200,
+                  "heapUsed": 13986120,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.export.utf8",
+                "recordsCompleted": 0,
+                "at": 151.191167,
+                "value": {
+                  "rss": 80773120,
+                  "heapTotal": 31539200,
+                  "heapUsed": 14039256,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": null,
+            "observerErrors": []
+          }
+        },
+        "result": {
+          "encodedBytes": 20537,
+          "encodedCodeUnits": 20537,
+          "header": {
+            "analyzer": {
+              "environmentProfile": "unqualified",
+              "id": "basic-v1"
+            },
+            "capabilities": [
+              {
+                "codec": {
+                  "id": "raveldex-source-v1",
+                  "version": 1
+                },
+                "contractVersion": 1,
+                "costs": {
+                  "externalResources": "none",
+                  "importedCode": "Selected-source capture and copy-on-write directory staging; no phrase verifier.",
+                  "retainedRepresentation": "One entry per record, present selected field and original value; selected original UTF-16 strings only.",
+                  "transientWork": "Changed selected-field values and touched source-directory buckets; shared mutation budget."
+                },
+                "dataRequirements": {
+                  "fields": [
+                    "body"
+                  ],
+                  "metadata": false,
+                  "offsets": false,
+                  "positions": false,
+                  "source": true
+                },
+                "execution": {
+                  "direct": true,
+                  "worker": true,
+                  "workerRegistration": "raveldex:source:1:{\"fields\":[\"body\"],\"id\":\"source\",\"maxRetainedEntries\":660000,\"maxWorkUnits\":50000000}"
+                },
+                "id": "source",
+                "indexEffect": "transactional",
+                "limits": {
+                  "maxOutputEntries": 0,
+                  "maxPayloadCodeUnits": 16384,
+                  "maxRetainedEntries": 660000,
+                  "maxWorkUnits": 50000000
+                },
+                "provides": [
+                  {
+                    "contractVersion": 1,
+                    "id": "source:body"
+                  }
+                ],
+                "rebuildPolicy": "new-index",
+                "requires": [],
+                "roles": [
+                  "transaction-participant"
+                ],
+                "version": "0.0.0"
+              },
+              {
+                "contractVersion": 1,
+                "costs": {
+                  "externalResources": "none",
+                  "importedCode": "Native analyzer, resumable source phrase verifier and selected-source protocol.",
+                  "retainedRepresentation": "No additional index state; source providers retain declared originals.",
+                  "transientWork": "At most 32 phrase-prefix entries plus one current token; complete lexical candidates are scanned under the shared search budget."
+                },
+                "dataRequirements": {
+                  "fields": [
+                    "body"
+                  ],
+                  "metadata": false,
+                  "offsets": false,
+                  "positions": false,
+                  "source": true
+                },
+                "execution": {
+                  "direct": true,
+                  "worker": true,
+                  "workerRegistration": "raveldex:source-phrases:1:{\"fields\":[\"body\"],\"id\":\"source-phrases\",\"maxRetainedEntries\":0,\"maxWorkUnits\":10000000}"
+                },
+                "id": "source-phrases",
+                "indexEffect": "none",
+                "limits": {
+                  "maxOutputEntries": 0,
+                  "maxPayloadCodeUnits": 16384,
+                  "maxRetainedEntries": 0,
+                  "maxWorkUnits": 10000000
+                },
+                "provides": [
+                  {
+                    "contractVersion": 1,
+                    "id": "phrases"
+                  }
+                ],
+                "rebuildPolicy": "new-index",
+                "requires": [
+                  {
+                    "contractVersion": 1,
+                    "id": "source:body"
+                  }
+                ],
+                "roles": [
+                  "leaf-refinement"
+                ],
+                "version": "0.0.0"
+              }
+            ],
+            "indexDetail": {
+              "id": "frequency-directory-256-v1",
+              "version": 1
+            },
+            "limits": {
+              "checkpointWorkUnits": 2048,
+              "maxAdmissionEntries": 16384,
+              "maxCorpusTextCodeUnits": 67108864,
+              "maxCorpusTokens": 4000000,
+              "maxDeadlineMs": 60000,
+              "maxDictionaryEntries": 250000,
+              "maxDocuments": 10000,
+              "maxExpansionsPerGroup": 256,
+              "maxFieldNameCodeUnits": 64,
+              "maxHits": 100,
+              "maxIdCodeUnits": 256,
+              "maxMetadataCodeUnitsPerRecord": 32768,
+              "maxMetadataFields": 32,
+              "maxMetadataStringCodeUnits": 1024,
+              "maxMetadataValuesPerField": 128,
+              "maxMutationBatch": 256,
+              "maxMutationWorkUnits": 50000000,
+              "maxPostingEntries": 2000000,
+              "maxQueryCodeUnits": 16384,
+              "maxQueryDepth": 16,
+              "maxQueryExpansions": 1024,
+              "maxQueryGroups": 64,
+              "maxQueryLexicalCodeUnits": 2048,
+              "maxQueryNodes": 128,
+              "maxQueryTokens": 64,
+              "maxQueuedOperations": 32,
+              "maxRawTokenCodeUnits": 256,
+              "maxSearchWorkUnits": 10000000,
+              "maxTermCodeUnits": 256,
+              "maxTextCodeUnitsPerRecord": 262144,
+              "maxTextCodeUnitsPerValue": 65536,
+              "maxTextFields": 32,
+              "maxTextValuesPerField": 64,
+              "maxTokensPerRecord": 32768,
+              "maxVariantsPerGroup": 16,
+              "minPrefixCodePoints": 2
+            },
+            "nativeQualification": null,
+            "originRevision": 1,
+            "ranking": {
+              "implementationVersion": 1,
+              "model": "raveldex-bm25-v1"
+            },
+            "schema": {
+              "metadata": {
+                "group": {
+                  "multi": false,
+                  "nullable": false,
+                  "type": "string"
+                }
+              },
+              "text": {
+                "body": {
+                  "boost": 1
+                }
+              }
+            },
+            "schemaVersion": 1
+          },
+          "encodedSha256": "94539eabf0a7b402f5ff454b6740856bce87ff36dc6728067630f2a94ba0a97a",
+          "snapshotArtifact": "source-100-1-diagnostic.snapshot.json"
+        }
+      },
+      {
+        "operation": "restoreSource",
+        "outcome": "Pass",
+        "wallMs": 99.07600000000002,
+        "cpuUserMs": 114.777,
+        "cpuSystemMs": 1.692,
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 150149,
+          "emittedWorkUnits": 341729,
+          "maxStepWorkUnits": 256,
+          "hostYields": 166,
+          "continuationsScheduled": 166,
+          "deadlineCallbacks": 0,
+          "restorePhase": "snapshot.precommit",
+          "restorePhases": {
+            "snapshot.decode": {
+              "checks": 1,
+              "emittedSteps": 17326,
+              "emittedWorkUnits": 55593
+            },
+            "snapshot.integrity": {
+              "checks": 1,
+              "emittedSteps": 80,
+              "emittedWorkUnits": 20376
+            },
+            "snapshot.compatibility": {
+              "checks": 1,
+              "emittedSteps": 0,
+              "emittedWorkUnits": 0
+            },
+            "snapshot.staging": {
+              "checks": 1,
+              "emittedSteps": 132743,
+              "emittedWorkUnits": 265760
+            },
+            "snapshot.precommit": {
+              "checks": 1,
+              "emittedSteps": 0,
+              "emittedWorkUnits": 0
+            }
+          },
+          "restore": {
+            "operation": "restoreSource",
+            "phase": "snapshot.precommit",
+            "mutationPhase": "precommit",
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.decode",
+                "at": 268.149542,
+                "emittedWorkUnits": 0
+              },
+              {
+                "phase": "snapshot.integrity",
+                "at": 280.839542,
+                "emittedWorkUnits": 55593
+              },
+              {
+                "phase": "snapshot.compatibility",
+                "at": 282.453125,
+                "emittedWorkUnits": 75969
+              },
+              {
+                "phase": "snapshot.staging",
+                "at": 282.54575,
+                "emittedWorkUnits": 75969
+              },
+              {
+                "phase": "snapshot.precommit",
+                "at": 366.85325,
+                "emittedWorkUnits": 341729
+              }
+            ],
+            "phaseWork": {
+              "snapshot.decode": {
+                "steps": 17326,
+                "workUnits": 55593
+              },
+              "snapshot.integrity": {
+                "steps": 80,
+                "workUnits": 20376
+              },
+              "snapshot.staging": {
+                "steps": 132743,
+                "workUnits": 265760
+              }
+            },
+            "detailWork": {
+              "snapshot.decode": {
+                "steps": 17326,
+                "workUnits": 55593
+              },
+              "snapshot.integrity": {
+                "steps": 80,
+                "workUnits": 20376
+              },
+              "mutation.capture": {
+                "steps": 100,
+                "workUnits": 100
+              },
+              "mutation.validation": {
+                "steps": 100,
+                "workUnits": 1800
+              },
+              "mutation.analysis": {
+                "steps": 14812,
+                "workUnits": 46312
+              },
+              "mutation.staging": {
+                "steps": 26321,
+                "workUnits": 65180
+              },
+              "mutation.core": {
+                "steps": 81159,
+                "workUnits": 135337
+              },
+              "mutation.participant": {
+                "steps": 100,
+                "workUnits": 700
+              },
+              "mutation.participant:source": {
+                "steps": 10050,
+                "workUnits": 16230
+              },
+              "mutation.precommit": {
+                "steps": 101,
+                "workUnits": 101
+              }
+            },
+            "recordsAttempted": 100,
+            "recordsCaptured": 100,
+            "recordsCompleted": 100,
+            "captureWallMs": 0.5846270000000118,
+            "analysisCalls": {
+              "core": 166
+            },
+            "tokens": {
+              "core": 1068
+            },
+            "copy": {
+              "directories": 1068,
+              "directoryPointers": 41405,
+              "buckets": 1730,
+              "bucketEntries": 1148,
+              "seals": 1068
+            },
+            "participantWork": {
+              "source": {
+                "steps": 10050,
+                "workUnits": 16230
+              }
+            },
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1,
+              "snapshot.participant.total:source": 1,
+              "mutation.record": 100,
+              "mutation.participant:source": 100
+            },
+            "snapshots": [
+              {
+                "revision": 1,
+                "documents": 1,
+                "counts": {
+                  "documents": 1,
+                  "textCodeUnits": 96,
+                  "tokens": 11,
+                  "dictionaryEntries": 8,
+                  "postingEntries": 8
+                },
+                "participants": [
+                  {
+                    "id": "source",
+                    "kind": "raveldex-source-v1",
+                    "revision": 1,
+                    "records": 1,
+                    "retainedEntries": 3,
+                    "textCodeUnits": 96,
+                    "occurrenceCount": null,
+                    "offsetCount": null,
+                    "termEntries": null,
+                    "termCodeUnits": null
+                  }
+                ],
+                "authoritativeSame": true
+              }
+            ],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 267.879875,
+                "value": {
+                  "rss": 86687744,
+                  "heapTotal": 32751616,
+                  "heapUsed": 15260432,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "old-authoritative-root",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 268.135083,
+                "value": {
+                  "rss": 86687744,
+                  "heapTotal": 32751616,
+                  "heapUsed": 15282072,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.decode",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 268.149958,
+                "value": {
+                  "rss": 86687744,
+                  "heapTotal": 32751616,
+                  "heapUsed": 15282976,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.integrity",
+                "phase": "snapshot.integrity",
+                "recordsCompleted": 0,
+                "at": 280.840042,
+                "value": {
+                  "rss": 87261184,
+                  "heapTotal": 33275904,
+                  "heapUsed": 17788496,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "decoded-input",
+                "phase": "snapshot.integrity",
+                "recordsCompleted": 0,
+                "at": 282.448708,
+                "value": {
+                  "rss": 87293952,
+                  "heapTotal": 33538048,
+                  "heapUsed": 17849656,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.compatibility",
+                "phase": "snapshot.compatibility",
+                "recordsCompleted": 0,
+                "at": 282.453292,
+                "value": {
+                  "rss": 87293952,
+                  "heapTotal": 33538048,
+                  "heapUsed": 17850296,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.staging",
+                "phase": "snapshot.staging",
+                "recordsCompleted": 0,
+                "at": 282.545917,
+                "value": {
+                  "rss": 87293952,
+                  "heapTotal": 33538048,
+                  "heapUsed": 17871168,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "private-staging-root",
+                "phase": "snapshot.staging",
+                "recordsCompleted": 1,
+                "at": 283.176958,
+                "value": {
+                  "rss": 87326720,
+                  "heapTotal": 33538048,
+                  "heapUsed": 18138424,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.precommit",
+                "phase": "snapshot.precommit",
+                "recordsCompleted": 100,
+                "at": 366.85425,
+                "value": {
+                  "rss": 88178688,
+                  "heapTotal": 33800192,
+                  "heapUsed": 18278632,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "restore-finished",
+                "phase": "snapshot.precommit",
+                "recordsCompleted": 100,
+                "at": 366.932042,
+                "value": {
+                  "rss": 88195072,
+                  "heapTotal": 33800192,
+                  "heapUsed": 18283528,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.precommit",
+                "recordsCompleted": 100,
+                "at": 366.981167,
+                "value": {
+                  "rss": 88195072,
+                  "heapTotal": 33800192,
+                  "heapUsed": 18285320,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": false,
+            "observerErrors": [],
+            "oldRoot": {
+              "revision": 1,
+              "documents": 100,
+              "counts": {
+                "documents": 100,
+                "textCodeUnits": 11842,
+                "tokens": 1368,
+                "dictionaryEntries": 308,
+                "postingEntries": 868
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 1,
+                  "records": 100,
+                  "retainedEntries": 466,
+                  "textCodeUnits": 11842,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            },
+            "inputActive": false,
+            "decodedRecords": 100,
+            "decodedBodyCodeUnits": 20376,
+            "lastStagedRoot": {
+              "revision": 100,
+              "documents": 100,
+              "counts": {
+                "documents": 100,
+                "textCodeUnits": 9342,
+                "tokens": 1068,
+                "dictionaryEntries": 307,
+                "postingEntries": 768
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 100,
+                  "records": 100,
+                  "retainedEntries": 366,
+                  "textCodeUnits": 9342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            },
+            "finalAuthoritativeRoot": {
+              "revision": 2,
+              "documents": 100,
+              "counts": {
+                "documents": 100,
+                "textCodeUnits": 9342,
+                "tokens": 1068,
+                "dictionaryEntries": 307,
+                "postingEntries": 768
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 2,
+                  "records": 100,
+                  "retainedEntries": 366,
+                  "textCodeUnits": 9342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            }
+          }
+        },
+        "priorRevision": 1,
+        "priorDocuments": 100,
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 1,
+          "revision": 2,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "unqualified"
+          }
+        },
+        "postcondition": [
+          {
+            "id": "all",
+            "outcome": "Pass",
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 100,
+              "hits": [
+                {
+                  "id": "adversarial:00000",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00001",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00002",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00003",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00004",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00005",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00006",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00007",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00008",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00009",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00010",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00011",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00012",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00013",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00014",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00015",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00016",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00017",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00018",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00019",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "id": "common",
+            "outcome": "Pass",
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 100,
+              "hits": [
+                {
+                  "id": "adversarial:00002",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00005",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00008",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00011",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00014",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00017",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00020",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00023",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00026",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00029",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00032",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00035",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00038",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00041",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00044",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00047",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00050",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00053",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00056",
+                  "score": 0.005095512077550484
+                },
+                {
+                  "id": "adversarial:00059",
+                  "score": 0.005095512077550484
+                }
+              ]
+            }
+          },
+          {
+            "id": "rare",
+            "outcome": "Pass",
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "adversarial:00007",
+                  "score": 4.007051672483909
+                }
+              ]
+            }
+          },
+          {
+            "id": "narrow-prefix",
+            "outcome": "Pass",
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 10,
+              "hits": [
+                {
+                  "id": "adversarial:00002",
+                  "score": 4.322236649344206
+                },
+                {
+                  "id": "adversarial:00005",
+                  "score": 4.322236649344206
+                },
+                {
+                  "id": "adversarial:00008",
+                  "score": 4.322236649344206
+                },
+                {
+                  "id": "adversarial:00000",
+                  "score": 4.158680772098588
+                },
+                {
+                  "id": "adversarial:00001",
+                  "score": 4.158680772098588
+                },
+                {
+                  "id": "adversarial:00003",
+                  "score": 4.158680772098588
+                },
+                {
+                  "id": "adversarial:00004",
+                  "score": 4.158680772098588
+                },
+                {
+                  "id": "adversarial:00006",
+                  "score": 4.158680772098588
+                },
+                {
+                  "id": "adversarial:00009",
+                  "score": 4.158680772098588
+                },
+                {
+                  "id": "adversarial:00007",
+                  "score": 4.007051672483909
+                }
+              ]
+            }
+          },
+          {
+            "id": "source-phrase",
+            "outcome": "Pass",
+            "result": {
+              "revision": 2,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 34,
+              "hits": [
+                {
+                  "id": "adversarial:00000",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00003",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00006",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00009",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00012",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00015",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00018",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00021",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00024",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00027",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00030",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00033",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00036",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00039",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00042",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00045",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00048",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00051",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00054",
+                  "score": 0.009805390042269196
+                },
+                {
+                  "id": "adversarial:00057",
+                  "score": 0.009805390042269196
+                }
+              ]
+            }
+          }
+        ],
+        "oldRemoved": true
+      },
+      {
+        "operation": "deadlineRestore",
+        "outcome": "Refused",
+        "wallMs": 1.500959000000023,
+        "cpuUserMs": 0.285,
+        "cpuSystemMs": 0.025,
+        "error": {
+          "name": "RaveldexError",
+          "code": "DEADLINE_EXCEEDED",
+          "reason": null,
+          "details": {
+            "path": "options.deadlineMs"
+          },
+          "message": "Raveldex: DEADLINE_EXCEEDED"
+        },
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 48,
+          "emittedWorkUnits": 12288,
+          "maxStepWorkUnits": 256,
+          "hostYields": 5,
+          "continuationsScheduled": 6,
+          "deadlineCallbacks": 2,
+          "restorePhase": "snapshot.decode",
+          "restorePhases": {
+            "snapshot.decode": {
+              "checks": 1,
+              "emittedSteps": 48,
+              "emittedWorkUnits": 12288
+            }
+          },
+          "restore": {
+            "operation": "deadlineRestore",
+            "phase": "snapshot.decode",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.decode",
+                "at": 498.721708,
+                "emittedWorkUnits": 0
+              }
+            ],
+            "phaseWork": {
+              "snapshot.decode": {
+                "steps": 48,
+                "workUnits": 12288
+              }
+            },
+            "detailWork": {
+              "snapshot.decode": {
+                "steps": 48,
+                "workUnits": 12288
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {},
+            "tokens": {},
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 498.668083,
+                "value": {
+                  "rss": 105955328,
+                  "heapTotal": 54149120,
+                  "heapUsed": 22444048,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "old-authoritative-root",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 498.718333,
+                "value": {
+                  "rss": 105955328,
+                  "heapTotal": 54149120,
+                  "heapUsed": 22451784,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.decode",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 498.728292,
+                "value": {
+                  "rss": 105955328,
+                  "heapTotal": 54149120,
+                  "heapUsed": 22452400,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "restore-finished",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 500.160417,
+                "value": {
+                  "rss": 105988096,
+                  "heapTotal": 54149120,
+                  "heapUsed": 22478152,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 500.207333,
+                "value": {
+                  "rss": 105988096,
+                  "heapTotal": 54149120,
+                  "heapUsed": 22482792,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": true,
+            "observerErrors": [],
+            "oldRoot": {
+              "revision": 1,
+              "documents": 100,
+              "counts": {
+                "documents": 100,
+                "textCodeUnits": 11842,
+                "tokens": 1368,
+                "dictionaryEntries": 308,
+                "postingEntries": 868
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 1,
+                  "records": 100,
+                  "retainedEntries": 466,
+                  "textCodeUnits": 11842,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            },
+            "inputActive": false,
+            "finalAuthoritativeRoot": {
+              "revision": 1,
+              "documents": 100,
+              "counts": {
+                "documents": 100,
+                "textCodeUnits": 11842,
+                "tokens": 1368,
+                "dictionaryEntries": 308,
+                "postingEntries": 868
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 1,
+                  "records": 100,
+                  "retainedEntries": 466,
+                  "textCodeUnits": 11842,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            }
+          }
+        },
+        "priorRevision": 1,
+        "priorDocuments": 100,
+        "oldQueriesPreserved": true,
+        "oldSourceBytesPreserved": true,
+        "postcondition": {
+          "all": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 100,
+            "hits": [
+              {
+                "id": "prior:adversarial:00000",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00001",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00003",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00004",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00006",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00007",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00009",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00010",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00012",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00013",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00015",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00016",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00018",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00019",
+                "score": 0
+              }
+            ]
+          },
+          "lexical": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 100,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.005065802063516392
+              }
+            ]
+          },
+          "phrase": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 100,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.013841173945020602
+              }
+            ]
+          }
+        }
+      },
+      {
+        "operation": "abortedRestore",
+        "outcome": "Cancelled",
+        "wallMs": 1.7622920000000022,
+        "cpuUserMs": 0.6,
+        "cpuSystemMs": 0.045,
+        "error": {
+          "name": "RaveldexError",
+          "code": "CANCELLED",
+          "reason": null,
+          "details": {
+            "path": "options.signal"
+          },
+          "message": "Raveldex: CANCELLED"
+        },
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 48,
+          "emittedWorkUnits": 12288,
+          "maxStepWorkUnits": 256,
+          "hostYields": 5,
+          "continuationsScheduled": 6,
+          "deadlineCallbacks": 0,
+          "restorePhase": "snapshot.decode",
+          "restorePhases": {
+            "snapshot.decode": {
+              "checks": 1,
+              "emittedSteps": 48,
+              "emittedWorkUnits": 12288
+            }
+          },
+          "restore": {
+            "operation": "abortedRestore",
+            "phase": "snapshot.decode",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.decode",
+                "at": 694.119458,
+                "emittedWorkUnits": 0
+              }
+            ],
+            "phaseWork": {
+              "snapshot.decode": {
+                "steps": 48,
+                "workUnits": 12288
+              }
+            },
+            "detailWork": {
+              "snapshot.decode": {
+                "steps": 48,
+                "workUnits": 12288
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {},
+            "tokens": {},
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 693.881708,
+                "value": {
+                  "rss": 108756992,
+                  "heapTotal": 56147968,
+                  "heapUsed": 29426808,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "old-authoritative-root",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 694.113,
+                "value": {
+                  "rss": 108773376,
+                  "heapTotal": 56147968,
+                  "heapUsed": 29453216,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.decode",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 694.119833,
+                "value": {
+                  "rss": 108773376,
+                  "heapTotal": 56147968,
+                  "heapUsed": 29453832,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "restore-finished",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 695.639125,
+                "value": {
+                  "rss": 108773376,
+                  "heapTotal": 56147968,
+                  "heapUsed": 29483312,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 695.680958,
+                "value": {
+                  "rss": 108773376,
+                  "heapTotal": 56147968,
+                  "heapUsed": 29485584,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": true,
+            "observerErrors": [],
+            "oldRoot": {
+              "revision": 1,
+              "documents": 100,
+              "counts": {
+                "documents": 100,
+                "textCodeUnits": 11842,
+                "tokens": 1368,
+                "dictionaryEntries": 308,
+                "postingEntries": 868
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 1,
+                  "records": 100,
+                  "retainedEntries": 466,
+                  "textCodeUnits": 11842,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            },
+            "inputActive": false,
+            "finalAuthoritativeRoot": {
+              "revision": 1,
+              "documents": 100,
+              "counts": {
+                "documents": 100,
+                "textCodeUnits": 11842,
+                "tokens": 1368,
+                "dictionaryEntries": 308,
+                "postingEntries": 868
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 1,
+                  "records": 100,
+                  "retainedEntries": 466,
+                  "textCodeUnits": 11842,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            }
+          }
+        },
+        "abortRequested": true,
+        "abortRequestedWhilePending": true,
+        "priorRevision": 1,
+        "priorDocuments": 100,
+        "oldQueriesPreserved": true,
+        "oldSourceBytesPreserved": true,
+        "postcondition": {
+          "all": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 100,
+            "hits": [
+              {
+                "id": "prior:adversarial:00000",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00001",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00003",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00004",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00006",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00007",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00009",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00010",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00012",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00013",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00015",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00016",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00018",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00019",
+                "score": 0
+              }
+            ]
+          },
+          "lexical": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 100,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.005065802063516392
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.005065802063516392
+              }
+            ]
+          },
+          "phrase": {
+            "revision": 1,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 100,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.013841173945020602
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.013841173945020602
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "memory": [
+      {
+        "operation": "build",
+        "point": "before",
+        "values": {
+          "rss": 67305472,
+          "heapTotal": 18956288,
+          "heapUsed": 10223744,
+          "external": 2578560,
+          "arrayBuffers": 209183
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "build",
+        "point": "after",
+        "values": {
+          "rss": 73039872,
+          "heapTotal": 29442048,
+          "heapUsed": 14058576,
+          "external": 2578616,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "exportSource",
+        "point": "before",
+        "values": {
+          "rss": 79298560,
+          "heapTotal": 30228480,
+          "heapUsed": 10408888,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "exportSource",
+        "point": "after",
+        "values": {
+          "rss": 80773120,
+          "heapTotal": 31539200,
+          "heapUsed": 14040824,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "restoreSource",
+        "point": "before",
+        "values": {
+          "rss": 86687744,
+          "heapTotal": 32751616,
+          "heapUsed": 15257280,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "restoreSource",
+        "point": "after",
+        "values": {
+          "rss": 88195072,
+          "heapTotal": 33800192,
+          "heapUsed": 18286408,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "deadlineRestore",
+        "point": "before",
+        "values": {
+          "rss": 105955328,
+          "heapTotal": 54149120,
+          "heapUsed": 22440608,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "deadlineRestore",
+        "point": "after",
+        "values": {
+          "rss": 105988096,
+          "heapTotal": 54149120,
+          "heapUsed": 22484184,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "abortedRestore",
+        "point": "before",
+        "values": {
+          "rss": 108756992,
+          "heapTotal": 56147968,
+          "heapUsed": 29423336,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "abortedRestore",
+        "point": "after",
+        "values": {
+          "rss": 108773376,
+          "heapTotal": 56147968,
+          "heapUsed": 29486792,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      }
+    ],
+    "outcome": "Collected",
+    "scope": "One actual donor/receiver per case; ordinary wall/CPU excludes metadata/hash/postcondition work. Diagnostic observations are intrusive, not normal timings or retained/peak heap.",
+    "donorResults": [
+      {
+        "id": "all",
+        "outcome": "Pass",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 100,
+          "hits": [
+            {
+              "id": "adversarial:00000",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00001",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00002",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00003",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00004",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00005",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00006",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00007",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00008",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00009",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00010",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00011",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00012",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00013",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00014",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00015",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00016",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00017",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00018",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00019",
+              "score": 0
+            }
+          ]
+        }
+      },
+      {
+        "id": "common",
+        "outcome": "Pass",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 100,
+          "hits": [
+            {
+              "id": "adversarial:00002",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00005",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00008",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00011",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00014",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00017",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00020",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00023",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00026",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00029",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00032",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00035",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00038",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00041",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00044",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00047",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00050",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00053",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00056",
+              "score": 0.005095512077550484
+            },
+            {
+              "id": "adversarial:00059",
+              "score": 0.005095512077550484
+            }
+          ]
+        }
+      },
+      {
+        "id": "rare",
+        "outcome": "Pass",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1,
+          "hits": [
+            {
+              "id": "adversarial:00007",
+              "score": 4.007051672483909
+            }
+          ]
+        }
+      },
+      {
+        "id": "narrow-prefix",
+        "outcome": "Pass",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 10,
+          "hits": [
+            {
+              "id": "adversarial:00002",
+              "score": 4.322236649344206
+            },
+            {
+              "id": "adversarial:00005",
+              "score": 4.322236649344206
+            },
+            {
+              "id": "adversarial:00008",
+              "score": 4.322236649344206
+            },
+            {
+              "id": "adversarial:00000",
+              "score": 4.158680772098588
+            },
+            {
+              "id": "adversarial:00001",
+              "score": 4.158680772098588
+            },
+            {
+              "id": "adversarial:00003",
+              "score": 4.158680772098588
+            },
+            {
+              "id": "adversarial:00004",
+              "score": 4.158680772098588
+            },
+            {
+              "id": "adversarial:00006",
+              "score": 4.158680772098588
+            },
+            {
+              "id": "adversarial:00009",
+              "score": 4.158680772098588
+            },
+            {
+              "id": "adversarial:00007",
+              "score": 4.007051672483909
+            }
+          ]
+        }
+      },
+      {
+        "id": "source-phrase",
+        "outcome": "Pass",
+        "result": {
+          "revision": 1,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 34,
+          "hits": [
+            {
+              "id": "adversarial:00000",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00003",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00006",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00009",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00012",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00015",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00018",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00021",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00024",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00027",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00030",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00033",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00036",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00039",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00042",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00045",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00048",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00051",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00054",
+              "score": 0.009805390042269196
+            },
+            {
+              "id": "adversarial:00057",
+              "score": 0.009805390042269196
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "outcome": "Collected",
+  "packageMetadataSha256": "fa866f78cd23d285886ed810fb6509118a9b0eb9dacd25624f4fefb0e6f417a1"
+}

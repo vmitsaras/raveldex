@@ -1,0 +1,98 @@
+✔ format, codec and every compatibility header/version produce specific reasons and preserve old state (316.150042ms)
+ℹ {"compatibilityCases":36}
+✔ unknown or absent participant codecs fail explicitly instead of dropping selected transactional state (2.164541ms)
+✔ malformed, truncated, duplicate-property and damaged JSON snapshots never modify a visible revision (41.635833ms)
+ℹ {"malformedCases":10,"integrityCases":2}
+✔ source and offset participant corruption cannot bypass native side-state validation with a recomputed checksum (275.534667ms)
+ℹ {"nativeSideStateCorruptions":26}
+✔ qualified factory strictly owns and validates the attestation without promoting ordinary engines (1.579709ms)
+✔ valid-integrity native corruption fails reverse, postings, statistics and directory invariants atomically (125.122625ms)
+ℹ {"nativeCoreCorruptions":16}
+✔ snapshot calls share ordinary FIFO, read execution-start roots and own admitted strings/options (32.78275ms)
+✔ snapshot encode/decode/staging cancellation at multiple suspensions preserves exact old core and participant roots (86.291417ms)
+ℹ {"controlledSuspensionCancellations":10}
+✔ queued deadlines, aborts and overflow release slots while successful restore advances exactly once (12.457375ms)
+✔ active deadlines, work caps and encoded byte caps fail honestly without side-state publication (9.499334ms)
+✔ early stop and disposal skip untrusted snapshot/options access and release pending adapter work (0.546334ms)
+✔ successful empty restore is a new local revision even when both origin and target are empty (24.650167ms)
+✔ genuinely qualified native encode and restore cancellation preserve exact old roots and permit recovery (94.765833ms)
+ℹ {"qualifiedNativeSuspensionCancellations":10}
+✔ source and native final-precommit stops roll back, and no signal read after publication can revoke success (43.517583ms)
+✔ whole source restore accumulates participant work across private batches and preserves old state on a late failure (27.859542ms)
+ℹ {"individuallyAdmittedDonorWrites":100,"wholeRestoreParticipantWorkCap":4000,"validSnapshotPrivateRecordsBeyondMutationBatch":3}
+✔ qualified native decoding, integrity and structural validation phases can each stop without publication (27.259916ms)
+ℹ {"qualifiedNativePhaseStops":[{"phase":"snapshot.decode","postBoundarySignalChecks":8},{"phase":"snapshot.integrity","postBoundarySignalChecks":8},{"phase":"snapshot.validation","postBoundarySignalChecks":8}]}
+✔ a genuine maximum-revision native owner rejects source restore and preserves its actual immutable root (13.75575ms)
+✔ complete UTF-8 envelope byte boundary includes multibyte source and all header/checksum overhead (19.573125ms)
+✔ installed public codec declarations and complete minified native/source consumers preserve actual behavior (12091.951292ms)
+✔ snapshots stay optional and public imports do not inspect host/storage/startup capabilities (0.232917ms)
+✔ source roundtrip preserves source representation, exact semantic output and subsequent writes (117.17425ms)
+ℹ {"format":"source","representation":"source","completeComparisons":101}
+✔ source roundtrip preserves positions representation, exact semantic output and subsequent writes (62.475833ms)
+ℹ {"format":"source","representation":"positions","completeComparisons":76}
+✔ source roundtrip preserves offsets representation, exact semantic output and subsequent writes (75.5795ms)
+ℹ {"format":"source","representation":"offsets","completeComparisons":101}
+✔ source roundtrip preserves mixed representation, exact semantic output and subsequent writes (74.2075ms)
+ℹ {"format":"source","representation":"mixed","completeComparisons":101}
+✔ native roundtrip preserves core representation, exact semantic output and subsequent writes (13.180667ms)
+ℹ {"format":"native","representation":"core","completeComparisons":41}
+✔ native roundtrip preserves source representation, exact semantic output and subsequent writes (69.452041ms)
+ℹ {"format":"native","representation":"source","completeComparisons":101}
+✔ native roundtrip preserves positions representation, exact semantic output and subsequent writes (52.502416ms)
+ℹ {"format":"native","representation":"positions","completeComparisons":76}
+✔ native roundtrip preserves offsets representation, exact semantic output and subsequent writes (66.325167ms)
+ℹ {"format":"native","representation":"offsets","completeComparisons":96}
+✔ native roundtrip preserves mixed representation, exact semantic output and subsequent writes (66.644083ms)
+ℹ {"format":"native","representation":"mixed","completeComparisons":96}
+✔ source export requires originals for every indexed field and never fabricates source-free text (33.705459ms)
+✔ unqualified ordinary engines reject native state and source restore reports explicit receiving reindex (27.78175ms)
+✔ literal hand BM25 arithmetic survives both formats and deletion without calling the native scorer (7.257834ms)
+✔ browser restore coverage keeps refused/cancelled operations separate from collected configurations (2.699375ms)
+✔ browser restore method rejects coverage/state-proof drift, mixed diagnostics and fabricated CPU (1.702042ms)
+✔ browser restore parity rejects snapshot/header/hash and successful numerical/receipt drift while retaining refusal transitions (3.116416ms)
+✔ restore observer preserves actual source/position results and records private staging plus old-root identity (312.542792ms)
+✔ restore observer retains genuine work refusal and exact old state instead of labelling success (175.49525ms)
+✔ restore observer preflights anchor drift and serializes without Node dependencies or nested observation (103.656292ms)
+✔ restore method preserves typed refusal/cancellation/transport uncertainty and bounded real prior inputs (1.211958ms)
+✔ restore coverage rejects missing operations/owners/source or diagnostic preservation and never calls a refusal success (2.134667ms)
+✔ restore summaries separate refusal/stop costs, omit intrusive rows and make blocked input explicit (0.497375ms)
+✔ factory validation throws synchronously; ordinary operational failures reject promises (5.819583ms)
+✔ every operation converts validation failures without changing state or running getters (2.224459ms)
+✔ already aborted and disposed calls skip caller data, queue slots and host handles (0.430417ms)
+✔ search, batch and removal options share each call admission counter (0.924708ms)
+✔ zero queue capacity still accepts an idle operation and rejects concurrent waiting calls (1.112333ms)
+✔ default queue keeps 32 FIFO waiters, rejects the 33rd and never supersedes a search (4.069417ms)
+✔ FIFO selects revisions and conflicts at start; a failed operation preserves the next read (0.965291ms)
+✔ admission owns nested record/query/options and removal inputs before a queued call returns (1.327625ms)
+✔ queued abort removes its listener/timer and immediately frees a bounded queue slot (1.422375ms)
+✔ deadline starts at admission; an expired queue entry releases its slot before active work completes (0.813916ms)
+✔ delayed timer delivery cannot allow an expired operation to execute successfully (0.276ms)
+✔ silent queued abort is rechecked when its operation starts (0.296834ms)
+✔ active search cancellation closes owned work at different host opportunities and preserves later recovery (21.256875ms)
+✔ active mutation cancellation unwinds participant staging and keeps the previous coherent root (0.706292ms)
+✔ no-op operations still perform final cancellation/deadline checks (0.45175ms)
+✔ abort in participant finalization is observed before publication even below one whole work quantum (0.227833ms)
+✔ every precommit signal read preserves disposal and an observed abort event even if its getter returns false (13.245708ms)
+✔ a committed response keeps its actual revision after late abort, a newer write and disposal (0.303083ms)
+✔ dispose immediately rejects active/queued work, unregisters resources and shares one promise (0.252333ms)
+✔ disposal requested inside active trusted preparation waits for unwinding and prevents commit (0.272541ms)
+✔ participant failures and throwing abandonment cleanup preserve the original typed outcome and permit reuse (0.436125ms)
+✔ unknown participant failures become sanitized rejections and release all scheduling resources (0.186833ms)
+✔ host timer/continuation and signal-registration failures reject safely and permit later operations (0.493333ms)
+✔ search and addMany retain one work budget across analysis, selection, records and participants (2.993375ms)
+✔ visible stop precedence is disposed, caller abort, deadline, work; a settled first error is retained (0.345333ms)
+✔ late malformed content rejects the whole queued batch after charged work and preserves later reads (0.388042ms)
+✔ four task yield quanta preserve full source-oracle membership, pages, order and BM25 after queued mutations (293.871417ms)
+✔ query stop checks run inside dictionary, postings, analysis, evaluation, scoring, selection and final result (4.599542ms)
+✔ every search and replacement yield can abort and recover with identical published state (21.63225ms)
+ℹ Exhaustive cancellation positions: 57
+ℹ Exhaustive cancellation positions: 107
+✔ actual direct factory yields to host timers during complete common-term search and atomic staging (726.92475ms)
+ℹ tests 71
+ℹ suites 0
+ℹ pass 71
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12167.31575

@@ -1,0 +1,816 @@
+{
+  "algorithmVersion": "raveldex-doc-sections-v1",
+  "hashAlgorithm": "sha256",
+  "schema": {
+    "text": {
+      "title": {
+        "boost": 2
+      },
+      "body": {
+        "boost": 1
+      }
+    },
+    "metadata": {
+      "sourcePath": {
+        "type": "string",
+        "multi": false,
+        "nullable": false
+      },
+      "category": {
+        "type": "string",
+        "multi": false,
+        "nullable": false
+      }
+    }
+  },
+  "records": [
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+      "text": {
+        "title": "Public API contract",
+        "body": "\nThese names and call shapes are implemented and qualified through the root package in RX-1006. The frozen factory result exposes only bound ordinary methods; private roots, scheduler handles and execution callbacks remain internal. Root exports include the factory, `RaveldexError`, `ERROR_CODES` and readonly contract types; internal subpaths are excluded by the exports map.\n\n| Entry | Required call/result contract |\n| --- | --- |\n| `createRaveldex({ schema, limits?, analyzer?, addons? })` | Synchronously validates configuration and returns an empty engine at revision 0. Invalid configuration throws a typed configuration/schema error. No records are indexed by the factory. |\n| `engine.search(query, options?)` | Returns `Promise<SearchResult>`. `query` is a string or the typed AST below. Options are `{ limit?, offset?, signal?, deadlineMs?, extensions? }`; extensions require explicitly installed handlers. |\n| `engine.add(record, options?)` | Returns `Promise<MutationResult>`; existing ID rejects. |\n| `engine.addMany(records, options?)` | Returns one atomic `Promise<MutationResult>` for a bounded add-only batch. |\n| `engine.replace(record, options?)` | Returns `Promise<MutationResult>`; missing ID rejects. This is complete replacement, not a patch. |\n| `engine.remove(idOrIds, options?)` | Accepts one ID or a bounded readonly ID array; returns `Promise<MutationResult>`. Missing IDs are no-ops. |\n| `engine.clear(options?)` | Returns `Promise<MutationResult>` for clearing the complete collection. |\n| `engine.dispose()` | Returns an idempotent `Promise<void>`; closes admission immediately and releases state after active work settles safely. |\n\nMutation options are `{ signal?, deadlineMs? }`. All operational validation failures reject the returned promise; they do not escape as synchronous throws. Implementations still capture/copy bounded input structures and primitive values before returning that promise. Character-by-character UTF-16 validation and analysis occur later in charged resumable execution; admission does not scan all text in a large batch. There is no public arbitrary callback, mixed-command transaction, in-place schema update, or source projection in the initial API.\n\n`analyzer` defaults to `{ id: 'basic-v1', environmentProfile: 'unqualified' }`. It is a descriptor, not an executable string. A selected non-default analyzer requires a compatible explicitly installed registration. `addons` defaults to `[]`; registrations use the capability contract and trusted implementation handles in [ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md). The core imports none automatically. RX-2001 implements explicit direct source participants and exact-token-sequence leaf refinement; RX-2002 adds optional position/offset participants and position/mixed phrase strategies. RX-2003 adds optional typed numeric/set predicates and exact conjunctive string metadata aggregation through the same extension envelopes. RX-2004 adds optional evidence requests for selected actual native facts through the same result envelope. Other roles/custom analyzers remain unavailable.\n\n`MutationResult` is exactly `{ revision: number, changed: boolean, added: number, replaced: number, removed: number }`, with nonnegative safe-integer counts. All methods share the queue, revision, cancellation, conflict, and no-op rules in [MUTATIONS_AND_EXECUTION.md](MUTATIONS_AND_EXECUTION.md). Public TypeScript declarations must express these contracts, readonly input/output data, and the known error codes.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+      "text": {
+        "title": "Schema",
+        "body": "\nThe schema declares named text fields and metadata fields. This is its required top-level shape, illustrated with an example schema:\n\n```ts\n{\n  text: {\n    title: { boost: 2 },\n    body: { boost: 1 }\n  },\n  metadata: {\n    kind: { type: 'string', multi: false, nullable: false },\n    tags: { type: 'string', multi: true, nullable: false },\n    year: { type: 'number', multi: false, nullable: true }\n  }\n}\n```\n\nThese are schema data, not implementation code. Defaults are `boost: 1`, `multi: false`, and `nullable: false`. `metadata` may be omitted or empty; at least one text field is required. Metadata types are `string`, `number`, and `boolean`.\n\nNames match `[A-Za-z][A-Za-z0-9_]{0,63}`. Reject the names `constructor` and `prototype`; implementations must still use prototype-safe dictionaries. A name may not occur in both text and metadata declarations. An object API cannot detect duplicate same-name keys already overwritten during JavaScript construction or parsing; do not claim to reject information discarded before the API call. Unknown schema keys fail validation.\n\nText-field boosts are finite numbers greater than zero and at most 16. Schema/analyzer changes on a live engine require a new index/reindex operation; they cannot silently change existing state.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+      "text": {
+        "title": "Record",
+        "body": "\n```ts\n{\n  id: 'guide:storage#recovery',\n  text: {\n    title: 'Recover a saved collection',\n    body: ['First paragraph.', 'Second paragraph.']\n  },\n  metadata: {\n    kind: 'guide',\n    tags: ['storage', 'recovery'],\n    year: null\n  }\n}\n```\n\nThe only top-level keys are `id`, `text`, and `metadata`. `text` is required and may be empty; `metadata` is optional. Reject unknown field names. A declared text field may be missing, a string, or an array of strings. `null`, `undefined`, mixed arrays, and nested arrays are invalid text values. Empty strings/arrays are valid and emit no tokens. Array values are analyzed separately; their positions and offsets never share a coordinate space.\n\nAn ID contains 1–256 UTF-16 code units, is well-formed Unicode, and is compared byte-for-code-unit without trimming, normalization, numeric conversion, or locale collation. Whitespace and case are significant. The empty string is invalid. Internal storage must support ordinary opaque IDs such as `__proto__` without treating them as object property operations.\n\nFor a single metadata field, a present value must have the declared scalar type, or be `null` when nullable. For a multi field, a present value must be an array of allowed scalar/null values; a scalar is not automatically wrapped. Empty arrays are valid. Duplicate array values have one logical membership, and facet counts count a document at most once per value.\n\nNumbers must be finite. Canonicalize `-0` to `0`. `NaN`, infinities, bigint, dates, functions, symbols, accessors, and arbitrary class instances are rejected. `undefined` is never a synonym for a missing property. String values are well-formed UTF-16. Metadata strings preserve their original case/spacing and are not analyzed.\n\nAccept plain data objects with ordinary or null prototypes. Validate own data properties and copy accepted input into engine-owned data. Do not execute getters, call an input's `toJSON`, or use an input object as an internal dictionary. Proxies and code-bearing objects are outside the accepted data contract; the engine is not a sandbox for caller-supplied JavaScript.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+      "text": {
+        "title": "Ownership and retention",
+        "body": "\nAt method admission, copy the bounded object/array structure and capture primitive values. Perform cheap type, property, array-length, and string-length checks then; scan string contents and analyze tokens inside queued resumable work. Caller mutations after the call cannot change queued work. Strings are immutable values; capturing them does not require inventing a second byte buffer. Synchronous ownership capture is a bounded, nonpreemptible section, not an interruptible scan of all string characters.\n\nCore retains IDs, canonical equality metadata, reverse per-document term frequencies, field lengths, and index/statistical data. It does not retain the original `text` strings after a successful operation unless an explicitly installed transactional source participant requests them. It never retains arbitrary undeclared record properties.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+      "text": {
+        "title": "Normative algorithm",
+        "body": "\nProcess each original text value independently:\n\n1. Validate well-formed UTF-16 and input limits. Scan by Unicode code point while retaining JavaScript UTF-16 indices.\n2. Recognize original tokens equivalent to the ECMAScript Unicode expression `/[\\p{L}\\p{N}][\\p{L}\\p{N}\\p{M}]*/gu`. A token begins with a letter or number, then consumes letters/numbers/marks. Other code points delimit tokens. Leading combining marks outside a token are delimiters.\n3. For each complete original token span, reject a raw span beyond the token limit; do not truncate or split it to fit.\n4. Normalize that span using `raw.normalize('NFKC').toLowerCase()` in that order. This is default locale-independent lowercasing, not `toLocaleLowerCase`, full Unicode case folding, accent stripping, stemming, or language-specific segmentation.\n5. Emit exactly one normalized term for that original span. Do not retokenize normalized output, even if compatibility normalization introduces punctuation or a space. Enforce the normalized-term limit after transformation.\n6. Emit `{ term, valueIndex, position, start, end }`, with zero-based `position` in that original value and the half-open original UTF-16 range `[start, end)`. Positions increment once per emitted token. There are no stop-word holes in this analyzer.\n\nThe implementation may use a bounded scanner rather than allocating every regex result at once, but must have the stated behavior. It must not normalize a whole unbounded record in one operation or derive offsets from the normalized string.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+      "text": {
+        "title": "Examples and intentional limits",
+        "body": "\n| Original value | Terms | Consequence |\n| --- | --- | --- |\n| `Hello_world` | `hello`, `world` | Underscores split words; code/identifier preservation is a later analyzer. |\n| `can't` | `can`, `t` | Apostrophes are separators in `basic-v1`. |\n| `red—blue` | `red`, `blue` | Punctuation is ignored by token adjacency, not retained as a literal phrase requirement. |\n| `café` / `cafe` | `café` / `cafe` | Accents are significant. |\n| `a\\u0301` | `á`, original range `[0,2)` | The normalized term may have a different UTF-16 length. |\n| `ﬁle` | `file`, original range `[0,3)` | Compatibility expansion does not produce normalized-string offsets. |\n| `Straße` | `straße` | `strasse` is a different term; this is lowercasing, not full case folding. |\n| `½` | one term `1⁄2` | It is not re-tokenized into two number tokens. Literal `1/2` is analyzed as two tokens. |\n| `東京都` | one contiguous letter token | Linguistically segmented Japanese search is not claimed. |\n| `😀` or whitespace only | no terms | Plain empty analysis returns no matches. |\n\nCase behavior, including contextual lowercase mappings, follows the host's default lowercase algorithm. The engine does not claim locale-specific equivalence, transliteration, or perfect caseless matching across scripts.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+      "text": {
+        "title": "Source mapping",
+        "body": "\nToken ranges refer to the entire original token. They are sufficient for token occurrences and original-source phrase evidence. They do not constitute a character-by-character normalization map. A prefix match initially highlights the entire matching original token; a shorter normalized prefix is not converted into a fabricated shorter original range.\n\nArray indices are original indices, including empty values. Positions reset to zero for each value. Ranges are local to the identified value. Surrogate pairs must not be split. Presentation-level grapheme-safe snippet clipping is a separate evidence add-on concern.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+      "text": {
+        "title": "Environment compatibility",
+        "body": "\nIdentity contains `id: basic-v1`, the complete analyzer configuration, and an environment qualification profile. The logical ID alone is not a Unicode-data-version guarantee. ECMAScript property tables, normalization, and lowercasing are host supplied.\n\nThe default profile is **unqualified**: useful for same-owner indexing/querying, without a cross-host native-snapshot portability promise. A qualified profile must record tested runtime/browser versions and its compatibility evidence. A small fingerprint/probe set is diagnostic, not proof of equivalence for all Unicode.\n\nDirect and worker execution must use the same implementation/configuration and compatible qualified profiles, or an explicitly same-host unqualified pairing supported by the worker contract. Importing native state across incompatible or unqualified profiles is rejected. A source snapshot may be rebuilt under a receiving profile with an explicit reindex result; this is not a score/membership equivalence claim.\n\nThe RX-3002 optional snapshot entry may create a direct owner with an explicit trusted application qualification declaration and an actual matching Node environment record. This records the owner's qualified descriptor from revision 0; it cannot promote an already unqualified ordinary owner. Profile identity is separate from the unchanged `basic-v1` algorithm. Local round-trip fixtures qualify the observed scope only; declaration strings, probes, and exact version matching alone do not prove all-Unicode cross-host equivalence. Browser/worker native qualification remains unsupported by that entry.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+      "text": {
+        "title": "Core nodes",
+        "body": "\n| Node | Data | Meaning |\n| --- | --- | --- |\n| `text` | `text`, optional `operator: 'and' | 'or'`, optional `fields` | Analyze text into original token groups; AND is the default. Every group initially has one exact variant. |\n| `group` | nonempty `variants`, optional `fields` | OR between variants and selected fields. Each variant has `text`, `match: 'exact' | 'prefix'`, and optional `weight` defaulting to 1. |\n| `and` | nonempty `children` | Every child must qualify. |\n| `or` | nonempty `children` | At least one child must qualify. |\n| `not` | one `child` | Complement within all live documents in the operation's revision; contributes no score. |\n| `eq` | declared metadata `field`, scalar/null `value` | Strict typed equality, as defined below. |\n| `all` | no additional keys | Every live document, including records with no tokens. |\n| `none` | no additional keys | No documents. |\n\nThe discriminator key is `kind`. Unknown kinds/keys, empty Boolean children, invalid fields, duplicate field selections, cyclic data, and excessive depth/size fail validation. An omitted `fields` means every declared text field. A supplied field list must be nonempty.\n\nAn installed module may validate a reserved `{ kind: 'extension', capability, version, payload }` leaf. With no matching registration, this fails with `MISSING_CAPABILITY`. Search-option `extensions` is a bounded data map keyed by registered capability ID; every payload is validated by that capability, and absent handlers fail. No capability is inferred from payload contents. See the [extension contracts](../architecture/ADDONS_AND_ADAPTERS.md).\n\nEach `group` variant's raw `text` must analyze to exactly one token. Its weight is finite, greater than zero, and at most 1; it discounts an alternative, never boosts it beyond its ordinary contribution. Weights and exact/prefix variants are represented explicitly so later expansion add-ons need not corrupt original-group AND semantics. v1 has no arbitrary user-supplied score callback.\n\nA `text` node with zero tokens canonicalizes to `none`, even with operator OR. It does not become `all` or an unconstrained filter. Callers seeking filter-only results submit `eq` or a Boolean expression with an explicit `all`. A negative-only query is allowed and is evaluated against the complete live ID set.\n\nAnalyze raw lexical input exactly once at its boundary. Internal canonical groups carry normalized terms directly; they must not feed those terms back through the raw-text analyzer. This matters for compatibility output such as the single normalized term from `½`, which contains a separator that was not a separator in the original token. Phrase candidate compilation and snapshot term validation must preserve the same distinction.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+      "text": {
+        "title": "Boolean groups and repeated terms",
+        "body": "\nFor `red car`, default text search requires the `red` group AND the `car` group. Within a future expanded `car` group, variants such as `car` OR `automobile` remain alternatives; they do not become two required words.\n\nEquivalent normalized lexical groups are deduplicated for scoring. Ordinary repeated query words do not create a hidden query-frequency boost. Repetition inside a strict phrase remains significant to phrase membership; that is a separate capability.\n\nCanonicalization may flatten the same Boolean operator, sort its children, and deduplicate equivalent children. It must preserve matching and the scoring-contribution rules in [RANKING.md](RANKING.md). It cannot rewrite a negative filter into a positive scoring clause or turn empty analysis into match-all.\n\nA group may qualify from any selected field. Separate AND groups may qualify from different fields. Core AND is not same-field phrase matching.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+      "text": {
+        "title": "Exact and prefix terms",
+        "body": "\nExact means equality with a complete normalized dictionary term. Prefix means that a complete normalized dictionary term starts with the normalized query term. Matching is binary and never locale collation.\n\nPrefix terms require at least two Unicode code points after normalization. Enumerate qualifying live terms in the selected fields; count distinct `(field, term)` expansions. The per-group and whole-query caps below apply before result evaluation. The whole-query count unions these pairs across canonical groups; selecting the same pair through different clauses or weights does not count it twice. If an expansion cap is exceeded, fail the entire operation; do not take the first alphabetic expansions or the most frequent terms.\n\nPrefix matching is not automatically enabled on the final word of plain-string search. A caller requests it using a typed group. Fuzzy, infix, phrase, synonym, and query-language operators are not inferred from punctuation or misspellings.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+      "text": {
+        "title": "Scalar equality",
+        "body": "\n`eq` requires a scalar of the field's declared type, or `null` only for a nullable field. Wrong-type queries fail validation, rather than returning a guessed coercion result.\n\n- String equality is exact UTF-16 equality with no trimming/analysis.\n- Number equality is ordinary equality between finite numbers, with `-0` canonicalized to `0`.\n- Boolean equality is exact.\n- Explicit null matches explicit null only. Missing does not equal null.\n- For multi metadata, equality means at least one array element equals the requested scalar. An empty array has no matching value.\n- Missing metadata makes `eq` false. Therefore `not(eq(...))` includes missing metadata: this is two-valued Boolean set logic, not SQL NULL logic.\n\nEquality-only matches have score zero. Ordering among them uses the normal ID tie-breaker.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+      "text": {
+        "title": "Results and errors",
+        "body": "\nThe implemented search result shape is:\n\n```ts\n{\n  revision: 3,\n  model: 'raveldex-bm25-v1',\n  completeness: 'complete',\n  total: 27,\n  hits: [{ id: 'guide:storage#recovery', score: 1.234 }]\n}\n```\n\nThe example numbers illustrate shape only. `total` counts all unique documents satisfying the complete query before pagination. Sort by score descending, then opaque ID ascending by UTF-16 lexicographic comparison. Do not use locale collation or insertion order. Return unrounded finite score numbers.\n\nSearch options include `limit` (normally 20, maximum 100), `offset` (default 0), `signal`, and a bounded deadline option. A supplied offset is an integer from zero through document capacity. When limit is omitted its effective default is `min(20, maxHits, maxDocuments - offset)`, so a deliberately reduced engine capacity remains usable. `limit: 0` is valid and still obtains an exact total. An explicit limit must be a nonnegative integer no greater than `maxHits`; `offset + limit` must not exceed document capacity. Core results return IDs and scores, not automatically retained source or arbitrary application records.\n\nAn explicitly requested installed capability may add its validated data under an `extensions` result map, keyed by capability ID. Otherwise that property is absent. Capability output cannot overwrite revision, model, total, completeness, or core hits.\n\nAll operational methods settle through their promised result/error channel. A successful operation never returns `completeness: partial`, an estimated total, or undisclosed dropped expansions. Result pagination is the explicit requested projection of fully evaluated membership.\n\nUse a stable `RaveldexError`-style shape with `code`, a sanitized `message`, and bounded structured details such as `path`, `limit`, and `actual`. The exact class export is implemented in RX-1001. Error details must not embed raw query strings, text bodies, metadata values, or worker stacks by default.\n\n| Code | Meaning |\n| --- | --- |\n| `INVALID_SCHEMA`, `INVALID_RECORD`, `INVALID_QUERY`, `INVALID_OPTIONS` | Input does not satisfy its declared contract. |\n| `ID_EXISTS`, `ID_NOT_FOUND` | Add/replace membership conflict when the mutation executes. |\n| `LIMIT_EXCEEDED` | A named input, state, expansion, result, or capability bound would be exceeded. |\n| `QUEUE_FULL` | Bounded admission cannot accept another queued operation. |\n| `WORK_LIMIT_EXCEEDED`, `DEADLINE_EXCEEDED` | Execution cannot finish within the selected operation budget. |\n| `CANCELLED`, `DISPOSED` | The operation was cancelled before its commit/delivery boundary, or the engine has been disposed. |\n| `MISSING_CAPABILITY`, `INCOMPATIBLE_CAPABILITY` | A query/adapter requests absent or incompatible behavior/data. |\n| `UNSUPPORTED_ENVIRONMENT` | Requested optional behavior requires a missing host feature, such as grapheme segmentation for snippets. |\n| `REVISION_MISMATCH`, `REVISION_EXHAUSTED` | A revision precondition fails or another safe-integer revision cannot be created. |\n| `RESOURCE_EXHAUSTED`, `INTERNAL_ERROR` | A recoverable resource failure or invariant failure prevented success. |\n\nAdapters may add documented transport/storage/codec errors. An unknown transport outcome is not core `CANCELLED`; see the lifecycle and adapter contracts.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+      "text": {
+        "title": "Finite initial limits",
+        "body": "\nAll values below are adopted defensive design caps. They are not benchmark results or recommended dataset sizes. Each configurable upper bound may be reduced; implementation must validate interdependent bounds. The minimum prefix length may be increased, never reduced below two.\n\nThe accepted `limits` keys are `maxDocuments`, `maxTextFields`, `maxMetadataFields`, `maxFieldNameCodeUnits`, `maxIdCodeUnits`, `maxTextValuesPerField`, `maxMetadataValuesPerField`, `maxMetadataStringCodeUnits`, `maxMetadataCodeUnitsPerRecord`, `maxTextCodeUnitsPerValue`, `maxTextCodeUnitsPerRecord`, `maxCorpusTextCodeUnits`, `maxRawTokenCodeUnits`, `maxTermCodeUnits`, `maxTokensPerRecord`, `maxCorpusTokens`, `maxDictionaryEntries`, `maxPostingEntries`, `maxMutationBatch`, `maxAdmissionEntries`, `maxQueryNodes`, `maxQueryDepth`, `maxQueryLexicalCodeUnits`, `maxQueryCodeUnits`, `maxQueryTokens`, `maxQueryGroups`, `maxVariantsPerGroup`, `maxExpansionsPerGroup`, `maxQueryExpansions`, `minPrefixCodePoints`, `maxHits`, `maxQueuedOperations`, `maxSearchWorkUnits`, `maxMutationWorkUnits`, `checkpointWorkUnits`, and `maxDeadlineMs`. Unknown keys or noninteger bounds fail configuration validation. Positive bounds have a minimum of one; `maxMetadataFields` and `maxQueuedOperations` may be zero. The default operation deadline is `min(30,000, maxDeadlineMs)`; `maxDeadlineMs` defaults to 60,000.\n\n| Resource | Initial default / hard cap | Counting rule |\n| --- | ---: | --- |\n| Live documents | 10,000 | Published plus proposed mutation state, not cumulative historical additions. |\n| Text / metadata fields | 32 / 32 | At most 64 declared fields in total. |\n| Field name / ID | 64 / 256 UTF-16 code units | ID minimum is one. |\n| Text array values per field | 64 | Empty values count toward this bound. |\n| Metadata array values per field | 128 | Validate before deduplication. |\n| One metadata string | 1,024 UTF-16 code units | No truncation. |\n| Total metadata string content per record | 32,768 UTF-16 code units | All present values before deduplication. |\n| One original text value | 65,536 UTF-16 code units | Validate before analysis. |\n| Original text per record | 262,144 UTF-16 code units | Sum across fields/values. |\n| Original text across live corpus | 67,108,864 UTF-16 code units | Logical input-size accounting remains available even without retaining source. |\n| Raw token / normalized term | 256 / 256 UTF-16 code units | Oversized tokens reject the operation. |\n| Emitted tokens per record | 32,768 | Sum across fields/values. |\n| Emitted tokens across live corpus | 4,000,000 | Sum of field token frequencies. |\n| Distinct `(field, term)` dictionary entries | 250,000 | Live entries only. |\n| Distinct `(field, term, document)` posting entries | 2,000,000 | Repeated occurrences change tf, not this count. |\n| Mutation batch records/IDs | 256 | Includes duplicates before rejection. |\n| Admission structure entries | 16,384 | Own data properties and array elements inspected/captured per call; immutable string contents are not scanned at admission. |\n| Query tree nodes / depth | 128 / 16 | Before canonicalization. |\n| Raw lexical query text in total | 2,048 UTF-16 code units | All text/group payload strings before analysis. |\n| All query string content | 16,384 UTF-16 code units | Includes field names, scalar strings, and extension payload strings. |\n| Analyzed original query tokens / canonical groups | 64 / 64 | Token count is measured before duplicate elimination. |\n| Declared variants per group | 16 | Before equivalent-variant deduplication. |\n| Distinct prefix/exact expansions per group / query | 256 / 1,024 | Distinct `(field, term)` pairs; duplicate alternatives do not evade counting. |\n| Returned hits | 100 | Default 20. Offset plus limit is at most document capacity. |\n| Waiting operations | 32 | Excludes the single running operation. |\n| Search work / mutation work | 10,000,000 / 50,000,000 units | Versioned deterministic accounting; see execution contract. |\n| Work between checkpoints | 2,048 units | Upper target for owned resumable loops, with separately bounded primitives. |\n| Operation deadline | 30,000 ms default / 60,000 ms maximum | From admission, including queue time; observed cooperatively. |\n\nCounters use safe integers. Per-record/corpus bounds apply to proposed committed state. Updates may transiently hold old and staged structures simultaneously; admission limits are not a heap-memory cap. Recoverable overflow must reject before root publication.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/CORE_CONTRACT.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+      "text": {
+        "title": "Statistics from one revision",
+        "body": "\nFor field `f`, document `d`, and normalized term `t`:\n\n| Symbol | Exact definition |\n| --- | --- |\n| `tf(t,d,f)` | Count of emitted occurrences of `t` across the text values of `f` in `d`. |\n| `length(d,f)` | Total emitted tokens across those values, including repeated terms. |\n| `N(f)` | Number of live documents with `length(d,f) > 0`. |\n| `L(f)` | Sum of `length(d,f)` across live documents. |\n| `avgLength(f)` | `L(f) / N(f)` when `N(f) > 0`. |\n| `df(t,f)` | Number of live documents with `tf(t,d,f) > 0`. |\n| `boost(f)` | Positive finite schema boost, default 1, at most 16. |\n\nMissing, empty, and tokenless fields do not increment `N(f)`. An empty index has no term contribution and never divides by zero. An indexed term must satisfy `1 <= df(t,f) <= N(f)`, `tf > 0` for its posting, and `avgLength(f) > 0`. A violated invariant fails safely; it is not repaired by clamping arbitrary values into the formula.\n\nStatistics are for the complete live field corpus, not the filtered result set, selected page, independent worker shard, or original uncommitted input. Metadata/phrase restrictions do not recompute IDF. A mutation changes all affected statistics at its one commit point.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/RANKING.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#term-contribution",
+      "text": {
+        "title": "Term contribution",
+        "body": "\nFor a present term in a field, compute:\n\n```text\nidf(t,f) = ln(1 + (N(f) - df(t,f) + 0.5) / (df(t,f) + 0.5))\n\nnormalizer(d,f) = 1.2 * (1 - 0.75 + 0.75 * length(d,f) / avgLength(f))\n\ntfPart(t,d,f) = (tf(t,d,f) * (1.2 + 1)) / (tf(t,d,f) + normalizer(d,f))\n\nbase(t,d,f) = boost(f) * idf(t,f) * tfPart(t,d,f)\n```\n\n`ln` is the natural logarithm. A missing term contributes zero. Use JavaScript `number` arithmetic, without Float32 quantization or stored rounded field norms. Returned scores and facts remain unrounded; display formatting belongs to the application.\n\nThe operation order above is normative for same-runtime arithmetic reconstruction. Algebraic reassociation, approximate logarithms, rounded lengths, or a different TF numerator require a new model version and comparative evaluation.\n\nThe selected parameters and IDF form have established BM25 precedent; see the [Lucene BM25 API reference](https://lucene.apache.org/core/9_12_3/core/org/apache/lucene/search/similarities/BM25Similarity.html). Raveldex's full formula, group aggregation, field treatment, and Boolean contribution rules are specified here; they do not promise numerical compatibility with Lucene, MiniSearch, or another library.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/RANKING.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+      "text": {
+        "title": "Original groups and alternatives",
+        "body": "\nEach normalized original query token creates one group. The core query can also explicitly declare a group of exact/prefix variants. Each qualifying dictionary expansion has a declared variant weight `w` in `(0,1]`.\n\nFor group `g`, let `E(g,f)` be every qualifying normalized term/weight alternative in selected field `f`. Then:\n\n```text\ngroupField(g,d,f) = max( w * base(t,d,f) for (t,w) in E(g,f) )\ngroupScore(g,d) = sum( groupField(g,d,f) over selected fields f )\n```\n\nThe maximum over no matching term is zero. A document containing three alternatives to one requested word receives the best alternative contribution in that field, not their sum. Different fields may choose different winning alternatives; their field contributions are then summed.\n\nFor an exact/prefix alternative that resolves to the same `(field, term)` more than once, retain the highest weight. Equivalent weights do not cause repeated contributions. No fixed penalty is added merely because the matching mode is prefix; only the explicit variant weight applies.\n\nIf two alternatives have equal weighted contributions, choose the UTF-16 lexicographically smaller normalized term for trace identity, then the canonical variant key. This changes trace selection only, not the score.\n\nCanonical group identity includes the sorted selected fields and sorted normalized variant/mode/weight entries. Identical groups share one contribution even when repeated in the query. Groups with different field selections or weights are deliberately different explicit clauses; the engine must not guess that the author wanted them merged.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/RANKING.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+      "text": {
+        "title": "Boolean qualification and score participation",
+        "body": "\nEvaluate each AST node as membership plus a set of successful positive canonical groups:\n\n- A qualifying lexical group contributes its one group identity.\n- `eq`, `all`, and `none` do not contribute lexical groups.\n- For a successful AND, union the positive groups from every child. If any child fails, that branch supplies no groups to its parent.\n- For OR, union groups from every successful child; failed children supply none.\n- NOT complements membership and supplies an empty group set, regardless of its child's internal matches.\n\nThe final document score is the sum of the unique participating `groupScore` values. Do not use a failed OR branch to inflate a document's score.\n\nExamples:\n\n| Expression | Participation |\n| --- | --- |\n| `AND(red, red)` | One `red` group; no repeated-query boost. |\n| `AND(red, OR(red, car))` | `red` once and `car` when that OR child also qualifies. |\n| `OR(AND(red, car), blue)` for a red+blue document without car | Only `blue`; the red+car branch failed. |\n| `NOT(red)` | Qualifying documents receive score zero. |\n| `NOT(NOT(red))` | Same membership as red, but zero score because negative clauses do not become scoring clauses. |\n| `OR(all, red)` | Every document qualifies; red documents receive their ordinary red contribution. |\n\nCanonicalization must not eliminate/transform negative branches in ways that change this participation rule. Strict phrase leaves contribute the canonical lexical groups used by their phrase candidate expression only when the phrase itself qualifies. A phrase adds no separate bonus. Repeated phrase tokens remain necessary for phrase eligibility but do not introduce an undocumented query-frequency boost.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/RANKING.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+      "text": {
+        "title": "Deterministic accumulation and ordering",
+        "body": "\nSort selected field names and canonical group keys by UTF-16 lexicographic order. Sum selected field contributions in that order, then group contributions in that order. Do not accumulate in hash-map iteration order, posting traversal order, insertion order, or parallel completion order.\n\nReturn descending finite score, then ascending opaque ID by UTF-16 comparison. Exact numerical ties use the ID; a user-interface rounding tie is not a score tie. Internal document slot numbers and dictionary insertion order must not affect results.\n\nDirect and worker modes with the same qualified runtime/model/state must produce the same arithmetic and ordering. Different JavaScript engines may have tiny transcendental-function differences; cross-engine bit-for-bit floating-point equivalence is not asserted. Qualification uses declared tolerances for numerical fixtures and inspects any changed result order rather than hiding it behind a tolerance.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/RANKING.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#explanation-facts",
+      "text": {
+        "title": "Explanation facts",
+        "body": "\nCore exposes opt-in typed score facts to the Inspector capability. Normal searches must not allocate full explanation trees. Selected-contribution facts include:\n\n- revision, model, analyzer identity/profile, document ID, canonical query/group identity;\n- membership outcomes and which positive groups participated;\n- field name, boost, winning normalized term/variant, and variant weight;\n- `tf`, `df`, `N`, document field length, total field length, and average length;\n- `k1`, `b`, IDF, normalizer, TF part, base term contribution, weighted selected contribution;\n- field/group subtotals, final score, and the ID tie-breaker.\n\nThese facts are collected from the actual scorer/evaluator inputs and intermediate results. Do not reverse-engineer a plausible explanation after ranking, invent percentages, or present a foreign engine's score under the native model identity.\n\nInspector requests are separately bounded (selected facts initially at most 4,096 entries). If a requested complete trace exceeds its declared budget, that explain request fails explicitly. Ordinary search still works with tracing off; a trace limit must not silently alter membership or scoring. An expanded all-alternatives debug trace needs a separately declared larger budget or a narrowly scoped request.\n\nExplain requests that specify an expected revision fail on mismatch; the initial core does not retain historical roots merely for later inspection. Explaining why a document did not qualify must evaluate actual predicates/Boolean paths at the selected revision, not equate absent top-k membership with lexical failure.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/RANKING.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+      "text": {
+        "title": "Admission and concurrent calls",
+        "body": "\n`createRaveldex` returns an empty engine with revision 0. Each public operational call synchronously captures bounded input structures/primitive values and performs cheap shape/type/length checks before returning its promise; validation exceptions are converted into promise rejections. String-content scans, well-formed UTF-16 validation, and tokenization run inside queued charged resumable work, not as a full synchronous batch scan. It then either starts immediately or enters the queue.\n\nOwnership capture permits at most 16,384 own data properties/array elements per call by default. Count captured/inspected structure entries independently from text length; immutable string values require no character scan to capture. This bounded synchronous section and platform property operations are not preemptible and must be disclosed/measured in latency qualification. It is not a promise to sandbox malicious proxies or make every JavaScript primitive interruptible.\n\nThe first accepted operation starts as the single running operation. At most 32 further operations wait by default. `maxQueuedOperations: 0` permits an idle engine to start a call and rejects concurrent waiting calls. Reject overflow with `QUEUE_FULL`; do not drop an older request or replace it with a newer query silently.\n\nAn already-aborted signal rejects with `CANCELLED` before queue admission. A disposed/closing engine rejects new work with `DISPOSED` without inspecting caller text unnecessarily. The effective deadline begins at admission, so queue time counts. Every accepted operation settles exactly once.\n\nQueue order is call admission order within this owner. Ordinary search calls are not automatically debounced or superseded. A UI adapter may explicitly cancel a previous request and suppress obsolete presentation, but must keep those two behaviors distinguishable.\n\nA call chooses its read root **when it starts**, after previously accepted operations settle. Thus `add(a); search('a')` without awaiting the first promise still respects FIFO ordering. If the add fails, search sees the last good root. It does not observe a half-prepared add. Callers requiring a different order must await or order their submissions explicitly.\n\nYielding active work does not start the next queued operation. A signal handler can request cancellation during a yield; it cannot access or commit the staged root.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+      "text": {
+        "title": "Mutation behavior",
+        "body": "\nEvery mutation returns `{ revision, changed, added, replaced, removed }` as defined by the core API.\n\n| Method / situation | Required result |\n| --- | --- |\n| `add(record)` with absent ID | Commit one added record; `added: 1`, `changed: true`. |\n| `add(record)` with existing ID | `ID_EXISTS`; no state change. |\n| `addMany(records)` | Entire batch commits once or fails without any member committed. |\n| Duplicate IDs inside an add batch | `INVALID_RECORD` with the offending bounded path; no last-write-wins behavior. |\n| `addMany([])` | No-op; unchanged revision and zero counts. |\n| `replace(record)` with existing ID | Complete replacement and one commit, including replacing with apparently identical data; `replaced: 1`. No equality heuristic is required. |\n| `replace(record)` with missing ID | `ID_NOT_FOUND`; no implicit upsert. |\n| `remove(id)` / `remove(ids)` | Remove existing selected IDs atomically; missing IDs have no effect. Duplicate requested IDs are `INVALID_OPTIONS`. |\n| Remove empty/all-missing IDs | No-op; unchanged revision and zero counts. |\n| `clear()` on nonempty state | Commit an empty core plus empty installed side-index/source roots; removed count is the previous document count. |\n| `clear()` on empty state | No-op. |\n\nMembership conflicts are evaluated against the execution-start root, not an earlier admission-time root. For example, two queued adds of the same absent ID do not both succeed: the first commits and the second rejects.\n\nNo-op calls still respect disposal, an already-observed abort, and deadline rules. They do not increment revisions or manufacture transaction callbacks with a false change. Calling replace with identical content deliberately commits because core-only mode does not retain authoritative original source for a universal deep-content equivalence test.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+      "text": {
+        "title": "Incremental staging",
+        "body": "\nFor one changed document:\n\n1. Read its old canonical metadata, reverse term frequencies, field lengths, and any installed participant records.\n2. Validate and analyze only the supplied new document values when adding/replacing. Removing a record needs no text analysis.\n3. Derive term-frequency, field-population, token-length, logical-input-size, and metadata deltas.\n4. Stage touched document, dictionary, posting, and participant buckets. Reuse unchanged roots/buckets; copy a touched bucket once per batch and account for every copied entry.\n5. Validate the proposed live-state totals against all caps and every affected invariant.\n6. Assemble a complete new root; run the final cancellation/deadline check.\n7. Publish that root and its new revision in one non-yielding step.\n\nThe implementation must not read/re-tokenize unrelated original records, regenerate every posting list, or rebuild the entire dictionary as its routine replace/remove strategy. It may copy affected shared buckets and traverse affected common-term data. Quantify that work rather than claiming constant-time mutation.\n\nReverse data is sufficient to subtract old postings/statistics even without retained source. A tokenless document still occupies one live ID and may have metadata. Empty field transitions adjust field-positive-document count correctly. Removing the last occurrence of a term removes that term's dictionary entry. Metadata-only changes do not retokenize other records.\n\nBatch staging coalesces touched buckets and publishes one revision. Do not transiently commit individual members, rely on a sequence of public add calls, or allow one add-on to publish before the core.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+      "text": {
+        "title": "Revisions and the commit boundary",
+        "body": "\nRevision is a nonnegative safe integer. Each state-changing operation increments it exactly once. No-op, rejected, cancelled-before-commit, and failed operations leave it unchanged. Before exceeding `Number.MAX_SAFE_INTEGER`, reject with `REVISION_EXHAUSTED`; never wrap or reuse revisions within a live instance.\n\nThe commit point is the assignment of a fully assembled root containing every installed participant root. No async callback, user code, throwing participant action, or yield may occur inside that publication step. Participants prepare data before publication; their committed state is selected by the root, not by post-commit notification callbacks.\n\nPrepare/finalize failures discard staging and retain the old root. Best-effort cleanup may release private temporary data, but cannot change the published state or replace the operation's original error with a cleanup error. A recoverable allocation failure before publication reports `RESOURCE_EXHAUSTED`; process-wide out-of-memory termination is not something a JavaScript library can promise to catch or roll back across restarts.\n\nThe operation's response contains the revision it actually read or committed. It must not obtain a newer revision later from mutable global state while constructing the response.\n\nRX-3002 snapshot export/restore uses a private optional-adapter operation on this same owner queue. Restore validates and stages a complete core plus every installed participant, then publishes exactly one next local revision. Source rebuild may consume separately bounded record batches, but its complete decode/rebuild/participant work shares one overall restore ceiling; resetting per-batch counters cannot bypass that ceiling or participant limits. Imported origin revisions are returned as metadata and never reset the existing owner. A failed/cancelled import preserves exact old root identity and all side-state revisions. The root public facade gains no snapshot/root/publication method.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+      "text": {
+        "title": "State transitions and cancellation",
+        "body": "\nConceptually an accepted call is `queued → running → completed/failed/cancelled`; a mutation additionally reaches `prepared → committed → completed`. These states are lifecycle facts, not mandatory public events.\n\n| Moment of cancellation/disposal | Search | Mutation |\n| --- | --- | --- |\n| Before admission / while queued | Reject and remove from queue. | Reject; nothing committed. |\n| During active resumable work | Reject at the next checkpoint. | Discard staging and reject at the next checkpoint. |\n| Final check before result/commit | Reject if cancellation is observed. | Reject if cancellation is observed; old root remains. |\n| After result has settled / after commit | A settled result is not revoked. | Committed result remains success; do not report rollback. |\n\nFor active operations, caller abort uses `CANCELLED`; disposal uses `DISPOSED`; deadline/work-budget failures use their dedicated codes. If multiple stop conditions are already visible at a checkpoint, choose `DISPOSED`, then caller `CANCELLED`, then `DEADLINE_EXCEEDED`, then `WORK_LIMIT_EXCEEDED`. Preserve the specific first error already recorded by the operation.\n\nAn operation performs a final check even when it consumed fewer than one full checkpoint quantum. Signals are cooperative requests, not interrupts that preempt JavaScript in the middle of a primitive or the root assignment.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+      "text": {
+        "title": "Work, deadline, and yield accounting",
+        "body": "\nThe initial maximums are 10,000,000 search work units, 50,000,000 mutation work units, and 2,048 units between owned-loop checkpoints. They are defensive budgets, not latency claims. Publish the accounting policy as `work-v1` so changes in implementation instrumentation cannot silently redefine a benchmark.\n\nAt minimum, charge:\n\n| Work | Unit accounting |\n| --- | --- |\n| Input/analyzer scan | One per original code point visited; separately charge normalized output code units. |\n| Dictionary enumeration/comparison | One per entry visited plus compared code units in owned string-comparison loops. |\n| Posting traversal / set membership | One per posting or candidate membership operation. |\n| Score/Boolean evaluation | One per evaluated node, selected field-term contribution, or union insertion. |\n| Staging/copying | One per copied directory/bucket entry or updated posting/statistical entry. |\n| Result selection | One per heap/selection comparison and copied returned hit. |\n| Add-on work | Charge its traversal/analysis/aggregation using the same operation budget; no hidden unmetered outer loop. |\n\nWhere a bounded platform primitive performs internal work (token normalization, Map lookup, structured clone, allocation), count its declared input size and record it separately during qualification. Unit counters do not make that primitive preemptible. Raw token and message bounds limit its input; actual scheduling/latency must be measured.\n\nLarge loops must resume from cursors. Use a bounded top-page selection strategy rather than relying on one uninterruptible full-candidate sort. Sorting a small explicitly bounded array may remain a bounded primitive and must be disclosed in execution evidence.\n\nCheck cancellation/deadline/work limits at phase boundaries, no later than the configured owned-work quantum, and immediately before success/commit. A deadline is observed using a monotonic host clock. `deadlineMs` defaults to `min(30,000, maxDeadlineMs)`, is an integer at least one, and cannot exceed the configured maximum, whose hard cap is 60,000. A timeout includes queue time.\n\nDirect mode must yield to a host task opportunity, not only an indefinitely chained resolved-Promise microtask. Use a host scheduling primitive appropriate to the environment with a fallback such as `setTimeout`; no DOM is required. Tests may inject a private deterministic clock/scheduler seam. Runtime users do not receive an arbitrary scheduler capable of changing query semantics.\n\nThe host may delay task execution, garbage collection, or timer delivery. Therefore the API promises cooperative checks and typed observed outcomes, not hard real-time cancellation or a guaranteed maximum physical latency.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+      "text": {
+        "title": "Disposal",
+        "body": "\n`dispose()` immediately marks the instance closing, rejects queued operations with `DISPOSED`, requests cancellation of an active precommit operation, and prevents further admission. It returns a promise that resolves when active work has reached a safe terminal state and owned roots/temporary data/listeners have been released.\n\nCalling dispose repeatedly is safe and returns the same eventual outcome; disposal of an already disposed instance resolves. An operation that committed before disposal began retains its successful mutation outcome. No new commit can occur after closing is observed by the final precommit check.\n\nDisposal unregisters signal listeners and queue timers and leaves no scheduled work that can publish a root or resolve a previously rejected call. It does not erase an external database; erasure is an explicit storage-adapter operation. A worker adapter terminates only workers it owns, according to its documented ownership option.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+        "category": "spec"
+      }
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+      "text": {
+        "title": "Product boundary",
+        "body": "\nThe mandatory core includes schema/record/query validation, opaque IDs, the basic analyzer, field statistics, dictionary/postings, exact and bounded prefix groups, Boolean queries, scalar equality, deterministic ranking, exact totals, atomic incremental mutations, cancellation checkpoints, and typed failures.\n\nThe core does not import a DOM, create workers, open databases, retain original text by default, parse documents, send telemetry, access a network, or read application files. It does not perform fuzzy, vector, semantic, synonym, phrase, proximity, or language-specific search without a corresponding explicit capability.\n\nMetadata needed for declared core equality predicates is part of the index state. Display records and arbitrary application properties are not automatically retained. The caller may keep an ID-to-display-record map; a transactional source participant is available when a selected add-on requires original text.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+      "text": {
+        "title": "State model",
+        "body": "\nA published root contains its revision, live ID directory, canonical metadata, per-document reverse term frequencies and field lengths, field statistics, dictionary/postings directories, and the roots of installed transaction participants. Consumers never receive mutable references to this state.\n\nUse bounded bucketed copy-on-write directories for the first implementation:\n\n- A fixed directory points to lazily allocated buckets. Only touched buckets are copied into a staging root.\n- A document's reverse record identifies the old terms/frequencies needed to remove its contributions.\n- Posting data for a common term is also bucketed by document identity, so changing one document need not copy one complete common-term posting list.\n- Stage caches ensure a bucket touched multiple times by one batch is copied only once.\n- Field counts and total token lengths change by deltas. Empty terms and empty posting buckets are removed.\n- Do not invoke `new Map(largeMap)` or another uninterruptible whole-directory copy as a substitute for resumable staging. Bucket-copy work is counted and may yield.\n\nThe initial implementation may enumerate the bounded live dictionary for prefix lookup. It must charge visited terms, collect all qualifying expansions up to the declared cap, and fail on cap overflow. A trie, compressed postings, cached query results, and specialized range indexes are optional later optimizations justified by evidence. None is needed to prove exact native retrieval.\n\nThe number of buckets and hash layout are private format details selected during RX-1002/RX-1004. Collision cases must remain correct and bounded by admission/work limits; average bucket size is not a worst-case guarantee. A native snapshot codec must version these details if it serializes them.\n\nRX-1002 implements initial frequency-only construction with 256 logical slots per directory. Slot pointers and prototype-safe key buckets are allocated lazily; a private FNV-1a hash over original UTF-16 key units chooses the slot. Completed directories/buckets and all root records are frozen. Reverse field data stores aggregate frequencies/lengths across values and intentionally retains no per-value positions or original source. RX-1004 `DirectoryStage` now copies occupied slot pointers resumably and copies each touched key bucket once per transaction. Per-field term caches coalesce posting/statistical updates across a batch; empty terms/buckets disappear and unchanged roots/buckets remain shared. `MutationOwner` prepares core plus trusted participant roots, checks cancellation immediately before a single root assignment, and returns that committed revision. Replacement measurements at 100/1,000/10,000 records show one actual analyzed record/three values with counted directory/bucket copies and updates; these are partial logical allocation counts, not heap or latency measurements. RX-1005 implements bounded FIFO/promise execution, admission deadlines, cancellation and disposal; RX-2001 now implements direct source/leaf-refinement registration, while RX-1006 qualifies the root package and a seven-method facade. Construction accepts separately bounded captured batches and exposes no root until its final cursor completes. Its per-batch/finalization work guards are internal phase guards; ordinary operations now thread one work budget through their mutation/query cursor phases. Native key enumeration/freezing remains indivisible, and a collision bucket can contain the admitted corpus; no constant-time or interruption-latency guarantee is implied.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+      "text": {
+        "title": "Query execution pipeline",
+        "body": "\n1. Validate and own the query; reject unsupported capabilities before execution.\n2. Analyze raw lexical inputs using the index's analyzer configuration/profile.\n3. Canonicalize Boolean/groups without changing semantics; enumerate exact/prefix terms with explicit limits.\n4. Retrieve candidate sets and evaluate the complete Boolean tree, including installed leaf refinements.\n5. Evaluate all membership needed for the exact total and requested aggregation.\n6. Score qualifying documents from the same revision and select the requested page using the specified tie-breaker.\n7. Return owned data. Collect explanation facts only when explicitly requested.\n\nA selective filter or result limit may improve execution only when the optimization preserves all requested membership, scoring, totals, and facets. Phrase verification cannot run only after top-k selection. A verifier for a phrase leaf cannot globally discard documents that qualified through another OR branch.\n\nRX-1003 implements this core query pipeline as one internally consumed generator and one work-v1 budget. Canonical lexical keys contain sorted fields and deduplicated sorted normalized term/mode/weight tuples; Boolean structure preserves negative/scoring participation. Whole-query expansion counts union distinct field/term pairs across groups. Complete group posting membership is followed by evaluation of every live document, then field/group-ordered scoring. A worst-first heap retains at most offset + limit entries and uses charged resumable comparisons; no full candidate sort is required. Query-local memberships, canonical trees and page candidates are temporary operation data, not retained side indexes. Private selected-ID tracing records evaluator paths and actual scorer intermediates, including off-page/nonqualifying IDs, and caps the complete header/facts at 4,096. RX-1005 captures queries separately from execution-start root selection and wraps this cursor in ordinary scheduled promises with cooperative cancellation/deadlines. RX-2004 exposes this selected trace through optional direct evidence registration and bounded owned diagnostics; no public engine method is added.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+      "text": {
+        "title": "Analyzer/environment boundary",
+        "body": "\n`basic-v1` uses ECMAScript Unicode property recognition, `String.prototype.normalize('NFKC')`, and default `toLowerCase()` on bounded original token spans. It does not pin a private Unicode database or use locale-specific casing. Its exact algorithm and edge cases are in [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md).\n\nThe logical algorithm ID does not prove Unicode table equivalence across host versions. Indexing and querying run in the same owner with the same configuration. A worker handshake requires matching implementation/configuration and analyzer qualification profiles. Qualification fixtures record the actual engine/runtime/browser versions.\n\nAn unqualified default environment can run local core search, but cannot claim portable native-state restore. Such state is treated as profile-unqualified by the snapshot adapter. Rebuilding a source snapshot under the receiving analyzer is an explicit reindex, and may produce changed matches or scores. A profile-mismatched native snapshot must be rejected, not relabeled. A small probe set is useful diagnostics and does not prove complete Unicode equivalence.\n\nThis choice keeps a generated Unicode database and its licensing/build machinery out of RX-1001. If later cross-runtime requirements justify a pinned analyzer, it is a separately versioned analyzer decision with its code, data, licensing, and size costs measured.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+      "text": {
+        "title": "Registration and effect contracts",
+        "body": "\n`createRaveldex({ schema, analyzer?, limits?, addons? })` accepts an explicit ordered list of trusted capability registrations. The owner validates the complete set before creating an engine: duplicate IDs, missing requirements, conflicting providers, incompatible versions, dependency cycles, and incompatible execution support reject creation. Input list order cannot change semantics; validated dependency order governs preparation only.\n\nEach registration has a data manifest and implementation handles conforming to its declared role. Required manifest fields:\n\n| Field | Contract |\n| --- | --- |\n| `id`, `version` | Stable capability identity and SemVer package/module version; no anonymous registration. |\n| `contractVersion` | Exact supported capability protocol version, initially 1. |\n| `roles` | Selected roles from analyzer, term expansion, leaf refinement, aggregation, evidence, transaction participant, and host adapter. |\n| `provides`, `requires` | Named capabilities and compatible contract versions; requirements resolved before use. |\n| `dataRequirements` | Selected fields and required source/positions/offsets/metadata; no hidden retention. |\n| `indexEffect` | `none` or a declared transactional side representation/analyzer change. |\n| `rebuildPolicy` | Whether creation requires an empty/new index or an explicit rebuild; never a silent live upgrade. |\n| `execution` | Direct/worker support and worker registration identity; no serializing functions as strings. |\n| `limits` | Finite payload, work, retained-entry, and output caps applied with the core's stricter bounds. |\n| `costs` | Imported code, retained representation, transient work, and external resource/network behavior. |\n| `codec` | State format/version when its side representation can be snapshotted; absent otherwise. |\n\nThe implementation handles have narrow interfaces:\n\n- **Analyzer:** bounded resumable analysis from original values into terms/positions/original ranges, with an explicit compatibility identity. It is not enabled by merely importing a package.\n- **Term expansion:** returns weighted alternatives inside an existing original group. It cannot change the outer required-group Boolean relation or bypass expansion/work limits.\n- **Leaf refinement:** receives a conservative candidate membership for its own AST leaf and a read-only view at one revision. It may remove ineligible candidates for that leaf, not globally filter a different successful OR branch or rewrite score facts.\n- **Aggregation:** consumes complete qualifying membership before pagination and returns bounded data; it cannot add/remove matches or modify scores.\n- **Evidence:** produces bounded presentation/diagnostic data without changing search eligibility. If its requested exact data cannot be produced, the requested operation fails or returns an explicitly specified unavailable evidence state; it never fabricates source ranges.\n- **Transaction participant:** prepares a private side root using owned changed inputs and its previous root. It returns that root before publication. Root selection at core commit makes the side state current; no throwing after-commit callback is permitted.\n- **Host adapter:** provides validated transport, persistence, or application integration around public engine behavior, without changing the model or query.\n\nTrusted add-on code is not sandboxed. Work accounting and manifest checks constrain supported implementations; they do not make arbitrary hostile callbacks safe. Do not expose unrestricted `beforeSearch`/`afterSearch` hooks or arbitrary predicate functions in query data.\n\n### Query and result extensions\n\nAn extended leaf is `{ kind: 'extension', capability, version: 1, payload }`. Core validates the envelope and the installed handler validates the entire bounded payload. For example, the phrase capability payload contains `{ text, fields? }` with the meaning below.\n\nSearch options may contain `extensions: { [capabilityId]: payload }` for aggregations/evidence. Returned additional data appears only under the corresponding result `extensions` key; it cannot replace core hits, total, revision, or completeness. Unknown capability IDs or missing handlers fail explicitly. Ordinary queries with no extension requests remain ordinary core queries.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+      "text": {
+        "title": "Strict phrase capability",
+        "body": "\nPrimary task RX-2001; positional strategy RX-2002.\n\nA phrase is an ordered sequence of analyzed tokens occurring at adjacent token positions in one original value of one selected field. Analyze phrase input with exactly the index analyzer/configuration. Retain repeated terms and their order. Raw punctuation is not literal: `red—blue` and `red blue` have the same token adjacency under `basic-v1`. A phrase cannot cross fields or two array values, even adjacent values of the same field.\n\nv1 accepts exact phrase terms only: no prefix/fuzzy terms, slop, stop-word graphs, multiword synonym graph, or hidden phrase bonus. Empty analyzed phrase input is a nonmatching leaf. A one-token phrase has ordinary token membership but still uses a valid installed phrase capability. Maximum phrase length is 32 analyzed tokens, within the core's shared query limits.\n\nThe phrase leaf first obtains a complete lexical candidate superset from its required token groups. It then verifies that leaf's strict adjacency. Repeated tokens may share a deduplicated scoring group while still requiring distinct consecutive occurrences for membership. When a phrase qualifies, only its defined lexical groups contribute ordinary native scores; installing a positional strategy cannot change those scores.\n\n### Two conforming strategies\n\n| Strategy | Required data | Required behavior |\n| --- | --- | --- |\n| Source | Complete immutable original field values at the operation revision. | Reanalyze candidates and establish adjacent token occurrence; scan enough source to establish the exact leaf membership/total. |\n| Positions | `(document, field, valueIndex, term, position)` side entries at the same revision. | Intersect term occurrences with the required offsets, correctly handling repeats and value boundaries. |\n\nAt construction, phrase configuration declares a strategy/provider for every enabled field. A query-selected field with no valid provider is `MISSING_CAPABILITY`, even if another selected field has data. It cannot be silently excluded. A consumer can explicitly select different strategies for different fields. Installing positions later requires an explicit new index/rebuild; it is not an automatic search-time mutation.\n\nThe initial first-party source provider participates in the engine transaction and captures originals from the accepted record inputs. An arbitrary mutable external fetch/map is not an authoritative eligibility provider merely because it returns a claimed revision. Later external providers require a reviewed consistency protocol. Offsets-only data cannot substitute for missing source when a source strategy was requested.\n\nPhrase work is charged to the search budget. If complete verification cannot finish within a selected budget, return a typed failure; never verify only the first top-k lexical candidates or report an estimated total as exact.\n\nBefore reusing companion phrase code in RX-2001, record the actual source repository/commit/license, inspect coupling, and add native contract tests. Do not postpone that provenance check until N3. Old passing phrase tests are not native parity evidence.\n\n### Implemented source protocol and costs — RX-2001\n\nPublic `/addons/phrases` exports `createSourceProvider({ fields, id?, maxRetainedEntries?, maxWorkUnits? })` and `createSourcePhrases({ fields, id?, maxWorkUnits? })`; `/addons/phrases/source` exports only the source factory. Options are owned/frozen. Default registration IDs are `source` and `source-phrases`, providing `source:<field>` and `phrases` with contract version 1. No implicit installation, source getter or live registration/rebuild API exists.\n\nImplemented manifest role names are `transaction-participant`, `leaf-refinement`, (RX-2003) `aggregation` and (RX-2004) `evidence`. Unsupported roles/execution fail `INCOMPATIBLE_CAPABILITY`; direct execution is supported and RX-3001 adds explicit worker registration identities for first-party capabilities. Complete bounded manifests/handles are captured before initialization; dependency order is deterministic and independent of input order. Missing requirements fail `MISSING_CAPABILITY`; duplicate IDs, conflicting providers, cycles, incompatible versions/data/handles fail `INCOMPATIBLE_CAPABILITY`. SemVer module identity is validated; compatibility resolution uses exact protocol versions, not package-version ranges. Arbitrary trusted implementations are not sandboxed.\n\nThe initial refinement handle is `exact-token-sequence`. Core validates/owns the whole `{ text, fields? }` payload, counts text plus selected-field strings within payload/global bounds, analyzes it once with `basic-v1`, and passes the ordered normalized terms including repeats. Complete lexical groups do not reanalyze normalized output. Phrase preparation validates every selected field/provider/revision/analyzer, even for empty/unmatched phrases. A missing field on an accepted record is an ordinary nonmatch; a missing authoritative candidate record is a typed consistency failure. RX-2003 now supports requested metadata aggregations; RX-2004 implements selected factual evidence; other unsupported roles fail explicitly.\n\nSource state has one immutable revision/analyzer header and a sparse copy-on-write ID directory containing only selected original field/value arrays. It retains no metadata, tokens, positions, offsets or core roots. Preparation receives owned changed records, actual removal IDs and revisions; source/core publish together. No-ops skip preparation; clear removes source records; disposal releases the owned root. Unchanged immutable buckets may be shared with previous snapshots. Physical heap reclamation is not measured.\n\nA logical entry is one record, one present selected field or one original value. Default entry cap is `maxDocuments × (1 + enabledFields × (1 + maxTextValuesPerField))`, narrowed by configured core limits and an optional smaller provider cap. Logical text is bounded by `maxCorpusTextCodeUnits`. Default source prepare/phrase work caps are 50,000,000/10,000,000 work-v1 units. A phrase registration cap aggregates all its preparation/scans across every leaf in one search; the source cap covers its transaction preparation. Shared core budgets/checkpoints/deadlines remain stricter. Query token/group limits also apply before deduplication. Exhaustion rejects the whole operation, with no partial total.\n\nStreaming native reanalysis and a prefix table of at most 32 entries verify repeated-term overlap. Comparisons/scans are charged and resumable; every value resets matching. Verification can stop when one document's membership is established; every lexical candidate is considered before totals/page selection. The source utility excludes the verifier. The RX-2001 snapshot measured complete minified/gzip graphs: core 49,102/15,131 bytes, source utility 10,436/3,544 and core plus phrases 57,713/17,371, using pinned esbuild 0.28.2 and gzip level 9. Graphs overlap and are not additive costs. Core's 30 inputs exclude optional code. [Raw package/work evidence](../evidence/RX-2001.md) distinguishes logical counters from heap/latency claims.\n\nBefore adaptation, the actual companion was audited: `vmitsaras/LocalSearch`, clean commit `5f334a8ca4f7d9d95b6b731ac539f4b1dda302cb`, MIT © 2026 Vasileios Mitsaras, especially `src/evidence/source.ts:16–55`. Only the conceptual per-value adjacency approach is adapted; no source is copied/imported. Companion NFC differs from native NFKC despite the shared historical `basic-v1` label. Its global phrase mode, mandatory source, whole-state rebuild and snippet coupling are not reused; old tests are not native evidence.\n\n### Implemented positions and mixed strategies — RX-2002\n\nPublic `/addons/positions` exports only `createPositionProvider({ fields, offsets?, id?, maxRetainedEntries?, maxWorkUnits? })`. `offsets` is an independently selected subset of position fields, default `[]`; it never requests source retention. `/addons/phrases/positions` exports `createPositionPhrases({ fields, id?, maxWorkUnits? })`. `/addons/phrases/mixed` exports `createPhrases({ fields: { title: 'source', body: 'positions' }, id?, maxWorkUnits? })`. Default IDs are `positions`, `position-phrases`, and `mixed-phrases`. Options and selected strategies are captured/frozen. Position utilities exclude verifier imports; positional phrases exclude source storage/reanalysis; legacy source phrases exclude positions. Core imports no optional module.\n\nThe provider supplies `positions:<field>` for every selected field and `offsets:<field>` only for fields explicitly requesting spans, all at protocol version 1. The position/mixed leaf supplies `phrases` and declares the exact per-field requirements. Only one registration may provide `phrases`. Complete registration validation requires an appropriate declared transactional source/position provider for every enabled consumer field. A configured field cannot silently switch strategies, fall back, or omit missing data. Headers are checked even when the phrase is empty or has no lexical candidates; every authoritative selected candidate/provider is checked even after another field matches. Missing record fields remain ordinary nonmatches.\n\nThe private position root retains its revision, basic-v1 analyzer/profile, narrowed limits, selected position/offset fields, immutable copy-on-write ID directory and logical counters. Each record holds only selected field arrays, one element per original value. Each value records token count and a null-prototype map from normalized terms to sorted occurrences `{ position, positionLength: 1 }`, with `{ start, end }` only in offset-selected fields. Value index is the array coordinate. There are no original strings, metadata, normalized-to-source inferred ranges or mandatory offset arrays. Position length 1 describes basic-v1's single emitted token at each ordinal; it establishes no multiword synonym graph, holes, slop or proximity behavior.\n\nPreparation analyzes only changed selected original values with the existing native analyzer, builds frozen occurrences under the shared mutation budget, subtracts old record counters and copies only touched ID buckets. Added/replaced/removed records, late validation/participant failures, cancellation, clear and disposal use the existing one-revision transaction. No-ops skip participant work. Previous immutable roots remain valid. Installing later still requires a new index; there is no live migration API.\n\nLogical entries count one record, present selected field, original value, distinct term, occurrence, and two coordinates per retained span. The default maximum is `maxDocuments × (1 + positionFields × (1 + maxTextValuesPerField)) + maxCorpusTokens × (offsetFields.length ? 4 : 2)`, narrowed by core limits and an optional smaller provider cap. Occurrences are separately bounded by `maxCorpusTokens`, term code units by `maxCorpusTokens × maxTermCodeUnits`, and record analysis by `maxTokensPerRecord`. Limits count logical structures, not heap bytes. Provider/query work defaults remain 50,000,000/10,000,000 work-v1 units, with the shared core budgets/deadlines stricter. Query work caps aggregate every leaf of one registration.\n\nPositional verification intersects sorted occurrences at each ordered query offset within one value. Repeated terms reuse occurrence lists with distinct offsets; normalized query output is never reanalyzed. It checks all complete lexical candidates before pagination, and the successful canonical groups retain identical native BM25 and Boolean participation. Offsets are validated when retained but do not enable or modify phrase eligibility. The mixed strategy dispatches each field to its explicit source/position verifier under the same global and registration budget. [RX-2002 evidence](../evidence/RX-2002.md) records independent source parity, original spans, atomic lifecycle, full packed graphs and 100/1,000/10,000-record logical costs; host/heap/physical-latency qualification remains separate.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+      "text": {
+        "title": "Snapshots and IndexedDB",
+        "body": "\nPrimary tasks RX-3002 and RX-3003.\n\nKeep two named codecs:\n\n- **Source snapshot:** canonical IDs/metadata and complete original values for every indexed field, plus origin metadata. Restoring rebuilds using the receiving analyzer. It requires a source provider with every indexed original field; partial retained source cannot be advertised as a complete portable snapshot.\n- **Native-state snapshot:** dictionary/postings/reverse/statistical/side data plus schema, model, analyzer-environment compatibility, limits, and codec manifests. Restore requires a qualified matching profile; unqualified or mismatched native data is rejected. An opaque foreign-engine index is never native state.\n\nBoth validate shape, safe integer/count/range invariants, resource bounds, compatibility, and payload integrity before publication. A checksum detects accidental damage and is not proof that hostile input is trustworthy. Initial encoded snapshot cap: 64 MiB. This can be narrower than the largest admitted live collection; report oversize explicitly and do not claim every possible indexed corpus can be snapshotted under that cap.\n\nImport is atomic. On an existing engine, a successful import creates its next local revision, rather than resetting/reusing the snapshot's origin revision. Failure leaves current state intact. Source rebuild explicitly reports the receiving profile and does not promise old scores/membership after an analyzer change. Missing providers, unknown codecs, or invalid side-state references fail; no silent field omission or partial restore.\n\n### Implemented snapshot adapter boundary (RX-3002)\n\nThe explicit `/adapters/snapshots` entry supplies `createSnapshots(engine, { maxEncodedBytes? })`, `createSnapshotRaveldex(configuration, { nativeQualification })`, `currentNodeSnapshotEnvironment`, and typed snapshot reasons. The ordinary root facade remains its seven methods. An adapter attaches only to a native direct owner identity; copied, foreign, and worker facades cannot expose private roots through this entry. Export/restore operations enter that owner's ordinary admission/FIFO/stop lifecycle and select the execution-start revision.\n\nSource and native JSON formats have independent names and versioned schema/analyzer/ranking/implementation/capability/limit/index-detail headers. First-party source and positions declare their side-codec identities; unknown participating codecs fail explicitly. Native decoding validates dictionaries, hash directories, reverse frequencies, postings, statistics and chosen side-state references, rather than accepting a checksum as validity. Source decoding reconstructs canonical records and rebuilds every installed participant under the receiving analyzer. All staging stays private until one next-local-revision publication; snapshot origin revisions remain metadata.\n\nDefault `basic-v1` remains `unqualified`. The optional qualified factory creates its actual immutable owner descriptor from revision 0. Its `nativeQualification` is a trusted application declaration with a profile ID, exact Node/V8/ICU/Unicode/platform/architecture record, and bounded durable evidence references. The adapter independently reads and matches the actual runtime. References do not execute tests or establish project qualification merely by existing. Native restore requires the same complete declaration and runtime, while source restore explicitly reindexes across receiving profile identities. This initial path supports exact declared Node environments only; it does not qualify browser/worker or cross-host native portability.\n\nEncoding and decoding use bounded resumable owned loops, including UTF-8 envelope-size checks and a noncryptographic accidental-damage checksum. The 64 MiB ceiling counts JSON escaping and all headers, so it can reject a live corpus whose logical text fits core limits. The complete operation shares the mutation work ceiling, deadline and signal; synchronous bounded platform operations remain disclosed separately from cooperative loops. Encoded size and logical work/structure counts are distinct from observed process memory and true peak/retained component bytes. Without original source, native validation proves structural frequency/ordinal/range bounds and coherence, but cannot authenticate token provenance or original surrogate boundaries for a structurally possible altered span. Retained-source fields are checked against actual original reanalysis; the checksum is not authentication.\n\nIndexedDB is an optional adapter around validated snapshots and explicit save/load/erase. Database/namespace ownership is explicit; no background network sync or silent persistence. Save/load conflict handling must not overwrite a newer committed generation silently. Recovery distinguishes missing data, incompatible data, corruption, quota, permissions, and unavailable storage.\n\nErase affects only the selected namespace and all of its owned records/artifacts. It includes source data and side representations. Disposal alone is not erasure. Define and test interrupted writes/recovery and namespace isolation using the actual adapter, without treating serialized size as retained memory.\n\n### IndexedDB adapter contract (RX-3003)\n\nThe optional public entry is `/adapters/indexeddb`: `createIndexedDBPersistence(snapshotHandle, options)`, `IndexedDBAdapterError`, fixed error codes and readonly types. Its frozen handle supplies `save`, `load`, `erase` and `dispose`; a snapshot handle is an explicit trusted application dependency created by the direct or worker snapshot API, not a sandbox for arbitrary callbacks. Database/namespace names are bounded to 256 well-formed UTF-16 units without control characters. Defaults are 5,000 ms for open and 30,000 ms for a complete action including queue time; selectable ceilings are 30,000 and 60,000 ms. At most 64 actions are pending. Save/erase return `durable: true` only for observed transaction completion; load returns `missing` or `restored` with the chosen generation and actual restore result. Unknown restore errors preserve the selected token and, when available, the bridge operation ID.\n\nStorage-v1 retains the exact canonical format/version prefix emitted by the chosen snapshot codec. Metadata format and snapshot prefix must agree; arbitrary reformatting of the storage artifact is refused, while portable snapshot decoding alone retains its general JSON contract. Complete UTF-8 size checks run outside active database transactions, yield every 16,384 code units (allowing one paired-surrogate boundary), and count a maximum 64 MiB envelope. Codec work keeps its own unchanged complete owner budget. Storage scanning has a separate fixed size/deadline bound. Browser structured cloning and transaction primitives are not isolated heap or physical latency measurements.\n\nPersistence is selected explicitly around a snapshot handle, with an application-owned database name and namespace. Constructing or importing the adapter does not open storage, initialize an engine, save in the background, or request persistent-storage permissions. The ordinary core facade has no storage methods. The application can continue using its in-memory engine when storage is unavailable; there is no success-returning memory substitute for a failed durable action.\n\nThe initial dedicated database schema is version 1 with separate `snapshots` and `metadata` stores keyed by namespace. Each committed snapshot has a fresh opaque generation token. Save and erase require an explicit expected token, or `null` for an absent namespace. Comparison and both store writes/deletions occur in one read/write transaction. A stale token rejects rather than overwriting a newer generation. Fresh tokens distinguish erase/recreate from an old saved generation without retaining an erasure tombstone. Erase removes both namespace records; other namespaces remain intact. If corrupt/orphaned metadata has no valid generation token, an explicit erase with `null` is the recovery route; an existing valid token still requires an exact match. It establishes absence at its commit point, not a prohibition on later explicit saves by another client.\n\nSerialization, in-memory engine changes and IndexedDB completion are separate outcomes. Save serializes one owner revision and publishes only its storage transaction; it does not claim that the engine and database committed together. Request success is insufficient: save/erase report committed success only from transaction completion. Write transactions request the `strict` durability hint. Completion is an observed IndexedDB commit, not a tested guarantee against physical power loss or browser eviction. These boundaries follow the [IndexedDB transaction lifecycle](https://w3c.github.io/IndexedDB/#transaction-lifecycle) and [commit algorithm](https://w3c.github.io/IndexedDB/#commit-a-transaction).\n\nLoad selects coherent snapshot/metadata records in one readonly transaction, closes that transaction, then uses the receiving snapshot adapter's complete validated atomic restore. Its generation identifies the selected stored snapshot. Another client may save while restore runs; the returned token is not a lease or assurance of the current head. A later save with an outdated token rejects. Missing data leaves the current engine unchanged. Corrupted or incompatible data is reported explicitly and retained for an application decision; it never triggers silent overwrite, automatic erase or partial source/participant recovery.\n\nOpening a new database creates only the documented initial schema. Existing incompatible store/version layouts fail explicitly; no destructive migration or automatic upgrade of foreign data occurs. A blocked open has a bounded failure path, and a late opened connection is closed even after its caller settles. Version-change notifications close owned connections so other tabs can upgrade; pending operations settle honestly. Quota, permission, transaction failure, cancellation, deadlines and disposal remain distinct from observed committed success. Disposal releases this adapter's connections/listeners/tasks without disposing the borrowed engine or erasing stored data.\n\nBrowser recovery uses source snapshots through a direct snapshot handle or an explicitly installed optional source-snapshot worker bridge. The bridge uses the worker's same complete owner and bounded transport; it does not qualify browser native snapshots. A dispatched restore with a lost reply reports an unknown engine outcome and exposes its operation identity for explicit reconciliation. Transport loss cannot prove rollback, and no restore is retried automatically. Storage transactions remain on the selected IndexedDB adapter host; using a worker engine does not silently move database ownership.\n\n"
+      },
+      "metadata": {
+        "sourcePath": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+        "category": "architecture"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#public-api-contract",
+      "title": "Public API contract",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "public-api-contract",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#public-api-contract",
+      "startLine": 28,
+      "endLine": 48,
+      "contentHash": "2f3691f6bba56d9cffd0debe1f081c45b7ec46934ea933916fcbf8ef24eaad39"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#schema",
+      "title": "Schema",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "schema",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#schema",
+      "startLine": 51,
+      "endLine": 74,
+      "contentHash": "edfcfc0b71634ebe442f2a21372df56c1bd2bb8566987584616fb32f25b80d82"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#record",
+      "title": "Record",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "record",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#record",
+      "startLine": 75,
+      "endLine": 101,
+      "contentHash": "f0e7ee4f33662ed789132965e2e253b0ccd391cb9067edd0b2d795d6e2ae75cf"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+      "title": "Ownership and retention",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "ownership-and-retention",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#ownership-and-retention",
+      "startLine": 102,
+      "endLine": 107,
+      "contentHash": "b3ee0570b8413345b0efcc0994fd051c6afad983a01e7204ba40daad8028b656"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#normative-algorithm",
+      "title": "Normative algorithm",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "normative-algorithm",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#normative-algorithm",
+      "startLine": 110,
+      "endLine": 122,
+      "contentHash": "d7325441d1129fbd2946b057bfd5d7d127c81157c21c506e149093fcd86657d0"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+      "title": "Examples and intentional limits",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "examples-and-intentional-limits",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#examples-and-intentional-limits",
+      "startLine": 123,
+      "endLine": 139,
+      "contentHash": "a10c6b6527bf7fe04963529d7820ac920d022c7685a99614e562b0907e937505"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#source-mapping",
+      "title": "Source mapping",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "source-mapping",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#source-mapping",
+      "startLine": 140,
+      "endLine": 145,
+      "contentHash": "1f058ed43158b31fe0154a83db119aa0d66955c2d7f49de275505d43e8120183"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#environment-compatibility",
+      "title": "Environment compatibility",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "environment-compatibility",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#environment-compatibility",
+      "startLine": 146,
+      "endLine": 155,
+      "contentHash": "dc29c5470bdf2dc4e86273afb4f16ac51c348e6c87a8653dc944bb2c9300de41"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#core-nodes",
+      "title": "Core nodes",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "core-nodes",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#core-nodes",
+      "startLine": 160,
+      "endLine": 182,
+      "contentHash": "eff129ca1cb63c22fd00a81f75d005d3facab46a601c498b3fca829bf98f5686"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+      "title": "Boolean groups and repeated terms",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "boolean-groups-and-repeated-terms",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#boolean-groups-and-repeated-terms",
+      "startLine": 183,
+      "endLine": 192,
+      "contentHash": "e61b44a7b29470bd57120cc8526e61eee8f91867b664d0faedfe8e32b9b878b4"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+      "title": "Exact and prefix terms",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "exact-and-prefix-terms",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#exact-and-prefix-terms",
+      "startLine": 193,
+      "endLine": 200,
+      "contentHash": "11c31b03f18fb6ad07f342da4991439d61e049effede09a79c2924efd0c778eb"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#scalar-equality",
+      "title": "Scalar equality",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "scalar-equality",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#scalar-equality",
+      "startLine": 201,
+      "endLine": 213,
+      "contentHash": "2b83fe18f5c15d2f443c96ffca150501d010a033a0c03ef8bc62fb7f5a165b8b"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#results-and-errors",
+      "title": "Results and errors",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "results-and-errors",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#results-and-errors",
+      "startLine": 214,
+      "endLine": 252,
+      "contentHash": "5338d9f8305349b67fe1cb7f5cf65144f02abfd326570f1d3ebebd25bf86a46f"
+    },
+    {
+      "id": "doc:docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+      "title": "Finite initial limits",
+      "sourcePath": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "anchor": "finite-initial-limits",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md#finite-initial-limits",
+      "startLine": 253,
+      "endLine": 291,
+      "contentHash": "e13350af39d8c77371f72e1ffedb6c741f39bad42bd8d2cb25c6dd5e03d03fd3"
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#statistics-from-one-revision",
+      "title": "Statistics from one revision",
+      "sourcePath": "docs/specs/RANKING.md",
+      "category": "spec",
+      "anchor": "statistics-from-one-revision",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#statistics-from-one-revision",
+      "startLine": 23,
+      "endLine": 40,
+      "contentHash": "178651dec7f5e876be22e2ae0b12050f7c41b05d1528c10abaa44eb4a6b9935f"
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#term-contribution",
+      "title": "Term contribution",
+      "sourcePath": "docs/specs/RANKING.md",
+      "category": "spec",
+      "anchor": "term-contribution",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#term-contribution",
+      "startLine": 41,
+      "endLine": 60,
+      "contentHash": "aee9f22e58ee06fab4a85db9a7adbaa966ee102b8412f477e88e930ab9b9e5f2"
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#original-groups-and-alternatives",
+      "title": "Original groups and alternatives",
+      "sourcePath": "docs/specs/RANKING.md",
+      "category": "spec",
+      "anchor": "original-groups-and-alternatives",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#original-groups-and-alternatives",
+      "startLine": 61,
+      "endLine": 79,
+      "contentHash": "2efe76a4a7c2cb127adea655f52efc09dfc4fe7ef9859c943932ac0a3c6bef01"
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+      "title": "Boolean qualification and score participation",
+      "sourcePath": "docs/specs/RANKING.md",
+      "category": "spec",
+      "anchor": "boolean-qualification-and-score-participation",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#boolean-qualification-and-score-participation",
+      "startLine": 80,
+      "endLine": 104,
+      "contentHash": "37b8fda073c42ee0f082d497010187ec1cf89f83fed1b9bdc029116886b1edd1"
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+      "title": "Deterministic accumulation and ordering",
+      "sourcePath": "docs/specs/RANKING.md",
+      "category": "spec",
+      "anchor": "deterministic-accumulation-and-ordering",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#deterministic-accumulation-and-ordering",
+      "startLine": 105,
+      "endLine": 112,
+      "contentHash": "8c5ce5d95e2d838be34cb6a7b2d6b1a7b078221003eaeb492650734bbc0eaa07"
+    },
+    {
+      "id": "doc:docs/specs/RANKING.md#explanation-facts",
+      "title": "Explanation facts",
+      "sourcePath": "docs/specs/RANKING.md",
+      "category": "spec",
+      "anchor": "explanation-facts",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md#explanation-facts",
+      "startLine": 136,
+      "endLine": 152,
+      "contentHash": "901c21a29a748ec85af887fd6de61bcbfabc7c64372b7dae2d980d98c2284368"
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+      "title": "Admission and concurrent calls",
+      "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "anchor": "admission-and-concurrent-calls",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#admission-and-concurrent-calls",
+      "startLine": 26,
+      "endLine": 41,
+      "contentHash": "b402df1841c6a3017ca38ff23267d1c0ec7cb02e5f034b7425a2496d86451639"
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+      "title": "Mutation behavior",
+      "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "anchor": "mutation-behavior",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#mutation-behavior",
+      "startLine": 42,
+      "endLine": 63,
+      "contentHash": "a275aca84bc7bc82e92422bb2214b1fde851ea1144dea5f2253f6fb103d09e52"
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+      "title": "Incremental staging",
+      "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "anchor": "incremental-staging",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#incremental-staging",
+      "startLine": 64,
+      "endLine": 81,
+      "contentHash": "8ac0ad67d21201559096c155ee357159f7f014cae502f69f24cd231bbe500155"
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+      "title": "Revisions and the commit boundary",
+      "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "anchor": "revisions-and-the-commit-boundary",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#revisions-and-the-commit-boundary",
+      "startLine": 82,
+      "endLine": 93,
+      "contentHash": "8535b81c5f729c8d9f31af6855c66fd8ba40ac6576a60681012f7fbc1a58b507"
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+      "title": "State transitions and cancellation",
+      "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "anchor": "state-transitions-and-cancellation",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#state-transitions-and-cancellation",
+      "startLine": 94,
+      "endLine": 108,
+      "contentHash": "9240c8dcfbca5de6768c85da0478600d2b215212597aaef08ecc9baee69c58f7"
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+      "title": "Work, deadline, and yield accounting",
+      "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "anchor": "work-deadline-and-yield-accounting",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#work-deadline-and-yield-accounting",
+      "startLine": 109,
+      "endLine": 134,
+      "contentHash": "64ac033eefc7a34b0e5f25352c77ef68224dbbdcbddf39ae33d8f85e70beecfa"
+    },
+    {
+      "id": "doc:docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+      "title": "Disposal",
+      "sourcePath": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "anchor": "disposal",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md#disposal",
+      "startLine": 135,
+      "endLine": 142,
+      "contentHash": "0d859caa68d484249f6cd86e305fc30badc9cfad0daa6609053f97e4ffdfa865"
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+      "title": "Product boundary",
+      "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+      "category": "architecture",
+      "anchor": "product-boundary",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md#product-boundary",
+      "startLine": 30,
+      "endLine": 37,
+      "contentHash": "d084a0e40eb0229840d3af1ac1468cf766cd95fc03734f91be5a36691e8f1733"
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+      "title": "State model",
+      "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+      "category": "architecture",
+      "anchor": "state-model",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md#state-model",
+      "startLine": 60,
+      "endLine": 78,
+      "contentHash": "148c3d3abde76fc4657ce5f8c62f705414da2a9478144c0ee531fbf0a4b71384"
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+      "title": "Query execution pipeline",
+      "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+      "category": "architecture",
+      "anchor": "query-execution-pipeline",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md#query-execution-pipeline",
+      "startLine": 89,
+      "endLine": 102,
+      "contentHash": "fdbc5ec5c744b2511739f6bba82dd05f9a9c26bb2b599ea69ba81a85ee48e251"
+    },
+    {
+      "id": "doc:docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+      "title": "Analyzer/environment boundary",
+      "sourcePath": "docs/architecture/NATIVE_ARCHITECTURE.md",
+      "category": "architecture",
+      "anchor": "analyzerenvironment-boundary",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md#analyzerenvironment-boundary",
+      "startLine": 103,
+      "endLine": 112,
+      "contentHash": "b52a19337e3682853da0c28c8c48f7d8c1b3cbaebe8794a71d0cb253fc5c3e9b"
+    },
+    {
+      "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+      "title": "Registration and effect contracts",
+      "sourcePath": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+      "category": "architecture",
+      "anchor": "registration-and-effect-contracts",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md#registration-and-effect-contracts",
+      "startLine": 24,
+      "endLine": 61,
+      "contentHash": "dcd0d2660ce75e201f5f8e24ae0d45f52e7f53f8145c2521bc2c62682e493017"
+    },
+    {
+      "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+      "title": "Strict phrase capability",
+      "sourcePath": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+      "category": "architecture",
+      "anchor": "strict-phrase-capability",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md#strict-phrase-capability",
+      "startLine": 73,
+      "endLine": 127,
+      "contentHash": "cb4484ea543f21d2ff1a307459a31090fe7d92feaf53e44dcf43c97f3a9e61ce"
+    },
+    {
+      "id": "doc:docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+      "title": "Snapshots and IndexedDB",
+      "sourcePath": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+      "category": "architecture",
+      "anchor": "snapshots-and-indexeddb",
+      "sourceUrl": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md#snapshots-and-indexeddb",
+      "startLine": 256,
+      "endLine": 300,
+      "contentHash": "2f93e55162432bbff90a054a121d192f0ea5543a65e2f04f34aab299e4e19d43"
+    }
+  ],
+  "sources": [
+    {
+      "path": "docs/specs/CORE_CONTRACT.md",
+      "category": "spec",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/CORE_CONTRACT.md",
+      "sha256": "cfbc8562c75f876a14c5fc120534968f6795054970f69a8dd674b09a0f3587d2",
+      "bytes": 31840
+    },
+    {
+      "path": "docs/specs/RANKING.md",
+      "category": "spec",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/RANKING.md",
+      "sha256": "29c70acf708a8161f53c7830c37237f05bab791dcd68d0b0ce8d5cba7abbbcc1",
+      "bytes": 13933
+    },
+    {
+      "path": "docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "category": "spec",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/specs/MUTATIONS_AND_EXECUTION.md",
+      "sha256": "cc71f313734d17b63776612b8bb04078f42a2066614f1168e92fe6a947f6e8a3",
+      "bytes": 24249
+    },
+    {
+      "path": "docs/architecture/NATIVE_ARCHITECTURE.md",
+      "category": "architecture",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/NATIVE_ARCHITECTURE.md",
+      "sha256": "5028e4991d8e07a19c1c39f0091b85af396eac46d97235eded35e4084dd7f840",
+      "bytes": 22776
+    },
+    {
+      "path": "docs/architecture/ADDONS_AND_ADAPTERS.md",
+      "category": "architecture",
+      "url": "https://github.com/vmitsaras/raveldex/blob/main/docs/architecture/ADDONS_AND_ADAPTERS.md",
+      "sha256": "5faa78faaa64747654ce8be307ceadf12b6c2bc773bec19372ce0b42910554a5",
+      "bytes": 67236
+    }
+  ],
+  "hash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b"
+}
