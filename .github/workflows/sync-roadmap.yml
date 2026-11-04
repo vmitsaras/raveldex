@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - docs/planning/roadmap.json
+      - IMPLEMENTATION_TASKS.md
+      - scripts/link-native-subissues.mjs
       - scripts/sync-github.mjs
       - scripts/lib/roadmap.mjs
       - .github/workflows/sync-roadmap.yml
@@ -42,9 +44,16 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node node_modules/playwright-core/cli.js install --with-deps chromium
-      - run: npm run check
+      # The tracker has no browser/runtime dependency. Full candidate checks remain
+      # in ci.yml and RX-8001; they must not silently block a valid task graph.
+      - run: npm run handoff:check
+      - run: npm run docs:check
+      - run: node --test test/tooling/tracking.test.mjs test/tooling/native-subissues.test.mjs
       - name: Create or update repository milestones and task issues
         run: npm run tracking:sync
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Link N9 task issues as native GitHub sub-issues
+        run: node scripts/link-native-subissues.mjs --apply
         env:
           GITHUB_TOKEN: ${{ github.token }}
