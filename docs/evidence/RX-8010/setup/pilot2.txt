@@ -1,0 +1,17 @@
+node:internal/fs/promises:1661
+  const result = await PromisePrototypeThen(
+                 ^
+
+Error: ENOTDIR: not a directory, scandir '/tmp/raveldex-rx8010-20261104/consumer/node_modules/.package-lock.json'
+    at async readdir (node:internal/fs/promises:1661:18)
+    at async walk (file:///Users/vasilis/Documents/GitHub/raveldex/bench/n9/run.mjs:15:57)
+    at async inventory (file:///Users/vasilis/Documents/GitHub/raveldex/bench/n9/run.mjs:19:3)
+    at async installedInventory (file:///Users/vasilis/Documents/GitHub/raveldex/bench/n9/alternatives.mjs:16:166)
+    at async file:///Users/vasilis/Documents/GitHub/raveldex/bench/n9/alternatives.mjs:17:21 {
+  errno: -20,
+  code: 'ENOTDIR',
+  syscall: 'scandir',
+  path: '/tmp/raveldex-rx8010-20261104/consumer/node_modules/.package-lock.json'
+}
+
+Node.js v24.21.0

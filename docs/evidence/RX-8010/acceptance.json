@@ -1,0 +1,95 @@
+{
+  "task": "RX-8010",
+  "status": "Pass locally",
+  "criteria": {
+    "RX-8010-AC01": {
+      "status": "Pass",
+      "evidence": [
+        "setup/archives.json",
+        "setup/package-lock.json",
+        "node/report.json",
+        "node-audit.json",
+        "package-identities.json"
+      ]
+    },
+    "RX-8010-AC02": {
+      "status": "Pass",
+      "evidence": [
+        "node/report.json",
+        "relevance.json",
+        "pagefind/runs.json",
+        "../../evaluation/RX-8010-method.md"
+      ]
+    },
+    "RX-8010-AC03": {
+      "status": "Pass",
+      "evidence": [
+        "relevance.json",
+        "summary.json",
+        "verification/independent-review.json"
+      ]
+    }
+  },
+  "focusedTests": {
+    "status": "Pass",
+    "tests": 47,
+    "failures": 0,
+    "skips": 0,
+    "log": "verification/focused-final.txt"
+  },
+  "rawReview": "Pass within recorded scope",
+  "fullProjectVerification": {
+    "status": "Pass",
+    "tests": 1311,
+    "primaryTests": 1075,
+    "uiTests": 182,
+    "workerTests": 24,
+    "indexedDBTests": 26,
+    "migrationBrowserTests": 1,
+    "astroBrowserTests": 3,
+    "failures": 0,
+    "skips": 0,
+    "recordedInputsUnchanged": true,
+    "command": [
+      "npm",
+      "run",
+      "candidate:prepare",
+      "--",
+      "--output",
+      "/tmp/raveldex-rx8010-20261104/verified-candidate"
+    ],
+    "log": "verification/verification.log",
+    "siteCases": 14,
+    "overlappingLifecycleCases": 30,
+    "installedOracle": "verification/independent-results.json",
+    "measuredVerifiedWholeTarIdentical": true,
+    "sha256": "a72ced302ec98c337cf6b9fdb1f1526e55c25637c654d14a5d403d63eea2f6b9"
+  },
+  "sourceBoundary": {
+    "unchangedRuntimeIntegrationPackageInputs": 194,
+    "baselineHead": "6d00200697074749f077706e3f7fa0ff3162d247"
+  },
+  "limitations": [
+    "Actual native default-budget build refusal retained; successfulretry does not erase it",
+    "Foreign complete output and native top20 differ; no equal-outputspeedup ratio",
+    "Orama9observed case-sensitive mismatches Notcomparable",
+    "Fuse fuzzy and Pagefind static tracks separate",
+    "No memory/otherbrowsers/humanAT/remoteCI/publication claim"
+  ],
+  "projectSynchronization": {
+    "status": "Pass locally",
+    "manifest": "RX-8010 done with actual evidence; readable roadmap/tasks regenerated",
+    "checks": [
+      "docs:check",
+      "handoff:check",
+      "handoff:next",
+      "tracking:preview",
+      "pages:check",
+      "git diff --check"
+    ],
+    "nextActual": "RX-8011",
+    "remoteTracking": "Not mutated; later committed-manifest workflow owns remote synchronization",
+    "closingPackage": "Only publication-status prose differs; runtime/declarations/CSS byte-identical",
+    "comparison": "verification/package-comparison.json"
+  }
+}

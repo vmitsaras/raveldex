@@ -1,0 +1,1953 @@
+{
+  "version": "rx8010-pagefind-static-v1",
+  "track": "static-site",
+  "comparability": "Not comparable",
+  "workload": {
+    "version": "rx8002-workloads-v1",
+    "family": "high-cardinality",
+    "size": 100,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "8c3784ff226db2d43a5e1f65d8b1d33f4815ddaf4563d057edb6fe3276817719",
+    "labelsSha256": "7f2ffd38b7abced3e4b35de8e5791d15d885c6178c5aed9185c1856b770096cc",
+    "queriesSha256": "620a9f2951d685f6bf58559819a93bfa10ec52fa0d1f08d7dd5acfb78ad8c7a4",
+    "judgmentsSha256": "50f587c05c06a5e535ef801498c1d95819f33b7453d8c710454b421e9edc9c4a",
+    "dictionaryTerms": 1152,
+    "judgmentCounts": {
+      "common": 100,
+      "rare": 1,
+      "overlapping-or": 35,
+      "negative-only": 99,
+      "filtered": 20,
+      "narrow-prefix": 10,
+      "broad-prefix-refusal": 100,
+      "source-phrase": 34
+    }
+  },
+  "method": {
+    "content": "Each frozen body value concatenated with newline into one custom static page per source ID; no phrase-boundary equivalence.",
+    "fields": [
+      "body"
+    ],
+    "language": "en",
+    "matching": "Unmodified Pagefind language analysis/stemming/prefix search; not native NFKC token/exact semantics.",
+    "output": "Timed search returns generated result handles/count. Complete untimed data() hydration captures original source IDs/URLs; not native ranked ID+score output cost.",
+    "build": "Node native Pagefind indexing plus writeFiles; excludes browser launch/HTTP host.",
+    "queries": "Single text and one prefix raw string only; unsupported operators retained explicitly.",
+    "quantiles": "Nearest rank; p95 only if at least100 samples. Same-context warm repetitions; no population or heap/CPU claim.",
+    "samples": 10,
+    "warmups": 2
+  },
+  "package": {
+    "name": "pagefind",
+    "version": "1.6.0",
+    "entry": "/tmp/raveldex-rx8010-20261104/consumer/node_modules/pagefind/lib/index.js"
+  },
+  "build": {
+    "status": "Pass",
+    "wallMs": 29.505833999999595,
+    "records": 100
+  },
+  "queries": [
+    {
+      "id": "common",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "n9common",
+      "warmupWallMs": [
+        69.70000000298023,
+        0.3999999985098839
+      ],
+      "wallMs": [
+        0.6000000014901161,
+        0.29999999701976776,
+        0.5,
+        0.4000000022351742,
+        0.5,
+        0.30000000074505806,
+        0.3999999985098839,
+        0.3999999985098839,
+        0.8000000007450581,
+        0.4000000022351742
+      ],
+      "total": 100,
+      "hydrated": [
+        {
+          "pagefindId": "en_e1b5595",
+          "sourceId": "high-cardinality:00013",
+          "url": "/records/high-cardinality%3A00013/"
+        },
+        {
+          "pagefindId": "en_60a6832",
+          "sourceId": "high-cardinality:00047",
+          "url": "/records/high-cardinality%3A00047/"
+        },
+        {
+          "pagefindId": "en_175dc62",
+          "sourceId": "high-cardinality:00081",
+          "url": "/records/high-cardinality%3A00081/"
+        },
+        {
+          "pagefindId": "en_43d2c45",
+          "sourceId": "high-cardinality:00041",
+          "url": "/records/high-cardinality%3A00041/"
+        },
+        {
+          "pagefindId": "en_8be56ba",
+          "sourceId": "high-cardinality:00075",
+          "url": "/records/high-cardinality%3A00075/"
+        },
+        {
+          "pagefindId": "en_8a10313",
+          "sourceId": "high-cardinality:00007",
+          "url": "/records/high-cardinality%3A00007/"
+        },
+        {
+          "pagefindId": "en_62a4a85",
+          "sourceId": "high-cardinality:00099",
+          "url": "/records/high-cardinality%3A00099/"
+        },
+        {
+          "pagefindId": "en_7c5a8a3",
+          "sourceId": "high-cardinality:00031",
+          "url": "/records/high-cardinality%3A00031/"
+        },
+        {
+          "pagefindId": "en_4851a31",
+          "sourceId": "high-cardinality:00065",
+          "url": "/records/high-cardinality%3A00065/"
+        },
+        {
+          "pagefindId": "en_9238acf",
+          "sourceId": "high-cardinality:00030",
+          "url": "/records/high-cardinality%3A00030/"
+        },
+        {
+          "pagefindId": "en_335b688",
+          "sourceId": "high-cardinality:00033",
+          "url": "/records/high-cardinality%3A00033/"
+        },
+        {
+          "pagefindId": "en_87f43e9",
+          "sourceId": "high-cardinality:00064",
+          "url": "/records/high-cardinality%3A00064/"
+        },
+        {
+          "pagefindId": "en_8ef4a54",
+          "sourceId": "high-cardinality:00067",
+          "url": "/records/high-cardinality%3A00067/"
+        },
+        {
+          "pagefindId": "en_a8a5aee",
+          "sourceId": "high-cardinality:00098",
+          "url": "/records/high-cardinality%3A00098/"
+        },
+        {
+          "pagefindId": "en_df22c61",
+          "sourceId": "high-cardinality:00020",
+          "url": "/records/high-cardinality%3A00020/"
+        },
+        {
+          "pagefindId": "en_22f40a3",
+          "sourceId": "high-cardinality:00054",
+          "url": "/records/high-cardinality%3A00054/"
+        },
+        {
+          "pagefindId": "en_afb7d1f",
+          "sourceId": "high-cardinality:00088",
+          "url": "/records/high-cardinality%3A00088/"
+        },
+        {
+          "pagefindId": "en_48f44f2",
+          "sourceId": "high-cardinality:00022",
+          "url": "/records/high-cardinality%3A00022/"
+        },
+        {
+          "pagefindId": "en_302fde5",
+          "sourceId": "high-cardinality:00023",
+          "url": "/records/high-cardinality%3A00023/"
+        },
+        {
+          "pagefindId": "en_cec205d",
+          "sourceId": "high-cardinality:00027",
+          "url": "/records/high-cardinality%3A00027/"
+        },
+        {
+          "pagefindId": "en_a5b9316",
+          "sourceId": "high-cardinality:00029",
+          "url": "/records/high-cardinality%3A00029/"
+        },
+        {
+          "pagefindId": "en_e4a8d6a",
+          "sourceId": "high-cardinality:00056",
+          "url": "/records/high-cardinality%3A00056/"
+        },
+        {
+          "pagefindId": "en_9a649ed",
+          "sourceId": "high-cardinality:00057",
+          "url": "/records/high-cardinality%3A00057/"
+        },
+        {
+          "pagefindId": "en_9974dac",
+          "sourceId": "high-cardinality:00061",
+          "url": "/records/high-cardinality%3A00061/"
+        },
+        {
+          "pagefindId": "en_eccc72c",
+          "sourceId": "high-cardinality:00063",
+          "url": "/records/high-cardinality%3A00063/"
+        },
+        {
+          "pagefindId": "en_f64c8a5",
+          "sourceId": "high-cardinality:00090",
+          "url": "/records/high-cardinality%3A00090/"
+        },
+        {
+          "pagefindId": "en_ea35336",
+          "sourceId": "high-cardinality:00091",
+          "url": "/records/high-cardinality%3A00091/"
+        },
+        {
+          "pagefindId": "en_72274fc",
+          "sourceId": "high-cardinality:00095",
+          "url": "/records/high-cardinality%3A00095/"
+        },
+        {
+          "pagefindId": "en_e1ef4d4",
+          "sourceId": "high-cardinality:00097",
+          "url": "/records/high-cardinality%3A00097/"
+        },
+        {
+          "pagefindId": "en_b9eb755",
+          "sourceId": "high-cardinality:00004",
+          "url": "/records/high-cardinality%3A00004/"
+        },
+        {
+          "pagefindId": "en_2f85c47",
+          "sourceId": "high-cardinality:00072",
+          "url": "/records/high-cardinality%3A00072/"
+        },
+        {
+          "pagefindId": "en_8be8fb6",
+          "sourceId": "high-cardinality:00038",
+          "url": "/records/high-cardinality%3A00038/"
+        },
+        {
+          "pagefindId": "en_2e20947",
+          "sourceId": "high-cardinality:00019",
+          "url": "/records/high-cardinality%3A00019/"
+        },
+        {
+          "pagefindId": "en_b4fae7c",
+          "sourceId": "high-cardinality:00053",
+          "url": "/records/high-cardinality%3A00053/"
+        },
+        {
+          "pagefindId": "en_7c1d8ed",
+          "sourceId": "high-cardinality:00062",
+          "url": "/records/high-cardinality%3A00062/"
+        },
+        {
+          "pagefindId": "en_763530c",
+          "sourceId": "high-cardinality:00087",
+          "url": "/records/high-cardinality%3A00087/"
+        },
+        {
+          "pagefindId": "en_9b3a483",
+          "sourceId": "high-cardinality:00096",
+          "url": "/records/high-cardinality%3A00096/"
+        },
+        {
+          "pagefindId": "en_249492d",
+          "sourceId": "high-cardinality:00028",
+          "url": "/records/high-cardinality%3A00028/"
+        },
+        {
+          "pagefindId": "en_6d91408",
+          "sourceId": "high-cardinality:00012",
+          "url": "/records/high-cardinality%3A00012/"
+        },
+        {
+          "pagefindId": "en_9f893e9",
+          "sourceId": "high-cardinality:00046",
+          "url": "/records/high-cardinality%3A00046/"
+        },
+        {
+          "pagefindId": "en_b6d27dc",
+          "sourceId": "high-cardinality:00060",
+          "url": "/records/high-cardinality%3A00060/"
+        },
+        {
+          "pagefindId": "en_32b3251",
+          "sourceId": "high-cardinality:00080",
+          "url": "/records/high-cardinality%3A00080/"
+        },
+        {
+          "pagefindId": "en_d2b155b",
+          "sourceId": "high-cardinality:00026",
+          "url": "/records/high-cardinality%3A00026/"
+        },
+        {
+          "pagefindId": "en_bd6598d",
+          "sourceId": "high-cardinality:00094",
+          "url": "/records/high-cardinality%3A00094/"
+        },
+        {
+          "pagefindId": "en_fcf9602",
+          "sourceId": "high-cardinality:00003",
+          "url": "/records/high-cardinality%3A00003/"
+        },
+        {
+          "pagefindId": "en_beb4146",
+          "sourceId": "high-cardinality:00071",
+          "url": "/records/high-cardinality%3A00071/"
+        },
+        {
+          "pagefindId": "en_9b3b7ca",
+          "sourceId": "high-cardinality:00037",
+          "url": "/records/high-cardinality%3A00037/"
+        },
+        {
+          "pagefindId": "en_2e27ce6",
+          "sourceId": "high-cardinality:00036",
+          "url": "/records/high-cardinality%3A00036/"
+        },
+        {
+          "pagefindId": "en_dd9f5a5",
+          "sourceId": "high-cardinality:00040",
+          "url": "/records/high-cardinality%3A00040/"
+        },
+        {
+          "pagefindId": "en_11169da",
+          "sourceId": "high-cardinality:00044",
+          "url": "/records/high-cardinality%3A00044/"
+        },
+        {
+          "pagefindId": "en_49102ee",
+          "sourceId": "high-cardinality:00010",
+          "url": "/records/high-cardinality%3A00010/"
+        },
+        {
+          "pagefindId": "en_7faa8f3",
+          "sourceId": "high-cardinality:00070",
+          "url": "/records/high-cardinality%3A00070/"
+        },
+        {
+          "pagefindId": "en_6f2ab28",
+          "sourceId": "high-cardinality:00074",
+          "url": "/records/high-cardinality%3A00074/"
+        },
+        {
+          "pagefindId": "en_ac6f3fa",
+          "sourceId": "high-cardinality:00078",
+          "url": "/records/high-cardinality%3A00078/"
+        },
+        {
+          "pagefindId": "en_8482a64",
+          "sourceId": "high-cardinality:00006",
+          "url": "/records/high-cardinality%3A00006/"
+        },
+        {
+          "pagefindId": "en_7263eae",
+          "sourceId": "high-cardinality:00002",
+          "url": "/records/high-cardinality%3A00002/"
+        },
+        {
+          "pagefindId": "en_8660c15",
+          "sourceId": "high-cardinality:00034",
+          "url": "/records/high-cardinality%3A00034/"
+        },
+        {
+          "pagefindId": "en_8a71537",
+          "sourceId": "high-cardinality:00052",
+          "url": "/records/high-cardinality%3A00052/"
+        },
+        {
+          "pagefindId": "en_bae667a",
+          "sourceId": "high-cardinality:00018",
+          "url": "/records/high-cardinality%3A00018/"
+        },
+        {
+          "pagefindId": "en_d79ea29",
+          "sourceId": "high-cardinality:00000",
+          "url": "/records/high-cardinality%3A00000/"
+        },
+        {
+          "pagefindId": "en_f97595e",
+          "sourceId": "high-cardinality:00068",
+          "url": "/records/high-cardinality%3A00068/"
+        },
+        {
+          "pagefindId": "en_7484f8f",
+          "sourceId": "high-cardinality:00086",
+          "url": "/records/high-cardinality%3A00086/"
+        },
+        {
+          "pagefindId": "en_79117e2",
+          "sourceId": "high-cardinality:00043",
+          "url": "/records/high-cardinality%3A00043/"
+        },
+        {
+          "pagefindId": "en_a51270d",
+          "sourceId": "high-cardinality:00077",
+          "url": "/records/high-cardinality%3A00077/"
+        },
+        {
+          "pagefindId": "en_2254cc7",
+          "sourceId": "high-cardinality:00009",
+          "url": "/records/high-cardinality%3A00009/"
+        },
+        {
+          "pagefindId": "en_1f35b3f",
+          "sourceId": "high-cardinality:00093",
+          "url": "/records/high-cardinality%3A00093/"
+        },
+        {
+          "pagefindId": "en_b547553",
+          "sourceId": "high-cardinality:00050",
+          "url": "/records/high-cardinality%3A00050/"
+        },
+        {
+          "pagefindId": "en_1f1e966",
+          "sourceId": "high-cardinality:00016",
+          "url": "/records/high-cardinality%3A00016/"
+        },
+        {
+          "pagefindId": "en_f8d8387",
+          "sourceId": "high-cardinality:00084",
+          "url": "/records/high-cardinality%3A00084/"
+        },
+        {
+          "pagefindId": "en_4c11234",
+          "sourceId": "high-cardinality:00059",
+          "url": "/records/high-cardinality%3A00059/"
+        },
+        {
+          "pagefindId": "en_b05cbfe",
+          "sourceId": "high-cardinality:00025",
+          "url": "/records/high-cardinality%3A00025/"
+        },
+        {
+          "pagefindId": "en_461df73",
+          "sourceId": "high-cardinality:00032",
+          "url": "/records/high-cardinality%3A00032/"
+        },
+        {
+          "pagefindId": "en_306b2db",
+          "sourceId": "high-cardinality:00066",
+          "url": "/records/high-cardinality%3A00066/"
+        },
+        {
+          "pagefindId": "en_97aa513",
+          "sourceId": "high-cardinality:00079",
+          "url": "/records/high-cardinality%3A00079/"
+        },
+        {
+          "pagefindId": "en_16ae363",
+          "sourceId": "high-cardinality:00045",
+          "url": "/records/high-cardinality%3A00045/"
+        },
+        {
+          "pagefindId": "en_c5ce559",
+          "sourceId": "high-cardinality:00011",
+          "url": "/records/high-cardinality%3A00011/"
+        },
+        {
+          "pagefindId": "en_2e1846f",
+          "sourceId": "high-cardinality:00058",
+          "url": "/records/high-cardinality%3A00058/"
+        },
+        {
+          "pagefindId": "en_cbdbf3f",
+          "sourceId": "high-cardinality:00024",
+          "url": "/records/high-cardinality%3A00024/"
+        },
+        {
+          "pagefindId": "en_a748aab",
+          "sourceId": "high-cardinality:00092",
+          "url": "/records/high-cardinality%3A00092/"
+        },
+        {
+          "pagefindId": "en_2e2d903",
+          "sourceId": "high-cardinality:00017",
+          "url": "/records/high-cardinality%3A00017/"
+        },
+        {
+          "pagefindId": "en_4afe9e8",
+          "sourceId": "high-cardinality:00049",
+          "url": "/records/high-cardinality%3A00049/"
+        },
+        {
+          "pagefindId": "en_ae2f744",
+          "sourceId": "high-cardinality:00083",
+          "url": "/records/high-cardinality%3A00083/"
+        },
+        {
+          "pagefindId": "en_30b7532",
+          "sourceId": "high-cardinality:00051",
+          "url": "/records/high-cardinality%3A00051/"
+        },
+        {
+          "pagefindId": "en_6f23277",
+          "sourceId": "high-cardinality:00085",
+          "url": "/records/high-cardinality%3A00085/"
+        },
+        {
+          "pagefindId": "en_cdf6c7e",
+          "sourceId": "high-cardinality:00015",
+          "url": "/records/high-cardinality%3A00015/"
+        },
+        {
+          "pagefindId": "en_6e5aece",
+          "sourceId": "high-cardinality:00035",
+          "url": "/records/high-cardinality%3A00035/"
+        },
+        {
+          "pagefindId": "en_b6bb2c8",
+          "sourceId": "high-cardinality:00001",
+          "url": "/records/high-cardinality%3A00001/"
+        },
+        {
+          "pagefindId": "en_d278dfc",
+          "sourceId": "high-cardinality:00069",
+          "url": "/records/high-cardinality%3A00069/"
+        },
+        {
+          "pagefindId": "en_6bd8a93",
+          "sourceId": "high-cardinality:00021",
+          "url": "/records/high-cardinality%3A00021/"
+        },
+        {
+          "pagefindId": "en_b06510c",
+          "sourceId": "high-cardinality:00089",
+          "url": "/records/high-cardinality%3A00089/"
+        },
+        {
+          "pagefindId": "en_8a2d889",
+          "sourceId": "high-cardinality:00055",
+          "url": "/records/high-cardinality%3A00055/"
+        },
+        {
+          "pagefindId": "en_f4a185c",
+          "sourceId": "high-cardinality:00073",
+          "url": "/records/high-cardinality%3A00073/"
+        },
+        {
+          "pagefindId": "en_a895eaa",
+          "sourceId": "high-cardinality:00005",
+          "url": "/records/high-cardinality%3A00005/"
+        },
+        {
+          "pagefindId": "en_4118d5c",
+          "sourceId": "high-cardinality:00039",
+          "url": "/records/high-cardinality%3A00039/"
+        },
+        {
+          "pagefindId": "en_1bf1357",
+          "sourceId": "high-cardinality:00042",
+          "url": "/records/high-cardinality%3A00042/"
+        },
+        {
+          "pagefindId": "en_f673fd2",
+          "sourceId": "high-cardinality:00076",
+          "url": "/records/high-cardinality%3A00076/"
+        },
+        {
+          "pagefindId": "en_14d8177",
+          "sourceId": "high-cardinality:00008",
+          "url": "/records/high-cardinality%3A00008/"
+        },
+        {
+          "pagefindId": "en_c9e0ce3",
+          "sourceId": "high-cardinality:00082",
+          "url": "/records/high-cardinality%3A00082/"
+        },
+        {
+          "pagefindId": "en_dbc7555",
+          "sourceId": "high-cardinality:00014",
+          "url": "/records/high-cardinality%3A00014/"
+        },
+        {
+          "pagefindId": "en_6c4ddfd",
+          "sourceId": "high-cardinality:00048",
+          "url": "/records/high-cardinality%3A00048/"
+        }
+      ],
+      "p50WallMs": 0.4000000022351742,
+      "p95WallMs": null,
+      "nativeMembershipEqual": true
+    },
+    {
+      "id": "rare",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "n9rare",
+      "warmupWallMs": [
+        0.20000000298023224,
+        0.09999999776482582
+      ],
+      "wallMs": [
+        0.10000000149011612,
+        0,
+        0.19999999925494194,
+        0.10000000149011612,
+        0,
+        0.09999999776482582,
+        0,
+        0.10000000149011612,
+        0.09999999776482582,
+        0
+      ],
+      "total": 1,
+      "hydrated": [
+        {
+          "pagefindId": "en_8a10313",
+          "sourceId": "high-cardinality:00007",
+          "url": "/records/high-cardinality%3A00007/"
+        }
+      ],
+      "p50WallMs": 0.09999999776482582,
+      "p95WallMs": null,
+      "nativeMembershipEqual": true
+    },
+    {
+      "id": "overlapping-or",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    },
+    {
+      "id": "negative-only",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    },
+    {
+      "id": "filtered",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    },
+    {
+      "id": "narrow-prefix",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "n9key00000",
+      "warmupWallMs": [
+        0.19999999925494194,
+        0.09999999776482582
+      ],
+      "wallMs": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.19999999925494194,
+        0,
+        0.19999999925494194,
+        0.19999999925494194,
+        0.10000000149011612,
+        0.09999999776482582,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "total": 10,
+      "hydrated": [
+        {
+          "pagefindId": "en_8a10313",
+          "sourceId": "high-cardinality:00007",
+          "url": "/records/high-cardinality%3A00007/"
+        },
+        {
+          "pagefindId": "en_b9eb755",
+          "sourceId": "high-cardinality:00004",
+          "url": "/records/high-cardinality%3A00004/"
+        },
+        {
+          "pagefindId": "en_fcf9602",
+          "sourceId": "high-cardinality:00003",
+          "url": "/records/high-cardinality%3A00003/"
+        },
+        {
+          "pagefindId": "en_7263eae",
+          "sourceId": "high-cardinality:00002",
+          "url": "/records/high-cardinality%3A00002/"
+        },
+        {
+          "pagefindId": "en_8482a64",
+          "sourceId": "high-cardinality:00006",
+          "url": "/records/high-cardinality%3A00006/"
+        },
+        {
+          "pagefindId": "en_d79ea29",
+          "sourceId": "high-cardinality:00000",
+          "url": "/records/high-cardinality%3A00000/"
+        },
+        {
+          "pagefindId": "en_2254cc7",
+          "sourceId": "high-cardinality:00009",
+          "url": "/records/high-cardinality%3A00009/"
+        },
+        {
+          "pagefindId": "en_b6bb2c8",
+          "sourceId": "high-cardinality:00001",
+          "url": "/records/high-cardinality%3A00001/"
+        },
+        {
+          "pagefindId": "en_a895eaa",
+          "sourceId": "high-cardinality:00005",
+          "url": "/records/high-cardinality%3A00005/"
+        },
+        {
+          "pagefindId": "en_14d8177",
+          "sourceId": "high-cardinality:00008",
+          "url": "/records/high-cardinality%3A00008/"
+        }
+      ],
+      "p50WallMs": 0.10000000149011612,
+      "p95WallMs": null,
+      "nativeMembershipEqual": true
+    },
+    {
+      "id": "broad-prefix-refusal",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "n9key",
+      "warmupWallMs": [
+        0.5,
+        0.5
+      ],
+      "wallMs": [
+        0.3999999985098839,
+        0.4000000022351742,
+        0.3999999985098839,
+        0.4000000022351742,
+        0.5,
+        0.3999999985098839,
+        0.5,
+        0.3999999985098839,
+        0.4000000022351742,
+        0.3999999985098839
+      ],
+      "total": 100,
+      "hydrated": [
+        {
+          "pagefindId": "en_e1b5595",
+          "sourceId": "high-cardinality:00013",
+          "url": "/records/high-cardinality%3A00013/"
+        },
+        {
+          "pagefindId": "en_60a6832",
+          "sourceId": "high-cardinality:00047",
+          "url": "/records/high-cardinality%3A00047/"
+        },
+        {
+          "pagefindId": "en_175dc62",
+          "sourceId": "high-cardinality:00081",
+          "url": "/records/high-cardinality%3A00081/"
+        },
+        {
+          "pagefindId": "en_43d2c45",
+          "sourceId": "high-cardinality:00041",
+          "url": "/records/high-cardinality%3A00041/"
+        },
+        {
+          "pagefindId": "en_8be56ba",
+          "sourceId": "high-cardinality:00075",
+          "url": "/records/high-cardinality%3A00075/"
+        },
+        {
+          "pagefindId": "en_8a10313",
+          "sourceId": "high-cardinality:00007",
+          "url": "/records/high-cardinality%3A00007/"
+        },
+        {
+          "pagefindId": "en_62a4a85",
+          "sourceId": "high-cardinality:00099",
+          "url": "/records/high-cardinality%3A00099/"
+        },
+        {
+          "pagefindId": "en_7c5a8a3",
+          "sourceId": "high-cardinality:00031",
+          "url": "/records/high-cardinality%3A00031/"
+        },
+        {
+          "pagefindId": "en_4851a31",
+          "sourceId": "high-cardinality:00065",
+          "url": "/records/high-cardinality%3A00065/"
+        },
+        {
+          "pagefindId": "en_9238acf",
+          "sourceId": "high-cardinality:00030",
+          "url": "/records/high-cardinality%3A00030/"
+        },
+        {
+          "pagefindId": "en_335b688",
+          "sourceId": "high-cardinality:00033",
+          "url": "/records/high-cardinality%3A00033/"
+        },
+        {
+          "pagefindId": "en_87f43e9",
+          "sourceId": "high-cardinality:00064",
+          "url": "/records/high-cardinality%3A00064/"
+        },
+        {
+          "pagefindId": "en_8ef4a54",
+          "sourceId": "high-cardinality:00067",
+          "url": "/records/high-cardinality%3A00067/"
+        },
+        {
+          "pagefindId": "en_a8a5aee",
+          "sourceId": "high-cardinality:00098",
+          "url": "/records/high-cardinality%3A00098/"
+        },
+        {
+          "pagefindId": "en_df22c61",
+          "sourceId": "high-cardinality:00020",
+          "url": "/records/high-cardinality%3A00020/"
+        },
+        {
+          "pagefindId": "en_22f40a3",
+          "sourceId": "high-cardinality:00054",
+          "url": "/records/high-cardinality%3A00054/"
+        },
+        {
+          "pagefindId": "en_afb7d1f",
+          "sourceId": "high-cardinality:00088",
+          "url": "/records/high-cardinality%3A00088/"
+        },
+        {
+          "pagefindId": "en_48f44f2",
+          "sourceId": "high-cardinality:00022",
+          "url": "/records/high-cardinality%3A00022/"
+        },
+        {
+          "pagefindId": "en_302fde5",
+          "sourceId": "high-cardinality:00023",
+          "url": "/records/high-cardinality%3A00023/"
+        },
+        {
+          "pagefindId": "en_cec205d",
+          "sourceId": "high-cardinality:00027",
+          "url": "/records/high-cardinality%3A00027/"
+        },
+        {
+          "pagefindId": "en_a5b9316",
+          "sourceId": "high-cardinality:00029",
+          "url": "/records/high-cardinality%3A00029/"
+        },
+        {
+          "pagefindId": "en_e4a8d6a",
+          "sourceId": "high-cardinality:00056",
+          "url": "/records/high-cardinality%3A00056/"
+        },
+        {
+          "pagefindId": "en_9a649ed",
+          "sourceId": "high-cardinality:00057",
+          "url": "/records/high-cardinality%3A00057/"
+        },
+        {
+          "pagefindId": "en_9974dac",
+          "sourceId": "high-cardinality:00061",
+          "url": "/records/high-cardinality%3A00061/"
+        },
+        {
+          "pagefindId": "en_eccc72c",
+          "sourceId": "high-cardinality:00063",
+          "url": "/records/high-cardinality%3A00063/"
+        },
+        {
+          "pagefindId": "en_f64c8a5",
+          "sourceId": "high-cardinality:00090",
+          "url": "/records/high-cardinality%3A00090/"
+        },
+        {
+          "pagefindId": "en_ea35336",
+          "sourceId": "high-cardinality:00091",
+          "url": "/records/high-cardinality%3A00091/"
+        },
+        {
+          "pagefindId": "en_72274fc",
+          "sourceId": "high-cardinality:00095",
+          "url": "/records/high-cardinality%3A00095/"
+        },
+        {
+          "pagefindId": "en_e1ef4d4",
+          "sourceId": "high-cardinality:00097",
+          "url": "/records/high-cardinality%3A00097/"
+        },
+        {
+          "pagefindId": "en_b9eb755",
+          "sourceId": "high-cardinality:00004",
+          "url": "/records/high-cardinality%3A00004/"
+        },
+        {
+          "pagefindId": "en_2f85c47",
+          "sourceId": "high-cardinality:00072",
+          "url": "/records/high-cardinality%3A00072/"
+        },
+        {
+          "pagefindId": "en_8be8fb6",
+          "sourceId": "high-cardinality:00038",
+          "url": "/records/high-cardinality%3A00038/"
+        },
+        {
+          "pagefindId": "en_2e20947",
+          "sourceId": "high-cardinality:00019",
+          "url": "/records/high-cardinality%3A00019/"
+        },
+        {
+          "pagefindId": "en_b4fae7c",
+          "sourceId": "high-cardinality:00053",
+          "url": "/records/high-cardinality%3A00053/"
+        },
+        {
+          "pagefindId": "en_7c1d8ed",
+          "sourceId": "high-cardinality:00062",
+          "url": "/records/high-cardinality%3A00062/"
+        },
+        {
+          "pagefindId": "en_763530c",
+          "sourceId": "high-cardinality:00087",
+          "url": "/records/high-cardinality%3A00087/"
+        },
+        {
+          "pagefindId": "en_9b3a483",
+          "sourceId": "high-cardinality:00096",
+          "url": "/records/high-cardinality%3A00096/"
+        },
+        {
+          "pagefindId": "en_249492d",
+          "sourceId": "high-cardinality:00028",
+          "url": "/records/high-cardinality%3A00028/"
+        },
+        {
+          "pagefindId": "en_6d91408",
+          "sourceId": "high-cardinality:00012",
+          "url": "/records/high-cardinality%3A00012/"
+        },
+        {
+          "pagefindId": "en_9f893e9",
+          "sourceId": "high-cardinality:00046",
+          "url": "/records/high-cardinality%3A00046/"
+        },
+        {
+          "pagefindId": "en_b6d27dc",
+          "sourceId": "high-cardinality:00060",
+          "url": "/records/high-cardinality%3A00060/"
+        },
+        {
+          "pagefindId": "en_32b3251",
+          "sourceId": "high-cardinality:00080",
+          "url": "/records/high-cardinality%3A00080/"
+        },
+        {
+          "pagefindId": "en_d2b155b",
+          "sourceId": "high-cardinality:00026",
+          "url": "/records/high-cardinality%3A00026/"
+        },
+        {
+          "pagefindId": "en_bd6598d",
+          "sourceId": "high-cardinality:00094",
+          "url": "/records/high-cardinality%3A00094/"
+        },
+        {
+          "pagefindId": "en_fcf9602",
+          "sourceId": "high-cardinality:00003",
+          "url": "/records/high-cardinality%3A00003/"
+        },
+        {
+          "pagefindId": "en_beb4146",
+          "sourceId": "high-cardinality:00071",
+          "url": "/records/high-cardinality%3A00071/"
+        },
+        {
+          "pagefindId": "en_9b3b7ca",
+          "sourceId": "high-cardinality:00037",
+          "url": "/records/high-cardinality%3A00037/"
+        },
+        {
+          "pagefindId": "en_2e27ce6",
+          "sourceId": "high-cardinality:00036",
+          "url": "/records/high-cardinality%3A00036/"
+        },
+        {
+          "pagefindId": "en_dd9f5a5",
+          "sourceId": "high-cardinality:00040",
+          "url": "/records/high-cardinality%3A00040/"
+        },
+        {
+          "pagefindId": "en_11169da",
+          "sourceId": "high-cardinality:00044",
+          "url": "/records/high-cardinality%3A00044/"
+        },
+        {
+          "pagefindId": "en_49102ee",
+          "sourceId": "high-cardinality:00010",
+          "url": "/records/high-cardinality%3A00010/"
+        },
+        {
+          "pagefindId": "en_7faa8f3",
+          "sourceId": "high-cardinality:00070",
+          "url": "/records/high-cardinality%3A00070/"
+        },
+        {
+          "pagefindId": "en_6f2ab28",
+          "sourceId": "high-cardinality:00074",
+          "url": "/records/high-cardinality%3A00074/"
+        },
+        {
+          "pagefindId": "en_ac6f3fa",
+          "sourceId": "high-cardinality:00078",
+          "url": "/records/high-cardinality%3A00078/"
+        },
+        {
+          "pagefindId": "en_8482a64",
+          "sourceId": "high-cardinality:00006",
+          "url": "/records/high-cardinality%3A00006/"
+        },
+        {
+          "pagefindId": "en_7263eae",
+          "sourceId": "high-cardinality:00002",
+          "url": "/records/high-cardinality%3A00002/"
+        },
+        {
+          "pagefindId": "en_8660c15",
+          "sourceId": "high-cardinality:00034",
+          "url": "/records/high-cardinality%3A00034/"
+        },
+        {
+          "pagefindId": "en_8a71537",
+          "sourceId": "high-cardinality:00052",
+          "url": "/records/high-cardinality%3A00052/"
+        },
+        {
+          "pagefindId": "en_bae667a",
+          "sourceId": "high-cardinality:00018",
+          "url": "/records/high-cardinality%3A00018/"
+        },
+        {
+          "pagefindId": "en_d79ea29",
+          "sourceId": "high-cardinality:00000",
+          "url": "/records/high-cardinality%3A00000/"
+        },
+        {
+          "pagefindId": "en_f97595e",
+          "sourceId": "high-cardinality:00068",
+          "url": "/records/high-cardinality%3A00068/"
+        },
+        {
+          "pagefindId": "en_7484f8f",
+          "sourceId": "high-cardinality:00086",
+          "url": "/records/high-cardinality%3A00086/"
+        },
+        {
+          "pagefindId": "en_79117e2",
+          "sourceId": "high-cardinality:00043",
+          "url": "/records/high-cardinality%3A00043/"
+        },
+        {
+          "pagefindId": "en_a51270d",
+          "sourceId": "high-cardinality:00077",
+          "url": "/records/high-cardinality%3A00077/"
+        },
+        {
+          "pagefindId": "en_2254cc7",
+          "sourceId": "high-cardinality:00009",
+          "url": "/records/high-cardinality%3A00009/"
+        },
+        {
+          "pagefindId": "en_1f35b3f",
+          "sourceId": "high-cardinality:00093",
+          "url": "/records/high-cardinality%3A00093/"
+        },
+        {
+          "pagefindId": "en_b547553",
+          "sourceId": "high-cardinality:00050",
+          "url": "/records/high-cardinality%3A00050/"
+        },
+        {
+          "pagefindId": "en_1f1e966",
+          "sourceId": "high-cardinality:00016",
+          "url": "/records/high-cardinality%3A00016/"
+        },
+        {
+          "pagefindId": "en_f8d8387",
+          "sourceId": "high-cardinality:00084",
+          "url": "/records/high-cardinality%3A00084/"
+        },
+        {
+          "pagefindId": "en_4c11234",
+          "sourceId": "high-cardinality:00059",
+          "url": "/records/high-cardinality%3A00059/"
+        },
+        {
+          "pagefindId": "en_b05cbfe",
+          "sourceId": "high-cardinality:00025",
+          "url": "/records/high-cardinality%3A00025/"
+        },
+        {
+          "pagefindId": "en_461df73",
+          "sourceId": "high-cardinality:00032",
+          "url": "/records/high-cardinality%3A00032/"
+        },
+        {
+          "pagefindId": "en_306b2db",
+          "sourceId": "high-cardinality:00066",
+          "url": "/records/high-cardinality%3A00066/"
+        },
+        {
+          "pagefindId": "en_97aa513",
+          "sourceId": "high-cardinality:00079",
+          "url": "/records/high-cardinality%3A00079/"
+        },
+        {
+          "pagefindId": "en_16ae363",
+          "sourceId": "high-cardinality:00045",
+          "url": "/records/high-cardinality%3A00045/"
+        },
+        {
+          "pagefindId": "en_c5ce559",
+          "sourceId": "high-cardinality:00011",
+          "url": "/records/high-cardinality%3A00011/"
+        },
+        {
+          "pagefindId": "en_2e1846f",
+          "sourceId": "high-cardinality:00058",
+          "url": "/records/high-cardinality%3A00058/"
+        },
+        {
+          "pagefindId": "en_cbdbf3f",
+          "sourceId": "high-cardinality:00024",
+          "url": "/records/high-cardinality%3A00024/"
+        },
+        {
+          "pagefindId": "en_a748aab",
+          "sourceId": "high-cardinality:00092",
+          "url": "/records/high-cardinality%3A00092/"
+        },
+        {
+          "pagefindId": "en_2e2d903",
+          "sourceId": "high-cardinality:00017",
+          "url": "/records/high-cardinality%3A00017/"
+        },
+        {
+          "pagefindId": "en_4afe9e8",
+          "sourceId": "high-cardinality:00049",
+          "url": "/records/high-cardinality%3A00049/"
+        },
+        {
+          "pagefindId": "en_ae2f744",
+          "sourceId": "high-cardinality:00083",
+          "url": "/records/high-cardinality%3A00083/"
+        },
+        {
+          "pagefindId": "en_30b7532",
+          "sourceId": "high-cardinality:00051",
+          "url": "/records/high-cardinality%3A00051/"
+        },
+        {
+          "pagefindId": "en_6f23277",
+          "sourceId": "high-cardinality:00085",
+          "url": "/records/high-cardinality%3A00085/"
+        },
+        {
+          "pagefindId": "en_cdf6c7e",
+          "sourceId": "high-cardinality:00015",
+          "url": "/records/high-cardinality%3A00015/"
+        },
+        {
+          "pagefindId": "en_6e5aece",
+          "sourceId": "high-cardinality:00035",
+          "url": "/records/high-cardinality%3A00035/"
+        },
+        {
+          "pagefindId": "en_b6bb2c8",
+          "sourceId": "high-cardinality:00001",
+          "url": "/records/high-cardinality%3A00001/"
+        },
+        {
+          "pagefindId": "en_d278dfc",
+          "sourceId": "high-cardinality:00069",
+          "url": "/records/high-cardinality%3A00069/"
+        },
+        {
+          "pagefindId": "en_6bd8a93",
+          "sourceId": "high-cardinality:00021",
+          "url": "/records/high-cardinality%3A00021/"
+        },
+        {
+          "pagefindId": "en_b06510c",
+          "sourceId": "high-cardinality:00089",
+          "url": "/records/high-cardinality%3A00089/"
+        },
+        {
+          "pagefindId": "en_8a2d889",
+          "sourceId": "high-cardinality:00055",
+          "url": "/records/high-cardinality%3A00055/"
+        },
+        {
+          "pagefindId": "en_f4a185c",
+          "sourceId": "high-cardinality:00073",
+          "url": "/records/high-cardinality%3A00073/"
+        },
+        {
+          "pagefindId": "en_a895eaa",
+          "sourceId": "high-cardinality:00005",
+          "url": "/records/high-cardinality%3A00005/"
+        },
+        {
+          "pagefindId": "en_4118d5c",
+          "sourceId": "high-cardinality:00039",
+          "url": "/records/high-cardinality%3A00039/"
+        },
+        {
+          "pagefindId": "en_1bf1357",
+          "sourceId": "high-cardinality:00042",
+          "url": "/records/high-cardinality%3A00042/"
+        },
+        {
+          "pagefindId": "en_f673fd2",
+          "sourceId": "high-cardinality:00076",
+          "url": "/records/high-cardinality%3A00076/"
+        },
+        {
+          "pagefindId": "en_14d8177",
+          "sourceId": "high-cardinality:00008",
+          "url": "/records/high-cardinality%3A00008/"
+        },
+        {
+          "pagefindId": "en_c9e0ce3",
+          "sourceId": "high-cardinality:00082",
+          "url": "/records/high-cardinality%3A00082/"
+        },
+        {
+          "pagefindId": "en_dbc7555",
+          "sourceId": "high-cardinality:00014",
+          "url": "/records/high-cardinality%3A00014/"
+        },
+        {
+          "pagefindId": "en_6c4ddfd",
+          "sourceId": "high-cardinality:00048",
+          "url": "/records/high-cardinality%3A00048/"
+        }
+      ],
+      "p50WallMs": 0.3999999985098839,
+      "p95WallMs": null,
+      "nativeMembershipEqual": true
+    },
+    {
+      "id": "source-phrase",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    }
+  ],
+  "errors": [],
+  "requests": [
+    "http://127.0.0.1:50973/",
+    "http://127.0.0.1:50973/pagefind/pagefind.js",
+    "http://127.0.0.1:50973/pagefind/pagefind-worker.js",
+    "http://127.0.0.1:50973/pagefind/pagefind-entry.json?ts=1793818322097",
+    "http://127.0.0.1:50973/pagefind/pagefind.en_24d5f0e201.pf_meta",
+    "http://127.0.0.1:50973/pagefind/wasm.en.pagefind",
+    "http://127.0.0.1:50973/pagefind/index/en_4f69ff2.pf_index",
+    "http://127.0.0.1:50973/pagefind/fragment/en_e1b5595.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_60a6832.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_175dc62.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_43d2c45.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8be56ba.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8a10313.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_62a4a85.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_7c5a8a3.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_4851a31.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_9238acf.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_335b688.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_87f43e9.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8ef4a54.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_a8a5aee.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_df22c61.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_22f40a3.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_afb7d1f.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_48f44f2.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_302fde5.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_cec205d.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_a5b9316.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_e4a8d6a.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_9a649ed.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_9974dac.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_eccc72c.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_f64c8a5.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_ea35336.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_72274fc.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_e1ef4d4.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_b9eb755.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_2f85c47.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8be8fb6.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_2e20947.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_b4fae7c.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_7c1d8ed.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_763530c.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_9b3a483.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_249492d.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_6d91408.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_9f893e9.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_b6d27dc.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_32b3251.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_d2b155b.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_bd6598d.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_fcf9602.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_beb4146.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_9b3b7ca.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_2e27ce6.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_dd9f5a5.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_11169da.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_49102ee.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_7faa8f3.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_6f2ab28.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_ac6f3fa.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8482a64.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_7263eae.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8660c15.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8a71537.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_bae667a.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_d79ea29.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_f97595e.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_7484f8f.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_79117e2.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_a51270d.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_2254cc7.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_1f35b3f.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_b547553.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_1f1e966.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_f8d8387.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_4c11234.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_b05cbfe.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_461df73.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_306b2db.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_97aa513.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_16ae363.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_c5ce559.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_2e1846f.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_cbdbf3f.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_a748aab.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_2e2d903.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_4afe9e8.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_ae2f744.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_30b7532.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_6f23277.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_cdf6c7e.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_6e5aece.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_b6bb2c8.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_d278dfc.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_6bd8a93.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_b06510c.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_8a2d889.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_f4a185c.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_a895eaa.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_4118d5c.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_1bf1357.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_f673fd2.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_14d8177.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_c9e0ce3.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_dbc7555.pf_fragment",
+    "http://127.0.0.1:50973/pagefind/fragment/en_6c4ddfd.pf_fragment"
+  ],
+  "files": [
+    {
+      "path": "pagefind/fragment/en_11169da.pf_fragment",
+      "bytes": 434,
+      "sha256": "211dc495974e70da14720bd90a366f00784121f4471965146784af4ef0e44732"
+    },
+    {
+      "path": "pagefind/fragment/en_14d8177.pf_fragment",
+      "bytes": 431,
+      "sha256": "212dfbc11460ef9e97c9650957cf02f70d35011a4eab7e45061cd45d7ac3897e"
+    },
+    {
+      "path": "pagefind/fragment/en_16ae363.pf_fragment",
+      "bytes": 455,
+      "sha256": "f48f994dd34bed7583466d9b7d585701e9268f8c1819b7ab09049779422fb0a3"
+    },
+    {
+      "path": "pagefind/fragment/en_175dc62.pf_fragment",
+      "bytes": 434,
+      "sha256": "365beafa66f5f978f288520a3f5dc169c5f4e004dea7ee6429a619590c264629"
+    },
+    {
+      "path": "pagefind/fragment/en_1bf1357.pf_fragment",
+      "bytes": 434,
+      "sha256": "6721473f0764294388ced347eb3a17ff136173b0213c90a5c18f30272f1b2434"
+    },
+    {
+      "path": "pagefind/fragment/en_1f1e966.pf_fragment",
+      "bytes": 448,
+      "sha256": "dfec3a11f3303bf8ed6aef018e41605044f43a160abcad4eff9e279e38515ae4"
+    },
+    {
+      "path": "pagefind/fragment/en_1f35b3f.pf_fragment",
+      "bytes": 470,
+      "sha256": "d469a057955d36e09769436e25de2c9d38cec82374593371d7f678b83cf90931"
+    },
+    {
+      "path": "pagefind/fragment/en_2254cc7.pf_fragment",
+      "bytes": 460,
+      "sha256": "16881760a11814241fcf72291da3ac02d62cd7aeba303eddc617497d1bce0a59"
+    },
+    {
+      "path": "pagefind/fragment/en_22f40a3.pf_fragment",
+      "bytes": 473,
+      "sha256": "54a132ce1dbc3c8df2039b2b5617f604b8af8f3d8fb7d3e6ad389af9fff89fa5"
+    },
+    {
+      "path": "pagefind/fragment/en_249492d.pf_fragment",
+      "bytes": 463,
+      "sha256": "0c8c8d43046daad900def7e691ce2f755574b8f29b6c0dec07a0e042511f9a7b"
+    },
+    {
+      "path": "pagefind/fragment/en_2e1846f.pf_fragment",
+      "bytes": 462,
+      "sha256": "75a21494d396fcbea3839b1484fb2f73b8f0fb60508ea1b4cd7655a3535ee858"
+    },
+    {
+      "path": "pagefind/fragment/en_2e20947.pf_fragment",
+      "bytes": 470,
+      "sha256": "76243d17e8d4afa60abfc396c895fe06eec5b91fba7819c8c91c839cecaa3676"
+    },
+    {
+      "path": "pagefind/fragment/en_2e27ce6.pf_fragment",
+      "bytes": 443,
+      "sha256": "03a6d216012693d35b5b7cb093c4bdc498908978d2ab3234b0f6782a1fdb2b1c"
+    },
+    {
+      "path": "pagefind/fragment/en_2e2d903.pf_fragment",
+      "bytes": 438,
+      "sha256": "7bcd2617c9ffb103b519417a1a735ea9027b449fdc2470e0081f7a23e0a015fd"
+    },
+    {
+      "path": "pagefind/fragment/en_2f85c47.pf_fragment",
+      "bytes": 473,
+      "sha256": "4f6c42c972afc5d814aa91f04871171d99e2341b46ddcfc59514e3f2f38083ac"
+    },
+    {
+      "path": "pagefind/fragment/en_302fde5.pf_fragment",
+      "bytes": 482,
+      "sha256": "6f6540573c19fa4e8671be9ff8ef9defeaeb07a01ea961b06c9a3cf2d897807f"
+    },
+    {
+      "path": "pagefind/fragment/en_306b2db.pf_fragment",
+      "bytes": 458,
+      "sha256": "b9e8b651fd231736b83d165c094cb8580bd304c393247bfacd5579ad7bf3ce7a"
+    },
+    {
+      "path": "pagefind/fragment/en_30b7532.pf_fragment",
+      "bytes": 438,
+      "sha256": "56567217a8820dacb7fd189047905c7029ab8cfca3bf512cd19b3c70c77cb885"
+    },
+    {
+      "path": "pagefind/fragment/en_32b3251.pf_fragment",
+      "bytes": 478,
+      "sha256": "bd7fa622bbaf40d7863dafce871d78bf38d22e754082eed04e17c4b4c84439ad"
+    },
+    {
+      "path": "pagefind/fragment/en_335b688.pf_fragment",
+      "bytes": 456,
+      "sha256": "51ae42d266df041d79d8c2370aeacc0d3623f3ff2fdf1e47ca57f5e30495ef9d"
+    },
+    {
+      "path": "pagefind/fragment/en_4118d5c.pf_fragment",
+      "bytes": 475,
+      "sha256": "ea682474b563e7af14f756b76341d8d9639a56309cfbf780ff4a14baa172b86f"
+    },
+    {
+      "path": "pagefind/fragment/en_43d2c45.pf_fragment",
+      "bytes": 467,
+      "sha256": "ddfbf0e23862b47612fea07dc2cf89698cacb625aada6b19ce5e84edfb0faaa9"
+    },
+    {
+      "path": "pagefind/fragment/en_461df73.pf_fragment",
+      "bytes": 458,
+      "sha256": "357e384f208761913a8655f222b273d899a456f1e70dc80f61f5f596fe1c10b0"
+    },
+    {
+      "path": "pagefind/fragment/en_4851a31.pf_fragment",
+      "bytes": 462,
+      "sha256": "7bd0c67ec7cb88725437a3051586c4ff749b14174bf5ac2dd7c4704161b42f2c"
+    },
+    {
+      "path": "pagefind/fragment/en_48f44f2.pf_fragment",
+      "bytes": 456,
+      "sha256": "653f9c5e61ccc751f40b2e0c9b9c1ce4427ae34765cd074e8bf20a3079fb9461"
+    },
+    {
+      "path": "pagefind/fragment/en_49102ee.pf_fragment",
+      "bytes": 434,
+      "sha256": "98c296ad0afdd898bc348234220803511ebedba057bbc55ddb409e5a6d5d2dcf"
+    },
+    {
+      "path": "pagefind/fragment/en_4afe9e8.pf_fragment",
+      "bytes": 458,
+      "sha256": "71d1a7fb534e94e4f4e895e43dca09d642980e01b3b832629fa07ee4747c8212"
+    },
+    {
+      "path": "pagefind/fragment/en_4c11234.pf_fragment",
+      "bytes": 470,
+      "sha256": "efff9a38c8b1fc43736829ea1d6236f54094ca80ba439e83af7928e21f972ead"
+    },
+    {
+      "path": "pagefind/fragment/en_60a6832.pf_fragment",
+      "bytes": 434,
+      "sha256": "dec2fc1d6940e8dbd1a2c6ebfb6f382f8b57683c1b3c9b608027eb6be6b75989"
+    },
+    {
+      "path": "pagefind/fragment/en_62a4a85.pf_fragment",
+      "bytes": 461,
+      "sha256": "828517100443267175e8c455282c864d14a1cc50377a8d8d22caaaaf8753a22b"
+    },
+    {
+      "path": "pagefind/fragment/en_6bd8a93.pf_fragment",
+      "bytes": 472,
+      "sha256": "550f0e1b18638b811c29ca6b0c961b29adf0458bd8e8c6e49e031575c5c76d4c"
+    },
+    {
+      "path": "pagefind/fragment/en_6c4ddfd.pf_fragment",
+      "bytes": 434,
+      "sha256": "4b2a763968a259fde20c92498fb3e43e1efa13eb25b55bfa8e28113dc4cb6b6d"
+    },
+    {
+      "path": "pagefind/fragment/en_6d91408.pf_fragment",
+      "bytes": 478,
+      "sha256": "a10e5d26df865ee223104df74e3a04a9a825786be9adf7be3d4230d50d23d00b"
+    },
+    {
+      "path": "pagefind/fragment/en_6e5aece.pf_fragment",
+      "bytes": 404,
+      "sha256": "c4fd31b4151aee6f496900cd17a605db3cf5ab5f84eefcb19d3c2cfc9fa57ffc"
+    },
+    {
+      "path": "pagefind/fragment/en_6f23277.pf_fragment",
+      "bytes": 438,
+      "sha256": "c49384155fddd5a67a63f9a33f328a0197d8854b70227ffb1e6ba79a54858f13"
+    },
+    {
+      "path": "pagefind/fragment/en_6f2ab28.pf_fragment",
+      "bytes": 434,
+      "sha256": "699d81d0ea55b4efaefda2a5f283cf273ebab2f74d33c58d4434f68e949d4050"
+    },
+    {
+      "path": "pagefind/fragment/en_72274fc.pf_fragment",
+      "bytes": 472,
+      "sha256": "0185ddcb1621bfa1453b97e97f2af8f28fe4e3c92934d7b585fcd5f70639abfd"
+    },
+    {
+      "path": "pagefind/fragment/en_7263eae.pf_fragment",
+      "bytes": 442,
+      "sha256": "3e9510543d6804f487e5e11ee8eea3f51a2caa5374f2588dfd31c7e75d6567ca"
+    },
+    {
+      "path": "pagefind/fragment/en_7484f8f.pf_fragment",
+      "bytes": 439,
+      "sha256": "637dc59468ffdff51877893a822fef3772bb91d98d6318e2d51b1882f0e78ae4"
+    },
+    {
+      "path": "pagefind/fragment/en_763530c.pf_fragment",
+      "bytes": 472,
+      "sha256": "ee9abe0c83f51a6f20abb3c3713f18c425b7ac2009405fada939e1d86e1c96c7"
+    },
+    {
+      "path": "pagefind/fragment/en_79117e2.pf_fragment",
+      "bytes": 462,
+      "sha256": "04b212b9d7ebc8544b85b50b382a37692b4b2ba561d9b492c11e3cafecbddaeb"
+    },
+    {
+      "path": "pagefind/fragment/en_7c1d8ed.pf_fragment",
+      "bytes": 462,
+      "sha256": "815c01c8411663d5591e298e0100b44e72c7e9db8b37ad1681e26e6399972d14"
+    },
+    {
+      "path": "pagefind/fragment/en_7c5a8a3.pf_fragment",
+      "bytes": 462,
+      "sha256": "a80064ac8eae0418e0fcb84eaf6704aad900862b520562d0a5b01fc315dfa57d"
+    },
+    {
+      "path": "pagefind/fragment/en_7faa8f3.pf_fragment",
+      "bytes": 443,
+      "sha256": "e3b14d7873f76f7ba957e95f0bb76164c93861b55c9e4d185f587d0005dda1ae"
+    },
+    {
+      "path": "pagefind/fragment/en_8482a64.pf_fragment",
+      "bytes": 432,
+      "sha256": "371dc24453d72f283489bbb00f032b0c8b9c7c51b2dd4882b62810a7e0c04cdf"
+    },
+    {
+      "path": "pagefind/fragment/en_8660c15.pf_fragment",
+      "bytes": 479,
+      "sha256": "c91139236b2e266205bdfe1f00838a08d969ecc67c86c841ddf40d9f14c5f622"
+    },
+    {
+      "path": "pagefind/fragment/en_87f43e9.pf_fragment",
+      "bytes": 491,
+      "sha256": "7c9010242757216f7e27de468333196476f6ebd49739a2c235d4754732a890fb"
+    },
+    {
+      "path": "pagefind/fragment/en_8a10313.pf_fragment",
+      "bytes": 469,
+      "sha256": "dbcd708610e507fb3d95b4281e42c78fb4531eb93eb36ca74b4c8b2b82271cb0"
+    },
+    {
+      "path": "pagefind/fragment/en_8a2d889.pf_fragment",
+      "bytes": 472,
+      "sha256": "6c46eaf980335a56005fbc73ecd3ff3546f128fdee80db79f0e48ae8ed137cfc"
+    },
+    {
+      "path": "pagefind/fragment/en_8a71537.pf_fragment",
+      "bytes": 439,
+      "sha256": "a357555318b1bf7ea48cd9aaad19018b077a1a27d25e3ded25e888c2135c9a08"
+    },
+    {
+      "path": "pagefind/fragment/en_8be56ba.pf_fragment",
+      "bytes": 468,
+      "sha256": "9c37845fcd3c6d99c754eb16fcd2565907ee515011d4b0cf151d53753fce90f4"
+    },
+    {
+      "path": "pagefind/fragment/en_8be8fb6.pf_fragment",
+      "bytes": 472,
+      "sha256": "5937f8a51bce671c352a7569c0e72cc5505f2e96d90dc89c95e23ddd84d1be99"
+    },
+    {
+      "path": "pagefind/fragment/en_8ef4a54.pf_fragment",
+      "bytes": 457,
+      "sha256": "43e4782b8c486d7348cd30dd03ea500bf47e2e574bd8ab03548889be3b2f26d1"
+    },
+    {
+      "path": "pagefind/fragment/en_9238acf.pf_fragment",
+      "bytes": 491,
+      "sha256": "cf703c6849395d9a5e2b7465043160e1d23d317b70b13443f9aa3df318d85389"
+    },
+    {
+      "path": "pagefind/fragment/en_97aa513.pf_fragment",
+      "bytes": 455,
+      "sha256": "9d023a25b0ebc310e03448c4ff170f663718c2a1c988eb0eb0381dd96d424e57"
+    },
+    {
+      "path": "pagefind/fragment/en_9974dac.pf_fragment",
+      "bytes": 472,
+      "sha256": "613b5509ee8297ea5b3893f9f73b89c974a5654ccb2a2f8c46b53b7bea0177c5"
+    },
+    {
+      "path": "pagefind/fragment/en_9a649ed.pf_fragment",
+      "bytes": 482,
+      "sha256": "440d99bb2fbdf762629a1f0716daa2c35cfed53fb590fe1361fb26d14bd6c7ac"
+    },
+    {
+      "path": "pagefind/fragment/en_9b3a483.pf_fragment",
+      "bytes": 462,
+      "sha256": "d20c77e62b33e194b41d61668303ba51329a6e9a4f0d739f5b8baeec0d009f0f"
+    },
+    {
+      "path": "pagefind/fragment/en_9b3b7ca.pf_fragment",
+      "bytes": 461,
+      "sha256": "09b6a05bd683cd2c848c033e1c8b2ce3d6a507935097f5b0bc28d5551c1ad22d"
+    },
+    {
+      "path": "pagefind/fragment/en_9f893e9.pf_fragment",
+      "bytes": 478,
+      "sha256": "7122f99471fe9de03f43bc87f99a36d96326bdcc2230c1003e7e28160aa53be1"
+    },
+    {
+      "path": "pagefind/fragment/en_a51270d.pf_fragment",
+      "bytes": 462,
+      "sha256": "049474b1a1f97b2a98a0017cb2779f0533bc7be8794c6dea74ec81a02a682319"
+    },
+    {
+      "path": "pagefind/fragment/en_a5b9316.pf_fragment",
+      "bytes": 478,
+      "sha256": "2cd421f97468889f42151e55ad7a3191b7b096d61b2cf03f2195e0aaf7e7dbfa"
+    },
+    {
+      "path": "pagefind/fragment/en_a748aab.pf_fragment",
+      "bytes": 461,
+      "sha256": "80a3ca649ae5cbaecf8c2ac1e1bc72188fdc7ccce6f426dceefa47f00edd2df9"
+    },
+    {
+      "path": "pagefind/fragment/en_a895eaa.pf_fragment",
+      "bytes": 474,
+      "sha256": "0ecc97d74a4e7728cd1a48fccdaf3ad4e5b6899d39ac00c34d3f7ebb07e3506f"
+    },
+    {
+      "path": "pagefind/fragment/en_a8a5aee.pf_fragment",
+      "bytes": 491,
+      "sha256": "62e4062da528963663d2f7e808f8d29c6dfbf528060c12d95b1a4ee6703ec253"
+    },
+    {
+      "path": "pagefind/fragment/en_ac6f3fa.pf_fragment",
+      "bytes": 435,
+      "sha256": "6fb78c857990717d1484dfa669d997534395678eee2e88105616bf3ae6aa6b05"
+    },
+    {
+      "path": "pagefind/fragment/en_ae2f744.pf_fragment",
+      "bytes": 457,
+      "sha256": "a83431c6ca57270a5380e841ec62ec5a867af750a18a1c29b00be1b430b8c7c9"
+    },
+    {
+      "path": "pagefind/fragment/en_afb7d1f.pf_fragment",
+      "bytes": 475,
+      "sha256": "3753a13a193bee6f6ffb93ffcf49e481ac6aa24a3aef6ff7587d9d89dd675ae8"
+    },
+    {
+      "path": "pagefind/fragment/en_b05cbfe.pf_fragment",
+      "bytes": 470,
+      "sha256": "9f58ec5da27a9516924fdee6b00f33e2452d18a7d97178e05441449c294c9ac0"
+    },
+    {
+      "path": "pagefind/fragment/en_b06510c.pf_fragment",
+      "bytes": 472,
+      "sha256": "2435d2238594c314fa24c8f3f7a5c8899a30ff48236bb580dfc87012816af73d"
+    },
+    {
+      "path": "pagefind/fragment/en_b4fae7c.pf_fragment",
+      "bytes": 471,
+      "sha256": "5e6e6f6eee941f2cf3769426aeb30625fec9c515cce19258f243e6b6d591e892"
+    },
+    {
+      "path": "pagefind/fragment/en_b547553.pf_fragment",
+      "bytes": 448,
+      "sha256": "db3ec45512899f254525abc455757f32c321c61106ed54171243337b68eee895"
+    },
+    {
+      "path": "pagefind/fragment/en_b6bb2c8.pf_fragment",
+      "bytes": 403,
+      "sha256": "4704a7a90a599201625c23826d3d14a233a5c492a5ffa907bef930dcabb4b551"
+    },
+    {
+      "path": "pagefind/fragment/en_b6d27dc.pf_fragment",
+      "bytes": 457,
+      "sha256": "4878e6bb47f536a99f6b1bb763bf38374f2fc79d62a82ec160ece278c5ed9572"
+    },
+    {
+      "path": "pagefind/fragment/en_b9eb755.pf_fragment",
+      "bytes": 471,
+      "sha256": "714f43f776b2065fbb56b1efc78e64199a4d9c76fc5ff690252ce863f6ce74c3"
+    },
+    {
+      "path": "pagefind/fragment/en_bae667a.pf_fragment",
+      "bytes": 439,
+      "sha256": "7833a4afd78d2ad869cb76d7febde2b0b9957371921144ef43e62886320e0d09"
+    },
+    {
+      "path": "pagefind/fragment/en_bd6598d.pf_fragment",
+      "bytes": 456,
+      "sha256": "805044fc4b9f962659723935547a4e6009f748618fd994b54c683819f9cbe3ba"
+    },
+    {
+      "path": "pagefind/fragment/en_beb4146.pf_fragment",
+      "bytes": 461,
+      "sha256": "0901d75ebb8db4648c22f78de6c127a551aa103d5209820a4462dc096ee981b5"
+    },
+    {
+      "path": "pagefind/fragment/en_c5ce559.pf_fragment",
+      "bytes": 455,
+      "sha256": "156f21161bb3944f3a97153a43982f2e30db9fad5f8d960141cb887eccf1bb7e"
+    },
+    {
+      "path": "pagefind/fragment/en_c9e0ce3.pf_fragment",
+      "bytes": 433,
+      "sha256": "aa36fe514ff1256f360b945f7f1654711a7bc93e1d467dda9471f328e84177da"
+    },
+    {
+      "path": "pagefind/fragment/en_cbdbf3f.pf_fragment",
+      "bytes": 462,
+      "sha256": "6f49cad5ca50b88e6839bd69a53ab5e5250377116ca5c9998da858850ff5a84b"
+    },
+    {
+      "path": "pagefind/fragment/en_cdf6c7e.pf_fragment",
+      "bytes": 457,
+      "sha256": "9525a5356ca84a27797724786d5d05db09213d110282ff38a3fd5d1fd3e20294"
+    },
+    {
+      "path": "pagefind/fragment/en_cec205d.pf_fragment",
+      "bytes": 471,
+      "sha256": "4aeb9343982020ce1122536368e229ab832dfa60127bd3a0e11bc952cad11849"
+    },
+    {
+      "path": "pagefind/fragment/en_d278dfc.pf_fragment",
+      "bytes": 404,
+      "sha256": "4a5a3a88add5158c2b482a893d14fb45478daf2fd8d7079c5de08b8bbbf0e1c5"
+    },
+    {
+      "path": "pagefind/fragment/en_d2b155b.pf_fragment",
+      "bytes": 457,
+      "sha256": "55dc9648edc811ab119f21b4fd4061a52d631ad9397cb8be6f4e35e342043e0f"
+    },
+    {
+      "path": "pagefind/fragment/en_d79ea29.pf_fragment",
+      "bytes": 477,
+      "sha256": "0dbbc61e223e239b8c1728c3562598465a3e2344d5114493984c7b271a265268"
+    },
+    {
+      "path": "pagefind/fragment/en_dbc7555.pf_fragment",
+      "bytes": 433,
+      "sha256": "7b533189d6358d3dbbfb791d670c1beccc0e27f7c1c3bca4d9d8091f8d534281"
+    },
+    {
+      "path": "pagefind/fragment/en_dd9f5a5.pf_fragment",
+      "bytes": 433,
+      "sha256": "51681d885424739aaf1035f576debee21a90a9fa100a237433051ceae3b01896"
+    },
+    {
+      "path": "pagefind/fragment/en_df22c61.pf_fragment",
+      "bytes": 474,
+      "sha256": "90ab6a3417a829bca5023b700e3e7aa7c08d9c33230d4e8e784d6e0fed1a5c55"
+    },
+    {
+      "path": "pagefind/fragment/en_e1b5595.pf_fragment",
+      "bytes": 433,
+      "sha256": "2329bdb438447f84cced2a89850370db5063d98dd0f2ab84314fb213d52e8f13"
+    },
+    {
+      "path": "pagefind/fragment/en_e1ef4d4.pf_fragment",
+      "bytes": 478,
+      "sha256": "5519dcc45ca3d85553ac1a86ef2e072e0341badfdf75ce3aafbacf3473bbc0c6"
+    },
+    {
+      "path": "pagefind/fragment/en_e4a8d6a.pf_fragment",
+      "bytes": 457,
+      "sha256": "8e7378a90073b140e80e35f07eea4c5505d1b58827d16f11e686bdfedc7265a6"
+    },
+    {
+      "path": "pagefind/fragment/en_ea35336.pf_fragment",
+      "bytes": 483,
+      "sha256": "7f87dd8dd8151086c74948e9e2811b48d560aa04a58701b18f20572b4bba2aa6"
+    },
+    {
+      "path": "pagefind/fragment/en_eccc72c.pf_fragment",
+      "bytes": 478,
+      "sha256": "0444a9dc52b872cea7f4e82e89ea342921724be45d0bb4244e0a48d33b5271e9"
+    },
+    {
+      "path": "pagefind/fragment/en_f4a185c.pf_fragment",
+      "bytes": 474,
+      "sha256": "265d5a9680fb0e1555dd4ef7db29af7558f57490b59ac1a0f7a985de0bc33fd1"
+    },
+    {
+      "path": "pagefind/fragment/en_f64c8a5.pf_fragment",
+      "bytes": 458,
+      "sha256": "188b1a8a828a4beb045bb2206b3aa4d72e0ad4fd8ab9b62259ec6017b97933c2"
+    },
+    {
+      "path": "pagefind/fragment/en_f673fd2.pf_fragment",
+      "bytes": 434,
+      "sha256": "c881d5de1ac4324040fd64e80c96a1bcedc6fd9dcf8821974a4289884daab780"
+    },
+    {
+      "path": "pagefind/fragment/en_f8d8387.pf_fragment",
+      "bytes": 449,
+      "sha256": "f6888781b3d56de045dc69442b505e427a2bc506a0b268d27318a72bb0b39e3e"
+    },
+    {
+      "path": "pagefind/fragment/en_f97595e.pf_fragment",
+      "bytes": 477,
+      "sha256": "5af06421edf15354d7de02cc32354a6192aafa88ae21f56a2e9681c1385cde01"
+    },
+    {
+      "path": "pagefind/fragment/en_fcf9602.pf_fragment",
+      "bytes": 459,
+      "sha256": "32902e9d1895694664c6fa74846302bffc0efb627027d9c2b65be62eb56e92f4"
+    },
+    {
+      "path": "pagefind/index/en_4f69ff2.pf_index",
+      "bytes": 15992,
+      "sha256": "be9fc4fab7eeed12c228b83a81d634d9eecbf840cf1c25d8448168a23a363ba6"
+    },
+    {
+      "path": "pagefind/index/en_61a5c40.pf_index",
+      "bytes": 1639,
+      "sha256": "2574e227257c6205b2b9dfbda54630d639ef7caabf3582c2f586160171170cca"
+    },
+    {
+      "path": "pagefind/pagefind-component-ui.css",
+      "bytes": 42081,
+      "sha256": "12a3ae7abdba2f00a7617b861f7e0f915ce54c17c47d568e1108103ecb228325"
+    },
+    {
+      "path": "pagefind/pagefind-component-ui.js",
+      "bytes": 184026,
+      "sha256": "f7a4ba1403c0dfb23e84e18b4480f95785035d21e5b45a05a08191bd87c84944"
+    },
+    {
+      "path": "pagefind/pagefind-entry.json",
+      "bytes": 173,
+      "sha256": "e855b4a6cd9aa403811aed29f7be647286703354584793dc238957e3bde90a06"
+    },
+    {
+      "path": "pagefind/pagefind-highlight.js",
+      "bytes": 44404,
+      "sha256": "7aab88a3c64047708f6ecabe1f094ecc48fb76b0895e64d56593f335c5d2ea0a"
+    },
+    {
+      "path": "pagefind/pagefind-modular-ui.css",
+      "bytes": 7336,
+      "sha256": "653ab29e4de5629f6ddf5f6fcdf5d2b3eb539a8c07fff8a56b8ce2156a570788"
+    },
+    {
+      "path": "pagefind/pagefind-modular-ui.js",
+      "bytes": 14634,
+      "sha256": "f3efa0f74b305ccab0bc9edc7c09ab69867180b4c43093d84bb9b508ac4ec32c"
+    },
+    {
+      "path": "pagefind/pagefind-ui.css",
+      "bytes": 14482,
+      "sha256": "e113b816110ed07b017613e901addfe635350f2a5b84990aa76c91a74b158084"
+    },
+    {
+      "path": "pagefind/pagefind-ui.js",
+      "bytes": 126634,
+      "sha256": "07b2a55750c180546523435461fd44f0612531bcdc0e8a069fe00eef7741d1f7"
+    },
+    {
+      "path": "pagefind/pagefind-worker.js",
+      "bytes": 42928,
+      "sha256": "78115e3651f11d29f03a1f3eb2776a7901c22532bdfa23b7ae73c693c0867bda"
+    },
+    {
+      "path": "pagefind/pagefind.en_24d5f0e201.pf_meta",
+      "bytes": 729,
+      "sha256": "f4fb5d8e0dc968122638b3607df091b6df408dffa7e1a1dd13875679bc1a15fd"
+    },
+    {
+      "path": "pagefind/pagefind.js",
+      "bytes": 47228,
+      "sha256": "02746cc529f88f853275720dcb1c2b6a18b0c7a92b73fae82ca2738e64500bcd"
+    },
+    {
+      "path": "pagefind/wasm.en.pagefind",
+      "bytes": 59738,
+      "sha256": "a2bc2068e113b49d03ea6d9985cad708016555ec3ae811e308a81193aa79ef15"
+    },
+    {
+      "path": "pagefind/wasm.unknown.pagefind",
+      "bytes": 55400,
+      "sha256": "2289cc9af9f629dbf6670222d8e12785ec35454417000cc60978fafec34fcca0"
+    }
+  ],
+  "environment": {
+    "browser": "156.0.8078.80",
+    "channel": "chrome",
+    "headless": true,
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "status": "Collected"
+}

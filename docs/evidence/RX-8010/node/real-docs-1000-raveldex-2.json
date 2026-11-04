@@ -1,0 +1,1642 @@
+{
+  "kind": "rx8010-child-v1",
+  "engine": "raveldex",
+  "family": "real-docs",
+  "size": 1000,
+  "owner": 2,
+  "pid": 7923,
+  "identity": {
+    "version": "rx8002-workloads-v1",
+    "family": "real-docs",
+    "size": 1000,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "2f9142a8480f9ac38600e8a1214e34668b5d383752f1084127f8e87495248495",
+    "labelsSha256": "047b92c4e0ee972cdb8b59d7a64675808b6f24fb880de177a099baea0a3db4a0",
+    "queriesSha256": "db6494b38b0d6080f7431273bdc5522b36d7b8324747ba1f6434ed2e507fe75e",
+    "judgmentsSha256": "03351127bb11ac07376ac8e84f83c0ca7dc1b95ddb9de7b9fccd53ecce754b6a",
+    "dictionaryTerms": 845,
+    "judgmentCounts": {
+      "common": 971,
+      "rare": 30,
+      "overlapping-or": 263,
+      "negative-only": 941,
+      "filtered": 194,
+      "narrow-prefix": 59,
+      "broad-prefix": 912,
+      "source-phrase": 30
+    }
+  },
+  "startedAt": "2026-11-04T18:39:59.596Z",
+  "samples": [
+    {
+      "operation": "build",
+      "phase": "fresh-owner",
+      "outcome": "Pass",
+      "wallMs": 784.920542,
+      "cpuUserMs": 529.636,
+      "cpuSystemMs": 25.311
+    },
+    {
+      "operation": "query:common",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 29.023208000000068,
+      "cpuUserMs": 9.354,
+      "cpuSystemMs": 1.139,
+      "resultSha256": "409a27915afcc50c79a43dda9d3f9b95da9d6851c8e3106d20a6a3d2cf1330ae"
+    },
+    {
+      "operation": "query:common",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 29.10941700000012,
+      "cpuUserMs": 12.126,
+      "cpuSystemMs": 1.249,
+      "resultSha256": "409a27915afcc50c79a43dda9d3f9b95da9d6851c8e3106d20a6a3d2cf1330ae"
+    },
+    {
+      "operation": "query:rare",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 2.096499999999878,
+      "cpuUserMs": 3.088,
+      "cpuSystemMs": 0.099,
+      "resultSha256": "5489a62181838635ed11399dd2381a7b342bc20f2db060b74ff1e464d237042d"
+    },
+    {
+      "operation": "query:rare",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 2.1154579999999896,
+      "cpuUserMs": 2.456,
+      "cpuSystemMs": 0.09,
+      "resultSha256": "5489a62181838635ed11399dd2381a7b342bc20f2db060b74ff1e464d237042d"
+    },
+    {
+      "operation": "query:overlapping-or",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 11.888834000000088,
+      "cpuUserMs": 3.133,
+      "cpuSystemMs": 0.227,
+      "resultSha256": "f8c22f047a48eccedc38121caed424bae5bd9d9108b34ae27ea33313eb95ae44"
+    },
+    {
+      "operation": "query:overlapping-or",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 12.751332999999931,
+      "cpuUserMs": 18.255,
+      "cpuSystemMs": 0.298,
+      "resultSha256": "f8c22f047a48eccedc38121caed424bae5bd9d9108b34ae27ea33313eb95ae44"
+    },
+    {
+      "operation": "query:negative-only",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 13.14912500000014,
+      "cpuUserMs": 15.771,
+      "cpuSystemMs": 0.794,
+      "resultSha256": "234ace6d9d963c742c84eda6fd993075ec621d3e3812c0223151147cd4102ca5"
+    },
+    {
+      "operation": "query:negative-only",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 14.58445800000004,
+      "cpuUserMs": 8.62,
+      "cpuSystemMs": 0.781,
+      "resultSha256": "234ace6d9d963c742c84eda6fd993075ec621d3e3812c0223151147cd4102ca5"
+    },
+    {
+      "operation": "query:filtered",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 25.451749999999947,
+      "cpuUserMs": 18.07,
+      "cpuSystemMs": 0.462,
+      "resultSha256": "217936ce7f44c892d7e3ba0c19a236acfcb3f8772edd1f1540e52ebbd55dd854"
+    },
+    {
+      "operation": "query:filtered",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 26.16708299999982,
+      "cpuUserMs": 5.116,
+      "cpuSystemMs": 0.435,
+      "resultSha256": "217936ce7f44c892d7e3ba0c19a236acfcb3f8772edd1f1540e52ebbd55dd854"
+    },
+    {
+      "operation": "query:narrow-prefix",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 3.4770829999999933,
+      "cpuUserMs": 0.965,
+      "cpuSystemMs": 0.138,
+      "resultSha256": "83513d0707bb9c250e9a5a05c114daa53ba01d7f60af625707661dc93aacc48b"
+    },
+    {
+      "operation": "query:narrow-prefix",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 2.3177499999999327,
+      "cpuUserMs": 0.985,
+      "cpuSystemMs": 0.056,
+      "resultSha256": "83513d0707bb9c250e9a5a05c114daa53ba01d7f60af625707661dc93aacc48b"
+    },
+    {
+      "operation": "query:broad-prefix",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 199.3177079999998,
+      "cpuUserMs": 49.718,
+      "cpuSystemMs": 3.75,
+      "resultSha256": "21f021da985f20796e6c309ea48009c56a50bfdd922f163d4ee05889996b1ff3"
+    },
+    {
+      "operation": "query:broad-prefix",
+      "phase": "after-two-warmups",
+      "outcome": "Pass",
+      "wallMs": 212.6090839999997,
+      "cpuUserMs": 53.452,
+      "cpuSystemMs": 4.706,
+      "resultSha256": "21f021da985f20796e6c309ea48009c56a50bfdd922f163d4ee05889996b1ff3"
+    }
+  ],
+  "warmups": [
+    {
+      "query": "common",
+      "index": 0
+    },
+    {
+      "query": "common",
+      "index": 1
+    },
+    {
+      "query": "rare",
+      "index": 0
+    },
+    {
+      "query": "rare",
+      "index": 1
+    },
+    {
+      "query": "overlapping-or",
+      "index": 0
+    },
+    {
+      "query": "overlapping-or",
+      "index": 1
+    },
+    {
+      "query": "negative-only",
+      "index": 0
+    },
+    {
+      "query": "negative-only",
+      "index": 1
+    },
+    {
+      "query": "filtered",
+      "index": 0
+    },
+    {
+      "query": "filtered",
+      "index": 1
+    },
+    {
+      "query": "narrow-prefix",
+      "index": 0
+    },
+    {
+      "query": "narrow-prefix",
+      "index": 1
+    },
+    {
+      "query": "broad-prefix",
+      "index": 0
+    },
+    {
+      "query": "broad-prefix",
+      "index": 1
+    }
+  ],
+  "queries": [
+    {
+      "id": "common",
+      "query": {
+        "kind": "text",
+        "text": "the",
+        "fields": [
+          "body"
+        ]
+      },
+      "expectedTotal": 971,
+      "expectedIdsSha256": "df64f5b6aecef060a46b4c1a0dc4e9f0e29830b9a872d28c8207811b9bf7aa6e",
+      "expectedError": null,
+      "status": "Native exact-total/top20 control",
+      "capture": {
+        "revision": 4,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 971,
+        "hits": [
+          {
+            "id": "real-docs:00000",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00034",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00068",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00102",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00136",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00170",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00204",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00238",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00272",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00306",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00340",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00374",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00408",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00442",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00476",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00510",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00544",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00578",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00612",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00646",
+            "score": 0.05123511621164167
+          }
+        ]
+      }
+    },
+    {
+      "id": "rare",
+      "query": {
+        "kind": "text",
+        "text": "unqualified",
+        "fields": [
+          "body"
+        ]
+      },
+      "expectedTotal": 30,
+      "expectedIdsSha256": "462bfa21dea966998a3c4a69eb58b6e460278587533ce5b18245e8c211309179",
+      "expectedError": null,
+      "status": "Native exact-total/top20 control",
+      "capture": {
+        "revision": 4,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 30,
+        "hits": [
+          {
+            "id": "real-docs:00007",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00041",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00075",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00109",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00143",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00177",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00211",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00245",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00279",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00313",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00347",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00381",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00415",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00449",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00483",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00517",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00551",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00585",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00619",
+            "score": 3.5924986350749863
+          },
+          {
+            "id": "real-docs:00653",
+            "score": 3.5924986350749863
+          }
+        ]
+      }
+    },
+    {
+      "id": "overlapping-or",
+      "query": {
+        "kind": "or",
+        "children": [
+          {
+            "kind": "text",
+            "text": "revision",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "text",
+            "text": "source",
+            "fields": [
+              "body"
+            ]
+          }
+        ]
+      },
+      "expectedTotal": 263,
+      "expectedIdsSha256": "3eb7763f787f884ad8897b269f3b068698279edc30285f3768ff515c693d6a34",
+      "expectedError": null,
+      "status": "Native exact-total/top20 control",
+      "capture": {
+        "revision": 4,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 263,
+        "hits": [
+          {
+            "id": "real-docs:00033",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00067",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00101",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00135",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00169",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00203",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00237",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00271",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00305",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00339",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00373",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00407",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00441",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00475",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00509",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00543",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00577",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00611",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00645",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00679",
+            "score": 4.475357410727052
+          }
+        ]
+      }
+    },
+    {
+      "id": "negative-only",
+      "query": {
+        "kind": "not",
+        "child": {
+          "kind": "text",
+          "text": "snapshot",
+          "fields": [
+            "body"
+          ]
+        }
+      },
+      "expectedTotal": 941,
+      "expectedIdsSha256": "7b9ea86543578afb4c94d11c1705817a2c89289d8449e85e2e185c90448aec0e",
+      "expectedError": null,
+      "status": "Native exact-total/top20 control",
+      "capture": {
+        "revision": 4,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 941,
+        "hits": [
+          {
+            "id": "real-docs:00000",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00001",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00002",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00003",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00004",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00005",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00006",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00008",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00009",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00010",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00011",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00012",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00013",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00014",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00015",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00016",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00017",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00018",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00019",
+            "score": 0
+          },
+          {
+            "id": "real-docs:00020",
+            "score": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "filtered",
+      "query": {
+        "kind": "and",
+        "children": [
+          {
+            "kind": "text",
+            "text": "the",
+            "fields": [
+              "body"
+            ]
+          },
+          {
+            "kind": "eq",
+            "field": "group",
+            "value": "g0"
+          }
+        ]
+      },
+      "expectedTotal": 194,
+      "expectedIdsSha256": "c98de891db1d1321034760b45539ceabe930b1a95f343f07855c6289c9dd2cd1",
+      "expectedError": null,
+      "status": "Native exact-total/top20 control",
+      "capture": {
+        "revision": 4,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 194,
+        "hits": [
+          {
+            "id": "real-docs:00000",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00170",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00340",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00510",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00680",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00850",
+            "score": 0.05123511621164167
+          },
+          {
+            "id": "real-docs:00165",
+            "score": 0.05098691525827056
+          },
+          {
+            "id": "real-docs:00335",
+            "score": 0.05098691525827056
+          },
+          {
+            "id": "real-docs:00505",
+            "score": 0.05098691525827056
+          },
+          {
+            "id": "real-docs:00675",
+            "score": 0.05098691525827056
+          },
+          {
+            "id": "real-docs:00845",
+            "score": 0.05098691525827056
+          },
+          {
+            "id": "real-docs:00010",
+            "score": 0.050256534186428774
+          },
+          {
+            "id": "real-docs:00180",
+            "score": 0.050256534186428774
+          },
+          {
+            "id": "real-docs:00350",
+            "score": 0.050256534186428774
+          },
+          {
+            "id": "real-docs:00520",
+            "score": 0.050256534186428774
+          },
+          {
+            "id": "real-docs:00690",
+            "score": 0.050256534186428774
+          },
+          {
+            "id": "real-docs:00860",
+            "score": 0.050256534186428774
+          },
+          {
+            "id": "real-docs:00075",
+            "score": 0.04771285971742371
+          },
+          {
+            "id": "real-docs:00245",
+            "score": 0.04771285971742371
+          },
+          {
+            "id": "real-docs:00415",
+            "score": 0.04771285971742371
+          }
+        ]
+      }
+    },
+    {
+      "id": "narrow-prefix",
+      "query": {
+        "kind": "group",
+        "fields": [
+          "body"
+        ],
+        "variants": [
+          {
+            "text": "snap",
+            "match": "prefix"
+          }
+        ]
+      },
+      "expectedTotal": 59,
+      "expectedIdsSha256": "7c4b9b57080cc52ef3a1442c70dd1d8b6b0ec7bbb47d7c60e1c63aca74c40737",
+      "expectedError": null,
+      "status": "Native exact-total/top20 control",
+      "capture": {
+        "revision": 4,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 59,
+        "hits": [
+          {
+            "id": "real-docs:00033",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00067",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00101",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00135",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00169",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00203",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00237",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00271",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00305",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00339",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00373",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00407",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00441",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00475",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00509",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00543",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00577",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00611",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00645",
+            "score": 4.475357410727052
+          },
+          {
+            "id": "real-docs:00679",
+            "score": 4.475357410727052
+          }
+        ]
+      }
+    },
+    {
+      "id": "broad-prefix",
+      "query": {
+        "kind": "group",
+        "fields": [
+          "body"
+        ],
+        "variants": [
+          {
+            "text": "re",
+            "match": "prefix"
+          }
+        ]
+      },
+      "expectedTotal": 912,
+      "expectedIdsSha256": "f67db159860aa2748aea473147485d3b1bd638310552bfffa1d51ba0dd911a29",
+      "expectedError": null,
+      "status": "Native exact-total/top20 control",
+      "capture": {
+        "revision": 4,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 912,
+        "hits": [
+          {
+            "id": "real-docs:00013",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00047",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00081",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00115",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00149",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00183",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00217",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00251",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00285",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00319",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00353",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00387",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00421",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00455",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00489",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00523",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00557",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00591",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00625",
+            "score": 5.141088256991248
+          },
+          {
+            "id": "real-docs:00659",
+            "score": 5.141088256991248
+          }
+        ]
+      }
+    },
+    {
+      "id": "source-phrase",
+      "query": {
+        "kind": "extension",
+        "capability": "phrases",
+        "version": 1,
+        "payload": {
+          "text": "source mapping",
+          "fields": [
+            "body"
+          ]
+        }
+      },
+      "expectedTotal": 30,
+      "expectedIdsSha256": "467ba61b2683dabfc1bc409a7ed98ff342386a6cf60953c825257cbf4cd716e3",
+      "expectedError": null,
+      "status": "Not comparable",
+      "reason": "Core-only native configuration does not enable optional phrase/source retention"
+    }
+  ],
+  "captures": {
+    "409a27915afcc50c79a43dda9d3f9b95da9d6851c8e3106d20a6a3d2cf1330ae": {
+      "revision": 4,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 971,
+      "hits": [
+        {
+          "id": "real-docs:00000",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00034",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00068",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00102",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00136",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00170",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00204",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00238",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00272",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00306",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00340",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00374",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00408",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00442",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00476",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00510",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00544",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00578",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00612",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00646",
+          "score": 0.05123511621164167
+        }
+      ]
+    },
+    "5489a62181838635ed11399dd2381a7b342bc20f2db060b74ff1e464d237042d": {
+      "revision": 4,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 30,
+      "hits": [
+        {
+          "id": "real-docs:00007",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00041",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00075",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00109",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00143",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00177",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00211",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00245",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00279",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00313",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00347",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00381",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00415",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00449",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00483",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00517",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00551",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00585",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00619",
+          "score": 3.5924986350749863
+        },
+        {
+          "id": "real-docs:00653",
+          "score": 3.5924986350749863
+        }
+      ]
+    },
+    "f8c22f047a48eccedc38121caed424bae5bd9d9108b34ae27ea33313eb95ae44": {
+      "revision": 4,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 263,
+      "hits": [
+        {
+          "id": "real-docs:00033",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00067",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00101",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00135",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00169",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00203",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00237",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00271",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00305",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00339",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00373",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00407",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00441",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00475",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00509",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00543",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00577",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00611",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00645",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00679",
+          "score": 4.475357410727052
+        }
+      ]
+    },
+    "234ace6d9d963c742c84eda6fd993075ec621d3e3812c0223151147cd4102ca5": {
+      "revision": 4,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 941,
+      "hits": [
+        {
+          "id": "real-docs:00000",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00001",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00002",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00003",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00004",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00005",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00006",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00008",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00009",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00010",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00011",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00012",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00013",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00014",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00015",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00016",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00017",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00018",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00019",
+          "score": 0
+        },
+        {
+          "id": "real-docs:00020",
+          "score": 0
+        }
+      ]
+    },
+    "217936ce7f44c892d7e3ba0c19a236acfcb3f8772edd1f1540e52ebbd55dd854": {
+      "revision": 4,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 194,
+      "hits": [
+        {
+          "id": "real-docs:00000",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00170",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00340",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00510",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00680",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00850",
+          "score": 0.05123511621164167
+        },
+        {
+          "id": "real-docs:00165",
+          "score": 0.05098691525827056
+        },
+        {
+          "id": "real-docs:00335",
+          "score": 0.05098691525827056
+        },
+        {
+          "id": "real-docs:00505",
+          "score": 0.05098691525827056
+        },
+        {
+          "id": "real-docs:00675",
+          "score": 0.05098691525827056
+        },
+        {
+          "id": "real-docs:00845",
+          "score": 0.05098691525827056
+        },
+        {
+          "id": "real-docs:00010",
+          "score": 0.050256534186428774
+        },
+        {
+          "id": "real-docs:00180",
+          "score": 0.050256534186428774
+        },
+        {
+          "id": "real-docs:00350",
+          "score": 0.050256534186428774
+        },
+        {
+          "id": "real-docs:00520",
+          "score": 0.050256534186428774
+        },
+        {
+          "id": "real-docs:00690",
+          "score": 0.050256534186428774
+        },
+        {
+          "id": "real-docs:00860",
+          "score": 0.050256534186428774
+        },
+        {
+          "id": "real-docs:00075",
+          "score": 0.04771285971742371
+        },
+        {
+          "id": "real-docs:00245",
+          "score": 0.04771285971742371
+        },
+        {
+          "id": "real-docs:00415",
+          "score": 0.04771285971742371
+        }
+      ]
+    },
+    "83513d0707bb9c250e9a5a05c114daa53ba01d7f60af625707661dc93aacc48b": {
+      "revision": 4,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 59,
+      "hits": [
+        {
+          "id": "real-docs:00033",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00067",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00101",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00135",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00169",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00203",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00237",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00271",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00305",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00339",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00373",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00407",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00441",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00475",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00509",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00543",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00577",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00611",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00645",
+          "score": 4.475357410727052
+        },
+        {
+          "id": "real-docs:00679",
+          "score": 4.475357410727052
+        }
+      ]
+    },
+    "21f021da985f20796e6c309ea48009c56a50bfdd922f163d4ee05889996b1ff3": {
+      "revision": 4,
+      "model": "raveldex-bm25-v1",
+      "completeness": "complete",
+      "total": 912,
+      "hits": [
+        {
+          "id": "real-docs:00013",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00047",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00081",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00115",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00149",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00183",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00217",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00251",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00285",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00319",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00353",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00387",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00421",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00455",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00489",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00523",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00557",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00591",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00625",
+          "score": 5.141088256991248
+        },
+        {
+          "id": "real-docs:00659",
+          "score": 5.141088256991248
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "fields": [
+      "body"
+    ],
+    "matching": "basic-v1 NFKC/lowercase, no source retention or phrases",
+    "output": "exact total/top20 IDs/scores/revision; complete pages checked separately",
+    "ranking": "raveldex-bm25-v1",
+    "sourceRetention": false
+  },
+  "projectedInputSha256": "7da0521cf56d3fbde1e595ddc955fba18b78cc089fb7758dcaad4ad3cbd2864c",
+  "status": "Collected",
+  "completedAt": "2026-11-04T18:40:01.815Z"
+}

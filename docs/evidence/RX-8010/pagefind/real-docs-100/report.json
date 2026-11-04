@@ -1,0 +1,1933 @@
+{
+  "version": "rx8010-pagefind-static-v1",
+  "track": "static-site",
+  "comparability": "Not comparable",
+  "workload": {
+    "version": "rx8002-workloads-v1",
+    "family": "real-docs",
+    "size": 100,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "f3722c30449184e525facfcc0bda09af644919caea8f30ec38740f455cebe2cb",
+    "labelsSha256": "838ea43a198dc25cae67ff753e778ee569aba5cb9b7173d9d78df1d3662c23f4",
+    "queriesSha256": "db6494b38b0d6080f7431273bdc5522b36d7b8324747ba1f6434ed2e507fe75e",
+    "judgmentsSha256": "7fcbb8073ab508369d41bb3310f7e8fa40f9a9f1b7eccf61d72d404ad77f8f55",
+    "dictionaryTerms": 845,
+    "judgmentCounts": {
+      "common": 97,
+      "rare": 3,
+      "overlapping-or": 26,
+      "negative-only": 95,
+      "filtered": 19,
+      "narrow-prefix": 5,
+      "broad-prefix": 91,
+      "source-phrase": 3
+    }
+  },
+  "method": {
+    "content": "Each frozen body value concatenated with newline into one custom static page per source ID; no phrase-boundary equivalence.",
+    "fields": [
+      "body"
+    ],
+    "language": "en",
+    "matching": "Unmodified Pagefind language analysis/stemming/prefix search; not native NFKC token/exact semantics.",
+    "output": "Timed search returns generated result handles/count. Complete untimed data() hydration captures original source IDs/URLs; not native ranked ID+score output cost.",
+    "build": "Node native Pagefind indexing plus writeFiles; excludes browser launch/HTTP host.",
+    "queries": "Single text and one prefix raw string only; unsupported operators retained explicitly.",
+    "quantiles": "Nearest rank; p95 only if at least100 samples. Same-context warm repetitions; no population or heap/CPU claim.",
+    "samples": 10,
+    "warmups": 2
+  },
+  "package": {
+    "name": "pagefind",
+    "version": "1.6.0",
+    "entry": "/tmp/raveldex-rx8010-20261104/consumer/node_modules/pagefind/lib/index.js"
+  },
+  "build": {
+    "status": "Pass",
+    "wallMs": 43.477416000000005,
+    "records": 100
+  },
+  "queries": [
+    {
+      "id": "common",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "the",
+      "warmupWallMs": [
+        68.40000000223517,
+        0.5
+      ],
+      "wallMs": [
+        0.6999999992549419,
+        0.6999999992549419,
+        0.6000000014901161,
+        0.3999999985098839,
+        0.6000000014901161,
+        0.3999999985098839,
+        0.6999999992549419,
+        0.4000000022351742,
+        0.3999999985098839,
+        0.5
+      ],
+      "total": 100,
+      "hydrated": [
+        {
+          "pagefindId": "en_812ea4c",
+          "sourceId": "real-docs:00003",
+          "url": "/records/real-docs%3A00003/"
+        },
+        {
+          "pagefindId": "en_893b90d",
+          "sourceId": "real-docs:00037",
+          "url": "/records/real-docs%3A00037/"
+        },
+        {
+          "pagefindId": "en_c8c6334",
+          "sourceId": "real-docs:00071",
+          "url": "/records/real-docs%3A00071/"
+        },
+        {
+          "pagefindId": "en_3b658c4",
+          "sourceId": "real-docs:00006",
+          "url": "/records/real-docs%3A00006/"
+        },
+        {
+          "pagefindId": "en_bb646c3",
+          "sourceId": "real-docs:00040",
+          "url": "/records/real-docs%3A00040/"
+        },
+        {
+          "pagefindId": "en_98609a4",
+          "sourceId": "real-docs:00074",
+          "url": "/records/real-docs%3A00074/"
+        },
+        {
+          "pagefindId": "en_e2744cc",
+          "sourceId": "real-docs:00012",
+          "url": "/records/real-docs%3A00012/"
+        },
+        {
+          "pagefindId": "en_252c8b9",
+          "sourceId": "real-docs:00046",
+          "url": "/records/real-docs%3A00046/"
+        },
+        {
+          "pagefindId": "en_c075c4b",
+          "sourceId": "real-docs:00080",
+          "url": "/records/real-docs%3A00080/"
+        },
+        {
+          "pagefindId": "en_9b846ff",
+          "sourceId": "real-docs:00034",
+          "url": "/records/real-docs%3A00034/"
+        },
+        {
+          "pagefindId": "en_15bd306",
+          "sourceId": "real-docs:00068",
+          "url": "/records/real-docs%3A00068/"
+        },
+        {
+          "pagefindId": "en_b654c4c",
+          "sourceId": "real-docs:00000",
+          "url": "/records/real-docs%3A00000/"
+        },
+        {
+          "pagefindId": "en_ede2c0c",
+          "sourceId": "real-docs:00013",
+          "url": "/records/real-docs%3A00013/"
+        },
+        {
+          "pagefindId": "en_fe65d13",
+          "sourceId": "real-docs:00047",
+          "url": "/records/real-docs%3A00047/"
+        },
+        {
+          "pagefindId": "en_98a7709",
+          "sourceId": "real-docs:00081",
+          "url": "/records/real-docs%3A00081/"
+        },
+        {
+          "pagefindId": "en_1a472ea",
+          "sourceId": "real-docs:00032",
+          "url": "/records/real-docs%3A00032/"
+        },
+        {
+          "pagefindId": "en_66a5ef8",
+          "sourceId": "real-docs:00066",
+          "url": "/records/real-docs%3A00066/"
+        },
+        {
+          "pagefindId": "en_9d62944",
+          "sourceId": "real-docs:00043",
+          "url": "/records/real-docs%3A00043/"
+        },
+        {
+          "pagefindId": "en_c060416",
+          "sourceId": "real-docs:00009",
+          "url": "/records/real-docs%3A00009/"
+        },
+        {
+          "pagefindId": "en_41cba5f",
+          "sourceId": "real-docs:00077",
+          "url": "/records/real-docs%3A00077/"
+        },
+        {
+          "pagefindId": "en_6b7e3f2",
+          "sourceId": "real-docs:00018",
+          "url": "/records/real-docs%3A00018/"
+        },
+        {
+          "pagefindId": "en_f62415d",
+          "sourceId": "real-docs:00052",
+          "url": "/records/real-docs%3A00052/"
+        },
+        {
+          "pagefindId": "en_6c443ab",
+          "sourceId": "real-docs:00086",
+          "url": "/records/real-docs%3A00086/"
+        },
+        {
+          "pagefindId": "en_2954dab",
+          "sourceId": "real-docs:00016",
+          "url": "/records/real-docs%3A00016/"
+        },
+        {
+          "pagefindId": "en_e5eba0e",
+          "sourceId": "real-docs:00050",
+          "url": "/records/real-docs%3A00050/"
+        },
+        {
+          "pagefindId": "en_daf5592",
+          "sourceId": "real-docs:00059",
+          "url": "/records/real-docs%3A00059/"
+        },
+        {
+          "pagefindId": "en_d882819",
+          "sourceId": "real-docs:00025",
+          "url": "/records/real-docs%3A00025/"
+        },
+        {
+          "pagefindId": "en_5516b4d",
+          "sourceId": "real-docs:00084",
+          "url": "/records/real-docs%3A00084/"
+        },
+        {
+          "pagefindId": "en_39b2885",
+          "sourceId": "real-docs:00093",
+          "url": "/records/real-docs%3A00093/"
+        },
+        {
+          "pagefindId": "en_8b7d6cd",
+          "sourceId": "real-docs:00072",
+          "url": "/records/real-docs%3A00072/"
+        },
+        {
+          "pagefindId": "en_206f858",
+          "sourceId": "real-docs:00004",
+          "url": "/records/real-docs%3A00004/"
+        },
+        {
+          "pagefindId": "en_8ee3333",
+          "sourceId": "real-docs:00038",
+          "url": "/records/real-docs%3A00038/"
+        },
+        {
+          "pagefindId": "en_7cca0a5",
+          "sourceId": "real-docs:00063",
+          "url": "/records/real-docs%3A00063/"
+        },
+        {
+          "pagefindId": "en_dd2a598",
+          "sourceId": "real-docs:00029",
+          "url": "/records/real-docs%3A00029/"
+        },
+        {
+          "pagefindId": "en_7982e12",
+          "sourceId": "real-docs:00097",
+          "url": "/records/real-docs%3A00097/"
+        },
+        {
+          "pagefindId": "en_4fa4ad1",
+          "sourceId": "real-docs:00044",
+          "url": "/records/real-docs%3A00044/"
+        },
+        {
+          "pagefindId": "en_fff081e",
+          "sourceId": "real-docs:00078",
+          "url": "/records/real-docs%3A00078/"
+        },
+        {
+          "pagefindId": "en_adcf907",
+          "sourceId": "real-docs:00010",
+          "url": "/records/real-docs%3A00010/"
+        },
+        {
+          "pagefindId": "en_d547958",
+          "sourceId": "real-docs:00007",
+          "url": "/records/real-docs%3A00007/"
+        },
+        {
+          "pagefindId": "en_4bb3e15",
+          "sourceId": "real-docs:00041",
+          "url": "/records/real-docs%3A00041/"
+        },
+        {
+          "pagefindId": "en_dc5a9fc",
+          "sourceId": "real-docs:00075",
+          "url": "/records/real-docs%3A00075/"
+        },
+        {
+          "pagefindId": "en_d9e15e6",
+          "sourceId": "real-docs:00098",
+          "url": "/records/real-docs%3A00098/"
+        },
+        {
+          "pagefindId": "en_73931fe",
+          "sourceId": "real-docs:00064",
+          "url": "/records/real-docs%3A00064/"
+        },
+        {
+          "pagefindId": "en_5cddc1d",
+          "sourceId": "real-docs:00030",
+          "url": "/records/real-docs%3A00030/"
+        },
+        {
+          "pagefindId": "en_2b75bfd",
+          "sourceId": "real-docs:00091",
+          "url": "/records/real-docs%3A00091/"
+        },
+        {
+          "pagefindId": "en_795ad93",
+          "sourceId": "real-docs:00023",
+          "url": "/records/real-docs%3A00023/"
+        },
+        {
+          "pagefindId": "en_df86e75",
+          "sourceId": "real-docs:00057",
+          "url": "/records/real-docs%3A00057/"
+        },
+        {
+          "pagefindId": "en_a79f73a",
+          "sourceId": "real-docs:00027",
+          "url": "/records/real-docs%3A00027/"
+        },
+        {
+          "pagefindId": "en_405eb4e",
+          "sourceId": "real-docs:00061",
+          "url": "/records/real-docs%3A00061/"
+        },
+        {
+          "pagefindId": "en_e6b36d4",
+          "sourceId": "real-docs:00095",
+          "url": "/records/real-docs%3A00095/"
+        },
+        {
+          "pagefindId": "en_6377113",
+          "sourceId": "real-docs:00024",
+          "url": "/records/real-docs%3A00024/"
+        },
+        {
+          "pagefindId": "en_995a565",
+          "sourceId": "real-docs:00058",
+          "url": "/records/real-docs%3A00058/"
+        },
+        {
+          "pagefindId": "en_6c2a909",
+          "sourceId": "real-docs:00092",
+          "url": "/records/real-docs%3A00092/"
+        },
+        {
+          "pagefindId": "en_8e3da85",
+          "sourceId": "real-docs:00001",
+          "url": "/records/real-docs%3A00001/"
+        },
+        {
+          "pagefindId": "en_c88b8cb",
+          "sourceId": "real-docs:00069",
+          "url": "/records/real-docs%3A00069/"
+        },
+        {
+          "pagefindId": "en_b9c6bdd",
+          "sourceId": "real-docs:00035",
+          "url": "/records/real-docs%3A00035/"
+        },
+        {
+          "pagefindId": "en_2dcfb63",
+          "sourceId": "real-docs:00099",
+          "url": "/records/real-docs%3A00099/"
+        },
+        {
+          "pagefindId": "en_bf69b0f",
+          "sourceId": "real-docs:00065",
+          "url": "/records/real-docs%3A00065/"
+        },
+        {
+          "pagefindId": "en_a3b6f5d",
+          "sourceId": "real-docs:00031",
+          "url": "/records/real-docs%3A00031/"
+        },
+        {
+          "pagefindId": "en_1e89f48",
+          "sourceId": "real-docs:00062",
+          "url": "/records/real-docs%3A00062/"
+        },
+        {
+          "pagefindId": "en_8d8212a",
+          "sourceId": "real-docs:00028",
+          "url": "/records/real-docs%3A00028/"
+        },
+        {
+          "pagefindId": "en_45219a3",
+          "sourceId": "real-docs:00096",
+          "url": "/records/real-docs%3A00096/"
+        },
+        {
+          "pagefindId": "en_e3bc4e1",
+          "sourceId": "real-docs:00060",
+          "url": "/records/real-docs%3A00060/"
+        },
+        {
+          "pagefindId": "en_19aac8b",
+          "sourceId": "real-docs:00026",
+          "url": "/records/real-docs%3A00026/"
+        },
+        {
+          "pagefindId": "en_3f21aee",
+          "sourceId": "real-docs:00094",
+          "url": "/records/real-docs%3A00094/"
+        },
+        {
+          "pagefindId": "en_f6604fe",
+          "sourceId": "real-docs:00055",
+          "url": "/records/real-docs%3A00055/"
+        },
+        {
+          "pagefindId": "en_991ce5f",
+          "sourceId": "real-docs:00089",
+          "url": "/records/real-docs%3A00089/"
+        },
+        {
+          "pagefindId": "en_fb78465",
+          "sourceId": "real-docs:00021",
+          "url": "/records/real-docs%3A00021/"
+        },
+        {
+          "pagefindId": "en_9672a65",
+          "sourceId": "real-docs:00033",
+          "url": "/records/real-docs%3A00033/"
+        },
+        {
+          "pagefindId": "en_9548029",
+          "sourceId": "real-docs:00067",
+          "url": "/records/real-docs%3A00067/"
+        },
+        {
+          "pagefindId": "en_e571102",
+          "sourceId": "real-docs:00056",
+          "url": "/records/real-docs%3A00056/"
+        },
+        {
+          "pagefindId": "en_e31ee36",
+          "sourceId": "real-docs:00090",
+          "url": "/records/real-docs%3A00090/"
+        },
+        {
+          "pagefindId": "en_9a2d8d1",
+          "sourceId": "real-docs:00022",
+          "url": "/records/real-docs%3A00022/"
+        },
+        {
+          "pagefindId": "en_619dbad",
+          "sourceId": "real-docs:00019",
+          "url": "/records/real-docs%3A00019/"
+        },
+        {
+          "pagefindId": "en_9645cc6",
+          "sourceId": "real-docs:00087",
+          "url": "/records/real-docs%3A00087/"
+        },
+        {
+          "pagefindId": "en_4662652",
+          "sourceId": "real-docs:00053",
+          "url": "/records/real-docs%3A00053/"
+        },
+        {
+          "pagefindId": "en_d512463",
+          "sourceId": "real-docs:00036",
+          "url": "/records/real-docs%3A00036/"
+        },
+        {
+          "pagefindId": "en_508a884",
+          "sourceId": "real-docs:00002",
+          "url": "/records/real-docs%3A00002/"
+        },
+        {
+          "pagefindId": "en_1e2b31b",
+          "sourceId": "real-docs:00070",
+          "url": "/records/real-docs%3A00070/"
+        },
+        {
+          "pagefindId": "en_79be699",
+          "sourceId": "real-docs:00079",
+          "url": "/records/real-docs%3A00079/"
+        },
+        {
+          "pagefindId": "en_3f6b2ab",
+          "sourceId": "real-docs:00011",
+          "url": "/records/real-docs%3A00011/"
+        },
+        {
+          "pagefindId": "en_9728dc1",
+          "sourceId": "real-docs:00045",
+          "url": "/records/real-docs%3A00045/"
+        },
+        {
+          "pagefindId": "en_6595447",
+          "sourceId": "real-docs:00015",
+          "url": "/records/real-docs%3A00015/"
+        },
+        {
+          "pagefindId": "en_82cebf5",
+          "sourceId": "real-docs:00049",
+          "url": "/records/real-docs%3A00049/"
+        },
+        {
+          "pagefindId": "en_8a4b228",
+          "sourceId": "real-docs:00017",
+          "url": "/records/real-docs%3A00017/"
+        },
+        {
+          "pagefindId": "en_d7df9fd",
+          "sourceId": "real-docs:00083",
+          "url": "/records/real-docs%3A00083/"
+        },
+        {
+          "pagefindId": "en_f7994a3",
+          "sourceId": "real-docs:00085",
+          "url": "/records/real-docs%3A00085/"
+        },
+        {
+          "pagefindId": "en_75dbec1",
+          "sourceId": "real-docs:00051",
+          "url": "/records/real-docs%3A00051/"
+        },
+        {
+          "pagefindId": "en_d4162d6",
+          "sourceId": "real-docs:00005",
+          "url": "/records/real-docs%3A00005/"
+        },
+        {
+          "pagefindId": "en_82dbf57",
+          "sourceId": "real-docs:00073",
+          "url": "/records/real-docs%3A00073/"
+        },
+        {
+          "pagefindId": "en_1dff832",
+          "sourceId": "real-docs:00039",
+          "url": "/records/real-docs%3A00039/"
+        },
+        {
+          "pagefindId": "en_b434f16",
+          "sourceId": "real-docs:00042",
+          "url": "/records/real-docs%3A00042/"
+        },
+        {
+          "pagefindId": "en_b0a7507",
+          "sourceId": "real-docs:00076",
+          "url": "/records/real-docs%3A00076/"
+        },
+        {
+          "pagefindId": "en_1c7b5e1",
+          "sourceId": "real-docs:00008",
+          "url": "/records/real-docs%3A00008/"
+        },
+        {
+          "pagefindId": "en_16cceac",
+          "sourceId": "real-docs:00054",
+          "url": "/records/real-docs%3A00054/"
+        },
+        {
+          "pagefindId": "en_eb2a1a9",
+          "sourceId": "real-docs:00020",
+          "url": "/records/real-docs%3A00020/"
+        },
+        {
+          "pagefindId": "en_993d3d2",
+          "sourceId": "real-docs:00088",
+          "url": "/records/real-docs%3A00088/"
+        },
+        {
+          "pagefindId": "en_4719be8",
+          "sourceId": "real-docs:00082",
+          "url": "/records/real-docs%3A00082/"
+        },
+        {
+          "pagefindId": "en_78573c9",
+          "sourceId": "real-docs:00048",
+          "url": "/records/real-docs%3A00048/"
+        },
+        {
+          "pagefindId": "en_9231a73",
+          "sourceId": "real-docs:00014",
+          "url": "/records/real-docs%3A00014/"
+        }
+      ],
+      "p50WallMs": 0.5,
+      "p95WallMs": null,
+      "nativeMembershipEqual": false
+    },
+    {
+      "id": "rare",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "unqualified",
+      "warmupWallMs": [
+        0.3999999985098839,
+        0
+      ],
+      "wallMs": [
+        0.10000000149011612,
+        0,
+        0.10000000149011612,
+        0,
+        0.09999999776482582,
+        0.10000000149011612,
+        0,
+        0,
+        0.09999999776482582,
+        0.10000000149011612
+      ],
+      "total": 3,
+      "hydrated": [
+        {
+          "pagefindId": "en_d547958",
+          "sourceId": "real-docs:00007",
+          "url": "/records/real-docs%3A00007/"
+        },
+        {
+          "pagefindId": "en_4bb3e15",
+          "sourceId": "real-docs:00041",
+          "url": "/records/real-docs%3A00041/"
+        },
+        {
+          "pagefindId": "en_dc5a9fc",
+          "sourceId": "real-docs:00075",
+          "url": "/records/real-docs%3A00075/"
+        }
+      ],
+      "p50WallMs": 0.09999999776482582,
+      "p95WallMs": null,
+      "nativeMembershipEqual": true
+    },
+    {
+      "id": "overlapping-or",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    },
+    {
+      "id": "negative-only",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    },
+    {
+      "id": "filtered",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    },
+    {
+      "id": "narrow-prefix",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "snap",
+      "warmupWallMs": [
+        0.19999999925494194,
+        0.10000000149011612
+      ],
+      "wallMs": [
+        0,
+        0.19999999925494194,
+        0,
+        0,
+        0.10000000149011612,
+        0,
+        0,
+        0.09999999776482582,
+        0.10000000149011612,
+        0
+      ],
+      "total": 5,
+      "hydrated": [
+        {
+          "pagefindId": "en_9672a65",
+          "sourceId": "real-docs:00033",
+          "url": "/records/real-docs%3A00033/"
+        },
+        {
+          "pagefindId": "en_9548029",
+          "sourceId": "real-docs:00067",
+          "url": "/records/real-docs%3A00067/"
+        },
+        {
+          "pagefindId": "en_d547958",
+          "sourceId": "real-docs:00007",
+          "url": "/records/real-docs%3A00007/"
+        },
+        {
+          "pagefindId": "en_4bb3e15",
+          "sourceId": "real-docs:00041",
+          "url": "/records/real-docs%3A00041/"
+        },
+        {
+          "pagefindId": "en_dc5a9fc",
+          "sourceId": "real-docs:00075",
+          "url": "/records/real-docs%3A00075/"
+        }
+      ],
+      "p50WallMs": 0,
+      "p95WallMs": null,
+      "nativeMembershipEqual": true
+    },
+    {
+      "id": "broad-prefix",
+      "status": "Collected",
+      "comparability": "Not comparable",
+      "term": "re",
+      "warmupWallMs": [
+        0.9000000022351742,
+        0.5999999977648258
+      ],
+      "wallMs": [
+        0.6999999992549419,
+        0.5,
+        0.6000000014901161,
+        0.6000000014901161,
+        0.6999999992549419,
+        0.5999999977648258,
+        0.6000000014901161,
+        0.5,
+        0.6000000014901161,
+        0.5
+      ],
+      "total": 100,
+      "hydrated": [
+        {
+          "pagefindId": "en_3f21aee",
+          "sourceId": "real-docs:00094",
+          "url": "/records/real-docs%3A00094/"
+        },
+        {
+          "pagefindId": "en_19aac8b",
+          "sourceId": "real-docs:00026",
+          "url": "/records/real-docs%3A00026/"
+        },
+        {
+          "pagefindId": "en_e3bc4e1",
+          "sourceId": "real-docs:00060",
+          "url": "/records/real-docs%3A00060/"
+        },
+        {
+          "pagefindId": "en_c060416",
+          "sourceId": "real-docs:00009",
+          "url": "/records/real-docs%3A00009/"
+        },
+        {
+          "pagefindId": "en_9d62944",
+          "sourceId": "real-docs:00043",
+          "url": "/records/real-docs%3A00043/"
+        },
+        {
+          "pagefindId": "en_41cba5f",
+          "sourceId": "real-docs:00077",
+          "url": "/records/real-docs%3A00077/"
+        },
+        {
+          "pagefindId": "en_fb78465",
+          "sourceId": "real-docs:00021",
+          "url": "/records/real-docs%3A00021/"
+        },
+        {
+          "pagefindId": "en_f6604fe",
+          "sourceId": "real-docs:00055",
+          "url": "/records/real-docs%3A00055/"
+        },
+        {
+          "pagefindId": "en_991ce5f",
+          "sourceId": "real-docs:00089",
+          "url": "/records/real-docs%3A00089/"
+        },
+        {
+          "pagefindId": "en_e571102",
+          "sourceId": "real-docs:00056",
+          "url": "/records/real-docs%3A00056/"
+        },
+        {
+          "pagefindId": "en_9a2d8d1",
+          "sourceId": "real-docs:00022",
+          "url": "/records/real-docs%3A00022/"
+        },
+        {
+          "pagefindId": "en_e31ee36",
+          "sourceId": "real-docs:00090",
+          "url": "/records/real-docs%3A00090/"
+        },
+        {
+          "pagefindId": "en_9672a65",
+          "sourceId": "real-docs:00033",
+          "url": "/records/real-docs%3A00033/"
+        },
+        {
+          "pagefindId": "en_9548029",
+          "sourceId": "real-docs:00067",
+          "url": "/records/real-docs%3A00067/"
+        },
+        {
+          "pagefindId": "en_795ad93",
+          "sourceId": "real-docs:00023",
+          "url": "/records/real-docs%3A00023/"
+        },
+        {
+          "pagefindId": "en_df86e75",
+          "sourceId": "real-docs:00057",
+          "url": "/records/real-docs%3A00057/"
+        },
+        {
+          "pagefindId": "en_2b75bfd",
+          "sourceId": "real-docs:00091",
+          "url": "/records/real-docs%3A00091/"
+        },
+        {
+          "pagefindId": "en_d512463",
+          "sourceId": "real-docs:00036",
+          "url": "/records/real-docs%3A00036/"
+        },
+        {
+          "pagefindId": "en_508a884",
+          "sourceId": "real-docs:00002",
+          "url": "/records/real-docs%3A00002/"
+        },
+        {
+          "pagefindId": "en_1e2b31b",
+          "sourceId": "real-docs:00070",
+          "url": "/records/real-docs%3A00070/"
+        },
+        {
+          "pagefindId": "en_16cceac",
+          "sourceId": "real-docs:00054",
+          "url": "/records/real-docs%3A00054/"
+        },
+        {
+          "pagefindId": "en_eb2a1a9",
+          "sourceId": "real-docs:00020",
+          "url": "/records/real-docs%3A00020/"
+        },
+        {
+          "pagefindId": "en_993d3d2",
+          "sourceId": "real-docs:00088",
+          "url": "/records/real-docs%3A00088/"
+        },
+        {
+          "pagefindId": "en_995a565",
+          "sourceId": "real-docs:00058",
+          "url": "/records/real-docs%3A00058/"
+        },
+        {
+          "pagefindId": "en_6377113",
+          "sourceId": "real-docs:00024",
+          "url": "/records/real-docs%3A00024/"
+        },
+        {
+          "pagefindId": "en_6c2a909",
+          "sourceId": "real-docs:00092",
+          "url": "/records/real-docs%3A00092/"
+        },
+        {
+          "pagefindId": "en_1a472ea",
+          "sourceId": "real-docs:00032",
+          "url": "/records/real-docs%3A00032/"
+        },
+        {
+          "pagefindId": "en_66a5ef8",
+          "sourceId": "real-docs:00066",
+          "url": "/records/real-docs%3A00066/"
+        },
+        {
+          "pagefindId": "en_a3b6f5d",
+          "sourceId": "real-docs:00031",
+          "url": "/records/real-docs%3A00031/"
+        },
+        {
+          "pagefindId": "en_bf69b0f",
+          "sourceId": "real-docs:00065",
+          "url": "/records/real-docs%3A00065/"
+        },
+        {
+          "pagefindId": "en_2dcfb63",
+          "sourceId": "real-docs:00099",
+          "url": "/records/real-docs%3A00099/"
+        },
+        {
+          "pagefindId": "en_b654c4c",
+          "sourceId": "real-docs:00000",
+          "url": "/records/real-docs%3A00000/"
+        },
+        {
+          "pagefindId": "en_9b846ff",
+          "sourceId": "real-docs:00034",
+          "url": "/records/real-docs%3A00034/"
+        },
+        {
+          "pagefindId": "en_15bd306",
+          "sourceId": "real-docs:00068",
+          "url": "/records/real-docs%3A00068/"
+        },
+        {
+          "pagefindId": "en_1e89f48",
+          "sourceId": "real-docs:00062",
+          "url": "/records/real-docs%3A00062/"
+        },
+        {
+          "pagefindId": "en_8d8212a",
+          "sourceId": "real-docs:00028",
+          "url": "/records/real-docs%3A00028/"
+        },
+        {
+          "pagefindId": "en_45219a3",
+          "sourceId": "real-docs:00096",
+          "url": "/records/real-docs%3A00096/"
+        },
+        {
+          "pagefindId": "en_7982e12",
+          "sourceId": "real-docs:00097",
+          "url": "/records/real-docs%3A00097/"
+        },
+        {
+          "pagefindId": "en_7cca0a5",
+          "sourceId": "real-docs:00063",
+          "url": "/records/real-docs%3A00063/"
+        },
+        {
+          "pagefindId": "en_dd2a598",
+          "sourceId": "real-docs:00029",
+          "url": "/records/real-docs%3A00029/"
+        },
+        {
+          "pagefindId": "en_fe65d13",
+          "sourceId": "real-docs:00047",
+          "url": "/records/real-docs%3A00047/"
+        },
+        {
+          "pagefindId": "en_98a7709",
+          "sourceId": "real-docs:00081",
+          "url": "/records/real-docs%3A00081/"
+        },
+        {
+          "pagefindId": "en_ede2c0c",
+          "sourceId": "real-docs:00013",
+          "url": "/records/real-docs%3A00013/"
+        },
+        {
+          "pagefindId": "en_c075c4b",
+          "sourceId": "real-docs:00080",
+          "url": "/records/real-docs%3A00080/"
+        },
+        {
+          "pagefindId": "en_e2744cc",
+          "sourceId": "real-docs:00012",
+          "url": "/records/real-docs%3A00012/"
+        },
+        {
+          "pagefindId": "en_252c8b9",
+          "sourceId": "real-docs:00046",
+          "url": "/records/real-docs%3A00046/"
+        },
+        {
+          "pagefindId": "en_d4162d6",
+          "sourceId": "real-docs:00005",
+          "url": "/records/real-docs%3A00005/"
+        },
+        {
+          "pagefindId": "en_82dbf57",
+          "sourceId": "real-docs:00073",
+          "url": "/records/real-docs%3A00073/"
+        },
+        {
+          "pagefindId": "en_1dff832",
+          "sourceId": "real-docs:00039",
+          "url": "/records/real-docs%3A00039/"
+        },
+        {
+          "pagefindId": "en_812ea4c",
+          "sourceId": "real-docs:00003",
+          "url": "/records/real-docs%3A00003/"
+        },
+        {
+          "pagefindId": "en_c8c6334",
+          "sourceId": "real-docs:00071",
+          "url": "/records/real-docs%3A00071/"
+        },
+        {
+          "pagefindId": "en_893b90d",
+          "sourceId": "real-docs:00037",
+          "url": "/records/real-docs%3A00037/"
+        },
+        {
+          "pagefindId": "en_79be699",
+          "sourceId": "real-docs:00079",
+          "url": "/records/real-docs%3A00079/"
+        },
+        {
+          "pagefindId": "en_3f6b2ab",
+          "sourceId": "real-docs:00011",
+          "url": "/records/real-docs%3A00011/"
+        },
+        {
+          "pagefindId": "en_9728dc1",
+          "sourceId": "real-docs:00045",
+          "url": "/records/real-docs%3A00045/"
+        },
+        {
+          "pagefindId": "en_a79f73a",
+          "sourceId": "real-docs:00027",
+          "url": "/records/real-docs%3A00027/"
+        },
+        {
+          "pagefindId": "en_405eb4e",
+          "sourceId": "real-docs:00061",
+          "url": "/records/real-docs%3A00061/"
+        },
+        {
+          "pagefindId": "en_e6b36d4",
+          "sourceId": "real-docs:00095",
+          "url": "/records/real-docs%3A00095/"
+        },
+        {
+          "pagefindId": "en_98609a4",
+          "sourceId": "real-docs:00074",
+          "url": "/records/real-docs%3A00074/"
+        },
+        {
+          "pagefindId": "en_bb646c3",
+          "sourceId": "real-docs:00040",
+          "url": "/records/real-docs%3A00040/"
+        },
+        {
+          "pagefindId": "en_3b658c4",
+          "sourceId": "real-docs:00006",
+          "url": "/records/real-docs%3A00006/"
+        },
+        {
+          "pagefindId": "en_206f858",
+          "sourceId": "real-docs:00004",
+          "url": "/records/real-docs%3A00004/"
+        },
+        {
+          "pagefindId": "en_8ee3333",
+          "sourceId": "real-docs:00038",
+          "url": "/records/real-docs%3A00038/"
+        },
+        {
+          "pagefindId": "en_8b7d6cd",
+          "sourceId": "real-docs:00072",
+          "url": "/records/real-docs%3A00072/"
+        },
+        {
+          "pagefindId": "en_fff081e",
+          "sourceId": "real-docs:00078",
+          "url": "/records/real-docs%3A00078/"
+        },
+        {
+          "pagefindId": "en_4fa4ad1",
+          "sourceId": "real-docs:00044",
+          "url": "/records/real-docs%3A00044/"
+        },
+        {
+          "pagefindId": "en_adcf907",
+          "sourceId": "real-docs:00010",
+          "url": "/records/real-docs%3A00010/"
+        },
+        {
+          "pagefindId": "en_78573c9",
+          "sourceId": "real-docs:00048",
+          "url": "/records/real-docs%3A00048/"
+        },
+        {
+          "pagefindId": "en_4719be8",
+          "sourceId": "real-docs:00082",
+          "url": "/records/real-docs%3A00082/"
+        },
+        {
+          "pagefindId": "en_9231a73",
+          "sourceId": "real-docs:00014",
+          "url": "/records/real-docs%3A00014/"
+        },
+        {
+          "pagefindId": "en_dc5a9fc",
+          "sourceId": "real-docs:00075",
+          "url": "/records/real-docs%3A00075/"
+        },
+        {
+          "pagefindId": "en_d547958",
+          "sourceId": "real-docs:00007",
+          "url": "/records/real-docs%3A00007/"
+        },
+        {
+          "pagefindId": "en_4bb3e15",
+          "sourceId": "real-docs:00041",
+          "url": "/records/real-docs%3A00041/"
+        },
+        {
+          "pagefindId": "en_619dbad",
+          "sourceId": "real-docs:00019",
+          "url": "/records/real-docs%3A00019/"
+        },
+        {
+          "pagefindId": "en_9645cc6",
+          "sourceId": "real-docs:00087",
+          "url": "/records/real-docs%3A00087/"
+        },
+        {
+          "pagefindId": "en_4662652",
+          "sourceId": "real-docs:00053",
+          "url": "/records/real-docs%3A00053/"
+        },
+        {
+          "pagefindId": "en_d9e15e6",
+          "sourceId": "real-docs:00098",
+          "url": "/records/real-docs%3A00098/"
+        },
+        {
+          "pagefindId": "en_5cddc1d",
+          "sourceId": "real-docs:00030",
+          "url": "/records/real-docs%3A00030/"
+        },
+        {
+          "pagefindId": "en_73931fe",
+          "sourceId": "real-docs:00064",
+          "url": "/records/real-docs%3A00064/"
+        },
+        {
+          "pagefindId": "en_6b7e3f2",
+          "sourceId": "real-docs:00018",
+          "url": "/records/real-docs%3A00018/"
+        },
+        {
+          "pagefindId": "en_f62415d",
+          "sourceId": "real-docs:00052",
+          "url": "/records/real-docs%3A00052/"
+        },
+        {
+          "pagefindId": "en_6c443ab",
+          "sourceId": "real-docs:00086",
+          "url": "/records/real-docs%3A00086/"
+        },
+        {
+          "pagefindId": "en_39b2885",
+          "sourceId": "real-docs:00093",
+          "url": "/records/real-docs%3A00093/"
+        },
+        {
+          "pagefindId": "en_daf5592",
+          "sourceId": "real-docs:00059",
+          "url": "/records/real-docs%3A00059/"
+        },
+        {
+          "pagefindId": "en_d882819",
+          "sourceId": "real-docs:00025",
+          "url": "/records/real-docs%3A00025/"
+        },
+        {
+          "pagefindId": "en_82cebf5",
+          "sourceId": "real-docs:00049",
+          "url": "/records/real-docs%3A00049/"
+        },
+        {
+          "pagefindId": "en_6595447",
+          "sourceId": "real-docs:00015",
+          "url": "/records/real-docs%3A00015/"
+        },
+        {
+          "pagefindId": "en_d7df9fd",
+          "sourceId": "real-docs:00083",
+          "url": "/records/real-docs%3A00083/"
+        },
+        {
+          "pagefindId": "en_8e3da85",
+          "sourceId": "real-docs:00001",
+          "url": "/records/real-docs%3A00001/"
+        },
+        {
+          "pagefindId": "en_c88b8cb",
+          "sourceId": "real-docs:00069",
+          "url": "/records/real-docs%3A00069/"
+        },
+        {
+          "pagefindId": "en_b9c6bdd",
+          "sourceId": "real-docs:00035",
+          "url": "/records/real-docs%3A00035/"
+        },
+        {
+          "pagefindId": "en_b434f16",
+          "sourceId": "real-docs:00042",
+          "url": "/records/real-docs%3A00042/"
+        },
+        {
+          "pagefindId": "en_5516b4d",
+          "sourceId": "real-docs:00084",
+          "url": "/records/real-docs%3A00084/"
+        },
+        {
+          "pagefindId": "en_f7994a3",
+          "sourceId": "real-docs:00085",
+          "url": "/records/real-docs%3A00085/"
+        },
+        {
+          "pagefindId": "en_b0a7507",
+          "sourceId": "real-docs:00076",
+          "url": "/records/real-docs%3A00076/"
+        },
+        {
+          "pagefindId": "en_e5eba0e",
+          "sourceId": "real-docs:00050",
+          "url": "/records/real-docs%3A00050/"
+        },
+        {
+          "pagefindId": "en_75dbec1",
+          "sourceId": "real-docs:00051",
+          "url": "/records/real-docs%3A00051/"
+        },
+        {
+          "pagefindId": "en_8a4b228",
+          "sourceId": "real-docs:00017",
+          "url": "/records/real-docs%3A00017/"
+        },
+        {
+          "pagefindId": "en_1c7b5e1",
+          "sourceId": "real-docs:00008",
+          "url": "/records/real-docs%3A00008/"
+        },
+        {
+          "pagefindId": "en_2954dab",
+          "sourceId": "real-docs:00016",
+          "url": "/records/real-docs%3A00016/"
+        }
+      ],
+      "p50WallMs": 0.6000000014901161,
+      "p95WallMs": null,
+      "nativeMembershipEqual": false
+    },
+    {
+      "id": "source-phrase",
+      "status": "Not comparable",
+      "reason": "Static Pagefind language/stemming/prefix model and generated index differ; native operators/phrases/transactions not emulated."
+    }
+  ],
+  "errors": [],
+  "requests": [
+    "http://127.0.0.1:50855/",
+    "http://127.0.0.1:50855/pagefind/pagefind.js",
+    "http://127.0.0.1:50855/pagefind/pagefind-worker.js",
+    "http://127.0.0.1:50855/pagefind/pagefind-entry.json?ts=1793818305432",
+    "http://127.0.0.1:50855/pagefind/pagefind.en_21e9cc5cb7.pf_meta",
+    "http://127.0.0.1:50855/pagefind/wasm.en.pagefind",
+    "http://127.0.0.1:50855/pagefind/index/en_4c5423c.pf_index",
+    "http://127.0.0.1:50855/pagefind/fragment/en_812ea4c.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_893b90d.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_c8c6334.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_3b658c4.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_bb646c3.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_98609a4.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_e2744cc.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_252c8b9.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_c075c4b.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9b846ff.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_15bd306.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_b654c4c.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_ede2c0c.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_fe65d13.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_98a7709.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_1a472ea.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_66a5ef8.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9d62944.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_c060416.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_41cba5f.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_6b7e3f2.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_f62415d.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_6c443ab.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_2954dab.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_e5eba0e.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_daf5592.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_d882819.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_5516b4d.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_39b2885.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_8b7d6cd.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_206f858.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_8ee3333.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_7cca0a5.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_dd2a598.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_7982e12.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_4fa4ad1.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_fff081e.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_adcf907.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_d547958.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_4bb3e15.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_dc5a9fc.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_d9e15e6.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_73931fe.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_5cddc1d.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_2b75bfd.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_795ad93.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_df86e75.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_a79f73a.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_405eb4e.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_e6b36d4.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_6377113.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_995a565.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_6c2a909.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_8e3da85.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_c88b8cb.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_b9c6bdd.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_2dcfb63.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_bf69b0f.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_a3b6f5d.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_1e89f48.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_8d8212a.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_45219a3.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_e3bc4e1.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_19aac8b.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_3f21aee.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_f6604fe.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_991ce5f.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_fb78465.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9672a65.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9548029.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_e571102.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_e31ee36.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9a2d8d1.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_619dbad.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9645cc6.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_4662652.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_d512463.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_508a884.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_1e2b31b.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_79be699.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_3f6b2ab.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9728dc1.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_6595447.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_82cebf5.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_8a4b228.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_d7df9fd.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_f7994a3.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_75dbec1.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_d4162d6.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_82dbf57.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_1dff832.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_b434f16.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_b0a7507.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_1c7b5e1.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_16cceac.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_eb2a1a9.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_993d3d2.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_4719be8.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_78573c9.pf_fragment",
+    "http://127.0.0.1:50855/pagefind/fragment/en_9231a73.pf_fragment"
+  ],
+  "files": [
+    {
+      "path": "pagefind/fragment/en_15bd306.pf_fragment",
+      "bytes": 436,
+      "sha256": "18a397f45752b6adbe18d9918ce5987661763449d8a9a624d8b6593964333e58"
+    },
+    {
+      "path": "pagefind/fragment/en_16cceac.pf_fragment",
+      "bytes": 430,
+      "sha256": "e5c265690cf4ddd3aca0b73b45a868b77301c705115c06780604e8c490cdd7de"
+    },
+    {
+      "path": "pagefind/fragment/en_19aac8b.pf_fragment",
+      "bytes": 415,
+      "sha256": "ffbcbd6b4bda893d0cc130aa3642ed4e82ec313cf448a5246fff84f4418c409a"
+    },
+    {
+      "path": "pagefind/fragment/en_1a472ea.pf_fragment",
+      "bytes": 418,
+      "sha256": "a2d684331e1930e6df9598dcc915e9d5f04ac9104e6ab9333cc6ccf81555d4b0"
+    },
+    {
+      "path": "pagefind/fragment/en_1c7b5e1.pf_fragment",
+      "bytes": 389,
+      "sha256": "6ffdd4bc8c9be5367dd6b05a3370826377c23e908827c0f6b67b3dfb3ab7539a"
+    },
+    {
+      "path": "pagefind/fragment/en_1dff832.pf_fragment",
+      "bytes": 433,
+      "sha256": "347f423e75b4729dcf485feb1794820fa297dc5156fd11e4045cb2798dfe01fe"
+    },
+    {
+      "path": "pagefind/fragment/en_1e2b31b.pf_fragment",
+      "bytes": 398,
+      "sha256": "4b4cb589faf0e362db6687ed8709ead536af22c4a7f6aaff6ffb321ea21b5559"
+    },
+    {
+      "path": "pagefind/fragment/en_1e89f48.pf_fragment",
+      "bytes": 418,
+      "sha256": "41a6fdf105500cf66e8d4eae3038d46ad32de32254514aa0f98c2bb3f50874c6"
+    },
+    {
+      "path": "pagefind/fragment/en_206f858.pf_fragment",
+      "bytes": 429,
+      "sha256": "209ea75eefb7f200297df11d8042040d7f859521ddf72575e23db87fe16c680d"
+    },
+    {
+      "path": "pagefind/fragment/en_252c8b9.pf_fragment",
+      "bytes": 436,
+      "sha256": "d99d5a40a46156a6eac6940b9ec1fc2d92f1a008f3d9d0bc61ccb7529c549589"
+    },
+    {
+      "path": "pagefind/fragment/en_2954dab.pf_fragment",
+      "bytes": 407,
+      "sha256": "db56920e5f0fb9ec3820ac19ab473d8e45908ce474d41518fda875b3dbba263e"
+    },
+    {
+      "path": "pagefind/fragment/en_2b75bfd.pf_fragment",
+      "bytes": 441,
+      "sha256": "16cc7d6d0d6bd7c88d6761e23be5370f8716a9c1cee71bba9fbac86b1c48d1d6"
+    },
+    {
+      "path": "pagefind/fragment/en_2dcfb63.pf_fragment",
+      "bytes": 422,
+      "sha256": "ca4fc0967c79d07ad1b9e9ee4ea266e38995d8154b8250f9a98c384c4e62134b"
+    },
+    {
+      "path": "pagefind/fragment/en_39b2885.pf_fragment",
+      "bytes": 428,
+      "sha256": "12e3c605455f5dcc4606fe4dd18094065eceef78a649c8274939edeb6cbed48b"
+    },
+    {
+      "path": "pagefind/fragment/en_3b658c4.pf_fragment",
+      "bytes": 391,
+      "sha256": "bdbe41a175316b4193625b25b14c4b2e4bb578c4d9ed06511a3eed32f1807a07"
+    },
+    {
+      "path": "pagefind/fragment/en_3f21aee.pf_fragment",
+      "bytes": 415,
+      "sha256": "647a16a5e999104b57e5ada9bf4ffefe3c67b5862fa2bbb24362207544487245"
+    },
+    {
+      "path": "pagefind/fragment/en_3f6b2ab.pf_fragment",
+      "bytes": 416,
+      "sha256": "74af9ecfcab5ad1cb39ee59eb6d64e46670ef70335a3dfe18ce6b1cd5ef5e10e"
+    },
+    {
+      "path": "pagefind/fragment/en_405eb4e.pf_fragment",
+      "bytes": 431,
+      "sha256": "c002aaa831c64f472c38d61404284a17a14bd15078a4ba132aa9c9bc659a951c"
+    },
+    {
+      "path": "pagefind/fragment/en_41cba5f.pf_fragment",
+      "bytes": 420,
+      "sha256": "59e7faa7543a5061cbf1248ee86452af29fda5526def6346c9cebeca3a9f3d28"
+    },
+    {
+      "path": "pagefind/fragment/en_45219a3.pf_fragment",
+      "bytes": 418,
+      "sha256": "f1d3d97b4d417da203b970fc470f746e523c7d11144ec6373980c0e1a21495b2"
+    },
+    {
+      "path": "pagefind/fragment/en_4662652.pf_fragment",
+      "bytes": 431,
+      "sha256": "4090b4af30d0b5f1e4d302baf327c5dfbf01fa59d9c8a2847978e533adb2d099"
+    },
+    {
+      "path": "pagefind/fragment/en_4719be8.pf_fragment",
+      "bytes": 391,
+      "sha256": "68160a9686072fa3485a6c85ff3732454e7179462f71dc55e694aa473740d3e1"
+    },
+    {
+      "path": "pagefind/fragment/en_4bb3e15.pf_fragment",
+      "bytes": 426,
+      "sha256": "ca2b1f4df9f0defe84cae186fffc685db5d926408b960e8fd059f61d657a0bd4"
+    },
+    {
+      "path": "pagefind/fragment/en_4fa4ad1.pf_fragment",
+      "bytes": 393,
+      "sha256": "8bb0dd18c3c5e5394021a4c1eb774b82e0d7b515c136f92a0dc12fdaa1975171"
+    },
+    {
+      "path": "pagefind/fragment/en_508a884.pf_fragment",
+      "bytes": 397,
+      "sha256": "e959485c4624c8db2c6eb3854283374f22ba6c6977865f525c348fff71e54064"
+    },
+    {
+      "path": "pagefind/fragment/en_5516b4d.pf_fragment",
+      "bytes": 408,
+      "sha256": "3c3baa05dd1f04bd3d6c100171fd7ce6e4093d8105c2635579e96d24acfb92ad"
+    },
+    {
+      "path": "pagefind/fragment/en_5cddc1d.pf_fragment",
+      "bytes": 450,
+      "sha256": "0633025f8f9ab8da3f2d5d5c6ade7db388fa425df4d6c944bb19cd85ec081c60"
+    },
+    {
+      "path": "pagefind/fragment/en_619dbad.pf_fragment",
+      "bytes": 431,
+      "sha256": "7f1576479c206f5defe709a5323eaee3b51d51f274f15e16a16190605f5dde89"
+    },
+    {
+      "path": "pagefind/fragment/en_6377113.pf_fragment",
+      "bytes": 421,
+      "sha256": "d829a1db8875e3504c11e3d43d4532193beaf98a9e70bb7bc715def280e7b00b"
+    },
+    {
+      "path": "pagefind/fragment/en_6595447.pf_fragment",
+      "bytes": 415,
+      "sha256": "d8ada810266b6c24afe8314f7e0aef0a0c3c57f308683800fcc7fe026b4a8e35"
+    },
+    {
+      "path": "pagefind/fragment/en_66a5ef8.pf_fragment",
+      "bytes": 418,
+      "sha256": "d0d82bcfcefaa4df3cc5b426b5dd26123d2d97b90c3718601abf4d7c16119f90"
+    },
+    {
+      "path": "pagefind/fragment/en_6b7e3f2.pf_fragment",
+      "bytes": 398,
+      "sha256": "a6260dc0ef95edc7b516a84ac99ac49bf6347868f86a36351eb371db3a6ffb6e"
+    },
+    {
+      "path": "pagefind/fragment/en_6c2a909.pf_fragment",
+      "bytes": 420,
+      "sha256": "b3e0cdacafab8fd323b37e56f47644ca675955a42a1091b0885cd6e80343a04c"
+    },
+    {
+      "path": "pagefind/fragment/en_6c443ab.pf_fragment",
+      "bytes": 398,
+      "sha256": "8cb11b496bb602306ebded402476c811a186ba053ba4396ef91bc40c63f49594"
+    },
+    {
+      "path": "pagefind/fragment/en_73931fe.pf_fragment",
+      "bytes": 450,
+      "sha256": "1cc14214cc1f9780a8b5b879dd72a50c3fe6734a93e3ec72fa860b5d12397811"
+    },
+    {
+      "path": "pagefind/fragment/en_75dbec1.pf_fragment",
+      "bytes": 397,
+      "sha256": "b09cf08558ab29745f6c81babf6b6e0ce9ec0458cc71a9ac8c9bea28c6b401c7"
+    },
+    {
+      "path": "pagefind/fragment/en_78573c9.pf_fragment",
+      "bytes": 390,
+      "sha256": "60373e31cc251f524453d0a8e3141a4498571761ee7dfc639175b76435967472"
+    },
+    {
+      "path": "pagefind/fragment/en_795ad93.pf_fragment",
+      "bytes": 441,
+      "sha256": "98d442c87efa79f514360734caff620957d19a24628ad9c1dbd21a118f9a5a66"
+    },
+    {
+      "path": "pagefind/fragment/en_7982e12.pf_fragment",
+      "bytes": 437,
+      "sha256": "a9fe9a92f292601e0ff618abb23dbb0b43d23598cad8bdc484454c1f19b5c816"
+    },
+    {
+      "path": "pagefind/fragment/en_79be699.pf_fragment",
+      "bytes": 417,
+      "sha256": "4d05c0748bf4b876d5fc929075e63e17d138215f9f3321004f5d7d381fa57109"
+    },
+    {
+      "path": "pagefind/fragment/en_7cca0a5.pf_fragment",
+      "bytes": 436,
+      "sha256": "6ac91881b4f5df62bdf9e61238073624d9b0070f883eb0f966131a11855a017c"
+    },
+    {
+      "path": "pagefind/fragment/en_812ea4c.pf_fragment",
+      "bytes": 417,
+      "sha256": "c218ad8481383eaa3c78ced9ba6acb9f95a940c937c627dab459b3aa1b59cd82"
+    },
+    {
+      "path": "pagefind/fragment/en_82cebf5.pf_fragment",
+      "bytes": 416,
+      "sha256": "cb8bef9db65ca4f9db607b7a0e102365c9862f9dd46af5a61753f125b2d8b56c"
+    },
+    {
+      "path": "pagefind/fragment/en_82dbf57.pf_fragment",
+      "bytes": 433,
+      "sha256": "2443eb2a44a182d14704d3f25f2f7a3921d91463884f8b8466cab1047853211a"
+    },
+    {
+      "path": "pagefind/fragment/en_893b90d.pf_fragment",
+      "bytes": 417,
+      "sha256": "a2692f35e2934ad6353c4c6c509a208aed35754edc359d049a6beb5c82b57216"
+    },
+    {
+      "path": "pagefind/fragment/en_8a4b228.pf_fragment",
+      "bytes": 397,
+      "sha256": "bb773d7b095c53a3f789b778399d50d5f1c92ad9428607281fbb5cca7f2d30f6"
+    },
+    {
+      "path": "pagefind/fragment/en_8b7d6cd.pf_fragment",
+      "bytes": 431,
+      "sha256": "138fc08ff99263cccb3085179f2f60fa7caaf2997184560ea129c67e13488a85"
+    },
+    {
+      "path": "pagefind/fragment/en_8d8212a.pf_fragment",
+      "bytes": 418,
+      "sha256": "ec8453f5d6d8ec716796b58a06b634a1782264017b7761cc29c8a9f97e1ba6dd"
+    },
+    {
+      "path": "pagefind/fragment/en_8e3da85.pf_fragment",
+      "bytes": 361,
+      "sha256": "0213026db537f4742a41e8e65558c1027656adf2a2d722c214f3d7184e011d27"
+    },
+    {
+      "path": "pagefind/fragment/en_8ee3333.pf_fragment",
+      "bytes": 431,
+      "sha256": "ebc9af41f9fe304d6b0cda0883a01be923e57fe77c07ac8453111bd808d9a5c5"
+    },
+    {
+      "path": "pagefind/fragment/en_9231a73.pf_fragment",
+      "bytes": 390,
+      "sha256": "a391f343b2a3b00271c32dea86df6b3492b3f9394a070190013ba57c92fc55b0"
+    },
+    {
+      "path": "pagefind/fragment/en_9548029.pf_fragment",
+      "bytes": 415,
+      "sha256": "af1f93bf4dc9a7b8681791fe73dabe028b0c2bff0f48494689e1d30a483fedaf"
+    },
+    {
+      "path": "pagefind/fragment/en_9645cc6.pf_fragment",
+      "bytes": 431,
+      "sha256": "afd19865d3efce3f3f2e7e1ca49f20b54105bb34e38c5268dc08cb7e4f48239d"
+    },
+    {
+      "path": "pagefind/fragment/en_9672a65.pf_fragment",
+      "bytes": 414,
+      "sha256": "823ab50c06acf98b14578ece7f8890ed53de6f1d15a3a3dbdd25ba999892c522"
+    },
+    {
+      "path": "pagefind/fragment/en_9728dc1.pf_fragment",
+      "bytes": 417,
+      "sha256": "186d3fa91ffb6a44fd21e638c975dabcf92017c585cb68f1c5b65023621a6f18"
+    },
+    {
+      "path": "pagefind/fragment/en_98609a4.pf_fragment",
+      "bytes": 394,
+      "sha256": "56c7dffdce7317e217b18b3f9bfaf8608a5e40025ef3c3a3d739f732dce830ce"
+    },
+    {
+      "path": "pagefind/fragment/en_98a7709.pf_fragment",
+      "bytes": 395,
+      "sha256": "796b972e490cd477e6c4c6a6f687dda1a825cb2105db08cff2d518dd7afd2c48"
+    },
+    {
+      "path": "pagefind/fragment/en_991ce5f.pf_fragment",
+      "bytes": 430,
+      "sha256": "662307460fc491ae55d1446dd93e4324150befe091e4693995edc9e9efb4dbe5"
+    },
+    {
+      "path": "pagefind/fragment/en_993d3d2.pf_fragment",
+      "bytes": 431,
+      "sha256": "785f1dd9d41ef22a4df01ad8b1e3437fd7498331fafaaa9989cbed128d68947a"
+    },
+    {
+      "path": "pagefind/fragment/en_995a565.pf_fragment",
+      "bytes": 421,
+      "sha256": "e962679ccfa0661a21a2cbf4c9b324b03ed4e5fb122ba5249f0fc2093bda73f8"
+    },
+    {
+      "path": "pagefind/fragment/en_9a2d8d1.pf_fragment",
+      "bytes": 418,
+      "sha256": "50621f00b169a129f0b1bc582e21c2ecbb63c55acb5247efad11349dc3e8f306"
+    },
+    {
+      "path": "pagefind/fragment/en_9b846ff.pf_fragment",
+      "bytes": 437,
+      "sha256": "b1b989df296bceb17f4dacbcae74926add61bd4a008677b801b87122fa617e92"
+    },
+    {
+      "path": "pagefind/fragment/en_9d62944.pf_fragment",
+      "bytes": 420,
+      "sha256": "e1a9b109abdf1f2407f91d0e139ab26097779924fdd4e971af7acb0795f5f0fa"
+    },
+    {
+      "path": "pagefind/fragment/en_a3b6f5d.pf_fragment",
+      "bytes": 422,
+      "sha256": "ea926cfd1ac84b2cbe8c6b56407451c4d23839c65fb8a8fe14d9ed4cdce640d6"
+    },
+    {
+      "path": "pagefind/fragment/en_a79f73a.pf_fragment",
+      "bytes": 431,
+      "sha256": "2914ae50b92f10183cd13e0c8d28ff28613f6e2ebc1300cb2d31fcc72eb3d7b9"
+    },
+    {
+      "path": "pagefind/fragment/en_adcf907.pf_fragment",
+      "bytes": 393,
+      "sha256": "5be1666a86e79329b2e52ee55128113e01b4a5f41766f01401ddb341321229d3"
+    },
+    {
+      "path": "pagefind/fragment/en_b0a7507.pf_fragment",
+      "bytes": 392,
+      "sha256": "263c763f0940ce96349a832cd9e082548a2c36899a270b7ce8ac98a1f57d65e8"
+    },
+    {
+      "path": "pagefind/fragment/en_b434f16.pf_fragment",
+      "bytes": 391,
+      "sha256": "af9ae60eb0d6ab6f26f294b3147019c8aa3c0bb594dfd91df312222b6e6c7bab"
+    },
+    {
+      "path": "pagefind/fragment/en_b654c4c.pf_fragment",
+      "bytes": 434,
+      "sha256": "8246e61b59ab5969e90ca8126a04b6e24641128bd4c5c3e2eb88e19b1b3ed56e"
+    },
+    {
+      "path": "pagefind/fragment/en_b9c6bdd.pf_fragment",
+      "bytes": 363,
+      "sha256": "71b1eb2a7c045a56c21026840d48f1d986c5046a5a42ca693994dde27fc118a6"
+    },
+    {
+      "path": "pagefind/fragment/en_bb646c3.pf_fragment",
+      "bytes": 394,
+      "sha256": "502b6da0a7247f538e0b8dcdcaa50c45293a21cbdf225903cb07aeb010705aaf"
+    },
+    {
+      "path": "pagefind/fragment/en_bf69b0f.pf_fragment",
+      "bytes": 422,
+      "sha256": "a8e57396437acd12c024b43227d49bbc9f0ab955130ce4265b76d6563f0a209f"
+    },
+    {
+      "path": "pagefind/fragment/en_c060416.pf_fragment",
+      "bytes": 419,
+      "sha256": "0054a148e5e5bf01e59ca51ec6b5f8a901d21b9a327af773e75f004b4be61288"
+    },
+    {
+      "path": "pagefind/fragment/en_c075c4b.pf_fragment",
+      "bytes": 436,
+      "sha256": "cc24d21a3c20f253d471cb952a92322f630e3aa4a48fe289b9a3c10fe2103902"
+    },
+    {
+      "path": "pagefind/fragment/en_c88b8cb.pf_fragment",
+      "bytes": 363,
+      "sha256": "ae6d59d5be214877c958230974c1c0ea2fff6a9952f62a4b854d814636d0fa3d"
+    },
+    {
+      "path": "pagefind/fragment/en_c8c6334.pf_fragment",
+      "bytes": 418,
+      "sha256": "5eed6002502b104f0b4249e8b5e6c514ed6e97fee1fce972341bd112506ebc0c"
+    },
+    {
+      "path": "pagefind/fragment/en_d4162d6.pf_fragment",
+      "bytes": 434,
+      "sha256": "6dbb4619d3d4ac89e76875a2d9438fc29aec5b01370b67650b8bf35028f8eaab"
+    },
+    {
+      "path": "pagefind/fragment/en_d512463.pf_fragment",
+      "bytes": 399,
+      "sha256": "54c584b9c8a78fca93d8cfae952e3fdb491e00758305d5fe8ddc33fe73656dac"
+    },
+    {
+      "path": "pagefind/fragment/en_d547958.pf_fragment",
+      "bytes": 425,
+      "sha256": "66fbc23202a964297fc813d9b3f4c2fec891f63d42c373bd5e560a01c01b9339"
+    },
+    {
+      "path": "pagefind/fragment/en_d7df9fd.pf_fragment",
+      "bytes": 415,
+      "sha256": "ca52391d66e1806ce32039d5c00138cc125ef38d121b01d56da99e0afa4d1b26"
+    },
+    {
+      "path": "pagefind/fragment/en_d882819.pf_fragment",
+      "bytes": 428,
+      "sha256": "da40681dc3486ed7115f7e65f97a3c67431028ade42ef48a9e08776672246e03"
+    },
+    {
+      "path": "pagefind/fragment/en_d9e15e6.pf_fragment",
+      "bytes": 451,
+      "sha256": "1ae337a260154e5a32f6bf4e6d6ccdcc9d08d707663896139bdf6a3f1b9936a9"
+    },
+    {
+      "path": "pagefind/fragment/en_daf5592.pf_fragment",
+      "bytes": 428,
+      "sha256": "d8bdc64c25f893887078c886f694e2c31495062a131e73523fd26f1355259fed"
+    },
+    {
+      "path": "pagefind/fragment/en_dc5a9fc.pf_fragment",
+      "bytes": 426,
+      "sha256": "7d2f3904af99382afb1f3ef0eb7df24bcc9beb51bf86c89517a59c7c334f96a7"
+    },
+    {
+      "path": "pagefind/fragment/en_dd2a598.pf_fragment",
+      "bytes": 437,
+      "sha256": "0a952eb625712d0559d8ab87b34b6803f615f108c987614aa047de61430afd03"
+    },
+    {
+      "path": "pagefind/fragment/en_df86e75.pf_fragment",
+      "bytes": 441,
+      "sha256": "881362748646e5b845964e36848a398c0f7c57aa7f6fdad9c553564897789388"
+    },
+    {
+      "path": "pagefind/fragment/en_e2744cc.pf_fragment",
+      "bytes": 435,
+      "sha256": "1d9072216df8ab325f0088d57a91cd61d9ea5c9dbf241ee9b6f30128ae8d86d2"
+    },
+    {
+      "path": "pagefind/fragment/en_e31ee36.pf_fragment",
+      "bytes": 417,
+      "sha256": "ab541c2727aa61b3f51f93beece4ac2cc135a62951fd21b6332de4f811e544bb"
+    },
+    {
+      "path": "pagefind/fragment/en_e3bc4e1.pf_fragment",
+      "bytes": 414,
+      "sha256": "4c54ca714cc9e105c1d976b1311c7ffbefa1e6a222cd7b14ba485afef9bdf8b1"
+    },
+    {
+      "path": "pagefind/fragment/en_e571102.pf_fragment",
+      "bytes": 418,
+      "sha256": "3eec6eb89be39e656b5eab1e2ce8268efdaa2a74c5aa2c633d5d210809a9ff5e"
+    },
+    {
+      "path": "pagefind/fragment/en_e5eba0e.pf_fragment",
+      "bytes": 407,
+      "sha256": "72dbd671e838e2512efec6f3c4ba81c9de782eb85d9fe9d8033ac657985d0ce7"
+    },
+    {
+      "path": "pagefind/fragment/en_e6b36d4.pf_fragment",
+      "bytes": 431,
+      "sha256": "b4797f95680c1716d5b3de765686d1308a80413055357b5f31c7f3d39855162d"
+    },
+    {
+      "path": "pagefind/fragment/en_eb2a1a9.pf_fragment",
+      "bytes": 430,
+      "sha256": "20a6e1416451bc57dc719444ee7d9908439f4ee424a70a2a9a36e644e1c745e0"
+    },
+    {
+      "path": "pagefind/fragment/en_ede2c0c.pf_fragment",
+      "bytes": 394,
+      "sha256": "5422a1740fba57878ce22521ee1e2960fc8ff34fff9168d00cc4082344a206cf"
+    },
+    {
+      "path": "pagefind/fragment/en_f62415d.pf_fragment",
+      "bytes": 398,
+      "sha256": "60f0a4d3f5ec4d931849a6761143bfeb13f139981d1e0d3870f1ef3cb46a1ae4"
+    },
+    {
+      "path": "pagefind/fragment/en_f6604fe.pf_fragment",
+      "bytes": 429,
+      "sha256": "d67eced82d7d0a64c6df11bd0499b71e056978be4ff2107c5edb7274fb35b3bc"
+    },
+    {
+      "path": "pagefind/fragment/en_f7994a3.pf_fragment",
+      "bytes": 397,
+      "sha256": "9bb60e4fc49edce9b4301df5767154b20f0dcbe4af1dd75f9394d41333ff7659"
+    },
+    {
+      "path": "pagefind/fragment/en_fb78465.pf_fragment",
+      "bytes": 430,
+      "sha256": "5bd91cfd98a37e5b221d6e82f5f587325e04b5226d3a7fb6314ad3fad1b75aec"
+    },
+    {
+      "path": "pagefind/fragment/en_fe65d13.pf_fragment",
+      "bytes": 395,
+      "sha256": "2b908927e51bbcf80abd41e29f309f090f827bf10c26d7641a178fd7b4363e0d"
+    },
+    {
+      "path": "pagefind/fragment/en_fff081e.pf_fragment",
+      "bytes": 394,
+      "sha256": "ddb62c8c8c38a0063aef569e1e927ac51eb2e37e9d8407b7dc58a1947a1b5f9a"
+    },
+    {
+      "path": "pagefind/index/en_4c5423c.pf_index",
+      "bytes": 14670,
+      "sha256": "86e393f07f8c24d898378e195b9761781edb04b8b7e902af9bc93f23ed7906bb"
+    },
+    {
+      "path": "pagefind/pagefind-component-ui.css",
+      "bytes": 42081,
+      "sha256": "12a3ae7abdba2f00a7617b861f7e0f915ce54c17c47d568e1108103ecb228325"
+    },
+    {
+      "path": "pagefind/pagefind-component-ui.js",
+      "bytes": 184026,
+      "sha256": "f7a4ba1403c0dfb23e84e18b4480f95785035d21e5b45a05a08191bd87c84944"
+    },
+    {
+      "path": "pagefind/pagefind-entry.json",
+      "bytes": 173,
+      "sha256": "d5c168540794a77b8ad6575083a438b2899f7fcf5453c92f2106d531c9a2e3b6"
+    },
+    {
+      "path": "pagefind/pagefind-highlight.js",
+      "bytes": 44404,
+      "sha256": "7aab88a3c64047708f6ecabe1f094ecc48fb76b0895e64d56593f335c5d2ea0a"
+    },
+    {
+      "path": "pagefind/pagefind-modular-ui.css",
+      "bytes": 7336,
+      "sha256": "653ab29e4de5629f6ddf5f6fcdf5d2b3eb539a8c07fff8a56b8ce2156a570788"
+    },
+    {
+      "path": "pagefind/pagefind-modular-ui.js",
+      "bytes": 14634,
+      "sha256": "f3efa0f74b305ccab0bc9edc7c09ab69867180b4c43093d84bb9b508ac4ec32c"
+    },
+    {
+      "path": "pagefind/pagefind-ui.css",
+      "bytes": 14482,
+      "sha256": "e113b816110ed07b017613e901addfe635350f2a5b84990aa76c91a74b158084"
+    },
+    {
+      "path": "pagefind/pagefind-ui.js",
+      "bytes": 126634,
+      "sha256": "07b2a55750c180546523435461fd44f0612531bcdc0e8a069fe00eef7741d1f7"
+    },
+    {
+      "path": "pagefind/pagefind-worker.js",
+      "bytes": 42928,
+      "sha256": "78115e3651f11d29f03a1f3eb2776a7901c22532bdfa23b7ae73c693c0867bda"
+    },
+    {
+      "path": "pagefind/pagefind.en_21e9cc5cb7.pf_meta",
+      "bytes": 727,
+      "sha256": "20d023e1a29f957e1cae31c9369dda956c3022bb14d9ba8507a3a42dccce0a43"
+    },
+    {
+      "path": "pagefind/pagefind.js",
+      "bytes": 47228,
+      "sha256": "02746cc529f88f853275720dcb1c2b6a18b0c7a92b73fae82ca2738e64500bcd"
+    },
+    {
+      "path": "pagefind/wasm.en.pagefind",
+      "bytes": 59738,
+      "sha256": "a2bc2068e113b49d03ea6d9985cad708016555ec3ae811e308a81193aa79ef15"
+    },
+    {
+      "path": "pagefind/wasm.unknown.pagefind",
+      "bytes": 55400,
+      "sha256": "2289cc9af9f629dbf6670222d8e12785ec35454417000cc60978fafec34fcca0"
+    }
+  ],
+  "environment": {
+    "browser": "156.0.8078.80",
+    "channel": "chrome",
+    "headless": true,
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "status": "Collected"
+}

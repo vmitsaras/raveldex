@@ -2333,7 +2333,7 @@ Repeat frozen matched workloads against separate installed baseline and candidat
 
 **Benchmark equivalently configured search-library alternatives**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8010%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8010%22)
 
 **Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
@@ -2361,7 +2361,12 @@ Build pinned isolated comparisons for MiniSearch, FlexSearch, Orama and Lunr whe
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8010.md](docs/evidence/RX-8010.md)
+- [docs/evidence/RX-8010/acceptance.json](docs/evidence/RX-8010/acceptance.json)
+- [docs/evidence/RX-8010/review.md](docs/evidence/RX-8010/review.md)
+- [docs/evidence/RX-8010/node-audit.json](docs/evidence/RX-8010/node-audit.json)
+- [docs/evidence/RX-8010/summary.json](docs/evidence/RX-8010/summary.json)
+- [docs/evaluation/RX-8010-method.md](docs/evaluation/RX-8010-method.md)
 
 
 ## RX-8011

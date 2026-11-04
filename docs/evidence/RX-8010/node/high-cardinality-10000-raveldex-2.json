@@ -1,0 +1,78 @@
+{
+  "kind": "rx8010-child-v1",
+  "engine": "raveldex",
+  "family": "high-cardinality",
+  "size": 10000,
+  "owner": 2,
+  "pid": 7992,
+  "identity": {
+    "version": "rx8002-workloads-v1",
+    "family": "high-cardinality",
+    "size": 10000,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "3ce5d0c3f250ce3249c1426194f40219b769173b4b4f4ee9016fe9c19e10c763",
+    "labelsSha256": "3ed37c977db49ec22ae7a8bb7cbe94ba4786670969b2312ffe35ed2493fe9fc3",
+    "queriesSha256": "620a9f2951d685f6bf58559819a93bfa10ec52fa0d1f08d7dd5acfb78ad8c7a4",
+    "judgmentsSha256": "6cd645b1e64e568b222564a5b755e1992c5a1d019be5b21c9bfc8a957ff496eb",
+    "dictionaryTerms": 30852,
+    "judgmentCounts": {
+      "common": 10000,
+      "rare": 11,
+      "overlapping-or": 3342,
+      "negative-only": 9989,
+      "filtered": 2000,
+      "narrow-prefix": 10,
+      "broad-prefix-refusal": 10000,
+      "source-phrase": 3334
+    }
+  },
+  "startedAt": "2026-11-04T18:40:42.241Z",
+  "samples": [
+    {
+      "operation": "build",
+      "phase": "fresh-owner",
+      "outcome": "Refused",
+      "wallMs": 77617.464417,
+      "cpuUserMs": 8025.721,
+      "cpuSystemMs": 463.991,
+      "error": {
+        "name": "RaveldexError",
+        "code": "DEADLINE_EXCEEDED",
+        "message": "Raveldex: DEADLINE_EXCEEDED",
+        "details": {
+          "path": "options.deadlineMs"
+        }
+      }
+    }
+  ],
+  "warmups": [],
+  "queries": [],
+  "captures": {},
+  "metadata": null,
+  "status": "Fail",
+  "failure": {
+    "name": "Error",
+    "code": null,
+    "message": "admitted build failed: Raveldex: DEADLINE_EXCEEDED",
+    "details": null
+  },
+  "completedAt": "2026-11-04T18:41:59.860Z"
+}
