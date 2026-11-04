@@ -87,6 +87,8 @@ The [example index](https://github.com/vmitsaras/raveldex/blob/main/examples/REA
 
 Matching follows the indexed words: `cafe` and `café` are different, and spelling mistakes are not corrected automatically. Handle operation-limit errors in your application. If a worker stops replying during an update, check the update receipt before retrying.
 
+A small result page still needs an exact count of every match. A quick single-record update does not predict the cost of a broad search or whole-source restore. Check those operations separately with your own records and configured providers; the 10,000-record admission ceiling is not a latency or completion guarantee.
+
 Use source snapshots to rebuild data in a browser or worker. Native snapshots need an explicitly qualified, matching Node environment. See [compatibility](docs/api/COMPATIBILITY.md) and [practical limits](docs/api/LIMITATIONS.md) for the details.
 
 MIT licensed. [Source and issues](https://github.com/vmitsaras/raveldex) require repository access.

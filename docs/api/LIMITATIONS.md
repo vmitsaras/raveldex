@@ -18,6 +18,10 @@ A snippet is a short excerpt and may leave out matches or surrounding context. L
 
 Limits apply separately to records, dictionaries, postings, queues, work, output and deadlines. Successfully adding a collection in small batches does not guarantee that a one-operation source restore will fit its budget.
 
+A single-record update, a broad search and a whole-collection restore have different costs. A small returned page still requires an exact total; `limit: 0` omits hits but is not an early-stop search. Fast selective queries or successful small updates do not guarantee low latency for browse, negative-only, broad-prefix or phrase requests. N9 establishes no new single-record update latency guarantee.
+
+The ordinary operation deadline defaults to 30 seconds, or the lower configured maximum; the maximum permitted deadline is 60 seconds. N9 measured operations explicitly supplied the 60-second deadline. Its observed 10,000-record adversarial restores therefore qualify specific inputs/providers/hosts under that configuration, not every collection below the 10,000-document admission ceiling. Larger real-document/high-cardinality source exports still hit work limits, and a separate native build attempt reached its deadline. See the [reviewed workload and recovery guidance](https://github.com/vmitsaras/raveldex/blob/main/docs/support/RX-8011.md) for exact configurations, preserved failures and evidence boundaries.
+
 Handle `WORK_LIMIT_EXCEEDED` and `DEADLINE_EXCEEDED` as failed operations. They do not provide a successful search with an incomplete total.
 
 Pass an `AbortSignal` when work becomes obsolete, handle the typed error, and keep authoritative application data for recovery. See [execution, errors and bounds](CORE.md#execution-errors-and-bounds).
@@ -33,6 +37,8 @@ The DOM UI shows a generic search error for worker failures. Use the adapter's t
 ## Choose snapshot format deliberately
 
 Source snapshots rebuild under the receiver and may exceed its operation budget. Native snapshots require the exact application-qualified Node runtime; they are not portable browser caches. See [snapshot requirements](COMPATIBILITY.md#snapshot-compatibility).
+
+A successful restore publishes one receiving revision. An authoritative failure before commit leaves the previous state intact; a worker/storage timeout with an unknown outcome does not prove rollback. A sequence of separately committed add batches is not one atomic whole-collection import.
 
 ## Test your interface
 

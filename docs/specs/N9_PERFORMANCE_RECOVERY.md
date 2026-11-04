@@ -2,6 +2,10 @@
 
 **Planning scope selected 3 November 2026.** This registers 11 dependency-linked tasks; it does not authorize publication or automatically implement all tasks.
 
+## RX-8011 deadline clarification
+
+The ordinary no-option operation deadline is 30 seconds, or a lower configured maximum. N9 timed operations explicitly requested the allowed 60-second ceiling. Historical “default 60s” wording refers to that measured setting, not the ordinary default; see the [correction record](../evidence/RX-8011/corrections.md). No runtime, raw result, cap or matched timing changes.
+
 ## Initial observed baseline
 
 Reviewed source: main `f523d9dafeed842de6a423c1a85eac60a9daf9ed`. Existing historical RX-4001 measurements (8 October 2026; Node 24.21.0, Apple M5 Pro) report 10k core build 10,740 ms, common exact-total/top20 1,377 ms, selective exact-total/top20 408 ms, single-record replacement 6 ms, source phrase 2,294 ms, positions phrase 1,844 ms. These are **historical workload medians**, not fresh head benchmarks or p95 values. Worker source restore and source rebuilds have documented 10k work/deadline refusals.
@@ -47,6 +51,10 @@ Current exact-head CI stopped before tests because two historical RX-5004 log pa
 ## RX-8010 execution checkpoint — 4 November 2026
 
 [RX-8010](../evidence/RX-8010.md) completes isolated pinned MiniSearch/FlexSearch/Orama/Lunr lexical comparisons, separate Fuse fuzzy and genuine Pagefind static-site tracks without native/dependency changes. Independent review verifies 162 complete Node runs plus one retained deadline-refused build attempt, 423 equivalent foreign rows, 56 complete native query cells, all 76 frozen relevance labels and nine Chrome/Pagefind cells with 33,636 generated assets. Orama exact case-sensitive source filtering produces explicit mismatches; foreign full-output and native top 20 costs stay distinct. All 1,311 repository tests/private-candidate checks, fourteen site cases, thirty lifecycle cases and the installed independent oracle pass with stable recorded inputs. Measured and verified native archives are byte-identical; closing packaged status prose is separate. The baseline through RX-8009 is committed at `6d00200`; RX-8010 remains uncommitted. Remote tracking, CI and publication are unchanged. RX-8011 is next.
+
+## RX-8011 execution checkpoint — 4 November 2026
+
+[RX-8011](../evidence/RX-8011.md) completes independent native/comparator raw reviews and practical workload/recovery guidance. Source inspection corrects historical deadline wording: ordinary operations default to 30s (or a lower configured maximum); timed N9 runs explicitly request the 60s ceiling. Existing timings, regressions and refusals remain intact. All 1,311 repository/private-candidate tests, fourteen site cases, thirty lifecycle cases, fifteen bulk-restore cases and the installed independent oracle pass with stable recorded inputs. All 663 implementation inputs and tested runtime/declaration/CSS bytes remain unchanged. The generated limits page and packaged guidance are synchronized. All eleven N9 tasks and the prior 50 selected tasks are complete locally; there is no next selected task. Deferred optional work, remote tracking/CI, publication, version bumps and new capabilities remain separate. RX-8011 is recorded by this commit. Its task evidence retains the precommit baseline `1dfbff1` and worktree verification; exact committed-head verification is a separate, hash-bound run.
 
 ## Priorities and prerequisites
 

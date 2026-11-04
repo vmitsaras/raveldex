@@ -22,6 +22,8 @@ Each acceptance record binds its source, selected graph/configuration, environme
 
 The full-core gzip planning target remains 15 KiB and is missed. Current preparation reports the actual graph, compression runtime and measured bytes; historical values are not current package-size claims. Optional graphs overlap and cannot be summed; serialized bytes are not retained/peak memory.
 
+The N9 independent review distinguishes incremental updates from broad exact-total retrieval and whole-source recovery. Ordinary operations default to 30-second deadlines (or a lower configured maximum); timed N9 operations explicitly request the 60-second ceiling. Successful selected 10k restores do not establish universal capacity, and observed work/deadline refusals remain limitations. The [practical guide](../api/LIMITATIONS.md) gives the recovery boundary.
+
 Admitted 1,000/10,000-record workloads have finite observations, not universal latency/completion promises. Whole-source rebuilds can exceed work/deadline limits. Unknown transport/storage outcomes remain distinct from rollback; applications retain authoritative source and choose recovery explicitly. Native snapshots require exact application-qualified Node environments and remain unavailable in browser/worker hosts.
 
 Browser automation, bounded Safari/VoiceOver and physical-input sessions, managed occupied-operation observations and native requested wire-capacity measurements retain different scopes. Earlier interrupted announcements and refused/invalid measurements remain evidence, not hidden fixes. See [support and known limitations](../support/RX-4003.md).

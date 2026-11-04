@@ -2373,7 +2373,7 @@ Build pinned isolated comparisons for MiniSearch, FlexSearch, Orama and Lunr whe
 
 **Independently review optimization evidence and practical limits**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8011%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8011%22)
 
 **Dependencies:** [RX-8009](IMPLEMENTATION_TASKS.md#rx-8009), [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010)
 
@@ -2401,7 +2401,15 @@ Consolidate measured differences, reproducibility, safe capacity/latency guidanc
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8011.md](docs/evidence/RX-8011.md)
+- [docs/evidence/RX-8011/acceptance.json](docs/evidence/RX-8011/acceptance.json)
+- [docs/evidence/RX-8011/native-review.md](docs/evidence/RX-8011/native-review.md)
+- [docs/evidence/RX-8011/native-audit.json](docs/evidence/RX-8011/native-audit.json)
+- [docs/evidence/RX-8011/comparator-review.md](docs/evidence/RX-8011/comparator-review.md)
+- [docs/evidence/RX-8011/comparator-audit.json](docs/evidence/RX-8011/comparator-audit.json)
+- [docs/evidence/RX-8011/corrections.md](docs/evidence/RX-8011/corrections.md)
+- [docs/evaluation/RX-8011.md](docs/evaluation/RX-8011.md)
+- [docs/support/RX-8011.md](docs/support/RX-8011.md)
 
 
 ## Deferred enhancement tasks

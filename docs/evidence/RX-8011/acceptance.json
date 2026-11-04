@@ -1,0 +1,80 @@
+{
+  "task": "RX-8011",
+  "status": "Pass locally",
+  "criteria": {
+    "RX-8011-AC01": {
+      "status": "Pass within recorded scope",
+      "evidence": [
+        "native-review.md",
+        "native-audit.json",
+        "comparator-review.md",
+        "comparator-audit.json",
+        "corrections.md"
+      ]
+    },
+    "RX-8011-AC02": {
+      "status": "Pass",
+      "evidence": [
+        "../../support/RX-8011.md",
+        "../../api/LIMITATIONS.md",
+        "../../evaluation/RX-8011.md"
+      ]
+    },
+    "RX-8011-AC03": {
+      "status": "Pass",
+      "evidence": [
+        "implementation-baseline.json"
+      ],
+      "boundary": "663 code/test/tooling/integration/package inputs match clean HEAD; no version/dependency/capability/publication change"
+    }
+  },
+  "materialFinding": {
+    "status": "Corrected in current guidance",
+    "finding": "Omitted deadline defaults to30s orlowerconfiguredmaximum; N9 timedruns explicitly optinto60s ceiling",
+    "rawCapturesChanged": false
+  },
+  "fullProjectVerification": {
+    "status": "Pass",
+    "tests": 1311,
+    "failures": 0,
+    "skips": 0,
+    "sourceInputsUnchanged": true,
+    "siteCases": 14,
+    "overlappingLifecycleCases": 30,
+    "overlappingBulkRestoreCases": 15,
+    "candidateCommand": [
+      "npm",
+      "run",
+      "candidate:prepare",
+      "--",
+      "--output",
+      "/tmp/raveldex-rx8011-20261104/verified-candidate"
+    ],
+    "installedOracle": "verification/independent-results.json",
+    "testedPackageSha256": "0604ea0730f8f4cf1f29458fdf3953dc456aa2871b478d21996fd3b176217974",
+    "runtimeDeclarationsCSSEqualToRX8010": true
+  },
+  "projectSynchronization": {
+    "status": "Pass locally",
+    "manifest": "RX-8011 done with actual evidence; all eleven N9 tasks and 61 selected tasks complete",
+    "checks": [
+      "docs:check",
+      "handoff:check",
+      "handoff:next",
+      "tracking:preview",
+      "pages:check",
+      "git diff --check"
+    ],
+    "nextSelectedTask": null,
+    "deferredOptionalWork": "Remains deferred until owner-selected",
+    "remoteTracking": "Not mutated; committed-manifest workflow owns later synchronization",
+    "closingPackage": "Only publication-status prose follows tested package; runtime/declarations/CSS identical",
+    "closingPackageEvidence": "verification/closing-package-comparison.json"
+  },
+  "remainingEvidenceLimits": [
+    "Selected persisted/source review, no new timing collection",
+    "Larger measured work/export/search refusals and explicit60s buildfailure retained",
+    "No currentN9 single-record update latencySLA",
+    "No new heap/physical/browser/AT/remoteCI/publication claim"
+  ]
+}
