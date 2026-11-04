@@ -20,6 +20,10 @@ Current exact-head CI stopped before tests because two historical RX-5004 log pa
 
 [RX-8003 evidence](../evidence/RX-8003.md) records conservative group/AND/OR posting bounds, native-order touched-bucket traversal and requested Inspector nonmatch evaluation. Whole-query fallback for opaque predicates and compound refinements preserves per-record typed errors; NOT/browse/unknown OR branches remain conservative. Eighteen paired installed Node processes preserve exact native pages/errors at frozen adversarial 100/1,000/10,000 sizes. Rare 10k queries evaluate 11 documents rather than 10,000 and show measured work/latency improvement; source-phrase planning adds work and core gzip increases 554 bytes. Broader paired optimization claims remain RX-8009. RX-8004 is next dependency-ready.
 
+## RX-8004 execution checkpoint — 3 November 2026
+
+[RX-8004 evidence](../evidence/RX-8004.md) records captured continuation dispatch separate from deadline timers: Node immediates, lazy owned message ports in supported browser/worker realms, and captured timer fallback with every eighth continuation on a timer turn. Paired result/work/step/yield parity, actual normal p50/p95 and separate pump spans pass. Forced fallback retains measured timer costs. Twelve longer browser/direct-worker diagnostic probes show timer, heartbeat and inbound-event progress while pending; no physical input/paint or universal fairness claim follows. Gzip adds 599 bytes. Nine new deterministic host regressions and existing focused checks pass. Full 1,183-test repository/installed-candidate checks, fourteen site browser cases and the installed independent oracle pass with stable recorded inputs; measured/verified runtime bytes match and generated bundles are synchronized. RX-8005 is next; no quantum, caps, API, scoring or dependency change.
+
 ## Priorities and prerequisites
 
 - **RX-8001** — genuine current-head baseline and truthful evidence availability; preserve previous accepted work.

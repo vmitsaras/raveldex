@@ -2105,7 +2105,7 @@ Use complete posting-derived candidate sets for positive Boolean queries while f
 
 **Optimize resumable continuation scheduling without starving hosts**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8004%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8004%22)
 
 **Dependencies:** [RX-8002](IMPLEMENTATION_TASKS.md#rx-8002)
 
@@ -2133,7 +2133,9 @@ Profile and separate execution continuation from deadline timers using host-appr
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8004.md](docs/evidence/RX-8004.md)
+- [docs/evidence/RX-8004/acceptance.json](docs/evidence/RX-8004/acceptance.json)
+- [docs/evidence/RX-8004/review.md](docs/evidence/RX-8004/review.md)
 
 
 ## RX-8005

@@ -42,13 +42,17 @@ export async function instrumentPackage(packageRoot) {
   assert.equal(metadata.name, '@vmitsaras/raveldex');
   const search = await readFile(resolve(directory, 'dist/core/query/search.js'), 'utf8');
   const bounded = search.includes('for (const [id, doc] of documents) {');
+  const execution = await readFile(resolve(directory, 'dist/core/execution/engine.js'), 'utf8');
+  const separateContinuation = execution.includes('op.resume = this.#host.continuation(');
   const staged = [];
   for (const patch of patches) {
     const path = resolve(directory, patch.path), original = await readFile(path, 'utf8');
-    const anchors = patch.path === 'dist/core/query/search.js' && bounded ? [
+    let anchors = patch.path === 'dist/core/query/search.js' && bounded ? [
       ['candidate-loop', 'const candidate = !bound || bound.has(id);', 'const candidate = !bound || bound.has(id);\n        if (candidate) n9Count(\'candidates\');'],
       ...patch.anchors.slice(1),
     ] : patch.anchors;
+    if (patch.path === 'dist/core/execution/engine.js' && separateContinuation) anchors = anchors.map(anchor => anchor[0] === 'continuation-callback' ?
+      ['continuation-callback', 'op.resume = this.#host.continuation(() => { op.resume = undefined; this.pump(); });', 'n9Count(\'continuationsScheduled\');\n                            op.resume = this.#host.continuation(() => { n9Count(\'hostYields\'); op.resume = undefined; this.pump(); });'] : anchor);
     let changed = original;
     for (const [name, from, to, occurrences = 1] of anchors) {
       assert.equal(changed.split(from).length - 1, occurrences, `Instrumentation anchor drift: ${patch.path} ${name}`);
@@ -59,7 +63,7 @@ export async function instrumentPackage(packageRoot) {
       anchors: anchors.map(([name, , , occurrences = 1]) => ({ name, occurrences })) } });
   }
   for (const file of staged) await writeFile(file.path, file.changed);
-  return { version: 'rx8003-private-observer-v2', candidateProfile: bounded ? 'postings-bound' : 'document-universe', patches: staged.map(file => file.report) };
+  return { version: 'rx8004-private-observer-v3', continuationProfile: separateContinuation ? 'separate' : 'timer', candidateProfile: bounded ? 'postings-bound' : 'document-universe', patches: staged.map(file => file.report) };
 }
 
 export async function collectDiagnostics(call) {

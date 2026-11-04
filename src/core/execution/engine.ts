@@ -62,7 +62,7 @@ export function emptyRoot(configuration: OwnedConfiguration, states: Readonly<Re
 export class ExecutionOwner implements Raveldex {
   #owner: MutationOwner | undefined;
   readonly #configuration: OwnedConfiguration;
-  readonly #host: ExecutionHost;
+  readonly #host: ExecutionHost & { continuation(callback: () => void): () => void };
   readonly #metrics: ExecutionMetrics | undefined;
   #queue: Operation[] = [];
   #active: Operation | undefined;
@@ -70,13 +70,17 @@ export class ExecutionOwner implements Raveldex {
   #pumping = false;
   #disposal: Promise<void> | undefined;
   #disposed: (() => void) | undefined;
+  #hostReleased = false;
 
   constructor(root: IndexRoot, host: ExecutionHost, participants: readonly TransactionParticipant[] = [], metrics?: ExecutionMetrics) {
     this.#owner = new MutationOwner(root, participants);
     this.#configuration = root.configuration;
     this.#metrics = metrics;
     // Trusted private host handles; caller changes cannot replace them later.
-    this.#host = Object.freeze({ now: host.now.bind(host), schedule: host.schedule.bind(host) });
+    const schedule = host.schedule.bind(host), continuation = host.continuation, dispose = host.dispose;
+    this.#host = Object.freeze({ now: host.now.bind(host), schedule,
+      continuation: continuation ? continuation.bind(host) : (callback: () => void) => schedule(callback, 0),
+      ...(dispose ? { dispose: dispose.bind(host) } : {}) });
   }
   get root(): IndexRoot | undefined { return this.#owner?.root; }
 
@@ -235,7 +239,7 @@ export class ExecutionOwner implements Raveldex {
             }
             if (consumed >= this.#configuration.limits.checkpointWorkUnits) {
               this.check(op);
-              op.resume = this.#host.schedule(() => { op.resume = undefined; this.pump(); }, 0);
+              op.resume = this.#host.continuation(() => { op.resume = undefined; this.pump(); });
               if (this.#metrics) this.#metrics.hostYields++;
               break;
             }
@@ -275,6 +279,10 @@ export class ExecutionOwner implements Raveldex {
   private release(): void {
     if (this.#closing && !this.#active && this.#queue.length === 0) {
       this.#owner = undefined;
+      if (!this.#hostReleased) {
+        this.#hostReleased = true;
+        try { this.#host.dispose?.(); } catch { /* Disposal keeps its original outcome. */ }
+      }
       const resolve = this.#disposed; this.#disposed = undefined; resolve?.();
     }
   }
