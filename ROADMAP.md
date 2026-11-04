@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 47/51 done · 0 in progress · 2 dependency-ready.
+**Release progress:** 49/51 done · 0 in progress · 1 dependency-ready.
 
 **Planner state:** `ready`.
 
-**Next or resumable release task:** [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008) — Implement atomic bulk-source restore under existing limits.
+**Next or resumable release task:** [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010) — Benchmark equivalently configured search-library alternatives.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -39,7 +39,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N6 — Search Workbench documentation site** | `RX-5001`–`RX-5005` | 5/5 | Implement the owner-selected Search Workbench design in the existing static documentation site, with real packed search and preserved publication boundaries. |
 | **N7 — Inline and documentation search solutions** | `RX-6001`–`RX-6008` | 8/8 | Provide ready-to-use Pagefind-style inline search and a documentation modal with optional native UI, complete installed starters, CSS customization and evidence-backed page/section presentation. |
 | **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 6/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
-| **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 7/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
+| **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 9/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
 
 ## Task index
 
@@ -102,8 +102,8 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-8005](IMPLEMENTATION_TASKS.md#rx-8005) — Replace exhaustive prefix dictionary scans with bounded seek | `done` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8005%22) |
 | [RX-8006](IMPLEMENTATION_TASKS.md#rx-8006) — Hoist revision-invariant BM25 calculations | `done` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8006%22) |
 | [RX-8007](IMPLEMENTATION_TASKS.md#rx-8007) — Diagnose admitted 10k source restore work/deadline failures | `done` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8007%22) |
-| [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008) — Implement atomic bulk-source restore under existing limits | `planned` | `RX-8007` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22) |
-| [RX-8009](IMPLEMENTATION_TASKS.md#rx-8009) — Run paired baseline-versus-optimized native benchmark | `planned` | `RX-8003`, `RX-8004`, `RX-8005`, `RX-8006`, `RX-8008` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22) |
+| [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008) — Implement atomic bulk-source restore under existing limits | `done` | `RX-8007` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22) |
+| [RX-8009](IMPLEMENTATION_TASKS.md#rx-8009) — Run paired baseline-versus-optimized native benchmark | `done` | `RX-8003`, `RX-8004`, `RX-8005`, `RX-8006`, `RX-8008` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22) |
 | [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010) — Benchmark equivalently configured search-library alternatives | `planned` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8010%22) |
 | [RX-8011](IMPLEMENTATION_TASKS.md#rx-8011) — Independently review optimization evidence and practical limits | `planned` | `RX-8009`, `RX-8010` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8011%22) |
 

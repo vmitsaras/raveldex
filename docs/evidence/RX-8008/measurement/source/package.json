@@ -1,0 +1,259 @@
+{
+  "name": "@vmitsaras/raveldex",
+  "version": "0.1.0-rc.0",
+  "private": true,
+  "description": "Native modular TypeScript local search \u2014 ESM core with BM25, atomic mutations, cooperative execution, optional search capabilities and native DOM UI.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmitsaras/raveldex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vmitsaras/raveldex/issues"
+  },
+  "homepage": "https://github.com/vmitsaras/raveldex#readme",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "npm run handoff:check && npm run docs:check && npm run typecheck && npm test",
+    "test": "npm run build && node --test --test-concurrency=4 --test-timeout=180000 test/tooling/*.test.mjs test/core/*.test.mjs test/consumer/*.test.mjs test/addons/patch/*.test.mjs test/addons/query-syntax/*.test.mjs test/addons/proximity/*.test.mjs test/addons/literal/*.test.mjs test/addons/identifiers/*.test.mjs test/addons/typo/*.test.mjs test/addons/suggestions/*.test.mjs test/addons/synonyms/*.test.mjs test/integrations/languages/*.test.mjs test/integrations/astro/runtime.test.mjs test/integrations/astro/sections*.test.mjs test/addons/phrases/*.test.mjs test/addons/positions/*.test.mjs test/addons/filters/*.test.mjs test/addons/facets/*.test.mjs test/addons/inspector/*.test.mjs test/addons/evidence/*.test.mjs test/addons/sections/*.test.mjs test/adapters/snapshots/*.test.mjs test/migration/converter.test.mjs test/comparison/*.test.mjs bench/memory/*.test.mjs && node --test --test-concurrency=1 --test-timeout=120000 test/ui/*.test.mjs && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs && node --test --test-timeout=180000 test/integrations/astro/browser.test.mjs",
+    "handoff:check": "node scripts/plan.mjs check",
+    "handoff:status": "node scripts/plan.mjs status",
+    "handoff:next": "node scripts/plan.mjs next",
+    "docs:generate": "node scripts/render-plan.mjs",
+    "docs:check": "node scripts/render-plan.mjs --check && node scripts/check-docs.mjs",
+    "tracking:preview": "node scripts/sync-github.mjs --dry-run",
+    "tracking:sync": "node scripts/sync-github.mjs --apply",
+    "typecheck": "tsc -p tsconfig.json && tsc -p test/types/tsconfig.json && tsc -p tsconfig.ui.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.indexeddb.json && tsc -p tsconfig.migration.json && tsc -p integrations/astro/tsconfig.json",
+    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.build.json && tsc -p tsconfig.ui.build.json && node scripts/copy-ui-css.mjs && tsc -p tsconfig.worker.build.json && tsc -p tsconfig.indexeddb.build.json && tsc -p tsconfig.migration.build.json && node scripts/copy-migration-license.mjs && tsc -p integrations/astro/tsconfig.build.json && node scripts/link-astro-peer.mjs",
+    "test:core": "npm run build && node --test test/core/*.test.mjs",
+    "prepack": "npm run build",
+    "test:consumer": "npm run build && node --test test/consumer/*.test.mjs",
+    "pilot:core": "npm run build && node scripts/core-pilot.mjs",
+    "test:phrases": "npm run build && node --test test/addons/phrases/*.test.mjs",
+    "test:positions": "npm run build && node --test test/addons/positions/*.test.mjs",
+    "test:filters": "npm run build && node --test test/addons/filters/*.test.mjs",
+    "test:facets": "npm run build && node --test test/addons/facets/*.test.mjs",
+    "test:inspector": "npm run build && node --test test/addons/inspector/*.test.mjs",
+    "test:evidence": "npm run build && node --test test/addons/evidence/*.test.mjs",
+    "test:ui": "npm run build && node --test --test-concurrency=1 test/ui/*.test.mjs",
+    "pilot:ui": "npm run build && node scripts/ui-pilot.mjs",
+    "test:worker": "npm run build && node --test --test-timeout=120000 test/adapters/worker/*.test.mjs",
+    "test:snapshots": "npm run build && node --test --test-timeout=120000 test/adapters/snapshots/*.test.mjs",
+    "measure:snapshots": "npm run build && node --expose-gc scripts/snapshot-costs.mjs",
+    "evaluate:prepare": "npm run build && node scripts/evaluation-consumer.mjs",
+    "evaluate:correctness": "node scripts/evaluate-correctness.mjs",
+    "evaluate:relevance": "node bench/relevance.mjs",
+    "evaluate:comparison": "node scripts/evaluate-comparison.mjs",
+    "measure:costs": "node bench/costs.mjs",
+    "measure:browser-costs": "node bench/browser-costs.mjs",
+    "test:indexeddb": "npm run build && node --test --test-timeout=120000 test/adapters/indexeddb/*.test.mjs",
+    "test:migration": "npm run build && node --test --test-timeout=120000 test/migration/converter.test.mjs test/comparison/*.test.mjs && node --test --test-timeout=120000 test/migration/packed-browser.test.mjs",
+    "qualify:browsers": "npm run build && node scripts/qualify-browsers.mjs --resources",
+    "qualify:serve": "npm run build && node scripts/qualify-browsers.mjs --serve",
+    "measure:memory": "node bench/memory/run.mjs",
+    "test:memory-method": "node --test bench/memory/*.test.mjs",
+    "candidate:check": "npm run build && node scripts/candidate-check.mjs",
+    "candidate:prepare": "node scripts/prepare-candidate.mjs",
+    "language:pack": "npm run build && node scripts/pack-english.mjs",
+    "astro:pack": "npm run build && node scripts/pack-astro.mjs",
+    "pages:build": "npm run build && npm run pages:generate",
+    "pages:generate": "node scripts/build-pages.mjs",
+    "pages:check": "node scripts/check-pages.mjs",
+    "pages:preview": "node scripts/preview-pages.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "astro": "7.3.2",
+    "axe-core": "4.13.0",
+    "esbuild": "0.28.2",
+    "playwright-core": "1.61.1",
+    "typescript": "7.0.2"
+  },
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./addons/phrases": {
+      "types": "./dist/addons/phrases/index.d.ts",
+      "import": "./dist/addons/phrases/index.js"
+    },
+    "./addons/phrases/source": {
+      "types": "./dist/addons/phrases/source.d.ts",
+      "import": "./dist/addons/phrases/source.js"
+    },
+    "./addons/positions": {
+      "types": "./dist/addons/positions/index.d.ts",
+      "import": "./dist/addons/positions/index.js"
+    },
+    "./addons/phrases/positions": {
+      "types": "./dist/addons/positions/phrases.d.ts",
+      "import": "./dist/addons/positions/phrases.js"
+    },
+    "./addons/phrases/mixed": {
+      "types": "./dist/addons/phrases/mixed.d.ts",
+      "import": "./dist/addons/phrases/mixed.js"
+    },
+    "./addons/filters": {
+      "types": "./dist/addons/filters/index.d.ts",
+      "import": "./dist/addons/filters/index.js"
+    },
+    "./addons/facets": {
+      "types": "./dist/addons/facets/index.d.ts",
+      "import": "./dist/addons/facets/index.js"
+    },
+    "./addons/inspector": {
+      "types": "./dist/addons/inspector/index.d.ts",
+      "import": "./dist/addons/inspector/index.js"
+    },
+    "./addons/evidence": {
+      "types": "./dist/addons/evidence/index.d.ts",
+      "import": "./dist/addons/evidence/index.js"
+    },
+    "./addons/snippets": {
+      "types": "./dist/addons/snippets/index.d.ts",
+      "import": "./dist/addons/snippets/index.js"
+    },
+    "./addons/ui": {
+      "types": "./dist/addons/ui/index.d.ts",
+      "import": "./dist/addons/ui/index.js"
+    },
+    "./addons/ui/styles.css": "./dist/addons/ui/styles.css",
+    "./adapters/worker": {
+      "types": "./dist/adapters/worker/index.d.ts",
+      "import": "./dist/adapters/worker/index.js"
+    },
+    "./adapters/worker/host": {
+      "types": "./dist/adapters/worker/host-entry.d.ts",
+      "import": "./dist/adapters/worker/host-entry.js"
+    },
+    "./adapters/snapshots": {
+      "types": "./dist/adapters/snapshots/index.d.ts",
+      "import": "./dist/adapters/snapshots/index.js"
+    },
+    "./adapters/indexeddb": {
+      "types": "./dist/adapters/indexeddb/index.d.ts",
+      "import": "./dist/adapters/indexeddb/index.js"
+    },
+    "./adapters/worker/snapshots": {
+      "types": "./dist/adapters/worker/snapshots.d.ts",
+      "import": "./dist/adapters/worker/snapshots.js"
+    },
+    "./adapters/worker/snapshots/host": {
+      "types": "./dist/adapters/worker/snapshots-host.d.ts",
+      "import": "./dist/adapters/worker/snapshots-host.js"
+    },
+    "./integrations/localsearch": {
+      "types": "./dist/integrations/localsearch/index.d.ts",
+      "import": "./dist/integrations/localsearch/index.js"
+    },
+    "./addons/typo": {
+      "types": "./dist/addons/typo/index.d.ts",
+      "import": "./dist/addons/typo/index.js"
+    },
+    "./addons/suggestions": {
+      "types": "./dist/addons/suggestions/index.d.ts",
+      "import": "./dist/addons/suggestions/index.js"
+    },
+    "./addons/synonyms": {
+      "types": "./dist/addons/synonyms/index.d.ts",
+      "import": "./dist/addons/synonyms/index.js"
+    },
+    "./integrations/languages/english": {
+      "types": "./dist/integrations/languages/english/index.d.ts",
+      "import": "./dist/integrations/languages/english/index.js"
+    },
+    "./addons/identifiers": {
+      "types": "./dist/addons/identifiers/index.d.ts",
+      "import": "./dist/addons/identifiers/index.js"
+    },
+    "./addons/literal": {
+      "types": "./dist/addons/literal/index.d.ts",
+      "import": "./dist/addons/literal/index.js"
+    },
+    "./addons/proximity": {
+      "types": "./dist/addons/proximity/index.d.ts",
+      "import": "./dist/addons/proximity/index.js"
+    },
+    "./addons/query-syntax": {
+      "types": "./dist/addons/query-syntax/index.d.ts",
+      "import": "./dist/addons/query-syntax/index.js"
+    },
+    "./addons/patch": {
+      "types": "./dist/addons/patch/index.d.ts",
+      "import": "./dist/addons/patch/index.js"
+    },
+    "./addons/ui/inline": {
+      "types": "./dist/addons/ui/inline.d.ts",
+      "import": "./dist/addons/ui/inline.js"
+    },
+    "./addons/ui/inline.css": "./dist/addons/ui/inline.css",
+    "./addons/sections": {
+      "types": "./dist/addons/sections/index.d.ts",
+      "import": "./dist/addons/sections/index.js"
+    },
+    "./addons/ui/modal": {
+      "types": "./dist/addons/ui/modal.d.ts",
+      "import": "./dist/addons/ui/modal.js"
+    },
+    "./addons/ui/modal.css": "./dist/addons/ui/modal.css",
+    "./addons/ui/dropdown": {
+      "types": "./dist/addons/ui/dropdown.d.ts",
+      "import": "./dist/addons/ui/dropdown.js"
+    },
+    "./addons/ui/dropdown.css": "./dist/addons/ui/dropdown.css",
+    "./addons/ui/directory": {
+      "types": "./dist/addons/ui/directory.d.ts",
+      "import": "./dist/addons/ui/directory.js"
+    },
+    "./addons/ui/directory/view": {
+      "types": "./dist/addons/ui/directory-view.d.ts",
+      "import": "./dist/addons/ui/directory-view.js"
+    },
+    "./addons/ui/directory.css": "./dist/addons/ui/directory.css",
+    "./addons/ui/directory/cards": {
+      "types": "./dist/addons/ui/directory-cards.d.ts",
+      "import": "./dist/addons/ui/directory-cards.js"
+    },
+    "./addons/ui/directory-cards.css": "./dist/addons/ui/directory-cards.css"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/core/",
+    "dist/addons/patch/",
+    "dist/addons/query-syntax/",
+    "dist/addons/proximity/",
+    "dist/addons/literal/",
+    "dist/addons/identifiers/",
+    "dist/addons/synonyms/",
+    "dist/addons/suggestions/",
+    "dist/addons/typo/",
+    "dist/addons/phrases/",
+    "dist/addons/positions/",
+    "dist/addons/filters/",
+    "dist/addons/facets/",
+    "dist/addons/metadata/",
+    "dist/addons/inspector/",
+    "dist/addons/evidence/",
+    "dist/addons/snippets/",
+    "dist/addons/sections/",
+    "dist/addons/ui/",
+    "dist/adapters/worker/",
+    "dist/adapters/snapshots/",
+    "dist/adapters/indexeddb/",
+    "dist/integrations/localsearch/",
+    "CHANGELOG.md",
+    "docs/api/",
+    "docs/release/",
+    "docs/support/RX-4003.md",
+    "dist/integrations/languages/"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ]
+}

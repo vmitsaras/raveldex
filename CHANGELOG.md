@@ -25,6 +25,8 @@ This draft describes the complete implemented product. All packages remain priva
 
 ### Hosts and separate packages
 
+- Source snapshots rebuild through one unpublished core and private source/position sessions under existing caps, then publish one coherent revision. Wrapped/custom participants keep per-record callbacks and cumulative budgets; failure/cancellation and worker/storage receipt semantics remain explicit.
+
 - Optional `/addons/ui/directory` supplies nonvisual multi-selection, exact native conjunctive counts and revision-safe paging. Its explicit URL binding owns named parameters, preserves unrelated query/hash/history state and supports bounded correction and native Back/Forward.
 - Separate `/addons/ui/directory/view` and explicit `/addons/ui/directory.css` add native checkbox groups, selected chips, Clear all, complete pages and mobile disclosure over that borrowed controller. Complete browser/Astro resource-directory starters and gallery provide real routes, optional URL state with visible recovery, loading/Retry/disposal and CSS recipes.
 - Separate `/addons/ui/directory/cards` and explicit `/addons/ui/directory-cards.css` add captured plain-text metadata, opt-in validated images and semantic list/card/grid presentation. Layout/density/image changes retain the native page, filters, IDs, order, totals and link focus. A complete browser starter and gallery provide real routes, local image assets, image-failure recovery, exact downloads and CSS recipes.

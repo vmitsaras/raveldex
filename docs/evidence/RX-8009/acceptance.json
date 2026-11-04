@@ -1,0 +1,113 @@
+{
+  "task": "RX-8009",
+  "implementation": "Pass",
+  "verification": "Pass",
+  "review": "Pass within recorded scope",
+  "sourceHead": "fe92ee251f2845b1cd7f6876e580bfd47d615772",
+  "runtime": "Accepted uncommitted RX-8008 preserved byte-for-byte;177runtime input pins unchanged.",
+  "acceptanceCriteria": {
+    "AC01": {
+      "status": "Pass within admitted-result scope; exact refusals explicit",
+      "nodeCases": 96,
+      "queryPairedRelations": {
+        "Equal result": 11434,
+        "Equal error": 1622
+      },
+      "semanticCases": 30,
+      "semanticQueryComparisons": 192,
+      "completePairedQueryComparisons": 169,
+      "equalTypedRefusalComparisons": 23,
+      "completeActualCaptures": 212,
+      "incompleteTypedCaptures": 28,
+      "actualPages": 3160,
+      "independentArithmeticAssertions": 4918,
+      "representationProfiles": 24,
+      "postRestoreWrites": 72,
+      "browserContexts": 96,
+      "completeBrowserCaptures": 384
+    },
+    "AC02": {
+      "status": "Pass",
+      "nodeNormalOwners": 66,
+      "nodeDiagnosticOwners": 30,
+      "nodeNormalQueries": 6528,
+      "nodeDiagnosticQueries": 240,
+      "nodeEmpiricalP95Groups": 48,
+      "nodeP95NotEstimatedGroups": 474,
+      "browserNormalQueries": 11520,
+      "browserDiagnosticQueries": 96,
+      "browserSamplesPerQueryCell": 120,
+      "metrics": "Raw wall, NodeCPUuser/system, emittedwork/steps/yields, candidates/dictionaryvisits, per-outcome denominators/rates anduniformcoregraph sizes retained; CPU/heap browserNotmeasured."
+    },
+    "AC03": {
+      "status": "Pass",
+      "scope": "Conditional incremental effects andcombined effect, not standalone/additive/universal gains.",
+      "findings": [
+        "Planning/otherquerytiming regressions retained.",
+        "Ranking calculations decrease while common10k wall p50 slightly worsens;100commonp95regresses.",
+        "Only adversarial10k restore changes refusal\u2192success; no equal-work ratio.",
+        "Real/high10k sourceexport stillrefuses, so12restore records areNotrun.",
+        "Real10k broadprefix andhigh10k sourcephrase retainworkrefusal.",
+        "Chrome0msquantiles aretimerfloor, notzeroenginework; ratiosomitted.",
+        "Largesmall-samplep50 changes arenotsignificance orpopulationtails."
+      ]
+    }
+  },
+  "operationOutcomes": {
+    "Pass": 6181,
+    "Refused": 863,
+    "Not run": 12
+  },
+  "restoreOutcomes": {
+    "Pass": 69,
+    "Refused": 15,
+    "Not run": 12
+  },
+  "fullVerification": {
+    "tests": 1264,
+    "primary": 1028,
+    "ui": 182,
+    "worker": 24,
+    "indexeddb": 26,
+    "migrationBrowser": 1,
+    "astro": 3,
+    "siteCases": 14,
+    "focusedLifecycle": 30,
+    "installedOracle": {
+      "queries": 345,
+      "mutationComparisons": 1155,
+      "mutationOperations": 75,
+      "phraseChecks": 438,
+      "phraseParity": 288,
+      "handScores": 10
+    },
+    "measuredVerifiedTarByteIdentical": true,
+    "generationProjectionUnchanged": true
+  },
+  "next": "RX-8010",
+  "publication": "Not performed",
+  "remoteCI": "Not run",
+  "commit": "Not created",
+  "independentReview": {
+    "node": "docs/evidence/RX-8009/node-review.md",
+    "combined": "docs/evidence/RX-8009/review.md",
+    "independentCoreGraphs": 126,
+    "reverseDocumentInstances": 111552,
+    "storedUtf16OffsetPairInstances": 384,
+    "totalArithmeticAssertionsIncludingLiteralFixtures": 5110
+  },
+  "projectSynchronization": {
+    "status": "Pass locally",
+    "manifest": "RX-8009 done with actual evidence; readable roadmap/tasks regenerated",
+    "checks": [
+      "docs:check",
+      "handoff:check",
+      "handoff:next",
+      "tracking:preview",
+      "pages:check"
+    ],
+    "nextActual": "RX-8010",
+    "remoteTracking": "Not mutated; later committed-manifest workflow owns synchronization",
+    "closingPackage": "Only PUBLICATION_STATUS prose differs from measured/verified artifact; all runtime/declarations/CSS byte-identical"
+  }
+}

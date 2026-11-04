@@ -1,0 +1,664 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 6dd0b85..58d3ad8 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -25,6 +25,8 @@ This draft describes the complete implemented product. All packages remain priva
+ 
+ ### Hosts and separate packages
+ 
++- Source snapshots rebuild through one unpublished core and private source/position sessions under existing caps, then publish one coherent revision. Wrapped/custom participants keep per-record callbacks and cumulative budgets; failure/cancellation and worker/storage receipt semantics remain explicit.
++
+ - Optional `/addons/ui/directory` supplies nonvisual multi-selection, exact native conjunctive counts and revision-safe paging. Its explicit URL binding owns named parameters, preserves unrelated query/hash/history state and supports bounded correction and native Back/Forward.
+ - Separate `/addons/ui/directory/view` and explicit `/addons/ui/directory.css` add native checkbox groups, selected chips, Clear all, complete pages and mobile disclosure over that borrowed controller. Complete browser/Astro resource-directory starters and gallery provide real routes, optional URL state with visible recovery, loading/Retry/disposal and CSS recipes.
+ - Separate `/addons/ui/directory/cards` and explicit `/addons/ui/directory-cards.css` add captured plain-text metadata, opt-in validated images and semantic list/card/grid presentation. Layout/density/image changes retain the native page, filters, IDs, order, totals and link focus. A complete browser starter and gallery provide real routes, local image assets, image-failure recovery, exact downloads and CSS recipes.
+diff --git a/IMPLEMENTATION_TASKS.md b/IMPLEMENTATION_TASKS.md
+index 14942bc..6d4d4f3 100644
+--- a/IMPLEMENTATION_TASKS.md
++++ b/IMPLEMENTATION_TASKS.md
+@@ -2254,7 +2254,7 @@ Reproduce and isolate source codec, validation, token and staging costs before p
+ 
+ **Implement atomic bulk-source restore under existing limits**
+ 
+-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22)
++**Milestone:** N9 · **Status:** `in_progress` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22)
+ 
+ **Dependencies:** [RX-8007](IMPLEMENTATION_TASKS.md#rx-8007)
+ 
+@@ -2262,7 +2262,7 @@ Reduce redundant restore preparation while preserving source/position/native-sta
+ 
+ **Expected affected areas**
+ 
+-`src/adapters/snapshots/`, `src/adapters/indexeddb/`, `src/adapters/worker/`, `src/core/mutations/`, `test/adapters/`, `bench/`. These are planning boundaries; create files only when this task needs them.
++`src/adapters/snapshots/`, `src/adapters/indexeddb/`, `src/adapters/worker/`, `src/core/mutations/`, `src/core/capabilities/`, `src/addons/phrases/`, `src/addons/positions/`, `test/adapters/`, `bench/`. These are planning boundaries; create files only when this task needs them.
+ 
+ **Contracts**
+ 
+diff --git a/ROADMAP.md b/ROADMAP.md
+index a541ad2..db9697e 100644
+--- a/ROADMAP.md
++++ b/ROADMAP.md
+@@ -8,9 +8,9 @@ The owner selected the native direction on 2026-10-06 and requested initializati
+ 
+ ## Current tracked state
+ 
+-**Release progress:** 47/51 done · 0 in progress · 2 dependency-ready.
++**Release progress:** 47/51 done · 1 in progress · 1 dependency-ready.
+ 
+-**Planner state:** `ready`.
++**Planner state:** `in_progress`.
+ 
+ **Next or resumable release task:** [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008) — Implement atomic bulk-source restore under existing limits.
+ 
+@@ -102,7 +102,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
+ | [RX-8005](IMPLEMENTATION_TASKS.md#rx-8005) — Replace exhaustive prefix dictionary scans with bounded seek | `done` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8005%22) |
+ | [RX-8006](IMPLEMENTATION_TASKS.md#rx-8006) — Hoist revision-invariant BM25 calculations | `done` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8006%22) |
+ | [RX-8007](IMPLEMENTATION_TASKS.md#rx-8007) — Diagnose admitted 10k source restore work/deadline failures | `done` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8007%22) |
+-| [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008) — Implement atomic bulk-source restore under existing limits | `planned` | `RX-8007` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22) |
++| [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008) — Implement atomic bulk-source restore under existing limits | `in_progress` | `RX-8007` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22) |
+ | [RX-8009](IMPLEMENTATION_TASKS.md#rx-8009) — Run paired baseline-versus-optimized native benchmark | `planned` | `RX-8003`, `RX-8004`, `RX-8005`, `RX-8006`, `RX-8008` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22) |
+ | [RX-8010](IMPLEMENTATION_TASKS.md#rx-8010) — Benchmark equivalently configured search-library alternatives | `planned` | `RX-8002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8010%22) |
+ | [RX-8011](IMPLEMENTATION_TASKS.md#rx-8011) — Independently review optimization evidence and practical limits | `planned` | `RX-8009`, `RX-8010` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8011%22) |
+diff --git a/bench/n9/restore-browser.mjs b/bench/n9/restore-browser.mjs
+index f352887..03764d4 100644
+--- a/bench/n9/restore-browser.mjs
++++ b/bench/n9/restore-browser.mjs
+@@ -10,6 +10,7 @@ import { build, version as esbuildVersion } from 'esbuild';
+ import { inventory, digest } from './run.mjs';
+ import { schema, workloadFor, verifyFrozen } from './workloads.mjs';
+ import { instrumentRestorePackage, createRestoreDiagnostic } from './restore-instrument.mjs';
++import { createBulkVerifier } from './bulk-verify.mjs';
+ 
+ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+ export const BROWSER_RESTORE_VARIANTS = Object.freeze(['source', 'positions-offsets']);
+@@ -82,6 +83,9 @@ export function validateBrowserRestoreParity(rows, sizes, variants = BROWSER_RES
+           assert.equal(receipt.format, 'raveldex-source'); assert.equal(receipt.reindexed, true);
+           assert.equal(receipt.originRevision, exported.result.header.originRevision, 'restore origin drift');
+           assert.equal(receipt.revision, operation.priorRevision + 1, 'restore must publish exactly once'); assert.equal(operation.oldRemoved, true);
++          assert.equal(operation.completeSource?.outcome, 'Pass', 'complete public receiving source required'); assert.equal(operation.completeSource.records, size);
++          assert.equal(operation.completeMembership?.outcome, 'Pass', 'complete public receiving membership required'); assert.equal(operation.completeMembership.records, size);
++          if (row.mode === 'diagnostic') { assert.equal(operation.completeState?.outcome, 'Pass', 'complete diagnostic core/sidecar equality required'); assert.match(operation.completeState.donor?.sha256 ?? '', /^[a-f0-9]{64}$/); assert.equal(operation.completeState.receiver?.sha256, operation.completeState.donor.sha256); }
+           const queries = normalizedQueryObservations(operation.postcondition, receipt.revision);
+           compareQueryObservations(donor, queries, { ...context, stage: operation.operation + ':donor' }, parity, transitions);
+           const normalizedReceipt = { ...receipt, originRevision: 0, revision: 0 };
+@@ -144,19 +148,22 @@ async function bundle(directory, source, name) {
+   const result = await build({ stdin: { contents: source, sourcefile: name + '.entry.mjs', resolveDir: directory }, absWorkingDir: directory,
+     bundle: true, platform: 'browser', format: 'esm', target: 'es2022', minify: true, treeShaking: true, legalComments: 'none', charset: 'ascii', sourcemap: false, write: false, metafile: true, logLevel: 'silent' });
+   for (const [path, input] of Object.entries(result.metafile.inputs)) {
+-    assert.ok(path === name + '.entry.mjs' || path === 'restore-case.mjs' || path.startsWith('node_modules/@vmitsaras/raveldex/dist/'), 'unexpected bundle input: ' + path);
++    assert.ok(path === name + '.entry.mjs' || path === 'restore-case.mjs' || path === 'bulk-verify.mjs' || path.startsWith('node_modules/@vmitsaras/raveldex/dist/'), 'unexpected bundle input: ' + path);
+     assert.ok(input.imports.every(entry => !entry.external), 'external bundle input');
+   }
+   const bytes = result.outputFiles[0].contents;
+   return { bytes, identity: { file: name, bytes: bytes.length, sha256: digest(bytes), inputs: result.metafile.inputs } };
+ }
+ async function stage(directory, destination, workload, variant, mode) {
+-  const diagnosticDefinition = mode === 'diagnostic' ? `const localDiagnostic=(${createRestoreDiagnostic.toString()})();` : '';
++  const diagnosticDefinition = mode === 'diagnostic' ? `const localDiagnostic=(${createRestoreDiagnostic.toString()})();
++const rootVerifier=(${createBulkVerifier.toString()})();
++const hashData=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))).map(byte=>byte.toString(16).padStart(2,'0')).join('');
++const rootDigest=async root=>{const state=rootVerifier.rootState(root);return{sha256:await hashData(state.canonical),encounterSha256:await hashData(state.encounterCanonical),revision:state.revision,summary:state.summary,scope:state.scope};};` : '';
+   const controls = mode === 'diagnostic' ? `
+-self.addEventListener('message',event=>{if(!event.data?.restoreBench)return;event.stopImmediatePropagation();const {id,operation,meta}=event.data;try{const value=operation==='start'?localDiagnostic.start(meta):localDiagnostic.stop();self.postMessage({restoreBench:true,id,value});}catch(error){self.postMessage({restoreBench:true,id,error:{name:error.name,message:error.message}});}});` : '';
++self.addEventListener('message',async event=>{if(!event.data?.restoreBench)return;event.stopImmediatePropagation();const {id,operation,meta}=event.data;try{const value=operation==='rootState'?await rootDigest(globalThis[Symbol.for('raveldex.n9.bulk.owner')]()):operation==='start'?localDiagnostic.start(meta):localDiagnostic.stop();self.postMessage({restoreBench:true,id,value});}catch(error){self.postMessage({restoreBench:true,id,error:{name:error.name,message:error.message}});}});` : '';
+   const workerSource = imports + `import {serveSnapshotRaveldexWorker} from '@vmitsaras/raveldex/adapters/worker/snapshots/host';${addonDefinition}${diagnosticDefinition}${controls}
+ const variant=new URL(import.meta.url).searchParams.get('variant');if(!['source','positions-offsets'].includes(variant))throw Error('Unknown restore variant');serveSnapshotRaveldexWorker(self,{addons:addons(variant)});`;
+-  const appSource = imports + `import {exerciseRestore} from './restore-case.mjs';
++  const appSource = imports + (mode === 'diagnostic' ? `import {getExecutionOwner} from './node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js';` : '') + `import {exerciseRestore} from './restore-case.mjs';
+ import {createWorkerRaveldex} from '@vmitsaras/raveldex/adapters/worker';
+ import {createWorkerSnapshots} from '@vmitsaras/raveldex/adapters/worker/snapshots';${addonDefinition}${diagnosticDefinition}
+ const records=${JSON.stringify(workload.records)},queries=${JSON.stringify(workload.queries)},schema=${JSON.stringify(schema)},variant=${JSON.stringify(variant)},mode=${JSON.stringify(mode)};
+@@ -169,7 +176,8 @@ window.restoreExercise=async execution=>{
+   try{const engine=await createWorkerRaveldex({worker,configuration:{schema,addons:addons(variant)},ownership:'owned',sameHost:true});bridges.set(engine,{rpc,worker,role,pending});return engine;}catch(error){worker.terminate();workers.delete(worker);throw error;}};
+  const snapshots=engine=>execution==='direct'?createSnapshots(engine):createWorkerSnapshots(engine);
+  const diagnostic=mode==='diagnostic'?{start:({operation,engine,role})=>execution==='direct'?localDiagnostic.start({operation,role}):bridges.get(engine).rpc('start',{operation,role}),stop:({engine})=>execution==='direct'?localDiagnostic.stop():bridges.get(engine).rpc('stop')}:undefined;
+- try{return await exerciseRestore({create,createSnapshots:snapshots,records,queries,mode,diagnostic,deadlineMs:60000,onSnapshot:async(encoded,meta)=>window.persistRestoreSnapshot(encoded,meta)});}catch(error){return{outcome:'Fail',failure:{name:error.name,code:error.code??null,message:error.message},partial:error.restoreReport??null};}finally{for(const worker of workers)worker.terminate();workers.clear();}
++ const captureRoot=mode==='diagnostic'?engine=>execution==='direct'?rootDigest(getExecutionOwner(engine).root):bridges.get(engine).rpc('rootState'):undefined;
++ try{return await exerciseRestore({create,createSnapshots:snapshots,records,queries,mode,diagnostic,captureRoot,deadlineMs:60000,onSnapshot:async(encoded,meta)=>window.persistRestoreSnapshot(encoded,meta)});}catch(error){return{outcome:'Fail',failure:{name:error.name,code:error.code??null,message:error.message},partial:error.restoreReport??null};}finally{for(const worker of workers)worker.terminate();workers.clear();}
+ };`;
+   await mkdir(destination, { recursive: true });
+   const bundles = {};
+@@ -189,13 +197,14 @@ async function main() {
+   assert.ok(sizes.length && new Set(sizes).size === sizes.length && sizes.every(size => [100,1000,10000].includes(size)));
+   assert.ok(variants.length && new Set(variants).size === variants.length && variants.every(variant => BROWSER_RESTORE_VARIANTS.includes(variant)));
+   const harness = [];
+-  for (const path of ['bench/n9/restore-browser.mjs','bench/n9/restore-case.mjs','bench/n9/restore-instrument.mjs','bench/n9/instrument.mjs','bench/n9/workloads.mjs','bench/n9/run.mjs','test/fixtures/n9/freeze.json','test/fixtures/relevance/corpus.json']) harness.push({ path, sha256: digest(await readFile(join(root,path))) });
++  for (const path of ['bench/n9/restore-browser.mjs','bench/n9/restore-case.mjs','bench/n9/bulk-verify.mjs','bench/n9/restore-instrument.mjs','bench/n9/instrument.mjs','bench/n9/workloads.mjs','bench/n9/run.mjs','test/fixtures/n9/freeze.json','test/fixtures/relevance/corpus.json']) harness.push({ path, sha256: digest(await readFile(join(root,path))) });
+   const packages = {}, routes = {}, bundles = {}, workloads = sizes.map(size => verifyFrozen(workloadFor('adversarial', size)));
+   for (const mode of BROWSER_RESTORE_MODES) {
+     const directory = join(canonicalOutput, mode), packageRoot = join(directory, 'node_modules/@vmitsaras/raveldex'); await mkdir(dirname(packageRoot), { recursive: true }); await cp(source, packageRoot, { recursive: true }); await writeFile(join(directory,'package.json'), JSON.stringify({ private:true,type:'module' }));
+     await copyFile(join(root,'bench/n9/restore-case.mjs'), join(directory,'restore-case.mjs'));
++    await copyFile(join(root,'bench/n9/bulk-verify.mjs'), join(directory,'bulk-verify.mjs'));
+     const instrumentation = mode === 'diagnostic' ? await instrumentRestorePackage(packageRoot) : null;
+-    packages[mode] = { directory, packageRoot, metadata, instrumentation, inventory: await inventory(packageRoot), stagedCaseSha256: digest(await readFile(join(directory,'restore-case.mjs'))) };
++    packages[mode] = { directory, packageRoot, metadata, instrumentation, inventory: await inventory(packageRoot), stagedCaseSha256: digest(await readFile(join(directory,'restore-case.mjs'))), stagedVerifierSha256: digest(await readFile(join(directory,'bulk-verify.mjs'))) };
+     for (const workload of workloads) for (const variant of variants) {
+       const label = [mode,variant,workload.size].join('-'), destination = join(directory,'assets',variant+'-'+workload.size);
+       bundles[label] = await stage(directory,destination,workload,variant,mode); routes[label] = destination;
+@@ -230,7 +239,7 @@ async function main() {
+     await browser?.close();await new Promise(yes=>server.close(yes));
+     try {
+       assert.deepEqual(await inventory(source),originalInventory,'original installed package changed');report.originalPackageUnchanged=true;
+-      for(const mode of BROWSER_RESTORE_MODES){assert.deepEqual(await inventory(packages[mode].packageRoot),packages[mode].inventory,'staged package changed');assert.equal(digest(await readFile(join(packages[mode].directory,'restore-case.mjs'))),packages[mode].stagedCaseSha256);packages[mode].packageUnchanged=true;packages[mode].stagedCaseUnchanged=true;}
++      for(const mode of BROWSER_RESTORE_MODES){assert.deepEqual(await inventory(packages[mode].packageRoot),packages[mode].inventory,'staged package changed');assert.equal(digest(await readFile(join(packages[mode].directory,'restore-case.mjs'))),packages[mode].stagedCaseSha256);assert.equal(digest(await readFile(join(packages[mode].directory,'bulk-verify.mjs'))),packages[mode].stagedVerifierSha256);packages[mode].packageUnchanged=true;packages[mode].stagedCaseUnchanged=true;}
+       for(const file of harness)assert.equal(digest(await readFile(join(root,file.path))),file.sha256,'harness source drift');
+       for(const [label,files] of Object.entries(bundles))for(const [name,identity] of Object.entries(files))assert.equal(digest(await readFile(join(routes[label],name))),identity.sha256,'executed bundle drift');
+     } catch(error){report.outcome='Fail';report.guardFailure={name:error.name,message:error.message};throw error;}
+diff --git a/bench/n9/restore-case.mjs b/bench/n9/restore-case.mjs
+index 6b696b0..969c183 100644
+--- a/bench/n9/restore-case.mjs
++++ b/bench/n9/restore-case.mjs
+@@ -1,5 +1,6 @@
+ // Host-neutral diagnosis runner: actual factories are supplied by Node/browser.
+-// No imports; this module can be bundled or serialized into actual worker hosts.
++// The verifier is host-neutral and runs only outside operation timing windows.
++import { createBulkVerifier } from './bulk-verify.mjs';
+ export const RESTORE_VARIANTS = Object.freeze(['source', 'positions-offsets']);
+ export const RESTORE_OPERATIONS = Object.freeze(['build', 'exportSource', 'restoreSource', 'deadlineRestore', 'abortedRestore']);
+ export function restoreError(error) {
+@@ -16,7 +17,8 @@ export function priorRestoreRecords(records) {
+   return records.slice(0, Math.min(1000, records.length)).map(record => ({ id: 'prior:' + record.id,
+     text: { body: ['n9priorstate n9red n9blue', ...(Array.isArray(record.text.body) ? record.text.body : [record.text.body])] }, metadata: { group: 'prior' } }));
+ }
+-export async function exerciseRestore({ create, createSnapshots, records, queries, mode = 'normal', diagnostic, cpuUsage, memory, onSnapshot, deadlineMs = 60000 }) {
++export async function exerciseRestore({ create, createSnapshots, records, queries, mode = 'normal', diagnostic, cpuUsage, memory, onSnapshot, captureRoot, deadlineMs = 60000 }) {
++  const verifier = createBulkVerifier();
+   const ensure = (condition, message) => { if (!condition) throw Error(message); };
+   const equal = (actual, expected, message) => ensure(JSON.stringify(actual) === JSON.stringify(expected), message);
+   const errorData = error => ({ name: error?.name ?? 'Error', code: error?.code ?? null, reason: error?.reason ?? null, details: error?.details ?? null, message: String(error?.message ?? error) });
+@@ -81,6 +83,9 @@ export async function exerciseRestore({ create, createSnapshots, records, querie
+     const snapshot = (() => { const envelope = JSON.parse(encoded); ensure(envelope.format === 'raveldex-source', 'wrong snapshot format'); ensure(envelope.body.payload.records.length === records.length, 'snapshot missing records'); return { header: envelope.body.header }; })();
+     exported.row.result = { encodedBytes: new TextEncoder().encode(encoded).length, encodedCodeUnits: encoded.length, header: snapshot.header,
+       ...(onSnapshot ? await onSnapshot(encoded, { operation: 'exportSource', role: 'donor' }) : {}) };
++    // Canonical private data never crosses a production RPC. A diagnostic host
++    // hashes its one final selected root after export and outside all windows.
++    if (mode === 'diagnostic' && captureRoot) row.fullStateDonor = await captureRoot(donor);
+     for (const [operation, role] of [['restoreSource', 'receiver'], ['deadlineRestore', 'deadline'], ['abortedRestore', 'abort']]) {
+       const receiver = await create({ role });
+       try {
+@@ -112,6 +117,20 @@ export async function exerciseRestore({ create, createSnapshots, records, querie
+           equal(after.map(item => item.result ? { ...item, result: { ...item.result, revision: 0 } } : item), donorResults.map(item => item.result ? { ...item, result: { ...item.result, revision: 0 } } : item), 'restored queries differ from donor');
+           const old = await receiver.search('n9priorstate', { deadlineMs }); ensure(old.total === 0 && old.revision === restored.result.revision, 'restore retained prior records');
+           restored.row.postcondition = after; restored.row.oldRemoved = true;
++          const receiverEncoded = await snapshots.exportSource({ deadlineMs });
++          restored.row.completeSource = verifier.compareSourceSnapshots(encoded, receiverEncoded);
++          const membership = await verifier.enumerateMembership(receiver, verifier.sourceSnapshot(encoded).ids, restored.result.revision, { deadlineMs });
++          // Keep complete page evidence bounded in reports; the verifier has
++          // already checked every returned id and rejects duplicate/missing ids.
++          const { ids: verifiedIds, ...membershipReport } = membership;
++          ensure(verifiedIds.length === records.length, 'complete membership record count');
++          restored.row.completeMembership = membershipReport;
++          if (mode === 'diagnostic' && captureRoot) {
++            const receiverState = await captureRoot(receiver);
++            ensure(receiverState.sha256 === row.fullStateDonor.sha256, 'complete private restored core/source/positions differ from donor');
++            restored.row.completeState = { outcome: 'Pass', donor: row.fullStateDonor, receiver: receiverState,
++              encounterOrderEqual: receiverState.encounterSha256 === row.fullStateDonor.encounterSha256 };
++          }
+         }
+       } finally { await receiver.dispose(); }
+     }
+diff --git a/bench/n9/restore-child.mjs b/bench/n9/restore-child.mjs
+index c79b2c4..4d71db0 100644
+--- a/bench/n9/restore-child.mjs
++++ b/bench/n9/restore-child.mjs
+@@ -7,6 +7,7 @@ import { createPositionProvider } from '@vmitsaras/raveldex/addons/positions';
+ import { createPositionPhrases } from '@vmitsaras/raveldex/addons/phrases/positions';
+ import { createSnapshots } from '@vmitsaras/raveldex/adapters/snapshots';
+ import { exerciseRestore } from './n9-restore-case.mjs';
++import { createBulkVerifier } from './bulk-verify.mjs';
+ const [workloadURL, instrumentURL, rawSize, variant, mode, output, rawOwner] = process.argv.slice(2);
+ if (!['source', 'positions-offsets'].includes(variant) || !['normal', 'diagnostic'].includes(mode)) throw Error('Invalid restore child configuration');
+ const { workloadFor, verifyFrozen, schema } = await import(workloadURL), { createRestoreDiagnostic } = await import(instrumentURL);
+@@ -16,12 +17,17 @@ const configuration = () => ({ schema, addons: [createSourceProvider({ fields: [
+   ? [createSourcePhrases({ fields: ['body'] })]
+   : [createPositionProvider({ fields: ['body'], offsets: ['body'] }), createPositionPhrases({ fields: ['body'] })])] });
+ const diagnostic = mode === 'diagnostic' ? createRestoreDiagnostic({ memory: () => process.memoryUsage() }) : undefined;
++const privateOwner = mode === 'diagnostic' ? (await import('./node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js')).getExecutionOwner : undefined;
++const captureRoot = mode === 'diagnostic' ? engine => {
++  const state = createBulkVerifier().rootState(privateOwner(engine).root);
++  return { sha256: digest(state.canonical), encounterSha256: digest(state.encounterCanonical), revision: state.revision, summary: state.summary, scope: state.scope };
++} : undefined;
+ const report = { kind: 'rx8007-restore-node-child-v1', pid: process.pid, variant, mode, owner: Number(rawOwner), size: workload.size, identity: workload.identity,
+   runtime: { node: process.version, versions: process.versions, execArgv: process.execArgv }, configuration: { schema, addons: configuration().addons.map(addon => addon.manifest), defaultLimits: true },
+   scope: 'Actual installed Node source restore. process.memoryUsage observations include harness, inputs, donor and receiver; phase samples are not retained/peak/exclusive engine heap.' };
+ try {
+   report.exercise = await exerciseRestore({ create: () => createRaveldex(configuration()), createSnapshots, records: workload.records, queries: workload.queries, mode,
+-    diagnostic, cpuUsage: previous => previous ? process.cpuUsage(previous) : process.cpuUsage(),
++    diagnostic, captureRoot, cpuUsage: previous => previous ? process.cpuUsage(previous) : process.cpuUsage(),
+     memory: () => ({ values: process.memoryUsage(), method: 'Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap.' }),
+     onSnapshot: async encoded => { const path = output.replace(/\.json$/, '.snapshot.json'); await writeFile(path, encoded); return { encodedSha256: digest(encoded), snapshotArtifact: path.split('/').at(-1) }; },
+   });
+diff --git a/bench/n9/restore-instrument.mjs b/bench/n9/restore-instrument.mjs
+index 538517a..e4f31a1 100644
+--- a/bench/n9/restore-instrument.mjs
++++ b/bench/n9/restore-instrument.mjs
+@@ -20,16 +20,18 @@ export function createRestoreDiagnostic({ memory } = {}) {
+       const counts = { idfComputations: 0, averageLengthComputations: 0, fieldsPrepared: 0, candidates: 0, documentsEvaluated: 0, documentsScored: 0, exactDictionaryProbes: 0, prefixDictionaryVisits: 0, postingsVisited: 0, emittedSteps: 0, emittedWorkUnits: 0, maxStepWorkUnits: 0, hostYields: 0, continuationsScheduled: 0, deadlineCallbacks: 0, restorePhase: null, restorePhases: {} };
+       const data = { operation: meta.operation ?? null, phase: 'none', mutationPhase: null, participant: null, validationParticipant: null, phaseEvents: [], phaseWork: {}, detailWork: {}, recordsAttempted: 0, recordsCaptured: 0, recordsCompleted: 0, captureWallMs: 0, analysisCalls: {}, tokens: {}, copy: { directories: 0, directoryPointers: 0, buckets: 0, bucketEntries: 0, seals: 0 }, participantWork: {}, budgetRefusals: [], budgetConstructions: {}, snapshots: [], memorySamples: [], authoritativeUnchangedDuringStaging: true, finalAuthoritativeSame: null, observerErrors: [] };
+       const sample = point => { if (!memory || data.memorySamples.length >= 128) return; try { data.memorySamples.push({ point, phase: data.phase, recordsCompleted: data.recordsCompleted, at: performance.now(), value: memory() }); } catch (error) { data.observerErrors.push(String(error)); } };
+-      const budgetRoles = new WeakMap();
++      const budgetRoles = new WeakMap(), sampledPhases = new Set();
+       const state = {
+         data, summary,
++        sidecar(stage) { (data.sidecarStages ??= {})[data.participant] = stage; },
+         labelBudget(budget, role) { if (budget) { budgetRoles.set(budget, role); data.budgetConstructions[role] = (data.budgetConstructions[role] ?? 0) + 1; } },
+         roleFor(budget) { return budgetRoles.get(budget) ?? 'unlabelled'; },
+-        phase(value) { if (typeof value !== 'string' || !value.startsWith('snapshot.') || value === data.phase) return; data.phase = value; data.phaseEvents.push({ phase: value, at: performance.now(), emittedWorkUnits: counts.emittedWorkUnits }); sample(value); },
++        phase(value) { if (typeof value !== 'string' || !value.startsWith('snapshot.') || value === data.phase) return; data.phase = value; if (data.phaseEvents.length < 128) data.phaseEvents.push({ phase: value, at: performance.now(), emittedWorkUnits: counts.emittedWorkUnits }); if (!sampledPhases.has(value)) { sampledPhases.add(value); sample(value); } },
+         step(units) { const top = data.phaseWork[data.phase] ??= { steps: 0, workUnits: 0 }; top.steps++; top.workUnits += units; const name = data.phase === 'snapshot.staging' ? `mutation.${data.mutationPhase ?? 'between-records'}${data.participant ? ':' + data.participant : ''}` : data.phase === 'snapshot.export.validation' ? `${data.phase}:${data.validationParticipant ?? 'nonparticipant-structural'}` : data.phase; const detail = data.detailWork[name] ??= { steps: 0, workUnits: 0 }; detail.steps++; detail.workUnits += units; },
+         old(root, current) { data.oldRoot = summary(root); data.inputActive = true; state.currentSame = () => current() === root; sample('old-authoritative-root'); },
+         decoded(records, textUnits) { data.decodedRecords = records; data.decodedBodyCodeUnits = textUnits; sample('decoded-input'); },
+         staged(root) { data.recordsCompleted++; data.lastStagedRoot = summary(root); const same = state.currentSame?.() ?? true; data.authoritativeUnchangedDuringStaging &&= same; if (data.recordsCompleted === 1 || data.recordsCompleted % 256 === 0) { data.snapshots.push({ ...data.lastStagedRoot, authoritativeSame: same }); sample('private-staging-root'); } },
++        partial(stage) { data.recordsCompleted++; data.lastUnsealedStage = stage; const same = state.currentSame?.() ?? true; data.authoritativeUnchangedDuringStaging &&= same; if (data.recordsCompleted === 1 || data.recordsCompleted % 256 === 0) { data.snapshots.push({ kind: 'unsealed-bulk-stage', ...stage, authoritativeSame: same }); sample('private-unsealed-stage'); } },
+         finish(current) { data.finalAuthoritativeSame = state.currentSame?.() ?? null; data.finalAuthoritativeRoot = summary(current); data.inputActive = false; delete state.currentSame; sample('restore-finished'); },
+         sample,
+       };
+@@ -88,16 +90,42 @@ const patches = [
+     ['refusal', "invalid('WORK_LIMIT_EXCEEDED', 'work');", "{ if (rx7()) rx7().data.budgetRefusals.push({ role: rx7().roleFor(this), emittedBefore: globalThis[Symbol.for('raveldex.n9.diagnostics')]?.emittedWorkUnits ?? 0, maximum: this.maximum, attempted: this.used, units, phase: rx7().data.phase, mutationPhase: rx7().data.mutationPhase, participant: rx7().data.participant }); invalid('WORK_LIMIT_EXCEEDED', 'work'); }"],
+   ] },
+ ];
++const legacyOnly = new Set(['participant-total-budget', 'record-capture-phase', 'attempt', 'single-record', 'participant', 'participant-work', 'participant-end', 'analysis']);
++const bulkPatch = { path: 'dist/adapters/snapshots/bulk.js', anchors: [
++  ['participant-total-budget', 'budget: new WorkBudget(maximum)', "budget: (() => { const budget = new WorkBudget(maximum); rx7()?.labelBudget(budget, 'snapshot.participant.total:' + id); return budget; })()"],
++  ['record-capture', "const request = captureMutation(configuration, 'add', record);", "if (rx7()) rx7().data.recordsAttempted++; const captureStarted = performance.now();\n        const request = captureMutation(configuration, 'add', record);\n        if (rx7()) { rx7().data.captureWallMs += performance.now() - captureStarted; rx7().data.recordsCaptured++; }"],
++  ['record-budget', 'budget = new WorkBudget(configuration.limits.maxMutationWorkUnits);\n        const owned', "budget = new WorkBudget(configuration.limits.maxMutationWorkUnits); rx7()?.labelBudget(budget, 'mutation.record');\n        const owned"],
++  ['final-budget', "budget = new WorkBudget(configuration.limits.maxMutationWorkUnits);\n    boundary('snapshot.source.finalization');", "budget = new WorkBudget(configuration.limits.maxMutationWorkUnits); rx7()?.labelBudget(budget, 'snapshot.bulk.finalization');\n    boundary('snapshot.source.finalization');"],
++  ['invocation-budget', 'const invocation = new WorkBudget(participant.maximum);', "const invocation = new WorkBudget(participant.maximum); rx7()?.labelBudget(invocation, 'mutation.participant:' + participant.id); if (rx7()) rx7().data.participant = participant.id;", 2],
++  ['participant-work', 'participant.budget.charge(step.value.workUnits);', "participant.budget.charge(step.value.workUnits); if (rx7()) { const row = rx7().data.participantWork[participant.id] ??= { steps: 0, workUnits: 0 }; row.steps++; row.workUnits += step.value.workUnits; }", 2],
++  ['participant-end', '/* Preserve first outcome, including success. */', '/* Preserve first outcome, including success. */'],
++  ['participant-clear', 'currentStates = Object.freeze(nextStates);', 'if (rx7()) rx7().data.participant = null;\n        currentStates = Object.freeze(nextStates);'],
++  ['stage', 'revision++;', "revision++; rx7()?.partial({ revision, counts: { ...delta.counts, dictionaryEntries: delta.liveDictionaryEntries }, participants: Object.entries(currentStates).map(([id, value]) => ({ id, ...(rx7()?.data.sidecarStages?.[id] ?? { kind: value?.kind, revision: value?.revision, records: value?.records?.size, retainedEntries: value?.retainedEntries, occurrenceCount: value?.occurrenceCount, offsetCount: value?.offsetCount }) })) });"],
++  ['analysis', 'const analyze = createAnalysis(configuration, check);', "const baseAnalyze = createAnalysis(configuration, check);\n    const analyze = function* (...args) { const name = rx7()?.data.participant ?? 'core'; if (rx7()) rx7().data.analysisCalls[name] = (rx7().data.analysisCalls[name] ?? 0) + 1; for (const step of baseAnalyze(...args)) { if (step.token && rx7()) rx7().data.tokens[name] = (rx7().data.tokens[name] ?? 0) + 1; yield step; } };"],
++] };
++const workerOwnerPatch = { path: 'dist/adapters/worker/snapshots-host.js', anchors: [
++  ['diagnostic-owner', 'const engine = facadeFromExecutionOwner(owner);', "const engine = facadeFromExecutionOwner(owner); globalThis[Symbol.for('raveldex.n9.bulk.owner')] = () => owner.root;"],
++] };
+ export async function instrumentRestorePackage(packageRoot) {
+   const root = await realpath(packageRoot);
++  const bulk = await readFile(resolve(root, 'dist/adapters/snapshots/snapshots.js'), 'utf8').then(source => source.includes('reconstructSource('));
++  const selectedPatches = patches.map(patch => patch.path === 'dist/adapters/snapshots/snapshots.js' && bulk ? { ...patch, anchors: patch.anchors.filter(([name]) => !legacyOnly.has(name)) } : patch);
++  if (bulk) {
++    selectedPatches.push(bulkPatch);
++    for (const [path, counters] of [
++      ['dist/addons/phrases/store.js', 'retainedEntries, textCodeUnits'],
++      ['dist/addons/positions/store.js', 'retainedEntries, occurrenceCount, offsetCount, termEntries, termCodeUnits'],
++    ]) selectedPatches.push({ path, anchors: [['unsealed-sidecar', 'revision = context.revision;', `revision = context.revision; rx7()?.sidecar({ kind: old.kind, revision, records: stage.size, ${counters}, sealed: false });`]] });
++  }
++  selectedPatches.push(workerOwnerPatch);
+   // Preflight every additional source anchor before generic instrumentation.
+-  for (const patch of patches) { const source = await readFile(resolve(root, patch.path), 'utf8'); for (const [name, from] of patch.anchors) assert.equal(source.split(from).length - 1, 1, `Restore diagnostic anchor drift: ${patch.path} ${name}`); }
++  for (const patch of selectedPatches) { const source = await readFile(resolve(root, patch.path), 'utf8'); for (const [name, from, , expected = 1] of patch.anchors) assert.equal(source.split(from).length - 1, expected, `Restore diagnostic anchor drift: ${patch.path} ${name}`); }
+   const generic = await instrumentPackage(root), staged = [];
+-  for (const patch of patches) {
++  for (const patch of selectedPatches) {
+     const path = resolve(root, patch.path), original = await readFile(path, 'utf8'); let changed = original;
+-    for (const [name, from, to] of patch.anchors) { assert.equal(changed.split(from).length - 1, 1, `Restore anchor drift after generic instrumentation: ${name}`); changed = changed.replace(from, to); }
++    for (const [name, from, to, expected = 1] of patch.anchors) { assert.equal(changed.split(from).length - 1, expected, `Restore anchor drift after generic instrumentation: ${name}`); changed = changed.replaceAll(from, to); }
+     changed = prelude + changed; staged.push({ path, changed, report: { path: patch.path, beforeSha256: digest(original), instrumentedSha256: digest(changed), anchors: patch.anchors.map(([name]) => name) } });
+   }
+   for (const file of staged) await writeFile(file.path, file.changed);
+-  return { version: 'rx8007-restore-diagnostic-v1', generic, patches: staged.map(file => file.report), scope: 'Diagnostic-only disposable copy; actual yielded work and sampled process memory, no complete peak or retained-heap claim.' };
++  return { version: 'rx8008-paired-restore-diagnostic-v1', generic, patches: staged.map(file => file.report), scope: 'Diagnostic-only disposable copy; actual yielded work and sampled process memory, no complete peak or retained-heap claim.' };
+ }
+diff --git a/bench/n9/restore-node.mjs b/bench/n9/restore-node.mjs
+index 1637024..0bd3c3a 100644
+--- a/bench/n9/restore-node.mjs
++++ b/bench/n9/restore-node.mjs
+@@ -33,7 +33,12 @@ export function requireRestoreCase(row) {
+         assert.equal(detail.finalAuthoritativeSame, item.outcome !== 'Pass', 'restore authoritative identity contradicts outcome');
+       }
+     }
+-    if (item.outcome === 'Pass') { assert.ok(item.result, 'success without actual result'); if (item.operation.endsWith('Restore') || item.operation === 'restoreSource') assert.equal(item.oldRemoved, true); }
++    if (item.outcome === 'Pass') { assert.ok(item.result, 'success without actual result'); if (item.operation.endsWith('Restore') || item.operation === 'restoreSource') {
++      assert.equal(item.oldRemoved, true);
++      assert.equal(item.completeSource?.outcome, 'Pass', 'complete public receiving source required'); assert.equal(item.completeSource.records, row.size);
++      assert.equal(item.completeMembership?.outcome, 'Pass', 'complete public receiving membership required'); assert.equal(item.completeMembership.records, row.size);
++      if (row.mode === 'diagnostic') { assert.equal(item.completeState?.outcome, 'Pass', 'complete diagnostic core/sidecar equality required'); assert.match(item.completeState.donor?.sha256 ?? '', /^[a-f0-9]{64}$/); assert.equal(item.completeState.receiver?.sha256, item.completeState.donor.sha256); }
++    } }
+     else {
+       assert.ok(item.error?.code && typeof item.error.message === 'string', 'typed error missing'); assert.equal(restoreOutcome(item.error), item.outcome, 'typed error reclassified');
+       if (item.outcome === 'Unknown') { assert.ok(item.stateClaim || item.donorQueriesPreserved); if (item.operation !== 'exportSource') { assert.notEqual(item.oldQueriesPreserved, true); assert.notEqual(item.oldSourceBytesPreserved, true); assert.notEqual(item.oldRemoved, true); } continue; }
+@@ -78,10 +83,10 @@ async function main() {
+   const before = await inventory(root), diagnostic = join(output, 'diagnostic'); await mkdir(join(diagnostic, 'node_modules/@vmitsaras'), { recursive: true });
+   const copied = join(diagnostic, 'node_modules/@vmitsaras/raveldex'); await cp(root, copied, { recursive: true }); await writeFile(join(diagnostic, 'package.json'), JSON.stringify({ private: true, type: 'module' }));
+   const instrumentation = await instrumentRestorePackage(copied), diagnosticBefore = await inventory(copied);
+-  for (const directory of [consumer, diagnostic]) { await copyFile(join(repo, 'bench/n9/restore-child.mjs'), join(directory, 'n9-restore-child.mjs')); await copyFile(join(repo, 'bench/n9/restore-case.mjs'), join(directory, 'n9-restore-case.mjs')); }
++  for (const directory of [consumer, diagnostic]) { await copyFile(join(repo, 'bench/n9/restore-child.mjs'), join(directory, 'n9-restore-child.mjs')); await copyFile(join(repo, 'bench/n9/restore-case.mjs'), join(directory, 'n9-restore-case.mjs')); await copyFile(join(repo, 'bench/n9/bulk-verify.mjs'), join(directory, 'bulk-verify.mjs')); }
+   const sizes = process.env.RAVELDEX_N9_RESTORE_SIZES?.split(',').map(Number) ?? RESTORE_METHOD.sizes, variants = process.env.RAVELDEX_N9_RESTORE_VARIANTS?.split(',') ?? RESTORE_VARIANTS;
+   assert.ok(sizes.length && new Set(sizes).size === sizes.length && sizes.every(size => SIZES.includes(size))); assert.ok(variants.length && new Set(variants).size === variants.length && variants.every(variant => RESTORE_VARIANTS.includes(variant)));
+-  const paths = ['bench/n9/restore-node.mjs', 'bench/n9/restore-child.mjs', 'bench/n9/restore-case.mjs', 'bench/n9/restore-instrument.mjs', 'bench/n9/instrument.mjs', 'bench/n9/run.mjs', 'bench/n9/workloads.mjs', 'test/fixtures/n9/freeze.json', 'test/fixtures/relevance/corpus.json'];
++  const paths = ['bench/n9/restore-node.mjs', 'bench/n9/restore-child.mjs', 'bench/n9/restore-case.mjs', 'bench/n9/bulk-verify.mjs', 'bench/n9/restore-instrument.mjs', 'bench/n9/instrument.mjs', 'bench/n9/run.mjs', 'bench/n9/workloads.mjs', 'test/fixtures/n9/freeze.json', 'test/fixtures/relevance/corpus.json'];
+   const harness = await Promise.all(paths.map(async path => ({ path, sha256: digest(await readFile(join(repo, path))) })));
+   const report = { kind: 'rx8007-node-restore-diagnosis-v1', startedAt: new Date().toISOString(), sourceHead: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim(), harness,
+     package: { root, metadata, inventory: before, inventorySha256: digest(JSON.stringify(before)), diagnostic: copied, diagnosticInventory: diagnosticBefore, diagnosticInventorySha256: digest(JSON.stringify(diagnosticBefore)), instrumentation },
+@@ -102,7 +107,7 @@ async function main() {
+   finally {
+     try {
+       assert.deepEqual(await inventory(root), before, 'normal package drift'); report.normalPackageUnchanged = true; assert.deepEqual(await inventory(copied), diagnosticBefore, 'diagnostic package drift'); report.diagnosticPackageUnchanged = true;
+-      for (const directory of [consumer, diagnostic]) for (const [source, staged] of [['bench/n9/restore-child.mjs', 'n9-restore-child.mjs'], ['bench/n9/restore-case.mjs', 'n9-restore-case.mjs']]) assert.equal(digest(await readFile(join(directory, staged))), harness.find(file => file.path === source).sha256, 'staged source drift');
++      for (const directory of [consumer, diagnostic]) for (const [source, staged] of [['bench/n9/restore-child.mjs', 'n9-restore-child.mjs'], ['bench/n9/restore-case.mjs', 'n9-restore-case.mjs'], ['bench/n9/bulk-verify.mjs', 'bulk-verify.mjs']]) assert.equal(digest(await readFile(join(directory, staged))), harness.find(file => file.path === source).sha256, 'staged source drift');
+       for (const file of harness) assert.equal(digest(await readFile(join(repo, file.path))), file.sha256, 'harness drift');
+     } catch (error) { report.outcome = 'Fail'; report.guardFailure = { name: error.name, message: error.message }; throw error; }
+     finally { report.finishedAt = new Date().toISOString(); await writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n'); }
+diff --git a/docs/planning/roadmap.json b/docs/planning/roadmap.json
+index bd08d24..0f2c890 100644
+--- a/docs/planning/roadmap.json
++++ b/docs/planning/roadmap.json
+@@ -3137,7 +3137,7 @@
+       "id": "RX-8008",
+       "title": "Implement atomic bulk-source restore under existing limits",
+       "milestone": "N9",
+-      "status": "planned",
++      "status": "in_progress",
+       "dependsOn": [
+         "RX-8007"
+       ],
+@@ -3157,6 +3157,9 @@
+         "src/adapters/indexeddb/",
+         "src/adapters/worker/",
+         "src/core/mutations/",
++        "src/core/capabilities/",
++        "src/addons/phrases/",
++        "src/addons/positions/",
+         "test/adapters/",
+         "bench/"
+       ],
+diff --git a/docs/release/PUBLICATION_STATUS.md b/docs/release/PUBLICATION_STATUS.md
+index a18650e..f854f04 100644
+--- a/docs/release/PUBLICATION_STATUS.md
++++ b/docs/release/PUBLICATION_STATUS.md
+@@ -1,6 +1,6 @@
+ # Publication status
+ 
+-The earlier implementation backlog is complete: **50 accepted tasks**, including the documentation-site and five search presentations. The selected [N9 performance/recovery milestone](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/N9_PERFORMANCE_RECOVERY.md) adds eleven tasks; RX-8001 is accepted after clean committed-head local verification of `919c9ed`, and RX-8002 adds frozen matched inputs and separately instrumented cost observations without runtime changes. RX-8003 adds conservative posting bounds with scoped paired query improvements and explicit callback/trace safeguards. RX-8004 separates genuine continuation scheduling from deadline timers with scoped Node/browser/worker latency measurements, exact work/result parity, a tested timer fallback and 599 additional core gzip bytes. RX-8005 adds bounded ordinary prefix seek with exact near-cap error compatibility; measured Node query gains trade against build/snapshot work, bounded retained term nodes and 580 additional core gzip bytes. RX-8006 reuses query-local BM25 invariants with exact score/trace/work parity and fewer repeated calculations; normal Node timing impacts are mixed and core gzip adds 156 bytes. RX-8007 diagnoses admitted 10k source restore work refusal on Node and actual Chrome workers, preserves old state and reviews a bounded bulk-builder contract without changing runtime/caps or claiming repaired capacity. Four tasks remain planned; RX-8008 is next dependency-ready. Local baseline/measurement evidence is separate from historical acceptance and unrun fresh remote CI. Core, English and Astro packages stay private `0.1.0-rc.0`; the [Unreleased notes](../../CHANGELOG.md) choose no public version or release date.
++The earlier implementation backlog is complete: **50 accepted tasks**, including the documentation-site and five search presentations. The selected [N9 performance/recovery milestone](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/N9_PERFORMANCE_RECOVERY.md) adds eleven tasks; RX-8001 is accepted after clean committed-head local verification of `919c9ed`, and RX-8002 adds frozen matched inputs and separately instrumented cost observations without runtime changes. RX-8003 adds conservative posting bounds with scoped paired query improvements and explicit callback/trace safeguards. RX-8004 separates genuine continuation scheduling from deadline timers with scoped Node/browser/worker latency measurements, exact work/result parity, a tested timer fallback and 599 additional core gzip bytes. RX-8005 adds bounded ordinary prefix seek with exact near-cap error compatibility; measured Node query gains trade against build/snapshot work, bounded retained term nodes and 580 additional core gzip bytes. RX-8006 reuses query-local BM25 invariants with exact score/trace/work parity and fewer repeated calculations; normal Node timing impacts are mixed and core gzip adds 156 bytes. RX-8007 diagnoses admitted 10k source restore work refusal on Node and actual Chrome workers, preserves old state and reviews a bounded bulk-builder contract without changing runtime/caps or claiming repaired capacity. RX-8008 implements a private atomic bulk core/source/positions reconstruction under unchanged limits, retaining per-record callback compatibility for other registrations; fresh installed Node/browser/worker capacity and full verification are in progress. Three tasks remain planned after this active slice. Local baseline/measurement evidence is separate from historical acceptance and unrun fresh remote CI. Core, English and Astro packages stay private `0.1.0-rc.0`; the [Unreleased notes](../../CHANGELOG.md) choose no public version or release date.
+ 
+ ## Documentation and evaluation
+ 
+diff --git a/src/adapters/snapshots/snapshots.ts b/src/adapters/snapshots/snapshots.ts
+index 575567a..9071a7d 100644
+--- a/src/adapters/snapshots/snapshots.ts
++++ b/src/adapters/snapshots/snapshots.ts
+@@ -1,13 +1,11 @@
+-import { createAnalysis } from '../../core/analyzer/selected.js';
+ import { Admission, has, keysOnly, ownObject } from '../../core/contracts/data.js';
+ import { captureConfiguration } from '../../core/contracts/schema.js';
+ import { captureOptions } from '../../core/contracts/options.js';
+ import type { Configuration, MutationOptions, OwnedConfiguration, Raveldex } from '../../core/contracts/types.js';
+-import { initializeParticipants } from '../../core/capabilities/participants.js';
+-import { createOwnedRaveldex, emptyRoot, getExecutionOwner } from '../../core/execution/engine.js';
++import { createOwnedRaveldex, getExecutionOwner } from '../../core/execution/engine.js';
+ import type { AdapterControl, ExecutionMetrics } from '../../core/execution/engine.js';
+ import type { ExecutionHost } from '../../core/execution/host.js';
+-import { MutationOwner } from '../../core/mutations/owner.js';
++import { reconstructSource } from './bulk.js';
+ import { invalid, RaveldexError } from '../../core/errors/error.js';
+ import type { IndexRoot } from '../../core/index/state.js';
+ import type { WorkStep } from '../../core/index/directory.js';
+@@ -113,29 +111,10 @@ function checkedHeader(raw: unknown, root: IndexRoot, format: SnapshotFormat, qu
+   count(value.originRevision, Number.MAX_SAFE_INTEGER); return value;
+ }
+ 
+-function* preparedSource(payload: unknown, configuration: OwnedConfiguration, check: () => void): Generator<WorkStep, IndexRoot> {
++function* preparedSource(payload: unknown, configuration: OwnedConfiguration, check: (phase?: string) => void): Generator<WorkStep, IndexRoot> {
+   const data = object(payload, ['records']);
+   if (!Array.isArray(data.records) || data.records.length > configuration.limits.maxDocuments) fail('MALFORMED_SNAPSHOT');
+-  const installed = initializeParticipants(configuration);
+-  const participants = installed.participants.map(participant => {
+-    const budget = new WorkBudget(participant.maxWorkUnits ?? configuration.limits.maxMutationWorkUnits);
+-    return Object.freeze({ id: participant.id, ...(participant.maxWorkUnits !== undefined ? { maxWorkUnits: participant.maxWorkUnits } : {}), *prepare(previous: unknown, context: Parameters<typeof participant.prepare>[1]): Generator<WorkStep, unknown> {
+-      const cursor = participant.prepare(previous, context); let finished = false;
+-      try {
+-        for (;;) { const step = cursor.next(); if (step.done) { finished = true; return step.value; } budget.charge(step.value.workUnits); yield step.value; }
+-      } finally { if (!finished) { try { cursor.return(undefined); } catch { /* Preserve first failure. */ } } }
+-    } });
+-  });
+-  const owner = new MutationOwner(emptyRoot(configuration, installed.states), participants);
+-  const analyze = createAnalysis(configuration, check);
+-  for (const record of data.records) {
+-    // Capturing one admitted record retains the original live admission bounds;
+-    // all batches' yielded work also joins the one outer restore budget.
+-    yield { workUnits: 1 };
+-    const request = owner.capture('add', record);
+-    yield* owner.execute(request, { analyze });
+-  }
+-  return owner.root;
++  return yield* reconstructSource(data.records, configuration, check);
+ }
+ 
+ function* restoreCursor(engine: Raveldex, root: IndexRoot, encoded: string, maximum: number, publish: (root: IndexRoot) => void, check: (phase?: string) => void): Generator<WorkStep, SnapshotRestoreResult> {
+diff --git a/src/addons/phrases/store.ts b/src/addons/phrases/store.ts
+index db7c37e..77a7543 100644
+--- a/src/addons/phrases/store.ts
++++ b/src/addons/phrases/store.ts
+@@ -1,4 +1,6 @@
+ import { workerIdentity } from '../../core/capabilities/worker-identity.js';
++import { registerBulkParticipant } from '../../core/capabilities/bulk-participant.js';
++import type { BulkParticipant } from '../../core/capabilities/bulk-participant.js';
+ import type { AddonRegistration, ParticipantContext } from '../../core/capabilities/types.js';
+ import { has } from '../../core/contracts/data.js';
+ import type { AnalyzerDescriptor, OwnedConfiguration, OwnedRecord } from '../../core/contracts/types.js';
+@@ -115,10 +117,42 @@ function* prepareSource(previous: unknown, context: ParticipantContext, fields:
+   return Object.freeze({ ...old, revision: context.revision, records, retainedEntries, textCodeUnits });
+ }
+ 
++/** Add-only private reconstruction; one owned directory is sealed at the end. */
++function bulkSource(initial: unknown, fields: readonly string[]): BulkParticipant {
++  const old = requireSourceRoot(initial, fields[0]!, 0, (initial as SourceRoot)?.analyzer);
++  if (old.records.size !== 0 || old.retainedEntries !== 0 || old.textCodeUnits !== 0) invalid('INCOMPATIBLE_CAPABILITY', 'source.bulk.initial');
++  const stage = new DirectoryStage(old.records, rawCharge);
++  let revision = 0, retainedEntries = 0, textCodeUnits = 0, sealed = false;
++  return Object.freeze({
++    *add(context: ParticipantContext): Generator<WorkStep, void> {
++      if (sealed) invalid('INTERNAL_ERROR', 'source.bulk.sealed');
++      if (context.kind !== 'add' || context.records.length !== 1 || context.removedIds.length !== 0) invalid('INCOMPATIBLE_CAPABILITY', 'source.bulk.add');
++      if (context.previousRevision !== revision || context.revision !== revision + 1 || !Number.isSafeInteger(context.revision)) invalid('REVISION_MISMATCH', 'source.revision');
++      if (context.analyzer.id !== old.analyzer.id || context.analyzer.environmentProfile !== old.analyzer.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.source.analyzer');
++      const record = context.records[0]!;
++      yield rawCharge(record.id.length + 1);
++      if (stage.get(record.id)) invalid('INCOMPATIBLE_CAPABILITY', 'source.record');
++      const next = yield* retainRecord(record, fields);
++      retainedEntries += next.retainedEntries; textCodeUnits += next.textCodeUnits;
++      bound(retainedEntries, old.maxRetainedEntries, 'source.retainedEntries');
++      bound(textCodeUnits, old.maxTextCodeUnits, 'source.textCodeUnits');
++      yield* stage.set(record.id, next);
++      revision = context.revision;
++    },
++    *finish(finalRevision: number): Generator<WorkStep, SourceRoot> {
++      if (sealed) invalid('INTERNAL_ERROR', 'source.bulk.sealed');
++      if (finalRevision !== revision || !Number.isSafeInteger(finalRevision)) invalid('REVISION_MISMATCH', 'source.revision');
++      sealed = true;
++      const records = yield* stage.finish();
++      return Object.freeze({ ...old, revision, records, retainedEntries, textCodeUnits });
++    },
++  });
++}
++
+ /** Optional selected-field originals, committed with the native frequency root. */
+ export function createSourceProvider(options: SourceProviderOptions): AddonRegistration {
+   const captured = capturePhraseOptions(options, true);
+-  return Object.freeze({
++  const registration: AddonRegistration = Object.freeze({
+     manifest: Object.freeze({
+       id: captured.id, version: '0.0.0', contractVersion: 1,
+       roles: Object.freeze(['transaction-participant'] as const),
+@@ -136,4 +170,5 @@ export function createSourceProvider(options: SourceProviderOptions): AddonRegis
+       prepare: (previous: unknown, context: ParticipantContext): Generator<WorkStep, SourceRoot> => prepareSource(previous, context, captured.fields),
+     }),
+   });
++  return registerBulkParticipant(registration, initial => bulkSource(initial, captured.fields));
+ }
+diff --git a/src/addons/positions/store.ts b/src/addons/positions/store.ts
+index c7c79b8..38e2baf 100644
+--- a/src/addons/positions/store.ts
++++ b/src/addons/positions/store.ts
+@@ -1,4 +1,6 @@
+ import { workerIdentity } from '../../core/capabilities/worker-identity.js';
++import { registerBulkParticipant } from '../../core/capabilities/bulk-participant.js';
++import type { BulkParticipant } from '../../core/capabilities/bulk-participant.js';
+ import { createAnalysis, requireAnalysis } from '../../core/analyzer/selected.js';
+ import type { AnalysisRunner } from '../../core/analyzer/selected.js';
+ import type { AddonRegistration, ParticipantContext } from '../../core/capabilities/types.js';
+@@ -193,10 +195,46 @@ function* preparePositions(previous: unknown, context: ParticipantContext, field
+   return Object.freeze({ ...old, revision: context.revision, records, retainedEntries, occurrenceCount, offsetCount, termEntries, termCodeUnits });
+ }
+ 
++/** Same occurrence construction and bounds, with one add-only owned directory. */
++function bulkPositions(initial: unknown, fields: readonly string[]): BulkParticipant {
++  const old = requirePositionRoot(initial, fields[0]!, 0, (initial as PositionRoot)?.analyzer);
++  if (old.records.size !== 0 || [old.retainedEntries, old.occurrenceCount, old.offsetCount, old.termEntries, old.termCodeUnits].some(count => count !== 0)) invalid('INCOMPATIBLE_CAPABILITY', 'positions.bulk.initial');
++  const stage = new DirectoryStage(old.records, rawCharge);
++  let revision = 0, retainedEntries = 0, occurrenceCount = 0, offsetCount = 0, termEntries = 0, termCodeUnits = 0, sealed = false;
++  return Object.freeze({
++    *add(context: ParticipantContext): Generator<WorkStep, void> {
++      if (sealed) invalid('INTERNAL_ERROR', 'positions.bulk.sealed');
++      const analyze = requireAnalysis(context);
++      if (context.kind !== 'add' || context.records.length !== 1 || context.removedIds.length !== 0) invalid('INCOMPATIBLE_CAPABILITY', 'positions.bulk.add');
++      if (context.previousRevision !== revision || context.revision !== revision + 1 || !Number.isSafeInteger(context.revision)) invalid('REVISION_MISMATCH', 'positions.revision');
++      if (context.analyzer.id !== old.analyzer.id || context.analyzer.environmentProfile !== old.analyzer.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.positions.analyzer');
++      const record = context.records[0]!;
++      yield rawCharge(record.id.length + 1);
++      if (stage.get(record.id)) invalid('INCOMPATIBLE_CAPABILITY', 'positions.record');
++      const next = yield* retainRecord(record, old, analyze);
++      retainedEntries += next.retainedEntries; occurrenceCount += next.occurrenceCount; offsetCount += next.offsetCount;
++      termEntries += next.termEntries; termCodeUnits += next.termCodeUnits;
++      bound(retainedEntries, old.maxRetainedEntries, 'positions.retainedEntries');
++      bound(occurrenceCount, old.maxOccurrences, 'positions.occurrences');
++      bound(termCodeUnits, old.maxTermCodeUnits, 'positions.termCodeUnits');
++      if ([retainedEntries, occurrenceCount, offsetCount, termEntries, termCodeUnits].some(count => !finiteCount(count))) invalid('INCOMPATIBLE_CAPABILITY', 'positions.counts');
++      yield* stage.set(record.id, next);
++      revision = context.revision;
++    },
++    *finish(finalRevision: number): Generator<WorkStep, PositionRoot> {
++      if (sealed) invalid('INTERNAL_ERROR', 'positions.bulk.sealed');
++      if (finalRevision !== revision || !Number.isSafeInteger(finalRevision)) invalid('REVISION_MISMATCH', 'positions.revision');
++      sealed = true;
++      const records = yield* stage.finish();
++      return Object.freeze({ ...old, revision, records, retainedEntries, occurrenceCount, offsetCount, termEntries, termCodeUnits });
++    },
++  });
++}
++
+ /** Explicit selected-field token occurrences; original spans opt in per field. */
+ export function createPositionProvider(options: PositionProviderOptions): AddonRegistration {
+   const captured = capturePositionOptions(options, true);
+-  return Object.freeze({
++  const registration: AddonRegistration = Object.freeze({
+     manifest: Object.freeze({
+       id: captured.id, version: '0.0.0', contractVersion: 1,
+       roles: Object.freeze(['transaction-participant'] as const),
+@@ -213,4 +251,5 @@ export function createPositionProvider(options: PositionProviderOptions): AddonR
+       prepare: (previous: unknown, context: ParticipantContext): Generator<WorkStep, PositionRoot> => preparePositions(previous, context, captured.fields),
+     }),
+   });
++  return registerBulkParticipant(registration, initial => bulkPositions(initial, captured.fields));
+ }
+diff --git a/src/core/capabilities/registration.ts b/src/core/capabilities/registration.ts
+index 08cd361..9c44723 100644
+--- a/src/core/capabilities/registration.ts
++++ b/src/core/capabilities/registration.ts
+@@ -1,3 +1,4 @@
++import { captureBulkParticipant } from './bulk-participant.js';
+ import { has, keysOnly, ownArray, ownObject, scanUnicode, stringValue } from '../contracts/data.js';
+ import { invalid } from '../errors/error.js';
+ import type { CapabilityManifest, CapabilityReference, CapabilitySet, CapturedRegistration, RegistrationContext } from './types.js';
+@@ -109,6 +110,7 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
+       costs: Object.freeze({ importedCode: string(costs.importedCode, 'addons.costs', 1024), retainedRepresentation: string(costs.retainedRepresentation, 'addons.costs', 1024), transientWork: string(costs.transientWork, 'addons.costs', 1024), externalResources: 'none' }), ...(codec ? { codec } : {}) });
+     const captured: CapturedRegistration = Object.freeze({ manifest, ...implementations });
+     if (captured.analyzer && (manifest.provides.length !== 1 || manifest.provides[0]!.id !== `analyzer:${captured.analyzer.id}` || manifest.requires.length !== 0)) invalid(code, 'addons.analyzer');
++    captureBulkParticipant(entry as object, captured);
+     registrations.set(name, captured);
+     if (!manifest.provides.length) invalid(code, 'addons.provides');
+     for (const provided of manifest.provides) { if (has(providers, provided.id)) invalid(code, 'addons.providers'); providers[provided.id] = captured; }
+diff --git a/src/core/mutations/delta.ts b/src/core/mutations/delta.ts
+index c75415f..721e7d0 100644
+--- a/src/core/mutations/delta.ts
++++ b/src/core/mutations/delta.ts
+@@ -28,10 +28,12 @@ export class CoreDelta {
+   private readonly documents: DirectoryStage<DocumentEntry>;
+   private readonly fields = new Map<string, StagedField>();
+   private readonly counts;
++  private liveDictionaryEntries: number;
+   constructor(private readonly old: IndexRoot, private readonly charge: Charge, private readonly diagnostics?: StagingCounts) {
+     validateStateCounts(old.counts, old.configuration.limits);
+     if (old.documents.size !== old.counts.documents) invalid('INTERNAL_ERROR', 'state.documents');
+     this.counts = { ...old.counts };
++    this.liveDictionaryEntries = old.counts.dictionaryEntries;
+     this.documents = new DirectoryStage(old.documents, charge, diagnostics?.documents);
+   }
+   private field(name: string): StagedField {
+@@ -84,7 +86,9 @@ export class CoreDelta {
+           if (current !== undefined) invalid('INTERNAL_ERROR', 'posting.duplicate');
+           yield* term.postings.set(document.id, tf);
+         }
++        if (term.df === 0 && sign > 0) this.liveDictionaryEntries++;
+         term.df += sign; term.frequency += sign * tf;
++        if (term.df === 0 && sign < 0) this.liveDictionaryEntries--;
+         this.counts.postingEntries += sign;
+         if (this.diagnostics) this.diagnostics.termUpdates++;
+       }
+@@ -95,6 +99,12 @@ export class CoreDelta {
+     if (delta.previous) { yield* this.contribute(delta.previous, -1); yield* this.documents.delete(delta.previous.id); this.counts.documents--; }
+     if (delta.next) { yield* this.contribute(delta.next, 1); yield* this.documents.set(delta.next.id, delta.next); this.counts.documents++; }
+   }
++  /** Unsealed add-only construction still enforces every live retention cap. */
++  hasDocument(id: string): boolean { return this.documents.get(id) !== undefined; }
++  checkCounts(): void {
++    validateStateCounts({ ...this.counts, dictionaryEntries: this.liveDictionaryEntries }, this.old.configuration.limits);
++    if (this.documents.size !== this.counts.documents) invalid('INTERNAL_ERROR', 'state.documents');
++  }
+   *finish(): Generator<WorkStep, Pick<IndexRoot, 'documents' | 'fields' | 'counts'>> {
+     const fields: Record<string, FieldIndex> = Object.create(null) as typeof fields;
+     for (const name of Object.keys(this.old.fields)) {
+@@ -122,6 +132,7 @@ export class CoreDelta {
+     const documents = yield* this.documents.finish();
+     yield this.charge(5);
+     validateStateCounts(this.counts, this.old.configuration.limits);
++    if (this.counts.dictionaryEntries !== this.liveDictionaryEntries) invalid('INTERNAL_ERROR', 'state.dictionary');
+     if (documents.size !== this.counts.documents) invalid('INTERNAL_ERROR', 'state.documents');
+     return { documents, fields: Object.freeze(fields), counts: Object.freeze(this.counts) };
+   }
+diff --git a/test/adapters/snapshots/lifecycle.test.mjs b/test/adapters/snapshots/lifecycle.test.mjs
+index 875ac86..cada93b 100644
+--- a/test/adapters/snapshots/lifecycle.test.mjs
++++ b/test/adapters/snapshots/lifecycle.test.mjs
+@@ -188,8 +188,11 @@ test('source and native final-precommit stops roll back, and no signal read afte
+   }
+ });
+ 
+-test('whole source restore accumulates participant work across private batches and preserves old state on a late failure', async t => {
+-  const host = new FakeHost(), configuration = captureConfiguration({ schema, limits: { checkpointWorkUnits: 1, maxMutationBatch: 2 }, addons: [createSourceProvider({ fields: ['title', 'body'], maxWorkUnits: 4000 })] });
++test('whole source restore accumulates generic participant work across private batches and preserves old state on a late failure', async t => {
++  // A spread registration deliberately keeps the public compatibility route:
++  // copied codec/handle declarations do not convey first-party bulk identity.
++  const source = { ...createSourceProvider({ fields: ['title', 'body'], maxWorkUnits: 4000 }) };
++  const host = new FakeHost(), configuration = captureConfiguration({ schema, limits: { checkpointWorkUnits: 1, maxMutationBatch: 2 }, addons: [source] });
+   const donor = createOwnedRaveldex(configuration, host), targetHost = new FakeHost(), target = createOwnedRaveldex(configuration, targetHost);
+   const owner = getExecutionOwner(target), donorSnapshots = createSnapshots(donor), targetSnapshots = createSnapshots(target);
+   try {
+diff --git a/test/comparison/n9-restore-browser-method.test.mjs b/test/comparison/n9-restore-browser-method.test.mjs
+index adbc4f1..f30464c 100644
+--- a/test/comparison/n9-restore-browser-method.test.mjs
++++ b/test/comparison/n9-restore-browser-method.test.mjs
+@@ -5,7 +5,9 @@ const result = (revision = 4, id = 'a') => ({ revision, model:'raveldex-bm25-v1'
+ const donor = () => ['all','common','rare','narrow-prefix','source-phrase'].map(id=>({id,outcome:'Pass',result:result()}));
+ const prior = () => ({all:result(4,'prior:a'),lexical:result(4,'prior:a'),phrase:result(4,'prior:a')});
+ function successful(input) {
+-  for(const row of input){const operations=row.mode==='normal'?row.case.samples:row.case.observations;operations[2]={operation:'restoreSource',outcome:'Pass',wallMs:1,...(row.mode==='diagnostic'?{counters:{emittedSteps:1}}:{}),priorRevision:4,priorDocuments:1000,oldRemoved:true,result:{format:'raveldex-source',reindexed:true,originRevision:4,revision:5,receivingAnalyzer:{id:'basic-v1',environmentProfile:'unqualified'}},postcondition:donor().map(item=>({...item,result:{...item.result,revision:5}}))};}
++  for(const row of input){const operations=row.mode==='normal'?row.case.samples:row.case.observations;operations[2]={operation:'restoreSource',outcome:'Pass',wallMs:1,...(row.mode==='diagnostic'?{counters:{emittedSteps:1},completeState:{outcome:'Pass',donor:{sha256:'c'.repeat(64)},receiver:{sha256:'c'.repeat(64)}}}:{}),priorRevision:4,priorDocuments:1000,oldRemoved:true,
++    completeSource:{outcome:'Pass',records:row.size},completeMembership:{outcome:'Pass',records:row.size},
++    result:{format:'raveldex-source',reindexed:true,originRevision:4,revision:5,receivingAnalyzer:{id:'basic-v1',environmentProfile:'unqualified'}},postcondition:donor().map(item=>({...item,result:{...item.result,revision:5}}))};}
+   return input;
+ }
+ function rows() {
+@@ -51,5 +53,11 @@ test('browser restore parity rejects snapshot/header/hash and successful numeric
+   change(operations=>operations[2].result.originRevision++);
+   change(operations=>operations[2].result.receivingAnalyzer.id='changed');
+   change(operations=>operations[2].result.revision++);
++  change(operations=>delete operations[2].completeSource);
++  change(operations=>operations[2].completeSource.records--);
++  change(operations=>delete operations[2].completeMembership);
++  change(operations=>operations[2].completeMembership.records--);
++  input=successful(rows());delete input[2].case.observations[2].completeState;assert.throws(()=>validateBrowserRestoreRows(input,[1000]));
++  input=successful(rows());input[2].case.observations[2].completeState.receiver.sha256='d'.repeat(64);assert.throws(()=>validateBrowserRestoreRows(input,[1000]));
+   input=rows();input[1].case.samples[2].error={code:'DEADLINE_EXCEEDED',details:{path:'deadline'}};const transitions=validateBrowserRestoreRows(input,[1000]).transitions;assert.ok(transitions.some(row=>row.operation==='restoreSource'&&row.observed.error.code==='DEADLINE_EXCEEDED'));
+ });

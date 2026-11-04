@@ -33,7 +33,12 @@ export function requireRestoreCase(row) {
         assert.equal(detail.finalAuthoritativeSame, item.outcome !== 'Pass', 'restore authoritative identity contradicts outcome');
       }
     }
-    if (item.outcome === 'Pass') { assert.ok(item.result, 'success without actual result'); if (item.operation.endsWith('Restore') || item.operation === 'restoreSource') assert.equal(item.oldRemoved, true); }
+    if (item.outcome === 'Pass') { assert.ok(item.result, 'success without actual result'); if (item.operation.endsWith('Restore') || item.operation === 'restoreSource') {
+      assert.equal(item.oldRemoved, true);
+      assert.equal(item.completeSource?.outcome, 'Pass', 'complete public receiving source required'); assert.equal(item.completeSource.records, row.size);
+      assert.equal(item.completeMembership?.outcome, 'Pass', 'complete public receiving membership required'); assert.equal(item.completeMembership.records, row.size);
+      if (row.mode === 'diagnostic') { assert.equal(item.completeState?.outcome, 'Pass', 'complete diagnostic core/sidecar equality required'); assert.match(item.completeState.donor?.sha256 ?? '', /^[a-f0-9]{64}$/); assert.equal(item.completeState.receiver?.sha256, item.completeState.donor.sha256); }
+    } }
     else {
       assert.ok(item.error?.code && typeof item.error.message === 'string', 'typed error missing'); assert.equal(restoreOutcome(item.error), item.outcome, 'typed error reclassified');
       if (item.outcome === 'Unknown') { assert.ok(item.stateClaim || item.donorQueriesPreserved); if (item.operation !== 'exportSource') { assert.notEqual(item.oldQueriesPreserved, true); assert.notEqual(item.oldSourceBytesPreserved, true); assert.notEqual(item.oldRemoved, true); } continue; }
@@ -78,10 +83,10 @@ async function main() {
   const before = await inventory(root), diagnostic = join(output, 'diagnostic'); await mkdir(join(diagnostic, 'node_modules/@vmitsaras'), { recursive: true });
   const copied = join(diagnostic, 'node_modules/@vmitsaras/raveldex'); await cp(root, copied, { recursive: true }); await writeFile(join(diagnostic, 'package.json'), JSON.stringify({ private: true, type: 'module' }));
   const instrumentation = await instrumentRestorePackage(copied), diagnosticBefore = await inventory(copied);
-  for (const directory of [consumer, diagnostic]) { await copyFile(join(repo, 'bench/n9/restore-child.mjs'), join(directory, 'n9-restore-child.mjs')); await copyFile(join(repo, 'bench/n9/restore-case.mjs'), join(directory, 'n9-restore-case.mjs')); }
+  for (const directory of [consumer, diagnostic]) { await copyFile(join(repo, 'bench/n9/restore-child.mjs'), join(directory, 'n9-restore-child.mjs')); await copyFile(join(repo, 'bench/n9/restore-case.mjs'), join(directory, 'n9-restore-case.mjs')); await copyFile(join(repo, 'bench/n9/bulk-verify.mjs'), join(directory, 'bulk-verify.mjs')); }
   const sizes = process.env.RAVELDEX_N9_RESTORE_SIZES?.split(',').map(Number) ?? RESTORE_METHOD.sizes, variants = process.env.RAVELDEX_N9_RESTORE_VARIANTS?.split(',') ?? RESTORE_VARIANTS;
   assert.ok(sizes.length && new Set(sizes).size === sizes.length && sizes.every(size => SIZES.includes(size))); assert.ok(variants.length && new Set(variants).size === variants.length && variants.every(variant => RESTORE_VARIANTS.includes(variant)));
-  const paths = ['bench/n9/restore-node.mjs', 'bench/n9/restore-child.mjs', 'bench/n9/restore-case.mjs', 'bench/n9/restore-instrument.mjs', 'bench/n9/instrument.mjs', 'bench/n9/run.mjs', 'bench/n9/workloads.mjs', 'test/fixtures/n9/freeze.json', 'test/fixtures/relevance/corpus.json'];
+  const paths = ['bench/n9/restore-node.mjs', 'bench/n9/restore-child.mjs', 'bench/n9/restore-case.mjs', 'bench/n9/bulk-verify.mjs', 'bench/n9/restore-instrument.mjs', 'bench/n9/instrument.mjs', 'bench/n9/run.mjs', 'bench/n9/workloads.mjs', 'test/fixtures/n9/freeze.json', 'test/fixtures/relevance/corpus.json'];
   const harness = await Promise.all(paths.map(async path => ({ path, sha256: digest(await readFile(join(repo, path))) })));
   const report = { kind: 'rx8007-node-restore-diagnosis-v1', startedAt: new Date().toISOString(), sourceHead: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim(), harness,
     package: { root, metadata, inventory: before, inventorySha256: digest(JSON.stringify(before)), diagnostic: copied, diagnosticInventory: diagnosticBefore, diagnosticInventorySha256: digest(JSON.stringify(diagnosticBefore)), instrumentation },
@@ -102,7 +107,7 @@ async function main() {
   finally {
     try {
       assert.deepEqual(await inventory(root), before, 'normal package drift'); report.normalPackageUnchanged = true; assert.deepEqual(await inventory(copied), diagnosticBefore, 'diagnostic package drift'); report.diagnosticPackageUnchanged = true;
-      for (const directory of [consumer, diagnostic]) for (const [source, staged] of [['bench/n9/restore-child.mjs', 'n9-restore-child.mjs'], ['bench/n9/restore-case.mjs', 'n9-restore-case.mjs']]) assert.equal(digest(await readFile(join(directory, staged))), harness.find(file => file.path === source).sha256, 'staged source drift');
+      for (const directory of [consumer, diagnostic]) for (const [source, staged] of [['bench/n9/restore-child.mjs', 'n9-restore-child.mjs'], ['bench/n9/restore-case.mjs', 'n9-restore-case.mjs'], ['bench/n9/bulk-verify.mjs', 'bulk-verify.mjs']]) assert.equal(digest(await readFile(join(directory, staged))), harness.find(file => file.path === source).sha256, 'staged source drift');
       for (const file of harness) assert.equal(digest(await readFile(join(repo, file.path))), file.sha256, 'harness drift');
     } catch (error) { report.outcome = 'Fail'; report.guardFailure = { name: error.name, message: error.message }; throw error; }
     finally { report.finishedAt = new Date().toISOString(); await writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n'); }

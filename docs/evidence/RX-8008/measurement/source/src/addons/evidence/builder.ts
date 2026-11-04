@@ -1,0 +1,200 @@
+import { workerIdentity } from '../../core/capabilities/worker-identity.js';
+import type { Token } from '../../core/analyzer/basic.js';
+import { requireAnalysis } from '../../core/analyzer/selected.js';
+import { Admission, has, ownObject } from '../../core/contracts/data.js';
+import type { AddonRegistration, AggregationOutput, CapturedPayload, EvidenceContext, EvidenceResultContext, PayloadContext, PreparedEvidence } from '../../core/capabilities/types.js';
+import { bound, invalid } from '../../core/errors/error.js';
+import type { WorkStep } from '../../core/index/directory.js';
+import type { Limits } from '../../core/limits/limits.js';
+import { DEFAULT_LIMITS } from '../../core/limits/limits.js';
+import type { Fact, TraceRequest } from '../../core/trace/facts.js';
+import type { CompiledNode } from '../../core/query/compile.js';
+import { ownInspectorOutput } from '../inspector/output.js';
+import { validatePayload } from '../metadata/payload.js';
+import { requireSourceRoot } from '../phrases/store.js';
+import type { SourceRoot } from '../phrases/store.js';
+import { requirePositionRoot } from '../positions/store.js';
+import type { PositionRoot } from '../positions/store.js';
+import { contributingLeaves, matchingGroup, matchingPhrase, phraseTable } from './occurrences.js';
+import type { ContributingLeaf, NodeFact } from './occurrences.js';
+import { captureMatchOptions, captureMatchRequest, parseMatchRequest } from './options.js';
+import type { CapturedMatchOptions, OwnedMatchRequest } from './options.js';
+import { offsetTokens, sourceTokens } from './providers.js';
+import type { MatchDocument, MatchEvidenceData, MatchEvidenceOptions, MatchRange } from './types.js';
+
+/** Internal optional composition seam for snippets and section presentation. */
+export interface EvidencePresentation {
+  readonly capability: string;
+  readonly workerOptions: Readonly<Record<string, number>>;
+  readonly maxSerializedBytes?: number;
+  capture?(input: unknown, context: PayloadContext, options: CapturedMatchOptions): CapturedPayload;
+  parse?(input: unknown, limits: Limits, options: CapturedMatchOptions): OwnedMatchRequest;
+  prepare(context: EvidenceContext, fields: readonly string[]): Generator<WorkStep, PreparedPresentation>;
+}
+export interface PreparedPresentation {
+  project(id: string, ranges: readonly MatchRange[], eligibility: MatchDocument['eligibility']): Generator<WorkStep, Readonly<Record<string, unknown>>>;
+}
+const charge = (workUnits = 1): WorkStep => ({ workUnits });
+type DocumentFact = Extract<Fact, { readonly kind: 'document' }>;
+type Provider = { readonly kind: 'source'; readonly root: SourceRoot } | { readonly kind: 'offsets'; readonly root: PositionRoot };
+
+function* rangesFor(id: string, leaves: readonly ContributingLeaf[], fields: readonly string[], providers: ReadonlyMap<string, Provider>, context: EvidenceContext, maximum: number, counter: { value: number }): Generator<WorkStep, readonly MatchRange[]> {
+  const ranges: MatchRange[] = [];
+  const tables = new Map<ContributingLeaf, readonly number[]>();
+  let tokenCount = 0;
+  for (const field of fields) {
+    yield charge(field.length + 1);
+    const active: ContributingLeaf[] = [];
+    for (const leaf of leaves) {
+      const names = leaf.kind === 'group' ? leaf.group.fields : leaf.fields;
+      yield charge(names.length + 1);
+      if (names.includes(field)) active.push(leaf);
+    }
+    if (!active.length) continue;
+    const provider = providers.get(field)!;
+    const values = provider.kind === 'source' ? yield* sourceTokens(provider.root, id, field, context.limits, requireAnalysis(context)) : yield* offsetTokens(provider.root, id, field, context.limits);
+    for (let valueIndex = 0; valueIndex < values.length; valueIndex++) {
+      const tokens = values[valueIndex]!;
+      yield charge(); tokenCount += tokens.length;
+      if (tokenCount > context.limits.maxTokensPerRecord) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.record.tokens');
+      const selected = new Set<Token>();
+      const mark = (token: Token): void => {
+        if (selected.has(token)) return;
+        selected.add(token); bound(++counter.value, maximum, 'evidence.ranges');
+      };
+      for (const leaf of active) {
+        yield charge();
+        if (leaf.kind === 'group') yield* matchingGroup(tokens, leaf.group, mark);
+        else {
+          let table = tables.get(leaf);
+          if (!table) { table = yield* phraseTable(leaf.terms); tables.set(leaf, table); }
+          yield* matchingPhrase(tokens, leaf.terms, table, mark);
+        }
+      }
+      // Stored positions and selected reanalysis are both complete dense values.
+      // Visiting this order avoids a full output sort and deduplicates coordinates.
+      for (const token of tokens) {
+        yield charge();
+        if (selected.has(token)) ranges.push(Object.freeze({ field, valueIndex, position: token.position, start: token.start, end: token.end, term: token.term,
+          ...(token.kind ? { kind: token.kind } : {}), ...(token.original ? { original: token.original } : {}) }));
+      }
+    }
+  }
+  if (context.analyzer.id === 'code-identifiers-v1') {
+    // Co-position originals/components overlap; preserve truthful coordinates in
+    // source order for snippet projection rather than treating ordinals as keys.
+    const sorted: MatchRange[] = [];
+    for (const range of ranges) {
+      let index = sorted.length;
+      while (index > 0) {
+        yield charge(fields.length * 2 + 1); const prior = sorted[index - 1]!;
+        const order = fields.indexOf(prior.field) - fields.indexOf(range.field) || prior.valueIndex - range.valueIndex || prior.start - range.start || prior.end - range.end || prior.position - range.position;
+        if (order <= 0) break; index--;
+      }
+      sorted.splice(index, 0, range);
+    }
+    return Object.freeze(sorted);
+  }
+  return Object.freeze(ranges);
+}
+
+function* project(context: EvidenceContext, finished: EvidenceResultContext, request: OwnedMatchRequest, options: CapturedMatchOptions, providers: ReadonlyMap<string, Provider>, presentation?: PreparedPresentation, maxSerializedBytes?: number): Generator<WorkStep, AggregationOutput> {
+  if (finished.trace.revision !== context.revision || finished.result.revision !== context.revision || finished.trace.model !== finished.result.model ||
+      finished.trace.analyzer.id !== context.analyzer.id || finished.trace.analyzer.environmentProfile !== context.analyzer.environmentProfile) invalid('REVISION_MISMATCH', 'evidence.revision');
+  // Strict phrase range projection cannot truthfully label ordered-gap paths.
+  // Refuse the complete requested projection even for empty IDs/failed branches.
+  function* supported(node: CompiledNode): Generator<WorkStep> {
+    yield charge();
+    if (node.kind === 'extension' && node.termGroups) invalid('MISSING_CAPABILITY', 'evidence.proximity');
+    if (node.kind === 'and' || node.kind === 'or') for (const child of node.children) yield* supported(child);
+    else if (node.kind === 'not') yield* supported(node.child);
+  }
+  yield* supported(finished.query);
+  const documents = new Map<string, DocumentFact>(), nodes = new Map<string, Map<string, NodeFact>>();
+  for (const fact of finished.trace.facts) {
+    yield charge(fact.id.length + 1);
+    if (fact.kind === 'document') {
+      if (documents.has(fact.id)) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.trace');
+      documents.set(fact.id, fact);
+    } else if (fact.kind === 'node') {
+      let paths = nodes.get(fact.id);
+      if (!paths) { paths = new Map<string, NodeFact>(); nodes.set(fact.id, paths); }
+      yield charge(fact.path.length + 1);
+      if (paths.has(fact.path)) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.trace');
+      paths.set(fact.path, fact);
+    }
+  }
+  const output: MatchDocument[] = [], counter = { value: 0 };
+  for (const id of request.ids) {
+    yield charge(id.length + 1);
+    const fact = documents.get(id);
+    if (!fact) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.trace');
+    const eligibility = !fact.exists ? 'absent' : fact.matched ? 'matched' : 'excluded';
+    const leaves = eligibility === 'matched' ? yield* contributingLeaves(finished.query, nodes.get(id) ?? new Map()) : [];
+    const ranges = leaves.length ? yield* rangesFor(id, leaves, request.fields, providers, context, request.maxRanges, counter) : Object.freeze([] as MatchRange[]);
+    let extra: Record<string, unknown> = Object.create(null) as typeof extra;
+    if (presentation) {
+      const value = yield* presentation.project(id, ranges, eligibility);
+      extra = ownObject(value, 'INCOMPATIBLE_CAPABILITY', 'evidence.presentation', new Admission(options.maxOutputEntries));
+      yield charge(Object.keys(extra).length + 1);
+      if (has(extra, 'id') || has(extra, 'eligibility') || has(extra, 'ranges')) invalid('INCOMPATIBLE_CAPABILITY', 'evidence.presentation');
+    }
+    output.push({ id, eligibility, ranges, ...extra });
+  }
+  const data: MatchEvidenceData = { kind: 'raveldex-match-evidence-v1', revision: context.revision, fields: request.fields,
+    scope: 'successful-positive-token-occurrences', complete: true, documents: output };
+  const owned = yield* ownInspectorOutput(data, Math.min(options.maxOutputEntries, context.limits.maxAdmissionEntries));
+  if (maxSerializedBytes !== undefined) {
+    const serialized=JSON.stringify(owned.value); yield charge(serialized.length+1);let bytes=0;
+    for(const char of serialized){yield charge();const point=char.codePointAt(0)!;bytes+=point<=0x7f?1:point<=0x7ff?2:point<=0xffff?3:4;bound(bytes,maxSerializedBytes,'evidence.output.bytes');}
+  }
+  return owned;
+}
+
+function* prepare(context: EvidenceContext, options: CapturedMatchOptions, presentation?: EvidencePresentation): Generator<WorkStep, PreparedEvidence> {
+  yield* validatePayload(context.payload, 'INVALID_OPTIONS');
+  requireAnalysis(context);
+  const request = presentation?.parse ? presentation.parse(context.payload, context.limits, options) : parseMatchRequest(context.payload, context.limits, options), providers = new Map<string, Provider>();
+  for (const field of request.fields) {
+    yield charge(field.length + 1);
+    if (!has(context.schema.text, field)) invalid('INVALID_OPTIONS', 'evidence.fields');
+    if (options.strategies[field] === 'source') providers.set(field, { kind: 'source', root: requireSourceRoot(context.state(`source:${field}`), field, context.revision, context.analyzer) });
+    else {
+      const root = requirePositionRoot(context.state(`offsets:${field}`), field, context.revision, context.analyzer);
+      yield charge(root.offsetFields.length + 1);
+      if (!root.offsetFields.includes(field)) invalid('MISSING_CAPABILITY', 'evidence.offsets.field');
+      providers.set(field, { kind: 'offsets', root });
+    }
+  }
+  const prepared = presentation ? yield* presentation.prepare(context, request.fields) : undefined;
+  if (prepared && typeof prepared.project !== 'function') invalid('INCOMPATIBLE_CAPABILITY', 'evidence.presentation');
+  return Object.freeze({ finish: (finished: EvidenceResultContext): Generator<WorkStep, AggregationOutput> => project(context, finished, request, options, providers, prepared, presentation?.maxSerializedBytes) });
+}
+
+/** Internal shared builder, with no presentation or host API import. */
+export function buildMatchEvidence(input: MatchEvidenceOptions, presentation?: EvidencePresentation): AddonRegistration {
+  const capability = presentation?.capability ?? 'match-evidence', options = captureMatchOptions(input, capability);
+  const sourceFields = options.fields.filter(field => options.strategies[field] === 'source' || presentation !== undefined);
+  const offsetFields = options.fields.filter(field => options.strategies[field] === 'offsets');
+  const requires = [...sourceFields.map(field => `source:${field}`), ...offsetFields.map(field => `offsets:${field}`)];
+  return Object.freeze({
+    manifest: Object.freeze({ id: options.id, version: '0.0.0', contractVersion: 1,
+      roles: Object.freeze(['evidence'] as const), provides: Object.freeze([Object.freeze({ id: capability, contractVersion: 1 })]),
+      requires: Object.freeze(requires.map(id => Object.freeze({ id, contractVersion: 1 }))),
+      dataRequirements: Object.freeze({ fields: options.fields, source: sourceFields.length > 0, positions: offsetFields.length > 0, offsets: offsetFields.length > 0, metadata: false }),
+      indexEffect: 'none', rebuildPolicy: 'new-index', execution: Object.freeze({ direct: true, worker: true, workerRegistration: workerIdentity(capability, { options, ...(presentation ? { presentation: presentation.workerOptions } : {}) }) }),
+      limits: Object.freeze({ maxPayloadCodeUnits: DEFAULT_LIMITS.maxQueryCodeUnits, maxWorkUnits: options.maxWorkUnits, maxRetainedEntries: 0, maxOutputEntries: options.maxOutputEntries }),
+      costs: Object.freeze({ importedCode: 'Actual positive-path original-token evidence and optional explicit presentation; no scorer, diagnostics, DOM or network.',
+        retainedRepresentation: 'No additional root or source retention; per-field source or original-offset providers are explicit.',
+        transientWork: 'Selected source analysis or validated stored occurrences, complete bounded range union, actual native facts and owned output; shared operation budget.', externalResources: 'none' }),
+    }),
+    evidence: Object.freeze({
+      capture: (value: unknown, context: PayloadContext) => presentation?.capture ? presentation.capture(value, context, options) : captureMatchRequest(value, context, options),
+      select: (value: unknown): TraceRequest => {
+        const request = value as OwnedMatchRequest;
+        return Object.freeze({ ids: request.ids, maxFacts: request.maxFacts, ...(request.expectedRevision === undefined ? {} : { expectedRevision: request.expectedRevision }) });
+      },
+      prepare: (context: EvidenceContext): Generator<WorkStep, PreparedEvidence> => prepare(context, options, presentation),
+    }),
+  });
+}

@@ -5,7 +5,9 @@ const result = (revision = 4, id = 'a') => ({ revision, model:'raveldex-bm25-v1'
 const donor = () => ['all','common','rare','narrow-prefix','source-phrase'].map(id=>({id,outcome:'Pass',result:result()}));
 const prior = () => ({all:result(4,'prior:a'),lexical:result(4,'prior:a'),phrase:result(4,'prior:a')});
 function successful(input) {
-  for(const row of input){const operations=row.mode==='normal'?row.case.samples:row.case.observations;operations[2]={operation:'restoreSource',outcome:'Pass',wallMs:1,...(row.mode==='diagnostic'?{counters:{emittedSteps:1}}:{}),priorRevision:4,priorDocuments:1000,oldRemoved:true,result:{format:'raveldex-source',reindexed:true,originRevision:4,revision:5,receivingAnalyzer:{id:'basic-v1',environmentProfile:'unqualified'}},postcondition:donor().map(item=>({...item,result:{...item.result,revision:5}}))};}
+  for(const row of input){const operations=row.mode==='normal'?row.case.samples:row.case.observations;operations[2]={operation:'restoreSource',outcome:'Pass',wallMs:1,...(row.mode==='diagnostic'?{counters:{emittedSteps:1},completeState:{outcome:'Pass',donor:{sha256:'c'.repeat(64)},receiver:{sha256:'c'.repeat(64)}}}:{}),priorRevision:4,priorDocuments:1000,oldRemoved:true,
+    completeSource:{outcome:'Pass',records:row.size},completeMembership:{outcome:'Pass',records:row.size},
+    result:{format:'raveldex-source',reindexed:true,originRevision:4,revision:5,receivingAnalyzer:{id:'basic-v1',environmentProfile:'unqualified'}},postcondition:donor().map(item=>({...item,result:{...item.result,revision:5}}))};}
   return input;
 }
 function rows() {
@@ -51,5 +53,11 @@ test('browser restore parity rejects snapshot/header/hash and successful numeric
   change(operations=>operations[2].result.originRevision++);
   change(operations=>operations[2].result.receivingAnalyzer.id='changed');
   change(operations=>operations[2].result.revision++);
+  change(operations=>delete operations[2].completeSource);
+  change(operations=>operations[2].completeSource.records--);
+  change(operations=>delete operations[2].completeMembership);
+  change(operations=>operations[2].completeMembership.records--);
+  input=successful(rows());delete input[2].case.observations[2].completeState;assert.throws(()=>validateBrowserRestoreRows(input,[1000]));
+  input=successful(rows());input[2].case.observations[2].completeState.receiver.sha256='d'.repeat(64);assert.throws(()=>validateBrowserRestoreRows(input,[1000]));
   input=rows();input[1].case.samples[2].error={code:'DEADLINE_EXCEEDED',details:{path:'deadline'}};const transitions=validateBrowserRestoreRows(input,[1000]).transitions;assert.ok(transitions.some(row=>row.operation==='restoreSource'&&row.observed.error.code==='DEADLINE_EXCEEDED'));
 });

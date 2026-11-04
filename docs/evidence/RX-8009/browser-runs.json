@@ -1,0 +1,86 @@
+[
+  {
+    "intervention": "planning",
+    "before": "baseline",
+    "after": "planning",
+    "command": [
+      "node",
+      "bench/n9/paired-browser.mjs",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-baseline",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-planning",
+      "/tmp/raveldex-rx8009-20261104/browser-planning"
+    ],
+    "exitCode": 0,
+    "completedAt": "2026-11-04T17:29:28.625775+00:00"
+  },
+  {
+    "intervention": "scheduling",
+    "before": "planning",
+    "after": "scheduling",
+    "command": [
+      "node",
+      "bench/n9/paired-browser.mjs",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-planning",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-scheduling",
+      "/tmp/raveldex-rx8009-20261104/browser-scheduling"
+    ],
+    "exitCode": 0,
+    "completedAt": "2026-11-04T17:30:44.939530+00:00"
+  },
+  {
+    "intervention": "prefix",
+    "before": "scheduling",
+    "after": "prefix",
+    "command": [
+      "node",
+      "bench/n9/paired-browser.mjs",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-scheduling",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-prefix",
+      "/tmp/raveldex-rx8009-20261104/browser-prefix"
+    ],
+    "exitCode": 0,
+    "completedAt": "2026-11-04T17:30:53.045618+00:00"
+  },
+  {
+    "intervention": "ranking",
+    "before": "prefix",
+    "after": "ranking",
+    "command": [
+      "node",
+      "bench/n9/paired-browser.mjs",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-prefix",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-ranking",
+      "/tmp/raveldex-rx8009-20261104/browser-ranking"
+    ],
+    "exitCode": 0,
+    "completedAt": "2026-11-04T17:31:00.923647+00:00"
+  },
+  {
+    "intervention": "bulk",
+    "before": "ranking",
+    "after": "combined",
+    "command": [
+      "node",
+      "bench/n9/paired-browser.mjs",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-ranking",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-combined",
+      "/tmp/raveldex-rx8009-20261104/browser-bulk"
+    ],
+    "exitCode": 0,
+    "completedAt": "2026-11-04T17:31:08.999876+00:00"
+  },
+  {
+    "intervention": "combined",
+    "before": "baseline",
+    "after": "combined",
+    "command": [
+      "node",
+      "bench/n9/paired-browser.mjs",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-baseline",
+      "/private/tmp/raveldex-rx8009-20261104/consumer-combined",
+      "/tmp/raveldex-rx8009-20261104/browser-combined"
+    ],
+    "exitCode": 0,
+    "completedAt": "2026-11-04T17:32:29.848867+00:00"
+  }
+]

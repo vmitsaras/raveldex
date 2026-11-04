@@ -10,6 +10,7 @@ import { build, version as esbuildVersion } from 'esbuild';
 import { inventory, digest } from './run.mjs';
 import { schema, workloadFor, verifyFrozen } from './workloads.mjs';
 import { instrumentRestorePackage, createRestoreDiagnostic } from './restore-instrument.mjs';
+import { createBulkVerifier } from './bulk-verify.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 export const BROWSER_RESTORE_VARIANTS = Object.freeze(['source', 'positions-offsets']);
@@ -82,6 +83,9 @@ export function validateBrowserRestoreParity(rows, sizes, variants = BROWSER_RES
           assert.equal(receipt.format, 'raveldex-source'); assert.equal(receipt.reindexed, true);
           assert.equal(receipt.originRevision, exported.result.header.originRevision, 'restore origin drift');
           assert.equal(receipt.revision, operation.priorRevision + 1, 'restore must publish exactly once'); assert.equal(operation.oldRemoved, true);
+          assert.equal(operation.completeSource?.outcome, 'Pass', 'complete public receiving source required'); assert.equal(operation.completeSource.records, size);
+          assert.equal(operation.completeMembership?.outcome, 'Pass', 'complete public receiving membership required'); assert.equal(operation.completeMembership.records, size);
+          if (row.mode === 'diagnostic') { assert.equal(operation.completeState?.outcome, 'Pass', 'complete diagnostic core/sidecar equality required'); assert.match(operation.completeState.donor?.sha256 ?? '', /^[a-f0-9]{64}$/); assert.equal(operation.completeState.receiver?.sha256, operation.completeState.donor.sha256); }
           const queries = normalizedQueryObservations(operation.postcondition, receipt.revision);
           compareQueryObservations(donor, queries, { ...context, stage: operation.operation + ':donor' }, parity, transitions);
           const normalizedReceipt = { ...receipt, originRevision: 0, revision: 0 };
@@ -144,19 +148,22 @@ async function bundle(directory, source, name) {
   const result = await build({ stdin: { contents: source, sourcefile: name + '.entry.mjs', resolveDir: directory }, absWorkingDir: directory,
     bundle: true, platform: 'browser', format: 'esm', target: 'es2022', minify: true, treeShaking: true, legalComments: 'none', charset: 'ascii', sourcemap: false, write: false, metafile: true, logLevel: 'silent' });
   for (const [path, input] of Object.entries(result.metafile.inputs)) {
-    assert.ok(path === name + '.entry.mjs' || path === 'restore-case.mjs' || path.startsWith('node_modules/@vmitsaras/raveldex/dist/'), 'unexpected bundle input: ' + path);
+    assert.ok(path === name + '.entry.mjs' || path === 'restore-case.mjs' || path === 'bulk-verify.mjs' || path.startsWith('node_modules/@vmitsaras/raveldex/dist/'), 'unexpected bundle input: ' + path);
     assert.ok(input.imports.every(entry => !entry.external), 'external bundle input');
   }
   const bytes = result.outputFiles[0].contents;
   return { bytes, identity: { file: name, bytes: bytes.length, sha256: digest(bytes), inputs: result.metafile.inputs } };
 }
 async function stage(directory, destination, workload, variant, mode) {
-  const diagnosticDefinition = mode === 'diagnostic' ? `const localDiagnostic=(${createRestoreDiagnostic.toString()})();` : '';
+  const diagnosticDefinition = mode === 'diagnostic' ? `const localDiagnostic=(${createRestoreDiagnostic.toString()})();
+const rootVerifier=(${createBulkVerifier.toString()})();
+const hashData=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))).map(byte=>byte.toString(16).padStart(2,'0')).join('');
+const rootDigest=async root=>{const state=rootVerifier.rootState(root);return{sha256:await hashData(state.canonical),encounterSha256:await hashData(state.encounterCanonical),revision:state.revision,summary:state.summary,scope:state.scope};};` : '';
   const controls = mode === 'diagnostic' ? `
-self.addEventListener('message',event=>{if(!event.data?.restoreBench)return;event.stopImmediatePropagation();const {id,operation,meta}=event.data;try{const value=operation==='start'?localDiagnostic.start(meta):localDiagnostic.stop();self.postMessage({restoreBench:true,id,value});}catch(error){self.postMessage({restoreBench:true,id,error:{name:error.name,message:error.message}});}});` : '';
+self.addEventListener('message',async event=>{if(!event.data?.restoreBench)return;event.stopImmediatePropagation();const {id,operation,meta}=event.data;try{const value=operation==='rootState'?await rootDigest(globalThis[Symbol.for('raveldex.n9.bulk.owner')]()):operation==='start'?localDiagnostic.start(meta):localDiagnostic.stop();self.postMessage({restoreBench:true,id,value});}catch(error){self.postMessage({restoreBench:true,id,error:{name:error.name,message:error.message}});}});` : '';
   const workerSource = imports + `import {serveSnapshotRaveldexWorker} from '@vmitsaras/raveldex/adapters/worker/snapshots/host';${addonDefinition}${diagnosticDefinition}${controls}
 const variant=new URL(import.meta.url).searchParams.get('variant');if(!['source','positions-offsets'].includes(variant))throw Error('Unknown restore variant');serveSnapshotRaveldexWorker(self,{addons:addons(variant)});`;
-  const appSource = imports + `import {exerciseRestore} from './restore-case.mjs';
+  const appSource = imports + (mode === 'diagnostic' ? `import {getExecutionOwner} from './node_modules/@vmitsaras/raveldex/dist/core/execution/engine.js';` : '') + `import {exerciseRestore} from './restore-case.mjs';
 import {createWorkerRaveldex} from '@vmitsaras/raveldex/adapters/worker';
 import {createWorkerSnapshots} from '@vmitsaras/raveldex/adapters/worker/snapshots';${addonDefinition}${diagnosticDefinition}
 const records=${JSON.stringify(workload.records)},queries=${JSON.stringify(workload.queries)},schema=${JSON.stringify(schema)},variant=${JSON.stringify(variant)},mode=${JSON.stringify(mode)};
@@ -169,7 +176,8 @@ window.restoreExercise=async execution=>{
   try{const engine=await createWorkerRaveldex({worker,configuration:{schema,addons:addons(variant)},ownership:'owned',sameHost:true});bridges.set(engine,{rpc,worker,role,pending});return engine;}catch(error){worker.terminate();workers.delete(worker);throw error;}};
  const snapshots=engine=>execution==='direct'?createSnapshots(engine):createWorkerSnapshots(engine);
  const diagnostic=mode==='diagnostic'?{start:({operation,engine,role})=>execution==='direct'?localDiagnostic.start({operation,role}):bridges.get(engine).rpc('start',{operation,role}),stop:({engine})=>execution==='direct'?localDiagnostic.stop():bridges.get(engine).rpc('stop')}:undefined;
- try{return await exerciseRestore({create,createSnapshots:snapshots,records,queries,mode,diagnostic,deadlineMs:60000,onSnapshot:async(encoded,meta)=>window.persistRestoreSnapshot(encoded,meta)});}catch(error){return{outcome:'Fail',failure:{name:error.name,code:error.code??null,message:error.message},partial:error.restoreReport??null};}finally{for(const worker of workers)worker.terminate();workers.clear();}
+ const captureRoot=mode==='diagnostic'?engine=>execution==='direct'?rootDigest(getExecutionOwner(engine).root):bridges.get(engine).rpc('rootState'):undefined;
+ try{return await exerciseRestore({create,createSnapshots:snapshots,records,queries,mode,diagnostic,captureRoot,deadlineMs:60000,onSnapshot:async(encoded,meta)=>window.persistRestoreSnapshot(encoded,meta)});}catch(error){return{outcome:'Fail',failure:{name:error.name,code:error.code??null,message:error.message},partial:error.restoreReport??null};}finally{for(const worker of workers)worker.terminate();workers.clear();}
 };`;
   await mkdir(destination, { recursive: true });
   const bundles = {};
@@ -189,13 +197,14 @@ async function main() {
   assert.ok(sizes.length && new Set(sizes).size === sizes.length && sizes.every(size => [100,1000,10000].includes(size)));
   assert.ok(variants.length && new Set(variants).size === variants.length && variants.every(variant => BROWSER_RESTORE_VARIANTS.includes(variant)));
   const harness = [];
-  for (const path of ['bench/n9/restore-browser.mjs','bench/n9/restore-case.mjs','bench/n9/restore-instrument.mjs','bench/n9/instrument.mjs','bench/n9/workloads.mjs','bench/n9/run.mjs','test/fixtures/n9/freeze.json','test/fixtures/relevance/corpus.json']) harness.push({ path, sha256: digest(await readFile(join(root,path))) });
+  for (const path of ['bench/n9/restore-browser.mjs','bench/n9/restore-case.mjs','bench/n9/bulk-verify.mjs','bench/n9/restore-instrument.mjs','bench/n9/instrument.mjs','bench/n9/workloads.mjs','bench/n9/run.mjs','test/fixtures/n9/freeze.json','test/fixtures/relevance/corpus.json']) harness.push({ path, sha256: digest(await readFile(join(root,path))) });
   const packages = {}, routes = {}, bundles = {}, workloads = sizes.map(size => verifyFrozen(workloadFor('adversarial', size)));
   for (const mode of BROWSER_RESTORE_MODES) {
     const directory = join(canonicalOutput, mode), packageRoot = join(directory, 'node_modules/@vmitsaras/raveldex'); await mkdir(dirname(packageRoot), { recursive: true }); await cp(source, packageRoot, { recursive: true }); await writeFile(join(directory,'package.json'), JSON.stringify({ private:true,type:'module' }));
     await copyFile(join(root,'bench/n9/restore-case.mjs'), join(directory,'restore-case.mjs'));
+    await copyFile(join(root,'bench/n9/bulk-verify.mjs'), join(directory,'bulk-verify.mjs'));
     const instrumentation = mode === 'diagnostic' ? await instrumentRestorePackage(packageRoot) : null;
-    packages[mode] = { directory, packageRoot, metadata, instrumentation, inventory: await inventory(packageRoot), stagedCaseSha256: digest(await readFile(join(directory,'restore-case.mjs'))) };
+    packages[mode] = { directory, packageRoot, metadata, instrumentation, inventory: await inventory(packageRoot), stagedCaseSha256: digest(await readFile(join(directory,'restore-case.mjs'))), stagedVerifierSha256: digest(await readFile(join(directory,'bulk-verify.mjs'))) };
     for (const workload of workloads) for (const variant of variants) {
       const label = [mode,variant,workload.size].join('-'), destination = join(directory,'assets',variant+'-'+workload.size);
       bundles[label] = await stage(directory,destination,workload,variant,mode); routes[label] = destination;
@@ -230,7 +239,7 @@ async function main() {
     await browser?.close();await new Promise(yes=>server.close(yes));
     try {
       assert.deepEqual(await inventory(source),originalInventory,'original installed package changed');report.originalPackageUnchanged=true;
-      for(const mode of BROWSER_RESTORE_MODES){assert.deepEqual(await inventory(packages[mode].packageRoot),packages[mode].inventory,'staged package changed');assert.equal(digest(await readFile(join(packages[mode].directory,'restore-case.mjs'))),packages[mode].stagedCaseSha256);packages[mode].packageUnchanged=true;packages[mode].stagedCaseUnchanged=true;}
+      for(const mode of BROWSER_RESTORE_MODES){assert.deepEqual(await inventory(packages[mode].packageRoot),packages[mode].inventory,'staged package changed');assert.equal(digest(await readFile(join(packages[mode].directory,'restore-case.mjs'))),packages[mode].stagedCaseSha256);assert.equal(digest(await readFile(join(packages[mode].directory,'bulk-verify.mjs'))),packages[mode].stagedVerifierSha256);packages[mode].packageUnchanged=true;packages[mode].stagedCaseUnchanged=true;}
       for(const file of harness)assert.equal(digest(await readFile(join(root,file.path))),file.sha256,'harness source drift');
       for(const [label,files] of Object.entries(bundles))for(const [name,identity] of Object.entries(files))assert.equal(digest(await readFile(join(routes[label],name))),identity.sha256,'executed bundle drift');
     } catch(error){report.outcome='Fail';report.guardFailure={name:error.name,message:error.message};throw error;}

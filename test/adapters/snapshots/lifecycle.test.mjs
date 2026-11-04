@@ -188,8 +188,11 @@ test('source and native final-precommit stops roll back, and no signal read afte
   }
 });
 
-test('whole source restore accumulates participant work across private batches and preserves old state on a late failure', async t => {
-  const host = new FakeHost(), configuration = captureConfiguration({ schema, limits: { checkpointWorkUnits: 1, maxMutationBatch: 2 }, addons: [createSourceProvider({ fields: ['title', 'body'], maxWorkUnits: 4000 })] });
+test('whole source restore accumulates generic participant work across private batches and preserves old state on a late failure', async t => {
+  // A spread registration deliberately keeps the public compatibility route:
+  // copied codec/handle declarations do not convey first-party bulk identity.
+  const source = { ...createSourceProvider({ fields: ['title', 'body'], maxWorkUnits: 4000 }) };
+  const host = new FakeHost(), configuration = captureConfiguration({ schema, limits: { checkpointWorkUnits: 1, maxMutationBatch: 2 }, addons: [source] });
   const donor = createOwnedRaveldex(configuration, host), targetHost = new FakeHost(), target = createOwnedRaveldex(configuration, targetHost);
   const owner = getExecutionOwner(target), donorSnapshots = createSnapshots(donor), targetSnapshots = createSnapshots(target);
   try {

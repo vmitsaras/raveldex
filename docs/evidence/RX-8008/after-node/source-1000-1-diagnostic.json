@@ -1,0 +1,3858 @@
+{
+  "kind": "rx8007-restore-node-child-v1",
+  "pid": 68042,
+  "variant": "source",
+  "mode": "diagnostic",
+  "owner": 1,
+  "size": 1000,
+  "identity": {
+    "version": "rx8002-workloads-v1",
+    "family": "adversarial",
+    "size": 1000,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "7ccd625d48773cdbad053cc3e31d8a74a4ef47e6f80f266765ce9abbbbaa19ab",
+    "labelsSha256": "29c28371a4af83ad4abeb8746e4b7cc554b6e5a041b1f9746126c617c9a913e1",
+    "queriesSha256": "620a9f2951d685f6bf58559819a93bfa10ec52fa0d1f08d7dd5acfb78ad8c7a4",
+    "judgmentsSha256": "83f5a67855d4aeacaa8b3349f3a50d58ab85cd6f73e79c1c206a781d5ab50d2b",
+    "dictionaryTerms": 3007,
+    "judgmentCounts": {
+      "common": 1000,
+      "rare": 1,
+      "overlapping-or": 335,
+      "negative-only": 999,
+      "filtered": 200,
+      "narrow-prefix": 10,
+      "broad-prefix-refusal": 1000,
+      "source-phrase": 334
+    }
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "versions": {
+      "node": "24.21.0",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.8",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.3",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "137",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "3.6.4",
+      "simdjson": "4.6.11",
+      "simdutf": "6.4.0",
+      "sqlite": "3.53.4",
+      "tz": "2026a",
+      "undici": "7.29.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "13.6.233.17-node.53",
+      "zlib": "1.2.12",
+      "zstd": "1.5.7"
+    },
+    "execArgv": []
+  },
+  "configuration": {
+    "schema": {
+      "text": {
+        "body": {}
+      },
+      "metadata": {
+        "group": {
+          "type": "string"
+        }
+      }
+    },
+    "addons": [
+      {
+        "id": "source",
+        "version": "0.0.0",
+        "contractVersion": 1,
+        "roles": [
+          "transaction-participant"
+        ],
+        "provides": [
+          {
+            "id": "source:body",
+            "contractVersion": 1
+          }
+        ],
+        "requires": [],
+        "dataRequirements": {
+          "fields": [
+            "body"
+          ],
+          "source": true,
+          "positions": false,
+          "offsets": false,
+          "metadata": false
+        },
+        "indexEffect": "transactional",
+        "rebuildPolicy": "new-index",
+        "execution": {
+          "direct": true,
+          "worker": true,
+          "workerRegistration": "raveldex:source:1:{\"fields\":[\"body\"],\"id\":\"source\",\"maxRetainedEntries\":660000,\"maxWorkUnits\":50000000}"
+        },
+        "limits": {
+          "maxPayloadCodeUnits": 16384,
+          "maxWorkUnits": 50000000,
+          "maxRetainedEntries": 660000,
+          "maxOutputEntries": 0
+        },
+        "costs": {
+          "importedCode": "Selected-source capture and copy-on-write directory staging; no phrase verifier.",
+          "retainedRepresentation": "One entry per record, present selected field and original value; selected original UTF-16 strings only.",
+          "transientWork": "Changed selected-field values and touched source-directory buckets; shared mutation budget.",
+          "externalResources": "none"
+        },
+        "codec": {
+          "id": "raveldex-source-v1",
+          "version": 1
+        }
+      },
+      {
+        "id": "source-phrases",
+        "version": "0.0.0",
+        "contractVersion": 1,
+        "roles": [
+          "leaf-refinement"
+        ],
+        "provides": [
+          {
+            "id": "phrases",
+            "contractVersion": 1
+          }
+        ],
+        "requires": [
+          {
+            "id": "source:body",
+            "contractVersion": 1
+          }
+        ],
+        "dataRequirements": {
+          "fields": [
+            "body"
+          ],
+          "source": true,
+          "positions": false,
+          "offsets": false,
+          "metadata": false
+        },
+        "indexEffect": "none",
+        "rebuildPolicy": "new-index",
+        "execution": {
+          "direct": true,
+          "worker": true,
+          "workerRegistration": "raveldex:source-phrases:1:{\"fields\":[\"body\"],\"id\":\"source-phrases\",\"maxRetainedEntries\":0,\"maxWorkUnits\":10000000}"
+        },
+        "limits": {
+          "maxPayloadCodeUnits": 16384,
+          "maxWorkUnits": 10000000,
+          "maxRetainedEntries": 0,
+          "maxOutputEntries": 0
+        },
+        "costs": {
+          "importedCode": "Native analyzer, resumable source phrase verifier and selected-source protocol.",
+          "retainedRepresentation": "No additional index state; source providers retain declared originals.",
+          "transientWork": "At most 32 phrase-prefix entries plus one current token; complete lexical candidates are scanned under the shared search budget.",
+          "externalResources": "none"
+        }
+      }
+    ],
+    "defaultLimits": true
+  },
+  "scope": "Actual installed Node source restore. process.memoryUsage observations include harness, inputs, donor and receiver; phase samples are not retained/peak/exclusive engine heap.",
+  "exercise": {
+    "mode": "diagnostic",
+    "size": 1000,
+    "priorRecords": 1000,
+    "samples": [],
+    "observations": [
+      {
+        "operation": "build",
+        "outcome": "Pass",
+        "wallMs": 324.353792,
+        "cpuUserMs": 275.164,
+        "cpuSystemMs": 12.134,
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 583260,
+          "emittedWorkUnits": 1930757,
+          "maxStepWorkUnits": 33,
+          "hostYields": 937,
+          "continuationsScheduled": 937,
+          "deadlineCallbacks": 0,
+          "restorePhase": null,
+          "restorePhases": {},
+          "restore": {
+            "operation": "build",
+            "phase": "none",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [],
+            "phaseWork": {
+              "none": {
+                "steps": 583260,
+                "workUnits": 1930757
+              }
+            },
+            "detailWork": {
+              "none": {
+                "steps": 583260,
+                "workUnits": 1930757
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {},
+            "tokens": {},
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "mutation.record": 4,
+              "mutation.participant:source": 4
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 67.766125,
+                "value": {
+                  "rss": 78004224,
+                  "heapTotal": 28901376,
+                  "heapUsed": 18370136,
+                  "external": 2578600,
+                  "arrayBuffers": 209183
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 392.2745,
+                "value": {
+                  "rss": 103825408,
+                  "heapTotal": 55918592,
+                  "heapUsed": 24439832,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": null,
+            "observerErrors": []
+          }
+        },
+        "result": {
+          "revision": 4,
+          "changed": true,
+          "added": 232,
+          "replaced": 0,
+          "removed": 0
+        },
+        "admittedBatches": 4
+      },
+      {
+        "operation": "exportSource",
+        "outcome": "Pass",
+        "wallMs": 635.0988749999999,
+        "cpuUserMs": 507.695,
+        "cpuSystemMs": 11.735,
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 826226,
+          "emittedWorkUnits": 2769527,
+          "maxStepWorkUnits": 256,
+          "hostYields": 1341,
+          "continuationsScheduled": 1341,
+          "deadlineCallbacks": 0,
+          "restorePhase": null,
+          "restorePhases": {},
+          "restore": {
+            "operation": "exportSource",
+            "phase": "snapshot.export.utf8",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.export.validation",
+                "at": 560.293,
+                "emittedWorkUnits": 5
+              },
+              {
+                "phase": "snapshot.export.source",
+                "at": 1066.218,
+                "emittedWorkUnits": 1899067
+              },
+              {
+                "phase": "snapshot.export.encode",
+                "at": 1081.276458,
+                "emittedWorkUnits": 2062075
+              },
+              {
+                "phase": "snapshot.export.checksum",
+                "at": 1166.7185,
+                "emittedWorkUnits": 2423814
+              },
+              {
+                "phase": "snapshot.export.utf8",
+                "at": 1181.538417,
+                "emittedWorkUnits": 2596590
+              }
+            ],
+            "phaseWork": {
+              "none": {
+                "steps": 1,
+                "workUnits": 5
+              },
+              "snapshot.export.validation": {
+                "steps": 638410,
+                "workUnits": 1899062
+              },
+              "snapshot.export.source": {
+                "steps": 4666,
+                "workUnits": 163008
+              },
+              "snapshot.export.encode": {
+                "steps": 181798,
+                "workUnits": 361739
+              },
+              "snapshot.export.checksum": {
+                "steps": 675,
+                "workUnits": 172776
+              },
+              "snapshot.export.utf8": {
+                "steps": 676,
+                "workUnits": 172937
+              }
+            },
+            "detailWork": {
+              "none": {
+                "steps": 1,
+                "workUnits": 5
+              },
+              "snapshot.export.validation:nonparticipant-structural": {
+                "steps": 415134,
+                "workUnits": 1439429
+              },
+              "snapshot.export.validation:source": {
+                "steps": 223276,
+                "workUnits": 459633
+              },
+              "snapshot.export.source": {
+                "steps": 4666,
+                "workUnits": 163008
+              },
+              "snapshot.export.encode": {
+                "steps": 181798,
+                "workUnits": 361739
+              },
+              "snapshot.export.checksum": {
+                "steps": 675,
+                "workUnits": 172776
+              },
+              "snapshot.export.utf8": {
+                "steps": 676,
+                "workUnits": 172937
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {
+              "native-validation:source": 1666
+            },
+            "tokens": {
+              "native-validation:source": 10668
+            },
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1,
+              "native.validation.participant:source": 1
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 559.906042,
+                "value": {
+                  "rss": 132022272,
+                  "heapTotal": 90783744,
+                  "heapUsed": 39743064,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.validation",
+                "phase": "snapshot.export.validation",
+                "recordsCompleted": 0,
+                "at": 560.297125,
+                "value": {
+                  "rss": 132038656,
+                  "heapTotal": 90783744,
+                  "heapUsed": 39773296,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.source",
+                "phase": "snapshot.export.source",
+                "recordsCompleted": 0,
+                "at": 1066.223875,
+                "value": {
+                  "rss": 137494528,
+                  "heapTotal": 93028352,
+                  "heapUsed": 38173680,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.encode",
+                "phase": "snapshot.export.encode",
+                "recordsCompleted": 0,
+                "at": 1081.281667,
+                "value": {
+                  "rss": 137527296,
+                  "heapTotal": 93028352,
+                  "heapUsed": 39805384,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.checksum",
+                "phase": "snapshot.export.checksum",
+                "recordsCompleted": 0,
+                "at": 1166.726792,
+                "value": {
+                  "rss": 140066816,
+                  "heapTotal": 94208000,
+                  "heapUsed": 37769264,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.export.utf8",
+                "phase": "snapshot.export.utf8",
+                "recordsCompleted": 0,
+                "at": 1181.544167,
+                "value": {
+                  "rss": 140083200,
+                  "heapTotal": 94208000,
+                  "heapUsed": 37949296,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.export.utf8",
+                "recordsCompleted": 0,
+                "at": 1195.04375,
+                "value": {
+                  "rss": 140279808,
+                  "heapTotal": 94388224,
+                  "heapUsed": 38310328,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": null,
+            "observerErrors": []
+          }
+        },
+        "result": {
+          "encodedBytes": 172937,
+          "encodedCodeUnits": 172937,
+          "header": {
+            "analyzer": {
+              "environmentProfile": "unqualified",
+              "id": "basic-v1"
+            },
+            "capabilities": [
+              {
+                "codec": {
+                  "id": "raveldex-source-v1",
+                  "version": 1
+                },
+                "contractVersion": 1,
+                "costs": {
+                  "externalResources": "none",
+                  "importedCode": "Selected-source capture and copy-on-write directory staging; no phrase verifier.",
+                  "retainedRepresentation": "One entry per record, present selected field and original value; selected original UTF-16 strings only.",
+                  "transientWork": "Changed selected-field values and touched source-directory buckets; shared mutation budget."
+                },
+                "dataRequirements": {
+                  "fields": [
+                    "body"
+                  ],
+                  "metadata": false,
+                  "offsets": false,
+                  "positions": false,
+                  "source": true
+                },
+                "execution": {
+                  "direct": true,
+                  "worker": true,
+                  "workerRegistration": "raveldex:source:1:{\"fields\":[\"body\"],\"id\":\"source\",\"maxRetainedEntries\":660000,\"maxWorkUnits\":50000000}"
+                },
+                "id": "source",
+                "indexEffect": "transactional",
+                "limits": {
+                  "maxOutputEntries": 0,
+                  "maxPayloadCodeUnits": 16384,
+                  "maxRetainedEntries": 660000,
+                  "maxWorkUnits": 50000000
+                },
+                "provides": [
+                  {
+                    "contractVersion": 1,
+                    "id": "source:body"
+                  }
+                ],
+                "rebuildPolicy": "new-index",
+                "requires": [],
+                "roles": [
+                  "transaction-participant"
+                ],
+                "version": "0.0.0"
+              },
+              {
+                "contractVersion": 1,
+                "costs": {
+                  "externalResources": "none",
+                  "importedCode": "Native analyzer, resumable source phrase verifier and selected-source protocol.",
+                  "retainedRepresentation": "No additional index state; source providers retain declared originals.",
+                  "transientWork": "At most 32 phrase-prefix entries plus one current token; complete lexical candidates are scanned under the shared search budget."
+                },
+                "dataRequirements": {
+                  "fields": [
+                    "body"
+                  ],
+                  "metadata": false,
+                  "offsets": false,
+                  "positions": false,
+                  "source": true
+                },
+                "execution": {
+                  "direct": true,
+                  "worker": true,
+                  "workerRegistration": "raveldex:source-phrases:1:{\"fields\":[\"body\"],\"id\":\"source-phrases\",\"maxRetainedEntries\":0,\"maxWorkUnits\":10000000}"
+                },
+                "id": "source-phrases",
+                "indexEffect": "none",
+                "limits": {
+                  "maxOutputEntries": 0,
+                  "maxPayloadCodeUnits": 16384,
+                  "maxRetainedEntries": 0,
+                  "maxWorkUnits": 10000000
+                },
+                "provides": [
+                  {
+                    "contractVersion": 1,
+                    "id": "phrases"
+                  }
+                ],
+                "rebuildPolicy": "new-index",
+                "requires": [
+                  {
+                    "contractVersion": 1,
+                    "id": "source:body"
+                  }
+                ],
+                "roles": [
+                  "leaf-refinement"
+                ],
+                "version": "0.0.0"
+              }
+            ],
+            "indexDetail": {
+              "id": "frequency-directory-256-v1",
+              "version": 1
+            },
+            "limits": {
+              "checkpointWorkUnits": 2048,
+              "maxAdmissionEntries": 16384,
+              "maxCorpusTextCodeUnits": 67108864,
+              "maxCorpusTokens": 4000000,
+              "maxDeadlineMs": 60000,
+              "maxDictionaryEntries": 250000,
+              "maxDocuments": 10000,
+              "maxExpansionsPerGroup": 256,
+              "maxFieldNameCodeUnits": 64,
+              "maxHits": 100,
+              "maxIdCodeUnits": 256,
+              "maxMetadataCodeUnitsPerRecord": 32768,
+              "maxMetadataFields": 32,
+              "maxMetadataStringCodeUnits": 1024,
+              "maxMetadataValuesPerField": 128,
+              "maxMutationBatch": 256,
+              "maxMutationWorkUnits": 50000000,
+              "maxPostingEntries": 2000000,
+              "maxQueryCodeUnits": 16384,
+              "maxQueryDepth": 16,
+              "maxQueryExpansions": 1024,
+              "maxQueryGroups": 64,
+              "maxQueryLexicalCodeUnits": 2048,
+              "maxQueryNodes": 128,
+              "maxQueryTokens": 64,
+              "maxQueuedOperations": 32,
+              "maxRawTokenCodeUnits": 256,
+              "maxSearchWorkUnits": 10000000,
+              "maxTermCodeUnits": 256,
+              "maxTextCodeUnitsPerRecord": 262144,
+              "maxTextCodeUnitsPerValue": 65536,
+              "maxTextFields": 32,
+              "maxTextValuesPerField": 64,
+              "maxTokensPerRecord": 32768,
+              "maxVariantsPerGroup": 16,
+              "minPrefixCodePoints": 2
+            },
+            "nativeQualification": null,
+            "originRevision": 4,
+            "ranking": {
+              "implementationVersion": 1,
+              "model": "raveldex-bm25-v1"
+            },
+            "schema": {
+              "metadata": {
+                "group": {
+                  "multi": false,
+                  "nullable": false,
+                  "type": "string"
+                }
+              },
+              "text": {
+                "body": {
+                  "boost": 1
+                }
+              }
+            },
+            "schemaVersion": 1
+          },
+          "encodedSha256": "6c686a6c1ec7b6556bc7e651be2238ba0043c053bceb760e041f007cbf223110",
+          "snapshotArtifact": "source-1000-1-diagnostic.snapshot.json"
+        }
+      },
+      {
+        "operation": "restoreSource",
+        "outcome": "Pass",
+        "wallMs": 497.4583339999999,
+        "cpuUserMs": 462,
+        "cpuSystemMs": 15.775,
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 702686,
+          "emittedWorkUnits": 2225616,
+          "maxStepWorkUnits": 256,
+          "hostYields": 1082,
+          "continuationsScheduled": 1082,
+          "deadlineCallbacks": 0,
+          "restorePhase": "snapshot.precommit",
+          "restorePhases": {
+            "snapshot.decode": {
+              "checks": 1,
+              "emittedSteps": 147661,
+              "emittedWorkUnits": 469893
+            },
+            "snapshot.integrity": {
+              "checks": 1,
+              "emittedSteps": 675,
+              "emittedWorkUnits": 172776
+            },
+            "snapshot.compatibility": {
+              "checks": 1,
+              "emittedSteps": 0,
+              "emittedWorkUnits": 0
+            },
+            "snapshot.staging": {
+              "checks": 1,
+              "emittedSteps": 1,
+              "emittedWorkUnits": 1
+            },
+            "snapshot.source.admission": {
+              "checks": 2000,
+              "emittedSteps": 1000,
+              "emittedWorkUnits": 18000
+            },
+            "snapshot.source.analysis": {
+              "checks": 149012,
+              "emittedSteps": 148012,
+              "emittedWorkUnits": 462712
+            },
+            "snapshot.source.core": {
+              "checks": 19336,
+              "emittedSteps": 18336,
+              "emittedWorkUnits": 392727
+            },
+            "snapshot.source.participant": {
+              "checks": 7666,
+              "emittedSteps": 7665,
+              "emittedWorkUnits": 51665
+            },
+            "snapshot.source.finalization": {
+              "checks": 378079,
+              "emittedSteps": 378078,
+              "emittedWorkUnits": 639578
+            },
+            "snapshot.source.participant-finalization": {
+              "checks": 1258,
+              "emittedSteps": 1258,
+              "emittedWorkUnits": 18264
+            },
+            "snapshot.precommit": {
+              "checks": 1,
+              "emittedSteps": 0,
+              "emittedWorkUnits": 0
+            }
+          },
+          "restore": {
+            "operation": "restoreSource",
+            "phase": "snapshot.precommit",
+            "mutationPhase": null,
+            "participant": "source",
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.decode",
+                "at": 2399.82075,
+                "emittedWorkUnits": 0
+              },
+              {
+                "phase": "snapshot.integrity",
+                "at": 2493.732083,
+                "emittedWorkUnits": 469893
+              },
+              {
+                "phase": "snapshot.compatibility",
+                "at": 2508.439542,
+                "emittedWorkUnits": 642669
+              },
+              {
+                "phase": "snapshot.staging",
+                "at": 2508.584875,
+                "emittedWorkUnits": 642669
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2508.8625,
+                "emittedWorkUnits": 642670
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2508.921375,
+                "emittedWorkUnits": 642688
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2509.118792,
+                "emittedWorkUnits": 643163
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2509.190875,
+                "emittedWorkUnits": 643571
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2509.324375,
+                "emittedWorkUnits": 643622
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2509.339458,
+                "emittedWorkUnits": 643640
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2509.464125,
+                "emittedWorkUnits": 644111
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2509.512583,
+                "emittedWorkUnits": 644518
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2509.541625,
+                "emittedWorkUnits": 644569
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2509.55375,
+                "emittedWorkUnits": 644587
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2509.67075,
+                "emittedWorkUnits": 645029
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2509.696542,
+                "emittedWorkUnits": 645392
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2509.714583,
+                "emittedWorkUnits": 645445
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2509.719583,
+                "emittedWorkUnits": 645463
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2509.8275,
+                "emittedWorkUnits": 645938
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2509.891583,
+                "emittedWorkUnits": 646346
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2509.915958,
+                "emittedWorkUnits": 646397
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2509.926,
+                "emittedWorkUnits": 646415
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2510.048083,
+                "emittedWorkUnits": 646886
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2510.07425,
+                "emittedWorkUnits": 647293
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2510.098292,
+                "emittedWorkUnits": 647344
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2510.104708,
+                "emittedWorkUnits": 647362
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2510.2025,
+                "emittedWorkUnits": 647804
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2510.220917,
+                "emittedWorkUnits": 648167
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2510.240333,
+                "emittedWorkUnits": 648220
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2510.246167,
+                "emittedWorkUnits": 648238
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2510.380167,
+                "emittedWorkUnits": 648713
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2510.406167,
+                "emittedWorkUnits": 649121
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2510.429167,
+                "emittedWorkUnits": 649172
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2510.436333,
+                "emittedWorkUnits": 649190
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2510.548833,
+                "emittedWorkUnits": 649694
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2510.571792,
+                "emittedWorkUnits": 650146
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2510.587167,
+                "emittedWorkUnits": 650197
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2510.592333,
+                "emittedWorkUnits": 650215
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2510.712333,
+                "emittedWorkUnits": 650657
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2510.731958,
+                "emittedWorkUnits": 651020
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2510.748167,
+                "emittedWorkUnits": 651073
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2510.754958,
+                "emittedWorkUnits": 651091
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2510.847292,
+                "emittedWorkUnits": 651566
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2510.867458,
+                "emittedWorkUnits": 651974
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2510.88025,
+                "emittedWorkUnits": 652025
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2510.884292,
+                "emittedWorkUnits": 652043
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2510.990208,
+                "emittedWorkUnits": 652514
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2511.008875,
+                "emittedWorkUnits": 652921
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2511.015667,
+                "emittedWorkUnits": 652972
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2511.01975,
+                "emittedWorkUnits": 652990
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2511.120667,
+                "emittedWorkUnits": 653432
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2511.138,
+                "emittedWorkUnits": 653795
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2511.145292,
+                "emittedWorkUnits": 653848
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2511.148625,
+                "emittedWorkUnits": 653866
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2511.24275,
+                "emittedWorkUnits": 654341
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2511.278625,
+                "emittedWorkUnits": 654749
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2511.2845,
+                "emittedWorkUnits": 654800
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2511.287833,
+                "emittedWorkUnits": 654818
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2511.382667,
+                "emittedWorkUnits": 655289
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2511.401167,
+                "emittedWorkUnits": 655696
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2511.407083,
+                "emittedWorkUnits": 655747
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2511.410583,
+                "emittedWorkUnits": 655765
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2511.492667,
+                "emittedWorkUnits": 656207
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2511.509792,
+                "emittedWorkUnits": 656570
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2511.547833,
+                "emittedWorkUnits": 656623
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2511.553792,
+                "emittedWorkUnits": 656641
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2511.6565,
+                "emittedWorkUnits": 657116
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2511.677333,
+                "emittedWorkUnits": 657524
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2511.683958,
+                "emittedWorkUnits": 657575
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2511.687625,
+                "emittedWorkUnits": 657593
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2511.774417,
+                "emittedWorkUnits": 658064
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2511.793792,
+                "emittedWorkUnits": 658471
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2511.799875,
+                "emittedWorkUnits": 658522
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2511.803667,
+                "emittedWorkUnits": 658540
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.047167,
+                "emittedWorkUnits": 658982
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.068167,
+                "emittedWorkUnits": 659345
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.077958,
+                "emittedWorkUnits": 659398
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.082875,
+                "emittedWorkUnits": 659416
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.170042,
+                "emittedWorkUnits": 659891
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.1885,
+                "emittedWorkUnits": 660299
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.194375,
+                "emittedWorkUnits": 660350
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.197833,
+                "emittedWorkUnits": 660368
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.300875,
+                "emittedWorkUnits": 660839
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.319708,
+                "emittedWorkUnits": 661246
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.325458,
+                "emittedWorkUnits": 661297
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.329125,
+                "emittedWorkUnits": 661315
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.413792,
+                "emittedWorkUnits": 661757
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.429958,
+                "emittedWorkUnits": 662120
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.4385,
+                "emittedWorkUnits": 662173
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.441833,
+                "emittedWorkUnits": 662191
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.530458,
+                "emittedWorkUnits": 662666
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.569458,
+                "emittedWorkUnits": 663074
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.576042,
+                "emittedWorkUnits": 663125
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.579417,
+                "emittedWorkUnits": 663143
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.671833,
+                "emittedWorkUnits": 663614
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.690333,
+                "emittedWorkUnits": 664021
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.696,
+                "emittedWorkUnits": 664072
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.700125,
+                "emittedWorkUnits": 664090
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.803708,
+                "emittedWorkUnits": 664532
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.836708,
+                "emittedWorkUnits": 664895
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.845583,
+                "emittedWorkUnits": 664948
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.84975,
+                "emittedWorkUnits": 664966
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2513.942375,
+                "emittedWorkUnits": 665441
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2513.960917,
+                "emittedWorkUnits": 665849
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2513.966833,
+                "emittedWorkUnits": 665900
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2513.97,
+                "emittedWorkUnits": 665918
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2514.059917,
+                "emittedWorkUnits": 666389
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2514.079208,
+                "emittedWorkUnits": 666796
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2514.084875,
+                "emittedWorkUnits": 666847
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2514.103667,
+                "emittedWorkUnits": 666865
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2514.188833,
+                "emittedWorkUnits": 667307
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2514.205917,
+                "emittedWorkUnits": 667670
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2514.21275,
+                "emittedWorkUnits": 667723
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2514.215792,
+                "emittedWorkUnits": 667741
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2514.316333,
+                "emittedWorkUnits": 668216
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2514.376,
+                "emittedWorkUnits": 668624
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2514.381917,
+                "emittedWorkUnits": 668675
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2514.3855,
+                "emittedWorkUnits": 668693
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2514.483792,
+                "emittedWorkUnits": 669164
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2514.50175,
+                "emittedWorkUnits": 669571
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2514.507042,
+                "emittedWorkUnits": 669622
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2514.510375,
+                "emittedWorkUnits": 669640
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2514.585375,
+                "emittedWorkUnits": 670082
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2514.601042,
+                "emittedWorkUnits": 670445
+              },
+              {
+                "phase": "snapshot.source.admission",
+                "at": 2514.607333,
+                "emittedWorkUnits": 670498
+              },
+              {
+                "phase": "snapshot.source.analysis",
+                "at": 2514.610375,
+                "emittedWorkUnits": 670516
+              },
+              {
+                "phase": "snapshot.source.core",
+                "at": 2514.704708,
+                "emittedWorkUnits": 670991
+              },
+              {
+                "phase": "snapshot.source.participant",
+                "at": 2514.724792,
+                "emittedWorkUnits": 671399
+              }
+            ],
+            "phaseWork": {
+              "snapshot.decode": {
+                "steps": 147661,
+                "workUnits": 469893
+              },
+              "snapshot.integrity": {
+                "steps": 675,
+                "workUnits": 172776
+              },
+              "snapshot.staging": {
+                "steps": 1,
+                "workUnits": 1
+              },
+              "snapshot.source.admission": {
+                "steps": 1000,
+                "workUnits": 18000
+              },
+              "snapshot.source.analysis": {
+                "steps": 148012,
+                "workUnits": 462712
+              },
+              "snapshot.source.core": {
+                "steps": 18336,
+                "workUnits": 392727
+              },
+              "snapshot.source.participant": {
+                "steps": 7665,
+                "workUnits": 51665
+              },
+              "snapshot.source.finalization": {
+                "steps": 378078,
+                "workUnits": 639578
+              },
+              "snapshot.source.participant-finalization": {
+                "steps": 1258,
+                "workUnits": 18264
+              }
+            },
+            "detailWork": {
+              "snapshot.decode": {
+                "steps": 147661,
+                "workUnits": 469893
+              },
+              "snapshot.integrity": {
+                "steps": 675,
+                "workUnits": 172776
+              },
+              "mutation.between-records": {
+                "steps": 1,
+                "workUnits": 1
+              },
+              "snapshot.source.admission": {
+                "steps": 1000,
+                "workUnits": 18000
+              },
+              "snapshot.source.analysis": {
+                "steps": 148012,
+                "workUnits": 462712
+              },
+              "snapshot.source.core": {
+                "steps": 18336,
+                "workUnits": 392727
+              },
+              "snapshot.source.participant": {
+                "steps": 7665,
+                "workUnits": 51665
+              },
+              "snapshot.source.finalization": {
+                "steps": 378078,
+                "workUnits": 639578
+              },
+              "snapshot.source.participant-finalization": {
+                "steps": 1258,
+                "workUnits": 18264
+              }
+            },
+            "recordsAttempted": 1000,
+            "recordsCaptured": 1000,
+            "recordsCompleted": 1000,
+            "captureWallMs": 2.72658599999977,
+            "analysisCalls": {
+              "core": 1666
+            },
+            "tokens": {
+              "core": 10668
+            },
+            "copy": {
+              "directories": 3010,
+              "directoryPointers": 0,
+              "buckets": 5162,
+              "bucketEntries": 0,
+              "seals": 3010
+            },
+            "participantWork": {
+              "source": {
+                "steps": 5922,
+                "workUnits": 60922
+              }
+            },
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1,
+              "snapshot.participant.total:source": 1,
+              "mutation.record": 1000,
+              "mutation.participant:source": 1001,
+              "snapshot.bulk.finalization": 1
+            },
+            "snapshots": [
+              {
+                "kind": "unsealed-bulk-stage",
+                "revision": 1,
+                "counts": {
+                  "documents": 1,
+                  "textCodeUnits": 96,
+                  "tokens": 11,
+                  "dictionaryEntries": 8,
+                  "postingEntries": 8
+                },
+                "participants": [
+                  {
+                    "id": "source",
+                    "kind": "raveldex-source-v1",
+                    "revision": 1,
+                    "records": 1,
+                    "retainedEntries": 3,
+                    "textCodeUnits": 96,
+                    "sealed": false
+                  }
+                ],
+                "authoritativeSame": true
+              },
+              {
+                "kind": "unsealed-bulk-stage",
+                "revision": 256,
+                "counts": {
+                  "documents": 256,
+                  "textCodeUnits": 23902,
+                  "tokens": 2732,
+                  "dictionaryEntries": 775,
+                  "postingEntries": 1964
+                },
+                "participants": [
+                  {
+                    "id": "source",
+                    "kind": "raveldex-source-v1",
+                    "revision": 256,
+                    "records": 256,
+                    "retainedEntries": 938,
+                    "textCodeUnits": 23902,
+                    "sealed": false
+                  }
+                ],
+                "authoritativeSame": true
+              },
+              {
+                "kind": "unsealed-bulk-stage",
+                "revision": 512,
+                "counts": {
+                  "documents": 512,
+                  "textCodeUnits": 47798,
+                  "tokens": 5463,
+                  "dictionaryEntries": 1543,
+                  "postingEntries": 3927
+                },
+                "participants": [
+                  {
+                    "id": "source",
+                    "kind": "raveldex-source-v1",
+                    "revision": 512,
+                    "records": 512,
+                    "retainedEntries": 1876,
+                    "textCodeUnits": 47798,
+                    "sealed": false
+                  }
+                ],
+                "authoritativeSame": true
+              },
+              {
+                "kind": "unsealed-bulk-stage",
+                "revision": 768,
+                "counts": {
+                  "documents": 768,
+                  "textCodeUnits": 71686,
+                  "tokens": 8193,
+                  "dictionaryEntries": 2311,
+                  "postingEntries": 5889
+                },
+                "participants": [
+                  {
+                    "id": "source",
+                    "kind": "raveldex-source-v1",
+                    "revision": 768,
+                    "records": 768,
+                    "retainedEntries": 2816,
+                    "textCodeUnits": 71686,
+                    "sealed": false
+                  }
+                ],
+                "authoritativeSame": true
+              }
+            ],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 2399.461708,
+                "value": {
+                  "rss": 164085760,
+                  "heapTotal": 103776256,
+                  "heapUsed": 44695104,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "old-authoritative-root",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 2399.805833,
+                "value": {
+                  "rss": 164102144,
+                  "heapTotal": 103776256,
+                  "heapUsed": 44716648,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.decode",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 2399.822792,
+                "value": {
+                  "rss": 164102144,
+                  "heapTotal": 103776256,
+                  "heapUsed": 44717600,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.integrity",
+                "phase": "snapshot.integrity",
+                "recordsCompleted": 0,
+                "at": 2493.734958,
+                "value": {
+                  "rss": 164806656,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42360264,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "decoded-input",
+                "phase": "snapshot.integrity",
+                "recordsCompleted": 0,
+                "at": 2508.424333,
+                "value": {
+                  "rss": 164823040,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42584688,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.compatibility",
+                "phase": "snapshot.compatibility",
+                "recordsCompleted": 0,
+                "at": 2508.440542,
+                "value": {
+                  "rss": 164823040,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42585328,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.staging",
+                "phase": "snapshot.staging",
+                "recordsCompleted": 0,
+                "at": 2508.585292,
+                "value": {
+                  "rss": 164823040,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42606200,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.source.admission",
+                "phase": "snapshot.source.admission",
+                "recordsCompleted": 0,
+                "at": 2508.863167,
+                "value": {
+                  "rss": 164823040,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42631480,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.source.analysis",
+                "phase": "snapshot.source.analysis",
+                "recordsCompleted": 0,
+                "at": 2508.922167,
+                "value": {
+                  "rss": 164823040,
+                  "heapTotal": 104873984,
+                  "heapUsed": 43113792,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.source.core",
+                "phase": "snapshot.source.core",
+                "recordsCompleted": 0,
+                "at": 2509.119042,
+                "value": {
+                  "rss": 164855808,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42721112,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.source.participant",
+                "phase": "snapshot.source.participant",
+                "recordsCompleted": 0,
+                "at": 2509.191125,
+                "value": {
+                  "rss": 164855808,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42758088,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "private-unsealed-stage",
+                "phase": "snapshot.source.participant",
+                "recordsCompleted": 1,
+                "at": 2509.316458,
+                "value": {
+                  "rss": 164872192,
+                  "heapTotal": 104873984,
+                  "heapUsed": 42777824,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "private-unsealed-stage",
+                "phase": "snapshot.source.participant",
+                "recordsCompleted": 256,
+                "at": 2551.6865,
+                "value": {
+                  "rss": 165953536,
+                  "heapTotal": 105398272,
+                  "heapUsed": 43278992,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "private-unsealed-stage",
+                "phase": "snapshot.source.participant",
+                "recordsCompleted": 512,
+                "at": 2594.624917,
+                "value": {
+                  "rss": 173506560,
+                  "heapTotal": 176324608,
+                  "heapUsed": 32757256,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "private-unsealed-stage",
+                "phase": "snapshot.source.participant",
+                "recordsCompleted": 768,
+                "at": 2636.5585,
+                "value": {
+                  "rss": 173506560,
+                  "heapTotal": 176324608,
+                  "heapUsed": 56301368,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.source.finalization",
+                "phase": "snapshot.source.finalization",
+                "recordsCompleted": 1000,
+                "at": 2676.317167,
+                "value": {
+                  "rss": 183894016,
+                  "heapTotal": 176324608,
+                  "heapUsed": 77543072,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.source.participant-finalization",
+                "phase": "snapshot.source.participant-finalization",
+                "recordsCompleted": 1000,
+                "at": 2894.782875,
+                "value": {
+                  "rss": 214794240,
+                  "heapTotal": 176324608,
+                  "heapUsed": 50581592,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.precommit",
+                "phase": "snapshot.precommit",
+                "recordsCompleted": 1000,
+                "at": 2896.815833,
+                "value": {
+                  "rss": 214794240,
+                  "heapTotal": 176324608,
+                  "heapUsed": 51110192,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "restore-finished",
+                "phase": "snapshot.precommit",
+                "recordsCompleted": 1000,
+                "at": 2896.900625,
+                "value": {
+                  "rss": 214794240,
+                  "heapTotal": 176324608,
+                  "heapUsed": 51115768,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.precommit",
+                "recordsCompleted": 1000,
+                "at": 2896.949208,
+                "value": {
+                  "rss": 214794240,
+                  "heapTotal": 176324608,
+                  "heapUsed": 51120128,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": false,
+            "observerErrors": [],
+            "oldRoot": {
+              "revision": 4,
+              "documents": 1000,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 118342,
+                "tokens": 13668,
+                "dictionaryEntries": 3008,
+                "postingEntries": 8668
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 4,
+                  "records": 1000,
+                  "retainedEntries": 4666,
+                  "textCodeUnits": 118342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            },
+            "inputActive": false,
+            "decodedRecords": 1000,
+            "decodedBodyCodeUnits": 172776,
+            "sidecarStages": {
+              "source": {
+                "kind": "raveldex-source-v1",
+                "revision": 1000,
+                "records": 1000,
+                "retainedEntries": 3666,
+                "textCodeUnits": 93342,
+                "sealed": false
+              }
+            },
+            "lastUnsealedStage": {
+              "revision": 1000,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 93342,
+                "tokens": 10668,
+                "dictionaryEntries": 3007,
+                "postingEntries": 7668
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 1000,
+                  "records": 1000,
+                  "retainedEntries": 3666,
+                  "textCodeUnits": 93342,
+                  "sealed": false
+                }
+              ]
+            },
+            "finalAuthoritativeRoot": {
+              "revision": 5,
+              "documents": 1000,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 93342,
+                "tokens": 10668,
+                "dictionaryEntries": 3007,
+                "postingEntries": 7668
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 5,
+                  "records": 1000,
+                  "retainedEntries": 3666,
+                  "textCodeUnits": 93342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            }
+          }
+        },
+        "priorRevision": 4,
+        "priorDocuments": 1000,
+        "result": {
+          "format": "raveldex-source",
+          "originRevision": 4,
+          "revision": 5,
+          "reindexed": true,
+          "receivingAnalyzer": {
+            "id": "basic-v1",
+            "environmentProfile": "unqualified"
+          }
+        },
+        "postcondition": [
+          {
+            "id": "all",
+            "outcome": "Pass",
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1000,
+              "hits": [
+                {
+                  "id": "adversarial:00000",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00001",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00002",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00003",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00004",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00005",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00006",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00007",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00008",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00009",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00010",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00011",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00012",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00013",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00014",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00015",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00016",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00017",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00018",
+                  "score": 0
+                },
+                {
+                  "id": "adversarial:00019",
+                  "score": 0
+                }
+              ]
+            }
+          },
+          {
+            "id": "common",
+            "outcome": "Pass",
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1000,
+              "hits": [
+                {
+                  "id": "adversarial:00002",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00005",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00008",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00011",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00014",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00017",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00020",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00023",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00026",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00029",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00032",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00035",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00038",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00041",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00044",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00047",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00050",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00053",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00056",
+                  "score": 0.0005127602167096836
+                },
+                {
+                  "id": "adversarial:00059",
+                  "score": 0.0005127602167096836
+                }
+              ]
+            }
+          },
+          {
+            "id": "rare",
+            "outcome": "Pass",
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 1,
+              "hits": [
+                {
+                  "id": "adversarial:00007",
+                  "score": 6.187252001238879
+                }
+              ]
+            }
+          },
+          {
+            "id": "narrow-prefix",
+            "outcome": "Pass",
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 10,
+              "hits": [
+                {
+                  "id": "adversarial:00002",
+                  "score": 6.674258245761013
+                },
+                {
+                  "id": "adversarial:00005",
+                  "score": 6.674258245761013
+                },
+                {
+                  "id": "adversarial:00008",
+                  "score": 6.674258245761013
+                },
+                {
+                  "id": "adversarial:00000",
+                  "score": 6.421534780101359
+                },
+                {
+                  "id": "adversarial:00001",
+                  "score": 6.421534780101359
+                },
+                {
+                  "id": "adversarial:00003",
+                  "score": 6.421534780101359
+                },
+                {
+                  "id": "adversarial:00004",
+                  "score": 6.421534780101359
+                },
+                {
+                  "id": "adversarial:00006",
+                  "score": 6.421534780101359
+                },
+                {
+                  "id": "adversarial:00009",
+                  "score": 6.421534780101359
+                },
+                {
+                  "id": "adversarial:00007",
+                  "score": 6.187252001238879
+                }
+              ]
+            }
+          },
+          {
+            "id": "source-phrase",
+            "outcome": "Pass",
+            "result": {
+              "revision": 5,
+              "model": "raveldex-bm25-v1",
+              "completeness": "complete",
+              "total": 334,
+              "hits": [
+                {
+                  "id": "adversarial:00000",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00003",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00006",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00009",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00012",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00015",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00018",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00021",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00024",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00027",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00030",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00033",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00036",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00039",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00042",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00045",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00048",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00051",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00054",
+                  "score": 0.0009866886908503497
+                },
+                {
+                  "id": "adversarial:00057",
+                  "score": 0.0009866886908503497
+                }
+              ]
+            }
+          }
+        ],
+        "oldRemoved": true,
+        "completeSource": {
+          "outcome": "Pass",
+          "records": 1000,
+          "donorRevision": 4,
+          "receiverRevision": 5,
+          "normalized": [
+            "body.header.originRevision",
+            "integrity.value"
+          ],
+          "scope": "Complete public source snapshot, including all raw field arrays and metadata; both checksums verified."
+        },
+        "completeMembership": {
+          "outcome": "Pass",
+          "records": 1000,
+          "pages": 10,
+          "pageSize": 100,
+          "scope": "Every all-query membership page, outside timing; exact total/revision, unique ids, zero scores and ordinal tie order."
+        },
+        "completeState": {
+          "outcome": "Pass",
+          "donor": {
+            "sha256": "6091bcb15345f6ce5a23e9c427d4f148d5dace310525232d4ae62661c639285c",
+            "encounterSha256": "dd0611aaae0bfd51bc7d38e09ae311b5ad1cde8d1d62680d706bab2e03e29efc",
+            "revision": 4,
+            "summary": {
+              "documents": 1000,
+              "fields": 1,
+              "participants": 1,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 93342,
+                "tokens": 10668,
+                "dictionaryEntries": 3007,
+                "postingEntries": 7668
+              }
+            },
+            "scope": "Complete core/reverse/dictionary/postings/statistics and selected source/position protocol data; AVL membership/heights/balance validated, shape excluded. Known header revisions normalized. No scorer/tokenizer oracle or heap claim."
+          },
+          "receiver": {
+            "sha256": "6091bcb15345f6ce5a23e9c427d4f148d5dace310525232d4ae62661c639285c",
+            "encounterSha256": "dd0611aaae0bfd51bc7d38e09ae311b5ad1cde8d1d62680d706bab2e03e29efc",
+            "revision": 5,
+            "summary": {
+              "documents": 1000,
+              "fields": 1,
+              "participants": 1,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 93342,
+                "tokens": 10668,
+                "dictionaryEntries": 3007,
+                "postingEntries": 7668
+              }
+            },
+            "scope": "Complete core/reverse/dictionary/postings/statistics and selected source/position protocol data; AVL membership/heights/balance validated, shape excluded. Known header revisions normalized. No scorer/tokenizer oracle or heap claim."
+          },
+          "encounterOrderEqual": true
+        }
+      },
+      {
+        "operation": "deadlineRestore",
+        "outcome": "Refused",
+        "wallMs": 1.764208000000508,
+        "cpuUserMs": 0.75,
+        "cpuSystemMs": 0.068,
+        "error": {
+          "name": "RaveldexError",
+          "code": "DEADLINE_EXCEEDED",
+          "reason": null,
+          "details": {
+            "path": "options.deadlineMs"
+          },
+          "message": "Raveldex: DEADLINE_EXCEEDED"
+        },
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 64,
+          "emittedWorkUnits": 16384,
+          "maxStepWorkUnits": 256,
+          "hostYields": 7,
+          "continuationsScheduled": 8,
+          "deadlineCallbacks": 2,
+          "restorePhase": "snapshot.decode",
+          "restorePhases": {
+            "snapshot.decode": {
+              "checks": 1,
+              "emittedSteps": 64,
+              "emittedWorkUnits": 16384
+            }
+          },
+          "restore": {
+            "operation": "deadlineRestore",
+            "phase": "snapshot.decode",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.decode",
+                "at": 5325.629,
+                "emittedWorkUnits": 0
+              }
+            ],
+            "phaseWork": {
+              "snapshot.decode": {
+                "steps": 64,
+                "workUnits": 16384
+              }
+            },
+            "detailWork": {
+              "snapshot.decode": {
+                "steps": 64,
+                "workUnits": 16384
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {},
+            "tokens": {},
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 5325.498958,
+                "value": {
+                  "rss": 266207232,
+                  "heapTotal": 194068480,
+                  "heapUsed": 63137584,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "old-authoritative-root",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 5325.623,
+                "value": {
+                  "rss": 266207232,
+                  "heapTotal": 194068480,
+                  "heapUsed": 63144840,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.decode",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 5325.630375,
+                "value": {
+                  "rss": 266207232,
+                  "heapTotal": 194068480,
+                  "heapUsed": 63145664,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "restore-finished",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 5327.238958,
+                "value": {
+                  "rss": 266240000,
+                  "heapTotal": 194068480,
+                  "heapUsed": 63183352,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 5327.305292,
+                "value": {
+                  "rss": 266240000,
+                  "heapTotal": 194068480,
+                  "heapUsed": 63190000,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": true,
+            "observerErrors": [],
+            "oldRoot": {
+              "revision": 4,
+              "documents": 1000,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 118342,
+                "tokens": 13668,
+                "dictionaryEntries": 3008,
+                "postingEntries": 8668
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 4,
+                  "records": 1000,
+                  "retainedEntries": 4666,
+                  "textCodeUnits": 118342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            },
+            "inputActive": false,
+            "finalAuthoritativeRoot": {
+              "revision": 4,
+              "documents": 1000,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 118342,
+                "tokens": 13668,
+                "dictionaryEntries": 3008,
+                "postingEntries": 8668
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 4,
+                  "records": 1000,
+                  "retainedEntries": 4666,
+                  "textCodeUnits": 118342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            }
+          }
+        },
+        "priorRevision": 4,
+        "priorDocuments": 1000,
+        "oldQueriesPreserved": true,
+        "oldSourceBytesPreserved": true,
+        "postcondition": {
+          "all": {
+            "revision": 4,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1000,
+            "hits": [
+              {
+                "id": "prior:adversarial:00000",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00001",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00003",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00004",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00006",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00007",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00009",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00010",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00012",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00013",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00015",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00016",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00018",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00019",
+                "score": 0
+              }
+            ]
+          },
+          "lexical": {
+            "revision": 4,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1000,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.0005098184042315868
+              }
+            ]
+          },
+          "phrase": {
+            "revision": 4,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1000,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.0013931188196750859
+              }
+            ]
+          }
+        }
+      },
+      {
+        "operation": "abortedRestore",
+        "outcome": "Cancelled",
+        "wallMs": 1.8855829999993148,
+        "cpuUserMs": 0.824,
+        "cpuSystemMs": 0.062,
+        "error": {
+          "name": "RaveldexError",
+          "code": "CANCELLED",
+          "reason": null,
+          "details": {
+            "path": "options.signal"
+          },
+          "message": "Raveldex: CANCELLED"
+        },
+        "counters": {
+          "idfComputations": 0,
+          "averageLengthComputations": 0,
+          "fieldsPrepared": 0,
+          "candidates": 0,
+          "documentsEvaluated": 0,
+          "documentsScored": 0,
+          "exactDictionaryProbes": 0,
+          "prefixDictionaryVisits": 0,
+          "postingsVisited": 0,
+          "emittedSteps": 64,
+          "emittedWorkUnits": 16384,
+          "maxStepWorkUnits": 256,
+          "hostYields": 7,
+          "continuationsScheduled": 8,
+          "deadlineCallbacks": 0,
+          "restorePhase": "snapshot.decode",
+          "restorePhases": {
+            "snapshot.decode": {
+              "checks": 1,
+              "emittedSteps": 64,
+              "emittedWorkUnits": 16384
+            }
+          },
+          "restore": {
+            "operation": "abortedRestore",
+            "phase": "snapshot.decode",
+            "mutationPhase": null,
+            "participant": null,
+            "validationParticipant": null,
+            "phaseEvents": [
+              {
+                "phase": "snapshot.decode",
+                "at": 7276.046917,
+                "emittedWorkUnits": 0
+              }
+            ],
+            "phaseWork": {
+              "snapshot.decode": {
+                "steps": 64,
+                "workUnits": 16384
+              }
+            },
+            "detailWork": {
+              "snapshot.decode": {
+                "steps": 64,
+                "workUnits": 16384
+              }
+            },
+            "recordsAttempted": 0,
+            "recordsCaptured": 0,
+            "recordsCompleted": 0,
+            "captureWallMs": 0,
+            "analysisCalls": {},
+            "tokens": {},
+            "copy": {
+              "directories": 0,
+              "directoryPointers": 0,
+              "buckets": 0,
+              "bucketEntries": 0,
+              "seals": 0
+            },
+            "participantWork": {},
+            "budgetRefusals": [],
+            "budgetConstructions": {
+              "snapshot.total": 1
+            },
+            "snapshots": [],
+            "memorySamples": [
+              {
+                "point": "observation-start",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 7275.724667,
+                "value": {
+                  "rss": 281624576,
+                  "heapTotal": 207470592,
+                  "heapUsed": 114163864,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "old-authoritative-root",
+                "phase": "none",
+                "recordsCompleted": 0,
+                "at": 7276.04075,
+                "value": {
+                  "rss": 281657344,
+                  "heapTotal": 207470592,
+                  "heapUsed": 114390160,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "snapshot.decode",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 7276.056,
+                "value": {
+                  "rss": 281657344,
+                  "heapTotal": 207470592,
+                  "heapUsed": 114390776,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "restore-finished",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 7277.597583,
+                "value": {
+                  "rss": 281657344,
+                  "heapTotal": 207470592,
+                  "heapUsed": 114226992,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              },
+              {
+                "point": "observation-stop",
+                "phase": "snapshot.decode",
+                "recordsCompleted": 0,
+                "at": 7277.640917,
+                "value": {
+                  "rss": 281657344,
+                  "heapTotal": 207470592,
+                  "heapUsed": 114229264,
+                  "external": 2513044,
+                  "arrayBuffers": 143627
+                }
+              }
+            ],
+            "authoritativeUnchangedDuringStaging": true,
+            "finalAuthoritativeSame": true,
+            "observerErrors": [],
+            "oldRoot": {
+              "revision": 4,
+              "documents": 1000,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 118342,
+                "tokens": 13668,
+                "dictionaryEntries": 3008,
+                "postingEntries": 8668
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 4,
+                  "records": 1000,
+                  "retainedEntries": 4666,
+                  "textCodeUnits": 118342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            },
+            "inputActive": false,
+            "finalAuthoritativeRoot": {
+              "revision": 4,
+              "documents": 1000,
+              "counts": {
+                "documents": 1000,
+                "textCodeUnits": 118342,
+                "tokens": 13668,
+                "dictionaryEntries": 3008,
+                "postingEntries": 8668
+              },
+              "participants": [
+                {
+                  "id": "source",
+                  "kind": "raveldex-source-v1",
+                  "revision": 4,
+                  "records": 1000,
+                  "retainedEntries": 4666,
+                  "textCodeUnits": 118342,
+                  "occurrenceCount": null,
+                  "offsetCount": null,
+                  "termEntries": null,
+                  "termCodeUnits": null
+                }
+              ]
+            }
+          }
+        },
+        "abortRequested": true,
+        "abortRequestedWhilePending": true,
+        "priorRevision": 4,
+        "priorDocuments": 1000,
+        "oldQueriesPreserved": true,
+        "oldSourceBytesPreserved": true,
+        "postcondition": {
+          "all": {
+            "revision": 4,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1000,
+            "hits": [
+              {
+                "id": "prior:adversarial:00000",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00001",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00003",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00004",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00006",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00007",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00009",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00010",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00012",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00013",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00015",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00016",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00018",
+                "score": 0
+              },
+              {
+                "id": "prior:adversarial:00019",
+                "score": 0
+              }
+            ]
+          },
+          "lexical": {
+            "revision": 4,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1000,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.0005098184042315868
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.0005098184042315868
+              }
+            ]
+          },
+          "phrase": {
+            "revision": 4,
+            "model": "raveldex-bm25-v1",
+            "completeness": "complete",
+            "total": 1000,
+            "hits": [
+              {
+                "id": "prior:adversarial:00002",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00005",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00008",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00011",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00014",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00017",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00020",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00023",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00026",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00029",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00032",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00035",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00038",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00041",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00044",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00047",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00050",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00053",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00056",
+                "score": 0.0013931188196750859
+              },
+              {
+                "id": "prior:adversarial:00059",
+                "score": 0.0013931188196750859
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "memory": [
+      {
+        "operation": "build",
+        "point": "before",
+        "values": {
+          "rss": 77987840,
+          "heapTotal": 28901376,
+          "heapUsed": 18340776,
+          "external": 2578560,
+          "arrayBuffers": 209183
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "build",
+        "point": "after",
+        "values": {
+          "rss": 103825408,
+          "heapTotal": 55918592,
+          "heapUsed": 24442256,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "exportSource",
+        "point": "before",
+        "values": {
+          "rss": 132022272,
+          "heapTotal": 90783744,
+          "heapUsed": 39738160,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "exportSource",
+        "point": "after",
+        "values": {
+          "rss": 140279808,
+          "heapTotal": 94388224,
+          "heapUsed": 38311896,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "restoreSource",
+        "point": "before",
+        "values": {
+          "rss": 164085760,
+          "heapTotal": 103776256,
+          "heapUsed": 44691664,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "restoreSource",
+        "point": "after",
+        "values": {
+          "rss": 214794240,
+          "heapTotal": 176324608,
+          "heapUsed": 51123552,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "deadlineRestore",
+        "point": "before",
+        "values": {
+          "rss": 266207232,
+          "heapTotal": 194068480,
+          "heapUsed": 63133808,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "deadlineRestore",
+        "point": "after",
+        "values": {
+          "rss": 266240000,
+          "heapTotal": 194068480,
+          "heapUsed": 63191392,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "abortedRestore",
+        "point": "before",
+        "values": {
+          "rss": 281624576,
+          "heapTotal": 207470592,
+          "heapUsed": 114160104,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      },
+      {
+        "operation": "abortedRestore",
+        "point": "after",
+        "values": {
+          "rss": 281657344,
+          "heapTotal": 207470592,
+          "heapUsed": 114230472,
+          "external": 2513044,
+          "arrayBuffers": 143627
+        },
+        "method": "Unforced process.memoryUsage sample outside timing; not retained/peak/exclusive heap."
+      }
+    ],
+    "outcome": "Collected",
+    "scope": "One actual donor/receiver per case; ordinary wall/CPU excludes metadata/hash/postcondition work. Diagnostic observations are intrusive, not normal timings or retained/peak heap.",
+    "donorResults": [
+      {
+        "id": "all",
+        "outcome": "Pass",
+        "result": {
+          "revision": 4,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1000,
+          "hits": [
+            {
+              "id": "adversarial:00000",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00001",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00002",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00003",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00004",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00005",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00006",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00007",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00008",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00009",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00010",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00011",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00012",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00013",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00014",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00015",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00016",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00017",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00018",
+              "score": 0
+            },
+            {
+              "id": "adversarial:00019",
+              "score": 0
+            }
+          ]
+        }
+      },
+      {
+        "id": "common",
+        "outcome": "Pass",
+        "result": {
+          "revision": 4,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1000,
+          "hits": [
+            {
+              "id": "adversarial:00002",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00005",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00008",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00011",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00014",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00017",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00020",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00023",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00026",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00029",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00032",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00035",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00038",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00041",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00044",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00047",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00050",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00053",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00056",
+              "score": 0.0005127602167096836
+            },
+            {
+              "id": "adversarial:00059",
+              "score": 0.0005127602167096836
+            }
+          ]
+        }
+      },
+      {
+        "id": "rare",
+        "outcome": "Pass",
+        "result": {
+          "revision": 4,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 1,
+          "hits": [
+            {
+              "id": "adversarial:00007",
+              "score": 6.187252001238879
+            }
+          ]
+        }
+      },
+      {
+        "id": "narrow-prefix",
+        "outcome": "Pass",
+        "result": {
+          "revision": 4,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 10,
+          "hits": [
+            {
+              "id": "adversarial:00002",
+              "score": 6.674258245761013
+            },
+            {
+              "id": "adversarial:00005",
+              "score": 6.674258245761013
+            },
+            {
+              "id": "adversarial:00008",
+              "score": 6.674258245761013
+            },
+            {
+              "id": "adversarial:00000",
+              "score": 6.421534780101359
+            },
+            {
+              "id": "adversarial:00001",
+              "score": 6.421534780101359
+            },
+            {
+              "id": "adversarial:00003",
+              "score": 6.421534780101359
+            },
+            {
+              "id": "adversarial:00004",
+              "score": 6.421534780101359
+            },
+            {
+              "id": "adversarial:00006",
+              "score": 6.421534780101359
+            },
+            {
+              "id": "adversarial:00009",
+              "score": 6.421534780101359
+            },
+            {
+              "id": "adversarial:00007",
+              "score": 6.187252001238879
+            }
+          ]
+        }
+      },
+      {
+        "id": "source-phrase",
+        "outcome": "Pass",
+        "result": {
+          "revision": 4,
+          "model": "raveldex-bm25-v1",
+          "completeness": "complete",
+          "total": 334,
+          "hits": [
+            {
+              "id": "adversarial:00000",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00003",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00006",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00009",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00012",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00015",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00018",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00021",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00024",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00027",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00030",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00033",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00036",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00039",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00042",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00045",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00048",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00051",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00054",
+              "score": 0.0009866886908503497
+            },
+            {
+              "id": "adversarial:00057",
+              "score": 0.0009866886908503497
+            }
+          ]
+        }
+      }
+    ],
+    "fullStateDonor": {
+      "sha256": "6091bcb15345f6ce5a23e9c427d4f148d5dace310525232d4ae62661c639285c",
+      "encounterSha256": "dd0611aaae0bfd51bc7d38e09ae311b5ad1cde8d1d62680d706bab2e03e29efc",
+      "revision": 4,
+      "summary": {
+        "documents": 1000,
+        "fields": 1,
+        "participants": 1,
+        "counts": {
+          "documents": 1000,
+          "textCodeUnits": 93342,
+          "tokens": 10668,
+          "dictionaryEntries": 3007,
+          "postingEntries": 7668
+        }
+      },
+      "scope": "Complete core/reverse/dictionary/postings/statistics and selected source/position protocol data; AVL membership/heights/balance validated, shape excluded. Known header revisions normalized. No scorer/tokenizer oracle or heap claim."
+    }
+  },
+  "outcome": "Collected",
+  "packageMetadataSha256": "fa866f78cd23d285886ed810fb6509118a9b0eb9dacd25624f4fefb0e6f417a1"
+}

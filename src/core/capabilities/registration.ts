@@ -1,3 +1,4 @@
+import { captureBulkParticipant } from './bulk-participant.js';
 import { has, keysOnly, ownArray, ownObject, scanUnicode, stringValue } from '../contracts/data.js';
 import { invalid } from '../errors/error.js';
 import type { CapabilityManifest, CapabilityReference, CapabilitySet, CapturedRegistration, RegistrationContext } from './types.js';
@@ -109,6 +110,7 @@ export function captureRegistrations(input: unknown, context: RegistrationContex
       costs: Object.freeze({ importedCode: string(costs.importedCode, 'addons.costs', 1024), retainedRepresentation: string(costs.retainedRepresentation, 'addons.costs', 1024), transientWork: string(costs.transientWork, 'addons.costs', 1024), externalResources: 'none' }), ...(codec ? { codec } : {}) });
     const captured: CapturedRegistration = Object.freeze({ manifest, ...implementations });
     if (captured.analyzer && (manifest.provides.length !== 1 || manifest.provides[0]!.id !== `analyzer:${captured.analyzer.id}` || manifest.requires.length !== 0)) invalid(code, 'addons.analyzer');
+    captureBulkParticipant(entry as object, captured);
     registrations.set(name, captured);
     if (!manifest.provides.length) invalid(code, 'addons.provides');
     for (const provided of manifest.provides) { if (has(providers, provided.id)) invalid(code, 'addons.providers'); providers[provided.id] = captured; }

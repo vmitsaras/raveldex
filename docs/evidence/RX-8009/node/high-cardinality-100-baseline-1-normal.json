@@ -1,0 +1,2067 @@
+{
+  "kind": "rx8009-node-child-v1",
+  "pid": 87788,
+  "family": "high-cardinality",
+  "size": 100,
+  "variant": "baseline",
+  "mode": "normal",
+  "owner": 1,
+  "identity": {
+    "version": "rx8002-workloads-v1",
+    "family": "high-cardinality",
+    "size": 100,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "8c3784ff226db2d43a5e1f65d8b1d33f4815ddaf4563d057edb6fe3276817719",
+    "labelsSha256": "7f2ffd38b7abced3e4b35de8e5791d15d885c6178c5aed9185c1856b770096cc",
+    "queriesSha256": "620a9f2951d685f6bf58559819a93bfa10ec52fa0d1f08d7dd5acfb78ad8c7a4",
+    "judgmentsSha256": "50f587c05c06a5e535ef801498c1d95819f33b7453d8c710454b421e9edc9c4a",
+    "dictionaryTerms": 1152,
+    "judgmentCounts": {
+      "common": 100,
+      "rare": 1,
+      "overlapping-or": 35,
+      "negative-only": 99,
+      "filtered": 20,
+      "narrow-prefix": 10,
+      "broad-prefix-refusal": 100,
+      "source-phrase": 34
+    }
+  },
+  "samples": [
+    {
+      "operation": "build",
+      "outcome": "Pass",
+      "wallMs": 510.88975000000005,
+      "cpuUserMs": 136.088,
+      "cpuSystemMs": 10.656,
+      "result": {
+        "revision": 1,
+        "changed": true,
+        "added": 100,
+        "replaced": 0,
+        "removed": 0
+      }
+    },
+    {
+      "operation": "query:common",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Pass",
+      "wallMs": 27.68520799999999,
+      "cpuUserMs": 16.013,
+      "cpuSystemMs": 0.648,
+      "resultSha256": "5a0ebac44bfcf9ae198ceeaacacba498295c5b5b4b10bb34a0ae96ce1c9ce307"
+    },
+    {
+      "operation": "query:common",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Pass",
+      "wallMs": 23.416292,
+      "cpuUserMs": 11.178,
+      "cpuSystemMs": 0.427,
+      "resultSha256": "5a0ebac44bfcf9ae198ceeaacacba498295c5b5b4b10bb34a0ae96ce1c9ce307"
+    },
+    {
+      "operation": "query:rare",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Pass",
+      "wallMs": 5.399042000000009,
+      "cpuUserMs": 2.875,
+      "cpuSystemMs": 0.102,
+      "resultSha256": "ba0c7e11cd1d779800599aec1a1d9bccd79cdeea3f0505915fa022be6acfb329"
+    },
+    {
+      "operation": "query:rare",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Pass",
+      "wallMs": 5.287292000000093,
+      "cpuUserMs": 0.989,
+      "cpuSystemMs": 0.06,
+      "resultSha256": "ba0c7e11cd1d779800599aec1a1d9bccd79cdeea3f0505915fa022be6acfb329"
+    },
+    {
+      "operation": "query:overlapping-or",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Pass",
+      "wallMs": 14.00304200000005,
+      "cpuUserMs": 4.264,
+      "cpuSystemMs": 0.18,
+      "resultSha256": "0bd12f456e1ce9f04d7e9c80be28b63c9b1d63a5e726ea45a5cd62666cd592d4"
+    },
+    {
+      "operation": "query:overlapping-or",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Pass",
+      "wallMs": 16.62241599999993,
+      "cpuUserMs": 3.441,
+      "cpuSystemMs": 0.269,
+      "resultSha256": "0bd12f456e1ce9f04d7e9c80be28b63c9b1d63a5e726ea45a5cd62666cd592d4"
+    },
+    {
+      "operation": "query:negative-only",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Pass",
+      "wallMs": 17.949333000000024,
+      "cpuUserMs": 21.574,
+      "cpuSystemMs": 0.747,
+      "resultSha256": "76904b84770a066ce3a76c88b232013e944cc408f97c8c6a3f40b1c171ff18a2"
+    },
+    {
+      "operation": "query:negative-only",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Pass",
+      "wallMs": 14.567708000000039,
+      "cpuUserMs": 6.193,
+      "cpuSystemMs": 0.443,
+      "resultSha256": "76904b84770a066ce3a76c88b232013e944cc408f97c8c6a3f40b1c171ff18a2"
+    },
+    {
+      "operation": "query:filtered",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Pass",
+      "wallMs": 17.392624999999953,
+      "cpuUserMs": 10.031,
+      "cpuSystemMs": 0.622,
+      "resultSha256": "45757f716b7723cb616a9c7845a1b43bcd1b6a828c4c11ed62932b38f27b31a7"
+    },
+    {
+      "operation": "query:filtered",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Pass",
+      "wallMs": 18.859624999999937,
+      "cpuUserMs": 1.629,
+      "cpuSystemMs": 0.311,
+      "resultSha256": "45757f716b7723cb616a9c7845a1b43bcd1b6a828c4c11ed62932b38f27b31a7"
+    },
+    {
+      "operation": "query:narrow-prefix",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Pass",
+      "wallMs": 22.75770799999998,
+      "cpuUserMs": 8.003,
+      "cpuSystemMs": 0.537,
+      "resultSha256": "5b12fc77262dd8b76994fe920590f0efd13ba32cf4ab9d8ba1c2f8e1af9e4ec1"
+    },
+    {
+      "operation": "query:narrow-prefix",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Pass",
+      "wallMs": 23.020917000000054,
+      "cpuUserMs": 5.231,
+      "cpuSystemMs": 0.306,
+      "resultSha256": "5b12fc77262dd8b76994fe920590f0efd13ba32cf4ab9d8ba1c2f8e1af9e4ec1"
+    },
+    {
+      "operation": "query:broad-prefix-refusal",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Refused",
+      "wallMs": 8.36441699999989,
+      "cpuUserMs": 3.239,
+      "cpuSystemMs": 0.068,
+      "error": {
+        "name": "RaveldexError",
+        "code": "LIMIT_EXCEEDED",
+        "reason": null,
+        "details": {
+          "path": "expansions.group",
+          "limit": 256,
+          "actual": 257
+        },
+        "message": "Raveldex: LIMIT_EXCEEDED"
+      },
+      "resultSha256": "0e5e92f96714c731a4fd4e557d1b3606117dc4ce9d5cb5b349b827fa3a6d3c53"
+    },
+    {
+      "operation": "query:broad-prefix-refusal",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Refused",
+      "wallMs": 9.114624999999933,
+      "cpuUserMs": 4.813,
+      "cpuSystemMs": 0.089,
+      "error": {
+        "name": "RaveldexError",
+        "code": "LIMIT_EXCEEDED",
+        "reason": null,
+        "details": {
+          "path": "expansions.group",
+          "limit": 256,
+          "actual": 257
+        },
+        "message": "Raveldex: LIMIT_EXCEEDED"
+      },
+      "resultSha256": "0e5e92f96714c731a4fd4e557d1b3606117dc4ce9d5cb5b349b827fa3a6d3c53"
+    },
+    {
+      "operation": "query:source-phrase",
+      "repetition": 0,
+      "phase": "first-call-for-query",
+      "outcome": "Pass",
+      "wallMs": 159.45487500000002,
+      "cpuUserMs": 95.142,
+      "cpuSystemMs": 3.472,
+      "resultSha256": "52a810b720f219845991283da6a2832643ffc4a6df34bcde040f86644986529f"
+    },
+    {
+      "operation": "query:source-phrase",
+      "repetition": 1,
+      "phase": "repeat-same-owner",
+      "outcome": "Pass",
+      "wallMs": 165.53654199999994,
+      "cpuUserMs": 82.14,
+      "cpuSystemMs": 1.479,
+      "resultSha256": "52a810b720f219845991283da6a2832643ffc4a6df34bcde040f86644986529f"
+    },
+    {
+      "operation": "exportSource",
+      "outcome": "Pass",
+      "wallMs": 1278.364791,
+      "cpuUserMs": 527.15,
+      "cpuSystemMs": 12.257,
+      "result": {
+        "encodedBytes": 70738,
+        "encodedSha256": "d6c241c85e2c432f11f85fea27833b6e00076bb289ecd75cd4e0206ee55cc2b7",
+        "header": {
+          "analyzer": {
+            "environmentProfile": "unqualified",
+            "id": "basic-v1"
+          },
+          "capabilities": [
+            {
+              "codec": {
+                "id": "raveldex-source-v1",
+                "version": 1
+              },
+              "contractVersion": 1,
+              "costs": {
+                "externalResources": "none",
+                "importedCode": "Selected-source capture and copy-on-write directory staging; no phrase verifier.",
+                "retainedRepresentation": "One entry per record, present selected field and original value; selected original UTF-16 strings only.",
+                "transientWork": "Changed selected-field values and touched source-directory buckets; shared mutation budget."
+              },
+              "dataRequirements": {
+                "fields": [
+                  "body"
+                ],
+                "metadata": false,
+                "offsets": false,
+                "positions": false,
+                "source": true
+              },
+              "execution": {
+                "direct": true,
+                "worker": true,
+                "workerRegistration": "raveldex:source:1:{\"fields\":[\"body\"],\"id\":\"source\",\"maxRetainedEntries\":660000,\"maxWorkUnits\":50000000}"
+              },
+              "id": "source",
+              "indexEffect": "transactional",
+              "limits": {
+                "maxOutputEntries": 0,
+                "maxPayloadCodeUnits": 16384,
+                "maxRetainedEntries": 660000,
+                "maxWorkUnits": 50000000
+              },
+              "provides": [
+                {
+                  "contractVersion": 1,
+                  "id": "source:body"
+                }
+              ],
+              "rebuildPolicy": "new-index",
+              "requires": [],
+              "roles": [
+                "transaction-participant"
+              ],
+              "version": "0.0.0"
+            },
+            {
+              "contractVersion": 1,
+              "costs": {
+                "externalResources": "none",
+                "importedCode": "Native analyzer, resumable source phrase verifier and selected-source protocol.",
+                "retainedRepresentation": "No additional index state; source providers retain declared originals.",
+                "transientWork": "At most 32 phrase-prefix entries plus one current token; complete lexical candidates are scanned under the shared search budget."
+              },
+              "dataRequirements": {
+                "fields": [
+                  "body"
+                ],
+                "metadata": false,
+                "offsets": false,
+                "positions": false,
+                "source": true
+              },
+              "execution": {
+                "direct": true,
+                "worker": true,
+                "workerRegistration": "raveldex:source-phrases:1:{\"fields\":[\"body\"],\"id\":\"source-phrases\",\"maxRetainedEntries\":0,\"maxWorkUnits\":10000000}"
+              },
+              "id": "source-phrases",
+              "indexEffect": "none",
+              "limits": {
+                "maxOutputEntries": 0,
+                "maxPayloadCodeUnits": 16384,
+                "maxRetainedEntries": 0,
+                "maxWorkUnits": 10000000
+              },
+              "provides": [
+                {
+                  "contractVersion": 1,
+                  "id": "phrases"
+                }
+              ],
+              "rebuildPolicy": "new-index",
+              "requires": [
+                {
+                  "contractVersion": 1,
+                  "id": "source:body"
+                }
+              ],
+              "roles": [
+                "leaf-refinement"
+              ],
+              "version": "0.0.0"
+            }
+          ],
+          "indexDetail": {
+            "id": "frequency-directory-256-v1",
+            "version": 1
+          },
+          "limits": {
+            "checkpointWorkUnits": 2048,
+            "maxAdmissionEntries": 16384,
+            "maxCorpusTextCodeUnits": 67108864,
+            "maxCorpusTokens": 4000000,
+            "maxDeadlineMs": 60000,
+            "maxDictionaryEntries": 250000,
+            "maxDocuments": 10000,
+            "maxExpansionsPerGroup": 256,
+            "maxFieldNameCodeUnits": 64,
+            "maxHits": 100,
+            "maxIdCodeUnits": 256,
+            "maxMetadataCodeUnitsPerRecord": 32768,
+            "maxMetadataFields": 32,
+            "maxMetadataStringCodeUnits": 1024,
+            "maxMetadataValuesPerField": 128,
+            "maxMutationBatch": 256,
+            "maxMutationWorkUnits": 50000000,
+            "maxPostingEntries": 2000000,
+            "maxQueryCodeUnits": 16384,
+            "maxQueryDepth": 16,
+            "maxQueryExpansions": 1024,
+            "maxQueryGroups": 64,
+            "maxQueryLexicalCodeUnits": 2048,
+            "maxQueryNodes": 128,
+            "maxQueryTokens": 64,
+            "maxQueuedOperations": 32,
+            "maxRawTokenCodeUnits": 256,
+            "maxSearchWorkUnits": 10000000,
+            "maxTermCodeUnits": 256,
+            "maxTextCodeUnitsPerRecord": 262144,
+            "maxTextCodeUnitsPerValue": 65536,
+            "maxTextFields": 32,
+            "maxTextValuesPerField": 64,
+            "maxTokensPerRecord": 32768,
+            "maxVariantsPerGroup": 16,
+            "minPrefixCodePoints": 2
+          },
+          "nativeQualification": null,
+          "originRevision": 1,
+          "ranking": {
+            "implementationVersion": 1,
+            "model": "raveldex-bm25-v1"
+          },
+          "schema": {
+            "metadata": {
+              "group": {
+                "multi": false,
+                "nullable": false,
+                "type": "string"
+              }
+            },
+            "text": {
+              "body": {
+                "boost": 1
+              }
+            }
+          },
+          "schemaVersion": 1
+        }
+      },
+      "snapshotArtifact": "high-cardinality-100-baseline-1-normal.source.json"
+    },
+    {
+      "operation": "restoreSource",
+      "outcome": "Pass",
+      "wallMs": 1369.201208,
+      "cpuUserMs": 560.955,
+      "cpuSystemMs": 13.64,
+      "result": {
+        "format": "raveldex-source",
+        "originRevision": 1,
+        "revision": 2,
+        "reindexed": true,
+        "receivingAnalyzer": {
+          "id": "basic-v1",
+          "environmentProfile": "unqualified"
+        }
+      },
+      "completeSource": {
+        "outcome": "Pass",
+        "records": 100,
+        "donorRevision": 1,
+        "receiverRevision": 2,
+        "normalized": [
+          "body.header.originRevision",
+          "integrity.value"
+        ],
+        "scope": "Complete public source snapshot, including all raw field arrays and metadata; both checksums verified."
+      }
+    }
+  ],
+  "observations": [],
+  "warmups": [],
+  "results": {
+    "common": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 100,
+        "hits": [
+          {
+            "id": "high-cardinality:00013",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00047",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00081",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00058",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00092",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00031",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00065",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00008",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00076",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00073",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00035",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00034",
+            "score": 0.005091754993945734
+          }
+        ]
+      }
+    },
+    "rare": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          }
+        ]
+      }
+    },
+    "overlapping-or": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 35,
+        "hits": [
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00081",
+            "score": 1.1761708980127992
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 1.1441197335651796
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 1.1379179823668863
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 1.1257140179479013
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 1.1197096761329068
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 1.107891120311291
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 1.1020749100375418
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 1.1020749100375418
+          },
+          {
+            "id": "high-cardinality:00021",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00027",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00036",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00087",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00033",
+            "score": 1.0906237896630935
+          },
+          {
+            "id": "high-cardinality:00063",
+            "score": 1.0906237896630935
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00054",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00096",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 1.0794081880897306
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 1.073886447848842
+          }
+        ]
+      }
+    },
+    "negative-only": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 99,
+        "hits": [
+          {
+            "id": "high-cardinality:00000",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00002",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00004",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00006",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00008",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00009",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00010",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00011",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00013",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00014",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00015",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00016",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00017",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00018",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00019",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00020",
+            "score": 0
+          }
+        ]
+      }
+    },
+    "filtered": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 20,
+        "hits": [
+          {
+            "id": "high-cardinality:00065",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00035",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00055",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00070",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00095",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00020",
+            "score": 0.005012806255991542
+          },
+          {
+            "id": "high-cardinality:00080",
+            "score": 0.005012806255991542
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 0.004987031264530448
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 0.0049615199783277185
+          },
+          {
+            "id": "high-cardinality:00025",
+            "score": 0.004936268371007363
+          },
+          {
+            "id": "high-cardinality:00010",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00030",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00040",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00085",
+            "score": 0.004862032569622007
+          },
+          {
+            "id": "high-cardinality:00045",
+            "score": 0.00481377018990866
+          },
+          {
+            "id": "high-cardinality:00050",
+            "score": 0.004586150825581669
+          },
+          {
+            "id": "high-cardinality:00015",
+            "score": 0.004359402788658762
+          }
+        ]
+      }
+    },
+    "narrow-prefix": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 10,
+        "hits": [
+          {
+            "id": "high-cardinality:00008",
+            "score": 4.4116917796768504
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 4.3881606651972875
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 4.341843550251058
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 4.3190497263806344
+          },
+          {
+            "id": "high-cardinality:00002",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 4.187159158775493
+          },
+          {
+            "id": "high-cardinality:00006",
+            "score": 4.144967614644745
+          },
+          {
+            "id": "high-cardinality:00009",
+            "score": 4.144967614644745
+          },
+          {
+            "id": "high-cardinality:00004",
+            "score": 4.023344960698042
+          }
+        ]
+      }
+    },
+    "broad-prefix-refusal": {
+      "error": {
+        "name": "RaveldexError",
+        "code": "LIMIT_EXCEEDED",
+        "reason": null,
+        "details": {
+          "path": "expansions.group",
+          "limit": 256,
+          "actual": 257
+        },
+        "message": "Raveldex: LIMIT_EXCEEDED"
+      }
+    },
+    "source-phrase": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 34,
+        "hits": [
+          {
+            "id": "high-cardinality:00081",
+            "score": 0.01086817962943427
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 0.010572017045291269
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 0.010514710963195555
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 0.010401942591081563
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 0.01034646063219945
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 0.010237253553664491
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.010183509987891469
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 0.010183509987891469
+          },
+          {
+            "id": "high-cardinality:00021",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00027",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00036",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00087",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00033",
+            "score": 0.010077698125518366
+          },
+          {
+            "id": "high-cardinality:00063",
+            "score": 0.010077698125518366
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00054",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00096",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 0.009974062529060896
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 0.009923039956655437
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 0.009872536742014725
+          }
+        ]
+      }
+    }
+  },
+  "resultCaptures": {
+    "5a0ebac44bfcf9ae198ceeaacacba498295c5b5b4b10bb34a0ae96ce1c9ce307": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 100,
+        "hits": [
+          {
+            "id": "high-cardinality:00013",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00047",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00081",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00058",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00092",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00031",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00065",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00008",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00076",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00073",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00035",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00034",
+            "score": 0.005091754993945734
+          }
+        ]
+      }
+    },
+    "ba0c7e11cd1d779800599aec1a1d9bccd79cdeea3f0505915fa022be6acfb329": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          }
+        ]
+      }
+    },
+    "0bd12f456e1ce9f04d7e9c80be28b63c9b1d63a5e726ea45a5cd62666cd592d4": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 35,
+        "hits": [
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00081",
+            "score": 1.1761708980127992
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 1.1441197335651796
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 1.1379179823668863
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 1.1257140179479013
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 1.1197096761329068
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 1.107891120311291
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 1.1020749100375418
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 1.1020749100375418
+          },
+          {
+            "id": "high-cardinality:00021",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00027",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00036",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00087",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00033",
+            "score": 1.0906237896630935
+          },
+          {
+            "id": "high-cardinality:00063",
+            "score": 1.0906237896630935
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00054",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00096",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 1.0794081880897306
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 1.073886447848842
+          }
+        ]
+      }
+    },
+    "76904b84770a066ce3a76c88b232013e944cc408f97c8c6a3f40b1c171ff18a2": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 99,
+        "hits": [
+          {
+            "id": "high-cardinality:00000",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00002",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00004",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00006",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00008",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00009",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00010",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00011",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00013",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00014",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00015",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00016",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00017",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00018",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00019",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00020",
+            "score": 0
+          }
+        ]
+      }
+    },
+    "45757f716b7723cb616a9c7845a1b43bcd1b6a828c4c11ed62932b38f27b31a7": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 20,
+        "hits": [
+          {
+            "id": "high-cardinality:00065",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00035",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00055",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00070",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00095",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00020",
+            "score": 0.005012806255991542
+          },
+          {
+            "id": "high-cardinality:00080",
+            "score": 0.005012806255991542
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 0.004987031264530448
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 0.0049615199783277185
+          },
+          {
+            "id": "high-cardinality:00025",
+            "score": 0.004936268371007363
+          },
+          {
+            "id": "high-cardinality:00010",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00030",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00040",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00085",
+            "score": 0.004862032569622007
+          },
+          {
+            "id": "high-cardinality:00045",
+            "score": 0.00481377018990866
+          },
+          {
+            "id": "high-cardinality:00050",
+            "score": 0.004586150825581669
+          },
+          {
+            "id": "high-cardinality:00015",
+            "score": 0.004359402788658762
+          }
+        ]
+      }
+    },
+    "5b12fc77262dd8b76994fe920590f0efd13ba32cf4ab9d8ba1c2f8e1af9e4ec1": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 10,
+        "hits": [
+          {
+            "id": "high-cardinality:00008",
+            "score": 4.4116917796768504
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 4.3881606651972875
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 4.341843550251058
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 4.3190497263806344
+          },
+          {
+            "id": "high-cardinality:00002",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 4.187159158775493
+          },
+          {
+            "id": "high-cardinality:00006",
+            "score": 4.144967614644745
+          },
+          {
+            "id": "high-cardinality:00009",
+            "score": 4.144967614644745
+          },
+          {
+            "id": "high-cardinality:00004",
+            "score": 4.023344960698042
+          }
+        ]
+      }
+    },
+    "0e5e92f96714c731a4fd4e557d1b3606117dc4ce9d5cb5b349b827fa3a6d3c53": {
+      "error": {
+        "name": "RaveldexError",
+        "code": "LIMIT_EXCEEDED",
+        "reason": null,
+        "details": {
+          "path": "expansions.group",
+          "limit": 256,
+          "actual": 257
+        },
+        "message": "Raveldex: LIMIT_EXCEEDED"
+      }
+    },
+    "52a810b720f219845991283da6a2832643ffc4a6df34bcde040f86644986529f": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 34,
+        "hits": [
+          {
+            "id": "high-cardinality:00081",
+            "score": 0.01086817962943427
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 0.010572017045291269
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 0.010514710963195555
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 0.010401942591081563
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 0.01034646063219945
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 0.010237253553664491
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.010183509987891469
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 0.010183509987891469
+          },
+          {
+            "id": "high-cardinality:00021",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00027",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00036",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00087",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00033",
+            "score": 0.010077698125518366
+          },
+          {
+            "id": "high-cardinality:00063",
+            "score": 0.010077698125518366
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00054",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00096",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 0.009974062529060896
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 0.009923039956655437
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 0.009872536742014725
+          }
+        ]
+      }
+    }
+  },
+  "queryTransitions": [],
+  "runtime": {
+    "node": "v24.21.0",
+    "versions": {
+      "node": "24.21.0",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.8",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.3",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "137",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "3.6.4",
+      "simdjson": "4.6.11",
+      "simdutf": "6.4.0",
+      "sqlite": "3.53.4",
+      "tz": "2026a",
+      "undici": "7.29.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "13.6.233.17-node.53",
+      "zlib": "1.2.12",
+      "zstd": "1.5.7"
+    },
+    "execArgv": []
+  },
+  "scope": "Actual installed Node direct source+source phrases, default limits. Query timing includes exact totals/top20. Semantic full-page verification is a separate explicitly controlled-host lane.",
+  "successfulResults": {
+    "common": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 100,
+        "hits": [
+          {
+            "id": "high-cardinality:00013",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00047",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00081",
+            "score": 0.005434089814717135
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00058",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00092",
+            "score": 0.005286008522645634
+          },
+          {
+            "id": "high-cardinality:00031",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00065",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00008",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00076",
+            "score": 0.0052009712955407815
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00073",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00035",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00034",
+            "score": 0.005091754993945734
+          }
+        ]
+      }
+    },
+    "rare": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 1,
+        "hits": [
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          }
+        ]
+      }
+    },
+    "overlapping-or": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 35,
+        "hits": [
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00081",
+            "score": 1.1761708980127992
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 1.1441197335651796
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 1.1379179823668863
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 1.1257140179479013
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 1.1197096761329068
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 1.107891120311291
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 1.1020749100375418
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 1.1020749100375418
+          },
+          {
+            "id": "high-cardinality:00021",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00027",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00036",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00087",
+            "score": 1.0963194487613426
+          },
+          {
+            "id": "high-cardinality:00033",
+            "score": 1.0906237896630935
+          },
+          {
+            "id": "high-cardinality:00063",
+            "score": 1.0906237896630935
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00054",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00096",
+            "score": 1.0849870054973785
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 1.0794081880897306
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 1.073886447848842
+          }
+        ]
+      }
+    },
+    "negative-only": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 99,
+        "hits": [
+          {
+            "id": "high-cardinality:00000",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00002",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00004",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00006",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00008",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00009",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00010",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00011",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00013",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00014",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00015",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00016",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00017",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00018",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00019",
+            "score": 0
+          },
+          {
+            "id": "high-cardinality:00020",
+            "score": 0
+          }
+        ]
+      }
+    },
+    "filtered": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 20,
+        "hits": [
+          {
+            "id": "high-cardinality:00065",
+            "score": 0.005257355481597777
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 0.005173230316099725
+          },
+          {
+            "id": "high-cardinality:00035",
+            "score": 0.0051186267768322455
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 0.005091754993945734
+          },
+          {
+            "id": "high-cardinality:00055",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00070",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00095",
+            "score": 0.005065163880738602
+          },
+          {
+            "id": "high-cardinality:00020",
+            "score": 0.005012806255991542
+          },
+          {
+            "id": "high-cardinality:00080",
+            "score": 0.005012806255991542
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 0.004987031264530448
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 0.0049615199783277185
+          },
+          {
+            "id": "high-cardinality:00025",
+            "score": 0.004936268371007363
+          },
+          {
+            "id": "high-cardinality:00010",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00030",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00040",
+            "score": 0.004886528493224099
+          },
+          {
+            "id": "high-cardinality:00085",
+            "score": 0.004862032569622007
+          },
+          {
+            "id": "high-cardinality:00045",
+            "score": 0.00481377018990866
+          },
+          {
+            "id": "high-cardinality:00050",
+            "score": 0.004586150825581669
+          },
+          {
+            "id": "high-cardinality:00015",
+            "score": 0.004359402788658762
+          }
+        ]
+      }
+    },
+    "narrow-prefix": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 10,
+        "hits": [
+          {
+            "id": "high-cardinality:00008",
+            "score": 4.4116917796768504
+          },
+          {
+            "id": "high-cardinality:00005",
+            "score": 4.3881606651972875
+          },
+          {
+            "id": "high-cardinality:00001",
+            "score": 4.341843550251058
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 4.3190497263806344
+          },
+          {
+            "id": "high-cardinality:00002",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00007",
+            "score": 4.296493978832299
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 4.187159158775493
+          },
+          {
+            "id": "high-cardinality:00006",
+            "score": 4.144967614644745
+          },
+          {
+            "id": "high-cardinality:00009",
+            "score": 4.144967614644745
+          },
+          {
+            "id": "high-cardinality:00004",
+            "score": 4.023344960698042
+          }
+        ]
+      }
+    },
+    "source-phrase": {
+      "result": {
+        "revision": 1,
+        "model": "raveldex-bm25-v1",
+        "completeness": "complete",
+        "total": 34,
+        "hits": [
+          {
+            "id": "high-cardinality:00081",
+            "score": 0.01086817962943427
+          },
+          {
+            "id": "high-cardinality:00024",
+            "score": 0.010572017045291269
+          },
+          {
+            "id": "high-cardinality:00099",
+            "score": 0.010514710963195555
+          },
+          {
+            "id": "high-cardinality:00042",
+            "score": 0.010401942591081563
+          },
+          {
+            "id": "high-cardinality:00039",
+            "score": 0.01034646063219945
+          },
+          {
+            "id": "high-cardinality:00069",
+            "score": 0.010237253553664491
+          },
+          {
+            "id": "high-cardinality:00000",
+            "score": 0.010183509987891469
+          },
+          {
+            "id": "high-cardinality:00075",
+            "score": 0.010183509987891469
+          },
+          {
+            "id": "high-cardinality:00021",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00027",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00036",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00087",
+            "score": 0.010130327761477204
+          },
+          {
+            "id": "high-cardinality:00033",
+            "score": 0.010077698125518366
+          },
+          {
+            "id": "high-cardinality:00063",
+            "score": 0.010077698125518366
+          },
+          {
+            "id": "high-cardinality:00012",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00054",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00096",
+            "score": 0.010025612511983084
+          },
+          {
+            "id": "high-cardinality:00060",
+            "score": 0.009974062529060896
+          },
+          {
+            "id": "high-cardinality:00090",
+            "score": 0.009923039956655437
+          },
+          {
+            "id": "high-cardinality:00003",
+            "score": 0.009872536742014725
+          }
+        ]
+      }
+    }
+  },
+  "outcome": "Collected",
+  "packageMetadataSha256": "fa866f78cd23d285886ed810fb6509118a9b0eb9dacd25624f4fefb0e6f417a1"
+}

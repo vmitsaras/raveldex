@@ -1,0 +1,95 @@
+{
+  "task": "RX-8008",
+  "implementation": "Pass",
+  "verification": "Pass",
+  "scope": "Frozen actual basic-analyzer1k/10k source and positions/offsets, installed Node24 and headless Chrome156 direct/real-worker; generic callbacks retain compatibility and may refuse.",
+  "sourceHead": "fe92ee251f2845b1cd7f6876e580bfd47d615772",
+  "acceptanceCriteria": {
+    "AC01": {
+      "status": "Pass",
+      "before10k": {
+        "Pass": 0,
+        "WORK_LIMIT_EXCEEDED": 14
+      },
+      "after10k": {
+        "Pass": 14,
+        "refused": 0
+      },
+      "limits": "Unchanged"
+    },
+    "AC02": {
+      "status": "Pass",
+      "knownStops": {
+        "DEADLINE_EXCEEDED": 56,
+        "CANCELLED": 56
+      },
+      "priorSourceAndQueriesPreserved": 126,
+      "unknownObservedInMatrix": 0,
+      "unknownProtocols": "Separate24worker/26IndexedDB packed-browser regression cases pass; original receipt semantics preserved.",
+      "preEntryDiagnosticWorkerDeadlines": 8
+    },
+    "AC03": {
+      "status": "Pass",
+      "cases": 56,
+      "ordinaryNodeOwnersPerCell": 2,
+      "ordinaryChromeCasesPerCell": 1,
+      "exactInputAndDonorStateParity": true,
+      "after10kSourceWork": 23043299,
+      "after10kPositionsWork": 28435912,
+      "normalDiagnosticSeparate": true,
+      "completeSourceAndMembershipSuccessProofs": 42,
+      "completeDiagnosticStateSuccessProofs": 18,
+      "memory": "Bounded unforced process samples, not retained/peak/exclusive heap."
+    }
+  },
+  "verificationResults": {
+    "fullTests": {
+      "primary": 1001,
+      "ui": 182,
+      "worker": 24,
+      "indexeddb": 26,
+      "migrationBrowser": 1,
+      "astroBrowser": 3,
+      "total": 1237,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "siteBrowser": 14,
+    "focusedLifecycle": 30,
+    "independentOracle": {
+      "queries": 345,
+      "mutationComparisons": 1155,
+      "mutationOperations": 75,
+      "phraseChecks": 438,
+      "phraseParity": 288,
+      "handScores": 10
+    },
+    "measuredVerifiedArchivesByteIdentical": true,
+    "siteGenerationInputsUnchanged": true,
+    "siteGeneratedRuntimeOutputChanged": true
+  },
+  "initialFullFailure": "Two stale diagnostic assertion expectations;999/1001primary passed, later groups not run. Corrected test-only and successful full rerun retained.",
+  "reviews": [
+    "docs/evidence/RX-8008/review.md",
+    "docs/evidence/RX-8008/raw-review.md"
+  ],
+  "remoteCI": "Not run",
+  "publication": "Not performed",
+  "commit": "Not created",
+  "next": "RX-8009",
+  "projectSynchronization": {
+    "status": "Pass locally",
+    "canonicalManifest": "RX-8008 done with actual evidence; generated roadmap/tasks synchronized",
+    "nextActual": "RX-8009",
+    "checks": [
+      "docs:check",
+      "handoff:check",
+      "handoff:next",
+      "tracking:preview",
+      "pages:check"
+    ],
+    "remoteTracking": "Not mutated; committed-manifest workflow owns later synchronization",
+    "closingPackage": "Only packaged PUBLICATION_STATUS prose differs; all runtime/declarations/CSS byte-identical to measured/verified package"
+  }
+}

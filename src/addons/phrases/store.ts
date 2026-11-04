@@ -1,4 +1,6 @@
 import { workerIdentity } from '../../core/capabilities/worker-identity.js';
+import { registerBulkParticipant } from '../../core/capabilities/bulk-participant.js';
+import type { BulkParticipant } from '../../core/capabilities/bulk-participant.js';
 import type { AddonRegistration, ParticipantContext } from '../../core/capabilities/types.js';
 import { has } from '../../core/contracts/data.js';
 import type { AnalyzerDescriptor, OwnedConfiguration, OwnedRecord } from '../../core/contracts/types.js';
@@ -115,10 +117,42 @@ function* prepareSource(previous: unknown, context: ParticipantContext, fields: 
   return Object.freeze({ ...old, revision: context.revision, records, retainedEntries, textCodeUnits });
 }
 
+/** Add-only private reconstruction; one owned directory is sealed at the end. */
+function bulkSource(initial: unknown, fields: readonly string[]): BulkParticipant {
+  const old = requireSourceRoot(initial, fields[0]!, 0, (initial as SourceRoot)?.analyzer);
+  if (old.records.size !== 0 || old.retainedEntries !== 0 || old.textCodeUnits !== 0) invalid('INCOMPATIBLE_CAPABILITY', 'source.bulk.initial');
+  const stage = new DirectoryStage(old.records, rawCharge);
+  let revision = 0, retainedEntries = 0, textCodeUnits = 0, sealed = false;
+  return Object.freeze({
+    *add(context: ParticipantContext): Generator<WorkStep, void> {
+      if (sealed) invalid('INTERNAL_ERROR', 'source.bulk.sealed');
+      if (context.kind !== 'add' || context.records.length !== 1 || context.removedIds.length !== 0) invalid('INCOMPATIBLE_CAPABILITY', 'source.bulk.add');
+      if (context.previousRevision !== revision || context.revision !== revision + 1 || !Number.isSafeInteger(context.revision)) invalid('REVISION_MISMATCH', 'source.revision');
+      if (context.analyzer.id !== old.analyzer.id || context.analyzer.environmentProfile !== old.analyzer.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.source.analyzer');
+      const record = context.records[0]!;
+      yield rawCharge(record.id.length + 1);
+      if (stage.get(record.id)) invalid('INCOMPATIBLE_CAPABILITY', 'source.record');
+      const next = yield* retainRecord(record, fields);
+      retainedEntries += next.retainedEntries; textCodeUnits += next.textCodeUnits;
+      bound(retainedEntries, old.maxRetainedEntries, 'source.retainedEntries');
+      bound(textCodeUnits, old.maxTextCodeUnits, 'source.textCodeUnits');
+      yield* stage.set(record.id, next);
+      revision = context.revision;
+    },
+    *finish(finalRevision: number): Generator<WorkStep, SourceRoot> {
+      if (sealed) invalid('INTERNAL_ERROR', 'source.bulk.sealed');
+      if (finalRevision !== revision || !Number.isSafeInteger(finalRevision)) invalid('REVISION_MISMATCH', 'source.revision');
+      sealed = true;
+      const records = yield* stage.finish();
+      return Object.freeze({ ...old, revision, records, retainedEntries, textCodeUnits });
+    },
+  });
+}
+
 /** Optional selected-field originals, committed with the native frequency root. */
 export function createSourceProvider(options: SourceProviderOptions): AddonRegistration {
   const captured = capturePhraseOptions(options, true);
-  return Object.freeze({
+  const registration: AddonRegistration = Object.freeze({
     manifest: Object.freeze({
       id: captured.id, version: '0.0.0', contractVersion: 1,
       roles: Object.freeze(['transaction-participant'] as const),
@@ -136,4 +170,5 @@ export function createSourceProvider(options: SourceProviderOptions): AddonRegis
       prepare: (previous: unknown, context: ParticipantContext): Generator<WorkStep, SourceRoot> => prepareSource(previous, context, captured.fields),
     }),
   });
+  return registerBulkParticipant(registration, initial => bulkSource(initial, captured.fields));
 }

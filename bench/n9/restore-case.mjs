@@ -1,5 +1,6 @@
 // Host-neutral diagnosis runner: actual factories are supplied by Node/browser.
-// No imports; this module can be bundled or serialized into actual worker hosts.
+// The verifier is host-neutral and runs only outside operation timing windows.
+import { createBulkVerifier } from './bulk-verify.mjs';
 export const RESTORE_VARIANTS = Object.freeze(['source', 'positions-offsets']);
 export const RESTORE_OPERATIONS = Object.freeze(['build', 'exportSource', 'restoreSource', 'deadlineRestore', 'abortedRestore']);
 export function restoreError(error) {
@@ -16,7 +17,8 @@ export function priorRestoreRecords(records) {
   return records.slice(0, Math.min(1000, records.length)).map(record => ({ id: 'prior:' + record.id,
     text: { body: ['n9priorstate n9red n9blue', ...(Array.isArray(record.text.body) ? record.text.body : [record.text.body])] }, metadata: { group: 'prior' } }));
 }
-export async function exerciseRestore({ create, createSnapshots, records, queries, mode = 'normal', diagnostic, cpuUsage, memory, onSnapshot, deadlineMs = 60000 }) {
+export async function exerciseRestore({ create, createSnapshots, records, queries, mode = 'normal', diagnostic, cpuUsage, memory, onSnapshot, captureRoot, deadlineMs = 60000 }) {
+  const verifier = createBulkVerifier();
   const ensure = (condition, message) => { if (!condition) throw Error(message); };
   const equal = (actual, expected, message) => ensure(JSON.stringify(actual) === JSON.stringify(expected), message);
   const errorData = error => ({ name: error?.name ?? 'Error', code: error?.code ?? null, reason: error?.reason ?? null, details: error?.details ?? null, message: String(error?.message ?? error) });
@@ -81,6 +83,9 @@ export async function exerciseRestore({ create, createSnapshots, records, querie
     const snapshot = (() => { const envelope = JSON.parse(encoded); ensure(envelope.format === 'raveldex-source', 'wrong snapshot format'); ensure(envelope.body.payload.records.length === records.length, 'snapshot missing records'); return { header: envelope.body.header }; })();
     exported.row.result = { encodedBytes: new TextEncoder().encode(encoded).length, encodedCodeUnits: encoded.length, header: snapshot.header,
       ...(onSnapshot ? await onSnapshot(encoded, { operation: 'exportSource', role: 'donor' }) : {}) };
+    // Canonical private data never crosses a production RPC. A diagnostic host
+    // hashes its one final selected root after export and outside all windows.
+    if (mode === 'diagnostic' && captureRoot) row.fullStateDonor = await captureRoot(donor);
     for (const [operation, role] of [['restoreSource', 'receiver'], ['deadlineRestore', 'deadline'], ['abortedRestore', 'abort']]) {
       const receiver = await create({ role });
       try {
@@ -112,6 +117,20 @@ export async function exerciseRestore({ create, createSnapshots, records, querie
           equal(after.map(item => item.result ? { ...item, result: { ...item.result, revision: 0 } } : item), donorResults.map(item => item.result ? { ...item, result: { ...item.result, revision: 0 } } : item), 'restored queries differ from donor');
           const old = await receiver.search('n9priorstate', { deadlineMs }); ensure(old.total === 0 && old.revision === restored.result.revision, 'restore retained prior records');
           restored.row.postcondition = after; restored.row.oldRemoved = true;
+          const receiverEncoded = await snapshots.exportSource({ deadlineMs });
+          restored.row.completeSource = verifier.compareSourceSnapshots(encoded, receiverEncoded);
+          const membership = await verifier.enumerateMembership(receiver, verifier.sourceSnapshot(encoded).ids, restored.result.revision, { deadlineMs });
+          // Keep complete page evidence bounded in reports; the verifier has
+          // already checked every returned id and rejects duplicate/missing ids.
+          const { ids: verifiedIds, ...membershipReport } = membership;
+          ensure(verifiedIds.length === records.length, 'complete membership record count');
+          restored.row.completeMembership = membershipReport;
+          if (mode === 'diagnostic' && captureRoot) {
+            const receiverState = await captureRoot(receiver);
+            ensure(receiverState.sha256 === row.fullStateDonor.sha256, 'complete private restored core/source/positions differ from donor');
+            restored.row.completeState = { outcome: 'Pass', donor: row.fullStateDonor, receiver: receiverState,
+              encounterOrderEqual: receiverState.encounterSha256 === row.fullStateDonor.encounterSha256 };
+          }
         }
       } finally { await receiver.dispose(); }
     }

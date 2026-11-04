@@ -28,10 +28,12 @@ export class CoreDelta {
   private readonly documents: DirectoryStage<DocumentEntry>;
   private readonly fields = new Map<string, StagedField>();
   private readonly counts;
+  private liveDictionaryEntries: number;
   constructor(private readonly old: IndexRoot, private readonly charge: Charge, private readonly diagnostics?: StagingCounts) {
     validateStateCounts(old.counts, old.configuration.limits);
     if (old.documents.size !== old.counts.documents) invalid('INTERNAL_ERROR', 'state.documents');
     this.counts = { ...old.counts };
+    this.liveDictionaryEntries = old.counts.dictionaryEntries;
     this.documents = new DirectoryStage(old.documents, charge, diagnostics?.documents);
   }
   private field(name: string): StagedField {
@@ -84,7 +86,9 @@ export class CoreDelta {
           if (current !== undefined) invalid('INTERNAL_ERROR', 'posting.duplicate');
           yield* term.postings.set(document.id, tf);
         }
+        if (term.df === 0 && sign > 0) this.liveDictionaryEntries++;
         term.df += sign; term.frequency += sign * tf;
+        if (term.df === 0 && sign < 0) this.liveDictionaryEntries--;
         this.counts.postingEntries += sign;
         if (this.diagnostics) this.diagnostics.termUpdates++;
       }
@@ -94,6 +98,12 @@ export class CoreDelta {
   *apply(delta: DocumentDelta): Generator<WorkStep, void> {
     if (delta.previous) { yield* this.contribute(delta.previous, -1); yield* this.documents.delete(delta.previous.id); this.counts.documents--; }
     if (delta.next) { yield* this.contribute(delta.next, 1); yield* this.documents.set(delta.next.id, delta.next); this.counts.documents++; }
+  }
+  /** Unsealed add-only construction still enforces every live retention cap. */
+  hasDocument(id: string): boolean { return this.documents.get(id) !== undefined; }
+  checkCounts(): void {
+    validateStateCounts({ ...this.counts, dictionaryEntries: this.liveDictionaryEntries }, this.old.configuration.limits);
+    if (this.documents.size !== this.counts.documents) invalid('INTERNAL_ERROR', 'state.documents');
   }
   *finish(): Generator<WorkStep, Pick<IndexRoot, 'documents' | 'fields' | 'counts'>> {
     const fields: Record<string, FieldIndex> = Object.create(null) as typeof fields;
@@ -122,6 +132,7 @@ export class CoreDelta {
     const documents = yield* this.documents.finish();
     yield this.charge(5);
     validateStateCounts(this.counts, this.old.configuration.limits);
+    if (this.counts.dictionaryEntries !== this.liveDictionaryEntries) invalid('INTERNAL_ERROR', 'state.dictionary');
     if (documents.size !== this.counts.documents) invalid('INTERNAL_ERROR', 'state.documents');
     return { documents, fields: Object.freeze(fields), counts: Object.freeze(this.counts) };
   }

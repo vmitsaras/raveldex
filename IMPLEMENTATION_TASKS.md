@@ -2254,7 +2254,7 @@ Reproduce and isolate source codec, validation, token and staging costs before p
 
 **Implement atomic bulk-source restore under existing limits**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8008%22)
 
 **Dependencies:** [RX-8007](IMPLEMENTATION_TASKS.md#rx-8007)
 
@@ -2262,7 +2262,7 @@ Reduce redundant restore preparation while preserving source/position/native-sta
 
 **Expected affected areas**
 
-`src/adapters/snapshots/`, `src/adapters/indexeddb/`, `src/adapters/worker/`, `src/core/mutations/`, `test/adapters/`, `bench/`. These are planning boundaries; create files only when this task needs them.
+`src/adapters/snapshots/`, `src/adapters/indexeddb/`, `src/adapters/worker/`, `src/core/mutations/`, `src/core/capabilities/`, `src/addons/phrases/`, `src/addons/positions/`, `test/adapters/`, `bench/`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
@@ -2282,14 +2282,18 @@ Reduce redundant restore preparation while preserving source/position/native-sta
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8008.md](docs/evidence/RX-8008.md)
+- [docs/evidence/RX-8008/acceptance.json](docs/evidence/RX-8008/acceptance.json)
+- [docs/evidence/RX-8008/review.md](docs/evidence/RX-8008/review.md)
+- [docs/evidence/RX-8008/raw-review.md](docs/evidence/RX-8008/raw-review.md)
+- [docs/evaluation/RX-8008-method.md](docs/evaluation/RX-8008-method.md)
 
 
 ## RX-8009
 
 **Run paired baseline-versus-optimized native benchmark**
 
-**Milestone:** N9 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22)
+**Milestone:** N9 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-8009%22)
 
 **Dependencies:** [RX-8003](IMPLEMENTATION_TASKS.md#rx-8003), [RX-8004](IMPLEMENTATION_TASKS.md#rx-8004), [RX-8005](IMPLEMENTATION_TASKS.md#rx-8005), [RX-8006](IMPLEMENTATION_TASKS.md#rx-8006), [RX-8008](IMPLEMENTATION_TASKS.md#rx-8008)
 
@@ -2317,7 +2321,12 @@ Repeat frozen matched workloads against separate installed baseline and candidat
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-8009.md](docs/evidence/RX-8009.md)
+- [docs/evidence/RX-8009/acceptance.json](docs/evidence/RX-8009/acceptance.json)
+- [docs/evidence/RX-8009/node-review.md](docs/evidence/RX-8009/node-review.md)
+- [docs/evidence/RX-8009/review.md](docs/evidence/RX-8009/review.md)
+- [docs/evidence/RX-8009/summary.json](docs/evidence/RX-8009/summary.json)
+- [docs/evaluation/RX-8009-method.md](docs/evaluation/RX-8009-method.md)
 
 
 ## RX-8010

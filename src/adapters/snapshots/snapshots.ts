@@ -1,13 +1,11 @@
-import { createAnalysis } from '../../core/analyzer/selected.js';
 import { Admission, has, keysOnly, ownObject } from '../../core/contracts/data.js';
 import { captureConfiguration } from '../../core/contracts/schema.js';
 import { captureOptions } from '../../core/contracts/options.js';
 import type { Configuration, MutationOptions, OwnedConfiguration, Raveldex } from '../../core/contracts/types.js';
-import { initializeParticipants } from '../../core/capabilities/participants.js';
-import { createOwnedRaveldex, emptyRoot, getExecutionOwner } from '../../core/execution/engine.js';
+import { createOwnedRaveldex, getExecutionOwner } from '../../core/execution/engine.js';
 import type { AdapterControl, ExecutionMetrics } from '../../core/execution/engine.js';
 import type { ExecutionHost } from '../../core/execution/host.js';
-import { MutationOwner } from '../../core/mutations/owner.js';
+import { reconstructSource } from './bulk.js';
 import { invalid, RaveldexError } from '../../core/errors/error.js';
 import type { IndexRoot } from '../../core/index/state.js';
 import type { WorkStep } from '../../core/index/directory.js';
@@ -113,29 +111,10 @@ function checkedHeader(raw: unknown, root: IndexRoot, format: SnapshotFormat, qu
   count(value.originRevision, Number.MAX_SAFE_INTEGER); return value;
 }
 
-function* preparedSource(payload: unknown, configuration: OwnedConfiguration, check: () => void): Generator<WorkStep, IndexRoot> {
+function* preparedSource(payload: unknown, configuration: OwnedConfiguration, check: (phase?: string) => void): Generator<WorkStep, IndexRoot> {
   const data = object(payload, ['records']);
   if (!Array.isArray(data.records) || data.records.length > configuration.limits.maxDocuments) fail('MALFORMED_SNAPSHOT');
-  const installed = initializeParticipants(configuration);
-  const participants = installed.participants.map(participant => {
-    const budget = new WorkBudget(participant.maxWorkUnits ?? configuration.limits.maxMutationWorkUnits);
-    return Object.freeze({ id: participant.id, ...(participant.maxWorkUnits !== undefined ? { maxWorkUnits: participant.maxWorkUnits } : {}), *prepare(previous: unknown, context: Parameters<typeof participant.prepare>[1]): Generator<WorkStep, unknown> {
-      const cursor = participant.prepare(previous, context); let finished = false;
-      try {
-        for (;;) { const step = cursor.next(); if (step.done) { finished = true; return step.value; } budget.charge(step.value.workUnits); yield step.value; }
-      } finally { if (!finished) { try { cursor.return(undefined); } catch { /* Preserve first failure. */ } } }
-    } });
-  });
-  const owner = new MutationOwner(emptyRoot(configuration, installed.states), participants);
-  const analyze = createAnalysis(configuration, check);
-  for (const record of data.records) {
-    // Capturing one admitted record retains the original live admission bounds;
-    // all batches' yielded work also joins the one outer restore budget.
-    yield { workUnits: 1 };
-    const request = owner.capture('add', record);
-    yield* owner.execute(request, { analyze });
-  }
-  return owner.root;
+  return yield* reconstructSource(data.records, configuration, check);
 }
 
 function* restoreCursor(engine: Raveldex, root: IndexRoot, encoded: string, maximum: number, publish: (root: IndexRoot) => void, check: (phase?: string) => void): Generator<WorkStep, SnapshotRestoreResult> {

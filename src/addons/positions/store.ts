@@ -1,4 +1,6 @@
 import { workerIdentity } from '../../core/capabilities/worker-identity.js';
+import { registerBulkParticipant } from '../../core/capabilities/bulk-participant.js';
+import type { BulkParticipant } from '../../core/capabilities/bulk-participant.js';
 import { createAnalysis, requireAnalysis } from '../../core/analyzer/selected.js';
 import type { AnalysisRunner } from '../../core/analyzer/selected.js';
 import type { AddonRegistration, ParticipantContext } from '../../core/capabilities/types.js';
@@ -193,10 +195,46 @@ function* preparePositions(previous: unknown, context: ParticipantContext, field
   return Object.freeze({ ...old, revision: context.revision, records, retainedEntries, occurrenceCount, offsetCount, termEntries, termCodeUnits });
 }
 
+/** Same occurrence construction and bounds, with one add-only owned directory. */
+function bulkPositions(initial: unknown, fields: readonly string[]): BulkParticipant {
+  const old = requirePositionRoot(initial, fields[0]!, 0, (initial as PositionRoot)?.analyzer);
+  if (old.records.size !== 0 || [old.retainedEntries, old.occurrenceCount, old.offsetCount, old.termEntries, old.termCodeUnits].some(count => count !== 0)) invalid('INCOMPATIBLE_CAPABILITY', 'positions.bulk.initial');
+  const stage = new DirectoryStage(old.records, rawCharge);
+  let revision = 0, retainedEntries = 0, occurrenceCount = 0, offsetCount = 0, termEntries = 0, termCodeUnits = 0, sealed = false;
+  return Object.freeze({
+    *add(context: ParticipantContext): Generator<WorkStep, void> {
+      if (sealed) invalid('INTERNAL_ERROR', 'positions.bulk.sealed');
+      const analyze = requireAnalysis(context);
+      if (context.kind !== 'add' || context.records.length !== 1 || context.removedIds.length !== 0) invalid('INCOMPATIBLE_CAPABILITY', 'positions.bulk.add');
+      if (context.previousRevision !== revision || context.revision !== revision + 1 || !Number.isSafeInteger(context.revision)) invalid('REVISION_MISMATCH', 'positions.revision');
+      if (context.analyzer.id !== old.analyzer.id || context.analyzer.environmentProfile !== old.analyzer.environmentProfile) invalid('INCOMPATIBLE_CAPABILITY', 'phrases.positions.analyzer');
+      const record = context.records[0]!;
+      yield rawCharge(record.id.length + 1);
+      if (stage.get(record.id)) invalid('INCOMPATIBLE_CAPABILITY', 'positions.record');
+      const next = yield* retainRecord(record, old, analyze);
+      retainedEntries += next.retainedEntries; occurrenceCount += next.occurrenceCount; offsetCount += next.offsetCount;
+      termEntries += next.termEntries; termCodeUnits += next.termCodeUnits;
+      bound(retainedEntries, old.maxRetainedEntries, 'positions.retainedEntries');
+      bound(occurrenceCount, old.maxOccurrences, 'positions.occurrences');
+      bound(termCodeUnits, old.maxTermCodeUnits, 'positions.termCodeUnits');
+      if ([retainedEntries, occurrenceCount, offsetCount, termEntries, termCodeUnits].some(count => !finiteCount(count))) invalid('INCOMPATIBLE_CAPABILITY', 'positions.counts');
+      yield* stage.set(record.id, next);
+      revision = context.revision;
+    },
+    *finish(finalRevision: number): Generator<WorkStep, PositionRoot> {
+      if (sealed) invalid('INTERNAL_ERROR', 'positions.bulk.sealed');
+      if (finalRevision !== revision || !Number.isSafeInteger(finalRevision)) invalid('REVISION_MISMATCH', 'positions.revision');
+      sealed = true;
+      const records = yield* stage.finish();
+      return Object.freeze({ ...old, revision, records, retainedEntries, occurrenceCount, offsetCount, termEntries, termCodeUnits });
+    },
+  });
+}
+
 /** Explicit selected-field token occurrences; original spans opt in per field. */
 export function createPositionProvider(options: PositionProviderOptions): AddonRegistration {
   const captured = capturePositionOptions(options, true);
-  return Object.freeze({
+  const registration: AddonRegistration = Object.freeze({
     manifest: Object.freeze({
       id: captured.id, version: '0.0.0', contractVersion: 1,
       roles: Object.freeze(['transaction-participant'] as const),
@@ -213,4 +251,5 @@ export function createPositionProvider(options: PositionProviderOptions): AddonR
       prepare: (previous: unknown, context: ParticipantContext): Generator<WorkStep, PositionRoot> => preparePositions(previous, context, captured.fields),
     }),
   });
+  return registerBulkParticipant(registration, initial => bulkPositions(initial, captured.fields));
 }

@@ -67,7 +67,7 @@ test('restore phases account actual emitted work; malformed/cancelled operations
   const encoded = await createSnapshots(normal).exportSource();
   const observed = await collectDiagnostics(() => snapshots.createSnapshots(patched).restore(encoded));
   assert.equal(observed.error, undefined); assert.equal(observed.result.reindexed, true);
-  assert.deepEqual(Object.keys(observed.counters.restorePhases), ['snapshot.decode', 'snapshot.integrity', 'snapshot.compatibility', 'snapshot.staging', 'snapshot.precommit']);
+  assert.deepEqual(Object.keys(observed.counters.restorePhases), ['snapshot.decode', 'snapshot.integrity', 'snapshot.compatibility', 'snapshot.staging', 'snapshot.source.admission', 'snapshot.source.analysis', 'snapshot.source.core', 'snapshot.source.participant', 'snapshot.source.finalization', 'snapshot.source.participant-finalization', 'snapshot.precommit']);
   assert.equal(Object.values(observed.counters.restorePhases).reduce((sum, row) => sum + row.emittedWorkUnits, 0), observed.counters.emittedWorkUnits);
   assert.ok(observed.counters.restorePhases['snapshot.decode'].emittedWorkUnits > 0);
   assert.ok(observed.counters.restorePhases['snapshot.staging'].emittedWorkUnits > 0);
