@@ -1,0 +1,55 @@
+✔ real Node continuations run after microtasks and allow a previously registered timer to progress (3.682666ms)
+✔ timer-only fallback captures handles, remains asynchronous and cancels exact owned work (0.78875ms)
+✔ browser-like message continuations suppress cancelled/stale messages and release both ports on disposal (0.326875ms)
+✔ message cleanup failures still close the second port and preserve the callback outcome (0.470875ms)
+✔ failed message listener installation closes both partial ports and executes timer fallback once (0.250167ms)
+✔ engine resumes use the captured continuation seam while deadlines and legacy hosts retain timer semantics (4.490417ms)
+✔ abort, deadline and disposal retire active/queued continuation handles without allowing stale publication (1.005125ms)
+✔ continuation scheduling failures reject atomically and later FIFO work can recover (0.449208ms)
+✔ deadline cleanup reentry cannot revoke an already committed response (0.354292ms)
+✔ factory validation throws synchronously; ordinary operational failures reject promises (4.71775ms)
+✔ every operation converts validation failures without changing state or running getters (1.775667ms)
+✔ already aborted and disposed calls skip caller data, queue slots and host handles (0.3165ms)
+✔ search, batch and removal options share each call admission counter (0.677959ms)
+✔ zero queue capacity still accepts an idle operation and rejects concurrent waiting calls (0.825208ms)
+✔ default queue keeps 32 FIFO waiters, rejects the 33rd and never supersedes a search (3.351333ms)
+✔ FIFO selects revisions and conflicts at start; a failed operation preserves the next read (0.719333ms)
+✔ admission owns nested record/query/options and removal inputs before a queued call returns (1.0495ms)
+✔ queued abort removes its listener/timer and immediately frees a bounded queue slot (1.008834ms)
+✔ deadline starts at admission; an expired queue entry releases its slot before active work completes (0.53675ms)
+✔ delayed timer delivery cannot allow an expired operation to execute successfully (0.21475ms)
+✔ silent queued abort is rechecked when its operation starts (0.279625ms)
+✔ active search cancellation closes owned work at different host opportunities and preserves later recovery (16.097916ms)
+✔ active mutation cancellation unwinds participant staging and keeps the previous coherent root (0.399042ms)
+✔ no-op operations still perform final cancellation/deadline checks (0.295125ms)
+✔ abort in participant finalization is observed before publication even below one whole work quantum (0.15175ms)
+✔ every precommit signal read preserves disposal and an observed abort event even if its getter returns false (9.156042ms)
+✔ a committed response keeps its actual revision after late abort, a newer write and disposal (0.315542ms)
+✔ dispose immediately rejects active/queued work, unregisters resources and shares one promise (0.132292ms)
+✔ disposal requested inside active trusted preparation waits for unwinding and prevents commit (0.152292ms)
+✔ participant failures and throwing abandonment cleanup preserve the original typed outcome and permit reuse (0.350541ms)
+✔ unknown participant failures become sanitized rejections and release all scheduling resources (0.188417ms)
+✔ host timer/continuation and signal-registration failures reject safely and permit later operations (0.396333ms)
+✔ search and addMany retain one work budget across analysis, selection, records and participants (1.925459ms)
+✔ visible stop precedence is disposed, caller abort, deadline, work; a settled first error is retained (0.200833ms)
+✔ late malformed content rejects the whole queued batch after charged work and preserves later reads (0.179625ms)
+✔ four task yield quanta preserve full source-oracle membership, pages, order and BM25 after queued mutations (240.065625ms)
+✔ query stop checks run inside dictionary, postings, analysis, evaluation, scoring, selection and final result (2.967375ms)
+✔ every search and replacement yield can abort and recover with identical published state (10.960167ms)
+ℹ Exhaustive cancellation positions: 57
+ℹ Exhaustive cancellation positions: 107
+✔ actual direct factory yields to host timers during complete common-term search and atomic staging (681.738542ms)
+✔ captured direct host eighth timer composes with queued abort-first, queued-stop-first, slot recovery and stale callbacks (5.480833ms)
+✔ captured direct host eighth timer composes with queued deadline-first, queued-stop-first, slot recovery and stale callbacks (0.606041ms)
+✔ captured direct host eighth timer composes with queued abort-first, continuation-first, slot recovery and stale callbacks (0.588125ms)
+✔ captured direct host eighth timer composes with queued deadline-first, continuation-first, slot recovery and stale callbacks (0.562ms)
+✔ actual Node captured handles traverse eighth timer turns, abort suspended work and recover without stranded ownership (69.748125ms)
+ℹ {"kind":"rx9002-actual-node-continuation-observation","node":"v24.21.0","observedTaskSources":["external-timer","immediate","zero-timer"],"externalTimerBeforeFirstContinuation":true,"nativeContinuationCallbacks":426,"zeroTimerCallbacks":53,"handlesAfterSettlement":0,"signalListenersAfterAbort":0,"scope":"Finite actual Node task/ownership observation; no latency, universal fairness, retained/peak heap or platform transfer claim."}
+ℹ tests 44
+ℹ suites 0
+ℹ pass 44
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 993.097959

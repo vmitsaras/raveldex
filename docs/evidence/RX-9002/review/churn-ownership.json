@@ -1,0 +1,50 @@
+{
+  "kind": "rx9002-independent-churn-ownership-review-v1",
+  "status": "Pass within reviewed scope",
+  "remainingActionableFindings": [],
+  "scope": "Independent source/test/evidence review; no production edits or new engine execution in this cross-review.",
+  "reviewedSourcePins": {
+    "test/core/n10-churn-hardening.test.mjs": "2a373dc994c92bdb29b1d7597b61e327243df71deb6ae4b57bcb877a57c7055b",
+    "test/core/n10-resource-ownership.test.mjs": "833e66f844281afd94a037f0ac9e6906ca374f082ce5ccc266d707a44ba989bb",
+    "test/oracle/query.mjs": "bfccdd9db9650ead172406e5fc75eb0e4baea1a7478c37fd3e06d3eb1bbea773",
+    "src/core/query/search.ts": "b5d1421c51f390424ca68769ac72d50ef835f911da3a3740013272392b9b0f5e",
+    "src/core/mutations/owner.ts": "dc55ef224db86b679e3db32456432e41c2032c3d8d28a2887aa32fb91f50e3f8",
+    "src/core/execution/engine.ts": "d1c39467af59a85df4d73db36aa957a781461a3e1c7b2831994be849c1a20bd4",
+    "src/adapters/snapshots/bulk.ts": "44cd2b60afda1b4292a278254ca317da8fe16f5b1830fd90541b5195617a5700"
+  },
+  "existingCommandLogsVerified": {
+    "churn": {
+      "tests": 33,
+      "pass": 33,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0
+    },
+    "ownership": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0
+    }
+  },
+  "newChurnCases": 3,
+  "newOwnershipCases": 1,
+  "sourceOracleIndependence": "test/oracle/query.mjs has no production imports and computes source tokens/statistics/Boolean participation/BM25 and ordering independently.",
+  "avlChecks": [
+    "frozen/cycle-free BST",
+    "independently computed height and balance",
+    "complete live-key set equals source-derived terms",
+    "live directory keys and per-term DF match independent source statistics"
+  ],
+  "lateFailureClarification": "Latest queued case distinguishes late ID_EXISTS validation from actual private core-sealing cancellation; src/core/mutations/owner.ts:125 reaches core after contributions are staged.",
+  "ownershipScope": "Eight repeated source/positions cycles verify deterministic tasks/listeners/authoritative root and host-dispose ownership; no GC/retained-heap inference.",
+  "testReplay": "Not rerun in this cross-review while parent browser work was active; existing recorded focused33/33 and resource1/1 logs/source hashes verified.",
+  "limits": [
+    "No universal composition or native-snapshot/opaque-callback integration coverage follows.",
+    "Resource-cycle test preserves root/sidecar identities and source roundtrips but does not independently reconstruct every position-sidecar element.",
+    "Owned task/listener/root counts and source ownership inspection do not prove garbage-collection timing or retained/peak heap."
+  ]
+}

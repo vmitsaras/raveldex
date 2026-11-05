@@ -1,0 +1,1102 @@
+{
+  "kind": "rx9001-semantic-pilot-v1",
+  "startedAt": "2026-11-04T21:58:10.274Z",
+  "artifactManifestSha256": "a97b25336b90919a0eedc684dff5584c40c7c599cca22bc6b9649b43d5f9b594",
+  "harness": [
+    {
+      "path": "docs/evidence/RX-9001/pilot-semantic.mjs",
+      "sha256": "6f972126a36bcbb35ce0e485be419976ac6e2e2d80de1bea64e512fa56e55b30"
+    },
+    {
+      "path": "docs/evaluation/RX-9001-method.json",
+      "sha256": "ec288cc5a1fc8db0d2551c47055dbb2b492025bae414dbb5df68becd7fc0c8c8"
+    },
+    {
+      "path": "docs/evaluation/RX-9001-method.md",
+      "sha256": "e777fc784ef2e076b2ef4f5a85338da8b15b60b161ab0f69bb582affd6b2a292"
+    },
+    {
+      "path": "bench/n9/paired-semantics.mjs",
+      "sha256": "6b3cd4742dbe6655b74b8b8967d042c328d68fd45a32c60809f11676fd904262"
+    },
+    {
+      "path": "bench/n9/paired-verify.mjs",
+      "sha256": "c7107ad06752f23bc4c03b1730116f41b2f0362163f1a928cd11a0c37ed91b6e"
+    },
+    {
+      "path": "bench/n9/bulk-verify.mjs",
+      "sha256": "1df3ddfa1a374607128565e3f8c38696b8eca23ae2843b8017939e11dd39f1fd"
+    },
+    {
+      "path": "bench/n9/workloads.mjs",
+      "sha256": "0924363c913694c203847ad78d9c6ea1e93647de5326f5f8d45bda6441b89c72"
+    },
+    {
+      "path": "bench/n9/paired-node.mjs",
+      "sha256": "3384b5b9cb23cee67903a78ed6d069199e8a526c8a685a94aec339bbabb2bf64"
+    },
+    {
+      "path": "bench/n9/run.mjs",
+      "sha256": "4b5deb832234dcb265362e34db1a0426997944ae2d2e812633249d3a900ea90a"
+    },
+    {
+      "path": "bench/n10/run.mjs",
+      "sha256": "9fec426a92cc224cc49712512f2b2c0a374444763823a0178512a27b3d110611"
+    },
+    {
+      "path": "bench/n10/contract.mjs",
+      "sha256": "e2ece7509fbea2225d366b79f0e7348e24aecf9c157c78530b20e2f22a1c161c"
+    },
+    {
+      "path": "bench/n10/child.mjs",
+      "sha256": "f5421a9613802d689bf26d38b49bd9737c6ccf0ac39a1994ef238843b6ac9a91"
+    },
+    {
+      "path": "test/fixtures/snapshots/records.mjs",
+      "sha256": "b40cb650a4455b0551694d2cbee1a226faa8321df43a5069ad784b0bbf54eabb"
+    },
+    {
+      "path": "test/fixtures/n9/freeze.json",
+      "sha256": "3650c1e754c6756de9d1aee0de297e8d64670c3eaa5f409592e107b21e5a6ad0"
+    },
+    {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db"
+    }
+  ],
+  "identity": {
+    "version": "rx8002-workloads-v1",
+    "family": "adversarial",
+    "size": 100,
+    "model": {
+      "analyzer": {
+        "id": "basic-v1",
+        "environmentProfile": "unqualified"
+      },
+      "ranking": "raveldex-bm25-v1",
+      "k1": 1.2,
+      "b": 0.75,
+      "work": "work-v1"
+    },
+    "source": {
+      "path": "test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db",
+      "logicalHash": "8ba88f8c4610a83ee3dcf453ce2434c16e6d2f3af070590f2e220c7bec28244b",
+      "sections": 34,
+      "method": "Cycle 34 frozen technical-document sections; retain heading plus a whitespace-bounded excerpt at most 512 UTF-16 code units. Repetitions are labeled and are not independent real documents.",
+      "limits": "Single English technical self-documentation corpus, repeated excerpts and deterministic synthetic lexical controls; no representative traffic or relevance-quality claim."
+    },
+    "schemaSha256": "08d81c31b40a4fecb0d3f24ab9fd75edd41dfffc0b87f822a1a410836f2ea5f0",
+    "corpusSha256": "8ba8718059fb9b81777b1cdae185664aff8d776c3201ca73acf54d0c057fa538",
+    "labelsSha256": "c63e9a2ed2fc874b73ddc06c5d7494b48f60870fbf0a5f38836c8a7ed67c8538",
+    "queriesSha256": "620a9f2951d685f6bf58559819a93bfa10ec52fa0d1f08d7dd5acfb78ad8c7a4",
+    "judgmentsSha256": "4a73dc3c6ef404c7000bd5349a2be0171560c5dc6ef711ecbafb317885af471b",
+    "dictionaryTerms": 307,
+    "judgmentCounts": {
+      "common": 100,
+      "rare": 1,
+      "overlapping-or": 35,
+      "negative-only": 99,
+      "filtered": 20,
+      "narrow-prefix": 10,
+      "broad-prefix-refusal": 100,
+      "source-phrase": 34
+    }
+  },
+  "runs": [
+    {
+      "role": "preN9",
+      "command": [
+        "/opt/homebrew/Cellar/node@24/24.21.0/bin/node",
+        "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/paired-semantics.mjs",
+        "--child",
+        "/private/tmp/raveldex-rx9001-20261104/consumers-final/preN9",
+        "preN9",
+        "adversarial",
+        "100",
+        "/tmp/raveldex-rx9001-20261104/semantic-attempt1/preN9.json"
+      ],
+      "exitCode": 0,
+      "output": "preN9.json",
+      "archiveSha256": "3f4f31eb03951f13366256dd019710f0bd5c58b29d7ae687d8a96f0ea5ecec11",
+      "fullQueryCaptures": 8,
+      "arithmeticAssertions": 162,
+      "fixtureKinds": [
+        "source",
+        "positions",
+        "offsets",
+        "mixed"
+      ],
+      "packageUnchanged": true
+    },
+    {
+      "role": "acceptedN9",
+      "command": [
+        "/opt/homebrew/Cellar/node@24/24.21.0/bin/node",
+        "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/paired-semantics.mjs",
+        "--child",
+        "/private/tmp/raveldex-rx9001-20261104/consumers-final/acceptedN9",
+        "acceptedN9",
+        "adversarial",
+        "100",
+        "/tmp/raveldex-rx9001-20261104/semantic-attempt1/acceptedN9.json"
+      ],
+      "exitCode": 0,
+      "output": "acceptedN9.json",
+      "archiveSha256": "1d7dab63dbbd9bee7dd67394dd6893c227711caad471d448a02e704c91225fbe",
+      "fullQueryCaptures": 8,
+      "arithmeticAssertions": 162,
+      "fixtureKinds": [
+        "source",
+        "positions",
+        "offsets",
+        "mixed"
+      ],
+      "packageUnchanged": true
+    },
+    {
+      "role": "current",
+      "command": [
+        "/opt/homebrew/Cellar/node@24/24.21.0/bin/node",
+        "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/paired-semantics.mjs",
+        "--child",
+        "/private/tmp/raveldex-rx9001-20261104/consumers-final/current",
+        "current",
+        "adversarial",
+        "100",
+        "/tmp/raveldex-rx9001-20261104/semantic-attempt1/current.json"
+      ],
+      "exitCode": 0,
+      "output": "current.json",
+      "archiveSha256": "e562633424a3b6b37692d5c1a21bfeadb3b399dc6fff2ba9d33aba87f98b96b6",
+      "fullQueryCaptures": 8,
+      "arithmeticAssertions": 162,
+      "fixtureKinds": [
+        "source",
+        "positions",
+        "offsets",
+        "mixed"
+      ],
+      "packageUnchanged": true
+    }
+  ],
+  "comparisons": [
+    {
+      "before": "preN9",
+      "after": "acceptedN9",
+      "core": "Pass",
+      "queries": [
+        {
+          "id": "common",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 100,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "rare",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 1,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "overlapping-or",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 35,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "negative-only",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 99,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "filtered",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 20,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "narrow-prefix",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 10,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "broad-prefix-refusal",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-error",
+            "outcome": "Refused",
+            "stateParityVerified": false,
+            "completeMembershipVerified": false,
+            "beforePages": 0,
+            "afterPages": 0,
+            "comparisons": []
+          }
+        },
+        {
+          "id": "source-phrase",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 34,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        }
+      ],
+      "selected": [
+        {
+          "id": "common",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 36922,
+              "after": 36927
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "rare",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 9022,
+              "after": 1848
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "overlapping-or",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 28098,
+              "after": 21522
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "negative-only",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 17600,
+              "after": 17604
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "filtered",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 31368,
+              "after": 31379
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "narrow-prefix",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 31146,
+              "after": 19393
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "broad-prefix-refusal",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-error",
+            "outcome": "Refused",
+            "stateParityVerified": false
+          }
+        },
+        {
+          "id": "source-phrase",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 68821,
+              "after": 70824
+            },
+            "stateParityVerified": true
+          }
+        }
+      ]
+    },
+    {
+      "before": "preN9",
+      "after": "current",
+      "core": "Pass",
+      "queries": [
+        {
+          "id": "common",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 100,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "rare",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 1,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "overlapping-or",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 35,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "negative-only",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 99,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "filtered",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 20,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "narrow-prefix",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 10,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "broad-prefix-refusal",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-error",
+            "outcome": "Refused",
+            "stateParityVerified": false,
+            "completeMembershipVerified": false,
+            "beforePages": 0,
+            "afterPages": 0,
+            "comparisons": []
+          }
+        },
+        {
+          "id": "source-phrase",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 34,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        }
+      ],
+      "selected": [
+        {
+          "id": "common",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 36922,
+              "after": 36927
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "rare",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 9022,
+              "after": 1848
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "overlapping-or",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 28098,
+              "after": 21522
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "negative-only",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 17600,
+              "after": 17604
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "filtered",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 31368,
+              "after": 31379
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "narrow-prefix",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 31146,
+              "after": 19393
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "broad-prefix-refusal",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-error",
+            "outcome": "Refused",
+            "stateParityVerified": false
+          }
+        },
+        {
+          "id": "source-phrase",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 68821,
+              "after": 70824
+            },
+            "stateParityVerified": true
+          }
+        }
+      ]
+    },
+    {
+      "before": "acceptedN9",
+      "after": "current",
+      "core": "Pass",
+      "queries": [
+        {
+          "id": "common",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 100,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "rare",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 1,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "overlapping-or",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 35,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "negative-only",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 99,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "filtered",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 20,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "narrow-prefix",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 10,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "broad-prefix-refusal",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-error",
+            "outcome": "Refused",
+            "stateParityVerified": false,
+            "completeMembershipVerified": false,
+            "beforePages": 0,
+            "afterPages": 0,
+            "comparisons": []
+          }
+        },
+        {
+          "id": "source-phrase",
+          "comparison": {
+            "status": "Pass",
+            "kind": "complete-result-parity",
+            "completeMembershipVerified": true,
+            "pages": 1,
+            "records": 34,
+            "comparisons": [
+              {
+                "status": "Pass",
+                "kind": "equal-result",
+                "normalized": [
+                  "inspector.resources.searchWorkUnits"
+                ],
+                "inspectorWork": {
+                  "before": null,
+                  "after": null
+                },
+                "stateParityVerified": true
+              }
+            ]
+          }
+        }
+      ],
+      "selected": [
+        {
+          "id": "common",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 36927,
+              "after": 36927
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "rare",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 1848,
+              "after": 1848
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "overlapping-or",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 21522,
+              "after": 21522
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "negative-only",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 17604,
+              "after": 17604
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "filtered",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 31379,
+              "after": 31379
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "narrow-prefix",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 19393,
+              "after": 19393
+            },
+            "stateParityVerified": true
+          }
+        },
+        {
+          "id": "broad-prefix-refusal",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-error",
+            "outcome": "Refused",
+            "stateParityVerified": false
+          }
+        },
+        {
+          "id": "source-phrase",
+          "comparison": {
+            "status": "Pass",
+            "kind": "equal-result",
+            "normalized": [
+              "inspector.resources.searchWorkUnits"
+            ],
+            "inspectorWork": {
+              "before": 70824,
+              "after": 70824
+            },
+            "stateParityVerified": true
+          }
+        }
+      ]
+    }
+  ],
+  "outcome": "Pass",
+  "acceptedPerformanceEvidence": false,
+  "scope": "Separate unchanged N9 semantic child: private zero-clock controlled host, explicit 60000ms untimed verification. Full pages, Inspector arithmetic and fixtures; no real-host deadline or latency claim.",
+  "timedCapturesLinked": 240,
+  "finishedAt": "2026-11-04T21:58:11.185Z"
+}

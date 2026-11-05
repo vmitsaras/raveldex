@@ -1,0 +1,38 @@
+{
+  "kind": "rx9003-artifact-audit-attempts-v1",
+  "attempts": [
+    {
+      "command": [
+        "python3",
+        "docs/evidence/RX-9003/identity/audit.py"
+      ],
+      "exitCode": 1,
+      "classification": "audit fixture path mistake",
+      "failure": "Initial audit used nonexistent docs/evidence/RX-9001/verification/verified-core.tar.gz, then attempted nonexistent validation.json. Actual predecessor archive is closing-core.tar.gz.",
+      "exception": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9001/verification/validation.json'",
+      "effect": "No production, retained artifact or method mutation; no candidate or engine failure. Corrected local audit path from actual inventory."
+    },
+    {
+      "command": [
+        "python3",
+        "docs/evidence/RX-9003/identity/audit.py"
+      ],
+      "exitCode": 0,
+      "classification": "corrected retained artifact/source audit",
+      "result": "Pass; initial-audit.json records successful final version including predecessor raw verification and regression pin checks."
+    },
+    {
+      "command": [
+        "python3",
+        "docs/evidence/RX-9003/identity/audit.py",
+        "--candidate",
+        "docs/evidence/RX-9003/verification/verified-core.tar.gz",
+        "--consumer",
+        "/tmp/raveldex-rx9003-20261105/verification/candidate/consumer/node_modules/@vmitsaras/raveldex"
+      ],
+      "exitCode": 0,
+      "classification": "fresh prepared archive and installed-member audit",
+      "result": "Pass; audit.json, inventory.json and final-output.txt record exact fresh RX-9003 package/archive/source equivalence."
+    }
+  ]
+}

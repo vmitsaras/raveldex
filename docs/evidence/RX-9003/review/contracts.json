@@ -1,0 +1,55 @@
+{
+  "kind": "rx9003-independent-contract-review-v1",
+  "status": "Pass within reviewed source and retained-observation scope",
+  "date": "2026-11-05",
+  "findings": [],
+  "runtimeRepairsRequired": [],
+  "reviewedFiles": {
+    "test/core/n10-continuation-hardening.test.mjs": "2c19a0b458e6c745da66809a5efd6d914ddddd5fdc5e675b391e3a438907c3fa",
+    "test/core/n10-churn-hardening.test.mjs": "2a373dc994c92bdb29b1d7597b61e327243df71deb6ae4b57bcb877a57c7055b",
+    "test/core/n10-resource-ownership.test.mjs": "833e66f844281afd94a037f0ac9e6906ca374f082ce5ccc266d707a44ba989bb",
+    "test/adapters/indexeddb/n10-bulk-recovery.test.mjs": "55326e560926319888cd174249b61fc69ef36997481939624c1e072894038143",
+    "test/oracle/query.mjs": "bfccdd9db9650ead172406e5fc75eb0e4baea1a7478c37fd3e06d3eb1bbea773",
+    "test/adapters/indexeddb/fixture-entry.mjs": "b3fa932c9c1cc150b2885e15a0282b2fa1ce027ab3a6e36580db9226eb054510",
+    "test/fixtures/indexeddb/records.mjs": "0870d93403006b728963b8dd0322eb8791b22c9e99c40e7c86c5c9880817b9dd",
+    "src/core/execution/engine.ts": "d1c39467af59a85df4d73db36aa957a781461a3e1c7b2831994be849c1a20bd4",
+    "src/core/execution/host.ts": "83ec696299b37ed6536d7525a7ac40a70d20e418b2c5363b9bba7cf552c73fa2",
+    "src/core/query/search.ts": "b5d1421c51f390424ca68769ac72d50ef835f911da3a3740013272392b9b0f5e",
+    "src/core/ranking/bm25.ts": "ecaee1742ee84dc76aba3f23bf1391c6ad36bb66fd1ecfb7a18405a7c158bb2f",
+    "src/core/index/invariants.ts": "8ec52d75429f123ac315476d49fb2ef941690fa241357f33377053760f88eb82",
+    "src/adapters/snapshots/bulk.ts": "44cd2b60afda1b4292a278254ca317da8fe16f5b1830fd90541b5195617a5700",
+    "src/adapters/snapshots/snapshots.ts": "2084e2bfd681e0a010e79cbd2d5ab27cf219b05a7bc646992799f162ee0b8c75",
+    "src/adapters/worker/snapshots.ts": "a9942658b38e6ab86355cd8e1c3961fb5030909a39b2096ac97a39ddc6ce5ba6",
+    "src/adapters/worker/client.ts": "eab4076dcfebbb6b0434b057ac10bbd9b6f4756eedf5565b0101475fdb8de686",
+    "src/adapters/worker/host.ts": "b6404d6dfa20f4a3296c4f85faa2ccf413f7703dd6e4e98d98180668436907ee",
+    "src/adapters/indexeddb/persistence.ts": "2ed037ac4ffd7c4b72561d6bb178e3947047fa9d6010227fe7e954de202fad29"
+  },
+  "retainedEvidence": {
+    "docs/evidence/RX-9002/observations.json": "6a5a14c90adb6512a998e86212ae78c4c4ed3c1a725d927b84174cd3fd9e49cb",
+    "docs/evidence/RX-9002/continuations/results.json": "7516aac820a96294ac6356d2673a233e5eb83706de9ebc6e51b171bb762f5d9e",
+    "docs/evidence/RX-9002/churn/results.json": "db906949ad71f8c95ede0584ade54816d7db9cb35d98a7a52eea214f48a7e017",
+    "docs/evidence/RX-9002/ownership/result.json": "c292b32f2b8b32c0a5b0720f263d462d65c28857d8ac89e120b8ca48bf1d3015",
+    "docs/evidence/RX-9002/bulk/result.json": "c27ab38541db513692d3082e42a62af6e31c7d7d3585ab157d2ea43ae69748db",
+    "docs/evidence/RX-9002/bulk/browser-report.json": "b34413036ea5d8d6b5c5e5345415094347eacb95d2618ddf341b7804550b7b18",
+    "docs/evidence/RX-9002/verification/validation.json": "e3e696857c77f310e4ddb867f7d4bf7d3e80532284bf7e81c1746a2207f35867"
+  },
+  "directReadback": {
+    "rx9002TestsMatchRecordedPins": 4,
+    "actualBrowserCasesPassing": 4,
+    "completeFixtureComparisons": 435,
+    "independentRawBm25ScoresReplayed": 88,
+    "ambiguousRestoreAttemptsEach": 1,
+    "beforeHostReceipt": "expired (not proof of rollback)",
+    "afterCommitReceipt": "committed, revision 2"
+  },
+  "reviewerExecution": "Source inspection, retained-result/hash readback and independent Python arithmetic only; no tests/builds/browser/benchmark collectors rerun by reviewer. Parent owns fresh full candidate checks.",
+  "limitations": [
+    "No universal absence-of-defect claim",
+    "No GC/retained/peak heap, physical responsiveness or universal scheduler fairness",
+    "Native Safari/Firefox and human AT not observed",
+    "Bulk observer copy is diagnostic and cannot supply ordinary timing",
+    "Fixture revision normalization is not arbitrary-metadata equivalence",
+    "Eight resource cycles do not reconstruct every position-sidecar element independently",
+    "Fresh full candidate gate is parent-owned and must pass before AC03 complete"
+  ]
+}

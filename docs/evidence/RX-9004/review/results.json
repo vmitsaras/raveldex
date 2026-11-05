@@ -1,0 +1,127 @@
+{
+  "kind": "rx9004-independent-results-review-v1",
+  "status": "Pass within selected Node/raw semantic scope",
+  "reviewedAt": "2026-11-05T10:21:35.421810+00:00",
+  "sourcePins": [
+    {
+      "path": "docs/evaluation/RX-9004.md",
+      "bytes": 8731,
+      "sha256": "ac1c7eb8c7fe12408f3c21f521c4c6d61949bc355eaeb81b918f195fa8fafeb9"
+    },
+    {
+      "path": "docs/evidence/RX-9004/analysis/results.json",
+      "bytes": 4646434,
+      "sha256": "adaaf7e2b823eecadc05de38a8fc35bf13b470ee4382d054e4eaf42a4d3f9e4e"
+    },
+    {
+      "path": "docs/evidence/RX-9004/analysis/comparisons.csv",
+      "bytes": 565786,
+      "sha256": "f7b5e9385539a03378752c7a9238be2f528292890685a74a688f9581315a993b"
+    },
+    {
+      "path": "docs/evidence/RX-9004/analysis/summarize.py",
+      "bytes": 7205,
+      "sha256": "126da20d8244e919743bbbf4c38a0c8f19a47f3d57aac36abcbdbe6394c5c0af"
+    },
+    {
+      "path": "docs/evidence/RX-9004/identity/artifacts.json",
+      "bytes": 352909,
+      "sha256": "9ce9cd6955eed493de332721d86f1197824d6a07809eb55e1d788b34e04c9e70"
+    },
+    {
+      "path": "docs/evidence/RX-9004/semantic/freeze.json",
+      "bytes": 2628,
+      "sha256": "8afce22a472d6f0710b5a8903b06773cfd17b63a4c3a5eb9955edf804b82c1f7"
+    },
+    {
+      "path": "docs/evidence/RX-9004/semantic/run.mjs",
+      "bytes": 14837,
+      "sha256": "e7c4afa2e55e48467fb8cc54d173b5e25be3dec206e39fa5f2d1749b82b42b24"
+    },
+    {
+      "path": "docs/evidence/RX-9004/semantic/oracle.mjs",
+      "bytes": 5488,
+      "sha256": "d1478da311a555df8d93d8521ff9c8e402e7fd6050aa913834fc06d41c94ec78"
+    },
+    {
+      "path": "docs/evidence/RX-9004/semantic/negative-results.json",
+      "bytes": 9092,
+      "sha256": "537ee7b4923cadc5f591481fc45cae083d07f5a0b56f51681d8fb46287d4bf34"
+    },
+    {
+      "path": "test/fixtures/relevance/corpus.json",
+      "bytes": 112401,
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db"
+    },
+    {
+      "path": "docs/evidence/RX-9004/review/reconstruct.py",
+      "bytes": 10373,
+      "sha256": "a9913bfa6a514f7af561d85b38066e273587c7e7711acbb56e9b9735c64964db"
+    },
+    {
+      "path": "docs/evidence/RX-9004/review/reconstruction.json",
+      "bytes": 2745945,
+      "sha256": "6fe37064c3c124bac6d68056dd8a9b5601f524889bd179753fcec92467c1a5f3"
+    },
+    {
+      "path": "docs/evidence/RX-9004/review/compare-parent.py",
+      "bytes": 4994,
+      "sha256": "60a662198e2292698f32d071f4132030eb26b70cd04da9d3071e3647ec98f6a3"
+    },
+    {
+      "path": "docs/evidence/RX-9004/review/parent-analysis.json",
+      "bytes": 42754,
+      "sha256": "5a70c570488161f14d8eb01ec65b7c0cb6624795e82a3abe4879ce66b614b872"
+    },
+    {
+      "path": "docs/evidence/RX-9004/review/semantic-replay.py",
+      "bytes": 10790,
+      "sha256": "9103026eafe15ebb03f7ecf30dfe7fd503c355891345c2670a544ac904f701ff"
+    },
+    {
+      "path": "docs/evidence/RX-9004/review/semantic-replay.json",
+      "bytes": 9494,
+      "sha256": "7f624aadfbd8ca8408ff17ae5c8c9caa444b5b7cb616a32cb472cd77f2868f4f"
+    }
+  ],
+  "rawReconstruction": "reconstruction.json",
+  "parentCellComparison": "parent-analysis.json",
+  "pythonSemanticReplay": "semantic-replay.json",
+  "semanticStaticReviewedPinsUnchanged": true,
+  "analysisStaticPinChange": "CSV writer adds sameRuntimeControl column; current source reread and all2258CSV rows verified against independently reconstructed unchanged numerical JSON. No actual collector or semantic method changed.",
+  "csvRowsIndependentlyCompared": 2258,
+  "blockingFindings": [],
+  "counts": {
+    "actualChildren": 216,
+    "normalQueries": 13536,
+    "diagnosticQueries": 432,
+    "warmups": 576,
+    "summaryCells": 930,
+    "pairedCells": 620,
+    "successfulP95Cells": 84,
+    "refusedCostP95Cells": 12,
+    "semanticChildren": 27,
+    "timedCapturesLinked": 13968,
+    "fullPageScores": 267042,
+    "timedScores": 197040
+  },
+  "interpretation": {
+    "preCurrentWallObservedFaster": 272,
+    "preCurrentCpuTotalObservedFaster": 194,
+    "preCurrentCpuTotalObservedSlower": 6,
+    "preCurrentCpuTotalOverlap": 72,
+    "capacityImprovedCells": 2,
+    "noSuccessfulLatencyCells": 36,
+    "sameRuntimeWallFaster": 8,
+    "sameRuntimeWallSlower": 8,
+    "sameRuntimeWallOverlap": 258,
+    "overallWeightedWinner": "Not claimed"
+  },
+  "limitations": [
+    "Read-only actual raw/source/artifact computations; no new engine/build/test/collector/install/network execution by reviewer",
+    "Full project/private-candidate and final documentation/diff gates remain parent-owned",
+    "No browser/worker, new update distributions, retained/peak heap, universal fairness, physical input/paint, representative traffic or population confidence interval claim",
+    "Additional Python source replay does not independently reconstruct every element in optional fixture position/facet data"
+  ],
+  "reviewAttempt": "Earlier evidence assembly conservatively required every static-review pin, including post-timing analysis CSV script, to be unchanged. It stopped on that expected analysis-only change. No runtime/collector failure; reviewed actual CSV change and every row explicitly before accepting."
+}

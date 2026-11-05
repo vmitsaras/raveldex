@@ -2417,7 +2417,7 @@ Consolidate measured differences, reproducibility, safe capacity/latency guidanc
 
 **Freeze post-N9 artifacts and a validated comparison method**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9001%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9001%22)
 
 **Dependencies:** [RX-8011](IMPLEMENTATION_TASKS.md#rx-8011)
 
@@ -2446,14 +2446,19 @@ Pin the before-N9/current/control artifacts and complete finite workload, host, 
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9001.md](docs/evidence/RX-9001.md)
+- [docs/evidence/RX-9001/identity/artifacts.json](docs/evidence/RX-9001/identity/artifacts.json)
+- [docs/evidence/RX-9001/method-freeze.json](docs/evidence/RX-9001/method-freeze.json)
+- [docs/evidence/RX-9001/pilot-acceptance.json](docs/evidence/RX-9001/pilot-acceptance.json)
+- [docs/evidence/RX-9001/review/method.md](docs/evidence/RX-9001/review/method.md)
+- [docs/evidence/RX-9001/verification/candidate-implementation.json](docs/evidence/RX-9001/verification/candidate-implementation.json)
 
 
 ## RX-9002
 
 **Audit combined lifecycle and recovery hardening coverage**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9002%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9002%22)
 
 **Dependencies:** [RX-9001](IMPLEMENTATION_TASKS.md#rx-9001)
 
@@ -2482,14 +2487,22 @@ Review the optimized paths in composition, reuse existing safety evidence and re
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9002.md](docs/evidence/RX-9002.md)
+- [docs/evidence/RX-9002/baseline.json](docs/evidence/RX-9002/baseline.json)
+- [docs/evidence/RX-9002/observations.json](docs/evidence/RX-9002/observations.json)
+- [docs/evidence/RX-9002/continuations/results.json](docs/evidence/RX-9002/continuations/results.json)
+- [docs/evidence/RX-9002/churn/results.json](docs/evidence/RX-9002/churn/results.json)
+- [docs/evidence/RX-9002/bulk/result.json](docs/evidence/RX-9002/bulk/result.json)
+- [docs/evidence/RX-9002/ownership/result.json](docs/evidence/RX-9002/ownership/result.json)
+- [docs/evidence/RX-9002/review/churn-ownership.md](docs/evidence/RX-9002/review/churn-ownership.md)
+- [docs/evidence/RX-9002/review/continuation-bulk.md](docs/evidence/RX-9002/review/continuation-bulk.md)
 
 
 ## RX-9003
 
 **Repair confirmed defects and verify the measurement candidate**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9003%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9003%22)
 
 **Dependencies:** [RX-9002](IMPLEMENTATION_TASKS.md#rx-9002)
 
@@ -2518,14 +2531,21 @@ Apply bounded fixes only to reproduced contract violations and establish a revie
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9003.md](docs/evidence/RX-9003.md)
+- [docs/evidence/RX-9003/baseline.json](docs/evidence/RX-9003/baseline.json)
+- [docs/evidence/RX-9003/verification/decision.json](docs/evidence/RX-9003/verification/decision.json)
+- [docs/evidence/RX-9003/verification/validation.json](docs/evidence/RX-9003/verification/validation.json)
+- [docs/evidence/RX-9003/verification/oracle.json](docs/evidence/RX-9003/verification/oracle.json)
+- [docs/evidence/RX-9003/review/contracts.md](docs/evidence/RX-9003/review/contracts.md)
+- [docs/evidence/RX-9003/identity/audit.json](docs/evidence/RX-9003/identity/audit.json)
+- [docs/evidence/RX-9003/identity/inventory.json](docs/evidence/RX-9003/identity/inventory.json)
 
 
 ## RX-9004
 
 **Measure matched native build and query performance**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9004%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9004%22)
 
 **Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
@@ -2554,7 +2574,18 @@ Recheck net before-N9-to-current performance on frozen native workloads while pr
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9004.md](docs/evidence/RX-9004.md)
+- [docs/evaluation/RX-9004.md](docs/evaluation/RX-9004.md)
+- [docs/evidence/RX-9004/identity/artifacts.json](docs/evidence/RX-9004/identity/artifacts.json)
+- [docs/evidence/RX-9004/identity/collection-freeze.json](docs/evidence/RX-9004/identity/collection-freeze.json)
+- [docs/evidence/RX-9004/full-01-inventory.json](docs/evidence/RX-9004/full-01-inventory.json)
+- [docs/evidence/RX-9004/semantic/report.json](docs/evidence/RX-9004/semantic/report.json)
+- [docs/evidence/RX-9004/semantic-01-inventory.json](docs/evidence/RX-9004/semantic-01-inventory.json)
+- [docs/evidence/RX-9004/analysis/results.json](docs/evidence/RX-9004/analysis/results.json)
+- [docs/evidence/RX-9004/review/results.json](docs/evidence/RX-9004/review/results.json)
+- [docs/evidence/RX-9004/review/semantic-replay.json](docs/evidence/RX-9004/review/semantic-replay.json)
+- [docs/evidence/RX-9004/verification/validation.json](docs/evidence/RX-9004/verification/validation.json)
+- [docs/evidence/RX-9004/verification/identity.json](docs/evidence/RX-9004/verification/identity.json)
 
 
 ## RX-9005

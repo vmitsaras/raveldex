@@ -1,5 +1,23 @@
 # N10 — Post-N9 hardening and performance review
 
+## RX-9004 execution checkpoint — 5 November 2026
+
+The [matched Node collection](../evidence/RX-9004.md) and [readout](../evaluation/RX-9004.md) pass full frozen coverage, 27-case semantic acceptance, independent Python source/arithmetic/core/timed-link replay and raw-distribution review. All 216 processes complete with 13,536 ordinary queries/432 diagnostics and unchanged source/artifact/environment guards. The 272 matched-success wall cells separate faster versus pre-N9 in these three-owner repeats; CPU has six observed regressions and 72 overlaps alongside 194 faster cells. All adverse cells/refusals/Not-run outcomes, same-runtime control variation and two source-restore capacity transitions remain explicit. No weighted overall winner or new post-N9 optimization is claimed.
+
+Fresh full project/private-candidate checks pass 1,344 tests (1,336 passed/eight intentional skips/zero failures or cancellations), and the verified archive stays byte-identical to RX-9003. Runtime/tests/dependencies and RX-9001 method files are unchanged. RX-9004 is complete locally; RX-9005 is next and RX-9006 is also ready. Collectors stay serial; updates, host/recovery/resource cohorts and RX-9007's combined verdict remain unrun. Work is uncommitted; no remote mutation or publication occurred. Frozen planning-time statements below retain their original scope.
+
+## RX-9003 execution checkpoint — 5 November 2026
+
+The [measurement-candidate gate](../evidence/RX-9003.md) passes on an unchanged runtime; no confirmed RX-9002 violation justified repair. Fresh full project/private-candidate checks pass 1,344 tests (1,336 passed/eight intentional skips/zero failures or cancellations), and the separate installed independent oracle passes. Independent contract and artifact reviews verify complete source/method/member identities, all 380 actual installed members and zero production differences versus reviewed current. The new private archive is byte-identical to RX-9001/RX-9002 verified archives. RX-9003 is complete locally; RX-9004 is next, and RX-9005/RX-9006 are also ready. Their collectors remain serial and unrun. Expired temporary consumers must be recreated from retained whole original archives with a fresh run manifest; the RX-9001 freeze stays immutable. Work remains uncommitted; no remote mutation or publication occurred.
+
+## RX-9002 execution checkpoint — 5 November 2026
+
+The [combined hardening audit](../evidence/RX-9002.md) and independent cross-reviews pass within the documented local scopes. Thirteen new composition regressions distinguish existing coverage from added cases and show no new runtime violation. Actual source/positions bulk dispatch is joined with worker reply loss and IndexedDB CAS; deterministic and real-host scheduling observations remain separate from performance and heap claims. RX-9002 is accepted locally: its closing repository/private-candidate gate also passes all 1,344 tests with 1,336 passed, eight explicit skips and zero failures/cancellations. The verified package remains byte-identical to RX-9001. RX-9003 is next and may verify an unchanged candidate; no speculative repair or full measurement is implied.
+
+## RX-9001 execution checkpoint — 4 November 2026
+
+The [artifact/method/pilot evidence](../evidence/RX-9001.md) and [frozen measurement contract](../evaluation/RX-9001-method.md) pass independent review and local project/installed-candidate verification. The reduced pilot validates actual orchestration and independent semantics; full performance collections are not run. RX-9001 is complete locally and RX-9002 is next. The planning-time states and future cohorts below remain the original selection contract, not fabricated execution results.
+
 ## Owner-selected outcome
 
 On 4 November 2026 the owner requested a **plan for hardening, benchmarks and a performance review after the latest changes, to check whether Raveldex actually got better**. This contract selects seven future tasks. Planning is not a fresh benchmark, a confirmed defect, or authorization to implement all seven tasks in this turn.

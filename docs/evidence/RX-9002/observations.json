@@ -1,0 +1,30 @@
+{
+  "kind": "rx9002-audit-observations-v1",
+  "sourceHead": "6100770f3498c8f03897caf1378f131cf48f2d42",
+  "sourceScope": "Existing RX-9001 uncommitted work preserved; no production source changes",
+  "newPassingRegressions": 13,
+  "testFiles": {
+    "test/core/n10-continuation-hardening.test.mjs": "2c19a0b458e6c745da66809a5efd6d914ddddd5fdc5e675b391e3a438907c3fa",
+    "test/core/n10-churn-hardening.test.mjs": "2a373dc994c92bdb29b1d7597b61e327243df71deb6ae4b57bcb877a57c7055b",
+    "test/core/n10-resource-ownership.test.mjs": "833e66f844281afd94a037f0ac9e6906ca374f082ce5ccc266d707a44ba989bb",
+    "test/adapters/indexeddb/n10-bulk-recovery.test.mjs": "55326e560926319888cd174249b61fc69ef36997481939624c1e072894038143"
+  },
+  "focusedResults": {
+    "continuationNew": "5/5 Pass",
+    "continuationExistingPlusNew": "44/44 Pass",
+    "churnNew": "3/3 Pass",
+    "churnExistingPlusNew": "33/33 Pass",
+    "resourceComposition": "1/1 Pass",
+    "ChromiumIndexedDBWorker": "4/4 Pass"
+  },
+  "runtimeSourceAndRx9001FreezeUnchanged": true,
+  "newRuntimeContractViolationsObserved": [],
+  "classification": "Not observed within the selected audit/probe scope; not proof of universal absence",
+  "notMeasured": [
+    "retained/peak heap and GC",
+    "universal host fairness",
+    "full N10 performance matrix",
+    "human AT/physical input/native Safari/Firefox"
+  ],
+  "nextTask": "RX-9003: verify an unchanged candidate unless a new confirmed violation requires a bounded repair"
+}

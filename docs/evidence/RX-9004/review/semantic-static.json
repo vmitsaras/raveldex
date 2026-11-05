@@ -1,0 +1,50 @@
+{
+  "kind": "rx9004-independent-semantic-static-review-v1",
+  "status": "Pass source inspection; actual run pending",
+  "capturedAt": "2026-11-05T08:17:54.826060+00:00",
+  "sourcePins": [
+    {
+      "path": "docs/evidence/RX-9004/semantic/run.mjs",
+      "sha256": "e7c4afa2e55e48467fb8cc54d173b5e25be3dec206e39fa5f2d1749b82b42b24"
+    },
+    {
+      "path": "docs/evidence/RX-9004/semantic/oracle.mjs",
+      "sha256": "d1478da311a555df8d93d8521ff9c8e402e7fd6050aa913834fc06d41c94ec78"
+    },
+    {
+      "path": "test/oracle/query.mjs",
+      "sha256": "bfccdd9db9650ead172406e5fc75eb0e4baea1a7478c37fd3e06d3eb1bbea773"
+    },
+    {
+      "path": "test/oracle/phrases.mjs",
+      "sha256": "638fd46b1b24c6e079027c80622923dcfdf70d80ab77ef1c057ad3f5b7f99933"
+    },
+    {
+      "path": "bench/n9/paired-semantics.mjs",
+      "sha256": "6b3cd4742dbe6655b74b8b8967d042c328d68fd45a32c60809f11676fd904262"
+    },
+    {
+      "path": "bench/n9/paired-verify.mjs",
+      "sha256": "c7107ad06752f23bc4c03b1730116f41b2f0362163f1a928cd11a0c37ed91b6e"
+    },
+    {
+      "path": "docs/evidence/RX-9004/analysis/summarize.py",
+      "sha256": "a3c728a700dca95e4d58422c181657aafbb9f33de95fdf659b19b0b7a6cb4d69"
+    }
+  ],
+  "blockingFindings": [],
+  "checks": [
+    "Actual capturePages100stride, zero-hit and final-short pages match oracle offset/limit handling; partial-refusal capture lacks pageSize and known100fallback is valid",
+    "Selected Inspector query really requests20publichits; source oracle verifies every returned score/order plus all tracedfield TF/DF/N/length/boost facts against authored strings",
+    "Canonical core source shape, root counts, document terms/frequencies, postings and exact source arrays align with unchanged historical canonicalCore output",
+    "Independent source/phrase oracle has no production analyzer/scorer import; declared expansion refusal bypasses success expectation, successful prefix uses complete independent source result",
+    "27fresh children use controlled0clock only in separate untimed lane, bounded600s/child and10800s globally, and complete file/archive/package/env guards",
+    "13968timed links validate complete independent reference on successes even if separate larger-output paginationrefuses; expected typed broadrefusals compare exact semantic error",
+    "Parent summarize.py uses nearest-rank lower medians and owner-range rule, preserving all outcomes and same-runtime controls"
+  ],
+  "limitations": [
+    "Static review only, no engine/build/test/collector/raw computation during timed collector",
+    "Semantic data and source pins must remain unchanged or be rereviewed before run",
+    "Selected field statistics and formulas are independently verified; this does not extend to physical heap, universal fairness, browser platforms or deadline evidence"
+  ]
+}

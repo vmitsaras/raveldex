@@ -1,0 +1,72 @@
+{
+  "status": "Pass within bounded continuation/ownership scope",
+  "classification": "No contract violation observed; no production repair proposed",
+  "newCases": {
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0
+  },
+  "focusedRegression": {
+    "tests": 44,
+    "pass": 44,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0
+  },
+  "actualNodeObservation": {
+    "kind": "rx9002-actual-node-continuation-observation",
+    "node": "v24.21.0",
+    "observedTaskSources": [
+      "external-timer",
+      "immediate",
+      "zero-timer"
+    ],
+    "externalTimerBeforeFirstContinuation": true,
+    "nativeContinuationCallbacks": 426,
+    "zeroTimerCallbacks": 53,
+    "handlesAfterSettlement": 0,
+    "signalListenersAfterAbort": 0,
+    "scope": "Finite actual Node task/ownership observation; no latency, universal fairness, retained/peak heap or platform transfer claim."
+  },
+  "deterministicCombinations": [
+    {
+      "readyTaskDelivery": "queued-stop-first",
+      "firstQueuedTerminal": "abort-first"
+    },
+    {
+      "readyTaskDelivery": "queued-stop-first",
+      "firstQueuedTerminal": "deadline-first"
+    },
+    {
+      "readyTaskDelivery": "continuation-first",
+      "firstQueuedTerminal": "abort-first"
+    },
+    {
+      "readyTaskDelivery": "continuation-first",
+      "firstQueuedTerminal": "deadline-first"
+    }
+  ],
+  "observations": [
+    "directHost real fast-dispatch/eighth-timer path used by actual ExecutionOwner",
+    "queued deadline measured from admission while active write remains unpublished",
+    "first settled queued abort/deadline retained despite later controls",
+    "single waiting queue slot immediately reusable",
+    "stale captured deadline and continuation callbacks cannot republish before/after disposal",
+    "actual native handle/listener ownership returns to zero after success, cancellation and recovery"
+  ],
+  "limitations": [
+    "Actual Node observed one legal timer/immediate ordering; deterministic delivery exercised both.",
+    "No actual browser/worker message-source observation in this scoped probe.",
+    "Owned task/listener counts are not retained/peak heap or universal scheduling evidence.",
+    "Logs contain node:test duration metadata; these are not performance benchmark observations."
+  ],
+  "files": {
+    "new-cases.txt": "4ae7f2fb63247bd90be464b88ff7b8f3cc06d8fa5f08d16ff4cd510473e106eb",
+    "focused.txt": "168e009f187a322d0e1984b7686af69872d97d6d289f84a58028c082de7bc6c8",
+    "identity.json": "8e6fbe9fd1ae7cc9d977acf1c404d6aebf222a10424866e0143c5eff6ec747e2"
+  }
+}

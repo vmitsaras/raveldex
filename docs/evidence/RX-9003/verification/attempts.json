@@ -1,0 +1,34 @@
+{
+  "kind": "rx9003-local-attempts-v1",
+  "fullCandidatePreparation": {
+    "attempts": 1,
+    "status": "Pass",
+    "exitCode": 0,
+    "log": "full-check.txt"
+  },
+  "summaryParser": {
+    "initial": "TAP-only regex yielded zero aggregate counters for successful Node spec reporter output. Initial validation preserved in validation-before-count-correction.json.",
+    "correction": "summarize.py parses all six actual spec summaries and validates totals; no test rerun or changed test outcome."
+  },
+  "installedOracle": {
+    "firstCommand": [
+      "node",
+      "scripts/evaluate-correctness.mjs",
+      "/tmp/raveldex-rx9003-20261105/verification/candidate/consumer",
+      "/tmp/raveldex-rx9003-20261105/verification/oracle.json"
+    ],
+    "firstExitCode": 1,
+    "firstError": "SyntaxError: Unexpected end of JSON input at JSON.parse, scripts/evaluate-correctness.mjs:12:21",
+    "classification": "Tooling path-alias mismatch, not engine defect. Node resolves import.meta.url through /private/tmp while the copied correctness.mjs CLI guard compares it with process.argv[1] using /tmp; the guard is false and no correctness verification runs. Direct invocation through /tmp also exits zero with no output; this is explicitly not a passing oracle run.",
+    "successfulCommand": [
+      "node",
+      "scripts/evaluate-correctness.mjs",
+      "/private/tmp/raveldex-rx9003-20261105/verification/candidate/consumer",
+      "/private/tmp/raveldex-rx9003-20261105/verification/oracle.json"
+    ],
+    "successfulExitCode": 0,
+    "scope": "Canonical physical path selects existing CLI guard. No production or historical script change. Actual oracle report produced and status Pass."
+  },
+  "auditFixture": "Independent identity/attempts.json retains corrected predecessor-basename mistake.",
+  "previousFailures": "All earlier RX-9001/RX-9002 attempt records preserved."
+}

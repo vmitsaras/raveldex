@@ -1,0 +1,37 @@
+✖ N10 bulk-restored dictionary and ranking stay coherent across live 256/257 churn and an older search cursor (64.559042ms)
+✖ N10 queued bulk restore, failed staged write and later selective search retain one current revision and old-root facts (52.812125ms)
+✔ N10 bulk restore and dictionary removal/reinsert preserve exact 1024/1025 query expansion errors (118.08625ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 298.322042
+
+✖ failing tests:
+
+test at test/core/n10-churn-hardening.test.mjs:80:1
+✖ N10 bulk-restored dictionary and ranking stay coherent across live 256/257 churn and an older search cursor (64.559042ms)
+  Error [RaveldexError]: Raveldex: LIMIT_EXCEEDED
+      at bound (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/errors/error.js:28:15)
+      at validateExpansionCounts (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/limits/work.js:24:5)
+      at add (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/retrieval/expand.js:26:21)
+      at add.next (<anonymous>)
+      at expandGroups (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/retrieval/expand.js:64:40)
+      at expandGroups.next (<anonymous>)
+      at executeOwnedSearch (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/query/search.js:73:31)
+      at executeOwnedSearch.next (<anonymous>)
+      at ExecutionOwner.pump (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:225:48)
+      at Object.callback (file:///Users/vasilis/Documents/GitHub/raveldex/dist/core/execution/engine.js:240:101) {
+    code: 'LIMIT_EXCEEDED',
+    details: { path: 'expansions.group', limit: 256, actual: 257 }
+  }
+
+test at test/core/n10-churn-hardening.test.mjs:115:1
+✖ N10 queued bulk restore, failed staged write and later selective search retain one current revision and old-root facts (52.812125ms)
+  TypeError: Cannot read properties of undefined (reading 'revision')
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/core/n10-churn-hardening.test.mjs:127:61)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

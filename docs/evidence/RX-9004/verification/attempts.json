@@ -1,0 +1,39 @@
+{
+  "kind": "rx9004-attempt-classification-v1",
+  "timedCollection": {
+    "attempts": 1,
+    "exitCode": 0,
+    "outcome": "Collected",
+    "source": "../identity/collection-result.json"
+  },
+  "untimedSemanticCollection": {
+    "attempts": 1,
+    "exitCode": 0,
+    "outcome": "Pass",
+    "source": "../semantic/result.json"
+  },
+  "fullProjectAndPrivateCandidate": {
+    "attempts": 1,
+    "exitCode": 0,
+    "outcome": "Pass",
+    "source": "validation.json"
+  },
+  "negativeProbes": {
+    "positiveFixture": "Pass",
+    "expectedRejectedPoisonedFixtures": 12,
+    "source": "../semantic/negative-results.json",
+    "classification": "Expected validation rejection probes, not failed native operations."
+  },
+  "reviewOnlyAssemblyEvents": [
+    {
+      "source": "../review/results.json",
+      "classification": "Overstrict audit pin stopped after analysis-only CSV control-label addition; every actual2258CSV row independently checked against unchanged numerical JSON before accepting."
+    },
+    {
+      "source": "../review/final.json",
+      "classification": "Overstrict raw guard comparison included task-owned outputs; actual declared5500non-task hashes, HEAD and corresponding status independently verified unchanged."
+    }
+  ],
+  "nativeRefusals": "All actual deadline/work/expansion refusals remain in raw collector/semantic records; no hidden retries or successful zero-duration substitutes.",
+  "previousEvidence": "Every prior adverse or failed RX-9001 through RX-9003 record is preserved."
+}

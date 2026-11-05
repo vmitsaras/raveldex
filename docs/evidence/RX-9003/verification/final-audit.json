@@ -1,0 +1,108 @@
+{
+  "status": "Pass",
+  "checkedAt": "2026-11-05T08:11:11.327635+00:00",
+  "head": "6100770f3498c8f03897caf1378f131cf48f2d42",
+  "uncommitted": true,
+  "task": "RX-9003",
+  "taskState": "done",
+  "next": "RX-9004",
+  "alsoDependencyReady": [
+    "RX-9005",
+    "RX-9006"
+  ],
+  "collectors": "Not run; future collections serial",
+  "fullVerification": {
+    "tests": 1344,
+    "pass": 1336,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 8,
+    "todo": 0
+  },
+  "fullCheckInputScope": 5461,
+  "preservedPreexistingFiles": 5455,
+  "allowedClosingDocumentationChanges": [
+    "CODEX_HANDOFF.md",
+    "IMPLEMENTATION_TASKS.md",
+    "PROJECT_CONTEXT.md",
+    "ROADMAP.md",
+    "docs/planning/roadmap.json",
+    "docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md"
+  ],
+  "currentPackagedMembersStillMatchVerifiedCandidate": 380,
+  "archiveSha256": "4dd0f8333ff95d0c7e50f2a91a028e41122bdf127f5fadf92dd1104eb4589b0c",
+  "independentReview": {
+    "path": "docs/evidence/RX-9003/review/final.json",
+    "sha256": "ca4cd595b3809154b34d9b9f93447afc09009fba9f970a09562b4c17387cb224"
+  },
+  "evidenceFileCountAtAudit": 37,
+  "ignoredEvidenceFiles": [],
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "handoff:check"
+      ],
+      "exitCode": 0,
+      "log": "handoff-check.txt",
+      "sha256": "ccb5d3e8e0d6db143ec83c95af581094d67b58c5e23b7463edc580d4b354bfdb"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "docs:check"
+      ],
+      "exitCode": 0,
+      "log": "docs-check.txt",
+      "sha256": "67ce6baf2c4acc31aebc83caca5f65d10a25be965ffdf664ac2e260dfdadf570"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "pages:check"
+      ],
+      "exitCode": 0,
+      "log": "pages-check.txt",
+      "sha256": "5ab2c2ce0b506269ea7ca81ab4d78bea2403a705be308f0828f1ac42124e7de6"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "handoff:next"
+      ],
+      "exitCode": 0,
+      "log": "handoff-next.txt",
+      "sha256": "936be8a9b075d223201ec9fd4dbf41b42bf4d2eaa956c8f7c341e82961c72b4e"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "tracking:preview"
+      ],
+      "exitCode": 0,
+      "log": "tracking-preview.txt",
+      "sha256": "7a05f90f61347f134e8878d276ea87516abf28da9d2963f43fb2106ffa1c15fd"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "log": "--check.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Full check precedes closing planning/prose synchronization; final checks above verify those later documentation bytes. No claim of full test rerun on final prose or exact committed head.",
+  "productionRepairs": [],
+  "runtimeTestMethodDependencyChanges": false,
+  "remoteMutations": false,
+  "commitPushPublication": false,
+  "toolingAttempts": "attempts.json"
+}

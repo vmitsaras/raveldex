@@ -1,0 +1,58 @@
+{
+  "scope": "Deterministic observable ownership only; no physical heap or garbage-collection claim.",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "versions": {
+      "node": "24.21.0",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.8",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.3",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "137",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "3.6.4",
+      "simdjson": "4.6.11",
+      "simdutf": "6.4.0",
+      "sqlite": "3.53.4",
+      "tz": "2026a",
+      "undici": "7.29.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "13.6.233.17-node.53",
+      "zlib": "1.2.12",
+      "zstd": "1.5.7"
+    }
+  },
+  "probe": "test/core/n10-resource-ownership.test.mjs",
+  "probeSha256": "833e66f844281afd94a037f0ac9e6906ca374f082ce5ccc266d707a44ba989bb",
+  "cycles": 8,
+  "perCycle": [
+    "successful first-party source+positions restore",
+    "late duplicate after staging -> INVALID_NATIVE_STATE",
+    "query cancellation after first scored-document selection",
+    "restore cancellation in participant sealing",
+    "successful search/source recovery"
+  ],
+  "final": "dispose while participant sealing is suspended; one disposal and no remaining authoritative root",
+  "observations": {
+    "ownedDeadlineContinuationTasksAtEachSettlement": 0,
+    "signalListenersAfterEachCancellation": 0,
+    "hostDisposeCallsPerOwner": 1,
+    "oldRootsAndSidecarsPreservedOnFailures": true,
+    "retainedHeapPeakOrGc": "Not measured"
+  },
+  "result": "Pass"
+}

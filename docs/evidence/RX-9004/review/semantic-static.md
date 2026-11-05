@@ -1,0 +1,11 @@
+# RX-9004 independent semantic-lane source review
+
+**Pass within source inspection; actual semantic execution and acceptance remain pending.** [Pinned machine record](semantic-static.json) lists inspected sources. No engine, build, test, collector or raw-results computation ran during the timed phase.
+
+The new lane reuses the unchanged historical public-page/Inspector/fixture child and adds an independent original-source reference. The source and phrase oracles import no production tokenizer/scorer. They derive population/DF/TF/length, source membership and ordered BM25 pages directly from authored strings; expected expansion-limit controls have no success expectation. Canonical document/field/source/count shape matches the historical canonical capture.
+
+Actual pagination has100-record strides, short final pages and a one-call zero-hit page. The wrapper's index-based stride and100 fallback for partially refused captures match that actual contract. Every successful page is checked against the complete independent source result. Selected Inspector queries really request20hits; every observed field fact's original-source statistics and formula replay are separate checks. The top20 timing output remains bound to the full source reference even if larger-output pagination refuses; that refusal is retained explicitly.
+
+The lane fixes27 actual role×family×size children, serial execution, controlled zero-clock semantics,600s child/10800s global watchdogs and before/after package/archive/harness/environment guards. A watchdog is incomplete collection. It cannot establish actual default-deadline or fairness behavior. All13,968 actual timed query calls are linked; exact known expansion errors and resource/deadline transitions are separate from successful numerical observations.
+
+The parent ordinary-analysis script uses the frozen nearest-rank lower median rather than the arithmetic average of two middle observations. Owner medians, ranges, descriptive p95 eligibility and same-runtime control labels are consistent with the declared rule. Actual raw reconstruction and final interpretation review remain later gates. Current source pins must still match before claiming this review applies to an executed lane.
