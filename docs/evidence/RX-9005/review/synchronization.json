@@ -1,0 +1,137 @@
+{
+  "kind": "rx9005-independent-postclosing-synchronization-v1",
+  "status": "Pass",
+  "reviewedAt": "2026-11-05T14:58:01.943058+00:00",
+  "findings": [],
+  "closingAudit": {
+    "path": "verification/final-audit.json",
+    "status": "Pass",
+    "observedCheckedAt": "2026-11-05T14:55:57.235265+00:00",
+    "scope": "Observed completed closing audit before parent adds this separate proof binding; no circular current-file hash claim.",
+    "checks": [
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:check"
+        ],
+        "exitCode": 0,
+        "log": "handoff-check.txt",
+        "sha256": "ccb5d3e8e0d6db143ec83c95af581094d67b58c5e23b7463edc580d4b354bfdb"
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "docs:check"
+        ],
+        "exitCode": 0,
+        "log": "docs-check.txt",
+        "sha256": "553c52ea50ed5fc254ec7a66250616c70234c712d39e1da9a1239870bf902d77"
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "pages:check"
+        ],
+        "exitCode": 0,
+        "log": "pages-check.txt",
+        "sha256": "5ab2c2ce0b506269ea7ca81ab4d78bea2403a705be308f0828f1ac42124e7de6"
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "handoff:next"
+        ],
+        "exitCode": 0,
+        "log": "handoff-next.txt",
+        "sha256": "b6a1c2e8fc5ced4e5924e0f8fa17bfd8cc79f302c91c1df24bfa8d23c6413243"
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "tracking:preview"
+        ],
+        "exitCode": 0,
+        "log": "tracking-preview.txt",
+        "sha256": "ccb38d5d0f78a9f5d36360006d84ba92fe0c38cb40dfe8915a5f082eab402100"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exitCode": 0,
+        "log": "--check.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "acceptance": {
+    "path": "verification/acceptance.json",
+    "sha256": "578f887b12e825b3cabd16b6c75880f75b39fd9e81b2df0c038906102e5b9c38",
+    "allCurrentBindingsMatch": true,
+    "boundFinalReviewUnchanged": true
+  },
+  "canonicalTask": "RX-9005 done; every listed evidence path exists",
+  "evidencePathsVerified": 13,
+  "nextEligible": "RX-9006",
+  "RX9007UnsatisfiedDependencies": [
+    "RX-9006"
+  ],
+  "preservedPriorFiles": 5570,
+  "allowedPriorDocumentChanges": [
+    "CODEX_HANDOFF.md",
+    "IMPLEMENTATION_TASKS.md",
+    "PROJECT_CONTEXT.md",
+    "ROADMAP.md",
+    "docs/planning/roadmap.json",
+    "docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md"
+  ],
+  "currentPackagedFilesStillMatchCandidate": 380,
+  "retainedArchivesRehashedByParentClosing": 78,
+  "pins": [
+    {
+      "path": "CODEX_HANDOFF.md",
+      "sha256": "c17ccd772fd6cd21a77c8ba648bdf1cb7f9f4d8ec27334ed354e419270fe2c43"
+    },
+    {
+      "path": "PROJECT_CONTEXT.md",
+      "sha256": "260f9a376a9065d04fd47fe9c7dec3ce100d6d4df9076609fd52349d67bcccb2"
+    },
+    {
+      "path": "docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md",
+      "sha256": "3b4490d1bb4751562e2fcddbd7ccfd8685bddab366a00dbbf897fb11bf848068"
+    },
+    {
+      "path": "docs/planning/roadmap.json",
+      "sha256": "99a2c211ee0e4f61a125d3405126dd8ac1f67f453621c71e941ab716b8f27b1f"
+    },
+    {
+      "path": "ROADMAP.md",
+      "sha256": "d920e576695553c43b44899afab23d254f521b8355354c89e89757fafa55ed10"
+    },
+    {
+      "path": "IMPLEMENTATION_TASKS.md",
+      "sha256": "d53adf85d45d366b389769521141a83afc8705cddeaeb9f6b2bd03bbe9d9cb67"
+    },
+    {
+      "path": "docs/evidence/RX-9005.md",
+      "sha256": "3c4ccc8d74651678f1ca4d6385978afac90e0af8e5ff36112a9126155a339a81"
+    },
+    {
+      "path": "docs/evaluation/RX-9005.md",
+      "sha256": "4836c5c49c756787b0495df0d67ffd770fbf39b1d7a490d7a7480bb062d4d390"
+    }
+  ],
+  "scope": "Quick direct context/spec/canonical/generated-roadmap/evidence/readout reread and closing-log/acceptance hash verification only. No new engine, build, project tests, collector, Git or network commands. Final implementation-review JSON, main evidence/readout and acceptance bytes remain unchanged.",
+  "limitations": [
+    "Local uncommitted RX-9005 completion only; no exact committed-head, remote CI, GitHub tracking mutation or publication claim.",
+    "The150minute authorization applies only to the completed separate RX-9005 rerun; RX-9006 retains its frozen budget/options.",
+    "Fresh project checks preceded the six closing documentation transitions; actual later handoff/docs/pages/planner/tracking-preview checks passed separately."
+  ]
+}

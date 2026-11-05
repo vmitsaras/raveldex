@@ -1,0 +1,1100 @@
+{
+  "classifications": {
+    "preN9": {
+      "wallMs": {
+        "inconclusive-within-observed-variation": 53,
+        "observed-faster": 403,
+        "observed-slower": 4
+      },
+      "cpuUserMs": {
+        "observed-slower": 20,
+        "inconclusive-within-observed-variation": 249,
+        "observed-faster": 191
+      },
+      "cpuSystemMs": {
+        "inconclusive-within-observed-variation": 207,
+        "inconclusive-timer-floor": 23,
+        "observed-faster": 227,
+        "observed-slower": 3
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 247,
+        "observed-faster": 196,
+        "observed-slower": 17
+      },
+      "invocationToReturnSumMs": {
+        "inconclusive-within-observed-variation": 348,
+        "observed-faster": 101,
+        "observed-slower": 11
+      },
+      "returnToSettlementSumMs": {
+        "inconclusive-within-observed-variation": 53,
+        "observed-faster": 405,
+        "observed-slower": 2
+      }
+    },
+    "acceptedN9": {
+      "wallMs": {
+        "inconclusive-within-observed-variation": 432,
+        "observed-faster": 19,
+        "observed-slower": 9
+      },
+      "cpuUserMs": {
+        "inconclusive-within-observed-variation": 425,
+        "observed-faster": 21,
+        "observed-slower": 14
+      },
+      "cpuSystemMs": {
+        "inconclusive-within-observed-variation": 393,
+        "inconclusive-timer-floor": 24,
+        "observed-faster": 24,
+        "observed-slower": 19
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 423,
+        "observed-slower": 18,
+        "observed-faster": 19
+      },
+      "invocationToReturnSumMs": {
+        "inconclusive-within-observed-variation": 417,
+        "observed-faster": 21,
+        "observed-slower": 22
+      },
+      "returnToSettlementSumMs": {
+        "inconclusive-within-observed-variation": 431,
+        "observed-faster": 18,
+        "observed-slower": 11
+      }
+    }
+  },
+  "adverseMetricCells": 57,
+  "examples": [
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "repeat-same-owner",
+      "id": "addMany-new-vocabulary",
+      "kind": "batch",
+      "batch": 256,
+      "publicCall": "addMany",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "beforeOutcomes": {
+        "Pass": 3
+      },
+      "afterOutcomes": {
+        "Pass": 3
+      },
+      "beforeRolePrePopulation": [
+        9744
+      ],
+      "afterRolePrePopulation": [
+        9744
+      ],
+      "beforeRolePostPopulation": [
+        10000
+      ],
+      "afterRolePostPopulation": [
+        10000
+      ],
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 619.3697920000122,
+          "afterP50": 106.77700000000186,
+          "absoluteChangeMs": -512.5927920000104,
+          "relativeChangePercent": -82.76037976356461,
+          "beforeOwnerMedianRange": [
+            617.2051669999928,
+            622.5931659999915
+          ],
+          "afterOwnerMedianRange": [
+            106.41683399999602,
+            107.28566699998919
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuUserMs": {
+          "beforeP50": 46.718,
+          "afterP50": 26.961,
+          "absoluteChangeMs": -19.757000000000005,
+          "relativeChangePercent": -42.289909670790706,
+          "beforeOwnerMedianRange": [
+            44.627,
+            51.728
+          ],
+          "afterOwnerMedianRange": [
+            26.8,
+            27.822
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuSystemMs": {
+          "beforeP50": 5.174,
+          "afterP50": 1.725,
+          "absoluteChangeMs": -3.4490000000000003,
+          "relativeChangePercent": -66.66022419791264,
+          "beforeOwnerMedianRange": [
+            4.764,
+            5.499
+          ],
+          "afterOwnerMedianRange": [
+            1.64,
+            1.774
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 52.217000000000006,
+          "afterP50": 28.735,
+          "absoluteChangeMs": -23.482000000000006,
+          "relativeChangePercent": -44.970028917785406,
+          "beforeOwnerMedianRange": [
+            49.391000000000005,
+            56.902
+          ],
+          "afterOwnerMedianRange": [
+            28.525000000000002,
+            29.462
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "invocationToReturnSumMs": {
+          "beforeP50": 0.49508299998706207,
+          "afterP50": 0.37316699999792036,
+          "absoluteChangeMs": -0.12191599998914171,
+          "relativeChangePercent": -24.625365846197045,
+          "beforeOwnerMedianRange": [
+            0.39500000000407454,
+            0.5209579999936977
+          ],
+          "afterOwnerMedianRange": [
+            0.36050000000250293,
+            0.45329200000560377
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "inconclusive-within-observed-variation",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "returnToSettlementSumMs": {
+          "beforeP50": 618.8618750000023,
+          "afterP50": 106.39741600000707,
+          "absoluteChangeMs": -512.4644589999953,
+          "relativeChangePercent": -82.80756655109725,
+          "beforeOwnerMedianRange": [
+            616.6704580000078,
+            622.1798750000016
+          ],
+          "afterOwnerMedianRange": [
+            106.05112499999814,
+            106.82641599999624
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      },
+      "comparison": "matched-success"
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B256",
+      "phase": "repeat-same-owner",
+      "id": "remove-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "publicCall": "B sequential remove calls",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "beforeOutcomes": {
+        "Pass": 3
+      },
+      "afterOutcomes": {
+        "Pass": 3
+      },
+      "beforeRolePrePopulation": [
+        10000
+      ],
+      "afterRolePrePopulation": [
+        10000
+      ],
+      "beforeRolePostPopulation": [
+        9744
+      ],
+      "afterRolePostPopulation": [
+        9744
+      ],
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 2676.1596250000002,
+          "afterP50": 495.7580830000079,
+          "absoluteChangeMs": -2180.4015419999923,
+          "relativeChangePercent": -81.4750182175696,
+          "beforeOwnerMedianRange": [
+            2499.0088339999784,
+            2705.086083000002
+          ],
+          "afterOwnerMedianRange": [
+            491.02266699999745,
+            510.1115839999984
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuUserMs": {
+          "beforeP50": 493.158,
+          "afterP50": 206.817,
+          "absoluteChangeMs": -286.341,
+          "relativeChangePercent": -58.06273040283236,
+          "beforeOwnerMedianRange": [
+            275.815,
+            550.026
+          ],
+          "afterOwnerMedianRange": [
+            195.704,
+            250.921
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuSystemMs": {
+          "beforeP50": 27.332,
+          "afterP50": 9.555,
+          "absoluteChangeMs": -17.777,
+          "relativeChangePercent": -65.04097760866384,
+          "beforeOwnerMedianRange": [
+            19.689,
+            27.971
+          ],
+          "afterOwnerMedianRange": [
+            7.891,
+            10.018
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 520.49,
+          "afterP50": 216.372,
+          "absoluteChangeMs": -304.118,
+          "relativeChangePercent": -58.42917251051893,
+          "beforeOwnerMedianRange": [
+            295.504,
+            577.997
+          ],
+          "afterOwnerMedianRange": [
+            205.722,
+            258.812
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "invocationToReturnSumMs": {
+          "beforeP50": 101.29207899962785,
+          "afterP50": 43.33954799982894,
+          "absoluteChangeMs": -57.95253099979891,
+          "relativeChangePercent": -57.213290093504575,
+          "beforeOwnerMedianRange": [
+            51.68108599979314,
+            101.80359000028693
+          ],
+          "afterOwnerMedianRange": [
+            40.5348410000297,
+            47.95382799996878
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "returnToSettlementSumMs": {
+          "beforeP50": 2573.2157139997,
+          "afterP50": 452.30383500012977,
+          "absoluteChangeMs": -2120.91187899957,
+          "relativeChangePercent": -82.42262269193563,
+          "beforeOwnerMedianRange": [
+            2446.6522090002254,
+            2602.9188800001575
+          ],
+          "afterOwnerMedianRange": [
+            450.433866999927,
+            461.98980200011283
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      },
+      "comparison": "matched-success"
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-records:B256",
+      "phase": "repeat-same-owner",
+      "id": "replace-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "publicCall": "B sequential replace calls",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "beforeOutcomes": {
+        "Pass": 3
+      },
+      "afterOutcomes": {
+        "Pass": 3
+      },
+      "beforeRolePrePopulation": [
+        10000
+      ],
+      "afterRolePrePopulation": [
+        10000
+      ],
+      "beforeRolePostPopulation": [
+        10000
+      ],
+      "afterRolePostPopulation": [
+        10000
+      ],
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 2699.4220840000053,
+          "afterP50": 502.6336250000022,
+          "absoluteChangeMs": -2196.788459000003,
+          "relativeChangePercent": -81.379954325068,
+          "beforeOwnerMedianRange": [
+            2665.0727500000066,
+            2758.195458000002
+          ],
+          "afterOwnerMedianRange": [
+            485.58174999999756,
+            550.268333
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuUserMs": {
+          "beforeP50": 372.923,
+          "afterP50": 193.363,
+          "absoluteChangeMs": -179.56,
+          "relativeChangePercent": -48.149349865789986,
+          "beforeOwnerMedianRange": [
+            321.559,
+            411.782
+          ],
+          "afterOwnerMedianRange": [
+            172.493,
+            240.872
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuSystemMs": {
+          "beforeP50": 24.991,
+          "afterP50": 8.736,
+          "absoluteChangeMs": -16.255,
+          "relativeChangePercent": -65.04341562962667,
+          "beforeOwnerMedianRange": [
+            23.733,
+            26.173
+          ],
+          "afterOwnerMedianRange": [
+            8.163,
+            8.926
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 399.096,
+          "afterP50": 202.099,
+          "absoluteChangeMs": -196.997,
+          "relativeChangePercent": -49.36080542024977,
+          "beforeOwnerMedianRange": [
+            345.29200000000003,
+            436.77299999999997
+          ],
+          "afterOwnerMedianRange": [
+            180.656,
+            249.798
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "invocationToReturnSumMs": {
+          "beforeP50": 93.3795080002601,
+          "afterP50": 45.30175200018857,
+          "absoluteChangeMs": -48.07775600007153,
+          "relativeChangePercent": -51.486409630620045,
+          "beforeOwnerMedianRange": [
+            79.9110049999581,
+            99.6385820000578
+          ],
+          "afterOwnerMedianRange": [
+            38.68954700011818,
+            54.14641199988546
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "returnToSettlementSumMs": {
+          "beforeP50": 2604.3941199999244,
+          "afterP50": 457.103376999803,
+          "absoluteChangeMs": -2147.2907430001214,
+          "relativeChangePercent": -82.44876328472834,
+          "beforeOwnerMedianRange": [
+            2583.9298760000092,
+            2657.5328389998904
+          ],
+          "afterOwnerMedianRange": [
+            446.7088640000293,
+            495.97121300006984
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      },
+      "comparison": "matched-success"
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "id": "replace-existing-vocabulary",
+      "kind": "single",
+      "batch": 1,
+      "publicCall": "replace",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "beforeOutcomes": {
+        "Pass": 3
+      },
+      "afterOutcomes": {
+        "Pass": 3
+      },
+      "beforeRolePrePopulation": [
+        10000
+      ],
+      "afterRolePrePopulation": [
+        10000
+      ],
+      "beforeRolePostPopulation": [
+        10000
+      ],
+      "afterRolePostPopulation": [
+        10000
+      ],
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 10.280291000002762,
+          "afterP50": 1.9863750000004075,
+          "absoluteChangeMs": -8.293916000002355,
+          "relativeChangePercent": -80.67783295239528,
+          "beforeOwnerMedianRange": [
+            10.091541000001598,
+            10.432124999992084
+          ],
+          "afterOwnerMedianRange": [
+            1.9769589999996242,
+            2.010874999999942
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuUserMs": {
+          "beforeP50": 1.115,
+          "afterP50": 0.768,
+          "absoluteChangeMs": -0.347,
+          "relativeChangePercent": -31.121076233183853,
+          "beforeOwnerMedianRange": [
+            0.955,
+            1.177
+          ],
+          "afterOwnerMedianRange": [
+            0.762,
+            0.792
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuSystemMs": {
+          "beforeP50": 0.06,
+          "afterP50": 0.018,
+          "absoluteChangeMs": -0.041999999999999996,
+          "relativeChangePercent": -69.99999999999999,
+          "beforeOwnerMedianRange": [
+            0.035,
+            0.114
+          ],
+          "afterOwnerMedianRange": [
+            0.014,
+            0.019
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 1.175,
+          "afterP50": 0.787,
+          "absoluteChangeMs": -0.388,
+          "relativeChangePercent": -33.02127659574468,
+          "beforeOwnerMedianRange": [
+            0.99,
+            1.2910000000000001
+          ],
+          "afterOwnerMedianRange": [
+            0.776,
+            0.81
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "invocationToReturnSumMs": {
+          "beforeP50": 0.2626250000030268,
+          "afterP50": 0.24570800000219606,
+          "absoluteChangeMs": -0.01691700000083074,
+          "relativeChangePercent": -6.44150404593461,
+          "beforeOwnerMedianRange": [
+            0.2615839999925811,
+            0.2838750000082655
+          ],
+          "afterOwnerMedianRange": [
+            0.24016699999629054,
+            0.2538750000021537
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "returnToSettlementSumMs": {
+          "beforeP50": 10.004833999992115,
+          "afterP50": 1.7390830000003916,
+          "absoluteChangeMs": -8.265750999991724,
+          "relativeChangePercent": -82.61757266535595,
+          "beforeOwnerMedianRange": [
+            9.791916000001947,
+            10.162958000000799
+          ],
+          "afterOwnerMedianRange": [
+            1.714958000004117,
+            1.7539580000011483
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      },
+      "comparison": "matched-success"
+    }
+  ],
+  "tailCells": [
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "after-two-warmups",
+      "id": "replace-existing-vocabulary",
+      "kind": "single",
+      "batch": 1,
+      "publicCall": "replace",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "beforeOutcomes": {
+        "Pass": 120
+      },
+      "afterOutcomes": {
+        "Pass": 120
+      },
+      "beforeRolePrePopulation": [
+        1000
+      ],
+      "afterRolePrePopulation": [
+        1000
+      ],
+      "beforeRolePostPopulation": [
+        1000
+      ],
+      "afterRolePostPopulation": [
+        1000
+      ],
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 2.9622910000002776,
+          "afterP50": 0.6039169999999103,
+          "absoluteChangeMs": -2.3583740000003672,
+          "relativeChangePercent": -79.61317777355926,
+          "beforeOwnerMedianRange": [
+            2.837792000000263,
+            3.012917000000016
+          ],
+          "afterOwnerMedianRange": [
+            0.5252500000001419,
+            0.6727089999999407
+          ],
+          "beforeP95": 3.414792000000034,
+          "afterP95": 1.810207999999875,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuUserMs": {
+          "beforeP50": 0.706,
+          "afterP50": 0.559,
+          "absoluteChangeMs": -0.1469999999999999,
+          "relativeChangePercent": -20.82152974504248,
+          "beforeOwnerMedianRange": [
+            0.573,
+            0.719
+          ],
+          "afterOwnerMedianRange": [
+            0.508,
+            0.65
+          ],
+          "beforeP95": 3.396,
+          "afterP95": 1.76,
+          "classification": "inconclusive-within-observed-variation",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuSystemMs": {
+          "beforeP50": 0.025,
+          "afterP50": 0.009,
+          "absoluteChangeMs": -0.016,
+          "relativeChangePercent": -64.0,
+          "beforeOwnerMedianRange": [
+            0.024,
+            0.028
+          ],
+          "afterOwnerMedianRange": [
+            0.007,
+            0.009
+          ],
+          "beforeP95": 0.146,
+          "afterP95": 0.042,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 0.732,
+          "afterP50": 0.583,
+          "absoluteChangeMs": -0.14900000000000002,
+          "relativeChangePercent": -20.355191256830604,
+          "beforeOwnerMedianRange": [
+            0.597,
+            0.75
+          ],
+          "afterOwnerMedianRange": [
+            0.514,
+            0.658
+          ],
+          "beforeP95": 3.542,
+          "afterP95": 1.8,
+          "classification": "inconclusive-within-observed-variation",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "invocationToReturnSumMs": {
+          "beforeP50": 0.3723330000002534,
+          "afterP50": 0.32629099999985556,
+          "absoluteChangeMs": -0.04604200000039782,
+          "relativeChangePercent": -12.365812324012776,
+          "beforeOwnerMedianRange": [
+            0.3220000000001164,
+            0.39845900000000256
+          ],
+          "afterOwnerMedianRange": [
+            0.3029999999998836,
+            0.3765000000003056
+          ],
+          "beforeP95": 0.5887080000002243,
+          "afterP95": 0.41666699999996126,
+          "classification": "inconclusive-within-observed-variation",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "returnToSettlementSumMs": {
+          "beforeP50": 2.578457999999955,
+          "afterP50": 0.24108299999988958,
+          "absoluteChangeMs": -2.3373750000000655,
+          "relativeChangePercent": -90.65010948404458,
+          "beforeOwnerMedianRange": [
+            2.5230830000000424,
+            2.6090840000001663
+          ],
+          "afterOwnerMedianRange": [
+            0.20949999999993452,
+            0.27500000000009095
+          ],
+          "beforeP95": 2.848917000000256,
+          "afterP95": 1.4391249999998763,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      },
+      "comparison": "matched-success"
+    }
+  ],
+  "diagnosticExamples": [
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "replace-existing-vocabulary",
+      "kind": "single",
+      "batch": 1,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 3597,
+        "emittedWorkUnits": 16682,
+        "maxStepWorkUnits": 29,
+        "hostYields": 8,
+        "continuationsScheduled": 8,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "addMany-new-vocabulary",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 117486,
+        "emittedWorkUnits": 1079305,
+        "maxStepWorkUnits": 35,
+        "hostYields": 525,
+        "continuationsScheduled": 525,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "replace-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 933472,
+        "emittedWorkUnits": 4521152,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2080,
+        "continuationsScheduled": 2080,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "remove-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 920000,
+        "emittedWorkUnits": 4419968,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2020,
+        "continuationsScheduled": 2020,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "replace-existing-vocabulary",
+      "kind": "single",
+      "batch": 1,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 3597,
+        "emittedWorkUnits": 16682,
+        "maxStepWorkUnits": 29,
+        "hostYields": 8,
+        "continuationsScheduled": 8,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "addMany-new-vocabulary",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 83990,
+        "emittedWorkUnits": 1045809,
+        "maxStepWorkUnits": 35,
+        "hostYields": 509,
+        "continuationsScheduled": 509,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "replace-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 933472,
+        "emittedWorkUnits": 4521152,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2080,
+        "continuationsScheduled": 2080,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "remove-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 920000,
+        "emittedWorkUnits": 4419968,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2020,
+        "continuationsScheduled": 2020,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    }
+  ],
+  "preparationTotalsByRole": {
+    "preN9": {
+      "childElapsedMs": 3136519.553295,
+      "publicPreparationCalls": 36304,
+      "publicPreparationWallMs": 957157.8248719989,
+      "publicPreparationCpuUserMs": 123996.11700000003,
+      "publicPreparationCpuSystemMs": 9626.524000000012
+    },
+    "acceptedN9": {
+      "childElapsedMs": 1796015.0279570005,
+      "publicPreparationCalls": 36304,
+      "publicPreparationWallMs": 202464.55241000035,
+      "publicPreparationCpuUserMs": 93800.56400000006,
+      "publicPreparationCpuSystemMs": 4631.882999999982
+    },
+    "current": {
+      "childElapsedMs": 1823973.4584180003,
+      "publicPreparationCalls": 36304,
+      "publicPreparationWallMs": 203088.20701399987,
+      "publicPreparationCpuUserMs": 94494.49799999998,
+      "publicPreparationCpuSystemMs": 4818.117999999984
+    }
+  },
+  "verification": {
+    "wallMs": 4879804.908119,
+    "queryPagesActuallyExecuted": 128712,
+    "queryScoresActuallyChecked": 2042808
+  }
+}

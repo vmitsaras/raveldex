@@ -2592,7 +2592,7 @@ Recheck net before-N9-to-current performance on frozen native workloads while pr
 
 **Measure incremental update costs and state preservation**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9005%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9005%22)
 
 **Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
@@ -2621,7 +2621,19 @@ Fill the missing current update-latency evidence with matched bounded mutations 
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9005.md](docs/evidence/RX-9005.md)
+- [docs/evaluation/RX-9005.md](docs/evaluation/RX-9005.md)
+- [docs/evidence/RX-9005/identity/artifacts.json](docs/evidence/RX-9005/identity/artifacts.json)
+- [docs/evidence/RX-9005/collection-budget-revision.json](docs/evidence/RX-9005/collection-budget-revision.json)
+- [docs/evidence/RX-9005/full-inventory.json.gz](docs/evidence/RX-9005/full-inventory.json.gz)
+- [docs/evidence/RX-9005/analysis/results.json](docs/evidence/RX-9005/analysis/results.json)
+- [docs/evidence/RX-9005/review/reconstruction.json](docs/evidence/RX-9005/review/reconstruction.json)
+- [docs/evidence/RX-9005/review/parent-analysis.json](docs/evidence/RX-9005/review/parent-analysis.json)
+- [docs/evidence/RX-9005/review/state-replay.json](docs/evidence/RX-9005/review/state-replay.json)
+- [docs/evidence/RX-9005/review/final.json](docs/evidence/RX-9005/review/final.json)
+- [docs/evidence/RX-9005/verification/validation.json](docs/evidence/RX-9005/verification/validation.json)
+- [docs/evidence/RX-9005/verification/identity.json](docs/evidence/RX-9005/verification/identity.json)
+- [docs/evidence/RX-9005/verification/retention-audit.json](docs/evidence/RX-9005/verification/retention-audit.json)
 
 
 ## RX-9006

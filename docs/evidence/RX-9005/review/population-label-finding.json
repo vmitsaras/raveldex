@@ -1,0 +1,37 @@
+{
+  "kind": "rx9005-analysis-population-label-finding-v1",
+  "status": "Fixed and independently verified",
+  "reportedAt": "2026-11-05T14:44:47.701085+00:00",
+  "sourceResultsSha256": "27261219bc1deadbd62d9930c08f37507fef2534d36dddbb9151bb1eb4cde634",
+  "cell": {
+    "size": 10000,
+    "configuration": "core-only",
+    "deadline": "default30s",
+    "caseKey": "addMany-new-vocabulary:B256",
+    "phase": "repeat-same-owner",
+    "before": "preN9",
+    "after": "current"
+  },
+  "observedComparisonPopulationFields": {
+    "beforePopulation": [
+      9744
+    ],
+    "afterPopulation": [
+      9744
+    ]
+  },
+  "actualCurrentCellPopulations": {
+    "beforePopulation": [
+      9744
+    ],
+    "afterPopulation": [
+      10000
+    ]
+  },
+  "issue": "Comparison afterPopulation is populated from after-role beforePopulation; ambiguous pre/post field name can report9744 to9744 for an actual9744 to10000 addMany. Timing/CPU/classification math is unaffected.",
+  "requestedFix": "Explicit role-specific pre/post population fields, or explicit common input/successful-post population fields. Regenerate derived facts and rebind final review hash; no benchmark rerun.",
+  "resolvedAt": "2026-11-05T14:47:12.340219+00:00",
+  "resolution": "All920 pairs now have explicit beforeRolePrePopulation,afterRolePrePopulation,beforeRolePostPopulation,afterRolePostPopulation checked against raw role cells. Legacy ambiguous fields removed. Original proof/log retained; final parent analysis hash rebound.",
+  "finalParentResultsSha256": "663fbc8a9af32a9a9e6f2fadb2ab318570f9ac1b34151411e2006935960c4bb8",
+  "finalComparisonProofSha256": "ca0ad59af4fdaf101c451181d8c15be8295d680c775d24f1eccd198653b04dc1"
+}
