@@ -2640,11 +2640,13 @@ Fill the missing current update-latency evidence with matched bounded mutations 
 
 **Verify host, recovery, deadline and resource tradeoffs**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22)
+**Milestone:** N10 · **Status:** `blocked` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22)
 
 **Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
 Measure selected real direct/worker and source-recovery configurations under truthful deadlines and cost boundaries, including actual failure and delivery outcomes.
+
+**Blocker or decision:** Original unchanged 180-minute recovery attempt failed total bound: 146/204 contexts completed, one interrupted and 57 uncollected. Owner chose original attempt only and declined a separate rerun; complete frozen recovery acceptance remains unavailable. No probe pooling or acceptance relaxation. First verification-overhead slice implemented and locally checked; canaries and another collection remain explicitly unauthorized.
 
 **Expected affected areas**
 
@@ -2669,7 +2671,17 @@ Measure selected real direct/worker and source-recovery configurations under tru
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9006.md](docs/evidence/RX-9006.md)
+- [docs/evaluation/RX-9006.md](docs/evaluation/RX-9006.md)
+- [docs/evidence/RX-9006/timed-browser-report.json](docs/evidence/RX-9006/timed-browser-report.json)
+- [docs/evidence/RX-9006/timed-recovery-report.json](docs/evidence/RX-9006/timed-recovery-report.json)
+- [docs/evidence/RX-9006/recovery-budget-owner-decision.json](docs/evidence/RX-9006/recovery-budget-owner-decision.json)
+- [docs/evidence/RX-9006/review/recovery-incomplete-replay.json](docs/evidence/RX-9006/review/recovery-incomplete-replay.json)
+- [docs/evidence/RX-9006/review/browser-scoped-inputs.json](docs/evidence/RX-9006/review/browser-scoped-inputs.json)
+- [docs/evidence/RX-9006/review/browser-statistics.json](docs/evidence/RX-9006/review/browser-statistics.json)
+- [docs/evidence/RX-9006/analysis/recovery-prefix.json.gz](docs/evidence/RX-9006/analysis/recovery-prefix.json.gz)
+- [docs/evidence/RX-9006/identity/retention-execution.json](docs/evidence/RX-9006/identity/retention-execution.json)
+- [docs/evidence/RX-9006/overhead-slice1/README.md](docs/evidence/RX-9006/overhead-slice1/README.md)
 
 
 ## RX-9007
@@ -2702,6 +2714,438 @@ Independently decide what the latest implementation improves, regresses or leave
 - Give independent reviewers raw artifacts, source identities and the frozen method; verify adverse cells and historical-versus-current attribution as well as favorable summaries.
 - Run relevant final project/installed-consumer and changed-site checks, validate all evidence references and regenerate the readable roadmap before completion.
 - Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9007.md before marking done; add only produced evidence and regenerate the roadmap.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9101
+
+**Confirm consumer scenario, state and compatibility contract**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/81)
+
+**Dependencies:** [RX-9007](IMPLEMENTATION_TASKS.md#rx-9007)
+
+Establish observable polish behavior for all consumer surfaces from the eight reviewed personas, separating existing guarantees, reversible presentation fixes and unresolved public-contract decisions.
+
+**Expected affected areas**
+
+`docs/specs/N11_UI_UX_POLISH.md`, `docs/specs/SEARCH_SOLUTIONS.md`, `docs/api/HOSTS.md`, `test/ui/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9101-AC01: Current source/tests are reconciled with F01–F10 and each finding maps to a task, affected surfaces and observable acceptance behavior.
+- RX-9101-AC02: A per-surface state matrix covers idle/composition/loading/results/append/empty/error/retry/reset/close/refresh/destroy, with keyboard, pointer and announcement expectations.
+- RX-9101-AC03: Idle filtering, focus-safe pagination, reset meaning, theme selection, localization and rich-display boundaries are explicitly specified before code changes; new load-bearing choices remain decision items.
+- RX-9101-AC04: N10 closeout and frozen-artifact ownership are respected; legacy workbench, native results, optional imports, public compatibility and publication boundaries remain intact.
+
+**Verification**
+
+- Inspect current contracts/source and existing regressions; review the proposed scenario/state matrix against the N11 guardrails.
+- Identify tests already proving behavior and missing checks without treating retained evidence as a fresh run.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9101.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9102
+
+**Make consumer adoption and Pagefind migration guidance explicit**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/82)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Give static-site and Pagefind adopters a short accurate route to the appropriate consumer preset and its required data/capabilities.
+
+**Expected affected areas**
+
+`docs/api/HOSTS.md`, `docs/api/STATIC_ASTRO.md`, `docs/api/GETTING_STARTED.md`, `docs/api/examples/`, `docs/api/PAGEFIND_MIGRATION.md`, `README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9102-AC01: Primary integration guidance distinguishes inline/modal/dropdown/directory/cards from the preserved developer workbench and leads ordinary consumers to the appropriate preset.
+- RX-9102-AC02: A Pagefind migration guide maps static HTML indexing expectations to explicit Raveldex records, fields, display maps and actual heading targets, with a complete supported integration path.
+- RX-9102-AC03: A capability matrix covers snippets/sections, images/metadata, filters/counts, paging, language, themes, keyboard behavior and ownership without promising drop-in compatibility.
+- RX-9102-AC04: Examples specify imports, explicit search mode, CSS, data preparation and teardown; version-sensitive Pagefind claims are checked against official documentation.
+
+**Verification**
+
+- Validate documented imports/options and complete examples against actual declarations and installed package exports.
+- Walk through a Pagefind-to-Raveldex adoption scenario; run relevant documentation/example checks without redesigning demo pages.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9102.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9103
+
+**Clarify idle filter availability and reset behavior**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/83)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Make inline/modal facet availability and reset outcomes understandable while preserving the no-automatic-query idle contract.
+
+**Expected affected areas**
+
+`src/addons/ui/inline.ts`, `src/addons/ui/inline-render.ts`, `src/addons/ui/inline.css`, `src/addons/ui/modal.ts`, `test/ui/inline-controls.test.mjs`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9103-AC01: Initial idle and cleared states do not imply usable facet choices when only All is available; guidance/presentation makes the next action clear.
+- RX-9103-AC02: Successful search, facet selection, empty results, failed requests and clear/reset transition consistently without silently issuing a browse-all query.
+- RX-9103-AC03: The visible and accessible reset label accurately describes whether query and filters are cleared; existing reset semantics stay compatible unless an explicit contract revision is approved.
+- RX-9103-AC04: Query/filter state, focus, composition, stale-response suppression and modal close/reopen behavior remain correct across these transitions.
+
+**Verification**
+
+- Add focused behavioral checks for first mount, query-populated buckets, selected filters, clear, retry and modal reuse.
+- Review the filter-first cognitive-accessibility scenario and keyboard recovery under the accepted idle contract.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9103.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9104
+
+**Simplify pagination presentation while preserving focus**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/84)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Reduce pagination clutter and clarify batch/window navigation without losing exact totals, bounded rendering or focused controls.
+
+**Expected affected areas**
+
+`src/addons/ui/inline.ts`, `src/addons/ui/inline-render.ts`, `src/addons/ui/inline.css`, `test/ui/inline-controls.test.mjs`, `test/ui/announcements-browser.test.mjs`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9104-AC01: Initial batch, appended batch, window cap, previous/next window and terminal results each present understandable available actions and result ranges.
+- RX-9104-AC02: Unavailable controls and their persistence follow an explicit focus-safe policy; a focused control is not removed or hidden without a defined recovery path.
+- RX-9104-AC03: Keyboard users have a discoverable route to appended content while native result links, deterministic order and current page/window bounds remain unchanged.
+- RX-9104-AC04: Clear, empty, error, retry and rapid query replacement do not leave misleading navigation or stale page summaries.
+
+**Verification**
+
+- Exercise counts below/at/above page and rendering-window boundaries with independent expected ranges and native result order.
+- Verify focus and appended-content discovery in installed inline and modal consumers, including narrow layouts.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9104.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9105
+
+**Polish search states and recovery messages**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/85)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Use clear consumer-facing status, empty and error language that explains the next useful action without exposing technical details as the primary message.
+
+**Expected affected areas**
+
+`src/addons/ui/inline.ts`, `src/addons/ui/inline-render.ts`, `src/addons/ui/dropdown.ts`, `src/addons/ui/directory-view-options.ts`, `test/ui/announcements-browser.test.mjs`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9105-AC01: Idle/loading/results/empty/failure/retry/reset copy is consistent across applicable consumer presets and accurately describes settled state.
+- RX-9105-AC02: Empty states safely identify the submitted query or active filtering context and explain available recovery; input and filters remain recoverable.
+- RX-9105-AC03: Operational failures offer an understandable retry/recovery path while retaining programmatically useful typed errors and optional diagnostics.
+- RX-9105-AC04: All inserted text is safe; announcement timing/deduplication, query replacement and destroy do not announce stale states or overwrite focus/composition.
+
+**Verification**
+
+- Exercise no match, filters excluding all matches, delayed replies, typed failures, retry and hostile/long query text in component regressions.
+- Review visible and accessible messages together; record human speech observations separately from automated live-region assertions.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9105.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9106
+
+**Make keyboard guidance discoverable and consistent**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/86)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Help users discover surface-appropriate navigation and dismissal keys without replacing native editing/link behavior.
+
+**Expected affected areas**
+
+`src/addons/ui/dropdown.ts`, `src/addons/ui/modal.ts`, `src/addons/ui/dropdown.css`, `src/addons/ui/modal.css`, `test/ui/dropdown-browser.test.mjs`, `test/ui/modal-browser.test.mjs`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9106-AC01: Dropdown users can discover Arrow navigation, Enter selection and Escape dismissal through concise visible/accessible guidance.
+- RX-9106-AC02: Modal guidance accurately describes native search-input Escape handling and dialog dismissal; shortcuts remain opt-in under the current contract.
+- RX-9106-AC03: Inline/directory native lists keep their existing keyboard model; guidance does not imply combobox behavior on unrelated surfaces.
+- RX-9106-AC04: Guidance works with long translated text and multiple instances; active descendants, Tab order, native links, focus restoration and composition remain correct.
+
+**Verification**
+
+- Verify keyboard sequences on installed dropdown and modal components, including no active row, native input clearing and close/reopen.
+- Review hint exposure with assistive technology when available and keep speech/platform limits explicit.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9106.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9107
+
+**Unify consumer themes, narrow layouts and target comfort**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/87)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Polish shipped component CSS so consumers have coherent theming, readable hierarchy and comfortable interactions in real host layouts.
+
+**Expected affected areas**
+
+`src/addons/ui/inline.css`, `src/addons/ui/modal.css`, `src/addons/ui/dropdown.css`, `src/addons/ui/directory.css`, `src/addons/ui/directory-cards.css`, `test/ui/`, `docs/api/HOSTS.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9107-AC01: A documented light/dark/host-override policy is applied consistently across inline/modal/dropdown/directory/cards using existing scoped customization conventions.
+- RX-9107-AC02: Result links and primary controls have a documented target-comfort policy with measured sizes/spacing; no unmeasured accessibility-conformance claim is made.
+- RX-9107-AC03: Compact headers, modal content, filters and navigation remain usable at narrow widths with long text, RTL, forced colors and enlarged content.
+- RX-9107-AC04: Visible focus, safe wrapping, reduced motion, native semantics, optional CSS imports and host isolation remain intact without global tokens or new runtime dependencies.
+
+**Verification**
+
+- Compare isolated component and installed-host states using the agreed light/dark/RTL/long-label/forced-colors viewport matrix; measure clipping/overflow/targets/contrast.
+- Observe actual 200%/400% zoom and mobile keyboard behavior where available; identify emulation and missing device observations explicitly.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9107.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9108
+
+**Provide coherent localization and message customization**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/88)
+
+**Dependencies:** [RX-9105](IMPLEMENTATION_TASKS.md#rx-9105), [RX-9106](IMPLEMENTATION_TASKS.md#rx-9106), [RX-9110](IMPLEMENTATION_TASKS.md#rx-9110)
+
+Make it practical to translate complete consumer interfaces consistently using the accepted explicit message contract.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `test/ui/`, `docs/api/HOSTS.md`, `docs/api/PAGEFIND_MIGRATION.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9108-AC01: A complete message inventory covers visible labels, statuses, recovery, reset, keyboard hints, counts and assistive text for every consumer surface.
+- RX-9108-AC02: A documented locale/message configuration path prevents accidental mixed-language interfaces; fallback and partial-override behavior are explicit and tested.
+- RX-9108-AC03: Number/plural handling and any locale selection are specified before adding public fields; UI language remains separate from engine query analysis.
+- RX-9108-AC04: Long translations, RTL and locale changes through supported capture/remount behavior preserve focus, accessible names and lifecycle safety.
+
+**Verification**
+
+- Test complete and partial message configurations, zero/one/many counts, missing keys and remounting with a different language.
+- Review at least a complete non-English configuration plus long-text RTL fixtures without claiming translation quality from automation alone.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9108.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9109
+
+**Decide rich-result compatibility without expanding APIs implicitly**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/89)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Resolve the adopter-facing split between title/snippet/section results and rich directory metadata with an explicit bounded compatibility decision.
+
+**Expected affected areas**
+
+`src/addons/ui/types.ts`, `src/addons/ui/directory-cards-types.ts`, `docs/specs/N11_UI_UX_POLISH.md`, `docs/specs/DIRECTORY_CARDS.md`, `docs/api/HOSTS.md`, `docs/api/PAGEFIND_MIGRATION.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9109-AC01: A source-verified surface matrix states support for titles/URLs, excerpts, matching snippets/highlights, sections, breadcrumbs, dates and images.
+- RX-9109-AC02: Pagefind migration scenarios identify which desired displays are possible through existing options and which require a different surface or optional capability.
+- RX-9109-AC03: A reviewed decision either documents the current boundary or proposes a separately selectable additive contract with data ownership, safe text/URL handling, image privacy and lifecycle costs.
+- RX-9109-AC04: No new renderer callback, mandatory provider, automatic image request, retained side index or public display field is implemented as part of this decision task.
+
+**Verification**
+
+- Verify supported combinations and incompatible options against declarations/source and existing installed cases.
+- Review the minimum proposal or keep-current decision against native result identity/order, optionality, privacy and compatibility constraints.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9109.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9110
+
+**Explain directory counts and multi-select filtering plainly**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/90)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Make current-result facet counts understandable without changing conjunctive count semantics or OR/AND selection behavior.
+
+**Expected affected areas**
+
+`src/addons/ui/directory-view-options.ts`, `src/addons/ui/directory-view-mount.ts`, `src/addons/ui/directory.css`, `test/ui/directory-view.test.mjs`, `docs/api/HOSTS.md`, `docs/specs/DIRECTORY_VIEW.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9110-AC01: Labels/help explain counts as belonging to the complete current filtered result set, using consumer language rather than unexplained Boolean jargon.
+- RX-9110-AC02: A mutually exclusive two-value scenario demonstrates why adding a zero-current-count OR option can expand results; usable choices are not wrongly disabled.
+- RX-9110-AC03: Selected state, active filters and remove/reset recovery are clear and remain synchronized with exact totals, pagination and configured URL state.
+- RX-9110-AC04: No disjunctive/predicted counts, changed filter logic or approximate totals are introduced under this copy/presentation task.
+
+**Verification**
+
+- Add or reuse independent expected-result cases for one/two OR choices, multiple AND groups, zero-count options and URL Back/Forward.
+- Review cognitive and keyboard scenarios in installed directory/list/card presentations.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9110.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9111
+
+**Document safe CMS refresh, remount and state preservation**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/91)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
+
+Give dynamic-content integrators an accurate lifecycle recipe using existing engine, UI and directory-controller contracts.
+
+**Expected affected areas**
+
+`docs/api/HOSTS.md`, `docs/api/examples/`, `src/addons/ui/directory-controller.ts`, `src/addons/ui/inline.ts`, `src/addons/ui/modal.ts`, `test/ui/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9111-AC01: A complete recipe distinguishes engine mutations, explicit search/refresh and display maps captured at mount; repeated same-kind mount does not imply option replacement.
+- RX-9111-AC02: App-owned query/filter state is preserved through supported APIs where possible; unsupported inline/modal snapshot or filter setters are identified honestly.
+- RX-9111-AC03: Destroy/remount ordering, borrowed-engine lifetime, stale responses and engine disposal are specified and demonstrated without background subscriptions or polling.
+- RX-9111-AC04: If an existing API cannot support a required scenario, record a bounded decision/follow-up instead of inventing methods or expanding public state ownership.
+
+**Verification**
+
+- Run an installed integration scenario with metadata/content changes, refresh, remount, repeated mounts and disposal; check latest results and cleanup.
+- Validate documented code against actual handle/controller declarations and ownership regressions.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9111.md before completion; add only produced evidence and regenerate the plan.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9112
+
+**Verify consumer polish across personas and synchronize guidance**
+
+**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/92)
+
+**Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101), [RX-9102](IMPLEMENTATION_TASKS.md#rx-9102), [RX-9103](IMPLEMENTATION_TASKS.md#rx-9103), [RX-9104](IMPLEMENTATION_TASKS.md#rx-9104), [RX-9105](IMPLEMENTATION_TASKS.md#rx-9105), [RX-9106](IMPLEMENTATION_TASKS.md#rx-9106), [RX-9107](IMPLEMENTATION_TASKS.md#rx-9107), [RX-9108](IMPLEMENTATION_TASKS.md#rx-9108), [RX-9109](IMPLEMENTATION_TASKS.md#rx-9109), [RX-9110](IMPLEMENTATION_TASKS.md#rx-9110), [RX-9111](IMPLEMENTATION_TASKS.md#rx-9111)
+
+Prove the milestone outcome on shipped plugin interfaces through independent scenario, state, integration and accessibility evidence.
+
+**Expected affected areas**
+
+`test/ui/`, `test/types/`, `docs/evidence/`, `docs/api/`, `docs/specs/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9112-AC01: Every F01–F10 finding maps to a verified outcome or an explicit reviewed compatibility decision, without silently expanding demo or core scope.
+- RX-9112-AC02: Installed consumer tests cover all affected surfaces, native links, exact counts/order, composition, focus, stale replies, repeated lifecycle and optional capability failures.
+- RX-9112-AC03: Visual/responsive/theme/translation checks and required human screen-reader, actual zoom and physical/mobile observations have exact environments and truthful Pass/Fail/Blocked/Not-run status.
+- RX-9112-AC04: Resulting diffs, public contracts, migration/CMS recipes, generated roadmap, actual evidence and GitHub issues agree; unresolved required failures are not labeled complete and publication remains separate.
+
+**Verification**
+
+- Run focused behavior checks first, then relevant full project/installed-consumer checks after timing ownership is clear; independently review the final diff and scenario evidence.
+- Review each persona journey against the agreed state matrix and include adverse/manual/unavailable outcomes in the final qualification record.
+- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9112.md before completion; add only produced evidence and regenerate the plan.
 
 **Recorded evidence**
 

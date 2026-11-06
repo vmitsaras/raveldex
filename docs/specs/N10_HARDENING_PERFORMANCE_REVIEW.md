@@ -1,5 +1,19 @@
 # N10 — Post-N9 hardening and performance review
 
+## RX-9006 first verifier slice — 6 November 2026
+
+[Slice evidence](../evidence/RX-9006/overhead-slice1/README.md) implements source-only unused-position allocation removal, privately authenticated validated-source facts and context-local immutable lazy literal expectations. Existing branch-dependent public calls/pages, source/private/offset observations, receipts, later writes and online live witnesses remain. All 116 focused tests and independent 2,250-capture differential/literal checks pass; static staging compiles twelve bundles without executing a context. Independent implementation review passes. Closing full project/private-candidate checks pass 1,489 tests: 1,481 passed, eight intentional comparator skips and zero failures. All 6,195 guarded inputs stayed unchanged during the check; the private package is byte-identical to the prior RX-9006 verified archive.
+
+Dated verifier revision rx9006-recovery-verification-2026-11-06-slice1 changes observer allocation/warming and is not measurement qualification. Runtime/N9 helper/original frozen method/native limits and existing 180-minute/300-second collection policy remain unchanged. Proposed new policies, profiling and comparator are deferred. No canary or new collection was started; original 146/204 remains incomplete, so RX-9006 is blocked and dependent RX-9007/N11 implementation waits. Original v1 sources, failures, artifacts and foreign planning are preserved; no remote mutation/publication occurred.
+
+## RX-9006 execution checkpoint — 5 November 2026
+
+[Host/recovery evidence](../evidence/RX-9006.md) and the [readout](../evaluation/RX-9006.md) record an incomplete original recovery collection: 146/204 contexts completed, one interrupted and 57 uncollected. The unchanged 10,800,000 ms total bound was exceeded by 2,768.789167 ms including final guards; outcome Fail and acceptedPerformanceEvidence false remain intact. The remaining total budget governed interruption, not a native deadline or exhaustion of the full 300s context allowance. The owner chose to keep only this original attempt; no rerun, extension, pooling or acceptance relaxation is authorized.
+
+Independent complete-row source/root/offset/score/receipt/later-write replay passes for all saved rows. The full browser cohort completes 96 contexts/6,144 measured calls, with scoped input/semantic/statistical review and separate clock qualification. Its original broad workspace guard remains Fail for foreign planning/tracking changes, with measured-input audit Pass retained separately. Separate queue/transport diagnostics, graph and ownership observations preserve actual scope; no browser CPU/heap or physical-platform claim follows.
+
+RX-9006 remains blocked on complete frozen recovery coverage; RX-9007 and dependent N11 work wait. Fresh project/private-candidate verification passes 1,409 tests (1,401 passed/eight intentional comparator skips/zero failures), with all 5,810 guarded inputs unchanged during the check. The verified archive remains byte-identical to RX-9005. Runtime/dependencies/native limits/original frozen method and foreign N11 data are unchanged. All failed/probe/partial attempts are preserved; no commit, remote mutation or publication occurred. This supersedes historical next-task statements below.
+
 ## RX-9005 execution checkpoint — 5 November 2026
 
 The [incremental-update collection](../evidence/RX-9005.md) and [readout](../evaluation/RX-9005.md) complete the full 144-process matrix, with 5,544 ordinary/696 diagnostic windows, 107,544 selected public calls, 72 excluded warmups and 240 zero-attempt N/A rows. All selected mutations passed. Complete independent initial/delta/source/position/query replay and numerical reconstruction pass; four wall and 17 CPU-total regressions, overlap and same-runtime control variation remain explicit. No production implementation, dependency, scoring model or native cap changed.

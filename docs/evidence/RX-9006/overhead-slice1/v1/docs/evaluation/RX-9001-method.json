@@ -1,0 +1,395 @@
+{
+  "kind": "rx9001-frozen-method-v1",
+  "scope": "Method and pilot only; downstream full collections are not executed by RX-9001.",
+  "artifactRoles": [
+    "preN9",
+    "acceptedN9",
+    "current"
+  ],
+  "node": {
+    "contractModule": "bench/n10/contract.mjs",
+    "fullChildren": 216,
+    "fullNormalChildren": 162,
+    "fullDiagnosticChildren": 54,
+    "fullNormalQueryCalls": 13536,
+    "fullDiagnosticQueryCalls": 432,
+    "fullTailCells": {
+      "family": "adversarial",
+      "sizes": [
+        100,
+        1000
+      ],
+      "normalOwners": 3,
+      "callsPerOwner": 40,
+      "untimedWarmupsPerOwner": 2
+    },
+    "pilotChildren": 18,
+    "pilotNormalQueryCalls": 192,
+    "pilotDiagnosticQueryCalls": 48,
+    "pilotTailClaims": false,
+    "normalOutput": {
+      "queryLimit": 20,
+      "exactTotal": true,
+      "materialization": "native public complete total and top20; full pages/Inspector are separate untimed verification"
+    },
+    "collectionBudgetMs": 10800000,
+    "childWatchdogMs": 600000,
+    "pilotBudgetMs": 600000,
+    "pilotChildWatchdogMs": 90000
+  },
+  "deadlines": [
+    {
+      "id": "default30s",
+      "timedOptions": {},
+      "meaning": "deadlineMs omitted; ordinary30000ms or lower configured maximum"
+    },
+    {
+      "id": "explicit60s",
+      "timedOptions": {
+        "deadlineMs": 60000
+      },
+      "meaning": "explicit historical60000ms cohort, not default"
+    }
+  ],
+  "updates": {
+    "task": "RX-9005",
+    "status": "Frozen future cohort; not collected in RX-9001",
+    "family": "adversarial",
+    "sizes": [
+      100,
+      1000,
+      10000
+    ],
+    "configurations": [
+      {
+        "id": "core-only",
+        "addons": []
+      },
+      {
+        "id": "source-positions",
+        "addons": [
+          {
+            "entry": "addons/phrases",
+            "factory": "createSourceProvider",
+            "options": {
+              "fields": [
+                "body"
+              ]
+            }
+          },
+          {
+            "entry": "addons/positions",
+            "factory": "createPositionProvider",
+            "options": {
+              "fields": [
+                "body"
+              ],
+              "offsets": [
+                "body"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "deadlineCohorts": [
+      "default30s",
+      "explicit60s"
+    ],
+    "normalOwners": 3,
+    "diagnosticOwners": 1,
+    "children": 144,
+    "normalRepetitions": 2,
+    "tail": {
+      "operation": "replace-existing-vocabulary",
+      "size": 1000,
+      "repetitionsPerNormalOwner": 40,
+      "observationsPerArtifactConfigurationDeadline": 120,
+      "untimedWarmups": 2
+    },
+    "batchSizes": [
+      1,
+      32,
+      256
+    ],
+    "notApplicable": [
+      {
+        "size": 100,
+        "batch": 256,
+        "attempts": 0,
+        "reason": "batch exceeds declared collection size; no resizing or fabricated timing"
+      }
+    ],
+    "singleRecordCases": [
+      {
+        "id": "add-new-vocabulary",
+        "publicCall": "add",
+        "before": "N-1 frozen records; reserved final ID absent",
+        "input": "reserved ID + newVocabularyRecord",
+        "after": "N records, novel terms present"
+      },
+      {
+        "id": "replace-existing-vocabulary",
+        "publicCall": "replace",
+        "before": "N-1 frozen records plus reserved ID at authored A or B",
+        "input": "alternate A->B->A; genuinely different order/source/positions, same vocabulary",
+        "after": "N records; changed:true, expected alternate source"
+      },
+      {
+        "id": "replace-new-vocabulary",
+        "publicCall": "replace",
+        "before": "N-1 frozen records plus reserved ID at A",
+        "input": "reserved ID + newVocabularyRecord",
+        "after": "N records; expected removed/created terms"
+      },
+      {
+        "id": "remove",
+        "publicCall": "remove",
+        "before": "N-1 frozen records plus reserved ID at A",
+        "input": "reserved final ID",
+        "after": "N-1 records; reserved ID absent"
+      },
+      {
+        "id": "reinsert",
+        "publicCall": "add",
+        "before": "N-1 frozen records; reserved final ID absent after untimed removal",
+        "input": "reserved ID + A",
+        "after": "N records; reserved ID restored"
+      },
+      {
+        "id": "remove-unique-vocabulary",
+        "publicCall": "remove",
+        "before": "N-1 frozen records plus reserved ID at newVocabularyRecord; n10novel/n10replacement occur only there",
+        "input": "reserved final ID",
+        "after": "N-1 records; both unique terms absent from complete live dictionary and independent retrieval/source/positions checks"
+      }
+    ],
+    "singleRecordTrace": {
+      "reservedId": "original final record in workloadFor(adversarial,N)",
+      "preAddPopulation": "N-1; add creates N",
+      "existingVocabularyA": {
+        "text": {
+          "body": "n9common n9red n9blue"
+        },
+        "metadata": {
+          "group": "g0"
+        }
+      },
+      "existingVocabularyB": {
+        "text": {
+          "body": "n9blue n9common n9red"
+        },
+        "metadata": {
+          "group": "g0"
+        }
+      },
+      "newVocabularyRecord": {
+        "text": {
+          "body": "n10novel n10replacement n9common"
+        },
+        "metadata": {
+          "group": "g1"
+        }
+      },
+      "replaceRule": "alternate A/B; require changed:true and verify distinct source/order/positions despite equal token membership",
+      "postMutationChecks": "independent authored record-state and lexical/full-page/hand-arithmetic expectations outside timing",
+      "reset": "restore exact declared pre-state outside timing; record actual revisions, preparation and reset costs separately",
+      "caseMapping": "singleRecordCases fixes public method, input, pre/post population and exact A/B/novel templates; set id to reserved final ID."
+    },
+    "batchCases": [
+      {
+        "id": "addMany-new-vocabulary",
+        "publicCall": "addMany",
+        "timedWindow": "one admitted batch of B records, prepopulation N-B",
+        "input": "trailing B original IDs; each body is n9common n10batchnovel n10batch{j}, j=0..B-1 zero-padded to six digits; group g1",
+        "after": "N records; declared novel terms created"
+      },
+      {
+        "id": "addMany-existing-vocabulary",
+        "publicCall": "addMany",
+        "timedWindow": "one admitted batch of B records, prepopulation N-B",
+        "input": "trailing B original IDs mapped to authored A; all A vocabulary asserted already present",
+        "after": "N records; dictionary term membership unchanged"
+      },
+      {
+        "id": "replace-existing-records",
+        "publicCall": "B sequential replace calls",
+        "timedWindow": "entire ordered sequence, not one atomic mutation",
+        "before": "N-B frozen prefix plus trailing B IDs mapped to A",
+        "input": "trailing IDs in ascending fixture order, each mapped to B",
+        "after": "N records; all B replacements changed:true; dictionary membership unchanged"
+      },
+      {
+        "id": "remove-existing-records",
+        "publicCall": "B sequential remove calls",
+        "timedWindow": "entire ordered sequence, not one atomic mutation",
+        "before": "N-B frozen prefix plus trailing B IDs mapped to A",
+        "input": "trailing B IDs in ascending fixture order",
+        "after": "N-B records"
+      },
+      {
+        "id": "reinsert-removed-records",
+        "publicCall": "addMany",
+        "timedWindow": "one admitted batch of B records, prepopulation N-B after untimed removal",
+        "input": "trailing B IDs mapped to A",
+        "after": "N records; exact declared source restored"
+      }
+    ],
+    "batchRule": "B=1/32; B=256 only at N>=1000. Original reserved IDs are workload.records.slice(N-B). Reset exact authored prestate outside each measured window; input templates and sequence order are fixed above. All outcomes/receipts and per-call count for sequences are retained. No silent API/granularity/size substitution.",
+    "watchdogMs": 600000,
+    "budgetMs": 5400000,
+    "diagnosticRepetitions": 1
+  },
+  "browserQueries": {
+    "task": "RX-9006",
+    "status": "Frozen future cohort; not collected in RX-9001",
+    "family": "adversarial",
+    "sizes": [
+      100,
+      1000
+    ],
+    "channels": [
+      "direct",
+      "real-module-worker"
+    ],
+    "configuration": "source+source-phrases on body",
+    "queries": [
+      "common",
+      "rare",
+      "narrow-prefix",
+      "source-phrase"
+    ],
+    "deadlineCohorts": [
+      "default30s",
+      "explicit60s"
+    ],
+    "normalOwners": 3,
+    "diagnosticOwners": 1,
+    "contexts": 96,
+    "samplesAt100": 2,
+    "samplesAt1000": 40,
+    "untimedWarmupsAt1000": 2,
+    "normalQueryCalls": 6048,
+    "diagnosticQueryCalls": 96,
+    "perContextWatchdogMs": 300000,
+    "budgetMs": 5400000,
+    "browserIdentity": "Exact installed Chromium version and executable hash must be captured before collection; no transfer to Chrome/WebKit/Safari or physical input.",
+    "engineVersion": {
+      "engine": "Chromium",
+      "version": "149.0.7827.55",
+      "identityRecord": "docs/evidence/RX-9001/identity/artifacts.json environment.browsers.chromium"
+    }
+  },
+  "recovery": {
+    "task": "RX-9006",
+    "status": "Frozen future cohort; not collected in RX-9001",
+    "hosts": [
+      "Node-direct",
+      "browser-direct",
+      "browser-real-module-worker"
+    ],
+    "configurations": [
+      "source+source-phrases",
+      "source+positions-with-body-offsets"
+    ],
+    "deadlineCohorts": [
+      "default30s",
+      "explicit60s"
+    ],
+    "normalOwners": 2,
+    "diagnosticOwners": 1,
+    "primary": [
+      {
+        "family": "adversarial",
+        "size": 1000,
+        "roles": [
+          "preN9",
+          "acceptedN9",
+          "current"
+        ],
+        "attemptsOrDiagnosticContexts": 108
+      },
+      {
+        "family": "adversarial",
+        "size": 10000,
+        "roles": [
+          "preN9",
+          "current"
+        ],
+        "attemptsOrDiagnosticContexts": 72
+      }
+    ],
+    "refusalControls": {
+      "families": [
+        "real-docs",
+        "high-cardinality"
+      ],
+      "size": 10000,
+      "roles": [
+        "preN9",
+        "current"
+      ],
+      "host": "Node-direct",
+      "configuration": "source+source-phrases",
+      "contexts": 24
+    },
+    "contexts": 204,
+    "tailEstimates": false,
+    "priorReceiver": {
+      "id": "prior-state",
+      "text": {
+        "body": "n9oldstate"
+      },
+      "metadata": {
+        "group": "prior"
+      }
+    },
+    "requiredChecks": [
+      "complete source/positions/offsets and later writes after success",
+      "exact old source/root/query observations after authoritative precommit failure",
+      "Unknown delivery is not rollback or safe blind retry",
+      "source export refusal makes restore Not run with zero attempts"
+    ],
+    "perContextWatchdogMs": 300000,
+    "budgetMs": 10800000
+  },
+  "timingRules": {
+    "serialCollectors": true,
+    "taskOwnedBuildsTestsConcurrent": false,
+    "normalVersusDiagnostic": "separate installed copies and observations; no subtraction to invent observer overhead",
+    "p95MinimumActualSameCellSamples": 100,
+    "normalCpu": "process CPU user/system includes harness/promise activity, not isolated engine CPU",
+    "watchdog": "orchestrator budget exhaustion is Incomplete collection, never a fabricated native deadline result",
+    "warmup": "excluded from measured samples; retain outcome and numerical consistency checks",
+    "environment": "record actual Node/npm/browser/OS/hardware/executable and package/input/harness identities; no representative traffic or universal platform claim"
+  },
+  "decisionRule": {
+    "correctnessGate": "complete frozen coverage and independent results/arithmetic/state/input/artifact checks before latency interpretation",
+    "latency": "report absolute/relative successful wall and CPU per workload/phase/host/configuration/deadline; keep outcome denominators and owner summaries",
+    "observedSeparation": "For at least three fresh normal owners with comparable successful outcomes, strictly nonoverlapping owner-median ranges support observed faster/slower in these repeats only; overlapping ranges, zero timer floors or insufficient owners are Inconclusive/within observed variation. This is not a confidence interval or population claim.",
+    "p95": "descriptive empirical nearest-rank same-cell quantiles only, not independent-device tails",
+    "capacity": "refusal-to-success or reverse is capacity improved/regressed, never an equal-work speed ratio",
+    "sameRuntime": "accepted/current equal runtime is a method/environment control; timing variation cannot be labeled another implementation gain",
+    "noOverallWinner": "no weighted total without owner-selected workload distribution; retain every adverse and unavailable cell"
+  },
+  "semanticPilot": {
+    "roles": [
+      "preN9",
+      "acceptedN9",
+      "current"
+    ],
+    "family": "adversarial",
+    "size": 100,
+    "historicalChild": "bench/n9/paired-semantics.mjs --child",
+    "host": "private controlled zero-clock host; explicit60000ms untimed verifier, not deadline/fairness evidence",
+    "checks": [
+      "full eight-query public pagination and independent IDs/order",
+      "selected Inspector formula replay and literal facets/source",
+      "source/positions/offset/mixed fixtures and later writes",
+      "cross-role canonical core and complete public-result comparisons",
+      "timed top20 captures from both real-host deadline cohorts agree with corresponding full semantic prefix"
+    ],
+    "outputScope": "pilot only, not full collection"
+  },
+  "environmentDriftRule": "Use matched observed environment within every pair. If the frozen runtime/browser/hardware/toolchain cannot be retained, record a new method/environment revision before collection and keep its observations separate; never inherit or pool an old Pass."
+}

@@ -1,0 +1,20 @@
+{
+  "status": "Nonaccepted probe timing invalidated",
+  "recordedAt": "2026-11-05T15:23:19.799736+00:00",
+  "attempt": "browser-probe-01",
+  "cause": "Parent launched browser feasibility probe before receiving recovery owner notification that an already-started focused test was still running. That test was stopped via its own exec session Ctrl-C; no assertion failure, onepass/onecancellation. Initial timing may overlap.",
+  "disposition": "Retain all raw/progress. Never use any probe timing in accepted statistics or pool with fresh full samples. Probe may reveal integration/correctness defects; full collection must wait explicit all-owner tests/build/preparation quiescence.",
+  "scope": "Coordination/method issue, not native timeout/cancellation; only the interrupted test process was stopped.",
+  "interruptedTest": {
+    "command": "node --test test/comparison/n10-host-recovery-method.test.mjs",
+    "session": 15115,
+    "reportedDurationMs": 29664.5925,
+    "pass": 1,
+    "cancelled": 1,
+    "assertionFailures": 0,
+    "exitCode": 1,
+    "stop": "Ctrl-C through owned exec session",
+    "wallClockStartAndStop": "Not captured; no precise overlap interval claimed",
+    "earlierPkillAttempt": "No-op failed because process listing/sysmon unavailable"
+  }
+}

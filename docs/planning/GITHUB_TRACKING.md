@@ -2,6 +2,12 @@
 
 The [milestone list](https://github.com/vmitsaras/raveldex/milestones) and [issues](https://github.com/vmitsaras/raveldex/issues) mirror stable IDs from `roadmap.json`.
 
+## N11 registration — 5 November 2026
+
+The owner-selected [consumer plugin polish milestone](https://github.com/vmitsaras/raveldex/milestone/11) has overview [#80](https://github.com/vmitsaras/raveldex/issues/80) and twelve planned native sub-issues, RX-9101–RX-9112 ([#81](https://github.com/vmitsaras/raveldex/issues/81) through [#92](https://github.com/vmitsaras/raveldex/issues/92)). Only task issues belong to the milestone; the overview remains unassigned. See the [registration record](N11_GITHUB.md) and [planning contract](../specs/N11_UI_UX_POLISH.md).
+
+This targeted registration leaves unrelated N10 local/remote state unchanged. Companion planning edits are uncommitted at registration; no full synchronization or implementation is implied. Existing native relationships are preserved by metadata synchronization; the automated native linker below remains N9-only. Older inventory counts below describe their historical registration scope; use the current manifest and actual remote inventory for live counts.
+
 ## Structure
 
 - Ten milestone definitions now span N0–N9; N9 tracks performance/recovery and retains a separate task checklist.

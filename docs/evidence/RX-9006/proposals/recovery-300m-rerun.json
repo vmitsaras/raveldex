@@ -1,0 +1,761 @@
+{
+  "status": "Owner declined; NOT authorized or applied",
+  "recordedAt": "2026-11-05T17:08:20.349165+00:00",
+  "currentAttempt": "/private/tmp/raveldex-rx9006-20261105/recovery-full-01",
+  "currentFrozenTotalMs": 10800000,
+  "proposedSeparateFreshTotalMs": 18000000,
+  "currentPerContextMs": 300000,
+  "proposedPerContextMs": 300000,
+  "reason": "Full selected10k contexts combine real operation windows with complete public pagination under fixed maxHits100, full source/core/position checks and subsequent writes. Observed100\u2013170s cases and236/261s prior large worker probes create material risk that204 serial contexts exceed the original180m total. This is a feasibility projection, not an extrapolated performance claim. Increasing verification page size above100 would change a frozen native limit and is excluded.",
+  "fullyCapturedRepresentativeRuns": [
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 1000,
+        "host": "browser-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": false,
+        "index": 6,
+        "key": "6-adversarial-1000-browser-direct-source-preN9-default30s-0-normal"
+      },
+      "file": "6-adversarial-1000-browser-direct-source-preN9-default30s-0-normal.json",
+      "contextElapsedMs": 66300.575166,
+      "outcome": "Collected",
+      "sha256": "ac3d9db40f0fd73b0ebe98a54c5e5e528012b56c4fb2cbd6e9354d35534a7509"
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 1000,
+        "host": "browser-real-module-worker",
+        "variant": "positions-offsets",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": false,
+        "index": 15,
+        "key": "15-adversarial-1000-browser-real-module-worker-positions-offsets-preN9-default30s-0-normal"
+      },
+      "file": "15-adversarial-1000-browser-real-module-worker-positions-offsets-preN9-default30s-0-normal.json",
+      "contextElapsedMs": 82151.43091700005,
+      "outcome": "Collected",
+      "sha256": "9d9d83cca87710a2771aed9178b3fa255ca20e6aeeb4e60830b922ae4071188c"
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": false,
+        "index": 18,
+        "key": "18-adversarial-10000-Node-direct-source-preN9-default30s-0-normal"
+      },
+      "file": "18-adversarial-10000-Node-direct-source-preN9-default30s-0-normal.json",
+      "contextElapsedMs": 98583.11533299997,
+      "outcome": "Collected",
+      "sha256": "46db1af3dbbe7ac4ea33cbcb6d6a6e02dfb2877db862450f950ff3e6fb00aabd"
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": false,
+        "index": 19,
+        "key": "19-adversarial-10000-Node-direct-source-current-default30s-0-normal"
+      },
+      "file": "19-adversarial-10000-Node-direct-source-current-default30s-0-normal.json",
+      "contextElapsedMs": 170718.74429099995,
+      "outcome": "Collected",
+      "sha256": "7cca2d3eea7c2fe0d235c06cbd7cb12f9140f3647134c85a34fa360635f39b35"
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "positions-offsets",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": false,
+        "index": 20,
+        "key": "20-adversarial-10000-Node-direct-positions-offsets-preN9-default30s-0-normal"
+      },
+      "file": "20-adversarial-10000-Node-direct-positions-offsets-preN9-default30s-0-normal.json",
+      "contextElapsedMs": 109170.75874999992,
+      "outcome": "Collected",
+      "sha256": "d621494098649b51d7f4d4b10ce778c2d416b1103dc75d46c52dae8a28d50506"
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "positions-offsets",
+        "role": "current",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": false,
+        "index": 21,
+        "key": "21-adversarial-10000-Node-direct-positions-offsets-current-default30s-0-normal"
+      },
+      "file": "21-adversarial-10000-Node-direct-positions-offsets-current-default30s-0-normal.json",
+      "contextElapsedMs": 175800.03099999996,
+      "outcome": "Collected",
+      "sha256": "9bde6a749a51a075428da5bbe2b599037e45bbd7b5a38efa9e5afe99e7f5453f"
+    }
+  ],
+  "unchanged": [
+    "All204context tuples/roles/hosts/configurations/deadlines/owners",
+    "Native30s omission and60s explicit cohorts",
+    "Native limits including maxHits100 and256batch",
+    "Publicworker65000msdefault",
+    "Full source/core/offset/receipt/publicmembership andlaterwrite proof",
+    "Normalvsdiagnostic separation",
+    "Percontext300s watchdog",
+    "All actual failures/refusals/Unknown/zeroattemptNotrun outcomes"
+  ],
+  "executionIfApproved": "Operator-stop only current owned collector/active child and preserve every complete/partial raw file and initial180m method. Record the explicit owner answer as a dated revision; default stays180m and only named full-run opt-in gets300m. Prepare fresh pinned assets/source; run204 entirely fresh contexts serially, without pooling earlier samples. Keep all prior attempts and nativecaps unchanged.",
+  "executionWithoutApproval": "Keep original180m attempt and its cap unchanged. If it exhausts, preserve incomplete evidence and do not mark RX-9006 complete.",
+  "methodSource": "docs/evaluation/RX-9001-method.json recovery.budgetMs10800000",
+  "methodSha256": "ec288cc5a1fc8db0d2551c47055dbb2b492025bae414dbb5df68becd7fc0c8c8",
+  "representativeBlockObservation": {
+    "recordedAt": "2026-11-05T17:31:26.311048+00:00",
+    "completedFirstBlockContexts": 30,
+    "contextElapsedMsSum": 2275177.4479579995,
+    "minutes": 37.919624132633324,
+    "primaryMatrixBlocksOfSameTupleStructure": 6,
+    "illustrativePrimaryProjectionMsAtObservedBlockRate": 13651064.687747996,
+    "illustrativePrimaryProjectionMinutes": 227.51774479579993,
+    "controlsAdditionalContexts": 24,
+    "scope": "Feasibility projection only; laterdeadline/diagnosticcohorts andexternalconditions differ. No observedtotalruntime or performancecomparison claim. Original180m attempt remains unchanged pendingexplicitownerreply.",
+    "actualRuns": [
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "Node-direct",
+          "variant": "source",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 0,
+          "key": "0-adversarial-1000-Node-direct-source-preN9-default30s-0-normal"
+        },
+        "file": "0-adversarial-1000-Node-direct-source-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 21662.92875,
+        "outcome": "Collected",
+        "sha256": "1110831f66c271418244077c771f08910483f2ad18d668580dc955096ec4c674"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "Node-direct",
+          "variant": "source",
+          "role": "acceptedN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 1,
+          "key": "1-adversarial-1000-Node-direct-source-acceptedN9-default30s-0-normal"
+        },
+        "file": "1-adversarial-1000-Node-direct-source-acceptedN9-default30s-0-normal.json",
+        "contextElapsedMs": 3822.8037079999995,
+        "outcome": "Collected",
+        "sha256": "8cf9b988de8e63c71c6ebb462f55f71023ac8cc71718af6f34f54a0f0cf1d3b5"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "Node-direct",
+          "variant": "source",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 2,
+          "key": "2-adversarial-1000-Node-direct-source-current-default30s-0-normal"
+        },
+        "file": "2-adversarial-1000-Node-direct-source-current-default30s-0-normal.json",
+        "contextElapsedMs": 3818.889332999999,
+        "outcome": "Collected",
+        "sha256": "ebf45adef9cb70afc2f828e321954cb72739d8566215fd36717cbafcb25d30de"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "Node-direct",
+          "variant": "positions-offsets",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 3,
+          "key": "3-adversarial-1000-Node-direct-positions-offsets-preN9-default30s-0-normal"
+        },
+        "file": "3-adversarial-1000-Node-direct-positions-offsets-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 24911.60525,
+        "outcome": "Collected",
+        "sha256": "295eaae22948054b1e1bd3a7d80c3dad0731b966b7195523fa45189ee738507e"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "Node-direct",
+          "variant": "positions-offsets",
+          "role": "acceptedN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 4,
+          "key": "4-adversarial-1000-Node-direct-positions-offsets-acceptedN9-default30s-0-normal"
+        },
+        "file": "4-adversarial-1000-Node-direct-positions-offsets-acceptedN9-default30s-0-normal.json",
+        "contextElapsedMs": 4404.227291000003,
+        "outcome": "Collected",
+        "sha256": "f0398d0c6030e9a1a47fc805aeb5c4ff36ccef4ee655daa4eb4298f299908653"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "Node-direct",
+          "variant": "positions-offsets",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 5,
+          "key": "5-adversarial-1000-Node-direct-positions-offsets-current-default30s-0-normal"
+        },
+        "file": "5-adversarial-1000-Node-direct-positions-offsets-current-default30s-0-normal.json",
+        "contextElapsedMs": 4367.356833000005,
+        "outcome": "Collected",
+        "sha256": "9c6a168b8238bdf8c9b7284ab23cec5c68ba0eab6be2508994187d288d4f759b"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-direct",
+          "variant": "source",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 6,
+          "key": "6-adversarial-1000-browser-direct-source-preN9-default30s-0-normal"
+        },
+        "file": "6-adversarial-1000-browser-direct-source-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 66300.575166,
+        "outcome": "Collected",
+        "sha256": "ac3d9db40f0fd73b0ebe98a54c5e5e528012b56c4fb2cbd6e9354d35534a7509"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-direct",
+          "variant": "source",
+          "role": "acceptedN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 7,
+          "key": "7-adversarial-1000-browser-direct-source-acceptedN9-default30s-0-normal"
+        },
+        "file": "7-adversarial-1000-browser-direct-source-acceptedN9-default30s-0-normal.json",
+        "contextElapsedMs": 2222.151957999973,
+        "outcome": "Collected",
+        "sha256": "2a573f32d54fe5168a4614768b53926104e4e51e7062d7761a116cb338297ad6"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-direct",
+          "variant": "source",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 8,
+          "key": "8-adversarial-1000-browser-direct-source-current-default30s-0-normal"
+        },
+        "file": "8-adversarial-1000-browser-direct-source-current-default30s-0-normal.json",
+        "contextElapsedMs": 2195.8378340000054,
+        "outcome": "Collected",
+        "sha256": "5e8a00ea337b8e5d6f76f4da85918701a849f734144b89d202b5d45de2eb41db"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-direct",
+          "variant": "positions-offsets",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 9,
+          "key": "9-adversarial-1000-browser-direct-positions-offsets-preN9-default30s-0-normal"
+        },
+        "file": "9-adversarial-1000-browser-direct-positions-offsets-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 73979.437458,
+        "outcome": "Collected",
+        "sha256": "df50195ba43c816c5499c64eeb06522b5abbaf43ab894e002468ac031fbac49f"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-direct",
+          "variant": "positions-offsets",
+          "role": "acceptedN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 10,
+          "key": "10-adversarial-1000-browser-direct-positions-offsets-acceptedN9-default30s-0-normal"
+        },
+        "file": "10-adversarial-1000-browser-direct-positions-offsets-acceptedN9-default30s-0-normal.json",
+        "contextElapsedMs": 2681.757833999989,
+        "outcome": "Collected",
+        "sha256": "25e3f74cbad922ff2e68c5242ccdfb576078dec0a40f0bdb020708ae447a2e33"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-direct",
+          "variant": "positions-offsets",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 11,
+          "key": "11-adversarial-1000-browser-direct-positions-offsets-current-default30s-0-normal"
+        },
+        "file": "11-adversarial-1000-browser-direct-positions-offsets-current-default30s-0-normal.json",
+        "contextElapsedMs": 2641.457915999985,
+        "outcome": "Collected",
+        "sha256": "1023b960bc9078b77365dec2bf272484bc1f66a4c55b23724a35a25a833eb7d8"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-real-module-worker",
+          "variant": "source",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 12,
+          "key": "12-adversarial-1000-browser-real-module-worker-source-preN9-default30s-0-normal"
+        },
+        "file": "12-adversarial-1000-browser-real-module-worker-source-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 72641.769459,
+        "outcome": "Collected",
+        "sha256": "0527619c0667fdff87ab80273cdbd8f01ba08012ba506b60b51a9ff3f9662e9a"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-real-module-worker",
+          "variant": "source",
+          "role": "acceptedN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 13,
+          "key": "13-adversarial-1000-browser-real-module-worker-source-acceptedN9-default30s-0-normal"
+        },
+        "file": "13-adversarial-1000-browser-real-module-worker-source-acceptedN9-default30s-0-normal.json",
+        "contextElapsedMs": 2157.960334000003,
+        "outcome": "Collected",
+        "sha256": "ed10ad182be3b7b68af7d4597c36a824ae6a36f78401564e62c373b0e3824828"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-real-module-worker",
+          "variant": "source",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 14,
+          "key": "14-adversarial-1000-browser-real-module-worker-source-current-default30s-0-normal"
+        },
+        "file": "14-adversarial-1000-browser-real-module-worker-source-current-default30s-0-normal.json",
+        "contextElapsedMs": 2154.332999999984,
+        "outcome": "Collected",
+        "sha256": "95c08355010d47d2944460705fc6c3bff4958009552a5a64f2a772e6ba95ff9b"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-real-module-worker",
+          "variant": "positions-offsets",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 15,
+          "key": "15-adversarial-1000-browser-real-module-worker-positions-offsets-preN9-default30s-0-normal"
+        },
+        "file": "15-adversarial-1000-browser-real-module-worker-positions-offsets-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 82151.43091700005,
+        "outcome": "Collected",
+        "sha256": "9d9d83cca87710a2771aed9178b3fa255ca20e6aeeb4e60830b922ae4071188c"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-real-module-worker",
+          "variant": "positions-offsets",
+          "role": "acceptedN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 16,
+          "key": "16-adversarial-1000-browser-real-module-worker-positions-offsets-acceptedN9-default30s-0-normal"
+        },
+        "file": "16-adversarial-1000-browser-real-module-worker-positions-offsets-acceptedN9-default30s-0-normal.json",
+        "contextElapsedMs": 2404.1083750000107,
+        "outcome": "Collected",
+        "sha256": "b9d7aafbe53f6fd6981c64e706654a18f77bf2f46b86be383269ddaf8aea7633"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 1000,
+          "host": "browser-real-module-worker",
+          "variant": "positions-offsets",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 17,
+          "key": "17-adversarial-1000-browser-real-module-worker-positions-offsets-current-default30s-0-normal"
+        },
+        "file": "17-adversarial-1000-browser-real-module-worker-positions-offsets-current-default30s-0-normal.json",
+        "contextElapsedMs": 2362.2988340000156,
+        "outcome": "Collected",
+        "sha256": "f363aefd68e4ec11aa6a177e901df7d147ce1c085b14e84d2b6bbe3a225cd4e1"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "Node-direct",
+          "variant": "source",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 18,
+          "key": "18-adversarial-10000-Node-direct-source-preN9-default30s-0-normal"
+        },
+        "file": "18-adversarial-10000-Node-direct-source-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 98583.11533299997,
+        "outcome": "Collected",
+        "sha256": "46db1af3dbbe7ac4ea33cbcb6d6a6e02dfb2877db862450f950ff3e6fb00aabd"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "Node-direct",
+          "variant": "source",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 19,
+          "key": "19-adversarial-10000-Node-direct-source-current-default30s-0-normal"
+        },
+        "file": "19-adversarial-10000-Node-direct-source-current-default30s-0-normal.json",
+        "contextElapsedMs": 170718.74429099995,
+        "outcome": "Collected",
+        "sha256": "7cca2d3eea7c2fe0d235c06cbd7cb12f9140f3647134c85a34fa360635f39b35"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "Node-direct",
+          "variant": "positions-offsets",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 20,
+          "key": "20-adversarial-10000-Node-direct-positions-offsets-preN9-default30s-0-normal"
+        },
+        "file": "20-adversarial-10000-Node-direct-positions-offsets-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 109170.75874999992,
+        "outcome": "Collected",
+        "sha256": "d621494098649b51d7f4d4b10ce778c2d416b1103dc75d46c52dae8a28d50506"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "Node-direct",
+          "variant": "positions-offsets",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 21,
+          "key": "21-adversarial-10000-Node-direct-positions-offsets-current-default30s-0-normal"
+        },
+        "file": "21-adversarial-10000-Node-direct-positions-offsets-current-default30s-0-normal.json",
+        "contextElapsedMs": 175800.03099999996,
+        "outcome": "Collected",
+        "sha256": "9bde6a749a51a075428da5bbe2b599037e45bbd7b5a38efa9e5afe99e7f5453f"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-direct",
+          "variant": "source",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 22,
+          "key": "22-adversarial-10000-browser-direct-source-preN9-default30s-0-normal"
+        },
+        "file": "22-adversarial-10000-browser-direct-source-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 224840.05408299994,
+        "outcome": "Collected",
+        "sha256": "9c97c47ac7a25391b806dd19d1fe37dff8b0b201b1dbfd17982d8ed988c34340"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-direct",
+          "variant": "source",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 23,
+          "key": "23-adversarial-10000-browser-direct-source-current-default30s-0-normal"
+        },
+        "file": "23-adversarial-10000-browser-direct-source-current-default30s-0-normal.json",
+        "contextElapsedMs": 96903.42487500003,
+        "outcome": "Collected",
+        "sha256": "c5c93f8f3c6f20ce40b30c638db38e5c8d8d25de96f2b12a950db5790435d2a7"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-direct",
+          "variant": "positions-offsets",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 24,
+          "key": "24-adversarial-10000-browser-direct-positions-offsets-preN9-default30s-0-normal"
+        },
+        "file": "24-adversarial-10000-browser-direct-positions-offsets-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 236739.4087080001,
+        "outcome": "Collected",
+        "sha256": "1e83383c35c4e076275cdc85b63881ff9e622b32b67d7d928fd78beaf5547364"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-direct",
+          "variant": "positions-offsets",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 25,
+          "key": "25-adversarial-10000-browser-direct-positions-offsets-current-default30s-0-normal"
+        },
+        "file": "25-adversarial-10000-browser-direct-positions-offsets-current-default30s-0-normal.json",
+        "contextElapsedMs": 99775.29529199982,
+        "outcome": "Collected",
+        "sha256": "a4b23db2de17c9e6786cbb9c240db3446c98150878e376f4ec743bbaaae2a1d0"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-real-module-worker",
+          "variant": "source",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 26,
+          "key": "26-adversarial-10000-browser-real-module-worker-source-preN9-default30s-0-normal"
+        },
+        "file": "26-adversarial-10000-browser-real-module-worker-source-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 252456.4998339999,
+        "outcome": "Collected",
+        "sha256": "22c38e13fdc6b7048caab8fee5ca66d6e6a4e9506190cad4c9a9843715e2de5f"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-real-module-worker",
+          "variant": "source",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 27,
+          "key": "27-adversarial-10000-browser-real-module-worker-source-current-default30s-0-normal"
+        },
+        "file": "27-adversarial-10000-browser-real-module-worker-source-current-default30s-0-normal.json",
+        "contextElapsedMs": 82027.18004200002,
+        "outcome": "Collected",
+        "sha256": "95aa19dbe53ab45c373f38103f6ef0ecf081cc1779a606e6dc126df3ec1098ac"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-real-module-worker",
+          "variant": "positions-offsets",
+          "role": "preN9",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 28,
+          "key": "28-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-default30s-0-normal"
+        },
+        "file": "28-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-default30s-0-normal.json",
+        "contextElapsedMs": 264874.008167,
+        "outcome": "Collected",
+        "sha256": "68b7659ef7c6744154c83f30e5ee8eaa877489527db2dfc500d14003d6b3f0d6"
+      },
+      {
+        "job": {
+          "family": "adversarial",
+          "size": 10000,
+          "host": "browser-real-module-worker",
+          "variant": "positions-offsets",
+          "role": "current",
+          "deadline": "default30s",
+          "deadlineOptions": {},
+          "owner": 0,
+          "mode": "normal",
+          "control": false,
+          "index": 29,
+          "key": "29-adversarial-10000-browser-real-module-worker-positions-offsets-current-default30s-0-normal"
+        },
+        "file": "29-adversarial-10000-browser-real-module-worker-positions-offsets-current-default30s-0-normal.json",
+        "contextElapsedMs": 86407.99733299995,
+        "outcome": "Collected",
+        "sha256": "b00296b606dd549f779f2990d8af06455a261f46340b2d21714b47eef267b986"
+      }
+    ]
+  },
+  "ownerReply": "Keep only the original 180-minute attempt",
+  "ownerDecisionRecordedAt": "2026-11-05T17:43:49.098324+00:00"
+}

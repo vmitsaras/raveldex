@@ -1,0 +1,198 @@
+{
+  "kind": "rx9006-independent-recovery-prefix-statistics-v1",
+  "status": "Pass for completed-prefix accounting; collection remains INCOMPLETE",
+  "reviewedAt": "2026-11-05T20:05:18.448644+00:00",
+  "fullAcceptance": false,
+  "coverage": {
+    "expectedContexts": 204,
+    "collectedContexts": 146,
+    "interruptedContexts": 1,
+    "notCollectedContexts": 57,
+    "rawDescriptorRecords": 146,
+    "rejectedDescriptorRecords": 0,
+    "unacceptedRawRows": 0
+  },
+  "lanes": {
+    "normal": {
+      "collectedContexts": 120,
+      "productWindowRecords": 600,
+      "operationWindowAttempts": 552,
+      "actualNotRunProductOperations": 48,
+      "outcomes": {
+        "Pass": 320,
+        "Refused": 128,
+        "Cancelled": 104,
+        "Not run": 48
+      },
+      "operations": {
+        "build": {
+          "Pass": 120
+        },
+        "exportSource": {
+          "Pass": 104,
+          "Refused": 16
+        },
+        "restoreSource": {
+          "Pass": 96,
+          "Refused": 8,
+          "Not run": 16
+        },
+        "deadlineRestore": {
+          "Refused": 104,
+          "Not run": 16
+        },
+        "abortedRestore": {
+          "Cancelled": 104,
+          "Not run": 16
+        }
+      }
+    },
+    "diagnostic": {
+      "collectedContexts": 26,
+      "productWindowRecords": 130,
+      "operationWindowAttempts": 124,
+      "actualNotRunProductOperations": 6,
+      "outcomes": {
+        "Pass": 72,
+        "Refused": 28,
+        "Cancelled": 24,
+        "Not run": 6
+      },
+      "operations": {
+        "build": {
+          "Pass": 26
+        },
+        "exportSource": {
+          "Pass": 24,
+          "Refused": 2
+        },
+        "restoreSource": {
+          "Pass": 22,
+          "Refused": 2,
+          "Not run": 2
+        },
+        "deadlineRestore": {
+          "Refused": 24,
+          "Not run": 2
+        },
+        "abortedRestore": {
+          "Cancelled": 24,
+          "Not run": 2
+        }
+      }
+    }
+  },
+  "operationCells": 430,
+  "vectors": {
+    "timingAndCpuVectors": 1650,
+    "logicalCounterVectors": 744
+  },
+  "actualStartupObservations": 530,
+  "actualSeparateResourceObservations": 196,
+  "missingDimensions": [
+    {
+      "mode": "diagnostic",
+      "control": false,
+      "contexts": 34
+    },
+    {
+      "mode": "normal",
+      "control": true,
+      "contexts": 16
+    },
+    {
+      "mode": "diagnostic",
+      "control": true,
+      "contexts": 8
+    }
+  ],
+  "observedErrorCodes": [
+    {
+      "mode": "normal",
+      "operation": "deadlineRestore",
+      "code": "DEADLINE_EXCEEDED",
+      "rows": 104
+    },
+    {
+      "mode": "normal",
+      "operation": "abortedRestore",
+      "code": "CANCELLED",
+      "rows": 104
+    },
+    {
+      "mode": "normal",
+      "operation": "restoreSource",
+      "code": "DEADLINE_EXCEEDED",
+      "rows": 4
+    },
+    {
+      "mode": "normal",
+      "operation": "exportSource",
+      "code": "DEADLINE_EXCEEDED",
+      "rows": 16
+    },
+    {
+      "mode": "normal",
+      "operation": "restoreSource",
+      "code": "WORK_LIMIT_EXCEEDED",
+      "rows": 4
+    },
+    {
+      "mode": "diagnostic",
+      "operation": "deadlineRestore",
+      "code": "DEADLINE_EXCEEDED",
+      "rows": 24
+    },
+    {
+      "mode": "diagnostic",
+      "operation": "abortedRestore",
+      "code": "CANCELLED",
+      "rows": 24
+    },
+    {
+      "mode": "diagnostic",
+      "operation": "restoreSource",
+      "code": "DEADLINE_EXCEEDED",
+      "rows": 2
+    },
+    {
+      "mode": "diagnostic",
+      "operation": "exportSource",
+      "code": "DEADLINE_EXCEEDED",
+      "rows": 2
+    }
+  ],
+  "orchestrationInterruption": {
+    "index": 146,
+    "nativeOutcome": null,
+    "notAProductNotRun": true
+  },
+  "pins": [
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/review/recovery_prefix_statistics.py",
+      "sha256": "f838816561319aa964ae40bacc5cc47db63f1454e3f5a1445cf43ddfffb1afd3"
+    },
+    {
+      "path": "/private/tmp/raveldex-rx9006-20261105/recovery-full-01/report.json",
+      "sha256": "3acbe27287e398576e8024e4cdbc01bb84a84f1e312474001cf3dd7597dbe0f3"
+    },
+    {
+      "path": "/private/tmp/raveldex-rx9006-20261105/recovery-full-01/prepared.json",
+      "sha256": "f5d14059f6ec8a89d7640918318a8df08db49b42cc6d420254ef65cdb80b7650"
+    },
+    {
+      "path": "/private/tmp/raveldex-rx9006-20261105/recovery-prefix-fresh/recovery-prefix.json",
+      "sha256": "653fd0dccc16b4b4debe36453185b1311e6ae57792fec83b8096504d9ecc2687"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/review/recovery-incomplete-replay.json",
+      "sha256": "7e758434b5453bc39037a6197cfe88eac72f5fc2ff02eba5b71a0bb07730b8e7"
+    }
+  ],
+  "limitations": [
+    "Only committed descriptor observations enter vectors;58 missing completed contexts acquire no invented attempt, timing, CPU or native outcome",
+    "54 actual dependent product Not-run rows have zero attempts, distinct from1 interrupted/57 uncollected matrix slots",
+    "P50 is outcome/lane/host/provider/deadline/role specific nearest rank, even-n lower middle; no recovery p95/speed ratio/classification or full204 acceptance",
+    "Logical counters, startup/resource observations and process memory samples retain separate scopes and prove no exclusive CPU/retained/peak/browser heap or physical response"
+  ]
+}

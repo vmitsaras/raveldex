@@ -1,0 +1,15 @@
+# RX-9006 execution plan — 5 November 2026
+
+Start: clean `576c0412aa7876ec443abd2ee884c2d286ba6b0c` includes RX-9001–RX-9005. One bounded task, RX-9006, is in progress. RX-9007 remains dependent. No commit, remote mutation, publication, native change, dependency change or cap increase is authorized by this slice.
+
+The owner invoked subagent-delegation-router. Parent owns identity/setup, serial timing orchestration, graph/resource observations, integration, full verification and synchronized evidence/docs/roadmap. One inherited agent owns only the new browser query harness and its method tests. Another owns only the recovery harness/case and method tests. A third owns only independent review artifacts. No nested delegation. Source preparation and independent read-only review may progress concurrently; collectors, builds and tests do not.
+
+The immutable RX-9001 machine/text methods govern: browser 96 contexts, 6048 normal/96 diagnostic selected queries, 5400s total/300s per context; recovery 204 contexts, 10800s total/300s per context. Query and recovery collection run serially, on installed Chromium149.0.7827.55. Original default30s/explicit60s cohorts stay separate with literal option omission in the former. The RX-9005 owner-approved 150-minute exception applies only to RX-9005 and grants no changed RX-9006 budget.
+
+Fresh offline consumers come from unchanged whole historical frozen archives. Source/archive/environment equality is checked before collection. Probes validate feasibility and correctness before a full accepted run; they never supply missing full samples. Any method revision, failed probe, partial run, unavailable host or unexpected result is retained separately. A watchdog failure remains an incomplete collector, not a fabricated native timeout. No runtime fix is planned without a reproducible contract defect.
+
+Normal public worker entrypoints stay unchanged. Complete public source/membership/receipts and later writes are normal-path correctness evidence. Detailed private core/source/positions/offsets and work/task spans are separate diagnostics. Private observers do not turn ordinary Promise settlement into an engine-only, isolated queue, physical-input/paint or heap measurement. Sparse recovery has only two ordinary owners and cannot satisfy the frozen three-owner faster/slower rule or a p95 claim.
+
+Fresh fixed-graph recipe and repeated deterministic ownership checks remain separate from unforced process samples and unmeasured retained/peak/browser heap. The final acceptance and readout will be written from actual outcomes and independent replay, preserving all adverse cells and historical timeout/retry distinctions.
+
+Before any accepted full collection, [transport clarification](transport-default-clarification.json) restores the native public worker65000ms response default; earlier probes explicitly used120000ms and remain unpooled/nonaccepted. Native30/60s and original frozen matrix/watchdogs/budgets remain unchanged. Fresh browser-prepared-03/recovery-prepared-04 assets bind the correction.

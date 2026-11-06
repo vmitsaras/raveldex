@@ -1,0 +1,63 @@
+{
+  "kind": "rx9006-independent-incomplete-recovery-input-audit-v1",
+  "status": "Pass for original inputs; collection remains INCOMPLETE",
+  "reviewedAt": "2026-11-05T20:03:41.395447+00:00",
+  "fullAcceptance": false,
+  "originalCollector": {
+    "outcome": "Fail",
+    "guards": "Pass",
+    "elapsedMs": 10802768.789167,
+    "budgetMs": 10800000,
+    "reportedOverrunMs": 2768.789166999981,
+    "wrapperStatus": "Fail",
+    "wrapperExitCode": 1,
+    "headAndNonTaskInputsUnchanged": true,
+    "head": "576c0412aa7876ec443abd2ee884c2d286ba6b0c"
+  },
+  "inputChecks": {
+    "guardedNonTaskFilesUnchanged": 5808,
+    "runtimeSourceInputs": 194,
+    "frozenMethodFiles": 9,
+    "harnessPins": 16,
+    "originalInstalledMembers": {
+      "preN9": 372,
+      "acceptedN9": 380,
+      "current": 380
+    },
+    "stagedPackages": 6,
+    "stagedMembers": 2264,
+    "preparedFilePins": 40,
+    "independentLiteralWorkloadFiles": 4,
+    "archivePins": {
+      "preN9": "3f4f31eb03951f13366256dd019710f0bd5c58b29d7ae687d8a96f0ea5ecec11",
+      "acceptedN9": "1d7dab63dbbd9bee7dd67394dd6893c227711caad471d448a02e704c91225fbe",
+      "reviewedCurrent": "45747067b227db1f2238381241997e9ea3dfb687dcb1daa91196927be6494f3b",
+      "current": "e562633424a3b6b37692d5c1a21bfeadb3b399dc6fff2ba9d33aba87f98b96b6"
+    },
+    "normalPackagesExact": true,
+    "diagnosticTransformChainsExact": true,
+    "frozenEnvironmentAndExecutablesMatch": true
+  },
+  "watchdogScope": {
+    "interruptedIndex": 146,
+    "contextElapsedMs": 176237.57862499915,
+    "contextBoundMs": 300000,
+    "conclusion": "Remaining-total 180-minute orchestration watchdog, not an observed native30s deadline or full300s context exhaustion",
+    "basis": "Unchanged source arms min(contextBound, remainingTotal) and subtracts context setup from its watchdog; actual context elapsed176237.58ms is below300000 while final global elapsed exceeds10800000. Failure is generic Error with nativeOutcome:null.",
+    "nativeOutcome": null,
+    "timerArmValueRecorded": false,
+    "limitation": "Exact original watchdog-arm remaining milliseconds and native in-flight publication state were not recorded; no rollback/commit/refusal/Unknown code is invented."
+  },
+  "postcollectionControl": {
+    "file": "prepared.json",
+    "sha256": "f5d14059f6ec8a89d7640918318a8df08db49b42cc6d420254ef65cdb80b7650",
+    "bytes": 1505153,
+    "provenance": "docs/evidence/RX-9006/identity/recovery-postcollection-prepared-copy.json",
+    "provenanceSha256": "12771cd3e494075d4a20ea0e9e800ecf74efe759745c03d1000ef46d542be500",
+    "classification": "Known postcollection byte-identical sealed-preparation control; not unexplained native orphan data"
+  },
+  "limitations": [
+    "No full204-cell acceptance, rerun, extension, probe pooling, native cap change or cause attribution to historical high-cardinality timeout",
+    "Filesystem/source/recorded environment identities do not prove absence of all external OS activity, heap peaks or physical responsiveness"
+  ]
+}

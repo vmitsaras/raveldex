@@ -1,0 +1,142 @@
+{
+  "kind": "rx9006-independent-queue-replay-v1",
+  "status": "Pass",
+  "reviewedAt": "2026-11-05T15:39:25.290135+00:00",
+  "directory": "/private/tmp/raveldex-rx9006-20261105/queue-diagnostic-01",
+  "reportSha256": "f52cbf0f27c4ed8b6d25e192bdb5d24c115aca0a5670b326085723dd98e6d374",
+  "counts": {
+    "notQueuedAtInsertion": 4,
+    "publicScores": 84,
+    "operations": 16,
+    "observedQueuedInsertions": 12,
+    "root:records": 8000,
+    "root:terms": 24056,
+    "root:postings": 61344,
+    "root:sourceValues": 13328,
+    "root:offsets": 0,
+    "roots": 8,
+    "sourceRecords": 8000,
+    "fullPageScores": 5380,
+    "pages": 64,
+    "laterWriteScores": 4
+  },
+  "outcomes": [
+    {
+      "role": "current",
+      "deadline": "default30s",
+      "label": "abort-queued",
+      "outcome": "Cancelled",
+      "calls": 1
+    },
+    {
+      "role": "current",
+      "deadline": "default30s",
+      "label": "deadline-1ms",
+      "outcome": "Refused",
+      "calls": 1
+    },
+    {
+      "role": "current",
+      "deadline": "default30s",
+      "label": "long-common",
+      "outcome": "Pass",
+      "calls": 1
+    },
+    {
+      "role": "current",
+      "deadline": "default30s",
+      "label": "queued-rare",
+      "outcome": "Pass",
+      "calls": 1
+    },
+    {
+      "role": "current",
+      "deadline": "explicit60s",
+      "label": "abort-queued",
+      "outcome": "Cancelled",
+      "calls": 1
+    },
+    {
+      "role": "current",
+      "deadline": "explicit60s",
+      "label": "deadline-1ms",
+      "outcome": "Refused",
+      "calls": 1
+    },
+    {
+      "role": "current",
+      "deadline": "explicit60s",
+      "label": "long-common",
+      "outcome": "Pass",
+      "calls": 1
+    },
+    {
+      "role": "current",
+      "deadline": "explicit60s",
+      "label": "queued-rare",
+      "outcome": "Pass",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "default30s",
+      "label": "abort-queued",
+      "outcome": "Cancelled",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "default30s",
+      "label": "deadline-1ms",
+      "outcome": "Refused",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "default30s",
+      "label": "long-common",
+      "outcome": "Pass",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "default30s",
+      "label": "queued-rare",
+      "outcome": "Pass",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "explicit60s",
+      "label": "abort-queued",
+      "outcome": "Cancelled",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "explicit60s",
+      "label": "deadline-1ms",
+      "outcome": "Refused",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "explicit60s",
+      "label": "long-common",
+      "outcome": "Pass",
+      "calls": 1
+    },
+    {
+      "role": "preN9",
+      "deadline": "explicit60s",
+      "label": "queued-rare",
+      "outcome": "Pass",
+      "calls": 1
+    }
+  ],
+  "limitations": [
+    "Four sparse intrusive native Node observations, not normal performance evidence or browser/worker queue evidence",
+    "Post-enqueue to cursor-start includes instrumentation, signal/timer installation and pump setup; no pure queue-service estimate",
+    "Zero recorded operation closure/queue ownership does not establish global native handle counts or retained/peak heap"
+  ]
+}

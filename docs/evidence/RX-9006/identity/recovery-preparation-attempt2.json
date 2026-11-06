@@ -1,0 +1,19 @@
+{
+  "status": "Fail",
+  "stage": "diagnostic preparation before any recovery collection",
+  "command": [
+    "node",
+    "bench/n10/host-recovery.mjs",
+    "prepare",
+    "--artifacts",
+    "docs/evidence/RX-9006/identity/artifacts.json",
+    "--output",
+    "/private/tmp/raveldex-rx9006-20261105/recovery-prepared-02"
+  ],
+  "sourceSha256": "bf9a757ea55d3cf9c18433b9e30c26f29087a1edf46752e353df4212b66f448b",
+  "log": "docs/evidence/RX-9006/identity/recovery-preparation-02.txt",
+  "logSha256": "c4a8e2764127f567ca489812764978e7cf2d81be6606c57859a5d7419a7225e0",
+  "error": "Historical restore instrument export-validation anchor requires five validateNative args while actual pre-N9 installed snapshots.js has four. Anchorpreflight aborted before instrumentation writes.",
+  "retainedDirectory": "/private/tmp/raveldex-rx9006-20261105/recovery-prepared-02",
+  "scope": "No native validation behavior change, restore failure or performance observation. A new bounded diagnostic-only compatibility helper is being prepared; historical helper and failed directory stay unchanged."
+}

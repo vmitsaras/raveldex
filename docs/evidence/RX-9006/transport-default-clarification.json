@@ -1,0 +1,57 @@
+{
+  "kind": "rx9006-worker-transport-clarification-v1",
+  "recordedAt": "2026-11-05T15:47:54.906710+00:00",
+  "status": "Recorded before fresh full collection",
+  "reason": "Independent source review found a120000ms public worker response option in initial probes, differing from installed65000ms default. Conservative full-method correction removes that override on both sides; diagnostic RPC120000 remains distinct. RX-9001 did not freeze a120s transport override.",
+  "nativeOperationDeadlinesUnchanged": [
+    30000,
+    60000
+  ],
+  "frozenMachineMethodUnchanged": true,
+  "browserBoundsMs": {
+    "total": 5400000,
+    "context": 300000
+  },
+  "recoveryBoundsMs": {
+    "total": 10800000,
+    "context": 300000
+  },
+  "priorProbeDisposition": "All prior120s-envelope probe/raw outcomes remain separate, nonaccepted and unpooled. Initial browserprobe also incomplete/initialtestoverlap. All full observations must be fresh with default65000 public transport.",
+  "installedDefaultProof": [
+    {
+      "role": "preN9",
+      "path": "/private/tmp/raveldex-rx9006-20261105/consumers/preN9/node_modules/@vmitsaras/raveldex/dist/adapters/worker/client.js",
+      "sha256": "e992d1c610fc40807bbceadeb917590c0aa00265eaa7fc2a17174de41abf26b4",
+      "defaultLines": [
+        "const maximum = cap(data.maxMessageBytes), timeout = data.responseTimeoutMs === undefined ? 65_000 : integer(data.responseTimeoutMs, 120_000, 1);"
+      ]
+    },
+    {
+      "role": "acceptedN9",
+      "path": "/private/tmp/raveldex-rx9006-20261105/consumers/acceptedN9/node_modules/@vmitsaras/raveldex/dist/adapters/worker/client.js",
+      "sha256": "e992d1c610fc40807bbceadeb917590c0aa00265eaa7fc2a17174de41abf26b4",
+      "defaultLines": [
+        "const maximum = cap(data.maxMessageBytes), timeout = data.responseTimeoutMs === undefined ? 65_000 : integer(data.responseTimeoutMs, 120_000, 1);"
+      ]
+    },
+    {
+      "role": "current",
+      "path": "/private/tmp/raveldex-rx9006-20261105/consumers/current/node_modules/@vmitsaras/raveldex/dist/adapters/worker/client.js",
+      "sha256": "e992d1c610fc40807bbceadeb917590c0aa00265eaa7fc2a17174de41abf26b4",
+      "defaultLines": [
+        "const maximum = cap(data.maxMessageBytes), timeout = data.responseTimeoutMs === undefined ? 65_000 : integer(data.responseTimeoutMs, 120_000, 1);"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "bench/n10/host-browser.mjs",
+      "sha256": "25b26a2c5909436fae5eeb5cd258bc3018403b0c91ea0991080553c8ecc280a9"
+    },
+    {
+      "path": "bench/n10/host-recovery.mjs",
+      "sha256": "fac4130ad90e6ad4818f9a015c235da537f80c2836d4f1401b951e0e685f3746"
+    }
+  ],
+  "scope": "Harness/public transport configuration correction only. No runtime, archive, work cap, operation deadline, workload, sample count or original freeze change."
+}

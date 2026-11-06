@@ -1,0 +1,100 @@
+{
+  "status": "Pass",
+  "startedAt": "2026-11-06T08:07:23.839Z",
+  "finishedAt": "2026-11-06T08:07:27.882Z",
+  "output": "/private/tmp/raveldex-rx9006-overhead-slice1-20261106/staging-only-02",
+  "contextsPlannedOnly": 204,
+  "contextsExecuted": 0,
+  "engineFactoriesInvoked": 0,
+  "preparedSha256": "a9519daebf65ac65228163e4cab7d46a2dc9b6a6a8d6ea422f1a257c7c1283f9",
+  "verificationRevision": {
+    "id": "rx9006-recovery-verification-2026-11-06-slice1",
+    "date": "2026-11-06",
+    "changes": [
+      "source-only-unused-position-expectations",
+      "per-exercise-authenticated-source-validation",
+      "owned-literal-snapshots-with-lazy-source-expectations"
+    ]
+  },
+  "method": {
+    "kind": "rx9006-recovery-v1",
+    "normalOwners": 2,
+    "diagnosticOwners": 1,
+    "contexts": 204,
+    "budgetMs": 10800000,
+    "perContextWatchdogMs": 300000,
+    "priorReceiver": {
+      "id": "prior-state",
+      "text": {
+        "body": "n9oldstate"
+      },
+      "metadata": {
+        "group": "prior"
+      }
+    },
+    "tailEstimates": false
+  },
+  "sourceInputsUnchanged": [
+    {
+      "path": "bench/n10/host-recovery.mjs",
+      "sha256": "ecd3e030d799d5e8a41e382b74566b976fb9b7c9216b6a39d6815914ebd9d19e"
+    },
+    {
+      "path": "bench/n10/host-recovery-case.mjs",
+      "sha256": "2dc07449f5f20fe30d0b30bd6da9e5d6680808924b453074ce0bea3d242ac3f3"
+    },
+    {
+      "path": "bench/n10/host-recovery-verification.mjs",
+      "sha256": "6b7aa03280ae6df1a9bf24b06af2eaf9754f13848475cce9adb6361192a60531"
+    },
+    {
+      "path": "bench/n9/bulk-verify.mjs",
+      "sha256": "1df3ddfa1a374607128565e3f8c38696b8eca23ae2843b8017939e11dd39f1fd"
+    }
+  ],
+  "checks": [
+    {
+      "package": "preN9-normal",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "normal"
+    },
+    {
+      "package": "preN9-diagnostic",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "diagnostic"
+    },
+    {
+      "package": "acceptedN9-normal",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "normal"
+    },
+    {
+      "package": "acceptedN9-diagnostic",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "diagnostic"
+    },
+    {
+      "package": "current-normal",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "normal"
+    },
+    {
+      "package": "current-diagnostic",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "diagnostic"
+    }
+  ],
+  "scope": "Six isolated package staging copies, generated Node-child syntax, pure support imports and twelve browser bundles only. No child execution, engine initialization, queries, canary or collection. Not measurement qualification."
+}

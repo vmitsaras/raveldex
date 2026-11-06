@@ -1,0 +1,40 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "Fail before preparation",
+      "classification": "Parent check setup: absent temporary parent directory",
+      "exitCode": 1,
+      "nativeCalls": 0,
+      "log": "staging-attempt-01-output.txt",
+      "source": "staging-before-parent-setup-fix.mjs"
+    },
+    {
+      "attempt": 2,
+      "status": "Pass",
+      "classification": "Static package/module/bundle check before standalone revision-guard refinement",
+      "exitCode": 0,
+      "nativeCalls": 0,
+      "contextsExecuted": 0,
+      "stagedPackages": 6,
+      "browserBundles": 12,
+      "report": "staging-attempt-02.json",
+      "prepared": "staging-attempt-02-prepared.json.gz",
+      "log": "staging-attempt-02-output.txt"
+    },
+    {
+      "attempt": 3,
+      "status": "Pass",
+      "classification": "Final static package/module/bundle check after revision-guard refinement",
+      "exitCode": 0,
+      "nativeCalls": 0,
+      "contextsExecuted": 0,
+      "stagedPackages": 6,
+      "browserBundles": 12,
+      "report": "staging.json",
+      "prepared": "staging-prepared.json.gz",
+      "log": "staging-output.txt"
+    }
+  ],
+  "scope": "Every setup failure preserved; no engine or collection was started."
+}

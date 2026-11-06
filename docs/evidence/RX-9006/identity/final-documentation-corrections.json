@@ -1,0 +1,17 @@
+{
+  "status": "Corrected",
+  "recordedAt": "2026-11-05T20:05:15.800740+00:00",
+  "findings": [
+    {
+      "issue": "Evidence browser command added an unsupported collect argument and used a preparation directory.",
+      "correction": "Copied the exact command from identity/browser-full-01.json: no collect argument; --prepared ends in browser-prepared-03/prepared.json.",
+      "wrongCommandExecuted": false
+    },
+    {
+      "issue": "Generic earlier-probes timeout wording could incorrectly include recovery probe 02.",
+      "correction": "Browser probe 01 and recovery probe 01 explicitly used 120s; recovery probe 02 and both full runs used default 65s."
+    }
+  ],
+  "scope": "Documentation corrections after the closing project input guard completed. No benchmark, runtime, harness, test, method, or package bytes changed. Final documentation checks passed afterwards.",
+  "additionalClosingDocumentation": "Added actual independent prefix/input audit results, exact missing-cohort denominators, native refusal classifications and successful project/identity/final-check results. Readout refusal-code clarification is the fifth post-check documentation-only file; all runtime/harness/test inputs remain unchanged."
+}

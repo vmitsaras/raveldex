@@ -1,0 +1,118 @@
+{
+  "kind": "rx9006-independent-source-ownership-review-v1",
+  "status": "Pass for source ownership scope only",
+  "reviewedAt": "2026-11-05T15:14:40.228914+00:00",
+  "sourcePins": [
+    {
+      "path": "src/core/execution/engine.ts",
+      "sha256": "d1c39467af59a85df4d73db36aa957a781461a3e1c7b2831994be849c1a20bd4",
+      "bytes": 17722
+    },
+    {
+      "path": "src/core/execution/host.ts",
+      "sha256": "83ec696299b37ed6536d7525a7ac40a70d20e418b2c5363b9bba7cf552c73fa2",
+      "bytes": 5751
+    },
+    {
+      "path": "src/core/ranking/bm25.ts",
+      "sha256": "ecaee1742ee84dc76aba3f23bf1391c6ad36bb66fd1ecfb7a18405a7c158bb2f",
+      "bytes": 4853
+    },
+    {
+      "path": "src/core/query/search.ts",
+      "sha256": "b5d1421c51f390424ca68769ac72d50ef835f911da3a3740013272392b9b0f5e",
+      "bytes": 8854
+    },
+    {
+      "path": "src/core/capabilities/bulk-participant.ts",
+      "sha256": "a2f8149f17255e3c7395e78b841800b7721b977c9cb35ddd9aa11c3832278ced",
+      "bytes": 1152
+    },
+    {
+      "path": "src/adapters/snapshots/snapshots.ts",
+      "sha256": "2084e2bfd681e0a010e79cbd2d5ab27cf219b05a7bc646992799f162ee0b8c75",
+      "bytes": 14194
+    },
+    {
+      "path": "src/adapters/snapshots/bulk.ts",
+      "sha256": "44cd2b60afda1b4292a278254ca317da8fe16f5b1830fd90541b5195617a5700",
+      "bytes": 5319
+    },
+    {
+      "path": "src/addons/phrases/store.ts",
+      "sha256": "848ade34cf02325b7357e463b27bcdba3db90deec771bac8b428721e82646fce",
+      "bytes": 11660
+    },
+    {
+      "path": "src/addons/positions/store.ts",
+      "sha256": "bdd9786a236c683acfa478d72461e9898354262de11b595d79972baf5410e401",
+      "bytes": 18676
+    }
+  ],
+  "findings": [
+    {
+      "resource": "execution operation",
+      "path": "src/core/execution/engine.ts",
+      "lines": [
+        255,
+        268
+      ],
+      "finding": "settled guard; detach admission/start/cursor/resolver fields before cursor/host/listener cleanup; remove active/queued ownership; preserve first outcome"
+    },
+    {
+      "resource": "disposed authoritative root",
+      "path": "src/core/execution/engine.ts",
+      "lines": [
+        271,
+        286
+      ],
+      "finding": "shared disposal, mark closing, stop queue and suspended work; once inactive/unqueued clear mutation owner then release host once"
+    },
+    {
+      "resource": "native continuation callback/channel",
+      "path": "src/core/execution/host.ts",
+      "lines": [
+        41,
+        110
+      ],
+      "finding": "owned pending Set; clear callback and cancel handle on terminal stop; invalidate channel and callback map before closing ports; dispose drains pending and channel"
+    },
+    {
+      "resource": "ranking cache",
+      "path": "src/core/ranking/bm25.ts",
+      "lines": [
+        16,
+        18
+      ],
+      "finding": "fresh root-bound fields Map per search; no module strong cache"
+    },
+    {
+      "resource": "bulk participant registration",
+      "path": "src/core/capabilities/bulk-participant.ts",
+      "lines": [
+        11,
+        23
+      ],
+      "finding": "WeakMap registration keys, factory invocation-local reconstruction; weak ownership does not establish GC"
+    },
+    {
+      "resource": "bulk staging cursors",
+      "path": "src/adapters/snapshots/bulk.ts",
+      "lines": [
+        16,
+        86
+      ],
+      "finding": "generator-local staged input/participants/core; closes per-record and finalization participant cursors in finally; no persistent staged-root registry"
+    }
+  ],
+  "priorDeterministicEvidence": {
+    "path": "docs/evidence/RX-9002/ownership/result.json",
+    "sha256": "c292b32f2b8b32c0a5b0720f263d462d65c28857d8ac89e120b8ca48bf1d3015",
+    "scope": "Historical bounded injected-host 8-cycle resource composition; fresh runtime execution is separate"
+  },
+  "limitations": [
+    "Source reachability is not retained/peak engine heap or GC evidence",
+    "No fresh native port/task lifetime measurement yet",
+    "Source line ranges support inspected current source, not historical package attribution"
+  ]
+}

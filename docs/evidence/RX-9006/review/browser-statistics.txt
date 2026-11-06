@@ -1,0 +1,150 @@
+{
+  "kind": "rx9006-independent-browser-statistics-qualification-v1",
+  "status": "Pass for numerical reconstruction; narrative corrections recorded",
+  "reviewedAt": "2026-11-05T16:51:24.721173+00:00",
+  "counts": {
+    "excludedWarmups": 288,
+    "ordinaryCalls": 6048,
+    "excludedDiagnosticCalls": 96,
+    "pooledMetricVectors": 432,
+    "ownerMetricVectors": 1296,
+    "eligibleWallP95Cells": 48,
+    "eligibleAllMetricP95Scalars": 144
+  },
+  "cells": 144,
+  "rawComparisons": 288,
+  "qualifiedComparisons": 288,
+  "rawClassifications": {
+    "preN9\u2192current": {
+      "wallMs": {
+        "Observed faster": 46,
+        "Inconclusive: timer floor": 2
+      },
+      "invocationReturnMs": {
+        "Overlapping / inconclusive": 10,
+        "Observed faster": 17,
+        "Inconclusive: timer floor": 21
+      },
+      "returnSettlementMs": {
+        "Observed faster": 42,
+        "Inconclusive: timer floor": 6
+      }
+    },
+    "acceptedN9\u2192current": {
+      "wallMs": {
+        "Overlapping / inconclusive": 46,
+        "Inconclusive: timer floor": 2
+      },
+      "invocationReturnMs": {
+        "Overlapping / inconclusive": 22,
+        "Inconclusive: timer floor": 26
+      },
+      "returnSettlementMs": {
+        "Overlapping / inconclusive": 42,
+        "Inconclusive: timer floor": 6
+      }
+    }
+  },
+  "qualifiedClassifications": {
+    "preN9\u2192current": {
+      "wallMs": {
+        "Observed faster": 40,
+        "Inconclusive: at observed main-clock quantum": 8
+      },
+      "invocationReturnMs": {
+        "Overlapping / inconclusive": 2,
+        "Inconclusive: at observed main-clock quantum": 41,
+        "Observed faster": 5
+      },
+      "returnSettlementMs": {
+        "Observed faster": 36,
+        "Inconclusive: at observed main-clock quantum": 12
+      }
+    },
+    "acceptedN9\u2192current": {
+      "wallMs": {
+        "Overlapping / inconclusive": 40,
+        "Inconclusive: at observed main-clock quantum": 8
+      },
+      "invocationReturnMs": {
+        "Overlapping / inconclusive": 7,
+        "Inconclusive: at observed main-clock quantum": 41
+      },
+      "returnSettlementMs": {
+        "Overlapping / inconclusive": 36,
+        "Inconclusive: at observed main-clock quantum": 12
+      }
+    }
+  },
+  "observedMainQuantumMs": 0.09999999776482582,
+  "roundingToleranceMs": 1e-06,
+  "classificationTransitions": [
+    {
+      "frozen": "Overlapping / inconclusive",
+      "qualified": "Inconclusive: at observed main-clock quantum",
+      "labels": 35
+    },
+    {
+      "frozen": "Observed faster",
+      "qualified": "Inconclusive: at observed main-clock quantum",
+      "labels": 24
+    },
+    {
+      "frozen": "Inconclusive: timer floor",
+      "qualified": "Inconclusive: at observed main-clock quantum",
+      "labels": 63
+    }
+  ],
+  "positivePooledMedianChangesRetained": [
+    {
+      "comparison": "acceptedN9\u2192current",
+      "metric": "wallMs",
+      "cells": 20
+    },
+    {
+      "comparison": "acceptedN9\u2192current",
+      "metric": "returnSettlementMs",
+      "cells": 18
+    },
+    {
+      "comparison": "acceptedN9\u2192current",
+      "metric": "invocationReturnMs",
+      "cells": 6
+    }
+  ],
+  "positiveAbsolutePooledMedianChangesRetained": [
+    {
+      "comparison": "acceptedN9\u2192current",
+      "metric": "wallMs",
+      "cells": 20
+    },
+    {
+      "comparison": "acceptedN9\u2192current",
+      "metric": "returnSettlementMs",
+      "cells": 18
+    },
+    {
+      "comparison": "acceptedN9\u2192current",
+      "metric": "invocationReturnMs",
+      "cells": 11
+    }
+  ],
+  "rawFloorClassifiedRowsWithArithmeticRatios": 37,
+  "narrativeFindingsResolved": {
+    "record": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/analysis/scope-wording-correction.json",
+    "sha256": "7877dc5599700e8834465f43636b497ec61d787bec01d164bf45d41e659fdd0c",
+    "allRawComparisonsUnchanged": true,
+    "positiveAbsoluteInventoryRows": 49,
+    "zeroBeforeRowsWithNoPercentRatioRetained": 5
+  },
+  "narrativeCorrections": [
+    "122 labels change, including63 alreadyzero-floor inconclusive and35 overlapping/inconclusive; exactly24 Observed faster labels become quantum-inconclusive",
+    "37 zero-floor-classified rows retain raw arithmetic percentChange; do not claim all floor ratios absent or interpret their raw ratios as speedups",
+    "Zero strictly Observed slower rows does not imply no adverse variation:49 positive absolute pooled-median control changes remain (44 have defined positive percent changes; five start at zero)"
+  ],
+  "limitations": [
+    "Three fresh context-owner range rule is descriptive, not a confidence interval or population guarantee",
+    "Separate observed0.1ms clock facts are conservative interpretation, not hard precision/error bounds or timing correction",
+    "Every original favorable/adverse/overlapping/floor cell, raw median/tail/delta/ratio is preserved; no weighted overall winner or same-runtime optimization claim"
+  ]
+}

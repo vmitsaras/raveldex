@@ -1,0 +1,21 @@
+{
+  "kind": "rx9006-closing-review-attempt-record-v1",
+  "attempts": [
+    {
+      "attempt": 1,
+      "command": "Inline python3 -B closing audit, prior to closing_audit.py creation",
+      "exitCode": 1,
+      "terminal": "Traceback (most recent call last):\n  File \"<stdin>\", line 11, in <module>\nAssertionError\n",
+      "failedAssertion": "guard['stable'] and guard['before']==guard['after']",
+      "classification": "Verifier scope error: whole status lists include task-evidence reviewer outputs excluded by the documented project check. All guarded file maps and HEAD were actually equal.",
+      "correction": "Require equal HEAD/files and explicitly inventory status differences; allow only docs/evidence/RX-9006/ paths, as established before the check. No native/result/input gate relaxed."
+    },
+    {
+      "attempt": 2,
+      "command": "python3 -B docs/evidence/RX-9006/review/closing_audit.py",
+      "exitCode": 0,
+      "log": "closing-checks-attempt2.txt",
+      "result": "closing-checks.json"
+    }
+  ]
+}

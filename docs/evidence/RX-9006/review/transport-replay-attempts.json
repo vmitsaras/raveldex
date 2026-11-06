@@ -1,0 +1,20 @@
+{
+  "kind": "rx9006-independent-transport-replay-attempts-v1",
+  "updatedAt": "2026-11-05T16:46:30.964844+00:00",
+  "attempts": [
+    {
+      "outcome": "Fail: verifier assumption",
+      "command": "python3 -B docs/evidence/RX-9006/review/transport_replay.py /private/tmp/raveldex-rx9006-20261105/transport-diagnostic-01",
+      "actualError": "KeyError: 'deadlineMs' at default packet option assertion",
+      "source": "docs/evidence/RX-9006/review/transport_replay-before-default-wire-fix.py",
+      "sourceSha256": "c63b1de50c42acc457830c9433b64726bf40109355d19a0c0efa4b0a79860aec",
+      "reason": "Verifier wrongly assumed client serialized default deadline30000; actual default wire options omit deadlineMs exactly, native host owns30s default. No engine/harness/data change."
+    },
+    {
+      "outcome": "Pass",
+      "result": "docs/evidence/RX-9006/review/transport-replay.json",
+      "resultSha256": "4b915cf754bfc9d0f90b5b63ab8a42b97dbd01e4668fc058da89ff669962c6d3",
+      "fix": "Assert actual default property omission and explicit60000 separately; all other packet/state/clock checks unchanged"
+    }
+  ]
+}

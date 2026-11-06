@@ -1,0 +1,89 @@
+{
+  "kind": "rx9006-independent-identity-graph-audit-v1",
+  "status": "Pass",
+  "reviewedAt": "2026-11-05T15:18:31.338460+00:00",
+  "manifestSha256": "fe16aae7fb9c5b6691c6d995ad0f38235075dfae133c3df2f2f03e5b47670e2d",
+  "archiveMembers": {
+    "preN9": 372,
+    "acceptedN9": 380,
+    "reviewedCurrent": 380,
+    "current": 380
+  },
+  "equalCurrentAcceptedReviewedCompiledMembers": 345,
+  "currentRuntimeSourceInputs": 194,
+  "freshFocusedCompiledMembers": 345,
+  "graphs": [
+    {
+      "role": "preN9",
+      "bytes": 69483,
+      "gzipBytes": 20332,
+      "sha256": "55554c4ffac0ac81398d7f7d1aa1df9a0df328f294a4ca61ade3228448607043",
+      "gzipSha256": "e9ff0ef7567c3153f1c90f5afbbd43769bc03a178090bd92f16fe3408da5543b"
+    },
+    {
+      "role": "acceptedN9",
+      "bytes": 75513,
+      "gzipBytes": 22384,
+      "sha256": "4b25bd3cfd5f7ad7ae99f4fb64ec789f80414bf318409990c264c6d0c68ba9f7",
+      "gzipSha256": "07eace51d432c09e9094da2c93038b0de8f6527433f9154d5c50b26e63b05a49"
+    },
+    {
+      "role": "current",
+      "bytes": 75513,
+      "gzipBytes": 22384,
+      "sha256": "4b25bd3cfd5f7ad7ae99f4fb64ec789f80414bf318409990c264c6d0c68ba9f7",
+      "gzipSha256": "07eace51d432c09e9094da2c93038b0de8f6527433f9154d5c50b26e63b05a49"
+    }
+  ],
+  "coreGraphDelta": {
+    "bytes": 6030,
+    "gzipBytes": 2052
+  },
+  "freshDeterministicTests": 6,
+  "freshActualNodeContinuationObservation": {
+    "kind": "rx9002-actual-node-continuation-observation",
+    "node": "v24.21.0",
+    "observedTaskSources": [
+      "external-timer",
+      "immediate",
+      "zero-timer"
+    ],
+    "externalTimerBeforeFirstContinuation": true,
+    "nativeContinuationCallbacks": 426,
+    "zeroTimerCallbacks": 53,
+    "handlesAfterSettlement": 0,
+    "signalListenersAfterAbort": 0,
+    "scope": "Finite actual Node task/ownership observation; no latency, universal fairness, retained/peak heap or platform transfer claim."
+  },
+  "pins": [
+    {
+      "path": "docs/evidence/RX-9006/identity/artifacts.json",
+      "sha256": "fe16aae7fb9c5b6691c6d995ad0f38235075dfae133c3df2f2f03e5b47670e2d"
+    },
+    {
+      "path": "docs/evidence/RX-9006/identity/core-graphs.json",
+      "sha256": "9a48a2d31d9a194d20644f2180f61f250e8e68e59d34aa95b11d6650668eef3d"
+    },
+    {
+      "path": "docs/evidence/RX-9006/identity/graph.mjs",
+      "sha256": "6dce9dadd649b4c762157577efa245673b38f85c1b3e57945384e66e32e6f1e1"
+    },
+    {
+      "path": "docs/evidence/RX-9006/verification/focused-inputs.json",
+      "sha256": "360cf254ffe18a00e68765b692c7536604163b9db7e2411222a0e132c774d567"
+    },
+    {
+      "path": "docs/evidence/RX-9006/verification/resource-ownership.txt",
+      "sha256": "7bc9bce96a8fdec35436163a8b9f7f42af66d4a5f2a4eed806da9fe82865f599"
+    },
+    {
+      "path": "docs/evidence/RX-9006/verification/continuation-queue.txt",
+      "sha256": "01fc497278126cd0f7cbe3d720fc7fb141d8858bb34425f745a1a1d550c5af89"
+    }
+  ],
+  "limitations": [
+    "Read-only archive/member/source/graph/recorded-result replay; does not rerun engine, tests or bundler",
+    "Core code graph is the new exact three-role recipe, not asserted byte-identical to historical RX8009 recipe",
+    "Fresh injected-host resource composition and actual Node handles are not retained/peak/browser heap or universal scheduler evidence"
+  ]
+}

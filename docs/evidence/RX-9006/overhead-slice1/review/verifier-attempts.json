@@ -1,0 +1,11 @@
+{
+  "scope": "Reviewer source-check tooling only; no implementation or captured measurement failure.",
+  "attempts": [
+    {
+      "status": "Incomplete verifier read",
+      "cause": "An initial ad hoc read assumed the preserved Markdown file retained its original .md suffix while the parent had correctly moved it to .md.source and recorded preservedCopy metadata.",
+      "error": "FileNotFoundError: overhead-slice1/v1/docs/evaluation/RX-9001-method.md",
+      "resolution": "Use the actual preservedCopy mapping in v1-source-pins.json; verify all preserved bytes against their original hashes. No source or historical data was missing or changed."
+    }
+  ]
+}

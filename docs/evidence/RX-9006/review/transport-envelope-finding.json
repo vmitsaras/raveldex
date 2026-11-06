@@ -1,0 +1,50 @@
+{
+  "kind": "rx9006-review-transport-envelope-finding-v1",
+  "reviewedAt": "2026-11-05T15:43:26.892388+00:00",
+  "status": "Source correction reviewed before full collection; fresh full identities/acceptance pending",
+  "finding": "New browser query/recovery createWorkerRaveldex explicitly requested responseTimeoutMs120000, while actual public client default is65000 and historical restore browser recipe states default65000. Native operation deadlines30/60 and8MiB messagecap are separate and unchanged.",
+  "sourceFacts": [
+    {
+      "path": "src/adapters/worker/client.ts",
+      "sha256": "eab4076dcfebbb6b0434b057ac10bbd9b6f4756eedf5565b0101475fdb8de686"
+    },
+    {
+      "path": "bench/n9/restore-browser.mjs",
+      "sha256": "7d32c797a07bbf6c0a7fb9c3375c17cf6e1ac3b38e6ed7bd250e0c7f465c7818"
+    },
+    {
+      "path": "bench/n10/host-browser.mjs",
+      "sha256": "ce522c616c00aff737009d2e6d312263c389f025b058e73216fcfda38db40e04"
+    },
+    {
+      "path": "bench/n10/host-recovery.mjs",
+      "sha256": "06b556b2ba533eef8f57f01a48a203fa514ca57be526af967156fc0ec09f6a9a"
+    }
+  ],
+  "parentDecision": "After active recovery probe completes, preserve executed prior sources/probe artifacts; remove only explicit public responseTimeoutMs120000, retain separately labeled120s out-of-band diagnostic control timeout; date correction and fresh browser/recovery preparations before full accepted collection.",
+  "scope": "Tooling/method correction before accepted collection, not native defect or changed public API/cap; no user decision required for ordinary conservative implementation detail.",
+  "probeEvidence": "Existing failed browserprobe01 and active recoveryprobe01 use120s configured public response envelope; retain explicitly and never pool into fresh default65s full cohorts.",
+  "fullAcceptanceGate": "Fresh staged public worker code uses omitted responseTimeoutMs/default65000, original normal native members remain exact, new source/assets/prepared identities pinned and independent review updated.",
+  "correctedAt": "2026-11-05T15:48:08.978293+00:00",
+  "correctedSourcePins": [
+    {
+      "path": "bench/n10/host-browser.mjs",
+      "sha256": "25b26a2c5909436fae5eeb5cd258bc3018403b0c91ea0991080553c8ecc280a9"
+    },
+    {
+      "path": "bench/n10/host-recovery.mjs",
+      "sha256": "fac4130ad90e6ad4818f9a015c235da537f80c2836d4f1401b951e0e685f3746"
+    }
+  ],
+  "preservedActualSources": [
+    {
+      "path": "docs/evidence/RX-9006/review/browser-before-transport-default-fix.mjs",
+      "sha256": "ce522c616c00aff737009d2e6d312263c389f025b058e73216fcfda38db40e04"
+    },
+    {
+      "path": "docs/evidence/RX-9006/review/recovery-before-transport-default-fix.mjs",
+      "sha256": "06b556b2ba533eef8f57f01a48a203fa514ca57be526af967156fc0ec09f6a9a"
+    }
+  ],
+  "diffReview": "Recovery differs by exactlyone removed responseTimeoutMs120000 option; browser same plus explicit default65s vs diagnostic120s scope prose. No other operation/input/runtime change."
+}

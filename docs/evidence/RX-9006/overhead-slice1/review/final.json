@@ -1,0 +1,202 @@
+{
+  "status": "Pass for authorized slice implementation and local closing verification",
+  "reviewedAt": "2026-11-06T08:16:55.038304+00:00",
+  "rx9006Acceptance": "blocked; full fresh measurement coverage remains incomplete",
+  "measuredPerformanceOrCanaryReadinessClaim": false,
+  "reviewedSource": [
+    {
+      "path": "bench/n10/host-recovery-verification.mjs",
+      "sha256": "6b7aa03280ae6df1a9bf24b06af2eaf9754f13848475cce9adb6361192a60531"
+    },
+    {
+      "path": "bench/n10/host-recovery-case.mjs",
+      "sha256": "2dc07449f5f20fe30d0b30bd6da9e5d6680808924b453074ce0bea3d242ac3f3"
+    },
+    {
+      "path": "bench/n10/host-recovery.mjs",
+      "sha256": "7e56dc04a3f9608939abfe416a51c1df455f82a7a168f849212b6c3c95b08dc4"
+    },
+    {
+      "path": "test/comparison/n10-host-recovery-verification.test.mjs",
+      "sha256": "c118142098691f1c5a0f00c3e34103b844dfc577de993bcc8d92a470bf693fb9"
+    },
+    {
+      "path": "test/comparison/n10-host-recovery-verification-coverage.test.mjs",
+      "sha256": "cc7975c0ddfc9089b80a45896ab28aaaf85b2f6d32708366b5d6873c681c3075"
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "id": "R1",
+      "status": "Resolved",
+      "issue": "Standalone row validator originally checked new revision metadata only when supplied through context; malformed advertised row metadata could be accepted without that context.",
+      "resolution": "Presence-aware row/exercise/context advertisement now requires exact current revision on both row and exercise; null, undefined, false and single-sided advertised fields fail. Genuinely absent historical fields remain accepted. Actual collector paths were already context-bound.",
+      "regression": "test/comparison/n10-host-recovery-verification.test.mjs standalone revision advertisement test"
+    }
+  ],
+  "unresolvedBlockingImplementationFindings": [],
+  "evidence": {
+    "independentAdversarialChecks": {
+      "status": "Pass",
+      "pass": 11,
+      "helperUnchanged": true
+    },
+    "parentFocusedTests": {
+      "tests": 116,
+      "pass": 116,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "independentCoverageAndReplay": {
+      "fakeOwnerTests": {
+        "tests": 68,
+        "pass": 68,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "literalReplay": {
+        "sourceCaptures": 1280,
+        "sourceRecordAssertions": 1210916,
+        "privateCaptures": 970,
+        "privateRecordAssertions": 998692,
+        "originalOffsetAssertions": 5323456,
+        "contexts": 146,
+        "independentMembershipNegatives": 6
+      },
+      "v1NewDifferential": {
+        "contexts": 146,
+        "sourceCaptures": 1280,
+        "privateCaptures": 970,
+        "sourceRecordAssertions": 1210916,
+        "privateRecordAssertions": 998692,
+        "originalOffsetAssertions": 5323456,
+        "normalizedSourcePairComparisons": 118
+      }
+    },
+    "staticStaging": {
+      "status": "Pass",
+      "packageCopies": 6,
+      "browserBundles": 12,
+      "contextsExecuted": 0,
+      "engineFactoriesInvoked": 0,
+      "preparedSha256": "501667b47735006210728b1c1ae7e15e799752bab020b5ddca7bd4d6526a7ddf"
+    },
+    "sourcePreservation": {
+      "originalExecutedPins": 16,
+      "unchangedFrozenInputPaths": 14,
+      "unchangedKeyFunctionText": [
+        {
+          "function": "observe",
+          "unchanged": true,
+          "utf8Sha256": "2d743053a38dc0ca4ccb7b7fcbd64e0b89291b01b06027b210a9a802797c4eb2"
+        },
+        {
+          "function": "build",
+          "unchanged": true,
+          "utf8Sha256": "b098faa5e2e1a3401c731770884af2e7de775787955a2024c31e90913fa77115"
+        },
+        {
+          "function": "inspectQueries",
+          "unchanged": true,
+          "utf8Sha256": "ab75ef32afbf2b3257d857ba604f4e0292c9e10dfb54d59e57e5378a5293c348"
+        },
+        {
+          "function": "captureRecoveryRoot",
+          "unchanged": true,
+          "utf8Sha256": "09897297e3e72ea844678ba321f00ca1b967cb914c2cf4c383696590a26cd3dc"
+        }
+      ],
+      "runtimeSourceMembersUnchanged": 194,
+      "originalFrozenMethodFilesUnchanged": 9,
+      "originalRecoveryMethodAnd204PlanUnchanged": true
+    }
+  },
+  "proofBindings": [
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/review/source-review.json",
+      "sha256": "8fa728c5ae2f5d03c92e50a82a2e59370f540672ccec8d0178265509558daf9b"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/review/adversarial.json",
+      "sha256": "4c372ad9de990f76dc4a6efe52553cb2a2c24899a9b2c3d7a9723fafe232d4c0"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/review/verifier-attempts.json",
+      "sha256": "311d99b1d930ec29373fdeb910fa31d4d0ef77f7ea10ea7b2cd086cea1d7c600"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/checks/focused.json",
+      "sha256": "6694e025947381905b2a6684389e4c7a03afdae5f5f806c5218ec099abeaf5e7"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/checks/focused-output.txt",
+      "sha256": "896d9776fd781478b909f61e21e49b696435330822229023fafd91c03df30020"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/checks/staging.json",
+      "sha256": "0d5843faecc305c609e421332170ca41eebba45e2f831f5344a4e7f096b2784d"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/checks/staging-prepared.json.gz",
+      "sha256": "4453e7b7eea5a3d8f792983c7f2395be56ee44d5e08cc18afbee97e33151aa33"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/checks/staging-attempts.json",
+      "sha256": "ccdbc4ff203924cd62cf77696545f0fcd4eabd4a6ae4e375057a44b8d8adb0b4"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/validation/summary.json",
+      "sha256": "a8693b28dd2204b7eca8ca50337f46e1f0800208019abf0064699050fe7657a7"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/validation/capture-differential.json",
+      "sha256": "52ad984b48601c16ccacc7f7a04e245fde13a397e9e91a1a9eb99fb2e292bb05"
+    },
+    {
+      "path": "docs/evidence/RX-9006/overhead-slice1/validation/independent-capture-replay.json",
+      "sha256": "231b6b876b00c8c2b77734b5efd526b82b4d60c38fde8183c0ce5d0de0fa0cbe"
+    }
+  ],
+  "notes": [
+    "Raw literal ownership precedes native calls; derived expected IDs/source data remain lazy. Extra raw copying/freezing/retention may change allocation, GC and warming; the dated verifier revision records that distinction.",
+    "Owned expectations protect oracle authority and are not a general detector of mutations to caller-owned input references.",
+    "Native-call/capture/persistence ordering is supported by controlled fake-owner transcripts, not by new live engine execution.",
+    "The historical online membership check did not validate the model field; independent Python replay retains that existing acceptance gate. No stronger online-model claim is made.",
+    "Normal public workers retain private-root Not observed. The slowest export-refusal path is not claimed to benefit from these helper optimizations.",
+    "Original public worker 65s/default omitted30s/explicit60s/maxHits100 and original180m/300s orchestration remain unchanged. Proposed450m/360s policies, canaries, profiling and conditional structural comparator remain unimplemented."
+  ],
+  "remainingChecks": "No authorized local slice checks remain. RX-9006 itself remains blocked on missing full fresh measurement coverage; no canary/benchmark or new budget policy is authorized or executed.",
+  "limitations": [
+    "Source review and data-only adversarial checks do not establish native/browser/worker runtime qualification or performance savings.",
+    "Raw expectation ownership is not a general detector of mutations to caller-owned inputs; it prevents those mutations from poisoning oracle authority.",
+    "No garbage-collection, retained/peak heap, physical-input or new capacity claim follows.",
+    "RX-9006 remains blocked on complete collection acceptance; parent integration/project evidence is reviewed separately."
+  ],
+  "sourceStageStatus": "Pass within authorized implementation/source/data/static-integration scopes",
+  "closingReview": "closing.json",
+  "closingReviewedAt": "2026-11-06T08:36:57.514929+00:00",
+  "closingVerification": {
+    "counts": {
+      "tests": 1489,
+      "pass": 1481,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 8,
+      "todo": 0
+    },
+    "guardedInputs": 6195,
+    "sourceHead": "576c0412aa7876ec443abd2ee884c2d286ba6b0c",
+    "archiveSha256": "4dd0f8333ff95d0c7e50f2a91a028e41122bdf127f5fadf92dd1104eb4589b0c",
+    "runtimeInputs": 194,
+    "originalMethodFiles": 9,
+    "installedMembers": 380,
+    "compiledMembers": 345,
+    "preservation": "6143 baseline files;6134unchanged,9authorizedexistingchanges,3newsource/testpaths;79othertasks/12milestones/4foreignfiles/16v1copies preserved",
+    "currentDocumentationLocalLinksChecked": 159,
+    "unresolvedBlockingFindings": []
+  }
+}

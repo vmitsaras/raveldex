@@ -1,0 +1,24 @@
+{
+  "kind": "rx9006-independent-recovery-input-audit-attempts-v1",
+  "attempts": [
+    {
+      "command": "python3 -B docs/evidence/RX-9006/review/recovery_inputs.py",
+      "outcome": "Fail: verifier list-order assumption",
+      "actualLog": "docs/evidence/RX-9006/review/recovery-inputs-attempt1.txt",
+      "actualFailure": "AssertionError at instrumentation.originalMembers == artifact.members",
+      "cause": "Filesystem inventory uses locale ordering while frozen archive manifest uses codepoint path ordering. Complete path, bytes and SHA membership is the relevant identity, not list presentation order.",
+      "priorSource": "docs/evidence/RX-9006/review/recovery_inputs-before-member-order-fix.py",
+      "priorSourceRetention": "Reconstructed from the recorded source patch by restoring exactly the two prior assertions after the failed attempt; no claim that this backup file existed before execution.",
+      "correction": "Compare complete path-to-(bytes,SHA256) maps. Correct the unused later source-text assertion to the actual unchanged elapsed-bound expression. No native/helper/raw data/identity predicate weakened."
+    },
+    {
+      "outcome": "Pass",
+      "actualLog": "docs/evidence/RX-9006/review/recovery-inputs-attempt2.txt",
+      "result": "docs/evidence/RX-9006/review/recovery-inputs.json",
+      "resultSha256": "7e910aa18946671742bb812116476180059d1cfc4c20608c741828a61088c351",
+      "sourceSha256": "d5e4b8a26c516f0d10e70022afa30313e8a6721557e81a26b7950c1f830e86ec",
+      "scope": "Complete member path/byte/SHA equality independently confirmed, all original/staged packages, source/freeze/environment inputs unchanged. No native/helper/raw-data change."
+    }
+  ],
+  "updatedAt": "2026-11-05T20:05:45.017474+00:00"
+}

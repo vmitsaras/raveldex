@@ -1,0 +1,41 @@
+{
+  "kind": "rx9006-independent-transport-replay-v1",
+  "status": "Pass",
+  "reviewedAt": "2026-11-05T16:46:06.477121+00:00",
+  "verifierSourcePins": [
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/review/transport_replay.py",
+      "sha256": "3108b38a8dc7007d9ae9c39ae8959cb9c8e9ad305bb831daef5e5bf82755d10b"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/review/oracle.py",
+      "sha256": "71d2007152d21ffe79238d84507c389d2b491122a6c1cd43318fcb7299649f9d"
+    }
+  ],
+  "directory": "/private/tmp/raveldex-rx9006-20261105/transport-diagnostic-01",
+  "reportSha256": "33716b8c9a81663560aca7f079c1ab695905572b3099775b1140232e9b4bcd2b",
+  "normalTimingEvidence": false,
+  "counts": {
+    "clockReads": 1572864,
+    "negativeClockIntervals": 0,
+    "explicitlyTerminatedWorkerObjects": 16,
+    "selectedPublicCalls": 24,
+    "exactPacketRepresentations": 48,
+    "sameCallJoins": 24,
+    "selectedQueryScores": 160,
+    "literalSourceRecords": 24008,
+    "fullPageScores": 10760,
+    "pages": 128,
+    "laterWriteScores": 8,
+    "successfulRestoreReceiptsAndWriteRecoveries": 8,
+    "configurations": 8,
+    "contexts": 4
+  },
+  "limitations": [
+    "Sparse separate observer-conditioned worker diagnostic; packet retention/startup clocks can affect this lane, never pooled normal performance evidence",
+    "Server receive-to-reply-entry includes server packet capture/admission/queue/native work/result construction; synchronous post window separate and can overlap main delivery",
+    "Same-call duration residual combines client/IPC/event-loop/delivery and clock quantization; not pure transport, exclusive engine CPU, physical copied bytes or calibrated hardware precision",
+    "Main/worker adjacent-clock observations are bounded empirical facts, not a hard universal clock-error bound or timing correction",
+    "Selected source+positions enabled, but detailed private offsets are independently checked in recovery lane, not enumerated here"
+  ]
+}
