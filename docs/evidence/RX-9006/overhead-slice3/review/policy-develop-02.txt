@@ -1,0 +1,112 @@
+✔ four immutable dated policies preserve exact recommended and strict orchestration bounds (0.895ms)
+✔ reject ad-hoc policy mutation: budgetMs (0.585209ms)
+✔ reject ad-hoc policy mutation: perContextWatchdogMs (0.13575ms)
+✔ reject ad-hoc policy mutation: preflightGateMs (0.168ms)
+✔ reject ad-hoc policy mutation: closingReserveMs (0.127125ms)
+✔ reject ad-hoc policy mutation: workCutoffMs (0.103584ms)
+✔ reject ad-hoc policy mutation: contexts (0.087833ms)
+✔ reject ad-hoc policy mutation: maxHits (0.075917ms)
+✔ reject ad-hoc policy mutation: publicWorkerResponseMs (0.076333ms)
+✔ reject ad-hoc policy mutation: tailEstimates (0.107166ms)
+✔ unknown names, hybrid families and extra policy keys fail closed (0.17075ms)
+✔ exact ordered22 preflight descriptors preserve10 ordinary12 diagnostic and allcontrols (0.5955ms)
+✔ full policies preserve every original descriptor/order and omitted versus explicit native options (2.987042ms)
+✔ watchdogs never become native deadline options and incomplete base matrices fail (0.643792ms)
+✔ dispatch requires whole watchdog before reserved closing: rx9006-recommended-preflight-2026-11-06 (0.428667ms)
+✔ dispatch requires whole watchdog before reserved closing: rx9006-recommended-full-2026-11-06 (0.127125ms)
+✔ dispatch requires whole watchdog before reserved closing: rx9006-strict-preflight-2026-11-06 (0.117292ms)
+✔ dispatch requires whole watchdog before reserved closing: rx9006-strict-full-2026-11-06 (0.119083ms)
+✔ synthetic operator records accept only exact bound policy phase and scope before launch (1.2365ms)
+✔ authorization rejects future (0.171709ms)
+✔ authorization rejects expired (0.088333ms)
+✔ authorization rejects badDate (0.079459ms)
+✔ authorization rejects wrongRevision (0.109542ms)
+✔ authorization rejects wrongScope (0.07925ms)
+✔ authorization rejects duplicateScope (0.074458ms)
+✔ authorization rejects unknownScope (0.074292ms)
+✔ authorization rejects wrongOutput (0.1435ms)
+✔ authorization rejects wrongPrepared (0.187458ms)
+✔ authorization rejects wrongSource (0.126708ms)
+✔ authorization rejects wrongNode (0.117333ms)
+✔ authorization rejects wrongBrowser (0.133333ms)
+✔ authorization rejects missingInstruction (0.083917ms)
+✔ authorization rejects extraBudget (0.072125ms)
+✔ complete synthetic preflight and full report validators invoke every row oracle (6.291458ms)
+✔ strict preflight report rejects missing (0.284416ms)
+✔ strict preflight report rejects extra (0.241959ms)
+✔ strict preflight report rejects reordered (0.338625ms)
+✔ strict preflight report rejects duplicate (0.240208ms)
+✔ strict preflight report rejects aboveMargin (0.210375ms)
+✔ strict preflight report rejects watchdog (0.219792ms)
+✔ strict preflight report rejects budget (0.224291ms)
+✔ strict preflight report rejects notCollected (0.241125ms)
+✔ strict preflight report rejects guardFailure (0.227459ms)
+✔ strict preflight report rejects interrupted (0.208917ms)
+✔ strict preflight report rejects budgetExceeded (0.20875ms)
+✔ strict preflight report rejects gateFailure (0.222042ms)
+✔ strict preflight report rejects rowPolicy (0.241125ms)
+✔ strict preflight report rejects rowCohort (0.204ms)
+✔ strict preflight report rejects rowAuthorization (0.200291ms)
+✔ strict preflight report rejects oracleFailure (0.203042ms)
+✔ fresh Node owners are mandatory across complete rows (0.987667ms)
+✔ full launch requires same-family complete preflight with distinct preparation and output (3.225458ms)
+✔ CLI allows explicit named preparation/launch shapes and unchanged original collection shape (0.161041ms)
+✔ CLI rejects malformed or unbounded override [] (0.049584ms)
+✔ CLI rejects malformed or unbounded override ["collect-named"] (0.040042ms)
+✔ CLI rejects malformed or unbounded override ["collect-named","--prepared","p","--output","o"] (0.044833ms)
+✔ CLI rejects malformed or unbounded override ["collect-named","--prepared","p","--output","o","--authorization","a","--budgetMs","27000000"] (0.03125ms)
+✔ CLI rejects malformed or unbounded override ["collect-named","--prepared","p","--output","o","--authorization","a","--jobs","87"] (0.029958ms)
+✔ CLI rejects malformed or unbounded override ["collect-named","--prepared","p","--output","o","--authorization","a","--profile","full"] (0.028584ms)
+✔ CLI rejects malformed or unbounded override ["collect-named","--prepared","p","--output","o","--authorization","a","--authorization","b"] (0.029083ms)
+✔ CLI rejects malformed or unbounded override ["prepare","--artifacts","a","--output","o","--policy","custom"] (0.032209ms)
+✔ CLI rejects malformed or unbounded override ["collect","--prepared","p","--output","o","--deadlineMs","360000"] (0.02825ms)
+✔ CLI rejects malformed or unbounded override ["collect-named","--prepared","--output","o","--authorization","a"] (0.0315ms)
+✔ historical method and entire204-context plan retain previous slice bytes (5.524083ms)
+✖ report cannot erase authorization identity from itself and every row (0.539959ms)
+✖ report binding policy must match independently selected run policy (0.312458ms)
+ℹ tests 66
+ℹ suites 0
+ℹ pass 64
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 211.378584
+
+✖ failing tests:
+
+test at test/comparison/n10-host-recovery-policy.test.mjs:74:1
+✖ report cannot erase authorization identity from itself and every row (0.539959ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/comparison/n10-host-recovery-policy.test.mjs:74:204)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/comparison/n10-host-recovery-policy.test.mjs:75:1
+✖ report binding policy must match independently selected run policy (0.312458ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/comparison/n10-host-recovery-policy.test.mjs:75:159)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }

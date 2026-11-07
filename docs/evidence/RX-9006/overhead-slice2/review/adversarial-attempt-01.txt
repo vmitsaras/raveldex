@@ -1,0 +1,38 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ "async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await phaseAsync('diagnostic.control-start',operation,()=>diagnostic.start({operation,engine,role}));}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n" +
+- "async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await diagnostic.start({operation,engine,role});}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n" +
+    '  try{const pending=call();returnedAt=performance.now();operationId=pending?.operationId;result=await pending;}catch(caught){error=caught;returnedAt??=performance.now();}\n' +
+    '  const end=performance.now(),usage=cpuUsage?.(cpu),sample={operation,role,outcome:recoveryOutcome(error),attempts:1,wallMs:end-start,invocationToReturnMs:returnedAt-start,returnToSettlementMs:end-returnedAt,deadlineOptions:options(),...(operationId?{operationId}:{}),...(usage?{cpuUserMs:usage.user/1000,cpuSystemMs:usage.system/1000}:{}),...(error?{error:recoveryError(error)}:{})};\n' +
++   "  if(mode==='diagnostic'){sample.counters=await phaseAsync('diagnostic.control-stop',operation,()=>diagnostic.stop({engine,role}));if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n" +
+-   "  if(mode==='diagnostic'){sample.counters=await diagnostic.stop({engine,role});if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n" +
+    ' }\n' +
+    ' '
+
+    at file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/overhead-slice2/review/adversarial.mjs:18:399
+    at async check (file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/overhead-slice2/review/adversarial.mjs:7:32)
+    at async file:///Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/overhead-slice2/review/adversarial.mjs:18:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: "async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await phaseAsync('diagnostic.control-start',operation,()=>diagnostic.start({operation,engine,role}));}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n" +
+    '  try{const pending=call();returnedAt=performance.now();operationId=pending?.operationId;result=await pending;}catch(caught){error=caught;returnedAt??=performance.now();}\n' +
+    '  const end=performance.now(),usage=cpuUsage?.(cpu),sample={operation,role,outcome:recoveryOutcome(error),attempts:1,wallMs:end-start,invocationToReturnMs:returnedAt-start,returnToSettlementMs:end-returnedAt,deadlineOptions:options(),...(operationId?{operationId}:{}),...(usage?{cpuUserMs:usage.user/1000,cpuSystemMs:usage.system/1000}:{}),...(error?{error:recoveryError(error)}:{})};\n' +
+    "  if(mode==='diagnostic'){sample.counters=await phaseAsync('diagnostic.control-stop',operation,()=>diagnostic.stop({engine,role}));if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n" +
+    ' }\n' +
+    ' ',
+  expected: "async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await diagnostic.start({operation,engine,role});}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n" +
+    '  try{const pending=call();returnedAt=performance.now();operationId=pending?.operationId;result=await pending;}catch(caught){error=caught;returnedAt??=performance.now();}\n' +
+    '  const end=performance.now(),usage=cpuUsage?.(cpu),sample={operation,role,outcome:recoveryOutcome(error),attempts:1,wallMs:end-start,invocationToReturnMs:returnedAt-start,returnToSettlementMs:end-returnedAt,deadlineOptions:options(),...(operationId?{operationId}:{}),...(usage?{cpuUserMs:usage.user/1000,cpuSystemMs:usage.system/1000}:{}),...(error?{error:recoveryError(error)}:{})};\n' +
+    "  if(mode==='diagnostic'){sample.counters=await diagnostic.stop({engine,role});if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n" +
+    ' }\n' +
+    ' ',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

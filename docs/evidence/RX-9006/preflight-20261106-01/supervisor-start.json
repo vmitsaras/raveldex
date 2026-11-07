@@ -1,0 +1,189 @@
+{
+  "kind": "rx9006-supervisor-terminal-v1",
+  "revision": {
+    "id": "rx9006-owned-posix-supervision-2026-11-06-slice3",
+    "date": "2026-11-06"
+  },
+  "attemptId": "586b27fc-c68b-48df-bba8-87eb2b0c9a29",
+  "bindingSha256": "48741c6654094422547165a019dfa8155accaea9f1961d388bf791e7119b9013",
+  "identity": {
+    "kind": "rx9006-exact-run-binding-v1",
+    "policy": {
+      "kind": "rx9006-run-policy-v1",
+      "id": "rx9006-recommended-preflight-2026-11-06",
+      "revision": {
+        "id": "rx9006-named-run-policies-2026-11-06-slice3",
+        "date": "2026-11-06"
+      },
+      "family": "recommended",
+      "phase": "preflight",
+      "contexts": 22,
+      "budgetMs": 9000000,
+      "perContextWatchdogMs": 360000,
+      "preflightGateMs": 324000,
+      "closingReserveMs": 600000,
+      "workCutoffMs": 8400000,
+      "tailEstimates": false,
+      "nativeDeadlinePolicy": "unchanged-omitted30s-explicit60s-forced1ms",
+      "maxHits": 100,
+      "publicWorkerResponseMs": 65000
+    },
+    "baseMethod": {
+      "kind": "rx9006-recovery-v1",
+      "normalOwners": 2,
+      "diagnosticOwners": 1,
+      "contexts": 204,
+      "budgetMs": 10800000,
+      "perContextWatchdogMs": 300000,
+      "priorReceiver": {
+        "id": "prior-state",
+        "text": {
+          "body": "n9oldstate"
+        },
+        "metadata": {
+          "group": "prior"
+        }
+      },
+      "tailEstimates": false
+    },
+    "prepared": {
+      "path": "/private/tmp/raveldex-rx9006-preflight-20261106-01/prepared/prepared.json",
+      "sha256": "e2523c8f107d6dd26b464072b7ea5c4d732b28ecc09b525c6ee028aa15c8159f"
+    },
+    "sourceIdentity": "9f113e26d279da4c050ca4a5e0569d9dab6b65617f697f0a5dafa1a8723395aa",
+    "cohortIdentity": "6a16042fe5a8534170de24e2185e76828710d25e5e9576203e07f39aaea5c183",
+    "executables": {
+      "node": {
+        "path": "/opt/homebrew/Cellar/node@24/24.21.0/bin/node",
+        "sha256": "4cc6e0762050bb4922c4564da3902b738d202e6b353e91c08ed1f82ac039de98",
+        "version": "v24.21.0"
+      },
+      "chromium": {
+        "path": "/Users/vasilis/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+        "sha256": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7"
+      }
+    },
+    "output": "/private/tmp/raveldex-rx9006-preflight-20261106-01/attempt",
+    "preflight": null
+  },
+  "authorizationSha256": "a292b17a0ad72c6351e7ffcdd94138fe6dde8c31441b9c0b336d01ac5c4c88c1",
+  "budgetMs": 9000000,
+  "shutdownReserveMs": 5000,
+  "terminationGraceMs": 1000,
+  "contextPolicy": {
+    "workCutoffMs": 8400000,
+    "perContextWatchdogMs": 360000
+  },
+  "startedAt": "2026-11-06T11:20:50.365Z",
+  "outcome": "Starting",
+  "nativeOutcome": null,
+  "events": [],
+  "scope": "External POSIX owned-group orchestration only. A supervisor interruption is incomplete evidence, never a native refusal/cancellation/rollback. OS scheduling, filesystem and signal delivery are not hard real-time guarantees.",
+  "output": "/private/tmp/raveldex-rx9006-preflight-20261106-01/attempt",
+  "pins": [
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery.mjs",
+      "sha256": "08474dee51348a7eb1a1cabd632dd73e12cf4335b806f33274b796d9928fe868"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery-policy.mjs",
+      "sha256": "d312ae40fbff87b8f6f4df520f50644c0aedf8aa162020567757bc7bae9b43eb"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery-policy-child.mjs",
+      "sha256": "5371672b466723ef50b51193f4305ca9e756b4f8a01a7fc051194997a95eba47"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery-supervisor.mjs",
+      "sha256": "b36dd7e25ad3d53bb01917d621eb9292da87130f0395d3521cf7b1a490dda5b0"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery-case.mjs",
+      "sha256": "183b10e8f394cb59ab7e3a2a68e1ff0118d63e91df7747da2d0534a0d33655cf"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery-verification.mjs",
+      "sha256": "9d4e02a53b6382873cf1984efd974ecffbf0cec890b27cc009cebc2ba15fe5c4"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery-profile.mjs",
+      "sha256": "5bdb93db85d5f6319dba873efdf91ac5791c57e72d19dc0d46783d45b8b57f98"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/host-recovery-instrument.mjs",
+      "sha256": "a63069c7c9d49b875a1dceea212f478800916a46471708d7acf6baeed0306b65"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/bulk-verify.mjs",
+      "sha256": "1df3ddfa1a374607128565e3f8c38696b8eca23ae2843b8017939e11dd39f1fd"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/restore-instrument.mjs",
+      "sha256": "30f884b7b8f349ce6bddfc569ecc5f8c1b10c0f019b68ac5519bcf36dfcc7523"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/instrument.mjs",
+      "sha256": "978e7a6fb2ab6b44b496da20a72c4ba58ea4b48e22f4302a340d9e20d7b21480"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/workloads.mjs",
+      "sha256": "0924363c913694c203847ad78d9c6ea1e93647de5326f5f8d45bda6441b89c72"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/run.mjs",
+      "sha256": "4b5deb832234dcb265362e34db1a0426997944ae2d2e812633249d3a900ea90a"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/run.mjs",
+      "sha256": "9fec426a92cc224cc49712512f2b2c0a374444763823a0178512a27b3d110611"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n10/contract.mjs",
+      "sha256": "e2ece7509fbea2225d366b79f0e7348e24aecf9c157c78530b20e2f22a1c161c"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/paired-node.mjs",
+      "sha256": "3384b5b9cb23cee67903a78ed6d069199e8a526c8a685a94aec339bbabb2bf64"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/bench/n9/paired-verify.mjs",
+      "sha256": "c7107ad06752f23bc4c03b1730116f41b2f0362163f1a928cd11a0c37ed91b6e"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/test/fixtures/n9/freeze.json",
+      "sha256": "3650c1e754c6756de9d1aee0de297e8d64670c3eaa5f409592e107b21e5a6ad0"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evaluation/RX-9001-method.json",
+      "sha256": "ec288cc5a1fc8db0d2551c47055dbb2b492025bae414dbb5df68becd7fc0c8c8"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evaluation/RX-9001-method.md",
+      "sha256": "e777fc784ef2e076b2ef4f5a85338da8b15b60b161ab0f69bb582affd6b2a292"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/test/fixtures/relevance/corpus.json",
+      "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db"
+    },
+    {
+      "path": "/private/tmp/raveldex-rx9006-preflight-20261106-01/prepared/prepared.json",
+      "sha256": "e2523c8f107d6dd26b464072b7ea5c4d732b28ecc09b525c6ee028aa15c8159f"
+    },
+    {
+      "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/preflight-20261106-01/authorization.json",
+      "sha256": "a292b17a0ad72c6351e7ffcdd94138fe6dde8c31441b9c0b336d01ac5c4c88c1"
+    },
+    {
+      "path": "/opt/homebrew/Cellar/node@24/24.21.0/bin/node",
+      "sha256": "4cc6e0762050bb4922c4564da3902b738d202e6b353e91c08ed1f82ac039de98"
+    },
+    {
+      "path": "/Users/vasilis/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+      "sha256": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7"
+    }
+  ],
+  "nodeExecutable": {
+    "path": "/opt/homebrew/Cellar/node@24/24.21.0/bin/node",
+    "sha256": "4cc6e0762050bb4922c4564da3902b738d202e6b353e91c08ed1f82ac039de98"
+  }
+}

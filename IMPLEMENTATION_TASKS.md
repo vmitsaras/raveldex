@@ -2646,7 +2646,7 @@ Fill the missing current update-latency evidence with matched bounded mutations 
 
 Measure selected real direct/worker and source-recovery configurations under truthful deadlines and cost boundaries, including actual failure and delivery outcomes.
 
-**Blocker or decision:** Original unchanged 180-minute recovery attempt failed total bound: 146/204 contexts completed, one interrupted and 57 uncollected. Owner chose original attempt only and declined a separate rerun; complete frozen recovery acceptance remains unavailable. No probe pooling or acceptance relaxation. First verification-overhead slice implemented and locally checked; canaries and another collection remain explicitly unauthorized.
+**Blocker or decision:** Original 180-minute recovery attempt remains incomplete at 146/204 contexts. The separately authorized recommended 22-context preflight passes: 150-minute cap, 360-second watchdog, 324-second gate; all 22 complete in 53.90 minutes, slowest 293.35 seconds, independent semantics/guards/cleanup pass. Fresh full 204-context recovery coverage remains uncollected and explicitly unauthorized. No retry, sample pooling or acceptance relaxation.
 
 **Expected affected areas**
 
@@ -2682,6 +2682,9 @@ Measure selected real direct/worker and source-recovery configurations under tru
 - [docs/evidence/RX-9006/analysis/recovery-prefix.json.gz](docs/evidence/RX-9006/analysis/recovery-prefix.json.gz)
 - [docs/evidence/RX-9006/identity/retention-execution.json](docs/evidence/RX-9006/identity/retention-execution.json)
 - [docs/evidence/RX-9006/overhead-slice1/README.md](docs/evidence/RX-9006/overhead-slice1/README.md)
+- [docs/evidence/RX-9006/overhead-slice2/README.md](docs/evidence/RX-9006/overhead-slice2/README.md)
+- [docs/evidence/RX-9006/overhead-slice3/README.md](docs/evidence/RX-9006/overhead-slice3/README.md)
+- [docs/evidence/RX-9006/preflight-20261106-01/README.md](docs/evidence/RX-9006/preflight-20261106-01/README.md)
 
 
 ## RX-9007

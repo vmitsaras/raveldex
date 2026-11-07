@@ -2,12 +2,13 @@
 import { createBulkVerifier } from '../n9/bulk-verify.mjs';
 
 export const RECOVERY_VERIFICATION_REVISION = Object.freeze({
-  id: 'rx9006-recovery-verification-2026-11-06-slice1',
+  id: 'rx9006-recovery-verification-2026-11-06-slice2',
   date: '2026-11-06',
   changes: Object.freeze([
     'source-only-unused-position-expectations',
     'per-exercise-authenticated-source-validation',
     'owned-literal-snapshots-with-lazy-source-expectations',
+    'diagnostic-only-inclusive-verification-phase-profiling',
   ]),
 });
 
@@ -62,7 +63,7 @@ function freezeParsed(value) {
   return value;
 }
 
-export function createRecoveryVerification({ records, priorRecord, variant }) {
+export function createRecoveryVerification({ records, priorRecord, variant, profile }) {
   ensure(Array.isArray(records), 'literal records array');
   ensure(variant === 'source' || variant === 'positions-offsets', 'variant');
   const verifier = createBulkVerifier(), expectations = new Map();
@@ -71,8 +72,8 @@ export function createRecoveryVerification({ records, priorRecord, variant }) {
   const mintPopulation = data => {
     const token = Object.freeze({}); populations.set(token, data); return token;
   };
-  const donorPopulation = mintPopulation({ kind: 'donor', records: ownLiteral(records) });
-  const priorPopulation = mintPopulation({ kind: 'prior', records: ownLiteral([priorRecord]) });
+  const donorPopulation = mintPopulation({ kind: 'donor', records: profile ? profile.sync('expected.literal-ownership','donor',()=>ownLiteral(records)) : ownLiteral(records) });
+  const priorPopulation = mintPopulation({ kind: 'prior', records: profile ? profile.sync('expected.literal-ownership','prior',()=>ownLiteral([priorRecord])) : ownLiteral([priorRecord]) });
   function populationData(population) {
     open(); const data = populations.get(population);
     ensure(data, 'authentic literal population'); return data;
@@ -86,6 +87,9 @@ export function createRecoveryVerification({ records, priorRecord, variant }) {
     return data.records;
   }
   function expected(population) {
+    return profile ? profile.sync('expected.source-and-ids',populationData(population).kind,()=>expectedValue(population)) : expectedValue(population);
+  }
+  function expectedValue(population) {
     const data = populationData(population);
     // A label/hash/ID is not authority. Base tokens own full immutable literal
     // data; later populations also compare the complete owned replacement.
@@ -113,11 +117,11 @@ export function createRecoveryVerification({ records, priorRecord, variant }) {
     ensure(base.kind === 'donor' || base.kind === 'prior', 'later-write base population');
     return mintPopulation({ kind: 'postwrite-' + base.kind, basePopulation, replacement: ownLiteral(record) });
   }
-  function validateSource(encoded) {
+  function validateSource(encoded,label='') {
     open();
     // Every invocation validates a newly captured value, even when its bytes
     // happen to equal a previous capture. There is no encoded-string cache.
-    const facts = freezeParsed(verifier.sourceSnapshot(encoded));
+    const facts = profile ? profile.sync('source.parse-checksum-canonicalization',label,()=>freezeParsed(verifier.sourceSnapshot(encoded))) : freezeParsed(verifier.sourceSnapshot(encoded));
     const handle = Object.freeze({}); sources.set(handle, { encoded, facts }); return handle;
   }
   function sourceFacts(handle, encoded) {
@@ -126,14 +130,16 @@ export function createRecoveryVerification({ records, priorRecord, variant }) {
     ensure(value.encoded === encoded, 'exact encoded source binding');
     return value.facts;
   }
-  function verifySource(handle, encoded, population) {
+  function verifySource(handle, encoded, population,label='') {
     const facts = sourceFacts(handle, encoded), literal = expected(population);
-    ensure(verifier.canonical(facts.payload) === literal.sourceCanonical, 'complete literal source/metadata');
+    const compare=()=>ensure(verifier.canonical(facts.payload) === literal.sourceCanonical, 'complete literal source/metadata');
+    if(profile)profile.sync('source.actual-literal-comparison',label,compare);else compare();
     return Object.freeze({ outcome: 'Pass', records: facts.records });
   }
-  function compareSources(beforeHandle, beforeEncoded, afterHandle, afterEncoded) {
+  function compareSources(beforeHandle, beforeEncoded, afterHandle, afterEncoded,label='') {
     const before = sourceFacts(beforeHandle, beforeEncoded), after = sourceFacts(afterHandle, afterEncoded);
-    ensure(before.canonical === after.canonical, 'complete source header/records/metadata differ');
+    const compare=()=>ensure(before.canonical === after.canonical, 'complete source header/records/metadata differ');
+    if(profile)profile.sync('source.validated-parity',label,compare);else compare();
     return Object.freeze({
       outcome: 'Pass', records: after.records,
       donorRevision: before.originRevision, receiverRevision: after.originRevision,

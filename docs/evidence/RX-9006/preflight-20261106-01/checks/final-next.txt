@@ -1,0 +1,23 @@
+No release task can start. Unfinished blocked work remains.
+
+Explicitly blocked release work (1):
+- RX-9006 — Verify host, recovery, deadline and resource tradeoffs: Original 180-minute recovery attempt remains incomplete at 146/204 contexts. The separately authorized recommended 22-context preflight passes: 150-minute cap, 360-second watchdog, 324-second gate; all 22 complete in 53.90 minutes, slowest 293.35 seconds, independent semantics/guards/cleanup pass. Fresh full 204-context recovery coverage remains uncollected and explicitly unauthorized. No retry, sample pooling or acceptance relaxation.
+
+Release work waiting on dependencies (13):
+- RX-9007 waits for RX-9006 (blocked)
+- RX-9101 waits for RX-9007 (planned)
+- RX-9102 waits for RX-9101 (planned)
+- RX-9103 waits for RX-9101 (planned)
+- RX-9104 waits for RX-9101 (planned)
+- RX-9105 waits for RX-9101 (planned)
+- RX-9106 waits for RX-9101 (planned)
+- RX-9107 waits for RX-9101 (planned)
+- RX-9108 waits for RX-9105 (planned), RX-9106 (planned), RX-9110 (planned)
+- RX-9109 waits for RX-9101 (planned)
+- RX-9110 waits for RX-9101 (planned)
+- RX-9111 waits for RX-9101 (planned)
+- RX-9112 waits for RX-9101 (planned), RX-9102 (planned), RX-9103 (planned), RX-9104 (planned), RX-9105 (planned), RX-9106 (planned), RX-9107 (planned), RX-9108 (planned), RX-9109 (planned), RX-9110 (planned), RX-9111 (planned)
+
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:next
+npm notice run node scripts/plan.mjs next

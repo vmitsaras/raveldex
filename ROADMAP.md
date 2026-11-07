@@ -130,7 +130,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 ## Recorded blockers and decisions
 
-- [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006): Original unchanged 180-minute recovery attempt failed total bound: 146/204 contexts completed, one interrupted and 57 uncollected. Owner chose original attempt only and declined a separate rerun; complete frozen recovery acceptance remains unavailable. No probe pooling or acceptance relaxation. First verification-overhead slice implemented and locally checked; canaries and another collection remain explicitly unauthorized.
+- [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006): Original 180-minute recovery attempt remains incomplete at 146/204 contexts. The separately authorized recommended 22-context preflight passes: 150-minute cap, 360-second watchdog, 324-second gate; all 22 complete in 53.90 minutes, slowest 293.35 seconds, independent semantics/guards/cleanup pass. Fresh full 204-context recovery coverage remains uncollected and explicitly unauthorized. No retry, sample pooling or acceptance relaxation.
 
 ## Milestone exit conditions
 

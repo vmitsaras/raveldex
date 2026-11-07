@@ -1,0 +1,107 @@
+✔ normal lane never reads the supplied profiler clock (0.726292ms)
+✔ profile records parented inclusive spans without exclusive CPU or merged clocks (0.517125ms)
+✔ span tokens reject forged, cross-context, duplicate and out-of-order completion (0.125834ms)
+✔ snapshots refuse open spans and release closes authority (0.079209ms)
+✔ sync and async wrappers preserve exact values and first callback errors (0.457042ms)
+✔ bounded retention fails closed instead of silently dropping spans (0.096084ms)
+✔ invalid local clock is rejected: () => NaN (0.057583ms)
+✔ invalid local clock is rejected: () => Infinity (0.037583ms)
+✔ invalid local clock is rejected: () => -1 (0.126875ms)
+✔ a backward local clock cannot manufacture a nonnegative phase (0.120125ms)
+✔ d95fca1 transcript parity: normal/source (77.170167ms)
+✔ d95fca1 transcript parity: normal/positions-offsets (65.6655ms)
+✔ d95fca1 transcript parity: diagnostic/source (40.46975ms)
+✔ d95fca1 transcript parity: diagnostic/positions-offsets (69.535875ms)
+✔ diagnostic profiling preserves branch transcript: buildRefusal (0.374ms)
+✔ diagnostic profiling preserves branch transcript: exportRefusal (0.622041ms)
+✔ diagnostic profiling preserves branch transcript: unknownBefore (4.932625ms)
+✔ diagnostic profiling preserves branch transcript: unknownAfter (4.652625ms)
+✔ diagnostic profiling preserves branch transcript: allSuccess (3.650584ms)
+✔ diagnostic profiling preserves branch transcript: persistenceSource (1.017209ms)
+✔ diagnostic profiling preserves branch transcript: persistenceState (0.534709ms)
+✔ diagnostic profiling preserves branch transcript: firstFailureCleanup (0.243834ms)
+✔ diagnostic profiling preserves branch transcript: receiverCleanup (1.60225ms)
+✔ diagnostic profiling preserves branch transcript: noPrivate (4.542834ms)
+✔ committed reference has exact reviewed first-slice source bytes (1.0685ms)
+✔ closing clock faults preserve the original synchronous and asynchronous callback errors (0.1495ms)
+✔ remote worker snapshots retain their own clock domain and independent immutable scalar copies (0.1685ms)
+✔ remote snapshots reject main-realm clocks, nested remotes, extra payloads and aggregate overflow (0.195084ms)
+✔ profile validator rejects symbol payload retention at profile (0.045625ms)
+✔ profile validator rejects symbol payload retention at span (0.037ms)
+✔ profile validation rejects malformed revision (0.041583ms)
+✔ profile validation rejects malformed clock (0.034125ms)
+✔ profile validation rejects malformed realm (0.03175ms)
+✔ profile validation rejects malformed negative (0.039209ms)
+✔ profile validation rejects malformed nonfinite (0.047167ms)
+✔ profile validation rejects malformed wrongDuration (0.042667ms)
+✔ profile validation rejects malformed absentParent (0.039625ms)
+✔ profile validation rejects malformed duplicate (0.042375ms)
+✔ profile validation rejects malformed hiddenData (0.036209ms)
+✔ validation rejects hidden and accessor data without invoking getters: profile (0.067333ms)
+✔ validation rejects hidden and accessor data without invoking getters: span (0.068042ms)
+✔ validation rejects hidden and accessor data without invoking getters: revision (0.048583ms)
+✔ validation rejects a getter on an expected scalar field without invoking it (0.049667ms)
+✔ validation rejects impossible inclusive serial interval tree: rootsOverlap (0.066583ms)
+✔ validation rejects impossible inclusive serial interval tree: siblingsOverlap (0.044542ms)
+✔ validation rejects impossible inclusive serial interval tree: startsGoBackward (0.040041ms)
+✔ validation rejects impossible inclusive serial interval tree: missingActiveParent (0.04325ms)
+✔ validation accepts sequential root spans and nested adjacent siblings (0.041166ms)
+✖ selected-operation observer function keeps every original boundary and only adds a pre-window idle guard (1.930583ms)
+✖ current diagnostic row requires its exact profile identity and complete local profile (22.085208ms)
+✖ advertised profile cannot bypass validation by dropping top-level identity on a historical fixture (0.299459ms)
+✔ normal row rejects even an undefined profile property and keeps frozen native/collector limits (0.440333ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 49
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 508.757875
+
+✖ failing tests:
+
+test at test/comparison/n10-host-recovery-profile.test.mjs:313:1
+✖ selected-operation observer function keeps every original boundary and only adds a pre-window idle guard (1.930583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + " async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await phaseAsync('diagnostic.control-start',operation,()=>diagnostic.start({operation,engine,role}));}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n" +
+  - " async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await diagnostic.start({operation,engine,role});}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n" +
+      '  try{const pending=call();returnedAt=performance.now();operationId=pending?.operationId;result=await pending;}catch(caught){error=caught;returnedAt??=performance.now();}\n' +
+      '  const end=performance.now(),usage=cpuUsage?.(cpu),sample={operation,role,outcome:recoveryOutcome(error),attempts:1,wallMs:end-start,invocationToReturnMs:returnedAt-start,returnToSettlementMs:end-returnedAt,deadlineOptions:options(),...(operationId?{operationId}:{}),...(usage?{cpuUserMs:usage.user/1000,cpuSystemMs:usage.system/1000}:{}),...(error?{error:recoveryError(error)}:{})};\n' +
+  +   "  if(mode==='diagnostic'){sample.counters=await phaseAsync('diagnostic.control-stop',operation,()=>diagnostic.stop({engine,role}));if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n" +
+  -   "  if(mode==='diagnostic'){sample.counters=await diagnostic.stop({engine,role});if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n" +
+      ' }\n'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/comparison/n10-host-recovery-profile.test.mjs:317:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: " async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await phaseAsync('diagnostic.control-start',operation,()=>diagnostic.start({operation,engine,role}));}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n  try{const pending=call();returnedAt=performance.now();operationId=pending?.operationId;result=await pending;}catch(caught){error=caught;returnedAt??=performance.now();}\n  const end=performance.now(),usage=cpuUsage?.(cpu),sample={operation,role,outcome:recoveryOutcome(error),attempts:1,wallMs:end-start,invocationToReturnMs:returnedAt-start,returnToSettlementMs:end-returnedAt,deadlineOptions:options(),...(operationId?{operationId}:{}),...(usage?{cpuUserMs:usage.user/1000,cpuSystemMs:usage.system/1000}:{}),...(error?{error:recoveryError(error)}:{})};\n  if(mode==='diagnostic'){sample.counters=await phaseAsync('diagnostic.control-stop',operation,()=>diagnostic.stop({engine,role}));if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n }\n",
+    expected: " async function observe(operation,engine,role,call){let beforeMemory;if(mode==='diagnostic'){beforeMemory=memory?.();await diagnostic.start({operation,engine,role});}const cpu=cpuUsage?.(),start=performance.now();let result,error,operationId,returnedAt;\n  try{const pending=call();returnedAt=performance.now();operationId=pending?.operationId;result=await pending;}catch(caught){error=caught;returnedAt??=performance.now();}\n  const end=performance.now(),usage=cpuUsage?.(cpu),sample={operation,role,outcome:recoveryOutcome(error),attempts:1,wallMs:end-start,invocationToReturnMs:returnedAt-start,returnToSettlementMs:end-returnedAt,deadlineOptions:options(),...(operationId?{operationId}:{}),...(usage?{cpuUserMs:usage.user/1000,cpuSystemMs:usage.system/1000}:{}),...(error?{error:recoveryError(error)}:{})};\n  if(mode==='diagnostic'){sample.counters=await diagnostic.stop({engine,role});if(memory)sample.processSamples={before:beforeMemory,after:memory(),scope:'Unforced process samples include harness/donor/receiver/input; not retained/peak/exclusive engine heap.'};}outputs.push(sample);return{result,error,row:sample};\n }\n",
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/comparison/n10-host-recovery-profile.test.mjs:324:1
+✖ current diagnostic row requires its exact profile identity and complete local profile (22.085208ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/comparison/n10-host-recovery-profile.test.mjs:329:58)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/comparison/n10-host-recovery-profile.test.mjs:331:1
+✖ advertised profile cannot bypass validation by dropping top-level identity on a historical fixture (0.299459ms)
+  TypeError: Cannot assign to read only property 'wallMs' of object '#<Object>'
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/comparison/n10-host-recovery-profile.test.mjs:333:46)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

@@ -1,0 +1,167 @@
+{
+  "kind": "rx9006-independent-recommended-preflight-review-v1",
+  "status": "Pass",
+  "reviewedAt": "2026-11-06T12:27:59.738632+00:00",
+  "phase": "preflight",
+  "policy": {
+    "kind": "rx9006-run-policy-v1",
+    "id": "rx9006-recommended-preflight-2026-11-06",
+    "revision": {
+      "id": "rx9006-named-run-policies-2026-11-06-slice3",
+      "date": "2026-11-06"
+    },
+    "family": "recommended",
+    "phase": "preflight",
+    "contexts": 22,
+    "budgetMs": 9000000,
+    "perContextWatchdogMs": 360000,
+    "preflightGateMs": 324000,
+    "closingReserveMs": 600000,
+    "workCutoffMs": 8400000,
+    "tailEstimates": false,
+    "nativeDeadlinePolicy": "unchanged-omitted30s-explicit60s-forced1ms",
+    "maxHits": 100,
+    "publicWorkerResponseMs": 65000
+  },
+  "coverage": {
+    "plannedContexts": 22,
+    "completedContexts": 22,
+    "failedContexts": 0,
+    "interruptedContexts": 0,
+    "uncollectedContexts": 0,
+    "fullRunStarted": false,
+    "fullRunAuthorized": false,
+    "normalContexts": 10,
+    "diagnosticContexts": 12
+  },
+  "actualCliExitCode": 0,
+  "actualCliCommandElapsedMs": 3234046.0734579996,
+  "supervisorElapsedMsBeforeOwnTerminalWrite": 3231410.503416,
+  "maximumContext": {
+    "index": 178,
+    "contextElapsedMs": 293349.774292,
+    "gateMarginMs": 30650.225708000013,
+    "watchdogMarginMs": 66650.22570800001,
+    "rowSha256": "f56021aae4e8f9f00ec9eb8c3cdb15501b62160b9b0317c38c84ab23d02f00bd"
+  },
+  "gateMarginMs": 30650.225708000013,
+  "watchdogMarginMs": 66650.22570800001,
+  "selectedOperationRows": 110,
+  "attemptedSelectedOperationRows": 50,
+  "zeroAttemptNotRunRows": 60,
+  "nativeOperationOutcomes": {
+    "Pass": 26,
+    "Refused": 22,
+    "Not run": 60,
+    "Cancelled": 2,
+    "Unknown": 0,
+    "Rejected": 0
+  },
+  "nativeRefusalCodes": {
+    "DEADLINE_EXCEEDED": 10,
+    "WORK_LIMIT_EXCEEDED": 12
+  },
+  "independentSemanticCounts": {
+    "queryScores": 1456,
+    "successfulQueries": 88,
+    "root:records": 240014,
+    "root:terms": 493650,
+    "root:postings": 9930900,
+    "root:sourceValues": 293342,
+    "root:offsets": 746752,
+    "privateRootCaptures": 38,
+    "operationRows": 110,
+    "diagnostic:emittedSteps": 415901025,
+    "diagnostic:emittedWorkUnits": 2075693305,
+    "diagnostic:hostYields": 1009085,
+    "diagnostic:continuationsScheduled": 1009089,
+    "diagnosticProcessSamples": 115,
+    "diagnosticNoRestoreCursorEntered": 25,
+    "postTerminalZeroDiagnosticPendingChecks": 8,
+    "preTerminationHarnessWorkerReferences": 17,
+    "contexts": 22,
+    "explicitUnobservedPrivateRoots": 2,
+    "refusedQueries": 8,
+    "sourceSnapshots": 20,
+    "sourceRecordAssertions": 60014,
+    "membershipScores": 40014,
+    "membershipPages": 414,
+    "attemptedMutatingRestores": 6,
+    "independentStagedPrefixSummaries": 80,
+    "observedRestoreTerminalOwnershipFlags": 5,
+    "completeNormalizedSourceParityChecks": 2,
+    "laterWriteScores": 6,
+    "subsequentWrites": 6,
+    "authoritativeOldSourcePreservations": 4,
+    "actualNodeProcesses": 17,
+    "pinnedStateAndSourceArtifacts": 58
+  },
+  "inputGuardStable": true,
+  "guardedInputs": 6355,
+  "normalObserverIsolation": "Pass",
+  "completeExternalLedger": "Pass",
+  "sourcePackagePreparationAuthorizationBindings": "Pass",
+  "onlineDiagnosticStagingAndTerminalFlags": "Pass",
+  "independentCleanupLiveness": "Pass",
+  "recordedPidsAbsent": 20,
+  "ownedGroupsAbsent": 2,
+  "phaseScope": "900 local spans across12diagnosticcontexts plus12separatebrowser-worker spans. Inclusive durations retain parentage; do not sum overlapping phases or cross clocks. No exclusive CPU/heap or matched speed verdict.",
+  "rawAcceptedPerformanceEvidence": false,
+  "fullRx9006Acceptance": false,
+  "original146of204StatusUnchanged": true,
+  "fullLaunchDecision": "Recommended preflight gate passes as evidence; current owner explicitly forbids full benchmark. No full launch or automatic retry follows.",
+  "unresolvedFindings": [],
+  "limitations": [
+    "This is one22-context preflight, not the full204-context recovery collection or a matched speed verdict. No samples are pooled.",
+    "Saved donor/receiver query results and all membership/later-write pages are independently scored. Post-refusal repeated query parity and prior-removal queries are checked online but their repeated result arrays are not separately serialized; unchanged reviewed source and existing online witnesses remain that evidence layer.",
+    "Serialized replay cannot recreate immutable-object/AVL shape observations, physical heap/GC or OS scheduler fairness.",
+    "Supervisor serialized elapsed precedes its own terminal write; actual successful CLI duration is the complete invocation witness and also fits150minutes.",
+    "Normal public worker has no private root seam; complete private positions/root are diagnostic observations, normal source/membership/receipt/later-write observations remain separate",
+    "Source projection revisions are normalized by capture and live root immutability/AVL shape are source/online checks, not independently reobserved by Python serialized replay",
+    "Recovery has two ordinary owners and no p95 or frozen three-owner separated-range speed verdict",
+    "Only actually attempted fields are replayed; zero-attempt Not-run restores establish no fresh restore/old-state/later-write observation",
+    "Read-only replay cannot establish scheduler fairness, physical input, retained/peak/browser heap or cause of historical timeout"
+  ],
+  "filePins": {
+    "prelaunch.json": {
+      "sha256": "25db1b4d296580b3cd190246b3bb889450901d04e7fdea09374a9af43bf3b9a9",
+      "bytes": 4236
+    },
+    "semantic-output.txt": {
+      "sha256": "33e9438ad476c74579f15c7c7aaba9b411be22ed58510b81a06dea99201c3fbb",
+      "bytes": 5866
+    },
+    "phase-summary.json": {
+      "sha256": "2a4acaf98d7d097b1101d3824caa48036284ec3222703ece65d2304c350f99a9",
+      "bytes": 14613
+    },
+    "metadata-output.txt": {
+      "sha256": "26973c9fdc92255b5f8fac4d0f77e716c727588d9c22be4a98fa3c4f457e2be6",
+      "bytes": 1795
+    },
+    "audit_metadata.py": {
+      "sha256": "778ccf45812c67f1c7045a52d22b331fce766d699b8dd0eb4ae20b83da265317",
+      "bytes": 15735
+    },
+    "audit_liveness.py": {
+      "sha256": "5883edd5f84850c0d0dc1a7480b0ef1bfb3afb8b6b139af56595820d6a6c072b",
+      "bytes": 1786
+    },
+    "cleanup-liveness.json": {
+      "sha256": "c53b4aa0188a2f6c16b78fed215e153d3199d39408d6f9b818416a344cfdcb66",
+      "bytes": 794
+    },
+    "metadata-audit.json": {
+      "sha256": "2e03e905245c7e49f7924d5f1aaa81b775999634553a4c923645e40f4f3f8cb3",
+      "bytes": 9098
+    },
+    "semantic_replay.py": {
+      "sha256": "d82b7ba3be38c59200698aee497123dd7f9b2580660608c666e95af22e34504d",
+      "bytes": 27456
+    },
+    "semantic-replay.json": {
+      "sha256": "58f988e2806efa2a0f3cd3ebf27c98723ff72484461b139036d0922e01fe77f8",
+      "bytes": 9418
+    }
+  }
+}

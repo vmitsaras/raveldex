@@ -1,0 +1,112 @@
+{
+  "scope": "Pure policy fixture development only; no native/runtime failure or execution permission.",
+  "attempts": [
+    {
+      "log": "policy-develop-01.txt",
+      "tests": 64,
+      "passed": 64,
+      "failed": 0,
+      "sha256": "fd7070d73b57cbd477c56fe99142fdf7583090344b443e839f69ec2cdbb91e1f"
+    },
+    {
+      "log": "policy-develop-02.txt",
+      "tests": 66,
+      "passed": 64,
+      "failed": 2,
+      "sha256": "f5bc3f426d247dd840c1940221fe67f6b9e822b91c8697aa09b3538370611baa"
+    },
+    {
+      "log": "policy-develop-03.txt",
+      "tests": 66,
+      "passed": 66,
+      "failed": 0,
+      "sha256": "2641f4196533f8cf1744dd6945fad87ff35d3f6b9e28f7708409c41a640f4dfd"
+    },
+    {
+      "log": "policy-develop-04.txt",
+      "tests": 91,
+      "passed": 91,
+      "failed": 0,
+      "sha256": "662e026101cb4abf49f35c3eb5e856777b7cc50ec4b8db9cb29b1db31f782e8c"
+    },
+    {
+      "log": "policy-develop-05.txt",
+      "tests": 101,
+      "passed": 101,
+      "failed": 0,
+      "sha256": "57494041f1663e2631e36c243c42f1bfaa2126c6804761d367cc7361adc400dc"
+    }
+  ],
+  "confirmedRed": "Two independent negative tests reproduced missing report authorization hash and inconsistent binding.policy acceptance; owner corrected both and later tests pass.",
+  "reviewExpectationCorrections": [
+    {
+      "issue": "Unconfirmed cleanup might pass",
+      "correction": "Direct final b36dd7 source line187 already sets externalFailure before inner acceptance. Reviewer overlooked adjacent guard; no implementation RED and no source change. A new unused-launcher negative test is additional regression coverage."
+    }
+  ],
+  "supervisorDevelopmentOwnerReport": {
+    "rawHistoricalStdoutRetainedOnDisk": false,
+    "source": "Implementation owner supplied tool chunk references and classifications; reviewer does not recreate missing raw logs. Passing final22 logs are copied separately.",
+    "attempts": [
+      {
+        "toolChunk": "cd032e",
+        "classification": "Syntax check failed before execution: await in non-async callback; corrected."
+      },
+      {
+        "toolChunk": "b4e6e7",
+        "tests": 19,
+        "passed": 5,
+        "failed": 14,
+        "classification": "Sandbox Unix-socket listen EPERM; targeted21bbf1 confirms before child spawn."
+      },
+      {
+        "toolChunk": "c5f9f8",
+        "tests": 19,
+        "passed": 15,
+        "failed": 4,
+        "classification": "Confirmed cleanup-ordering defect plus macOS kill0 EPERM during zombie reaping."
+      },
+      {
+        "toolChunk": "c4d9e3",
+        "tests": 19,
+        "passed": 16,
+        "failed": 3,
+        "classification": "Remaining cleanup/probe fixes in progress."
+      },
+      {
+        "toolChunk": "6f3208",
+        "tests": 19,
+        "passed": 18,
+        "failed": 1,
+        "classification": "Remaining kill0 probe classification; switched liveness proof to ps/non-Z, retaining signal failures."
+      },
+      {
+        "toolChunk": "6d03fb",
+        "tests": 19,
+        "passed": 19,
+        "failed": 0
+      },
+      {
+        "toolChunk": "0f4438",
+        "tests": 22,
+        "passed": 21,
+        "failed": 1,
+        "classification": "Review fixture quoting SyntaxError prevented handshake/launcher, so expected Unconfirmed state did not apply; targeted623d20."
+      },
+      {
+        "toolChunk": "ba3d18",
+        "tests": 22,
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "toolChunk": "fccc78",
+        "classification": "Passing22 raw log/report retained as supervisor-before-regular-*."
+      },
+      {
+        "toolChunk": "8ca165",
+        "classification": "Passing22 after regular-file guard raw log/report retained as supervisor-22-*."
+      }
+    ]
+  }
+}

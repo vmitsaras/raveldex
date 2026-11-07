@@ -1,0 +1,109 @@
+{
+  "status": "Pass",
+  "startedAt": "2026-11-06T09:10:44.886Z",
+  "finishedAt": "2026-11-06T09:10:48.491Z",
+  "output": "/private/tmp/raveldex-rx9006-overhead-slice2-20261106/staging-only-01",
+  "contextsPlannedOnly": 204,
+  "contextsExecuted": 0,
+  "engineFactoriesInvoked": 0,
+  "preparedSha256": "c724ff3878929a10b28fa681f8dc1dcddd1aaeb759e85e333f5de9792bff645f",
+  "verificationRevision": {
+    "id": "rx9006-recovery-verification-2026-11-06-slice2",
+    "date": "2026-11-06",
+    "changes": [
+      "source-only-unused-position-expectations",
+      "per-exercise-authenticated-source-validation",
+      "owned-literal-snapshots-with-lazy-source-expectations",
+      "diagnostic-only-inclusive-verification-phase-profiling"
+    ]
+  },
+  "profilingRevision": {
+    "id": "rx9006-recovery-phases-2026-11-06-slice2",
+    "date": "2026-11-06"
+  },
+  "method": {
+    "kind": "rx9006-recovery-v1",
+    "normalOwners": 2,
+    "diagnosticOwners": 1,
+    "contexts": 204,
+    "budgetMs": 10800000,
+    "perContextWatchdogMs": 300000,
+    "priorReceiver": {
+      "id": "prior-state",
+      "text": {
+        "body": "n9oldstate"
+      },
+      "metadata": {
+        "group": "prior"
+      }
+    },
+    "tailEstimates": false
+  },
+  "sourceInputsUnchanged": [
+    {
+      "path": "bench/n10/host-recovery.mjs",
+      "sha256": "8ffafdb512f1fe71baeb953a2daa6debd8899726f07f71d4fc8a9de2a9ec55e7"
+    },
+    {
+      "path": "bench/n10/host-recovery-case.mjs",
+      "sha256": "183b10e8f394cb59ab7e3a2a68e1ff0118d63e91df7747da2d0534a0d33655cf"
+    },
+    {
+      "path": "bench/n10/host-recovery-verification.mjs",
+      "sha256": "9d4e02a53b6382873cf1984efd974ecffbf0cec890b27cc009cebc2ba15fe5c4"
+    },
+    {
+      "path": "bench/n10/host-recovery-profile.mjs",
+      "sha256": "5bdb93db85d5f6319dba873efdf91ac5791c57e72d19dc0d46783d45b8b57f98"
+    },
+    {
+      "path": "bench/n9/bulk-verify.mjs",
+      "sha256": "1df3ddfa1a374607128565e3f8c38696b8eca23ae2843b8017939e11dd39f1fd"
+    }
+  ],
+  "checks": [
+    {
+      "package": "preN9-normal",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "normal"
+    },
+    {
+      "package": "preN9-diagnostic",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "diagnostic"
+    },
+    {
+      "package": "acceptedN9-normal",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "normal"
+    },
+    {
+      "package": "acceptedN9-diagnostic",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "diagnostic"
+    },
+    {
+      "package": "current-normal",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "normal"
+    },
+    {
+      "package": "current-diagnostic",
+      "nodeChildSyntax": "Pass",
+      "supportModuleImports": "Pass",
+      "browserBundleHelperInput": "Pass",
+      "mode": "diagnostic"
+    }
+  ],
+  "scope": "Six isolated package staging copies, generated Node-child syntax, pure support imports and twelve browser bundles only. No child execution, engine initialization, queries, canary or collection. Not measurement qualification."
+}

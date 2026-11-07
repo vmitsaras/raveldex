@@ -1,0 +1,821 @@
+{
+  "kind": "rx9006-named-recovery-collection-v1",
+  "startedAt": "2026-11-06T11:20:50.521Z",
+  "runPolicy": {
+    "kind": "rx9006-run-policy-v1",
+    "id": "rx9006-recommended-preflight-2026-11-06",
+    "revision": {
+      "id": "rx9006-named-run-policies-2026-11-06-slice3",
+      "date": "2026-11-06"
+    },
+    "family": "recommended",
+    "phase": "preflight",
+    "contexts": 22,
+    "budgetMs": 9000000,
+    "perContextWatchdogMs": 360000,
+    "preflightGateMs": 324000,
+    "closingReserveMs": 600000,
+    "workCutoffMs": 8400000,
+    "tailEstimates": false,
+    "nativeDeadlinePolicy": "unchanged-omitted30s-explicit60s-forced1ms",
+    "maxHits": 100,
+    "publicWorkerResponseMs": 65000
+  },
+  "policyRevision": {
+    "id": "rx9006-named-run-policies-2026-11-06-slice3",
+    "date": "2026-11-06"
+  },
+  "binding": {
+    "kind": "rx9006-exact-run-binding-v1",
+    "policy": {
+      "kind": "rx9006-run-policy-v1",
+      "id": "rx9006-recommended-preflight-2026-11-06",
+      "revision": {
+        "id": "rx9006-named-run-policies-2026-11-06-slice3",
+        "date": "2026-11-06"
+      },
+      "family": "recommended",
+      "phase": "preflight",
+      "contexts": 22,
+      "budgetMs": 9000000,
+      "perContextWatchdogMs": 360000,
+      "preflightGateMs": 324000,
+      "closingReserveMs": 600000,
+      "workCutoffMs": 8400000,
+      "tailEstimates": false,
+      "nativeDeadlinePolicy": "unchanged-omitted30s-explicit60s-forced1ms",
+      "maxHits": 100,
+      "publicWorkerResponseMs": 65000
+    },
+    "baseMethod": {
+      "kind": "rx9006-recovery-v1",
+      "normalOwners": 2,
+      "diagnosticOwners": 1,
+      "contexts": 204,
+      "budgetMs": 10800000,
+      "perContextWatchdogMs": 300000,
+      "priorReceiver": {
+        "id": "prior-state",
+        "text": {
+          "body": "n9oldstate"
+        },
+        "metadata": {
+          "group": "prior"
+        }
+      },
+      "tailEstimates": false
+    },
+    "prepared": {
+      "path": "/private/tmp/raveldex-rx9006-preflight-20261106-01/prepared/prepared.json",
+      "sha256": "e2523c8f107d6dd26b464072b7ea5c4d732b28ecc09b525c6ee028aa15c8159f"
+    },
+    "sourceIdentity": "9f113e26d279da4c050ca4a5e0569d9dab6b65617f697f0a5dafa1a8723395aa",
+    "cohortIdentity": "6a16042fe5a8534170de24e2185e76828710d25e5e9576203e07f39aaea5c183",
+    "executables": {
+      "node": {
+        "path": "/opt/homebrew/Cellar/node@24/24.21.0/bin/node",
+        "sha256": "4cc6e0762050bb4922c4564da3902b738d202e6b353e91c08ed1f82ac039de98",
+        "version": "v24.21.0"
+      },
+      "chromium": {
+        "path": "/Users/vasilis/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+        "sha256": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7"
+      }
+    },
+    "output": "/private/tmp/raveldex-rx9006-preflight-20261106-01/attempt",
+    "preflight": null
+  },
+  "authorization": {
+    "path": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9006/preflight-20261106-01/authorization.json",
+    "sha256": "a292b17a0ad72c6351e7ffcdd94138fe6dde8c31441b9c0b336d01ac5c4c88c1"
+  },
+  "authorizationSha256": "a292b17a0ad72c6351e7ffcdd94138fe6dde8c31441b9c0b336d01ac5c4c88c1",
+  "supervisorBinding": {
+    "attemptId": "586b27fc-c68b-48df-bba8-87eb2b0c9a29",
+    "bindingSha256": "48741c6654094422547165a019dfa8155accaea9f1961d388bf791e7119b9013"
+  },
+  "method": {
+    "kind": "rx9006-recovery-v1",
+    "normalOwners": 2,
+    "diagnosticOwners": 1,
+    "contexts": 204,
+    "budgetMs": 10800000,
+    "perContextWatchdogMs": 300000,
+    "priorReceiver": {
+      "id": "prior-state",
+      "text": {
+        "body": "n9oldstate"
+      },
+      "metadata": {
+        "group": "prior"
+      }
+    },
+    "tailEstimates": false
+  },
+  "verificationRevision": {
+    "id": "rx9006-recovery-verification-2026-11-06-slice2",
+    "date": "2026-11-06",
+    "changes": [
+      "source-only-unused-position-expectations",
+      "per-exercise-authenticated-source-validation",
+      "owned-literal-snapshots-with-lazy-source-expectations",
+      "diagnostic-only-inclusive-verification-phase-profiling"
+    ]
+  },
+  "profilingRevision": {
+    "id": "rx9006-recovery-phases-2026-11-06-slice2",
+    "date": "2026-11-06"
+  },
+  "planned": 22,
+  "runs": [
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "browser-real-module-worker",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": false,
+        "index": 176,
+        "key": "176-adversarial-10000-browser-real-module-worker-source-preN9-explicit60s-2-diagnostic"
+      },
+      "file": "176-adversarial-10000-browser-real-module-worker-source-preN9-explicit60s-2-diagnostic.json",
+      "contextElapsedMs": 282250.019625,
+      "dispatchElapsedMs": 3655.2493329999998,
+      "endElapsedMs": 285905.268958,
+      "outcome": "Collected",
+      "sha256": "790eb827b0d9042c1d7c51e27fc3a63fab5c4cf9e0fc83bbcb6d35d609556321",
+      "config": {
+        "file": "176-adversarial-10000-browser-real-module-worker-source-preN9-explicit60s-2-diagnostic.config.json",
+        "sha256": "2225c234cb6c70107d1df5e209cc09851934614b6b7fc4ea61cefac5e56d95c0"
+      },
+      "process": null
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "browser-real-module-worker",
+        "variant": "positions-offsets",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": false,
+        "index": 178,
+        "key": "178-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-explicit60s-2-diagnostic"
+      },
+      "file": "178-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-explicit60s-2-diagnostic.json",
+      "contextElapsedMs": 293349.774292,
+      "dispatchElapsedMs": 285910.034333,
+      "endElapsedMs": 579259.8086250001,
+      "outcome": "Collected",
+      "sha256": "f56021aae4e8f9f00ec9eb8c3cdb15501b62160b9b0317c38c84ab23d02f00bd",
+      "config": {
+        "file": "178-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-explicit60s-2-diagnostic.config.json",
+        "sha256": "c739e81c7d30023fa6790946bf34fd66e3205786c8215f46f98dfd2da658c3e4"
+      },
+      "process": null
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "browser-real-module-worker",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 1,
+        "mode": "normal",
+        "control": false,
+        "index": 87,
+        "key": "87-adversarial-10000-browser-real-module-worker-source-preN9-explicit60s-1-normal"
+      },
+      "file": "87-adversarial-10000-browser-real-module-worker-source-preN9-explicit60s-1-normal.json",
+      "contextElapsedMs": 276229.409625,
+      "dispatchElapsedMs": 579264.530416,
+      "endElapsedMs": 855493.940041,
+      "outcome": "Collected",
+      "sha256": "34b8ec495867c939f81cce5ddc666ba3178c41a20e704d7e11cfefd05273cad8",
+      "config": {
+        "file": "87-adversarial-10000-browser-real-module-worker-source-preN9-explicit60s-1-normal.config.json",
+        "sha256": "75958b21c4660207491fec69133e41c3edbfb05d45a2c96d69158c7f8c2d53e7"
+      },
+      "process": null
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "browser-real-module-worker",
+        "variant": "positions-offsets",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 1,
+        "mode": "normal",
+        "control": false,
+        "index": 89,
+        "key": "89-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-explicit60s-1-normal"
+      },
+      "file": "89-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-explicit60s-1-normal.json",
+      "contextElapsedMs": 292871.34275000007,
+      "dispatchElapsedMs": 855500.1831250001,
+      "endElapsedMs": 1148371.525875,
+      "outcome": "Collected",
+      "sha256": "17464656d88fb82d15899b2fcd6ab010f539633b035e84b300e70a5b7b191b5b",
+      "config": {
+        "file": "89-adversarial-10000-browser-real-module-worker-positions-offsets-preN9-explicit60s-1-normal.config.json",
+        "sha256": "0d91a370476ca34332281192efb72e698fc7c79638dacb1a0f1b7842433c0483"
+      },
+      "process": null
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 180,
+        "key": "180-real-docs-10000-Node-direct-source-preN9-default30s-0-normal"
+      },
+      "file": "180-real-docs-10000-Node-direct-source-preN9-default30s-0-normal.json",
+      "contextElapsedMs": 126232.92095900001,
+      "dispatchElapsedMs": 1148377.6194159999,
+      "endElapsedMs": 1274610.5403749999,
+      "outcome": "Collected",
+      "sha256": "d43a459abca721a791e0b9b1023dd35e22931fbb6bddd5550d06a6a91cc685fb",
+      "config": {
+        "file": "180-real-docs-10000-Node-direct-source-preN9-default30s-0-normal.config.json",
+        "sha256": "36a12e38e2678a7d17b4f9d5f021e9b14ca594fa53893be31684e05d67d95d04"
+      },
+      "process": {
+        "file": "180-real-docs-10000-Node-direct-source-preN9-default30s-0-normal.process.json",
+        "sha256": "c95a36a5985cff498df5033838979d2a61f1c0e05008a24675f7a855b67d3fd6"
+      }
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 181,
+        "key": "181-real-docs-10000-Node-direct-source-current-default30s-0-normal"
+      },
+      "file": "181-real-docs-10000-Node-direct-source-current-default30s-0-normal.json",
+      "contextElapsedMs": 30647.150957999984,
+      "dispatchElapsedMs": 1274616.086833,
+      "endElapsedMs": 1305263.237791,
+      "outcome": "Collected",
+      "sha256": "cfc21dcc4b554e2cd7373d7f76ac6336c147ebeaa631616f87f47bb2d7a212c7",
+      "config": {
+        "file": "181-real-docs-10000-Node-direct-source-current-default30s-0-normal.config.json",
+        "sha256": "898b6896aa8bce819654c15cb57241996ea19ba0f1f5df85302cd574427f73a4"
+      },
+      "process": {
+        "file": "181-real-docs-10000-Node-direct-source-current-default30s-0-normal.process.json",
+        "sha256": "363fffe7cb6b2ab30c451559a9f4333410a596e7b5fb5a7dd858261a36ad7b72"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 182,
+        "key": "182-high-cardinality-10000-Node-direct-source-preN9-default30s-0-normal"
+      },
+      "file": "182-high-cardinality-10000-Node-direct-source-preN9-default30s-0-normal.json",
+      "contextElapsedMs": 201820.5029170001,
+      "dispatchElapsedMs": 1305268.370958,
+      "endElapsedMs": 1507088.873875,
+      "outcome": "Collected",
+      "sha256": "47a1ac26cb4a87c1950dd918d589cfff166f92c2f4b797ad8a64a0566210166d",
+      "config": {
+        "file": "182-high-cardinality-10000-Node-direct-source-preN9-default30s-0-normal.config.json",
+        "sha256": "a07aa1dfe62053fdcb73daca8672e686b6fabbedd7b9da0ca8950f267bbc8980"
+      },
+      "process": {
+        "file": "182-high-cardinality-10000-Node-direct-source-preN9-default30s-0-normal.process.json",
+        "sha256": "83218c812f1b390a0dc8a8f57d633fffd982992174da674df8002378463d4c1c"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 183,
+        "key": "183-high-cardinality-10000-Node-direct-source-current-default30s-0-normal"
+      },
+      "file": "183-high-cardinality-10000-Node-direct-source-current-default30s-0-normal.json",
+      "contextElapsedMs": 47878.440375000006,
+      "dispatchElapsedMs": 1507098.151333,
+      "endElapsedMs": 1554976.591708,
+      "outcome": "Collected",
+      "sha256": "3f886af4aa575a8499a3193722ad1bdb1962190f3b8943b8a1c077ce21537c82",
+      "config": {
+        "file": "183-high-cardinality-10000-Node-direct-source-current-default30s-0-normal.config.json",
+        "sha256": "cbf9ff578cde1f9b7f7261baada69c0b4456dbc807bdcb45f33847cf3dcafa76"
+      },
+      "process": {
+        "file": "183-high-cardinality-10000-Node-direct-source-current-default30s-0-normal.process.json",
+        "sha256": "0613dea29646c28b21ffcd3ba62c8e76a3966a6a0fa6ba988a2e829ccdef0438"
+      }
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 184,
+        "key": "184-real-docs-10000-Node-direct-source-preN9-explicit60s-0-normal"
+      },
+      "file": "184-real-docs-10000-Node-direct-source-preN9-explicit60s-0-normal.json",
+      "contextElapsedMs": 138445.85345799988,
+      "dispatchElapsedMs": 1554982.699208,
+      "endElapsedMs": 1693428.5526659999,
+      "outcome": "Collected",
+      "sha256": "ba97960b5ab30a686cf9e9a77cbdccc31c36980d6b40530752617cab760a6a7c",
+      "config": {
+        "file": "184-real-docs-10000-Node-direct-source-preN9-explicit60s-0-normal.config.json",
+        "sha256": "a467aacf9bf12b5e69ff1eeb4c6dce21ff6b8a00d33a5e298235dc88d1ffaf94"
+      },
+      "process": {
+        "file": "184-real-docs-10000-Node-direct-source-preN9-explicit60s-0-normal.process.json",
+        "sha256": "775ede2929ae9faa8b0aacf119a851f7fd1d6023113ef38bd50e59e66a0541a6"
+      }
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 185,
+        "key": "185-real-docs-10000-Node-direct-source-current-explicit60s-0-normal"
+      },
+      "file": "185-real-docs-10000-Node-direct-source-current-explicit60s-0-normal.json",
+      "contextElapsedMs": 30534.780416999944,
+      "dispatchElapsedMs": 1693433.716208,
+      "endElapsedMs": 1723968.496625,
+      "outcome": "Collected",
+      "sha256": "156bbf39580aca6b9a70fdb846905c8ecb1f036283bae45a9d2a7d4cbd139105",
+      "config": {
+        "file": "185-real-docs-10000-Node-direct-source-current-explicit60s-0-normal.config.json",
+        "sha256": "e7f561c6a3fdd13b4449480179f851443efc8d7a9cf6555cae953c24bf884526"
+      },
+      "process": {
+        "file": "185-real-docs-10000-Node-direct-source-current-explicit60s-0-normal.process.json",
+        "sha256": "e0e2cb0d3ad55a0504df3e4cd0c58cd7f35b1c2c09278aa15878d987c78341af"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 186,
+        "key": "186-high-cardinality-10000-Node-direct-source-preN9-explicit60s-0-normal"
+      },
+      "file": "186-high-cardinality-10000-Node-direct-source-preN9-explicit60s-0-normal.json",
+      "contextElapsedMs": 215180.01749999984,
+      "dispatchElapsedMs": 1723973.645,
+      "endElapsedMs": 1939153.6624999999,
+      "outcome": "Collected",
+      "sha256": "d955ecb17b60c269e752e081a94ab391044a95e8a1059449091e578698c0af78",
+      "config": {
+        "file": "186-high-cardinality-10000-Node-direct-source-preN9-explicit60s-0-normal.config.json",
+        "sha256": "1091b0960c0abcf8d21e58db7a340b5c5f1288b6e9e1ea6e5ac2acc15798ffa2"
+      },
+      "process": {
+        "file": "186-high-cardinality-10000-Node-direct-source-preN9-explicit60s-0-normal.process.json",
+        "sha256": "070fb1ed7a1121c7c7ad0e6a5450a393a6cc5d800a4596c00d78e4f3f23adfc7"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 0,
+        "mode": "normal",
+        "control": true,
+        "index": 187,
+        "key": "187-high-cardinality-10000-Node-direct-source-current-explicit60s-0-normal"
+      },
+      "file": "187-high-cardinality-10000-Node-direct-source-current-explicit60s-0-normal.json",
+      "contextElapsedMs": 47830.59762499994,
+      "dispatchElapsedMs": 1939160.210833,
+      "endElapsedMs": 1986990.808458,
+      "outcome": "Collected",
+      "sha256": "24038b53b71cf7a263c3ea3bd5d5f4644b131ab531fb7bc41a543cbc8428e933",
+      "config": {
+        "file": "187-high-cardinality-10000-Node-direct-source-current-explicit60s-0-normal.config.json",
+        "sha256": "c546932c76f39da77075f912376bfd5b387d1b4e9362b67e106e2fc66d8fde8a"
+      },
+      "process": {
+        "file": "187-high-cardinality-10000-Node-direct-source-current-explicit60s-0-normal.process.json",
+        "sha256": "b1c7622a5d517bd18f70fc0bdcf1e691c398583b9fb001a565148af1ba8555f4"
+      }
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 196,
+        "key": "196-real-docs-10000-Node-direct-source-preN9-default30s-2-diagnostic"
+      },
+      "file": "196-real-docs-10000-Node-direct-source-preN9-default30s-2-diagnostic.json",
+      "contextElapsedMs": 128842.58154200017,
+      "dispatchElapsedMs": 1986995.5903329998,
+      "endElapsedMs": 2115838.171875,
+      "outcome": "Collected",
+      "sha256": "ee04d92aa05699bdcde3362e3b9143218745c17f1a1637aecb69814f7042ff85",
+      "config": {
+        "file": "196-real-docs-10000-Node-direct-source-preN9-default30s-2-diagnostic.config.json",
+        "sha256": "237b226c19b5dc4de6c32888cd42cb3dde83bb3784360c9c49db51aca66ad9cb"
+      },
+      "process": {
+        "file": "196-real-docs-10000-Node-direct-source-preN9-default30s-2-diagnostic.process.json",
+        "sha256": "cad663919f728c88df6dc9069bba237df60411d410cdf626e5e55575717233ea"
+      }
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 197,
+        "key": "197-real-docs-10000-Node-direct-source-current-default30s-2-diagnostic"
+      },
+      "file": "197-real-docs-10000-Node-direct-source-current-default30s-2-diagnostic.json",
+      "contextElapsedMs": 33602.889958999585,
+      "dispatchElapsedMs": 2115843.085791,
+      "endElapsedMs": 2149445.9757499998,
+      "outcome": "Collected",
+      "sha256": "41700d44f5363a4cfadb9ff206bb8850bc39a250ff80a19f6a4d54455f49b5de",
+      "config": {
+        "file": "197-real-docs-10000-Node-direct-source-current-default30s-2-diagnostic.config.json",
+        "sha256": "8f6fbd70324606e68b3bd271eb0a14420b4c0b1797b53554c1e74306dc57a2ab"
+      },
+      "process": {
+        "file": "197-real-docs-10000-Node-direct-source-current-default30s-2-diagnostic.process.json",
+        "sha256": "8625d574de0f2d5a9912bab3bc7eb59e715e8984f36a674677aa2327be987280"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 198,
+        "key": "198-high-cardinality-10000-Node-direct-source-preN9-default30s-2-diagnostic"
+      },
+      "file": "198-high-cardinality-10000-Node-direct-source-preN9-default30s-2-diagnostic.json",
+      "contextElapsedMs": 209722.04529100005,
+      "dispatchElapsedMs": 2149451.611125,
+      "endElapsedMs": 2359173.656416,
+      "outcome": "Collected",
+      "sha256": "619de4feefa0ea7cb97fa7ace60b1988d8fae3c376ea836d01e2589710b61c3f",
+      "config": {
+        "file": "198-high-cardinality-10000-Node-direct-source-preN9-default30s-2-diagnostic.config.json",
+        "sha256": "8df854afdf77025664dfe159884f899220d553d2cba8d3d4ab571b40547c1c27"
+      },
+      "process": {
+        "file": "198-high-cardinality-10000-Node-direct-source-preN9-default30s-2-diagnostic.process.json",
+        "sha256": "94095e55fec76513b8203be5e6c91291c835d505e5628e0b7e508e5447ceb1d8"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 199,
+        "key": "199-high-cardinality-10000-Node-direct-source-current-default30s-2-diagnostic"
+      },
+      "file": "199-high-cardinality-10000-Node-direct-source-current-default30s-2-diagnostic.json",
+      "contextElapsedMs": 52093.61108400021,
+      "dispatchElapsedMs": 2359179.896041,
+      "endElapsedMs": 2411273.507125,
+      "outcome": "Collected",
+      "sha256": "f03eda0177ab7e09a31e4cf8d8cc759771df21070da498b5d549b7ed515d0653",
+      "config": {
+        "file": "199-high-cardinality-10000-Node-direct-source-current-default30s-2-diagnostic.config.json",
+        "sha256": "78ecc8a60265347e94234bb8a335fb6ac1f6a1e5f6ede7300bf075f1dc7fb459"
+      },
+      "process": {
+        "file": "199-high-cardinality-10000-Node-direct-source-current-default30s-2-diagnostic.process.json",
+        "sha256": "3a484bc76adcbce7ab88a64c6ca5a7a5a4ed5b728651f9f1aeed1590d7f1808a"
+      }
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 200,
+        "key": "200-real-docs-10000-Node-direct-source-preN9-explicit60s-2-diagnostic"
+      },
+      "file": "200-real-docs-10000-Node-direct-source-preN9-explicit60s-2-diagnostic.json",
+      "contextElapsedMs": 149835.2245,
+      "dispatchElapsedMs": 2411279.305333,
+      "endElapsedMs": 2561114.529833,
+      "outcome": "Collected",
+      "sha256": "28aecf9b03c30b9fcbb91d803038ea333216db3c6f32f0142e4eeb72ed9c37bb",
+      "config": {
+        "file": "200-real-docs-10000-Node-direct-source-preN9-explicit60s-2-diagnostic.config.json",
+        "sha256": "134587f424a84d70c078fcc87d6a02db28fcf265c3e6d33ac852c38d0b2cf4b8"
+      },
+      "process": {
+        "file": "200-real-docs-10000-Node-direct-source-preN9-explicit60s-2-diagnostic.process.json",
+        "sha256": "391a14b22315bf961bf85c90f418e28e9f30bc6b9faac68f0e63b481df1baf16"
+      }
+    },
+    {
+      "job": {
+        "family": "real-docs",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 201,
+        "key": "201-real-docs-10000-Node-direct-source-current-explicit60s-2-diagnostic"
+      },
+      "file": "201-real-docs-10000-Node-direct-source-current-explicit60s-2-diagnostic.json",
+      "contextElapsedMs": 33160.60049999971,
+      "dispatchElapsedMs": 2561119.902958,
+      "endElapsedMs": 2594280.503458,
+      "outcome": "Collected",
+      "sha256": "5aad43c5601413d3437adbd980171510fec118499e02055a589260eac92628b0",
+      "config": {
+        "file": "201-real-docs-10000-Node-direct-source-current-explicit60s-2-diagnostic.config.json",
+        "sha256": "204a1b60dbe5557bb3b402973d4eb1fccb86fc902cc0ea8567b29f7c254b41ce"
+      },
+      "process": {
+        "file": "201-real-docs-10000-Node-direct-source-current-explicit60s-2-diagnostic.process.json",
+        "sha256": "bb2c73b49f3058eecc7ca93dbc3d3896d77f2b7c460f1f063a8b950c2ba0db10"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "preN9",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 202,
+        "key": "202-high-cardinality-10000-Node-direct-source-preN9-explicit60s-2-diagnostic"
+      },
+      "file": "202-high-cardinality-10000-Node-direct-source-preN9-explicit60s-2-diagnostic.json",
+      "contextElapsedMs": 233655.04916700022,
+      "dispatchElapsedMs": 2594286.046708,
+      "endElapsedMs": 2827941.095875,
+      "outcome": "Collected",
+      "sha256": "f1c718c61c3172435c20e20db7a0dd2551cdd348ebe00068574b75ab76dbc075",
+      "config": {
+        "file": "202-high-cardinality-10000-Node-direct-source-preN9-explicit60s-2-diagnostic.config.json",
+        "sha256": "01bed2300f3735db01cdd43aaffe543c991d27f342e77928500b8f3955952c6d"
+      },
+      "process": {
+        "file": "202-high-cardinality-10000-Node-direct-source-preN9-explicit60s-2-diagnostic.process.json",
+        "sha256": "a8a3a000c2414c5bc163a7f1846e51c6e1c16fe5c6c8ee5fff16beb52a2f63d5"
+      }
+    },
+    {
+      "job": {
+        "family": "high-cardinality",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "source",
+        "role": "current",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": true,
+        "index": 203,
+        "key": "203-high-cardinality-10000-Node-direct-source-current-explicit60s-2-diagnostic"
+      },
+      "file": "203-high-cardinality-10000-Node-direct-source-current-explicit60s-2-diagnostic.json",
+      "contextElapsedMs": 51552.67700000014,
+      "dispatchElapsedMs": 2827946.851791,
+      "endElapsedMs": 2879499.528791,
+      "outcome": "Collected",
+      "sha256": "38e60849c4458ecf158a65d5e07e5d9f7cb9508c7fb267fcf5288d10d973040f",
+      "config": {
+        "file": "203-high-cardinality-10000-Node-direct-source-current-explicit60s-2-diagnostic.config.json",
+        "sha256": "e90e2bedbdeb0f5c1b7eb90f3faa98ce5041c974d7f8c498834129a15c7dc90e"
+      },
+      "process": {
+        "file": "203-high-cardinality-10000-Node-direct-source-current-explicit60s-2-diagnostic.process.json",
+        "sha256": "781f0b84522ac0c9f1c78403c2a85ec2a8bc3b50674b5ed27992a0b1096f5571"
+      }
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "Node-direct",
+        "variant": "positions-offsets",
+        "role": "current",
+        "deadline": "default30s",
+        "deadlineOptions": {},
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": false,
+        "index": 141,
+        "key": "141-adversarial-10000-Node-direct-positions-offsets-current-default30s-2-diagnostic"
+      },
+      "file": "141-adversarial-10000-Node-direct-positions-offsets-current-default30s-2-diagnostic.json",
+      "contextElapsedMs": 200160.64674999984,
+      "dispatchElapsedMs": 2879505.613,
+      "endElapsedMs": 3079666.2597499997,
+      "outcome": "Collected",
+      "sha256": "feae7c5067cf7ffb0c35f57a45fe3b416e028e8ef804b1ee6c75e2adbea31ce7",
+      "config": {
+        "file": "141-adversarial-10000-Node-direct-positions-offsets-current-default30s-2-diagnostic.config.json",
+        "sha256": "7e0322bf6566f9828ea530ef2c5bb12c56066a0e80b36f92360063927fcc488d"
+      },
+      "process": {
+        "file": "141-adversarial-10000-Node-direct-positions-offsets-current-default30s-2-diagnostic.process.json",
+        "sha256": "32560bf1f04295ce2fe0be334191c07552d3e3423a025951e99260ef25e75d71"
+      }
+    },
+    {
+      "job": {
+        "family": "adversarial",
+        "size": 10000,
+        "host": "browser-real-module-worker",
+        "variant": "positions-offsets",
+        "role": "current",
+        "deadline": "explicit60s",
+        "deadlineOptions": {
+          "deadlineMs": 60000
+        },
+        "owner": 2,
+        "mode": "diagnostic",
+        "control": false,
+        "index": 179,
+        "key": "179-adversarial-10000-browser-real-module-worker-positions-offsets-current-explicit60s-2-diagnostic"
+      },
+      "file": "179-adversarial-10000-browser-real-module-worker-positions-offsets-current-explicit60s-2-diagnostic.json",
+      "contextElapsedMs": 114258.84058300033,
+      "dispatchElapsedMs": 3079670.28275,
+      "endElapsedMs": 3193929.123333,
+      "outcome": "Collected",
+      "sha256": "f76a9ff24f638a04aa522e45f41a7220753e89645dda37e2f7d63587b512a28b",
+      "config": {
+        "file": "179-adversarial-10000-browser-real-module-worker-positions-offsets-current-explicit60s-2-diagnostic.config.json",
+        "sha256": "44c03e9b81aca0e5d6cf0d96254c17f9f0c83149e7ff0b25f7ea77e0f8c80a3e"
+      },
+      "process": null
+    }
+  ],
+  "outcome": "Collected",
+  "acceptedPerformanceEvidence": false,
+  "interrupted": false,
+  "budgetExceeded": false,
+  "nativeOutcome": null,
+  "browserVersion": "149.0.7827.55",
+  "browserStartupRecipe": "Supervisor-owned acknowledged wrapper group, pinned Chromium launchServer and browser connection; outside selected operation windows.",
+  "activeJob": null,
+  "launchGate": "Pass",
+  "guards": "Pass",
+  "finishedAt": "2026-11-06T12:14:22.374Z",
+  "elapsedMs": 3212008.8624159996,
+  "coverage": {
+    "outcome": "Pass",
+    "contexts": 22,
+    "phase": "preflight",
+    "policy": "rx9006-recommended-preflight-2026-11-06"
+  }
+}
