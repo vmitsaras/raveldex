@@ -1,10 +1,18 @@
-# N11 — Consumer plugin UI/UX polish
+# N11 — Raveldex-native consumer identity and usability
 
 ## Status and outcome
 
-Planned on 5 November 2026 from the owner's plugin UI/UX and persona review. This selects planning and GitHub registration only; no plugin, CSS, demo, dependency or public API implementation is part of registration. Execution follows N10's accepted closeout so its measured candidate and serial collection remain undisturbed. No deadline or assignee is inferred.
+Planned on 5 November 2026 from the owner's plugin UI/UX and persona review. This selects planning and GitHub registration only; no plugin, CSS, demo, dependency or public API implementation is part of registration. The November 7 owner amendment removes the N10-closeout dependency: use accepted RX-7006/RX-9003 and isolate frozen measurement artifacts; same-host timing isolation is scheduling, not a prerequisite for UI design. No deadline or assignee is inferred.
 
-The outcome is a familiar, understandable and consistent consumer search experience for people adopting Raveldex, including Pagefind migrants. Scope covers the shipped inline, modal, dropdown, directory and cards add-ons and their integration guidance. The legacy developer workbench remains supported under its existing contract.
+The outcome is Raveldex's own clear, recognizable, host-friendly consumer experience: clear results, visible context and optional explanations. Familiar search interactions remain useful; Pagefind migration is a secondary use case, not the design target. Scope covers the shipped inline, modal, dropdown, directory and cards add-ons and their integration guidance. The legacy developer workbench remains supported under its existing contract.
+
+## Raveldex design direction and finite acceptance
+
+The [November 7 amendment](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) governs current scope. RX-9101 selects one implementable direction from at most two initial alternatives; RX-9107 applies it. Use restrained readable surfaces, clear title/source/snippet hierarchy, compact optional context, a single configurable accent, deliberate typography/spacing/density and distinct match-versus-focus treatment. Supporting evidence is progressive disclosure, not default numeric/debug chrome. Reuse existing Raveldex identity without importing its dense technical Workbench into consumer interfaces.
+
+The five existing presentations should feel related while respecting their different native interactions. Tokens/classes remain scoped and host-overridable; CSS is optional, fonts/assets are local or host-selected, and no new framework, renderer API or mandatory Inspector is introduced. Originality is not permission to invent unfamiliar editing, focus or link behavior. Record the rationale and review actual states; changing a Pagefind logo/color is not an original design acceptance.
+
+Verification reuses existing shared-component coverage. One primary installed-candidate pass covers changed behavior plus desktop/narrow layouts, forced colors/reduced motion and long-text RTL. Focused secondary-engine smoke remains where relevant. A short real keyboard/screen-reader/zoom walkthrough records actual tools/versions and observations. Known essential behavior failures block acceptance; unavailable expanded device/AT combinations limit claims rather than force environment acquisition or a full statistical benchmark. No unchanged-core benchmark or repeated full build is required for evidence-only edits.
 
 ## Evidence and limitations
 
@@ -26,6 +34,7 @@ Current source anchors include `src/addons/ui/inline.ts`, `inline-render.ts`, `i
 | F08: Rich metadata and generated matching snippets/sections are available through different surface contracts. | Medium | RX-9102, RX-9109 |
 | F09: Counts describe the fully filtered set; a zero-count unselected OR option can still expand the result set when added. | Medium | RX-9110 |
 | F10: Captured display data and repeated mounts need clearer CMS refresh/remount and state-preservation guidance. | Medium | RX-9111 |
+| F11: A migration-led brief does not define a recognizable Raveldex visual identity. Define result hierarchy, density, typography, spacing and state treatment rather than emulate a competitor. | High | RX-9101, RX-9107, RX-9112 |
 
 RX-9101 establishes the scenario/state contract; RX-9112 verifies the complete outcome. All tasks start planned with no completion evidence.
 
@@ -33,7 +42,7 @@ RX-9101 establishes the scenario/state contract; RX-9112 verifies the complete o
 
 | Persona | Scenario and expected outcome |
 | --- | --- |
-| Pagefind adopter maintaining a static documentation site | Chooses inline/modal/dropdown from a clear capability map, prepares explicit records and heading targets, installs only needed modules/CSS, and reaches consumer search without accidentally choosing the workbench. |
+| First-time Raveldex adopter maintaining documentation or an application | Chooses inline/modal/dropdown from a clear capability map, prepares explicit records and heading targets, installs only needed modules/CSS, and reaches consumer search without accidentally choosing the workbench. |
 | Visitor with cognitive or attention constraints | Understands idle filter availability, submits a query, changes filters, reaches zero results and recovers without guessing what reset will erase. |
 | Keyboard-only researcher | Enters a query, discovers dropdown selection keys, follows a native result link, loads another batch and retains a predictable focus location and path to new content. |
 | Screen-reader user | Distinguishes idle, settled loading, result totals, appended results, empty and failed requests; can retry without stale replies or duplicate announcements taking over. Speech requires human observation. |
@@ -59,12 +68,12 @@ For each applicable surface, the contract must cover idle, composing, loading, r
 
 ## Sequence and completion gate
 
-RX-9101 follows RX-9007 and confirms the state/decision matrix before implementation. RX-9102–RX-9111 follow that contract; localization follows settled copy/keyboard/count messages. RX-9112 depends on every delivery/decision task. Parallel edits to shared UI/message files need explicit ownership; timing collectors remain serial with no builds/tests alongside them.
+RX-9101 follows accepted RX-7006 and RX-9003, independently of RX-9007, and confirms the original identity and state/decision matrix before implementation. RX-9102–RX-9111 follow that contract; localization follows settled copy/keyboard/count messages. RX-9112 depends on every delivery/decision task. Parallel edits to shared UI/message files need explicit ownership; timing collectors remain serial with no builds/tests alongside them.
 
-Completion requires behavior-level regression evidence for changed states, installed consumer verification of each affected surface, visual review under the agreed theme/responsive/translation matrix, and a reviewed scenario report mapping outcomes to acceptance criteria. Capture actual browser/OS/assistive-technology versions and distinguish automated keyboard checks from human speech, actual zoom and physical-device observations. Required unavailable observations remain Blocked or Not run; they are not inferred from screenshots, emulation or axe.
+Completion requires behavior-level regression evidence for changed states, installed consumer verification of each affected surface, visual review under the agreed theme/responsive/translation matrix, and a reviewed scenario report mapping F01–F11 to acceptance criteria. Follow the finite, risk-based qualification amendment rather than multiplying every persona by every platform/theme/state. Capture actual browser/OS/assistive-technology versions and distinguish automated keyboard checks from human speech, actual zoom and physical-device observations. Required unavailable observations remain Blocked or Not run; they are not inferred from screenshots, emulation or axe.
 
 Record actual commands, reviewed source/artifact identities, limitations and review outcomes in each produced `docs/evidence/RX-91xx.md` before marking that task done. Only existing evidence paths belong in the canonical manifest. Keep public guidance, relevant specifications, generated plans and GitHub state aligned; publication remains separate.
 
 ## Migration references
 
-The review consulted Pagefind's [current component UI](https://pagefind.app/docs/search-ui/), [supported default UI](https://pagefind.app/docs/ui-usage/), [default UI options](https://pagefind.app/docs/ui/) and [static build integration](https://pagefind.app/docs/running-pagefind/). These establish migration expectations, not an obligation to copy APIs, custom elements or architecture. Recheck official documentation before writing version-sensitive migration claims.
+The review consulted Pagefind's [current component UI](https://pagefind.app/docs/search-ui/), [supported default UI](https://pagefind.app/docs/ui-usage/), [default UI options](https://pagefind.app/docs/ui/) and [static build integration](https://pagefind.app/docs/running-pagefind/). These serve only an optional migration appendix. They are not visual references, pixel/layout tests, API contracts, feature-parity goals or release criteria for Raveldex. Recheck official documentation before writing version-sensitive migration claims.

@@ -1,5 +1,9 @@
 # RX-9006 verification-overhead and rerun plan
 
+## Active disposition — 7 November 2026
+
+The [scope amendment](SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) supersedes this document's earlier recommendation that all 204 fresh recovery contexts and the 450-minute full policy are required to advance the product. This document and its named collector/validators remain unchanged **as an optional extended research method**. They are not the default RX-9006 closeout path. Do not run them, pool partial/preflight observations, or build further supervision machinery without a distinct research instruction. Ordinary continuation starts with the amended acceptance-to-evidence map; any essential new current-candidate collection is capped at eight predeclared contexts and 60 minutes including closing. Historical fields/results below retain their original truth and are not relabeled.
+
 ## Recommended preflight completed — 6 November 2026
 
 [The authorized single preflight](../evidence/RX-9006/preflight-20261106-01/README.md) passes all 22 contexts in the frozen order. Actual CLI exit 0 arrives in 53.90 minutes, with all 6,355 guarded inputs unchanged; maximum 293.349774292s at 178 leaves 30.650225708s to the 324s gate and 66.650225708s to the 360s watchdog. Independent full source/state/UTF-16/scoring/receipt, external-ledger and cleanup checks pass. Every actual raw/prepared file is preserved. Closing project/private-candidate checks pass 1,676 tests (1,668 passed/eight intentional skips/zero failures), with all 6,431 guarded inputs unchanged and a byte-identical verified runtime package.

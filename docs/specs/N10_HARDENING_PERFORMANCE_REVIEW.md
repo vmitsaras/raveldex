@@ -1,5 +1,9 @@
 # N10 — Post-N9 hardening and performance review
 
+## Active scope amendment — 7 November 2026
+
+The [scoped qualification amendment](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) and updated canonical RX-9006/RX-9007 cards now govern remaining N10 work. Preserve all older observations and frozen-method validators below; they no longer impose a fresh full 204-context recovery run as the default product-qualification gate. The 450-minute policy is optional extended research, not required next work. RX-9006 is planned for evidence reuse/support-envelope review and only essential bounded gaps, not completed or newly measured. N11 is independent of N10 closeout. No benchmark launch, native limit change or historical Pass is authorized by this documentation amendment.
+
 ## RX-9006 recommended preflight Pass — 6 November 2026
 
 [Attempt01 evidence](../evidence/RX-9006/preflight-20261106-01/README.md) records one authorized recommended preflight: all 22 contexts complete, CLI exit 0 in 53.90 minutes, slowest 293.349774292s within the 324s gate and 360s watchdog, under the unchanged 150-minute cap with ten-minute closing reserve. No failed, interrupted or missing context occurred. Independent source/root/UTF-16/scoring/receipt replay, external ledger, all 6,355 input guards, normal/diagnostic isolation and scoped owned-process cleanup pass. Every actual attempt/preparation file is archived and byte-audited. Closing project/private-candidate checks pass 1,676 tests (1,668 passed/eight intentional skips/zero failures), with all 6,431 guarded inputs unchanged and a byte-identical verified runtime package.

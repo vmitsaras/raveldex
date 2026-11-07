@@ -1,5 +1,9 @@
 # Agent instructions — Raveldex
 
+## Change-sensitive verification — November 7 owner amendment
+
+Follow [the current qualification and identity contract](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) for N10/N11. Use the smallest reliable evidence for the affected acceptance criterion. Nonpackaged issue/planning/evidence-only edits require plan/generated/reference/diff checks, not automatic rebuilding or recollecting unchanged runtime evidence. Preserve runtime, relevant fixture/test/build/dependency identities when reusing results; evidence-directory executable files are real inputs. Do not weaken actual product safety or mark unavailable required behavior Pass. N11 may proceed independently on stable contracts; do not use optional comparative research as its dependency. A normal task instruction permits bounded work inside the amended scope, not a 450-minute experiment or publication.
+
 ## Read only the relevant context
 
 Start with this file, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `npm run handoff:next`, the selected task in `IMPLEMENTATION_TASKS.md`, and its referenced specifications. Read surrounding source/tests before editing. Actual repository/runtime evidence outranks old narrative claims.

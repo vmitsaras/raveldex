@@ -1,5 +1,11 @@
 # Codex handoff
 
+## Current continuation — finite qualification and original UI, 7 November 2026
+
+Read [the active scope amendment](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) and run `npm run handoff:next`. **RX-9006 and RX-9101 are independently ready.** RX-9006 starts with existing-evidence/support-envelope reconciliation; the 450-minute full matrix is not the next instruction. Do not launch any collector automatically. RX-9101 establishes Raveldex's own visual/interaction identity using accepted RX-7006/RX-9003, without waiting for RX-9007. Pagefind is an optional migration reference, not a visual/API/feature-parity target.
+
+Keep native correctness, safe failure, essential accessibility, original artifacts and old incomplete/preflight results strict. Reuse unchanged candidate evidence; run focused checks for relevant changes, not a full runtime/benchmark cycle after every nonpackaged documentation edit. The detailed amendment defines the finite gap-run/stop rules and support claims. No task is marked done by this plan update and no runtime code, limit, dependency or publication is changed. Earlier contradictory future-work instructions below are dated history and are superseded only to this extent.
+
 ## RX-9006 recommended preflight Pass — 6 November 2026
 
 [Attempt01 evidence](docs/evidence/RX-9006/preflight-20261106-01/README.md) records one authorized recommended preflight: all 22 contexts complete, CLI exit 0 in 53.90 minutes, slowest 293.349774292s within the 324s gate and 360s watchdog, under the unchanged 150-minute cap with ten-minute closing reserve. No failed, interrupted or missing context occurred. Independent source/root/UTF-16/scoring/receipt replay, external ledger, all 6,355 input guards, normal/diagnostic isolation and scoped owned-process cleanup pass. Every actual attempt/preparation file is archived and byte-audited. Closing project/private-candidate checks pass 1,676 tests (1,668 passed/eight intentional skips/zero failures), with all 6,431 guarded inputs unchanged and a byte-identical verified runtime package.

@@ -2638,15 +2638,13 @@ Fill the missing current update-latency evidence with matched bounded mutations 
 
 ## RX-9006
 
-**Verify host, recovery, deadline and resource tradeoffs**
+**Qualify supported recovery paths with bounded evidence reuse**
 
-**Milestone:** N10 · **Status:** `blocked` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22)
+**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22)
 
 **Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
-Measure selected real direct/worker and source-recovery configurations under truthful deadlines and cost boundaries, including actual failure and delivery outcomes.
-
-**Blocker or decision:** Original 180-minute recovery attempt remains incomplete at 146/204 contexts. The separately authorized recommended 22-context preflight passes: 150-minute cap, 360-second watchdog, 324-second gate; all 22 complete in 53.90 minutes, slowest 293.35 seconds, independent semantics/guards/cleanup pass. Fresh full 204-context recovery coverage remains uncollected and explicitly unauthorized. No retry, sample pooling or acceptance relaxation.
+Reconcile existing recovery evidence and close essential current-candidate support/atomicity gaps only; distinguish successful recovery from safe refusal without requiring a fresh exhaustive statistical run.
 
 **Expected affected areas**
 
@@ -2654,20 +2652,23 @@ Measure selected real direct/worker and source-recovery configurations under tru
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
-- RX-9006-AC01: Installed browser direct/real-worker and source/source-positions recovery pairs use the declared equal inputs/configuration/output, separating startup/transport/operation costs and preserving nonempty prior receivers.
-- RX-9006-AC02: Ordinary omitted-30s and explicit-60s cohorts remain distinct; work/queue/task-span diagnostics preserve actual timeout/cancellation/Unknown outcomes, refusal-to-success capacity and Not-run dependent restores.
-- RX-9006-AC03: Complete old/new root, source/offset and subsequent-write checks establish atomicity and receipt classification; the prior high-cardinality timeout and retry remain distinct observations unless a new cause is proved.
-- RX-9006-AC04: Identical-recipe graph costs, logical work and owned resources are reported separately from process samples and unmeasured retained/peak/browser heap, physical input or platform claims.
+- RX-9006-AC01: Map existing browser/worker, source/positions and receipt evidence to the actual unchanged candidate and explicitly declared supported sizes/options; preserve separate methods, incomplete rows and adverse outcomes.
+- RX-9006-AC02: Each advertised host/provider recovery combination has a demonstrated ordinary successful nonempty roundtrip and independent source/query/offset checks; a safely refused configuration is labeled limited/unsupported, never successful recovery.
+- RX-9006-AC03: Independent deterministic/real-host evidence covers prior-state preservation, forced deadline/abort, commit versus Unknown delivery, subsequent writes and disposal; unresolved material contract failures block the affected claim.
+- RX-9006-AC04: Any essential gap collection is predeclared, current-candidate only, at most eight representative contexts and at most 60 minutes including a ten-minute closing reserve, with effective per-context bounds; no automatic retry or hidden full matrix.
+- RX-9006-AC05: The old 146/204 collection and separate 22-context preflight remain separately scoped; neither is promoted to full coverage. The 450-minute extended comparison is optional and unexecuted unless separately requested.
+- RX-9006-AC06: A reviewed support-envelope and limitation report distinguishes qualification from statistical speed/p95, retained-heap and platform claims; completion records actual evidence under the November 7 amendment rather than rewriting old outcomes.
 
 **Verification**
 
-- Run only the frozen bounded host/recovery/tail cells on actual installed direct/worker implementations; retain every refused, unknown and unavailable outcome.
-- Replay source/state/receipt checks and resource-accounting summaries independently; keep timing collectors serial and any intrusive retention diagnosis in a separate controlled lane.
-- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9006.md before marking done; add only produced evidence and regenerate the roadmap.
+- Read and independently map already-produced evidence first; do not rerun passing unchanged runtime/fixture/method coverage simply because planning prose or a Git SHA changed.
+- When essential coverage is missing, define the smallest new dated qualification case set and exact expected source/results/receipt checks before running. Keep existing native call limits and preserve every refusal or unrun case.
+- Use one primary toolchain/candidate verification only when relevant runtime/test/build inputs change; documentation-only reconciliation uses planner/generated/link/preservation checks.
+- Record the support/coverage decision and any new execution in a separately dated RX-9006 scoped closeout; keep old report/raw artifacts untouched and add only actual evidence before marking done.
 
 **Recorded evidence**
 
@@ -2689,13 +2690,13 @@ Measure selected real direct/worker and source-recovery configurations under tru
 
 ## RX-9007
 
-**Review whether Raveldex improved and synchronize guidance**
+**Publish a scoped engineering verdict and remaining limitations**
 
 **Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9007%22)
 
 **Dependencies:** [RX-9004](IMPLEMENTATION_TASKS.md#rx-9004), [RX-9005](IMPLEMENTATION_TASKS.md#rx-9005), [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006)
 
-Independently decide what the latest implementation improves, regresses or leaves inconclusive, with practical guidance grounded in complete fresh observations.
+Synthesize completed query/update measurements and revised recovery qualification into practical product guidance; missing optional exhaustive research limits claims rather than causing an endless rerun loop.
 
 **Expected affected areas**
 
@@ -2703,20 +2704,20 @@ Independently decide what the latest implementation improves, regresses or leave
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
-- RX-9007-AC01: Independent source/raw-artifact review reconstructs identities, outcomes, sample denominators, numerical/semantic checks, summaries and actual cost scopes without hiding unfavorable or missing cells.
+- RX-9007-AC01: Independent review maps runtime/source identities, complete measured cohorts, qualification cases and adverse/missing outcomes; it never pools incompatible runs or interprets incomplete recovery data as a full benchmark.
 - RX-9007-AC02: A per-workload/host/configuration verdict states faster, slower, capacity improved/regressed, unchanged within observed variation or inconclusive; no weighted overall winner or invented SLA replaces the evidence.
-- RX-9007-AC03: The report explains build/update/query/recovery tradeoffs, same-runtime controls, fixed defects and remaining refusals/regressions; material unexplained findings remain explicit rather than being relabeled Pass.
+- RX-9007-AC03: Document successful and safely refused recovery envelopes, real defects, update/query tradeoffs and optional research gaps; a scoped or inconclusive performance conclusion is acceptable without repeating the full recovery matrix.
 - RX-9007-AC04: Support/evaluation/context/roadmap guidance matches actual results and preserved raw failures; no new capability, limit change, package version, deployment, registry publication or broad platform claim is implied.
 
 **Verification**
 
-- Give independent reviewers raw artifacts, source identities and the frozen method; verify adverse cells and historical-versus-current attribution as well as favorable summaries.
-- Run relevant final project/installed-consumer and changed-site checks, validate all evidence references and regenerate the readable roadmap before completion.
-- Record real commands, source/environment/artifact identities, failures, acceptance and independent review in docs/evidence/RX-9007.md before marking done; add only produced evidence and regenerate the roadmap.
+- Review completed query/update raw evidence and the RX-9006 scoped acceptance map, emphasizing adverse cells, actual successes and claim limits.
+- Reuse unchanged artifact/runtime qualification with its original identities. Run focused checks for changed public docs/package inventory and one relevant complete candidate check only if executable inputs changed.
+- Keep historical measurements intact; write a new scoped conclusion and regenerate canonical views. No new benchmark, release or UI freeze is implied.
 
 **Recorded evidence**
 
@@ -2725,13 +2726,13 @@ None recorded. A future report destination in the verification steps is not evid
 
 ## RX-9101
 
-**Confirm consumer scenario, state and compatibility contract**
+**Define Raveldex identity and consumer interaction contract**
 
 **Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/81)
 
-**Dependencies:** [RX-9007](IMPLEMENTATION_TASKS.md#rx-9007)
+**Dependencies:** [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006), [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
-Establish observable polish behavior for all consumer surfaces from the eight reviewed personas, separating existing guarantees, reversible presentation fixes and unresolved public-contract decisions.
+Select one implementable Raveldex-first consumer identity and shared state contract for the existing five surfaces, reusing familiar interaction semantics without using Pagefind as a design specification.
 
 **Expected affected areas**
 
@@ -2739,20 +2740,21 @@ Establish observable polish behavior for all consumer surfaces from the eight re
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
-- RX-9101-AC01: Current source/tests are reconciled with F01–F10 and each finding maps to a task, affected surfaces and observable acceptance behavior.
-- RX-9101-AC02: A per-surface state matrix covers idle/composition/loading/results/append/empty/error/retry/reset/close/refresh/destroy, with keyboard, pointer and announcement expectations.
-- RX-9101-AC03: Idle filtering, focus-safe pagination, reset meaning, theme selection, localization and rich-display boundaries are explicitly specified before code changes; new load-bearing choices remain decision items.
-- RX-9101-AC04: N10 closeout and frozen-artifact ownership are respected; legacy workbench, native results, optional imports, public compatibility and publication boundaries remain intact.
+- RX-9101-AC01: Reconcile F01–F10 with current code/tests and add F11, an explicit original-identity requirement; map each to a bounded task and observable outcome rather than a new feature backlog.
+- RX-9101-AC02: Specify shared idle/composition/loading/results/append/empty/error/retry/reset/close/refresh/destroy expectations with native keyboard, pointer, links and truthful announcements.
+- RX-9101-AC03: From at most two initial visual alternatives select one Raveldex direction covering result title/source/snippet hierarchy, typography, density, spacing, configurable accent, match versus focus treatment and secondary evidence disclosure.
+- RX-9101-AC04: Consumer styles remain optional, scoped and host-overridable; no numeric score/Inspector chrome, copied competitor visual assets or layout, mandatory network font or new runtime component is required.
+- RX-9101-AC05: The lane depends on accepted RX-7006/RX-9003, not RX-9007. Preserve frozen N10 artifacts and avoid same-host timing contention; ordinary UI work does not await an exhaustive benchmark.
 
 **Verification**
 
-- Inspect current contracts/source and existing regressions; review the proposed scenario/state matrix against the N11 guardrails.
-- Identify tests already proving behavior and missing checks without treating retained evidence as a fresh run.
-- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9101.md before completion; add only produced evidence and regenerate the plan.
+- Review current UI/source/test coverage, shared state matrix and the proposed original visual hierarchy using representative data rather than copied screenshots.
+- Record the chosen direction and token/state rationale; preserve compatibility decisions, known a11y limits and optional import boundaries.
+- This specification task needs source/contract and document validation, not a full browser/performance rerun; record actual review before acceptance.
 
 **Recorded evidence**
 
@@ -2761,13 +2763,13 @@ None recorded. A future report destination in the verification steps is not evid
 
 ## RX-9102
 
-**Make consumer adoption and Pagefind migration guidance explicit**
+**Lead with Raveldex adoption and separate migration guidance**
 
 **Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/82)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
-Give static-site and Pagefind adopters a short accurate route to the appropriate consumer preset and its required data/capabilities.
+Give first-time Raveldex consumers and dynamic/static integrators a short native-product adoption path; provide Pagefind migration as a secondary appendix, not the primary product specification.
 
 **Expected affected areas**
 
@@ -2775,20 +2777,21 @@ Give static-site and Pagefind adopters a short accurate route to the appropriate
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
-- RX-9102-AC01: Primary integration guidance distinguishes inline/modal/dropdown/directory/cards from the preserved developer workbench and leads ordinary consumers to the appropriate preset.
-- RX-9102-AC02: A Pagefind migration guide maps static HTML indexing expectations to explicit Raveldex records, fields, display maps and actual heading targets, with a complete supported integration path.
+- RX-9102-AC01: Primary documentation starts with Raveldex needs, the five consumer surfaces, data preparation and installed setup; it neither routes users to the technical Workbench nor assumes prior Pagefind use.
+- RX-9102-AC02: A bounded optional migration appendix explains explicit Raveldex records/fields/section targets versus static-site indexing; no drop-in, pixel, component/API or feature parity is promised.
 - RX-9102-AC03: A capability matrix covers snippets/sections, images/metadata, filters/counts, paging, language, themes, keyboard behavior and ownership without promising drop-in compatibility.
-- RX-9102-AC04: Examples specify imports, explicit search mode, CSS, data preparation and teardown; version-sensitive Pagefind claims are checked against official documentation.
+- RX-9102-AC04: Native-first examples specify actual imports, explicit search mode, CSS tokens, data preparation, ownership and disposal; version-sensitive competitor claims are checked only when included in the migration appendix.
 
 **Verification**
 
 - Validate documented imports/options and complete examples against actual declarations and installed package exports.
 - Walk through a Pagefind-to-Raveldex adoption scenario; run relevant documentation/example checks without redesigning demo pages.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9102.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -2811,7 +2814,7 @@ Make inline/modal facet availability and reset outcomes understandable while pre
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2825,6 +2828,7 @@ Make inline/modal facet availability and reset outcomes understandable while pre
 - Add focused behavioral checks for first mount, query-populated buckets, selected filters, clear, retry and modal reuse.
 - Review the filter-first cognitive-accessibility scenario and keyboard recovery under the accepted idle contract.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9103.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -2847,7 +2851,7 @@ Reduce pagination clutter and clarify batch/window navigation without losing exa
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2861,6 +2865,7 @@ Reduce pagination clutter and clarify batch/window navigation without losing exa
 - Exercise counts below/at/above page and rendering-window boundaries with independent expected ranges and native result order.
 - Verify focus and appended-content discovery in installed inline and modal consumers, including narrow layouts.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9104.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -2883,7 +2888,7 @@ Use clear consumer-facing status, empty and error language that explains the nex
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2897,6 +2902,7 @@ Use clear consumer-facing status, empty and error language that explains the nex
 - Exercise no match, filters excluding all matches, delayed replies, typed failures, retry and hostile/long query text in component regressions.
 - Review visible and accessible messages together; record human speech observations separately from automated live-region assertions.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9105.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -2919,7 +2925,7 @@ Help users discover surface-appropriate navigation and dismissal keys without re
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2933,6 +2939,7 @@ Help users discover surface-appropriate navigation and dismissal keys without re
 - Verify keyboard sequences on installed dropdown and modal components, including no active row, native input clearing and close/reopen.
 - Review hint exposure with assistive technology when available and keep speech/platform limits explicit.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9106.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -2941,13 +2948,13 @@ None recorded. A future report destination in the verification steps is not evid
 
 ## RX-9107
 
-**Unify consumer themes, narrow layouts and target comfort**
+**Implement Raveldex visual tokens and coherent consumer styling**
 
 **Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/87)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
-Polish shipped component CSS so consumers have coherent theming, readable hierarchy and comfortable interactions in real host layouts.
+Apply the RX-9101 Raveldex identity through scoped reusable consumer tokens and readable state treatments while remaining easy to embed in real host sites.
 
 **Expected affected areas**
 
@@ -2955,20 +2962,21 @@ Polish shipped component CSS so consumers have coherent theming, readable hierar
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
-- RX-9107-AC01: A documented light/dark/host-override policy is applied consistently across inline/modal/dropdown/directory/cards using existing scoped customization conventions.
-- RX-9107-AC02: Result links and primary controls have a documented target-comfort policy with measured sizes/spacing; no unmeasured accessibility-conformance claim is made.
-- RX-9107-AC03: Compact headers, modal content, filters and navigation remain usable at narrow widths with long text, RTL, forced colors and enlarged content.
-- RX-9107-AC04: Visible focus, safe wrapping, reduced motion, native semantics, optional CSS imports and host isolation remain intact without global tokens or new runtime dependencies.
+- RX-9107-AC01: The chosen native direction has consistent typography, spacing, result hierarchy, density, boundaries, one configurable accent and distinct match/focus treatments across the five existing surfaces; changing a competitor logo or color is not sufficient.
+- RX-9107-AC02: Light/dark/host-override tokens and result links/actions have measured readable contrast and target comfort; no global reset, mandatory font download or unmeasured accessibility claim.
+- RX-9107-AC03: Responsive visual review covers one desktop and a narrow layout, long translated/RTL text, forced colors and enlarged content using shared component coverage rather than every persona/browser permutation.
+- RX-9107-AC04: Safe wrapping, visible focus, reduced motion, native semantics, optional CSS, existing event/lifecycle behavior and host isolation are unchanged; optional evidence details remain secondary.
 
 **Verification**
 
 - Compare isolated component and installed-host states using the agreed light/dark/RTL/long-label/forced-colors viewport matrix; measure clipping/overflow/targets/contrast.
 - Observe actual 200%/400% zoom and mobile keyboard behavior where available; identify emulation and missing device observations explicitly.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9107.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -2991,7 +2999,7 @@ Make it practical to translate complete consumer interfaces consistently using t
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3005,6 +3013,7 @@ Make it practical to translate complete consumer interfaces consistently using t
 - Test complete and partial message configurations, zero/one/many counts, missing keys and remounting with a different language.
 - Review at least a complete non-English configuration plus long-text RTL fixtures without claiming translation quality from automation alone.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9108.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -3013,13 +3022,13 @@ None recorded. A future report destination in the verification steps is not evid
 
 ## RX-9109
 
-**Decide rich-result compatibility without expanding APIs implicitly**
+**Define native result hierarchy and rich-content compatibility**
 
 **Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/89)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
-Resolve the adopter-facing split between title/snippet/section results and rich directory metadata with an explicit bounded compatibility decision.
+Map real documentation/catalog/content needs to Raveldex result hierarchy and existing rich-display capabilities without introducing speculative rendering APIs.
 
 **Expected affected areas**
 
@@ -3027,12 +3036,12 @@ Resolve the adopter-facing split between title/snippet/section results and rich 
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
 - RX-9109-AC01: A source-verified surface matrix states support for titles/URLs, excerpts, matching snippets/highlights, sections, breadcrumbs, dates and images.
-- RX-9109-AC02: Pagefind migration scenarios identify which desired displays are possible through existing options and which require a different surface or optional capability.
+- RX-9109-AC02: Native documentation, application and catalog scenarios identify meaningful source/snippet/section/metadata hierarchy, existing supported options and when another surface is appropriate; competitor layouts are not requirements.
 - RX-9109-AC03: A reviewed decision either documents the current boundary or proposes a separately selectable additive contract with data ownership, safe text/URL handling, image privacy and lifecycle costs.
 - RX-9109-AC04: No new renderer callback, mandatory provider, automatic image request, retained side index or public display field is implemented as part of this decision task.
 
@@ -3041,6 +3050,7 @@ Resolve the adopter-facing split between title/snippet/section results and rich 
 - Verify supported combinations and incompatible options against declarations/source and existing installed cases.
 - Review the minimum proposal or keep-current decision against native result identity/order, optionality, privacy and compatibility constraints.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9109.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -3063,7 +3073,7 @@ Make current-result facet counts understandable without changing conjunctive cou
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3077,6 +3087,7 @@ Make current-result facet counts understandable without changing conjunctive cou
 - Add or reuse independent expected-result cases for one/two OR choices, multiple AND groups, zero-count options and URL Back/Forward.
 - Review cognitive and keyboard scenarios in installed directory/list/card presentations.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9110.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -3099,7 +3110,7 @@ Give dynamic-content integrators an accurate lifecycle recipe using existing eng
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3113,6 +3124,7 @@ Give dynamic-content integrators an accurate lifecycle recipe using existing eng
 - Run an installed integration scenario with metadata/content changes, refresh, remount, repeated mounts and disposal; check latest results and cleanup.
 - Validate documented code against actual handle/controller declarations and ownership regressions.
 - Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9111.md before completion; add only produced evidence and regenerate the plan.
+- Apply the November 7 risk-based verification policy: reuse unchanged shared coverage, avoid exhaustive persona/platform products, and do not rebenchmark unchanged core for UI or evidence-only edits.
 
 **Recorded evidence**
 
@@ -3121,13 +3133,13 @@ None recorded. A future report destination in the verification steps is not evid
 
 ## RX-9112
 
-**Verify consumer polish across personas and synchronize guidance**
+**Qualify the Raveldex experience with a finite interaction review**
 
 **Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/92)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101), [RX-9102](IMPLEMENTATION_TASKS.md#rx-9102), [RX-9103](IMPLEMENTATION_TASKS.md#rx-9103), [RX-9104](IMPLEMENTATION_TASKS.md#rx-9104), [RX-9105](IMPLEMENTATION_TASKS.md#rx-9105), [RX-9106](IMPLEMENTATION_TASKS.md#rx-9106), [RX-9107](IMPLEMENTATION_TASKS.md#rx-9107), [RX-9108](IMPLEMENTATION_TASKS.md#rx-9108), [RX-9109](IMPLEMENTATION_TASKS.md#rx-9109), [RX-9110](IMPLEMENTATION_TASKS.md#rx-9110), [RX-9111](IMPLEMENTATION_TASKS.md#rx-9111)
 
-Prove the milestone outcome on shipped plugin interfaces through independent scenario, state, integration and accessibility evidence.
+Verify changed consumer behavior and the original Raveldex design on one identified installed candidate with proportionate automated and human checks, not a Cartesian product of personas and environments.
 
 **Expected affected areas**
 
@@ -3135,20 +3147,21 @@ Prove the milestone outcome on shipped plugin interfaces through independent sce
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
-- RX-9112-AC01: Every F01–F10 finding maps to a verified outcome or an explicit reviewed compatibility decision, without silently expanding demo or core scope.
-- RX-9112-AC02: Installed consumer tests cover all affected surfaces, native links, exact counts/order, composition, focus, stale replies, repeated lifecycle and optional capability failures.
-- RX-9112-AC03: Visual/responsive/theme/translation checks and required human screen-reader, actual zoom and physical/mobile observations have exact environments and truthful Pass/Fail/Blocked/Not-run status.
-- RX-9112-AC04: Resulting diffs, public contracts, migration/CMS recipes, generated roadmap, actual evidence and GitHub issues agree; unresolved required failures are not labeled complete and publication remains separate.
+- RX-9112-AC01: F01–F11 map to verified outcomes or explicit compatibility decisions; the five surfaces share the selected Raveldex identity and do not depend on Pagefind resemblance or parity.
+- RX-9112-AC02: Existing and focused installed regressions cover affected native links, exact counts/order, composition, focus, stale replies, reset/retry, teardown and capability failures; reuse shared component tests rather than duplicating every persona combination.
+- RX-9112-AC03: One primary supported-browser candidate pass covers changed surfaces, desktop/narrow layout, themes and long-text RTL; focused existing secondary-engine smoke and an available real-screen-reader/actual-zoom walkthrough record exact environment and limitations. Known essential failures remain blockers.
+- RX-9112-AC04: A new complete acceptance run is required for relevant executable/fixture/build changes, not each evidence-only edit; N10 statistical collections are not UI exit prerequisites. Unavailable expanded AT/device combinations narrow claims, never become false passes.
+- RX-9112-AC05: Public contracts, native-first and optional migration/CMS guidance, reviewed evidence, canonical tasks and GitHub descriptions agree without publication or a new runtime feature scope.
 
 **Verification**
 
-- Run focused behavior checks first, then relevant full project/installed-consumer checks after timing ownership is clear; independently review the final diff and scenario evidence.
-- Review each persona journey against the agreed state matrix and include adverse/manual/unavailable outcomes in the final qualification record.
-- Record actual source/environment, commands, acceptance results, review and limitations in docs/evidence/RX-9112.md before completion; add only produced evidence and regenerate the plan.
+- Map existing coverage and run focused changed-state regressions first. Build one candidate and run one primary complete installed acceptance pass when relevant executable inputs changed.
+- Independently review the original identity and practical task journeys, plus a focused real keyboard/screen-reader/zoom session; preserve precise unsupported/manual outcomes.
+- Validate only changed nonpackaged docs/planner/generated references after evidence synchronization. Do not require a repeated full performance matrix to close UI work.
 
 **Recorded evidence**
 

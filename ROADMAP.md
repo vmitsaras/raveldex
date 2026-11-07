@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 56/70 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 56/70 done · 0 in progress · 2 dependency-ready.
 
-**Planner state:** `blocked`.
+**Planner state:** `ready`.
 
-**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
+**Next or resumable release task:** [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006) — Qualify supported recovery paths with bounded evidence reuse.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -40,8 +40,8 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N7 — Inline and documentation search solutions** | `RX-6001`–`RX-6008` | 8/8 | Provide ready-to-use Pagefind-style inline search and a documentation modal with optional native UI, complete installed starters, CSS customization and evidence-backed page/section presentation. |
 | **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 6/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
 | **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 11/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
-| **N10 — Post-N9 hardening and performance review** | `RX-9001`–`RX-9007` | 5/7 | Verify whether the latest native changes improve matched workloads, harden demonstrated combined failure paths, and document gains, regressions and bounded costs without new capabilities or limit increases. |
-| **N11 — Consumer plugin UI/UX polish** | `RX-9101`–`RX-9112` | 0/12 | Make consumer search plugins familiar, understandable and consistent for Pagefind migrants and varied users, preserving native semantics, optionality and existing lifecycle contracts. |
+| **N10 — Post-N9 hardening and performance review** | `RX-9001`–`RX-9007` | 5/7 | Conclude the post-N9 engineering review from completed matched measurements and bounded, claim-based recovery qualification; preserve adverse evidence without requiring exhaustive research before product work. |
+| **N11 — Raveldex-native consumer identity and usability** | `RX-9101`–`RX-9112` | 0/12 | Create a recognizable Raveldex consumer search experience with clear result context, optional explanations and coherent host-friendly styling; familiar interactions and migration guides support adoption without copying Pagefind. |
 
 ## Task index
 
@@ -113,24 +113,20 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003) — Repair confirmed defects and verify the measurement candidate | `done` | `RX-9002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9003%22) |
 | [RX-9004](IMPLEMENTATION_TASKS.md#rx-9004) — Measure matched native build and query performance | `done` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9004%22) |
 | [RX-9005](IMPLEMENTATION_TASKS.md#rx-9005) — Measure incremental update costs and state preservation | `done` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9005%22) |
-| [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006) — Verify host, recovery, deadline and resource tradeoffs | `blocked` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22) |
-| [RX-9007](IMPLEMENTATION_TASKS.md#rx-9007) — Review whether Raveldex improved and synchronize guidance | `planned` | `RX-9004`, `RX-9005`, `RX-9006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9007%22) |
-| [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101) — Confirm consumer scenario, state and compatibility contract | `planned` | `RX-9007` | [Issue](https://github.com/vmitsaras/raveldex/issues/81) |
-| [RX-9102](IMPLEMENTATION_TASKS.md#rx-9102) — Make consumer adoption and Pagefind migration guidance explicit | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/82) |
+| [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006) — Qualify supported recovery paths with bounded evidence reuse | `planned` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22) |
+| [RX-9007](IMPLEMENTATION_TASKS.md#rx-9007) — Publish a scoped engineering verdict and remaining limitations | `planned` | `RX-9004`, `RX-9005`, `RX-9006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9007%22) |
+| [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101) — Define Raveldex identity and consumer interaction contract | `planned` | `RX-7006`, `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues/81) |
+| [RX-9102](IMPLEMENTATION_TASKS.md#rx-9102) — Lead with Raveldex adoption and separate migration guidance | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/82) |
 | [RX-9103](IMPLEMENTATION_TASKS.md#rx-9103) — Clarify idle filter availability and reset behavior | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/83) |
 | [RX-9104](IMPLEMENTATION_TASKS.md#rx-9104) — Simplify pagination presentation while preserving focus | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/84) |
 | [RX-9105](IMPLEMENTATION_TASKS.md#rx-9105) — Polish search states and recovery messages | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/85) |
 | [RX-9106](IMPLEMENTATION_TASKS.md#rx-9106) — Make keyboard guidance discoverable and consistent | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/86) |
-| [RX-9107](IMPLEMENTATION_TASKS.md#rx-9107) — Unify consumer themes, narrow layouts and target comfort | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/87) |
+| [RX-9107](IMPLEMENTATION_TASKS.md#rx-9107) — Implement Raveldex visual tokens and coherent consumer styling | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/87) |
 | [RX-9108](IMPLEMENTATION_TASKS.md#rx-9108) — Provide coherent localization and message customization | `planned` | `RX-9105`, `RX-9106`, `RX-9110` | [Issue](https://github.com/vmitsaras/raveldex/issues/88) |
-| [RX-9109](IMPLEMENTATION_TASKS.md#rx-9109) — Decide rich-result compatibility without expanding APIs implicitly | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/89) |
+| [RX-9109](IMPLEMENTATION_TASKS.md#rx-9109) — Define native result hierarchy and rich-content compatibility | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/89) |
 | [RX-9110](IMPLEMENTATION_TASKS.md#rx-9110) — Explain directory counts and multi-select filtering plainly | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/90) |
 | [RX-9111](IMPLEMENTATION_TASKS.md#rx-9111) — Document safe CMS refresh, remount and state preservation | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/91) |
-| [RX-9112](IMPLEMENTATION_TASKS.md#rx-9112) — Verify consumer polish across personas and synchronize guidance | `planned` | `RX-9101`, `RX-9102`, `RX-9103`, `RX-9104`, `RX-9105`, `RX-9106`, `RX-9107`, `RX-9108`, `RX-9109`, `RX-9110`, `RX-9111` | [Issue](https://github.com/vmitsaras/raveldex/issues/92) |
-
-## Recorded blockers and decisions
-
-- [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006): Original 180-minute recovery attempt remains incomplete at 146/204 contexts. The separately authorized recommended 22-context preflight passes: 150-minute cap, 360-second watchdog, 324-second gate; all 22 complete in 53.90 minutes, slowest 293.35 seconds, independent semantics/guards/cleanup pass. Fresh full 204-context recovery coverage remains uncollected and explicitly unauthorized. No retry, sample pooling or acceptance relaxation.
+| [RX-9112](IMPLEMENTATION_TASKS.md#rx-9112) — Qualify the Raveldex experience with a finite interaction review | `planned` | `RX-9101`, `RX-9102`, `RX-9103`, `RX-9104`, `RX-9105`, `RX-9106`, `RX-9107`, `RX-9108`, `RX-9109`, `RX-9110`, `RX-9111` | [Issue](https://github.com/vmitsaras/raveldex/issues/92) |
 
 ## Milestone exit conditions
 
@@ -201,17 +197,18 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 ### N10 — Post-N9 hardening and performance review
 
-- Reviewed current and pre-N9 artifacts, immutable inputs, measurement cohorts and complete-run validation are frozen before accepted collection.
-- Demonstrated correctness/lifecycle defects are repaired or their absence is independently verified; source, atomicity, limits, receipt and optionality contracts remain intact.
-- Fresh matched query, incremental-update and installed host/recovery observations retain complete outcomes, statistical limits, adverse cells and resource-cost scope.
-- Independent review answers where the implementation is faster, slower, more capable or inconclusive; guidance, actual evidence and task state agree without publication.
+- Preserved sources, artifacts and frozen historical methods remain identifiable; new scoped qualification has a dated method and is never pooled into an incomplete older collection.
+- Exact results, atomic state, native limits, receipts, cancellation and essential failure recovery remain strictly verified for every claimed supported configuration.
+- Completed query/update cohorts and recovery outcomes have independent review and explicit limits; the full 204-context/450-minute recovery experiment is optional, not a mandatory milestone exit.
+- A finite scoped conclusion states gains, regressions, safe refusals and unknowns without universal capacity, latency, memory, accessibility or publication claims.
 
-### N11 — Consumer plugin UI/UX polish
+### N11 — Raveldex-native consumer identity and usability
 
-- Consumer-first adoption and Pagefind migration guidance accurately map indexing, presentation, metadata, language, keyboard and lifecycle expectations without routing ordinary adopters to the legacy workbench.
-- Idle filters, reset, paging, recovery messages, keyboard guidance and directory counts have understandable verified behavior that preserves exact results, composition, focus, cancellation and cleanup.
-- Consumer CSS and localization guidance are coherent across host themes, long translations, RTL, narrow layouts and enlarged content; rich-result and CMS integration boundaries have explicit reviewed decisions and recipes.
-- Installed component and persona/state verification maps actual evidence to acceptance criteria; required human/platform observations remain explicit when unavailable, and documentation/roadmap/GitHub state agree without publication.
+- One implemented Raveldex visual and interaction direction defines hierarchy, density, typography, spacing, emphasis and state treatments across inline, modal, dropdown, directory and cards; competitor resemblance is not an acceptance criterion.
+- First-time Raveldex integration is the primary journey; optional Pagefind migration material states differences honestly without dictating APIs, layout or feature parity.
+- Search, filters, paging, reset/retry, localization and CMS lifecycle remain understandable and preserve exact native results, focus, composition, safe rendering and cleanup.
+- Risk-based installed behavior/visual checks and a focused human accessibility walkthrough qualify the changed candidate; unobserved expanded combinations remain explicit limitations instead of triggering an exhaustive benchmark/platform prerequisite.
+- N11 proceeds independently of comparative N10 research using stable public contracts and isolated artifacts; no new engine capability, dependency, deployment or publication is implied.
 
 ## Execution and authorization
 

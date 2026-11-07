@@ -1,5 +1,9 @@
 # Project context
 
+## Active plan update — 7 November 2026
+
+The owner requested proportionate RX-9006 verification and a distinct Raveldex consumer identity. [The amendment](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) changes the remaining acceptance scope and removes N11's dependency on the full N10 performance decision. RX-9006 remains uncompleted and returns to planned evidence/support-envelope reconciliation; RX-9101 is independently ready. Existing 146/204 and 22-context preflight records remain separate. No 450-minute run, recovery capacity proof, UI implementation or fresh runtime qualification occurred in this planning update. Subsequent historical status sections do not override this current instruction.
+
 ## RX-9006 recommended preflight Pass — 6 November 2026
 
 [Attempt01 evidence](docs/evidence/RX-9006/preflight-20261106-01/README.md) records one authorized recommended preflight: all 22 contexts complete, CLI exit 0 in 53.90 minutes, slowest 293.349774292s within the 324s gate and 360s watchdog, under the unchanged 150-minute cap with ten-minute closing reserve. No failed, interrupted or missing context occurred. Independent source/root/UTF-16/scoring/receipt replay, external ledger, all 6,355 input guards, normal/diagnostic isolation and scoped owned-process cleanup pass. Every actual attempt/preparation file is archived and byte-audited. Closing project/private-candidate checks pass 1,676 tests (1,668 passed/eight intentional skips/zero failures), with all 6,431 guarded inputs unchanged and a byte-identical verified runtime package.
