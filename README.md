@@ -6,7 +6,17 @@ Raveldex is written in TypeScript, uses ESM imports and has no core runtime depe
 
 [Get started](docs/api/GETTING_STARTED.md) · [API reference](docs/api/README.md) · [Runnable examples](https://github.com/vmitsaras/raveldex/blob/main/examples/README.md)
 
-For a complete interface to copy, use the [solution chooser](examples/README.md): inline search, documentation modal, compact header, faceted directory or rich results. It links eight complete browser/Astro projects, working previews, exact source downloads and CSS recipes. Replace the explicit sample content and edit the component properties in your own stylesheet.
+Choose the interface that fits your application:
+
+| Need | Consumer interface |
+| --- | --- |
+| Search within a page | [Inline search](docs/api/HOSTS.md#inline-search-foundation) |
+| Open documentation search from a button | [Documentation modal](docs/api/HOSTS.md#documentation-search-modal) |
+| Show compact header results with a full-results route | [Dropdown](docs/api/HOSTS.md#compact-dropdown-search) |
+| Browse resources with filters and pages | [Directory](docs/api/HOSTS.md#directory-controls-and-styling) |
+| Show authored excerpts, metadata or optional images | [Rich directory results](docs/api/HOSTS.md#rich-directory-results) |
+
+Start with the [minimal consumer recipe and capability map](docs/api/HOSTS.md#consumer-search-interfaces), or copy one of the [eight complete browser/Astro projects](examples/README.md). Supply explicit public records and matching display data; Raveldex does not crawl your pages. Core also works alone when your application supplies its own interface.
 
 ## Install
 
@@ -57,7 +67,7 @@ By default, every complete search term must match. For example, `atomic updates`
 | --- | --- |
 | Define fields, index documents and update records | [Core usage](docs/api/CORE.md) |
 | Add phrases, filters, facets, snippets or highlights | [Search add-ons](docs/api/ADDONS.md) |
-| Mount search controls and customize their CSS | [Native DOM UI](docs/api/HOSTS.md#native-dom-ui-and-css) |
+| Mount consumer controls and customize their CSS | [Consumer setup and capabilities](docs/api/HOSTS.md#consumer-search-interfaces) |
 | Run search in a worker or save source snapshots | [Host integrations](docs/api/HOSTS.md) |
 | Add search to static Astro pages | [Astro](docs/api/STATIC_ASTRO.md) |
 | Open documentation search from a button | [Documentation modal](docs/api/HOSTS.md#documentation-search-modal) |
@@ -77,11 +87,17 @@ If you mount the UI, import its CSS separately. The UI uses your engine without 
 
 ## Examples
 
-Run `npm run pilot:ui` from a source checkout to open the browser demo. Search for `source provider` to find instructions for keeping original text. Choose a category to narrow the results, follow a result to its guide, or open Inspector to see why it matched.
+The [solution chooser](examples/README.md) links complete consumer projects with explicit data, CSS, loading/retry and cleanup. For a small integration in an installed application, copy the [inline recipe](docs/api/examples/inline.mjs). Its search mode is explicitly `prefix`; CSS is a separate import, and the returned disposer destroys the UI before releasing its engine.
+
+### Developer Workbench
+
+Run `npm run pilot:ui` from a source checkout to explore the developer demo. Search for `source provider`, filter results or open Inspector to see why a result matched. The Workbench is a separate developer presentation; consumer presets omit its numerical scores and Inspector controls.
 
 Under **Advanced demo settings**, you can compare phrase and word searches, run the same search in a worker, or change how word locations are stored.
 
 The [example index](https://github.com/vmitsaras/raveldex/blob/main/examples/README.md) also links the core terminal example, [complete Astro setup/build/preview walkthrough](https://github.com/vmitsaras/raveldex/blob/main/examples/astro/README.md), migration example and small installed API recipes. Source checkout links require repository access.
+
+Already using Pagefind? The optional [migration appendix](docs/api/PAGEFIND_MIGRATION.md) explains how to rebuild from your content using Raveldex's records and chosen interface. It is not the starting point for a new integration.
 
 ## Requirements and limits
 

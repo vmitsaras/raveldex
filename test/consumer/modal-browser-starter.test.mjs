@@ -117,7 +117,7 @@ test('copied installed modal browser starter loads only on open, preserves nativ
     await page.getByRole('button', { name: 'Close search', exact: true }).click(); await trigger.click(); await searchbox(page).waitFor();
     assert.equal(await searchbox(page).inputValue(), 'workshop');
     assert.match(await page.getByRole('combobox', { name: 'Topic', exact: true }).locator('option:checked').textContent(), /^Tools/);
-    await page.getByRole('button', { name: 'Clear', exact: true }).click();
+    await page.getByRole('button', { name: 'Clear search and filters', exact: true }).click();
     await search(page, 'bobbin'); await page.getByRole('link', { name: 'Thread the machine', exact: true }).waitFor();
     assert.deepEqual(await ids(page), ['sewing']);
     const link = page.getByRole('link', { name: 'Thread the machine', exact: true });

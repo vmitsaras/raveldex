@@ -141,7 +141,13 @@ test('root/help encoded destinations navigate natively and modified links keep t
 
 test('query/facet preservation, reset-on-close and map revision revalidation are explicit', async () => {
   for (const resetOnClose of [false, true]) {
-    await mount({ resetOnClose }, { facets: true }); await show(); await search();
+    await mount({ resetOnClose }, { facets: true });
+    const closedCount = await calls(); await show(); await settle();
+    assert.equal(await calls(), closedCount);
+    assert.equal(await part('status').textContent(), 'Enter a search term to see filter choices.');
+    assert.deepEqual(await part('facet').locator('option').allTextContents(), ['All']);
+    assert.equal(await root().getByRole('button', { name: 'Clear search and filters', exact: true }).textContent(), 'Clear search and filters');
+    await search();
     const value = await part('facet').locator('option').evaluateAll(nodes => nodes.find(n => n.textContent.startsWith('Guide'))?.value);
     await part('facet').selectOption(value); await settle(); assert.deepEqual(await ids(), ['page:a', 'page:b']);
     const options = await part('facet').locator('option').evaluateAll(nodes => nodes.map(n => n.value));
@@ -149,6 +155,17 @@ test('query/facet preservation, reset-on-close and map revision revalidation are
     assert.equal(await part('facet').inputValue(), resetOnClose ? '' : value);
     if (!resetOnClose) assert.deepEqual(await part('facet').locator('option').evaluateAll(nodes => nodes.map(n => n.value)), options);
     const count = await calls(); await show(); await settle(); assert.equal((await calls()) > count, !resetOnClose);
+    if (resetOnClose) {
+      assert.equal(await part('status').textContent(), 'Enter a search term to see filter choices.');
+      assert.deepEqual(await part('facet').locator('option').allTextContents(), ['All']);
+    } else assert.match(await part('facet').locator('option:checked').textContent(), /^Guide/);
+    const clearCount = await calls();
+    const clear = root().getByRole('button', { name: 'Clear search and filters', exact: true });
+    await clear.focus(); await clear.press('Enter');
+    assert.equal(await part('input').inputValue(), ''); assert.equal(await part('facet').inputValue(), '');
+    assert.equal(await clear.evaluate(node => node === document.activeElement), true);
+    assert.equal(await part('status').textContent(), 'Enter a search term to see filter choices.');
+    await close(); await show(); await settle(); assert.equal(await calls(), clearCount);
   }
   await mount(); await show(); await search(); await close();
   await page.evaluate(() => { const h = window.modalHarness; return h.owner.replace({ ...h.rows[0], metadata: { category: 'Changed' } }); });

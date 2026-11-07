@@ -66,7 +66,7 @@ export function createDocumentationSearch({ root, trigger, loadingDialog, status
         mounted = mountRaveldexModal({ root, trigger, engine: candidate.engine, documents, pageSections,
           pageSize: 3, maxRenderedResults: 6, resetOnClose, shortcut: false,
           facets: [{ field: 'category', label: 'Topic' }],
-          messages: { label: 'Search the workshop guide', placeholder: 'Try bobbin or booking', clear: 'Clear search' },
+          messages: { label: 'Search the workshop guide', placeholder: 'Try bobbin or booking', clear: 'Clear search and filters' },
           modalMessages: { title: 'Search the workshop guide' } });
         if (!live() || !loadingDialog.open) return;
         hideLoading(attempt.opener);

@@ -1,6 +1,6 @@
 # Public API reference
 
-Start with [installation and your first search](GETTING_STARTED.md), then use this page to find the import you need. Every JavaScript entry uses ESM and includes TypeScript declarations. Use the public paths listed here rather than importing from `dist/` or `src/`. CommonJS is not supported.
+Start with [Raveldex adoption and installation](GETTING_STARTED.md), then choose a [consumer interface and its capabilities](HOSTS.md#consumer-search-interfaces), or use core with your own UI. This page lists exact imports; the developer Workbench is separately identified below. Every JavaScript entry uses ESM and includes TypeScript declarations. Use the public paths listed here rather than importing from `dist/` or `src/`. CommonJS is not supported.
 
 ## Export map
 
@@ -29,7 +29,7 @@ Add `@vmitsaras/raveldex` before each subpath below. For example, `/addons/ui` m
 | `/addons/evidence` | `createMatchEvidence` | [Original ranges](ADDONS.md#original-ranges-and-snippets) |
 | `/addons/snippets` | `createSnippetEvidence` | [Snippets](ADDONS.md#original-ranges-and-snippets) |
 | `/addons/sections` | `createSectionEvidence` and readonly page/section types | [Anchored page context](ADDONS.md#anchored-page-context) |
-| `/addons/ui` | `mountRaveldexUI` | [DOM UI](HOSTS.md#native-dom-ui-and-css) |
+| `/addons/ui` | `mountRaveldexUI` — developer Workbench | [Workbench](HOSTS.md#native-dom-ui-and-css) |
 | `/addons/ui/styles.css` | Independent CSS asset | [CSS](HOSTS.md#native-dom-ui-and-css) |
 | `/addons/ui/inline` | `mountRaveldexInline` | [Inline foundation](HOSTS.md#inline-search-foundation) |
 | `/addons/ui/inline.css` | Independent inline CSS asset | [Inline styling](HOSTS.md#inline-text-and-styling) |

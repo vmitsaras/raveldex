@@ -2768,7 +2768,7 @@ Select one implementable Raveldex-first consumer identity and shared state contr
 
 **Lead with Raveldex adoption and separate migration guidance**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/82)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/82)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -2798,14 +2798,19 @@ Give first-time Raveldex consumers and dynamic/static integrators a short native
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9102.md](docs/evidence/RX-9102.md)
+- [docs/evidence/RX-9102/review.md](docs/evidence/RX-9102/review.md)
+- [docs/evidence/RX-9102/tooling-tests.txt](docs/evidence/RX-9102/tooling-tests.txt)
+- [docs/evidence/RX-9102/installed-example-attempt03.txt](docs/evidence/RX-9102/installed-example-attempt03.txt)
+- [docs/evidence/RX-9102/installed-checks.json](docs/evidence/RX-9102/installed-checks.json)
+- [docs/evidence/RX-9102/pages-source-check.json](docs/evidence/RX-9102/pages-source-check.json)
 
 
 ## RX-9103
 
 **Clarify idle filter availability and reset behavior**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/83)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/83)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -2835,7 +2840,14 @@ Make inline/modal facet availability and reset outcomes understandable while pre
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9103.md](docs/evidence/RX-9103.md)
+- [docs/evidence/RX-9103/review.md](docs/evidence/RX-9103/review.md)
+- [docs/evidence/RX-9103/ui-tests-attempt01.txt](docs/evidence/RX-9103/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9103/consumer-tests.txt](docs/evidence/RX-9103/consumer-tests.txt)
+- [docs/evidence/RX-9103/starter-tests.txt](docs/evidence/RX-9103/starter-tests.txt)
+- [docs/evidence/RX-9103/controls-final-report.json](docs/evidence/RX-9103/controls-final-report.json)
+- [docs/evidence/RX-9103/typecheck.txt](docs/evidence/RX-9103/typecheck.txt)
+- [docs/evidence/RX-9103/tooling-tests.txt](docs/evidence/RX-9103/tooling-tests.txt)
 
 
 ## RX-9104

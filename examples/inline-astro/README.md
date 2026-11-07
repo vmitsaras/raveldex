@@ -26,7 +26,7 @@ ASTRO_TELEMETRY_DISABLED=1 npm --prefix "$RAVELDEX_INLINE_ASTRO" run preview -- 
 
 Open the HTTP URL Astro prints. The preview runs in the foreground; use Ctrl+C to stop this preview before rebuilding. Keep another existing server running if the port is occupied and choose another port. Do not open the generated HTML with a `file:` URL: the loader fetches same-origin assets.
 
-Choose **Enable search**, type `workshop` and select **Search**. Three results appear first; **Load more** shows the remaining matches. While those results are displayed, choose **Tools** in the Topic filter to narrow them to two tool pages. The filter choices come from the current search results. Select a result title to open its actual static page. **Clear search** resets both the words and topic. No Workbench controls or developer diagnostics are included.
+Choose **Enable search**, type `workshop` and select **Search**. Three results appear first; **Load more** shows the remaining matches. While those results are displayed, choose **Tools** in the Topic filter to narrow them to two tool pages. The filter choices come from the current search results. Select a result title to open its actual static page. **Clear search and filters** resets both the words and topic. No Workbench controls or developer diagnostics are included.
 
 The build writes `dist/raveldex/manifest.json` plus integrity-checked source and display files. The client loads all source data once on demand, then its display mapping. This is a complete local index, not a lazy or sharded index. It uses direct browser execution; no worker file is required.
 

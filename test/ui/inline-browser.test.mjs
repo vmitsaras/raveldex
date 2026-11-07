@@ -155,7 +155,7 @@ test('finite first-page presentation reports exact total and clear returns to id
     messages: { resultsMany: '{total} matching guides; {count} displayed.' } }); });
   await search('source prov'); assert.deepEqual(await ids(), ['alpha', 'beta']);
   assert.equal(await status().textContent(), '3 matching guides; 2 displayed.');
-  const clear = root().getByRole('button', { name: 'Clear', exact: true });
+  const clear = root().getByRole('button', { name: 'Clear search', exact: true });
   await clear.click(); assert.equal(await clear.evaluate(node => node === document.activeElement), true);
   assert.equal(await input().inputValue(), ''); assert.deepEqual(await ids(), []);
   assert.equal(await status().textContent(), 'Enter a search term.');
@@ -218,11 +218,14 @@ test('errors and native expansion refusals remain explicit and retry uses the ac
 test('display records and message overrides are captured and hostile text is never parsed', async () => {
   await page.evaluate(() => {
     window.inlineHarness.handle.destroy();
-    const messages = { label: 'Find a guide', noResults: 'Nothing matched.', resultsOne: '{total} guide; {count} shown.' };
-    window.inlineHarness.remount({ messages }); messages.noResults = 'Changed outside';
+    const messages = { label: 'Find a guide', noResults: 'Nothing matched.', resultsOne: '{total} guide; {count} shown.',
+      clear: 'Suche leeren', idle: 'Suchbegriff eingeben.' };
+    window.inlineHarness.remount({ messages }); messages.noResults = 'Changed outside'; messages.clear = 'Changed outside'; messages.idle = 'Changed outside';
     window.inlineHarness.documents[0].title = 'Changed title'; window.inlineHarness.documents[0].url = '/changed/';
   });
   assert.equal(await page.getByRole('searchbox', { name: 'Find a guide', exact: true }).count(), 1);
+  assert.equal(await root().getByRole('button', { name: 'Suche leeren', exact: true }).textContent(), 'Suche leeren');
+  assert.equal(await status().textContent(), 'Suchbegriff eingeben.');
   await search('unmatchable'); assert.equal(await status().textContent(), 'Nothing matched.');
   await search('source provider');
   const link = root().locator('.raveldex-inline__result-title').filter({ hasText: 'Provider guide' }).first();

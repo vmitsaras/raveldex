@@ -1,5 +1,17 @@
 # Codex handoff
 
+## Next N11 slice: RX-9104 — 7 November 2026
+
+RX-9103 is complete locally with [acceptance/review evidence](docs/evidence/RX-9103.md). Read the [Reading index contract](docs/specs/N11_CONSUMER_CONTRACT.md), current N11 task criteria and `npm run handoff:next`. Next is **RX-9104: simplify pagination presentation while preserving focus**. Preserve inline/modal bounded append/windows, exact totals/order/revisions, complete result reachability and persistent focused controls; directory remains page replacement and dropdown a bounded handoff. Do not turn presentation polish into new paging/engine semantics.
+
+RX-9102 and RX-9103 remain local/uncommitted over `51c38ab`; preserve both. RX-9103 changes only shared inline default text/status description plus matching examples/tests/docs. Query/filter/clear/modal lifecycle and engine/CSS behavior are unchanged. Reuse its passing build/typecheck and recorded primary/follow-on/selected starter/tooling checks for evidence-only edits. Real AT speech for the shared status description remains pending; no physical-IME/zoom or broader-device claim is made. **Do not launch benchmarks or change the engine.** RX-9006 remains globally ready but is not the selected next UI instruction. No commit, push, remote tracking update or publication occurred.
+
+## Next N11 slice: RX-9103 — 7 November 2026
+
+RX-9102 is complete locally with [acceptance/review evidence](docs/evidence/RX-9102.md). Read the [Reading index contract](docs/specs/N11_CONSUMER_CONTRACT.md), [N11 scope](docs/specs/N11_UI_UX_POLISH.md), the selected task criteria and `npm run handoff:next`. The next N11 slice is **RX-9103: clarify idle filter availability and reset behavior**. Preserve inline/modal no-automatic-query idle behavior; explain initial All-only facets and that reset clears query plus filters. Directory Clear all browses all, empty search retains filters, and refresh preserves the current query/filters at page one. No new browse-all behavior, engine capability or API is selected.
+
+Baseline `51c38ab` contains RX-9101. New native-first docs, inline recipe, capability map, optional migration appendix and focused documentation checks remain local/uncommitted. Reuse the recorded 66 passing tooling tests, two focused documentation tests, strict installed types/export checks and 345-member runtime equality; closing prose/status changes do not require another application/browser run. Final planning/document preservation checks are in RX-9102 evidence. Rendered Pages generation/deployment, new full runtime/AT qualification, commits and remote synchronization are separate unperformed work. **Do not launch benchmarks or change the engine.** RX-9006 remains independently ready by global planner priority, not the selected next UI instruction.
+
 ## Next N11 slice: RX-9102 — 7 November 2026
 
 RX-9101 is complete locally with [acceptance/review evidence](docs/evidence/RX-9101.md). Read the [selected Reading index contract](docs/specs/N11_CONSUMER_CONTRACT.md), [N11 scope](docs/specs/N11_UI_UX_POLISH.md), current task criteria and `npm run handoff:next`. The next N11 slice is **RX-9102: lead with Raveldex adoption and separate migration guidance**. Other dependency-ready N11 delivery tasks may be selected explicitly; none is implemented by this specification. Preserve per-surface idle/browse, reset, paging, capture and owner boundaries. No new universal source/snippet row, renderer or locale API is selected.

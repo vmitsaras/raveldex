@@ -2,6 +2,18 @@
 
 Raveldex adds search to data you already have. Tell it which fields to search, add your records and use the matching IDs to look up titles, URLs or other details in your application.
 
+## Choose your search experience
+
+| Your application needs | Start here |
+| --- | --- |
+| A search form within the page | [Inline](HOSTS.md#inline-search-foundation) |
+| Search opened from a documentation button | [Modal](HOSTS.md#documentation-search-modal) |
+| A small header popup with a full-results destination | [Dropdown](HOSTS.md#compact-dropdown-search) |
+| Resource browsing with checkbox filters and pages | [Directory](HOSTS.md#directory-controls-and-styling) |
+| Authored descriptions, metadata and optional images | [Rich directory results](HOSTS.md#rich-directory-results) |
+
+All five borrow an engine you configure. The [capability matrix](HOSTS.md#consumer-capability-matrix) explains their different result content, paging and keyboard models. For a complete project, the [solution chooser](../../examples/README.md) links browser/Astro starters. If your application supplies its own UI, start with the core example below.
+
 ## Install the package
 
 The packages are currently unpublished and supplied as local `.tgz` files. In a new application directory, run these commands to create a package, enable ESM imports and install core. Replace the absolute path with the file you received or built:
@@ -13,6 +25,14 @@ npm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/
 ```
 
 You can now import `@vmitsaras/raveldex` in that application. Core and the English analyzer require Node 22 or later; the Astro integration requires Node 22.12 or later. In a browser application, let your existing bundler resolve the imports. See [compatibility](COMPATIBILITY.md) for optional feature requirements.
+
+## Prepare your records
+
+Choose the public records people should find and give each a stable ID. Declare searchable strings in `schema.text`, then add records with those same field names. Keep title/URL display entries in your application, joined to hits by ID. Titles and destinations are required for the consumer presets; your application must provide the actual destination pages.
+
+Declare filter metadata separately when needed; card display fields are not automatically indexed or filterable. Keep original text when selecting snippets/sections and derive any section ranges from those exact strings. Render each section's target ID on its destination page. No UI preset discovers pages, headings or content changes automatically.
+
+For static sites, pass an explicit public allowlist to the [Astro/static builder](STATIC_ASTRO.md); deploy a complete matching artifact generation and base path. For live application data, await engine updates and explicitly search/refresh afterward. Replacing captured display data requires destroy/remount. Detailed CMS lifecycle guidance is separate from choosing a surface.
 
 ## Smallest core example
 
@@ -65,7 +85,9 @@ For search behind a button, choose a [documentation modal starter](../../site/Mo
 
 Both galleries provide complete project downloads and a short edit/build/preview CSS walkthrough. Keep the starter's source/snippet/facet or section registrations aligned with its UI options; these are explicit optional capabilities. The [adoption checklist](HOSTS.md#starter-adoption-and-local-checks) lists browser requirements, ownership and the remaining checks to run after replacing data or styles.
 
-The [native DOM UI](HOSTS.md#native-dom-ui-and-css) adds a labeled search field, results and pagination to an element you provide. Import its CSS separately. You still own the engine: remove the UI with `destroy()` before disposing that engine.
+For a minimal consumer integration without a starter, follow [mount a consumer search form](HOSTS.md#mount-a-consumer-search-form). Copy the complete [inline module](examples/inline.mjs), import `/addons/ui/inline.css` separately and use its explicit `mode: 'prefix'`. The UI starts idle; typing or Enter searches. Call the returned `dispose()` when removing the integration: it destroys the UI before disposing its owned engine. A UI mounted with an application-owned engine only borrows it.
+
+Choose [dropdown](HOSTS.md#compact-dropdown-search), [directory](HOSTS.md#directory-controls-and-styling) or [rich results](HOSTS.md#rich-directory-results) for the other consumer journeys. The [developer Workbench](HOSTS.md#native-dom-ui-and-css) remains a separate option for exploring scores and Inspector.
 
 If you want [phrases, snippets or highlights](ADDONS.md), choose the required source or position providers when creating the engine. These keep the original text or word locations that core alone does not store. For static Astro pages, follow [the Astro guide](STATIC_ASTRO.md).
 
@@ -94,3 +116,4 @@ Keep both shell variables set when following the [Astro example](https://github.
 - [Use the public API](README.md): options, defaults, methods and result types.
 - [Run the example modules](examples/README.md) in your own installed application.
 - [Handle practical limits](LIMITATIONS.md): analysis, operation bounds and recovery.
+- [Optional Pagefind migration appendix](PAGEFIND_MIGRATION.md): map an existing site's content decisions to explicit Raveldex records; no prior Pagefind knowledge is needed for the guides above.

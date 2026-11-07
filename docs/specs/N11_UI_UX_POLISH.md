@@ -38,7 +38,7 @@ Current source anchors include `src/addons/ui/inline.ts`, `inline-render.ts`, `i
 | F10: Captured display data and repeated mounts need clearer CMS refresh/remount and state-preservation guidance. | Medium | RX-9111 |
 | F11: A migration-led brief does not define a recognizable Raveldex visual identity. Define result hierarchy, density, typography, spacing and state treatment rather than emulate a competitor. | High | RX-9101, RX-9107, RX-9112 |
 
-RX-9101 establishes the scenario/state contract; its [local acceptance and independent review](../evidence/RX-9101.md) records the selected design without changing runtime behavior. The remaining eleven tasks stay planned; RX-9112 verifies the complete delivered outcome. Canonical and remote tracking synchronization have distinct scopes recorded in that evidence.
+RX-9101 establishes the scenario/state contract; its [local acceptance and independent review](../evidence/RX-9101.md) records the selected design without changing runtime behavior. [RX-9102 acceptance](../evidence/RX-9102.md) records native-first adoption guidance, the capability map and secondary migration appendix. [RX-9103 acceptance](../evidence/RX-9103.md) records query-first filter guidance and truthful reset labels without changing query/reset semantics. The remaining nine tasks stay planned; RX-9112 verifies the complete delivered outcome. Canonical and remote tracking synchronization have distinct scopes recorded in the evidence.
 
 ## Personas and observable scenarios
 

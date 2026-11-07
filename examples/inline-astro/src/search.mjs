@@ -29,7 +29,7 @@ export function createInlineSearch({ root, status, button, manifestUrl, buildId,
         mounted = mountRaveldexInline({ root, engine: candidate.engine, documents,
           pageSize: 3, maxRenderedResults: 6, snippetFields: ['body'],
           facets: [{ field: 'category', label: 'Topic' }],
-          messages: { label: 'Search the workshop guide', placeholder: 'Try booking or tools', clear: 'Clear search' } });
+          messages: { label: 'Search the workshop guide', placeholder: 'Try booking or tools', clear: 'Clear search and filters' } });
         if (destroyed) return;
         ui = mounted; mounted = undefined;
         owned = candidate; candidate = undefined;

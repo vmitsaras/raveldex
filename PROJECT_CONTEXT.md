@@ -1,5 +1,21 @@
 # Project context
 
+## RX-9103 idle filters and reset clarity — 7 November 2026
+
+[RX-9103](docs/evidence/RX-9103.md) is complete locally over preserved uncommitted RX-9102 work. Shared inline/modal defaults explain that a query supplies filter choices; native selects describe their count summary and current status while staying mounted/enabled. Reset labels are Clear search and filters with facets, Clear search without; existing translated overrides are captured unchanged. The two Astro starters' explicit reset labels and matching instructions/assertions are aligned. Mount, empty input without selected facets and reset still issue no query; query/filter/lifecycle/engine behavior and CSS are unchanged.
+
+Verification: one build and project typecheck; 62 installed inline/modal tests; a 41-test follow-on consumer batch including the strengthened controls subset; three selected browser/Astro starter acceptance cases; 56 tooling tests. All pass with zero reported failures/skips; batch counts overlap and are not a distinct-test total. Two read-only reviewers cleared their findings. Engine/provider/public declaration/CSS and prior evidence preservation are recorded separately. Human AT speech, physical input and actual zoom remain unobserved; no benchmark or new broad platform claim follows.
+
+N11 is locally 3/12 accepted. **RX-9104 is the next N11 slice**; RX-9006 remains independently ready, not selected for collection. Work remains uncommitted, with no push, GitHub synchronization, site deployment or publication. Earlier checkpoints retain their dated scope.
+
+## RX-9102 native adoption guidance — 7 November 2026
+
+[RX-9102](docs/evidence/RX-9102.md) is complete locally from baseline `51c38ab`. README, Getting started and HOSTS lead with Raveldex's five consumer surfaces, explicit records, installation and a complete prefix-mode inline recipe; the Workbench remains a separate developer option and Pagefind migration a secondary appendix. The capability matrix preserves per-surface content, paging, language/theme, keyboard and owner boundaries. Static guidance mounts consumer inline UI and disposes a published owner when later display initialization fails. The current consumer contract clarifies that directory refresh preserves query/filters and resets page one; historical evidence is retained.
+
+Reused passing evidence: 66 tooling tests, two focused documentation tests (including installed Chrome consumer behavior and injected static initialization failures), strict installed declaration checks, all 41 export targets and byte equality of all 345 runtime members. Two read-only reviewers cleared their findings. Closing edits require only planner/generated/reference/diff and preservation checks. No engine/CSS/dependency change or benchmark occurred. Rendered Pages/starter regeneration, hosted deployment and fresh broad runtime/AT qualification remain unrun and unclaimed.
+
+N11 is locally 2/12 accepted; **RX-9103 is the next N11 slice**, with other graph-ready tasks still planned. RX-9006 remains independently ready, not selected for collection. RX-9102 changes remain local and uncommitted; GitHub tracking remains at committed `main` until normal explicitly requested commit/push/sync. Earlier checkpoints retain their dated scope.
+
 ## RX-9101 consumer contract — 7 November 2026
 
 After the requested fast-forward to `038385b`, [RX-9101](docs/evidence/RX-9101.md) selects the [Reading index consumer identity and interaction contract](docs/specs/N11_CONSUMER_CONTRACT.md). F01–F11, concrete visual roles, representative content and the five surfaces' complete state/keyboard/focus/ownership rules are reconciled against current source/tests. Two read-only subagents supplied independent source and contract reviews; all material findings were corrected. The 54 existing planning/tracking/native-subissue tests and applicable planner/generated/reference checks pass. This accepts the specification locally, not new styling, copy, browser or AT behavior. Source/CSS/tests/engine/dependencies and frozen N10 evidence remain unchanged; no collector ran.

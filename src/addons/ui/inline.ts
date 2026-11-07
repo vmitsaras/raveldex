@@ -78,7 +78,7 @@ export interface InlineUIHandle {
 }
 
 const defaults: Required<InlineUIMessages> = Object.freeze({
-  label: 'Search this site', placeholder: 'Search', submit: 'Search', clear: 'Clear',
+  label: 'Search this site', placeholder: 'Search', submit: 'Search', clear: 'Clear search',
   idle: 'Enter a search term.', searching: 'Searching…', noResults: 'No results.',
   resultsLabel: 'Search results', resultsOne: '{total} result. Showing {count}.',
   resultsMany: '{total} results. Showing {count}.',
@@ -114,17 +114,20 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
     if (o[key] !== undefined && !Array.isArray(o[key])) fail('INVALID_OPTIONS', `inline.${key}`);
   }
   const ownedMessages = record(o.messages ?? {}, Object.keys(defaults), 'inline.messages');
-  const messages = { ...defaults };
-  for (const key of Object.keys(ownedMessages) as (keyof InlineUIMessages)[]) {
-    Object.defineProperty(messages, key, { value: displayName(ownedMessages[key], 512, `inline.messages.${key}`), enumerable: true });
-  }
-  Object.freeze(messages);
   const captured = captureOptions({ root: o.root as HTMLElement, engine: o.engine as Raveldex,
     documents: o.documents as readonly UIDocument[], mode,
     ...(o.pageSize === undefined ? {} : { pageSize: o.pageSize as number }),
     ...(o.debounceMs === undefined ? {} : { debounceMs: o.debounceMs as number }),
     ...(o.facets === undefined ? {} : { facets: o.facets as readonly UIFacet[] }),
     ...(o.snippetFields === undefined ? {} : { snippetFields: o.snippetFields as readonly string[] }) });
+  const messages = { ...defaults,
+    clear: captured.facets.length ? 'Clear search and filters' : defaults.clear,
+    idle: captured.facets.length ? 'Enter a search term to see filter choices.' : defaults.idle,
+  };
+  for (const key of Object.keys(ownedMessages) as (keyof InlineUIMessages)[]) {
+    Object.defineProperty(messages, key, { value: displayName(ownedMessages[key], 512, `inline.messages.${key}`), enumerable: true });
+  }
+  Object.freeze(messages);
   if (o.pageSections !== undefined && o.snippetFields !== undefined) fail('INVALID_OPTIONS', 'inline.pageSections');
   if (o.pageSections === undefined && o.maxSectionPreviews !== undefined) fail('INVALID_OPTIONS', 'inline.maxSectionPreviews');
   const maxSectionPreviews = o.maxSectionPreviews === undefined ? 3 : o.maxSectionPreviews;
@@ -155,12 +158,14 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
     const group = node('div', 'facet-group'), name = node('label', 'facet-label', facet.label);
     name.htmlFor = `${id}-facet-${index}`;
     const select = node('select', 'facet'); select.id = name.htmlFor; select.setAttribute('data-raveldex-inline-facet', facet.field);
-    const summary = node('p', 'facet-summary'); summary.id = `${id}-facet-summary-${index}`; select.setAttribute('aria-describedby', summary.id);
+    const summary = node('p', 'facet-summary'); summary.id = `${id}-facet-summary-${index}`;
+    select.setAttribute('aria-describedby', `${summary.id} ${id}-status`);
     group.append(name, select, summary); facetGroup.append(group);
     return { field: facet.field, select, summary, values: new Map<string, string>() };
   });
   resetInlineFacets(doc, facets, messages);
   const status = node('p', 'status', messages.idle); status.setAttribute('role', 'status'); status.setAttribute('aria-atomic', 'true');
+  status.id = `${id}-status`;
   const retry = node('button', 'retry', messages.retry); retry.type = 'button'; retry.hidden = true;
   const heading = node('h2', 'results-heading', messages.resultsLabel); heading.id = `${id}-results`; heading.hidden = true;
   const results = node('ol', 'results'); results.setAttribute('aria-labelledby', heading.id); results.hidden = true;

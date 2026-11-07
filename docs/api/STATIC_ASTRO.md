@@ -2,6 +2,8 @@
 
 Use `@vmitsaras/raveldex-astro` to add search to a static site. You choose the content during the build, and the browser loads the resulting search files when needed. The package includes a static builder, an Astro build hook and a browser loader; core still works without Astro.
 
+Choose [inline, modal, dropdown, directory or rich results](HOSTS.md#consumer-search-interfaces) independently of static delivery. The primary recipe below uses title/link-only inline results with explicit prefix mode; static source reconstruction needs the source providers shown below, while snippets/sections and filters require their own registrations. Complete [inline](../../examples/inline-astro/README.md), [modal](../../examples/modal-astro/README.md) and [directory](../../examples/directory-astro/README.md) Astro projects provide loading/retry and lifecycle wrappers.
+
 For links to matching headings, supply the [optional heading maps](#optional-heading-maps). The adapter accepts explicit page records, titles and fragment-free directory routes; your application supplies source ranges and renders the target IDs.
 
 ## Install matching packages
@@ -86,8 +88,8 @@ The loader needs the manifest URL, the build ID you expect and the same configur
 
 ```js
 import { loadStaticSearch } from '@vmitsaras/raveldex-astro/client';
-import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
-import '@vmitsaras/raveldex/addons/ui/styles.css';
+import { mountRaveldexInline } from '@vmitsaras/raveldex/addons/ui/inline';
+import '@vmitsaras/raveldex/addons/ui/inline.css';
 import { configuration } from './search-content.mjs';
 
 const loaded = await loadStaticSearch({
@@ -95,19 +97,29 @@ const loaded = await loadStaticSearch({
   expectedBuildId: 'docs-v1',
   configuration,
 });
-const ui = mountRaveldexUI({
-  root: document.querySelector('#search'),
-  engine: loaded.engine,
-  documents: await loaded.loadDocuments(),
-});
+let ui;
+try {
+  const root = document.querySelector('#search');
+  if (!(root instanceof HTMLElement)) throw new Error('Missing search root');
+  ui = mountRaveldexInline({
+    root, engine: loaded.engine,
+    documents: await loaded.loadDocuments(),
+    mode: 'prefix',
+  });
+} catch (error) {
+  await loaded.dispose();
+  throw error;
+}
 // When removing the search component:
 // ui.destroy();
 // await loaded.dispose();
 ```
 
-You should see search controls in `#search`. Searching `atomic` returns **Atomic updates**, linked to `/docs/guide/updates/`. The UI uses the loaded engine; it does not fetch the destination page until you follow the link.
+You should see idle search controls in `#search`. Searching `atom` returns **Atomic updates**, linked to `/docs/guide/updates/`. The inline UI borrows the loaded engine; it does not fetch the destination page until you follow the link. Import `/addons/ui/inline.css` separately and override scoped `--raveldex-inline-*` properties as in the [consumer recipe](HOSTS.md#mount-a-consumer-search-form).
 
 Resolve the manifest from the deployment base, as above, so it also works on nested pages. Keep ordinary documentation links available while search loads. If loading fails, offer a retry and keep any working engine until its replacement is ready. The loader checks build/configuration identity, file sizes and hashes. SHA-256 detects corruption or mixed generations, but does not establish whether the sender is trustworthy.
+
+Once loading publishes an owner, the application must dispose it if display loading or UI mounting fails; the catch above covers that boundary. For cancellation/removal during initialization and user-visible retry, use a complete starter controller. After successful initialization, destroy the mounted UI before disposing its loaded owner.
 
 ## Optional heading maps
 
@@ -138,7 +150,7 @@ import '@vmitsaras/raveldex/addons/ui/inline.css';
 
 const pageSections = await loaded.loadSections();
 const documents = await loaded.loadDocuments();
-const ui = mountRaveldexInline({ root, engine: loaded.engine, documents, pageSections });
+const ui = mountRaveldexInline({ root, engine: loaded.engine, documents, pageSections, mode: 'prefix' });
 // ui.destroy();
 // await loaded.dispose();
 ```

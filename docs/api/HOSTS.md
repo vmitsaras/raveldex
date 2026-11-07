@@ -1,8 +1,90 @@
-# UI, workers, snapshots, storage and migration
+# Consumer search, UI and host integrations
 
-Use these integrations to add a browser interface, move work to a module worker or save and restore an index. You decide when each integration starts and when to clean it up. Importing a module does not start a worker, mount controls, open a database or restore data. The [example modules](examples/README.md) show complete small setups.
+Choose a Raveldex consumer interface for your application's records, then add only the capabilities it needs. You supply searchable data and matching display records; no surface crawls pages or downloads an index automatically. Start with [installation and record preparation](GETTING_STARTED.md). Workers, snapshots, storage and the developer Workbench remain separately selected integrations below.
+
+## Consumer search interfaces
+
+| Need | JavaScript entry after `@vmitsaras/raveldex` | Separate CSS entry |
+| --- | --- | --- |
+| Inline form | `/addons/ui/inline` → `mountRaveldexInline` | `/addons/ui/inline.css` |
+| Documentation dialog | `/addons/ui/modal` → `mountRaveldexModal` | `/addons/ui/modal.css` (includes inline CSS) |
+| Compact header popup | `/addons/ui/dropdown` → `mountRaveldexDropdown` | `/addons/ui/dropdown.css` |
+| Filterable directory | `/addons/ui/directory` → `createDirectory`; `/addons/ui/directory/view` → `mountRaveldexDirectory` | `/addons/ui/directory.css` |
+| Rich directory results | Same directory controller; `/addons/ui/directory/cards` → `mountRaveldexDirectoryCards` | Both `/addons/ui/directory.css` and `/addons/ui/directory-cards.css` |
+
+For complete projects, the [solution chooser](../../examples/README.md) links eight browser/Astro starters with explicit data, loading/retry and cleanup. For a small core-only integration, copy the recipe below. The `/addons/ui` Workbench is for developer exploration; it is not required by any consumer preset.
+
+### Mount a consumer search form
+
+Use a connected root on an HTTP(S) page. Keep ordinary navigation outside it so visitors can browse when search is unavailable:
+
+<!-- consumer-example: markup -->
+```html
+<section id="search" class="help-search" aria-label="Documentation search"></section>
+```
+
+Copy [inline.mjs](examples/inline.mjs) into your installed ESM application and run this entry after the root exists, through a bundler with CSS support:
+
+<!-- consumer-example: entry -->
+```js
+import { createInlineSearch } from './inline.mjs';
+import '@vmitsaras/raveldex/addons/ui/inline.css';
+
+const root = document.querySelector('#search');
+if (!(root instanceof HTMLElement)) throw new Error('Missing search root');
+const search = await createInlineSearch(root);
+// When removing this integration, after initialization has returned:
+// await search.dispose();
+```
+
+The module creates one title/body record, joins its ID to an application-owned title/URL, and mounts `mountRaveldexInline` with explicit `mode: 'prefix'`. It starts idle with no automatic search. Enter `atom` and submit to find **Atomic updates** at `/guide/updates/`; your application must supply that actual page. Prefix completes the final word after two normalized code points; earlier words remain exact. Choose explicit `mode: 'text'` for complete words instead. This example selects no snippet, facet, worker, storage or Inspector capability.
+
+Replace both indexed text and display records, retaining matching stable IDs. `search.ui.search(text)` explicitly updates the input/results; `clear()` clears text and filters to idle. Display data/options are captured: destroy/remount to replace them. `search.dispose()` destroys this UI before disposing the engine created by the recipe. A preset mounted over your existing engine only borrows it; do not dispose that shared engine until its other users are finished.
+
+The recipe assumes the root remains until initialization returns and propagates initialization errors to your app after disposing its engine. For removal during async loading, visible loading/retry, lazy assets or repeated initialization, use the complete starter controllers rather than inventing lifecycle methods on the UI handle.
+
+Import the optional CSS explicitly; the module does not inject it. Override a few scoped component properties in your own stylesheet:
+
+<!-- consumer-example: theme -->
+```css
+.help-search .raveldex-inline {
+  --raveldex-inline-accent: #145b45;
+  --raveldex-inline-gap: 1rem;
+  --raveldex-inline-radius: .35rem;
+}
+```
+
+Fonts are inherited. Light/dark palettes, focus and highlight colors are separate roles: supply a complete appropriate set for a dark host and check contrast after overrides. Inline/modal/dropdown use light defaults with explicit host dark overrides; directory/cards also have automatic dark defaults. Properties beginning `--_` are private. There is no JavaScript theme option or mandatory font request. The surface-specific sections below list actual properties; changing CSS never changes search meaning.
+
+### Consumer capability matrix
+
+| Surface | Result content | Filters and exact counts | Paging |
+| --- | --- | --- | --- |
+| Inline | Title/link alone, or explicit original-source snippets **or** page/section context. Snippets and sections are mutually exclusive; no generic metadata/image row. | Optional single-value string selects; explicit facets registration; counts include all active filters. Starts idle with All-only choices. | Load more within a bounded window, then Next/Previous windows. Exact total is separate from visible count. |
+| Modal | Same inline result/capability choices in native `dialog`. | Same inline filters/counts. | Same bounded append/window behavior. |
+| Dropdown | Title/link only. No snippet, section or rich-metadata options. | Exact total, no filters. Required `fullResults` destination supplies a native link for valid nonempty queries. | Bounded first page (`maxResults`, default 5, at most 20); full-results handoff, no accumulated paging. |
+| Directory | Title/link ordered list. | Checkbox groups: OR within, AND across. Explicit filters/facets when configured; counts include the complete current filtered set, including their own group. A zero-count choice stays usable; unavailable projected counts are not zero. | Previous/Next replace a page; explicit URL-state binding is optional. No Load more. |
+| Rich directory | Authored excerpt/category/breadcrumb/date/labeled fields; optional explicitly enabled dimensioned images with alternatives. No generated snippets/section marks. | Same directory semantics. Display fields do not become filter metadata automatically. | Same directory pages; list/cards/grid, density and image visibility change presentation only. |
+
+Snippets require explicitly installed snippet evidence plus source/offset providers for their selected fields; section previews require section evidence and exact-original, revision-bound heading maps. Core alone retains neither original source text nor offsets. Direct title/link search needs neither capability; static source delivery still requires source providers to rebuild its indexed fields. Missing requested capabilities fail explicitly. A supported section-context refusal may retain valid page links with an explicit unavailable-context notice; it never pretends that context succeeded. Images default off, and enabling them can make image requests; disabling them does not undo requests already sent.
+
+All five consumer text modes default to final-word prefix and allow explicit `text`. UI language is separate from query analysis: captured partial plain-text message overrides use English for omitted keys. Choose an analyzer explicitly when needed; see [English morphology](ENGLISH.md). No automatic locale detection, translated UI or date formatting is implied; card dates are already-authored localized strings.
+
+| Surface | Keyboard model | Ownership and refresh |
+| --- | --- | --- |
+| Inline | Native input/buttons/selects and links; composition waits; stable navigation preserves focus. | Borrows engine. Search explicitly after index changes; destroy/remount for changed display data. Clear resets query and filters. |
+| Modal | Native dialog containment, opening search focus, Close/Escape and appropriate opener restoration. | Borrows engine. Close preserves query/selections by default; reopen revalidates. `resetOnClose` is explicit. |
+| Dropdown | Input keeps editing focus; Up/Down selects a virtual current item, Enter searches/follows it, Escape dismisses, Tab traverses normally. Native pointer/modified links remain usable. | Borrows engine. Retains raw query on close; full-results route owns its own presentation/explicitly shared engine. |
+| Directory | Native form, checkboxes, chips, disclosure and links; keyboard close returns to the filter summary. | View borrows controller; controller borrows engine. Clear all removes text/filters and browses all. Empty search keeps filters; controller refresh reruns current state at page one. New controller is idle; mounting a view reflects its current snapshot. |
+| Rich directory | Same ordered-list interaction; CSS grid adds no ARIA grid or arrow model. | Same owners; presentation changes preserve query/page/link identities. Image handlers are cleaned up. |
+
+Destroy UI/view first, then any explicit directory URL binding/controller, then the engine or static-loader owner you created. Destroying a borrowed view never disposes a shared controller/engine. No automatic mutation subscription or option replacement on same-kind remount is implied. Keep exact results, native links, composition, focus, stale-reply suppression and recovery intact after customization; [starter adoption checks](#starter-adoption-and-local-checks) cover the remaining browser/AT observations.
+
+An existing Pagefind integration may use the [secondary migration appendix](PAGEFIND_MIGRATION.md). New integrations need no Pagefind knowledge, assets or API.
 
 ## Native DOM UI and CSS
+
+This section documents the separate **developer Workbench**, with numerical scores and optional Inspector. Its existing exact-word default and public API remain supported. Use the consumer entries above for visitor-facing search.
 
 Use `mountRaveldexUI(options: UIOptions): UIHandle` from `/addons/ui` to put search controls into an element on your page. You supply the engine and keep responsibility for disposing it. Import the UI and its stylesheet through a bundler that handles CSS:
 
@@ -118,6 +200,10 @@ Mounting inline again on the same root returns the existing handle without apply
 ### Inline text and styling
 
 The original messages are `label`, `placeholder`, `submit`, `clear`, `idle`, `searching`, `noResults`, `resultsLabel`, `resultsOne`, `resultsMany`, `error` and `retry`. Additive optional keys are `composing`, `loadMore`, `previous`, `next`, `paginationLabel`, `pageSummary`, `windowLimit`, `revisionChanged`, `all`, `emptyValue`, `nullValue`, `missingValue`, `unlistedValue`, `facetSummary`, `snippetOmissions` and `snippetLimits`. Existing complete original bundles remain valid; unspecified new keys use English defaults.
+
+Inline and modal use **Clear search** by default without facets and **Clear search and filters** when facets are configured. Both reset the query and every facet selection; the label does not change that behavior. The button's visible text is also its accessible name. Existing `messages.clear` overrides remain authoritative; choose translated text that describes the complete reset scope.
+
+With facets, default idle guidance is **Enter a search term to see filter choices.** It appears on first mount and after reset, when selects contain only All. Each select references its own count summary and the shared status through `aria-describedby`, so the current guidance or result/error status is available alongside the native label. Controls remain enabled and mounted to preserve focus and selected-value recovery. Search populates choices; changing a selected filter can still intentionally search with an empty query. Mounting, empty input without filters, and reset do not issue a browse-all query. `messages.idle` overrides are captured unchanged; no new message key is required.
 
 Summary templates substitute `{total}` and `{count}`; `pageSummary` also supports `{start}`/`{end}`, and `windowLimit` supports `{remaining}`. `unlistedValue` uses `{value}`, `facetSummary` uses `{total}`/`{omitted}`, and `snippetOmissions` uses `{count}`. The error template substitutes a sanitized native `{code}` (unrecognized failures use `INTERNAL_ERROR`); a revision mismatch uses `revisionChanged`. Every message, title, selection and excerpt is inserted as text, never HTML. UI messages do not select a different engine analyzer. The polite status region announces actual searching, composition and settled outcomes without repeating unchanged messages on each keystroke.
 

@@ -7,6 +7,7 @@ export const PAGES = [
   ['site/Demo.astro', 'demo', 'Search the usage guides'],
   ['site/404.md', '404', 'Page not found'],
   ['docs/api/GETTING_STARTED.md', 'guide/overview', 'Getting started'],
+  ['docs/api/PAGEFIND_MIGRATION.md', 'guide/pagefind-migration', 'Optional Pagefind migration'],
   ['site/guides.md', 'guide', 'Guides'],
   ['docs/api/COMPATIBILITY.md', 'guide/compatibility', 'Compatibility'],
   ['docs/api/LIMITATIONS.md', 'guide/limitations', 'Practical limits'],
@@ -35,6 +36,6 @@ export const PAGES = [
     'IDENTIFIERS', 'LITERAL', 'PROXIMITY', 'QUERY_SYNTAX', 'RECORD_PATCH', 'STATIC_ASTRO']
     .map(name => [`docs/api/${name}.md`, name === 'README' ? 'reference' : `reference/${name.toLowerCase().replaceAll('_', '-')}`, name === 'README' ? 'API reference' : name.replaceAll('_', ' ')]),
 ];
-export const RECIPES = ['core', 'ui', 'addons', 'snapshots', 'browser', 'worker', 'worker-host', 'migration'];
+export const RECIPES = ['core', 'inline', 'ui', 'addons', 'snapshots', 'browser', 'worker', 'worker-host', 'migration'];
 export const href = route => BASE + (route ? route === '404' ? '404.html' : `${route}/` : '');
 export const JEKYLL = `# Required: Jekyll excludes repository-only records before branch publication.\n# Do not add .nojekyll. Do not add includes that override these exclusions.\nurl: https://vmitsaras.github.io\nbaseurl: /raveldex\ntheme: null\nplugins: []\nexclude:\n${EXCLUDED.map(name => `  - ${name}\n`).join('')}`;

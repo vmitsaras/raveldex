@@ -98,9 +98,9 @@ for (const surface of ['inline', 'modal']) test(`${surface}: committed compositi
     assert.equal(await status.innerText(), 'No results.'); assert.equal(await input.inputValue(), 'zzzzzz');
     assert.deepEqual(await ids(), []); assert.equal((await calls()).at(-1).result.total, 0);
     assert.equal(await input.evaluate(node => node === document.activeElement), true);
-    await root.getByRole('button', { name: 'Clear', exact: true }).click();
+    await root.getByRole('button', { name: 'Clear search', exact: true }).click();
     assert.equal(await status.innerText(), 'Enter a search term.'); assert.equal(await input.inputValue(), '');
-    const clear = root.getByRole('button', { name: 'Clear', exact: true });
+    const clear = root.getByRole('button', { name: 'Clear search', exact: true });
     assert.equal(await clear.evaluate(node => node === document.activeElement), true);
     const clearedCalls = (await calls()).length; await page.waitForTimeout(80); assert.equal((await calls()).length, clearedCalls);
     assert.deepEqual(errors, []);

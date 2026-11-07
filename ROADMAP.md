@@ -8,7 +8,7 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 57/70 done · 0 in progress · 10 dependency-ready.
+**Release progress:** 59/70 done · 0 in progress · 8 dependency-ready.
 
 **Planner state:** `ready`.
 
@@ -41,7 +41,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N8 — Dropdown, directory and rich search results** | `RX-7001`–`RX-7006` | 6/6 | Extend the verified consumer UI foundation with compact dropdown search, faceted directory search and rich card/grid results, each backed by complete installed examples. |
 | **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 11/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
 | **N10 — Post-N9 hardening and performance review** | `RX-9001`–`RX-9007` | 5/7 | Conclude the post-N9 engineering review from completed matched measurements and bounded, claim-based recovery qualification; preserve adverse evidence without requiring exhaustive research before product work. |
-| **N11 — Raveldex-native consumer identity and usability** | `RX-9101`–`RX-9112` | 1/12 | Create a recognizable Raveldex consumer search experience with clear result context, optional explanations and coherent host-friendly styling; familiar interactions and migration guides support adoption without copying Pagefind. |
+| **N11 — Raveldex-native consumer identity and usability** | `RX-9101`–`RX-9112` | 3/12 | Create a recognizable Raveldex consumer search experience with clear result context, optional explanations and coherent host-friendly styling; familiar interactions and migration guides support adoption without copying Pagefind. |
 
 ## Task index
 
@@ -116,8 +116,8 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006) — Qualify supported recovery paths with bounded evidence reuse | `planned` | `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22) |
 | [RX-9007](IMPLEMENTATION_TASKS.md#rx-9007) — Publish a scoped engineering verdict and remaining limitations | `planned` | `RX-9004`, `RX-9005`, `RX-9006` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9007%22) |
 | [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101) — Define Raveldex identity and consumer interaction contract | `done` | `RX-7006`, `RX-9003` | [Issue](https://github.com/vmitsaras/raveldex/issues/81) |
-| [RX-9102](IMPLEMENTATION_TASKS.md#rx-9102) — Lead with Raveldex adoption and separate migration guidance | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/82) |
-| [RX-9103](IMPLEMENTATION_TASKS.md#rx-9103) — Clarify idle filter availability and reset behavior | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/83) |
+| [RX-9102](IMPLEMENTATION_TASKS.md#rx-9102) — Lead with Raveldex adoption and separate migration guidance | `done` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/82) |
+| [RX-9103](IMPLEMENTATION_TASKS.md#rx-9103) — Clarify idle filter availability and reset behavior | `done` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/83) |
 | [RX-9104](IMPLEMENTATION_TASKS.md#rx-9104) — Simplify pagination presentation while preserving focus | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/84) |
 | [RX-9105](IMPLEMENTATION_TASKS.md#rx-9105) — Polish search states and recovery messages | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/85) |
 | [RX-9106](IMPLEMENTATION_TASKS.md#rx-9106) — Make keyboard guidance discoverable and consistent | `planned` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/86) |

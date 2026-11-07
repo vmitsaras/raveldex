@@ -103,6 +103,39 @@ after(async () => { try { await browser?.close(); } finally {
   report.finishedAt = new Date().toISOString(); await save();
 } });
 
+test('idle filters explain query-first choices and keyboard reset clears intent without searching or losing focus', async () => {
+  const guidance = 'Enter a search term to see filter choices.';
+  assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), 0);
+  assert.deepEqual(await part('facet').locator('option').allTextContents(), ['All']);
+  assert.equal(await part('status').textContent(), guidance);
+  const described = await part('facet').evaluate(node => node.getAttribute('aria-describedby').split(/\s+/).map(id => ({ id, exists: !!node.ownerDocument.getElementById(id), text: node.ownerDocument.getElementById(id)?.textContent })));
+  assert.ok(described.every(target => target.exists));
+  assert.deepEqual(described.map(target => target.text).filter(Boolean), [guidance]);
+  const clear = root().getByRole('button', { name: 'Clear search and filters', exact: true });
+  assert.equal(await clear.textContent(), 'Clear search and filters');
+  await part('input').focus(); await part('input').press('Enter'); await page.waitForTimeout(60);
+  assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), 0);
+  await search(); await selectCategory('Guide');
+  const before = await page.evaluate(() => window.controlsHarness.calls().length);
+  await clear.focus(); await clear.press('Enter'); await page.waitForTimeout(60);
+  assert.equal(await part('input').inputValue(), ''); assert.equal(await part('facet').inputValue(), '');
+  assert.deepEqual(await part('facet').locator('option').allTextContents(), ['All']);
+  assert.equal(await part('status').textContent(), guidance);
+  assert.equal(await clear.evaluate(node => node === document.activeElement), true);
+  assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), before);
+  await part('facet').focus(); await page.evaluate(() => window.controlsHarness.handle.clear());
+  assert.equal(await part('facet').evaluate(node => node === document.activeElement && !node.disabled), true);
+  await part('input').focus(); await page.evaluate(() => window.controlsHarness.handle.clear());
+  assert.equal(await part('input').evaluate(node => node === document.activeElement), true);
+  assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), before);
+  await open({ messages: { clear: 'Suche und Filter leeren', idle: 'Zuerst einen Suchbegriff eingeben.' } });
+  await page.evaluate(() => { const messages = window.controlsHarness.options.messages; messages.clear = 'Changed outside'; messages.idle = 'Changed outside'; });
+  assert.equal(await root().getByRole('button', { name: 'Suche und Filter leeren', exact: true }).textContent(), 'Suche und Filter leeren');
+  assert.equal(await part('status').textContent(), 'Zuerst einen Suchbegriff eingeben.');
+  assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), 0);
+  observation('query-first guidance / keyboard reset / surviving focus', { mountAndEmptySubmitCalls: 0, resetCalls: 0, focus: ['reset button', 'facet', 'input'], guidance });
+});
+
 for (const host of ['direct', 'worker']) for (const strategy of ['source', 'offsets']) {
   test(`${host}/${strategy}: native full-batch IDs, exact counts, snippets and filters agree with hand fixtures`, async () => {
     await open({}, { host, strategy }); await search();
@@ -145,14 +178,23 @@ test('filter-only browsing, zero projected selections and clear retain coherent 
   await search(); await part('facet').focus(); await selectCategory('Guide');
   assert.equal(await part('facet').evaluate(node => node === document.activeElement), true);
   await activate('Load more'); assert.deepEqual(await ids(), expected.slice(0, 7));
+  await page.evaluate(() => { window.controlsHarness.state.failNext = true; }); await search();
+  assert.match(await part('status').textContent(), /WORK_LIMIT_EXCEEDED/);
+  assert.equal(await part('input').inputValue(), 'source prov');
+  assert.match(await part('facet').locator('option:checked').textContent(), /Guide/);
+  assert.equal(await part('facet').isEnabled(), true);
+  await activate('Retry search'); assert.deepEqual(await ids(), expected.slice(0, 5));
+  const retried = await page.evaluate(() => window.controlsHarness.calls().filter(call => !call.evidence).at(-1));
+  assert.ok(retried.query.children.some(query => query.kind === 'eq' && query.field === 'category' && query.value === 'Guide'));
+  assert.equal(retried.options.offset, 0);
   await page.evaluate(() => window.controlsHarness.recategorize()); await search();
   assert.deepEqual(await ids(), []);
   const selected = await part('facet').evaluate(node => node.selectedOptions[0].textContent);
   assert.match(selected, /Guide/); assert.match(selected, /not in displayed/);
-  await root().getByRole('button', { name: 'Clear', exact: true }).click();
+  await root().getByRole('button', { name: 'Clear search and filters', exact: true }).click();
   assert.equal(await part('clear').evaluate(node => node === document.activeElement), true);
   assert.equal(await part('facet').inputValue(), ''); assert.equal(await part('input').inputValue(), '');
-  assert.equal(await part('status').textContent(), 'Enter a search term.');
+  assert.equal(await part('status').textContent(), 'Enter a search term to see filter choices.');
   await search(); await selectCategory('Reference');
   await part('input').fill(''); await part('input').press('Enter'); await settled();
   assert.deepEqual(await ids(), expected.slice(0, 5)); assert.match(await part('status').textContent(), /12/);
@@ -233,7 +275,8 @@ test('ignored-abort evidence and pending Load more cannot publish after clear, n
   await page.evaluate(() => { window.controlsHarness.state.holdMain = true; });
   await part('load-more').click(); await page.waitForFunction(() => window.controlsHarness.state.pending.length === 1);
   await page.evaluate(() => { window.controlsHarness.handle.clear(); window.controlsHarness.release(); }); await page.waitForTimeout(50);
-  assert.deepEqual(await ids(), []); assert.equal(await part('status').textContent(), 'Enter a search term.');
+  assert.deepEqual(await ids(), []); assert.equal(await part('status').textContent(), 'Enter a search term to see filter choices.');
+  assert.deepEqual(await part('facet').locator('option').allTextContents(), ['All']);
   await search(); await page.evaluate(() => { window.controlsHarness.state.holdMain = true; });
   await part('load-more').click(); await page.waitForFunction(() => window.controlsHarness.state.pending.length === 1);
   const destroyed = await page.evaluate(async () => {

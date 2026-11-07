@@ -118,7 +118,7 @@ test('exact installed Astro inline starter builds root/help bases with real sear
       await page.getByLabel('Topic', { exact: true }).selectOption({ label: 'Tools (2)' });
       await page.waitForFunction(() => document.querySelectorAll('[data-raveldex-inline-result]').length === 2);
       assert.deepEqual([...(await resultIDs(page))].sort(), ['sewing', 'woodworking']);
-      await page.getByRole('button', { name: 'Clear search', exact: true }).click();
+    await page.getByRole('button', { name: 'Clear search and filters', exact: true }).click();
       await search(page, 'bobbin'); assert.deepEqual(await resultIDs(page), ['sewing']);
       const link = page.locator('a.raveldex-inline__result-title').first();
       assert.equal(await link.getAttribute('href'), server.origin + base + 'guide/sewing/');

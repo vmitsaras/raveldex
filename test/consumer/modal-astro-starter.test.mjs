@@ -120,7 +120,7 @@ test('copied paired installed Astro modal builds and previews actual encoded hea
     await page.waitForFunction(() => document.querySelectorAll('[data-raveldex-inline-result]').length === 2);
     assert.match(await page.getByLabel('Topic', { exact: true }).locator('option:checked').innerText(), /^Tools/);
     assert.equal(requests.filter(x => x.endsWith('/manifest.json')).length, 1, 'Ready reopen reuses its owned source index');
-    await page.getByRole('button', { name: 'Clear search', exact: true }).click();
+    await page.getByRole('button', { name: 'Clear search and filters', exact: true }).click();
     await search(page, 'purple'); assert.deepEqual(await ids(page), ['sewing']);
     const link = page.getByRole('link', { name: 'Wind the bobbin', exact: true });
     const target = server.origin + base + 'guide/sewing/#%25%23caf%C3%A9-bobbin';
