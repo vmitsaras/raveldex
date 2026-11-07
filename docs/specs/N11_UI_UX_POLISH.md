@@ -8,6 +8,8 @@ The outcome is Raveldex's own clear, recognizable, host-friendly consumer experi
 
 ## Raveldex design direction and finite acceptance
 
+RX-9101's [consumer identity and interaction contract](N11_CONSUMER_CONTRACT.md) selects **Reading index**: a readable result column, strong linked titles, available context, quiet excerpts and optional explanation. It reconciles F01–F11 against current source/test coverage, maps existing CSS roles to concrete implementation targets, and specifies the five surfaces' shared states and intentional differences. Its design targets are for subsequent delivery tasks; they are not a claim that new styling or copy has shipped.
+
 The [November 7 amendment](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) governs current scope. RX-9101 selects one implementable direction from at most two initial alternatives; RX-9107 applies it. Use restrained readable surfaces, clear title/source/snippet hierarchy, compact optional context, a single configurable accent, deliberate typography/spacing/density and distinct match-versus-focus treatment. Supporting evidence is progressive disclosure, not default numeric/debug chrome. Reuse existing Raveldex identity without importing its dense technical Workbench into consumer interfaces.
 
 The five existing presentations should feel related while respecting their different native interactions. Tokens/classes remain scoped and host-overridable; CSS is optional, fonts/assets are local or host-selected, and no new framework, renderer API or mandatory Inspector is introduced. Originality is not permission to invent unfamiliar editing, focus or link behavior. Record the rationale and review actual states; changing a Pagefind logo/color is not an original design acceptance.
@@ -36,7 +38,7 @@ Current source anchors include `src/addons/ui/inline.ts`, `inline-render.ts`, `i
 | F10: Captured display data and repeated mounts need clearer CMS refresh/remount and state-preservation guidance. | Medium | RX-9111 |
 | F11: A migration-led brief does not define a recognizable Raveldex visual identity. Define result hierarchy, density, typography, spacing and state treatment rather than emulate a competitor. | High | RX-9101, RX-9107, RX-9112 |
 
-RX-9101 establishes the scenario/state contract; RX-9112 verifies the complete outcome. All tasks start planned with no completion evidence.
+RX-9101 establishes the scenario/state contract; its [local acceptance and independent review](../evidence/RX-9101.md) records the selected design without changing runtime behavior. The remaining eleven tasks stay planned; RX-9112 verifies the complete delivered outcome. Canonical and remote tracking synchronization have distinct scopes recorded in that evidence.
 
 ## Personas and observable scenarios
 

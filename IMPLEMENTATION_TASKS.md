@@ -2728,7 +2728,7 @@ None recorded. A future report destination in the verification steps is not evid
 
 **Define Raveldex identity and consumer interaction contract**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/81)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/81)
 
 **Dependencies:** [RX-7006](IMPLEMENTATION_TASKS.md#rx-7006), [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
@@ -2740,7 +2740,7 @@ Select one implementable Raveldex-first consumer identity and shared state contr
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [N11_CONSUMER_CONTRACT.md](docs/specs/N11_CONSUMER_CONTRACT.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2758,7 +2758,10 @@ Select one implementable Raveldex-first consumer identity and shared state contr
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9101.md](docs/evidence/RX-9101.md)
+- [docs/evidence/RX-9101/review.md](docs/evidence/RX-9101/review.md)
+- [docs/evidence/RX-9101/palette.json](docs/evidence/RX-9101/palette.json)
+- [docs/evidence/RX-9101/planning-tests.txt](docs/evidence/RX-9101/planning-tests.txt)
 
 
 ## RX-9102

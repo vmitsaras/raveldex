@@ -6,6 +6,8 @@ The [canonical roadmap](../planning/roadmap.json) owns task status, dependencies
 
 ## RX-6001 frozen foundation contract
 
+For subsequent N11 consumer polish, the selected [Raveldex identity and interaction contract](N11_CONSUMER_CONTRACT.md) defines visual roles and per-surface state expectations. It preserves these shipped foundation/API contracts: inline/modal snippets or sections, title-only dropdown/base directory, authored card metadata, native links, optional CSS and explicit ownership. Its proposed visual/copy changes belong to the later N11 delivery tasks; the API guide continues to describe current runtime behavior.
+
 The additive entry is `/addons/ui/inline`, exporting `mountRaveldexInline` and types `InlineUIOptions`, `InlineUIHandle`, `InlineUIMessages`, `UIDocument`. CSS is `/addons/ui/inline.css`. The legacy `/addons/ui` export stays unchanged. [The API guide](../api/HOSTS.md#inline-search-foundation) defines the exact options, message keys/default policies, safe display capture, initial public style properties and handle methods.
 
 The foundation accepts only root/borrowed engine/display documents, optional text-or-prefix mode, page size, debounce and captured plain-text messages. Prefix is its default; idle makes no search request. It renders one bounded title/link window with exact native total/displayed count, no diagnostics or required optional providers. Complete paging, snippets, filters, rich presentation and installed starters are later slices. Existing-root duplicate mounts return the same handle; conflicting legacy/inline ownership is explicitly rejected. Both UI entry graphs remain optional and inert on import. No core, artifact, dependency or legacy-default change is authorized by this foundation contract.

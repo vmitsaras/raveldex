@@ -1,5 +1,11 @@
 # Project context
 
+## RX-9101 consumer contract — 7 November 2026
+
+After the requested fast-forward to `038385b`, [RX-9101](docs/evidence/RX-9101.md) selects the [Reading index consumer identity and interaction contract](docs/specs/N11_CONSUMER_CONTRACT.md). F01–F11, concrete visual roles, representative content and the five surfaces' complete state/keyboard/focus/ownership rules are reconciled against current source/tests. Two read-only subagents supplied independent source and contract reviews; all material findings were corrected. The 54 existing planning/tracking/native-subissue tests and applicable planner/generated/reference checks pass. This accepts the specification locally, not new styling, copy, browser or AT behavior. Source/CSS/tests/engine/dependencies and frozen N10 evidence remain unchanged; no collector ran.
+
+RX-9102 is the next N11 task; RX-9103–RX-9107/RX-9109–RX-9111 are also eligible under the graph. RX-9108 still waits for its message dependencies and RX-9112 for all delivery/decision tasks. RX-9006 remains independently planned. Changes are local and uncommitted; GitHub tracking still describes committed `main` until normal explicitly requested commit/push/sync. No publication is included. Earlier checkpoints retain their dated scope.
+
 ## Active plan update — 7 November 2026
 
 The owner requested proportionate RX-9006 verification and a distinct Raveldex consumer identity. [The amendment](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) changes the remaining acceptance scope and removes N11's dependency on the full N10 performance decision. RX-9006 remains uncompleted and returns to planned evidence/support-envelope reconciliation; RX-9101 is independently ready. Existing 146/204 and 22-context preflight records remain separate. No 450-minute run, recovery capacity proof, UI implementation or fresh runtime qualification occurred in this planning update. Subsequent historical status sections do not override this current instruction.

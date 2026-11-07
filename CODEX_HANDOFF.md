@@ -1,5 +1,11 @@
 # Codex handoff
 
+## Next N11 slice: RX-9102 — 7 November 2026
+
+RX-9101 is complete locally with [acceptance/review evidence](docs/evidence/RX-9101.md). Read the [selected Reading index contract](docs/specs/N11_CONSUMER_CONTRACT.md), [N11 scope](docs/specs/N11_UI_UX_POLISH.md), current task criteria and `npm run handoff:next`. The next N11 slice is **RX-9102: lead with Raveldex adoption and separate migration guidance**. Other dependency-ready N11 delivery tasks may be selected explicitly; none is implemented by this specification. Preserve per-surface idle/browse, reset, paging, capture and owner boundaries. No new universal source/snippet row, renderer or locale API is selected.
+
+The requested pull fast-forwarded clean `main` to `038385b`; new RX-9101 docs/roadmap changes remain local and uncommitted. Existing 54 planning/tracking/native-subissue tests pass; final planner/generated/local-reference and preservation checks are recorded in the evidence. No runtime/browser/AT test, benchmark, engine/CSS change, remote write or publication is part of this slice. RX-9006 remains independently ready by canonical priority, not the selected next UI instruction; **do not launch collectors**. Apply the November 7 change-sensitive verification policy and keep frozen N10 inputs intact.
+
 ## Current continuation — finite qualification and original UI, 7 November 2026
 
 Read [the active scope amendment](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) and run `npm run handoff:next`. **RX-9006 and RX-9101 are independently ready.** RX-9006 starts with existing-evidence/support-envelope reconciliation; the 450-minute full matrix is not the next instruction. Do not launch any collector automatically. RX-9101 establishes Raveldex's own visual/interaction identity using accepted RX-7006/RX-9003, without waiting for RX-9007. Pagefind is an optional migration reference, not a visual/API/feature-parity target.
