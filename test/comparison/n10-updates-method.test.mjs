@@ -16,7 +16,7 @@ const traceCache=new WeakMap();
 function traceFor(s){let t=traceCache.get(s);if(!t){t={caseKey:s.caseKey,batch:s.batch,beforeRecordsSha256:updateHash(s.beforeRecords),afterRecordsSha256:updateHash(s.afterRecords),calls:s.calls,preparationCalls:s.preparationCalls,vocabularyRule:s.vocabularyRule};traceCache.set(s,t);}return t;}
 // Synthetic structural inputs isolate the aggregator's rejection policy. They
 // are never engine observations, persisted measurements or semantic acceptance.
-function structuralFixture(){return planUpdates('full').map((job,index)=>{
+function structuralFixture(profile='full'){return planUpdates(profile).map((job,index)=>{
  const a=manifest.artifacts.find(a=>a.role===job.role),row={kind:'rx9005-update-child-v1',...job,pid:10000+index,outcome:'Collected',artifactSha256:a.sha256,artifactSource:a.source,packageInventorySha256:updateHash([...a.members].sort((a,b)=>a.path.localeCompare(b.path))),contractSha256:UPDATE_CONTRACT_SHA256,artifactManifestSha256:manifestSha256,harnessSha256,configurationSha256:configurationHash(job.configuration),identity:workloadForUpdate(job.size).identity,runtime:{node:process.version,execArgv:[]},packageMetadataSha256:a.members.find(x=>x.path==='package.json').sha256,notApplicable:notApplicableCasesFor(job.size),samples:[],observations:[],warmups:[],states:{[SHA]:{synthetic:true}},traces:{},preparation:[{purpose:'initialize-native-factory-and-providers',outcome:'Pass'}],checkpoints:[{scope:'synthetic structural fixture only'}]};
  for(const d of casesFor(job.size))for(const warm of [false,true])for(let repetition=0;repetition<(warm?warmupsFor(job,d):repetitionsFor(job,d));repetition++){
   const s=scenarioFor(d,job.size,{repetition}),trace=traceFor(s),traceSha256=updateHash(trace),beforeRevision=50;row.traces[traceSha256]=trace;
@@ -29,7 +29,7 @@ function structuralFixture(){return planUpdates('full').map((job,index)=>{
 });}
 let base;
 function fixture(){return base??=structuralFixture();}
-function validate(rows){return validateUpdateRows(rows,{profile:'full',manifest,manifestSha256,harnessSha256});}
+function validate(rows,profile='full'){return validateUpdateRows(rows,{profile,manifest,manifestSha256,harnessSha256});}
 function corrupt(action,index=0){const rows=[...fixture()];rows[index]=structuredClone(rows[index]);action(rows[index],rows);assert.throws(()=>validate(rows));}
 
 test('literal full update cohort has 144 fresh slots, exact native call granularity and explicit inapplicable coverage',()=>{
@@ -105,7 +105,12 @@ test('selected broad-page policy labels actual offsets and rejects forged middle
  const wrongPage=function*(r,q,o){return yield*executeSearch(r,q,{...o,offset:0});};assert.throws(()=>createUpdateVerifier({executeSearch:wrongPage,configuration:'source-positions',size:10000,pageSize:100}).inspect(root,records,2));
 });
 test('a refused sequence retains its completed atomic prefix and cannot assert rollback',()=>{
- const rows=[...fixture()];rows[0]=structuredClone(rows[0]);const item=rows[0].samples.find(x=>x.id==='replace-existing-records'&&x.batch===32);item.receipts=item.receipts.slice(0,2);item.prefixStates=item.prefixStates.slice(0,2);item.completedCalls=2;item.attemptedCalls=3;item.afterRevision=item.beforeRevision+2;item.atomicCallsVerified=2;item.outcome='Refused';item.error={name:'RaveldexError',code:'WORK_LIMIT_EXCEEDED',details:{path:'work'},message:'synthetic structural refusal fixture'};item.failedCallPreservedAuthoritativePrefix=true;item.callWindows=item.callWindows.slice(0,3);item.callWindows[2].outcome='Refused';assert.equal(validate(rows).normalPublicCalls,92347);item.failedCallPreservedAuthoritativePrefix=false;assert.throws(()=>validate(rows));
+ // The pilot contains this exact B32 case; the full144 cohort and its exact
+ // totals are already checked above. No second successful full scan is needed.
+ const rows=structuralFixture('pilot');rows[0]=structuredClone(rows[0]);const item=rows[0].samples.find(x=>x.id==='replace-existing-records'&&x.batch===32);item.receipts=item.receipts.slice(0,2);item.prefixStates=item.prefixStates.slice(0,2);item.completedCalls=2;item.attemptedCalls=3;item.afterRevision=item.beforeRevision+2;item.atomicCallsVerified=2;item.outcome='Refused';item.error={name:'RaveldexError',code:'WORK_LIMIT_EXCEEDED',details:{path:'work'},message:'synthetic structural refusal fixture'};item.failedCallPreservedAuthoritativePrefix=true;item.callWindows=item.callWindows.slice(0,3);item.callWindows[2].outcome='Refused';
+ // Six normal pilot owners each attempt 2 * (6 single + 5 B1 + 67 B32)
+ // calls. This window attempts three of32, reducing936 by29.
+ assert.equal(validate(rows,'pilot').normalPublicCalls,907);item.failedCallPreservedAuthoritativePrefix=false;assert.throws(()=>validate(rows,'pilot'));
 });
 test('same-count live-vocabulary swap cannot reuse a stale ordered-tree cache entry',async t=>{
  const {engine,root,records}=await actualFixture(t),v=verifier();v.inspect(root,records,root.revision);const old=records.at(-1);assert.equal(typeof old.text.body,'string');const replacement={...old,text:{body:old.text.body.replace('n9key000099a','n10swapone').replace('n9key000099b','n10swaptwo').replace('n9key000099c','n10swapthree')}};assert.notEqual(replacement.text.body,old.text.body);await engine.replace(replacement);const fresh=getExecutionOwner(engine).root;assert.equal(fresh.counts.dictionaryEntries,root.counts.dictionaryEntries);const stale=patch(fresh,['fields','body','order'],()=>root.fields.body.order);const expected=[...records.slice(0,-1),replacement];assert.throws(()=>v.inspect(stale,expected,fresh.revision));
