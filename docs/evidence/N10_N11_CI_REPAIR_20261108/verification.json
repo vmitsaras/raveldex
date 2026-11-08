@@ -1,0 +1,110 @@
+{
+  "kind": "raveldex-supervisor-ci-fixture-repair-v1",
+  "date": "2026-11-08",
+  "sourceParent": "fda574ebf351b5c7a1e2abd7f225126c201bfa7b",
+  "changedExecutableInput": "test/comparison/n10-host-recovery-supervisor.test.mjs",
+  "beforeTestSHA256": "23e47e0d3ab0abf5fd015a0e389d44433ed54c602342ff27b4147ca56a3c8a12",
+  "afterTestSHA256": "590aa90e66c82a22f5011fe4a5142d742e2d8de0fe7bd3b7a413b036f93186d7",
+  "host": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "machine": "arm64"
+  },
+  "failedHostedRun": {
+    "sha": "fda574ebf351b5c7a1e2abd7f225126c201bfa7b",
+    "run": 42471326609,
+    "jobs": [
+      {
+        "nodeMajor": 22,
+        "job": "https://github.com/vmitsaras/raveldex/actions/runs/42471326609/job/128702517159",
+        "originalVerificationLogSHA256": "7df948f59267907d399f0cbefe01ad939fccdc2f409800062244d9804bdf608f",
+        "failedCases": [
+          "caller abort terminates only its own controller group"
+        ]
+      },
+      {
+        "nodeMajor": 24,
+        "job": "https://github.com/vmitsaras/raveldex/actions/runs/42471326609/job/128702517124",
+        "originalVerificationLogSHA256": "fc63558a87762459d14a28999f8540308d552f170ec65c58e45daa6b90eb92ca",
+        "failedCases": [
+          "hung controller ignoring SIGTERM is killed and total interruption stays orchestration",
+          "hung semantic validator is bounded and cannot produce Pass",
+          "caller abort terminates only its own controller group",
+          "wrapper handshakes before fake executable spawn and forwards fd3/fd4 exactly",
+          "acknowledged wrapper and fake executable are reclaimed if controller crashes",
+          "failed wrapper acknowledgement cannot spawn the fake executable",
+          "abrupt controller death before wrapper acknowledgement never starts executable or claims cleanup proof",
+          "forged owned-process registration never signals an unrelated process",
+          "unused declared launcher cannot pass even with a valid inner terminal"
+        ]
+      }
+    ]
+  },
+  "localFocusedRuns": [
+    {
+      "node": "22.23.2",
+      "executableSHA256": "18e387c90ab8a8400183e8bdd396376e1e875b91b4c874b894dcade7b35bf572",
+      "command": "/Users/vasilis/.npm/_npx/52027bd8fc0022aa/node_modules/node/bin/node --test --test-reporter=tap --test-timeout=60000 test/comparison/n10-host-recovery-supervisor.test.mjs",
+      "result": "Pass",
+      "exitCode": 0,
+      "counts": {
+        "tests": 24,
+        "pass": 24,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "log": "node-22.tap",
+      "logSHA256": "53352e2e9e6cbebe81dde7940e6dd08d839b3bfa9a186af6f7a801eeb613b978"
+    },
+    {
+      "node": "24.21.0",
+      "executableSHA256": "4cc6e0762050bb4922c4564da3902b738d202e6b353e91c08ed1f82ac039de98",
+      "command": "/opt/homebrew/bin/node --test --test-reporter=tap --test-timeout=60000 test/comparison/n10-host-recovery-supervisor.test.mjs",
+      "result": "Pass",
+      "exitCode": 0,
+      "counts": {
+        "tests": 24,
+        "pass": 24,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "log": "node-24.tap",
+      "logSHA256": "08002aeea0556000f1861e222052b3589c8840a173b36243f465a86c81ee59e4"
+    }
+  ],
+  "preservation": {
+    "files": 698,
+    "mismatches": [],
+    "supervisorSHA256": "b36dd7e25ad3d53bb01917d621eb9292da87130f0395d3521cf7b1a490dda5b0",
+    "engineRuntimeBuildDependencyAndPolicyInputsUnchanged": true
+  },
+  "independentReview": {
+    "reviewer": "supervisor_cleanup_review",
+    "result": "Clear: phase readiness, pre-spawn Unconfirmed, actual group cleanup, foreign-PID survival, no detached polling timer and no relaxed safety checks"
+  },
+  "hostedQualification": "Not claimed by local macOS runs; verify the containing pushed commit in ordinary Node22/24 GitHub Actions",
+  "benchmarksOrCollectorsLaunched": 0,
+  "localBuilds": 0,
+  "localFullRuntimeSuites": 0,
+  "planningChecks": [
+    {
+      "command": "npm run handoff:check",
+      "result": "Pass",
+      "exitCode": 0,
+      "scope": "80 tasks / 12 milestones; graph and evidence references"
+    },
+    {
+      "command": "npm run docs:check",
+      "result": "Pass",
+      "exitCode": 0,
+      "scope": "Three generated views; 336 Markdown files"
+    },
+    {
+      "command": "git diff --check",
+      "result": "Pass",
+      "exitCode": 0
+    }
+  ]
+}

@@ -9,6 +9,10 @@ import {fileURLToPath} from 'node:url';
 import {superviseRecoveryAttempt,RECOVERY_SUPERVISOR_REVISION} from '../../bench/n10/host-recovery-supervisor.mjs';
 
 // Short Node fixture processes only. No native engine, browser or collector.
+// These bounds include pinning the Node executable and starting child processes
+// while other test files run. They do not change any named collector policy.
+const fixtureBudgetMs=15000,fixtureReserveMs=3000,fixtureWorkMs=fixtureBudgetMs-fixtureReserveMs;
+const interruptionBudgetMs=10000;
 const moduleURL=new URL('../../bench/n10/host-recovery-supervisor.mjs',import.meta.url);
 const modulePath=fileURLToPath(moduleURL),sha=value=>createHash('sha256').update(value).digest('hex');
 const imports=`import {childControllerHandshake,finishController,beginRecoveryContext,endRecoveryContext,createSupervisedBrowserLauncher} from ${JSON.stringify(moduleURL.href)};import {writeFile,mkdir,readFile} from 'node:fs/promises';import {spawn} from 'node:child_process';import {createHash} from 'node:crypto';import {createConnection} from 'node:net';import {join} from 'node:path';const context=await childControllerHandshake();`;
@@ -17,12 +21,12 @@ async function fixture(body,options={}){
   const directory=await realpath(await mkdtemp(join(tmpdir(),'rx9006-supervisor-test-'))),entry=join(directory,'controller.mjs'),auth=join(directory,'authorization.json');
   await writeFile(entry,imports+body);await writeFile(auth,'{"scope":"fixture-only"}\n');
   const paths=[entry,modulePath,auth,await realpath(process.execPath)],pins=await Promise.all(paths.map(async path=>({path,sha256:sha(await readFile(path))})));
-  return {directory,entry,output:join(directory,'attempt'),pins,authorizationSha256:sha(await readFile(auth)),budgetMs:3500,shutdownReserveMs:1000,terminationGraceMs:150,
+  return {directory,entry,output:join(directory,'attempt'),pins,authorizationSha256:sha(await readFile(auth)),budgetMs:fixtureBudgetMs,shutdownReserveMs:fixtureReserveMs,terminationGraceMs:300,
     identity:{kind:'fake-only',revision:RECOVERY_SUPERVISOR_REVISION},validateInner:inner=>assert.equal(inner.guards,'Pass'),...options};
 }
 async function run(body,options={},check){const setup=await fixture(body,options);try{const report=await superviseRecoveryAttempt(setup);if(check)await check(report,setup);return report;}finally{await rm(setup.directory,{recursive:true,force:true});}}
 const supported=['darwin','linux'].includes(process.platform);
-const scoped=(name,call)=>test(name,{skip:!supported,timeout:15000},call);
+const scoped=(name,call)=>test(name,{skip:!supported,timeout:30000},call);
 const alive=pid=>{try{process.kill(pid,0);return true;}catch(error){if(error.code==='ESRCH')return false;throw error;}};
 function liveWork(pid){try{return !execFileSync('/bin/ps',['-p',String(pid),'-o','stat='],{encoding:'utf8',stdio:['ignore','pipe','ignore'],timeout:1000}).trim().startsWith('Z');}catch(error){if(error.status===1)return false;throw error;}}
 
@@ -51,8 +55,8 @@ scoped('existing output is untouched on freshness rejection',async()=>{
   const setup=await fixture(terminal);try{await mkdir(setup.output);await writeFile(join(setup.output,'human'),'keep');const report=await superviseRecoveryAttempt(setup);assert.equal(report.outcome,'Fail');assert.deepEqual(await readdir(setup.output),['human']);}finally{await rm(setup.directory,{recursive:true,force:true});}
 });
 scoped('hung controller ignoring SIGTERM is killed and total interruption stays orchestration',async()=>{
-  const report=await run(`process.on('SIGTERM',()=>{});setInterval(()=>{},1000);`,{budgetMs:1600,shutdownReserveMs:600,terminationGraceMs:120});
-  assert.equal(report.outcome,'Fail');assert.equal(report.nativeOutcome,null);assert.equal(report.cleanup,'Pass',JSON.stringify(report));assert.match(report.failure.message,/cutoff/);assert.ok(report.events.some(event=>event.signal==='SIGKILL'));assert.equal(alive(report.controller.pid),false);assert.ok(report.elapsedMs<1600);
+  const report=await run(`process.on('SIGTERM',()=>{});setInterval(()=>{},1000);`,{budgetMs:interruptionBudgetMs});
+  assert.equal(report.outcome,'Fail');assert.equal(report.nativeOutcome,null);assert.equal(report.cleanup,'Pass',JSON.stringify(report));assert.match(report.failure.message,/cutoff/);assert.ok(report.events.some(event=>event.signal==='SIGKILL'));assert.equal(alive(report.controller.pid),false);assert.ok(report.elapsedMs<interruptionBudgetMs);
 });
 scoped('controller crash retains first exit failure and kills an inherited descendant',async()=>{
   await run(`const child=spawn(process.execPath,['-e',"process.on('SIGTERM',()=>{});setInterval(()=>{},1000)"],{stdio:'ignore'});await writeFile(join(context.output,'descendant.pid'),String(child.pid));setTimeout(()=>process.exit(7),100);`,{},async(report,setup)=>{
@@ -64,18 +68,18 @@ scoped('controller crash retains first exit failure and kills an inherited desce
   });
 });
 scoped('external context timer stops hung controller before total bound',async()=>{
-  const report=await run(`await beginRecoveryContext({key:'fixture-context'});process.on('SIGTERM',()=>{});setInterval(()=>{},1000);`,{contextPolicy:{workCutoffMs:2300,perContextWatchdogMs:180}});
+  const report=await run(`await beginRecoveryContext({key:'fixture-context'});process.on('SIGTERM',()=>{});setInterval(()=>{},1000);`,{contextPolicy:{workCutoffMs:fixtureWorkMs,perContextWatchdogMs:180}});
   assert.equal(report.outcome,'Fail');assert.match(report.failure.message,/context watchdog/);assert.equal(report.nativeOutcome,null);assert.equal(report.events.filter(event=>event.type==='context-end').length,0);assert.equal(report.cleanup,'Pass',JSON.stringify(report));
 });
 scoped('complete context returns same authoritative monotonic ledger values',async()=>{
-  await run(`const admitted=await beginRecoveryContext({key:'one'});const ended=await endRecoveryContext({key:'one'});await writeFile(join(context.output,'ledger.json'),JSON.stringify({admitted,ended}));`+terminal,{contextPolicy:{workCutoffMs:2300,perContextWatchdogMs:1000}},async(report,setup)=>{
+  await run(`const admitted=await beginRecoveryContext({key:'one'});const ended=await endRecoveryContext({key:'one'});await writeFile(join(context.output,'ledger.json'),JSON.stringify({admitted,ended}));`+terminal,{contextPolicy:{workCutoffMs:fixtureWorkMs,perContextWatchdogMs:1000}},async(report,setup)=>{
     assert.equal(report.outcome,'Pass');const {admitted,ended}=JSON.parse(await readFile(join(setup.output,'ledger.json'))),start=report.events.find(event=>event.type==='context-begin'),end=report.events.find(event=>event.type==='context-end');
-    assert.equal(admitted.dispatchElapsedMs,start.dispatchElapsedMs);assert.equal(ended.dispatchElapsedMs,start.dispatchElapsedMs);assert.equal(ended.contextElapsedMs,end.contextElapsedMs);assert.equal(ended.endElapsedMs,end.endElapsedMs);assert.ok(start.dispatchElapsedMs+1000<=2300);assert.equal(ended.contextElapsedMs,ended.endElapsedMs-ended.dispatchElapsedMs);
+    assert.equal(admitted.dispatchElapsedMs,start.dispatchElapsedMs);assert.equal(ended.dispatchElapsedMs,start.dispatchElapsedMs);assert.equal(ended.contextElapsedMs,end.contextElapsedMs);assert.equal(ended.endElapsedMs,end.endElapsedMs);assert.ok(start.dispatchElapsedMs+1000<=fixtureWorkMs);assert.equal(ended.contextElapsedMs,ended.endElapsedMs-ended.dispatchElapsedMs);
   });
 });
 scoped('serial context and wrong end identity fail closed',async()=>{
   for(const call of [`await beginRecoveryContext({key:'two'});`,`await endRecoveryContext({key:'wrong'});`]){
-    const report=await run(`await beginRecoveryContext({key:'one'});try{${call}}catch{}finishController();`,{contextPolicy:{workCutoffMs:2300,perContextWatchdogMs:1000}});assert.equal(report.outcome,'Fail');assert.equal(report.nativeOutcome,null);
+    const report=await run(`await beginRecoveryContext({key:'one'});try{${call}}catch{}finishController();`,{contextPolicy:{workCutoffMs:fixtureWorkMs,perContextWatchdogMs:1000}});assert.equal(report.outcome,'Fail');assert.equal(report.nativeOutcome,null);
   }
 });
 scoped('whole watchdog admission cannot consume reserved closing interval',async()=>{
@@ -83,11 +87,34 @@ scoped('whole watchdog admission cannot consume reserved closing interval',async
   assert.equal(report.outcome,'Fail');assert.match(report.failure.message,/full context allowance/);assert.equal(report.events.some(event=>event.type==='context-begin'),false);
 });
 scoped('hung semantic validator is bounded and cannot produce Pass',async()=>{
-  const report=await run(terminal,{budgetMs:1800,shutdownReserveMs:600,terminationGraceMs:100,validateInner:()=>new Promise(()=>{})});assert.equal(report.outcome,'Fail');assert.match(report.failure.message,/validation deadline/);assert.equal(report.cleanup,'Pass',JSON.stringify(report));
+  const report=await run(terminal,{budgetMs:interruptionBudgetMs,validateInner:()=>new Promise(()=>{})});assert.equal(report.outcome,'Fail');assert.match(report.failure.message,/validation deadline/);assert.equal(report.cleanup,'Pass',JSON.stringify(report));assert.ok(report.elapsedMs<interruptionBudgetMs);
+});
+scoped('abort during input validation remains a pre-spawn interruption without cleanup proof',async()=>{
+  const control=new AbortController(),setup=await fixture(terminal,{signal:control.signal});let observed=false;
+  const pin=setup.pins[0];setup.pins[0]={get path(){observed=true;control.abort();return pin.path;},sha256:pin.sha256};
+  try{
+    const report=await superviseRecoveryAttempt(setup);
+    assert.equal(observed,true);assert.equal(report.outcome,'Fail');assert.equal(report.nativeOutcome,null);assert.match(report.failure.message,/caller aborted/);
+    assert.equal(report.controller,undefined);assert.equal(report.childExit,null);assert.deepEqual(report.ownedGroups,[]);assert.deepEqual(report.launchers,[]);assert.deepEqual(report.events,[]);assert.equal(report.cleanup,'Unconfirmed');
+    assert.equal(JSON.parse(await readFile(join(setup.output,'supervisor.json'))).cleanup,'Unconfirmed');
+  }finally{await rm(setup.directory,{recursive:true,force:true});}
 });
 scoped('caller abort terminates only its own controller group',async()=>{
-  const control=new AbortController(),setup=await fixture(`setInterval(()=>{},1000);`,{signal:control.signal});const other=spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{stdio:'ignore'});
-  try{setTimeout(()=>control.abort(),250);const report=await superviseRecoveryAttempt(setup);assert.equal(report.outcome,'Fail');assert.match(report.failure.message,/caller aborted/);assert.equal(report.cleanup,'Pass',JSON.stringify(report));assert.equal(alive(other.pid),true);}finally{other.kill('SIGKILL');await new Promise(resolve=>other.once('exit',resolve));await rm(setup.directory,{recursive:true,force:true});}
+  const control=new AbortController(),setup=await fixture(`await writeFile(join(context.output,'controller-ready'),String(process.pid));setInterval(()=>{},1000);`,{signal:control.signal});const other=spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{stdio:'ignore'});
+  const attempt=superviseRecoveryAttempt(setup);let report,settled=false;
+  void attempt.then(value=>{report=value;settled=true;},()=>{settled=true;});
+  try{
+    const ready=join(setup.output,'controller-ready');let pid;
+    const until=performance.now()+fixtureWorkMs;
+    while(!settled&&performance.now()<until){
+      try{const value=Number(await readFile(ready,'utf8'));if(Number.isSafeInteger(value)&&value>1){pid=value;break;}}catch(error){if(error.code!=='ENOENT')throw error;}
+      await new Promise(resolve=>setTimeout(resolve,20));
+    }
+    assert.ok(pid,'Controller did not become ready: '+JSON.stringify(report));
+    control.abort();report=await attempt;
+    assert.equal(report.outcome,'Fail');assert.equal(report.nativeOutcome,null);assert.match(report.failure.message,/caller aborted/);assert.equal(report.cleanup,'Pass',JSON.stringify(report));
+    assert.equal(report.controller.pid,pid);assert.equal(report.ownedGroups.length,1);assert.equal(report.ownedGroups[0].pid,pid);assert.ok(report.events.some(event=>event.type==='signal'&&event.pid===pid));assert.equal(liveWork(pid),false);assert.equal(alive(other.pid),true);
+  }finally{control.abort();await attempt.catch(()=>{});other.kill('SIGKILL');await new Promise(resolve=>other.once('exit',resolve));await rm(setup.directory,{recursive:true,force:true});}
 });
 scoped('already aborted signal refuses controller spawn',async()=>{
   const signal=AbortSignal.abort();const report=await run(terminal,{signal});assert.equal(report.outcome,'Fail');assert.equal(report.controller,undefined);
@@ -100,7 +127,7 @@ scoped('wrapper handshakes before fake executable spawn and forwards fd3/fd4 exa
   await run(body,{},async(report,setup)=>{assert.equal(report.outcome,'Pass');assert.equal(report.ownedGroups.length,2);assert.equal(report.launchers.length,1);assert.equal(report.events.filter(event=>event.type==='owned-registration').length,1);assert.deepEqual(JSON.parse(await readFile(join(setup.output,'forwarded.json'))),{a:'three',b:'four',code:0});});
 });
 scoped('acknowledged wrapper and fake executable are reclaimed if controller crashes',async()=>{
-  const body=`const hash=createHash('sha256').update(await readFile(process.execPath)).digest('hex'),wrapper=await createSupervisedBrowserLauncher({executablePath:process.execPath,executableSha256:hash});const child=spawn(wrapper,['-e',"require('node:fs').writeFileSync(process.argv[1],String(process.pid));process.on('SIGTERM',()=>{});setInterval(()=>{},1000)",join(context.output,'fake.pid')],{detached:true,stdio:['ignore','ignore','ignore','pipe','pipe']});for(let i=0;i<100;i++){try{await readFile(join(context.output,'fake.pid'));break;}catch{}await new Promise(resolve=>setTimeout(resolve,10));}process.exit(9);`;
+  const body=`const hash=createHash('sha256').update(await readFile(process.execPath)).digest('hex'),wrapper=await createSupervisedBrowserLauncher({executablePath:process.execPath,executableSha256:hash});const child=spawn(wrapper,['-e',"process.on('SIGTERM',()=>{});require('node:fs').writeFileSync(process.argv[1],String(process.pid));setInterval(()=>{},1000)",join(context.output,'fake.pid')],{detached:true,stdio:['ignore','ignore','ignore','pipe','pipe']});let ready=false;const until=Date.now()+5000;while(Date.now()<until){try{await readFile(join(context.output,'fake.pid'));ready=true;break;}catch(error){if(error.code!=='ENOENT')throw error;}await new Promise(resolve=>setTimeout(resolve,10));}if(!ready)throw Error('Fake executable readiness deadline');process.exit(9);`;
   await run(body,{},async(report,setup)=>{assert.equal(report.outcome,'Fail');assert.equal(report.cleanup,'Pass',JSON.stringify(report));assert.equal(report.ownedGroups.length,2);assert.ok(report.events.some(event=>event.signal==='SIGKILL'));assert.equal(liveWork(Number(await readFile(join(setup.output,'fake.pid'),'utf8'))),false,'fake executable cannot still execute');for(const group of report.ownedGroups)assert.equal(liveWork(group.pid),false,'registered group leader cannot still execute');});
 });
 scoped('failed wrapper acknowledgement cannot spawn the fake executable',async()=>{
@@ -124,8 +151,8 @@ scoped('forged owned-process registration never signals an unrelated process',as
   try{const report=await run(body,{env:{FIXTURE_FOREIGN_PID:String(other.pid)}});assert.equal(report.outcome,'Fail');assert.equal(report.ownedGroups.length,1);assert.equal(liveWork(other.pid),true);assert.match(report.failure.message,/owned direct-child group leader/);}finally{other.kill('SIGKILL');await new Promise(resolve=>other.once('exit',resolve));}
 });
 scoped('non-regular input pin is rejected before any blocking read or controller spawn',async()=>{
-  const setup=await fixture(terminal,{budgetMs:1600,shutdownReserveMs:600,terminationGraceMs:100}),fifo=join(setup.directory,'blocked-pin');execFileSync('/usr/bin/mkfifo',[fifo]);setup.pins.push({path:fifo,sha256:sha('released')});
-  try{const report=await superviseRecoveryAttempt(setup);assert.equal(report.outcome,'Fail');assert.equal(report.controller,undefined);assert.match(report.failure.message,/regular file/);assert.ok(report.elapsedMs<1600);}finally{await rm(setup.directory,{recursive:true,force:true});}
+  const setup=await fixture(terminal,{budgetMs:interruptionBudgetMs}),fifo=join(setup.directory,'blocked-pin');execFileSync('/usr/bin/mkfifo',[fifo]);setup.pins.push({path:fifo,sha256:sha('released')});
+  try{const report=await superviseRecoveryAttempt(setup);assert.equal(report.outcome,'Fail');assert.equal(report.controller,undefined);assert.match(report.failure.message,/regular file/);assert.ok(report.elapsedMs<interruptionBudgetMs);}finally{await rm(setup.directory,{recursive:true,force:true});}
 });
 scoped('unused declared launcher cannot pass even with a valid inner terminal',async()=>{
   let validated=false;

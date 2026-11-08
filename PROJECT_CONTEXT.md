@@ -1,5 +1,9 @@
 # Project context
 
+## Recovery-supervisor CI fixture repair — 8 November 2026
+
+The [CI follow-up](docs/evidence/N10_N11_CI_REPAIR_20261108.md) fixes phase/timing assumptions in the fake-process supervisor tests: post-handshake abort readiness, a separate conservative pre-spawn abort, handler-before-ready ordering and bounded fixture startup headroom. Local Node 22.23.2 and 24.21.0 each pass24/24, with independent review clear. Supervisor, collector policies, engine, dependencies and all347 runtime members remain unchanged. Hosted qualification belongs to the containing pushed commit's actual Ubuntu Node22/24 results; the old failed run remains failed. No benchmark or collector is selected, and N10/N11 acceptance/tracking states stay complete.
+
 ## Accepted N10 / N11 source snapshot — 8 November 2026
 
 This source snapshot includes the completed N10 engineering review and N11 consumer work, their actual evidence and closed tracking. The owner explicitly requested committing/pushing it and checking alignment. [Source handoff](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md) records the reviewed scope, exact accepted input identities and local checks. Earlier uncommitted/tracking-only statements below remain dated checkpoints.

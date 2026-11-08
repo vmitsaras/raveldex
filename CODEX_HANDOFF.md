@@ -1,5 +1,9 @@
 # Codex handoff
 
+## Recovery-supervisor CI fixture repair — 8 November 2026
+
+Read the [CI follow-up](docs/evidence/N10_N11_CI_REPAIR_20261108.md) for the original Node22/24 failure provenance and test-only repair. Both local focused suites pass24/24; preserve actual owned-group cleanup, foreign-process survival, SIGKILL, forbidden-spawn and truthful pre-spawn Unconfirmed assertions. Supervisor/collector policy/engine/build/dependency bytes remain unchanged, so their passing evidence is reused. Confirm hosted Ubuntu Node22/24 on the containing pushed commit separately; local macOS patch versions are not that evidence. N10/N11 and all80 accepted tasks remain complete; do not reopen them or start optional benchmarks. No release, registry publication, deployment or engine change is selected.
+
 ## N10 / N11 accepted source snapshot — 8 November 2026
 
 The completed work and its reviewed evidence are included in this source snapshot. [Source handoff](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md) records commit scope, preserved artifact identities and actual local checks. Use the containing Git commit/main ref and hosted tracker results for delivery status; historical uncommitted statements below describe their original checkpoints.
