@@ -84,7 +84,7 @@
     "reviewer": "supervisor_cleanup_review",
     "result": "Clear: phase readiness, pre-spawn Unconfirmed, actual group cleanup, foreign-PID survival, no detached polling timer and no relaxed safety checks"
   },
-  "hostedQualification": "Not claimed by local macOS runs; verify the containing pushed commit in ordinary Node22/24 GitHub Actions",
+  "hostedQualification": "Pass: exact source a19f1e3ed29afacd653cc51951751721a0bde426, run42514000024, Node22.23.4/24.22.2 Linux x64; local macOS evidence remains separate",
   "benchmarksOrCollectorsLaunched": 0,
   "localBuilds": 0,
   "localFullRuntimeSuites": 0,
@@ -172,5 +172,56 @@
       }
     ],
     "independentReview": "Clear: supervisor_cleanup_review; same validator branch and hand-derived count907; full144 exact totals unchanged"
+  },
+  "finalHostedQualification": {
+    "sourceCommit": "a19f1e3ed29afacd653cc51951751721a0bde426",
+    "run": 42514000024,
+    "url": "https://github.com/vmitsaras/raveldex/actions/runs/42514000024",
+    "result": "Pass",
+    "summary": "hosted-42514000024/summary.json",
+    "summarySHA256": "c4650dfa1fad9c13412fe024b1203865752bd598e18ec8da7cc26a4f54ba971d",
+    "jobs": [
+      {
+        "node": "v22.23.4",
+        "job": 128832917196,
+        "result": "Pass",
+        "counts": {
+          "tests": 1724,
+          "pass": 1716,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 8
+        },
+        "verificationLogSHA256": "a0cb0a487172d9b7fc17641e813f28d29ab9cbfc0c9305e183791e925aa0098d"
+      },
+      {
+        "node": "v24.22.2",
+        "job": 128832916860,
+        "result": "Pass",
+        "counts": {
+          "tests": 1724,
+          "pass": 1716,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 8
+        },
+        "verificationLogSHA256": "1715e6ff26558f49a0dd15583f38c42e7edd66a6375b79da457c19e3d199ea2e"
+      }
+    ],
+    "recordingScope": "Nonpackaged metadata only; reuse passing exact-source checks without new runtime/build/benchmark execution"
+  },
+  "evidenceRecordingChecks": {
+    "qualifiedSourceCommit": "a19f1e3ed29afacd653cc51951751721a0bde426",
+    "newRuntimeSuites": 0,
+    "newBuilds": 0,
+    "benchmarksOrCollectorsLaunched": 0,
+    "handoffCheck": "Pass: 80 tasks / 12 milestones",
+    "docsCheck": "Pass: three generated views and local targets across336 Markdown files",
+    "diffCheck": "Pass: authored metadata plus all seven new retained evidence files; no whitespace findings",
+    "preservedInputs": "Pass: all698 captured source/method/tooling/dependency/runtime inputs and both repaired test hashes match",
+    "originalReportRetention": "Pass: all six original hosted log/report files are byte-identical; preparation log/report hashes match",
+    "trackingReadback": "Pass: all21 task/overview records and both closed milestones aligned; notes/manual labels/assignees/memberships preserved",
+    "selectedBacklog": "Complete: no remaining implementation, mandatory CI repair or tracking transition",
+    "deliveryAtRecording": "Included in the containing owner-authorized metadata-only delivery commit over qualified source; verify its pushed Git ref. Ordinary push automation remains separate from reused exact-source qualification."
   }
 }

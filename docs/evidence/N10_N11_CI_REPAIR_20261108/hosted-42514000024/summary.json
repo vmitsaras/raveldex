@@ -1,0 +1,417 @@
+{
+  "kind": "raveldex-n10-n11-final-hosted-ci-v1",
+  "sourceCommit": "a19f1e3ed29afacd653cc51951751721a0bde426",
+  "sourceTree": "351e084ae9ddad5bbc06091d2da97d9346571e02",
+  "run": {
+    "id": 42514000024,
+    "url": "https://github.com/vmitsaras/raveldex/actions/runs/42514000024",
+    "head": "a19f1e3ed29afacd653cc51951751721a0bde426",
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1,
+    "startedAt": "2026-11-08T19:14:08Z",
+    "updatedAt": "2026-11-08T19:27:56Z"
+  },
+  "verifiedAtUTC": "2026-11-08 19:35:01 UTC",
+  "result": "Pass",
+  "jobs": [
+    {
+      "id": 128832917196,
+      "url": "https://github.com/vmitsaras/raveldex/actions/runs/42514000024/job/128832917196",
+      "name": "Candidate verification (Node 22)",
+      "status": "completed",
+      "conclusion": "success",
+      "environment": {
+        "node": "v22.23.4",
+        "platform": "linux",
+        "arch": "x64",
+        "release": "7.0.0-1019-azure",
+        "npm": "10.9.9"
+      },
+      "preparation": "Pass",
+      "installedCandidate": "Pass",
+      "counts": {
+        "tests": 1724,
+        "pass": 1716,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 8
+      },
+      "stages": [
+        {
+          "name": "core/tooling/consumer/addon/method fixtures",
+          "tests": 1462,
+          "pass": 1454,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 8
+        },
+        {
+          "name": "UI",
+          "tests": 204,
+          "pass": 204,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "worker adapter",
+          "tests": 24,
+          "pass": 24,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "IndexedDB adapter",
+          "tests": 30,
+          "pass": 30,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "packed migration browser",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "Astro browser",
+          "tests": 3,
+          "pass": 3,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        }
+      ],
+      "workflowSteps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Record available runner storage",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run node node_modules/playwright-core/cli.js install --with-deps chromium",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Verify and prepare the private candidate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run npm run tracking:preview",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Preserve separate private N5 packages from verified compiler output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Preserve candidate reports and tarball",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        }
+      ],
+      "artifact": {
+        "id": 13631141078,
+        "name": "raveldex-ci-candidate-node-22",
+        "digest": "sha256:363def0ae737ccd5ffa52c430bb752e0986dc4d10bd82193c626e6d51a9c3a33",
+        "sourceCommit": "a19f1e3ed29afacd653cc51951751721a0bde426",
+        "expiresAt": "2026-11-15T19:27:50Z",
+        "expired": false
+      },
+      "reports": [
+        {
+          "originalName": "preparation.json",
+          "path": "node-22/preparation.json",
+          "bytes": 669,
+          "sha256": "d378f67d9a6e24ece2be8b2fd599c2b854936c1ca8e23b29a4d7bf1a61fae30a"
+        },
+        {
+          "originalName": "candidate-report.json",
+          "path": "node-22/candidate-report.json",
+          "bytes": 322384,
+          "sha256": "64d1621ef314a1daa25e0c4eb81d35323b2dbceefa825a9df85ed57de9dfc610"
+        },
+        {
+          "originalName": "verification.log",
+          "path": "node-22/verification.txt",
+          "bytes": 530560,
+          "sha256": "a0cb0a487172d9b7fc17641e813f28d29ab9cbfc0c9305e183791e925aa0098d"
+        }
+      ],
+      "candidateTarballSHA256": "709f128914e43f88c3239d76656e49dd059dcad88df0c379becbc1ab5e99fc72",
+      "tarballRetention": "Hash recorded; original tarball remains in the hosted artifact. No tarball is copied into this evidence-only closeout."
+    },
+    {
+      "id": 128832916860,
+      "url": "https://github.com/vmitsaras/raveldex/actions/runs/42514000024/job/128832916860",
+      "name": "Candidate verification (Node 24)",
+      "status": "completed",
+      "conclusion": "success",
+      "environment": {
+        "node": "v24.22.2",
+        "platform": "linux",
+        "arch": "x64",
+        "release": "7.0.0-1019-azure",
+        "npm": "11.19.1"
+      },
+      "preparation": "Pass",
+      "installedCandidate": "Pass",
+      "counts": {
+        "tests": 1724,
+        "pass": 1716,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 8
+      },
+      "stages": [
+        {
+          "name": "core/tooling/consumer/addon/method fixtures",
+          "tests": 1462,
+          "pass": 1454,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 8
+        },
+        {
+          "name": "UI",
+          "tests": 204,
+          "pass": 204,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "worker adapter",
+          "tests": 24,
+          "pass": 24,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "IndexedDB adapter",
+          "tests": 30,
+          "pass": 30,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "packed migration browser",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "Astro browser",
+          "tests": 3,
+          "pass": 3,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        }
+      ],
+      "workflowSteps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Record available runner storage",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run node node_modules/playwright-core/cli.js install --with-deps chromium",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Verify and prepare the private candidate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run npm run tracking:preview",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Preserve separate private N5 packages from verified compiler output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Preserve candidate reports and tarball",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        }
+      ],
+      "artifact": {
+        "id": 13631086641,
+        "name": "raveldex-ci-candidate-node-24",
+        "digest": "sha256:e15df2a030cd72ce16651833853e92a9a991daeb8035caa41763e79e80d1c139",
+        "sourceCommit": "a19f1e3ed29afacd653cc51951751721a0bde426",
+        "expiresAt": "2026-11-15T19:23:43Z",
+        "expired": false
+      },
+      "reports": [
+        {
+          "originalName": "preparation.json",
+          "path": "node-24/preparation.json",
+          "bytes": 669,
+          "sha256": "c55483332a93f5b567eaeb604928a15c1a717b4c66f676b856d1b1f9740f0309"
+        },
+        {
+          "originalName": "candidate-report.json",
+          "path": "node-24/candidate-report.json",
+          "bytes": 322385,
+          "sha256": "d518514ec75cd700ae368958cbdf8568a844413d821aca6decd63f429977df20"
+        },
+        {
+          "originalName": "verification.log",
+          "path": "node-24/verification.txt",
+          "bytes": 287725,
+          "sha256": "1715e6ff26558f49a0dd15583f38c42e7edd66a6375b79da457c19e3d199ea2e"
+        }
+      ],
+      "candidateTarballSHA256": "709f128914e43f88c3239d76656e49dd059dcad88df0c379becbc1ab5e99fc72",
+      "tarballRetention": "Hash recorded; original tarball remains in the hosted artifact. No tarball is copied into this evidence-only closeout."
+    }
+  ],
+  "trackingReadback": {
+    "result": "Pass",
+    "compared": 21,
+    "mismatches": [],
+    "closedTasks": 19,
+    "closedOverviews": 2,
+    "managedBodiesStatesReasonsLabelsMembershipsAligned": true,
+    "notesTitlesAssigneesPreserved": true,
+    "milestones": [
+      {
+        "number": 11,
+        "state": "closed",
+        "members": 12,
+        "closed": 12,
+        "staleAggregate": {
+          "open": 12,
+          "closed": 0
+        }
+      },
+      {
+        "number": 12,
+        "state": "closed",
+        "members": 7,
+        "closed": 7,
+        "staleAggregate": {
+          "open": 7,
+          "closed": 0
+        }
+      }
+    ]
+  },
+  "reuseBoundary": "Only nonpackaged evidence/context/handoff records are added. Passing source/test/runtime/build/dependency results retain the exact qualified commit identity. No new runtime check, build or benchmark is run for this record."
+}
