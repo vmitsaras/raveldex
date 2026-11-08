@@ -91,6 +91,7 @@ export function validateCandidateManifest(metadata, files) {
     assert.ok(['README.md', 'LICENSE', 'CHANGELOG.md', 'package.json'].includes(path)
       || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:patch|query-syntax|proximity|literal|identifiers|synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|sections|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/(?:localsearch|languages))\/.+\.(?:js|d\.ts|css))$/.test(path)
       || /^docs\/(?:api\/[^/]+\.md|api\/examples\/(?:[^/]+\.mjs|README\.md)|release\/[^/]+\.md|support\/RX-4003\.md)$/.test(path)
+      || path === 'docs/api/examples/consumer-themes.css'
       || path === 'dist/integrations/localsearch/LICENSE.LocalSearch', `unexpected tarball member ${path}`);
     assert.doesNotMatch(path, /(?:^|\/)(?:node_modules|src|test|bench|\.github|\.env)(?:\/|$)|\.map$/);
   }

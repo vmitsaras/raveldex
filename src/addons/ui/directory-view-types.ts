@@ -26,6 +26,8 @@ export interface DirectoryViewMessages {
   readonly composing: string;
   readonly searching: string;
   readonly noResults: string;
+  readonly noResultsFiltered?: string;
+  readonly noResultsBrowse?: string;
   readonly resultOne: string;
   readonly results: string;
   readonly previous: string;

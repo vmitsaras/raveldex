@@ -3,7 +3,7 @@ import { createWorkerRaveldex } from '@vmitsaras/raveldex/adapters/worker';
 import { mountRaveldexInline } from '@vmitsaras/raveldex/addons/ui/inline';
 import { controlsAddons } from './inline-controls-worker.mjs';
 
-const basicRows = () => Array.from({ length: 12 }, (_, i) => ({ id: `item-${String(i).padStart(2, '0')}`,
+const basicRows = (count = 12) => Array.from({ length: count }, (_, i) => ({ id: `item-${String(i).padStart(2, '0')}`,
   text: { body: 'source provider' }, metadata: { category: i < 7 ? 'Guide' : 'Reference' } }));
 const caseRows = name => name === 'unicode' ? [
   { id: 'unicode', text: { body: '😀 CAFE\u0301—Provider <script>literal</script>' }, metadata: { category: 'Guide' } },
@@ -20,7 +20,7 @@ window.createControlsFixture = async (uiOptions = {}, setup = {}) => {
   const root = document.getElementById('controls-root');
   const originalNodes = [...root.childNodes];
   const strategy = setup.strategy ?? 'source', host = setup.host ?? 'direct', features = setup.features ?? 'all';
-  const rows = caseRows(setup.corpus);
+  const rows = setup.count === undefined ? caseRows(setup.corpus) : basicRows(setup.count);
   const snippets = setup.corpus === 'omissions' ? { maxSnippets: 1, maxCodeUnits: 30, maxHighlights: 1 } : {};
   const configuration = { schema: { text: { body: {} }, metadata: { category: { type: 'string' } } },
     addons: controlsAddons(strategy, features, snippets) };

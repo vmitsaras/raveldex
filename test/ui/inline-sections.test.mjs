@@ -15,7 +15,7 @@ const report = { kind: 'raveldex-inline-sections-browser-v1', startedAt: new Dat
   limitations: 'Automated Chromium DOM/axe/navigation evidence; no human AT, physical input, zoom, broad platform, retained/peak memory or physical paint claim.' };
 const part = name => page.locator(`#section-root .raveldex-inline__${name}`);
 const ids = () => part('result').evaluateAll(nodes => nodes.map(n => n.getAttribute('data-raveldex-inline-result')));
-async function open(options = {}, setup = {}) { await page.evaluate(async args => { await window.sectionHarness?.cleanup(); await window.createSectionFixture(...args); }, [options, setup]); }
+async function open(options = {}, setup = {}) { await page.evaluate(async args => { await window.sectionHarness?.cleanup(); await window.createSectionFixture(...args); }, [{ messages: { error: 'Search failed ({code}). Retry search.' }, ...options }, setup]); }
 async function search(query = 'cross-section') { await page.evaluate(query => window.sectionHarness.search(query), query); }
 async function settle() { await page.waitForFunction(() => document.querySelector('#section-root .raveldex-inline')?.getAttribute('aria-busy') === 'false'); }
 async function click(name) { await part(name).click(); await settle(); }
@@ -149,7 +149,7 @@ test('malformed context responses fail the entire window; revision mismatch has 
     assert.deepEqual(await ids(), [], badReply); assert.match(await part('status').textContent(), /INCOMPATIBLE_CAPABILITY/, badReply);
   }
   await open(); await page.evaluate(() => { window.sectionHarness.state.badReply = 'revision'; }); await search();
-  assert.deepEqual(await ids(), []); assert.match(await part('status').textContent(), /index changed/i);
+  assert.deepEqual(await ids(), []); assert.match(await part('status').textContent(), /Search results changed/);
   observe('strict response validation', { malformedCases: cases.length, revisionsSeparate: true });
 });
 
@@ -157,7 +157,7 @@ test('native source/grapheme invalidity is unavailable context; changed owner be
   const broken = structuredClone(projection.pages[0]); broken.sections[0].end = 7;
   await open({}, { mapOverride: broken }); await search(); assert.equal((await rows())[0].state, 'unavailable'); assert.deepEqual(await ids(), ['page:a', 'page:b']);
   await open(); await page.evaluate(() => { window.sectionHarness.state.mutateBeforeEvidence = true; }); await search();
-  assert.deepEqual(await ids(), []); assert.match(await part('status').textContent(), /index changed/i);
+  assert.deepEqual(await ids(), []); assert.match(await part('status').textContent(), /Search results changed/);
   const before = await page.evaluate(() => window.sectionHarness.state.calls.filter(c => c.evidence).length); await click('retry');
   assert.deepEqual(await ids(), ['page:a', 'page:b']); assert.equal((await rows())[0].state, 'stale-map');
   assert.equal(await page.evaluate(() => window.sectionHarness.state.calls.filter(c => c.evidence).length), before);

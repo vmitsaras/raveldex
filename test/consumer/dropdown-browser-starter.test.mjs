@@ -209,7 +209,7 @@ test('native editing, composition, Clear and outside dismissal preserve the inst
   await input(page).press('Tab'); assert.equal(await input(page).getAttribute('aria-expanded'), 'false');
   await page.locator('[data-raveldex-dropdown-clear]').click(); assert.equal(await input(page).inputValue(), '');
   assert.equal(await page.locator('[data-raveldex-dropdown-full-results]').isHidden(), true);
-  await headerQuery(page, 'unmatchednonce'); await page.getByText('No results.', { exact: true }).waitFor();
+  await headerQuery(page, 'unmatchednonce'); await page.getByText('No results for “unmatchednonce”. Try a different search or open the full-results page.', { exact: true }).waitFor();
   assert.equal(await page.locator('[data-raveldex-dropdown-result]').count(), 0);
   await page.close(); record('installed native editing and synthetic composition', { activeDescendant: true, composedIDs: ['getting-started'], outsideTabClearNoResults: 'Pass', physicalIME: 'Not run' });
 });

@@ -1,5 +1,113 @@
 # Project context
 
+## Accepted N10 / N11 source snapshot — 8 November 2026
+
+This source snapshot includes the completed N10 engineering review and N11 consumer work, their actual evidence and closed tracking. The owner explicitly requested committing/pushing it and checking alignment. [Source handoff](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md) records the reviewed scope, exact accepted input identities and local checks. Earlier uncommitted/tracking-only statements below remain dated checkpoints.
+
+N10 is 7/7, N11 is 12/12 and all 80 canonical tasks are accepted. No implementation slice or optional benchmark is selected. The accepted 948-file source/test/runtime/API tree and relevant recovery inputs remain unchanged; only nonpackaged delivery/context/planning metadata is added here. No engine/provider/limit/dependency change or repeated local runtime/build/benchmark collection is required.
+
+Actual delivery is verified against Git refs and the corresponding hosted tracking run/read-back. Both milestones and all nineteen task issues plus the two overviews must remain closed, with main/source evidence links, notes/manual labels and memberships preserved. Source delivery does not publish a package, version, release/tag or deployment.
+
+## N10 GitHub tracking closed — 8 November 2026
+
+The owner-authorized [tracking closeout](docs/evidence/RX-9007/tracking-closeout/README.md) aligns RX-9006 #99, RX-9007 #100 and overview #93 with canonical acceptance, all closed/completed with status:done and exact managed evidence summaries. Milestone 12 is closed. All seven N10 task members verify closed; RX-9001–RX-9005 and existing maintainer notes/manual labels/assignees remain unchanged. The milestone's pre-existing aggregate API counters still say 7 open / 0 closed, contradicting the direct verified inventory; raw evidence records that external inconsistency.
+
+Current issue sections identify local artifact paths and contain self-contained reviewed summaries. Source/evidence remains uncommitted over HEAD `0d18463`; no current-main source publication is implied. Passing support/verdict/runtime checks are reused, with only planning/reference/diff and preservation validation needed for this metadata slice. No benchmark, runtime rerun, rebuild, engine/provider/limit/dependency change, source push, release, registry publication or deployment occurred.
+
+N10 is closed at 7/7 and N11 remains complete at 12/12. All 80 local tasks remain accepted; no selected implementation slice or optional experiment is started. Earlier entries below are dated checkpoints.
+
+## RX-9007 verdict complete — 8 November 2026
+
+The [scoped engineering verdict](docs/evaluation/RX-9007.md), [practical guidance](docs/support/RX-9007.md) and [acceptance/review evidence](docs/evidence/RX-9007.md) complete RX-9007 and N10 locally. Selected N9 Node query wall times improve versus pre-N9, and most measured update wall cells improve, while CPU remains mixed and four small update wall regressions remain. Conservative browser qualification is 40 faster / eight quantum-limited wall cells. Accepted N9 and measured current are the same implementation control; no additional post-N9 optimization or weighted overall winner is established.
+
+The report maps every workload/host/provider/deadline to retained results and distinguishes ordinary recovery successes, refused real-docs/high-cardinality options, Unknown delivery and uncollected historical coverage. Original 146/204 and separate 22-context preflight remain unchanged, not pooled. Exact sampled p95, observer/verification effects, source/native formats, larger-corpus capacity, CPU/heap and platform limits stay explicit. N11 remains complete, with its separate scoped human AT/zoom evidence.
+
+Two independent resulting-report reviews are clear. Original archive roles, relevant source/runtime/method identities and all protected prior files match; passing runtime evidence is reused. Only nonpackaged guidance/planning/evidence changed. No benchmark, runtime suite, build, engine/provider/dependency/limit change or new environment qualification occurred.
+
+**No selected implementation task remains:** all 80 canonical tasks are accepted locally, N10 is 7/7 and N11 is 12/12. This is no package-release or publication claim. Work remains uncommitted over HEAD `0d18463`; no source push, GitHub tracking mutation, release/tag, registry publication or deployment occurred in RX-9007. Earlier entries below are dated checkpoints.
+
+## RX-9006 amended qualification complete — 8 November 2026
+
+The [scoped support-envelope report](docs/evaluation/RX-9006-scoped-20261108.md) and [acceptance/reviews](docs/evidence/RX-9006/scoped-20261108/README.md) complete RX-9006 locally by reusing unchanged recovery evidence. Forty-eight original current-role ordinary successful contexts cover 24 exact Node/browser-direct/real-worker source and positions-offset recipes at 1k/10k; separate six-record Node and five-record Chromium 149/IndexedDB/worker tests establish literal membership, hand scores, original UTF-16, atomicity, receipt uncertainty, subsequent writes and disposal. All 140 relevant reused inputs and 285 non-UI compiled members match. Whole-package/UI identity differences are disclosed, not ignored.
+
+The original 146/204 remains failed/incomplete and separate from the22-context preflight. Its two admitted preflight contexts are diagnostic. Current normal 10k real-docs/high-cardinality source controls 181/183/185/187 refuse export with WORK_LIMIT_EXCEEDED and never attempt dependent restores; they are not qualified successes. Exact repeated-excerpt adversarial successes do not promise arbitrary 10k-site capacity. No new speed/p95/heap/platform claim is made.
+
+Two independent audits and resulting-report reviews found no essential gap; no collector, runtime suite, build, benchmark or engine/provider/limit change occurred. Only nonpackaged evidence/planning changes were needed. Historical evidence, current source/test/tooling/runtime/API files and completed N11 are preserved. Work remains uncommitted over HEAD `0d18463`; no source push, remote tracking mutation, deployment or publication occurred.
+
+**RX-9007 is next ready**, the scoped synthesis of already completed query/update cohorts and this recovery envelope. It is not a new benchmark or package-publication instruction. N11 remains 12/12 complete. Earlier entries below are dated checkpoints.
+
+## N11 closed — 8 November 2026
+
+[RX-9112 acceptance](docs/evidence/RX-9112.md) completes N11 at 12/12. The authorized [GitHub tracking closeout](docs/evidence/RX-9112/tracking-closeout.md) verified all twelve task issues #81–#92 and overview #80 closed as completed with status:done, accepted criteria and self-contained evidence summaries. Milestone 11 is closed; the native hierarchy remains twelve closed tasks with the overview outside the milestone. Its aggregate API counters still disagree with the enumerated closed members, an external summary inconsistency retained in raw evidence.
+
+Passing primary Chrome 25/25, focused Playwright WebKit 10/10, independent identity/journey reviews and the user's Chrome/VoiceOver/macOS plus actual 200%/400% zoom report are reused within their recorded scopes. Captured acceptance/native evidence hashes and all 948 source/test/tooling/dist/API/configuration files preserved in this closeout match, including 347 runtime files. Only nonpackaged planning/evidence/tracking metadata changed; no rebuild, benchmark or engine change occurred.
+
+Current source/evidence changes remain uncommitted over HEAD `0d18463`. Issues identify local paths and summarize evidence directly; no commit/push, deployed site, package publication or release is claimed. N11 has no remaining implementation slice. RX-9006 remains independently ready globally, not selected or authorized for collection. Earlier entries below are dated checkpoints.
+
+## RX-9111 CMS refresh and remount — 8 November 2026
+
+[RX-9111](docs/evidence/RX-9111.md) is complete locally over preserved RX-9104–RX-9110 at HEAD `0d18463`. The [native CMS guide](docs/api/CMS_REFRESH.md) separates owner mutations, explicit query/refresh and captured display maps, with per-surface state/composition/ownership limits. A complete finite document-tree example changes indexed text/metadata, refreshes preserved text/filters at page one/current revision, remounts fresh titles/excerpts, demonstrates duplicate-map behavior and conditional focus, then restores fallback Nodes and disposes its owned resources. Inline/modal hidden facet/window restoration remains unsupported; no state/map setter, background CMS subscription or runtime change is added. Pending same-query dropdown flights must close/settle before mutation.
+
+All four fresh installed recipe/type/inventory cases pass, including two complete native executions, moved-focus preservation and unsupported shadow/disabled-anchor admission. Both read-only reviewers clear corrected scope/status-check findings. The final dropdown qualifier changes only prose; final package inventory matches all 347 tested runtime members and copied code. Build/project typecheck and relevant native regressions are reused with matching inputs. Prior evidence is unchanged; human AT/physical input/actual zoom and final visual/platform qualification remain separate.
+
+N11 is locally 11/12 accepted. **RX-9112 is next ready**, the final finite experience qualification; it is not already satisfied by documentation tests. RX-9006 remains independently ready, not selected for collection. Work remains uncommitted with no push, remote sync, deployment, publication, benchmark or engine change. Earlier entries are dated checkpoints.
+
+## RX-9108 localization and message customization — 7 November 2026
+
+[RX-9108](docs/evidence/RX-9108.md) is complete locally over preserved RX-9104–RX-9107, RX-9109 and RX-9110 at HEAD `0d18463`. The [native guide](docs/api/LOCALIZATION.md) inventories every consumer message/token and supplies complete checked German bundles, including facet-aware inline reset/idle, modal shell and card image failure text. It documents partial English fallback, existing override precedence, authored-content responsibility, raw decimal/exact-total-one grammar and explicit destroy/remount with application-owned focus/state handoff. There was no missing runtime hook; no locale/formatter/plural API or runtime change is introduced.
+
+The final fresh installed suite passes 16/16, including strict checked-JS/public types, actual key inventory, all five German surfaces, exact 0/1/2 results, safe captured overrides, partial fallback, recovery and deliberate long RTL remounts. Initial 13/16 exposed test inspection/state assumptions and fixture CSS rejections; raw attempts are retained and those earlier RTL observations are excluded. Both read-only reviewers clear the corrected work. All 347 runtime members, 90 prior captured inputs and preceding evidence match; build/project typecheck and unchanged relevant native behavior results are reused. Human AT/physical input/actual zoom and translation-quality claims remain separate.
+
+N11 is locally 10/12 accepted. **RX-9111 is next ready**; RX-9112 waits for it. RX-9006 remains independently ready, not selected for collection. Work remains uncommitted, with no push, remote sync, deployment, publication, benchmark or engine change. Earlier entries are dated checkpoints.
+
+## RX-9110 directory count guidance — 7 November 2026
+
+[RX-9110](docs/evidence/RX-9110.md) is complete locally over preserved RX-9104–RX-9107 and RX-9109 at HEAD `0d18463`. The shared default count explanation now uses plain language for the complete current result set, alternatives within a group, matching each other selected group and zero-current-count choices that can expand results. HOSTS and the directory contract add the exclusive Guide/Manual example. Native controls, focus, composition, exact totals/pages, URL state and query/reset behavior are unchanged. No new message key, API, engine, CSS or dependency change occurs.
+
+One build/typecheck and all 44 affected installed directory/rich/focus cases pass. A one-case viewport-capture rerun overlaps those cases; both Chrome PNG attempts show compositor repetition and are excluded from visual acceptance. Independent read-only review is clear. Exactly one of 347 runtime members changes, solely the countHint string; 87/90 prior captured inputs and all previous evidence match. Human AT/physical input/actual zoom and fresh secondary-engine/hosted qualification remain unobserved.
+
+N11 is locally 9/12 accepted. **RX-9108 is next ready**, now that count/keyboard/state copy has settled; RX-9111 is independently ready. RX-9006 remains independently ready, not selected for collection. All changes remain uncommitted, with no push, remote sync, deployment, publication, benchmark or engine change. Earlier entries are dated checkpoints.
+
+## RX-9109 native result content — 7 November 2026
+
+[RX-9109](docs/evidence/RX-9109.md) is complete locally over preserved RX-9104–RX-9107 at HEAD `0d18463`. The [source-verified guide](docs/api/RESULT_CONTENT.md) adopts keep-current: generated inline/modal snippets or sections remain separate from authored card metadata. It defines the five-surface field matrix, native documentation/application/catalogue scenarios, strict basic projection, mutually exclusive options, actual image-before-title DOM order and image ownership/privacy/lifecycle limits. Absent/current empty maps yield parent-only output; stale/refused context has a notice. Sections are requested only for actual mapped/current/nonempty hits, not probed at zero matches. No new renderer, field, provider or retained side index is implemented.
+
+Both read-only reviewers cleared the corrected guide. Fresh offline package/inventory and strict installed type checks pass; the exact copied projection preserves seven authored records and only id/title/url. All 347 runtime members and 90 prior captured executable inputs match. Build, broader typecheck and browser suites were reused without rerunning; no new runtime/AT/performance qualification is claimed. HOSTS, secondary migration guidance and current contracts are aligned.
+
+N11 is locally 8/12 accepted. **RX-9110 is the next ready N11 slice**; RX-9108 still waits for RX-9110. RX-9006 remains independently ready, not selected for collection. RX-9104–RX-9107 and RX-9109 changes remain uncommitted, with no push, remote sync, deployment, publication, benchmark or engine change. Earlier entries are dated checkpoints.
+
+## RX-9107 Reading index styling — 7 November 2026
+
+[RX-9107](docs/evidence/RX-9107.md) is complete locally over preserved RX-9104–RX-9106 at HEAD `0d18463`. Five scoped CSS files align palette, title/context typography, rhythm, underlines and comfortable link heights. Inline/dropdown Search is accented and outlined for transparent-host compatibility; directory keeps its filled action and automatic dark defaults. Packaged optional light/dark recipes preserve explicit overrides. Directory error has a matching color role. Native handlers/queries, engine/providers, JS/declarations, dependencies and exports are unchanged; package inventory admits only the exact new recipe path.
+
+Build and 136 affected UI cases pass; project typecheck is reused from RX-9106 with 40 matching captured type/config/dependency inputs. Final consumer batch passes 28/29, with the exact recipe allowlist/docs failure corrected by four passing focused cases. Initial modal clipping measurement was corrected at the native top-layer boundary; real error-color checks use a different query to avoid directory no-op. Raw failures remain retained. Final family observations cover 29 surface/theme samples; minimum sampled text contrast 7.13:1, focus 9.29:1, boundaries 4.87:1 and target height 44 CSS px. Two read-only reviewers cleared corrected findings. These are sampled browser measurements, not universal accessibility or arbitrary-host guarantees.
+
+N11 is locally 7/12 accepted. **RX-9109 is the next ready N11 slice**; RX-9108 still waits for RX-9110. Actual browser zoom, physical mobile keyboard/IME, human speech and a fresh secondary-engine matrix remain unobserved. RX-9104–RX-9107 remain uncommitted, with no push, remote sync, deployment, publication, benchmark or performance claim. Earlier entries are dated checkpoints.
+
+## RX-9106 keyboard guidance — 7 November 2026
+
+[RX-9106](docs/evidence/RX-9106.md) is complete locally over preserved RX-9104/RX-9105 work at HEAD `0d18463`. Dropdown has visible/accessible Arrow/Enter/Escape/Tab guidance through optional captured `keyboardHint`. Modal explains native search-field Escape and reliable Close search, describes its input through unique hint IDs and shows shortcut guidance only when opted in. Its bounded footer is keyboard-scrollable rather than line-clamped, with one deliberate help Tab stop and an inset focus outline. Initial/settlement focus, native editing/links, composition, active descendants, query timing, reset and shortcut eligibility remain unchanged.
+
+One build/typecheck, 62 affected installed browser cases, 24 consumer/docs cases and two selected copied-starter cases pass with zero failures/skips. Read-only subagent review cleared the inset outline correction before acceptance. Chrome's populated search field cleared on first Escape and closed on second, matching a plain native baseline with no additional query. Native AX descriptions are observed; human speech, physical input, actual zoom and additional environments remain unobserved. Engine/providers, inline/directory/cards, dependencies and prior evidence are preserved.
+
+N11 is locally 6/12 accepted. **RX-9107 is the next N11 slice**. RX-9006 remains independently ready, not selected for collection. RX-9104–RX-9106 changes remain uncommitted; no push, remote tracking update, deployment, publication or benchmark occurred. Earlier entries are dated checkpoints.
+
+## RX-9105 search states and recovery — 7 November 2026
+
+[RX-9105](docs/evidence/RX-9105.md) is complete locally over preserved RX-9104 work at HEAD `0d18463`. Empty feedback identifies submitted text or active filters safely; bounded query previews do not change input or native queries. Directory/cards empty browse exposes the existing explicit Refresh action. Friendly failure copy retains typed snapshot errors and optional `{code}` diagnostics. Optional captured empty variants retain old translated bundles. Focus, exact totals/order/ranges, composition, sequence guards, query timing and reset/browse semantics remain intact. Engine/providers/CSS/dependencies are unchanged by this slice.
+
+One build/typecheck passes. Initial affected UI batch passed 150/153; three stale default-code assertions were corrected with explicit diagnostic overrides and pass in a four-case focused rerun (one overlap strengthens variant capture). No runtime edit or repeated build followed. The 24 installed consumer/docs cases and two selected copied-starter cases pass. Two read-only reviewers found no remaining source issue. Initial failures remain recorded; no all-green full-suite run, human speech, physical input, actual zoom or additional platform claim is inferred.
+
+N11 is locally 5/12 accepted. **RX-9106 is the next N11 slice**; RX-9006 remains independently ready, not selected for collection. RX-9104/RX-9105 changes remain local/uncommitted with no push, remote tracking update, deployment, publication or benchmark. Earlier entries are dated checkpoints.
+
+## RX-9104 focus-safe pagination — 7 November 2026
+
+[RX-9104](docs/evidence/RX-9104.md) is complete locally from clean `0d18463`, which contains the preceding RX-9102/RX-9103 work. Inline/modal paging now shows useful actions plus any focused unavailable action, retiring the latter only after focus transfer. The range summary is separate from navigation. After append, a native Go to new results action explicitly focuses the first added title link; settlement does not move focus or change the host fragment. Optional captured `newResults`/`resultsAdded` strings preserve existing complete message bundles. Engine/query/range/cap/revision behavior and native result links are unchanged.
+
+Final build/typecheck, 68 installed inline/modal tests, 24 consumer/documentation tests, two selected copied browser-starter cases and 56 tooling tests pass with zero failures/skips. Tests include authored batch/cap boundaries, three complete windows, native Tab/Enter/Space, open/closed/nested shadows, focused-target replacement, stale replies and 320px modal reuse. Both read-only reviewers cleared corrected draft findings. Prior evidence/tasks and unchanged engine/provider bytes are checked separately. Human AT/physical input/actual zoom remain unobserved; no benchmark or broader platform/performance claim follows.
+
+N11 is locally 4/12 accepted. **RX-9105 is the next N11 slice**. RX-9006 remains independently ready, not selected for collection. Only RX-9104 changes are uncommitted in this checkpoint; no commit/push, remote tracking update, site deployment or publication was performed. Earlier status sections retain their dated scope.
+
 ## RX-9103 idle filters and reset clarity — 7 November 2026
 
 [RX-9103](docs/evidence/RX-9103.md) is complete locally over preserved uncommitted RX-9102 work. Shared inline/modal defaults explain that a query supplies filter choices; native selects describe their count summary and current status while staying mounted/enabled. Reset labels are Clear search and filters with facets, Clear search without; existing translated overrides are captured unchanged. The two Astro starters' explicit reset labels and matching instructions/assertions are aligned. Mount, empty input without selected facets and reset still issue no query; query/filter/lifecycle/engine behavior and CSS are unchanged.

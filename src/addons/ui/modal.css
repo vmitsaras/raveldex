@@ -57,6 +57,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   font-size: var(--raveldex-modal-title-size, 1.25em);
+  font-weight: 650;
   line-height: 1.4;
 }
 .raveldex-modal__close {
@@ -115,23 +116,22 @@
   min-inline-size: 0;
   max-block-size: 4rem;
   padding: .5rem var(--_modal-padding);
-  overflow: hidden;
+  overflow: auto;
+  overscroll-behavior: contain;
   border-block-start: 1px solid var(--_modal-border);
   font-size: .875em;
+  line-height: 1.5;
 }
 .raveldex-modal__hint {
   flex: 1 1 0;
   min-inline-size: 0;
-  max-block-size: 3.2em;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  display: block;
 }
-.raveldex-modal :is(input, select, button, a):focus-visible {
+.raveldex-modal :is(input, select, button, a, .raveldex-modal__footer):focus-visible {
   outline: 3px solid var(--_modal-focus);
   outline-offset: 3px;
 }
+.raveldex-modal__footer:focus-visible { outline-offset: -3px; }
 .raveldex-modal .raveldex-inline__result-title {
   display: inline-flex;
   align-items: center;
@@ -172,7 +172,6 @@
     border: 0;
   }
   .raveldex-modal__footer { max-block-size: 2rem; padding-block: .125rem; }
-  .raveldex-modal__hint { max-block-size: 1.6em; -webkit-line-clamp: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .raveldex-modal, .raveldex-modal *, .raveldex-modal::backdrop {

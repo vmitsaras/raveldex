@@ -32,7 +32,8 @@ test('candidate package gate rejects hidden dependencies, publication exposure a
 });
 
 test('candidate package gate refuses source, evaluation evidence and undeclared tarball members', () => {
-  for (const path of ['src/index.ts', 'test/private.mjs', 'docs/evidence/sensitive.json', 'dist/../secret.js', '.env', 'dist/core/owner.js.map', 'node_modules/foreign/index.js']) {
+  assert.equal(validateCandidateManifest(metadata,[...selectedFiles(),{path:'docs/api/examples/consumer-themes.css',size:1}]).status,'Pass');
+  for (const path of ['src/index.ts', 'test/private.mjs', 'docs/evidence/sensitive.json', 'dist/../secret.js', '.env', 'dist/core/owner.js.map', 'node_modules/foreign/index.js','docs/api/examples/undeclared.css']) {
     assert.throws(() => validateCandidateManifest(metadata, [...selectedFiles(), { path, size: 1 }]), /tarball member|unexpected/);
   }
 });

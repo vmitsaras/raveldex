@@ -57,7 +57,7 @@ for (const surface of ['base', 'cards']) {
   });
   test(surface + ': page refusal retains its focused unavailable control and explicit Retry recovers', async () => {
     await load(); const next = page.getByRole('button', { name: 'Next page', exact: true }); await next.focus(); await page.evaluate(() => window.directoryFocus.fail()); await next.press('Enter');
-    await page.getByText('Search is unavailable (WORK_LIMIT_EXCEEDED). Try again.', { exact: true }).waitFor(); await frames();
+    await page.getByText('Search could not complete. Refresh results or change your search and filters.', { exact: true }).waitFor(); await frames();
     assert.equal(await active(next), true); assert.equal(await next.isVisible(), true); assert.equal(await next.getAttribute('aria-disabled'), 'true'); assert.equal(await page.locator('[data-raveldex-directory-page]').innerText(), '');
     const count = await calls(); await next.press('Enter'); assert.equal(await calls(), count);
     const retry = page.getByRole('button', { name: 'Refresh results', exact: true }); await retry.focus(); await retry.press('Enter'); await ready(); await frames(); assert.equal(await active(retry), true); assert.equal(await retry.getAttribute('aria-disabled'), 'true');

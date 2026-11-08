@@ -1,0 +1,40 @@
+RX-9006 amended qualification — 8 November 2026
+
+Read-only preparation and baseline:
+Selected RX-9006 from npm run handoff:next; task planned -> in_progress; generated three plan views.
+Captured 1,755 protected existing files before changes, including 628 historical RX-9006 files and 52 final N11 evidence files.
+Two independent read-only audits inspected retained evidence/source/JSON/gzip/selective archive members; no test, build, runtime case or benchmark collector executed.
+Parent copied both actual audit JSON files unchanged and reconfirmed all 140 relevant reuse input SHA256 values.
+reuse-audit.json SHA256 f9f7e48499e9703f0aad180635c570aa747e0a75b703a15b27587d87921d5f03
+support-audit.json SHA256 4ac5e678d0231d58ec2c1eb6a1b51fc4c077e570370c704de5b0583e43d73d47
+
+$ npm run handoff:check
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:check
+npm notice run node scripts/plan.mjs check
+Roadmap valid: 80 tasks across 12 milestones; graph and local references checked.
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+Exit: 0
+
+$ npm run docs:check
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 docs:check
+npm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs
+Generated roadmap and task documents match the canonical manifest (3 files).
+Local Markdown link targets checked in 329 files (external URLs and anchors not evaluated).
+Exit: 0
+
+$ git diff --check
+Exit: 0
+
+$ npm run handoff:next
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:next
+npm notice run node scripts/plan.mjs next
+Next dependency-ready release task: RX-9007 — Publish a scoped engineering verdict and remaining limitations
+
+All dependency-ready release tasks (1):
+- RX-9007 — Publish a scoped engineering verdict and remaining limitations
+
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+Exit: 0
+
+Preservation-check first attempt: metadata reader expected one field naming convention across both audit schemas; stopped with KeyError before any acceptance/status change. Corrected reader handles retainedSHA256/currentSHA256 browser-proof fields explicitly. No runtime input changed or runtime rerun occurred.
+Corrected parent audit: Pass. All 140 reuse hashes, 11 test/fixture pins, five browser-proof pins and 285 non-UI runtime hashes independently match. All 12 artifact hash bindings match. All 1755 protected existing files remain unchanged; all other 79 task objects and 12 milestones preserved; N11 remains12/12.

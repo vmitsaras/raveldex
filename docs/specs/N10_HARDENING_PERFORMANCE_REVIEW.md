@@ -1,5 +1,25 @@
 # N10 — Post-N9 hardening and performance review
 
+## N10 GitHub closeout complete — 8 November 2026
+
+The authorized [tracking alignment](../evidence/RX-9007/tracking-closeout/README.md) closes RX-9006 #99, RX-9007 #100, overview #93 and milestone 12 against accepted local evidence. All seven task members verify closed; earlier accepted issues and maintainer content are preserved. The pre-existing stale milestone aggregate counters remain disclosed. Current issue bodies use explicit local artifact paths and self-contained summaries because source/evidence is still uncommitted.
+
+N10 is 7/7 accepted and closed; N11 remains complete. Passing evidence is reused with no benchmark, build, runtime rerun, engine/provider/limit/dependency change or publication. Historical failed/incomplete runs and verdict limitations remain intact. No selected implementation task or optional extended experiment follows automatically. Earlier checkpoints below retain their historical scope.
+
+## RX-9007 / N10 locally complete — 8 November 2026
+
+The [scoped verdict](../evaluation/RX-9007.md), [practical support guidance](../support/RX-9007.md) and [reviewed acceptance](../evidence/RX-9007.md) complete the amended engineering review using retained query/update/host evidence and RX-9006's scoped recovery envelope. Lower observed wall time for matched Node queries and most updates is accompanied by explicit CPU costs, small-update regressions, same-runtime variation and conservative browser clock limits. No extra post-N9 optimization or weighted overall winner is claimed.
+
+All measured roles/methods/hosts and outcome denominators remain identifiable. Ordinary source/positions successes, work-refused options, uncertain delivery, original 146/204 failure and separate 22-context preflight are not pooled or relabeled. Sparse tails, observer effects, deeper heap, expanded platforms and optional full recovery research remain limitations. Both independent resulting-report reviews are clear; unchanged runtime evidence is reused with relevant identities, with fresh checks only for nonpackaged documentation/planner/reference/preservation risks.
+
+N10 is 7/7 accepted locally and N11 remains 12/12. The selected backlog has no remaining implementation task; no optional experiment, runtime capability, engine/limit/dependency change, fresh benchmark, publication, release or deployment follows automatically. Source remains uncommitted and remote N10 tracking unchanged by this slice. Earlier dated checkpoints preserve their historical instructions and outcomes.
+
+## RX-9006 amended qualification complete — 8 November 2026
+
+The [scoped support-envelope report](../evaluation/RX-9006-scoped-20261108.md) and [acceptance/reviews](../evidence/RX-9006/scoped-20261108/README.md) close RX-9006 locally under the November 7 amendment. Existing unchanged recovery inputs support ordinary nonempty roundtrips through Node, browser direct and real module workers, with source/positions, independent query/source/UTF-16 checks and mapped atomicity/Unknown/later-write/disposal regressions. Forty-eight current ordinary successful contexts represent 24 exact frozen adversarial recipes; small literal Node/actual Chromium 149 fixtures qualify the expressly scoped semantics. Relevant input and non-UI compiled identities match despite unrelated UI changes.
+
+Original146/204 remains failed/incomplete; the separate 22-context preflight is not promoted to ordinary success or full coverage. Its diagnostic 141/179 and work-refused current normal controls 181/183/185/187 remain distinct. Exact recipe limits, unsupported/refused options and unobserved platforms are explicit. Both independent resulting-report reviews are clear; no new collector, build, runtime suite, benchmark, engine/provider/limit change or publication occurred. N11 remains complete and independent. **RX-9007 is next ready** for the scoped engineering synthesis; optional extended research remains unexecuted. Earlier checkpoints below retain their dated historical scope.
+
 ## Active scope amendment — 7 November 2026
 
 The [scoped qualification amendment](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) and updated canonical RX-9006/RX-9007 cards now govern remaining N10 work. Preserve all older observations and frozen-method validators below; they no longer impose a fresh full 204-context recovery run as the default product-qualification gate. The 450-minute policy is optional extended research, not required next work. RX-9006 is planned for evidence reuse/support-envelope review and only essential bounded gaps, not completed or newly measured. N11 is independent of N10 closeout. No benchmark launch, native limit change or historical Pass is authorized by this documentation amendment.

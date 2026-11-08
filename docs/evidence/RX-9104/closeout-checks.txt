@@ -1,0 +1,45 @@
+RX-9104 final documentation/status checks. Passing executable checks reused.
+
+$ npm run handoff:check
+Roadmap valid: 80 tasks across 12 milestones; graph and local references checked.
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:check
+npm notice run node scripts/plan.mjs check
+
+Exit: 0
+
+$ npm run docs:check
+Generated roadmap and task documents match the canonical manifest (3 files).
+Local Markdown link targets checked in 305 files (external URLs and anchors not evaluated).
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 docs:check
+npm notice run node scripts/render-plan.mjs --check && node scripts/check-docs.mjs
+
+Exit: 0
+
+$ git diff --check
+
+Exit: 0
+
+$ npm run handoff:next
+Next dependency-ready release task: RX-9006 — Qualify supported recovery paths with bounded evidence reuse
+
+All dependency-ready release tasks (7):
+- RX-9006 — Qualify supported recovery paths with bounded evidence reuse
+- RX-9105 — Polish search states and recovery messages
+- RX-9106 — Make keyboard guidance discoverable and consistent
+- RX-9107 — Implement Raveldex visual tokens and coherent consumer styling
+- RX-9109 — Define native result hierarchy and rich-content compatibility
+- RX-9110 — Explain directory counts and multi-select filtering plainly
+- RX-9111 — Document safe CMS refresh, remount and state preservation
+
+Release work waiting on dependencies (3):
+- RX-9007 waits for RX-9006 (planned)
+- RX-9108 waits for RX-9105 (planned), RX-9106 (planned), RX-9110 (planned)
+- RX-9112 waits for RX-9105 (planned), RX-9106 (planned), RX-9107 (planned), RX-9108 (planned), RX-9109 (planned), RX-9110 (planned), RX-9111 (planned)
+
+Scope: roadmap tooling checks structure, dependencies, and evidence references. It does not qualify search features or verify the contents of evidence.
+npm notice run @vmitsaras/raveldex@0.1.0-rc.0 handoff:next
+npm notice run node scripts/plan.mjs next
+
+Exit: 0
+

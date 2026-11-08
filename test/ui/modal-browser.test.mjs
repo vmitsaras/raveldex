@@ -71,6 +71,43 @@ beforeEach(async () => {
 afterEach(async () => { try { await page.evaluate(() => window.cleanupModalFixtures?.()); assert.deepEqual(errors, []); } finally { await context?.close(); await save(); } });
 after(async () => { await browser?.close(); if (server) { server.closeAllConnections(); await new Promise(done => server.close(done)); } report.finishedAt = new Date().toISOString(); await save(); });
 
+test('modal keyboard hints describe native search Escape and opt-in shortcuts without live feedback or dangling IDs',async()=>{
+  assert.equal(await calls(),0);await show();
+  const guidance='Close search closes this dialog. Escape may clear the search field first.';
+  assert.equal(await modalPart('hint').textContent(),guidance);
+  const id=await modalPart('hint').getAttribute('id');assert.equal(await part('input').getAttribute('aria-describedby'),id);
+  assert.equal(await modalPart('hint').evaluate(n=>!!n.closest('[role=status],[aria-live]')),false);
+  assert.equal(await page.locator('#modal-trigger').getAttribute('aria-keyshortcuts'),null);assert.equal(await calls(),0);
+  const session=await context.newCDPSession(page);let nativeDescription;
+  try{const{nodes}=await session.send('Accessibility.getFullAXTree');nativeDescription=nodes.find(n=>!n.ignored&&n.role?.value==='searchbox')?.description?.value;assert.equal(nativeDescription,guidance);}finally{await session.detach();}
+  await close();
+  const other=await page.evaluate(async()=>{
+    const first=window.modalHarness,modalMessages={escapeHint:'Fermer <img src=x> : Échap peut effacer le texte.',shortcutHint:'Contrôle ou Commande K hors des champs.'};
+    first.remount({shortcut:true,modalMessages});modalMessages.escapeHint='Changed';modalMessages.shortcutHint='Changed';
+    await window.createModalFixture({}, {root:'second-root',trigger:'second-trigger'});
+    const inputs=[first.root.querySelector('input'),document.querySelector('#second-root input')];
+    const ids=inputs.flatMap(n=>n.getAttribute('aria-describedby').split(' '));window.modalHarness=first;
+    return{ids,unique:new Set(ids).size,text:first.root.querySelector('.raveldex-modal__hint').textContent,parsed:first.root.querySelectorAll('img').length};
+  });assert.equal(other.ids.length,3);assert.equal(other.unique,3);assert.equal(other.text,'Fermer <img src=x> : Échap peut effacer le texte.');assert.equal(other.parsed,0);
+  await show();assert.equal(await modalPart('hint').count(),2);await close();await mount({keyboardHints:false,shortcut:true});await show();
+  assert.equal(await modalPart('footer').count(),0);assert.equal(await part('input').getAttribute('aria-describedby'),null);
+  assert.equal(await page.locator('#modal-trigger').getAttribute('aria-keyshortcuts'),'Control+K Meta+K');
+  observe('described native keyboard guidance',{guidance,nativeDescription,...other,hintsOffReferences:0,shortcutOptIn:true});
+});
+
+test('populated search-field Escape matches a plain native dialog baseline and Close remains reliable',async()=>{
+  await page.evaluate(()=>{
+    const d=document.createElement('dialog');d.id='plain-search-dialog';const input=document.createElement('input');input.type='search';input.id='plain-search';d.append(input);document.body.append(d);d.showModal();input.focus();
+  });await page.locator('#plain-search').fill('alpha');
+  const native=[];for(let i=0;i<2;i++){await page.keyboard.press('Escape');await page.waitForTimeout(30);native.push(await page.locator('#plain-search-dialog').evaluate(d=>({open:d.open,text:d.querySelector('input').value})));}
+  await page.locator('#plain-search-dialog').evaluate(d=>d.remove());
+  await page.locator('#modal-trigger').focus();await show();await part('input').fill('alpha');await part('input').press('Enter');await settle();
+  const before=await calls(),actual=[];for(let i=0;i<2;i++){await page.keyboard.press('Escape');await page.waitForTimeout(30);actual.push({open:await opened(),text:await part('input').inputValue()});}
+  assert.deepEqual(actual,native);assert.equal(await calls(),before);
+  await show();await modalPart('close').focus();await modalPart('close').press('Enter');assert.equal(await opened(),false);assert.equal(await page.locator('#modal-trigger').evaluate(n=>n===document.activeElement),true);
+  observe('native populated search Escape baseline',{native,actual,escapeQueries:0,explicitClose:true});
+});
+
 test('closed mount/search/clear remain idle; native dialog and actual opener own keyboard focus', async () => {
   assert.equal(await opened(), false); assert.equal(await dialog().isVisible(), false); assert.equal(await calls(), 0);
   await search('alpha'); assert.equal(await calls(), 0); assert.equal(await part('input').inputValue(), 'alpha');
@@ -137,6 +174,37 @@ test('root/help encoded destinations navigate natively and modified links keep t
     await page.goto(origin); await page.waitForFunction(() => typeof window.createModalFixture === 'function'); await mount();
   }
   observe('root/help actual target navigation', { bases: ['/', '/help/'], rawAnchor: '%#café', modifiedActivation: 'middle-button native tab' });
+});
+
+test('modal paging exposes exact ranges and explicit native keyboard discovery at desktop and narrow widths', async () => {
+  for (const width of [1100, 320]) {
+    await page.setViewportSize({ width, height: 700 });
+    await mount({ pageSize: 2, maxRenderedResults: 3 }, { feature: 'core' }); await show(); await search();
+    assert.deepEqual(await ids(), ['page:a', 'page:b']);
+    assert.equal(await part('page-summary').textContent(), 'Showing 1–2 of 4.');
+    assert.equal(await part('previous').isVisible(), false); assert.equal(await part('next').isVisible(), false);
+    const more = part('load-more'), jump = part('new-results');
+    await more.focus(); await more.press('Enter'); await settle();
+    assert.deepEqual(await ids(), ['page:a', 'page:b', 'page:c']);
+    assert.equal(await more.evaluate(node => node === document.activeElement && !node.hidden), true);
+    assert.equal(await part('status').textContent(), 'Results added: 1. Showing 1–3 of 4.');
+    const count = await calls(); await more.press('Tab');
+    assert.equal(await jump.evaluate(node => node === document.activeElement), true);
+    await jump.press('Space');
+    assert.equal(await part('result-title').nth(2).evaluate(node => node === document.activeElement), true);
+    assert.equal(await calls(), count); assert.equal(await page.evaluate(() => location.hash), '');
+    await page.evaluate(() => { window.modalHarness.state.holdMain = true; });
+    await part('next').focus(); await part('next').press('Enter');
+    await page.waitForFunction(() => window.modalHarness.state.pending.length === 1);
+    await close(); assert.deepEqual(await ids(), []); assert.equal(await part('page-summary').textContent(), '');
+    await show(); await settle(); await page.evaluate(() => window.modalHarness.release()); await page.waitForTimeout(40);
+    assert.deepEqual(await ids(), ['page:a', 'page:b']);
+    assert.equal(await part('page-summary').textContent(), 'Showing 1–2 of 4.');
+    assert.equal(await jump.isVisible(), false);
+    assert.equal(await dialog().evaluate(node => node.scrollWidth <= node.clientWidth + 1), true);
+    await close();
+  }
+  observe('modal keyboard append discovery / narrow paging / stale closed window', { widths: [1100, 320], total: 4, cap: 3, explicitJump: 'page:c', implicitFocusMove: false });
 });
 
 test('query/facet preservation, reset-on-close and map revision revalidation are explicit', async () => {
@@ -223,10 +291,10 @@ test('destroy while open/pending aborts and restores exact nodes; all stale hand
 test('malformed native/context replies and actual worker failure show recoverable error feedback', async () => {
   for (const badReply of ['main', 'context']) {
     await mount(); await show(); await page.evaluate(value => { window.modalHarness.state.badReply = value; }, badReply); await search();
-    assert.deepEqual(await ids(), []); assert.equal(await part('retry').isVisible(), true); assert.match(await part('status').textContent(), /INCOMPATIBLE_CAPABILITY/);
+    assert.deepEqual(await ids(), []); assert.equal(await part('retry').isVisible(), true); assert.equal(await part('status').textContent(), 'Search could not complete. Retry search or change your search.');
     await part('retry').click(); await settle(); assert.deepEqual(await ids(), ['page:a', 'page:b']);
   }
-  await mount({}, { host: 'worker' }); await show();
+  await mount({ messages: { error: 'Search unavailable ({code}). Retry search.' } }, { host: 'worker' }); await show();
   await page.evaluate(() => window.modalHarness.worker.postMessage({ fixtureCrash: true }));
   await page.waitForTimeout(50); await search(); assert.deepEqual(await ids(), []); assert.equal(await part('retry').isVisible(), true);
   assert.match(await part('status').textContent(), /DISPOSED/);
@@ -528,7 +596,7 @@ test('narrow/short emulated viewports, RTL, themes and long labels retain reacha
     assert.ok(geometry.close.height >= 44); assert.ok(geometry.close.width >= 44); assert.ok(geometry.documentWidth <= viewport.width + 1); assert.equal(geometry.overflow, 'auto'); assert.ok(geometry.scroll[0] > geometry.scroll[1]); assert.ok(geometry.scroll[2] > 0);
     assert.deepEqual(await page.evaluate(async () => (await window.axe.run(document.querySelector('#modal-root'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } })).violations.map(v => ({ id: v.id, impact: v.impact, targets: v.nodes.map(n => n.target) }))), []);
     const keyboardScroll = [];
-    for (const region of [modalPart('title'), part('label')]) {
+    for (const region of [modalPart('title'), part('label'), modalPart('footer')]) {
       const state = await region.evaluate(n => { const r = n.getBoundingClientRect(); return { hidden: r.width <= 2 || r.height <= 2, overflow: n.scrollHeight > n.clientHeight + 1, scrolling: /auto|scroll/.test(getComputedStyle(n).overflowY), tabIndex: n.tabIndex }; });
       if (state.hidden) assert.ok(state.tabIndex < 0, 'A visually hidden label must not add an invisible Tab stop.');
       else if (state.overflow && state.scrolling) {

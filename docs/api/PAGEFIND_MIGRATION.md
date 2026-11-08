@@ -6,6 +6,8 @@ Migration rebuilds search from your authoritative content. Raveldex does not rea
 
 ## Map content decisions to explicit records
 
+Use Raveldex's [source-verified native content matrix and keep-current decision](RESULT_CONTENT.md) when choosing the replacement presentation. Generated matching snippets/section links belong to inline/modal; authored excerpts, category/breadcrumb/date/fields and explicitly enabled images belong to rich directory. Project rich records to `{id,title,url}` before using a basic surface, and do not treat authored excerpts as query-match evidence. These are Raveldex boundaries, independent of migration layout expectations.
+
 Pagefind's documented build workflow indexes generated HTML after the site build. Its content-selection attributes can identify selected bodies or excluded regions. Use your current public-content decisions to prepare an explicit Raveldex allowlist rather than assuming an entire page should become searchable. See the official [build workflow](https://pagefind.app/docs/) and [content selection](https://pagefind.app/docs/indexing/).
 
 | Existing integration concern | Raveldex preparation |
@@ -15,7 +17,7 @@ Pagefind's documented build workflow indexes generated HTML after the site build
 | Searchable metadata and filters | Put searchable words in text fields. Declare filter metadata separately and explicitly install the selected filters/facets. Card display metadata is not indexed automatically. Do not assume the old metadata/search/count semantics are preserved. |
 | Descriptions, breadcrumbs, images | Choose a surface that actually supports the required authored data. [Rich directory results](HOSTS.md#rich-directory-results) support authored excerpts/metadata and explicit image opt-in; title-only surfaces do not gain those fields through migration. |
 | Links to matching headings | Render the target IDs, preserve exact original text, and prepare Raveldex page/section maps with validated source ranges. Select source/section capabilities explicitly; no heading extraction happens in the UI. |
-| Query language and translated labels | Choose the query analyzer separately from UI message overrides. Check tokenization, stemming, prefix behavior and language coverage against your own records; no equivalent ranking or automatic translation is promised. |
+| Query language and translated labels | Choose the query analyzer separately from UI message overrides. Use the [complete native message inventory and German configuration example](LOCALIZATION.md), including modal shell/card failure text and authored labels. Partial overrides retain English defaults; there is no automatic locale/plural/number service. Check tokenization, stemming, prefix behavior and language coverage against your own records; no equivalent ranking or automatic translation is promised. |
 | Static deployment and later updates | Use the [static/Astro builder](STATIC_ASTRO.md) with explicit entries and matching source providers. Deploy the complete generation/base together; a content change needs a deliberate rebuild or supported engine update. |
 
 Pagefind documents metadata, heading sub-results and multilingual processing under its own contracts. Consult the versions/configuration actually used by your site: [metadata](https://pagefind.app/docs/metadata/), [sub-results](https://pagefind.app/docs/sub-results/), [languages](https://pagefind.app/docs/multilingual/). This mapping makes no promise that those contracts or outcomes transfer to Raveldex.

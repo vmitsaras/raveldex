@@ -57,6 +57,16 @@ beforeEach(async () => { imageRequests = []; context = await browser.newContext(
 afterEach(async () => { try { if (await page.evaluate(() => !!window.directoryCards)) await page.evaluate(() => window.directoryCards.cleanup()); assert.deepEqual(errors, []); } finally { await context.close(); } });
 after(async () => { await browser?.close(); if (server) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); } if (process.env.RAVELDEX_DIRECTORY_CARDS_REPORT) { const p = resolve(process.env.RAVELDEX_DIRECTORY_CARDS_REPORT); await mkdir(dirname(p), { recursive: true }); await writeFile(p, JSON.stringify(report, null, 2) + '\n'); } });
 
+test('cards reuse contextual empty recovery without presentation queries or focus movement',async()=>{
+  await page.evaluate(()=>window.directoryCards.view().search('missing'));await ready('missing');
+  assert.equal(await page.locator('[role=status]').textContent(),'No results for “missing”. Try a different search or clear all to browse resources.');
+  const input=page.locator('[data-raveldex-directory-input]');await input.focus();
+  const calls=await page.evaluate(()=>window.directoryCards.calls.length);await setPresentation({layout:'grid'});
+  assert.equal(await page.evaluate(()=>window.directoryCards.calls.length),calls);assert.equal(await input.evaluate(n=>n===document.activeElement),true);
+  assert.equal(await page.locator('[role=status]').textContent(),'No results for “missing”. Try a different search or clear all to browse resources.');
+  record('shared empty feedback',{extraQueries:0,focus:'input'});
+});
+
 test('list, cards and grid retain all independent native IDs, exact totals and pages without extra searches', async () => {
   const expected = directoryExpected(records, schema, { kind: 'all' }, {}, groups, 2), all = [];
   for (let number = 1; number <= 4; number++) {
@@ -67,6 +77,25 @@ test('list, cards and grid retain all independent native IDs, exact totals and p
   }
   assert.deepEqual(all, expected.allIDs); assert.equal(await page.getByRole('grid').count(), 0); assert.equal(await page.locator('ol > li[data-raveldex-directory-result]').count(), 2);
   record('independent complete presentation parity', { ids: all, pages: 4, layouts: ['list', 'cards', 'grid'], extraQueries: 0 });
+});
+
+test('list, cards and grid share plain current counts and enabled zero-choice keyboard filtering', async () => {
+  const choice=(field,value)=>page.locator(`input[data-field="${field}"][value="${value}"]`);
+  for(const layout of ['list','cards','grid']){
+    await page.evaluate(()=>window.directoryCards.view().clear());await ready();await setPresentation({layout});
+    await page.locator('details').evaluate(n=>{n.open=true;});
+    assert.ok((await page.locator('[data-raveldex-directory-hint]').textContent()).includes('not just this page'));
+    await choice('kind','guide').focus();await choice('kind','guide').press('Space');await ready();
+    await compare({kind:'all'},{kind:['guide']});assert.equal((await snap()).result.total,3);
+    const manual=choice('kind','manual');assert.ok((await manual.locator('..').innerText()).includes('(0)'));assert.equal(await manual.isEnabled(),true);
+    await manual.focus();await manual.press('Space');await ready();
+    await compare({kind:'all'},{kind:['guide','manual']});assert.equal((await snap()).result.total,5);assert.equal(await manual.evaluate(n=>n===document.activeElement&&n.checked),true);
+    await choice('tags','red').focus();await choice('tags','red').press('Space');await ready();
+    await compare({kind:'all'},{kind:['guide','manual'],tags:['red']});assert.deepEqual(await ids(),['a','b']);assert.equal((await snap()).result.total,2);
+    const calls=await page.evaluate(()=>window.directoryCards.calls.length);await setPresentation({density:'compact'});assert.equal(await page.evaluate(()=>window.directoryCards.calls.length),calls);
+    assert.equal(await choice('tags','red').evaluate(n=>n===document.activeElement),true);
+  }
+  record('plain counts across rich layouts',{layouts:['list','cards','grid'],guide:3,manualBefore:0,guideOrManual:5,withRed:2,keyboard:'native Space',presentationQueries:0});
 });
 
 test('filtered non-first-page presentation changes preserve query, selections, facets, URL and native history', async () => {

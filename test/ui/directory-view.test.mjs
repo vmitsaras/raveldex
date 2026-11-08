@@ -48,6 +48,49 @@ beforeEach(async()=> { context=await browser.newContext();page=await context.new
 afterEach(async()=> {try{await page.evaluate(()=>window.directoryView.cleanup());assert.deepEqual(errors,[]);}finally{await context.close();}});
 after(async()=> {await browser?.close();if(server){server.closeAllConnections();await new Promise(r=>server.close(r));}if(process.env.RAVELDEX_DIRECTORY_VIEW_REPORT){const p=resolve(process.env.RAVELDEX_DIRECTORY_VIEW_REPORT);await mkdir(dirname(p),{recursive:true});await writeFile(p,JSON.stringify(report,null,2)+'\n');}});
 
+test('empty directory feedback distinguishes safe query text, selected filters and explicit empty-browse refresh',async()=>{
+  const query='<img src=x onerror=alert(1)> '+ '😀'.repeat(180);
+  await input().focus();await page.evaluate(q=>window.directoryView.view().search(q),query);await ready(query);
+  assert.equal(await page.locator('[role=status]').textContent(),`No results for “${Array.from(query).slice(0,160).join('')}…”. Try a different search or clear all to browse resources.`);
+  assert.equal(await input().inputValue(),query);assert.equal(await input().evaluate(n=>n===document.activeElement),true);assert.equal(await page.locator('#directory img,#directory script').count(),0);
+  await page.setViewportSize({width:320,height:850});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+  if(process.env.RAVELDEX_DIRECTORY_VIEW_REPORT)await page.screenshot({path:resolve(process.env.RAVELDEX_DIRECTORY_VIEW_REPORT.replace(/\.json$/,'')+'-empty-320.png'),fullPage:true});
+  await page.evaluate(()=>window.directoryView.view().clear());await ready('');await openFilters();await checkbox('kind','absent').check();await ready('');
+  assert.equal(await page.locator('[role=status]').textContent(),'No results with the selected filters. Change or remove a filter, or clear all to browse resources.');
+  assert.equal(await checkbox('kind','absent').isChecked(),true);assert.equal(await page.getByRole('button',{name:'Remove Type: absent',exact:true}).count(),1);
+  await page.evaluate(async()=>{const f=window.directoryView;await f.engine.remove(f.documents.map(d=>d.id));await f.view().clear();});await ready('');
+  assert.equal(await page.locator('[role=status]').textContent(),'No resources to show. Use Refresh results to check for updates.');
+  const before=await page.evaluate(()=>window.directoryView.calls.length),refresh=page.getByRole('button',{name:'Refresh results',exact:true});
+  assert.equal(await refresh.getAttribute('aria-disabled'),'false');await refresh.focus();await refresh.press('Enter');await ready('');
+  assert.equal(await refresh.evaluate(n=>n===document.activeElement),true);assert.equal(await page.evaluate(()=>window.directoryView.calls.length),before+1);
+  record('contextual empty recovery',{querySafe:true,previewCodePoints:160,filterRetained:true,explicitRefreshQueries:1});
+});
+
+test('old empty overrides cover filtered and browse variants and detached stale status never republishes',async()=>{
+  await page.evaluate(()=>{
+    const messages={noResults:'Aucun résultat: {query}'};
+    return window.directoryView.remount({view:{messages}}).then(()=>{messages.noResults='Changed outside';});
+  });
+  await page.evaluate(()=>window.directoryView.view().search('missing'));await ready('missing');assert.equal(await page.locator('[role=status]').textContent(),'Aucun résultat: missing');
+  await page.evaluate(()=>window.directoryView.view().clear());await ready('');await openFilters();await checkbox('kind','absent').check();await ready('');assert.equal(await page.locator('[role=status]').textContent(),'Aucun résultat: ');
+  await page.evaluate(()=>window.directoryView.view().clear());await ready('');
+  await page.evaluate(()=>{
+    window.emptyFeedback=[];
+    new MutationObserver(rs=>{for(const r of rs)for(const n of r.addedNodes)window.emptyFeedback.push(n.textContent);}).observe(document.querySelector('[role=status]'),{childList:true});
+    window.directoryView.hold();window.oldFeedback=window.directoryView.view().search('obsolete_missing');
+  });
+  await page.waitForFunction(()=>window.directoryHeld);await page.evaluate(()=>window.directoryView.view().search('current_missing'));await ready('current_missing');
+  await page.evaluate(async()=>{window.directoryView.release();await window.oldFeedback;});assert.equal(await page.locator('[role=status]').textContent(),'Aucun résultat: current_missing');
+  assert.equal(await page.evaluate(()=>window.emptyFeedback.some(s=>s.includes('obsolete_missing'))),false);
+  await page.evaluate(async()=>{const f=window.directoryView;await f.engine.remove(f.documents.map(d=>d.id));await f.view().clear();});await ready('');assert.equal(await page.locator('[role=status]').textContent(),'Aucun résultat: ');
+  await page.evaluate(()=>{
+    const messages={noResults:'Texte {query}',noResultsFiltered:'Filtres {query}',noResultsBrowse:'Aucune ressource'};
+    return window.directoryView.remount({view:{messages}}).then(()=>{messages.noResultsFiltered='Changed';messages.noResultsBrowse='Changed';});
+  });await ready('');assert.equal(await page.locator('[role=status]').textContent(),'Aucune ressource');
+  await openFilters();await checkbox('kind','absent').check();await ready('');assert.equal(await page.locator('[role=status]').textContent(),'Filtres ');
+  record('captured empty fallback and freshness',{oldOverrideVariants:3,explicitVariantOverrides:2,obsoleteAnnouncements:0});
+});
+
 test('native empty browse exposes exact complete pages with stable navigation and no implicit URL state',async()=>{
   assert.equal(await page.getByRole('search').count(),1);assert.equal(await page.getByRole('searchbox',{name:'Search resources'}).count(),1);assert.equal(await page.locator('details').getAttribute('open'),null);
   const expected = directoryExpected(records,schema,{kind:'all'},{},groups,2), all=[];
@@ -61,6 +104,37 @@ test('text and OR-within/AND-across checkbox edits preserve native conjunctive t
   const filters={kind:['guide','manual'],tags:['red']};await compare({kind:'text',text:'shared'},filters,'shared');
   const d=await snap();for(const f of d.result.facets){for(const b of f.buckets.filter(b=>b.kind==='value'&&typeof b.value==='string')){const label=checkbox(f.field,b.value);if(await label.count())assert.ok((await label.locator('..').innerText()).includes(`(${b.count})`));}}
   assert.equal(await page.getByRole('group',{name:'Type',exact:true}).count(),1);assert.ok(await checkbox('tags','red').evaluate(n=>n===document.activeElement));record('native multi-selection/counts',{total:d.result.total,facets:d.result.facets});
+});
+test('plain count guidance explains an enabled zero choice expanding mutually exclusive results',async()=>{
+  await openFilters();
+  const hint=page.locator('[data-raveldex-directory-hint]');
+  assert.equal(await hint.textContent(),'Counts cover all results matching your search and selected filters, not just this page. Within a group, results can match any selected choice. Results must also match each other selected group. A choice showing 0 can add results when selected alongside another choice in its group.');
+  await checkbox('kind','guide').focus();await checkbox('kind','guide').press('Space');await ready('');
+  await compare({kind:'all'},{kind:['guide']},'');assert.equal((await snap()).result.total,3);
+  assert.deepEqual(await ids(),['a','c']);
+  assert.ok((await checkbox('kind','guide').locator('..').innerText()).includes('(3)'));
+  const manual=checkbox('kind','manual');assert.ok((await manual.locator('..').innerText()).includes('(0)'));assert.equal(await manual.isEnabled(),true);
+  await manual.evaluate(n=>{window.originalManual=n;});await manual.focus();await manual.press('Space');await ready('');
+  await compare({kind:'all'},{kind:['guide','manual']},'');assert.equal((await snap()).result.total,5);
+  assert.equal(await manual.evaluate(n=>n===window.originalManual&&n===document.activeElement&&n.checked),true);
+  assert.equal(await page.getByRole('button',{name:'Remove Type: Guide',exact:true}).count(),1);assert.equal(await page.getByRole('button',{name:'Remove Type: Manual',exact:true}).count(),1);
+  const all=[];
+  for(let number=1;number<=3;number++){
+    await compare({kind:'all'},{kind:['guide','manual']},'',number);all.push(...await ids());
+    if(number<3){await page.getByRole('button',{name:'Next page',exact:true}).press('Enter');await ready('',number+1);}
+  }
+  assert.deepEqual(all,['a','b','c','e','f']);
+  await checkbox('tags','red').focus();await checkbox('tags','red').press('Space');await ready('');
+  await compare({kind:'all'},{kind:['guide','manual'],tags:['red']},'');assert.equal((await snap()).result.total,2);assert.deepEqual(await ids(),['a','b']);
+  assert.equal(await checkbox('tags','red').evaluate(n=>n===document.activeElement),true);
+  assert.equal(await page.locator('[data-raveldex-directory-page]').textContent(),'Page 1 of 1.');
+  await page.setViewportSize({width:320,height:850});assert.equal(await hint.isVisible(),true);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth),true);
+  if(process.env.RAVELDEX_DIRECTORY_VIEW_REPORT)await page.screenshot({path:resolve(process.env.RAVELDEX_DIRECTORY_VIEW_REPORT.replace(/\.json$/,'')+'-counts-320.png')});
+  const translated={countHint:'<b>Alle aktuellen Treffer zählen.</b>'};
+  await page.evaluate(async messages=>{await window.directoryView.remount({view:{messages}});messages.countHint='Changed after capture';},translated);await openFilters();
+  assert.equal(await hint.textContent(),translated.countHint);assert.equal(await hint.locator('b').count(),0);
+  record('plain current counts and zero-choice expansion',{guide:3,manualBefore:0,guideOrManual:5,ids:all,withRed:2,nativeSpace:true,stableFocus:true,width:320,capturedTextOverride:true});
 });
 test('selected zero and projected-out values remain checked, removable and accurately labeled',async()=>{
   await page.evaluate(()=>window.directoryView.remount({limit:1}));await ready('');await openFilters();await checkbox('kind','absent').check();await ready('');
@@ -106,8 +180,8 @@ test('a revision change clears results and Refresh explicitly accepts the new na
   await page.getByText('The collection changed. Refresh results to continue.',{exact:true}).waitFor();assert.deepEqual(await ids(),[]);await page.getByRole('button',{name:'Refresh results',exact:true}).click();await ready('');assert.equal((await snap()).result.revision,2);assert.equal((await snap()).result.total,8);record('native revision recovery',{revision:2,page:1});
 });
 test('missing registrations and a missing display record refuse explicitly instead of showing false no-results',async()=>{
-  await page.evaluate(()=>window.directoryView.remount({missing:true}));await page.getByText('Search is unavailable (MISSING_CAPABILITY). Try again.',{exact:true}).waitFor();assert.deepEqual(await ids(),[]);
-  await page.evaluate(()=>window.directoryView.remount({view:{documents:[]}}));await page.getByText('Search is unavailable (INCOMPATIBLE_CAPABILITY). Try again.',{exact:true}).waitFor();assert.deepEqual(await ids(),[]);record('explicit refusal',{capability:'MISSING_CAPABILITY',display:'INCOMPATIBLE_CAPABILITY'});
+  await page.evaluate(()=>window.directoryView.remount({missing:true}));await page.getByText('Search could not complete. Refresh results or change your search and filters.',{exact:true}).waitFor();assert.deepEqual(await ids(),[]);assert.equal((await snap()).error,'MISSING_CAPABILITY');
+  await page.evaluate(()=>window.directoryView.remount({view:{documents:[],messages:{error:'Search is unavailable ({code}). Try again.'}}}));await page.getByText('Search is unavailable (INCOMPATIBLE_CAPABILITY). Try again.',{exact:true}).waitFor();assert.deepEqual(await ids(),[]);record('explicit refusal',{capability:'MISSING_CAPABILITY',display:'INCOMPATIBLE_CAPABILITY'});
 });
 test('mount admission is captured and safe before replacing authored nodes, duplicate ownership is bounded',async()=>{
   const details=await page.evaluate(()=>{

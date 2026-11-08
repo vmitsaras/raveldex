@@ -18,7 +18,7 @@
   color: var(--_text); background: var(--_surface);
   font-family: var(--raveldex-dropdown-font, inherit);
   font-size: var(--raveldex-dropdown-font-size, 1rem);
-  line-height: var(--raveldex-dropdown-line-height, 1.5);
+  line-height: var(--raveldex-dropdown-line-height, 1.6);
   overflow-wrap: anywhere;
 }
 .raveldex-dropdown *, .raveldex-dropdown *::before, .raveldex-dropdown *::after { box-sizing: border-box; }
@@ -32,12 +32,14 @@
 }
 .raveldex-dropdown__input { flex: 1 1 14rem; inline-size: 100%; }
 .raveldex-dropdown button { cursor: pointer; font-weight: 600; }
+.raveldex-dropdown .raveldex-dropdown__submit { color: var(--_accent); border-color: var(--_accent); font-weight: 650; }
 .raveldex-dropdown button[aria-disabled=true], .raveldex-dropdown button:disabled { cursor: default; border-style: dashed; }
 .raveldex-dropdown :is(input, button, a):focus-visible { outline: 3px solid var(--_focus); outline-offset: 3px; }
 .raveldex-dropdown__status { margin-block: var(--_gap); color: var(--_muted); }
+.raveldex-dropdown__hint { margin-block: var(--_gap); color: var(--_muted); font-size: .875em; line-height: 1.5; }
 .raveldex-dropdown[aria-busy=true] .raveldex-dropdown__status { font-weight: 600; }
 .raveldex-dropdown[data-state=error] .raveldex-dropdown__status { color: var(--_error); font-weight: 600; }
-.raveldex-dropdown__full-results { display: inline-flex; align-items: center; min-block-size: 2.75rem; color: var(--_accent); text-underline-offset: .2em; }
+.raveldex-dropdown__full-results { display: inline-flex; align-items: center; min-block-size: 2.75rem; color: var(--_accent); text-decoration-line: underline; text-underline-offset: .2em; }
 .raveldex-dropdown__popup {
   position: fixed; inset: auto; left: var(--_left, 0px); top: var(--_top, 0px);
   width: var(--_width, 0px); min-width: 0;
@@ -61,7 +63,8 @@
 .raveldex-dropdown__link {
   display: flex; align-items: center; min-block-size: 2.75rem;
   padding: var(--_padding); color: var(--_accent);
-  text-underline-offset: .2em; white-space: normal;
+  font-size: 1.15em; line-height: 1.35; font-weight: 650;
+  text-decoration-line: underline; text-underline-offset: .2em; white-space: normal;
 }
 .raveldex-dropdown__cell.is-active .raveldex-dropdown__link { color: inherit; font-weight: 650; }
 .raveldex-dropdown__link:focus-visible { outline-offset: -4px; }
@@ -76,4 +79,5 @@
     --_active: Highlight; --_active-text: HighlightText;
   }
   .raveldex-dropdown__cell.is-active { forced-color-adjust: none; }
+  .raveldex-dropdown .raveldex-dropdown__submit { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
 }

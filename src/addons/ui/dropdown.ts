@@ -5,11 +5,12 @@ import { assertResult } from './render.js';
 import { queryFromText } from './query.js';
 import { mounted } from './mounts.js';
 import { registerModalShortcut } from './modal-shortcuts.js';
+import { queryPreview } from './search-feedback.js';
 import type { UIDocument } from './types.js';
 
 export type { UIDocument } from './types.js';
 
-/** Plain text. Result messages accept {total}/{count}; error accepts {code}. */
+/** Plain text. Empty messages accept {query}; results {total}/{count}; error {code}. */
 export interface DropdownUIMessages {
   readonly label: string;
   readonly placeholder: string;
@@ -27,6 +28,7 @@ export interface DropdownUIMessages {
   readonly fullResults: string;
   readonly closed: string;
   readonly noSpace: string;
+  readonly keyboardHint?: string;
 }
 export interface DropdownUIOptions {
   readonly root: HTMLElement;
@@ -49,13 +51,14 @@ export interface DropdownUIHandle {
   readonly destroy: () => void;
 }
 
-const defaults: DropdownUIMessages = Object.freeze({
-  label: 'Search this site', placeholder: 'Search', submit: 'Search', clear: 'Clear',
-  idle: 'Enter a search term.', composing: 'Finish composing to search.', searching: 'Searching…',
-  noResults: 'No results.', resultsLabel: 'Search results', resultsOne: '{total} result. Showing {count}.',
-  resultsMany: '{total} results. Showing {count}.', error: 'Search could not complete ({code}). Try again.',
+const defaults: Required<DropdownUIMessages> = Object.freeze({
+  label: 'Search this site', placeholder: 'Search', submit: 'Search', clear: 'Clear search',
+  idle: 'Enter a search term.', composing: 'Finish entering text to search.', searching: 'Searching…',
+  noResults: 'No results for “{query}”. Try a different search or open the full-results page.', resultsLabel: 'Search results', resultsOne: '{total} result. Showing {count}.',
+  resultsMany: '{total} results. Showing {count}.', error: 'Search could not complete. Retry search or change your search.',
   retry: 'Retry search', fullResults: 'See all results', closed: 'Search dismissed. Edit the query or use Search to reopen.',
   noSpace: 'Not enough space for this result list. Open the full-results page.',
+  keyboardHint: 'Arrow Up/Down selects a result. Enter opens it; without a selection, Enter searches. Escape dismisses results. Tab moves on.',
 });
 interface OpenDropdown { readonly close: () => void }
 const opened = new WeakMap<Document, OpenDropdown>();
@@ -135,13 +138,14 @@ export function mountRaveldexDropdown(options: DropdownUIOptions): DropdownUIHan
   const clear = node('button', 'clear', messages.clear); clear.type = 'button';
   form.append(label, input, submit, clear);
   const status = node('p', 'status', messages.idle); status.setAttribute('role', 'status'); status.setAttribute('aria-atomic', 'true');
+  const hint = node('p', 'hint', messages.keyboardHint); hint.id = `${id}-hint`; input.setAttribute('aria-describedby', hint.id);
   const retry = node('button', 'retry', messages.retry); retry.type = 'button'; retry.hidden = true;
   const full = node('a', 'full-results', messages.fullResults); full.hidden = true;
   popup.className = 'raveldex-dropdown__popup'; popup.setAttribute('data-raveldex-dropdown-popup', ''); popup.id = `${id}-popup`;
   popup.setAttribute('popover', 'manual'); popup.setAttribute('role', 'grid'); popup.setAttribute('aria-label', messages.resultsLabel);
   input.setAttribute('aria-controls', popup.id);
   if (shortcut) input.setAttribute('aria-keyshortcuts', 'Control+K Meta+K');
-  form.append(full); shell.append(form, status, retry, popup);
+  form.append(full); shell.append(form, hint, status, retry, popup);
   const originalNodes = [...captured.root.childNodes], listeners: (() => void)[] = [];
   let destroyed = false, wanted = false, composing = false, suppressedComposition = false, imeSubmit = false;
   let compositionValue: string | undefined, timer: number | undefined, sequence = 0, controller: AbortController | undefined;
@@ -331,7 +335,7 @@ export function mountRaveldexDropdown(options: DropdownUIOptions): DropdownUIHan
         }
         if (!current()) return;
         shell.dataset.state = found.total ? 'results' : 'empty';
-        announce(found.total ? format(found.total === 1 ? messages.resultsOne : messages.resultsMany, { total: found.total, count: rows.length }) : messages.noResults);
+        announce(found.total ? format(found.total === 1 ? messages.resultsOne : messages.resultsMany, { total: found.total, count: rows.length }) : format(messages.noResults, { query: queryPreview(raw) }));
         if (!current()) return;
         if (rows.length && !position()) { if (geometryFailure === 'space') collapseForSpace(ticket, found.total); else close(); return; }
         if (job.intent && rows.length) setActive(job.intent === 'first' ? 0 : rows.length - 1);

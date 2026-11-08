@@ -11,10 +11,11 @@ import type { PageSections } from '../sections/types.js';
 import { captureInlineSections, isSectionRefusal, sectionDocument } from './inline-sections.js';
 import type { InlineSectionContext } from './inline-sections.js';
 import { inlineHost } from './inline-lifecycle.js';
+import { queryPreview } from './search-feedback.js';
 
 export type { UIDocument, UIFacet } from './types.js';
 
-/** All messages are plain text. Summary tokens: {total}, {count}; error: {code}. */
+/** Plain text. Empty templates support {query}; summaries {total}/{count}; append {added}/{start}/{end}; error {code}. */
 export interface InlineUIMessages {
   readonly label: string;
   readonly placeholder: string;
@@ -23,6 +24,7 @@ export interface InlineUIMessages {
   readonly idle: string;
   readonly searching: string;
   readonly noResults: string;
+  readonly noResultsFiltered?: string;
   readonly resultsLabel: string;
   readonly resultsOne: string;
   readonly resultsMany: string;
@@ -30,6 +32,8 @@ export interface InlineUIMessages {
   readonly retry: string;
   readonly composing?: string;
   readonly loadMore?: string;
+  readonly newResults?: string;
+  readonly resultsAdded?: string;
   readonly previous?: string;
   readonly next?: string;
   readonly paginationLabel?: string;
@@ -79,14 +83,16 @@ export interface InlineUIHandle {
 
 const defaults: Required<InlineUIMessages> = Object.freeze({
   label: 'Search this site', placeholder: 'Search', submit: 'Search', clear: 'Clear search',
-  idle: 'Enter a search term.', searching: 'Searching…', noResults: 'No results.',
+  idle: 'Enter a search term.', searching: 'Searching…', noResults: 'No results for “{query}”. Try a different search.',
+  noResultsFiltered: 'No results with the selected filters. Change a filter or clear search and filters.',
   resultsLabel: 'Search results', resultsOne: '{total} result. Showing {count}.',
   resultsMany: '{total} results. Showing {count}.',
-  error: 'Search could not complete ({code}). Try again.', retry: 'Retry search',
-  composing: 'Finish composing to search.', loadMore: 'Load more', previous: 'Previous results', next: 'Next results',
+  error: 'Search could not complete. Retry search or change your search.', retry: 'Retry search',
+  composing: 'Finish entering text to search.', loadMore: 'Load more', previous: 'Previous results', next: 'Next results',
+  newResults: 'Go to new results', resultsAdded: 'Results added: {added}. Showing {start}–{end} of {total}.',
   paginationLabel: 'Search result pages', pageSummary: 'Showing {start}–{end} of {total}.',
   windowLimit: 'This window shows {count} results; {remaining} remain. Use Next results to continue.',
-  revisionChanged: 'The index changed. Search again to refresh the results.',
+  revisionChanged: 'Search results changed. Retry search to see the latest results.',
   all: 'All', emptyValue: '(empty string)', nullValue: 'Null', missingValue: 'Missing',
   unlistedValue: '{value} (not in displayed values)',
   facetSummary: '{total} distinct values; {omitted} buckets omitted. Counts include the current filters.',
@@ -127,6 +133,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
   for (const key of Object.keys(ownedMessages) as (keyof InlineUIMessages)[]) {
     Object.defineProperty(messages, key, { value: displayName(ownedMessages[key], 512, `inline.messages.${key}`), enumerable: true });
   }
+  if (Object.hasOwn(ownedMessages, 'noResults') && !Object.hasOwn(ownedMessages, 'noResultsFiltered')) messages.noResultsFiltered = messages.noResults;
   Object.freeze(messages);
   if (o.pageSections !== undefined && o.snippetFields !== undefined) fail('INVALID_OPTIONS', 'inline.pageSections');
   if (o.pageSections === undefined && o.maxSectionPreviews !== undefined) fail('INVALID_OPTIONS', 'inline.maxSectionPreviews');
@@ -170,16 +177,19 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
   const heading = node('h2', 'results-heading', messages.resultsLabel); heading.id = `${id}-results`; heading.hidden = true;
   const results = node('ol', 'results'); results.setAttribute('aria-labelledby', heading.id); results.hidden = true;
   const navigation = node('nav', 'navigation'); navigation.hidden = true; navigation.setAttribute('aria-label', messages.paginationLabel);
-  const loadMore = node('button', 'load-more', messages.loadMore), previous = node('button', 'previous', messages.previous), next = node('button', 'next', messages.next);
-  for (const button of [loadMore, previous, next]) { button.type = 'button'; unavailable(button, true); }
-  const pageSummary = node('p', 'page-summary');
-  navigation.append(loadMore, previous, next, pageSummary);
-  shell.append(form, facetGroup, status, retry, heading, results, navigation); shell.dataset.state = 'idle'; shell.setAttribute('aria-busy', 'false');
+  const loadMore = node('button', 'load-more', messages.loadMore), newResults = node('button', 'new-results', messages.newResults);
+  const previous = node('button', 'previous', messages.previous), next = node('button', 'next', messages.next);
+  const navigationButtons = [loadMore, newResults, previous, next];
+  for (const button of navigationButtons) { button.type = 'button'; unavailable(button, true); }
+  const pageSummary = node('p', 'page-summary'); pageSummary.hidden = true;
+  navigation.append(loadMore, newResults, previous, next);
+  shell.append(form, facetGroup, status, retry, heading, results, pageSummary, navigation); shell.dataset.state = 'idle'; shell.setAttribute('aria-busy', 'false');
 
   const host = inlineHost(captured.root);
   let destroyed = false, composing = false, sequence = 0, suspended = !!host;
   const activePresentation = (): boolean => !destroyed && !suspended && (host?.active() ?? true);
   let timer: number | undefined, controller: AbortController | undefined;
+  let appendedTarget: HTMLAnchorElement | undefined;
   interface Snapshot { readonly signature: string; readonly revision: number; readonly total: number; readonly start: number; readonly ids: readonly string[] }
   let snapshot: Snapshot | undefined;
   const originalNodes = Array.from(captured.root.childNodes), listeners: (() => void)[] = [];
@@ -188,14 +198,24 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
   };
   const announce = (text: string): void => { if (status.textContent !== text) status.textContent = text; };
   const cancelTimer = (): void => { if (timer !== undefined) { win.clearTimeout(timer); timer = undefined; } };
-  const disableNavigation = (): void => { for (const button of [loadMore, previous, next]) unavailable(button, true); };
+  const updateNavigation = (): void => {
+    if (destroyed) return;
+    const focused = (navigation.getRootNode() as Document | ShadowRoot).activeElement;
+    for (const button of navigationButtons) button.hidden = button.getAttribute('aria-disabled') === 'true' && button !== focused;
+    navigation.hidden = !activePresentation() || navigationButtons.every(button => button.hidden);
+  };
+  const disableNavigation = (): void => {
+    appendedTarget = undefined;
+    for (const button of navigationButtons) unavailable(button, true);
+    updateNavigation();
+  };
   // Document focus is retargeted to the host when this surface is in a shadow
   // tree. Inspect only our own tree, including closed/nested authored roots.
   const resultFocused = (): boolean => results.contains((results.getRootNode() as Document | ShadowRoot).activeElement);
   const clearPresentation = (): void => {
     snapshot = undefined;
     if (activePresentation() && resultFocused()) input.focus();
-    results.replaceChildren(); results.hidden = true; heading.hidden = true; pageSummary.textContent = '';
+    results.replaceChildren(); results.hidden = true; heading.hidden = true; pageSummary.textContent = ''; pageSummary.hidden = true;
     resetInlineFacets(doc, facets, messages); disableNavigation();
   };
   const invalidate = (preserve = false): number => {
@@ -213,7 +233,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
   };
   const current = (ticket: number, active: AbortController): boolean => activePresentation() && sequence === ticket && !active.signal.aborted;
   const idle = (): void => { shell.dataset.state = 'idle'; announce(messages.idle); };
-  const queryControls = (): { query: Query; active: boolean } => {
+  const queryControls = (): { query: Query; active: boolean; text: string; filtered: boolean } => {
     const raw = input.value, text = raw.length > 2048 ? raw : raw.trim();
     const clauses: Query[] = [];
     for (const facet of facets) {
@@ -221,7 +241,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
       if (value !== undefined) clauses.push({ kind: 'eq', field: facet.field, value });
     }
     const query = queryFromText(text, captured.mode);
-    return { query: clauses.length ? { kind: 'and', children: [query, ...clauses] } : query, active: !!text || !!clauses.length };
+    return { query: clauses.length ? { kind: 'and', children: [query, ...clauses] } : query, active: !!text || !!clauses.length, text, filtered: !!clauses.length };
   };
   type Action = 'reset' | 'more' | 'next' | 'previous';
   const execute = async (action: Action = 'reset'): Promise<void> => {
@@ -286,6 +306,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
         }
       }
       const fragment = inlineResults(doc, node, captured, found, snippets, messages, contexts), updates = inlineFacets(doc, facets, found, messages);
+      const addedTarget = append ? fragment.querySelector<HTMLAnchorElement>('[data-raveldex-inline-result-title]') : null;
       const ids = found.hits.map(h => h.id);
       if (append && prior && ids.some(id => prior.ids.includes(id))) fail('INCOMPATIBLE_CAPABILITY', 'inline.result.duplicates');
       if (!current(ticket, active)) return;
@@ -293,13 +314,18 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
       if (append) results.append(fragment); else results.replaceChildren(fragment);
       const start = append && prior ? prior.start : offset, allIds = append && prior ? [...prior.ids, ...ids] : ids;
       snapshot = { signature, revision: found.revision, total: found.total, start, ids: allIds };
-      heading.hidden = false; results.hidden = false; navigation.hidden = false; results.start = start + 1;
+      heading.hidden = false; results.hidden = false; results.start = start + 1;
+      appendedTarget = addedTarget ?? undefined;
       shell.dataset.state = found.total ? 'results' : 'empty';
-      announce(found.total === 0 ? messages.noResults : message(found.total === 1 ? messages.resultsOne : messages.resultsMany, { total: found.total, count: allIds.length }));
+      announce(found.total === 0 ? message(controls.filtered ? messages.noResultsFiltered : messages.noResults, { query: queryPreview(controls.text) }) : append
+        ? message(messages.resultsAdded, { added: ids.length, start: start + 1, end: start + allIds.length, total: found.total, count: allIds.length })
+        : message(found.total === 1 ? messages.resultsOne : messages.resultsMany, { total: found.total, count: allIds.length }));
       const left = Math.max(0, found.total - start - allIds.length);
-      pageSummary.textContent = message(messages.pageSummary, { start: allIds.length ? start + 1 : 0, end: start + allIds.length, total: found.total, count: allIds.length });
+      pageSummary.hidden = found.total === 0;
+      pageSummary.textContent = found.total ? message(messages.pageSummary, { start: start + 1, end: start + allIds.length, total: found.total, count: allIds.length }) : '';
       if (left && allIds.length >= maxRendered) pageSummary.textContent += ' ' + message(messages.windowLimit, { count: allIds.length, remaining: left, total: found.total });
       unavailable(loadMore, !left || allIds.length >= maxRendered); unavailable(next, !left || allIds.length < maxRendered); unavailable(previous, start === 0);
+      unavailable(newResults, !appendedTarget); updateNavigation();
     } catch (reason) {
       if (!current(ticket, active)) return;
       const descriptor = typeof reason === 'object' && reason !== null ? Object.getOwnPropertyDescriptor(reason, 'code') : undefined;
@@ -337,6 +363,13 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
   for (const [button, action] of [[loadMore, 'more'], [next, 'next'], [previous, 'previous']] as const) {
     listen(button, 'click', () => { if (button.getAttribute('aria-disabled') !== 'true') void execute(action); });
   }
+  listen(newResults, 'click', () => {
+    if (newResults.getAttribute('aria-disabled') === 'true' || !appendedTarget || !results.contains(appendedTarget)) return;
+    appendedTarget.focus();
+  });
+  // Wait for native focus transfer before retiring an unavailable action.
+  // Read current state at that time, so newer requests cannot be overwritten.
+  listen(navigation, 'focusout', () => { void Promise.resolve().then(() => { if (activePresentation()) updateNavigation(); }); });
   listen(retry, 'click', () => { if (retry.getAttribute('aria-disabled') !== 'true') void execute(); });
   const handle: InlineUIHandle = Object.freeze({
     search: (text?: string): Promise<void> => {
@@ -348,14 +381,14 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
     destroy: (): void => {
       if (destroyed) return;
       destroyed = true; sequence++; cancelTimer();
-      sections = undefined; snapshot = undefined; results.replaceChildren();
+      sections = undefined; snapshot = undefined; appendedTarget = undefined; results.replaceChildren();
       const previous = controller; controller = undefined; previous?.abort();
       for (const remove of listeners) remove();
       if (mounted.get(captured.root)?.handle !== handle) return;
       mounted.delete(captured.root); captured.root.replaceChildren(...originalNodes);
     },
   });
-  host?.layout({ shell, form, facets: facetGroup, feedback: [status, retry, heading, results, navigation], input });
+  host?.layout({ shell, form, facets: facetGroup, feedback: [status, retry, heading, results, pageSummary, navigation], input });
   host?.connect(Object.freeze({
     suspend: (reset: boolean): void => {
       if (destroyed) return;

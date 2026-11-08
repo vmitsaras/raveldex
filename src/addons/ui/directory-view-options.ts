@@ -4,14 +4,17 @@ import type { CapturedDirectory } from './directory-state.js';
 import type { DirectoryViewMessages, DirectoryViewOptions } from './directory-view-types.js';
 import type { UIDocument } from './types.js';
 
-const defaults: DirectoryViewMessages = Object.freeze({
+const defaults: Required<DirectoryViewMessages> = Object.freeze({
   label: 'Search resources', placeholder: 'Enter a word', submit: 'Search', clear: 'Clear all', filters: 'Filter resources',
-  closeFilters: 'Close filters', countHint: 'Counts include every active filter. Choices in one group combine with OR; different groups combine with AND.',
+  closeFilters: 'Close filters', countHint: 'Counts cover all results matching your search and selected filters, not just this page. Within a group, results can match any selected choice. Results must also match each other selected group. A choice showing 0 can add results when selected alongside another choice in its group.',
   selectedFilters: 'Selected filters', remove: 'Remove {group}: {value}', unknownCount: 'count unavailable', emptyValue: '(Empty)',
   omittedCounts: 'Counts shown for {shown} of {total} values. Other counts are unavailable.', resultsLabel: 'Results',
-  idle: 'Search or browse all resources.', waiting: 'Waiting for your search.', composing: 'Finish entering text to search.', searching: 'Searching.',
-  noResults: 'No results. Remove a filter or clear all to browse resources.', resultOne: '1 result. Showing {start}–{end}.', results: '{total} results. Showing {start}–{end}.',
-  previous: 'Previous page', next: 'Next page', page: 'Page {page} of {pages}.', error: 'Search is unavailable ({code}). Try again.',
+  idle: 'Search or browse all resources.', waiting: 'Waiting for your search.', composing: 'Finish entering text to search.', searching: 'Searching…',
+  noResults: 'No results for “{query}”. Try a different search or clear all to browse resources.',
+  noResultsFiltered: 'No results with the selected filters. Change or remove a filter, or clear all to browse resources.',
+  noResultsBrowse: 'No resources to show. Use Refresh results to check for updates.',
+  resultOne: '1 result. Showing {start}–{end}.', results: '{total} results. Showing {start}–{end}.',
+  previous: 'Previous page', next: 'Next page', page: 'Page {page} of {pages}.', error: 'Search could not complete. Refresh results or change your search and filters.',
   stale: 'The collection changed. Refresh results to continue.', retry: 'Refresh results', invalid: 'This search or selection exceeds the directory limits. Remove a choice or shorten the search.',
 });
 export const directoryMessage = (source: string, values: Readonly<Record<string, string | number>>): string =>
@@ -24,7 +27,7 @@ export interface CapturedDirectoryView {
   readonly groups: readonly { readonly field: string; readonly label: string; readonly values: readonly { readonly value: string; readonly label: string }[] }[];
   readonly debounceMs: number;
   readonly filtersOpen: boolean;
-  readonly messages: DirectoryViewMessages;
+  readonly messages: Required<DirectoryViewMessages>;
 }
 export function captureDirectoryView(input: DirectoryViewOptions): CapturedDirectoryView {
   const budget = new Admission(100_000), o = object(input, ['root', 'controller', 'documents', 'groups', 'debounceMs', 'filtersOpen', 'messages'], 'view', budget);
@@ -35,7 +38,8 @@ export function captureDirectoryView(input: DirectoryViewOptions): CapturedDirec
     const captured = text(value, maximum, 'view.label'); if (/^[\s\p{C}]*$/u.test(captured)) failDirectory('view.label'); return captured;
   };
   const overrides = object(o.messages === undefined ? {} : o.messages, Object.keys(defaults), 'view.messages', budget);
-  const messages = Object.freeze(Object.fromEntries(Object.entries(defaults).map(([key, value]) => [key, Object.hasOwn(overrides, key) ? label(overrides[key]) : value]))) as unknown as DirectoryViewMessages;
+  const messages = Object.freeze(Object.fromEntries(Object.entries(defaults).map(([key, value]) => [key,
+    Object.hasOwn(overrides, key) ? label(overrides[key]) : (key === 'noResultsFiltered' || key === 'noResultsBrowse') && Object.hasOwn(overrides, 'noResults') ? label(overrides.noResults) : value]))) as unknown as Required<DirectoryViewMessages>;
   let units = 0;
   const documents = new Map<string, UIDocument>();
   for (const raw of ownArray(o.documents, 10_000, 'INVALID_OPTIONS', 'ui.directory.view.documents', budget)) {

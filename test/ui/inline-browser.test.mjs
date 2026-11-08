@@ -206,9 +206,9 @@ test('errors and native expansion refusals remain explicit and retry uses the ac
   await search('source prov');
   assert.equal(await input().inputValue(), 'source prov');
   assert.equal(await status().isVisible(), true);
-  assert.match(await status().textContent(), /WORK_LIMIT_EXCEEDED/);
+  assert.equal(await status().textContent(), 'Search could not complete. Retry search or change your search.');
   await root().getByRole('button', { name: 'Retry search', exact: true }).click(); await findIds(['alpha', 'beta', 'gamma']);
-  await page.evaluate(async () => { await window.inlineHarness.cleanup(); await window.createInlineFixture({}, { limits: { maxExpansionsPerGroup: 1 } }); });
+  await page.evaluate(async () => { await window.inlineHarness.cleanup(); await window.createInlineFixture({ messages: { error: 'Search failed ({code}). Retry search.' } }, { limits: { maxExpansionsPerGroup: 1 } }); });
   await search('source prov'); assert.deepEqual(await ids(), []);
   assert.match(await status().textContent(), /LIMIT_EXCEEDED/);
   assert.equal(await input().inputValue(), 'source prov');

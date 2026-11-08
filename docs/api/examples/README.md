@@ -5,6 +5,8 @@ Copy these modules into an ESM application where you installed the local package
 | Module | Invocation / environment |
 | --- | --- |
 | [inline.mjs](inline.mjs) | `await createInlineSearch(root)` on an HTTP(S) page; core-only consumer search with explicit prefix mode. Import `/addons/ui/inline.css` separately; call returned `dispose()` when removing it. |
+| [consumer-messages.de.mjs](consumer-messages.de.mjs) | Data-only complete German bundles: copy locally and use `german.inline`, `inlineWithFilters`, `modal`, `dropdown`, `directory` and `imageUnavailable` as described in [the localization guide](../LOCALIZATION.md). Imports do not mount or select a locale. |
+| [cms-refresh.mjs](cms-refresh.mjs) | `await runCMSRefreshExample(root, externalButton)` on an HTTP(S) page with a dedicated document-tree host. Finite owned directory update/remount/focus walkthrough; restores authored Nodes and disposes its engine before returning. Import card CSS separately; read the [preconditions and state limits](../CMS_REFRESH.md). |
 | [core.mjs](core.mjs) | `await runCoreExample()` in Node; one record and exact result. |
 | [addons.mjs](addons.mjs) | `await runAddonsExample()` in Node with usable `Intl.Segmenter`; phrases, filters/facets, Inspector, diagnostics, ranges/snippets and source/position/mixed parity. |
 | [snapshots.mjs](snapshots.mjs) | `await runSnapshotsExample(applicationQualification)` in the application's exactly declared Node environment. The application must supply its own `NativeSnapshotQualification` evidence; version detection alone is insufficient. |

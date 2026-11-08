@@ -152,6 +152,40 @@ after(async () => {
   report.finishedAt = new Date().toISOString(); await save();
 });
 
+test('keyboard guidance is visible, described once outside live feedback and independently captured per instance',async()=>{
+  const guidance='Arrow Up/Down selects a result. Enter opens it; without a selection, Enter searches. Escape dismisses results. Tab moves on.';
+  assert.equal(await part('hint').textContent(),guidance);assert.equal(await part('hint').isVisible(),true);
+  const id=await part('hint').getAttribute('id');assert.equal(await input().getAttribute('aria-describedby'),id);
+  assert.equal(await part('hint').evaluate(n=>!!n.closest('[role=status],[aria-live]')),false);
+  assert.equal(await input().getAttribute('aria-keyshortcuts'),null);assert.equal((await calls()).length,0);
+  let nativeDescription='Not run for this engine';
+  if(engine!=='webkit'){
+    const session=await context.newCDPSession(page);
+    try{const {nodes}=await session.send('Accessibility.getFullAXTree');nativeDescription=nodes.find(n=>!n.ignored&&n.role?.value==='combobox')?.description?.value;assert.equal(nativeDescription,guidance);}finally{await session.detach();}
+  }
+  const result=await page.evaluate(async()=>{
+    const first=window.dropdownHarness;
+    const messages={keyboardHint:'<img src=x> Flèches: choisir; Entrée: ouvrir; Échap: fermer.'};
+    first.remount({messages});messages.keyboardHint='Changed outside';
+    await window.createDropdownFixture({}, {root:'second-root',shared:true});
+    const firstInput=first.root.querySelector('input'),second=document.querySelector('#second-root input');
+    const descriptions=[firstInput,second].map(n=>n.getAttribute('aria-describedby'));
+    window.dropdownHarness=first;
+    return{descriptions,unique:new Set(descriptions).size,text:document.getElementById(descriptions[0]).textContent,parsed:first.root.querySelectorAll('img').length};
+  });
+  assert.equal(result.unique,2);assert.equal(result.text,'<img src=x> Flèches: choisir; Entrée: ouvrir; Échap: fermer.');assert.equal(result.parsed,0);
+  assert.equal((await calls()).length,0);observe('static keyboard guidance',{guidance,nativeDescription,...result,noAutomaticQueries:true});
+});
+
+test('long RTL keyboard guidance wraps without becoming a live announcement or replacing editing focus',async()=>{
+  const text=('اختيار نتيجة بالأسهم ثم فتحها باستخدام Enter. ').repeat(12).slice(0,512);
+  await mount({messages:{keyboardHint:text}});await page.setViewportSize({width:320,height:568});await page.evaluate(()=>document.documentElement.dir='rtl');
+  await input().focus();assert.equal(await part('hint').textContent(),text);assert.equal(await input().evaluate(n=>n===document.activeElement),true);
+  assert.equal(await part('hint').evaluate(n=>n.scrollHeight<=n.clientHeight+1),true);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+  assert.equal((await calls()).length,0);await screenshot('keyboard-help-320-rtl');
+  observe('long RTL keyboard guidance',{codeUnits:text.length,narrow:320,clipped:false,noQueries:true});
+});
+
 test('core-only idle mount and bounded native results expose a computed combobox/grid/link hierarchy', async () => {
   assert.equal(await input().getAttribute('type'), 'text');
   assert.equal(await input().getAttribute('role'), 'combobox');
@@ -486,9 +520,42 @@ test('outside pointer and focus changes cancel pending programmatic presentation
   observe('outside pending dismissal', { pointerWithSameOutsideFocus: true, focusChange: true, latePublication: false });
 });
 
+test('empty dropdown context is safe and bounded; captured templates retain optional typed diagnostics', async () => {
+  const query='<img src=x onerror=alert(1)> '+ '😀'.repeat(180);
+  await input().focus();await search(query);await state('empty');
+  assert.equal(await part('status').textContent(),`No results for “${Array.from(query).slice(0,160).join('')}…”. Try a different search or open the full-results page.`);
+  assert.equal(await input().inputValue(),query);assert.equal(await input().evaluate(n=>n===document.activeElement),true);
+  assert.equal(await root().locator('img,script').count(),0);assert.equal(new URL(await part('full-results').getAttribute('href')).searchParams.get('q'),query);
+  await page.setViewportSize({width:320,height:850});await screenshot('empty-320');
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+  await page.evaluate(()=>{
+    const messages={noResults:'Aucun résultat: {query}',error:'Réessayer ({code})'};
+    window.dropdownHarness.remount({messages});messages.noResults='Changed';messages.error='Changed';
+  });
+  await search('missing');assert.equal(await part('status').textContent(),'Aucun résultat: missing');
+  await page.evaluate(()=>{window.dropdownHarness.state.failNext=true;});await search('shared');
+  assert.equal(await part('status').textContent(),'Réessayer (WORK_LIMIT_EXCEEDED)');
+  observe('safe contextual empty/diagnostics',{previewCodePoints:160,originalInputRetained:true,capturedOverrides:true,typedCode:'WORK_LIMIT_EXCEEDED'});
+});
+
+test('replaced missing query cannot publish stale empty feedback and clear never queries', async () => {
+  await page.evaluate(()=>{
+    window.emptyFeedback=[];
+    new MutationObserver(rs=>{for(const r of rs)for(const n of r.addedNodes)window.emptyFeedback.push(n.textContent);}).observe(document.querySelector('.raveldex-dropdown__status'),{childList:true});
+    window.dropdownHarness.state.holdNext=true;window.oldFeedback=window.dropdownHarness.handle.search('obsolete_missing');
+  });
+  await page.waitForFunction(()=>window.dropdownHarness.state.pending.length===1);await search('current_missing');
+  await page.evaluate(async()=>{window.dropdownHarness.release();await window.oldFeedback;});
+  assert.equal(await part('status').textContent(),'No results for “current_missing”. Try a different search or open the full-results page.');
+  assert.equal(await page.evaluate(()=>window.emptyFeedback.some(s=>s.includes('obsolete_missing'))),false);
+  const before=(await calls()).length;await part('clear').focus();await part('clear').press('Enter');
+  assert.equal(await part('clear').evaluate(n=>n===document.activeElement),true);assert.equal((await calls()).length,before);
+  observe('empty feedback freshness/reset',{staleAnnouncements:0,resetQueries:0});
+});
+
 test('native failures, malformed results, no-results and Clear retain deliberate recoverable feedback', async () => {
   await page.evaluate(() => { window.dropdownHarness.state.failNext = true; }); await search('shared');
-  await state('error'); assert.match(await part('status').textContent(), /WORK_LIMIT_EXCEEDED/); assert.equal(await part('retry').isVisible(), true); await clearActive();
+  await state('error'); assert.equal(await part('status').textContent(), 'Search could not complete. Retry search or change your search.'); assert.equal(await part('retry').isVisible(), true); await clearActive();
   await input().focus(); const retryTabs = [];
   for (let i = 0; i < 6 && !await part('retry').evaluate(n => n === document.activeElement); i++) {
     await page.keyboard.press(controlTab);
@@ -500,9 +567,9 @@ test('native failures, malformed results, no-results and Clear retain deliberate
   assert.equal(await input().evaluate(n => n === document.activeElement), true, 'Retry deliberately returns focus to editing before it hides');
   for (const kind of ['total', 'revision', 'model', 'hits']) {
     await input().press('ArrowDown'); await page.evaluate(kind => { window.dropdownHarness.state.badReply = kind; }, kind); await search('shared');
-    await state('error'); assert.deepEqual(await ids(), []); await clearActive(); assert.match(await part('status').textContent(), /INCOMPATIBLE_CAPABILITY/);
+    await state('error'); assert.deepEqual(await ids(), []); await clearActive(); assert.equal(await part('status').textContent(), 'Search could not complete. Retry search or change your search.');
   }
-  await search('zzzzmissing'); await state('empty'); assert.equal(await part('status').textContent(), 'No results.'); assert.equal(await input().inputValue(), 'zzzzmissing');
+  await search('zzzzmissing'); await state('empty'); assert.equal(await part('status').textContent(), 'No results for “zzzzmissing”. Try a different search or open the full-results page.'); assert.equal(await input().inputValue(), 'zzzzmissing');
   await part('clear').evaluate(n => n.addEventListener('click', () => {
     window.pointerClearFocus = { node: document.activeElement, tag: document.activeElement.tagName, cls: document.activeElement.className };
   }, { capture: true, once: true }));
@@ -755,7 +822,7 @@ test('owned open/closed shadow focus stays inside; ancestor native dialog Escape
 });
 
 test('real module-worker hits remain native and actual worker loss is visible without fallback', async () => {
-  await mount({}, { host: 'worker' }); await search('shared'); assert.deepEqual(await ids(), ['a', 'b', 'c', 'd', 'e']); assert.equal((await calls()).at(-1).result.total, 7);
+  await mount({ messages: { error: 'Search unavailable ({code}). Retry search.' } }, { host: 'worker' }); await search('shared'); assert.deepEqual(await ids(), ['a', 'b', 'c', 'd', 'e']); assert.equal((await calls()).at(-1).result.total, 7);
   const ownerCreations = await page.evaluate(() => window.dropdownOwnerCreations);
   await page.evaluate(() => window.dropdownHarness.worker.postMessage({ fixtureCrash: true }));
   await page.waitForFunction(() => window.dropdownHarness.state.workerErrors.length === 1);

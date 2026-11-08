@@ -81,7 +81,7 @@ for (const surface of ['inline', 'modal']) test(`${surface}: committed compositi
       node.form.dispatchEvent(new SubmitEvent('submit', { bubbles: true, cancelable: true }));
     }, query);
     await page.waitForTimeout(80);
-    assert.equal((await calls()).length, 0); assert.equal(await status.innerText(), 'Finish composing to search.');
+    assert.equal((await calls()).length, 0); assert.equal(await status.innerText(), 'Finish entering text to search.');
     assert.equal(await root.locator('.raveldex-inline').getAttribute('data-state'), 'composing');
     await input.evaluate(node => {
       node.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true }));
@@ -95,7 +95,7 @@ for (const surface of ['inline', 'modal']) test(`${surface}: committed compositi
     await input.fill('zzzzzz'); await input.press('Enter');
     await page.waitForFunction(rootID => document.querySelector(`#${rootID} .raveldex-inline`)?.dataset.state === 'empty'
       && !document.querySelector(`#${rootID} [aria-busy="true"]`), `${surface}-root`);
-    assert.equal(await status.innerText(), 'No results.'); assert.equal(await input.inputValue(), 'zzzzzz');
+    assert.equal(await status.innerText(), 'No results for “zzzzzz”. Try a different search.'); assert.equal(await input.inputValue(), 'zzzzzz');
     assert.deepEqual(await ids(), []); assert.equal((await calls()).at(-1).result.total, 0);
     assert.equal(await input.evaluate(node => node === document.activeElement), true);
     await root.getByRole('button', { name: 'Clear search', exact: true }).click();

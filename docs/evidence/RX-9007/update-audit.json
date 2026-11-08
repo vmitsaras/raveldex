@@ -1,0 +1,3429 @@
+{
+  "kind": "raveldex-rx9007-readonly-update-verdict-audit-v1",
+  "date": "2026-11-08",
+  "status": "Pass for existing-evidence synthesis, not a new benchmark",
+  "activity": "Only current source/JSON/CSV/hash data read and this audit JSON written. No engine, runtime tests, build, benchmark, collector, network or repository mutation. No nested delegation.",
+  "method": {
+    "host": "Node-direct",
+    "fixture": "Frozen adversarial repeated technical-excerpt/synthetic lexical fixture",
+    "sizes": [
+      100,
+      1000,
+      10000
+    ],
+    "configurations": [
+      "core-only",
+      "source-positions"
+    ],
+    "deadlineOptions": [
+      "omitted30s",
+      "explicit60000ms"
+    ],
+    "roles": [
+      {
+        "role": "preN9",
+        "archive": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-8001/head-919c9ed/core.tar.gz",
+        "sha256": "3f4f31eb03951f13366256dd019710f0bd5c58b29d7ae687d8a96f0ea5ecec11",
+        "source": {
+          "commit": "919c9ed133b1dd004e3059cb15ddac18f474ef08",
+          "provenance": "Original exact committed-head baseline archive; original source record is RX-8001/head-919c9ed/source.json."
+        }
+      },
+      {
+        "role": "acceptedN9",
+        "archive": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-8008/verification/closing-core.tar.gz",
+        "sha256": "1d7dab63dbbd9bee7dd67394dd6893c227711caad471d448a02e704c91225fbe",
+        "source": {
+          "commit": "6d00200697074749f077706e3f7fa0ff3162d247",
+          "provenance": "Archive was produced during the accepted RX-8008 worktree. This is a later commit containing the accepted runtime, not a claim the original archive was built from a clean commit."
+        }
+      },
+      {
+        "role": "reviewedCurrent",
+        "archive": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-8011/verification/closing-core.tar.gz",
+        "sha256": "45747067b227db1f2238381241997e9ea3dfb687dcb1daa91196927be6494f3b",
+        "source": {
+          "commit": "5b40646c5da11ba7c5bde32148632a3a6e7e3d3c",
+          "provenance": "Reviewed closing archive; post-N9 remote artifact payload equality was independently checked. The commit identifies the reviewed runtime, not a claim of identical gzip bytes."
+        }
+      },
+      {
+        "role": "current",
+        "archive": "/Users/vasilis/Documents/GitHub/raveldex/docs/evidence/RX-9001/identity/current-core.tar.gz",
+        "sha256": "e562633424a3b6b37692d5c1a21bfeadb3b399dc6fff2ba9d33aba87f98b96b6",
+        "source": {
+          "commit": "6100770f3498c8f03897caf1378f131cf48f2d42",
+          "provenance": "Actual newly prepared candidate associated with this immutable runtime source; preparation/worktree guard is recorded separately."
+        }
+      }
+    ],
+    "environment": {
+      "npm": "12.2.0",
+      "python": "3.9.6",
+      "os": "macOS-27.0.1-arm64-arm-64bit",
+      "uname": {
+        "system": "Darwin",
+        "release": "27.0.0",
+        "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:06:40 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6050",
+        "machine": "arm64"
+      }
+    },
+    "node": {
+      "node": "v24.21.0",
+      "platform": "darwin",
+      "arch": "arm64",
+      "hardware": {
+        "cpuModels": [
+          "Apple M5 Pro"
+        ],
+        "logicalCpuCount": 18,
+        "totalMemoryBytes": 25769803776
+      }
+    },
+    "comparisonRule": "Strictly nonoverlapping ranges of three owner medians => observed faster/slower in these repeats only. Overlap or timer floor => inconclusive. No population confidence interval or weighted overall winner.",
+    "ordinaryOwners": 3,
+    "diagnosticOwners": 1,
+    "sampling": "Two ordinary repetitions for the general cases, separated first/repeat; selected N1000 same-vocabulary replacement has40 measured windows per owner after2warmups =120 actual same-cell windows. No per-call pooling of sequential batch calls.",
+    "sequenceGranularity": "Novel/existing addMany is one public invocation; B replacements/removals/reinsertions are B ordered awaited invocations. Whole sequence throughput, not atomic batch or single-record latency."
+  },
+  "cohort": {
+    "processes": 144,
+    "normalProcesses": 108,
+    "diagnosticProcesses": 36,
+    "windows": {
+      "normal": 5544,
+      "diagnostic": 696
+    },
+    "measuredPublicCalls": 107544,
+    "nativeCalls": [
+      {
+        "mode": "diagnostic",
+        "kind": "attemptedCalls",
+        "calls": 15168
+      },
+      {
+        "mode": "diagnostic",
+        "kind": "completedCalls",
+        "calls": 15168
+      },
+      {
+        "mode": "normal",
+        "kind": "attemptedCalls",
+        "calls": 92376
+      },
+      {
+        "mode": "normal",
+        "kind": "completedCalls",
+        "calls": 92376
+      }
+    ],
+    "excludedWarmups": 72,
+    "zeroAttemptInapplicableB256AtN100Rows": 240,
+    "outcomes": [
+      {
+        "mode": "diagnostic",
+        "kind": "batch",
+        "outcome": "Pass",
+        "windows": 480
+      },
+      {
+        "mode": "diagnostic",
+        "kind": "single",
+        "outcome": "Pass",
+        "windows": 216
+      },
+      {
+        "mode": "normal",
+        "kind": "batch",
+        "outcome": "Pass",
+        "windows": 2880
+      },
+      {
+        "mode": "normal",
+        "kind": "single",
+        "outcome": "Pass",
+        "windows": 2664
+      }
+    ],
+    "mutationRefusals": 0,
+    "updateCapacityTransitions": "None observed; every selected mutation passed. Refusal-to-success capacity claims belong other expressly observed workload cohorts, not this update matrix.",
+    "successfulP95OrdinaryRoleCells": 12,
+    "p95Scope": "Only N1000 same-vocabulary single replacement after2warmups,3roles ×2configs ×2deadlines;120 successful windows per role/cell. Descriptive nearest-rank quantiles, no independent-device tail inference. Most cells have3 actual windows/owners =>p95 not estimated.",
+    "collectionElapsedMs": 6821184.237334,
+    "budget": "Original frozen method5400s/default remains unchanged; separately authorized fresh full02 used9000s maximum, same600s child watchdog, actual113.69minutes. Full01 operator stopped after38 completed processes; samples excluded. First600s verification probe incomplete, not native mutation failure."
+  },
+  "classificationCounts": {
+    "preN9ToCurrent": {
+      "wallMs": {
+        "inconclusive-within-observed-variation": 53,
+        "observed-faster": 403,
+        "observed-slower": 4
+      },
+      "cpuUserMs": {
+        "observed-slower": 20,
+        "inconclusive-within-observed-variation": 249,
+        "observed-faster": 191
+      },
+      "cpuSystemMs": {
+        "inconclusive-within-observed-variation": 207,
+        "inconclusive-timer-floor": 23,
+        "observed-faster": 227,
+        "observed-slower": 3
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 247,
+        "observed-faster": 196,
+        "observed-slower": 17
+      },
+      "invocationToReturnSumMs": {
+        "inconclusive-within-observed-variation": 348,
+        "observed-faster": 101,
+        "observed-slower": 11
+      },
+      "returnToSettlementSumMs": {
+        "inconclusive-within-observed-variation": 53,
+        "observed-faster": 405,
+        "observed-slower": 2
+      }
+    },
+    "sameRuntimeAcceptedN9ToCurrent": {
+      "wallMs": {
+        "inconclusive-within-observed-variation": 432,
+        "observed-faster": 19,
+        "observed-slower": 9
+      },
+      "cpuUserMs": {
+        "inconclusive-within-observed-variation": 425,
+        "observed-faster": 21,
+        "observed-slower": 14
+      },
+      "cpuSystemMs": {
+        "inconclusive-within-observed-variation": 393,
+        "inconclusive-timer-floor": 24,
+        "observed-faster": 24,
+        "observed-slower": 19
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 423,
+        "observed-slower": 18,
+        "observed-faster": 19
+      },
+      "invocationToReturnSumMs": {
+        "inconclusive-within-observed-variation": 417,
+        "observed-faster": 21,
+        "observed-slower": 22
+      },
+      "returnToSettlementSumMs": {
+        "inconclusive-within-observed-variation": 431,
+        "observed-faster": 18,
+        "observed-slower": 11
+      }
+    }
+  },
+  "independentPureDataRecheck": {
+    "ownerRangeClassificationsAndMedianDeltasChecked": 5520,
+    "matches": true,
+    "originalIndependentReconstructionStatus": "Pass",
+    "fullOrdinaryCells": 1380,
+    "pairedComparisons": 920,
+    "independentReconstructionSHA256": "8170949352fda4e01bde8f02c075dedeba9446291edbf70086980c0fca02e4e8",
+    "parentResultsSHA256": "663fbc8a9af32a9a9e6f2fadb2ab318570f9ac1b34151411e2006935960c4bb8"
+  },
+  "perSizeConfigurationDeadline": [
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "pairedCells": 32,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 18,
+        "observed-faster": 13,
+        "observed-slower": 1
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 24,
+        "observed-faster": 5,
+        "observed-slower": 3
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "pairedCells": 32,
+      "wallMs": {
+        "observed-slower": 3,
+        "inconclusive-within-observed-variation": 16,
+        "observed-faster": 13
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 24,
+        "observed-slower": 6,
+        "observed-faster": 2
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "pairedCells": 32,
+      "wallMs": {
+        "observed-faster": 23,
+        "inconclusive-within-observed-variation": 9
+      },
+      "cpuTotalMs": {
+        "observed-faster": 7,
+        "inconclusive-within-observed-variation": 24,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "pairedCells": 32,
+      "wallMs": {
+        "observed-faster": 28,
+        "inconclusive-within-observed-variation": 4
+      },
+      "cpuTotalMs": {
+        "observed-faster": 7,
+        "inconclusive-within-observed-variation": 22,
+        "observed-slower": 3
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "pairedCells": 41,
+      "wallMs": {
+        "observed-faster": 38,
+        "inconclusive-within-observed-variation": 3
+      },
+      "cpuTotalMs": {
+        "observed-faster": 13,
+        "inconclusive-within-observed-variation": 27,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "pairedCells": 41,
+      "wallMs": {
+        "observed-faster": 39,
+        "inconclusive-within-observed-variation": 2
+      },
+      "cpuTotalMs": {
+        "observed-faster": 24,
+        "inconclusive-within-observed-variation": 17
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "pairedCells": 41,
+      "wallMs": {
+        "observed-faster": 40,
+        "inconclusive-within-observed-variation": 1
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 24,
+        "observed-faster": 17
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "pairedCells": 41,
+      "wallMs": {
+        "observed-faster": 41
+      },
+      "cpuTotalMs": {
+        "observed-faster": 22,
+        "inconclusive-within-observed-variation": 17,
+        "observed-slower": 2
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "pairedCells": 42,
+      "wallMs": {
+        "observed-faster": 42
+      },
+      "cpuTotalMs": {
+        "observed-faster": 27,
+        "inconclusive-within-observed-variation": 15
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "pairedCells": 42,
+      "wallMs": {
+        "observed-faster": 42
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 13,
+        "observed-faster": 29
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "pairedCells": 42,
+      "wallMs": {
+        "observed-faster": 42
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 31,
+        "observed-faster": 11
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "pairedCells": 42,
+      "wallMs": {
+        "observed-faster": 42
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 9,
+        "observed-faster": 32,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    }
+  ],
+  "perSizeConfiguration": [
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "pairedCells": 64,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 34,
+        "observed-faster": 26,
+        "observed-slower": 4
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 48,
+        "observed-faster": 7,
+        "observed-slower": 9
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "pairedCells": 64,
+      "wallMs": {
+        "observed-faster": 51,
+        "inconclusive-within-observed-variation": 13
+      },
+      "cpuTotalMs": {
+        "observed-faster": 14,
+        "inconclusive-within-observed-variation": 46,
+        "observed-slower": 4
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "pairedCells": 82,
+      "wallMs": {
+        "observed-faster": 77,
+        "inconclusive-within-observed-variation": 5
+      },
+      "cpuTotalMs": {
+        "observed-faster": 37,
+        "inconclusive-within-observed-variation": 44,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "pairedCells": 82,
+      "wallMs": {
+        "observed-faster": 81,
+        "inconclusive-within-observed-variation": 1
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 41,
+        "observed-faster": 39,
+        "observed-slower": 2
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "pairedCells": 84,
+      "wallMs": {
+        "observed-faster": 84
+      },
+      "cpuTotalMs": {
+        "observed-faster": 56,
+        "inconclusive-within-observed-variation": 28
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "pairedCells": 84,
+      "wallMs": {
+        "observed-faster": 84
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 40,
+        "observed-faster": 43,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    }
+  ],
+  "perOperationFamily": [
+    {
+      "id": "add-new-vocabulary",
+      "pairedCells": 24,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 6,
+        "observed-slower": 1,
+        "observed-faster": 17
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 14,
+        "observed-faster": 10
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "addMany-existing-vocabulary",
+      "pairedCells": 64,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 4,
+        "observed-faster": 60
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 27,
+        "observed-faster": 36,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "addMany-new-vocabulary",
+      "pairedCells": 64,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 6,
+        "observed-faster": 58
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 39,
+        "observed-slower": 6,
+        "observed-faster": 19
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "reinsert",
+      "pairedCells": 24,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 5,
+        "observed-faster": 19
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 15,
+        "observed-slower": 1,
+        "observed-faster": 8
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "reinsert-removed-records",
+      "pairedCells": 64,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 4,
+        "observed-faster": 60
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 27,
+        "observed-faster": 36,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "remove",
+      "pairedCells": 24,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 5,
+        "observed-faster": 19
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 16,
+        "observed-faster": 8
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "remove-existing-records",
+      "pairedCells": 64,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 11,
+        "observed-faster": 53
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 33,
+        "observed-slower": 2,
+        "observed-faster": 29
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "remove-unique-vocabulary",
+      "pairedCells": 24,
+      "wallMs": {
+        "observed-slower": 3,
+        "inconclusive-within-observed-variation": 6,
+        "observed-faster": 15
+      },
+      "cpuTotalMs": {
+        "observed-slower": 3,
+        "inconclusive-within-observed-variation": 16,
+        "observed-faster": 5
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "replace-existing-records",
+      "pairedCells": 64,
+      "wallMs": {
+        "observed-faster": 62,
+        "inconclusive-within-observed-variation": 2
+      },
+      "cpuTotalMs": {
+        "observed-faster": 27,
+        "inconclusive-within-observed-variation": 36,
+        "observed-slower": 1
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "replace-existing-vocabulary",
+      "pairedCells": 20,
+      "wallMs": {
+        "inconclusive-within-observed-variation": 4,
+        "observed-faster": 16
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 9,
+        "observed-faster": 9,
+        "observed-slower": 2
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    },
+    {
+      "id": "replace-new-vocabulary",
+      "pairedCells": 24,
+      "wallMs": {
+        "observed-faster": 24
+      },
+      "cpuTotalMs": {
+        "inconclusive-within-observed-variation": 15,
+        "observed-faster": 9
+      },
+      "interpretation": "Unweighted cell-classification counts, never a combined speed score or confidence interval."
+    }
+  ],
+  "allAdverseMetricRows": [
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "add-new-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.927,
+      "afterP50": 1.087,
+      "absoluteChangeMs": 0.15999999999999992,
+      "relativeChangePercent": 17.25997842502696,
+      "beforeOwnerMedianRange": [
+        0.875,
+        1.055
+      ],
+      "afterOwnerMedianRange": [
+        1.06,
+        1.105
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 1.302,
+      "afterP50": 1.476,
+      "absoluteChangeMs": 0.17399999999999993,
+      "relativeChangePercent": 13.364055299539164,
+      "beforeOwnerMedianRange": [
+        1.248,
+        1.304
+      ],
+      "afterOwnerMedianRange": [
+        1.441,
+        1.985
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.369,
+      "afterP50": 1.561,
+      "absoluteChangeMs": 0.19199999999999995,
+      "relativeChangePercent": 14.024835646457266,
+      "beforeOwnerMedianRange": [
+        1.343,
+        1.423
+      ],
+      "afterOwnerMedianRange": [
+        1.4929999999999999,
+        2.033
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.294,
+      "afterP50": 0.463,
+      "absoluteChangeMs": 0.16900000000000004,
+      "relativeChangePercent": 57.48299319727894,
+      "beforeOwnerMedianRange": [
+        0.292,
+        0.371
+      ],
+      "afterOwnerMedianRange": [
+        0.378,
+        0.479
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 4.7139999999999995,
+      "afterP50": 4.941000000000001,
+      "absoluteChangeMs": 0.2270000000000012,
+      "relativeChangePercent": 4.815443360203675,
+      "beforeOwnerMedianRange": [
+        4.538,
+        4.714
+      ],
+      "afterOwnerMedianRange": [
+        4.773,
+        5.104
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.1945829999999944,
+      "afterP50": 0.23537500000000477,
+      "absoluteChangeMs": 0.040792000000010376,
+      "relativeChangePercent": 20.963804648921823,
+      "beforeOwnerMedianRange": [
+        0.14920800000001577,
+        0.19650000000001455
+      ],
+      "afterOwnerMedianRange": [
+        0.21233399999999847,
+        0.2573330000000169
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.188,
+      "afterP50": 0.232,
+      "absoluteChangeMs": 0.04400000000000001,
+      "relativeChangePercent": 23.40425531914894,
+      "beforeOwnerMedianRange": [
+        0.15,
+        0.198
+      ],
+      "afterOwnerMedianRange": [
+        0.212,
+        0.241
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.197,
+      "afterP50": 0.24000000000000002,
+      "absoluteChangeMs": 0.04300000000000001,
+      "relativeChangePercent": 21.827411167512693,
+      "beforeOwnerMedianRange": [
+        0.151,
+        0.199
+      ],
+      "afterOwnerMedianRange": [
+        0.216,
+        0.26
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.19191700000001788,
+      "afterP50": 0.23170799999999758,
+      "absoluteChangeMs": 0.039790999999979704,
+      "relativeChangePercent": 20.7334420608784,
+      "beforeOwnerMedianRange": [
+        0.1471249999999884,
+        0.1941669999999931
+      ],
+      "afterOwnerMedianRange": [
+        0.21033399999998892,
+        0.2546250000000043
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "add-new-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.45529200000001424,
+      "afterP50": 0.5234579999999909,
+      "absoluteChangeMs": 0.06816599999997663,
+      "relativeChangePercent": 14.971930101994873,
+      "beforeOwnerMedianRange": [
+        0.42900000000000205,
+        0.48875000000001023
+      ],
+      "afterOwnerMedianRange": [
+        0.49416700000000446,
+        0.9589169999999996
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "add-new-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.36045799999999417,
+      "afterP50": 0.4325410000000005,
+      "absoluteChangeMs": 0.07208300000000634,
+      "relativeChangePercent": 19.997614146449102,
+      "beforeOwnerMedianRange": [
+        0.35004200000000196,
+        0.4045419999999922
+      ],
+      "afterOwnerMedianRange": [
+        0.41970799999999997,
+        0.7527499999999918
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-existing-vocabulary:B1",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.218,
+      "afterP50": 0.443,
+      "absoluteChangeMs": 0.225,
+      "relativeChangePercent": 103.21100917431193,
+      "beforeOwnerMedianRange": [
+        0.212,
+        0.241
+      ],
+      "afterOwnerMedianRange": [
+        0.391,
+        0.5
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-existing-vocabulary:B1",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.219,
+      "afterP50": 0.449,
+      "absoluteChangeMs": 0.23,
+      "relativeChangePercent": 105.0228310502283,
+      "beforeOwnerMedianRange": [
+        0.213,
+        0.241
+      ],
+      "afterOwnerMedianRange": [
+        0.41300000000000003,
+        0.533
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B1",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.221,
+      "afterP50": 0.26,
+      "absoluteChangeMs": 0.03900000000000001,
+      "relativeChangePercent": 17.647058823529417,
+      "beforeOwnerMedianRange": [
+        0.178,
+        0.236
+      ],
+      "afterOwnerMedianRange": [
+        0.237,
+        0.267
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 1.491,
+      "afterP50": 1.749,
+      "absoluteChangeMs": 0.258,
+      "relativeChangePercent": 17.303822937625753,
+      "beforeOwnerMedianRange": [
+        1.463,
+        1.551
+      ],
+      "afterOwnerMedianRange": [
+        1.715,
+        1.758
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.5610000000000002,
+      "afterP50": 1.8050000000000002,
+      "absoluteChangeMs": 0.244,
+      "relativeChangePercent": 15.63100576553491,
+      "beforeOwnerMedianRange": [
+        1.53,
+        1.661
+      ],
+      "afterOwnerMedianRange": [
+        1.796,
+        1.862
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 1.35,
+      "afterP50": 1.984,
+      "absoluteChangeMs": 0.6339999999999999,
+      "relativeChangePercent": 46.962962962962955,
+      "beforeOwnerMedianRange": [
+        1.313,
+        1.353
+      ],
+      "afterOwnerMedianRange": [
+        1.973,
+        2.175
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.416,
+      "afterP50": 2.031,
+      "absoluteChangeMs": 0.6150000000000002,
+      "relativeChangePercent": 43.432203389830526,
+      "beforeOwnerMedianRange": [
+        1.412,
+        1.4780000000000002
+      ],
+      "afterOwnerMedianRange": [
+        2.031,
+        2.258
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "reinsert-removed-records:B32",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 1.28,
+      "afterP50": 2.624,
+      "absoluteChangeMs": 1.344,
+      "relativeChangePercent": 105.0,
+      "beforeOwnerMedianRange": [
+        1.224,
+        2.024
+      ],
+      "afterOwnerMedianRange": [
+        2.28,
+        3.607
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "reinsert-removed-records:B32",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.385,
+      "afterP50": 2.7270000000000003,
+      "absoluteChangeMs": 1.3420000000000003,
+      "relativeChangePercent": 96.89530685920579,
+      "beforeOwnerMedianRange": [
+        1.301,
+        2.198
+      ],
+      "afterOwnerMedianRange": [
+        2.3089999999999997,
+        3.7300000000000004
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 4.667,
+      "afterP50": 5.678,
+      "absoluteChangeMs": 1.0110000000000001,
+      "relativeChangePercent": 21.6627383758303,
+      "beforeOwnerMedianRange": [
+        4.511,
+        4.703
+      ],
+      "afterOwnerMedianRange": [
+        4.846,
+        6.476
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 4.769,
+      "afterP50": 5.803,
+      "absoluteChangeMs": 1.0339999999999998,
+      "relativeChangePercent": 21.681694275529455,
+      "beforeOwnerMedianRange": [
+        4.538,
+        4.841
+      ],
+      "afterOwnerMedianRange": [
+        4.941,
+        6.522
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "returnToSettlementSumMs",
+      "beforeP50": 0.0032910000003312234,
+      "afterP50": 0.0037489999999706924,
+      "absoluteChangeMs": 0.000457999999639469,
+      "relativeChangePercent": 13.91674261906331,
+      "beforeOwnerMedianRange": [
+        0.0027100000002064917,
+        0.0034969999999248103
+      ],
+      "afterOwnerMedianRange": [
+        0.003666999999950349,
+        0.0039990000000784676
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.18866700000000947,
+      "afterP50": 0.2154170000000022,
+      "absoluteChangeMs": 0.026749999999992724,
+      "relativeChangePercent": 14.17842017946508,
+      "beforeOwnerMedianRange": [
+        0.17687499999999545,
+        0.19679199999998787
+      ],
+      "afterOwnerMedianRange": [
+        0.20150000000001,
+        0.22383299999998485
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.177,
+      "afterP50": 0.215,
+      "absoluteChangeMs": 0.038000000000000006,
+      "relativeChangePercent": 21.468926553672322,
+      "beforeOwnerMedianRange": [
+        0.174,
+        0.186
+      ],
+      "afterOwnerMedianRange": [
+        0.202,
+        0.224
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.191,
+      "afterP50": 0.218,
+      "absoluteChangeMs": 0.026999999999999996,
+      "relativeChangePercent": 14.136125654450261,
+      "beforeOwnerMedianRange": [
+        0.178,
+        0.19699999999999998
+      ],
+      "afterOwnerMedianRange": [
+        0.20400000000000001,
+        0.227
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.18625000000000114,
+      "afterP50": 0.21291700000000446,
+      "absoluteChangeMs": 0.026667000000003327,
+      "relativeChangePercent": 14.317852348994988,
+      "beforeOwnerMedianRange": [
+        0.17449999999999477,
+        0.1943330000000003
+      ],
+      "afterOwnerMedianRange": [
+        0.19962500000002592,
+        0.22129200000000537
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.16770800000000463,
+      "afterP50": 0.18883300000001668,
+      "absoluteChangeMs": 0.02112500000001205,
+      "relativeChangePercent": 12.596298328053203,
+      "beforeOwnerMedianRange": [
+        0.16329199999998423,
+        0.1775000000000091
+      ],
+      "afterOwnerMedianRange": [
+        0.17845899999997528,
+        0.18883399999998574
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.1655839999999955,
+      "afterP50": 0.186333999999988,
+      "absoluteChangeMs": 0.020749999999992497,
+      "relativeChangePercent": 12.531404000382318,
+      "beforeOwnerMedianRange": [
+        0.1613749999999925,
+        0.17541700000001015
+      ],
+      "afterOwnerMedianRange": [
+        0.17641599999998903,
+        0.1868340000000046
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "returnToSettlementSumMs",
+      "beforeP50": 0.0003329999999834854,
+      "afterP50": 0.0004160000000013042,
+      "absoluteChangeMs": 8.300000001781882e-05,
+      "relativeChangePercent": 24.924924931512034,
+      "beforeOwnerMedianRange": [
+        0.0002499999999940883,
+        0.0003749999999911324
+      ],
+      "afterOwnerMedianRange": [
+        0.00037500000001955414,
+        0.0004590000000064265
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.3619579999999871,
+      "afterP50": 0.39424999999999955,
+      "absoluteChangeMs": 0.03229200000001242,
+      "relativeChangePercent": 8.921477077454725,
+      "beforeOwnerMedianRange": [
+        0.35300000000000864,
+        0.3692089999999837
+      ],
+      "afterOwnerMedianRange": [
+        0.37537499999999113,
+        0.39491599999999494
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 2.44,
+      "afterP50": 3.134,
+      "absoluteChangeMs": 0.694,
+      "relativeChangePercent": 28.44262295081967,
+      "beforeOwnerMedianRange": [
+        2.324,
+        2.535
+      ],
+      "afterOwnerMedianRange": [
+        2.623,
+        6.875
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.737,
+      "afterP50": 1.151,
+      "absoluteChangeMs": 0.41400000000000003,
+      "relativeChangePercent": 56.173677069199464,
+      "beforeOwnerMedianRange": [
+        0.641,
+        0.876
+      ],
+      "afterOwnerMedianRange": [
+        1.023,
+        1.272
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.766,
+      "afterP50": 1.174,
+      "absoluteChangeMs": 0.4079999999999999,
+      "relativeChangePercent": 53.263707571801554,
+      "beforeOwnerMedianRange": [
+        0.666,
+        0.92
+      ],
+      "afterOwnerMedianRange": [
+        1.091,
+        1.554
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "reinsert",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.364,
+      "afterP50": 0.606,
+      "absoluteChangeMs": 0.242,
+      "relativeChangePercent": 66.48351648351648,
+      "beforeOwnerMedianRange": [
+        0.362,
+        0.466
+      ],
+      "afterOwnerMedianRange": [
+        0.585,
+        0.919
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "reinsert",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuSystemMs",
+      "beforeP50": 0.005,
+      "afterP50": 0.032,
+      "absoluteChangeMs": 0.027,
+      "relativeChangePercent": 540.0,
+      "beforeOwnerMedianRange": [
+        0.002,
+        0.009
+      ],
+      "afterOwnerMedianRange": [
+        0.027,
+        0.035
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "reinsert",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.369,
+      "afterP50": 0.638,
+      "absoluteChangeMs": 0.269,
+      "relativeChangePercent": 72.89972899728998,
+      "beforeOwnerMedianRange": [
+        0.364,
+        0.47500000000000003
+      ],
+      "afterOwnerMedianRange": [
+        0.612,
+        0.9540000000000001
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.262,
+      "afterP50": 0.882,
+      "absoluteChangeMs": 0.62,
+      "relativeChangePercent": 236.64122137404578,
+      "beforeOwnerMedianRange": [
+        0.247,
+        0.336
+      ],
+      "afterOwnerMedianRange": [
+        0.711,
+        1.149
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuSystemMs",
+      "beforeP50": 0.002,
+      "afterP50": 0.017,
+      "absoluteChangeMs": 0.015000000000000001,
+      "relativeChangePercent": 750.0000000000001,
+      "beforeOwnerMedianRange": [
+        0.002,
+        0.009
+      ],
+      "afterOwnerMedianRange": [
+        0.012,
+        0.078
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.264,
+      "afterP50": 0.894,
+      "absoluteChangeMs": 0.63,
+      "relativeChangePercent": 238.63636363636363,
+      "beforeOwnerMedianRange": [
+        0.249,
+        0.34500000000000003
+      ],
+      "afterOwnerMedianRange": [
+        0.7889999999999999,
+        1.166
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuSystemMs",
+      "beforeP50": 0.008,
+      "afterP50": 0.034,
+      "absoluteChangeMs": 0.026000000000000002,
+      "relativeChangePercent": 325.0,
+      "beforeOwnerMedianRange": [
+        0.008,
+        0.017
+      ],
+      "afterOwnerMedianRange": [
+        0.018,
+        0.199
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuUserMs",
+      "beforeP50": 0.729,
+      "afterP50": 1.273,
+      "absoluteChangeMs": 0.5439999999999999,
+      "relativeChangePercent": 74.62277091906721,
+      "beforeOwnerMedianRange": [
+        0.652,
+        0.768
+      ],
+      "afterOwnerMedianRange": [
+        1.109,
+        1.784
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.766,
+      "afterP50": 1.319,
+      "absoluteChangeMs": 0.5529999999999999,
+      "relativeChangePercent": 72.19321148825065,
+      "beforeOwnerMedianRange": [
+        0.667,
+        0.788
+      ],
+      "afterOwnerMedianRange": [
+        1.139,
+        1.826
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 256,
+      "metric": "cpuUserMs",
+      "beforeP50": 9.015,
+      "afterP50": 11.923,
+      "absoluteChangeMs": 2.9079999999999995,
+      "relativeChangePercent": 32.257348863006094,
+      "beforeOwnerMedianRange": [
+        8.665,
+        10.077
+      ],
+      "afterOwnerMedianRange": [
+        11.862,
+        12.299
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 256,
+      "metric": "cpuTotalMs",
+      "beforeP50": 9.869,
+      "afterP50": 12.476,
+      "absoluteChangeMs": 2.607000000000001,
+      "relativeChangePercent": 26.416050258384853,
+      "beforeOwnerMedianRange": [
+        9.459,
+        11.182
+      ],
+      "afterOwnerMedianRange": [
+        12.398,
+        12.728
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "caseKey": "add-new-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.32541700000001583,
+      "afterP50": 0.40037500000016735,
+      "absoluteChangeMs": 0.07495800000015151,
+      "relativeChangePercent": 23.03444503518497,
+      "beforeOwnerMedianRange": [
+        0.3096670000004451,
+        0.32958300000018426
+      ],
+      "afterOwnerMedianRange": [
+        0.3321249999999054,
+        0.4210420000003978
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B1",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.2517500000003565,
+      "afterP50": 0.3341670000004342,
+      "absoluteChangeMs": 0.08241700000007768,
+      "relativeChangePercent": 32.73763654417516,
+      "beforeOwnerMedianRange": [
+        0.23441600000023755,
+        0.2757080000001224
+      ],
+      "afterOwnerMedianRange": [
+        0.27595800000017334,
+        0.3369999999999891
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "add-new-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.358791999999994,
+      "afterP50": 0.41862500000002,
+      "absoluteChangeMs": 0.059833000000026004,
+      "relativeChangePercent": 16.676235813515074,
+      "beforeOwnerMedianRange": [
+        0.3556659999999283,
+        0.3767910000001393
+      ],
+      "afterOwnerMedianRange": [
+        0.39325000000008004,
+        0.41899999999986903
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 256,
+      "metric": "cpuUserMs",
+      "beforeP50": 16.623,
+      "afterP50": 24.22,
+      "absoluteChangeMs": 7.596999999999998,
+      "relativeChangePercent": 45.701738555014124,
+      "beforeOwnerMedianRange": [
+        15.169,
+        17.023
+      ],
+      "afterOwnerMedianRange": [
+        21.815,
+        24.531
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 256,
+      "metric": "cpuTotalMs",
+      "beforeP50": 18.136000000000003,
+      "afterP50": 24.965,
+      "absoluteChangeMs": 6.828999999999997,
+      "relativeChangePercent": 37.65438906043227,
+      "beforeOwnerMedianRange": [
+        16.548000000000002,
+        18.608999999999998
+      ],
+      "afterOwnerMedianRange": [
+        22.368000000000002,
+        25.398999999999997
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "replace-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 25.515,
+      "afterP50": 61.067,
+      "absoluteChangeMs": 35.552,
+      "relativeChangePercent": 139.3376445228297,
+      "beforeOwnerMedianRange": [
+        24.043,
+        28.181
+      ],
+      "afterOwnerMedianRange": [
+        60.501,
+        71.225
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "replace-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 26.745,
+      "afterP50": 62.056,
+      "absoluteChangeMs": 35.31099999999999,
+      "relativeChangePercent": 132.02841652645353,
+      "beforeOwnerMedianRange": [
+        25.078,
+        29.409000000000002
+      ],
+      "afterOwnerMedianRange": [
+        61.911,
+        72.50699999999999
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuUserMs",
+      "beforeP50": 8.908,
+      "afterP50": 14.745,
+      "absoluteChangeMs": 5.837,
+      "relativeChangePercent": 65.52537045352491,
+      "beforeOwnerMedianRange": [
+        6.921,
+        11.653
+      ],
+      "afterOwnerMedianRange": [
+        14.041,
+        15.148
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 10.173,
+      "afterP50": 15.263,
+      "absoluteChangeMs": 5.09,
+      "relativeChangePercent": 50.034404797011696,
+      "beforeOwnerMedianRange": [
+        7.638,
+        13.331
+      ],
+      "afterOwnerMedianRange": [
+        14.529,
+        15.927
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "remove",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.21195799999986775,
+      "afterP50": 0.2467090000063763,
+      "absoluteChangeMs": 0.03475100000650855,
+      "relativeChangePercent": 16.395229246610285,
+      "beforeOwnerMedianRange": [
+        0.20487499999580905,
+        0.21241700000246055
+      ],
+      "afterOwnerMedianRange": [
+        0.22866700000304263,
+        0.2536249999975553
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "remove",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.21404200000688434,
+      "afterP50": 0.25095799999689916,
+      "absoluteChangeMs": 0.036915999990014825,
+      "relativeChangePercent": 17.24708234310438,
+      "beforeOwnerMedianRange": [
+        0.19487500000104774,
+        0.21412499999860302
+      ],
+      "afterOwnerMedianRange": [
+        0.223959000002651,
+        0.37733299999672454
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "replace-new-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "invocationToReturnSumMs",
+      "beforeP50": 0.25583300000289455,
+      "afterP50": 0.3007080000024871,
+      "absoluteChangeMs": 0.044874999999592546,
+      "relativeChangePercent": 17.540739466403796,
+      "beforeOwnerMedianRange": [
+        0.2544579999957932,
+        0.2636659999989206
+      ],
+      "afterOwnerMedianRange": [
+        0.2790419999946607,
+        0.3057090000002063
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    }
+  ],
+  "wallRegressions": [
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.1945829999999944,
+      "afterP50": 0.23537500000000477,
+      "absoluteChangeMs": 0.040792000000010376,
+      "relativeChangePercent": 20.963804648921823,
+      "beforeOwnerMedianRange": [
+        0.14920800000001577,
+        0.19650000000001455
+      ],
+      "afterOwnerMedianRange": [
+        0.21233399999999847,
+        0.2573330000000169
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "add-new-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.45529200000001424,
+      "afterP50": 0.5234579999999909,
+      "absoluteChangeMs": 0.06816599999997663,
+      "relativeChangePercent": 14.971930101994873,
+      "beforeOwnerMedianRange": [
+        0.42900000000000205,
+        0.48875000000001023
+      ],
+      "afterOwnerMedianRange": [
+        0.49416700000000446,
+        0.9589169999999996
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.18866700000000947,
+      "afterP50": 0.2154170000000022,
+      "absoluteChangeMs": 0.026749999999992724,
+      "relativeChangePercent": 14.17842017946508,
+      "beforeOwnerMedianRange": [
+        0.17687499999999545,
+        0.19679199999998787
+      ],
+      "afterOwnerMedianRange": [
+        0.20150000000001,
+        0.22383299999998485
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "wallMs",
+      "beforeP50": 0.16770800000000463,
+      "afterP50": 0.18883300000001668,
+      "absoluteChangeMs": 0.02112500000001205,
+      "relativeChangePercent": 12.596298328053203,
+      "beforeOwnerMedianRange": [
+        0.16329199999998423,
+        0.1775000000000091
+      ],
+      "afterOwnerMedianRange": [
+        0.17845899999997528,
+        0.18883399999998574
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    }
+  ],
+  "cpuTotalRegressions": [
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.369,
+      "afterP50": 1.561,
+      "absoluteChangeMs": 0.19199999999999995,
+      "relativeChangePercent": 14.024835646457266,
+      "beforeOwnerMedianRange": [
+        1.343,
+        1.423
+      ],
+      "afterOwnerMedianRange": [
+        1.4929999999999999,
+        2.033
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 4.7139999999999995,
+      "afterP50": 4.941000000000001,
+      "absoluteChangeMs": 0.2270000000000012,
+      "relativeChangePercent": 4.815443360203675,
+      "beforeOwnerMedianRange": [
+        4.538,
+        4.714
+      ],
+      "afterOwnerMedianRange": [
+        4.773,
+        5.104
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.197,
+      "afterP50": 0.24000000000000002,
+      "absoluteChangeMs": 0.04300000000000001,
+      "relativeChangePercent": 21.827411167512693,
+      "beforeOwnerMedianRange": [
+        0.151,
+        0.199
+      ],
+      "afterOwnerMedianRange": [
+        0.216,
+        0.26
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-existing-vocabulary:B1",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.219,
+      "afterP50": 0.449,
+      "absoluteChangeMs": 0.23,
+      "relativeChangePercent": 105.0228310502283,
+      "beforeOwnerMedianRange": [
+        0.213,
+        0.241
+      ],
+      "afterOwnerMedianRange": [
+        0.41300000000000003,
+        0.533
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.5610000000000002,
+      "afterP50": 1.8050000000000002,
+      "absoluteChangeMs": 0.244,
+      "relativeChangePercent": 15.63100576553491,
+      "beforeOwnerMedianRange": [
+        1.53,
+        1.661
+      ],
+      "afterOwnerMedianRange": [
+        1.796,
+        1.862
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.416,
+      "afterP50": 2.031,
+      "absoluteChangeMs": 0.6150000000000002,
+      "relativeChangePercent": 43.432203389830526,
+      "beforeOwnerMedianRange": [
+        1.412,
+        1.4780000000000002
+      ],
+      "afterOwnerMedianRange": [
+        2.031,
+        2.258
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "reinsert-removed-records:B32",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 1.385,
+      "afterP50": 2.7270000000000003,
+      "absoluteChangeMs": 1.3420000000000003,
+      "relativeChangePercent": 96.89530685920579,
+      "beforeOwnerMedianRange": [
+        1.301,
+        2.198
+      ],
+      "afterOwnerMedianRange": [
+        2.3089999999999997,
+        3.7300000000000004
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 4.769,
+      "afterP50": 5.803,
+      "absoluteChangeMs": 1.0339999999999998,
+      "relativeChangePercent": 21.681694275529455,
+      "beforeOwnerMedianRange": [
+        4.538,
+        4.841
+      ],
+      "afterOwnerMedianRange": [
+        4.941,
+        6.522
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "core-only",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.191,
+      "afterP50": 0.218,
+      "absoluteChangeMs": 0.026999999999999996,
+      "relativeChangePercent": 14.136125654450261,
+      "beforeOwnerMedianRange": [
+        0.178,
+        0.19699999999999998
+      ],
+      "afterOwnerMedianRange": [
+        0.20400000000000001,
+        0.227
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.766,
+      "afterP50": 1.174,
+      "absoluteChangeMs": 0.4079999999999999,
+      "relativeChangePercent": 53.263707571801554,
+      "beforeOwnerMedianRange": [
+        0.666,
+        0.92
+      ],
+      "afterOwnerMedianRange": [
+        1.091,
+        1.554
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "reinsert",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.369,
+      "afterP50": 0.638,
+      "absoluteChangeMs": 0.269,
+      "relativeChangePercent": 72.89972899728998,
+      "beforeOwnerMedianRange": [
+        0.364,
+        0.47500000000000003
+      ],
+      "afterOwnerMedianRange": [
+        0.612,
+        0.9540000000000001
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "remove-unique-vocabulary",
+      "phase": "first-call-for-case",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.264,
+      "afterP50": 0.894,
+      "absoluteChangeMs": 0.63,
+      "relativeChangePercent": 238.63636363636363,
+      "beforeOwnerMedianRange": [
+        0.249,
+        0.34500000000000003
+      ],
+      "afterOwnerMedianRange": [
+        0.7889999999999999,
+        1.166
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 100,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "metric": "cpuTotalMs",
+      "beforeP50": 0.766,
+      "afterP50": 1.319,
+      "absoluteChangeMs": 0.5529999999999999,
+      "relativeChangePercent": 72.19321148825065,
+      "beforeOwnerMedianRange": [
+        0.667,
+        0.788
+      ],
+      "afterOwnerMedianRange": [
+        1.139,
+        1.826
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 256,
+      "metric": "cpuTotalMs",
+      "beforeP50": 9.869,
+      "afterP50": 12.476,
+      "absoluteChangeMs": 2.607000000000001,
+      "relativeChangePercent": 26.416050258384853,
+      "beforeOwnerMedianRange": [
+        9.459,
+        11.182
+      ],
+      "afterOwnerMedianRange": [
+        12.398,
+        12.728
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "first-call-for-case",
+      "kind": "batch",
+      "batch": 256,
+      "metric": "cpuTotalMs",
+      "beforeP50": 18.136000000000003,
+      "afterP50": 24.965,
+      "absoluteChangeMs": 6.828999999999997,
+      "relativeChangePercent": 37.65438906043227,
+      "beforeOwnerMedianRange": [
+        16.548000000000002,
+        18.608999999999998
+      ],
+      "afterOwnerMedianRange": [
+        22.368000000000002,
+        25.398999999999997
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 1000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "replace-existing-records:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 26.745,
+      "afterP50": 62.056,
+      "absoluteChangeMs": 35.31099999999999,
+      "relativeChangePercent": 132.02841652645353,
+      "beforeOwnerMedianRange": [
+        25.078,
+        29.409000000000002
+      ],
+      "afterOwnerMedianRange": [
+        61.911,
+        72.50699999999999
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    },
+    {
+      "size": 10000,
+      "configuration": "source-positions",
+      "deadline": "explicit60s",
+      "caseKey": "addMany-new-vocabulary:B32",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 32,
+      "metric": "cpuTotalMs",
+      "beforeP50": 10.173,
+      "afterP50": 15.263,
+      "absoluteChangeMs": 5.09,
+      "relativeChangePercent": 50.034404797011696,
+      "beforeOwnerMedianRange": [
+        7.638,
+        13.331
+      ],
+      "afterOwnerMedianRange": [
+        14.529,
+        15.927
+      ],
+      "beforeP95": null,
+      "afterP95": null,
+      "classification": "observed-slower",
+      "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+    }
+  ],
+  "representativeExamples": [
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 256,
+      "publicCall": "addMany",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 619.3697920000122,
+          "afterP50": 106.77700000000186,
+          "absoluteChangeMs": -512.5927920000104,
+          "relativeChangePercent": -82.76037976356461,
+          "beforeOwnerMedianRange": [
+            617.2051669999928,
+            622.5931659999915
+          ],
+          "afterOwnerMedianRange": [
+            106.41683399999602,
+            107.28566699998919
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 52.217000000000006,
+          "afterP50": 28.735,
+          "absoluteChangeMs": -23.482000000000006,
+          "relativeChangePercent": -44.970028917785406,
+          "beforeOwnerMedianRange": [
+            49.391000000000005,
+            56.902
+          ],
+          "afterOwnerMedianRange": [
+            28.525000000000002,
+            29.462
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      }
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B256",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 256,
+      "publicCall": "B sequential remove calls",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 2676.1596250000002,
+          "afterP50": 495.7580830000079,
+          "absoluteChangeMs": -2180.4015419999923,
+          "relativeChangePercent": -81.4750182175696,
+          "beforeOwnerMedianRange": [
+            2499.0088339999784,
+            2705.086083000002
+          ],
+          "afterOwnerMedianRange": [
+            491.02266699999745,
+            510.1115839999984
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 520.49,
+          "afterP50": 216.372,
+          "absoluteChangeMs": -304.118,
+          "relativeChangePercent": -58.42917251051893,
+          "beforeOwnerMedianRange": [
+            295.504,
+            577.997
+          ],
+          "afterOwnerMedianRange": [
+            205.722,
+            258.812
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      }
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-records:B256",
+      "phase": "repeat-same-owner",
+      "kind": "batch",
+      "batch": 256,
+      "publicCall": "B sequential replace calls",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 2699.4220840000053,
+          "afterP50": 502.6336250000022,
+          "absoluteChangeMs": -2196.788459000003,
+          "relativeChangePercent": -81.379954325068,
+          "beforeOwnerMedianRange": [
+            2665.0727500000066,
+            2758.195458000002
+          ],
+          "afterOwnerMedianRange": [
+            485.58174999999756,
+            550.268333
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 399.096,
+          "afterP50": 202.099,
+          "absoluteChangeMs": -196.997,
+          "relativeChangePercent": -49.36080542024977,
+          "beforeOwnerMedianRange": [
+            345.29200000000003,
+            436.77299999999997
+          ],
+          "afterOwnerMedianRange": [
+            180.656,
+            249.798
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      }
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "repeat-same-owner",
+      "kind": "single",
+      "batch": 1,
+      "publicCall": "replace",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 10.280291000002762,
+          "afterP50": 1.9863750000004075,
+          "absoluteChangeMs": -8.293916000002355,
+          "relativeChangePercent": -80.67783295239528,
+          "beforeOwnerMedianRange": [
+            10.091541000001598,
+            10.432124999992084
+          ],
+          "afterOwnerMedianRange": [
+            1.9769589999996242,
+            2.010874999999942
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 1.175,
+          "afterP50": 0.787,
+          "absoluteChangeMs": -0.388,
+          "relativeChangePercent": -33.02127659574468,
+          "beforeOwnerMedianRange": [
+            0.99,
+            1.2910000000000001
+          ],
+          "afterOwnerMedianRange": [
+            0.776,
+            0.81
+          ],
+          "beforeP95": null,
+          "afterP95": null,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      }
+    }
+  ],
+  "tailComparisonExamples": [
+    {
+      "size": 1000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "after-two-warmups",
+      "kind": "single",
+      "batch": 1,
+      "publicCall": "replace",
+      "before": "preN9",
+      "after": "current",
+      "sameRuntimeControl": false,
+      "metrics": {
+        "wallMs": {
+          "beforeP50": 2.9622910000002776,
+          "afterP50": 0.6039169999999103,
+          "absoluteChangeMs": -2.3583740000003672,
+          "relativeChangePercent": -79.61317777355926,
+          "beforeOwnerMedianRange": [
+            2.837792000000263,
+            3.012917000000016
+          ],
+          "afterOwnerMedianRange": [
+            0.5252500000001419,
+            0.6727089999999407
+          ],
+          "beforeP95": 3.414792000000034,
+          "afterP95": 1.810207999999875,
+          "classification": "observed-faster",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        },
+        "cpuTotalMs": {
+          "beforeP50": 0.732,
+          "afterP50": 0.583,
+          "absoluteChangeMs": -0.14900000000000002,
+          "relativeChangePercent": -20.355191256830604,
+          "beforeOwnerMedianRange": [
+            0.597,
+            0.75
+          ],
+          "afterOwnerMedianRange": [
+            0.514,
+            0.658
+          ],
+          "beforeP95": 3.542,
+          "afterP95": 1.8,
+          "classification": "inconclusive-within-observed-variation",
+          "interpretation": "Scoped observed owner-median range separation, not population confidence interval"
+        }
+      }
+    }
+  ],
+  "diagnosticExamples": [
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "replace-existing-vocabulary",
+      "kind": "single",
+      "batch": 1,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 3597,
+        "emittedWorkUnits": 16682,
+        "maxStepWorkUnits": 29,
+        "hostYields": 8,
+        "continuationsScheduled": 8,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "addMany-new-vocabulary",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 117486,
+        "emittedWorkUnits": 1079305,
+        "maxStepWorkUnits": 35,
+        "hostYields": 525,
+        "continuationsScheduled": 525,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "replace-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 933472,
+        "emittedWorkUnits": 4521152,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2080,
+        "continuationsScheduled": 2080,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "current",
+      "owner": 3,
+      "id": "remove-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 920000,
+        "emittedWorkUnits": 4419968,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2020,
+        "continuationsScheduled": 2020,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-vocabulary",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "replace-existing-vocabulary",
+      "kind": "single",
+      "batch": 1,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 3597,
+        "emittedWorkUnits": 16682,
+        "maxStepWorkUnits": 29,
+        "hostYields": 8,
+        "continuationsScheduled": 8,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "addMany-new-vocabulary:B256",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "addMany-new-vocabulary",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 1,
+      "completedCalls": 1,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 83990,
+        "emittedWorkUnits": 1045809,
+        "maxStepWorkUnits": 35,
+        "hostYields": 509,
+        "continuationsScheduled": 509,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "replace-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "replace-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 933472,
+        "emittedWorkUnits": 4521152,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2080,
+        "continuationsScheduled": 2080,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    },
+    {
+      "size": 10000,
+      "configuration": "core-only",
+      "deadline": "default30s",
+      "caseKey": "remove-existing-records:B256",
+      "phase": "diagnostic-first-call",
+      "role": "preN9",
+      "owner": 3,
+      "id": "remove-existing-records",
+      "kind": "batch",
+      "batch": 256,
+      "outcome": "Pass",
+      "attemptedCalls": 256,
+      "completedCalls": 256,
+      "counters": {
+        "idfComputations": 0,
+        "averageLengthComputations": 0,
+        "fieldsPrepared": 0,
+        "candidates": 0,
+        "documentsEvaluated": 0,
+        "documentsScored": 0,
+        "exactDictionaryProbes": 0,
+        "prefixDictionaryVisits": 0,
+        "postingsVisited": 0,
+        "emittedSteps": 920000,
+        "emittedWorkUnits": 4419968,
+        "maxStepWorkUnits": 29,
+        "hostYields": 2020,
+        "continuationsScheduled": 2020,
+        "deadlineCallbacks": 0,
+        "restorePhase": null,
+        "restorePhases": {}
+      },
+      "error": null
+    }
+  ],
+  "currentReuseIdentity": {
+    "originalSourceInventory": 194,
+    "sourceMembersStillMatching": 183,
+    "changedSourceUIOnly": [
+      {
+        "path": "src/addons/ui/directory-cards.css",
+        "expectedSHA256": "250b81dd2757fa9810a653e0a6ffdc283728e7be021f71bfbafe2b8039e0f0bd",
+        "currentSHA256": "8329df8b2caeb4b1246a79dc161ec069380cefe306a35d15ca90953f6e90a4de"
+      },
+      {
+        "path": "src/addons/ui/directory-view-mount.ts",
+        "expectedSHA256": "afe8207d3c37482aee15b45de747496d64bac77cccc97f62a0e829a79ecbb4ba",
+        "currentSHA256": "06c044ea12e22553864c0eaecac6cd71a3473a897afa94e3ca8c206a7b77814b"
+      },
+      {
+        "path": "src/addons/ui/directory-view-options.ts",
+        "expectedSHA256": "6c3c124942815535a591f32d67dc4e6c0919c6b21523c07bcb66084d571c24fc",
+        "currentSHA256": "332e9ae28331470e39d841653e1e6f49a6a4b68fc670faa3ea662aabd82c6010"
+      },
+      {
+        "path": "src/addons/ui/directory-view-types.ts",
+        "expectedSHA256": "2b98d2f86cd8b1ec33b8c1272b496a06c12429b8e7cce0c3cd6a00efc87d303a",
+        "currentSHA256": "c301611f616e1c45752b7ef1d5eca83c069297a0fca633d3713998a0883c5c65"
+      },
+      {
+        "path": "src/addons/ui/directory.css",
+        "expectedSHA256": "8ef13ca451b0d457afb180a6a97ef637b84f59fb24fd43f64ac39f42bc01673f",
+        "currentSHA256": "02dec69b764d521d14ef4cffb7fc651ac2aa5f76c8cd5e583d13d9a2ec2382c2"
+      },
+      {
+        "path": "src/addons/ui/dropdown.css",
+        "expectedSHA256": "acef9af7c581dbaaf74eb365450d1540978321e3f1d0dee42fce41c31b1072be",
+        "currentSHA256": "c2af44f39ea38aac5aee5263ea9ba0e4581efec046b71575fc51b15baefb0edb"
+      },
+      {
+        "path": "src/addons/ui/dropdown.ts",
+        "expectedSHA256": "4cbd1b2962517ba4e849f9ecf41944c3e1433b8344d660bbbd6e6f7f40e0da58",
+        "currentSHA256": "e49d1e64dcac21b6f9c05b1db0d8d0653482ceabb8d2ab132febc6ffd4ef0db2"
+      },
+      {
+        "path": "src/addons/ui/inline.css",
+        "expectedSHA256": "ea19ea2cb572d9395d35659564bb950d357e5dea371ab2ef3d73e85c0b3cbf08",
+        "currentSHA256": "9d80d6b4128130ba5e275a3f97736eefa6bf90aa808f009c711b61154d710a95"
+      },
+      {
+        "path": "src/addons/ui/inline.ts",
+        "expectedSHA256": "39692fe88fa83d9a289b3b9bfba7fe475796f1aeee6ba92555b6d54a0a4567cd",
+        "currentSHA256": "33d4eab638744c6da8f1b00e6cb39042f32bf8457072c2fa804c791210baeb15"
+      },
+      {
+        "path": "src/addons/ui/modal.css",
+        "expectedSHA256": "f54f1bad7ba23d5097f38de3db26e15df2913522725d5d3c28e06a1065edcf27",
+        "currentSHA256": "94145fd07eea4a081aded35acf068ae58b1e56df1810c8e60d55eaf2871091e0"
+      },
+      {
+        "path": "src/addons/ui/modal.ts",
+        "expectedSHA256": "b38608a7b47a0472d0c699b889f713959be0da78c1e51c4c87d1759e52dee7b9",
+        "currentSHA256": "0b417eb0af42bd93f209e1b081e0a2d1ee3f8c7e2b08fc4e5cbd0c4258af0848"
+      }
+    ],
+    "missingSource": [],
+    "nonUICompiledMembersMatched": 285,
+    "oldDistCaptured": 345,
+    "oldDistMembersMatched": 331,
+    "changedUICompiledOnly": [
+      "dist/addons/ui/directory-cards.css",
+      "dist/addons/ui/directory-view-mount.js",
+      "dist/addons/ui/directory-view-options.d.ts",
+      "dist/addons/ui/directory-view-options.js",
+      "dist/addons/ui/directory-view-types.d.ts",
+      "dist/addons/ui/directory.css",
+      "dist/addons/ui/dropdown.css",
+      "dist/addons/ui/dropdown.d.ts",
+      "dist/addons/ui/dropdown.js",
+      "dist/addons/ui/inline.css",
+      "dist/addons/ui/inline.d.ts",
+      "dist/addons/ui/inline.js",
+      "dist/addons/ui/modal.css",
+      "dist/addons/ui/modal.js"
+    ],
+    "relevantExecutedHarnessPinsUnchanged": [
+      {
+        "path": "bench/n10/updates-run.mjs",
+        "sha256": "22e47b3e584d18ab047607f7110616901d2fe47a3a59152c750682db86291347"
+      },
+      {
+        "path": "bench/n10/updates-child.mjs",
+        "sha256": "a6f54c6397b498ed940e38a153432b8d9766e7d9172bcf6c78f9ddc51cb35b7f"
+      },
+      {
+        "path": "bench/n10/updates-contract.mjs",
+        "sha256": "b2d13eb77a88a6d8ec593d6fc63fa15b23ac470aac78908e5ca1f1706bfe1beb"
+      },
+      {
+        "path": "bench/n10/updates-verify.mjs",
+        "sha256": "b530561444105fc1cbad30f23b436258651ae43279fd68be58b19cfbf964299b"
+      },
+      {
+        "path": "bench/n10/run.mjs",
+        "sha256": "9fec426a92cc224cc49712512f2b2c0a374444763823a0178512a27b3d110611"
+      },
+      {
+        "path": "bench/n10/contract.mjs",
+        "sha256": "e2ece7509fbea2225d366b79f0e7348e24aecf9c157c78530b20e2f22a1c161c"
+      },
+      {
+        "path": "bench/n9/paired-node.mjs",
+        "sha256": "3384b5b9cb23cee67903a78ed6d069199e8a526c8a685a94aec339bbabb2bf64"
+      },
+      {
+        "path": "bench/n9/run.mjs",
+        "sha256": "4b5deb832234dcb265362e34db1a0426997944ae2d2e812633249d3a900ea90a"
+      },
+      {
+        "path": "bench/n9/instrument.mjs",
+        "sha256": "978e7a6fb2ab6b44b496da20a72c4ba58ea4b48e22f4302a340d9e20d7b21480"
+      },
+      {
+        "path": "bench/n9/workloads.mjs",
+        "sha256": "0924363c913694c203847ad78d9c6ea1e93647de5326f5f8d45bda6441b89c72"
+      },
+      {
+        "path": "test/oracle/query.mjs",
+        "sha256": "bfccdd9db9650ead172406e5fc75eb0e4baea1a7478c37fd3e06d3eb1bbea773"
+      },
+      {
+        "path": "test/comparison/n10-updates-method.test.mjs",
+        "sha256": "d765b3124d056c2ec97bf937ddd0480f9a048753b28b863897434c4715aca89c"
+      },
+      {
+        "path": "test/fixtures/n9/freeze.json",
+        "sha256": "3650c1e754c6756de9d1aee0de297e8d64670c3eaa5f409592e107b21e5a6ad0"
+      },
+      {
+        "path": "test/fixtures/relevance/corpus.json",
+        "sha256": "d750399c6987c9dd6b6d2dd043604dd03bde0b36a71680daec77c8024f9949db"
+      },
+      {
+        "path": "docs/evaluation/RX-9001-method.json",
+        "sha256": "ec288cc5a1fc8db0d2551c47055dbb2b492025bae414dbb5df68becd7fc0c8c8"
+      },
+      {
+        "path": "docs/evaluation/RX-9001-method.md",
+        "sha256": "e777fc784ef2e076b2ef4f5a85338da8b15b60b161ab0f69bb582affd6b2a292"
+      },
+      {
+        "path": "docs/evidence/RX-9005/collection-budget-revision.json",
+        "sha256": "feb836e8568ab3c2cf490a400194e0b5b6d443a722c68447443a88659f236999"
+      }
+    ],
+    "wholePackageByteEqualityClaim": false,
+    "measuredCurrentArchive": "e562633424a3b6b37692d5c1a21bfeadb3b399dc6fff2ba9d33aba87f98b96b6",
+    "retainedVerifiedClosingArchive": "4dd0f8333ff95d0c7e50f2a91a028e41122bdf127f5fadf92dd1104eb4589b0c",
+    "acceptedCurrentControl": "AcceptedN9/current implementation bytes are equal; timing separations are method/environment variation, not an additional optimization."
+  },
+  "verificationCaveats": [
+    "All actual mutation prefixes independently reconstruct complete source/core/positions/UTF16 and receipt/revision states, but this is serialized replay plus separately reviewed runtime invariants, not a new runtime execution.",
+    "Verificationv2 freshly fully paginates rare/novel/replacement/shared-batch OR after checked roots; N<=1000 broad/all fully paginate. N10000 broad/all check explicit first/lower-middle/last pages with fullyEnumerated:false.",
+    "Prior identical-core query captures retain reuse provenance; not fresh queries/current-root admission/deadline/fairness observations.",
+    "Root references/receipts/clocks retained during sequence windows affect resource lifetime and potentially GC. Reset/oracle work outside windows can warm analyzer/JIT. No measured GC causal explanation.",
+    "Invocation-to-return includes admission/ownership/synchronous first pump; remainder does not isolate queue or engine work. One awaited call at a time, no intentionally queued backlog.",
+    "Process CPU includes harness/Promise/process activity, not isolated engine CPU. Diagnostics are separate owner/lane, logical counters not CPU/allocation meter; no overhead subtraction.",
+    "No browser/worker update timing, representative traffic, universal device, cold-machine, heap, physical paint/input, AT, SLA or overall-winner claim."
+  ],
+  "practicalVerdict": [
+    "On this Node method all168 N10000 wall cells observed faster, across both configurations/deadlines; CPU remains mixed (99faster/1slower/68overlap).",
+    "N1000 wall158faster/0slower/6overlap; CPU76faster/3slower/85overlap.",
+    "N100 wall77faster/4slower/47overlap; CPU21faster/13slower/94overlap. Small absolute wall regressions remain real observed classifications.",
+    "Treat updates as a workload/configuration tradeoff: substantial measured large-population wall gains, some small-workload wall costs, material source+positions CPU regressions and many CPU overlaps. No weighted overall winner without an owner-selected workload distribution.",
+    "Keep public B-call granularity and native limits; no production change justified by unestablished GC explanation. Full source/positions recovery capacity is a separate qualified/refused envelope."
+  ],
+  "evidenceSHA256": {
+    "docs/evidence/RX-9005/analysis/results.json": "663fbc8a9af32a9a9e6f2fadb2ab318570f9ac1b34151411e2006935960c4bb8",
+    "docs/evidence/RX-9005/analysis/comparisons.csv": "c70fe2a937d30b30c67acf7971ff7869b7c4993abb937c304ccb41dba289fffb",
+    "docs/evidence/RX-9005/analysis/adverse.csv": "6a1d74b82ec73cb5368d07dd74327b51bd8e7847f7f5b19d7b8d5503c9f8f117",
+    "docs/evidence/RX-9005/analysis/readout-facts.json": "2ebb672862a7e672d12126a0c18478cd1fc593292400d49c9e6d8be3298349cb",
+    "docs/evidence/RX-9005/review/parent-analysis.json": "ca0ad59af4fdaf101c451181d8c15be8295d680c775d24f1eccd198653b04dc1",
+    "docs/evidence/RX-9005/review/reconstruction.json": "8170949352fda4e01bde8f02c075dedeba9446291edbf70086980c0fca02e4e8",
+    "docs/evidence/RX-9005/review/state-replay.json": "dcf687266fcc6d16dd7bcf0f103886d391d6816b67e415d17752fd00b274feda",
+    "docs/evidence/RX-9005/review/final.json": "95d1f9b0a1ade8a82eb206bd37201a817e6e7a113555ee378f206e93b728fae5",
+    "docs/evidence/RX-9005/review/final-source-audit.json": "0418429a10ebff89f9294764f6a5d2c8d3d91e3a3bc0fd50b58d4715922334ec",
+    "docs/evidence/RX-9005/review/synchronization.json": "9ae632bb040610aed21ad705a3c8900a451f50456e60731cb463493e273f84ae",
+    "docs/evidence/RX-9005/verification/identity.json": "877ca21f908d0da4d053556baa0ccb2d09fb1be3381ada8bca0d95e71ad7b40d",
+    "docs/evidence/RX-9005/verification/validation.json": "ad413fe869eb05caf5ff4beb734c9f13f31a6c1d5bc9ee20f42ea4709ff8b36c",
+    "docs/evidence/RX-9005/identity/artifacts.json": "1c9427c791f7804142b301e9cad6672c021df605a4fbca58af0daaa65f80b79f",
+    "docs/evidence/RX-9005/timed-report.json": "70784a2e8fb8f853043c3e16513d72a992c97693f1fb838fbf610d3a15f57bd5",
+    "docs/evidence/RX-9005/verification-recipe-v2.json": "e7c1b58a059495c3afc0e2cf23f2617a807237a47d1c9d5d82d7bdb2e9c90820",
+    "docs/evidence/RX-9005/collection-budget-revision.json": "feb836e8568ab3c2cf490a400194e0b5b6d443a722c68447443a88659f236999",
+    "docs/evidence/RX-9005/identity/first-attempt-operator-stop.json": "52738f9bb96ef1f5c0e1691c839ba3cad124c8c9754920482debb191c362ab61",
+    "docs/evaluation/RX-9005.md": "4836c5c49c756787b0495df0d67ffd770fbf39b1d7a490d7a7480bb062d4d390",
+    "docs/evaluation/RX-9001-method.json": "ec288cc5a1fc8db0d2551c47055dbb2b492025bae414dbb5df68becd7fc0c8c8"
+  }
+}

@@ -2417,7 +2417,7 @@ Consolidate measured differences, reproducibility, safe capacity/latency guidanc
 
 **Freeze post-N9 artifacts and a validated comparison method**
 
-**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9001%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/94)
 
 **Dependencies:** [RX-8011](IMPLEMENTATION_TASKS.md#rx-8011)
 
@@ -2458,7 +2458,7 @@ Pin the before-N9/current/control artifacts and complete finite workload, host, 
 
 **Audit combined lifecycle and recovery hardening coverage**
 
-**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9002%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/95)
 
 **Dependencies:** [RX-9001](IMPLEMENTATION_TASKS.md#rx-9001)
 
@@ -2502,7 +2502,7 @@ Review the optimized paths in composition, reuse existing safety evidence and re
 
 **Repair confirmed defects and verify the measurement candidate**
 
-**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9003%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/96)
 
 **Dependencies:** [RX-9002](IMPLEMENTATION_TASKS.md#rx-9002)
 
@@ -2545,7 +2545,7 @@ Apply bounded fixes only to reproduced contract violations and establish a revie
 
 **Measure matched native build and query performance**
 
-**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9004%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/97)
 
 **Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
@@ -2592,7 +2592,7 @@ Recheck net before-N9-to-current performance on frozen native workloads while pr
 
 **Measure incremental update costs and state preservation**
 
-**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9005%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/98)
 
 **Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
@@ -2640,7 +2640,7 @@ Fill the missing current update-latency evidence with matched bounded mutations 
 
 **Qualify supported recovery paths with bounded evidence reuse**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9006%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/99)
 
 **Dependencies:** [RX-9003](IMPLEMENTATION_TASKS.md#rx-9003)
 
@@ -2686,13 +2686,21 @@ Reconcile existing recovery evidence and close essential current-candidate suppo
 - [docs/evidence/RX-9006/overhead-slice2/README.md](docs/evidence/RX-9006/overhead-slice2/README.md)
 - [docs/evidence/RX-9006/overhead-slice3/README.md](docs/evidence/RX-9006/overhead-slice3/README.md)
 - [docs/evidence/RX-9006/preflight-20261106-01/README.md](docs/evidence/RX-9006/preflight-20261106-01/README.md)
+- [docs/evaluation/RX-9006-scoped-20261108.md](docs/evaluation/RX-9006-scoped-20261108.md)
+- [docs/evidence/RX-9006/scoped-20261108/README.md](docs/evidence/RX-9006/scoped-20261108/README.md)
+- [docs/evidence/RX-9006/scoped-20261108/reuse-audit.json](docs/evidence/RX-9006/scoped-20261108/reuse-audit.json)
+- [docs/evidence/RX-9006/scoped-20261108/support-audit.json](docs/evidence/RX-9006/scoped-20261108/support-audit.json)
+- [docs/evidence/RX-9006/scoped-20261108/review.md](docs/evidence/RX-9006/scoped-20261108/review.md)
+- [docs/evidence/RX-9006/scoped-20261108/preservation.json](docs/evidence/RX-9006/scoped-20261108/preservation.json)
+- [docs/evidence/RX-9006/scoped-20261108/checks.txt](docs/evidence/RX-9006/scoped-20261108/checks.txt)
+- [docs/evidence/RX-9007/tracking-closeout/README.md](docs/evidence/RX-9007/tracking-closeout/README.md)
 
 
 ## RX-9007
 
 **Publish a scoped engineering verdict and remaining limitations**
 
-**Milestone:** N10 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9007%22)
+**Milestone:** N10 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/100)
 
 **Dependencies:** [RX-9004](IMPLEMENTATION_TASKS.md#rx-9004), [RX-9005](IMPLEMENTATION_TASKS.md#rx-9005), [RX-9006](IMPLEMENTATION_TASKS.md#rx-9006)
 
@@ -2721,7 +2729,17 @@ Synthesize completed query/update measurements and revised recovery qualificatio
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evaluation/RX-9007.md](docs/evaluation/RX-9007.md)
+- [docs/support/RX-9007.md](docs/support/RX-9007.md)
+- [docs/evidence/RX-9007.md](docs/evidence/RX-9007.md)
+- [docs/evidence/RX-9007/query-audit.json](docs/evidence/RX-9007/query-audit.json)
+- [docs/evidence/RX-9007/update-audit.json](docs/evidence/RX-9007/update-audit.json)
+- [docs/evidence/RX-9007/reuse-map.json](docs/evidence/RX-9007/reuse-map.json)
+- [docs/evidence/RX-9007/review.md](docs/evidence/RX-9007/review.md)
+- [docs/evidence/RX-9007/preservation.json](docs/evidence/RX-9007/preservation.json)
+- [docs/evidence/RX-9007/checks.txt](docs/evidence/RX-9007/checks.txt)
+- [docs/evidence/RX-9007/tracking-closeout/README.md](docs/evidence/RX-9007/tracking-closeout/README.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md)
 
 
 ## RX-9101
@@ -2854,7 +2872,7 @@ Make inline/modal facet availability and reset outcomes understandable while pre
 
 **Simplify pagination presentation while preserving focus**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/84)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/84)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -2884,14 +2902,23 @@ Reduce pagination clutter and clarify batch/window navigation without losing exa
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9104.md](docs/evidence/RX-9104.md)
+- [docs/evidence/RX-9104/review.md](docs/evidence/RX-9104/review.md)
+- [docs/evidence/RX-9104/ui-tests-attempt01.txt](docs/evidence/RX-9104/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9104/controls-report.json](docs/evidence/RX-9104/controls-report.json)
+- [docs/evidence/RX-9104/shadow-report.json](docs/evidence/RX-9104/shadow-report.json)
+- [docs/evidence/RX-9104/modal-report.json](docs/evidence/RX-9104/modal-report.json)
+- [docs/evidence/RX-9104/consumer-tests.txt](docs/evidence/RX-9104/consumer-tests.txt)
+- [docs/evidence/RX-9104/starter-tests.txt](docs/evidence/RX-9104/starter-tests.txt)
+- [docs/evidence/RX-9104/typecheck-final.txt](docs/evidence/RX-9104/typecheck-final.txt)
+- [docs/evidence/RX-9104/tooling-tests.txt](docs/evidence/RX-9104/tooling-tests.txt)
 
 
 ## RX-9105
 
 **Polish search states and recovery messages**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/85)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/85)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -2921,14 +2948,24 @@ Use clear consumer-facing status, empty and error language that explains the nex
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9105.md](docs/evidence/RX-9105.md)
+- [docs/evidence/RX-9105/review.md](docs/evidence/RX-9105/review.md)
+- [docs/evidence/RX-9105/build.txt](docs/evidence/RX-9105/build.txt)
+- [docs/evidence/RX-9105/typecheck.txt](docs/evidence/RX-9105/typecheck.txt)
+- [docs/evidence/RX-9105/ui-tests-attempt01.txt](docs/evidence/RX-9105/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9105/ui-focused-rerun.txt](docs/evidence/RX-9105/ui-focused-rerun.txt)
+- [docs/evidence/RX-9105/consumer-tests.txt](docs/evidence/RX-9105/consumer-tests.txt)
+- [docs/evidence/RX-9105/starter-tests.txt](docs/evidence/RX-9105/starter-tests.txt)
+- [docs/evidence/RX-9105/controls-report.json](docs/evidence/RX-9105/controls-report.json)
+- [docs/evidence/RX-9105/dropdown-report.json](docs/evidence/RX-9105/dropdown-report.json)
+- [docs/evidence/RX-9105/directory-report.json](docs/evidence/RX-9105/directory-report.json)
 
 
 ## RX-9106
 
 **Make keyboard guidance discoverable and consistent**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/86)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/86)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -2958,14 +2995,22 @@ Help users discover surface-appropriate navigation and dismissal keys without re
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9106.md](docs/evidence/RX-9106.md)
+- [docs/evidence/RX-9106/review.md](docs/evidence/RX-9106/review.md)
+- [docs/evidence/RX-9106/build.txt](docs/evidence/RX-9106/build.txt)
+- [docs/evidence/RX-9106/typecheck.txt](docs/evidence/RX-9106/typecheck.txt)
+- [docs/evidence/RX-9106/ui-tests-attempt01.txt](docs/evidence/RX-9106/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9106/dropdown-report.json](docs/evidence/RX-9106/dropdown-report.json)
+- [docs/evidence/RX-9106/modal-report.json](docs/evidence/RX-9106/modal-report.json)
+- [docs/evidence/RX-9106/consumer-tests.txt](docs/evidence/RX-9106/consumer-tests.txt)
+- [docs/evidence/RX-9106/starter-tests.txt](docs/evidence/RX-9106/starter-tests.txt)
 
 
 ## RX-9107
 
 **Implement Raveldex visual tokens and coherent consumer styling**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/87)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/87)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -2995,14 +3040,22 @@ Apply the RX-9101 Raveldex identity through scoped reusable consumer tokens and 
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9107.md](docs/evidence/RX-9107.md)
+- [docs/evidence/RX-9107/review.md](docs/evidence/RX-9107/review.md)
+- [docs/evidence/RX-9107/build.txt](docs/evidence/RX-9107/build.txt)
+- [docs/evidence/RX-9107/typecheck-reuse.json](docs/evidence/RX-9107/typecheck-reuse.json)
+- [docs/evidence/RX-9107/contrast-summary.json](docs/evidence/RX-9107/contrast-summary.json)
+- [docs/evidence/RX-9107/ui-regressions.txt](docs/evidence/RX-9107/ui-regressions.txt)
+- [docs/evidence/RX-9107/consumer-final.txt](docs/evidence/RX-9107/consumer-final.txt)
+- [docs/evidence/RX-9107/family-final-report.json](docs/evidence/RX-9107/family-final-report.json)
+- [docs/evidence/RX-9107/package-docs-rerun.txt](docs/evidence/RX-9107/package-docs-rerun.txt)
 
 
 ## RX-9108
 
 **Provide coherent localization and message customization**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/88)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/88)
 
 **Dependencies:** [RX-9105](IMPLEMENTATION_TASKS.md#rx-9105), [RX-9106](IMPLEMENTATION_TASKS.md#rx-9106), [RX-9110](IMPLEMENTATION_TASKS.md#rx-9110)
 
@@ -3032,14 +3085,18 @@ Make it practical to translate complete consumer interfaces consistently using t
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9108.md](docs/evidence/RX-9108.md)
+- [docs/evidence/RX-9108/review.md](docs/evidence/RX-9108/review.md)
+- [docs/evidence/RX-9108/localization-final.txt](docs/evidence/RX-9108/localization-final.txt)
+- [docs/evidence/RX-9108/localization-final-report.json](docs/evidence/RX-9108/localization-final-report.json)
+- [docs/evidence/RX-9108/preservation.json](docs/evidence/RX-9108/preservation.json)
 
 
 ## RX-9109
 
 **Define native result hierarchy and rich-content compatibility**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/89)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/89)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -3069,14 +3126,18 @@ Map real documentation/catalog/content needs to Raveldex result hierarchy and ex
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9109.md](docs/evidence/RX-9109.md)
+- [docs/evidence/RX-9109/review.md](docs/evidence/RX-9109/review.md)
+- [docs/evidence/RX-9109/package-checks.txt](docs/evidence/RX-9109/package-checks.txt)
+- [docs/evidence/RX-9109/package-report.json](docs/evidence/RX-9109/package-report.json)
+- [docs/evidence/RX-9109/source-reuse.json](docs/evidence/RX-9109/source-reuse.json)
 
 
 ## RX-9110
 
 **Explain directory counts and multi-select filtering plainly**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/90)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/90)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -3106,14 +3167,18 @@ Make current-result facet counts understandable without changing conjunctive cou
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9110.md](docs/evidence/RX-9110.md)
+- [docs/evidence/RX-9110/review.md](docs/evidence/RX-9110/review.md)
+- [docs/evidence/RX-9110/ui-tests.txt](docs/evidence/RX-9110/ui-tests.txt)
+- [docs/evidence/RX-9110/package-inventory.json](docs/evidence/RX-9110/package-inventory.json)
+- [docs/evidence/RX-9110/preservation.json](docs/evidence/RX-9110/preservation.json)
 
 
 ## RX-9111
 
 **Document safe CMS refresh, remount and state preservation**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/91)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/91)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101)
 
@@ -3143,14 +3208,18 @@ Give dynamic-content integrators an accurate lifecycle recipe using existing eng
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9111.md](docs/evidence/RX-9111.md)
+- [docs/evidence/RX-9111/review.md](docs/evidence/RX-9111/review.md)
+- [docs/evidence/RX-9111/cms-tests.txt](docs/evidence/RX-9111/cms-tests.txt)
+- [docs/evidence/RX-9111/cms-report.json](docs/evidence/RX-9111/cms-report.json)
+- [docs/evidence/RX-9111/preservation.json](docs/evidence/RX-9111/preservation.json)
 
 
 ## RX-9112
 
 **Qualify the Raveldex experience with a finite interaction review**
 
-**Milestone:** N11 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/92)
+**Milestone:** N11 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/92)
 
 **Dependencies:** [RX-9101](IMPLEMENTATION_TASKS.md#rx-9101), [RX-9102](IMPLEMENTATION_TASKS.md#rx-9102), [RX-9103](IMPLEMENTATION_TASKS.md#rx-9103), [RX-9104](IMPLEMENTATION_TASKS.md#rx-9104), [RX-9105](IMPLEMENTATION_TASKS.md#rx-9105), [RX-9106](IMPLEMENTATION_TASKS.md#rx-9106), [RX-9107](IMPLEMENTATION_TASKS.md#rx-9107), [RX-9108](IMPLEMENTATION_TASKS.md#rx-9108), [RX-9109](IMPLEMENTATION_TASKS.md#rx-9109), [RX-9110](IMPLEMENTATION_TASKS.md#rx-9110), [RX-9111](IMPLEMENTATION_TASKS.md#rx-9111)
 
@@ -3180,7 +3249,18 @@ Verify changed consumer behavior and the original Raveldex design on one identif
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9112.md](docs/evidence/RX-9112.md)
+- [docs/evidence/RX-9112/review.md](docs/evidence/RX-9112/review.md)
+- [docs/evidence/RX-9112/primary-family-report.json](docs/evidence/RX-9112/primary-family-report.json)
+- [docs/evidence/RX-9112/secondary-family-report.json](docs/evidence/RX-9112/secondary-family-report.json)
+- [docs/evidence/RX-9112/manual-walkthrough.md](docs/evidence/RX-9112/manual-walkthrough.md)
+- [docs/evidence/RX-9112/preservation.json](docs/evidence/RX-9112/preservation.json)
+- [docs/evidence/RX-9112/tracking-readback.json](docs/evidence/RX-9112/tracking-readback.json)
+- [docs/evidence/RX-9112/human-feedback.json](docs/evidence/RX-9112/human-feedback.json)
+- [docs/evidence/RX-9112/indexed-fields-probe.json](docs/evidence/RX-9112/indexed-fields-probe.json)
+- [docs/evidence/RX-9112/indexed-fields-probe.mjs](docs/evidence/RX-9112/indexed-fields-probe.mjs)
+- [docs/evidence/RX-9112/tracking-closeout.md](docs/evidence/RX-9112/tracking-closeout.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md)
 
 
 ## Optional enhancement tasks

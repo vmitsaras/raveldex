@@ -5,6 +5,7 @@ import type { CapturedDirectoryView } from './directory-view-options.js';
 import { directoryMessage as message } from './directory-view-options.js';
 import { failDirectory, queryText, stateKey } from './directory-state.js';
 import { mounted } from './mounts.js';
+import { queryPreview } from './search-feedback.js';
 /** Private presentation seam; public entries admit their own fixed data contracts. */
 export interface DirectoryViewExtension {
   readonly kind: 'directory-cards';
@@ -139,7 +140,9 @@ export function mountDirectoryView(captured: CapturedDirectoryView, extension?: 
       results.start = offset + 1; results.append(fragment); heading.hidden = false; navigation.hidden = false;
       unavailable(previous, value.state.page === 1); unavailable(next, value.state.page >= pages);
       pageSummary.textContent = message(messages.page, { page: value.state.page, pages });
-      announce(found.total ? message(found.total === 1 ? messages.resultOne : messages.results, { total: found.total, start: offset + 1, end: offset + found.hits.length }) : messages.noResults);
+      const empty = desired.length ? messages.noResultsFiltered : value.state.text.trim() ? messages.noResults : messages.noResultsBrowse;
+      announce(found.total ? message(found.total === 1 ? messages.resultOne : messages.results, { total: found.total, start: offset + 1, end: offset + found.hits.length }) : message(empty, { query: queryPreview(value.state.text) }));
+      if (!found.total && !desired.length && !value.state.text.trim()) { retry.hidden = false; unavailable(retry, false); }
     } else if (value.status === 'error' || value.status === 'stale') {
       announce(value.status === 'stale' ? messages.stale : message(messages.error, { code: value.error ?? 'INTERNAL_ERROR' })); retry.hidden = false; unavailable(retry, false);
     } else announce(value.status === 'loading' ? messages.searching : messages.idle);

@@ -24,6 +24,8 @@ Use native `popover=manual` to escape overflow/transform clipping while retainin
 
 ## Keys, focus and dismissal
 
+RX-9106 adds optional captured `messages.keyboardHint`. The default visible paragraph explains Arrow Up/Down selection, Enter on a selected link versus Enter to search, Escape dismissal and ordinary Tab exit. A unique input `aria-describedby` reference exposes that same static text; it is outside live feedback and adds no key binding or shortcut. Translate it through the existing plain-text 512-unit capture. Old complete message bundles remain valid. Other native-list presets do not receive combobox instructions.
+
 - Unmodified Down/Up enter first/last result, then clamp at boundaries. If results are not yet available, flush/reopen the current query and retain only explicit first/last navigation intent for its current reply; do not automatically activate ordinary search replies or issue repeated duplicate queries while loading.
 - Unmodified Enter on a current active cell activates its actual anchor without rewriting input. With no active cell, native form submission flushes/reopens search. Modified input Enter/arrow combinations do not select or activate a hit. Actual anchors preserve native modified pointer activation/context menus.
 - Left/Right/Home/End, deletion, printable and selection/editing keys clear virtual selection synchronously and retain native input behavior. Do not intercept platform editing/modifier shortcuts.

@@ -69,6 +69,15 @@ for (const surface of ['inline', 'modal']) for (const ancestry of ['open', 'clos
   await page.evaluate(() => window.shadowHarness.handle.clear());
   assert.equal(await page.evaluate(() => window.shadowHarness.focused()), true, 'Clear must recover focused result content before removing it.');
   await page.evaluate(async () => window.shadowHarness.handle.search('alpha'));
+  await page.evaluate(() => { const more = window.shadowHarness.root.querySelector('.raveldex-inline__load-more'); more.focus(); more.click(); });
+  await page.waitForFunction(() => window.shadowHarness.root.querySelectorAll('.raveldex-inline__result').length === 2 && window.shadowHarness.root.querySelector('.raveldex-inline').getAttribute('aria-busy') === 'false');
+  assert.equal(await page.evaluate(() => { const h = window.shadowHarness; return h.tree.activeElement === h.root.querySelector('.raveldex-inline__load-more'); }), true);
+  await page.keyboard.press('Tab');
+  assert.equal(await page.evaluate(() => { const h = window.shadowHarness; return h.tree.activeElement === h.root.querySelector('.raveldex-inline__new-results'); }), true);
+  await page.keyboard.press('Enter');
+  assert.equal(await page.evaluate(() => { const h = window.shadowHarness; return h.tree.activeElement === h.root.querySelectorAll('.raveldex-inline__result-title')[1]; }), true);
+  assert.equal(await page.evaluate(() => location.hash), '');
+  await page.evaluate(async () => window.shadowHarness.handle.search('alpha'));
   assert.equal(await page.evaluate(() => window.shadowHarness.focusResult()), true);
   await page.evaluate(() => { const h = window.shadowHarness; h.fail(); h.root.querySelector('.raveldex-inline__load-more').click(); });
   await page.waitForFunction(() => { const shell = window.shadowHarness.root.querySelector('.raveldex-inline'); return shell.dataset.state === 'error' && shell.getAttribute('aria-busy') === 'false'; });

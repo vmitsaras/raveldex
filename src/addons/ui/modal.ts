@@ -26,7 +26,8 @@ export interface ModalUIHandle extends InlineUIHandle {
 }
 
 const defaults: ModalUIMessages = Object.freeze({ title: 'Search documentation', close: 'Close search',
-  escapeHint: 'Esc to close', shortcutHint: 'Ctrl/⌘ K' });
+  escapeHint: 'Close search closes this dialog. Escape may clear the search field first.',
+  shortcutHint: 'Ctrl/Command+K opens search outside text fields.' });
 const triggers = new WeakMap<HTMLButtonElement, ModalUIHandle>();
 const activeDialogs = new WeakMap<Document, HTMLDialogElement>();
 let mountNumber = 0;
@@ -120,12 +121,13 @@ export function mountRaveldexModal(options: ModalUIOptions): ModalUIHandle {
   const inlineOptions: Record<string, unknown> = { ...o, root: inlineRoot };
   for (const name of ['trigger', 'resetOnClose', 'shortcut', 'keyboardHints', 'modalMessages']) delete inlineOptions[name];
   let presentation!: InlinePresentation;
+  let searchInput!: HTMLInputElement;
   let presentationActive = (): boolean => false;
   const releaseHost = prepareInlineHost(inlineRoot, {
     active: () => presentationActive(),
     layout: parts => {
       const search = node('div', 'search'), body = node('div', 'body');
-      parts.input.autofocus = true; search.append(parts.form); body.append(parts.facets, ...parts.feedback); parts.shell.replaceChildren(search, body);
+      searchInput = parts.input; parts.input.autofocus = true; search.append(parts.form); body.append(parts.facets, ...parts.feedback); parts.shell.replaceChildren(search, body);
     },
     connect: value => { presentation = value; },
   });
@@ -135,8 +137,15 @@ export function mountRaveldexModal(options: ModalUIOptions): ModalUIHandle {
   // Keep the existing inline component as the theme scope, without an extra layout wrapper.
   dialog.append(header, ...Array.from(inlineRoot.childNodes));
   if (hints) {
-    const footer = node('footer', 'footer'); footer.append(node('span', 'hint', messages.escapeHint));
-    if (shortcut) footer.append(node('span', 'hint', messages.shortcutHint));
+    const footer = node('footer', 'footer'), escapeHint = node('span', 'hint', messages.escapeHint);
+    escapeHint.id = `${dialog.id}-escape-hint`; footer.append(escapeHint);
+    const descriptions = [escapeHint.id];
+    if (shortcut) {
+      const shortcutHint = node('span', 'hint', messages.shortcutHint); shortcutHint.id = `${dialog.id}-shortcut-hint`;
+      footer.append(shortcutHint); descriptions.push(shortcutHint.id);
+    }
+    searchInput.setAttribute('aria-describedby', descriptions.join(' '));
+    footer.tabIndex = 0; footer.setAttribute('role', 'group'); footer.setAttribute('aria-labelledby', descriptions.join(' '));
     dialog.append(footer);
   }
   const originalNodes = Array.from(root.childNodes), attributes = new Map<string, Attribute>(), listeners: (() => void)[] = [];

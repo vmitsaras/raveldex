@@ -8,6 +8,7 @@ import { gzipSync } from 'node:zlib';
 import { build, version as esbuildVersion } from 'esbuild';
 import { chromium } from 'playwright-core';
 import { prepareConsumer, command, digest, REPO_ROOT } from '../../scripts/lib/packed-consumer.mjs';
+import { contrast } from '../helpers/contrast.mjs';
 
 let consumer, browser, server, origin, context, page, errors;
 const defaults = { facets: [{ field: 'category', label: 'Category' }], snippetFields: ['body'] };
@@ -103,6 +104,63 @@ after(async () => { try { await browser?.close(); } finally {
   report.finishedAt = new Date().toISOString(); await save();
 } });
 
+test('empty feedback safely identifies bounded submitted text and reset neither searches nor repeats idle announcements', async () => {
+  const query = '<img src=x onerror=alert(1)> "<script>" ' + '😀'.repeat(180);
+  await part('input').focus(); await search(query);
+  assert.equal(await part('status').textContent(), `No results for “${Array.from(query).slice(0,160).join('')}…”. Try a different search.`);
+  assert.equal(await part('input').inputValue(), query); assert.equal(await part('input').evaluate(n=>n===document.activeElement), true);
+  assert.equal(await root().locator('img,script').count(),0);
+  await page.setViewportSize({width:320,height:850});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+  if(process.env.RAVELDEX_INLINE_CONTROLS_REPORT) await page.screenshot({path:resolve(process.env.RAVELDEX_INLINE_CONTROLS_REPORT.replace(/\.json$/,'')+'-empty-320.png'),fullPage:true});
+  await page.evaluate(()=>window.controlsHarness.handle.clear());
+  const before=await page.evaluate(()=>{
+    window.feedbackMutations=0;
+    new MutationObserver(records=>window.feedbackMutations+=records.length).observe(document.querySelector('.raveldex-inline__status'),{childList:true,characterData:true,subtree:true});
+    return window.controlsHarness.calls().length;
+  });
+  await page.evaluate(()=>{window.controlsHarness.handle.clear();window.controlsHarness.handle.clear();});
+  assert.equal(await page.evaluate(()=>window.feedbackMutations),0);assert.equal(await page.evaluate(()=>window.controlsHarness.calls().length),before);
+  observation('safe empty query and idle dedup',{previewCodePoints:160,originalCodePoints:Array.from(query).length,narrow:320,resetQueries:0,idleMutations:0});
+});
+
+test('filter-only empty feedback retains selections and old translated empty overrides cover variants', async () => {
+  await search();await selectCategory('Guide');await page.evaluate(()=>window.controlsHarness.recategorize());await search('');
+  assert.equal(await part('status').textContent(),'No results with the selected filters. Change a filter or clear search and filters.');
+  assert.equal(await part('input').inputValue(),'');assert.equal(await part('facet').locator('option:checked').textContent(),'Guide (not in displayed values)');
+  await page.evaluate(()=>window.controlsHarness.remount({messages:{noResults:'Aucun résultat: {query}'}}));
+  await search();await selectCategory('Reference');await search('missing');
+  assert.equal(await part('status').textContent(),'Aucun résultat: missing');
+  await page.evaluate(()=>window.controlsHarness.remount({messages:{noResults:'Text {query}',noResultsFiltered:'Filtres {query}'}}));
+  await search();await selectCategory('Reference');await search('missing');
+  assert.equal(await part('status').textContent(),'Filtres missing');
+  observation('filtered empty compatibility',{retainedSelection:'Guide',oldOverrideFallback:true,explicitFilteredOverride:true});
+});
+
+test('older empty replies cannot announce after a new query, composition or destroy', async () => {
+  await page.evaluate(()=>{
+    window.emptyAnnouncements=[];
+    new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)window.emptyAnnouncements.push(n.textContent);}).observe(document.querySelector('.raveldex-inline__status'),{childList:true});
+    window.controlsHarness.state.holdMain=true;window.oldFeedback=window.controlsHarness.handle.search('obsolete_missing');
+  });
+  await page.waitForFunction(()=>window.controlsHarness.state.pending.length===1);
+  await search('current_missing');await page.evaluate(async()=>{window.controlsHarness.release();await window.oldFeedback;});
+  assert.equal(await part('status').textContent(),'No results for “current_missing”. Try a different search.');
+  await page.evaluate(()=>{window.controlsHarness.state.holdMain=true;window.oldFeedback=window.controlsHarness.handle.search('obsolete_composing');});
+  await page.waitForFunction(()=>window.controlsHarness.state.pending.length===1);await part('input').focus();
+  await part('input').evaluate(n=>{n.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));n.value='未確定';n.dispatchEvent(new InputEvent('input',{bubbles:true,isComposing:true}));});
+  await page.evaluate(async()=>{window.controlsHarness.release();await window.oldFeedback;});
+  assert.equal(await part('status').textContent(),'Finish entering text to search.');assert.equal(await part('input').inputValue(),'未確定');
+  await part('input').evaluate(n=>n.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true})));
+  await page.evaluate(()=>{window.controlsHarness.state.holdMain=true;window.oldFeedback=window.controlsHarness.handle.search('obsolete_destroy');});
+  await page.waitForFunction(()=>window.controlsHarness.state.pending.length===1);
+  const before=await page.evaluate(()=>window.emptyAnnouncements.length);
+  await page.evaluate(async()=>{window.controlsHarness.handle.destroy();window.controlsHarness.release();await window.oldFeedback;});await page.waitForTimeout(40);
+  assert.equal(await page.evaluate(()=>window.emptyAnnouncements.length),before);
+  assert.equal(await page.evaluate(()=>window.emptyAnnouncements.some(s=>s.includes('obsolete_'))),false);
+  observation('settled context freshness',{obsoleteAnnouncements:0,compositionPreserved:true,destroyMutations:0});
+});
+
 test('idle filters explain query-first choices and keyboard reset clears intent without searching or losing focus', async () => {
   const guidance = 'Enter a search term to see filter choices.';
   assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), 0);
@@ -172,6 +230,122 @@ test('a nonmultiple DOM cap has lossless Next/Previous windows and exact range s
   observation('bounded DOM / lossless continuation', { cap: 7, first, second, exactTotal: 12, maximumObservedItems: 7 });
 });
 
+test('batch/window boundaries expose useful actions and a native keyboard route to every appended result', async () => {
+  const cases = [];
+  for (const total of [0, 1, 4, 5, 6, 7, 8, 12]) {
+    await open({ pageSize: 5, maxRenderedResults: 7, facets: [], snippetFields: [] }, { count: total, features: 'core' });
+    await search();
+    const all = Array.from({ length: total }, (_, i) => `item-${String(i).padStart(2, '0')}`);
+    assert.deepEqual(await ids(), all.slice(0, 5));
+    assert.equal(await part('previous').isVisible(), false); assert.equal(await part('next').isVisible(), false);
+    assert.equal(await part('new-results').isVisible(), false);
+    assert.equal(await part('load-more').isVisible(), total > 5);
+    assert.equal(await part('page-summary').textContent(), total ? `Showing 1–${Math.min(5, total)} of ${total}.` : '');
+    if (total <= 5) {
+      assert.equal(await part('navigation').isVisible(), false);
+      cases.push({ total, ranges: total ? [[1, total]] : [], actions: [] }); continue;
+    }
+    const more = part('load-more'); await more.focus(); await more.press('Enter'); await settled();
+    const first = all.slice(0, 7); assert.deepEqual(await ids(), first);
+    assert.match(await part('page-summary').textContent(), new RegExp(`^Showing 1–${first.length} of ${total}\\.`));
+    assert.equal(await more.evaluate(node => node === document.activeElement && !node.hidden), true);
+    assert.equal(await more.getAttribute('aria-disabled'), 'true');
+    assert.equal(await part('status').textContent(), `Results added: ${first.length - 5}. Showing 1–${first.length} of ${total}.`);
+    const beforeJump = await page.evaluate(() => window.controlsHarness.calls().length);
+    await more.press('Tab');
+    assert.equal(await part('new-results').evaluate(node => node === document.activeElement), true);
+    assert.equal(await more.isVisible(), false);
+    await part('new-results').press('Enter');
+    assert.equal(await part('result-title').nth(5).evaluate(node => node === document.activeElement), true);
+    assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), beforeJump);
+    assert.equal(await part('next').isVisible(), total > 7);
+    if (total > 7) {
+      await activate('Next results'); assert.deepEqual(await ids(), all.slice(7));
+      assert.equal(await part('page-summary').textContent(), `Showing 8–${total} of ${total}.`);
+      assert.equal(await part('next').evaluate(node => node === document.activeElement && !node.hidden), true);
+      assert.equal(await part('new-results').isVisible(), false);
+      assert.deepEqual([...first, ...await ids()], all);
+      await activate('Previous results'); assert.deepEqual(await ids(), all.slice(0, 5));
+      assert.equal(await part('previous').evaluate(node => node === document.activeElement && !node.hidden), true);
+      assert.equal(await part('page-summary').textContent(), `Showing 1–5 of ${total}.`);
+    }
+    cases.push({ total, firstWindow: first, nextWindow: total > 7 ? all.slice(7) : [], jumpIndex: 5 });
+  }
+  observation('independent batch/window/terminal boundaries and keyboard append discovery', { pageSize: 5, cap: 7, cases });
+});
+
+test('three bounded windows retain exact ranges and complete native order', async () => {
+  await open({ pageSize: 5, maxRenderedResults: 7, facets: [], snippetFields: [] }, { count: 15, features: 'core' });
+  const all = Array.from({ length: 15 }, (_, i) => `item-${String(i).padStart(2, '0')}`);
+  await search(); await activate('Load more'); const first = await ids(); assert.deepEqual(first, all.slice(0, 7));
+  await activate('Next results'); assert.deepEqual(await ids(), all.slice(7, 12));
+  assert.equal(await part('page-summary').textContent(), 'Showing 8–12 of 15.');
+  await activate('Load more'); const second = await ids(); assert.deepEqual(second, all.slice(7, 14));
+  assert.match(await part('page-summary').textContent(), /^Showing 8–14 of 15\./);
+  await activate('Next results'); const last = await ids(); assert.deepEqual(last, all.slice(14));
+  assert.equal(await part('page-summary').textContent(), 'Showing 15–15 of 15.');
+  assert.deepEqual([...first, ...second, ...last], all);
+  await activate('Previous results'); assert.deepEqual(await ids(), all.slice(7, 12));
+  await activate('Previous results'); assert.deepEqual(await ids(), all.slice(0, 5));
+  observation('three native windows / exact complete membership', { total: 15, windows: [first, second, last], previousBatches: [all.slice(7, 12), all.slice(0, 5)] });
+});
+
+test('append status and discovery labels use captured optional translations', async () => {
+  await open({ pageSize: 5, maxRenderedResults: 7, facets: [], snippetFields: [],
+    messages: { newResults: 'Neue Ergebnisse', resultsAdded: '{added} neu; {start}–{end}/{total}; {count} sichtbar' } }, { count: 6, features: 'core' });
+  await page.evaluate(() => { const messages = window.controlsHarness.options.messages; messages.newResults = 'Changed'; messages.resultsAdded = 'Changed'; });
+  await search(); await activate('Load more');
+  assert.equal(await part('status').textContent(), '1 neu; 1–6/6; 6 sichtbar');
+  assert.equal(await root().getByRole('button', { name: 'Neue Ergebnisse', exact: true }).count(), 1);
+  observation('optional captured append messages', { label: 'Neue Ergebnisse', status: '1 neu; 1–6/6; 6 sichtbar', added: 1 });
+});
+
+test('focused unavailable actions retire after blur and clear/error/retry cannot retain stale ranges or jump targets', async () => {
+  await search(); await activate('Load more');
+  const more = part('load-more'), jump = part('new-results');
+  await jump.focus(); await page.evaluate(() => window.controlsHarness.handle.clear());
+  assert.equal(await jump.evaluate(node => node === document.activeElement && !node.hidden), true);
+  assert.equal(await jump.getAttribute('aria-disabled'), 'true');
+  assert.equal(await part('page-summary').textContent(), '');
+  const before = await page.evaluate(() => window.controlsHarness.calls().length);
+  await jump.press('Enter'); assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), before);
+  await part('input').focus(); assert.equal(await part('navigation').isVisible(), false);
+  await search(); await page.evaluate(() => { window.controlsHarness.state.holdMain = true; });
+  await more.focus(); await more.press('Enter'); await page.waitForFunction(() => window.controlsHarness.state.pending.length === 1);
+  assert.equal(await more.evaluate(node => node === document.activeElement && !node.hidden), true);
+  const held = await page.evaluate(() => window.controlsHarness.calls().length);
+  await more.press('Enter'); assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), held);
+  await page.evaluate(() => { window.controlsHarness.handle.clear(); window.controlsHarness.release(); });
+  await page.waitForTimeout(40); assert.deepEqual(await ids(), []); assert.equal(await part('page-summary').textContent(), '');
+  assert.equal(await jump.isVisible(), false);
+  await part('input').focus(); assert.equal(await part('navigation').isVisible(), false);
+  await search(); await page.evaluate(() => { window.controlsHarness.state.failNext = true; }); await activate('Load more');
+  assert.match(await part('status').textContent(), /Search could not complete\. Retry search/);
+  assert.equal(await part('page-summary').textContent(), ''); assert.equal(await jump.isVisible(), false);
+  await activate('Retry search'); assert.deepEqual(await ids(), expected.slice(0, 5));
+  assert.equal(await part('page-summary').textContent(), 'Showing 1–5 of 12.');
+  assert.equal(await more.isVisible(), true); assert.equal(await part('next').isVisible(), false);
+  observation('focused retirement / held reset / failed append / retry', { staleRanges: false, staleJump: false, unavailableRequests: 0, retryOffset: 0 });
+});
+
+test('a focused discovery action cannot follow an old target during replacement or a late reply', async () => {
+  await search(); await activate('Load more'); await part('new-results').focus();
+  await page.evaluate(() => { const h = window.controlsHarness; h.state.holdMain = true; window.heldReplacement = h.handle.search('missing'); });
+  await page.waitForFunction(() => window.controlsHarness.state.pending.length === 1);
+  assert.equal(await part('new-results').evaluate(node => node === document.activeElement && !node.hidden), true);
+  assert.equal(await part('new-results').getAttribute('aria-disabled'), 'true');
+  assert.equal(await part('page-summary').textContent(), '');
+  const count = await page.evaluate(() => window.controlsHarness.calls().length);
+  await part('new-results').press('Enter'); assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), count);
+  await search();
+  await page.evaluate(async () => { window.controlsHarness.release(); await window.heldReplacement; });
+  assert.deepEqual(await ids(), expected.slice(0, 5));
+  assert.equal(await part('page-summary').textContent(), 'Showing 1–5 of 12.');
+  assert.equal(await part('new-results').getAttribute('aria-disabled'), 'true');
+  await part('input').focus(); assert.equal(await part('new-results').isVisible(), false);
+  observation('focused discovery / replacement / ignored-abort target invalidation', { focusRetained: true, staleTargetActivated: false, currentIDs: expected.slice(0, 5) });
+});
+
 test('filter-only browsing, zero projected selections and clear retain coherent state/focus', async () => {
   assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), 0);
   // Initial idle facets need a real query before their native buckets exist.
@@ -179,7 +353,7 @@ test('filter-only browsing, zero projected selections and clear retain coherent 
   assert.equal(await part('facet').evaluate(node => node === document.activeElement), true);
   await activate('Load more'); assert.deepEqual(await ids(), expected.slice(0, 7));
   await page.evaluate(() => { window.controlsHarness.state.failNext = true; }); await search();
-  assert.match(await part('status').textContent(), /WORK_LIMIT_EXCEEDED/);
+  assert.match(await part('status').textContent(), /Search could not complete\. Retry search/);
   assert.equal(await part('input').inputValue(), 'source prov');
   assert.match(await part('facet').locator('option:checked').textContent(), /Guide/);
   assert.equal(await part('facet').isEnabled(), true);
@@ -258,10 +432,10 @@ test('append and evidence revision races clear stale accumulation and retry star
   await search(); await activate('Load more'); assert.equal((await ids()).length, 10);
   await page.evaluate(() => window.controlsHarness.replaceFirst()); await activate('Load more');
   assert.deepEqual(await ids(), []);
-  assert.equal(await part('status').textContent(), 'The index changed. Search again to refresh the results.');
+  assert.equal(await part('status').textContent(), 'Search results changed. Retry search to see the latest results.');
   await activate('Retry search'); assert.deepEqual(await ids(), expected.slice(0, 5));
   await page.evaluate(() => { window.controlsHarness.state.mutateBeforeEvidence = true; }); await search();
-  assert.deepEqual(await ids(), []); assert.equal(await part('status').textContent(), 'The index changed. Search again to refresh the results.');
+  assert.deepEqual(await ids(), []); assert.equal(await part('status').textContent(), 'Search results changed. Retry search to see the latest results.');
   await activate('Retry search'); assert.deepEqual(await ids(), expected.slice(0, 5));
   observation('append / main-versus-snippets revision refusal', { resetCounts: true, retryIDs: expected.slice(0, 5) });
 });
@@ -270,7 +444,7 @@ test('ignored-abort evidence and pending Load more cannot publish after clear, n
   await page.evaluate(() => { window.controlsHarness.state.holdEvidence = true; void window.controlsHarness.handle.search('source prov'); });
   await page.waitForFunction(() => window.controlsHarness.state.pending.length === 1);
   await search('missing'); await page.evaluate(() => window.controlsHarness.release()); await page.waitForTimeout(50);
-  assert.deepEqual(await ids(), []); assert.equal(await part('status').textContent(), 'No results.');
+  assert.deepEqual(await ids(), []); assert.equal(await part('status').textContent(), 'No results for “missing”. Try a different search.');
   await search();
   await page.evaluate(() => { window.controlsHarness.state.holdMain = true; });
   await part('load-more').click(); await page.waitForFunction(() => window.controlsHarness.state.pending.length === 1);
@@ -289,9 +463,9 @@ test('ignored-abort evidence and pending Load more cannot publish after clear, n
 });
 
 test('requested absent snippets/facets fail explicitly even for zero matching IDs', async () => {
-  await open({ facets: [] }, { features: 'facets-only' }); await search('missing');
+  await open({ facets: [], messages: { error: 'Search unavailable ({code}). Retry search.' } }, { features: 'facets-only' }); await search('missing');
   assert.deepEqual(await ids(), []); assert.match(await part('status').textContent(), /MISSING_CAPABILITY/);
-  await open({ snippetFields: [] }, { features: 'snippets-only' }); await search();
+  await open({ snippetFields: [], messages: { error: 'Search unavailable ({code}). Retry search.' } }, { features: 'snippets-only' }); await search();
   assert.deepEqual(await ids(), []); assert.match(await part('status').textContent(), /MISSING_CAPABILITY/);
   await open({ facets: [], snippetFields: [] }, { features: 'core' }); await search();
   assert.deepEqual(await ids(), expected.slice(0, 5));
@@ -303,6 +477,22 @@ test('new option nulls, invalid arrays and display caps fail before replacing au
   assert.equal(actual.searches, 0);
   for (const row of actual.outcomes) { assert.equal(row.code, 'INVALID_OPTIONS', row.name); assert.equal(row.preserved, true, row.name); }
   observation('strict new option admission', actual);
+});
+
+test('actual source marks stay distinct from measured focus and accented Search in complete light/dark host recipes',async()=>{
+  await search();await page.addStyleTag({content:await readFile(join(consumer.installed,'docs/api/examples/consumer-themes.css'),'utf8')});
+  const observed=[];
+  for(const theme of ['search-theme-light','search-theme-dark']){
+    await page.evaluate(theme=>document.body.className=theme,theme);await part('input').focus();await page.keyboard.press('ArrowLeft');
+    const found=await root().evaluate(root=>{
+      const mark=root.querySelector('mark'),field=root.querySelector('input'),submit=root.querySelector('button[type=submit]'),m=getComputedStyle(mark),f=getComputedStyle(field),s=getComputedStyle(submit);
+      return{mark:[m.color,m.backgroundColor],focus:[f.outlineColor,f.backgroundColor],submit:[s.color,s.backgroundColor],outlineWidth:f.outlineWidth,outlineStyle:f.outlineStyle,markTabIndex:mark.tabIndex};
+    });
+    const ratios={mark:contrast(...found.mark),focus:contrast(...found.focus),submit:contrast(...found.submit)};
+    assert.ok(ratios.mark>=4.5);assert.ok(ratios.focus>=3);assert.ok(ratios.submit>=4.5);assert.notEqual(found.focus[0],found.mark[1]);assert.equal(found.outlineWidth,'3px');assert.equal(found.outlineStyle,'solid');assert.equal(found.markTabIndex,-1);
+    observed.push({theme,...found,ratios});
+  }
+  observation('rendered match vs focus and primary action',{observed,sourceHighlights:true,focusAndMatchDistinct:true});
 });
 
 test('theme overrides, long RTL labels, narrow layout and forced colors retain usable controls and highlights', async () => {

@@ -1,0 +1,14 @@
+# RX-9108 independent message-contract and delta review
+
+7 November 2026. Parent owns edits. Two read-only subagents audited actual source and reviewed the resulting guide, German module and installed test/fixture. Neither ran tests/builds/benchmarks/network calls or nested delegation.
+
+| Reviewer | Direct source and review scope | Outcome |
+| --- | --- | --- |
+| rx9108_inline_messages | [Inline contract/capture](../../../src/addons/ui/inline.ts), [render/templates](../../../src/addons/ui/inline-render.ts), sections, [modal shell/focus](../../../src/addons/ui/modal.ts), complete keys/tokens, German reset/idle variants and remount boundary | Clear: all 35 inline plus four modal keys, English fallback, old empty-message compatibility, capture, fixed number/grammar limits and application focus responsibility are accurately described. German example wording is coherent product copy; no professional translation claim. |
+| rx9108_other_messages | [Dropdown](../../../src/addons/ui/dropdown.ts), [directory capture](../../../src/addons/ui/directory-view-options.ts), [mount/render/query handlers](../../../src/addons/ui/directory-view-mount.ts), [cards](../../../src/addons/ui/directory-cards.ts), complete keys/tokens, copied example and controller reuse | Clear after test correction: 17/29 keys plus separate image failure text, raw decimals, safe text and inherited empty variants match source. Directory retains its query/filters through view remount; explicit Clear is needed before expecting unfiltered results. |
+
+No missing runtime translation hook was found. The task delivers an explicit complete configuration path and tested compatibility decision rather than a new locale/formatter/plural API. Authored content, raw inline facet values, directory aliases, modal trigger and card display text remain application-owned.
+
+The second reviewer identified the retained absent-filter test setup before final acceptance and confirmed the corrected expectations against source. The final harness also removes the unsupported TypeScript inspection-API assumption and serves known CSS imports at nested fixture paths. Actual installed declaration equality and checked-JS compilation establish completeness. The final log/report records 16/16 Pass with no asynchronous errors; initial failures remain retained.
+
+Parent review confirms all 347 runtime members and prior executable inputs match, new executable example/fixture/test hashes are captured, current packaged assets match the tested install, and no engine, CSS, control handler, public API, dependency or build change is present. Ordinary focus preservation is distinguished from explicit application handoff on remount; stale non-directory replies and borrowed directory snapshots have different ownership. Human AT/physical input/actual zoom and translation quality remain unclaimed. No remaining actionable finding.

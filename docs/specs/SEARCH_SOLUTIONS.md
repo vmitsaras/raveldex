@@ -129,7 +129,7 @@ Recheck the selected reference when implementing a surface and record the versio
 | Debouncing/composing | Preserve input and focus; do not submit intermediate composition or announce every keystroke |
 | Searching/updating | Mark the relevant region busy; suppress stale results and avoid disabling/removing the active control |
 | Results | Announce a settled useful count/range; keep keyboard focus predictable |
-| No results | Show the submitted query safely and offer clear-query/clear-filter recovery |
+| No results | Identify the submitted query or active filters safely and offer editing/reset recovery; an empty directory browse offers explicit refresh |
 | Native refusal/transport failure | Explain failure, retain input and distinguish recovery from successful empty results |
 | Closed/destroyed | Suppress late work; restore the appropriate opener/original DOM without leaking ownership |
 
