@@ -55,5 +55,27 @@
     ],
     "rawLogPolicy": "Unqualified staged diff check reports retained native trailing/EOF whitespace in these seven original logs. Preserve all historical bytes and identity pins; do not normalize raw evidence.",
     "authoredSourceDocsStagedWhitespace": "Pass with only those seven raw log paths excluded; no product/source exception"
+  },
+  "cleanCheckoutRepair": {
+    "initialPushedHead": "36f8befaa7633ee8415d40e8c3df3ab2e3513c09",
+    "failedTrackingRun": "https://github.com/vmitsaras/raveldex/actions/runs/42470971470",
+    "finding": "Clean checkout docs:check could not resolve retained N9 planning-verification.log, which local checks saw but the global *.log ignore rule had kept untracked.",
+    "originalLog": "docs/evidence/N9-POST-20261104/planning-verification.log",
+    "logBytes": 248919,
+    "originalAndCurrentLogSHA256": "f9b3e8d3a23a8d341aa42f2cd9cf13d8138db925ba6899df2960885cba0f353a",
+    "binding": "Matches the pre-existing N9 planning-validation.json logSha256 exactly; no new test output is fabricated.",
+    "repair": "Commit only the actual referenced original log unchanged; preserve the ordinary log ignore policy and strict link validation.",
+    "trackedReferenceAuditBefore": "Exactly one ignored/untracked referenced target, this log",
+    "newEngineOrProviderChanges": false,
+    "newLocalRuntimeTests": 0,
+    "benchmarksOrCollectorsLaunched": 0,
+    "localChecks": {
+      "handoffCheck": "Pass:80 tasks/12 milestones",
+      "docsCheck": "Pass:three generated files/335 Markdown files",
+      "stagedWhitespace": "Pass",
+      "trackedReferenceAudit": "Pass:zero missing tracked targets",
+      "historicalLogHash": "Pass:matches existing N9 logSha256",
+      "productInputChanges": false
+    }
   }
 }

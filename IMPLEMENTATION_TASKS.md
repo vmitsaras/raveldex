@@ -2740,6 +2740,7 @@ Synthesize completed query/update measurements and revised recovery qualificatio
 - [docs/evidence/RX-9007/checks.txt](docs/evidence/RX-9007/checks.txt)
 - [docs/evidence/RX-9007/tracking-closeout/README.md](docs/evidence/RX-9007/tracking-closeout/README.md)
 - [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.json](docs/evidence/N10_N11_SOURCE_SYNC_20261108.json)
 
 
 ## RX-9101
@@ -3261,6 +3262,7 @@ Verify changed consumer behavior and the original Raveldex design on one identif
 - [docs/evidence/RX-9112/indexed-fields-probe.mjs](docs/evidence/RX-9112/indexed-fields-probe.mjs)
 - [docs/evidence/RX-9112/tracking-closeout.md](docs/evidence/RX-9112/tracking-closeout.md)
 - [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.json](docs/evidence/N10_N11_SOURCE_SYNC_20261108.json)
 
 
 ## Optional enhancement tasks
