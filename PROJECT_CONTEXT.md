@@ -1,5 +1,11 @@
 # Project context
 
+## N10/N11 closeout complete — 8 November 2026
+
+The evidence/handoff commit `4d778cb9a3c08fd0601797759233eacc5bad6124` is pushed and its [automatic CI](https://github.com/vmitsaras/raveldex/actions/runs/42516454677) passes both Node 22/24 candidate/package jobs. The [recorded closeout](docs/evidence/N10_N11_CI_REPAIR_20261108.md) binds the exact delivery source, observed jobs/artifacts and fresh closed/aligned tracking. The twelve-file delivery changes only nonpackaged records, so detailed runtime/build/test qualification from `a19f1e3` is reused with unchanged relevant inputs.
+
+All 80 tasks are accepted; N10 is 7/7 and N11 is 12/12. No selected implementation, required verification, source-delivery repair or tracking transition remains. This source snapshot includes the final status confirmation for owner-requested delivery; use its containing Git commit and pushed ref for commit/push status. The evidence-only delivery adds no executable change or new acceptance gate and reuses the completed qualification. Existing support/performance/AT limits remain explicit, and publication/deployment/optional research remain unselected. No benchmark, collector or engine change is made. Earlier entries are dated checkpoints.
+
 ## Final hosted CI recorded — 8 November 2026
 
 The final [Node 22/24 workflow](https://github.com/vmitsaras/raveldex/actions/runs/42514000024) passes on source `a19f1e3ed29afacd653cc51951751721a0bde426`. Hosted Node 22.23.4 and24.22.2 each pass 1,716 tests with eight intentional comparator skips and zero failures/cancellations; private candidate/package checks also pass. [Recorded evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md) retains original hosted logs/reports and their exact bindings, versions, counts, source and package hashes. This closes the supervisor/update-fixture CI repair; previous failed attempts remain unchanged.

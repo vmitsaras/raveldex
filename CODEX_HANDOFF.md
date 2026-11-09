@@ -1,5 +1,13 @@
 # Codex handoff
 
+## N10/N11 closeout complete — 8 November 2026
+
+The evidence/handoff delivery is pushed as `4d778cb9a3c08fd0601797759233eacc5bad6124`, and its automatic [CI run 42516454677](https://github.com/vmitsaras/raveldex/actions/runs/42516454677) passes both Node 22/24 candidate jobs, including installed checks, tracking preview, separate private packages and upload. Read the [closeout evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md) and [delivery-CI/source/tracking record](docs/evidence/N10_N11_CI_REPAIR_20261108/hosted-42516454677.json). The detailed earlier run 42514000024 reports remain reusable for identical executable/test/build/dependency/runtime inputs; preserve each run's own source identity.
+
+All 80 tasks are accepted; N10 is 7/7 and N11 is 12/12. Fresh GitHub read-back confirms all 19 tasks, both overviews and both milestones closed and aligned, with managed sections, labels, memberships and native relationships intact. Aggregate API counters remain the known external inconsistency. `handoff:next` reports the active release backlog complete. No selected implementation, mandatory CI repair, qualification gap or tracking transition remains.
+
+This source snapshot includes the final confirmation for owner-requested commit/push delivery; use the containing Git commit and pushed ref for delivery status. This nonpackaged status/evidence delivery reuses the passing qualified inputs and needs only applicable planner/generated/reference/diff/preservation checks; do not manufacture another qualification task solely because documentation changes the Git SHA. No runtime rerun, rebuild, benchmark, collector, engine change, release/tag, registry publication or deployment is selected. Earlier entries below retain their dated checkpoint scope.
+
 ## Final Node 22/24 CI recorded — 8 November 2026
 
 [Run 42514000024](https://github.com/vmitsaras/raveldex/actions/runs/42514000024) is completed/success on exact pushed source `a19f1e3ed29afacd653cc51951751721a0bde426`. Hosted Linux x64 Node 22.23.4/npm 10.9.9 and Node 24.22.2/npm 11.19.1 each record 1,724 tests: 1,716 passed, eight intentional comparator skips, zero failures/cancellations. Repaired supervisor cases, the full 144 update cohort and refusal-prefix validation pass; candidate preparation, installed checks, tracking preview, separate private packages and upload all pass. Read the [CI evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md) and [durable hosted reports/hash summary](docs/evidence/N10_N11_CI_REPAIR_20261108/hosted-42514000024/summary.json). Earlier local runs and failed hosted checkpoints remain separate historical observations.
