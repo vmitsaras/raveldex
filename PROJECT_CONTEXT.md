@@ -1,5 +1,11 @@
 # Project context
 
+## Final closeout delivery CI recorded — 9 November 2026
+
+Pushed final evidence/handoff source `67fecd98532e743149fee5c85f608758512d8080` passes both automatic Node 22/24 candidate/package jobs in [run 42569193560](https://github.com/vmitsaras/raveldex/actions/runs/42569193560). The [delivery-CI record](docs/evidence/N10_N11_CI_REPAIR_20261108/hosted-42569193560.json) binds the exact source, jobs/artifacts and fresh aligned tracking. Its six delivered files are nonpackaged metadata; earlier detailed qualification is reused with unchanged executable/test/build/dependency inputs and original provenance.
+
+All 80 tasks remain accepted, N10 is 7/7 and N11 is 12/12; both milestones and all 21 task/overview records remain closed and aligned. Closeout is complete, with no selected implementation, required verification or tracking transition left. This source snapshot includes the final confirmation for owner-requested delivery; use its containing Git commit and pushed ref for commit/push status. The metadata-only delivery adds no acceptance gate and reuses passing qualification. Existing support/performance/AT/zoom limits and unselected publication/deployment/optional research remain unchanged. No benchmark, collector or engine change is made. Earlier entries are dated checkpoints.
+
 ## N10/N11 closeout complete — 8 November 2026
 
 The evidence/handoff commit `4d778cb9a3c08fd0601797759233eacc5bad6124` is pushed and its [automatic CI](https://github.com/vmitsaras/raveldex/actions/runs/42516454677) passes both Node 22/24 candidate/package jobs. The [recorded closeout](docs/evidence/N10_N11_CI_REPAIR_20261108.md) binds the exact delivery source, observed jobs/artifacts and fresh closed/aligned tracking. The twelve-file delivery changes only nonpackaged records, so detailed runtime/build/test qualification from `a19f1e3` is reused with unchanged relevant inputs.

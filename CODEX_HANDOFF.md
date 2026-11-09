@@ -1,5 +1,13 @@
 # Codex handoff
 
+## Final closeout delivery CI recorded — 9 November 2026
+
+The final evidence/handoff commit `67fecd98532e743149fee5c85f608758512d8080` is pushed and its automatic [run 42569193560](https://github.com/vmitsaras/raveldex/actions/runs/42569193560) passes both Node 22/24 candidate jobs, including installed checks, tracking preview, separate private packages and artifact upload. The [CI/source/tracking record](docs/evidence/N10_N11_CI_REPAIR_20261108/hosted-42569193560.json) binds the observed success to the exact source. Its six delivered files change only nonpackaged records; earlier detailed runtime/test/build qualification remains reusable with its original source/run identity.
+
+**N10/N11 closeout is complete:** all 80 tasks are accepted, N10 is 7/7 and N11 is 12/12. Fresh read-back matches all 21 managed task/overview sections, closed/completed states, labels and memberships; both milestones remain closed, N11's twelve closed native children and N10's empty native hierarchy are preserved. Known aggregate API counters remain an external inconsistency. No selected implementation, required qualification, CI repair or tracking transition remains.
+
+This source snapshot includes the final CI confirmation over completed/pushed `67fecd9` for owner-requested delivery; use its containing Git commit and pushed ref for delivery status. This nonpackaged delivery reuses the passing qualified inputs with applicable metadata checks; a documentation SHA alone creates no new qualification task. Existing support/performance/AT/zoom limitations remain unchanged. No runtime rerun, rebuild, benchmark, collector or engine change is needed. Earlier entries remain dated checkpoints.
+
 ## N10/N11 closeout complete — 8 November 2026
 
 The evidence/handoff delivery is pushed as `4d778cb9a3c08fd0601797759233eacc5bad6124`, and its automatic [CI run 42516454677](https://github.com/vmitsaras/raveldex/actions/runs/42516454677) passes both Node 22/24 candidate jobs, including installed checks, tracking preview, separate private packages and upload. Read the [closeout evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md) and [delivery-CI/source/tracking record](docs/evidence/N10_N11_CI_REPAIR_20261108/hosted-42516454677.json). The detailed earlier run 42514000024 reports remain reusable for identical executable/test/build/dependency/runtime inputs; preserve each run's own source identity.
