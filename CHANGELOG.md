@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-This draft describes the complete implemented product. All packages remain private `0.1.0-rc.0`; no public version, release date, npm publication or GitHub release is announced here.
+## 1.0.0
 
 ### Native core
 
@@ -25,7 +23,7 @@ This draft describes the complete implemented product. All packages remain priva
 
 ### Hosts and separate packages
 
-- Source snapshots rebuild through one unpublished core and private source/position sessions under existing caps, then publish one coherent revision. Wrapped/custom participants keep per-record callbacks and cumulative budgets; failure/cancellation and worker/storage receipt semantics remain explicit.
+- Source snapshots rebuild through one internally staged core and private source/position sessions under existing caps, then publish one coherent revision. Wrapped/custom participants keep per-record callbacks and cumulative budgets; failure/cancellation and worker/storage receipt semantics remain explicit.
 
 - Optional `/addons/ui/directory` supplies nonvisual multi-selection, exact native conjunctive counts and revision-safe paging. Its explicit URL binding owns named parameters, preserves unrelated query/hash/history state and supports bounded correction and native Back/Forward.
 - Separate `/addons/ui/directory/view` and explicit `/addons/ui/directory.css` add native checkbox groups, selected chips, Clear all, complete pages and mobile disclosure over that borrowed controller. Complete browser/Astro resource-directory starters and gallery provide real routes, optional URL state with visible recovery, loading/Retry/disposal and CSS recipes.
@@ -39,14 +37,14 @@ This draft describes the complete implemented product. All packages remain priva
 
 - One-owner module workers with explicit ownership and outcome receipts; versioned source and exactly qualified Node native snapshots; namespaced IndexedDB save/load/erase with generation conflicts and explicit recovery.
 - Validated LocalSearch complete-source conversion into a new native owner; no foreign index or score reuse.
-- Separate `@vmitsaras/raveldex-english` analyzer package and `@vmitsaras/raveldex-astro` explicit static allowlist/build-hook/on-demand-loader package. Both require the exact core `0.1.0-rc.0` peer. Astro has an optional exact `astro@7.3.2` peer and Node `>=22.12.0`; core/English declare Node `>=22`.
+- Separate `@vmitsaras/raveldex-english` analyzer package and `@vmitsaras/raveldex-astro` explicit static allowlist/build-hook/on-demand-loader package. Both require the exact core `1.0.0` peer. Astro has an optional exact `astro@7.3.2` peer and Node `>=22.12.0`; core/English declare Node `>=22`.
 
 ### Documentation and evaluation
 
 - Five-presentation solution chooser and eight-project browser/Astro capability, loading, keyboard and cleanup guidance. Family qualification records installed native result/state/revision/lifecycle checks and scoped local gallery/CSS evidence separately from unrun human AT, physical input, actual zoom and deployment.
 
 - Inline/modal galleries explain complete browser/Astro adoption and reproducible CSS changes. Starter teardown guards authored status callbacks; modal loading handoffs and cancellation restore their logical opener, including closed loading-shell focus in WebKit.
-- Current [API reference](docs/api/README.md), executable installed-package examples, local documentation pilots, complete private-artifact setup instructions and scoped [support notes](docs/support/RX-4003.md).
+- Current [API reference](docs/api/README.md), executable installed-package examples, local documentation pilots, complete installation instructions and scoped [practical limits](docs/api/LIMITATIONS.md).
 - Independent retrieval/ranking checks and frozen documentation relevance judgments, actual browser fixtures, bounded Safari/VoiceOver and physical-input sessions, and separately calibrated memory observations. Each record retains its exact environment, workload and quantity.
 
 ### Known limitations
@@ -57,4 +55,4 @@ This draft describes the complete implemented product. All packages remain priva
 - Native snapshots require exact qualified Node environments; browser/worker native state is unavailable. Astro supports static directory builds, not SSR, development watchers or content crawling.
 - UI transport errors have generic presentation. Earlier VoiceOver interruptions retain an unconfirmed cause; accepted normal-typing observations do not establish all-reader support or a required VoiceOver setting.
 
-See [compatibility](docs/release/COMPATIBILITY.md), [candidate scope](docs/release/CANDIDATE.md) and [publication preparation](docs/release/PUBLICATION_STATUS.md). Repository evidence links require repository access. Historical private preparations are maintainer history, not issued releases.
+See [compatibility](docs/api/COMPATIBILITY.md), [practical limits](docs/api/LIMITATIONS.md) and the [API reference](docs/api/README.md).

@@ -1,19 +1,11 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Astro documentation modal starter · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="documentation-modal-starter-for-astro">Documentation modal starter for Astro</h1>
 <p>Copy this complete starter to build a workshop guide with optional search in a native dialog. It creates one search record per actual guide page, with evidence-backed links to the page’s authored headings. The ordinary guide links work before loading and without JavaScript. Search data loads only when someone selects <strong>Search the guide</strong>.</p>
 <h2 id="copy-and-install">Copy and install</h2>
-<p>Use Node 24 and npm. Raveldex is currently private and unpublished; use matching local core and Astro tarballs. In an authorized source checkout with <code>npm ci</code> complete, prepare fresh package and project directories:</p>
-<pre><code class="language-sh">export RAVELDEX_REPOSITORY="$PWD"
-export RAVELDEX_ARTIFACTS="$(mktemp -d /tmp/raveldex-modal-packages.XXXXXX)"
-export RAVELDEX_MODAL_ASTRO="$(mktemp -d /tmp/raveldex-modal-astro.XXXXXX)"
-export RAVELDEX_MODAL_ASTRO="$(cd "$RAVELDEX_MODAL_ASTRO" &amp;&amp; pwd -P)"
-npm run build
-mkdir "$RAVELDEX_ARTIFACTS/core"
-npm pack --ignore-scripts --cache "$RAVELDEX_ARTIFACTS/.npm-cache" --pack-destination "$RAVELDEX_ARTIFACTS/core"
-npm run astro:pack -- --output "$RAVELDEX_ARTIFACTS/astro"
-cp -R "$RAVELDEX_REPOSITORY/examples/modal-astro/." "$RAVELDEX_MODAL_ASTRO/"
-npm --prefix "$RAVELDEX_MODAL_ASTRO" install --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/core/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$RAVELDEX_ARTIFACTS/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz"
+<p>Use Node 24 and npm. Extract the complete starter into an empty directory with <code>tar -xzf modal-astro.tar.gz --strip-components=1</code>, then enter it. From a source checkout, copy the entire <code>examples/modal-astro/</code> folder into a new project instead.</p>
+<pre><code class="language-sh">export RAVELDEX_MODAL_ASTRO="$(pwd -P)"
+npm --prefix "$RAVELDEX_MODAL_ASTRO" install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0
 </code></pre>
-<p>If you received the complete starter archive, extract its <code>package/</code> directory into a fresh project and run the install command with that project’s absolute path and the supplied matching tarball paths. The copied <code>package.json</code> pins Astro <code>7.3.2</code>; installation needs registry access or a suitable npm cache for build tooling. No search runtime dependency besides those two packages is added. Keep your generated <code>package-lock.json</code> and use <code>npm ci</code> afterward.</p>
+<p>The starter pins Astro <code>7.3.2</code>. Keep the generated <code>package-lock.json</code> and use <code>npm ci</code> afterward. To test local changes, substitute matching core and Astro tarball paths in the install command. Keep <code>RAVELDEX_MODAL_ASTRO</code> set for the build and preview commands below.</p>
 <h2 id="build-and-preview">Build and preview</h2>
 <pre><code class="language-sh">ASTRO_TELEMETRY_DISABLED=1 npm --prefix "$RAVELDEX_MODAL_ASTRO" run build
 ASTRO_TELEMETRY_DISABLED=1 npm --prefix "$RAVELDEX_MODAL_ASTRO" run preview -- --host 127.0.0.1 --port 4321
@@ -47,4 +39,4 @@ RAVELDEX_ASTRO_BASE=/help/ ASTRO_TELEMETRY_DISABLED=1 npm --prefix "$RAVELDEX_MO
 <p>A custom <code>load</code> must transfer a <strong>fresh newly owned</strong> <code>LoadedStaticSearch</code> handle on every call. The wrapper owns that handle and destroys its borrowed modal before disposing it. Never return an engine or static handle owned elsewhere. To use an existing borrowed application engine, mount <code>mountRaveldexModal</code> directly with its documents/maps, destroy only that UI when the view ends, and let the existing owner dispose its engine.</p>
 <p>Call and await <code>destroy()</code> before replacing this integration. The stable destruction promise waits for late loader handles; listeners are removed, the loading shell closes, the original search fallback is restored and owners are released once. <code>src/main.mjs</code> handles <code>pagehide</code> and creates a fresh wrapper after teardown on back/forward-cache <code>pageshow</code>. The example uses static navigation, without Workbench selectors, global debug state, storage or telemetry.</p>
 <p>Automated installed tests cover finite native browser interaction and cleanup. Human screen-reader behavior, physical IME/touch/on-screen keyboard, actual zoom, broader browsers/devices, calibrated memory/latency and hosted deployment require separate qualification.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

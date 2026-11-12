@@ -10,7 +10,7 @@
   --_border-width: var(--raveldex-inline-border-width, 2px);
   --_control-height: var(--raveldex-inline-control-height, 2.75rem);
   --_control-padding: var(--raveldex-inline-control-padding, .6rem .85rem);
-  --_result-padding: var(--raveldex-inline-result-padding, 1rem 0);
+  --_result-padding: var(--raveldex-inline-result-padding, .75rem 0);
   --_highlight-background: var(--raveldex-inline-highlight-background, #ffe59a);
   --_highlight-color: var(--raveldex-inline-highlight-color, #17212b);
   --_error: var(--raveldex-inline-error, #9b1c1c);
@@ -45,10 +45,11 @@
 .raveldex-inline__facet-label { display: block; margin-block-end: .35rem; font-weight: 600; }
 .raveldex-inline__facet { inline-size: 100%; }
 .raveldex-inline__facet-summary { margin-block: .5rem 0; color: var(--_muted); font-size: .875em; line-height: 1.5; }
-.raveldex-inline__status { margin-block: var(--_gap); border-inline-start: 3px solid transparent; padding-inline-start: var(--_gap); color: var(--_muted); }
+.raveldex-inline__status { margin-block: var(--_gap); border: 1px solid transparent; border-inline-start-width: 3px; border-radius: var(--_radius); padding: .5rem var(--_gap); color: var(--_muted); }
+.raveldex-inline:is([data-state=empty], [data-state=error]) .raveldex-inline__status { border-color: var(--_border); }
 .raveldex-inline[aria-busy=true] .raveldex-inline__status { border-inline-start-color: var(--_accent); font-weight: 600; }
 .raveldex-inline[data-state=error] .raveldex-inline__status { border-inline-start-color: var(--_error); color: var(--_error); font-weight: 600; }
-.raveldex-inline__results-heading { margin-block: 1.5rem var(--_gap); font-size: 1.1em; }
+.raveldex-inline__results-heading { margin-block: 1rem .25rem; font-size: 1.1em; }
 .raveldex-inline__results { margin: 0; padding: 0; list-style: none; }
 .raveldex-inline__result { padding: var(--_result-padding); border-block-end: 1px solid var(--_border); }
 .raveldex-inline__result-heading { margin: 0; font-size: var(--raveldex-inline-title-size, 1.15em); line-height: 1.35; font-weight: 650; }

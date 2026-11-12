@@ -6,23 +6,17 @@ The project reuses the source-format static search loader, native filters/facets
 
 ## Copy and install matching packages
 
-Use Node 22.12 or later (Node 24 is used for the walkthrough), npm and the pinned Astro 7.3.2 tooling. Core and the Astro integration are private, unpublished matching `0.1.0-rc.0` tarballs. From an authorized source checkout after `npm ci`:
+Use Node 22.12 or later (Node 24 is used for this walkthrough), npm and the starter's pinned Astro `7.3.2`. Extract the complete project with `tar -xzf directory-astro.tar.gz --strip-components=1` into an empty directory and enter it. From a checkout, copy `examples/directory-astro/` into a new project instead.
 
 ```sh
-repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-directory-astro-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-directory-astro.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-npm run astro:pack -- --output "$packages/astro"
-cp -R "$repo/examples/directory-astro/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$packages/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz"
+npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0
 npm run build
 npm run preview -- --host 127.0.0.1 --port 4180
 ```
 
-Open `http://127.0.0.1:4180/` and choose **Enable directory**. Stop with Ctrl+C. For a downloaded archive, extract into an empty directory with `tar -xzf directory-astro.tar.gz --strip-components=1`, enter it and install both supplied tarballs with `npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/core.tgz /absolute/astro.tgz`. The first install may use registry access or an existing cache for pinned Astro tooling. Keep its generated lockfile and use `npm ci` afterward.
+Keep the generated lockfile and use `npm ci` afterward. To test a local build, substitute matching core and Astro tarball paths in the install command.
+
+Open `http://127.0.0.1:4180/` and choose **Enable directory**. Stop with Ctrl+C.
 
 The source loader needs Web Crypto over HTTPS or localhost. The browser view uses native forms, checkboxes and details. There is no Popover/dialog or `Intl.Segmenter` requirement for these title/link results. `configuration.mjs` explicitly installs filters/facets and original title/body source for static reconstruction; no snippet/source UI is selected.
 

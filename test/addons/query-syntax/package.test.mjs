@@ -6,7 +6,7 @@ import {measurePackedQuerySyntax} from '../../measurements/query-syntax-package.
 let report;
 before(async()=>{report=await measurePackedQuerySyntax();if(process.env.RAVELDEX_QUERY_SYNTAX_PACKAGE_REPORT)await writeFile(process.env.RAVELDEX_QUERY_SYNTAX_PACKAGE_REPORT,JSON.stringify(report,null,2)+'\n');});
 test('installed and minified syntax compilation preserves manual public trees, complete results and independent native arithmetic',()=>{
-  assert.equal(report.correctness.status,'Pass');assert.equal(report.correctness.authoredQueries,17);assert.equal(report.correctness.completePagesPerRun,51);assert.equal(report.correctness.ordinaryControls,6);assert.equal(report.correctness.syntaxRefusals,6);assert.equal(report.correctness.minifiedParity,'Pass');assert.equal(report.package.private,true);assert.match(report.packed.numerical,/independent native BM25/);
+  assert.equal(report.correctness.status,'Pass');assert.equal(report.correctness.authoredQueries,17);assert.equal(report.correctness.completePagesPerRun,51);assert.equal(report.correctness.ordinaryControls,6);assert.equal(report.correctness.syntaxRefusals,6);assert.equal(report.correctness.minifiedParity,'Pass');assert.equal(report.package.private,false);assert.match(report.packed.numerical,/independent native BM25/);
 });
 test('source/native restores preserve parsed and explicit typed queries across basic, English and identifier analysis',()=>{
   assert.equal(report.snapshots.status,'Pass');assert.equal(report.snapshots.comparisons,102);assert.equal(report.snapshots.rows.length,6);assert.deepEqual(report.snapshots.mismatches.map(row=>row.nativeCode),['MISSING_CAPABILITY','MISSING_CAPABILITY']);assert.match(report.snapshots.scope,/Not browser/);

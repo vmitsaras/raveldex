@@ -4,18 +4,14 @@ This complete starter builds six workshop guide pages and an optional inline sea
 
 ## Copy and install
 
-Use Node 24 and npm. Raveldex packages are currently private and unpublished: use matching local core and Astro `.tgz` files, rather than a registry install. Follow [build tarballs from a source checkout](https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#build-tarballs-from-a-source-checkout) first if you need to create them. Keep `RAVELDEX_REPOSITORY` and `RAVELDEX_ARTIFACTS` set to their actual absolute paths in the same shell.
-
-Copy every file in this directory into a new project, including `content.json`, `configuration.mjs` and `src/`. From a source checkout, run:
+Use Node 24 and npm. Extract the complete starter into an empty directory with `tar -xzf inline-astro.tar.gz --strip-components=1`, then enter it. From a source checkout, copy the entire `examples/inline-astro/` folder into a new project instead.
 
 ```sh
-export RAVELDEX_INLINE_ASTRO="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-inline-astro.XXXXXX")"
-export RAVELDEX_INLINE_ASTRO="$(cd "$RAVELDEX_INLINE_ASTRO" && pwd -P)"
-cp -R "$RAVELDEX_REPOSITORY/examples/inline-astro/." "$RAVELDEX_INLINE_ASTRO/"
-npm --prefix "$RAVELDEX_INLINE_ASTRO" install --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/core/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$RAVELDEX_ARTIFACTS/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz"
+export RAVELDEX_INLINE_ASTRO="$(pwd -P)"
+npm --prefix "$RAVELDEX_INLINE_ASTRO" install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0
 ```
 
-The copied `package.json` pins Astro `7.3.2`; installation resolves its build tools as well as the two local packages. Tool installation needs registry access or a suitable npm cache. No additional search runtime dependencies are installed. If you received the complete starter archive from the [inline solution page](https://github.com/vmitsaras/raveldex/blob/main/site/Inline.astro), extract its `package/` directory into a fresh project instead of copying from a checkout, then run the same install command with that project's absolute path.
+The starter pins Astro `7.3.2`. Keep the generated `package-lock.json` and use `npm ci` afterward. To test local changes, substitute matching core and Astro tarball paths in the install command. Keep `RAVELDEX_INLINE_ASTRO` set for the build and preview commands below.
 
 ## Build and preview
 
@@ -26,7 +22,7 @@ ASTRO_TELEMETRY_DISABLED=1 npm --prefix "$RAVELDEX_INLINE_ASTRO" run preview -- 
 
 Open the HTTP URL Astro prints. The preview runs in the foreground; use Ctrl+C to stop this preview before rebuilding. Keep another existing server running if the port is occupied and choose another port. Do not open the generated HTML with a `file:` URL: the loader fetches same-origin assets.
 
-Choose **Enable search**, type `workshop` and select **Search**. Three results appear first; **Load more** shows the remaining matches. While those results are displayed, choose **Tools** in the Topic filter to narrow them to two tool pages. The filter choices come from the current search results. Select a result title to open its actual static page. **Clear search** resets both the words and topic. No Workbench controls or developer diagnostics are included.
+Choose **Enable search**, type `workshop` and select **Search**. Three results appear first; **Load more** shows the remaining matches. While those results are displayed, choose **Tools** in the Topic filter to narrow them to two tool pages. The filter choices come from the current search results. Select a result title to open its actual static page. **Clear search and filters** resets both the words and topic. No Workbench controls or developer diagnostics are included.
 
 The build writes `dist/raveldex/manifest.json` plus integrity-checked source and display files. The client loads all source data once on demand, then its display mapping. This is a complete local index, not a lazy or sharded index. It uses direct browser execution; no worker file is required.
 

@@ -1,9 +1,8 @@
 ---
 import Layout from './Layout.astro';
 import SolutionChooser from './SolutionChooser.astro';
-import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+import StarterSetup from './StarterSetup.astro';
 const base='/raveldex/';
-const starter=STARTERS.find(s=>s.id==='cards-browser');
 ---
 <Layout frontmatter={{title:'Rich resource result cards'}}>
   <h1>Rich resource result cards</h1>
@@ -15,9 +14,8 @@ const starter=STARTERS.find(s=>s.id==='cards-browser');
   <p><a href={base+'examples/cards-preview/'}>Open the complete rich-results preview</a></p>
   <iframe src={base+'examples/cards-preview/'} title="Rich resource results starter preview" loading="lazy" height="900" style="width:100%;border:1px solid currentColor;border-radius:.5rem;"></iframe>
   <h2 id="copy-cards">Copy the complete browser project</h2>
-  <p><a href={base+'examples/cards-browser/'}>Setup, replacement data and image guide</a> · <a href={base+starterArchive(starter.id)} download>Download the complete starter</a></p>
-  <p>Extract into an empty directory with <code>tar -xzf cards-browser.tar.gz --strip-components=1</code>, enter it and follow its README. It installs a matching private local Raveldex tarball and pinned esbuild tooling. The complete project contains records, explicit metadata mapping, two local authored SVG assets, controls, ownership/teardown, styles, build and real resource routes.</p>
-  <details><summary>View all exact source files</summary><ul>{starter.files.map(path=><li><a href={base+starterSource(starter.id,path)}>{path}</a></li>)}</ul></details>
+  <p>Uses the directory controls. Images start off and load only when visitors choose to show them.</p>
+  <StarterSetup family="cards" />
   <h2 id="cards-theme">Change the appearance</h2>
   <ol><li>Copy, install, build and preview the complete project. Its List/Comfortable layout starts with images off.</li><li>Edit the existing component rules in <code>theme.css</code>, loaded after <code>directory.css</code> and <code>directory-cards.css</code>:</li></ol>
   <pre role="region" tabindex="0" aria-label="Rich result theme properties"><code>{`.raveldex-directory {

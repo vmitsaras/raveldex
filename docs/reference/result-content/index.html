@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RESULT CONTENT · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="native-result-content-and-hierarchy">Native result content and hierarchy</h1>
+<p>Choose the result content your application needs, then choose the Raveldex surface that already supports it. The result title and destination are the primary action; available context, excerpts and metadata support that action. Native identity, order, exact totals and page boundaries remain authoritative.</p>
+<p>Inline/modal offer optional query-derived context; rich directory offers authored display metadata. The five surface contracts use no renderer callback, shared display record extension, mandatory provider, automatic image loading or engine-side display index. Start with <a href="/raveldex/reference/hosts/#consumer-capability-matrix">installation and surface selection</a>.</p>
+<h2 id="source-verified-capability-matrix">Source-verified capability matrix</h2>
+<p>“Authored” means application-supplied display data. “Generated” means evidence from the selected native query/source capabilities; an authored excerpt is not a matching snippet.</p>
+<table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Inline</th>
+<th>Modal</th>
+<th>Dropdown</th>
+<th>Directory</th>
+<th>Rich directory/cards</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title and destination</td>
+<td>Required <code>title</code> / <code>url</code></td>
+<td>Same inline contract</td>
+<td>Required <code>title</code> / <code>url</code></td>
+<td>Required <code>title</code> / <code>url</code></td>
+<td>Required <code>title</code> / <code>url</code></td>
+</tr>
+<tr>
+<td>Generic visible source/location row</td>
+<td>None; URL is a link destination</td>
+<td>Same</td>
+<td>None</td>
+<td>None</td>
+<td>No generic source row; authored category/breadcrumb can supply context</td>
+</tr>
+<tr>
+<td>Authored excerpt</td>
+<td>Not a display field</td>
+<td>Same</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Optional <code>excerpt</code></td>
+</tr>
+<tr>
+<td>Matching snippets / highlights</td>
+<td>Explicit <code>snippetFields</code> and snippet/source capabilities</td>
+<td>Same</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported; excerpt remains plain authored text</td>
+</tr>
+<tr>
+<td>Matching heading links / section context</td>
+<td>Explicit revision-bound <code>pageSections</code> and section evidence, instead of <code>snippetFields</code></td>
+<td>Same</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+</tr>
+<tr>
+<td>Category / breadcrumb</td>
+<td>Not display fields</td>
+<td>Same</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Optional <code>category</code>, <code>breadcrumb</code>; breadcrumb is joined text, not generated route links</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Not a display field</td>
+<td>Same</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Optional already-localized <code>date</code> string; no parsing/formatting</td>
+</tr>
+<tr>
+<td>Labeled metadata</td>
+<td>Not display fields</td>
+<td>Same</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Optional <code>fields: [{name, value}]</code>, rendered as a description list</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Not supported</td>
+<td>Optional validated image metadata; requests require explicit image presentation opt-in</td>
+</tr>
+</tbody>
+</table>
+<p>The compact dropdown has a separate configured <code>fullResults</code> link. It hands off the raw query; it does not add snippets, metadata or another page to the popup. Directory filter labels, choices, counts and selected chips are control context, not new result fields. Rich display metadata does not automatically become indexed text or filter metadata.</p>
+<h2 id="actual-rendered-hierarchy">Actual rendered hierarchy</h2>
+<ul>
+<li><strong>Inline/modal:</strong> parent linked title, then selected generated snippets <strong>or</strong> section caption/child heading links and their optional excerpts, followed by applicable omission/context-availability feedback. A mapped section can legitimately have a heading link with no excerpt. Section links do not increase the exact parent-page total.</li>
+<li><strong>Dropdown/base directory:</strong> title links are complete results. Do not fabricate a source label from the URL or add a metadata row to satisfy a visual specimen. Keep total, paging and full-results recovery outside individual results.</li>
+<li><strong>Cards:</strong> when explicitly enabled, an image frame is prepended in the DOM. The remaining order is linked <code>h3</code> title, category, breadcrumb, authored excerpt, authored date, then labeled fields. The image is not an additional result or action. Optional missing content produces no placeholder row; empty optional excerpt/category/date strings and empty breadcrumb/field arrays render nothing. List/cards/grid keep the same ordered-list/native-link model.</li>
+</ul>
+<p>The <a href="/raveldex/reference/hosts/#consumer-visual-roles-and-host-themes">Reading index styles and optional host themes</a> emphasize titles and keep context secondary. CSS changes presentation, not the available fields, query evidence or native interaction model.</p>
+<h2 id="choose-by-the-native-task">Choose by the native task</h2>
+<table>
+<thead>
+<tr>
+<th>Application need</th>
+<th>Existing choice and hierarchy</th>
+<th>Boundary / alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documentation: a visitor should reach the matching heading within a long guide</td>
+<td>Inline or modal with <code>pageSections</code>. Parent title identifies the page; supplied section headings/native anchors and available source excerpts sit beneath it. Use the <a href="/raveldex/reference/static-astro/#optional-heading-maps">heading-map workflow</a>.</td>
+<td>Maps bind exact original text and revision; they are not extracted by the UI. An absent map, or an empty map at the current revision, leaves parent-only output without a section notice. A stale map or accepted context refusal can retain the page link with an explicit unavailable-context notice. Choose snippets instead when paragraph context is useful but heading maps are unavailable.</td>
+</tr>
+<tr>
+<td>Application/help search: a visitor needs a title/destination, optionally the matching paragraph</td>
+<td>Title-only inline/modal works with basic display records and no snippet/section capability. Select <code>snippetFields: ['body']</code> with explicit source/snippet capabilities when query-derived paragraphs are needed.</td>
+<td>Snippet fields are indexed original-source fields, not authored card excerpts. A compact header can use dropdown plus a full-results destination; it retains title-only rows. Base directory is appropriate for title-only filtered browsing.</td>
+</tr>
+<tr>
+<td>Catalogue/content browsing: a visitor compares authored descriptions and attributes</td>
+<td>Rich directory/cards: title first in the text group, category/breadcrumb context, excerpt, localized date and labeled fields. Keep images off unless the application explicitly selects them. See <a href="/raveldex/reference/hosts/#rich-directory-results">rich directory setup</a>.</td>
+<td>Index searchable words and filter metadata separately. Dates, breadcrumb parts and labeled fields are display strings, not inferred ranking/filter rules or generated heading links. If matching source evidence is essential, use inline/modal; combining that evidence with card metadata needs a separately selected contract.</td>
+</tr>
+</tbody>
+</table>
+<p>These choices serve Raveldex’s documentation, application and catalogue needs. A migration does not require reproducing another product’s layout or metadata behavior.</p>
+<h2 id="supported-combinations-and-captured-data">Supported combinations and captured data</h2>
+<p>Inline/modal <code>documents</code> contain only <code>{id, title, url}</code>. Base directory and dropdown use that same basic projection. Runtime admission rejects additional display keys even when TypeScript structural assignment would accept a richer object. Explicitly project card data before reusing it with a basic surface:</p>
+<pre><code class="language-js">const basicDocuments = cardDocuments.map(({ id, title, url }) =&gt; ({ id, title, url }));
+</code></pre>
+<p>Keep stable display IDs aligned with every possible native hit. UI mounting captures its display map; later mutation of the caller’s objects or an engine update does not replace it. Destroy/remount for changed display data. Controller refresh updates native results, not captured card metadata. Rich <code>setPresentation()</code> changes retain native link identities, query, filters, page and optional URL state; the application still owns the controller and engine lifecycle.</p>
+<p>For inline/modal:</p>
+<ul>
+<li>Supply <code>snippetFields</code> <strong>or</strong> <code>pageSections</code>, never both. Supplying <code>snippetFields: []</code> with maps is also rejected. <code>maxSectionPreviews</code> requires maps and is an integer 1–3, default 3.</li>
+<li>Snippet/section capabilities and source strategy remain explicit. Offset-backed strategies select their offset support; core title-only retrieval does not promise original text or source offsets. Static source delivery has its own source-provider requirements.</li>
+<li>Section-enabled parent destinations cannot already contain fragments. Maps provide exact authored anchors and source ranges; the validated child links retain the parent origin/path/query and encode the anchor. See <a href="/raveldex/reference/hosts/#inline-result-pages-filters-and-snippets">inline page context</a>.</li>
+<li>Missing snippet/facet capabilities can fail explicitly even with zero matches. Section evidence is requested only for actual mapped hits with a nonempty current-revision map; zero hits or absent/empty/stale maps do not trigger a section-capability probe. A recognized typed section-evidence refusal can retain parent links with an unavailable notice; corrupt replies fail rather than masquerading as missing context. Native totals/order/revisions and source offsets remain unchanged.</li>
+</ul>
+<p>All display text is inserted as text, never an HTML template. Basic/card destinations and card image sources resolve to HTTP(S) URLs without embedded user/password credentials. Rich records are bounded to 10,000 entries and 4,000,000 captured string units. Card excerpt limit is 4096 UTF-16 units, category/date 256 each, up to eight breadcrumb parts and four uniquely named labeled fields. Admission validates unknown keys, getters, string readability, URLs and image metadata before replacing authored content; <a href="/raveldex/reference/hosts/#rich-directory-results">HOSTS</a> lists the complete bounds.</p>
+<h2 id="image-ownership-and-request-boundary">Image ownership and request boundary</h2>
+<p>Cards capture and retain supplied image metadata even while images are off; they do not create image elements or assign <code>src</code> under the default <code>images:false</code>. Metadata opt-out is omission of the optional image field, not a promise that the declared display map is discarded.</p>
+<p><code>presentation: { images: true }</code> or <code>setPresentation({ images: true })</code> explicitly allows current-page image elements/src assignment. Mounting over an already-ready controller can do this immediately without a new query. Images have required <code>alt</code> (explicit empty text means decorative) and integer dimensions 1–4096, with reserved aspect ratio. The code selects lazy loading, async decoding and <code>referrerPolicy: 'no-referrer'</code>; it supplies no origin allowlist, <code>crossOrigin</code> or credential-omission option. Do not treat these attributes as anonymous or credential-free request guarantees. Image-host and content selection remain application-owned.</p>
+<p>An informative image failure preserves the title/metadata and shows failure text plus its authored alternative; decorative failure stays silent. Disabling images, page replacement or teardown removes image sources/listeners, guards late events and preserves borrowed ownership. It cannot undo requests already sent or promise how the browser handles an in-flight request, cache or cookies.</p>
+<h2 id="compatibility-decision">Compatibility decision</h2>
+<p>Keep the current split between query-derived context and authored rich display. It covers the scenarios above without an expanded runtime dependency, retained side index, mandatory source capability, renderer callback, implicit date/URL interpretation or new image request policy. Missing optional rows remain a complete native result.</p>
+<p>A future requirement for another field, mixed snippets/card metadata, rich dropdown or custom renderer must be separately selected and define ownership, finite admission/retention, revision/source consistency, safe text/URLs, image privacy/alternatives, focus/native activation and teardown. This task implements none of those extensions. Existing engine identity/order/totals, surface query/reset/paging, composition, focus and optional CSS contracts remain intact.</p>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

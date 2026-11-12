@@ -57,3 +57,9 @@ jobs:
         run: node scripts/link-native-subissues.mjs --apply
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Link optional demo and interface issue trees
+        run: |
+          node scripts/link-native-subissues.mjs --milestone N13 --apply
+          node scripts/link-native-subissues.mjs --milestone N14 --apply
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

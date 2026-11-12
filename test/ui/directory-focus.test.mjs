@@ -55,6 +55,19 @@ for (const surface of ['base', 'cards']) {
     await retry.press('Enter'); assert.equal(await calls(), count); assert.ok((await page.locator('[data-raveldex-directory-status]').innerText()).includes('No results'));
     report.observations.push({ surface, name: 'held Retry zero-result focus and guarded activation', status: 'Pass' });
   });
+  test(surface + ': settled empty recovery retires unused actions after native focus leaves', async () => {
+    await load();
+    await page.evaluate(async () => { window.directoryFocus.fail(); await window.directoryFocus.view.search('absent'); });
+    const retry = page.locator('[data-raveldex-directory-retry]'); await retry.focus(); await retry.press('Enter'); await ready('absent'); await frames();
+    assert.equal(await active(retry), true); assert.equal(await retry.getAttribute('aria-disabled'), 'true');
+    const input = page.locator('[data-raveldex-directory-input]'); await input.focus(); await frames();
+    assert.equal(await retry.isVisible(), false);
+    assert.equal(await page.locator('[data-raveldex-directory-navigation]').isVisible(), false);
+    assert.equal(await page.locator('[data-raveldex-directory-heading]').isVisible(), false);
+    assert.match(await page.locator('[data-raveldex-directory-status]').textContent(), /No results/);
+    report.observations.push({surface,name:'empty recovery controls retired after blur',status:'Pass'});
+  });
+
   test(surface + ': page refusal retains its focused unavailable control and explicit Retry recovers', async () => {
     await load(); const next = page.getByRole('button', { name: 'Next page', exact: true }); await next.focus(); await page.evaluate(() => window.directoryFocus.fail()); await next.press('Enter');
     await page.getByText('Search could not complete. Refresh results or change your search and filters.', { exact: true }).waitFor(); await frames();

@@ -32,7 +32,7 @@ afterEach(async () => {
 after(async () => { try { await browser?.close(); } finally { await fixture?.close(); } });
 
 test('opt-in trace leaves original UI policy intact, records automated trusted input honestly and stops without stealing focus', async () => {
-  await input().fill('blue'); await input().press('Enter'); await settled('1 results. Showing 1–1.');
+  await input().fill('blue'); await input().press('Enter'); await settled('1 result. Showing 1–1.');
   assert.deepEqual((await snapshot()).rows, []);
   await page.locator('#input-source').fill('German (test operator label)');
   await page.getByRole('button', { name: 'Start recording', exact: true }).click();
@@ -53,7 +53,7 @@ test('opt-in trace leaves original UI policy intact, records automated trusted i
   const saved = JSON.parse(await page.locator('#input-trace').inputValue());
   assert.equal(saved.recording, false); assert.equal(saved.current.focus.id, 'input-stop');
   const count = saved.rows.length;
-  await input().fill('atomic'); await input().press('Enter'); await settled('1 results. Showing 1–1.');
+  await input().fill('atomic'); await input().press('Enter'); await settled('1 result. Showing 1–1.');
   assert.equal((await snapshot()).rows.length, count);
   assert.equal(await page.locator('#input-trace').inputValue(), JSON.stringify(saved, null, 2));
   await page.goto(fixture.origin + '/ui'); await page.waitForFunction(() => !!window.harness);
@@ -84,7 +84,7 @@ test('synthetic precommit/submit/finalcommit is marked untrusted and correlates 
     node.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: 'é' }));
     node.dispatchEvent(new InputEvent('input', { bubbles: true, data: 'é', isComposing: false, inputType: 'insertText' }));
   });
-  await settled('1 results. Showing 1–1.');
+  await settled('1 result. Showing 1–1.');
   const final = await snapshot(), main = mainRows(final);
   assert.equal(main.length, 1); assert.equal(JSON.parse(main[0].query.text).text, 'café');
   assert.equal(main[0].current.observedComposing, false);

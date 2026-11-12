@@ -12,7 +12,7 @@ test('installed and minified suggestions preserve authored completion counts/ord
   assert.equal(report.correctness.strictUnrequestedComparisonsPerRun, 3);
   assert.equal(report.correctness.queryIndependentOutput, 'Pass, suggestions are present even for no search hits');
   assert.equal(report.correctness.bundledParity, 'Pass');
-  assert.equal(report.package.private, true);
+  assert.equal(report.package.private, false);
 });
 
 test('core excludes optional suggestions and all selected public imports are inert, isolated and independently packaged', () => {

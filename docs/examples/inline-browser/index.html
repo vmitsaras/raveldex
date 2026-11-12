@@ -1,20 +1,13 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Browser inline search starter · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="inline-search-for-a-browser-site">Inline search for a browser site</h1>
 <p>Copy this complete starter to add a search form, original-text snippets, a type filter and complete result paging. It uses native Raveldex in the browser’s main thread and a small explicit guide allowlist. There is no worker, crawler, server API or diagnostic selector. The rendered pages remain usable without JavaScript.</p>
 <h2 id="install-and-run">Install and run</h2>
-<p>Use Node 22 or later and npm. The packages are currently private and unpublished: these instructions use a local tarball from an authorized source checkout, not a registry release. The starter’s pinned esbuild dependency is build tooling and is not shipped as a browser runtime dependency.</p>
-<p>From a source checkout with <code>npm ci</code> already complete, prepare a private package and copy the entire starter directory. Use fresh directories for these outputs:</p>
-<pre><code class="language-sh">repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-inline-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-inline-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/inline-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+<p>Use Node 22 or later and npm. Extract the complete starter into an empty directory with <code>tar -xzf inline-browser.tar.gz --strip-components=1</code>, then enter that directory. From a source checkout, you can instead copy the complete <code>examples/inline-browser/</code> folder to a new project.</p>
+<p>Install Raveldex and the starter’s pinned build tooling, then build and preview:</p>
+<pre><code class="language-sh">npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4176
 </code></pre>
-<p>If someone supplied the starter and package archive, extract the starter, enter its directory and run <code>npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz</code>, followed by the two <code>npm run</code> commands above. Installation also installs the pinned build tool; it may need registry access or an existing npm cache. Keep the generated <code>package-lock.json</code> in your application and use <code>npm ci</code> thereafter.</p>
+<p>Keep the generated <code>package-lock.json</code> and use <code>npm ci</code> for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.</p>
 <p>Open <code>http://127.0.0.1:4176/</code>. Search <code>walking guide</code>: there are seven matches, with three initially visible. Load more shows six; Next results reaches the seventh, and Previous results returns to the first window. Choose Guide to narrow to five pages. A search such as <code>weather</code> shows original text with highlighted matches; following its title opens the actual guide page. Ctrl+C stops this preview.</p>
 <h2 id="deploy-under-a-subdirectory">Deploy under a subdirectory</h2>
 <p>Use the same base for the build and preview:</p>
@@ -40,4 +33,4 @@ RAVELDEX_INLINE_BASE=/help/ npm run preview -- --port 4176
 <p><code>createInlineSearch</code> accepts a <code>load(signal)</code> callback that transfers a <strong>newly owned</strong> <code>{ engine, documents, dispose }</code> object. It destroys the borrowed UI before disposing that owner, including on initialization failure and late completion. Do not return an engine owned elsewhere in your application. To integrate with an existing borrowed engine, mount <code>mountRaveldexInline</code> directly, call its <code>destroy()</code> when the view ends, and leave engine disposal to its existing owner.</p>
 <p>Call and await <code>controller.destroy()</code> before removing the integration in your own navigation system. It is idempotent, removes its Retry listener, aborts loading and waits for any late owner to be released. This page calls destruction on <code>pagehide</code> and creates a fresh controller on a back/forward-cache <code>pageshow</code>. No global debug API is exposed. The inline preset separately handles stale searches and revision-safe retry after initialization.</p>
 <p>The headless checks exercise installed bytes, navigation, failure/delay/retry and teardown. They do not establish human screen-reader, physical input, actual zoom, broad browser support or large-data performance qualification.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

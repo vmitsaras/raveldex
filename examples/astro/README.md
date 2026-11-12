@@ -2,11 +2,9 @@
 
 Try a small Astro site that loads search when you ask for it. Three documentation pages are searchable; a rendered draft is deliberately left out. The example shows how to choose the records, display titles and routes yourself.
 
-## Prepare artifacts
+## Source checkout
 
-Use Node 24 and npm. First follow [build tarballs from a source checkout](../../docs/api/GETTING_STARTED.md#build-tarballs-from-a-source-checkout). You should then have matching core and integration files, with `RAVELDEX_REPOSITORY` and `RAVELDEX_ARTIFACTS` set in the same shell.
-
-If you open another terminal, set those variables again to the actual absolute paths before continuing.
+Use Node 24 and npm. Set `RAVELDEX_REPOSITORY` to the absolute path of your checkout (`export RAVELDEX_REPOSITORY="$(pwd -P)"` from its root). The complete consumer [Astro starters](../../docs/api/STATIC_ASTRO.md) are the normal adoption path; this small fixture also exercises explicit draft exclusion.
 
 ## Copy and install the fixture
 
@@ -17,10 +15,10 @@ export RAVELDEX_EXAMPLE="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-astro-example.XXX
 export RAVELDEX_EXAMPLE="$(cd "$RAVELDEX_EXAMPLE" && pwd -P)"
 cp -R "$RAVELDEX_REPOSITORY/examples/astro/." "$RAVELDEX_EXAMPLE/"
 printf '%s\n' '{"name":"raveldex-astro-example","private":true,"type":"module"}' > "$RAVELDEX_EXAMPLE/package.json"
-npm --prefix "$RAVELDEX_EXAMPLE" install --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/core/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$RAVELDEX_ARTIFACTS/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz" astro@7.3.2
+npm --prefix "$RAVELDEX_EXAMPLE" install --ignore-scripts --no-audit --no-fund @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0 astro@7.3.2
 ```
 
-You now have an independent example project at `$RAVELDEX_EXAMPLE`, with local core and integration packages plus Astro `7.3.2` installed. The repository copy is unchanged. Resolving Astro and its dependencies needs registry access or a suitable npm cache.
+You now have an independent example project at `$RAVELDEX_EXAMPLE`, with matching core and integration packages plus Astro `7.3.2` installed. The repository copy is unchanged. Resolving Astro and its dependencies needs registry access or a suitable npm cache.
 
 ## Build and preview at the root
 

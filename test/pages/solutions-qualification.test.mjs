@@ -37,8 +37,9 @@ async function independentResults(family, query) {
   return sourceQueryResult(scanSourceCorpus(records, schema), prefixQuery(query), { limit: 100 }).hits.map(hit => hit.id);
 }
 const ids = (frame, attribute) => frame.locator(`[${attribute}]`).evaluateAll((nodes, name) => nodes.map(node => node.getAttribute(name)), attribute);
-async function readyInline(frame, total, shown) {
-  await frame.locator('.raveldex-inline__status').filter({ hasText: `${total} results. Showing ${shown}.` }).waitFor();
+async function readyInline(frame, total, shown, added = 0) {
+  const status = added ? `Results added: ${added}. Showing 1–${shown} of ${total}.` : `${total} results. Showing ${shown}.`;
+  await frame.locator('.raveldex-inline__status').filter({ hasText: status }).waitFor();
 }
 async function nativeSubmitFocus(input, root) {
   await input.focus(); await input.press('Tab');
@@ -66,7 +67,7 @@ test('five-solution chooser, complete starter inventories and published CSS pres
     const page = await browser.newPage({ viewport: { width: 1280, height: 1000 } }); page.setDefaultTimeout(15_000);
     page.on('pageerror', error => errors.push(String(error)));
     await page.goto(new URL('examples/', base).href);
-    for (const [name, family] of [['inline search', 'inline'], ['documentation search modal', 'modal'], ['compact header search', 'dropdown'], ['faceted resource directory', 'directory'], ['rich directory results', 'cards']]) {
+    for (const [name, family] of [['Open inline gallery', 'inline'], ['Open documentation modal gallery', 'modal'], ['Open compact dropdown gallery', 'dropdown'], ['Open directory gallery', 'directory'], ['Open rich-results gallery', 'cards']]) {
       assert.equal(new URL(await page.getByRole('link', { name, exact: true }).getAttribute('href'), base).pathname, `/raveldex/examples/${family}/`);
     }
     await page.getByRole('heading', { name: 'Choose a search solution', exact: true }).waitFor();
@@ -122,7 +123,7 @@ test('five-solution chooser, complete starter inventories and published CSS pres
           assert.equal(styles.modal.maxWidth, '40rem'); assert.equal(styles.modal.radius, '12px'); assert.ok(styles.modal.width <= 640);
         }
         focus = await nativeSubmitFocus(input, frame.locator('.raveldex-inline'));
-        await preview.scrollIntoViewIfNeeded(); await frame.getByRole('button', { name: 'Load more', exact: true }).click(); await readyInline(frame, expected.length, 6);
+        await preview.scrollIntoViewIfNeeded(); await frame.getByRole('button', { name: 'Load more', exact: true }).click(); await readyInline(frame, expected.length, 6, 3);
         const six = await ids(frame, attribute);
         if (expected.length > 6) { await frame.getByRole('button', { name: 'Next results', exact: true }).click(); await readyInline(frame, expected.length, 1); complete = [...six, ...await ids(frame, attribute)]; }
         else complete = six;
@@ -136,7 +137,7 @@ test('five-solution chooser, complete starter inventories and published CSS pres
         await Promise.all([inner.waitForURL(destination.href), full.press('Enter')]); await readyInline(frame, expected.length, 3);
         assert.equal(await frame.locator('[data-raveldex-inline-input]').inputValue(), entry.query);
         assert.deepEqual(await ids(frame, 'data-raveldex-inline-result'), before);
-        await frame.getByRole('button', { name: 'Load more', exact: true }).click(); await readyInline(frame, expected.length, 6); const six = await ids(frame, 'data-raveldex-inline-result');
+        await frame.getByRole('button', { name: 'Load more', exact: true }).click(); await readyInline(frame, expected.length, 6, 3); const six = await ids(frame, 'data-raveldex-inline-result');
         await frame.getByRole('button', { name: 'Next results', exact: true }).click(); await readyInline(frame, expected.length, 1); complete = [...six, ...await ids(frame, 'data-raveldex-inline-result')];
       } else {
         styles = await frame.locator('.raveldex-directory').evaluate(root => ({ accent: getComputedStyle(root.querySelector('a')).color, radius: getComputedStyle(root).borderRadius, gap: getComputedStyle(root).getPropertyValue('--raveldex-directory-gap').trim() }));

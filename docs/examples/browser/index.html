@@ -1,4 +1,9 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Browser demo instructions · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="search-the-usage-guides">Search the usage guides</h1>
+<p>The usage-guide demo shows a short section overview beside each result link.
+Open Inspector for the original matching excerpts, highlights and scores. These
+application-owned overviews do not replace indexed Markdown or remap source
+offsets. The independent frozen qualification corpus retains its original
+excerpt presentation. The overview observer is disconnected before UI teardown.</p>
 <p>Use this demo to find instructions for adding search to your application. It searches sections from five guides: getting started, core usage, search add-ons, host integration and Astro. Each result links to the full guide.</p>
 <h2 id="run-locally">Run locally</h2>
 <p>From a source checkout, use Node 24 and npm:</p>
@@ -11,7 +16,7 @@ npm run pilot:ui
 <li>Search <code>source provide</code> or <code>source prov</code>. Final-word prefix search completes the last word; earlier words must match exactly. Look for <strong>Source, positions and phrases</strong>, which explains how to keep original text.</li>
 <li>Search <code>typed filters</code> to find <strong>Typed filters and exact facets</strong>.</li>
 <li>Search <code>module worker</code> to find <strong>One-owner module worker</strong>.</li>
-<li>Search <code>unmatchedword</code> to see <strong>No results.</strong>, then enter a sample query again to recover.</li>
+<li>Search <code>unmatchedword</code> to see <strong>No results. Try a different search.</strong>, then enter a sample query again to recover.</li>
 <li>Choose a <strong>Category</strong> to narrow the matches, or <strong>All</strong> to clear the filter. Changing page shows more hits without changing the total.</li>
 <li>Follow a result to read its guide. Open <strong>Inspect results</strong> to see matching terms and score calculations; Close or Escape returns focus to that button.</li>
 </ol>
@@ -19,14 +24,22 @@ npm run pilot:ui
 <h2 id="advanced-demo-settings">Advanced demo settings</h2>
 <p>Expand <strong>Advanced demo settings</strong> to compare:</p>
 <ul>
-<li><strong>Query meaning:</strong> complete the final word (default), require all exact words, or require an adjacent phrase.</li>
-<li><strong>Representation:</strong> reanalyze original text, or use stored positions and offsets.</li>
-<li><strong>Execution:</strong> run directly, or in one module worker.</li>
+<li><strong>Match words:</strong> Complete the last word (default), Match whole words or Match a phrase.</li>
+<li><strong>Find phrases using:</strong> Original text or Saved word positions.</li>
+<li><strong>Where search runs:</strong> This page or Background worker.</li>
 </ul>
-<p>Changing a setting rebuilds the engine, keeps your query and resets the category and page. <strong>Destroy interface</strong> removes the controls. <strong>Reinitialize search</strong> rebuilds the collection and mounts them again.</p>
-<p>The demo enables phrases, facets, snippets and Inspector explicitly. It keeps data in memory and opens no database. A worker failure does not retry mutations automatically; Reinitialize search creates a fresh engine from the guide collection.</p>
+<p>Changing a setting or restarting keeps your query, clears the category and returns to the first page. <strong>Stop search</strong> removes the controls. <strong>Restart search</strong> rebuilds the collection and mounts them again.</p>
+<p>The demo enables phrases, facets, snippets and Inspector explicitly. It keeps data in memory and opens no database. A worker failure does not retry mutations automatically; Restart search creates a fresh engine from the guide collection.</p>
 <h2 id="add-the-interface-to-your-own-application">Add the interface to your own application</h2>
 <p>Start with <a href="/raveldex/example-files/ui.mjs">the minimal UI recipe</a> and the <a href="/raveldex/reference/hosts/#mount-a-minimal-search-form">complete markup and initialization</a>. Provide an element for the controls and import <code>@vmitsaras/raveldex/addons/ui/styles.css</code>.</p>
 <p>That recipe indexes one document. Searching <code>atomic</code> shows <strong>Atomic updates</strong>. Call its returned <code>dispose()</code> when removing the component.</p>
 <p>For snippets/highlights, select original-text or offset providers and the snippet add-on before creating the engine. For filters, select the filter/facet add-ons and declare your metadata fields. Keep display text as text; snippets are bounded excerpts, and result links open the full guide.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+<h2 id="recovering-a-stopped-demo">Recovering a stopped demo</h2>
+<p>A refused background read retains its code and offers Search again on the same
+worker. If the owner stops, the page offers Retry loading guides or This page
+in Advanced demo settings. Recovery is explicit and keeps the entered query;
+restarting clears category selection and returns to page one. Technical details
+contains the stable failure code. Stopped/abandoned work cannot publish into a new
+owner. The Workbench does not select storage or snapshots; their headless recovery
+choices are described in the <a href="/raveldex/reference/hosts/#recovery-choices-in-your-application">host guide</a>.</p>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

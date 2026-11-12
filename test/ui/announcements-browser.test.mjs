@@ -127,8 +127,8 @@ for (const busyScope of ['off', 'results']) test(`${busyScope} intercepts busy b
     if (mode !== 'original') assert.equal((await snapshot()).lastPublication.kind, 'error');
     await page.locator(hook('retry')).click();
     await page.waitForFunction(() => window.announcementProbe.snapshot().current.requestedBusy === 'false'
-      && document.querySelector('[data-raveldex-status]').textContent === '1 results. Showing 1–1.');
-    if (mode !== 'original') assert.equal((await snapshot()).lastPublication.text, '1 results. Showing 1–1.');
+      && document.querySelector('[data-raveldex-status]').textContent === '1 result. Showing 1–1.');
+    if (mode !== 'original') assert.equal((await snapshot()).lastPublication.text, '1 result. Showing 1–1.');
     assert.deepEqual(await page.evaluate(() => window.shellBusyMutations), []);
   }
 });
@@ -140,7 +140,7 @@ test('settled polite skips waiting, stale replies and composing work, republishe
   await page.waitForFunction(() => window.harness.state.pending.length === 1);
   assert.equal((await snapshot()).publishedCount, 1);
   assert.equal(await page.locator(hook('status')).innerText(), 'Searching…');
-  const blue = await search('blue', '1 results. Showing 1–1.');
+  const blue = await search('blue', '1 result. Showing 1–1.');
   assert.equal(blue.publishedCount, 2);
   assert.equal(await page.locator(hook('input')).evaluate(node => node === document.activeElement), true);
   await page.evaluate(() => window.harness.release());
@@ -177,18 +177,18 @@ test('settled polite skips waiting, stale replies and composing work, republishe
   await page.waitForFunction(() => window.announcementProbe.snapshot().publishedCount === 5);
   const bounded = await snapshot();
   assert.equal(bounded.rows.length, 200); assert.ok(bounded.droppedRows > 0);
-  assert.equal(bounded.lastPublication.text, '1 results. Showing 1–1.');
+  assert.equal(bounded.lastPublication.text, '1 result. Showing 1–1.');
 });
 
 test('settled assertive publishes empty/errors/retry and keeps the external node through destroy/remount', async () => {
   await open('settled-assertive');
-  await search('unmatched_rx4002_word', 'No results.');
+  await search('unmatched_rx4002_word', 'No results. Try a different search.');
   await page.locator('#inject-error').click();
   const failure = await search('blue', 'Search failed. Retry is available.');
   assert.equal(failure.lastPublication.kind, 'error');
   assert.equal(await page.locator(hook('input')).evaluate(node => node === document.activeElement), true);
   await page.locator(hook('retry')).click();
-  await page.waitForFunction(() => window.announcementProbe.snapshot().lastPublication?.text === '1 results. Showing 1–1.');
+  await page.waitForFunction(() => window.announcementProbe.snapshot().lastPublication?.text === '1 result. Showing 1–1.');
   const node = await page.locator('#announcement-output').elementHandle();
   await page.evaluate(() => { window.harness.state.holdNext = true; });
   await page.locator(hook('input')).fill('red');

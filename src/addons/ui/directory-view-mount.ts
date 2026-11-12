@@ -63,6 +63,7 @@ export function mountDirectoryView(captured: CapturedDirectoryView, extension?: 
   let chipOrder: string[] = [];
   let ended = false, local = false, dirty = false, composing = false, discardComposition = false, serial = 0;
   let activatedChip: string | undefined;
+  let navigationAvailable = false, retryAvailable = false;
   let timer: number | undefined, observed = controller.getSnapshot(), unsubscribe = (): void => {};
   const activeElement = (): Element | null => {
     const scope = root.getRootNode() as Document | ShadowRoot;
@@ -72,6 +73,12 @@ export function mountDirectoryView(captured: CapturedDirectoryView, extension?: 
   const listen = (target: EventTarget, type: string, callback: EventListener): void => { target.addEventListener(type, callback); removers.push(() => target.removeEventListener(type, callback)); };
   const unavailable = (element: HTMLButtonElement, value: boolean): void => { element.setAttribute('aria-disabled', String(value)); };
   const announce = (text: string): void => { if (status.textContent !== text) status.textContent = text; };
+  const updateRecovery = (): void => {
+    if (!live()) return;
+    const active = activeElement();
+    retry.hidden = !retryAvailable && active !== retry;
+    navigation.hidden = !navigationAvailable && !navigation.contains(active);
+  };
   const cancelTimer = (): void => { if (timer !== undefined) { win.clearTimeout(timer); timer = undefined; } };
   const recoverResults = (ticket: number): boolean => {
     if (results.contains(activeElement())) input.focus({ preventScroll: true });
@@ -120,16 +127,18 @@ export function mountDirectoryView(captured: CapturedDirectoryView, extension?: 
       if (facet?.omittedBucketCount) group.omitted.textContent = message(messages.omittedCounts, { shown: facet.buckets.length, total: facet.distinctValueTotal });
     }
     extension?.clear();
-    // Once exposed, keep navigation/recovery controls mounted and visible so
-    // asynchronous loading or refusal cannot discard their native focus.
-    results.replaceChildren(); pageSummary.textContent = ''; heading.hidden = true;
+    // Keep a focused action visible through asynchronous loading/refusal.
+    // Once native focus leaves, obsolete controls can retire without a jump.
+    results.replaceChildren(); results.hidden = true; pageSummary.textContent = ''; heading.hidden = true;
+    navigationAvailable = false; retryAvailable = false;
     unavailable(previous, true); unavailable(next, true); unavailable(retry, true); unavailable(clear, !input.value && !desired.length);
+    updateRecovery();
     region.setAttribute('aria-busy', String(pending || value.status === 'loading'));
     shell.dataset.state = pending ? composing ? 'composing' : 'waiting' : value.status;
     if (pending) { announce(composing ? messages.composing : messages.waiting); return; }
     if (found) {
       if (found.total > captured.documents.size || found.hits.some(hit => !captured.documents.has(hit.id))) {
-        shell.dataset.state = 'error'; announce(message(messages.error, { code: 'INCOMPATIBLE_CAPABILITY' })); retry.hidden = false; unavailable(retry, false); return;
+        shell.dataset.state = 'error'; announce(message(messages.error, { code: 'INCOMPATIBLE_CAPABILITY' })); retryAvailable = true; unavailable(retry, false); updateRecovery(); return;
       }
       const offset = (value.state.page - 1) * config.pageSize, pages = Math.max(1, Math.ceil(found.total / config.pageSize));
       const fragment = doc.createDocumentFragment();
@@ -137,15 +146,16 @@ export function mountDirectoryView(captured: CapturedDirectoryView, extension?: 
         const display = captured.documents.get(hit.id)!, li = node('li', 'result'), link = node('a', 'result-link', display.title); link.href = display.url;
         li.setAttribute('data-raveldex-directory-result', hit.id); li.append(link); extension?.render(li, link, display); fragment.append(li);
       }
-      results.start = offset + 1; results.append(fragment); heading.hidden = false; navigation.hidden = false;
+      results.start = offset + 1; results.append(fragment); heading.hidden = !found.total; results.hidden = !found.total; navigationAvailable = found.total > 0;
       unavailable(previous, value.state.page === 1); unavailable(next, value.state.page >= pages);
-      pageSummary.textContent = message(messages.page, { page: value.state.page, pages });
+      pageSummary.textContent = found.total ? message(messages.page, { page: value.state.page, pages }) : '';
       const empty = desired.length ? messages.noResultsFiltered : value.state.text.trim() ? messages.noResults : messages.noResultsBrowse;
       announce(found.total ? message(found.total === 1 ? messages.resultOne : messages.results, { total: found.total, start: offset + 1, end: offset + found.hits.length }) : message(empty, { query: queryPreview(value.state.text) }));
-      if (!found.total && !desired.length && !value.state.text.trim()) { retry.hidden = false; unavailable(retry, false); }
+      if (!found.total && !desired.length && !value.state.text.trim()) { retryAvailable = true; unavailable(retry, false); }
     } else if (value.status === 'error' || value.status === 'stale') {
-      announce(value.status === 'stale' ? messages.stale : message(messages.error, { code: value.error ?? 'INTERNAL_ERROR' })); retry.hidden = false; unavailable(retry, false);
+      announce(value.status === 'stale' ? messages.stale : message(messages.error, { code: value.error ?? 'INTERNAL_ERROR' })); retryAvailable = true; unavailable(retry, false);
     } else announce(value.status === 'loading' ? messages.searching : messages.idle);
+    updateRecovery();
   }
   function cancelDraft(): void {
     cancelTimer(); serial++; dirty = false; activatedChip = undefined;
@@ -202,6 +212,7 @@ export function mountDirectoryView(captured: CapturedDirectoryView, extension?: 
   });
   const handle = extension ? extension.extend(baseHandle) : baseHandle;
   extension?.initialize(shell, live);
+  for (const element of [retry, navigation]) listen(element, 'focusout', () => { void Promise.resolve().then(updateRecovery); });
   listen(form, 'submit', event => { event.preventDefault(); void execute(); });
   listen(input, 'input', schedule);
   listen(input, 'compositionstart', () => { if (!live()) return; discardComposition = false; composing = true; schedule(); });

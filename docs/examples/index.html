@@ -1,6 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Runnable examples · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/" aria-current="page">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="examples">Examples</h1>
-<p>For a complete interface to copy into your application, choose <a href="/raveldex/examples/inline/">inline search</a>, a <a href="/raveldex/examples/modal/">documentation search modal</a>, <a href="/raveldex/examples/dropdown/">compact header search</a>, a <a href="/raveldex/examples/directory/">faceted resource directory</a>, or <a href="/raveldex/examples/cards/">rich directory results</a>. Inline, modal and directory have browser and Astro projects; header and rich-results starters are plain-browser projects. Each includes explicit content, controls, styles and cleanup. The browser demo below is also available for exploring query and execution details.</p>
-<p>Use inline search for a field and results that stay in the page; use the modal for search opened from a button. The compact header offers a few page links and a complete inline results route. The directory supplies multi-selection checkboxes, chips, complete pages and explicit URL replay. Rich results add declared metadata and optional images with list/card/grid layouts over that directory state. All five galleries include a working installed preview, complete source downloads and an edit/build/preview CSS walkthrough. The current packages are private and unpublished, so each setup guide uses supplied matching local tarballs.</p>
+<p>Try a working preview, then copy a complete project and replace its sample content.
+Start with <a href="/raveldex/examples/inline/">inline search</a> if you want a search field and results
+in the page. Use the table below to find another layout.</p>
 <h2 id="choose-a-search-solution">Choose a search solution</h2>
 <p>Choose the presentation that fits the task, then use its gallery to try the installed preview, download every original source file and copy its CSS recipe. The eight projects below include indexing/loading, real destination pages and cleanup; the smaller API recipes are separate examples.</p>
 <table>
@@ -63,7 +64,7 @@
 <tr>
 <td>Compact dropdown</td>
 <td>Stable ID/title/body/path records. The header displays title/links from core; the full-results route uses the same prefix meaning. No snippet/facet/section registration is selected.</td>
-<td>Native Popover. The optional expanded-search button additionally needs <code>dialog</code>; it defaults off. Its code/CSS is included in the complete demonstration and shares one page owner.</td>
+<td>Native Popover for quick results; an ordinary search form and inline full page remain available otherwise. The optional expanded-search button additionally needs <code>dialog</code>; it defaults off. Its code/CSS is included in the complete demonstration and shares one page owner.</td>
 </tr>
 <tr>
 <td>Directory</td>
@@ -78,7 +79,7 @@
 </tbody>
 </table>
 <p>Browser inline, header, directory and rich-results projects start loading during page initialization. Astro inline/directory projects use their Enable button. Documentation modals load the complete index on first open and reuse that owner on reopen. First-open loading is not index sharding or a query-specific network backend. All these starters run directly on the main thread; workers are a separate explicit integration.</p>
-<p>Browser projects use esbuild 0.28.2; Astro projects use Astro 7.3.2. Their setup guides use Node 24/npm and matching unpublished local tarballs, then show root/subdirectory builds and actual previews. Deploy the complete rebuilt page/content/asset set with a consistent base. Do not place private content in public assets.</p>
+<p>Browser projects use esbuild 0.28.2; Astro projects use Astro 7.3.2. Their setup guides use Node 24/npm and matching Raveldex packages, then show root/subdirectory builds and actual previews. Deploy the complete rebuilt page/content/asset set with a consistent base. Do not place private content in public assets.</p>
 <h2 id="keyboard-and-cleanup">Keyboard and cleanup</h2>
 <table>
 <thead>
@@ -129,42 +130,42 @@
 <tbody>
 <tr>
 <td><a href="/raveldex/examples/inline-browser/">Browser inline starter</a></td>
-<td>Copy, install local core and run <code>npm run build</code></td>
+<td>Copy, install core and run <code>npm run build</code></td>
 <td>Replace guide records, search with snippets and topics, adjust CSS and preview at your deployment base.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/examples/inline-astro/">Astro inline starter</a></td>
-<td>Copy, install paired local packages and run <code>npm run build</code></td>
+<td>Copy, install matching packages and run <code>npm run build</code></td>
 <td>Build an explicit page allowlist and load its search artifacts on demand.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/examples/modal-browser/">Browser documentation modal</a></td>
-<td>Copy, install local core and run <code>npm run build</code></td>
+<td>Copy, install core and run <code>npm run build</code></td>
 <td>Open search on demand, cancel loading, follow real section links and change the theme.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/examples/modal-astro/">Astro documentation modal</a></td>
-<td>Copy, install paired local packages and run <code>npm run build</code></td>
+<td>Copy, install matching packages and run <code>npm run build</code></td>
 <td>Build pages and matching section artifacts, then load them on first open.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/examples/dropdown-browser/">Browser dropdown header</a></td>
-<td>Copy, install local core and run <code>npm run build</code></td>
+<td>Copy, install core and run <code>npm run build</code></td>
 <td>Search from a compact header, follow the real full-results route, change CSS and explicitly enable a shared-owner modal button.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/examples/directory-browser/">Browser directory</a></td>
-<td>Copy, install local core and run <code>npm run build</code></td>
+<td>Copy, install core and run <code>npm run build</code></td>
 <td>Replace resource records and filters, change CSS and try chips/pages/Back-Forward.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/examples/directory-astro/">Astro directory</a></td>
-<td>Copy, install paired local packages and run <code>npm run build</code></td>
+<td>Copy, install matching packages and run <code>npm run build</code></td>
 <td>Build an explicit resource allowlist, enable the directory and follow native filtered results at your deployment base.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/examples/cards-browser/">Browser rich results</a></td>
-<td>Copy, install local core and run <code>npm run build</code></td>
+<td>Copy, install core and run <code>npm run build</code></td>
 <td>Map resource metadata, opt into local images, switch list/card/grid without changing the native result page, and adjust CSS density.</td>
 </tr>
 <tr>
@@ -194,7 +195,7 @@
 </tr>
 </tbody>
 </table>
-<p>Repository commands need a source checkout, repository access, Node 24 and an initial <code>npm ci</code>. If you only have package tarballs, follow <a href="/raveldex/guide/overview/">installation</a> and use the copied API recipes instead.</p>
+<p>Repository commands need a source checkout, Node 24 and an initial <code>npm ci</code>. For an installed application, follow <a href="/raveldex/guide/overview/">installation</a> and use the copied API recipes instead.</p>
 <p>The eight starters index explicit public records rather than crawling pages. The header uses core-only title/link results and native Popover; its optional larger-search button also needs native <code>dialog</code>. Snippets and section previews in the inline/documentation-modal projects need <code>Intl.Segmenter</code>; their section/static asset verification needs Web Crypto over HTTPS or localhost. Directory examples explicitly register filters/facets; Astro directory also retains original title/body source for static reconstruction. Each guide explains its selected capabilities and how to replace the sample data. Review <a href="/raveldex/reference/hosts/#starter-adoption-and-local-checks">starter adoption and local checks</a> before changing those capabilities or claiming support for your target browsers and assistive technology.</p>
 <p>Each walkthrough explains what you should see and how to clean up. Stop ordinary preview servers with Ctrl+C. The Astro example uses its documented project-scoped stop command.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

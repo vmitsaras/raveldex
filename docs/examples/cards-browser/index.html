@@ -1,19 +1,14 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Browser rich-results starter · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="browser-rich-results-starter">Browser rich-results starter</h1>
 <p>Copy this complete resource directory, replace the explicit public records and adjust a few CSS properties. Search <code>walking resource</code>: seven genuine native matches span three pages. Choose List, Cards or Grid, adjust density and opt into local illustrations with <strong>Show images</strong>. Query, selections, native order, page and exact total stay the same. Every result opens a real generated resource page; the complete browse list also works without JavaScript.</p>
 <h2 id="copy-install-and-run">Copy, install and run</h2>
-<p>Use Node 22 or later and npm. Raveldex is private and unpublished, supplied as a matching local tarball. The pinned esbuild 0.28.2 dependency is build tooling. From an authorized source checkout after <code>npm ci</code>:</p>
-<pre><code class="language-sh">repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-cards-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-cards-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/cards-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+<p>Use Node 22 or later and npm. Extract the complete starter into an empty directory with <code>tar -xzf cards-browser.tar.gz --strip-components=1</code>, then enter that directory. From a source checkout, you can instead copy the complete <code>examples/cards-browser/</code> folder to a new project.</p>
+<p>Install Raveldex and the starter’s pinned build tooling, then build and preview:</p>
+<pre><code class="language-sh">npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4179
 </code></pre>
-<p>Open <code>http://127.0.0.1:4179/</code>; stop with Ctrl+C. For a downloaded archive, extract into an empty directory with <code>tar -xzf cards-browser.tar.gz --strip-components=1</code>, enter it and install the supplied tarball with <code>npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz</code>. Run build and preview as above. The first tooling install needs registry access or a suitable cache. Keep the generated lockfile and use <code>npm ci</code> afterward.</p>
+<p>Keep the generated <code>package-lock.json</code> and use <code>npm ci</code> for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.</p>
+<p>Open <code>http://127.0.0.1:4179/</code>. Stop the preview with Ctrl+C.</p>
 <p>Serve over HTTP(S). This project imports the separate directory controller, optional card view, base directory stylesheet and card stylesheet explicitly. Filters/facets are configured in <code>configuration.mjs</code>; it does not select snippets, a worker, storage, crawling, commerce actions or full-set sorting.</p>
 <h2 id="deploy-under-a-subdirectory">Deploy under a subdirectory</h2>
 <p>Use the same slash-terminated base for build and preview:</p>
@@ -49,4 +44,4 @@ RAVELDEX_CARDS_BASE=/help/ npm run preview -- --port 4179
 <h2 id="check-your-content-and-theme">Check your content and theme</h2>
 <p>Use native Tab/Enter/Space for links and controls. Filter resources is a native disclosure, initially closed at all widths. Close filters/Escape restores summary focus; removing a chip recovers adjacent focus. Layout/density changes preserve focused result links. No interactive ARIA grid is introduced.</p>
 <p>Check all native pages, metadata omissions, long and RTL text, images off/on/broken, zero results, loading/Retry, Back/Forward, teardown, light/dark/forced colors and reduced motion. Automated browser/axe and emulated viewport checks are distinct from human screen-reader speech, physical IME/touch/mobile keyboards, real 200%/400% browser zoom, Safari/device support and hosted deployment. Verify those in your target application.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

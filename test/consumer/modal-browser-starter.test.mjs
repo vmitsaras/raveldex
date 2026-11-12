@@ -43,7 +43,7 @@ before(async () => {
   const cache = join(consumer.directory, 'starter-npm-cache');
   report.cache = await seedStarterCache(cache);
   report.package = consumer.package;
-  report.environment = { node: process.version, platform: process.platform, release: osRelease(), arch: process.arch, tooling: 'Actual offline npm install of esbuild0.28.2 and private core tarball, no tool/runtime symlinks.' };
+  report.environment = { node: process.version, platform: process.platform, release: osRelease(), arch: process.arch, tooling: 'Actual offline npm install of esbuild0.28.2 and core tarball, no tool/runtime symlinks.' };
   for (const base of ['/', '/help/']) {
     const directory = join(consumer.directory, base === '/' ? 'browser-root' : 'browser-help');
     await cp(join(REPO_ROOT, 'examples/modal-browser'), directory, { recursive: true, filter: path => !/(?:^|\/)dist(?:\/|$)|build-meta\.json$|node_modules/.test(path) });

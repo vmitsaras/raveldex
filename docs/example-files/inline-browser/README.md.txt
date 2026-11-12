@@ -4,24 +4,17 @@ Copy this complete starter to add a search form, original-text snippets, a type 
 
 ## Install and run
 
-Use Node 22 or later and npm. The packages are currently private and unpublished: these instructions use a local tarball from an authorized source checkout, not a registry release. The starter's pinned esbuild dependency is build tooling and is not shipped as a browser runtime dependency.
+Use Node 22 or later and npm. Extract the complete starter into an empty directory with `tar -xzf inline-browser.tar.gz --strip-components=1`, then enter that directory. From a source checkout, you can instead copy the complete `examples/inline-browser/` folder to a new project.
 
-From a source checkout with `npm ci` already complete, prepare a private package and copy the entire starter directory. Use fresh directories for these outputs:
+Install Raveldex and the starter's pinned build tooling, then build and preview:
 
 ```sh
-repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-inline-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-inline-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/inline-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4176
 ```
 
-If someone supplied the starter and package archive, extract the starter, enter its directory and run `npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz`, followed by the two `npm run` commands above. Installation also installs the pinned build tool; it may need registry access or an existing npm cache. Keep the generated `package-lock.json` in your application and use `npm ci` thereafter.
+Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.
 
 Open `http://127.0.0.1:4176/`. Search `walking guide`: there are seven matches, with three initially visible. Load more shows six; Next results reaches the seventh, and Previous results returns to the first window. Choose Guide to narrow to five pages. A search such as `weather` shows original text with highlighted matches; following its title opens the actual guide page. Ctrl+C stops this preview.
 

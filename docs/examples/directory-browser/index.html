@@ -2,19 +2,14 @@
 <p>Copy this complete project to search a public resource library with checkboxes, removable selected filters and complete result pages. Search <code>walking resource</code>: all seven pages match. Filter by resource type and topic, remove a chip or choose <strong>Clear all</strong>. Every result opens a real generated resource page. The browse list also works without JavaScript.</p>
 <p>The application owns one native engine, one directory controller, its optional URL binding and one borrowed view. Filters use OR within a group and AND across groups/text. Counts include every active filter, including the group’s own selections, before result paging. A count describes the current matches; it does not predict what adding another OR choice will do. Zero-count choices remain usable.</p>
 <h2 id="copy-install-and-run">Copy, install and run</h2>
-<p>Use Node 22 or later and npm. Raveldex is private and unpublished, supplied as a local tarball. The pinned esbuild 0.28.2 dependency is build tooling. From an authorized source checkout after <code>npm ci</code>:</p>
-<pre><code class="language-sh">repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-directory-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-directory-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/directory-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+<p>Use Node 22 or later and npm. Extract the complete starter into an empty directory with <code>tar -xzf directory-browser.tar.gz --strip-components=1</code>, then enter that directory. From a source checkout, you can instead copy the complete <code>examples/directory-browser/</code> folder to a new project.</p>
+<p>Install Raveldex and the starter’s pinned build tooling, then build and preview:</p>
+<pre><code class="language-sh">npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4179
 </code></pre>
-<p>Open <code>http://127.0.0.1:4179/</code>. Stop with Ctrl+C. For a downloaded archive, extract into an empty directory with <code>tar -xzf directory-browser.tar.gz --strip-components=1</code>, enter it and install the supplied core tarball with <code>npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz</code>. Run the build/preview commands above. The first install needs registry access or a suitable cache for the pinned tooling; keep its generated lockfile and use <code>npm ci</code> afterward.</p>
+<p>Keep the generated <code>package-lock.json</code> and use <code>npm ci</code> for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.</p>
+<p>Open <code>http://127.0.0.1:4179/</code>. Stop the preview with Ctrl+C.</p>
 <p>Serve output over HTTP(S). The browser uses native forms, checkboxes and a details disclosure. No Popover, dialog, snippets, worker, storage or search-history feature is selected. Explicit filters and facets are installed in <code>configuration.mjs</code>; missing capabilities remain visible errors.</p>
 <h2 id="deploy-under-a-subdirectory">Deploy under a subdirectory</h2>
 <p>Use the same slash-terminated base for build and preview:</p>
@@ -45,4 +40,4 @@ RAVELDEX_DIRECTORY_BASE=/help/ npm run preview -- --port 4179
 <p>Typing waits for composition to finish. Loading, no results, native failure and revised collections have visible live status and recovery. No-results can recover by removing chips or clearing all. Initialization fetch/validation/mount failures retain the authored browse links and show <strong>Retry loading directory</strong>. The view does not silently install missing capabilities.</p>
 <p><code>controller.mjs</code> deduplicates start, aborts loading and releases a late owner even if its loader ignores abort. Destroy tears down view, URL binding and controller before disposing only the owned engine. Main waits for teardown on pagehide and recreates the application after persisted pageshow. Call/await <code>destroy()</code> when removing the application. Do not supply a borrowed engine from <code>load</code>: this wrapper owns and disposes the returned candidate.</p>
 <p>Before adopting your theme, check keyboard, chip focus, mobile disclosure, all pages, Back/Forward, zero results, loading/retry, long/RTL labels, dark/forced colors and reduced motion. Scripted browser/axe/reflow checks do not establish human screen-reader speech, physical IME/touch/on-screen keyboard or actual 200%/400% browser zoom; check those in your target application. Playwright WebKit is not Safari qualification.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

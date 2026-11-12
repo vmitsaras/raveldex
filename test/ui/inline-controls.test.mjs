@@ -104,6 +104,22 @@ after(async () => { try { await browser?.close(); } finally {
   report.finishedAt = new Date().toISOString(); await save();
 } });
 
+test('recovered retry retires after focus leaves; empty feedback does not introduce an empty results section', async () => {
+  await page.evaluate(() => { window.controlsHarness.state.failNext = true; }); await search();
+  const retry = part('retry'); await retry.focus(); await retry.press('Enter'); await settled();
+  assert.deepEqual(await ids(), expected.slice(0, 5));
+  assert.equal(await retry.evaluate(n => n === document.activeElement && !n.hidden), true);
+  assert.equal(await retry.getAttribute('aria-disabled'), 'true');
+  const calls = await page.evaluate(() => window.controlsHarness.calls().length);
+  await retry.press('Enter'); assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), calls);
+  await part('input').focus(); assert.equal(await retry.isVisible(), false);
+  await search('missing'); assert.equal(await part('results-heading').isVisible(), false); assert.equal(await part('results').isVisible(), false);
+  assert.match(await part('status').textContent(), /Try a different search/);
+  await page.evaluate(() => { window.controlsHarness.state.failNext = true; }); await search();
+  await part('clear').click(); assert.equal(await retry.isVisible(), false);
+  observation('retry focus retirement and empty hierarchy', { focusedUnavailableRetry: true, hiddenAfterBlur: true, emptyHeading: false, clearRemovesRetry: true });
+});
+
 test('empty feedback safely identifies bounded submitted text and reset neither searches nor repeats idle announcements', async () => {
   const query = '<img src=x onerror=alert(1)> "<script>" ' + '😀'.repeat(180);
   await part('input').focus(); await search(query);
@@ -378,7 +394,8 @@ test('filter-only browsing, zero projected selections and clear retain coherent 
 test('native facet projection exposes omitted buckets without changing exact result counts', async () => {
   await open({}, { corpus: 'projection' }); await search();
   assert.equal(await part('facet').locator('option').count(), 101);
-  assert.match(await part('facet-summary').textContent(), /101/); assert.match(await part('facet-summary').textContent(), /1/);
+  assert.match(await part('facet-summary').textContent(), /Filter choices: 101\. Not shown: 1\./);
+  assert.doesNotMatch(await part('facet-summary').textContent(), /distinct|buckets/);
   const main = await page.evaluate(() => window.controlsHarness.calls().find(call => !call.evidence).result);
   const field = main.extensions.facets.fields[0];
   assert.deepEqual([main.total, field.distinctValueTotal, field.omittedBucketCount, field.buckets.length], [101, 101, 1, 100]);

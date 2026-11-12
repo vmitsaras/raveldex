@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>API reference · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/" aria-current="page">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="public-api-reference">Public API reference</h1>
-<p>Start with <a href="/raveldex/guide/overview/">installation and your first search</a>, then use this page to find the import you need. Every JavaScript entry uses ESM and includes TypeScript declarations. Use the public paths listed here rather than importing from <code>dist/</code> or <code>src/</code>. CommonJS is not supported.</p>
+<p>Start with <a href="/raveldex/guide/overview/">Raveldex adoption and installation</a>, then choose a <a href="/raveldex/reference/hosts/#consumer-search-interfaces">consumer interface and its capabilities</a>, or use core with your own UI. This page lists exact imports; the developer Workbench is separately identified below. Every JavaScript entry uses ESM and includes TypeScript declarations. Use the public paths listed here rather than importing from <code>dist/</code> or <code>src/</code>. CommonJS is not supported.</p>
 <h2 id="export-map">Export map</h2>
 <p>Add <code>@vmitsaras/raveldex</code> before each subpath below. For example, <code>/addons/ui</code> means <code>@vmitsaras/raveldex/addons/ui</code>; the root entry is just <code>@vmitsaras/raveldex</code>. Importing a factory makes it available to call but does not enable its feature. TypeScript types are removed at runtime.</p>
 <table>
@@ -118,8 +118,8 @@
 </tr>
 <tr>
 <td><code>/addons/ui</code></td>
-<td><code>mountRaveldexUI</code></td>
-<td><a href="/raveldex/reference/hosts/#native-dom-ui-and-css">DOM UI</a></td>
+<td><code>mountRaveldexUI</code> — developer Workbench</td>
+<td><a href="/raveldex/reference/hosts/#native-dom-ui-and-css">Workbench</a></td>
 </tr>
 <tr>
 <td><code>/addons/ui/styles.css</code></td>
@@ -236,4 +236,4 @@
 <h2 id="installation-and-evaluation-routes">Installation and evaluation routes</h2>
 <p>Use <a href="/raveldex/guide/overview/">Getting started</a> for installation, <a href="/raveldex/reference/core/">Core</a> for records and queries, and <a href="/raveldex/reference/hosts/">UI and host integrations</a> for browser controls, workers and storage. If you prefer to learn by running code, start with the <a href="/raveldex/examples/api/">example modules</a>.</p>
 <p>The separately installable <code>@vmitsaras/raveldex-english</code> uses the same analyzer policy as the convenience subpath; choose one factory import. See <a href="/raveldex/reference/english/#separate-package">English installation</a>. The Astro integration is a separate package; see <a href="/raveldex/reference/static-astro/">static search and Astro</a>.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

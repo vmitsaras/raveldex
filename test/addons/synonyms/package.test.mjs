@@ -11,7 +11,7 @@ test('installed and minified synonyms preserve literal one-step outcomes, native
   assert.equal(report.correctness.fullPageScoreComparisonsPerRun, 39);
   assert.equal(report.correctness.strictUnrequestedComparisonsPerRun, 3);
   assert.equal(report.correctness.bundledParity, 'Pass');
-  assert.equal(report.package.private, true);
+  assert.equal(report.package.private, false);
 });
 
 test('core excludes optional synonyms and selected addon imports are inert, separately packaged and DOM-free', () => {

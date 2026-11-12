@@ -2,10 +2,10 @@
 <p>Use this package to match English word forms such as <code>indexed</code>, <code>indexing</code> and <code>index</code>. It exports <code>createEnglishAnalyzer</code> and <code>ENGLISH_ANALYZER</code>, using the original Porter 1980 stemming rules.</p>
 <p>The JavaScript bundle contains its language rules and helpers, with no runtime import of core. Its TypeScript declarations use public core types through an exact-version peer dependency.</p>
 <h2 id="install">Install</h2>
-<p>In an ESM application with Node <code>&gt;=22</code>, install matching local files:</p>
-<pre><code class="language-sh">npm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/english/vmitsaras-raveldex-english-0.1.0-rc.0.tgz
+<p>In an ESM application with Node <code>&gt;=22</code>, install matching core and English packages:</p>
+<pre><code class="language-sh">npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-english@1.0.0
 </code></pre>
-<p>Replace both absolute paths with your local files. The command installs core and the English package, which must both be version <code>0.1.0-rc.0</code>. To build them from a checkout, compile with <code>npm run build</code>, pack core with <code>npm pack --ignore-scripts</code>, then run <code>node scripts/pack-english.mjs --output NEW_DIRECTORY</code>.</p>
+<p>Both packages use version <code>1.0.0</code>. To test local changes, compile with <code>npm run build</code>, pack core with <code>npm pack --ignore-scripts</code>, then run <code>node scripts/pack-english.mjs --output NEW_DIRECTORY</code> and install the resulting files together.</p>
 <h2 id="search-english-word-forms">Search English word forms</h2>
 <p>Save this as an <code>.mjs</code> file in your installed application and run it with Node. Set both <code>analyzer</code> and the add-on registration to select English analysis:</p>
 <pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
@@ -32,4 +32,4 @@ try {
 <p>The analyzer implements the original 1980 algorithm described at
 <a href="https://snowballstem.org/algorithms/porter/stemmer.html">the original algorithm description</a>. It is not Porter2 or the
 later BLI/LOGI variant. No external stemmer implementation is included.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

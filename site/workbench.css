@@ -52,6 +52,7 @@
 .search-workbench .raveldex-ui__result-title { text-decoration: none; }
 .search-workbench .raveldex-ui__result-title:hover { text-decoration: underline; }
 .search-workbench .raveldex-ui__snippet { color: var(--_workbench-muted); font-size: .95rem; }
+.search-workbench__overview { color: var(--_workbench-muted); line-height: 1.65; overflow-wrap: anywhere; }
 .search-workbench .raveldex-ui__highlight { background: var(--_workbench-accent); color: #101709; padding-inline: .1em; }
 .search-workbench :is(.raveldex-ui__inspect, .raveldex-ui__previous, .raveldex-ui__next) { border-width: 1px; font-size: .9rem; }
 .search-workbench .raveldex-ui__inspect { display: block; margin-inline-start: auto; }
@@ -63,7 +64,7 @@
 .search-workbench__settings { margin-block-start: 1.5rem; border-block-start: 1px solid #475361; padding-block-start: 1rem; font-size: .9rem; }
 .search-workbench__settings summary { cursor: pointer; padding-block: .5rem; }
 .search-workbench__controls { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
-.search-workbench__controls label { display: grid; flex: 1 1 15rem; min-inline-size: 0; gap: .4rem; }
+.search-workbench__control { display: grid; flex: 1 1 15rem; min-inline-size: 0; gap: .4rem; }
 @media (min-width: 64rem) {
   .search-home__follow { grid-template-columns: 1fr 1fr; }
   .search-workbench .raveldex-ui { display: grid; grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem); column-gap: 1.5rem; }
@@ -80,3 +81,10 @@
   .search-workbench .raveldex-ui__highlight { background: Highlight; color: HighlightText; }
   .site .search-workbench :focus-visible { outline-color: Highlight; }
 }
+
+.search-home__preview { display: block; inline-size: 100%; border: 1px solid #708195; border-radius: .4rem; }
+
+.search-workbench__diagnostics { margin-block: .75rem; overflow-wrap: anywhere; }
+.search-workbench__diagnostics > summary { cursor: pointer; min-block-size: 2.75rem; padding-block: .5rem; }
+.search-workbench__diagnostics > summary:focus-visible { outline: 3px solid var(--_workbench-accent); outline-offset: 3px; }
+@media (forced-colors: active) { .search-workbench__diagnostics > summary:focus-visible { outline-color: Highlight; } }

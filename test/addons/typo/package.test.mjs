@@ -11,7 +11,7 @@ test('installed and minified typo consumers preserve authored repairs, native we
   assert.equal(report.correctness.fullPageScoreComparisonsPerRun, 30);
   assert.equal(report.correctness.strictUnrequestedComparisonsPerRun, 3);
   assert.equal(report.correctness.bundledParity, 'Pass');
-  assert.equal(report.package.private, true);
+  assert.equal(report.package.private, false);
 });
 
 test('core excludes typo implementation and selected addon imports are inert and independently packaged', () => {

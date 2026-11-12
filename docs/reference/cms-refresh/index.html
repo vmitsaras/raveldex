@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CMS REFRESH · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="refresh-cms-content-without-losing-ownership">Refresh CMS content without losing ownership</h1>
+<p>Treat searchable records, the submitted query and the captured display map as separate inputs. An engine write changes the index. It does not rerun a UI query or replace titles, URLs, excerpts, section maps, messages or labels captured when mounting a view. A repeated same-kind mount returns the current handle rather than applying options. Directory/cards may still validate supplied options before returning it; do not use a duplicate mount as an update or validation bypass.</p>
+<p>The application owns CMS delivery, mutation order and current display records. Raveldex adds no CMS subscription, polling, automatic fetch or automatic query. Await the authoritative write and use a deliberate search/refresh. Keep stable IDs and matching display records. If several mutations are needed, each admitted write is atomic; the sequence and display-map swap are not one transaction. For a whole replacement dataset, prepare a separate owner before switching rather than publishing half a rebuild. Do not blindly retry uncertain worker mutation outcomes; use the owner’s existing receipt/reconciliation contract.</p>
+<h2 id="choose-the-operation-that-actually-preserves-your-state">Choose the operation that actually preserves your state</h2>
+<table>
+<thead>
+<tr>
+<th>Change / surface</th>
+<th>Supported path</th>
+<th>State and focus boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Indexed text/metadata only, unchanged display IDs/options</td>
+<td>Await the owner write, then explicit <code>search()</code> on the live inline/modal/dropdown, or directory <code>refresh()</code></td>
+<td>Live inline facets are retained; result windows restart. Directory retains committed text/filters and deliberately resets page one. Mount/import alone starts no query.</td>
+</tr>
+<tr>
+<td>Display titles/URLs/card fields, messages or section maps</td>
+<td>Destroy the old view, then remount with the fresh map/options</td>
+<td>Caller object mutation and card <code>setPresentation()</code> do not replace captured content. New inputs/links are new Nodes; there is no automatic caret/composition/focus restoration.</td>
+</tr>
+<tr>
+<td>Directory/card metadata or language only, same index/controller configuration</td>
+<td>Remount over the same live controller/snapshot</td>
+<td>No query, page change or URL write is needed just for the view. Keep the URL binding alive. Opt-in images may request on ready mount even without a query. Preserve card <code>getPresentation()</code> explicitly if wanted.</td>
+</tr>
+<tr>
+<td>Directory content revision changed</td>
+<td>Explicit <code>refresh()</code>, inspect the snapshot, then mount matching display records</td>
+<td>Same text/filters, current revision, page one. Equivalent <code>restore(saved)</code> or <code>update()</code> may be inert; they are not refresh substitutes. Page/restore across a revision may report stale.</td>
+</tr>
+<tr>
+<td>New directory controller configuration</td>
+<td>Explicitly rebuild controller and any URL binding, admit application-owned state with <code>restore()</code></td>
+<td>Group fields/allowed values, page size and query mode are controller configuration, not view labels. Unknown/removed selections need an application decision. Out-of-range page restoration may recover to page one.</td>
+</tr>
+<tr>
+<td>Inline/dropdown after destroy/remount</td>
+<td>Restore application-owned text through explicit <code>search(text)</code> if wanted</td>
+<td>Starts idle. There is no public query snapshot/getter, facet setter or paging-restoration API. <code>search(text)</code> is still deferred during active composition; it is not an IME-cancellation method.</td>
+</tr>
+<tr>
+<td>Modal</td>
+<td>Close before replacement; remount the shell and explicitly reopen when appropriate</td>
+<td>Same-handle close/open normally retains text/facets; <code>resetOnClose</code> clears them. Closed <code>search(text)</code> stores text without a query; open follows the existing explicit-query contract. A new handle has no old private state. Normal opener restoration remains conditional.</td>
+</tr>
+</tbody>
+</table>
+<p>For a dropdown with a pending request, quiesce it with the existing <code>close()</code> before the owner write, or ensure that request has settled. Close retains the raw query while invalidating/aborting the flight; explicitly search after the write. Otherwise <code>search()</code> for the same raw query can reuse a pre-write in-flight request instead of starting a latest-revision query. Finish or deliberately discard composition separately; close is not a promise to finish editing.</p>
+<p>The application must record any state it needs through its own supported input flow. Do not read private hooks, synthesize hidden select IDs or invent <code>getState()</code>/<code>setFilters()</code> on inline/modal/dropdown. Exact inline/modal facet/window preservation across a captured-map replacement is <strong>not available</strong> through current public handles. Choose an explicit reset with restored text, or use the directory controller where first-class state restoration is required. The public handles expose no snapshot/filter setter.</p>
+<p>A UI/controller query Promise resolving means the operation/presentation settled, including native failure. Directory success requires <code>getSnapshot().status === 'ready'</code> and its actual result; inspect <code>error</code>/<code>stale</code> otherwise. Inline/modal/dropdown show their failures through the existing status/recovery interface. Do not treat <code>Promise&lt;void&gt;</code> as a successful-query receipt. Owner mutation receipts have their separate existing contract.</p>
+<h2 id="complete-installed-walkthrough">Complete installed walkthrough</h2>
+<p>Copy <a href="/raveldex/example-files/cms-refresh.mjs">cms-refresh.mjs</a> into an ESM application with the installed package. This finite example creates and owns its engine/controller, queries <code>shared</code> with Guide selected on page two, then changes indexed text and metadata. It unmounts the old display map, explicitly refreshes to the current revision/page one, and remounts fresh card titles/excerpts over the same controller. A repeated valid mount retains the existing handle and the fresh map. It finally restores authored Nodes and disposes its owner. It is an opt-in focus/update demonstration, not a production synchronization service.</p>
+<p>Use a dedicated connected root that no other view owns, and a stable enabled button outside it. This small walkthrough validates that both are in the document tree, outside ShadowRoots; a shadow-host integration needs its own known-scope focus reads/handoff. Keep the host in its original document and do not run competing writes, commands or teardown during this finite walkthrough. Import CSS explicitly. It deliberately focuses its first input to demonstrate handoff; it returns focus only if the stable anchor still has it, and leaves focus on the external button when final teardown removes a focused input. It does not claim to retain focus on a removed Node.</p>
+<pre><code class="language-html">&lt;button id="cms-update" type="button"&gt;Run content update example&lt;/button&gt;
+&lt;section id="cms-search" aria-label="Resource search"&gt;
+  &lt;p&gt;Browse resources while search is unavailable.&lt;/p&gt;
+&lt;/section&gt;
+</code></pre>
+<pre><code class="language-js">import '@vmitsaras/raveldex/addons/ui/directory-cards.css';
+import { runCMSRefreshExample } from './cms-refresh.mjs';
+
+const button = document.querySelector('#cms-update');
+const root = document.querySelector('#cms-search');
+let running = false;
+button.addEventListener('click', async () =&gt; {
+  if (running) return;
+  running = true;
+  try {
+    // Keep this stable anchor enabled; the guard prevents concurrent runs.
+    const result = await runCMSRefreshExample(root, button);
+    console.log(result.after.total, result.renderedTitles); // 1, ["Current b"]
+  } catch (error) {
+    console.error(error); // Present application-owned recovery in your interface.
+  } finally {
+    running = false;
+  }
+});
+</code></pre>
+<p>The guard keeps the trigger available as a focus anchor without launching overlapping runs. The important sequence in the copied module is view teardown → awaited owner mutation → explicit refresh/status check → fresh-map mount. A rejected update/query cannot leave a newly mounted success view in this example: <code>finally</code> tears down its resources and restores the authored fallback. Handle failures and visible recovery in your own application; never silently retry or remount a failed candidate as success.</p>
+<h2 id="apply-the-sequence-in-an-existing-owner">Apply the sequence in an existing owner</h2>
+<ol>
+<li>Finish composition, or deliberately discard the draft as part of the user’s update action. Capture <strong>committed</strong> directory state from <code>getSnapshot().state</code>, not a pending view draft; save presentation if needed. Inline/dropdown <code>search(text)</code> does not cancel composition. Avoid changing content underneath an active editing session without an application decision.</li>
+<li>Before destroying a focused view, move only owned focus to an enabled app-owned anchor outside the root. Keep an operation identity/liveness guard around asynchronous CMS work. Restore to a new control only if the operation is still current, the host is still owned/connected and focus remains on that anchor; do not steal focus after the user moves elsewhere.</li>
+<li>Destroy the old view before removing/replacing its host or mutating a dataset whose IDs may no longer fit the old map. For an unchanged-map dropdown, close its pending flight before the owner write, then explicitly search afterward. Await successful owner writes. Refresh while no incompatible old display map is mounted, then inspect the resulting controller snapshot before mounting the matching new map. Library stale-reply guards do not establish ordering for two competing application CMS requests.</li>
+<li>Keep a compatible directory controller and explicit URL binding for a view-only replacement. View teardown does not cancel shared controller work; its current pending operation can validly publish into a new view. If changing intent, issue the existing explicit controller command instead. A final controller destroy cancels its owned work and releases its subscriptions. Destroyed inline/modal/dropdown views suppress their own late replies.</li>
+<li>Keep the application’s configured URL ownership. Binding construction is inert; <code>read()</code> explicitly restores URL state and can query/canonicalize. Refresh resetting page one can replace the owned page parameter; unrelated parameters/hash remain outside that ownership. Do not re-read an old URL just to remount a view. If rebuilding a controller, release the old binding before connecting the replacement and explicitly choose whether URL state or saved application state wins.</li>
+<li>At final owner disposal: destroy view → destroy the optional URL binding → destroy controller → dispose the engine/static-loader owner <strong>you created</strong>, after other borrowers are finished. A view never owns a borrowed controller/engine. Destroy a view before replacing its root; arbitrary external DOM replacement is not a universal ownership-transfer guarantee.</li>
+</ol>
+<p>Keep <a href="/raveldex/reference/localization/">localization capture/remount</a>, <a href="/raveldex/reference/result-content/">rich-content maps and image privacy</a> and the <a href="/raveldex/reference/hosts/">host contracts</a> aligned with the same owner. No new background subscription, live-map setter, state API, renderer, engine behavior or query policy is introduced here.</p>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

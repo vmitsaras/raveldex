@@ -1,0 +1,82 @@
+Pages browser: onboarding and private-path checks complete
+✖ branch Pages projection and real packed demo work at /raveldex/ (2946.253792ms)
+{"status":"Pass","browser":"157.0.8103.51","completeProjects":1,"sourceFiles":14,"nativeIDs":["distance","maps","weather","wildlife","access","care","packing"],"styles":{"accent":"rgb(20, 91, 69)","gap":"1.25rem","radius":"1rem"},"scope":"Exact installed source/downloads, native pages, image opt-in, focus, routes and emulated 320px no-JS layout; no human AT/physical input/actual zoom."}
+✔ rich-result gallery publishes exact complete source and an installed native opt-in image preview (1325.0925ms)
+Demo clarity: 157.0.8103.51 / darwin arm64 / v24.21.0
+✔ home lets visitors try installed inline search and reach every interface without engine settings (1175.87325ms)
+✔ consumer entry remains useful without JavaScript and reflows in narrow themes and RTL text (420.73825ms)
+✔ Workbench shows readable overviews and discloses exact original excerpts and scores in Inspector (506.495541ms)
+✔ demo overviews render hostile display text literally and do not duplicate across remount (1013.521334ms)
+✔ advanced controls preserve the query, reset category and page, and retain focus on the chosen setting (1041.355042ms)
+✔ every gallery exposes a project-specific install, content and styling path with exact downloads (853.980041ms)
+{"status":"Pass","browser":"157.0.8103.51","completeProjects":2,"sourceFiles":23,"nativeIDs":["distance","maps","weather","wildlife","access","care","packing"],"styles":{"accent":"rgb(20, 91, 69)","radius":"12px","gap":"1.25rem"},"scope":"Installed gallery/downloads, scripted focus and 320px no-JS viewport. Not human AT, physical input or actual browser zoom."}
+✔ directory gallery publishes exact complete browser/Astro projects and an installed native resource preview (1390.798125ms)
+✔ dropdown gallery serves its exact installed header starter and a real complete full-results route (1722.298708ms)
+✔ inline gallery serves exact complete source downloads and the installed starter preview (1240.225ms)
+✔ modal gallery exposes exact complete starters and a first-open installed preview with real heading links (1609.517125ms)
+✔ published starter guidance reaches the real chooser and galleries (3.005625ms)
+✔ copyable localization and theme assets are exact public downloads (2.143417ms)
+✔ five-solution chooser, complete starter inventories and published CSS preserve independent native results and focus (2501.841459ms)
+✔ the static documentation recipe disposes its published owner when display loading or mounting fails (4.849541ms)
+{"copiedInstalledExample":"Pass","directory":"/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-fqUfjc","installed":"/private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-fqUfjc/node_modules/@vmitsaras/raveldex","browser":"157.0.8103.51","private":false,"packageSha256":"62b1f1683e3e596597eaaa3e211c1175d09bee221639daed58c01ac18fd423cb","total":1,"prefixQuery":"atom","idleAndClear":true,"cssLoaded":true,"scopedOverride":true,"workbenchMounted":false,"cleanup":true}
+✔ the documented consumer markup, prefix search, CSS and owned cleanup work from a fresh installed tarball (1812.842042ms)
+Workbench browser: 157.0.8103.51 / darwin arm64 / v24.21.0
+✔ Workbench uses the actual corpus, query buttons, filters and keyboard Inspector (1690.868625ms)
+✖ prefix results, original highlights, facets and every page agree across both hosts and representations (308.683458ms)
+✔ workbench pages and open Inspector have no automated WCAG A/AA violations (466.637917ms)
+✖ loading, initialization failure and retry preserve a useful page (383.45475ms)
+✔ without JavaScript the homepage keeps documentation and an honest search fallback (191.668625ms)
+✔ shared reading shell reflows, identifies the current page and supports keyboard skip (312.320792ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 20
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 25264.124958
+
+✖ failing tests:
+
+test at test/pages/browser.test.mjs:13:1
+✖ branch Pages projection and real packed demo work at /raveldex/ (2946.253792ms)
+  locator.getAttribute: Error: strict mode violation: locator('details') resolved to 2 elements:
+      1) <details hidden="" data-pilot-diagnostics="" class="search-workbench__diagnostics">…</details> aka getByText('Technical detailsError code:')
+      2) <details class="search-workbench__settings">…</details> aka getByText('Advanced demo settingsChanging a setting or restarting keeps your query, clears')
+  
+  Call log:
+  [2m  - waiting for locator('details')[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/Documents/GitHub/raveldex/test/pages/browser.test.mjs:132:48) {
+    log: [ "  - waiting for locator('details')" ]
+  }
+
+test at test/pages/workbench.test.mjs:97:1
+✖ prefix results, original highlights, facets and every page agree across both hosts and representations (308.683458ms)
+  locator.getAttribute: Error: strict mode violation: locator('details') resolved to 2 elements:
+      1) <details hidden="" data-pilot-diagnostics="" class="search-workbench__diagnostics">…</details> aka getByText('Technical detailsError code:')
+      2) <details class="search-workbench__settings">…</details> aka getByText('Advanced demo settingsChanging a setting or restarting keeps your query, clears')
+  
+  Call log:
+  [2m  - waiting for locator('details')[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/Documents/GitHub/raveldex/test/pages/workbench.test.mjs:109:48) {
+    log: [ "  - waiting for locator('details')" ]
+  }
+
+test at test/pages/workbench.test.mjs:242:1
+✖ loading, initialization failure and retry preserve a useful page (383.45475ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(await page.getByRole('button', { name: 'Retry loading guides' }).isHidden())
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/pages/workbench.test.mjs:262:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

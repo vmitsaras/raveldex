@@ -1,53 +1,84 @@
 # Agent instructions — Raveldex
 
-## Change-sensitive verification — November 7 owner amendment
+## Start here
 
-Follow [the current qualification and identity contract](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md) for N10/N11. Use the smallest reliable evidence for the affected acceptance criterion. Nonpackaged issue/planning/evidence-only edits require plan/generated/reference/diff checks, not automatic rebuilding or recollecting unchanged runtime evidence. Preserve runtime, relevant fixture/test/build/dependency identities when reusing results; evidence-directory executable files are real inputs. Do not weaken actual product safety or mark unavailable required behavior Pass. N11 may proceed independently on stable contracts; do not use optional comparative research as its dependency. A normal task instruction permits bounded work inside the amended scope, not a 450-minute experiment or publication.
+Read [project context](PROJECT_CONTEXT.md), run `npm run handoff:next`, then
+read the selected task in `IMPLEMENTATION_TASKS.md` and its referenced specs.
+Read surrounding source and tests before editing. The [contributor guide](CONTRIBUTING.md)
+lists setup and verification commands. Current code/runtime evidence outranks
+historical handoffs; [CODEX_HANDOFF.md](CODEX_HANDOFF.md) is only a current-work pointer.
 
-## Read only the relevant context
+## Architecture and contracts
 
-Start with this file, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `npm run handoff:next`, the selected task in `IMPLEMENTATION_TASKS.md`, and its referenced specifications. Read surrounding source/tests before editing. Actual repository/runtime evidence outranks old narrative claims.
+- Native TypeScript, pure ESM, framework-agnostic core with no runtime dependencies.
+  Do not put MiniSearch, Fuse, FlexSearch, Orama or another engine beneath it.
+- Core is independently useful. Source/positions, optional query features, DOM,
+  workers and persistence remain explicitly selected. Importing core must not
+  access DOM/network, initialize hosts or retain optional side indexes.
+- Preserve exact totals, coherent revisions, deterministic scoring/order, original
+  UTF-16 offsets, atomic writes, explicit capability failures and resource bounds.
+- Keep runtime dependencies out unless their maintenance/API cost is justified
+  and approved. Use npm and preserve dependency versions and the lockfile.
 
-## Established direction
+## Bounded implementation
 
-- Native TypeScript, pure ESM, framework-agnostic library. Own indexing, retrieval, ranking, incremental atomic writes, and execution.
-- No MiniSearch, Fuse, FlexSearch, Orama, or another engine beneath the native runtime. Comparators and compatibility packages stay isolated.
-- Core must be useful alone. DOM, workers, persistence, phrases, positions, evidence, UI, and advanced filters/facets remain optional as specified.
-- No network, DOM access, automatic initialization, or retained optional side indexes merely by importing core.
-- Never reopen the historical companion/native selection debate as a prerequisite to routine work. This fresh repository adopts the native direction.
-- Avoid new runtime dependencies. Tooling dependencies require a documented purpose; use npm and preserve the lockfile. RX-1001 owns initial compiler/build/test selection.
+1. Select a dependency-ready task, mark it `in_progress` in
+   `docs/planning/roadmap.json`, and run `npm run docs:generate`.
+2. Implement the smallest complete slice using established source/test patterns.
+   No success-returning stubs, hard-coded results or duplicate fallback engine.
+3. Test behavior at the affected layer. Retrieval uses the independent source
+   oracle; BM25 cases use hand-derived expectations, not the implementation scorer.
+4. Review the resulting diff for scope, public-contract regressions, lifecycle,
+   failure behavior, accessibility and stale documentation.
+5. Record actual commands, results, environments, limitations and review in
+   `docs/evidence/RX-####.md`. Add only existing evidence paths to the manifest;
+   mark done only after applicable acceptance is verified, then regenerate views.
 
-## Scope and authorization
+## Verification proportional to change
 
-The October 6, 2026 owner request authorizes repository initialization, committing the setup, and creating GitHub milestones/issues. It does not ask to build the entire search engine in the bootstrap turn. The native direction and roadmap are adopted; task availability describes engineering dependencies.
+Use the smallest reliable evidence for the affected criterion. Nonpackaged
+planning/evidence edits need graph/generated/reference/diff checks; they do not
+require rebuilding an unchanged runtime. Packaged docs need inventory/link/example
+checks. Executable changes need relevant semantic/installed behavior checks and
+one complete candidate verification. Build once for a stable input set and reuse
+that output for subsequent checks.
 
-A later instruction to continue implementation is sufficient to execute the next dependency-ready slice. Do not invent a separate approval gate for each ordinary task or request the native direction again. Escalate only a genuinely new, unresolved load-bearing choice: materially changed behavior/architecture, incompatible public contract, costly runtime dependency, destructive migration, security/privacy boundary, or publication.
+Reused evidence keeps its actual runtime, test/fixture, build and dependency
+identities. Executable files in evidence directories are real inputs. Never call
+unavailable required behavior Pass or enlarge benchmark/browser/AT claims from
+source inspection, screenshots or an unrelated check. The historical
+[qualification amendment](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+records the scoped N10/N11 decision; optional comparative research is not a
+prerequisite for ordinary product work.
 
-Do not publish npm packages, create releases/tags, change repository visibility, or enable paid services without an explicit instruction covering that action. Do not modify unrelated repositories. User instructions take precedence over generic source standards.
+## Tracking and delivery
 
-## Implementation
+The canonical roadmap owns task IDs, dependencies, status and acceptance.
+`ROADMAP.md`, `IMPLEMENTATION_TASKS.md` and optional task cards are generated.
+Run `npm run docs:generate` after manifest edits. Use `npm run docs:check`,
+`npm run handoff:check` and the relevant behavior checks before the full check.
 
-1. Select one bounded task, mark it `in_progress` in `docs/planning/roadmap.json`, and regenerate the readable roadmap.
-2. Confirm dependencies and the task's acceptance/verification requirements. A task marked `done` requires actual evidence; an issue closure alone is not proof.
-3. Implement the smallest complete slice. No success-returning stubs, pretend search APIs, duplicate fallback engine, or hard-coded query results.
-4. Preserve exact totals, revision consistency, deterministic scoring/order, source-offset semantics, explicit capability failures, and documented resource bounds.
-5. Write behavioral tests at the layer where the change matters. Use the independent oracle for retrieval correctness and hand-derived numerical cases for BM25. Do not make the oracle call the implementation's scorer/tokenizer for the behavior it is checking.
-6. Measure claimed costs. Serialized bytes are not retained/peak memory; animation-frame timing is not physical paint; automated accessibility checks are not screen-reader observations.
-7. Run focused checks, fix concrete failures, then relevant project checks. Review the resulting diff independently when work is cross-cutting.
-8. Save `docs/evidence/RX-####.md` with acceptance results, real commands/environments, limitations, and review outcome. Add its actual path to `evidence`, update context/specs/docs, then mark done and regenerate. Do not add intended future paths to `evidence`.
+GitHub mirrors managed task sections and milestone checklists. Update the manifest
+before closing tasks; preserve human notes, labels, discussion and existing native
+parents. Optional milestones never enter automatic task selection. Do not reopen
+completed tasks to manufacture work.
 
-## Planner and GitHub tracking
+## UI and ownership
 
-`docs/planning/roadmap.json` owns IDs, dependencies, task state, and acceptance criteria. `ROADMAP.md` and `IMPLEMENTATION_TASKS.md` are generated. Run `npm run docs:generate` after changing the manifest, then `npm run check`.
+Use semantic HTML/native controls, safe text insertion, visible focus, keyboard
+operation, reduced motion and deliberate status announcements. Preserve composition,
+stale-response suppression, focus, teardown and borrowed-engine ownership. Keep
+UI/CSS imports outside core. Retain Raveldex's existing identity unless redesign
+is explicitly requested. Record exact browser/OS/AT versions for manual claims.
 
-The GitHub workflow mirrors managed task sections and milestone checklists from that committed manifest. Preserve human notes outside managed markers and discussions/comments. Update the manifest before closing a tracked task; the sync refuses to silently reopen an issue closed inconsistently with the manifest. N5 is deferred and never automatically selected by the planner.
+## Authorization boundaries
 
-At the end of a slice report implementation, verification, and documentation synchronization separately; give the next eligible task or the precise remaining blocker. Never reset completed tasks to manufacture work. No-ready-work can mean blocked work, a pending decision, or a completed release backlog; say which.
+A request to continue permits the next bounded dependency-ready slice. Escalate a
+new incompatible public contract, major architecture/dependency change, destructive
+migration, security/privacy boundary or publication decision. Preserve unrelated
+user work. Commits/pushes, npm publication, releases/tags, visibility changes and
+paid services require an explicit instruction covering those actions.
 
-## UI requirements when UI is in scope
-
-Use semantic HTML, native form controls, visible focus, full keyboard operation, safe text insertion, reduced-motion support, and deliberate status announcements. Avoid redundant ARIA. Preserve input composition, focus, stale-response suppression, and teardown behavior. Keep CSS/UI imports outside core. Record exact assistive technology/browser/OS versions before making corresponding claims.
-
-## Completion
-
-Implementation complete means the behavior exists. Verification complete means applicable acceptance criteria have evidence. Project synchronized means code, tests, specs, context, roadmap, and issue tracking describe the same reality. Bootstrap checks establish only bootstrap readiness.
+Report implementation, actual verification and documentation/tracking separately.
+Give the next eligible task or precise blocker; distinguish optional follow-up work
+from required release work.

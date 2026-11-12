@@ -14,7 +14,7 @@ import { seedStarterCache } from './inline-astro-starter-cache.mjs';
 let directory, site, browser, corePackage, astroPackage;
 const report = { kind: 'raveldex-inline-astro-starter-v1', environment: {
   node: process.version, platform: platform(), release: release(), arch: arch(), astro: '7.3.2' },
-  observations: [], scope: 'Exact copied starter, real installed private packages, real static builds and finite headless browser behavior. No human AT, physical input, actual zoom, deployment or publication.' };
+  observations: [], scope: 'Exact copied starter, real installed packages, real static builds and finite headless browser behavior. No human AT, physical input, actual zoom, deployment or publication.' };
 const inputs = [];
 async function serve(root, base) {
   const server = createServer(async (request, response) => {
@@ -68,7 +68,7 @@ before(async () => {
     const installed = join(site, 'node_modules/@vmitsaras', name);
     assert.equal(await realpath(installed), installed, 'Actual installed tarball, no workspace symlink');
     const metadata = JSON.parse(await readFile(join(installed, 'package.json'), 'utf8'));
-    assert.equal(metadata.private, true); assert.deepEqual(metadata.dependencies ?? {}, {});
+    assert.equal(metadata.private, false); assert.deepEqual(metadata.dependencies ?? {}, {});
   }
   assert.equal(JSON.parse(await readFile(join(site, 'node_modules/astro/package.json'), 'utf8')).version, '7.3.2');
   report.packages = { coreSha256: digest(await readFile(corePackage)), astroSha256: digest(await readFile(astroPackage)),

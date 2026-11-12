@@ -1,12 +1,48 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Getting started · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="getting-started">Getting started</h1>
 <p>Raveldex adds search to data you already have. Tell it which fields to search, add your records and use the matching IDs to look up titles, URLs or other details in your application.</p>
+<h2 id="choose-your-search-experience">Choose your search experience</h2>
+<table>
+<thead>
+<tr>
+<th>Your application needs</th>
+<th>Start here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A search form within the page</td>
+<td><a href="/raveldex/reference/hosts/#inline-search-foundation">Inline</a></td>
+</tr>
+<tr>
+<td>Search opened from a documentation button</td>
+<td><a href="/raveldex/reference/hosts/#documentation-search-modal">Modal</a></td>
+</tr>
+<tr>
+<td>A small header popup with a full-results destination</td>
+<td><a href="/raveldex/reference/hosts/#compact-dropdown-search">Dropdown</a></td>
+</tr>
+<tr>
+<td>Resource browsing with checkbox filters and pages</td>
+<td><a href="/raveldex/reference/hosts/#directory-controls-and-styling">Directory</a></td>
+</tr>
+<tr>
+<td>Authored descriptions, metadata and optional images</td>
+<td><a href="/raveldex/reference/hosts/#rich-directory-results">Rich directory results</a></td>
+</tr>
+</tbody>
+</table>
+<p>All five borrow an engine you configure. The <a href="/raveldex/reference/hosts/#consumer-capability-matrix">capability matrix</a> explains their different result content, paging and keyboard models. For a complete project, the <a href="/raveldex/examples/">solution chooser</a> links browser/Astro starters. If your application supplies its own UI, start with the core example below.</p>
 <h2 id="install-the-package">Install the package</h2>
-<p>The packages are currently unpublished and supplied as local <code>.tgz</code> files. In a new application directory, run these commands to create a package, enable ESM imports and install core. Replace the absolute path with the file you received or built:</p>
+<p>Install Raveldex in your application with npm. For a new Node application, enable ESM imports first:</p>
 <pre><code class="language-sh">npm init -y
 npm pkg set type=module
-npm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz
+npm install @vmitsaras/raveldex@1.0.0
 </code></pre>
 <p>You can now import <code>@vmitsaras/raveldex</code> in that application. Core and the English analyzer require Node 22 or later; the Astro integration requires Node 22.12 or later. In a browser application, let your existing bundler resolve the imports. See <a href="/raveldex/guide/compatibility/">compatibility</a> for optional feature requirements.</p>
+<h2 id="prepare-your-records">Prepare your records</h2>
+<p>Choose the public records people should find and give each a stable ID. Declare searchable strings in <code>schema.text</code>, then add records with those same field names. Keep title/URL display entries in your application, joined to hits by ID. Titles and destinations are required for the consumer presets; your application must provide the actual destination pages.</p>
+<p>Declare filter metadata separately when needed; card display fields are not automatically indexed or filterable. Keep original text when selecting snippets/sections and derive any section ranges from those exact strings. Render each section’s target ID on its destination page. No UI preset discovers pages, headings or content changes automatically.</p>
+<p>For static sites, pass an explicit public allowlist to the <a href="/raveldex/reference/static-astro/">Astro/static builder</a>; deploy a complete matching artifact generation and base path. For live application data, await engine updates and explicitly search/refresh afterward. Replacing captured display data requires destroy/remount. Detailed CMS lifecycle guidance is separate from choosing a surface.</p>
 <h2 id="smallest-core-example">Smallest core example</h2>
 <p>Save the following as <code>search.mjs</code> beside your application’s <code>package.json</code>, then run <code>node search.mjs</code>. It indexes a single document and searches for <code>atomic</code>.</p>
 <pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
@@ -44,13 +80,14 @@ try {
 </ul>
 <p>Await an update before searching when the results need to include it. Each successful change creates a new collection revision, and each search result tells you which revision it used. See <a href="/raveldex/reference/core/">records, mutations and query shapes</a>.</p>
 <h2 id="add-a-search-interface">Add a search interface</h2>
-<p>For a complete project to adapt, choose a <a href="/raveldex/examples/inline/">browser or Astro inline starter</a>. Each includes explicit sample content, source snippets, a topic filter, paging, CSS, loading/retry and cleanup. The browser starter builds an engine from its records; Astro builds static search artifacts and loads them on demand. Both use the current local tarballs.</p>
+<p>For a complete project to adapt, choose a <a href="/raveldex/examples/inline/">browser or Astro inline starter</a>. Each includes explicit sample content, source snippets, a topic filter, paging, CSS, loading/retry and cleanup. The browser starter builds an engine from its records; Astro builds static search artifacts and loads them on demand. The browser project needs core; the Astro project also needs the matching integration.</p>
 <p>For search behind a button, choose a <a href="/raveldex/examples/modal/">documentation modal starter</a>. The browser and Astro projects include cancelable first-open loading, real page/heading links, retry, query preservation and owned-engine cleanup. Replace their explicit authored content and adjust the theme CSS.</p>
 <p>Both galleries provide complete project downloads and a short edit/build/preview CSS walkthrough. Keep the starter’s source/snippet/facet or section registrations aligned with its UI options; these are explicit optional capabilities. The <a href="/raveldex/reference/hosts/#starter-adoption-and-local-checks">adoption checklist</a> lists browser requirements, ownership and the remaining checks to run after replacing data or styles.</p>
-<p>The <a href="/raveldex/reference/hosts/#native-dom-ui-and-css">native DOM UI</a> adds a labeled search field, results and pagination to an element you provide. Import its CSS separately. You still own the engine: remove the UI with <code>destroy()</code> before disposing that engine.</p>
+<p>For a minimal consumer integration without a starter, follow <a href="/raveldex/reference/hosts/#mount-a-consumer-search-form">mount a consumer search form</a>. Copy the complete <a href="/raveldex/example-files/inline.mjs">inline module</a>, import <code>/addons/ui/inline.css</code> separately and use its explicit <code>mode: 'prefix'</code>. The UI starts idle; typing or Enter searches. Call the returned <code>dispose()</code> when removing the integration: it destroys the UI before disposing its owned engine. A UI mounted with an application-owned engine only borrows it.</p>
+<p>Choose <a href="/raveldex/reference/hosts/#compact-dropdown-search">dropdown</a>, <a href="/raveldex/reference/hosts/#directory-controls-and-styling">directory</a> or <a href="/raveldex/reference/hosts/#rich-directory-results">rich results</a> for the other consumer journeys. The <a href="/raveldex/reference/hosts/#native-dom-ui-and-css">developer Workbench</a> remains a separate option for exploring scores and Inspector.</p>
 <p>If you want <a href="/raveldex/reference/addons/">phrases, snippets or highlights</a>, choose the required source or position providers when creating the engine. These keep the original text or word locations that core alone does not store. For static Astro pages, follow <a href="/raveldex/reference/static-astro/">the Astro guide</a>.</p>
 <h2 id="build-tarballs-from-a-source-checkout">Build tarballs from a source checkout</h2>
-<p>You only need this step if you are building the packages yourself. With repository access, Node 24 and npm, run the following from the repository root. It compiles the code once and creates matching core, English and Astro tarballs:</p>
+<p>You only need this step if you are building the packages yourself. With Node 24 and npm, run the following from the repository root. It compiles the code once and creates matching core, English and Astro tarballs:</p>
 <pre><code class="language-sh">export RAVELDEX_REPOSITORY="$(pwd -P)"
 export RAVELDEX_ARTIFACTS="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-artifacts.XXXXXX")"
 npm ci
@@ -61,12 +98,13 @@ node scripts/pack-english.mjs --output "$RAVELDEX_ARTIFACTS/english"
 node scripts/pack-astro.mjs --output "$RAVELDEX_ARTIFACTS/astro"
 </code></pre>
 <p>The files are written beneath <code>$RAVELDEX_ARTIFACTS</code>, in <code>core/</code>, <code>english/</code> and <code>astro/</code>. Each pack output directory must be new. You can now install those files in a separate application.</p>
-<p>Keep both shell variables set when following the <a href="/raveldex/examples/astro/">Astro example</a>. Install the matching core tarball alongside either optional package. The Astro build hook also needs <code>astro@7.3.2</code>.</p>
+<p>When testing local artifacts, install the matching core tarball alongside either optional package. The <a href="/raveldex/examples/astro/">Astro example</a> describes its own source-copy and registry installation steps; its build hook also needs <code>astro@7.3.2</code>.</p>
 <h2 id="next-steps">Next steps</h2>
 <ul>
 <li><a href="/raveldex/reference/addons/">Choose optional capabilities</a>: phrases, facets, typo tolerance, suggestions and more.</li>
 <li><a href="/raveldex/reference/">Use the public API</a>: options, defaults, methods and result types.</li>
 <li><a href="/raveldex/examples/api/">Run the example modules</a> in your own installed application.</li>
 <li><a href="/raveldex/guide/limitations/">Handle practical limits</a>: analysis, operation bounds and recovery.</li>
+<li><a href="/raveldex/guide/pagefind-migration/">Optional Pagefind migration appendix</a>: map an existing site’s content decisions to explicit Raveldex records; no prior Pagefind knowledge is needed for the guides above.</li>
 </ul>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

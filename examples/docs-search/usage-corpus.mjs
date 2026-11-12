@@ -17,6 +17,40 @@ export const USAGE_SOURCES = Object.freeze([
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
 
+// A demo overview, not a source snippet or a general Markdown renderer. Indexed
+// bodies and native evidence stay byte-for-byte original. Skip code/table blocks
+// and format the first prose paragraph before bounding it, so a cut cannot leave
+// half a Markdown destination or backtick delimiter in the visitor's excerpt.
+function overview(body) {
+  const lines = []; let fence;
+  for (const line of body.split('\n')) {
+    const marker = /^ {0,3}(`{3,}|~{3,})(.*)$/.exec(line);
+    if (fence) {
+      if (marker && marker[1][0] === fence[0] && marker[1].length >= fence.length && !marker[2].trim()) fence = undefined;
+      continue;
+    }
+    if (marker) { fence = marker[1]; lines.push(''); continue; }
+    lines.push(/^(?: {0,3}#{1,6}\s|\s*\|| {4}|\t)/.test(line) ? '' : line);
+  }
+  const paragraph = lines.join('\n').split(/\n\s*\n/).map(value => value.trim()).find(Boolean);
+  if (!paragraph) return 'Open this guide for the complete code and reference details.';
+  const plain = paragraph
+    .replace(/!?\[([^\]]*)\]\((?:[^()\n]|\([^()\n]*\))*\)/g, '$1')
+    .replace(/(`+)([\s\S]*?)\1/g, '$2')
+    .replace(/(\*\*|__)([\s\S]*?)\1/g, '$2')
+    .replace(/^\s*(?:[-*+] |\d+\. |> )/gm, '')
+    .replace(/\s+/g, ' ').trim();
+  if (plain.length <= 320) return plain;
+  let end = 0;
+  for (const part of new Intl.Segmenter('en', { granularity: 'grapheme' }).segment(plain)) {
+    if (part.index + part.segment.length > 320) break;
+    end = part.index + part.segment.length;
+  }
+  const boundary = plain.lastIndexOf(' ', end);
+  if (boundary > 160 && plain[end] !== ' ') end = boundary;
+  return plain.slice(0, end).trimEnd() + '…';
+}
+
 export function buildUsageCorpus(root = fileURLToPath(new URL('../../', import.meta.url))) {
   const sources = [], records = [], sections = [];
   for (const { path, category } of USAGE_SOURCES) {
@@ -50,7 +84,7 @@ export function buildUsageCorpus(root = fileURLToPath(new URL('../../', import.m
       const id = `usage:${path}#${heading.anchor}`;
       const record = { id, text: { title: heading.title, body }, metadata: { sourcePath: path, category } };
       records.push(record);
-      sections.push({ id, title: heading.title, sourcePath: path, category, anchor: heading.anchor,
+      sections.push({ id, title: heading.title, overview: overview(body), sourcePath: path, category, anchor: heading.anchor,
         sourceUrl: `${url}#${heading.anchor}`, startLine: heading.line,
         endLine: next ? next.line - 1 : text.split('\n').length - 1, contentHash: hash(JSON.stringify(record)) });
     }

@@ -8,24 +8,27 @@ const base = '/raveldex/';
     <p class="search-workbench__identity" data-pilot-identity>Five usage guides · Loading sections…</p>
   </div>
   <div class="search-workbench__queries" aria-label="Example queries">
-    <span>Example queries:</span>
+    <span>Try a search:</span>
     {['source provider', 'typed filters', 'module worker'].map(query => <button type="button" data-pilot-query={query} disabled>{query}</button>)}
   </div>
-  <p>Start typing: <code>source prov</code> finds words beginning with <code>prov</code>. Earlier words must match exactly.</p>
+  <p>With the default “Complete the last word” setting, <code>source prov</code> finds “source provider”. The last word can be unfinished; earlier words must be complete.</p>
+  <p>Results show a short overview of each section. Open a guide to read it, or use Inspect results for the original matching excerpts, highlights and scores.</p>
   <div class="search-workbench__search" data-pilot-search data-pilot-initial-query={initialQuery} data-pilot-page-size={pageSize} data-pilot-compact={pageSize === 1 ? 'true' : undefined}></div>
-  <p class="search-workbench__status" data-pilot-status role="status">Loading guides and preparing search…</p>
+  <p class="search-workbench__status" data-pilot-status role="status">Loading guides…</p>
   <button class="search-workbench__retry" type="button" data-pilot-retry hidden>Retry loading guides</button>
+  <details class="search-workbench__diagnostics" data-pilot-diagnostics hidden><summary>Technical details</summary><p>Error code: <code data-pilot-error></code></p></details>
   <noscript><style is:inline>.search-workbench__status, .search-workbench__identity, .search-workbench__queries { display: none; }</style><p>JavaScript is required for this search demo. Read <a href={base + 'guide/overview/'}>Getting started</a> or <a href={base + 'guide/'}>browse the guides</a>.</p></noscript>
   {advanced && <details class="search-workbench__settings">
     <summary>Advanced demo settings</summary>
-    <p>Changing a setting rebuilds the collection, keeps your query and resets the category and page.</p>
+    <p>Changing a setting or restarting keeps your query, clears the category and returns to the first page.</p>
+    <p>Original text checks phrases against the guide text; saved word positions keep that information in the index. This page and Background worker use the same search results. Match a phrase requires the words in order, next to one another.</p>
     <div class="search-workbench__controls">
-      <label>Representation<select data-pilot-representation><option value="source">Original source reanalysis</option><option value="offsets">Stored positions and original offsets</option></select></label>
-      <label>Execution<select data-pilot-execution><option value="direct">Direct execution</option><option value="worker">One module worker</option></select></label>
-      <label>Query meaning<select data-pilot-mode><option value="prefix">Final-word prefix</option><option value="text">All exact terms</option><option value="phrase">Strict adjacent phrase</option></select></label>
-      <button type="button" data-pilot-initialize>Reinitialize search</button>
-      <button type="button" data-pilot-destroy>Destroy interface</button>
+      <div class="search-workbench__control"><label for="demo-representation">Find phrases using</label><select id="demo-representation" data-pilot-representation><option value="source">Original text</option><option value="offsets">Saved word positions</option></select></div>
+      <div class="search-workbench__control"><label for="demo-execution">Where search runs</label><select id="demo-execution" data-pilot-execution><option value="direct">This page</option><option value="worker">Background worker</option></select></div>
+      <div class="search-workbench__control"><label for="demo-mode">Match words</label><select id="demo-mode" data-pilot-mode><option value="prefix">Complete the last word</option><option value="text">Match whole words</option><option value="phrase">Match a phrase</option></select></div>
+      <button type="button" data-pilot-initialize>Restart search</button>
+      <button type="button" data-pilot-destroy>Stop search</button>
     </div>
-    <p>Destroy interface removes the controls. Reinitialize search rebuilds the collection and brings them back.</p>
+    <p>Stop search removes the live controls. Restart search brings them back with your query, no category filter and the first page.</p>
   </details>}
 </section>

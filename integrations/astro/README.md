@@ -2,27 +2,27 @@
 
 Build search files from a list of documents and load them when your application needs search. This package supplies a static builder, an Astro build hook and a browser loader. It does not add Astro as a dependency of core.
 
-Use the exact `@vmitsaras/raveldex@0.1.0-rc.0` core peer. The build hook also needs Astro `7.3.2`; builder and client-only applications can omit that optional peer. Browsers load source snapshots and rebuild with the configured analyzer. Native snapshots still require an exact, application-qualified Node runtime.
+Use the exact `@vmitsaras/raveldex@1.0.0` core peer. The build hook also needs Astro `7.3.2`; builder and client-only applications can omit that optional peer. Browsers load source snapshots and rebuild with the configured analyzer. Native snapshots still require an exact, application-qualified Node runtime.
 
-For a complete interface to copy, use the [Astro inline starter](../../examples/inline-astro/README.md). It includes real page content, the explicit allowlist, optional snippets and topic facets, CSS customization, loading/retry and ownership-safe disposal. The [inline solutions page](../../site/Inline.astro) links its complete source archive and a working browser preview.
+For a complete interface to copy, use the [Astro inline starter](https://github.com/vmitsaras/raveldex/blob/main/examples/inline-astro/README.md). It includes real page content, the explicit allowlist, optional snippets and topic facets, CSS customization, loading/retry and ownership-safe disposal. The [inline solutions page](https://github.com/vmitsaras/raveldex/blob/main/site/Inline.astro) links its complete source archive and a working browser preview.
 
-For documentation search opened from a button, use the [Astro modal starter](../../examples/modal-astro/README.md). It renders the same explicit sections it indexes, builds the separate source-only section companion, and loads the matching artifacts on first open. Its wrapper handles loading cancellation, retry and disposal; the [modal solutions page](../../site/Modal.astro) links complete sources and a browser preview.
+For documentation search opened from a button, use the [Astro modal starter](https://github.com/vmitsaras/raveldex/blob/main/examples/modal-astro/README.md). It renders the same explicit sections it indexes, builds the separate source-only section companion, and loads the matching artifacts on first open. Its wrapper handles loading cancellation, retry and disposal; the [modal solutions page](https://github.com/vmitsaras/raveldex/blob/main/site/Modal.astro) links complete sources and a browser preview.
 
-For a filterable resource library, use the [Astro directory starter](../../examples/directory-astro/README.md). It renders real resource pages, builds matching original title/body source and display artifacts, and waits for **Enable directory** before loading. Native multi-selection filters/facets, exact totals, complete pages and explicit URL replay share one controller; it does not select snippets or sections. The [directory gallery](../../site/Directory.astro) links its exact sources and complete browser preview.
+For a filterable resource library, use the [Astro directory starter](https://github.com/vmitsaras/raveldex/blob/main/examples/directory-astro/README.md). It renders real resource pages, builds matching original title/body source and display artifacts, and waits for **Enable directory** before loading. Native multi-selection filters/facets, exact totals, complete pages and explicit URL replay share one controller; it does not select snippets or sections. The [directory gallery](https://github.com/vmitsaras/raveldex/blob/main/site/Directory.astro) links its exact sources and complete browser preview.
 
-The [solution chooser](../../examples/README.md) compares all five presentations and their required data. Three complete Astro projects are supplied: inline, documentation modal and directory. The header and rich-results projects are plain-browser examples; no separate Astro starter or rich display artifact format is supplied for them. Keep each Astro source/display/optional-section generation, configuration and deployment base together. A source loader reconstructs every declared text field, so retain the original values for all of them.
+The [solution chooser](https://github.com/vmitsaras/raveldex/blob/main/examples/README.md) compares all five presentations and their required data. Three complete Astro projects are supplied: inline, documentation modal and directory. The header and rich-results projects are plain-browser examples; no separate Astro starter or rich display artifact format is supplied for them. Keep each Astro source/display/optional-section generation, configuration and deployment base together. A source loader reconstructs every declared text field, so retain the original values for all of them.
 
 ## Install matching packages
 
-In an ESM application with Node `>=22.12.0`, install matching local tarballs; core and integration must both be version `0.1.0-rc.0`:
+In an ESM application with Node `>=22.12.0`, install matching core and integration versions:
 
 ```sh
-npm install --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz astro@7.3.2
+npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0 astro@7.3.2
 ```
 
-Replace the absolute paths with your prepared tarballs. After this command, you can import core, the integration and Astro in the application. Resolving Astro and its dependencies needs registry access or a suitable cache. Omit the Astro argument if you only need the builder and client loader. Core-only applications do not need this package.
+Omit Astro itself if you only need the builder and client loader. Core-only applications do not need this package.
 
-From a source checkout, run `npm ci`, `npm run build`, pack core with `npm pack --ignore-scripts`, then run `node scripts/pack-astro.mjs --output NEW_DIRECTORY`. Use the resulting matching tarballs in your application.
+To test local source changes, compile with `npm run build`, pack core with `npm pack --ignore-scripts`, then run `node scripts/pack-astro.mjs --output NEW_DIRECTORY` and install the resulting files together.
 
 ## Build an explicit allowlist
 
@@ -153,4 +153,4 @@ Pass a separate `pageSections` array to the builder or hook for explicit origina
 
 New source handles expose explicit uncached `loadSections({ signal?, timeoutMs? })`. The public handle type makes this property optional for caller-authored legacy handles; narrow it before calling in TypeScript. Loading binds the companion to source/display/configuration identity, validates a transient public source export and stamps the receiving owner revision. Native handles refuse this optional operation before companion I/O. Failed optional loads leave ordinary search usable.
 
-Use the returned maps with `mountRaveldexInline({ root, engine: loaded.engine, documents: await loaded.loadDocuments(), pageSections })`. Register the same optional `createSectionEvidence` factory and explicit source providers in build and restore configuration for previews. Destroy the UI before disposing its owner. See the [complete heading-map recipe](../../docs/api/STATIC_ASTRO.md#optional-heading-maps) and [page/section contract](../../docs/specs/PAGE_SECTIONS.md) for limits, encoded links, stale-map recovery and errors.
+Use the returned maps with `mountRaveldexInline({ root, engine: loaded.engine, documents: await loaded.loadDocuments(), pageSections })`. Register the same optional `createSectionEvidence` factory and explicit source providers in build and restore configuration for previews. Destroy the UI before disposing its owner. See the [complete heading-map recipe](https://github.com/vmitsaras/raveldex/blob/main/docs/api/STATIC_ASTRO.md#optional-heading-maps) and [page/section contract](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/PAGE_SECTIONS.md) for limits, encoded links, stale-map recovery and errors.

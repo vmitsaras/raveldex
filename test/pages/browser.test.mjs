@@ -46,6 +46,11 @@ test('branch Pages projection and real packed demo work at /raveldex/', { timeou
     const recipe = await fetch(new URL('example-files/core.mjs', url));
     assert.equal(recipe.status, 200);
     assert.equal(await recipe.text(), await readFile(join(root, 'docs/api/examples/core.mjs'), 'utf8'));
+    for (const name of ['consumer-messages.de.mjs', 'consumer-themes.css']) {
+      const asset = await fetch(new URL('example-files/' + name, url));
+      assert.equal(asset.status, 200, name + ': public copyable asset');
+      assert.equal(await asset.text(), await readFile(join(root, 'docs/api/examples', name), 'utf8'));
+    }
     for (const path of ['evidence/PUBLIC-DOCS-20261030-raw.tar.gz', 'history/CANDIDATE_HISTORY.md', 'planning/roadmap.json', '_pages-manifest.json', '_config.yml',
       'guide/release-scope/', 'guide/publication-status/', 'guide/release-notes/', 'contracts/core-contract/', 'missing-page/']) {
       const result = await fetch(new URL(path, url));
@@ -98,7 +103,7 @@ test('branch Pages projection and real packed demo work at /raveldex/', { timeou
         { kind: 'group', variants: [{ text: ending, match: 'prefix' }] }] };
       const expected = sourceQueryResult(scan, typedQuery, { limit: 5 });
       assert.deepEqual((await collect()).map(item => item.id), expected.hits.map(item => item.id));
-      assert.equal(await page.locator('[data-raveldex-status]').innerText(), `${expected.total} results. Showing 1–${expected.hits.length}.`);
+      assert.equal(await page.locator('[data-raveldex-status]').innerText(), `${expected.total} ${expected.total === 1 ? 'result' : 'results'}. Showing 1–${expected.hits.length}.`);
       const all = sourceQueryResult(scan, typedQuery, { limit: corpus.records.length });
       assert.ok(all.hits.some(item => item.id === intended), `sample query finds its guide: ${query}`);
     }
@@ -124,7 +129,7 @@ test('branch Pages projection and real packed demo work at /raveldex/', { timeou
     await facet.selectOption({ index: 1 }); await ready();
     await facet.selectOption({ index: 0 }); await ready();
     await search('source provider');
-    assert.equal(await page.locator('details').getAttribute('open'), null);
+    assert.equal(await page.locator('.search-workbench__settings').getAttribute('open'), null);
     await page.getByText('Advanced demo settings', { exact: true }).click();
     await page.locator('[data-pilot-mode]').selectOption('phrase'); await ready();
     const direct = await collect(); assert.ok(direct.length > 0);
@@ -144,7 +149,7 @@ test('branch Pages projection and real packed demo work at /raveldex/', { timeou
     await page.locator('[data-pilot-initialize]').click(); await ready();
     assert.equal(await page.locator('[data-raveldex-input]').inputValue(), 'source provider');
     await search('unmatchedword');
-    assert.equal(await page.locator('[data-raveldex-status]').innerText(), 'No results.');
+    assert.equal(await page.locator('[data-raveldex-status]').innerText(), 'No results. Try a different search.');
     await search('source provider');
     observations.push({ name: 'real packed demo navigation, pagination, facets, phrase/offset/worker parity, Inspector, empty recovery, teardown', status: 'Pass', direct });
     console.log('Pages browser: guide search and lifecycle checks complete');

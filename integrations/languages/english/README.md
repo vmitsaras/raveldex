@@ -6,13 +6,13 @@ The JavaScript bundle contains its language rules and helpers, with no runtime i
 
 ## Install
 
-In an ESM application with Node `>=22`, install matching local files:
+In an ESM application with Node `>=22`, install matching core and English packages:
 
 ```sh
-npm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/english/vmitsaras-raveldex-english-0.1.0-rc.0.tgz
+npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-english@1.0.0
 ```
 
-Replace both absolute paths with your local files. The command installs core and the English package, which must both be version `0.1.0-rc.0`. To build them from a checkout, compile with `npm run build`, pack core with `npm pack --ignore-scripts`, then run `node scripts/pack-english.mjs --output NEW_DIRECTORY`.
+Both packages use version `1.0.0`. To test local changes, compile with `npm run build`, pack core with `npm pack --ignore-scripts`, then run `node scripts/pack-english.mjs --output NEW_DIRECTORY` and install the resulting files together.
 
 ## Search English word forms
 

@@ -61,7 +61,7 @@ export function taskSection(roadmap, task, index) {
     '', '**Recorded evidence**', '', ...(task.evidence.length ? task.evidence.map((p) => `- ${fileLink(roadmap, p)}`) : ['No completion evidence recorded.']),
     ...(task.blocker ? ['', '**Blocker / decision**', '', task.blocker] : []),
     '', `Canonical state: ${fileLink(roadmap, 'docs/planning/roadmap.json')}. Update it and regenerate the plan before closing the issue.`,
-    '', milestone.track === 'optional' ? 'Deferred optional work; do not automatically activate it or expand the release scope.' : 'Dependency eligibility is not proof of implementation. Native direction is already adopted; publication remains a separate owner action.',
+    '', milestone.track === 'optional' ? 'Optional work requires an explicit instruction; it is never automatically activated or made a release prerequisite.' : 'Dependency eligibility is not proof of implementation. Native direction is already adopted; publication remains a separate owner action.',
   ].join('\n');
 }
 

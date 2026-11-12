@@ -1,7 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import SolutionChooser from './SolutionChooser.astro';
-import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
 <Layout frontmatter={{ title: 'Documentation search modal starters' }}>
@@ -16,14 +16,12 @@ const base = '/raveldex/';
   <p><a href={base + 'examples/modal-preview/'}>Open the full modal preview</a></p>
   <iframe src={base + 'examples/modal-preview/'} title="Documentation modal starter preview" loading="lazy" height="720" style="width: 100%; max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem); border: 1px solid currentColor; border-radius: .5rem;"></iframe>
   <h2 id="copy-modal">Choose a complete starter</h2>
-  <p>Core and Astro packages are currently private and unpublished. Use the matching local package tarballs described in each guide. The browser starter uses pinned esbuild tooling; the Astro starter builds versioned source, display and section artifacts from an explicit allowlist.</p>
+  <p>Needs native dialog, Intl.Segmenter and Web Crypto over HTTPS or localhost. Search loads when first opened.</p>
+  <details><summary>Data and browser requirements</summary>
+    <p>Install matching core and Astro packages as described in each guide. The browser starter uses pinned esbuild tooling; the Astro starter builds versioned source, display and section artifacts from an explicit allowlist.</p>
   <p>Both projects need native <code>dialog</code>, <code>Intl.Segmenter</code> and Web Crypto over HTTPS or localhost. Supply public page records and exact original section text/ranges, with raw anchors that match real heading IDs. The same explicit content renders those targets in each starter. Sections require the selected source/section providers; the Topic filter requires its facet registration. Deploy each rebuilt set of pages and search assets together.</p>
-  {STARTERS.filter(starter => starter.family === 'modal').map(starter => <section aria-labelledby={'starter-' + starter.id}>
-    <h3 id={'starter-' + starter.id}>{starter.title}</h3>
-    <p><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base + starterArchive(starter.id)} download>Download the complete starter</a></p>
-    <p>Extract into an empty directory with <code>tar -xzf starter.tar.gz --strip-components=1</code>, replacing the archive name with your download. Read <code>README.md</code> before installing the local packages.</p>
-    <details><summary>View exact source files</summary><ul>{starter.files.map(path => <li><a href={base + starterSource(starter.id, path)}>{path}</a></li>)}</ul></details>
-  </section>)}
+  </details>
+  <StarterSetup family="modal" />
   <h2 id="modal-theme">Change the appearance</h2>
   <ol>
     <li>Copy and install one complete starter using its setup guide. Open search and try <code>workshop</code> before changing the CSS.</li>

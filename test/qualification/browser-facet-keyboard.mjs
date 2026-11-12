@@ -91,7 +91,7 @@ function checkMain(observed, { query, total, offset, membership, guide = false }
   assert.equal(new Set(ids).size, ids.length);
   assert.ok(ids.every(id => membership.includes(id)), 'every result is an independently expected fixture member');
   assert.deepEqual(observed.renderedIDs, ids);
-  assert.equal(observed.status, `${total} results. Showing ${offset + 1}–${offset + ids.length}.`);
+  assert.equal(observed.status, `${total} ${total === 1 ? 'result' : 'results'}. Showing ${offset + 1}–${offset + ids.length}.`);
   assert.equal(observed.page, `Page ${Math.floor(offset / 3) + 1} of ${Math.ceil(total / 3)}.`);
   assert.equal(observed.busy, 'false');
   assert.deepEqual(observed.facet.options, guide ? [{ value: '', text: 'All' }, { value: '0', text: 'Guide (5)' }]

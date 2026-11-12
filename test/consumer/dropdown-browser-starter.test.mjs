@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { before, after, test } from 'node:test';
 import { cp, readFile, writeFile, realpath, mkdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
@@ -51,7 +51,7 @@ before(async () => {
   report.installedRuntimeSHA256 = Object.fromEntries(await Promise.all(['dropdown', 'inline', 'modal'].map(async name =>
     [name, digest(await readFile(join(consumer.installed, `dist/addons/ui/${name}.js`)))])));
   report.environment = { node: process.version, platform: process.platform, release: release(), arch: process.arch, selectedEngine: selected,
-    tooling: 'Fresh actual offline installed private core tarball and esbuild0.28.2; no runtime or tooling symlinks.' };
+    tooling: 'Fresh actual offline installed core tarball and esbuild0.28.2; no runtime or tooling symlinks.' };
   const starter = STARTERS.find(item => item.id === 'dropdown-browser'); assert.ok(starter);
   report.sourceSHA256 = Object.fromEntries(await Promise.all(starter.files.map(async file => [file, digest(await readFile(join(REPO_ROOT, 'examples/dropdown-browser', file)))])));
   for (const base of ['/', '/help/']) {
@@ -153,6 +153,7 @@ test('copied installed header and full-results route preserve exact query/order/
 test('no-JavaScript browsing and real failed-data retry keep actual guides usable', async () => {
   const site = sites[0], context = await browser.newContext({ javaScriptEnabled: false }), fallback = await context.newPage();
   await fallback.goto(site.origin + site.base + 'search/?q=walking');
+  assert.equal(await fallback.locator('[data-search-root] form').isVisible(),false,'No-JavaScript pages offer truthful browse links, not a nonworking search form');
   assert.equal(await fallback.getByRole('navigation', { name: 'Browse all guides' }).getByRole('link').count(), 7);
   await fallback.getByRole('navigation', { name: 'Browse all guides' }).getByRole('link').first().click();
   assert.equal(await fallback.getByRole('heading', { level: 1 }).count(), 1); await context.close();
@@ -166,6 +167,44 @@ test('no-JavaScript browsing and real failed-data retry keep actual guides usabl
   assert.deepEqual(await resultIDs(page), ['getting-started']);
   const href = await page.locator('[data-raveldex-dropdown-result] a').getAttribute('href'); await page.locator('[data-raveldex-dropdown-result] a').click();
   await page.waitForURL(href); assert.equal(page.url(), href); await page.close(); record('no-JavaScript and real failed-data retry', { browseLinks: 7, recoveredIDs: ['getting-started'], actualGuide: href });
+});
+
+test('without native popovers a real header form reaches a working full-results page at each base', async () => {
+  for (const site of sites) {
+    const context = await browser.newContext({ viewport: { width: 320, height: 700 }, reducedMotion: 'reduce' });
+    await context.addInitScript(() => {
+      delete HTMLElement.prototype.showPopover; delete HTMLElement.prototype.hidePopover;
+    });
+    const page = await context.newPage(); page.setDefaultTimeout(8000); let contentRequests = 0;
+    page.on('request', request => { if (new URL(request.url()).pathname.endsWith('/content.json')) contentRequests++; });
+    await page.goto(site.origin + site.base);
+    await page.getByText(/Quick search is unavailable/).waitFor();
+    const form = page.locator('[data-search-root] form'), field = form.getByRole('searchbox');
+    assert.equal(await field.isVisible(), true); assert.equal(contentRequests, 0, 'Header-only unsupported search does not load a needless owner');
+    const raw = '  walking   gui  '; await field.fill(raw); await field.press('Enter');
+    await page.waitForURL(url => url.pathname === site.base + 'search/');
+    assert.equal(new URL(page.url()).searchParams.get('q'), raw);
+    await page.locator('[data-raveldex-inline-result]').nth(2).waitFor();
+    assert.deepEqual(await resultIDs(page, 'inline'), site.expected.hits.slice(0,3).map(h=>h.id));
+    assert.equal(await page.locator('.raveldex-dropdown').count(), 0);
+    assert.equal(await page.getByRole('navigation', {name:'Browse all guides'}).getByRole('link').count(), 7);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+    if (process.env.RAVELDEX_DROPDOWN_BROWSER_STARTER_REPORT) await page.screenshot({path:resolve(process.env.RAVELDEX_DROPDOWN_BROWSER_STARTER_REPORT.replace(/\.json$/,'')+`-no-popover-${site.base==='/'?'root':'help'}.png`),fullPage:true});
+    await context.close(); record(`no native popover ${site.base}`, { raw, headerLoads:0, fullPageIDs:site.expected.hits.slice(0,3).map(h=>h.id), borrowedPresetFallback:false });
+  }
+});
+
+test('a supported header never offers a draft field that loading will replace', async () => {
+  const site=sites[0],page=await browser.newPage();let release,entered;
+  const gate=new Promise(ok=>release=ok),waiting=new Promise(ok=>entered=ok);
+  await page.route('**/content.json',async route=>{entered();await gate;await route.continue().catch(()=>{});});
+  try{
+    await page.goto(site.origin+site.base);await waiting;
+    assert.equal(await page.locator('[data-search-root] input').isVisible(),false);
+    assert.equal(await page.getByRole('navigation',{name:'Browse all guides'}).getByRole('link').count(),7);
+    release();await ready(page);await input(page).fill('riverside');await input(page).press('Enter');await page.locator('[data-raveldex-dropdown-result]').first().waitFor();
+    assert.deepEqual(await resultIDs(page),['getting-started']);
+  }finally{release();await page.close();}
 });
 
 test('delayed loading and pagehide/pageshow cannot mount an abandoned owner', async () => {

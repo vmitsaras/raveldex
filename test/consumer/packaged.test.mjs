@@ -34,10 +34,10 @@ test('corpus uses reproducible current sections, stable IDs and source links', a
 
 test('tarball contains compiled core/declarations and installs public API without hidden dependencies', async () => {
   const metadata = consumer.package;
-  assert.equal(metadata.name, '@vmitsaras/raveldex'); assert.equal(metadata.version, '0.1.0-rc.0'); assert.equal(metadata.private, true);
+  assert.equal(metadata.name, '@vmitsaras/raveldex'); assert.equal(metadata.version, '1.0.0'); assert.equal(metadata.private, false);
   const paths = metadata.files.map(({ path }) => path);
   assert.ok(paths.includes('dist/index.js')); assert.ok(paths.includes('dist/index.d.ts'));
-  for (const path of paths) assert.ok(['README.md', 'LICENSE', 'package.json', 'CHANGELOG.md', 'docs/support/RX-4003.md'].includes(path) || path.startsWith('dist/') || path.startsWith('docs/api/') || path.startsWith('docs/release/'), path);
+  for (const path of paths) assert.ok(['README.md', 'LICENSE', 'package.json', 'CHANGELOG.md'].includes(path) || path.startsWith('dist/') || path.startsWith('docs/api/'), path);
   assert.ok(paths.every((path) => !path.startsWith('src/') && !path.includes('node_modules/') && !path.startsWith('test/')));
   // prepareConsumer already ran a standalone DOM-free public typecheck with negative fixtures.
   const probe = `

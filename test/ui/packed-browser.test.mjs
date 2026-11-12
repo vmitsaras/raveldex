@@ -62,7 +62,7 @@ async function initializeFixture(options = {}, fixtureOptions = {}) {
 }
 async function settled() {
   await page.waitForFunction(() => document.querySelector('[data-raveldex-ui]')?.getAttribute('aria-busy') !== 'true');
-  await page.waitForFunction(() => /results|failed/i.test(document.querySelector('[data-raveldex-status]')?.textContent ?? '') || !document.querySelector('[data-raveldex-error]')?.hidden);
+  await page.waitForFunction(() => /result|failed/i.test(document.querySelector('[data-raveldex-status]')?.textContent ?? '') || !document.querySelector('[data-raveldex-error]')?.hidden);
 }
 async function search(value) {
   await input().fill(value);
@@ -265,9 +265,9 @@ test('prefix mode keeps focus/composition, suppresses stale replies and restores
   assert.ok((await page.locator('[data-raveldex-highlight]').allTextContents()).includes('apple'));
   assert.ok(await input().evaluate(node => node === document.activeElement));
   await search('re app');
-  assert.equal(await status().innerText(), 'No results.');
+  assert.equal(await status().innerText(), 'No results. Try a different search.');
   await search('red a');
-  assert.equal(await status().innerText(), '1 results. Showing 1–1.');
+  assert.equal(await status().innerText(), '1 result. Showing 1–1.');
   assert.equal(await row('alpha').count(), 1); // The actual single-letter word, not apple/atomic.
   const beforeCount = (await calls()).length;
   await page.evaluate(() => {
@@ -309,7 +309,7 @@ test('debounced rapid typing admits the last value once', async () => {
     const node = document.querySelector('[data-raveldex-input]');
     for (const value of ['b', 'bl', 'blu', 'blue']) { node.value = value; node.dispatchEvent(new Event('input', { bubbles: true })); }
   });
-  await page.waitForFunction(() => /1 results/.test(document.querySelector('[data-raveldex-status]').textContent));
+  await page.waitForFunction(() => /1 result/.test(document.querySelector('[data-raveldex-status]').textContent));
   const admitted = (await calls()).slice(beforeCount);
   assert.equal(admitted.filter(call => call.options.extensions?.facets).length, 1);
   assert.equal(JSON.stringify(admitted[0].query).includes('blue'), true);
@@ -334,7 +334,7 @@ test('synthetic composition suppresses interim searches and admits compositionen
     node.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: 'blue' }));
     node.dispatchEvent(new InputEvent('input', { bubbles: true, data: 'blue', isComposing: false }));
   });
-  await page.waitForFunction(() => /1 results/.test(document.querySelector('[data-raveldex-status]').textContent));
+  await page.waitForFunction(() => /1 result/.test(document.querySelector('[data-raveldex-status]').textContent));
   assert.equal((await calls()).slice(beforeCount).filter(call => call.options.extensions?.facets).length, 1);
   record('synthetic IME event protocol', { interimSearches: 0, finalSearches: 1, realOSIME: 'Not run' });
 });
@@ -351,7 +351,7 @@ test('late real replies are suppressed even when a borrowed engine ignores cance
   assert.equal(waiting.aborted, true);
   await page.evaluate(() => window.harness.release()); await page.waitForTimeout(60);
   assert.equal(await row('beta').count(), 1);
-  assert.match(await status().innerText(), /1 results/);
+  assert.match(await status().innerText(), /1 result/);
   record('stale suppression distinct from cancellation', { discardedActualResultTotal: waiting.result.total, presentedTotal: 1, signalAborted: true,
     wrapper: 'Underlying real result computed without UI signal, then intentionally delayed.' });
 });
@@ -359,7 +359,7 @@ test('late real replies are suppressed even when a borrowed engine ignores cance
 test('empty results and typed errors announce status and recover by retry', async () => {
   await search('no_such_token_qx');
   assert.equal(await results().count(), 0);
-  assert.equal(await status().innerText(), 'No results.');
+  assert.equal(await status().innerText(), 'No results. Try a different search.');
   assert.equal(await page.locator(hooks('inspect')).isDisabled(), true);
   await axe('empty results');
   await page.evaluate(() => { window.harness.state.failNext = true; });
@@ -548,6 +548,7 @@ test('real documentation pilot supports judged tasks and source/offset phrase pr
   page.on('request', request => network.push(request.url()));
   await page.goto(`${origin}/pilot/index.html`);
   await page.waitForFunction(() => document.querySelector('[data-pilot-search]')?.dataset.pilotState === 'ready');
+  assert.equal(await page.locator('[data-pilot-original-results]').count(), 0, 'Frozen qualification has no derived overview presentation');
   await settled();
   assert.equal(await page.locator('[data-pilot-identity]').innerText(), 'Searches 34 sections from 5 guides.');
   await page.getByText('Advanced demo settings', { exact: true }).click();
@@ -585,7 +586,7 @@ test('real documentation pilot supports judged tasks and source/offset phrase pr
     score: node.querySelector('[data-raveldex-score]').textContent, snippets: [...node.querySelectorAll('[data-raveldex-snippet]')].map(snippet => snippet.textContent) })));
   assert.ok(source.length > 0);
   await page.locator('[data-pilot-representation]').selectOption('offsets');
-  await page.waitForFunction(() => document.querySelector('[data-pilot-status]')?.textContent.includes('Stored positions and original offsets'));
+  await page.waitForFunction(() => document.querySelector('[data-pilot-search]')?.dataset.pilotState === 'ready');
   await settled();
   const offsets = await results().evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.raveldexResult,
     score: node.querySelector('[data-raveldex-score]').textContent, snippets: [...node.querySelectorAll('[data-raveldex-snippet]')].map(snippet => snippet.textContent) })));
@@ -604,3 +605,46 @@ test('real documentation pilot supports judged tasks and source/offset phrase pr
     sameOriginRequestsOnly: true, destroyReinitializePreservedQuery: true,
     packageSHA256: pilotConsumer.package.sha256 });
 }, { timeout: 120_000 });
+
+
+test('visitor guidance distinguishes one result, no match and filtered empty while keeping exact counts', async () => {
+  await search('blue');
+  assert.equal(await results().count(), 1);
+  assert.equal(await status().innerText(), '1 result. Showing 1–1.');
+  assert.equal(await row('beta').count(), 1);
+  const summary = page.locator('[data-raveldex-facet-summary]');
+  assert.match(await summary.innerText(), /Filter choices: 1\./);
+  assert.doesNotMatch(await summary.innerText(), /buckets|distinct/);
+  await search('red');
+  assert.match(await status().innerText(), /^7 results\. Showing 1–3\./);
+  await page.locator('[data-raveldex-facet]').selectOption({ label: 'Guide (5)' }); await settled();
+  await search('blue');
+  assert.equal(await results().count(), 0);
+  assert.match(await status().innerText(), /selected filters.*Choose All/);
+  assert.notEqual(await page.locator('[data-raveldex-facet]').inputValue(), '');
+  await page.locator('[data-raveldex-facet]').selectOption(''); await settled();
+  assert.equal(await row('beta').count(), 1);
+  await search('unmatchedword');
+  assert.equal(await results().count(), 0);
+  assert.match(await status().innerText(), /No results\. Try a different search/);
+});
+
+test('Inspector announces one selected document', async () => {
+  await page.evaluate(() => window.harness.cleanup());
+  await initializeFixture({ facets: [{ field: 'category', label: 'Document type' }] }); await settled();
+  await search('blue');
+  await page.locator('[data-raveldex-inspect]').click();
+  await page.waitForFunction(() => document.querySelector('[data-raveldex-inspector]')?.getAttribute('aria-busy') === 'false');
+  assert.match(await page.locator('[data-raveldex-inspector-status]').innerText(), /1 selected document\.$/);
+  await page.keyboard.press('Escape');
+});
+
+test('generic facet guidance describes selected filters for a non-category label', async () => {
+  await page.evaluate(() => window.harness.cleanup());
+  await initializeFixture({ facets: [{ field: 'category', label: 'Document type' }] }); await settled();
+  await search('red');
+  await page.getByLabel('Document type', { exact: true }).selectOption({ label: 'Guide (5)' }); await settled();
+  await search('blue');
+  assert.match(await status().innerText(), /selected filters.*Choose All/);
+  assert.doesNotMatch(await status().innerText(), /category/);
+});

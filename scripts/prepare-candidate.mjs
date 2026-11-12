@@ -19,8 +19,9 @@ export async function prepareCandidate({ output } = {}) {
   try { await lstat(destination); throw new Error('Candidate output must be a new directory'); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   const metadata = JSON.parse(await readFile(join(REPO_ROOT, 'package.json'), 'utf8'));
-  assert.equal(metadata.private, true, 'candidate preparation requires private: true');
-  assert.equal(metadata.version, '0.1.0-rc.0', 'prepare the declared candidate only');
+  assert.equal(metadata.private, false, 'release metadata must be publishable');
+  assert.equal(metadata.version, '1.0.0', 'prepare the declared stable release only');
+  assert.deepEqual(metadata.publishConfig, { access: 'public' }, 'explicit public npm access');
   assert.deepEqual(metadata.dependencies ?? {}, {});
   const npmCli = process.env.npm_execpath;
   assert.ok(npmCli, 'Run through npm run candidate:prepare');
@@ -59,7 +60,8 @@ export async function prepareCandidate({ output } = {}) {
   await writeFile(join(destination, 'verification.log'), log, { flag: 'wx' });
   const report = {
     kind: 'raveldex-candidate-preparation-v1', status: 'Pass', startedAt,
-    completedAt: new Date().toISOString(), packageVersion: metadata.version, private: true,
+    completedAt: new Date().toISOString(), packageVersion: metadata.version, private: metadata.private,
+    publishConfig: metadata.publishConfig,
     projectCheck: { command: 'npm run check', exitCode: 0, log: 'verification.log', sha256: digest(log) },
     candidateReport: { path: 'candidate-report.json', sha256: digest(await readFile(candidate.reportPath)) },
     publication: 'Not performed; no publish, tag, release, credentials or remote tracking command is part of preparation.',

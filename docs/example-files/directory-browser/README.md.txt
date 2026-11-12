@@ -6,22 +6,19 @@ The application owns one native engine, one directory controller, its optional U
 
 ## Copy, install and run
 
-Use Node 22 or later and npm. Raveldex is private and unpublished, supplied as a local tarball. The pinned esbuild 0.28.2 dependency is build tooling. From an authorized source checkout after `npm ci`:
+Use Node 22 or later and npm. Extract the complete starter into an empty directory with `tar -xzf directory-browser.tar.gz --strip-components=1`, then enter that directory. From a source checkout, you can instead copy the complete `examples/directory-browser/` folder to a new project.
+
+Install Raveldex and the starter's pinned build tooling, then build and preview:
 
 ```sh
-repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-directory-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-directory-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/directory-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4179
 ```
 
-Open `http://127.0.0.1:4179/`. Stop with Ctrl+C. For a downloaded archive, extract into an empty directory with `tar -xzf directory-browser.tar.gz --strip-components=1`, enter it and install the supplied core tarball with `npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz`. Run the build/preview commands above. The first install needs registry access or a suitable cache for the pinned tooling; keep its generated lockfile and use `npm ci` afterward.
+Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.
+
+Open `http://127.0.0.1:4179/`. Stop the preview with Ctrl+C.
 
 Serve output over HTTP(S). The browser uses native forms, checkboxes and a details disclosure. No Popover, dialog, snippets, worker, storage or search-history feature is selected. Explicit filters and facets are installed in `configuration.mjs`; missing capabilities remain visible errors.
 

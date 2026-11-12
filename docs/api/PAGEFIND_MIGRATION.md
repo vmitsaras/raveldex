@@ -32,7 +32,7 @@ Take a public page at `/guide/updates/` with title **Atomic updates**, heading t
 4. For a static site, pass the explicit record/title/path through the [static build and on-demand load flow](STATIC_ASTRO.md). Use the same deployment base for generated pages, manifest and display destinations; do not reuse another engine's generated index files.
 5. Check that the expected native IDs, exact totals, actual destination and optional heading link agree with this authored content. Then extend to your real filters/counts, snippet ranges, paging, language and long labels. Keep loading/failure distinct from zero results and verify native keyboard/composition, reset/retry and teardown.
 
-The `atom` result and owned inline cleanup are exercised by RX-9102's installed consumer check. The optional heading workflow points to the existing section contract; this documentation task does not claim a fresh Pagefind-versus-Raveldex comparison or a new heading-browser qualification.
+Before extending the example, check that searching `atom` reaches the expected page and that removing the interface releases its owner. Add heading previews only when the application supplies the original section text and real heading targets.
 
 ## Replace the interface deliberately
 

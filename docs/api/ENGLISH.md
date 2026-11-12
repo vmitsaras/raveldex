@@ -46,10 +46,10 @@ Stemming can also join words you intended to keep separate. For example, `cancel
 
 You can also install `@vmitsaras/raveldex-english` separately instead of using the main package's convenience subpath. It exports the same factory and descriptor. Its JavaScript is self-contained; its TypeScript declarations use the public core types through an exact-version peer dependency.
 
-Place matching core and English tarballs in your application directory, or replace these paths with their actual locations:
+Install matching core and English packages in your application:
 
 ```sh
-npm install ./vmitsaras-raveldex-0.1.0-rc.0.tgz ./vmitsaras-raveldex-english-0.1.0-rc.0.tgz
+npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-english@1.0.0
 ```
 
-This installs both packages. Import `createEnglishAnalyzer` and `ENGLISH_ANALYZER` from `@vmitsaras/raveldex-english` and use the same engine configuration shown above. Choose one import path; registering both copies on the same engine would conflict. See [building the packages](GETTING_STARTED.md#build-tarballs-from-a-source-checkout) if you need to create the files yourself.
+This installs both packages. Import `createEnglishAnalyzer` and `ENGLISH_ANALYZER` from `@vmitsaras/raveldex-english` and use the same engine configuration shown above. Choose one import path; registering both copies on the same engine would conflict. See [building the packages](GETTING_STARTED.md#build-tarballs-from-a-source-checkout) to test local changes.

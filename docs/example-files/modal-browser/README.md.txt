@@ -4,26 +4,19 @@ Copy this complete starter to add a native documentation modal with real page re
 
 ## Install, build and preview
 
-Use Node 22 or later and npm. Raveldex is currently private and unpublished: use a local tarball from an authorized source checkout. esbuild 0.28.2 is pinned build tooling, not a browser runtime dependency.
+Use Node 22 or later and npm. Extract the complete starter into an empty directory with `tar -xzf modal-browser.tar.gz --strip-components=1`, then enter that directory. From a source checkout, you can instead copy the complete `examples/modal-browser/` folder to a new project.
 
-From a source checkout after `npm ci`, prepare a package and copy the whole directory into a fresh location:
+Install Raveldex and the starter's pinned build tooling, then build and preview:
 
 ```sh
-repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-modal-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-modal-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/modal-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4177
 ```
 
-Open `http://127.0.0.1:4177/`. Choose **Search documentation**, then search `bobbin`. The sewing page has one matching **Thread the machine** section preview; following that link opens its actual `threading-100%` heading. Search `workshop` for all six matching pages, with three initially displayed; **Load more** reveals the next batch. The Topic filter narrows matching pages. Close with Escape or **Close search**, then reopen to check the preserved words/filter. Some browsers clear a focused search field on the first Escape; press Escape again or use **Close search** to dismiss. Ctrl+C stops this preview.
+Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.
 
-If you received the complete starter archive, extract its `package/` directory into a new project. Run `npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz`, then the build/preview commands above. Tool installation may need registry access or an npm cache. Keep your generated `package-lock.json` and use `npm ci` for subsequent installs.
+Open `http://127.0.0.1:4177/`. Choose **Search documentation**, then search `bobbin`. The sewing page has one matching **Thread the machine** section preview; following that link opens its actual `threading-100%` heading. Search `workshop` for all six matching pages, with three initially displayed; **Load more** reveals the next batch. The Topic filter narrows matching pages. Close with Escape or **Close search**, then reopen to check the preserved words/filter. Some browsers clear a focused search field on the first Escape; press Escape again or use **Close search** to dismiss. Ctrl+C stops this preview.
 
 ## Deploy below a path
 

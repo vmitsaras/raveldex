@@ -35,11 +35,12 @@
 .raveldex-dropdown .raveldex-dropdown__submit { color: var(--_accent); border-color: var(--_accent); font-weight: 650; }
 .raveldex-dropdown button[aria-disabled=true], .raveldex-dropdown button:disabled { cursor: default; border-style: dashed; }
 .raveldex-dropdown :is(input, button, a):focus-visible { outline: 3px solid var(--_focus); outline-offset: 3px; }
-.raveldex-dropdown__status { margin-block: var(--_gap); color: var(--_muted); }
+.raveldex-dropdown__status { margin-block: var(--_gap); padding-inline-start: var(--_gap); border-inline-start: 3px solid transparent; color: var(--_muted); }
 .raveldex-dropdown__hint { margin-block: var(--_gap); color: var(--_muted); font-size: .875em; line-height: 1.5; }
-.raveldex-dropdown[aria-busy=true] .raveldex-dropdown__status { font-weight: 600; }
-.raveldex-dropdown[data-state=error] .raveldex-dropdown__status { color: var(--_error); font-weight: 600; }
-.raveldex-dropdown__full-results { display: inline-flex; align-items: center; min-block-size: 2.75rem; color: var(--_accent); text-decoration-line: underline; text-underline-offset: .2em; }
+.raveldex-dropdown[aria-busy=true] .raveldex-dropdown__status { border-inline-start-color: var(--_accent); font-weight: 600; }
+.raveldex-dropdown[data-state=empty] .raveldex-dropdown__status { border-inline-start-color: var(--_border); }
+.raveldex-dropdown[data-state=error] .raveldex-dropdown__status { border-inline-start-color: var(--_error); color: var(--_error); font-weight: 600; }
+.raveldex-dropdown__full-results { display: inline-flex; align-items: center; min-block-size: 2.75rem; color: var(--_accent); font-weight: 650; text-decoration-line: underline; text-underline-offset: .2em; }
 .raveldex-dropdown__popup {
   position: fixed; inset: auto; left: var(--_left, 0px); top: var(--_top, 0px);
   width: var(--_width, 0px); min-width: 0;

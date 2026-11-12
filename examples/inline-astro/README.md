@@ -4,18 +4,14 @@ This complete starter builds six workshop guide pages and an optional inline sea
 
 ## Copy and install
 
-Use Node 24 and npm. Raveldex packages are currently private and unpublished: use matching local core and Astro `.tgz` files, rather than a registry install. Follow [build tarballs from a source checkout](https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md#build-tarballs-from-a-source-checkout) first if you need to create them. Keep `RAVELDEX_REPOSITORY` and `RAVELDEX_ARTIFACTS` set to their actual absolute paths in the same shell.
-
-Copy every file in this directory into a new project, including `content.json`, `configuration.mjs` and `src/`. From a source checkout, run:
+Use Node 24 and npm. Extract the complete starter into an empty directory with `tar -xzf inline-astro.tar.gz --strip-components=1`, then enter it. From a source checkout, copy the entire `examples/inline-astro/` folder into a new project instead.
 
 ```sh
-export RAVELDEX_INLINE_ASTRO="$(mktemp -d "${TMPDIR:-/tmp}/raveldex-inline-astro.XXXXXX")"
-export RAVELDEX_INLINE_ASTRO="$(cd "$RAVELDEX_INLINE_ASTRO" && pwd -P)"
-cp -R "$RAVELDEX_REPOSITORY/examples/inline-astro/." "$RAVELDEX_INLINE_ASTRO/"
-npm --prefix "$RAVELDEX_INLINE_ASTRO" install --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/core/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$RAVELDEX_ARTIFACTS/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz"
+export RAVELDEX_INLINE_ASTRO="$(pwd -P)"
+npm --prefix "$RAVELDEX_INLINE_ASTRO" install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0
 ```
 
-The copied `package.json` pins Astro `7.3.2`; installation resolves its build tools as well as the two local packages. Tool installation needs registry access or a suitable npm cache. No additional search runtime dependencies are installed. If you received the complete starter archive from the [inline solution page](https://github.com/vmitsaras/raveldex/blob/main/site/Inline.astro), extract its `package/` directory into a fresh project instead of copying from a checkout, then run the same install command with that project's absolute path.
+The starter pins Astro `7.3.2`. Keep the generated `package-lock.json` and use `npm ci` afterward. To test local changes, substitute matching core and Astro tarball paths in the install command. Keep `RAVELDEX_INLINE_ASTRO` set for the build and preview commands below.
 
 ## Build and preview
 

@@ -95,6 +95,19 @@ test('modal keyboard hints describe native search Escape and opt-in shortcuts wi
   observe('described native keyboard guidance',{guidance,nativeDescription,...other,hintsOffReferences:0,shortcutOptIn:true});
 });
 
+test('modal recovery keeps keyboard focus until leaving retry and preserves room for results', async () => {
+  await show(); await page.evaluate(() => { window.modalHarness.state.badReply = 'main'; }); await search();
+  assert.equal(await part('retry').isVisible(), true);
+  await part('retry').focus(); await part('retry').press('Enter'); await settle();
+  assert.equal(await part('retry').evaluate(n => n === document.activeElement && !n.hidden), true);
+  await part('input').focus(); assert.equal(await part('retry').isVisible(), false);
+  await page.setViewportSize({width:320,height:568});
+  const area = await modalPart('body').evaluate(n => n.clientHeight); assert.ok(area >= 160, `reading area ${area}`);
+  await search('absent'); assert.equal(await part('results-heading').isVisible(), false);
+  await close(); await show(); assert.equal(await part('input').evaluate(n => n === document.activeElement), true);
+  observe('modal retry focus and reading area', { narrowReadingPixels:area, emptyHeading:false, reopenFocus:true });
+});
+
 test('populated search-field Escape matches a plain native dialog baseline and Close remains reliable',async()=>{
   await page.evaluate(()=>{
     const d=document.createElement('dialog');d.id='plain-search-dialog';const input=document.createElement('input');input.type='search';input.id='plain-search';d.append(input);document.body.append(d);d.showModal();input.focus();

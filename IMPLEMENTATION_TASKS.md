@@ -3265,6 +3265,170 @@ Verify changed consumer behavior and the original Raveldex design on one identif
 - [docs/evidence/N10_N11_SOURCE_SYNC_20261108.json](docs/evidence/N10_N11_SOURCE_SYNC_20261108.json)
 
 
+## RX-9201
+
+**Prepare stable package metadata and verification tooling**
+
+**Milestone:** N12 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9201%22)
+
+**Dependencies:** None
+
+Prepare core, English and Astro 1.0.0 artifacts without changing runtime contracts or adding a publishing pipeline.
+
+**Expected affected areas**
+
+`package.json`, `package-lock.json`, `integrations/`, `scripts/`, `test/consumer/`, `test/tooling/`, `.github/workflows/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+
+**Acceptance criteria**
+
+- RX-9201-AC01: All three library manifests and exact core peers use 1.0.0, public access and publishable metadata; example apps stay private and dependency/runtime contracts stay unchanged.
+- RX-9201-AC02: Preparation and isolated installed checks accept stable metadata and report actual versions/access; strict export/dependency/CSS/inventory checks remain effective.
+- RX-9201-AC03: Native issue linking supports explicit N13/N14 selection, preserves N9 behavior and existing parents, and verifies complete idempotent readback.
+
+**Verification**
+
+- Focused manifest/package and native-subissue behavioral tests; complete installed checks in RX-9204.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9201.md](docs/evidence/RX-9201.md)
+
+
+## RX-9202
+
+**Prune development notes and publish normal consumer guides**
+
+**Milestone:** N12 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9202%22)
+
+**Dependencies:** [RX-9201](IMPLEMENTATION_TASKS.md#rx-9201)
+
+Remove redundant development presentation while keeping usable product guidance, evidence and attribution.
+
+**Expected affected areas**
+
+`README.md`, `CHANGELOG.md`, `docs/api/`, `docs/release/`, `docs/research/`, `site/`, `examples/`, `integrations/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+
+**Acceptance criteria**
+
+- RX-9202-AC01: Consumer guides, galleries and starter instructions lead with registry installation and contain no private-preview/unpublished package disclaimers.
+- RX-9202-AC02: Superseded notes/baselines are removed only after reference checks; accepted evidence, executable inputs and provenance remain intact.
+- RX-9202-AC03: Npm inventories exclude maintainer status/history; necessary compatibility and support facts remain in package-local guides, with a 1.0.0 changelog and no invented release date.
+
+**Verification**
+
+- Markdown reference checks, targeted stale-wording review and package-inventory/docs checks.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9202.md](docs/evidence/RX-9202.md)
+
+
+## RX-9203
+
+**Simplify contributor and agent onboarding**
+
+**Milestone:** N12 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9203%22)
+
+**Dependencies:** [RX-9202](IMPLEMENTATION_TASKS.md#rx-9202)
+
+Replace chronological handoffs with a short current map of the product, source, tests, ownership and commands.
+
+**Expected affected areas**
+
+`AGENTS.md`, `CONTRIBUTING.md`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+
+**Acceptance criteria**
+
+- RX-9203-AC01: AGENTS and contribution guidance describe current architecture, safe task execution, focused checks and release boundaries without bootstrap-era authorization prose.
+- RX-9203-AC02: Project context and handoff point to current facts and planner-selected work rather than stale next-task instructions or duplicated chronology.
+
+**Verification**
+
+- Cold-read review and documentation/reference checks.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9203.md](docs/evidence/RX-9203.md)
+
+
+## RX-9204
+
+**Verify final packages and refresh the documentation site**
+
+**Milestone:** N12 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9204%22)
+
+**Dependencies:** [RX-9201](IMPLEMENTATION_TASKS.md#rx-9201), [RX-9202](IMPLEMENTATION_TASKS.md#rx-9202), [RX-9203](IMPLEMENTATION_TASKS.md#rx-9203)
+
+Qualify the stable artifacts and regenerate Pages and exact starter downloads from their final inputs.
+
+**Expected affected areas**
+
+`docs/`, `scripts/`, `test/`, `site/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+
+**Acceptance criteria**
+
+- RX-9204-AC01: Complete candidate preparation and isolated core/English/Astro imports/types/CSS/examples and paired installs pass with exact artifact identities.
+- RX-9204-AC02: Generated site and archives match final sources; Pages inventory/exclusions/links and the complete relevant browser suite pass.
+- RX-9204-AC03: Changed-risk checks and independent review identify no essential release defect; unchanged performance/AT evidence is not expanded into new claims.
+
+**Verification**
+
+- Run candidate:prepare, companion pack/install checks from the same compiler output, pages:generate, pages:check and test/pages suite; inspect final diff.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9204.md](docs/evidence/RX-9204.md)
+
+
+## RX-9205
+
+**Create native polish issue trees and synchronize the release handoff**
+
+**Milestone:** N12 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9205%22)
+
+**Dependencies:** [RX-9204](IMPLEMENTATION_TASKS.md#rx-9204)
+
+Deliver self-contained optional issues, preserved historical tracking and a precise preparation report.
+
+**Expected affected areas**
+
+`docs/planning/roadmap.json`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `scripts/link-native-subissues.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+
+**Acceptance criteria**
+
+- RX-9205-AC01: N13 and N14 each have four actual native subissues with bounded findings, user impact, measurable criteria and risk-based verification; follow-up tasks remain open.
+- RX-9205-AC02: Complete readback and second-run idempotency establish relationships without reparenting or altering historic completed records, notes or memberships.
+- RX-9205-AC03: Final roadmap/evidence/context agree and distinguish verified local preparation from source delivery/publication; large evidence footprint is reported separately.
+
+**Verification**
+
+- Tracking preview, GitHub issue/relationship readback, zero-write relink and planner/generated/reference/diff checks.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9205.md](docs/evidence/RX-9205.md)
+
+
 ## Optional enhancement tasks
 
 The `RX-A*` task cards in [Optional features](docs/planning/OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.
