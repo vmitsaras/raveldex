@@ -1,7 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import SolutionChooser from './SolutionChooser.astro';
-import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
 <Layout frontmatter={{ title: 'Compact header search starter' }}>
@@ -14,13 +14,11 @@ const base = '/raveldex/';
   <p><a href={base + 'examples/dropdown-preview/'}>Open the full header preview</a></p>
   <iframe src={base + 'examples/dropdown-preview/'} title="Dropdown header starter preview" loading="lazy" height="720" style="width: 100%; border: 1px solid currentColor; border-radius: .5rem;"></iframe>
   <h2 id="copy-dropdown">Copy the complete project</h2>
-  <p>Core is currently private and unpublished. Use the supplied local package tarball and the pinned esbuild tooling in the setup guide. This title/link example uses core directly; it needs no snippet, facet, section, worker or storage registration. Native Popover support is required for the header popup.</p>
-  {STARTERS.filter(starter => starter.family === 'dropdown').map(starter => <section aria-labelledby={'starter-' + starter.id}>
-    <h3 id={'starter-' + starter.id}>{starter.title}</h3>
-    <p><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base + starterArchive(starter.id)} download>Download the complete starter</a></p>
-    <p>Extract into an empty directory with <code>tar -xzf starter.tar.gz --strip-components=1</code>, replacing the archive name with your download. Read <code>README.md</code> before installing the local package.</p>
-    <details><summary>View exact source files</summary><ul>{starter.files.map(path => <li><a href={base + starterSource(starter.id, path)}>{path}</a></li>)}</ul></details>
-  </section>)}
+  <p>The quick popup needs native Popover. Otherwise, use the header form to open the working full results page.</p>
+  <details><summary>Data and browser requirements</summary>
+    <p>Install Raveldex and the pinned esbuild tooling using the setup guide. This title/link example uses core directly; it needs no snippet, facet, section, worker or storage registration. Native Popover support is required for the header popup.</p>
+  </details>
+  <StarterSetup family="dropdown" />
   <h2 id="dropdown-theme">Change the appearance</h2>
   <ol>
     <li>Copy, install, build and preview the complete project using its guide. Search the sample records before changing them.</li>

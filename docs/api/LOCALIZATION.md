@@ -73,7 +73,7 @@ Only the following messages interpolate tokens. All other keys are literal strin
 
 Numbers use ordinary JavaScript decimal conversion (`String(number)`), including option counts and page/range text: no grouping separators, localized digits or `Intl.NumberFormat`. Singular result text is chosen only when the **exact total is 1** (`resultsOne` or directory `resultOne`); zero uses the relevant empty message, all other positive totals use `resultsMany` or directory `results`. Append and omission messages have no plural-category switch. Use count-neutral wording when that distinction is insufficient for the language, such as “Ergebnisse: {total}”.
 
-This slice keeps the existing two-branch result contract. It adds no locale, formatter, plural-rule, translation callback or analyzer field. Languages requiring additional grammar/digit rules need a separately selected API decision; setting `lang` or translating templates does not provide those rules. Fixed count parentheses, range dashes, snippet ellipses and breadcrumb separators are punctuation, not configurable language services.
+Templates support singular results and other positive totals. They do not provide a locale, formatter, plural-rule service, translation callback or analyzer setting. Use count-neutral application wording when a language needs more grammar or digit rules; setting `lang` or translating templates does not add those rules. Fixed count parentheses, range dashes, snippet ellipses and breadcrumb separators are punctuation, not configurable language services.
 
 ## Check the installed interface
 

@@ -35,11 +35,18 @@ export function createHeaderSearch({ root, status, retry, load, fullResultsURL,
         if (!current(ticket)) return;
         retry.hidden = true;
         if (modalTrigger) modalTrigger.hidden = true;
+        const probe = doc.createElement('div');
+        const quickSearch = typeof probe.showPopover === 'function' && typeof probe.hidePopover === 'function';
+        if (!quickSearch) { const form = root.querySelector('.header-search__fallback'); if (form) form.hidden = false; }
+        if (!quickSearch && !fullRoot) {
+          say('Quick search is unavailable in this browser. Use the search form or browse the guides.');
+          return;
+        }
         say('Loading search. You can browse the guides while it loads.');
         if (!current(ticket)) return;
         candidate = await load(signal.signal);
         if (!current(ticket)) return;
-        mountedDropdown = mountRaveldexDropdown({ root, engine: candidate.engine, documents: candidate.documents,
+        if (quickSearch) mountedDropdown = mountRaveldexDropdown({ root, engine: candidate.engine, documents: candidate.documents,
           mode: configuration.mode, maxResults: configuration.maxResults, shortcut: false,
           fullResults: { url: fullResultsURL, queryParameter: 'q' },
           messages: { label: 'Search walking guides', placeholder: 'Try weather or walking guide' } });
@@ -57,8 +64,9 @@ export function createHeaderSearch({ root, status, retry, load, fullResultsURL,
         inline = mountedInline; mountedInline = undefined;
         if (inline && !refused && initialQuery !== undefined) await inline.search(initialQuery);
         if (!current(ticket)) return;
-        say(refused ? 'The query link could not be read. Enter a new search below.' : 'Search is ready.');
-        if (current(ticket) && modalHandoff) modalTrigger.hidden = false;
+        say(refused ? 'The query link could not be read. Enter a new search below.' : quickSearch ? 'Search is ready.'
+          : 'Quick search is unavailable in this browser. Search all guides below or use the browse links.');
+        if (current(ticket) && modalHandoff && quickSearch) modalTrigger.hidden = false;
       } catch {
         failed = true;
       } finally {
@@ -87,7 +95,7 @@ export function createHeaderSearch({ root, status, retry, load, fullResultsURL,
   function openModal() {
     // Even a refused newer handoff invalidates an older focus/mount callback.
     const request = ++handoff, ticket = generation;
-    if (!modalHandoff || !owner || !current(ticket)) return Promise.resolve();
+    if (!modalHandoff || !owner || !dropdown || !current(ticket)) return Promise.resolve();
     const field = root.querySelector('[data-raveldex-dropdown-input]');
     const raw = field?.value ?? '';
     const active = () => current(ticket) && handoff === request && !composing &&

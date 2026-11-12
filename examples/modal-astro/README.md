@@ -4,22 +4,14 @@ Copy this complete starter to build a workshop guide with optional search in a n
 
 ## Copy and install
 
-Use Node 24 and npm. Raveldex is currently private and unpublished; use matching local core and Astro tarballs. In an authorized source checkout with `npm ci` complete, prepare fresh package and project directories:
+Use Node 24 and npm. Extract the complete starter into an empty directory with `tar -xzf modal-astro.tar.gz --strip-components=1`, then enter it. From a source checkout, copy the entire `examples/modal-astro/` folder into a new project instead.
 
 ```sh
-export RAVELDEX_REPOSITORY="$PWD"
-export RAVELDEX_ARTIFACTS="$(mktemp -d /tmp/raveldex-modal-packages.XXXXXX)"
-export RAVELDEX_MODAL_ASTRO="$(mktemp -d /tmp/raveldex-modal-astro.XXXXXX)"
-export RAVELDEX_MODAL_ASTRO="$(cd "$RAVELDEX_MODAL_ASTRO" && pwd -P)"
-npm run build
-mkdir "$RAVELDEX_ARTIFACTS/core"
-npm pack --ignore-scripts --cache "$RAVELDEX_ARTIFACTS/.npm-cache" --pack-destination "$RAVELDEX_ARTIFACTS/core"
-npm run astro:pack -- --output "$RAVELDEX_ARTIFACTS/astro"
-cp -R "$RAVELDEX_REPOSITORY/examples/modal-astro/." "$RAVELDEX_MODAL_ASTRO/"
-npm --prefix "$RAVELDEX_MODAL_ASTRO" install --ignore-scripts --no-audit --no-fund "$RAVELDEX_ARTIFACTS/core/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$RAVELDEX_ARTIFACTS/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz"
+export RAVELDEX_MODAL_ASTRO="$(pwd -P)"
+npm --prefix "$RAVELDEX_MODAL_ASTRO" install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0
 ```
 
-If you received the complete starter archive, extract its `package/` directory into a fresh project and run the install command with that project's absolute path and the supplied matching tarball paths. The copied `package.json` pins Astro `7.3.2`; installation needs registry access or a suitable npm cache for build tooling. No search runtime dependency besides those two packages is added. Keep your generated `package-lock.json` and use `npm ci` afterward.
+The starter pins Astro `7.3.2`. Keep the generated `package-lock.json` and use `npm ci` afterward. To test local changes, substitute matching core and Astro tarball paths in the install command. Keep `RAVELDEX_MODAL_ASTRO` set for the build and preview commands below.
 
 ## Build and preview
 

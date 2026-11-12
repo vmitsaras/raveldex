@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Installed API recipes · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="runnable-api-examples">Runnable API examples</h1>
-<p>Copy these modules into an ESM application where you installed the local package tarball. They use public imports and show small, complete integrations. Most functions create and dispose their own example engine and return results you can inspect. The UI recipe instead returns a handle you dispose when removing the component. Errors are passed back to your application.</p>
+<p>Copy these modules into an ESM application where you installed Raveldex. They use public imports and show small, complete integrations. Most functions create and dispose their own example engine and return results you can inspect. The UI recipe instead returns a handle you dispose when removing the component. Errors are passed back to your application.</p>
 <table>
 <thead>
 <tr>
@@ -8,6 +8,18 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="/raveldex/example-files/inline.mjs">inline.mjs</a></td>
+<td><code>await createInlineSearch(root)</code> on an HTTP(S) page; core-only consumer search with explicit prefix mode. Import <code>/addons/ui/inline.css</code> separately; call returned <code>dispose()</code> when removing it.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/consumer-messages.de.mjs">consumer-messages.de.mjs</a></td>
+<td>Data-only complete German bundles: copy locally and use <code>german.inline</code>, <code>inlineWithFilters</code>, <code>modal</code>, <code>dropdown</code>, <code>directory</code> and <code>imageUnavailable</code> as described in <a href="/raveldex/reference/localization/">the localization guide</a>. Imports do not mount or select a locale.</td>
+</tr>
+<tr>
+<td><a href="/raveldex/example-files/cms-refresh.mjs">cms-refresh.mjs</a></td>
+<td><code>await runCMSRefreshExample(root, externalButton)</code> on an HTTP(S) page with a dedicated document-tree host. Finite owned directory update/remount/focus walkthrough; restores authored Nodes and disposes its engine before returning. Import card CSS separately; read the <a href="/raveldex/reference/cms-refresh/">preconditions and state limits</a>.</td>
+</tr>
 <tr>
 <td><a href="/raveldex/example-files/core.mjs">core.mjs</a></td>
 <td><code>await runCoreExample()</code> in Node; one record and exact result.</td>
@@ -26,7 +38,7 @@
 </tr>
 <tr>
 <td><a href="/raveldex/example-files/ui.mjs">ui.mjs</a></td>
-<td><code>await createSearchUI(root)</code> on an HTTP(S) page; a minimal search form with no storage. Call the returned <code>dispose()</code> when removing it.</td>
+<td>Developer Workbench: <code>await createSearchUI(root)</code> on an HTTP(S) page, with its existing exact-word default and optional Inspector. Import <code>/addons/ui/styles.css</code> separately; call returned <code>dispose()</code> when removing it.</td>
 </tr>
 <tr>
 <td><a href="/raveldex/example-files/browser.mjs">browser.mjs</a></td>
@@ -43,5 +55,26 @@
 </code></pre>
 <p>It prints an object with revision <code>1</code>, total <code>1</code> and one hit with ID <code>guide:updates</code>. The engine has already been disposed when the function returns.</p>
 <h3 id="browser-recipes">Browser recipes</h3>
+<p>For a visitor-facing interface, use <a href="/raveldex/example-files/inline.mjs">inline.mjs</a> and the <a href="/raveldex/reference/hosts/#mount-a-consumer-search-form">consumer setup</a>, or choose a complete modal/dropdown/directory/cards project from the <a href="/raveldex/examples/">solution chooser</a>. A connected root must exist before calling the recipe; keep ordinary browse links outside it. This small recipe assumes the page retains the root until initialization returns; use the complete starter controller for cancellable loading, removal during initialization and retry.</p>
 <p>The browser example expects a real root such as <code>&lt;main id="example-root"&gt;&lt;/main&gt;</code>. It uses adapter-owned database <code>raveldex-candidate-example</code> and namespace equal to the root ID; the initial save explicitly expects that namespace to be empty. Successful completion erases its rows, then disposes its borrowed resources. A failed run may leave a saved fixture generation: inspect/recover that generation or select a fresh explicit fixture namespace before rerunning. No general application data is erased automatically. Load <a href="/raveldex/reference/hosts/#native-dom-ui-and-css">the CSS</a> separately; the JavaScript module does not inject styling.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+<h3 id="when-an-example-refuses-work">When an example refuses work</h3>
+<p>Use the <a href="/raveldex/reference/hosts/#recovery-choices-in-your-application">recovery choices</a> when
+connecting these recipes to your own status and actions. Keep a browse route
+available. A missing provider needs a setup change; it is not repaired by retrying
+the same request. Prefix, phrase, suggestion and structured-filter requests retain
+their declared analyzer/provider/size limits. Do not reinterpret an invalid request
+as ordinary text or a successful empty result.</p>
+<p>The storage example disposes its example resources even on failure. It does not
+leave a working search mounted if a save/load failed. <code>QUOTA_EXCEEDED</code> or
+<code>UNAVAILABLE</code> can be explained as “The search cache could not be saved in this
+browser”; offer existing browse links or a separately initialized in-memory
+interface. Do not imply that such an interface was created by the failed recipe.
+Inspect a surviving saved generation before rerunning the fixture; never delete a
+namespace automatically to make the example succeed.</p>
+<p>The worker example shows successful receipt reconciliation. If a mutation or
+restore instead reports <code>OUTCOME_UNKNOWN</code>, retain <code>operationId</code> and consult the
+surviving owner’s appropriate receipt API <strong>before</strong> destroying that owner or
+repeating work. <code>pending</code> and <code>expired</code> cannot settle the outcome. If the owner is
+already gone, rebuild from authoritative records. The recipe’s <code>finally</code> releases
+its example-owned worker; it does not retain a worker for later reconciliation.</p>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

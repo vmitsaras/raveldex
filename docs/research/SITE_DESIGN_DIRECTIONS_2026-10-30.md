@@ -185,7 +185,7 @@ The following territories were considered and rejected:
 
 ## Evidence, uncertainty and next decision
 
-**Evidence used:** current [homepage source](../../site/index.md), [layout](../../site/Layout.astro), [styles](../../site/styles.css), [public page inventory](../../site/pages.mjs), [Getting started](../api/GETTING_STARTED.md), [practical limits](../api/LIMITATIONS.md), [demo source](../../examples/docs-search/index.html), and [site build/publication instructions](../../site/README.md). Local browser inspection covered home, Getting started and the initialized demo. The existing preview on port 4174 was used; no deployment was performed.
+**Evidence used:** current [homepage source at review](https://github.com/vmitsaras/raveldex/blob/ad42057/site/index.md), [layout](../../site/Layout.astro), [styles](../../site/styles.css), [public page inventory](../../site/pages.mjs), [Getting started](../api/GETTING_STARTED.md), [practical limits](../api/LIMITATIONS.md), [demo source](../../examples/docs-search/index.html), and [site build/publication instructions](../../site/README.md). Local browser inspection covered home, Getting started and the initialized demo. The existing preview on port 4174 was used; no deployment was performed.
 
 **External content precedents:** Pagefind explains its search approach, lists capabilities and links to larger demonstrations; this is useful evidence for connecting explanation to trials. Lit pairs a concise proposition with code and several learning entry points. These are content references, not visual templates, equivalent architectures or evidence of Raveldex performance. Only their homepage text was retrieved for this report. [Pagefind](https://pagefind.app/), [Lit](https://lit.dev/).
 

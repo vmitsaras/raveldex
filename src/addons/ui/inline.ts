@@ -95,9 +95,9 @@ const defaults: Required<InlineUIMessages> = Object.freeze({
   revisionChanged: 'Search results changed. Retry search to see the latest results.',
   all: 'All', emptyValue: '(empty string)', nullValue: 'Null', missingValue: 'Missing',
   unlistedValue: '{value} (not in displayed values)',
-  facetSummary: '{total} distinct values; {omitted} buckets omitted. Counts include the current filters.',
-  snippetOmissions: '{count} matching occurrences are outside the displayed highlights.',
-  snippetLimits: 'Some matching context was omitted by snippet limits or long matches.',
+  facetSummary: 'Filter choices: {total}. Not shown: {omitted}. Counts reflect the current filters.',
+  snippetOmissions: 'Matches not highlighted: {count}. Open the page to read more.',
+  snippetLimits: 'These excerpts show only part of the matching text. Open the page to read more.',
   sectionCaption: 'Matching text in this page', sectionOmissions: 'More matching context is not shown.',
   sectionUnavailable: 'Matching context is unavailable. Search again to retry.',
   sectionStale: 'Matching context is unavailable because the page map is out of date. Reload with fresh page maps.',
@@ -204,6 +204,13 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
     for (const button of navigationButtons) button.hidden = button.getAttribute('aria-disabled') === 'true' && button !== focused;
     navigation.hidden = !activePresentation() || navigationButtons.every(button => button.hidden);
   };
+  const updateRetry = (): void => {
+    if (destroyed) return;
+    // A focused action stays in place while unavailable. Retire it only after
+    // native focus has moved, just like pagination actions.
+    retry.hidden = !activePresentation() || retry.getAttribute('aria-disabled') === 'true' &&
+      (retry.getRootNode() as Document | ShadowRoot).activeElement !== retry;
+  };
   const disableNavigation = (): void => {
     appendedTarget = undefined;
     for (const button of navigationButtons) unavailable(button, true);
@@ -228,7 +235,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
       if (destroyed || ticket !== sequence) return ticket;
       clearPresentation();
     }
-    disableNavigation(); unavailable(retry, true); shell.setAttribute('aria-busy', 'false');
+    disableNavigation(); unavailable(retry, true); updateRetry(); shell.setAttribute('aria-busy', 'false');
     return ticket;
   };
   const current = (ticket: number, active: AbortController): boolean => activePresentation() && sequence === ticket && !active.signal.aborted;
@@ -314,7 +321,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
       if (append) results.append(fragment); else results.replaceChildren(fragment);
       const start = append && prior ? prior.start : offset, allIds = append && prior ? [...prior.ids, ...ids] : ids;
       snapshot = { signature, revision: found.revision, total: found.total, start, ids: allIds };
-      heading.hidden = false; results.hidden = false; results.start = start + 1;
+      heading.hidden = found.total === 0; results.hidden = found.total === 0; results.start = start + 1;
       appendedTarget = addedTarget ?? undefined;
       shell.dataset.state = found.total ? 'results' : 'empty';
       announce(found.total === 0 ? message(controls.filtered ? messages.noResultsFiltered : messages.noResults, { query: queryPreview(controls.text) }) : append
@@ -370,6 +377,7 @@ export function mountRaveldexInline(options: InlineUIOptions): InlineUIHandle {
   // Wait for native focus transfer before retiring an unavailable action.
   // Read current state at that time, so newer requests cannot be overwritten.
   listen(navigation, 'focusout', () => { void Promise.resolve().then(() => { if (activePresentation()) updateNavigation(); }); });
+  listen(retry, 'focusout', () => { void Promise.resolve().then(() => { if (activePresentation()) updateRetry(); }); });
   listen(retry, 'click', () => { if (retry.getAttribute('aria-disabled') !== 'true') void execute(); });
   const handle: InlineUIHandle = Object.freeze({
     search: (text?: string): Promise<void> => {

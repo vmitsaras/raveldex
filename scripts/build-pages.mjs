@@ -17,7 +17,7 @@ const output = join(work, 'output');
 await rm(work, { recursive: true, force: true }); // Only this script's scratch tree.
 await mkdir(join(source, 'src/pages'), { recursive: true });
 await copyFile(join(root, 'site/Layout.astro'), join(source, 'src/Layout.astro'));
-for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs']) {
+for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'StarterSetup.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs']) {
   await copyFile(join(root, 'site', name), join(source, 'src', name));
 }
 await writeFile(join(source, 'package.json'), '{"private":true,"type":"module"}\n');
@@ -27,6 +27,8 @@ export default defineConfig({ output: 'static', site: 'https://vmitsaras.github.
   markdown: { syntaxHighlight: false }, devToolbar: { enabled: false } });\n`);
 const routes = new Map(PAGES.map(([path, route]) => [path, href(route)]));
 const recipes = new Map(RECIPES.map(name => [`docs/api/examples/${name}.mjs`, `${BASE}example-files/${name}.mjs`]));
+const themeSource = 'docs/api/examples/consumer-themes.css';
+recipes.set(themeSource, `${BASE}example-files/consumer-themes.css`);
 for (const starter of STARTERS) for (const path of starter.files) {
   recipes.set(`examples/${starter.id}/${path}`, BASE + starterSource(starter.id, path));
 }
@@ -34,7 +36,6 @@ assert.equal(routes.size, PAGES.length, 'unique source allowlist');
 assert.equal(new Set(routes.values()).size, PAGES.length, 'unique public routes');
 routes.set('examples/docs-search/index.html', BASE + 'demo/');
 routes.set('README.md', href('guide/overview'));
-routes.set('site/index.md', href(''));
 for (const [path, route, title] of PAGES) {
   if (['site/Inline.astro', 'site/Modal.astro', 'site/Dropdown.astro', 'site/Directory.astro', 'site/Cards.astro'].includes(path)) {
     const component = path.slice('site/'.length, -'.astro'.length);
@@ -71,6 +72,7 @@ await copyFile(join(root, 'site/workbench.css'), join(output, 'site-assets/workb
 await copyFile(join(root, 'LICENSE'), join(output, 'site-assets/LICENSE.txt'));
 await mkdir(join(output, 'example-files'), { recursive: true });
 for (const name of RECIPES) await copyFile(join(root, `docs/api/examples/${name}.mjs`), join(output, `example-files/${name}.mjs`));
+await copyFile(join(root, themeSource), join(output, 'example-files/consumer-themes.css'));
 const starters = await prepareInlineStarters(output, work);
 
 // The ordinary demo indexes usage guides; the qualification pilot stays separate.
@@ -98,11 +100,12 @@ const { walk } = await import('./lib/pages.mjs');
 const staged = { files: (await walk(output)).map(path => ({ path })) };
 const links = await auditLinks(output, staged);
 const inputPaths = new Set([...PAGES.map(x => x[0]), ...RECIPES.map(name => `docs/api/examples/${name}.mjs`),
-  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
+  themeSource,
+  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/StarterSetup.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
   'scripts/lib/ui-consumer.mjs', 'scripts/lib/packed-consumer.mjs', 'examples/core-docs/corpus.mjs',
   'scripts/lib/inline-starters.mjs', 'site/starters.mjs', ...starters.sourceInputs,
   'README.md', 'package.json', 'package-lock.json', 'LICENSE',
-  ...['index.html', 'main.mjs', 'engine-worker.mjs', 'configuration.mjs', 'usage-corpus.mjs'].map(name => `examples/docs-search/${name}`),
+  ...['index.html', 'main.mjs', 'readable-results.mjs', 'engine-worker.mjs', 'configuration.mjs', 'usage-corpus.mjs'].map(name => `examples/docs-search/${name}`),
   ...pilot.package.files.filter(file => file.path.startsWith('dist/')).map(file => file.path)]);
 const inputs = await Promise.all([...inputPaths].sort().map(async path => ({ path, sha256: sha256(await readFile(join(root, path))) })));
 const manifest = await publishGenerated(join(root, 'docs'), output, inputs);

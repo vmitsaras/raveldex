@@ -12,16 +12,16 @@ Raveldex adds search to data you already have. Tell it which fields to search, a
 | Resource browsing with checkbox filters and pages | [Directory](HOSTS.md#directory-controls-and-styling) |
 | Authored descriptions, metadata and optional images | [Rich directory results](HOSTS.md#rich-directory-results) |
 
-All five borrow an engine you configure. The [capability matrix](HOSTS.md#consumer-capability-matrix) explains their different result content, paging and keyboard models. For a complete project, the [solution chooser](../../examples/README.md) links browser/Astro starters. If your application supplies its own UI, start with the core example below.
+All five borrow an engine you configure. The [capability matrix](HOSTS.md#consumer-capability-matrix) explains their different result content, paging and keyboard models. For a complete project, the [solution chooser](https://github.com/vmitsaras/raveldex/blob/main/examples/README.md) links browser/Astro starters. If your application supplies its own UI, start with the core example below.
 
 ## Install the package
 
-The packages are currently unpublished and supplied as local `.tgz` files. In a new application directory, run these commands to create a package, enable ESM imports and install core. Replace the absolute path with the file you received or built:
+Install Raveldex in your application with npm. For a new Node application, enable ESM imports first:
 
 ```sh
 npm init -y
 npm pkg set type=module
-npm install --offline --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz
+npm install @vmitsaras/raveldex@1.0.0
 ```
 
 You can now import `@vmitsaras/raveldex` in that application. Core and the English analyzer require Node 22 or later; the Astro integration requires Node 22.12 or later. In a browser application, let your existing bundler resolve the imports. See [compatibility](COMPATIBILITY.md) for optional feature requirements.
@@ -79,9 +79,9 @@ Await an update before searching when the results need to include it. Each succe
 
 ## Add a search interface
 
-For a complete project to adapt, choose a [browser or Astro inline starter](../../site/Inline.astro). Each includes explicit sample content, source snippets, a topic filter, paging, CSS, loading/retry and cleanup. The browser starter builds an engine from its records; Astro builds static search artifacts and loads them on demand. Both use the current local tarballs.
+For a complete project to adapt, choose a [browser or Astro inline starter](https://github.com/vmitsaras/raveldex/blob/main/site/Inline.astro). Each includes explicit sample content, source snippets, a topic filter, paging, CSS, loading/retry and cleanup. The browser starter builds an engine from its records; Astro builds static search artifacts and loads them on demand. The browser project needs core; the Astro project also needs the matching integration.
 
-For search behind a button, choose a [documentation modal starter](../../site/Modal.astro). The browser and Astro projects include cancelable first-open loading, real page/heading links, retry, query preservation and owned-engine cleanup. Replace their explicit authored content and adjust the theme CSS.
+For search behind a button, choose a [documentation modal starter](https://github.com/vmitsaras/raveldex/blob/main/site/Modal.astro). The browser and Astro projects include cancelable first-open loading, real page/heading links, retry, query preservation and owned-engine cleanup. Replace their explicit authored content and adjust the theme CSS.
 
 Both galleries provide complete project downloads and a short edit/build/preview CSS walkthrough. Keep the starter's source/snippet/facet or section registrations aligned with its UI options; these are explicit optional capabilities. The [adoption checklist](HOSTS.md#starter-adoption-and-local-checks) lists browser requirements, ownership and the remaining checks to run after replacing data or styles.
 
@@ -93,7 +93,7 @@ If you want [phrases, snippets or highlights](ADDONS.md), choose the required so
 
 ## Build tarballs from a source checkout
 
-You only need this step if you are building the packages yourself. With repository access, Node 24 and npm, run the following from the repository root. It compiles the code once and creates matching core, English and Astro tarballs:
+You only need this step if you are building the packages yourself. With Node 24 and npm, run the following from the repository root. It compiles the code once and creates matching core, English and Astro tarballs:
 
 ```sh
 export RAVELDEX_REPOSITORY="$(pwd -P)"
@@ -108,7 +108,7 @@ node scripts/pack-astro.mjs --output "$RAVELDEX_ARTIFACTS/astro"
 
 The files are written beneath `$RAVELDEX_ARTIFACTS`, in `core/`, `english/` and `astro/`. Each pack output directory must be new. You can now install those files in a separate application.
 
-Keep both shell variables set when following the [Astro example](https://github.com/vmitsaras/raveldex/blob/main/examples/astro/README.md). Install the matching core tarball alongside either optional package. The Astro build hook also needs `astro@7.3.2`.
+When testing local artifacts, install the matching core tarball alongside either optional package. The [Astro example](https://github.com/vmitsaras/raveldex/blob/main/examples/astro/README.md) describes its own source-copy and registry installation steps; its build hook also needs `astro@7.3.2`.
 
 ## Next steps
 

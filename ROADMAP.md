@@ -8,7 +8,7 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 70/70 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 75/75 done · 0 in progress · 0 dependency-ready.
 
 **Planner state:** `complete`.
 
@@ -42,6 +42,9 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N9 — Query performance, recovery and matched benchmarks** | `RX-8001`–`RX-8011` | 11/11 | Establish reproducible exact-head evidence, optimize native candidate retrieval and execution, recover admitted source collections safely, and compare equivalent installed search workloads. |
 | **N10 — Post-N9 hardening and performance review** | `RX-9001`–`RX-9007` | 7/7 | Conclude the post-N9 engineering review from completed matched measurements and bounded, claim-based recovery qualification; preserve adverse evidence without requiring exhaustive research before product work. |
 | **N11 — Raveldex-native consumer identity and usability** | `RX-9101`–`RX-9112` | 12/12 | Create a recognizable Raveldex consumer search experience with clear result context, optional explanations and coherent host-friendly styling; familiar interactions and migration guides support adoption without copying Pagefind. |
+| **N12 — Prepare Raveldex for stable 1.0.0** | `RX-9201`–`RX-9205` | 5/5 | Prepare verified 1.0.0 packages, clear documentation and current contributor guidance, with optional polish tracked separately. |
+| **N13 — Make the demo welcoming and easy to try** | `RX-9301`–`RX-9304` | 4/4 | Help a new visitor understand, try and adopt Raveldex using natural language and readable results. |
+| **N14 — Polish search interfaces and recovery states** | `RX-9401`–`RX-9404` | 4/4 | Refine the five consumer surfaces and visible recovery journeys while preserving native behavior and the existing identity. |
 
 ## Task index
 
@@ -127,6 +130,19 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-9110](IMPLEMENTATION_TASKS.md#rx-9110) — Explain directory counts and multi-select filtering plainly | `done` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/90) |
 | [RX-9111](IMPLEMENTATION_TASKS.md#rx-9111) — Document safe CMS refresh, remount and state preservation | `done` | `RX-9101` | [Issue](https://github.com/vmitsaras/raveldex/issues/91) |
 | [RX-9112](IMPLEMENTATION_TASKS.md#rx-9112) — Qualify the Raveldex experience with a finite interaction review | `done` | `RX-9101`, `RX-9102`, `RX-9103`, `RX-9104`, `RX-9105`, `RX-9106`, `RX-9107`, `RX-9108`, `RX-9109`, `RX-9110`, `RX-9111` | [Issue](https://github.com/vmitsaras/raveldex/issues/92) |
+| [RX-9201](IMPLEMENTATION_TASKS.md#rx-9201) — Prepare stable package metadata and verification tooling | `done` | None | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9201%22) |
+| [RX-9202](IMPLEMENTATION_TASKS.md#rx-9202) — Prune development notes and publish normal consumer guides | `done` | `RX-9201` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9202%22) |
+| [RX-9203](IMPLEMENTATION_TASKS.md#rx-9203) — Simplify contributor and agent onboarding | `done` | `RX-9202` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9203%22) |
+| [RX-9204](IMPLEMENTATION_TASKS.md#rx-9204) — Verify final packages and refresh the documentation site | `done` | `RX-9201`, `RX-9202`, `RX-9203` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9204%22) |
+| [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205) — Create native polish issue trees and synchronize the release handoff | `done` | `RX-9204` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9205%22) |
+| [RX-9301](IMPLEMENTATION_TASKS.md#rx-9301) — Help visitors choose and try a search interface | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9301%22) |
+| [RX-9302](IMPLEMENTATION_TASKS.md#rx-9302) — Use everyday labels, counts and search guidance | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9302%22) |
+| [RX-9303](IMPLEMENTATION_TASKS.md#rx-9303) — Make demo result excerpts readable and explanation optional | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9303%22) |
+| [RX-9304](IMPLEMENTATION_TASKS.md#rx-9304) — Simplify advanced controls and starter adoption | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9304%22) |
+| [RX-9401](IMPLEMENTATION_TASKS.md#rx-9401) — Polish inline and modal states and hierarchy | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9401%22) |
+| [RX-9402](IMPLEMENTATION_TASKS.md#rx-9402) — Polish compact dropdown and full-results handoff | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9402%22) |
+| [RX-9403](IMPLEMENTATION_TASKS.md#rx-9403) — Polish directory filters and rich result layouts | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9403%22) |
+| [RX-9404](IMPLEMENTATION_TASKS.md#rx-9404) — Review optional-feature and adapter recovery journeys | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9404%22) |
 
 ## Milestone exit conditions
 
@@ -209,6 +225,24 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 - Search, filters, paging, reset/retry, localization and CMS lifecycle remain understandable and preserve exact native results, focus, composition, safe rendering and cleanup.
 - Risk-based installed behavior/visual checks and a focused human accessibility walkthrough qualify the changed candidate; unobserved expanded combinations remain explicit limitations instead of triggering an exhaustive benchmark/platform prerequisite.
 - N11 proceeds independently of comparative N10 research using stable public contracts and isolated artifacts; no new engine capability, dependency, deployment or publication is implied.
+
+### N12 — Prepare Raveldex for stable 1.0.0
+
+- Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.
+- Public behavior, documentation and tracking agree; optional polish is not presented as implemented.
+- No publication, deployment, visibility change, commit or push is part of this work.
+
+### N13 — Make the demo welcoming and easy to try
+
+- Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.
+- Public behavior, documentation and tracking agree; unfinished follow-up work is not presented as completed.
+- No publication, deployment, visibility change, commit or push is part of this work.
+
+### N14 — Polish search interfaces and recovery states
+
+- Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.
+- Public behavior, documentation and tracking agree; completion claims match the recorded scope and retain manual qualification limits.
+- No publication, deployment, visibility change, commit or push is part of this work.
 
 ## Execution and authorization
 

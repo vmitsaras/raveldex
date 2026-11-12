@@ -636,6 +636,286 @@ Integrate native search artifacts with static content pipelines while keeping ex
 - [docs/evidence/RX-N5-remote-ci-20261030-failed-node24.zip](../../docs/evidence/RX-N5-remote-ci-20261030-failed-node24.zip)
 
 
+## RX-9301
+
+**Help visitors choose and try a search interface**
+
+**Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9301%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+The homepage/demo and examples chooser currently foreground an engineering Workbench and long comparison text. Source: site/Home.astro, site/Demo.astro and examples/README.md. The stale generated snapshot was reviewed for design only. Make the first action and route to an appropriate consumer starter clear.
+
+**Expected affected areas**
+
+`site/Home.astro`, `site/Demo.astro`, `site/SolutionChooser.astro`, `examples/README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+
+**Acceptance criteria**
+
+- RX-9301-AC01: A new visitor can identify the search purpose, try a useful query and choose inline/modal/dropdown/directory/cards without reading execution details.
+- RX-9301-AC02: Use the existing restrained Raveldex identity; keep advanced developer exploration reachable without making it the consumer starting point.
+- RX-9301-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9301-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9301.md](../../docs/evidence/RX-9301.md)
+
+
+## RX-9302
+
+**Use everyday labels, counts and search guidance**
+
+**Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9302%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+Current shared copy includes distinct values and buckets omitted; the reviewed snapshot also showed 1 results and verbose engine status. Source: site/SearchWorkbench.astro and src/addons/ui/. Confirm regenerated behavior before treating snapshot grammar as a current defect. Explain what a visitor can do next.
+
+**Expected affected areas**
+
+`site/SearchWorkbench.astro`, `src/addons/ui/`, `test/ui/`, `test/pages/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+
+**Acceptance criteria**
+
+- RX-9302-AC01: Counts use correct singular/plural forms and explain visible versus total results plainly; omission notices stay truthful without unnecessary indexing terminology.
+- RX-9302-AC02: Search, empty, loading, filtered-empty and retry guidance use short actionable language; technical API names remain accurate in reference material.
+- RX-9302-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9302-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9302.md](../../docs/evidence/RX-9302.md)
+
+
+## RX-9303
+
+**Make demo result excerpts readable and explanation optional**
+
+**Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9303%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+The design review of the stale generated Workbench showed full-precision scores, raw Markdown links/backticks and clipped excerpt fragments. Current source: examples/core-docs/corpus.mjs, examples/docs-search/ and Workbench rendering. Confirm final generated output and separate corpus/display improvements from engine semantics.
+
+**Expected affected areas**
+
+`examples/core-docs/`, `examples/docs-search/`, `site/`, `src/addons/ui/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+
+**Acceptance criteria**
+
+- RX-9303-AC01: Default result title, destination and excerpt are readable; raw markup fragments and numerical diagnostics do not dominate the ordinary result hierarchy.
+- RX-9303-AC02: Diagnostics remain available through deliberate disclosure; changes preserve original source-offset/highlight semantics and truthful truncation/omission.
+- RX-9303-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9303-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9303.md](../../docs/evidence/RX-9303.md)
+
+
+## RX-9304
+
+**Simplify advanced controls and starter adoption**
+
+**Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9304%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+Current advanced controls say Representation, Original source reanalysis, Reinitialize search and Destroy interface. Galleries repeat setup and qualification details. Source: site/SearchWorkbench.astro and the five gallery components. Make reset/recovery and copy/setup paths understandable without removing technical control.
+
+**Expected affected areas**
+
+`site/SearchWorkbench.astro`, `site/Inline.astro`, `site/Modal.astro`, `site/Dropdown.astro`, `site/Directory.astro`, `site/Cards.astro`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+
+**Acceptance criteria**
+
+- RX-9304-AC01: Advanced settings explain their effect in everyday language and remain secondary; resetting/remounting clearly states which query/filter/page state changes.
+- RX-9304-AC02: Each gallery has a clear try → choose project → install → replace content → style path with working source/archive links and concise nearby requirements.
+- RX-9304-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9304-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9304.md](../../docs/evidence/RX-9304.md)
+
+
+## RX-9401
+
+**Polish inline and modal states and hierarchy**
+
+**Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9401%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+Inline and modal starters already have authored consumer content and scoped styling. Review current generated and installed surfaces, especially technical facet summaries, repeated labels/status, result spacing and constrained modal reading area. Source: src/addons/ui/inline*, modal* and matching starters.
+
+**Expected affected areas**
+
+`src/addons/ui/`, `examples/inline-browser/`, `examples/inline-astro/`, `examples/modal-browser/`, `examples/modal-astro/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9401-AC01: Refine shared hierarchy/spacing and loading/empty/error/retry presentation within existing tokens; the main action and real result links stay obvious.
+- RX-9401-AC02: Verify focus through searching, load-more/windows, filter/clear, modal open/close/reopen and late first-open completion; preserve composition, dismissal and ownership contracts.
+- RX-9401-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9401-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9401.md](../../docs/evidence/RX-9401.md)
+
+
+## RX-9402
+
+**Polish compact dropdown and full-results handoff**
+
+**Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9402%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+The header starter uses a native popover with compact links and a real full-results route. Source: src/addons/ui/dropdown.ts and examples/dropdown-browser/. Review readable status and narrow popup/handoff hierarchy without replacing the established editing/keyboard model.
+
+**Expected affected areas**
+
+`src/addons/ui/dropdown.ts`, `src/addons/ui/dropdown.css`, `examples/dropdown-browser/`, `test/ui/dropdown-browser.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9402-AC01: The header remains usable with no popup space, long titles, empty/error/loading states and native-feature limitations; the complete-results and browse routes remain available.
+- RX-9402-AC02: Arrow/Enter/Escape/Tab, reopen/clear and raw-query handoff preserve focus and meaning; optional expanded search shares the existing owner without competing shortcuts.
+- RX-9402-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9402-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9402.md](../../docs/evidence/RX-9402.md)
+
+
+## RX-9403
+
+**Polish directory filters and rich result layouts**
+
+**Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9403%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+Directory/cards use native filters, selected chips, complete pages, optional URL state and opt-in images. Source: src/addons/ui/directory* and matching starters. Review hierarchy and constrained layouts; deliberate missing-image fixtures are demonstrations, not unverified defects.
+
+**Expected affected areas**
+
+`src/addons/ui/directory*`, `examples/directory-browser/`, `examples/directory-astro/`, `examples/cards-browser/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9403-AC01: Filters/counts/chips and clearing explain multi-selection and filtered-empty recovery; paging and Back/Forward retain state and logical focus.
+- RX-9403-AC02: List/cards/grid, density, absent/long/RTL metadata and images off/on/broken retain result identity/order/page and usable links across narrow/theme/forced-color contexts.
+- RX-9403-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9403-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9403.md](../../docs/evidence/RX-9403.md)
+
+
+## RX-9404
+
+**Review optional-feature and adapter recovery journeys**
+
+**Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9404%22)
+
+**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+
+Workers, snapshots, IndexedDB and optional search capabilities are headless APIs. Review their visible states in existing demos/recipes and their adoption guidance, not hypothetical adapter screens. Source: docs/api/HOSTS.md, docs/api/ADDONS.md and docs/api/examples/.
+
+**Expected affected areas**
+
+`docs/api/`, `examples/`, `src/addons/ui/`, `test/adapters/`, `test/ui/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+
+**Acceptance criteria**
+
+- RX-9404-AC01: Existing examples explain actionable recovery for missing capabilities, worker termination/stale replies, cancelled loads, storage/quota refusal and uncertain update receipts without exposing raw diagnostics as the only explanation.
+- RX-9404-AC02: Exercise query/suggestion/phrase/filter boundaries where offered, retry/reset and teardown after failed/late work; preserve public error codes, no implicit providers/network/storage and borrowed ownership.
+- RX-9404-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.
+- RX-9404-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately.
+
+**Verification**
+
+- Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.
+- Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9404.md](../../docs/evidence/RX-9404.md)
+
+
 ## Research ideas outside the task backlog
 
 These are unscheduled questions, not promised features or release dependencies.

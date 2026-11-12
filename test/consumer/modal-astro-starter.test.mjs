@@ -16,7 +16,7 @@ const selectedEngine = process.env.RAVELDEX_MODAL_STARTER_ENGINE ?? 'chrome';
 assert.ok(['chrome', 'webkit'].includes(selectedEngine), 'RAVELDEX_MODAL_STARTER_ENGINE must be chrome or webkit');
 const report = { kind: 'raveldex-modal-astro-starter-v1', environment: {
   node: process.version, platform: platform(), release: release(), arch: arch(), astro: '7.3.2' },
-  observations: [], scope: 'Fresh paired installed private packages, copied Astro source, actual Astro build/preview and finite headless browser tests in the selected recorded engine. No human AT, physical input, actual zoom, unrecorded engines or deployment.' };
+  observations: [], scope: 'Fresh paired installed packages, copied Astro source, actual Astro build/preview and finite headless browser tests in the selected recorded engine. No human AT, physical input, actual zoom, unrecorded engines or deployment.' };
 async function buildSite(base) {
   const saved = process.env.RAVELDEX_ASTRO_BASE;
   process.env.RAVELDEX_ASTRO_BASE = base; process.env.ASTRO_TELEMETRY_DISABLED = '1';
@@ -65,7 +65,7 @@ before(async () => {
     const path = join(site, 'node_modules/@vmitsaras', name);
     assert.equal(await realpath(path), path);
     const metadata = JSON.parse(await readFile(join(path, 'package.json'), 'utf8'));
-    assert.equal(metadata.private, true); assert.deepEqual(metadata.dependencies ?? {}, {});
+    assert.equal(metadata.private, false); assert.deepEqual(metadata.dependencies ?? {}, {});
   }
   report.packages = { coreSHA256: digest(await readFile(corePackage)), astroSHA256: digest(await readFile(astro.tarball)), sourceDirectory: site };
   // Exercise the documented replacement and scoped CSS recipe in the copied app.

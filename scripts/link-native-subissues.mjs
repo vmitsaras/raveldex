@@ -23,14 +23,16 @@ async function pages(request, endpoint) {
   throw new Error('Pagination limit exceeded for ' + endpoint + '.');
 }
 
-/** Only N9: no replacing parents, deleting unrelated relationships or changing milestone membership. */
-export async function linkN9Subissues(roadmap, request, log = () => {}) {
+/** Explicit groups only; never replace parents or change milestone membership. */
+export async function linkMilestoneSubissues(roadmap, request, milestone, log = () => {}) {
   if (roadmap.repository !== 'vmitsaras/raveldex') throw new Error('Unexpected repository.');
-  if (!roadmap.milestones.some(m => m.id === 'N9')) throw new Error('N9 is not in the canonical roadmap.');
-  const tasks = roadmap.tasks.filter(t => t.milestone === 'N9');
-  if (!tasks.length || tasks.some(t => !/^RX-8\d{3}$/.test(t.id))) throw new Error('Unexpected N9 task IDs.');
+  const taskPatterns = { N9: /^RX-8\d{3}$/, N13: /^RX-93\d{2}$/, N14: /^RX-94\d{2}$/ };
+  if (!Object.hasOwn(taskPatterns, milestone)) throw new Error('Unsupported native sub-issue milestone.');
+  if (!roadmap.milestones.some(m => m.id === milestone)) throw new Error(milestone + ' is not in the canonical roadmap.');
+  const tasks = roadmap.tasks.filter(t => t.milestone === milestone);
+  if (!tasks.length || tasks.some(t => !taskPatterns[milestone].test(t.id))) throw new Error('Unexpected ' + milestone + ' task IDs.');
   const inventory = await pages(request, PREFIX + '/issues?state=all');
-  const parent = managed(inventory, 'N9');
+  const parent = managed(inventory, milestone);
   if (parent.milestone !== null && parent.milestone !== undefined) throw new Error('Overview would inflate milestone progress.');
   const children = tasks.map(task => managed(inventory, task.id));
   const assigned = new Set(children.map(issue => issue.milestone?.number));
@@ -42,15 +44,25 @@ export async function linkN9Subissues(roadmap, request, log = () => {}) {
     if (existing.has(child.id)) continue;
     // Do not replace another parent. GitHub owns and validates the relationship.
     await request('POST', endpoint, { sub_issue_id: child.id });
-    log('Linked issue #' + child.number + ' under N9 overview #' + parent.number + '.');
+    log('Linked issue #' + child.number + ' under ' + milestone + ' overview #' + parent.number + '.');
   }
   const actual = new Set((await pages(request, endpoint)).map(issue => issue.id));
   for (const child of children) if (!actual.has(child.id)) throw new Error('Native sub-issue read-back missing #' + child.number + '.');
   return { parentNumber: parent.number, subIssueCount: children.length,
     added: children.filter(child => !existing.has(child.id)).length };
 }
+
+/** Existing workflow/API compatibility: an omitted selector still means N9. */
+export async function linkN9Subissues(roadmap, request, log = () => {}) {
+  return linkMilestoneSubissues(roadmap, request, 'N9', log);
+}
 async function main() {
-  if (process.argv.length !== 3 || process.argv[2] !== '--apply') throw new Error('Usage: node scripts/link-native-subissues.mjs --apply');
+  const args = process.argv.slice(2);
+  if (!(args.length === 1 && args[0] === '--apply') &&
+      !(args.length === 3 && args[0] === '--milestone' && ['N9','N13','N14'].includes(args[1]) && args[2] === '--apply')) {
+    throw new Error('Usage: node scripts/link-native-subissues.mjs [--milestone N9|N13|N14] --apply');
+  }
+  const milestone = args.length === 1 ? 'N9' : args[1];
   const { loadRoadmap } = await import('./lib/roadmap.mjs');
   const roadmap = loadRoadmap();
   if (process.env.GITHUB_REPOSITORY !== roadmap.repository) throw new Error('GITHUB_REPOSITORY mismatch.');
@@ -68,7 +80,7 @@ async function main() {
     if (method === 'POST') await new Promise(resolve => setTimeout(resolve, 1100));
     return response.json();
   }
-  console.log('N9_SUBISSUES=' + JSON.stringify(await linkN9Subissues(roadmap, request, console.log)));
+  console.log(milestone + '_SUBISSUES=' + JSON.stringify(await linkMilestoneSubissues(roadmap, request, milestone, console.log)));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(error => { console.error(error.message); process.exitCode = 1; });

@@ -40,12 +40,12 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node node_modules/playwright-core/cli.js install --with-deps chromium
-      - name: Verify and prepare the private candidate
+      - name: Verify and prepare the release artifacts
         env:
           RAVELDEX_ASTRO_PACKAGE_REPORT: ${{ runner.temp }}/raveldex-astro-observations.json
         run: npm run candidate:prepare -- --output "${{ runner.temp }}/raveldex-candidate"
       - run: npm run tracking:preview
-      - name: Preserve separate private N5 packages from verified compiler output
+      - name: Preserve separate companion packages from verified compiler output
         run: |
           node scripts/pack-english.mjs --output "${{ runner.temp }}/raveldex-english"
           node scripts/pack-astro.mjs --output "${{ runner.temp }}/raveldex-astro"

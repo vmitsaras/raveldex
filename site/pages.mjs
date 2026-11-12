@@ -33,9 +33,10 @@ export const PAGES = [
   ['integrations/astro/README.md', 'reference/astro-package', 'Astro package'],
   ['integrations/languages/english/README.md', 'reference/english-package', 'English package'],
   ...['README', 'CORE', 'ADDONS', 'HOSTS', 'TYPO', 'SUGGESTIONS', 'SYNONYMS', 'ENGLISH',
-    'IDENTIFIERS', 'LITERAL', 'PROXIMITY', 'QUERY_SYNTAX', 'RECORD_PATCH', 'STATIC_ASTRO']
+    'IDENTIFIERS', 'LITERAL', 'PROXIMITY', 'QUERY_SYNTAX', 'RECORD_PATCH', 'STATIC_ASTRO',
+    'LOCALIZATION', 'RESULT_CONTENT', 'CMS_REFRESH']
     .map(name => [`docs/api/${name}.md`, name === 'README' ? 'reference' : `reference/${name.toLowerCase().replaceAll('_', '-')}`, name === 'README' ? 'API reference' : name.replaceAll('_', ' ')]),
 ];
-export const RECIPES = ['core', 'inline', 'ui', 'addons', 'snapshots', 'browser', 'worker', 'worker-host', 'migration'];
+export const RECIPES = ['core', 'inline', 'ui', 'addons', 'snapshots', 'browser', 'worker', 'worker-host', 'migration', 'cms-refresh', 'consumer-messages.de'];
 export const href = route => BASE + (route ? route === '404' ? '404.html' : `${route}/` : '');
 export const JEKYLL = `# Required: Jekyll excludes repository-only records before branch publication.\n# Do not add .nojekyll. Do not add includes that override these exclusions.\nurl: https://vmitsaras.github.io\nbaseurl: /raveldex\ntheme: null\nplugins: []\nexclude:\n${EXCLUDED.map(name => `  - ${name}\n`).join('')}`;

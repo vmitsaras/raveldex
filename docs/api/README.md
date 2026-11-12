@@ -73,7 +73,7 @@ Install [`@vmitsaras/raveldex-astro`](STATIC_ASTRO.md) separately to build searc
 
 ## Complete search interfaces
 
-The [solution chooser](../../examples/README.md) links five presentations and eight installed browser/Astro projects. Compare the explicit data/capability, loading and CSS requirements before copying one. [Starter adoption](HOSTS.md#starter-adoption-and-local-checks) explains shared query/paging behavior, keyboard recovery and ownership. Core and the UI remain separately selected; images, sections, URL replay and workers require their own explicit choices.
+The [solution chooser](https://github.com/vmitsaras/raveldex/blob/main/examples/README.md) links five presentations and eight installed browser/Astro projects. Compare the explicit data/capability, loading and CSS requirements before copying one. [Starter adoption](HOSTS.md#starter-adoption-and-local-checks) explains shared query/paging behavior, keyboard recovery and ownership. Core and the UI remain separately selected; images, sections, URL replay and workers require their own explicit choices.
 
 ## Installation and evaluation routes
 

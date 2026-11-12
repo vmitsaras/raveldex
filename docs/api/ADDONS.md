@@ -154,7 +154,7 @@ The response keeps the match-evidence header and original positive ranges. Its s
 
 Excerpts stay within their section and original value. They use at most 240 UTF-16 units and 32 merged grapheme-safe marks, with explicit existing snippet omissions; omitted-before/after flags refer to the section's text. The complete response refuses rather than silently truncating evidence. Fixed ceilings include 4,096 facts/ranges, 262,144 section/range pair visits, 10,000,000 shared work units, 16,384 output entries and an additional 262,144 serialized UTF-8 bytes; lower native/configured bounds still apply. These are admission/output bounds, not memory or latency guarantees.
 
-For heading metadata and links, use the [inline section options](HOSTS.md#inline-anchored-sections). For build-time delivery, use the [optional Astro companion](STATIC_ASTRO.md#optional-heading-maps). The [page/section contract](../specs/PAGE_SECTIONS.md) specifies exact validation, clipping, limits and failure behavior.
+For heading metadata and links, use the [inline section options](HOSTS.md#inline-anchored-sections). For build-time delivery, use the [optional Astro companion](STATIC_ASTRO.md#optional-heading-maps). The [page/section contract](https://github.com/vmitsaras/raveldex/blob/main/docs/specs/PAGE_SECTIONS.md) specifies exact validation, clipping, limits and failure behavior.
 
 ## Bounded typo tolerance
 
@@ -191,3 +191,21 @@ Use `/addons/query-syntax` when your search box should accept operators, field n
 ## Explicit record patches
 
 Use [`createPatch`](RECORD_PATCH.md) to change selected whole fields without assembling the rest of a record yourself. It needs a direct engine, source providers for every text field and the revision you observed. It uses the ordinary atomic replacement operation and keeps no extra source copy. It is a helper, not an `AddonRegistration`.
+
+
+## Optional-feature refusal and recovery
+
+Choose features explicitly and expose only the controls that their registered
+providers can serve. Missing phrases/positions/snippets/facets produce typed
+capability failures even when a query has no hits; that is different from an empty
+successful search. Preserve the original code and explain the unavailable setup,
+then explicitly change the registrations or remove the corresponding control.
+Do not install a provider, retain originals, change analyzer, query a network
+service or write storage as an implicit recovery step.
+
+Suggestions are separate vocabulary completions, not filtered result counts.
+Invalid syntax, unsupported analyzer combinations, bounded prefix expansions,
+work/queue limits and cancellation keep their declared refusals. Preserve entered
+text and selections; offer a valid smaller request or the existing browse path.
+The [host recovery guide](HOSTS.md#recovery-choices-in-your-application) distinguishes
+read retries, storage refusals and unconfirmed writes. Each feature guide above defines the capability and bounds its requests need.

@@ -6,26 +6,21 @@ The starter creates one native engine per page. Header, inline results and an op
 
 ## Copy, install and run
 
-Use Node 22 or later and npm. Raveldex is currently private and unpublished; obtain a matching local package tarball from an authorized source checkout. esbuild 0.28.2 is the pinned build tool, not a browser runtime dependency.
+Use Node 22 or later and npm. Extract the complete starter into an empty directory with `tar -xzf dropdown-browser.tar.gz --strip-components=1`, then enter that directory. From a source checkout, you can instead copy the complete `examples/dropdown-browser/` folder to a new project.
 
-From that checkout, after `npm ci`, use fresh output directories:
+Install Raveldex and the starter's pinned build tooling, then build and preview:
 
 ```sh
-repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-dropdown-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-dropdown-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/dropdown-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4178
 ```
 
-Open `http://127.0.0.1:4178/`. Stop the preview with Ctrl+C. If supplied a downloaded starter archive, extract it into an empty directory with `tar -xzf dropdown-browser.tar.gz --strip-components=1`, enter that directory, then install the supplied package with `npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz`. Run the build and preview commands above. The install may need registry access or an existing npm cache for the pinned build tool. Keep your application's generated lockfile and use `npm ci` afterward.
+Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.
 
-The runtime requires a browser with native manual Popover support; optional expanded search also uses native `dialog`. Serve the built output over HTTP or HTTPS. Unsupported dropdown environments leave the authored browse routes and a readable loading failure with retry; the starter does not install a positioning polyfill.
+Open `http://127.0.0.1:4178/`. Stop the preview with Ctrl+C.
+
+The quick header popup needs native manual Popover support; optional expanded search also uses native `dialog`. The normal full-results page can search without Popover support. Serve the built output over HTTP or HTTPS. Without native popovers, the header reveals an ordinary GET search form and explains the limitation. The header does not load an unused engine. Its real full-results page still mounts the inline interface, reads the original query and searches the same records. While a supported browser loads, the authored form stays hidden so mounting cannot discard a typed draft. Without JavaScript, the page offers browse links rather than a form that could not search. The public dropdown preset still refuses unsupported hosts; the starter does not install a positioning polyfill.
 
 ## Use a deployment base
 

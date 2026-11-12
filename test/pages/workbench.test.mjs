@@ -34,15 +34,15 @@ async function ready(page) {
     && document.querySelector('[data-raveldex-ui]')?.getAttribute('aria-busy') === 'false');
 }
 
-test('home uses the actual corpus, query buttons, filters and keyboard Inspector', async () => {
+test('Workbench uses the actual corpus, query buttons, filters and keyboard Inspector', async () => {
   const page = await browser.newPage({ viewport: { width: 1536, height: 1024 }, reducedMotion: 'reduce' });
   const errors = [], requests = [];
   page.on('pageerror', error => errors.push(String(error)));
   page.on('request', request => requests.push(request.url()));
   try {
-    await page.goto(base); await ready(page);
-    assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), 'Add local search to your application.');
-    assert.equal(await page.locator('[data-raveldex-input]').inputValue(), 'module worker');
+    await page.goto(new URL('demo/', base).href); await ready(page);
+    assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), 'Try search on the usage guides');
+    assert.equal(await page.locator('[data-raveldex-input]').inputValue(), '');
     assert.equal(await page.locator('.search-workbench').count(), 1);
     const corpus = JSON.parse(await readFile(new URL('../../docs/demo/corpus.json', import.meta.url)));
     const scan = scanSourceCorpus(corpus.records, corpus.schema);
@@ -50,16 +50,16 @@ test('home uses the actual corpus, query buttons, filters and keyboard Inspector
       const button = page.getByRole('button', { name: query, exact: true });
       await button.focus(); await page.keyboard.press('Enter'); await ready(page);
       const [earlier, ending] = query.split(' ');
-      const expected = sourceQueryResult(scan, finalPrefix(earlier, ending), { limit: 1 });
+      const expected = sourceQueryResult(scan, finalPrefix(earlier, ending), { limit: 5 });
       assert.deepEqual(await page.locator('[data-raveldex-result]').evaluateAll(nodes => nodes.map(node => node.dataset.raveldexResult)), expected.hits.map(hit => hit.id));
-      assert.equal(await page.locator('[data-raveldex-status]').innerText(), `${expected.total} results. Showing 1–${expected.hits.length}.`);
+      assert.equal(await page.locator('[data-raveldex-status]').innerText(), `${expected.total} ${expected.total === 1 ? 'result' : 'results'}. Showing 1–${expected.hits.length}.`);
       assert.ok(await button.evaluate(node => node === document.activeElement));
     }
     const input = page.locator('[data-raveldex-input]');
     await input.fill('source provide'); await input.press('Enter'); await ready(page);
-    const partial = sourceQueryResult(scan, finalPrefix('source', 'provide'), { limit: 1 });
+    const partial = sourceQueryResult(scan, finalPrefix('source', 'provide'), { limit: 5 });
     assert.deepEqual(await page.locator('[data-raveldex-result]').evaluateAll(nodes => nodes.map(node => node.dataset.raveldexResult)), partial.hits.map(hit => hit.id));
-    assert.equal(await page.locator('[data-raveldex-status]').innerText(), `${partial.total} results. Showing 1–1.`);
+    assert.equal(await page.locator('[data-raveldex-status]').innerText(), `${partial.total} ${partial.total === 1 ? 'result' : 'results'}. Showing 1–${partial.hits.length}.`);
     await input.fill('source'); await input.press('Enter'); await ready(page);
     await page.locator('[data-raveldex-next]').click(); await ready(page);
     assert.match(await page.locator('[data-raveldex-page]').innerText(), /Page 2/);
@@ -72,7 +72,7 @@ test('home uses the actual corpus, query buttons, filters and keyboard Inspector
     assert.ok(await page.locator('[data-raveldex-inspect]').evaluate(node => node === document.activeElement));
     assert.equal(await page.locator('[data-raveldex-submit]').evaluate(node => getComputedStyle(node).backgroundColor), 'rgb(197, 246, 75)');
     await page.locator('[data-raveldex-input]').fill('unmatchedword'); await input.press('Enter'); await ready(page);
-    assert.equal(await page.locator('[data-raveldex-status]').innerText(), 'No results.');
+    assert.equal(await page.locator('[data-raveldex-status]').innerText(), 'No results. Try a different search.');
     await page.getByRole('button', { name: 'module worker', exact: true }).click(); await ready(page);
     if (process.env.RAVELDEX_WORKBENCH_SCREENSHOTS) {
       await mkdir(process.env.RAVELDEX_WORKBENCH_SCREENSHOTS, { recursive: true });
@@ -106,7 +106,7 @@ test('prefix results, original highlights, facets and every page agree across bo
   try {
     await page.goto(new URL('demo/', base).href); await ready(page);
     assert.equal(await page.locator('[data-pilot-mode]').inputValue(), 'prefix');
-    assert.equal(await page.locator('details').getAttribute('open'), null);
+    assert.equal(await page.locator('.search-workbench__settings').getAttribute('open'), null);
     await page.getByText('Advanced demo settings', { exact: true }).click();
     const input = page.locator('[data-raveldex-input]');
     const submit = async text => { await input.fill(text); await input.press('Enter'); await ready(page); };
@@ -134,7 +134,7 @@ test('prefix results, original highlights, facets and every page agree across bo
         const wanted = expected.hits.slice(offset, offset + 5);
         assert.deepEqual(rows.map(row => row.id), wanted.map(hit => hit.id), label);
         assert.equal(await page.locator('[data-raveldex-status]').innerText(), expected.total
-          ? `${expected.total} results. Showing ${offset + 1}–${offset + rows.length}.` : 'No results.', label);
+          ? `${expected.total} ${expected.total === 1 ? 'result' : 'results'}. Showing ${offset + 1}–${offset + rows.length}.` : 'No results. Try a different search.', label);
         for (const [i, row] of rows.entries()) {
           assert.ok(Math.abs(row.score - wanted[i].score) < 1e-10, `${label}: score`);
           const source = byId.get(row.id).text.body;
@@ -214,7 +214,7 @@ test('prefix results, original highlights, facets and every page agree across bo
 test('workbench pages and open Inspector have no automated WCAG A/AA violations', async () => {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   try {
-    for (const route of ['', 'demo/']) {
+    for (const route of ['demo/']) {
       await page.goto(new URL(route, base).href); await ready(page);
       await page.addScriptTag({ path: new URL('../../node_modules/axe-core/axe.min.js', import.meta.url).pathname });
       const code = page.locator('pre[tabindex="0"]').first();
@@ -245,17 +245,26 @@ test('loading, initialization failure and retry preserve a useful page', async (
   const gate = new Promise(resolve => { release = resolve; });
   await page.route('**/demo/corpus.json', async route => { await gate; await route.fulfill({ status: 503, body: 'Unavailable' }); });
   try {
-    await page.goto(base, { waitUntil: 'domcontentloaded' });
+    await page.goto(new URL('demo/', base).href, { waitUntil: 'domcontentloaded' });
     assert.ok(await page.getByRole('button', { name: 'module worker', exact: true }).isDisabled());
-    assert.ok(await page.getByRole('link', { name: 'Get started', exact: true }).isVisible());
+    assert.ok(await page.getByRole('link', { name: 'Getting started', exact: true }).isVisible());
     release();
     await page.waitForFunction(() => document.querySelector('[data-pilot-search]').dataset.pilotState === 'error');
     assert.ok(await page.getByRole('button', { name: 'Retry loading guides' }).isVisible());
+    assert.equal(await page.locator('[data-pilot-status]').textContent(), 'The guides could not be loaded. Use Retry loading guides or browse the guides.');
+    assert.equal(await page.locator('[data-pilot-diagnostics]').isVisible(), true);
+    await page.locator('[data-pilot-diagnostics] summary').focus(); await page.keyboard.press('Enter');
+    assert.equal(await page.locator('[data-pilot-error]').textContent(), 'CORPUS_OR_INITIALIZATION_ERROR');
     await page.unroute('**/demo/corpus.json');
     await page.getByRole('button', { name: 'Retry loading guides' }).click(); await ready(page);
     assert.equal(await page.locator('[data-raveldex-ui]').count(), 1);
-    assert.equal(await page.locator('[data-raveldex-input]').inputValue(), 'module worker');
-    assert.ok(await page.getByRole('button', { name: 'Retry loading guides' }).isHidden());
+    assert.equal(await page.locator('[data-raveldex-input]').inputValue(), '');
+    const retry=page.getByRole('button', { name: 'Retry loading guides' });
+    assert.equal(await retry.evaluate(node=>node===document.activeElement&&!node.hidden),true);
+    assert.equal(await retry.getAttribute('aria-disabled'),'true');
+    await page.locator('[data-raveldex-input]').focus();
+    assert.ok(await retry.isHidden());
+    assert.equal(await page.locator('[data-pilot-diagnostics]').isVisible(), false);
   } finally { release(); await page.close(); }
 });
 
@@ -264,9 +273,9 @@ test('without JavaScript the homepage keeps documentation and an honest search f
   try {
     const page = await context.newPage(); await page.goto(base);
     assert.ok(await page.locator('noscript p').isVisible());
-    assert.match(await page.locator('noscript p').innerText(), /JavaScript is required for this search demo/);
+    assert.match(await page.locator('noscript p').innerText(), /Search needs JavaScript/);
     assert.ok(await page.getByRole('link', { name: 'Get started', exact: true }).isVisible());
-    assert.ok(await page.locator('.search-workbench__queries').isHidden());
+    assert.equal(await page.locator('.search-workbench__queries').count(), 0);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
     await page.getByRole('link', { name: 'Get started', exact: true }).click();
     assert.equal(new URL(page.url()).pathname, '/raveldex/guide/overview/');

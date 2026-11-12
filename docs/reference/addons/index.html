@@ -156,4 +156,18 @@ await engine.dispose();
 <p>Use <code>/addons/query-syntax</code> when your search box should accept operators, field names, phrases and prefixes. Parse the input in your application, then pass the resulting typed query to the engine. The parser does not change ordinary strings or the built-in UI. Invalid syntax returns an error with a source span rather than falling back to plain search. See <a href="/raveldex/reference/query-syntax/">the grammar and example</a>.</p>
 <h2 id="explicit-record-patches">Explicit record patches</h2>
 <p>Use <a href="/raveldex/reference/record-patch/"><code>createPatch</code></a> to change selected whole fields without assembling the rest of a record yourself. It needs a direct engine, source providers for every text field and the revision you observed. It uses the ordinary atomic replacement operation and keeps no extra source copy. It is a helper, not an <code>AddonRegistration</code>.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+<h2 id="optional-feature-refusal-and-recovery">Optional-feature refusal and recovery</h2>
+<p>Choose features explicitly and expose only the controls that their registered
+providers can serve. Missing phrases/positions/snippets/facets produce typed
+capability failures even when a query has no hits; that is different from an empty
+successful search. Preserve the original code and explain the unavailable setup,
+then explicitly change the registrations or remove the corresponding control.
+Do not install a provider, retain originals, change analyzer, query a network
+service or write storage as an implicit recovery step.</p>
+<p>Suggestions are separate vocabulary completions, not filtered result counts.
+Invalid syntax, unsupported analyzer combinations, bounded prefix expansions,
+work/queue limits and cancellation keep their declared refusals. Preserve entered
+text and selections; offer a valid smaller request or the existing browse path.
+The <a href="/raveldex/reference/hosts/#recovery-choices-in-your-application">host recovery guide</a> distinguishes
+read retries, storage refusals and unconfirmed writes. Each feature guide above defines the capability and bounds its requests need.</p>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

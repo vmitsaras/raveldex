@@ -4,11 +4,15 @@ The intended publishing source is **GitHub Pages → Deploy from a branch → ma
 
 ## Local workflow
 
-The Search Workbench design is authored in `Home.astro`, `Demo.astro`, the shared `SearchWorkbench.astro`, `Layout.astro`, `styles.css` and `workbench.css`. `pages.mjs` owns their public routes. The previous `index.md` is retained as the pre-redesign content baseline; it is no longer rendered. Edit the Astro sources to change the homepage. The complete core example is still taken from README's executable quick-start block.
+The Search Workbench design is authored in `Home.astro`, `Demo.astro`, the shared `SearchWorkbench.astro`, `Layout.astro`, `styles.css` and `workbench.css`. `pages.mjs` owns their public routes. Edit the Astro sources to change the homepage. The complete core example is still taken from README's executable quick-start block.
 
-Home and demo load the same real packed-package browser bundle. Home starts with `module worker`, uses one hit per page and requests one snippet of at most 160 UTF-16 units through existing provider options. Counts, omission notices, category selection, pagination and Inspector remain visible. The dedicated demo retains its empty-query start and full snippets. Only the dedicated demo exposes representation, query-mode, worker and teardown controls.
+Home embeds the unchanged installed inline browser starter: try `walking guide`,
+filter by topic and follow a real guide. Its five-interface chooser leads to the
+complete galleries. The Workbench lives at `demo/` for exploring guide queries,
+Inspector and advanced source/worker settings. The homepage no longer initializes
+that engineering demo. Preview browse links and the chooser work without JavaScript.
 
-Home and the ordinary demo default to final-word prefix search: earlier words are exact, and the final word expands from two normalized Unicode code points. Shorter endings remain exact. Advanced settings also offer exact-word and strict-phrase modes. The frozen qualification pilot and integrations omitting the UI `mode` retain exact-word search.
+The Workbench defaults to final-word prefix search: earlier words are exact, and the final word expands from two normalized Unicode code points. Shorter endings remain exact. Advanced settings also offer exact-word and strict-phrase modes. The frozen qualification pilot and integrations omitting the UI `mode` retain exact-word search.
 
 Use Node 24 and npm in a source checkout. The pinned Astro toolchain renders the explicit public source list in [pages.mjs](pages.mjs). The browser demo is bundled from a real locally packed/installed core package. No registry release is needed.
 
@@ -23,9 +27,9 @@ Open `http://127.0.0.1:4174/raveldex/`. Use `npm run pages:preview -- --port 417
 
 `pages:build` compiles package output, then generates the site. `pages:generate` reuses existing compiler output; run it only after a successful package build. `pages:check` verifies generated/source identities, local links/fragments and the publishable inventory. Source changes require regeneration. Package `build` and `prepack` remain separate from site generation.
 
-For Astro integration onboarding, follow [the existing fixture walkthrough](../examples/astro/README.md). It includes paired local packages, isolated installation, root and `/docs/` builds/previews and cleanup. The documentation site does not turn that qualification fixture into a production starter.
+For Astro integration onboarding, follow [the existing fixture walkthrough](../examples/astro/README.md). It includes matching core and Astro packages, isolated installation, root and `/docs/` builds/previews and cleanup. The documentation site does not turn that qualification fixture into a production starter.
 
-For complete consumer integrations, use the [inline solution gallery](Inline.astro) and its [browser](../examples/inline-browser/README.md) and [Astro](../examples/inline-astro/README.md) starters. The gallery runs an unchanged browser starter built against a fresh installed private core tarball. `starters.mjs` explicitly lists every source; the generator exposes text copies, escaped Astro source views and complete exact source archives under `example-files/`. Astro source must use an escaped view because Jekyll would parse its frontmatter header; public file names also avoid Jekyll's reserved leading underscores. It reuses only the pinned esbuild tool for the preview build. No recursive repository copy or change to the Workbench corpus is involved. Run `node --test test/pages/inline-starter.test.mjs` after regenerating to check the gallery, exact downloads and live preview.
+For complete consumer integrations, use the [inline solution gallery](Inline.astro) and its [browser](../examples/inline-browser/README.md) and [Astro](../examples/inline-astro/README.md) starters. The gallery runs an unchanged browser starter built against a fresh installed core tarball. `starters.mjs` explicitly lists every source; the generator exposes text copies, escaped Astro source views and complete exact source archives under `example-files/`. Astro source must use an escaped view because Jekyll would parse its frontmatter header; public file names also avoid Jekyll's reserved leading underscores. It reuses only the pinned esbuild tool for the preview build. No recursive repository copy or change to the Workbench corpus is involved. Run `node --test test/pages/inline-starter.test.mjs` after regenerating to check the gallery, exact downloads and live preview.
 
 The [documentation modal gallery](Modal.astro) provides complete [browser](../examples/modal-browser/README.md) and [Astro](../examples/modal-astro/README.md) projects. Its installed browser preview loads on first open and links previews to actual generated heading IDs. The same explicit source/archive inventory covers both modal starters. Run `node --test test/pages/modal-starter.test.mjs` after regeneration for the modal preview, no-JavaScript browsing and exact downloads.
 
@@ -61,3 +65,20 @@ The [directory gallery](Directory.astro) adds complete [browser](../examples/dir
 The [rich-results gallery](Cards.astro) adds one complete [browser project](../examples/cards-browser/README.md) with explicit metadata mapping, two authored local SVGs and native layout/density/image controls. Its fourteen exact source files/archive and installed `examples/cards-preview/` use the same strict registry. Images start off; the preview server serves approved SVG paths as image/svg+xml. Run `node --test test/pages/cards-starter.test.mjs` for downloads/native pages/CSS/real routes/no-JavaScript behavior, alongside the documented full suite. Copied offline root/help builds and edited data/CSS are in `test/consumer/cards-starter.test.mjs`; runtime projection/image/lifecycle checks are in `test/ui/directory-cards.test.mjs`. Select available chrome/chromium/webkit with `RAVELDEX_CARDS_STARTER_BROWSER` and `RAVELDEX_DIRECTORY_CARDS_BROWSER`. Tests record the browser's native two-link traversal chord; macOS WebKit may use Option+Tab without changing preferences. Human AT/physical input/real zoom/Safari/device qualification remains separate.
 
 The five galleries share the static `SolutionChooser.astro`, explicitly copied and hashed by the Pages builder. The examples index compares all five presentations and eight installed projects; the chooser adds no hydration. Run `node --test test/pages/solutions-qualification.test.mjs` after generation for exact inventories, independent native full result sets, public-output CSS/focus and actual dropdown/rich behavior. `RAVELDEX_FAMILY_BROWSER=chrome|chromium|webkit RAVELDEX_FAMILY_REPORT=/absolute/report.json node --test --test-concurrency=1 --test-timeout=180000 test/consumer/family-qualification.test.mjs` runs the separate installed twenty-group body-only state/query/revision/lifecycle matrix (directory/cards register filters/facets). It does not replace the configured snippet/section/direct-worker/source-offset or fresh copied-project suites. Keep screenshots and DOM/serialized/request metrics separate from human AT, physical input, actual zoom and memory/paint/capacity claims; the family evidence records those scopes and any capture-tool limitations.
+
+The usage Workbench derives a bounded plain-text section overview for ordinary
+results. Its original native snippet/score hooks stay intact and the original
+excerpts/highlights/scores are deliberately exposed in Inspector. The indexed
+records, source offsets and qualification corpus do not change. The demo owns
+and disconnects this projection observer before UI teardown; core/consumer
+presenters do not parse Markdown. `readable-results.mjs` is an explicit hashed
+Pages input. `test/pages/demo-clarity.test.mjs` covers display safety/disclosure
+and repeated remount; `test/tooling/usage-corpus.test.mjs` covers original bodies.
+
+The five galleries use `StarterSetup.astro` for exact per-project download,
+registry install, content replacement and style-file steps. The explicit starter
+registry still owns source inventories; gallery components retain their platform
+requirements, CSS recipes and support limits. The Workbench controls use everyday
+labels while keeping their stored values and data hooks. Restart or a setting
+change retains the query, clears category and returns to page one; Stop removes
+controls and releases the application owner.

@@ -2,7 +2,7 @@
 
 Choose the result content your application needs, then choose the Raveldex surface that already supports it. The result title and destination are the primary action; available context, excerpts and metadata support that action. Native identity, order, exact totals and page boundaries remain authoritative.
 
-**RX-9109 decision: keep the current five surface contracts.** Inline/modal offer optional query-derived context; rich directory offers authored display metadata. This decision introduces no renderer callback, shared display record extension, mandatory provider, automatic image loading or engine-side display index. Start with [installation and surface selection](HOSTS.md#consumer-capability-matrix).
+Inline/modal offer optional query-derived context; rich directory offers authored display metadata. The five surface contracts use no renderer callback, shared display record extension, mandatory provider, automatic image loading or engine-side display index. Start with [installation and surface selection](HOSTS.md#consumer-capability-matrix).
 
 ## Source-verified capability matrix
 

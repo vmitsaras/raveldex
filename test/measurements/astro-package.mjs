@@ -149,7 +149,7 @@ async function browserProbe(browser, origin, base, expected, fixture) {
     assert.equal(requested.filter(path => path.includes('documents-')).length, cancelledDisplayRequests + 1);
     const input = page.getByRole('searchbox', { name: 'Search documentation', exact: true }); assert.equal(await input.count(), 1);
     await input.fill('atomic'); await input.press('Enter');
-    await page.waitForFunction(() => document.querySelector('[data-raveldex-status]')?.textContent === '1 results. Showing 1–1.');
+    await page.waitForFunction(() => document.querySelector('[data-raveldex-status]')?.textContent === '1 result. Showing 1–1.');
     assert.equal(await input.evaluate(node => node === document.activeElement), true);
     assert.deepEqual(await page.locator('[data-raveldex-result]').evaluateAll(nodes => nodes.map(node => node.dataset.raveldexResult)), ['guide:atomic']);
     const actualResultLink = page.locator('[data-raveldex-result-title]').first();
@@ -165,7 +165,7 @@ async function browserProbe(browser, origin, base, expected, fixture) {
     await page.waitForFunction(() => document.querySelector('[data-raveldex-status]')?.textContent === 'Search failed. Retry is available.');
     assert.equal(await input.evaluate(node => node === document.activeElement), true);
     await page.getByRole('button', { name: 'Retry search', exact: true }).click();
-    await page.waitForFunction(() => document.querySelector('[data-raveldex-status]')?.textContent === '1 results. Showing 1–1.');
+    await page.waitForFunction(() => document.querySelector('[data-raveldex-status]')?.textContent === '1 result. Showing 1–1.');
     await page.setViewportSize({ width: 320, height: 740 });
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     await page.addScriptTag({ content: axe.source }); const audit = await page.evaluate(async () => {
@@ -183,7 +183,7 @@ async function browserProbe(browser, origin, base, expected, fixture) {
     await page.getByRole('button', { name: 'Load search data', exact: true }).click(); await page.waitForFunction(() => document.body.dataset.searchState === 'ready');
     await page.getByRole('button', { name: 'Open search', exact: true }).click(); await page.waitForFunction(() => document.querySelector('[data-raveldex-ui]')?.getAttribute('aria-busy') === 'false');
     await page.getByRole('searchbox', { name: 'Search documentation', exact: true }).fill('atomic');
-    await page.waitForFunction(() => document.querySelector('[data-raveldex-status]')?.textContent === '1 results. Showing 1–1.');
+    await page.waitForFunction(() => document.querySelector('[data-raveldex-status]')?.textContent === '1 result. Showing 1–1.');
     await page.locator('[data-raveldex-result-title]').first().click(); await page.waitForURL(origin + base + 'guide/atomic/');
     assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), 'Atomic publication');
     assert.equal(await page.locator('[data-document-body]').innerText(), fixture.entries.find(entry => entry.slug === 'atomic').record.text.body);

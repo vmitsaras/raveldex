@@ -1,7 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import SolutionChooser from './SolutionChooser.astro';
-import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
 <Layout frontmatter={{ title: 'Ready to use inline search' }}>
@@ -10,21 +10,19 @@ const base = '/raveldex/';
   <p>Add a search field, highlighted excerpts, topic filters and more results to an ordinary page. Start with a complete browser or Astro project, replace its explicit guide records and adjust a few CSS properties.</p>
   <p>Use inline search when results belong in the page. For search that opens from a button, choose the <a href={base + 'examples/modal/'}>documentation modal</a>.</p>
   <p>For a header field with a few page links and a complete results route, choose the <a href={base + 'examples/dropdown/'}>compact header starter</a>.</p>
-  <p>These starters use the optional inline interface with direct execution, source snippets and string facets. They keep one result per supplied page and exact matching totals. They do not crawl HTML. Core and the Astro integration are currently private, unpublished packages supplied as matching local tarballs.</p>
+  <p>These starters use the optional inline interface with direct execution, source snippets and string facets. They keep one result per supplied page and exact matching totals. They do not crawl HTML.</p>
   <p>For a resource library with checkbox groups, selected chips, complete native pages and optional URL replay, use the <a href={base + 'examples/directory/'}>faceted directory</a>.</p>
   <h2 id="try-inline">Try the browser starter</h2>
   <p>Try <code>walking guide</code>, choose a type of guide to narrow the matches, and follow a result to its complete page. The guide links also work without JavaScript. This preview runs the installed browser starter shown below.</p>
   <p><a href={base + 'examples/inline-preview/'}>Open the full preview</a></p>
   <iframe src={base + 'examples/inline-preview/'} title="Inline search starter preview" loading="lazy" height="720" style="width: 100%; border: 1px solid currentColor; border-radius: .5rem;"></iframe>
   <h2 id="copy-inline">Choose a complete starter</h2>
-  <p>Use Node 24 and npm for the documented setup. The browser project uses esbuild 0.28.2; the Astro project uses Astro 7.3.2 and the existing static search loader. Serve the built output over HTTP or HTTPS. Each guide covers local package installation, changed deployment bases, loading failures, retry and cleanup.</p>
+  <p>Snippets need Intl.Segmenter. Astro also needs Web Crypto over HTTPS or localhost.</p>
+  <details><summary>Data and browser requirements</summary>
+    <p>Use Node 24 and npm for the documented setup. The browser project uses esbuild 0.28.2; the Astro project uses Astro 7.3.2 and the existing static search loader. Serve the built output over HTTP or HTTPS. Each guide covers package installation, changed deployment bases, loading failures, retry and cleanup.</p>
   <p>Supply an explicit list of public pages with stable IDs, titles, URLs and original text; the starter guides show the exact records to replace. Both examples select source snippets and a string topic facet. Their snippets require <code>Intl.Segmenter</code>; the Astro artifact loader also requires Web Crypto over HTTPS or localhost. Title/link-only integrations can omit snippets and facets by removing their matching UI options and registrations together.</p>
-  {STARTERS.filter(starter => starter.family === 'inline').map(starter => <section aria-labelledby={'starter-' + starter.id}>
-    <h3 id={'starter-' + starter.id}>{starter.title}</h3>
-    <p><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base + starterArchive(starter.id)} download>Download the complete starter</a></p>
-    <p>Extract the archive into an empty directory with <code>tar -xzf starter.tar.gz --strip-components=1</code>, replacing the archive name with the downloaded file. Read <code>README.md</code> there before installing the local package tarballs.</p>
-    <details><summary>View exact source files</summary><ul>{starter.files.map(path => <li><a href={base + starterSource(starter.id, path)}>{path}</a></li>)}</ul></details>
-  </section>)}
+  </details>
+  <StarterSetup family="inline" />
   <h2 id="inline-theme">Change the appearance</h2>
   <ol>
     <li>Copy and install one complete starter using its setup guide. Run it once and search the sample content before changing the CSS.</li>

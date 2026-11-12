@@ -77,7 +77,7 @@ test('trusted automated activation and Tab capture separate pre-default focus fr
   const saved = JSON.parse(await page.locator('#focus-trace').inputValue());
   assert.equal(saved.recording, false); assert.equal(saved.current.focus.id, 'focus-stop');
   const count = saved.rows.length;
-  await page.locator(hook('input')).fill('atomic'); await settled('1 results. Showing 1–1.');
+  await page.locator(hook('input')).fill('atomic'); await settled('1 result. Showing 1–1.');
   assert.equal((await snapshot()).rows.length, count);
   assert.equal(await page.locator('#focus-trace').inputValue(), JSON.stringify(saved, null, 2));
 });

@@ -67,7 +67,7 @@ export function resultNodes(doc: Document, captured: CapturedUIOptions, result: 
       }
       const omissions = evidence.snippetOmissions;
       if (!omissions || !Number.isSafeInteger(omissions.unshownMatches) || omissions.unshownMatches < 0 || omissions.unshownMatches > 4_096) fail('INCOMPATIBLE_CAPABILITY', 'snippets.omissions');
-      if (omissions.unshownMatches) item.append(element(doc, 'p', 'snippet-omissions', `${omissions.unshownMatches} matching occurrences are outside the displayed highlights.`));
+      if (omissions.unshownMatches) item.append(element(doc, 'p', 'snippet-omissions', `Matches not highlighted: ${omissions.unshownMatches}. Open the page to read more.`));
     }
     fragment.append(item);
   }
@@ -110,11 +110,11 @@ export function facetUpdates(doc: Document, controls: readonly FacetControl[], r
     }
     if (current !== undefined && !seen.has(current)) {
       selected = String(next); values.set(selected, current);
-      const option = doc.createElement('option'); option.value = selected; option.textContent = `${current || '(empty string)'} (not in displayed buckets)`; nodes.append(option);
+      const option = doc.createElement('option'); option.value = selected; option.textContent = `${current || '(empty string)'} (not shown in this list)`; nodes.append(option);
     }
     return () => {
       control.select.replaceChildren(nodes); control.values = values; control.select.value = selected;
-      control.summary.textContent = `${field.distinctValueTotal} distinct values; ${field.omittedBucketCount} buckets omitted. Counts include the current filters.`;
+      control.summary.textContent = `Filter choices: ${field.distinctValueTotal}. Not shown: ${field.omittedBucketCount}. Counts reflect the current filters.`;
     };
   });
 }

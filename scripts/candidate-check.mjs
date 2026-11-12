@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { copyFile, mkdir, mkdtemp, readFile, readdir, realpath, writeFile } from 'node:fs/promises';
 import { tmpdir, release } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, posix, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { build, version as esbuildVersion } from 'esbuild';
@@ -65,8 +65,9 @@ export function validateCandidateManifest(metadata, files) {
   assert.equal(metadata.name, NAME);
   assert.equal(metadata.type, 'module');
   assert.equal(metadata.license, 'MIT');
-  assert.match(metadata.version, /^0\.1\.0-rc\.[0-9]+$/, 'explicit native 0.1 release-candidate version');
-  assert.equal(metadata.private, true, 'candidate preparation retains the publication guard');
+  assert.equal(metadata.version, '1.0.0', 'explicit stable 1.0.0 release version');
+  assert.equal(metadata.private, false, 'release metadata must be publishable');
+  assert.deepEqual(metadata.publishConfig, { access: 'public' }, 'explicit public npm access');
   assert.deepEqual(metadata.engines, { node: '>=22' });
   assert.deepEqual(Object.keys(metadata.exports).sort(), PUBLIC_PATHS, 'explicit public entrypoint contract');
   assert.deepEqual(metadata.dependencies ?? {}, {}, 'no runtime dependencies');
@@ -90,7 +91,7 @@ export function validateCandidateManifest(metadata, files) {
     assert.ok(!path.includes('..') && !path.startsWith('/'), `unsafe tarball member ${path}`);
     assert.ok(['README.md', 'LICENSE', 'CHANGELOG.md', 'package.json'].includes(path)
       || /^dist\/(?:index\.(?:js|d\.ts)|(?:core|addons\/(?:patch|query-syntax|proximity|literal|identifiers|synonyms|suggestions|typo|phrases|positions|filters|facets|metadata|inspector|evidence|snippets|sections|ui)|adapters\/(?:worker|snapshots|indexeddb)|integrations\/(?:localsearch|languages))\/.+\.(?:js|d\.ts|css))$/.test(path)
-      || /^docs\/(?:api\/[^/]+\.md|api\/examples\/(?:[^/]+\.mjs|README\.md)|release\/[^/]+\.md|support\/RX-4003\.md)$/.test(path)
+      || /^docs\/api\/(?:[^/]+\.md|examples\/(?:[^/]+\.mjs|README\.md))$/.test(path)
       || path === 'docs/api/examples/consumer-themes.css'
       || path === 'dist/integrations/localsearch/LICENSE.LocalSearch', `unexpected tarball member ${path}`);
     assert.doesNotMatch(path, /(?:^|\/)(?:node_modules|src|test|bench|\.github|\.env)(?:\/|$)|\.map$/);
@@ -98,6 +99,23 @@ export function validateCandidateManifest(metadata, files) {
   assert.ok(paths.has('README.md') && paths.has('LICENSE'));
   assert.ok(paths.has('dist/integrations/localsearch/LICENSE.LocalSearch'), 'adapted code license included');
   return { status: 'Pass', publicEntrypoints: PUBLIC_PATHS, runtimeDependencies: [], privatePathAccess: 'Blocked by explicit exports map', independentCSS: metadata.exports[CSS] };
+}
+
+/** Installed guidance must not require missing source-checkout files. */
+export function validateDocumentationLinks(documents, files) {
+  const paths = new Set(files.map(file => file.path));
+  let checked = 0;
+  for (const document of documents) {
+    const prose = document.text.replace(/```[\s\S]*?```/g, '');
+    for (const match of prose.matchAll(/\[[^\]\n]*\]\(([^\s)]+)(?:\s+"[^"]*")?\)/g)) {
+      const link = match[1];
+      if (/^(?:https?:|mailto:|data:|#)/i.test(link)) continue;
+      const target = posix.normalize(posix.join(posix.dirname(document.path), decodeURIComponent(link.split('#')[0])));
+      assert.ok(paths.has(target), `Missing packaged documentation target: ${document.path}: ${link}`);
+      checked++;
+    }
+  }
+  return checked;
 }
 
 async function allFiles(directory, prefix = '') {
@@ -125,6 +143,9 @@ async function installCandidate(output) {
   assert.deepEqual(Object.keys(tree.dependencies), [NAME]);
   assert.deepEqual(tree.dependencies[NAME].dependencies ?? {}, {});
   assert.deepEqual(await allFiles(installed), packed.files.map(file => file.path).sort(), 'installed members match packed allowlist');
+  const documents = await Promise.all(packed.files.filter(file => file.path.endsWith('.md')).map(async file =>
+    ({ path: file.path, text: await readFile(join(installed, file.path), 'utf8') })));
+  const documentationLinks = validateDocumentationLinks(documents, packed.files);
   const identities = [];
   for (const file of packed.files) {
     const bytes = await readFile(join(installed, file.path));
@@ -132,8 +153,8 @@ async function installCandidate(output) {
     assert.deepEqual(bytes, await readFile(join(REPO_ROOT, file.path)), `installed/current identity ${file.path}`);
     identities.push({ path: file.path, bytes: bytes.length, sha256: digest(bytes) });
   }
-  return { directory, installed, metadata, report: { ...manifest, name: metadata.name, version: metadata.version, private: metadata.private,
-    tarball, sha256: digest(await readFile(tarball)), integrity: packed.integrity, tarballBytes: packed.size,
+  return { directory, installed, metadata, report: { ...manifest, name: metadata.name, version: metadata.version, private: metadata.private, publishConfig: metadata.publishConfig,
+    tarball, sha256: digest(await readFile(tarball)), integrity: packed.integrity, tarballBytes: packed.size, documentationLinks,
     unpackedBytes: packed.unpackedSize, installedDirectory: installed, exports: metadata.exports, files: identities, npmTree: tree } };
 }
 

@@ -2,20 +2,13 @@
 <p>Copy this complete static Astro project to build seven explicit public resource pages and an optional filterable directory. Enable the directory, then search <code>walking resource</code>: seven pages match, with three on each native result page. Use the resource-type/topic checkboxes, remove selected chips, navigate Back/Forward and follow a real resource link. All browse links work before enabling search and without JavaScript.</p>
 <p>The project reuses the source-format static search loader, native filters/facets, the directory controller and its separate view. It adds no crawler, SSR search service, development watcher, card/image renderer, sorting or storage.</p>
 <h2 id="copy-and-install-matching-packages">Copy and install matching packages</h2>
-<p>Use Node 22.12 or later (Node 24 is used for the walkthrough), npm and the pinned Astro 7.3.2 tooling. Core and the Astro integration are private, unpublished matching <code>0.1.0-rc.0</code> tarballs. From an authorized source checkout after <code>npm ci</code>:</p>
-<pre><code class="language-sh">repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-directory-astro-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-directory-astro.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-npm run astro:pack -- --output "$packages/astro"
-cp -R "$repo/examples/directory-astro/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz" "$packages/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz"
+<p>Use Node 22.12 or later (Node 24 is used for this walkthrough), npm and the starter’s pinned Astro <code>7.3.2</code>. Extract the complete project with <code>tar -xzf directory-astro.tar.gz --strip-components=1</code> into an empty directory and enter it. From a checkout, copy <code>examples/directory-astro/</code> into a new project instead.</p>
+<pre><code class="language-sh">npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0
 npm run build
 npm run preview -- --host 127.0.0.1 --port 4180
 </code></pre>
-<p>Open <code>http://127.0.0.1:4180/</code> and choose <strong>Enable directory</strong>. Stop with Ctrl+C. For a downloaded archive, extract into an empty directory with <code>tar -xzf directory-astro.tar.gz --strip-components=1</code>, enter it and install both supplied tarballs with <code>npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/core.tgz /absolute/astro.tgz</code>. The first install may use registry access or an existing cache for pinned Astro tooling. Keep its generated lockfile and use <code>npm ci</code> afterward.</p>
+<p>Keep the generated lockfile and use <code>npm ci</code> afterward. To test a local build, substitute matching core and Astro tarball paths in the install command.</p>
+<p>Open <code>http://127.0.0.1:4180/</code> and choose <strong>Enable directory</strong>. Stop with Ctrl+C.</p>
 <p>The source loader needs Web Crypto over HTTPS or localhost. The browser view uses native forms, checkboxes and details. There is no Popover/dialog or <code>Intl.Segmenter</code> requirement for these title/link results. <code>configuration.mjs</code> explicitly installs filters/facets and original title/body source for static reconstruction; no snippet/source UI is selected.</p>
 <h2 id="build-at-your-deployment-base">Build at your deployment base</h2>
 <pre><code class="language-sh">RAVELDEX_ASTRO_BASE=/help/ npm run build
@@ -40,4 +33,4 @@ RAVELDEX_ASTRO_BASE=/help/ npm run preview -- --host 127.0.0.1 --port 4180
 </code></pre>
 <p>Reload, enable and search <code>walking resource</code> again. Seven pages still match, three appear per page, checkboxes/chips retain their meaning and links reach real destinations. Inspect visible Tab focus. Update matching dark-theme overrides too; background, color, muted, border, focus and padding are additional supported properties. Private <code>--_</code> variables/data hooks are not customization APIs.</p>
 <p>Filter resources uses a native details disclosure. Close filters/Escape restores summary focus; resizing does not close it. Native Tab/Space/Enter, stable checkbox focus, adjacent chip focus, Clear all, selected zero values, no-results recovery and Refresh after a changed revision belong to the view. Initialization asset failure retains ordinary links and Retry. Check these flows with your own data/theme, including long/RTL labels, narrow layouts, dark/forced colors and reduced motion. Automated input/axe/viewport checks are separate from human AT, physical IME/touch/mobile keyboards, actual browser zoom, Safari/device support and hosted deployment.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

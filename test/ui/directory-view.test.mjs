@@ -58,6 +58,8 @@ test('empty directory feedback distinguishes safe query text, selected filters a
   await page.evaluate(()=>window.directoryView.view().clear());await ready('');await openFilters();await checkbox('kind','absent').check();await ready('');
   assert.equal(await page.locator('[role=status]').textContent(),'No results with the selected filters. Change or remove a filter, or clear all to browse resources.');
   assert.equal(await checkbox('kind','absent').isChecked(),true);assert.equal(await page.getByRole('button',{name:'Remove Type: absent',exact:true}).count(),1);
+  assert.equal(await page.locator('[data-raveldex-directory-heading]').isVisible(),false);
+  assert.equal(await page.locator('[data-raveldex-directory-navigation]').isVisible(),false);
   await page.evaluate(async()=>{const f=window.directoryView;await f.engine.remove(f.documents.map(d=>d.id));await f.view().clear();});await ready('');
   assert.equal(await page.locator('[role=status]').textContent(),'No resources to show. Use Refresh results to check for updates.');
   const before=await page.evaluate(()=>window.directoryView.calls.length),refresh=page.getByRole('button',{name:'Refresh results',exact:true});

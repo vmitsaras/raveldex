@@ -15,7 +15,7 @@ test('offline installed package and minified consumer preserve complete filter/p
   assert.ok(report.compiledFiles.filesVerified > 0);
   assert.ok(report.compiledFiles.mapping.every(file => file.sourcePath.endsWith('.ts')));
   assert.equal(report.corpus.records, 34);
-  assert.equal(report.package.private, true);
+  assert.equal(report.package.private, false);
 });
 
 test('complete import graphs keep utility/core boundaries, deny private paths and perform no guarded startup access', () => {

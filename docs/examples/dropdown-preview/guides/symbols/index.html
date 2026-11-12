@@ -15,7 +15,14 @@
           <button type="button" data-search-modal-trigger hidden>Open expanded search</button>
           <p class="header-search__status" data-search-status role="status">Browse the guides below while search becomes available.</p>
           <button type="button" data-search-retry hidden>Load search again</button>
-          <div data-search-root><p>Search needs JavaScript. Browse the guide links below.</p></div>
+          <div data-search-root>
+            <form class="header-search__fallback" action="/raveldex/examples/dropdown-preview/search/" method="get" role="search" aria-label="Search all walking guides" hidden>
+              <label for="guide-query">Search walking guides</label>
+              <input type="search" id="guide-query" name="q" maxlength="2048" autocomplete="off">
+              <button type="submit">Search all guides</button>
+            </form>
+            <p>Browse the guide links below at any time.</p>
+          </div>
         </div>
       </div>
     </header>

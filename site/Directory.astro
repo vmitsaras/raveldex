@@ -1,7 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import SolutionChooser from './SolutionChooser.astro';
-import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+import StarterSetup from './StarterSetup.astro';
 const base='/raveldex/';
 ---
 <Layout frontmatter={{title:'Faceted resource directory starters'}}>
@@ -14,13 +14,11 @@ const base='/raveldex/';
   <p><a href={base+'examples/directory-preview/'}>Open the complete resource directory preview</a></p>
   <iframe src={base+'examples/directory-preview/'} title="Resource directory starter preview" loading="lazy" height="820" style="width:100%;border:1px solid currentColor;border-radius:.5rem;"></iframe>
   <h2 id="copy-directory">Copy the complete project</h2>
-  <p>Packages remain private and unpublished; the setup guides install matching local tarballs. Browser uses esbuild 0.28.2; Astro uses Astro 7.3.2 and the source-format static loader. Both explicitly install native filters/facets. Astro also retains original title/body source for artifact reconstruction and needs Web Crypto over HTTPS or localhost. Neither example uses snippets, a worker, a crawler or storage.</p>
-  {STARTERS.filter(s=>s.family==='directory').map(starter=><section aria-labelledby={'starter-'+starter.id}>
-    <h3 id={'starter-'+starter.id}>{starter.title}</h3>
-    <p><a href={base+`examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base+starterArchive(starter.id)} download>Download the complete starter</a></p>
-    <p>Extract into an empty directory with <code>tar -xzf starter.tar.gz --strip-components=1</code>, replacing the archive name, then follow its README. Each project includes all records, build configuration, application lifecycle, styles and real resource routes.</p>
-    <details><summary>View exact source files</summary><ul>{starter.files.map(path=><li><a href={base+starterSource(starter.id,path)}>{path}</a></li>)}</ul></details>
-  </section>)}
+  <p>Uses native controls and explicit public records. Astro also needs Web Crypto over HTTPS or localhost.</p>
+  <details><summary>Data and browser requirements</summary>
+    <p>The setup guides install matching Raveldex packages. Browser uses esbuild 0.28.2; Astro uses Astro 7.3.2 and the source-format static loader. Both explicitly install native filters/facets. Astro also retains original title/body source for artifact reconstruction and needs Web Crypto over HTTPS or localhost. Neither example uses snippets, a worker, a crawler or storage.</p>
+  </details>
+  <StarterSetup family="directory" />
   <h2 id="directory-theme">Change the appearance</h2>
   <ol><li>Copy, install, build and preview one complete project. In Astro, choose Enable directory first.</li><li>Edit the existing <code>.raveldex-directory</code> rule in browser <code>theme.css</code> or Astro <code>src/style.css</code>, loaded after the package stylesheet:</li></ol>
   <pre role="region" tabindex="0" aria-label="Resource directory theme properties"><code>{`.raveldex-directory {

@@ -23,35 +23,31 @@
           <li><strong>typed filters</strong> finds the guide to metadata filters and category counts.</li>
           <li><strong>module worker</strong> finds worker setup.</li>
         </ul>
-        <p>To try an empty search, enter <strong>unmatchedword</strong>. You should see “No results.” Enter a sample query again to bring the results back.</p>
-        <p>Start typing: <strong>source prov</strong> finds words beginning with <strong>prov</strong>. Earlier words must match exactly.</p>
+        <p>To try an empty search, enter <strong>unmatchedword</strong>. You should see “No results. Try a different search.” Enter a sample query again to bring the results back.</p>
+        <p>With the default “Complete the last word” setting, <strong>source prov</strong> finds “source provider”. In whole-word or phrase mode, enter the complete words.</p>
         <div data-pilot-search></div>
         <noscript>JavaScript is required for this demo. Read <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/api/GETTING_STARTED.md">Getting started</a> instead.</noscript>
       </section>
       <details class="docs-pilot__settings">
         <summary>Advanced demo settings</summary>
-        <p>Use these settings to compare how search runs. Changing a setting rebuilds the collection, keeps your query and resets the category and page.</p>
+        <p>Use these settings to compare how search runs. Changing a setting or restarting keeps your query, clears the category and returns to the first page.</p>
         <ul>
-          <li><strong>Representation:</strong> check phrases from original text, or use stored word positions and offsets.</li>
-          <li><strong>Execution:</strong> run directly, or move the engine to a module worker.</li>
-          <li><strong>Query meaning:</strong> complete the final word, require all exact words, or require an adjacent phrase.</li>
+          <li><strong>Find phrases using:</strong> check phrases from original text, or use stored word positions and offsets.</li>
+          <li><strong>Where search runs:</strong> run directly, or move the engine to a module worker.</li>
+          <li><strong>Match words:</strong> complete the final word, require all exact words, or require an adjacent phrase.</li>
         </ul>
         <div class="docs-pilot__controls">
-          <label class="docs-pilot__control">Representation
-            <select data-pilot-representation><option value="source">Original source reanalysis</option><option value="offsets">Stored positions and original offsets</option></select>
-          </label>
-          <label class="docs-pilot__control">Execution
-            <select data-pilot-execution><option value="direct">Direct execution</option><option value="worker">One module worker</option></select>
-          </label>
-          <label class="docs-pilot__control">Query meaning
-            <select data-pilot-mode><option value="prefix">Final-word prefix</option><option value="text">All exact terms</option><option value="phrase">Strict adjacent phrase</option></select>
-          </label>
-          <button type="button" data-pilot-initialize>Reinitialize search</button>
-          <button type="button" data-pilot-destroy>Destroy interface</button>
+          <div class="docs-pilot__control"><label for="demo-representation">Find phrases using</label><select id="demo-representation" data-pilot-representation><option value="source">Original text</option><option value="offsets">Saved word positions</option></select></div>
+          <div class="docs-pilot__control"><label for="demo-execution">Where search runs</label><select id="demo-execution" data-pilot-execution><option value="direct">This page</option><option value="worker">Background worker</option></select></div>
+          <div class="docs-pilot__control"><label for="demo-mode">Match words</label><select id="demo-mode" data-pilot-mode><option value="prefix">Complete the last word</option><option value="text">Match whole words</option><option value="phrase">Match a phrase</option></select></div>
+          <button type="button" data-pilot-initialize>Restart search</button>
+          <button type="button" data-pilot-destroy>Stop search</button>
         </div>
-        <p><strong>Destroy interface</strong> removes the controls. Use <strong>Reinitialize search</strong> to rebuild the collection and bring them back.</p>
+        <p><strong>Stop search</strong> removes the controls. Use <strong>Restart search</strong> to rebuild the collection and bring them back.</p>
       </details>
       <p data-pilot-status role="status">Loading guides…</p>
+      <button type="button" data-pilot-retry hidden>Retry loading guides</button>
+      <details data-pilot-diagnostics hidden><summary>Technical details</summary><p>Error code: <code data-pilot-error></code></p></details>
       <p data-pilot-identity></p>
       <section aria-labelledby="demo-keyboard">
         <h2 id="demo-keyboard">Use the controls</h2>

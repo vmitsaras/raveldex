@@ -155,8 +155,8 @@ async function standaloneProbe(consumer, packedExpected) {
   await command('npm', ['install', prepared.tarball, '--offline', '--ignore-scripts', '--omit=dev', '--no-audit', '--no-fund', '--package-lock=false', '--cache', join(consumer.directory, '.npm-cache')], consumer.directory);
   const installed = join(consumer.directory, 'node_modules/@vmitsaras/raveldex-english');
   const metadata = JSON.parse(await readFile(join(installed, 'package.json'), 'utf8'));
-  assert.equal(metadata.private, true); assert.equal(metadata.version, '0.1.0-rc.0');
-  assert.deepEqual(metadata.peerDependencies, { '@vmitsaras/raveldex': '0.1.0-rc.0' });
+  assert.equal(metadata.private, false); assert.equal(metadata.version, '1.0.0');
+  assert.deepEqual(metadata.peerDependencies, { '@vmitsaras/raveldex': '1.0.0' });
   assert.deepEqual(metadata.dependencies ?? {}, {});
   const tree = JSON.parse((await command('npm', ['ls', '--omit=dev', '--all', '--json'], consumer.directory)).stdout);
   assert.deepEqual(Object.keys(tree.dependencies).sort(), ['@vmitsaras/raveldex', '@vmitsaras/raveldex-english']);
@@ -215,7 +215,7 @@ async function standaloneProbe(consumer, packedExpected) {
   return { status: 'Pass', preparation: prepared.report, installedFiles, graph: standaloneGraph, startup, typedFailures,
     declarations: 'Pass: compiler-emitted public-peer declaration, isolated ES2022 readonly types, no DOM/Node ambient types, private exports refused',
     fullPageComparisons: actual.rows.length, factoryParity: 'Pass: descriptor and complete canonical factory manifest equal the core convenience entry',
-    installation: 'Actual separate private tarball installed offline beside the exact existing core peer; no runtime imports, dependencies or registry lookup',
+    installation: 'Actual separate tarball installed offline beside the exact existing core peer; no runtime imports, dependencies or registry lookup',
     outcome: actual };
 }
 

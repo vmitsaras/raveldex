@@ -2,19 +2,19 @@
 
 Use `@vmitsaras/raveldex-astro` to add search to a static site. You choose the content during the build, and the browser loads the resulting search files when needed. The package includes a static builder, an Astro build hook and a browser loader; core still works without Astro.
 
-Choose [inline, modal, dropdown, directory or rich results](HOSTS.md#consumer-search-interfaces) independently of static delivery. The primary recipe below uses title/link-only inline results with explicit prefix mode; static source reconstruction needs the source providers shown below, while snippets/sections and filters require their own registrations. Complete [inline](../../examples/inline-astro/README.md), [modal](../../examples/modal-astro/README.md) and [directory](../../examples/directory-astro/README.md) Astro projects provide loading/retry and lifecycle wrappers.
+Choose [inline, modal, dropdown, directory or rich results](HOSTS.md#consumer-search-interfaces) independently of static delivery. The primary recipe below uses title/link-only inline results with explicit prefix mode; static source reconstruction needs the source providers shown below, while snippets/sections and filters require their own registrations. Complete [inline](https://github.com/vmitsaras/raveldex/blob/main/examples/inline-astro/README.md), [modal](https://github.com/vmitsaras/raveldex/blob/main/examples/modal-astro/README.md) and [directory](https://github.com/vmitsaras/raveldex/blob/main/examples/directory-astro/README.md) Astro projects provide loading/retry and lifecycle wrappers.
 
 For links to matching headings, supply the [optional heading maps](#optional-heading-maps). The adapter accepts explicit page records, titles and fragment-free directory routes; your application supplies source ranges and renders the target IDs.
 
 ## Install matching packages
 
-In your ESM application, install the core and integration tarballs together. Replace both absolute paths with your prepared files. The integration requires core `0.1.0-rc.0`, Node `>=22.12.0` and Astro `7.3.2` for its build hook:
+In your ESM application, install core and the integration together. The integration requires core `1.0.0`, Node `>=22.12.0` and Astro `7.3.2` for its build hook:
 
 ```sh
-npm install --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz astro@7.3.2
+npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0 astro@7.3.2
 ```
 
-This installs core, the integration and the pinned Astro version. Astro and its dependencies need registry access or a suitable npm cache. If you only use the static builder and client loader, you can omit Astro itself. See [building tarballs](GETTING_STARTED.md#build-tarballs-from-a-source-checkout) if you need to prepare the local files.
+If you only use the static builder and client loader, you can omit Astro itself. Maintainers can also [build matching tarballs](GETTING_STARTED.md#build-tarballs-from-a-source-checkout) to test local changes.
 
 ## Build static search
 

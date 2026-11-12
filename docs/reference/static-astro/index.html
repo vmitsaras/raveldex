@@ -1,11 +1,12 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>STATIC ASTRO · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="static-search-and-astro">Static search and Astro</h1>
 <p>Use <code>@vmitsaras/raveldex-astro</code> to add search to a static site. You choose the content during the build, and the browser loads the resulting search files when needed. The package includes a static builder, an Astro build hook and a browser loader; core still works without Astro.</p>
+<p>Choose <a href="/raveldex/reference/hosts/#consumer-search-interfaces">inline, modal, dropdown, directory or rich results</a> independently of static delivery. The primary recipe below uses title/link-only inline results with explicit prefix mode; static source reconstruction needs the source providers shown below, while snippets/sections and filters require their own registrations. Complete <a href="/raveldex/examples/inline-astro/">inline</a>, <a href="/raveldex/examples/modal-astro/">modal</a> and <a href="/raveldex/examples/directory-astro/">directory</a> Astro projects provide loading/retry and lifecycle wrappers.</p>
 <p>For links to matching headings, supply the <a href="#optional-heading-maps">optional heading maps</a>. The adapter accepts explicit page records, titles and fragment-free directory routes; your application supplies source ranges and renders the target IDs.</p>
 <h2 id="install-matching-packages">Install matching packages</h2>
-<p>In your ESM application, install the core and integration tarballs together. Replace both absolute paths with your prepared files. The integration requires core <code>0.1.0-rc.0</code>, Node <code>&gt;=22.12.0</code> and Astro <code>7.3.2</code> for its build hook:</p>
-<pre><code class="language-sh">npm install --ignore-scripts --no-audit --no-fund /absolute/artifacts/core/vmitsaras-raveldex-0.1.0-rc.0.tgz /absolute/artifacts/astro/vmitsaras-raveldex-astro-0.1.0-rc.0.tgz astro@7.3.2
+<p>In your ESM application, install core and the integration together. The integration requires core <code>1.0.0</code>, Node <code>&gt;=22.12.0</code> and Astro <code>7.3.2</code> for its build hook:</p>
+<pre><code class="language-sh">npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0 astro@7.3.2
 </code></pre>
-<p>This installs core, the integration and the pinned Astro version. Astro and its dependencies need registry access or a suitable npm cache. If you only use the static builder and client loader, you can omit Astro itself. See <a href="/raveldex/guide/overview/#build-tarballs-from-a-source-checkout">building tarballs</a> if you need to prepare the local files.</p>
+<p>If you only use the static builder and client loader, you can omit Astro itself. Maintainers can also <a href="/raveldex/guide/overview/#build-tarballs-from-a-source-checkout">build matching tarballs</a> to test local changes.</p>
 <h2 id="build-static-search">Build static search</h2>
 <p>Start by listing the records you want people to find. Include each record’s text, display title and directory-style route. The builder does not crawl your pages or parse Markdown or HTML, so leave drafts and private content out of this list. Add a source provider for every indexed text field.</p>
 <p>Save the following as <code>search-content.mjs</code> in your application. The later build and browser examples import this shared configuration:</p>
@@ -56,8 +57,8 @@ export default defineConfig({
 <p>Add a <code>&lt;section id="search" aria-label="Documentation search"&gt;&lt;/section&gt;</code> to your page. Put the following in a browser module handled by your bundler and run it after that element exists.</p>
 <p>The loader needs the manifest URL, the build ID you expect and the same configuration used by the builder. It loads the search index first; <code>loadDocuments()</code> fetches the separate title/URL list needed by the UI:</p>
 <pre><code class="language-js">import { loadStaticSearch } from '@vmitsaras/raveldex-astro/client';
-import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
-import '@vmitsaras/raveldex/addons/ui/styles.css';
+import { mountRaveldexInline } from '@vmitsaras/raveldex/addons/ui/inline';
+import '@vmitsaras/raveldex/addons/ui/inline.css';
 import { configuration } from './search-content.mjs';
 
 const loaded = await loadStaticSearch({
@@ -65,17 +66,26 @@ const loaded = await loadStaticSearch({
   expectedBuildId: 'docs-v1',
   configuration,
 });
-const ui = mountRaveldexUI({
-  root: document.querySelector('#search'),
-  engine: loaded.engine,
-  documents: await loaded.loadDocuments(),
-});
+let ui;
+try {
+  const root = document.querySelector('#search');
+  if (!(root instanceof HTMLElement)) throw new Error('Missing search root');
+  ui = mountRaveldexInline({
+    root, engine: loaded.engine,
+    documents: await loaded.loadDocuments(),
+    mode: 'prefix',
+  });
+} catch (error) {
+  await loaded.dispose();
+  throw error;
+}
 // When removing the search component:
 // ui.destroy();
 // await loaded.dispose();
 </code></pre>
-<p>You should see search controls in <code>#search</code>. Searching <code>atomic</code> returns <strong>Atomic updates</strong>, linked to <code>/docs/guide/updates/</code>. The UI uses the loaded engine; it does not fetch the destination page until you follow the link.</p>
+<p>You should see idle search controls in <code>#search</code>. Searching <code>atom</code> returns <strong>Atomic updates</strong>, linked to <code>/docs/guide/updates/</code>. The inline UI borrows the loaded engine; it does not fetch the destination page until you follow the link. Import <code>/addons/ui/inline.css</code> separately and override scoped <code>--raveldex-inline-*</code> properties as in the <a href="/raveldex/reference/hosts/#mount-a-consumer-search-form">consumer recipe</a>.</p>
 <p>Resolve the manifest from the deployment base, as above, so it also works on nested pages. Keep ordinary documentation links available while search loads. If loading fails, offer a retry and keep any working engine until its replacement is ready. The loader checks build/configuration identity, file sizes and hashes. SHA-256 detects corruption or mixed generations, but does not establish whether the sender is trustworthy.</p>
+<p>Once loading publishes an owner, the application must dispose it if display loading or UI mounting fails; the catch above covers that boundary. For cancellation/removal during initialization and user-visible retry, use a complete starter controller. After successful initialization, destroy the mounted UI before disposing its loaded owner.</p>
 <h2 id="optional-heading-maps">Optional heading maps</h2>
 <p>Add <code>pageSections</code> alongside <code>entries</code> in <code>buildStaticSearch</code>, or alongside <code>getEntries</code> in the Astro hook. It is an array of readonly <code>PageSectionPage</code> values from <code>@vmitsaras/raveldex/addons/sections</code>; it is not a field on a record or display document:</p>
 <pre><code class="language-js">const pageSections = [{
@@ -96,7 +106,7 @@ import '@vmitsaras/raveldex/addons/ui/inline.css';
 
 const pageSections = await loaded.loadSections();
 const documents = await loaded.loadDocuments();
-const ui = mountRaveldexInline({ root, engine: loaded.engine, documents, pageSections });
+const ui = mountRaveldexInline({ root, engine: loaded.engine, documents, pageSections, mode: 'prefix' });
 // ui.destroy();
 // await loaded.dispose();
 </code></pre>
@@ -108,4 +118,4 @@ const ui = mountRaveldexInline({ root, engine: loaded.engine, documents, pageSec
 <p>When removing the component, call <code>ui.destroy()</code> first, then <code>await loaded.dispose()</code>, as shown in the comments. The controls disappear, pending display requests are aborted and the owned engine is disposed.</p>
 <p>Use source snapshots in browsers. Native loading requires an exact, application-qualified Node runtime and a matching declaration. A browser rejects native loading rather than silently rebuilding it.</p>
 <p>The hook supports static builds, not <code>astro dev</code>, SSR, route crawling or watchers. Whole-source rebuilds and output sizes remain bounded. See <a href="/raveldex/guide/compatibility/#snapshot-compatibility">snapshot requirements</a>, <a href="/raveldex/guide/limitations/#handle-operation-limits">operation limits</a> and the <a href="/raveldex/reference/astro-package/">full builder/loader API</a>.</p>
-</main><footer class="site-footer"><p>Private preview · Packages not yet published</p><p><a href="https://github.com/vmitsaras/raveldex">Source repository (repository access)</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

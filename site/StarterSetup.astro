@@ -1,0 +1,22 @@
+---
+import { STARTERS, starterSource, starterArchive } from './starters.mjs';
+const { family } = Astro.props;
+const base = '/raveldex/';
+---
+<p>Choose a project for your site. Each download includes the sample content, working pages and styles. Use Node 24 and npm; serve the built files over HTTP or HTTPS.</p>
+{STARTERS.filter(starter => starter.family === family).map(starter => {
+  const astro = starter.id.endsWith('-astro');
+  const stylesheet = astro ? 'src/style.css' : 'theme.css';
+  const install = 'npm install @vmitsaras/raveldex@1.0.0' + (astro ? ' @vmitsaras/raveldex-astro@1.0.0' : '');
+  return <section aria-labelledby={'starter-' + starter.id}>
+    <h3 id={'starter-' + starter.id}>{starter.title}</h3>
+    <p><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base + starterArchive(starter.id)} download>Download the complete starter</a></p>
+    <ol data-starter-steps>
+      <li>In an empty directory, extract <code>{`tar -xzf ${starter.id}.tar.gz --strip-components=1`}</code>. Read the setup guide for deployment paths and preview commands.</li>
+      <li>Install from that directory with <code>{install}</code>, then run <code>npm run build</code> and <code>npm run preview</code> to try the sample content.</li>
+      <li>Replace the public records in <code>content.json</code>, keeping IDs and destination paths stable.{astro && <> Change <code>buildId</code> when the content changes.</>} The guide explains the fields and any matching heading anchors. Rebuild after editing.</li>
+      <li>Change <code>{stylesheet}</code> using the theme recipe below. Rebuild, restart the preview and check search, links and keyboard focus with your own content.</li>
+    </ol>
+    <details><summary>View exact source files</summary><ul>{starter.files.map(path => <li><a href={base + starterSource(starter.id, path)}>{path}</a></li>)}</ul></details>
+  </section>;
+})}

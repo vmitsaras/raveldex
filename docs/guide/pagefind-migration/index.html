@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Optional Pagefind migration · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="optional-pagefind-migration-appendix">Optional Pagefind migration appendix</h1>
+<p>Start with <a href="/raveldex/guide/overview/">Raveldex adoption</a> to prepare data and choose inline, modal, dropdown, directory or rich results. This appendix is for an existing Pagefind integration. It does not define Raveldex’s visual identity or require matching another product’s components, API or features.</p>
+<p>Migration rebuilds search from your authoritative content. Raveldex does not read Pagefind’s generated index, process its HTML attributes or translate its UI/options/styles. There is no drop-in converter in this guide. Keep the existing search available until the replacement meets your application’s requirements.</p>
+<h2 id="map-content-decisions-to-explicit-records">Map content decisions to explicit records</h2>
+<p>Use Raveldex’s <a href="/raveldex/reference/result-content/">source-verified native content matrix and keep-current decision</a> when choosing the replacement presentation. Generated matching snippets/section links belong to inline/modal; authored excerpts, category/breadcrumb/date/fields and explicitly enabled images belong to rich directory. Project rich records to <code>{id,title,url}</code> before using a basic surface, and do not treat authored excerpts as query-match evidence. These are Raveldex boundaries, independent of migration layout expectations.</p>
+<p>Pagefind’s documented build workflow indexes generated HTML after the site build. Its content-selection attributes can identify selected bodies or excluded regions. Use your current public-content decisions to prepare an explicit Raveldex allowlist rather than assuming an entire page should become searchable. See the official <a href="https://pagefind.app/docs/">build workflow</a> and <a href="https://pagefind.app/docs/indexing/">content selection</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Existing integration concern</th>
+<th>Raveldex preparation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Which built pages and body regions are searchable</td>
+<td>Select public records and exact text yourself. Declare text fields in <code>schema.text</code>, then add records with stable IDs. Exclude private/draft content before producing public assets.</td>
+</tr>
+<tr>
+<td>Titles and destinations</td>
+<td>Supply application-owned <code>{ id, title, url }</code> display entries with the same IDs as indexed records. Keep real destination pages and safe routes available.</td>
+</tr>
+<tr>
+<td>Searchable metadata and filters</td>
+<td>Put searchable words in text fields. Declare filter metadata separately and explicitly install the selected filters/facets. Card display metadata is not indexed automatically. Do not assume the old metadata/search/count semantics are preserved.</td>
+</tr>
+<tr>
+<td>Descriptions, breadcrumbs, images</td>
+<td>Choose a surface that actually supports the required authored data. <a href="/raveldex/reference/hosts/#rich-directory-results">Rich directory results</a> support authored excerpts/metadata and explicit image opt-in; title-only surfaces do not gain those fields through migration.</td>
+</tr>
+<tr>
+<td>Links to matching headings</td>
+<td>Render the target IDs, preserve exact original text, and prepare Raveldex page/section maps with validated source ranges. Select source/section capabilities explicitly; no heading extraction happens in the UI.</td>
+</tr>
+<tr>
+<td>Query language and translated labels</td>
+<td>Choose the query analyzer separately from UI message overrides. Use the <a href="/raveldex/reference/localization/">complete native message inventory and German configuration example</a>, including modal shell/card failure text and authored labels. Partial overrides retain English defaults; there is no automatic locale/plural/number service. Check tokenization, stemming, prefix behavior and language coverage against your own records; no equivalent ranking or automatic translation is promised.</td>
+</tr>
+<tr>
+<td>Static deployment and later updates</td>
+<td>Use the <a href="/raveldex/reference/static-astro/">static/Astro builder</a> with explicit entries and matching source providers. Deploy the complete generation/base together; a content change needs a deliberate rebuild or supported engine update.</td>
+</tr>
+</tbody>
+</table>
+<p>Pagefind documents metadata, heading sub-results and multilingual processing under its own contracts. Consult the versions/configuration actually used by your site: <a href="https://pagefind.app/docs/metadata/">metadata</a>, <a href="https://pagefind.app/docs/sub-results/">sub-results</a>, <a href="https://pagefind.app/docs/multilingual/">languages</a>. This mapping makes no promise that those contracts or outcomes transfer to Raveldex.</p>
+<h2 id="walk-through-one-page-first">Walk through one page first</h2>
+<p>Take a public page at <code>/guide/updates/</code> with title <strong>Atomic updates</strong>, heading target <code>atomic-writes</code>, and paragraph <strong>Replace a complete record.</strong></p>
+<ol>
+<li>Assign stable record ID <code>updates</code>. Declare text fields <code>title</code> and <code>body</code>; add <code>text: { title: 'Atomic updates', body: 'Replace a complete record.' }</code>. Supply display entry <code>{ id: 'updates', title: 'Atomic updates', url: '/guide/updates/' }</code>. Keep the real page reachable while search initializes.</li>
+<li>Copy the complete <a href="/raveldex/example-files/inline.mjs">inline recipe</a> through the <a href="/raveldex/reference/hosts/#mount-a-consumer-search-form">installed consumer setup</a>. It uses that same record/display pair, explicit <code>mode: 'prefix'</code>, its own optional CSS and application-owned cleanup. Searching <code>atom</code> should find the page; the original Pagefind results are not the membership/ranking oracle.</li>
+<li>If heading previews are required, use the <a href="/raveldex/reference/static-astro/#optional-heading-maps">section recipe</a>. The body range is <code>[0, body.length)</code> for this one paragraph, tied to the exact original body string. Keep <code>id="atomic-writes"</code> on the actual heading and search <code>replace</code> to check its body-section link; <code>atom</code> matches the title, not this mapped body. The build and restore configurations must both include the selected source/section factories. Direct title/link-only UI needs no snippet/section factories, but static source delivery still needs source providers for every indexed text field. Section previews do not add extra pages to the exact page total.</li>
+<li>For a static site, pass the explicit record/title/path through the <a href="/raveldex/reference/static-astro/">static build and on-demand load flow</a>. Use the same deployment base for generated pages, manifest and display destinations; do not reuse another engine’s generated index files.</li>
+<li>Check that the expected native IDs, exact totals, actual destination and optional heading link agree with this authored content. Then extend to your real filters/counts, snippet ranges, paging, language and long labels. Keep loading/failure distinct from zero results and verify native keyboard/composition, reset/retry and teardown.</li>
+</ol>
+<p>Before extending the example, check that searching <code>atom</code> reaches the expected page and that removing the interface releases its owner. Add heading previews only when the application supplies the original section text and real heading targets.</p>
+<h2 id="replace-the-interface-deliberately">Replace the interface deliberately</h2>
+<p>Choose the Raveldex surface from its <a href="/raveldex/reference/hosts/#consumer-capability-matrix">capability matrix</a>, import that surface’s CSS and use its documented keyboard model. Existing Pagefind markup, classes, callbacks, defaults or assets are not Raveldex APIs. Preserve browse links and show useful failure/retry before retiring the old integration.</p>
+<p>Destroy borrowed UI/view before releasing its engine or static-loader owner. Directory integrations also release their explicit URL binding/controller. Display records are captured at mount; replacing them requires destroy/remount rather than calling an invented refresh or snapshot method on a view.</p>
+<p>Official Pagefind references were checked on 7 November 2026. No version-specific competitor constructor/options example, compatibility claim, migration automation or performance claim is made here.</p>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

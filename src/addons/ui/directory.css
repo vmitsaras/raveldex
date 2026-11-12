@@ -37,10 +37,11 @@
 .raveldex-directory__close-filters { margin-block-end: .75rem; }
 .raveldex-directory__chips { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: var(--_gap) 0; padding: 0; }
 .raveldex-directory__chip { max-inline-size: 100%; }
-.raveldex-directory__status { min-block-size: 1.5em; margin-block: var(--_gap); }
+.raveldex-directory__status { min-block-size: 1.5em; margin-block: var(--_gap); padding: .5rem .75rem; border: 1px solid transparent; border-inline-start-width: 3px; border-radius: var(--_radius); }
+.raveldex-directory[data-state="loading"] .raveldex-directory__status { border-inline-start-color: var(--_accent); font-weight: 600; }
 .raveldex-directory[data-state="error"] .raveldex-directory__status,
 .raveldex-directory[data-state="stale"] .raveldex-directory__status,
-.raveldex-directory[data-state="invalid"] .raveldex-directory__status { color: var(--_error); font-weight: 600; }
+.raveldex-directory[data-state="invalid"] .raveldex-directory__status { border-color: var(--_border); border-inline-start-color: var(--_error); color: var(--_error); font-weight: 600; }
 .raveldex-directory__heading { font-size: 1.2em; margin-block: var(--_gap); }
 .raveldex-directory__results { padding-inline-start: 1.75rem; }
 .raveldex-directory__result { padding-block: 1rem; border-block-end: 1px solid var(--_border); }

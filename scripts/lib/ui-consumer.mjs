@@ -31,7 +31,7 @@ export async function prepareUsageDemo() {
   const corpus = buildUsageCorpus(REPO_ROOT);
   const consumer = await prepareConsumer(corpus, []);
   const { directory, installed } = consumer;
-  for (const name of ['index.html', 'pilot.css', 'main.mjs', 'configuration.mjs', 'engine-worker.mjs']) {
+  for (const name of ['index.html', 'pilot.css', 'main.mjs', 'readable-results.mjs', 'configuration.mjs', 'engine-worker.mjs']) {
     await copyFile(join(REPO_ROOT, 'examples/docs-search', name), join(directory, name === 'main.mjs' ? 'pilot-entry.mjs' : name));
   }
   await copyFile(join(installed, 'dist/addons/ui/styles.css'), join(directory, 'ui.css'));
@@ -49,7 +49,7 @@ export async function prepareUIPilot() {
   const corpus = buildCorpus(REPO_ROOT);
   const consumer = await prepareConsumer(corpus, DOCS_JUDGMENTS);
   const { directory, installed } = consumer;
-  for (const file of ['index.html', 'pilot.css', 'main.mjs', 'configuration.mjs', 'engine-worker.mjs']) {
+  for (const file of ['index.html', 'pilot.css', 'main.mjs', 'readable-results.mjs', 'configuration.mjs', 'engine-worker.mjs']) {
     await copyFile(join(REPO_ROOT, 'examples/docs-search', file), join(directory, file === 'main.mjs' ? 'pilot-entry.mjs' : file));
   }
   // Qualification retains its exact-word baseline; ordinary demos use prefixes.

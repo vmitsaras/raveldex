@@ -9,12 +9,12 @@ import { build, version as esbuildVersion } from 'esbuild';
 import { command, digest, REPO_ROOT } from './lib/packed-consumer.mjs';
 
 const NAME = '@vmitsaras/raveldex-english';
-const VERSION = '0.1.0-rc.0';
+const VERSION = '1.0.0';
 const PRIVATE_IMPORT = '../../../core/capabilities/types.js';
 const PUBLIC_IMPORT = '@vmitsaras/raveldex';
 const ALLOWED_FILES = ['LICENSE', 'README.md', 'dist/index.d.ts', 'dist/index.js', 'package.json'];
 
-/** Prepare the separately installable private language artifact from one stable
+/** Prepare the separately installable language artifact from one stable
  * built tree. This command never builds core, publishes, reads credentials or
  * resolves registry packages. Declarations come from compiler output. */
 export async function packEnglish({ output } = {}) {
@@ -32,14 +32,14 @@ export async function packEnglish({ output } = {}) {
   const declarationPath = entry.replace(/\.js$/, '.d.ts');
   for (const path of [entry, declarationPath]) assert.ok((await lstat(path)).isFile(), `stable compiled input required: ${relative(REPO_ROOT, path)}`);
   const metadata = JSON.parse(await readFile(join(sourceDirectory, 'package.json'), 'utf8'));
-  assert.equal(metadata.name, NAME); assert.equal(metadata.version, VERSION); assert.equal(metadata.private, true);
+  assert.equal(metadata.name, NAME); assert.equal(metadata.version, VERSION); assert.equal(metadata.private, false); assert.deepEqual(metadata.publishConfig, { access: 'public' });
   assert.equal(metadata.type, 'module'); assert.equal(metadata.license, 'MIT'); assert.equal(metadata.sideEffects, false);
   assert.deepEqual(metadata.exports, { '.': { types: './dist/index.d.ts', import: './dist/index.js' } });
   assert.deepEqual(metadata.peerDependencies, { '@vmitsaras/raveldex': VERSION });
   for (const key of ['dependencies', 'optionalDependencies']) assert.deepEqual(metadata[key] ?? {}, {}, 'language package has no runtime dependencies');
   assert.deepEqual(metadata.files, ['dist/index.js', 'dist/index.d.ts', 'README.md', 'LICENSE']);
   const rootMetadata = JSON.parse(await readFile(join(REPO_ROOT, 'package.json'), 'utf8'));
-  assert.equal(rootMetadata.name, PUBLIC_IMPORT); assert.equal(rootMetadata.version, VERSION); assert.equal(rootMetadata.private, true);
+  assert.equal(rootMetadata.name, PUBLIC_IMPORT); assert.equal(rootMetadata.version, VERSION); assert.equal(rootMetadata.private, false);
 
   const originalDeclaration = await readFile(declarationPath, 'utf8');
   const importLine = `import type { AddonRegistration } from '${PRIVATE_IMPORT}';`;
@@ -75,7 +75,7 @@ export async function packEnglish({ output } = {}) {
     const packedCommand = await command('npm', args, packageDirectory); commandLog = JSON.stringify({ command: ['npm', ...args], cwd: packageDirectory, exitCode: 0 }) + '\n' + packedCommand.stdout + packedCommand.stderr;
     const parsed = JSON.parse(packedCommand.stdout), entries = Array.isArray(parsed) ? parsed : Object.values(parsed);
     assert.equal(entries.length, 1); const packed = entries[0];
-    assert.equal(packed.name, NAME); assert.equal(packed.version, VERSION); assert.equal(packed.filename, 'vmitsaras-raveldex-english-0.1.0-rc.0.tgz');
+    assert.equal(packed.name, NAME); assert.equal(packed.version, VERSION); assert.equal(packed.filename, 'vmitsaras-raveldex-english-1.0.0.tgz');
     assert.deepEqual(packed.files.map(file => file.path).sort(), ALLOWED_FILES);
     const tarball = join(destination, packed.filename), tarBytes = await readFile(tarball);
     assert.equal(packed.integrity, 'sha512-' + createHash('sha512').update(tarBytes).digest('base64'));
@@ -86,11 +86,11 @@ export async function packEnglish({ output } = {}) {
       assert.equal(data.length, file.size); files.push({ path: file.path, bytes: data.length, sha256: digest(data) });
     }
     const report = { kind: 'raveldex-english-standalone-package-v1', status: 'Pass', startedAt, completedAt: new Date().toISOString(),
-      package: { name: NAME, version: VERSION, private: true, tarball, sha256: digest(tarBytes), integrity: packed.integrity, tarballBytes: tarBytes.length, unpackedBytes: packed.unpackedSize, peerDependencies: metadata.peerDependencies, runtimeDependencies: [], files },
+      package: { name: NAME, version: VERSION, private: metadata.private, publishConfig: metadata.publishConfig, tarball, sha256: digest(tarBytes), integrity: packed.integrity, tarballBytes: tarBytes.length, unpackedBytes: packed.unpackedSize, peerDependencies: metadata.peerDependencies, runtimeDependencies: [], files },
       source: { entry: relative(REPO_ROOT, entry), sha256: digest(await readFile(entry)) },
       declarations: { source: relative(REPO_ROOT, declarationPath), sourceSha256: digest(originalDeclaration), outputSha256: digest(declaration), rewrittenImports: [{ from: PRIVATE_IMPORT, to: PUBLIC_IMPORT, count: 1 }], method: 'Compiler-emitted declaration with its one private type-only registration import rewritten to the exact public core peer; no handwritten declaration.' },
       graph: { esbuild: esbuildVersion, settings, minifiedBytes: bytes.length, gzipBytes: compressed.length, sha256: digest(bytes), gzipSha256: digest(compressed), gzip: { ...gzip, mtime: 0 }, inputs, runtimeImports: [], metafile: result.metafile },
-      publication: 'Not performed. Private local pack only; no publish, registry lookup, release credentials, tag or remote write.' };
+      publication: 'Local artifact verification only; distribution is a separate maintainer action. No publish, registry lookup, release credentials, tag or remote write.' };
     await writeFile(logPath, commandLog, { flag: 'wx' }); await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n', { flag: 'wx' });
     return { output: destination, packageDirectory, tarball, reportPath, logPath, report };
   } catch (error) {

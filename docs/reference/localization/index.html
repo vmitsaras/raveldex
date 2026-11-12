@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LOCALIZATION · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/demo/">Demo</a></li></ul></nav></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="translate-a-consumer-interface">Translate a consumer interface</h1>
+<p>Choose message bundles explicitly when mounting a consumer surface. Raveldex does not detect a locale from <code>lang</code>, the browser or a global registry. UI language does not change tokenization, query mode, indexed content or the analyzer. Keep your existing engine and surface contract.</p>
+<p>Copy <a href="/raveldex/example-files/consumer-messages.de.mjs">the complete German example</a> into your application and import it by a relative path. It contains all current keys, including optional states, and has <code>Required&lt;…Messages&gt;</code> JSDoc checks against public types. Run JavaScript type checking in your application when updating the package so new keys cannot silently fall back to English. Review wording with your own audience; automated checks establish completeness and behavior, not translation quality.</p>
+<p>These are option fragments for the complete integrations in <a href="/raveldex/reference/hosts/">HOSTS</a>; retain their required root, engine/controller, records and lifecycle setup:</p>
+<pre><code class="language-js">import { german } from './consumer-messages.de.mjs';
+
+const inlineText = { messages: german.inline }; // No facets.
+const inlineFilterText = { messages: german.inlineWithFilters }; // Facets configured.
+const modalText = { messages: german.inlineWithFilters, modalMessages: german.modal }; // Same facet choice as inline.
+const dropdownText = { messages: german.dropdown };
+const directoryText = { messages: german.directory };
+const cardsText = { messages: german.directory, imageUnavailable: german.imageUnavailable };
+</code></pre>
+<p>Use <code>german.inline</code> for a modal without facets. Set the application-authored modal trigger label, page/root <code>lang</code> and <code>dir</code>, field/group/value labels, results and other surrounding content in the same language. The bundle does not translate your content. Keep the optional CSS imports separate.</p>
+<h2 id="complete-inventory">Complete inventory</h2>
+<p>Inline and modal share <strong>35</strong> <code>messages</code> keys; modal additionally needs its four <code>modalMessages</code>. Dropdown has <strong>17</strong> keys. Directory and all rich layouts share <strong>29</strong> keys, with a separate card image failure option. Each key below is explicit in the German example, including currently unused optional features.</p>
+<table>
+<thead>
+<tr>
+<th>Surface / role</th>
+<th>Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inline/modal controls and assistive names</td>
+<td><code>label</code>, <code>placeholder</code>, <code>submit</code>, <code>clear</code>, <code>resultsLabel</code>, <code>paginationLabel</code></td>
+</tr>
+<tr>
+<td>Inline/modal states and recovery</td>
+<td><code>idle</code>, <code>searching</code>, <code>composing</code>, <code>noResults</code>, <code>noResultsFiltered</code>, <code>resultsOne</code>, <code>resultsMany</code>, <code>error</code>, <code>retry</code>, <code>revisionChanged</code></td>
+</tr>
+<tr>
+<td>Inline/modal paging and append</td>
+<td><code>loadMore</code>, <code>newResults</code>, <code>resultsAdded</code>, <code>previous</code>, <code>next</code>, <code>pageSummary</code>, <code>windowLimit</code></td>
+</tr>
+<tr>
+<td>Inline/modal facets</td>
+<td><code>all</code>, <code>emptyValue</code>, <code>nullValue</code>, <code>missingValue</code>, <code>unlistedValue</code>, <code>facetSummary</code></td>
+</tr>
+<tr>
+<td>Inline/modal snippets and sections</td>
+<td><code>snippetOmissions</code>, <code>snippetLimits</code>, <code>sectionCaption</code>, <code>sectionOmissions</code>, <code>sectionUnavailable</code>, <code>sectionStale</code></td>
+</tr>
+<tr>
+<td>Modal shell (<code>modalMessages</code>)</td>
+<td><code>title</code>, <code>close</code>, <code>escapeHint</code>, <code>shortcutHint</code></td>
+</tr>
+<tr>
+<td>Dropdown controls, assistive names and guidance</td>
+<td><code>label</code>, <code>placeholder</code>, <code>submit</code>, <code>clear</code>, <code>resultsLabel</code>, <code>fullResults</code>, <code>keyboardHint</code></td>
+</tr>
+<tr>
+<td>Dropdown states and recovery</td>
+<td><code>idle</code>, <code>composing</code>, <code>searching</code>, <code>noResults</code>, <code>resultsOne</code>, <code>resultsMany</code>, <code>error</code>, <code>retry</code>, <code>closed</code>, <code>noSpace</code></td>
+</tr>
+<tr>
+<td>Directory/cards controls, assistive names and guidance</td>
+<td><code>label</code>, <code>placeholder</code>, <code>submit</code>, <code>clear</code>, <code>filters</code>, <code>closeFilters</code>, <code>countHint</code>, <code>selectedFilters</code>, <code>remove</code>, <code>resultsLabel</code>, <code>previous</code>, <code>next</code>, <code>page</code></td>
+</tr>
+<tr>
+<td>Directory/cards counts, states and recovery</td>
+<td><code>unknownCount</code>, <code>emptyValue</code>, <code>omittedCounts</code>, <code>idle</code>, <code>waiting</code>, <code>composing</code>, <code>searching</code>, <code>noResults</code>, <code>noResultsFiltered</code>, <code>noResultsBrowse</code>, <code>resultOne</code>, <code>results</code>, <code>error</code>, <code>stale</code>, <code>retry</code>, <code>invalid</code></td>
+</tr>
+<tr>
+<td>Cards extra top-level option</td>
+<td><code>imageUnavailable</code>; informative failure also includes the authored image alternative, decorative failure is silent</td>
+</tr>
+</tbody>
+</table>
+<p><code>label</code> names the input/form; result and pagination labels name their regions/navigation; named chip removal and keyboard hints are included rather than translated separately through ARIA. Library text is inserted as plain text, never HTML. Native browser/OS control text and key names are outside the bundle.</p>
+<p>Translate authored document titles, snippets/source text, page/section headings, directory group/value labels and card excerpts/categories/breadcrumbs/dates/field names/values/image alternatives separately. Inline facet strings come from indexed values; there is no inline value-alias API. Directory can map allowed values through <code>groups[].values[].label</code>; unmapped values retain their raw strings. Card dates are already formatted display text. See <a href="/raveldex/reference/result-content/">result content</a> for source/display boundaries.</p>
+<h2 id="fallback-capture-and-supported-changes">Fallback, capture and supported changes</h2>
+<ul>
+<li>A partial bundle overrides only its own keys; every other key uses the surface’s English default. Bundles are not inherited between surfaces. Partial overrides suit small customizations, but a complete translated interface needs the full relevant bundle, modal shell, card failure text and authored labels.</li>
+<li>Existing overrides keep precedence. Inline’s facet-dependent default Clear/idle guidance applies only when those keys are omitted. An inline <code>noResults</code> override also supplies an omitted <code>noResultsFiltered</code>. A directory <code>noResults</code> override also supplies omitted <code>noResultsFiltered</code> and <code>noResultsBrowse</code>. Individually supplied variants win. This compatibility behavior does not fill other missing translations.</li>
+<li>Messages are captured when mounted. Changing the caller’s object does not update the interface. Repeating a same-kind mount returns the existing handle; it is not a language setter. Card <code>setPresentation()</code> changes layout/density/images only.</li>
+<li>A deliberate language change uses destroy/remount. Finish composition, or deliberately discard it through teardown as part of the user’s switch. Inline/dropdown <code>search(text)</code> still defers during composition; it is not an IME-cancellation method. Prefer closing the modal first. The application owns focus handoff and any query/filter restoration: new input nodes do not retain focus, caret, selection or a composing session. Do not promise seamless in-place language switching. See the <a href="/raveldex/reference/cms-refresh/">CMS lifecycle sequence</a>.</li>
+<li>A directory/card view can remount over the same live controller and current snapshot without querying, changing the page or writing URL state. Keep its URL binding/controller alive. Inline/dropdown remount starts idle and does not preserve submitted text/facets automatically; an explicit search to restore it is a new query. Modal retains its normal closed/open query contract. Destroy the old view before mounting the new one; do not dispose a borrowed engine/controller just to change labels.</li>
+</ul>
+<p>Supply own data properties on plain or null-prototype records. Unknown keys/accessors and invalid strings refuse before replacing authored content. A supplied message must be well-formed, nonblank plain text, at most 512 UTF-16 units; use omission rather than <code>undefined</code> or an empty string for fallback. Directory labels also reject control-only text. Keep translated helper text concise enough to fit the same bound.</p>
+<h2 id="tokens-numbers-and-grammar">Tokens, numbers and grammar</h2>
+<p>Only the following messages interpolate tokens. All other keys are literal strings. Unknown or unavailable tokens remain literal, including <code>{code}</code> in a non-error message; there is no global interpolation, HTML, callback or ICU syntax. The submitted <code>{query}</code> is a safe preview of at most 160 Unicode code points plus an ellipsis; original input/native queries stay complete.</p>
+<table>
+<thead>
+<tr>
+<th>Surface / key</th>
+<th>Supplied tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inline <code>noResults</code>, <code>noResultsFiltered</code>; dropdown <code>noResults</code>; directory’s three empty variants</td>
+<td><code>{query}</code></td>
+</tr>
+<tr>
+<td>Inline/dropdown <code>resultsOne</code>, <code>resultsMany</code></td>
+<td><code>{total}</code>, <code>{count}</code></td>
+</tr>
+<tr>
+<td>Inline <code>resultsAdded</code></td>
+<td><code>{added}</code>, <code>{start}</code>, <code>{end}</code>, <code>{total}</code>, <code>{count}</code></td>
+</tr>
+<tr>
+<td>Inline <code>pageSummary</code></td>
+<td><code>{start}</code>, <code>{end}</code>, <code>{total}</code>, <code>{count}</code></td>
+</tr>
+<tr>
+<td>Inline <code>windowLimit</code></td>
+<td><code>{count}</code>, <code>{remaining}</code>, <code>{total}</code></td>
+</tr>
+<tr>
+<td>Inline <code>unlistedValue</code></td>
+<td><code>{value}</code></td>
+</tr>
+<tr>
+<td>Inline <code>facetSummary</code></td>
+<td><code>{total}</code>, <code>{omitted}</code></td>
+</tr>
+<tr>
+<td>Inline <code>snippetOmissions</code></td>
+<td><code>{count}</code></td>
+</tr>
+<tr>
+<td>Each surface’s <code>error</code></td>
+<td><code>{code}</code> (stable diagnostic identifier, not translated by the library)</td>
+</tr>
+<tr>
+<td>Directory <code>remove</code></td>
+<td><code>{group}</code>, <code>{value}</code></td>
+</tr>
+<tr>
+<td>Directory <code>omittedCounts</code></td>
+<td><code>{shown}</code>, <code>{total}</code></td>
+</tr>
+<tr>
+<td>Directory <code>resultOne</code>, <code>results</code></td>
+<td><code>{total}</code>, <code>{start}</code>, <code>{end}</code></td>
+</tr>
+<tr>
+<td>Directory <code>page</code></td>
+<td><code>{page}</code>, <code>{pages}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Numbers use ordinary JavaScript decimal conversion (<code>String(number)</code>), including option counts and page/range text: no grouping separators, localized digits or <code>Intl.NumberFormat</code>. Singular result text is chosen only when the <strong>exact total is 1</strong> (<code>resultsOne</code> or directory <code>resultOne</code>); zero uses the relevant empty message, all other positive totals use <code>resultsMany</code> or directory <code>results</code>. Append and omission messages have no plural-category switch. Use count-neutral wording when that distinction is insufficient for the language, such as “Ergebnisse: {total}”.</p>
+<p>Templates support singular results and other positive totals. They do not provide a locale, formatter, plural-rule service, translation callback or analyzer setting. Use count-neutral application wording when a language needs more grammar or digit rules; setting <code>lang</code> or translating templates does not add those rules. Fixed count parentheses, range dashes, snippet ellipses and breadcrumb separators are punctuation, not configurable language services.</p>
+<h2 id="check-the-installed-interface">Check the installed interface</h2>
+<p>Check complete and partial bundles, literal hostile-looking text, capture after caller mutation, zero/one/many results, empty/failure/retry, long RTL labels, keyboard focus, and teardown/remount with an explicit focus handoff. Include optional facets/snippet/section notices when your application enables them. Keep no-automatic-query idle/reset behavior and the directory’s deliberate Clear all browse. These automated checks do not establish translation quality, human screen-reader speech, physical input or actual browser zoom.</p>
+</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer></body></html>

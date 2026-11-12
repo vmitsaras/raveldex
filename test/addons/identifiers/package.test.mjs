@@ -5,7 +5,7 @@ import {measurePackedIdentifiers} from '../../measurements/identifier-package.mj
 let report;
 before(async()=>{report=await measurePackedIdentifiers();if(process.env.RAVELDEX_IDENTIFIER_PACKAGE_REPORT)await writeFile(process.env.RAVELDEX_IDENTIFIER_PACKAGE_REPORT,JSON.stringify(report,null,2)+'\n');});
 test('actual offline-installed and minified identifier consumers preserve whole/fragment Boolean, prefix, BM25 pages and mutations',()=>{
-  assert.equal(report.correctness.status,'Pass');assert.equal(report.correctness.authoredQueries,13);assert.equal(report.correctness.fullPageComparisonsPerRun,39);assert.equal(report.correctness.bundledParity,'Pass');assert.equal(report.correctness.unselectedPack,'Pass');assert.equal(report.package.private,true);assert.equal(report.packed.typed.length,2);assert.match(report.packed.numerical,/Independent literal frequencies/);
+  assert.equal(report.correctness.status,'Pass');assert.equal(report.correctness.authoredQueries,13);assert.equal(report.correctness.fullPageComparisonsPerRun,39);assert.equal(report.correctness.bundledParity,'Pass');assert.equal(report.correctness.unselectedPack,'Pass');assert.equal(report.package.private,false);assert.equal(report.packed.typed.length,2);assert.match(report.packed.numerical,/Independent literal frequencies/);
 });
 test('source/offset evidence, original-only strict phrases and qualified source/native snapshots preserve selected identifiers',()=>{
   assert.equal(report.snapshots.status,'Pass');assert.equal(report.snapshots.comparisons,76);assert.equal(report.snapshots.mismatchRefusals,8);assert.equal(report.snapshots.rows.length,4);assert.equal(report.documentation.status,'Pass');assert.match(report.snapshots.qualificationScope,/no all-Unicode or cross-host/);

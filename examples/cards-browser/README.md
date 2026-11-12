@@ -4,22 +4,19 @@ Copy this complete resource directory, replace the explicit public records and a
 
 ## Copy, install and run
 
-Use Node 22 or later and npm. Raveldex is private and unpublished, supplied as a matching local tarball. The pinned esbuild 0.28.2 dependency is build tooling. From an authorized source checkout after `npm ci`:
+Use Node 22 or later and npm. Extract the complete starter into an empty directory with `tar -xzf cards-browser.tar.gz --strip-components=1`, then enter that directory. From a source checkout, you can instead copy the complete `examples/cards-browser/` folder to a new project.
+
+Install Raveldex and the starter's pinned build tooling, then build and preview:
 
 ```sh
-repo="$PWD"
-packages="$(mktemp -d /tmp/raveldex-cards-packages.XXXXXX)"
-starter="$(mktemp -d /tmp/raveldex-cards-browser.XXXXXX)"
-npm run build
-npm pack --ignore-scripts --cache "$packages/.npm-cache" --pack-destination "$packages"
-cp -R "$repo/examples/cards-browser/." "$starter/"
-cd "$starter"
-npm install --ignore-scripts --cache "$starter/.npm-cache" --no-audit --no-fund "$packages/vmitsaras-raveldex-0.1.0-rc.0.tgz"
+npm install @vmitsaras/raveldex@1.0.0
 npm run build
 npm run preview -- --port 4179
 ```
 
-Open `http://127.0.0.1:4179/`; stop with Ctrl+C. For a downloaded archive, extract into an empty directory with `tar -xzf cards-browser.tar.gz --strip-components=1`, enter it and install the supplied tarball with `npm install --ignore-scripts --cache .npm-cache --no-audit --no-fund /absolute/path/to/vmitsaras-raveldex-0.1.0-rc.0.tgz`. Run build and preview as above. The first tooling install needs registry access or a suitable cache. Keep the generated lockfile and use `npm ci` afterward.
+Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.
+
+Open `http://127.0.0.1:4179/`. Stop the preview with Ctrl+C.
 
 Serve over HTTP(S). This project imports the separate directory controller, optional card view, base directory stylesheet and card stylesheet explicitly. Filters/facets are configured in `configuration.mjs`; it does not select snippets, a worker, storage, crawling, commerce actions or full-set sorting.
 

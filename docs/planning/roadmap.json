@@ -141,6 +141,39 @@
         "Risk-based installed behavior/visual checks and a focused human accessibility walkthrough qualify the changed candidate; unobserved expanded combinations remain explicit limitations instead of triggering an exhaustive benchmark/platform prerequisite.",
         "N11 proceeds independently of comparative N10 research using stable public contracts and isolated artifacts; no new engine capability, dependency, deployment or publication is implied."
       ]
+    },
+    {
+      "id": "N12",
+      "title": "N12 — Prepare Raveldex for stable 1.0.0",
+      "track": "release",
+      "goal": "Prepare verified 1.0.0 packages, clear documentation and current contributor guidance, with optional polish tracked separately.",
+      "exitCriteria": [
+        "Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.",
+        "Public behavior, documentation and tracking agree; optional polish is not presented as implemented.",
+        "No publication, deployment, visibility change, commit or push is part of this work."
+      ]
+    },
+    {
+      "id": "N13",
+      "title": "N13 — Make the demo welcoming and easy to try",
+      "track": "optional",
+      "goal": "Help a new visitor understand, try and adopt Raveldex using natural language and readable results.",
+      "exitCriteria": [
+        "Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.",
+        "Public behavior, documentation and tracking agree; unfinished follow-up work is not presented as completed.",
+        "No publication, deployment, visibility change, commit or push is part of this work."
+      ]
+    },
+    {
+      "id": "N14",
+      "title": "N14 — Polish search interfaces and recovery states",
+      "track": "optional",
+      "goal": "Refine the five consumer surfaces and visible recovery journeys while preserving native behavior and the existing identity.",
+      "exitCriteria": [
+        "Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.",
+        "Public behavior, documentation and tracking agree; completion claims match the recorded scope and retain manual qualification limits.",
+        "No publication, deployment, visibility change, commit or push is part of this work."
+      ]
     }
   ],
   "tasks": [
@@ -4201,6 +4234,444 @@
         "docs/evidence/RX-9112/tracking-closeout.md",
         "docs/evidence/N10_N11_SOURCE_SYNC_20261108.md",
         "docs/evidence/N10_N11_SOURCE_SYNC_20261108.json"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9201",
+      "title": "Prepare stable package metadata and verification tooling",
+      "milestone": "N12",
+      "status": "done",
+      "dependsOn": [],
+      "objective": "Prepare core, English and Astro 1.0.0 artifacts without changing runtime contracts or adding a publishing pipeline.",
+      "acceptanceCriteria": [
+        "RX-9201-AC01: All three library manifests and exact core peers use 1.0.0, public access and publishable metadata; example apps stay private and dependency/runtime contracts stay unchanged.",
+        "RX-9201-AC02: Preparation and isolated installed checks accept stable metadata and report actual versions/access; strict export/dependency/CSS/inventory checks remain effective.",
+        "RX-9201-AC03: Native issue linking supports explicit N13/N14 selection, preserves N9 behavior and existing parents, and verifies complete idempotent readback."
+      ],
+      "verification": [
+        "Focused manifest/package and native-subissue behavioral tests; complete installed checks in RX-9204."
+      ],
+      "affectedPaths": [
+        "package.json",
+        "package-lock.json",
+        "integrations/",
+        "scripts/",
+        "test/consumer/",
+        "test/tooling/",
+        ".github/workflows/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9201.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9202",
+      "title": "Prune development notes and publish normal consumer guides",
+      "milestone": "N12",
+      "status": "done",
+      "dependsOn": [
+        "RX-9201"
+      ],
+      "objective": "Remove redundant development presentation while keeping usable product guidance, evidence and attribution.",
+      "acceptanceCriteria": [
+        "RX-9202-AC01: Consumer guides, galleries and starter instructions lead with registry installation and contain no private-preview/unpublished package disclaimers.",
+        "RX-9202-AC02: Superseded notes/baselines are removed only after reference checks; accepted evidence, executable inputs and provenance remain intact.",
+        "RX-9202-AC03: Npm inventories exclude maintainer status/history; necessary compatibility and support facts remain in package-local guides, with a 1.0.0 changelog and no invented release date."
+      ],
+      "verification": [
+        "Markdown reference checks, targeted stale-wording review and package-inventory/docs checks."
+      ],
+      "affectedPaths": [
+        "README.md",
+        "CHANGELOG.md",
+        "docs/api/",
+        "docs/release/",
+        "docs/research/",
+        "site/",
+        "examples/",
+        "integrations/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9202.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9203",
+      "title": "Simplify contributor and agent onboarding",
+      "milestone": "N12",
+      "status": "done",
+      "dependsOn": [
+        "RX-9202"
+      ],
+      "objective": "Replace chronological handoffs with a short current map of the product, source, tests, ownership and commands.",
+      "acceptanceCriteria": [
+        "RX-9203-AC01: AGENTS and contribution guidance describe current architecture, safe task execution, focused checks and release boundaries without bootstrap-era authorization prose.",
+        "RX-9203-AC02: Project context and handoff point to current facts and planner-selected work rather than stale next-task instructions or duplicated chronology."
+      ],
+      "verification": [
+        "Cold-read review and documentation/reference checks."
+      ],
+      "affectedPaths": [
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "PROJECT_CONTEXT.md",
+        "CODEX_HANDOFF.md"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9203.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9204",
+      "title": "Verify final packages and refresh the documentation site",
+      "milestone": "N12",
+      "status": "done",
+      "dependsOn": [
+        "RX-9201",
+        "RX-9202",
+        "RX-9203"
+      ],
+      "objective": "Qualify the stable artifacts and regenerate Pages and exact starter downloads from their final inputs.",
+      "acceptanceCriteria": [
+        "RX-9204-AC01: Complete candidate preparation and isolated core/English/Astro imports/types/CSS/examples and paired installs pass with exact artifact identities.",
+        "RX-9204-AC02: Generated site and archives match final sources; Pages inventory/exclusions/links and the complete relevant browser suite pass.",
+        "RX-9204-AC03: Changed-risk checks and independent review identify no essential release defect; unchanged performance/AT evidence is not expanded into new claims."
+      ],
+      "verification": [
+        "Run candidate:prepare, companion pack/install checks from the same compiler output, pages:generate, pages:check and test/pages suite; inspect final diff."
+      ],
+      "affectedPaths": [
+        "docs/",
+        "scripts/",
+        "test/",
+        "site/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9204.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9205",
+      "title": "Create native polish issue trees and synchronize the release handoff",
+      "milestone": "N12",
+      "status": "done",
+      "dependsOn": [
+        "RX-9204"
+      ],
+      "objective": "Deliver self-contained optional issues, preserved historical tracking and a precise preparation report.",
+      "acceptanceCriteria": [
+        "RX-9205-AC01: N13 and N14 each have four actual native subissues with bounded findings, user impact, measurable criteria and risk-based verification; follow-up tasks remain open.",
+        "RX-9205-AC02: Complete readback and second-run idempotency establish relationships without reparenting or altering historic completed records, notes or memberships.",
+        "RX-9205-AC03: Final roadmap/evidence/context agree and distinguish verified local preparation from source delivery/publication; large evidence footprint is reported separately."
+      ],
+      "verification": [
+        "Tracking preview, GitHub issue/relationship readback, zero-write relink and planner/generated/reference/diff checks."
+      ],
+      "affectedPaths": [
+        "docs/planning/roadmap.json",
+        "docs/evidence/",
+        "PROJECT_CONTEXT.md",
+        "CODEX_HANDOFF.md",
+        "scripts/link-native-subissues.mjs"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9205.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9301",
+      "title": "Help visitors choose and try a search interface",
+      "milestone": "N13",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "The homepage/demo and examples chooser currently foreground an engineering Workbench and long comparison text. Source: site/Home.astro, site/Demo.astro and examples/README.md. The stale generated snapshot was reviewed for design only. Make the first action and route to an appropriate consumer starter clear.",
+      "acceptanceCriteria": [
+        "RX-9301-AC01: A new visitor can identify the search purpose, try a useful query and choose inline/modal/dropdown/directory/cards without reading execution details.",
+        "RX-9301-AC02: Use the existing restrained Raveldex identity; keep advanced developer exploration reachable without making it the consumer starting point.",
+        "RX-9301-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9301-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "site/Home.astro",
+        "site/Demo.astro",
+        "site/SolutionChooser.astro",
+        "examples/README.md"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/DEMO_CLARITY.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9301.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9302",
+      "title": "Use everyday labels, counts and search guidance",
+      "milestone": "N13",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "Current shared copy includes distinct values and buckets omitted; the reviewed snapshot also showed 1 results and verbose engine status. Source: site/SearchWorkbench.astro and src/addons/ui/. Confirm regenerated behavior before treating snapshot grammar as a current defect. Explain what a visitor can do next.",
+      "acceptanceCriteria": [
+        "RX-9302-AC01: Counts use correct singular/plural forms and explain visible versus total results plainly; omission notices stay truthful without unnecessary indexing terminology.",
+        "RX-9302-AC02: Search, empty, loading, filtered-empty and retry guidance use short actionable language; technical API names remain accurate in reference material.",
+        "RX-9302-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9302-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "site/SearchWorkbench.astro",
+        "src/addons/ui/",
+        "test/ui/",
+        "test/pages/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/DEMO_CLARITY.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9302.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9303",
+      "title": "Make demo result excerpts readable and explanation optional",
+      "milestone": "N13",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "The design review of the stale generated Workbench showed full-precision scores, raw Markdown links/backticks and clipped excerpt fragments. Current source: examples/core-docs/corpus.mjs, examples/docs-search/ and Workbench rendering. Confirm final generated output and separate corpus/display improvements from engine semantics.",
+      "acceptanceCriteria": [
+        "RX-9303-AC01: Default result title, destination and excerpt are readable; raw markup fragments and numerical diagnostics do not dominate the ordinary result hierarchy.",
+        "RX-9303-AC02: Diagnostics remain available through deliberate disclosure; changes preserve original source-offset/highlight semantics and truthful truncation/omission.",
+        "RX-9303-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9303-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "examples/core-docs/",
+        "examples/docs-search/",
+        "site/",
+        "src/addons/ui/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/DEMO_CLARITY.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9303.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9304",
+      "title": "Simplify advanced controls and starter adoption",
+      "milestone": "N13",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "Current advanced controls say Representation, Original source reanalysis, Reinitialize search and Destroy interface. Galleries repeat setup and qualification details. Source: site/SearchWorkbench.astro and the five gallery components. Make reset/recovery and copy/setup paths understandable without removing technical control.",
+      "acceptanceCriteria": [
+        "RX-9304-AC01: Advanced settings explain their effect in everyday language and remain secondary; resetting/remounting clearly states which query/filter/page state changes.",
+        "RX-9304-AC02: Each gallery has a clear try → choose project → install → replace content → style path with working source/archive links and concise nearby requirements.",
+        "RX-9304-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9304-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "site/SearchWorkbench.astro",
+        "site/Inline.astro",
+        "site/Modal.astro",
+        "site/Dropdown.astro",
+        "site/Directory.astro",
+        "site/Cards.astro"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/DEMO_CLARITY.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9304.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9401",
+      "title": "Polish inline and modal states and hierarchy",
+      "milestone": "N14",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "Inline and modal starters already have authored consumer content and scoped styling. Review current generated and installed surfaces, especially technical facet summaries, repeated labels/status, result spacing and constrained modal reading area. Source: src/addons/ui/inline*, modal* and matching starters.",
+      "acceptanceCriteria": [
+        "RX-9401-AC01: Refine shared hierarchy/spacing and loading/empty/error/retry presentation within existing tokens; the main action and real result links stay obvious.",
+        "RX-9401-AC02: Verify focus through searching, load-more/windows, filter/clear, modal open/close/reopen and late first-open completion; preserve composition, dismissal and ownership contracts.",
+        "RX-9401-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9401-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "src/addons/ui/",
+        "examples/inline-browser/",
+        "examples/inline-astro/",
+        "examples/modal-browser/",
+        "examples/modal-astro/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/UI_POLISH.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9401.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9402",
+      "title": "Polish compact dropdown and full-results handoff",
+      "milestone": "N14",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "The header starter uses a native popover with compact links and a real full-results route. Source: src/addons/ui/dropdown.ts and examples/dropdown-browser/. Review readable status and narrow popup/handoff hierarchy without replacing the established editing/keyboard model.",
+      "acceptanceCriteria": [
+        "RX-9402-AC01: The header remains usable with no popup space, long titles, empty/error/loading states and native-feature limitations; the complete-results and browse routes remain available.",
+        "RX-9402-AC02: Arrow/Enter/Escape/Tab, reopen/clear and raw-query handoff preserve focus and meaning; optional expanded search shares the existing owner without competing shortcuts.",
+        "RX-9402-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9402-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "src/addons/ui/dropdown.ts",
+        "src/addons/ui/dropdown.css",
+        "examples/dropdown-browser/",
+        "test/ui/dropdown-browser.test.mjs"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/UI_POLISH.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9402.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9403",
+      "title": "Polish directory filters and rich result layouts",
+      "milestone": "N14",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "Directory/cards use native filters, selected chips, complete pages, optional URL state and opt-in images. Source: src/addons/ui/directory* and matching starters. Review hierarchy and constrained layouts; deliberate missing-image fixtures are demonstrations, not unverified defects.",
+      "acceptanceCriteria": [
+        "RX-9403-AC01: Filters/counts/chips and clearing explain multi-selection and filtered-empty recovery; paging and Back/Forward retain state and logical focus.",
+        "RX-9403-AC02: List/cards/grid, density, absent/long/RTL metadata and images off/on/broken retain result identity/order/page and usable links across narrow/theme/forced-color contexts.",
+        "RX-9403-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9403-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "src/addons/ui/directory*",
+        "examples/directory-browser/",
+        "examples/directory-astro/",
+        "examples/cards-browser/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/UI_POLISH.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9403.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9404",
+      "title": "Review optional-feature and adapter recovery journeys",
+      "milestone": "N14",
+      "status": "done",
+      "dependsOn": [
+        "RX-9205"
+      ],
+      "objective": "Workers, snapshots, IndexedDB and optional search capabilities are headless APIs. Review their visible states in existing demos/recipes and their adoption guidance, not hypothetical adapter screens. Source: docs/api/HOSTS.md, docs/api/ADDONS.md and docs/api/examples/.",
+      "acceptanceCriteria": [
+        "RX-9404-AC01: Existing examples explain actionable recovery for missing capabilities, worker termination/stale replies, cancelled loads, storage/quota refusal and uncertain update receipts without exposing raw diagnostics as the only explanation.",
+        "RX-9404-AC02: Exercise query/suggestion/phrase/filter boundaries where offered, retry/reset and teardown after failed/late work; preserve public error codes, no implicit providers/network/storage and borrowed ownership.",
+        "RX-9404-AC03: Preserve public exports/options/CSS hooks, native results/counts/order/revisions, source offsets, safe text rendering and borrowed-engine cleanup.",
+        "RX-9404-AC04: Check relevant keyboard/focus, composition, stale/cancelled work, no-results/retry, no-JavaScript browse links, narrow/long/RTL text, light/dark/forced colors and reduced motion; record actual manual AT/zoom scope separately."
+      ],
+      "verification": [
+        "Confirm current-source behavior and capture before/after on the affected installed surface; use focused existing behavior/layout tests, then related regressions.",
+        "Record actual browser/OS/manual accessibility scope; screenshots or automated events do not establish human AT or physical input."
+      ],
+      "affectedPaths": [
+        "docs/api/",
+        "examples/",
+        "src/addons/ui/",
+        "test/adapters/",
+        "test/ui/"
+      ],
+      "specs": [
+        "docs/planning/RELEASE_1_0_0.md",
+        "docs/planning/UI_POLISH.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9404.md"
       ],
       "blocker": null
     }

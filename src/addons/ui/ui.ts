@@ -137,9 +137,14 @@ export function mountRaveldexUI(options: UIOptions): UIHandle {
       results.replaceChildren(resultFragment);
       snapshot = { query, offset, limit, result: main };
       const first = main.hits.length ? offset + 1 : 0, last = offset + main.hits.length;
-      status.textContent = main.total === 0 ? 'No results.' : main.hits.length === 0
-        ? `${main.total} results. No results on this page. Use Previous page.`
-        : `${main.total} results. Showing ${first}–${last}.`;
+      const resultCount = `${main.total} ${main.total === 1 ? 'result' : 'results'}`;
+      status.textContent = main.total === 0
+        ? facets.some(facet => facet.select.value !== '')
+          ? 'No results with the selected filters. Choose All or try a different search.'
+          : 'No results. Try a different search.'
+        : main.hits.length === 0
+        ? `${resultCount}. No results on this page. Use Previous page.`
+        : `${resultCount}. Showing ${first}–${last}.`;
       page.textContent = `Page ${Math.floor(offset / captured.pageSize) + 1} of ${Math.max(1, Math.ceil(main.total / captured.pageSize))}.`;
       unavailable(previous, offset === 0); unavailable(next, offset + main.hits.length >= main.total); unavailable(inspect, main.hits.length === 0);
     } catch (reason) {
@@ -180,7 +185,7 @@ export function mountRaveldexUI(options: UIOptions): UIHandle {
       const json = JSON.stringify(data, null, 2);
       if (json.length > 2_000_000) fail('LIMIT_EXCEEDED', 'inspector.display');
       if (!current()) return;
-      inspectorData.textContent = json; inspectorStatus.textContent = `Inspector for revision ${data.revision}. ${data.documents.length} selected documents.`;
+      inspectorData.textContent = json; inspectorStatus.textContent = `Inspector for revision ${data.revision}. ${data.documents.length} selected ${data.documents.length === 1 ? 'document' : 'documents'}.`;
     } catch (reason) {
       if (!current()) return;
       inspectorError.textContent = `Inspector failed (${errorCode(reason)}). Close and reopen to retry.`; inspectorError.hidden = false;

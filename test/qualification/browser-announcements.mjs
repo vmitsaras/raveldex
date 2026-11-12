@@ -98,9 +98,9 @@ function observePresentation(mutations = []) {
   if (!failed) {
     if (!state.main.completed || !state.snippets?.completed || state.snippets.aborted || state.snippets.revision !== state.main.revision) return;
     const offset = main.options.offset ?? 0, first = main.result.hits.length ? offset + 1 : 0;
-    const expected = main.result.total === 0 ? 'No results.' : main.result.hits.length === 0
-      ? `${main.result.total} results. No results on this page. Use Previous page.`
-      : `${main.result.total} results. Showing ${first}–${offset + main.result.hits.length}.`;
+    const expected = main.result.total === 0 ? 'No results. Try a different search.' : main.result.hits.length === 0
+      ? `${main.result.total} ${main.result.total === 1 ? 'result' : 'results'}. No results on this page. Use Previous page.`
+      : `${main.result.total} ${main.result.total === 1 ? 'result' : 'results'}. Showing ${first}–${offset + main.result.hits.length}.`;
     if (status.textContent !== expected) return;
     const rendered = [...root.querySelectorAll('[data-raveldex-result]')].map(node => node.getAttribute('data-raveldex-result'));
     if (JSON.stringify(rendered) !== JSON.stringify(main.result.hits.map(hit => hit.id))) return;

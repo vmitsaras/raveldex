@@ -7,7 +7,7 @@ let report;
 before(async () => { report = await measurePackedPatch(); if (process.env.RAVELDEX_PATCH_PACKAGE_REPORT) await writeFile(process.env.RAVELDEX_PATCH_PACKAGE_REPORT, JSON.stringify(report, null, 2) + '\n'); });
 
 test('installed and minified patches equal independently specified complete replacements through every field action', () => {
-  assert.equal(report.package.private, true); assert.equal(report.correctness.status, 'Pass'); assert.equal(report.correctness.fullReplacementCasesPerRun, 5); assert.equal(report.correctness.completeComparisonsPerRun, 120); assert.equal(report.correctness.minifiedParity, 'Pass'); assert.deepEqual(report.packed.failures, ['REVISION_MISMATCH', 'INVALID_RECORD', 'MISSING_CAPABILITY', 'MISSING_CAPABILITY']);
+  assert.equal(report.package.private, false); assert.equal(report.correctness.status, 'Pass'); assert.equal(report.correctness.fullReplacementCasesPerRun, 5); assert.equal(report.correctness.completeComparisonsPerRun, 120); assert.equal(report.correctness.minifiedParity, 'Pass'); assert.deepEqual(report.packed.failures, ['REVISION_MISMATCH', 'INVALID_RECORD', 'MISSING_CAPABILITY', 'MISSING_CAPABILITY']);
 });
 test('source snapshot recovery allows guarded direct patches and an actual worker refuses the optional direct handle', () => {
   assert.equal(report.snapshots.status, 'Pass'); assert.equal(report.snapshots.restoredRevision, 1); assert.equal(report.snapshots.patchRevision, 2); assert.equal(report.snapshots.unchangedSourceCodec, true); assert.equal(report.worker.status, 'Pass'); assert.equal(report.worker.code, 'MISSING_CAPABILITY'); assert.equal(report.worker.ordinaryWorkerReplacement, 'Pass'); assert.match(report.worker.transport, /Actual Node worker_threads/);

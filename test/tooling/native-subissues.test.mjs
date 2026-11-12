@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { linkN9Subissues } from '../../scripts/link-native-subissues.mjs';
+import * as linker from '../../scripts/link-native-subissues.mjs';
+const { linkN9Subissues } = linker;
 
 const body = id => '<!-- raveldex:' + id + ':start -->\ncontent\n<!-- raveldex:' + id + ':end -->';
 const roadmap = { repository: 'vmitsaras/raveldex', milestones: [{ id:'N9' }],
@@ -50,4 +51,26 @@ test('preserves an existing sub-issue and creates only missing children',async()
  const ctx=mock();ctx.subissues.push(ctx.issues[1]);
  assert.deepEqual(await linkN9Subissues(roadmap,ctx.request),{parentNumber:130,subIssueCount:2,added:1});
  assert.deepEqual(ctx.writes,[5002]);
+});
+
+for (const [milestone, prefix] of [['N13', '93'], ['N14', '94']]) {
+ test('links '+milestone+' native children without replacing parents and repeats with zero writes',async()=>{
+  assert.equal(typeof linker.linkMilestoneSubissues, 'function', 'explicit milestone linker');
+  const selected={repository:roadmap.repository,milestones:[{id:milestone}],tasks:[1,2].map(n=>({id:'RX-'+prefix+'0'+n,milestone}))};
+  const ctx=mock();ctx.issues[0].body=body(milestone);
+  ctx.issues[1].body=body(selected.tasks[0].id);ctx.issues[2].body=body(selected.tasks[1].id);
+  const requests=[];
+  const request=(method,path,payload)=>{requests.push({method,path,payload});return ctx.request(method,path,payload);};
+  assert.deepEqual(await linker.linkMilestoneSubissues(selected,request,milestone),{parentNumber:130,subIssueCount:2,added:2});
+  assert.deepEqual(await linker.linkMilestoneSubissues(selected,request,milestone),{parentNumber:130,subIssueCount:2,added:0});
+  assert.ok(requests.filter(row=>row.method==='POST').every(row=>!Object.hasOwn(row.payload,'replace_parent')));
+  assert.deepEqual(ctx.writes,[5001,5002]);
+ });
+}
+
+test('explicit milestone linker refuses unrelated groups and wrong task identities',async()=>{
+ assert.equal(typeof linker.linkMilestoneSubissues,'function','explicit milestone linker');
+ await assert.rejects(linker.linkMilestoneSubissues(roadmap,mock().request,'N11'),/Unsupported/);
+ const wrong={...roadmap,milestones:[{id:'N13'}],tasks:[{id:'RX-8001',milestone:'N13'}]};
+ await assert.rejects(linker.linkMilestoneSubissues(wrong,mock().request,'N13'),/task IDs/);
 });
