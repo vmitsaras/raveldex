@@ -8,7 +8,7 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 75/75 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 77/77 done · 0 in progress · 0 dependency-ready.
 
 **Planner state:** `complete`.
 
@@ -45,6 +45,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N12 — Prepare Raveldex for stable 1.0.0** | `RX-9201`–`RX-9205` | 5/5 | Prepare verified 1.0.0 packages, clear documentation and current contributor guidance, with optional polish tracked separately. |
 | **N13 — Make the demo welcoming and easy to try** | `RX-9301`–`RX-9304` | 4/4 | Help a new visitor understand, try and adopt Raveldex using natural language and readable results. |
 | **N14 — Polish search interfaces and recovery states** | `RX-9401`–`RX-9404` | 4/4 | Refine the five consumer surfaces and visible recovery journeys while preserving native behavior and the existing identity. |
+| **N15 — Local demo server reliability** | `RX-9501`–`RX-9502` | 2/2 | Make local demos straightforward to preview and handle occupied ports without changes to search behavior. |
 
 ## Task index
 
@@ -143,6 +144,8 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-9402](IMPLEMENTATION_TASKS.md#rx-9402) — Polish compact dropdown and full-results handoff | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9402%22) |
 | [RX-9403](IMPLEMENTATION_TASKS.md#rx-9403) — Polish directory filters and rich result layouts | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9403%22) |
 | [RX-9404](IMPLEMENTATION_TASKS.md#rx-9404) — Review optional-feature and adapter recovery journeys | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9404%22) |
+| [RX-9501](IMPLEMENTATION_TASKS.md#rx-9501) — Choose a free port when the UI pilot port is occupied | `done` | `RX-9404` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9501%22) |
+| [RX-9502](IMPLEMENTATION_TASKS.md#rx-9502) — Explain how to preview all demo pages from the README | `done` | `RX-9501` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9502%22) |
 
 ## Milestone exit conditions
 
@@ -243,6 +246,10 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 - Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.
 - Public behavior, documentation and tracking agree; completion claims match the recorded scope and retain manual qualification limits.
 - No publication, deployment, visibility change, commit or push is part of this work.
+
+### N15 — Local demo server reliability
+
+- The selected local-server bug is reproduced, fixed and verified with actual socket collisions.
 
 ## Execution and authorization
 

@@ -3429,6 +3429,74 @@ Deliver self-contained optional issues, preserved historical tracking and a prec
 - [docs/evidence/RX-9205.md](docs/evidence/RX-9205.md)
 
 
+## RX-9501
+
+**Choose a free port when the UI pilot port is occupied**
+
+**Milestone:** N15 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9501%22)
+
+**Dependencies:** [RX-9404](IMPLEMENTATION_TASKS.md#rx-9404)
+
+Fix the owner-reported EADDRINUSE failure in scripts/ui-pilot.mjs. Keep 4173 or --port as the preferred port, then retry once with an OS-assigned free port on a collision and print the actual URL.
+
+**Expected affected areas**
+
+`scripts/ui-pilot.mjs`, `test/tooling/ui-pilot.test.mjs`, `examples/docs-search/README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[README.md](examples/docs-search/README.md)
+
+**Acceptance criteria**
+
+- RX-9501-AC01: An occupied default or explicit preferred port does not stop the UI pilot; it serves the demo on another loopback port and prints the working URL.
+- RX-9501-AC02: A free explicit port and --port 0 still work; invalid ports fail and --no-serve exits without a listener.
+- RX-9501-AC03: Existing request allowlisting, methods, security headers and signal shutdown remain intact; only EADDRINUSE triggers one fallback attempt.
+
+**Verification**
+
+- Run the real CLI with occupied default/explicit ports, fetch the reported URL, verify request boundaries and stop only the test-owned processes.
+- Run focused tooling tests, roadmap/document checks and one complete candidate verification; record actual outcomes and review.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9501.md](docs/evidence/RX-9501.md)
+
+
+## RX-9502
+
+**Explain how to preview all demo pages from the README**
+
+**Milestone:** N15 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9502%22)
+
+**Dependencies:** [RX-9501](IMPLEMENTATION_TASKS.md#rx-9501)
+
+Add discoverable source-checkout instructions for the complete demo site, its five consumer pages and Workbench. Document a free-port preview, rebuild and shutdown, while keeping the standalone Workbench command clear.
+
+**Expected affected areas**
+
+`README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9502-AC01: The root README shows prerequisites, repository-root install/build/preview commands and how to open the actual URL, stop the server and regenerate changed sources.
+- RX-9502-AC02: The five consumer demos and Workbench have accurate routes, and the README distinguishes full-site preview from standalone pilot:ui.
+- RX-9502-AC03: Generated site, package inventory/links/examples and planning/reference checks pass without changing runtime behavior.
+
+**Verification**
+
+- Inspect command definitions and routes; regenerate with existing verified compiler output, fetch each documented demo route through the real preview server and verify the updated installed README.
+- Run packaged documentation checks, site identity/link/inventory checks and roadmap/generated/reference/diff checks; do not rebuild or rerun unchanged runtime qualification.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9502.md](docs/evidence/RX-9502.md)
+
+
 ## Optional enhancement tasks
 
 The `RX-A*` task cards in [Optional features](docs/planning/OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.

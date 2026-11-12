@@ -18,6 +18,33 @@ Choose the interface that fits your application:
 
 Start with the [minimal consumer recipe and capability map](docs/api/HOSTS.md#consumer-search-interfaces), or copy one of the [eight complete browser/Astro projects](https://github.com/vmitsaras/raveldex/blob/main/examples/README.md). Supply explicit public records and matching display data; Raveldex does not crawl your pages. Core also works alone when your application supplies its own interface.
 
+## Preview the demo pages locally
+
+Use Node 24 and npm in a source checkout. From the repository root, run:
+
+```sh
+npm ci
+npm run pages:build
+npm run pages:preview -- --port 0
+```
+
+Open the HTTP URL printed in the terminal, such as `http://127.0.0.1:54321/raveldex/`. Port `0` selects a free port automatically; use the port actually printed. Keep the terminal running while you browse, and press Ctrl+C to stop the preview.
+
+The homepage links all five consumer demos. Each demo page includes a live preview, a link to open it as a full page and complete starter projects. Append these paths to the printed `/raveldex/` address:
+
+| Demo | Path |
+| --- | --- |
+| Inline search | `examples/inline/` |
+| Documentation modal | `examples/modal/` |
+| Compact header dropdown | `examples/dropdown/` |
+| Filterable resource directory | `examples/directory/` |
+| Rich result cards | `examples/cards/` |
+| Developer Workbench | `demo/` |
+
+For example, the inline demo at the address above is `http://127.0.0.1:54321/raveldex/examples/inline/`.
+
+On later visits, run just `npm run pages:preview -- --port 0` if the generated site is current. After editing sources, stop the preview, run `npm run pages:build` again and restart it. These commands generate and serve the site locally. See the [site workflow](https://github.com/vmitsaras/raveldex/blob/main/site/README.md) for more detail.
+
 ## Install
 
 Install Raveldex in your application with npm. For a new Node application, enable ESM imports first:
@@ -91,7 +118,9 @@ The [solution chooser](https://github.com/vmitsaras/raveldex/blob/main/examples/
 
 ### Developer Workbench
 
-Run `npm run pilot:ui` from a source checkout to explore the developer demo. Search for `source provider`, filter results or open Inspector to see why a result matched. The Workbench is a separate developer presentation; consumer presets omit its numerical scores and Inspector controls.
+To run only the developer Workbench from the repository root, use `npm run pilot:ui` and open the HTTP URL printed in the terminal. It builds its own demo and automatically chooses another port if its preferred port is occupied. For all five consumer demos, use [the full-site preview above](#preview-the-demo-pages-locally).
+
+Search for `source provider`, filter results or open Inspector to see why a result matched. The Workbench is a separate developer presentation; consumer presets omit its numerical scores and Inspector controls.
 
 Under **Advanced demo settings**, you can compare phrase and word searches, run the same search in a worker, or change how word locations are stored.
 

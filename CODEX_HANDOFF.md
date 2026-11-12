@@ -9,6 +9,11 @@ and [issue delivery](docs/evidence/RX-9205.md) record actual results. N13 was ex
 is complete. See [the final demo verification](docs/evidence/RX-9304.md). N14 was explicitly selected and all four tasks are implemented/verified. See [the final UI evidence](docs/evidence/RX-9404.md). See [the UI polish plan](docs/planning/UI_POLISH.md). No required release-preparation task remains.
 Historical completed tasks stay accepted; reconcile with the planner before new work.
 
+The subsequent owner-selected port-collision fix is complete locally:
+[RX-9501 verification](docs/evidence/RX-9501.md). N15 also includes the requested
+[README demo-preview instructions](docs/evidence/RX-9502.md). Both tasks are
+complete locally; their GitHub tracking and commit/push were not performed.
+
 Run commands appropriate to the changed risk and record actual outcomes in the
 task's evidence. The [release runbook](docs/release/PREPARATION.md) packs/verifies
 all three libraries and the [site guide](site/README.md) owns generated Pages.

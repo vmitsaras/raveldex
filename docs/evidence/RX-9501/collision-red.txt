@@ -1,0 +1,68 @@
+✖ UI pilot serves on another port when the default is occupied (1203.949125ms)
+✖ UI pilot preserves an available explicit port and falls back on an explicit collision (2006.283042ms)
+✔ UI pilot accepts port zero and SIGINT closes its server (983.580958ms)
+✔ UI pilot rejects invalid ports and --no-serve exits without a URL (1188.160375ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5436.417583
+
+✖ failing tests:
+
+test at test/tooling/ui-pilot.test.mjs:46:1
+✖ UI pilot serves on another port when the default is occupied (1203.949125ms)
+  Error: Pilot exited (1): Search example: /private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-IO7Omi
+  Searches 51 sections from five usage guides.
+  node:net:2328
+      const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+                 ^
+  
+  Error: listen EADDRINUSE: address already in use 127.0.0.1:4173
+      at Server.setupListenHandle [as _listen2] (node:net:2328:16)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EADDRINUSE',
+    errno: -48,
+    syscall: 'listen',
+    address: '127.0.0.1',
+    port: 4173
+  }
+  
+  Node.js v24.21.0
+  
+      at ChildProcess.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/tooling/ui-pilot.test.mjs:21:49)
+      at ChildProcess.wrapper (node:events:639:12)
+      at ChildProcess.emit (node:events:526:24)
+      at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+
+test at test/tooling/ui-pilot.test.mjs:58:1
+✖ UI pilot preserves an available explicit port and falls back on an explicit collision (2006.283042ms)
+  Error: Pilot exited (1): Search example: /private/var/folders/m4/7qvldjl917j4nwbkw7bxmn_m0000gn/T/raveldex-core-consumer-UlhzT0
+  Searches 51 sections from five usage guides.
+  node:net:2328
+      const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+                 ^
+  
+  Error: listen EADDRINUSE: address already in use 127.0.0.1:57433
+      at Server.setupListenHandle [as _listen2] (node:net:2328:16)
+      at listenInCluster (node:net:2437:12)
+      at node:net:2666:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EADDRINUSE',
+    errno: -48,
+    syscall: 'listen',
+    address: '127.0.0.1',
+    port: 57433
+  }
+  
+  Node.js v24.21.0
+  
+      at ChildProcess.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/tooling/ui-pilot.test.mjs:21:49)
+      at ChildProcess.wrapper (node:events:639:12)
+      at ChildProcess.emit (node:events:526:24)
+      at ChildProcess._handle.onexit (node:internal/child_process:295:12)

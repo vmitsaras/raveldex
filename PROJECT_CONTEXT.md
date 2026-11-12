@@ -55,6 +55,13 @@ selected preparation/demo/UI work is complete. The owner authorized source
 commit/push and CI verification; package publication and tags/releases remain
 separate. Run `npm run handoff:next` before selecting new work.
 
+The owner-reported UI pilot port collision is fixed and verified in
+[RX-9501](docs/evidence/RX-9501.md). `pilot:ui` now chooses a free loopback port
+when its preferred port is occupied and prints the actual URL. The root README
+now explains the complete demo-site preview, verified in [RX-9502](docs/evidence/RX-9502.md).
+N15 is complete locally; GitHub synchronization and source delivery were not part
+of these maintenance tasks.
+
 All 80 pre-N12 tasks remain accepted. Their source-specific results and actual
 N10/N11 closeout are retained in [evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md).
 Those historical artifacts do not qualify changed 1.0.0 package inputs by themselves.

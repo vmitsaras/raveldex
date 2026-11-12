@@ -17,7 +17,7 @@ npm ci
 npm run pilot:ui
 ```
 
-Open the HTTP URL printed in the terminal. You should see a search field and the guide collection, ready to search. The command builds and installs a local package, bundles the browser and worker code, then serves the demo. Stop it with Ctrl+C. Use `--port 4175` if the default port is occupied.
+Open the HTTP URL printed in the terminal. You should see a search field and the guide collection, ready to search. The command builds and installs a local package, bundles the browser and worker code, then serves the demo. Stop it with Ctrl+C. It prefers port 4173 and automatically chooses a free port if that port is occupied. Use `npm run pilot:ui -- --port 4175` to prefer another port, or `--port 0` to choose a free port immediately. An occupied preferred port also falls back automatically; always use the printed URL.
 
 ## Try a search
 

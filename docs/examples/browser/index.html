@@ -10,7 +10,7 @@ excerpt presentation. The overview observer is disconnected before UI teardown.<
 <pre><code class="language-sh">npm ci
 npm run pilot:ui
 </code></pre>
-<p>Open the HTTP URL printed in the terminal. You should see a search field and the guide collection, ready to search. The command builds and installs a local package, bundles the browser and worker code, then serves the demo. Stop it with Ctrl+C. Use <code>--port 4175</code> if the default port is occupied.</p>
+<p>Open the HTTP URL printed in the terminal. You should see a search field and the guide collection, ready to search. The command builds and installs a local package, bundles the browser and worker code, then serves the demo. Stop it with Ctrl+C. It prefers port 4173 and automatically chooses a free port if that port is occupied. Use <code>npm run pilot:ui -- --port 4175</code> to prefer another port, or <code>--port 0</code> to choose a free port immediately. An occupied preferred port also falls back automatically; always use the printed URL.</p>
 <h2 id="try-a-search">Try a search</h2>
 <ol>
 <li>Search <code>source provide</code> or <code>source prov</code>. Final-word prefix search completes the last word; earlier words must match exactly. Look for <strong>Source, positions and phrases</strong>, which explains how to keep original text.</li>

@@ -35,7 +35,23 @@ if (serve) {
       response.end(request.method === 'HEAD' ? undefined : bytes);
     } catch { response.writeHead(500); response.end('Local artifact unavailable'); }
   });
-  await new Promise((accept, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', accept); });
+  await new Promise((accept, reject) => {
+    const onListening = () => { server.off('error', onError); accept(); };
+    const onError = error => {
+      if (error.code === 'EADDRINUSE' && port !== 0) {
+        // Let the OS allocate a free port without a separate, racy port probe.
+        port = 0;
+        server.listen(port, '127.0.0.1');
+      } else {
+        server.off('error', onError);
+        server.off('listening', onListening);
+        reject(error);
+      }
+    };
+    server.on('error', onError);
+    server.once('listening', onListening);
+    server.listen(port, '127.0.0.1');
+  });
   console.log(`Open http://127.0.0.1:${server.address().port}/ (Ctrl-C stops this local server).`);
   for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => { server.close(); });
 }
