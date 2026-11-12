@@ -1,0 +1,28 @@
+✖ a real worker failure offers explicit restart or direct search and preserves the query on recovery (3270.248167ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3598.740167
+
+✖ failing tests:
+
+test at test/consumer/ui-pilot.test.mjs:62:1
+✖ a real worker failure offers explicit restart or direct search and preserves the query on recovery (3270.248167ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Background search stopped/. Input:
+  
+  'Search is ready. Choose an example or type your own query.'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/consumer/ui-pilot.test.mjs:82:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Search is ready. Choose an example or type your own query.',
+    expected: /Background search stopped/,
+    operator: 'match',
+    diff: 'simple'
+  }

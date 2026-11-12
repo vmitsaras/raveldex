@@ -1,0 +1,102 @@
+✖ no-JavaScript browsing and real failed-data retry keep actual guides usable (8411.473375ms)
+✖ a supported header never offers a draft field that loading will replace (123.646333ms)
+✖ a real worker failure offers explicit restart or direct search and preserves the query on recovery (3533.261167ms)
+✖ per-read transport refusals and timeout keep explicit retry on the same real worker with the original code (521.387208ms)
+✖ an aborted older read or closed Inspector cannot publish a late worker refusal over current success (680.007709ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14061.029875
+
+✖ failing tests:
+
+test at test/consumer/dropdown-browser-starter.test.mjs:153:1
+✖ no-JavaScript browsing and real failed-data retry keep actual guides usable (8411.473375ms)
+  AssertionError [ERR_ASSERTION]: No-JavaScript pages offer truthful browse links, not a nonworking search form
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/consumer/dropdown-browser-starter.test.mjs:156:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/consumer/dropdown-browser-starter.test.mjs:197:1
+✖ a supported header never offers a draft field that loading will replace (123.646333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/consumer/dropdown-browser-starter.test.mjs:203:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/consumer/ui-pilot.test.mjs:62:1
+✖ a real worker failure offers explicit restart or direct search and preserves the query on recovery (3533.261167ms)
+  AssertionError [ERR_ASSERTION]: Restart must not hide the focused action
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/consumer/ui-pilot.test.mjs:89:12)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:541:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/consumer/ui-pilot.test.mjs:129:1
+✖ per-read transport refusals and timeout keep explicit retry on the same real worker with the original code (521.387208ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /could not complete this request/. Input:
+  
+  'Background search stopped. Use Retry loading guides, or choose This page in Advanced demo settings.'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/consumer/ui-pilot.test.mjs:133:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Background search stopped. Use Retry loading guides, or choose This page in Advanced demo settings.',
+    expected: /could not complete this request/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at test/consumer/ui-pilot.test.mjs:144:1
+✖ an aborted older read or closed Inspector cannot publish a late worker refusal over current success (680.007709ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'error' !== 'ready'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/consumer/ui-pilot.test.mjs:155:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'ready',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
