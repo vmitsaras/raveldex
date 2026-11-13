@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 75/75 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 75/83 done · 0 in progress · 1 dependency-ready.
 
-**Planner state:** `complete`.
+**Planner state:** `ready`.
 
-**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
+**Next or resumable release task:** [RX-9901](IMPLEMENTATION_TASKS.md#rx-9901) — Establish site-only styling and contextual navigation.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -45,6 +45,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N12 — Prepare Raveldex for stable 1.0.0** | `RX-9201`–`RX-9205` | 5/5 | Prepare verified 1.0.0 packages, clear documentation and current contributor guidance, with optional polish tracked separately. |
 | **N13 — Make the demo welcoming and easy to try** | `RX-9301`–`RX-9304` | 4/4 | Help a new visitor understand, try and adopt Raveldex using natural language and readable results. |
 | **N14 — Polish search interfaces and recovery states** | `RX-9401`–`RX-9404` | 4/4 | Refine the five consumer surfaces and visible recovery journeys while preserving native behavior and the existing identity. |
+| **N19 — Documentation and demo experience** | `RX-9901`–`RX-9908` | 0/8 | Help developers choose, try and integrate the existing search interfaces through a contextual Astro documentation site, visual gallery and truthful preview/setup pages; plan site-only Tailwind styling without changing native packages or standalone starters. |
 
 ## Task index
 
@@ -143,6 +144,14 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-9402](IMPLEMENTATION_TASKS.md#rx-9402) — Polish compact dropdown and full-results handoff | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9402%22) |
 | [RX-9403](IMPLEMENTATION_TASKS.md#rx-9403) — Polish directory filters and rich result layouts | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9403%22) |
 | [RX-9404](IMPLEMENTATION_TASKS.md#rx-9404) — Review optional-feature and adapter recovery journeys | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9404%22) |
+| [RX-9901](IMPLEMENTATION_TASKS.md#rx-9901) — Establish site-only styling and contextual navigation | `planned` | `RX-9404` | [Issue](https://github.com/vmitsaras/raveldex/issues/119) |
+| [RX-9902](IMPLEMENTATION_TASKS.md#rx-9902) — Lead the examples overview with five visual choices | `planned` | `RX-9901` | [Issue](https://github.com/vmitsaras/raveldex/issues/120) |
+| [RX-9903](IMPLEMENTATION_TASKS.md#rx-9903) — Complete the Inline preview and installation pilot | `planned` | `RX-9901` | [Issue](https://github.com/vmitsaras/raveldex/issues/121) |
+| [RX-9904](IMPLEMENTATION_TASKS.md#rx-9904) — Review and approve the rendered pilot before rollout | `planned` | `RX-9902`, `RX-9903` | [Issue](https://github.com/vmitsaras/raveldex/issues/122) |
+| [RX-9905](IMPLEMENTATION_TASKS.md#rx-9905) — Apply the reviewed template to modal and dropdown | `planned` | `RX-9904` | [Issue](https://github.com/vmitsaras/raveldex/issues/123) |
+| [RX-9906](IMPLEMENTATION_TASKS.md#rx-9906) — Apply the reviewed template to directory and rich results | `planned` | `RX-9904` | [Issue](https://github.com/vmitsaras/raveldex/issues/124) |
+| [RX-9907](IMPLEMENTATION_TASKS.md#rx-9907) — Give guides and API reference distinct reading layouts | `planned` | `RX-9904` | [Issue](https://github.com/vmitsaras/raveldex/issues/125) |
+| [RX-9908](IMPLEMENTATION_TASKS.md#rx-9908) — Qualify the integrated site and synchronize the handoff | `planned` | `RX-9905`, `RX-9906`, `RX-9907` | [Issue](https://github.com/vmitsaras/raveldex/issues/126) |
 
 ## Milestone exit conditions
 
@@ -243,6 +252,13 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 - Every task has scoped observable acceptance and recorded verification; existing accepted work is preserved.
 - Public behavior, documentation and tracking agree; completion claims match the recorded scope and retain manual qualification limits.
 - No publication, deployment, visibility change, commit or push is part of this work.
+
+### N19 — Documentation and demo experience
+
+- The owner explicitly approves a working shared-shell, examples-overview and Inline pilot before rollout; the recorded approval identifies the candidate.
+- All five interface pages and representative guide/API templates use the approved presentation, preserve routes/anchors and reflect the exact five-presentation/eight-starter inventory.
+- Actual site, archive/source, navigation, keyboard/reflow, package and publication-boundary checks have scoped current evidence; essential defects are repaired and manual limits are explicit.
+- Canonical statuses, generated documents and targeted GitHub native sub-issues agree. Registration is planning only; implementation, dependency installation, commit/push and publication are not authorized by this milestone setup.
 
 ## Execution and authorization
 

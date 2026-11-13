@@ -9,6 +9,16 @@ and [issue delivery](docs/evidence/RX-9205.md) record actual results. N13 was ex
 is complete. See [the final demo verification](docs/evidence/RX-9304.md). N14 was explicitly selected and all four tasks are implemented/verified. See [the final UI evidence](docs/evidence/RX-9404.md). See [the UI polish plan](docs/planning/UI_POLISH.md). No required release-preparation task remains.
 Historical completed tasks stay accepted; reconcile with the planner before new work.
 
+The separately delivered [N19 documentation/demo plan](docs/planning/DOCS_DEMO_EXPERIENCE.md)
+defines eight planned tasks and a rendered-pilot review gate. N19 remains planning-only;
+no product code or dependencies changed.
+N19 is queued but unstarted. When the owner explicitly selects implementation,
+RX-9901 is the first dependency-ready slice; begin from the accepted
+N16–N18 baseline, which remains on codex/prepare-1-0-0 and is not integrated by
+this planning-only PR. Its availability is an explicit entry gate even though
+the main-compatible graph depends on accepted RX-9404. The owner authorized
+planning PR delivery/merge after CI, not N19 implementation or publication.
+
 Run commands appropriate to the changed risk and record actual outcomes in the
 task's evidence. The [release runbook](docs/release/PREPARATION.md) packs/verifies
 all three libraries and the [site guide](site/README.md) owns generated Pages.
