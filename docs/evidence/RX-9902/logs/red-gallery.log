@@ -1,0 +1,79 @@
+Docs gallery: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ gallery exposes five truthful interface choices (1227.147625ms)
+✖ gallery preserves comparison anchors without initializing demo engines (637.7425ms)
+✖ gallery supports no-JS keyboard navigation and narrow comparison (142.921875ms)
+✖ gallery keeps focus and semantics in forced colors and reduced motion (5115.02075ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7641.571792
+
+✖ failing tests:
+
+test at test/pages/docs-gallery.test.mjs:29:1
+✖ gallery exposes five truthful interface choices (1227.147625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Examples'
+  - 'Choose a search interface'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:33:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Examples',
+    expected: 'Choose a search interface',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-gallery.test.mjs:63:1
+✖ gallery preserves comparison anchors without initializing demo engines (637.7425ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  4 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:71:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-gallery.test.mjs:93:1
+✖ gallery supports no-JS keyboard navigation and narrow comparison (142.921875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:99:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-gallery.test.mjs:124:1
+✖ gallery keeps focus and semantics in forced colors and reduced motion (5115.02075ms)
+  locator.focus: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-solution-demo]').first()[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:130:16) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for locator('[data-solution-demo]').first()" ]
+  }

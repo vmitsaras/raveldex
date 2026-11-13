@@ -49,6 +49,30 @@ for exact identities, renders, source boundaries and unrun human qualification.
 
 ### Existing consumer examples and search
 
+`Examples.astro` owns the overview at `/examples/`. Five inert local PNG snapshots
+show the real Browser starters; they add no iframe, search owner or remote image
+service. `solutions.mjs` supplies presentation names/use cases, while `STARTERS`
+alone supplies the eight real platform/project mappings, sources and archives.
+`SolutionCard.astro` renders ordinary links that also work without JavaScript.
+The compact comparison and supporting sections retain all four legacy section
+anchors and the overview's `#examples` anchor. Core-only recipes and the
+Developer Workbench remain secondary destinations.
+
+The explicit `SOURCE_ALIASES` registry maps `examples/README.md` links to that
+same overview without duplicating a public route. The Markdown remains the fuller
+repository comparison. The builder validates aliases against registered public
+destinations, copies/hashes each gallery component and all five thumbnails, and
+the strict preview serves allowlisted PNGs as `image/png`. Do not replace this
+with an asset directory glob. The thumbnails in `site/images/examples/` were
+captured from the unchanged generated starters; source/build/browser identities,
+queries and result IDs are in the [RX-9902 capture record](../docs/evidence/RX-9902/baseline/inventory.json).
+When a starter's visible interface changes, deliberately recapture and review its
+snapshot with the task's [capture script](../docs/evidence/RX-9902/capture.mjs).
+After generation, run `node --test test/pages/docs-gallery.test.mjs test/pages/solutions-qualification.test.mjs test/tooling/pages.test.mjs`
+and `npm run pages:check`. These check truthful choices, exact destinations,
+source alias, no-JS/keyboard navigation, narrow/forced-colors layouts and the
+request inventory separately from the unchanged lazy header search.
+
 The five consumer galleries share `ExampleShowcase.astro`: a short introduction,
 family navigation and the real installed live preview come before setup details.
 Full-page previews remain ordinary links. All eight standalone starter projects

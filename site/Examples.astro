@@ -1,0 +1,65 @@
+---
+import Layout from './Layout.astro';
+import SolutionCard from './SolutionCard.astro';
+import { SOLUTIONS } from './solutions.mjs';
+import { STARTERS, starterArchive } from './starters.mjs';
+import { BASE, href } from './pages.mjs';
+const sections = [
+  ['choose-a-search-solution', 'Compare interfaces'],
+  ['data-and-capabilities', 'Data and capabilities'],
+  ['keyboard-and-cleanup', 'Keyboard and cleanup'],
+  ['complete-projects-and-smaller-examples', 'Complete projects and smaller examples'],
+];
+const comparisons = [
+  ['inline', 'Field and results stay in the page', 'Page excerpts and topic filters', null],
+  ['modal', 'Search opens in a dialog', 'Excerpts linked to real headings', 'copy-modal'],
+  ['dropdown', 'Quick header links and a full results page', 'Core title/link results; no snippets or facets', 'copy-dropdown'],
+  ['directory', 'Persistent filtered resource list', 'Complete facet counts, chips and URL replay', 'copy-directory'],
+  ['cards', 'List, cards or grid over directory results', 'Plain-text metadata; images start off', 'cards-data'],
+];
+---
+<Layout frontmatter={{ title: 'Choose a search interface', route: 'examples' }} wide headings={sections.map(([slug, text]) => ({ depth: 2, slug, text }))}>
+  <div class="examples-gallery">
+    <header class="examples-gallery__intro">
+      <p class="examples-gallery__eyebrow">Examples · Five interfaces, eight complete projects</p>
+      <h1 id="examples">Choose a search interface</h1>
+      <p>Find the layout that fits your site, try its working demo, then copy a complete project and replace the sample content.</p>
+    </header>
+    <p class="examples-gallery__snapshot-note">Snapshots show the Browser starters; open a gallery to try the live demo.</p>
+    <ul class="examples-gallery__choices" data-solution-gallery aria-label="Search interface choices">
+      {SOLUTIONS.map(solution => <SolutionCard solution={solution} />)}
+    </ul>
+    <section aria-labelledby="choose-a-search-solution">
+      <h2 id="choose-a-search-solution">Compare interfaces</h2>
+      <table class="examples-gallery__comparison" tabindex="0" aria-label="Search interface comparison">
+        <caption>Choose a presentation; capabilities are selected separately.</caption>
+        <thead><tr><th scope="col">Interface</th><th scope="col">Where results appear</th><th scope="col">Selected features</th></tr></thead>
+        <tbody>{comparisons.map(([id, placement, features, anchor]) => <tr>
+          <th scope="row"><a href={href(`examples/${id}`)}>{SOLUTIONS.find(solution => solution.id === id).title}</a></th>
+          <td>{placement}</td><td><a href={id === 'inline' ? href('reference/hosts') + '#inline-result-pages-filters-and-snippets' : href(`examples/${id}`) + '#' + anchor}>{features}</a></td>
+        </tr>)}</tbody>
+      </table>
+    </section>
+    <section aria-labelledby="data-and-capabilities">
+      <h2 id="data-and-capabilities">Data and capabilities</h2>
+      <p>Every starter indexes an explicit allowlist of public records. None crawls a site or adds a remote search service. Keep private content out of public assets and deploy rebuilt pages and search files together.</p>
+      <p>Browser inline, dropdown, directory and rich results load at page initialization. Astro inline and directory wait for Enable; documentation modals load their complete local index on first open. All eight projects use the main thread. Workers are a separate integration.</p>
+      <p>Requirements stay with the example: <a href={href('examples/inline') + '#copy-inline'}>inline snippets and topics</a>, <a href={href('examples/modal') + '#copy-modal'}>modal sections and dialog</a>, <a href={href('examples/dropdown') + '#copy-dropdown'}>dropdown Popover and full results</a>, <a href={href('examples/directory') + '#copy-directory'}>directory filters and Astro artifacts</a>, and <a href={href('examples/cards') + '#cards-data'}>rich result metadata and images</a>.</p>
+    </section>
+    <section aria-labelledby="keyboard-and-cleanup">
+      <h2 id="keyboard-and-cleanup">Keyboard and cleanup</h2>
+      <p>Keep ordinary result links and visible keyboard focus. Inline and modal append matches with Load more; the dropdown uses Arrow keys, Enter and Escape; directories use native filters and complete result pages. The application owns its engine; destroy the borrowed view before disposing that owner.</p>
+      <p>Follow the Browser starter instructions for loading/Retry, no-results recovery and cleanup: <a href={href('examples/inline-browser') + '#loading-retry-and-disposal'}>Inline</a>, <a href={href('examples/modal-browser') + '#first-open-loading-retry-and-disposal'}>Modal</a>, <a href={href('examples/dropdown-browser') + '#loading-retry-and-cleanup'}>Dropdown</a>, <a href={href('examples/directory-browser') + '#keyboard-mobile-filters-and-recovery'}>Directory</a>, and <a href={href('examples/cards-browser') + '#query-navigation-and-ownership'}>rich results</a>. See <a href={href('reference/hosts') + '#starter-adoption-and-local-checks'}>starter adoption and local checks</a> for the shared contract and manual browser/assistive technology checks.</p>
+    </section>
+    <section aria-labelledby="complete-projects-and-smaller-examples">
+      <h2 id="complete-projects-and-smaller-examples">Complete projects and smaller examples</h2>
+      <p>Get the exact original files for any of the eight projects. Setup uses Node 24/npm and matching Raveldex packages; each guide explains installation, public data, CSS and deployment bases.</p>
+      <ul class="examples-gallery__projects">{STARTERS.map(starter => <li>
+        <a href={href(`examples/${starter.id}`)}>{SOLUTIONS.find(solution => solution.id === starter.family).title} · {starter.id.endsWith('-astro') ? 'Astro' : 'Browser'}</a>
+        <a href={BASE + starterArchive(starter.id)} download aria-label={`Download .tar.gz for ${SOLUTIONS.find(solution => solution.id === starter.family).title} · ${starter.id.endsWith('-astro') ? 'Astro' : 'Browser'}`}>Download<span class="examples-gallery__archive-format"> .tar.gz</span></a>
+      </li>)}</ul>
+      <p>Building your own interface? Start with <a href={href('examples/core')}>core-only terminal search</a> or the smaller <a href={href('examples/api')}>installed API recipes</a>. <a href={href('guide/overview')}>Get started</a> explains package installation.</p>
+      <p>For developer exploration, open the <a href={href('demo')}>Developer Workbench</a> and its <a href={href('examples/browser')}>run instructions</a>. The <a href={href('examples/astro')}>Astro setup fixture</a> and <a href={href('examples/migration')}>migration converter example</a> cover separate integration tasks.</p>
+    </section>
+  </div>
+</Layout>

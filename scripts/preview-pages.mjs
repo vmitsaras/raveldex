@@ -15,7 +15,7 @@ const args = process.argv.slice(2);
 assert.ok(!args.length || args.length === 2 && args[0] === '--port', 'Usage: npm run pages:preview -- [--port 4174]');
 const port = Number(args[1] ?? 4174);
 assert.ok(Number.isInteger(port) && port >= 0 && port <= 65535);
-const types = { html: 'text/html', css: 'text/css', js: 'text/javascript', mjs: 'text/javascript', json: 'application/json', txt: 'text/plain', gz: 'application/gzip', svg: 'image/svg+xml' };
+const types = { html: 'text/html', css: 'text/css', js: 'text/javascript', mjs: 'text/javascript', json: 'application/json', txt: 'text/plain', gz: 'application/gzip', svg: 'image/svg+xml', png: 'image/png' };
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');

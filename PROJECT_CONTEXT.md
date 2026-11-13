@@ -84,16 +84,19 @@ The 31-match header and 1,005-record shared regressions, complete project select
 and final package/site checks passed within the recorded environment. N18 is
 complete locally; source delivery and publication remain separate.
 
-[N19 documentation/demo experience](docs/planning/DOCS_DEMO_EXPERIENCE.md) has
-now been explicitly selected for RX-9901 only. This contextual-shell slice is
-implemented and verified locally on the delivered N15–N18 baseline, with site-only Tailwind development
-tooling, truthful route/section navigation and preserved installed search and
-starter boundaries. [RX-9901 evidence](docs/evidence/RX-9901.md) records actual
-checks and the scoped result. RX-9902–RX-9908 remain planned; the rendered-pilot
-approval gate still precedes rollout. The owner subsequently authorized
-[RX-9901 source delivery through a CI-checked PR](docs/evidence/RX_9901_DELIVERY_20261113.md),
-with RX-9902 explicitly unstarted. Package publication remains separate.
-See the [earlier baseline delivery](docs/evidence/N15_N18_DELIVERY_20261113.md).
+[N19 documentation/demo experience](docs/planning/DOCS_DEMO_EXPERIENCE.md) began
+with the contextual shell and site-only Tailwind tooling, delivered through
+[RX-9901's CI-checked PR](docs/evidence/RX_9901_DELIVERY_20261113.md).
+The owner subsequently selected RX-9902 only. Its static five-choice overview
+is implemented and verified locally, with exactly eight real starter mappings,
+local screenshots, compact comparison, preserved anchors/source alias and unchanged
+installed search/starter boundaries. [RX-9902 evidence](docs/evidence/RX-9902.md)
+records actual checks, review repairs, one deferred minor test-hardening item and
+manual limits. N19 is 2/8 accepted; RX-9902 source remains uncommitted on
+`codex/n19-rx9902`. **RX-9903 is planned/unstarted** under the explicit instruction;
+RX-9904–RX-9908 remain planned and the rendered-pilot owner gate precedes rollout.
+Source delivery and package publication remain separate. See the
+[earlier baseline delivery](docs/evidence/N15_N18_DELIVERY_20261113.md).
 
 All 80 pre-N12 tasks remain accepted. Their source-specific results and actual
 N10/N11 closeout are retained in [evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md).
@@ -118,3 +121,5 @@ preserves those artifacts and does not select retention migration/history rewrit
 The source repository is private; required package instructions are self-contained.
 Hosted Pages activation, source commit/push and registry/release publication are
 separate delivery actions. No hosted deployment is inferred from local generation.
+
+The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](docs/evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.

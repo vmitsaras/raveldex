@@ -2,7 +2,7 @@
 
 > For agentic workers: use the Superpowers `executing-plans` workflow to implement one dependency-ready task at a time after an explicit implementation instruction. The registration request authorized planning and GitHub setup only. The subsequent request authorizes delivery and merge of this planning-only PR after CI; it does not authorize product code, dependency installation or N19 implementation.
 
-**Current execution — 13 November 2026:** The owner subsequently selected RX-9901 implementation, required checks and roadmap/GitHub updates. The merged N15–N18 baseline is available at `35ea42e`. RX-9901 is implemented and verified locally; see [evidence](../evidence/RX-9901.md). RX-9902–RX-9908 remain planned. Earlier planning-only authorization statements below describe registration and delivery history. The owner then authorized RX-9901 commit/push, a PR and CI-gated merge; see the [delivery record](../evidence/RX_9901_DELIVERY_20261113.md). RX-9902 must remain unstarted. Publication and later-task implementation remain separate.
+**Current execution — 13 November 2026:** RX-9901 is delivered in [PR #138](https://github.com/vmitsaras/raveldex/pull/138), merge `f30486a`, after passing CI. The owner subsequently selected RX-9902 implementation, checks and roadmap/GitHub updates only. RX-9902 is implemented and verified locally; see [evidence](../evidence/RX-9902.md). N19 is **2/8 accepted**. RX-9902 source remains uncommitted on `codex/n19-rx9902`; source delivery/publication are separate. **RX-9903 remains planned and unstarted**; RX-9904–RX-9908 remain planned and the existing owner pilot gate still applies. Earlier authorization and baseline statements below retain their registration-time scope.
 
 **Goal:** Help a developer choose an interface, try the real starter, install the matching project, replace its data and find a precise API contract.
 
@@ -191,3 +191,5 @@ No runtime/browser checks are required merely to register this plan. Registratio
 - [Site pipeline and publication contract](../../site/README.md), [canonical roadmap](roadmap.json), [tracking conventions](GITHUB_TRACKING.md), and [N11 identity/scope](../specs/N11_UI_UX_POLISH.md).
 
 Mobbin URLs in the preserved proposal are structural provenance, not templates, copied assets or evidence of usability improvement. This plan adds no new claim about those screenshots.
+
+The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](../evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.

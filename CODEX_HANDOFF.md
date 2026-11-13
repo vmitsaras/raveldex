@@ -34,17 +34,21 @@ recorded optional comparator skips and manual limits. No required selected task
 remains; reconcile with `npm run handoff:next`. Source delivery/publication remain
 separate and the earlier header/demo work is preserved.
 
-The owner explicitly selected **RX-9901 only** from the delivered
-[N19 plan](docs/planning/DOCS_DEMO_EXPERIENCE.md). Implementation, full verification and review repairs
-are complete locally. The contextual
-shell, site development tooling and stable slots are described in
-[site/README.md](site/README.md); [RX-9901 evidence](docs/evidence/RX-9901.md)
-retains actual results and limits. RX-9902 and RX-9903 are dependency-ready;
-RX-9902–RX-9908 remain planned. The owner subsequently authorized RX-9901
-commit/push, PR creation and CI-gated merge. Follow the
-[source-delivery record](docs/evidence/RX_9901_DELIVERY_20261113.md).
-RX-9902 must remain unstarted; package publication and later implementation
-require separate instructions.
+The contextual shell from the [N19 plan](docs/planning/DOCS_DEMO_EXPERIENCE.md)
+was delivered in [PR #138](https://github.com/vmitsaras/raveldex/pull/138),
+merge `f30486a`, after passing Node 22/24 CI. The owner subsequently selected
+**RX-9902 only**. Its five-choice static overview, eight truthful platform/project
+mappings, compact comparison and preserved anchors/source alias are implemented
+and verified locally. [RX-9902 evidence](docs/evidence/RX-9902.md) records 16 focused
+and 45 site passes, complete project checks (1,744 passes/eight optional skips),
+installed candidate, three review repairs and one deferred minor test assertion.
+Current branch: `codex/n19-rx9902`; source is uncommitted. No delivery selected.
+N19 is 2/8 accepted. **RX-9903 remains planned and unstarted**, despite technical
+dependency readiness. RX-9904 still requires the owner's rendered-pilot response
+after RX-9903; RX-9904–RX-9908 remain planned. Publication/later implementation
+require separate instructions. The [site guide](site/README.md) owns the explicit
+gallery asset/capture contract; original verification/delivery records retain
+their dated scope.
 
 Run commands appropriate to the changed risk and record actual outcomes in the
 task's evidence. The [release runbook](docs/release/PREPARATION.md) packs/verifies
@@ -56,3 +60,5 @@ changes, followed by CI verification on the pushed commit. Preserve unrelated
 `.vscode/` work. Package publication, tags/releases, visibility changes, deployment
 and optional benchmarks remain separate actions. Report the next required task separately from
 optional follow-ups and identify unrun/blocked checks precisely.
+
+The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](docs/evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.

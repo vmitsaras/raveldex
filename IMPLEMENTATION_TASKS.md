@@ -3643,7 +3643,7 @@ After an explicit implementation instruction and verification of the delivered N
 
 **Lead the examples overview with five visual choices**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/120)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/120)
 
 **Dependencies:** [RX-9901](IMPLEMENTATION_TASKS.md#rx-9901)
 
@@ -3671,7 +3671,9 @@ Make /examples/ a visual choose-first gallery using inert real-interface preview
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9902.md](docs/evidence/RX-9902.md)
+- [docs/evidence/RX-9902/boundaries.json](docs/evidence/RX-9902/boundaries.json)
+- [docs/evidence/RX-9902/candidate-package/candidate-report.json](docs/evidence/RX-9902/candidate-package/candidate-report.json)
 
 
 ## RX-9903

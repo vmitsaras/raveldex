@@ -3,7 +3,7 @@ import { mkdir, rm, copyFile, readFile, writeFile, realpath } from 'node:fs/prom
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build as bundle } from 'esbuild';
-import { BASE, PAGES, RECIPES, JEKYLL, href } from '../site/pages.mjs';
+import { BASE, PAGES, SOURCE_ALIASES, RECIPES, JEKYLL, href } from '../site/pages.mjs';
 import { prepareUsageDemo } from './lib/ui-consumer.mjs';
 import { command } from './lib/packed-consumer.mjs';
 import { publishGenerated, rewriteMarkdown, auditLinks, sha256 } from './lib/pages.mjs';
@@ -17,7 +17,7 @@ const output = join(work, 'output');
 await rm(work, { recursive: true, force: true }); // Only this script's scratch tree.
 await mkdir(join(source, 'src/pages'), { recursive: true });
 await copyFile(join(root, 'site/Layout.astro'), join(source, 'src/Layout.astro'));
-for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'StarterSetup.astro', 'ExampleShowcase.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs', 'pages.mjs', 'navigation.mjs', 'styles.css']) {
+for (const name of ['Home.astro', 'Demo.astro', 'Examples.astro', 'SolutionCard.astro', 'solutions.mjs', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'StarterSetup.astro', 'ExampleShowcase.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs', 'pages.mjs', 'navigation.mjs', 'styles.css']) {
   await copyFile(join(root, 'site', name), join(source, 'src', name));
 }
 await writeFile(join(source, 'package.json'), '{"private":true,"type":"module"}\n');
@@ -39,9 +39,19 @@ for (const starter of STARTERS) for (const path of starter.files) {
 }
 assert.equal(routes.size, PAGES.length, 'unique source allowlist');
 assert.equal(new Set(routes.values()).size, PAGES.length, 'unique public routes');
+for (const [path, route] of SOURCE_ALIASES) {
+  assert.ok(!routes.has(path), 'source aliases cannot replace registered sources');
+  assert.ok([...routes.values()].includes(href(route)), 'source aliases require a real public destination');
+  routes.set(path, href(route));
+}
 routes.set('examples/docs-search/index.html', BASE + 'demo/');
 routes.set('README.md', href('guide/overview'));
 for (const [path, route, title] of PAGES) {
+  if (path === 'site/Examples.astro') {
+    await mkdir(join(source, 'src/pages/examples'), { recursive: true });
+    await writeFile(join(source, 'src/pages/examples/index.astro'), "---\nimport Examples from '../../Examples.astro';\n---\n<Examples />\n");
+    continue;
+  }
   if (['site/Inline.astro', 'site/Modal.astro', 'site/Dropdown.astro', 'site/Directory.astro', 'site/Cards.astro'].includes(path)) {
     const component = path.slice('site/'.length, -'.astro'.length);
     const route = component.toLowerCase();
@@ -72,6 +82,9 @@ const built = await command(process.execPath, [join(root, 'node_modules/astro/bi
 process.stdout.write(built.stdout);
 process.stderr.write(built.stderr);
 await mkdir(join(output, 'site-assets'), { recursive: true });
+const thumbnails = ['inline', 'modal', 'dropdown', 'directory', 'cards'].map(id => `site/images/examples/${id}.png`);
+await mkdir(join(output, 'site-assets/examples'), { recursive: true });
+for (const path of thumbnails) await copyFile(join(root, path), join(output, 'site-assets/examples', path.split('/').at(-1)));
 await copyFile(join(root, 'site/shell.mjs'), join(output, 'site-assets/shell.mjs'));
 await copyFile(join(root, 'site/workbench.css'), join(output, 'site-assets/workbench.css'));
 await copyFile(join(root, 'site/search.css'), join(output, 'site-assets/search.css'));
@@ -120,6 +133,7 @@ const { walk } = await import('./lib/pages.mjs');
 const staged = { files: (await walk(output)).map(path => ({ path })) };
 const links = await auditLinks(output, staged);
 const inputPaths = new Set([...PAGES.map(x => x[0]), ...RECIPES.map(name => `docs/api/examples/${name}.mjs`),
+  ...SOURCE_ALIASES.map(([path]) => path), ...thumbnails, 'site/SolutionCard.astro', 'site/solutions.mjs',
   themeSource,
   'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/StarterSetup.astro', 'site/ExampleShowcase.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'site/navigation.mjs', 'site/shell.mjs', 'site/search.mjs', 'site/search-controller.mjs', 'site/search.css', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
   'scripts/lib/ui-consumer.mjs', 'scripts/lib/packed-consumer.mjs', 'examples/core-docs/corpus.mjs',
