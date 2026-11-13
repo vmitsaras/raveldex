@@ -1,0 +1,17 @@
+---
+import { BASE, href } from './pages.mjs';
+import { STARTERS } from './starters.mjs';
+const { solution } = Astro.props;
+const starters = STARTERS.filter(starter => starter.family === solution.id);
+---
+<li class="solution-card">
+  <img src={BASE + `site-assets/examples/${solution.id}.png`} width="960" height="680" alt="" loading="lazy" />
+  <div class="solution-card__body">
+    <h2>{solution.title}</h2>
+    <p data-solution-use-case>{solution.description}</p>
+    <ul class="solution-card__platforms" data-solution-platforms aria-label={`${solution.title} starter platforms`}>
+      {starters.map(starter => <li><a href={href(`examples/${starter.id}`)}>{starter.id.endsWith('-astro') ? 'Astro' : 'Browser'}</a></li>)}
+    </ul>
+    <a class="solution-card__demo" href={href(`examples/${solution.id}`)} data-solution-demo>{solution.action}<span aria-hidden="true"> →</span></a>
+  </div>
+</li>

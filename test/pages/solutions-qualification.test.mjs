@@ -85,7 +85,9 @@ test('five-solution chooser, complete starter inventories and published CSS pres
     for (const [name, family] of [['Open inline gallery', 'inline'], ['Open documentation modal gallery', 'modal'], ['Open compact dropdown gallery', 'dropdown'], ['Open directory gallery', 'directory'], ['Open rich-results gallery', 'cards']]) {
       assert.equal(new URL(await page.getByRole('link', { name, exact: true }).getAttribute('href'), base).pathname, `/raveldex/examples/${family}/`);
     }
-    await page.getByRole('heading', { name: 'Choose a search solution', exact: true }).waitFor();
+    await page.getByRole('heading', { name: 'Choose a search interface', exact: true }).waitFor();
+    assert.equal(await page.locator('[data-solution-gallery] > li').count(), 5);
+    assert.equal(await page.locator('#choose-a-search-solution').count(), 1);
     await page.getByRole('heading', { name: 'Data and capabilities', exact: true }).waitFor();
     await page.getByRole('heading', { name: 'Keyboard and cleanup', exact: true }).waitFor();
     assert.equal(STARTERS.length, 8);

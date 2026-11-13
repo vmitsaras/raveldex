@@ -4,7 +4,8 @@ import { mkdtemp, mkdir, readFile, writeFile, symlink, rm, realpath } from 'node
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { publishGenerated, verifyFiles, verifyInputs, auditSurface, auditLinks, rewriteMarkdown, sha256 } from '../../scripts/lib/pages.mjs';
-import { JEKYLL } from '../../site/pages.mjs';
+import * as pages from '../../site/pages.mjs';
+const { JEKYLL } = pages;
 
 async function fixture(fn) {
   const base = await realpath(await mkdtemp(join(tmpdir(), 'raveldex-pages-test-')));
@@ -65,6 +66,13 @@ test('Pages rewrites prose navigation without rewriting executable fenced exampl
   assert.ok(rendered.includes('[Core](/raveldex/reference/core/#schema)'));
   assert.ok(rendered.includes('Evidence (repository access)'));
   assert.ok(rendered.endsWith(code));
+});
+test('Pages preserves the Markdown overview source alias with a single public destination', () => {
+  const routes = new Map(pages.PAGES.map(([source, route]) => [source, pages.href(route)]));
+  for (const [source, route] of pages.SOURCE_ALIASES ?? []) routes.set(source, pages.href(route));
+  const rendered = rewriteMarkdown('[Compare](../../examples/README.md#choose-a-search-solution)', 'docs/api/HOSTS.md', routes, new Map());
+  assert.equal(rendered, '[Compare](/raveldex/examples/#choose-a-search-solution)');
+  assert.equal(pages.PAGES.filter(([, route]) => route === 'examples').length, 1);
 });
 test('Pages audits real tags while escaped HTML examples create neither links nor fragment targets', () => fixture(async ({ stage }) => {
   const manifest = { files: ['index.html', '404.html', '_config.yml'].map(path => ({ path })) };

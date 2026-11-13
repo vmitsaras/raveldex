@@ -1,0 +1,63 @@
+Docs gallery: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ gallery comparison keeps readable columns accessible by keyboard at 320px (604.669667ms)
+✖ gallery archive labels include their complete visible wording (106.691667ms)
+✖ gallery feature and recovery links reach the precise retained instructions (107.357ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1139.412625
+
+✖ failing tests:
+
+test at test/pages/docs-gallery.test.mjs:134:1
+✖ gallery comparison keeps readable columns accessible by keyboard at 320px (604.669667ms)
+  AssertionError [ERR_ASSERTION]: Readable data columns, not single-word fragments: 71.625,73.15625
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:140:12)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:541:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-gallery.test.mjs:147:1
+✖ gallery archive labels include their complete visible wording (106.691667ms)
+  AssertionError [ERR_ASSERTION]: Accessible name 'Download inline-browser' includes 'Download .tar.gz'
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:156:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-gallery.test.mjs:163:1
+✖ gallery feature and recovery links reach the precise retained instructions (107.357ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '/raveldex/examples/inline/#inline-support'
+  - '/raveldex/reference/hosts/#inline-result-pages-filters-and-snippets'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:167:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '/raveldex/examples/inline/#inline-support',
+    expected: '/raveldex/reference/hosts/#inline-result-pages-filters-and-snippets',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

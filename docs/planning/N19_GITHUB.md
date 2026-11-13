@@ -68,3 +68,23 @@ with merge conditional on passing CI. RX-9902 is explicitly unstarted. The
 [delivery record](../evidence/RX_9901_DELIVERY_20261113.md) and PR result distinguish
 source delivery from the original local verification snapshots. Task acceptance
 remains 1/8; no later task is selected by this instruction.
+
+## RX-9902 implementation selection and local acceptance
+
+The owner subsequently selected RX-9902 only, based on delivered RX-9901 merge
+`f30486a`. The static five-choice overview is implemented and verified locally;
+[task evidence](../evidence/RX-9902.md) records 16 focused and 45 site passes,
+1,744 complete-project passes with eight optional comparator skips, the identical
+installed package, three Important review repairs and one deferred Minor test
+assertion. Canonical N19 acceptance is now **2/8**.
+
+GitHub mirrors local acceptance, with #120 completed and overview #118 open.
+Native children #119–#126 and milestone #16 membership stay intact; the parent
+remains outside milestone membership. [Read-back](../evidence/RX-9902/github-tracking.json)
+records actual states and any aggregate-counter mismatch. RX-9903 remains
+planned/unstarted under the explicit owner instruction; later tasks remain
+planned. New evidence is local/uncommitted; remote main links await separately
+authorized source delivery. Human owner approval at RX-9904 and publication
+remain separate. Historical registration/delivery sections above retain their scope.
+
+The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](../evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.

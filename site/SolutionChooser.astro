@@ -1,16 +1,10 @@
 ---
+import { SOLUTIONS } from './solutions.mjs';
 const { current, describe = false, compare = true } = Astro.props;
 const base = '/raveldex/';
-const solutions = [
-  ['inline', 'Inline', 'Keep a search field and results in the page.'],
-  ['modal', 'Modal', 'Open documentation search from a button.'],
-  ['dropdown', 'Dropdown', 'Show quick links in a header, with a full results page.'],
-  ['directory', 'Directory', 'Browse resources with filters and shareable pages.'],
-  ['cards', 'Cards', 'Add excerpts, metadata and optional images to a directory.'],
-];
 ---
 <nav class:list={['solution-chooser', { 'solution-chooser--described': describe }]} aria-label="Search solutions">
-  <ul>{solutions.map(([id, label, description]) => <li><a href={base + `examples/${id}/`} aria-current={current === id ? 'page' : undefined}>{label}</a>{describe && <p>{description}</p>}</li>)}</ul>
+  <ul>{SOLUTIONS.map(({ id, label, description }) => <li><a href={base + `examples/${id}/`} aria-current={current === id ? 'page' : undefined}>{label}</a>{describe && <p>{description}</p>}</li>)}</ul>
 </nav>
 {compare && <p><a href={base + 'examples/#choose-a-search-solution'}>Compare solutions and requirements</a></p>}
 <style>

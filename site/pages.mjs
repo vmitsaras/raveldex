@@ -11,7 +11,7 @@ export const PAGES = [
   ['site/guides.md', 'guide', 'Guides', { section: 'documentation', group: 'guide', parent: '', label: 'Documentation' }],
   ['docs/api/COMPATIBILITY.md', 'guide/compatibility', 'Compatibility', { section: 'documentation', group: 'guide', parent: 'guide', label: 'Compatibility' }],
   ['docs/api/LIMITATIONS.md', 'guide/limitations', 'Practical limits', { section: 'documentation', group: 'guide', parent: 'guide', label: 'Practical limits' }],
-  ['examples/README.md', 'examples', 'Runnable examples', { section: 'examples', group: 'examples', parent: '', label: 'Examples' }],
+  ['site/Examples.astro', 'examples', 'Choose a search interface', { section: 'examples', group: 'examples', parent: '', label: 'Examples' }],
   ['site/Inline.astro', 'examples/inline', 'Ready to use inline search', { section: 'examples', group: 'examples', parent: 'examples', label: 'Inline search', outline: false }],
   ['examples/inline-browser/README.md', 'examples/inline-browser', 'Browser inline search starter', { section: 'examples', group: 'examples', parent: 'examples/inline', label: 'Browser inline starter' }],
   ['examples/inline-astro/README.md', 'examples/inline-astro', 'Astro inline search starter', { section: 'examples', group: 'examples', parent: 'examples/inline', label: 'Astro inline starter' }],
@@ -40,6 +40,8 @@ export const PAGES = [
         label: ({ README: 'API reference', CORE: 'Core API', HOSTS: 'Hosts and UI', ADDONS: 'Addons' })[name]
           ?? name.toLowerCase().replaceAll('_', ' ').replace(/^./, first => first.toUpperCase()) }]),
 ];
+// Explicit legacy source links, separate from the unique public route inventory.
+export const SOURCE_ALIASES = [['examples/README.md', 'examples']];
 export const RECIPES = ['core', 'inline', 'ui', 'addons', 'snapshots', 'browser', 'worker', 'worker-host', 'migration', 'cms-refresh', 'consumer-messages.de'];
 export const href = route => BASE + (route ? route === '404' ? '404.html' : `${route}/` : '');
 export const JEKYLL = `# Required: Jekyll excludes repository-only records before branch publication.\n# Do not add .nojekyll. Do not add includes that override these exclusions.\nurl: https://vmitsaras.github.io\nbaseurl: /raveldex\ntheme: null\nplugins: []\nexclude:\n${EXCLUDED.map(name => `  - ${name}\n`).join('')}`;

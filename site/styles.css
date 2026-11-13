@@ -75,6 +75,36 @@
 .site-section a[aria-current] { border-color: var(--site-link); color: var(--site-link); font-weight: 650; background: var(--site-wash); }
 .site-section__nested { padding-inline-start: .85rem; }
 .site-outline { display: none; }
+
+/* Overview only: inert starter snapshots and a compact decision table. */
+.examples-gallery { max-inline-size: 76rem; }
+.examples-gallery__intro { max-inline-size: 66ch; margin-block-end: 1.5rem; }
+.examples-gallery__eyebrow { color: var(--site-muted); font-size: .8125rem; }
+.examples-gallery h1 { margin-block: .5rem 1rem; font-size: clamp(2.1rem, 4vw, 3.5rem); letter-spacing: -.045em; }
+.examples-gallery h2 { margin-block: 2.5rem 1rem; font-size: clamp(1.4rem, 2.5vw, 1.8rem); letter-spacing: -.025em; }
+.examples-gallery section > p { max-inline-size: 76ch; }
+.examples-gallery__snapshot-note { color: var(--site-muted); font-size: .8125rem; }
+.examples-gallery__choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
+.solution-card { display: flex; flex-direction: column; min-inline-size: 0; border: 1px solid var(--site-line); border-radius: .5rem; overflow: clip; }
+.solution-card > img { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 24 / 17; border-block-end: 1px solid var(--site-line); background: var(--site-wash); }
+.solution-card__body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
+.solution-card__body h2 { margin: 0; font-size: 1.25rem; }
+.solution-card__body p { margin-block: .75rem; }
+.solution-card__platforms { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: auto 0 .75rem; padding: 0; list-style: none; font-size: .875rem; }
+.solution-card__platforms a { display: inline-block; padding-block: .4rem; }
+.solution-card__demo { display: inline-block; align-self: flex-start; padding-block: .35rem; font-weight: 650; }
+.examples-gallery__comparison { display: block; max-inline-size: 100%; overflow-x: auto; border-collapse: collapse; font-size: .875rem; }
+.examples-gallery__comparison caption { text-align: start; padding-block-end: .75rem; color: var(--site-muted); }
+.examples-gallery__comparison :is(th, td) { text-align: start; vertical-align: top; padding: .8rem; border: 1px solid var(--site-line); }
+.examples-gallery__comparison thead { background: var(--site-wash); }
+.examples-gallery__comparison th[scope="row"] { min-inline-size: 8rem; }
+.examples-gallery__comparison :is(th, td) { overflow-wrap: normal; }
+.examples-gallery__comparison td:nth-child(2) { min-inline-size: 12rem; }
+.examples-gallery__comparison td:nth-child(3) { min-inline-size: 14rem; }
+.examples-gallery__projects { list-style: none; padding: 0; margin: 1.5rem 0; max-inline-size: 76ch; }
+.examples-gallery__projects li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1.5rem; padding-block: .65rem; border-block-end: 1px solid var(--site-line); }
+.examples-gallery__projects a { padding-block: .25rem; }
+.examples-gallery__archive-format { font-size: .8125rem; }
 @media (min-width: 64rem) {
   .site-frame--context { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 2.5rem; align-items: start; }
   .site-section { border: 0; margin: 0; }
