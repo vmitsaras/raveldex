@@ -131,10 +131,13 @@ test('copied installed header and full-results route preserve exact query/order/
     await page.getByRole('button', { name: 'Load more', exact: true }).click();
     await page.locator('[data-raveldex-inline-result]').nth(5).waitFor();
     const six = await resultIDs(page, 'inline'); assert.deepEqual(six, expected.slice(0, 6));
-    await page.getByRole('button', { name: 'Next results', exact: true }).click();
-    await page.waitForFunction(() => document.querySelectorAll('[data-raveldex-inline-result]').length === 1);
-    const last = await resultIDs(page, 'inline'); assert.deepEqual([...six, ...last], expected);
-    const guide = page.locator('[data-raveldex-inline-result] a').first(); const href = new URL(await guide.getAttribute('href'));
+    await page.getByRole('button', { name: 'Load more', exact: true }).click();
+    await page.waitForFunction(() => document.querySelectorAll('[data-raveldex-inline-result]').length === 7);
+    const complete = await resultIDs(page, 'inline'); assert.deepEqual(complete, expected); assert.deepEqual(complete.slice(0, 6), six);
+    assert.equal(await page.locator('[data-raveldex-inline-next], [data-raveldex-inline-previous]').count(), 0);
+    assert.equal(await page.locator('[data-raveldex-inline-page-summary]').textContent(), 'Showing 1–7 of 7.');
+    const last = complete.slice(6);
+    const guide = page.locator('[data-raveldex-inline-result] a').last(); const href = new URL(await guide.getAttribute('href'));
     assert.ok(href.pathname.startsWith(site.base + 'guides/')); await guide.click();
     await page.getByRole('heading', { level: 1 }).waitFor(); assert.equal(page.url(), href.href);
     assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), site.entries.find(entry => entry.id === last[0]).title);
@@ -146,7 +149,7 @@ test('copied installed header and full-results route preserve exact query/order/
     await input(page).press('ArrowDown'); await input(page).press('Enter'); await page.waitForURL(keyboardDestination);
     await page.getByRole('heading', { level: 1 }).waitFor(); assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), site.entries.find(entry => entry.id === keyboardID).title);
     assert.deepEqual(errors, []); await page.close();
-    record(`native full route ${site.base}`, { raw, destination: destination.pathname + destination.search + destination.hash, expectedIDs: expected, actualCompleteIDs: [...six, ...last], guide: href.pathname, nativeArrowEnterDestination: keyboardDestination });
+    record(`native full route ${site.base}`, { raw, destination: destination.pathname + destination.search + destination.hash, expectedIDs: expected, actualCompleteIDs: complete, guide: href.pathname, nativeArrowEnterDestination: keyboardDestination });
   }
 }, { timeout: 45000 });
 

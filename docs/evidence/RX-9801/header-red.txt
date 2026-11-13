@@ -1,0 +1,31 @@
+Site search: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ header Load more appends all addon matches past twenty without switching to pagination (1917.749375ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2248.742084
+
+✖ failing tests:
+
+test at test/pages/site-search.test.mjs:88:1
+✖ header Load more appends all addon matches past twenty without switching to pagination (1917.749375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Showing 1–20 of 31. This window shows 20 results; 11 remain. Use Next results to continue.'
+  - 'Showing 1–20 of 31.'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/Documents/GitHub/raveldex/test/pages/site-search.test.mjs:107:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Showing 1–20 of 31. This window shows 20 results; 11 remain. Use Next results to continue.',
+    expected: 'Showing 1–20 of 31.',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -6,7 +6,11 @@ Status: modal runtime implemented and locally verified in RX-6006, 2026-11-01. T
 
 Separate optional entry `/addons/ui/modal` exports only `mountRaveldexModal` at runtime, with readonly types `ModalUIOptions`, `ModalUIHandle`, `ModalUIMessages`. `/addons/ui/modal.css` is an explicit independent CSS selection that includes the existing inline stylesheet through a local CSS import. JavaScript never imports/injects CSS. No core, provider, worker, network, storage or framework initialization on import or mount; mount starts closed and performs no search.
 
-`ModalUIOptions` includes the existing `InlineUIOptions` fields, including root, borrowed engine, owned documents, existing inline messages, optional facets/snippets/maps and their unchanged validation/limits. Additional properties are:
+`ModalUIOptions` includes the existing `InlineUIOptions` fields, including root, borrowed engine, owned documents, existing inline messages, optional facets/snippets/maps and their unchanged validation/limits.
+
+The owner's 2026-11-12 [append decision](../planning/LOAD_MORE_APPEND.md) changes the inherited result continuation: Load more appends until every match is displayed, retaining earlier result nodes, with no Next/Previous windows. The legacy `maxRenderedResults` option and `previous`/`next`/`windowLimit` message keys remain validated compatibility inputs but no longer affect presentation. Batch, display-record, source and section admission bounds remain in force.
+
+Additional modal properties are:
 
 | Property | Contract |
 | --- | --- |
@@ -48,7 +52,7 @@ Destroy closes/cancels without resurrecting a session, removes every owned local
 
 Reuse inline theme properties and add scoped `--raveldex-modal-*` public values for dialog layout/surface/backdrop/focus as needed; internal values use `--_`. Native hidden dialog styling must stay hidden. Use logical properties, safe-area space, bounded `dvh` with a `vh` fallback, a zero-minimum scroll body, contained overscroll, 44px close/control targets, visible focus, forced colors and reduced motion. No animation is required. At narrow/short emulated viewports, input/close stay reachable and long content scrolls inside the surface; no physical on-screen-keyboard or actual zoom claim follows from viewport emulation.
 
-Native result, field/value/source/revision, DOM, work and section limits remain unchanged. Modal state consists of its captured options/current controls, one existing inline operation, owned listener/gesture/scroll records and root/trigger ancestor references; no retained alternate result/index representation. Ancestor inspection scales with authored DOM depth and document coordination with the number of registered instances; these are not calibrated memory/latency guarantees. Lazy initialization/asset failures belong to RX-6007 wrappers, while actual native/worker search failures and late borrowed replies are RX-6006 tests.
+Native batch result, field/value/source/revision, work, display-record and section limits remain unchanged. The lower retained-result window cap is superseded: all matching admitted display records can remain rendered as the user loads batches. Modal state consists of its captured options/current controls, one existing inline operation, owned listener/gesture/scroll records and root/trigger ancestor references; no retained alternate result/index representation. Ancestor inspection scales with authored DOM depth and document coordination with the number of registered instances; these are not calibrated memory/latency guarantees. Lazy initialization/asset failures belong to RX-6007 wrappers, while actual native/worker search failures and late borrowed replies are RX-6006 tests.
 
 Verify installed package/types/CSS/import graphs; real keyboard/Tab/Escape, pointer gestures, query/filter preservation/reset, stale revision/map revalidation, direct/module-worker × source/offset section parity, modified destination links, multi-instance/foreign-dialog shortcuts, editable/composition paths, trigger/opener removal, scroll/style restoration and close/destroy/reentrant/pending races. Independently review shared inline and focus ownership changes. Record exact automated browser/OS versions, missing human/platform evidence and actual commands in RX-6006 evidence; do not claim broad accessibility/device qualification.
 

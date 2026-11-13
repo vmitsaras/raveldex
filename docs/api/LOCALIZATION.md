@@ -21,13 +21,14 @@ Use `german.inline` for a modal without facets. Set the application-authored mod
 
 ## Complete inventory
 
-Inline and modal share **35** `messages` keys; modal additionally needs its four `modalMessages`. Dropdown has **17** keys. Directory and all rich layouts share **29** keys, with a separate card image failure option. Each key below is explicit in the German example, including currently unused optional features.
+Inline and modal accept **35** `messages` keys; modal additionally needs its four `modalMessages`. Dropdown has **17** keys. Directory and all rich layouts share **29** keys, with a separate card image failure option. Each key below is explicit in the German example, including currently unused optional features and retained compatibility keys.
 
 | Surface / role | Keys |
 | --- | --- |
 | Inline/modal controls and assistive names | `label`, `placeholder`, `submit`, `clear`, `resultsLabel`, `paginationLabel` |
 | Inline/modal states and recovery | `idle`, `searching`, `composing`, `noResults`, `noResultsFiltered`, `resultsOne`, `resultsMany`, `error`, `retry`, `revisionChanged` |
-| Inline/modal paging and append | `loadMore`, `newResults`, `resultsAdded`, `previous`, `next`, `pageSummary`, `windowLimit` |
+| Inline/modal append and range | `loadMore`, `newResults`, `resultsAdded`, `pageSummary` |
+| Inline/modal legacy window compatibility (accepted, unused) | `previous`, `next`, `windowLimit` |
 | Inline/modal facets | `all`, `emptyValue`, `nullValue`, `missingValue`, `unlistedValue`, `facetSummary` |
 | Inline/modal snippets and sections | `snippetOmissions`, `snippetLimits`, `sectionCaption`, `sectionOmissions`, `sectionUnavailable`, `sectionStale` |
 | Modal shell (`modalMessages`) | `title`, `close`, `escapeHint`, `shortcutHint` |
@@ -38,6 +39,8 @@ Inline and modal share **35** `messages` keys; modal additionally needs its four
 | Cards extra top-level option | `imageUnavailable`; informative failure also includes the authored image alternative, decorative failure is silent |
 
 `label` names the input/form; result and pagination labels name their regions/navigation; named chip removal and keyboard hints are included rather than translated separately through ARIA. Library text is inserted as plain text, never HTML. Native browser/OS control text and key names are outside the bundle.
+
+Inline/modal now append batches through Load more until all matches are displayed. They do not render Next/Previous results or the old window-limit message. Existing `previous`, `next` and `windowLimit` overrides remain accepted and validated so complete older bundles still mount. Directory and Workbench paging are unchanged.
 
 Translate authored document titles, snippets/source text, page/section headings, directory group/value labels and card excerpts/categories/breadcrumbs/dates/field names/values/image alternatives separately. Inline facet strings come from indexed values; there is no inline value-alias API. Directory can map allowed values through `groups[].values[].label`; unmapped values retain their raw strings. Card dates are already formatted display text. See [result content](RESULT_CONTENT.md) for source/display boundaries.
 
@@ -61,7 +64,6 @@ Only the following messages interpolate tokens. All other keys are literal strin
 | Inline/dropdown `resultsOne`, `resultsMany` | `{total}`, `{count}` |
 | Inline `resultsAdded` | `{added}`, `{start}`, `{end}`, `{total}`, `{count}` |
 | Inline `pageSummary` | `{start}`, `{end}`, `{total}`, `{count}` |
-| Inline `windowLimit` | `{count}`, `{remaining}`, `{total}` |
 | Inline `unlistedValue` | `{value}` |
 | Inline `facetSummary` | `{total}`, `{omitted}` |
 | Inline `snippetOmissions` | `{count}` |

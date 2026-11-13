@@ -4,6 +4,14 @@ The intended publishing source is **GitHub Pages → Deploy from a branch → ma
 
 ## Local workflow
 
+The five consumer galleries share `ExampleShowcase.astro`: a short introduction,
+family navigation and the real installed live preview come before setup details.
+Full-page previews remain ordinary links. All eight standalone starter projects
+carry their own matching theme CSS, so downloaded source and embedded previews
+have the same appearance without an external demo stylesheet. Keep public theme
+properties effective when refining controls; the existing computed CSS recipe
+checks verify that customization still works.
+
 The Search Workbench design is authored in `Home.astro`, `Demo.astro`, the shared `SearchWorkbench.astro`, `Layout.astro`, `styles.css` and `workbench.css`. `pages.mjs` owns their public routes. Edit the Astro sources to change the homepage. The complete core example is still taken from README's executable quick-start block.
 
 Home embeds the unchanged installed inline browser starter: try `walking guide`,
@@ -13,6 +21,25 @@ Inspector and advanced source/worker settings. The homepage no longer initialize
 that engineering demo. Preview browse links and the chooser work without JavaScript.
 
 The Workbench defaults to final-word prefix search: earlier words are exact, and the final word expands from two normalized Unicode code points. Shorter endings remain exact. Advanced settings also offer exact-word and strict-phrase modes. The frozen qualification pilot and integrations omitting the UI `mode` retain exact-word search.
+
+The shared header now uses the installed `mountRaveldexModal` component for real
+documentation search. **Search docs** or Ctrl/Command+K opens it; editable fields
+keep their shortcuts. The explicit five-guide corpus loads on first open, is
+checked against the bundle's build hash, and retains original indexed text and
+native results. Category labels and overview text are separate display content.
+`search.mjs`, `search-controller.mjs` and `search.css` own the site integration
+and theme; the package owns modal focus, queries and rendering. Loading is
+cancellable, retry is explicit, ready reopens reuse the index, and pagehide
+destroys the borrowed UI before disposing the owner. No-JavaScript/unsupported
+dialog hosts retain a guide link. The previous Demo navigation link is removed;
+the advanced Workbench remains at `demo/`.
+
+The generator bundles against the same isolated installed tarball used by the
+Workbench, serves explicit assets under `site-assets/search/`, and records every
+source input. After generating a new asset inventory, restart an existing
+`pages:preview` process before testing it. Run
+`node --test test/pages/site-search.test.mjs` for native-oracle results, headings,
+first-open/retry/cancellation, focus/reopen, narrow layouts and scoped axe checks.
 
 Use Node 24 and npm in a source checkout. The pinned Astro toolchain renders the explicit public source list in [pages.mjs](pages.mjs). The browser demo is bundled from a real locally packed/installed core package. No registry release is needed.
 

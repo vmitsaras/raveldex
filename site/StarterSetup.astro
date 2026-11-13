@@ -8,9 +8,9 @@ const base = '/raveldex/';
   const astro = starter.id.endsWith('-astro');
   const stylesheet = astro ? 'src/style.css' : 'theme.css';
   const install = 'npm install @vmitsaras/raveldex@1.0.0' + (astro ? ' @vmitsaras/raveldex-astro@1.0.0' : '');
-  return <section aria-labelledby={'starter-' + starter.id}>
+  return <section class="starter-setup__project" aria-labelledby={'starter-' + starter.id}>
     <h3 id={'starter-' + starter.id}>{starter.title}</h3>
-    <p><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a> · <a href={base + starterArchive(starter.id)} download>Download the complete starter</a></p>
+    <div class="starter-setup__actions"><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a><a href={base + starterArchive(starter.id)} download>Download the complete starter</a></div>
     <ol data-starter-steps>
       <li>In an empty directory, extract <code>{`tar -xzf ${starter.id}.tar.gz --strip-components=1`}</code>. Read the setup guide for deployment paths and preview commands.</li>
       <li>Install from that directory with <code>{install}</code>, then run <code>npm run build</code> and <code>npm run preview</code> to try the sample content.</li>

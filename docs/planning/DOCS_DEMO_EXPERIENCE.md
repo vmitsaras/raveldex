@@ -36,13 +36,13 @@
 
 ## Entry criteria, sequence and gates
 
-**Planning-only delivery:** This plan is delivered on `main` without the earlier N15–N18 implementation from `codex/prepare-1-0-0`. The canonical graph references accepted main task RX-9404, because RX-9801 is not a task in the main manifest. This is a graph reconciliation, not removal of the baseline requirement: do not start RX-9901 until the accepted N16–N18 source is separately available/integrated under owner authorization. Do not create done prerequisite stubs, reset the source branch, recreate its work or merge it as part of this planning PR. All eight N19 tasks remain planned.
+**Delivery reconciliation:** PR #127 delivered this plan without the earlier implementation and temporarily referenced accepted RX-9404 to keep the main graph valid. The separately authorized N15–N18 delivery now supplies that baseline and restores the intended RX-9801 prerequisite. This satisfies source availability only: all eight N19 tasks remain planned, and no N19 code or Tailwind dependency installation is selected. See [the delivery record](../evidence/N15_N18_DELIVERY_20261113.md).
 
 Entry to implementation requires the owner's explicit instruction and an available baseline containing N16–N18. Read this plan, applicable `AGENTS.md`, the task's generated card, surrounding source/tests and the existing site guide. Mark only the selected dependency-ready task `in_progress` and regenerate views.
 
 | Task | Independently reviewable outcome | Dependencies |
 | --- | --- | --- |
-| RX-9901 | Site-only styling and contextual shell work on representative existing routes | RX-9404 plus separate N16–N18 baseline entry gate |
+| RX-9901 | Site-only styling and contextual shell work on representative existing routes | RX-9801; verify delivered baseline before implementation |
 | RX-9902 | Five visual choices and truthful comparison at `/examples/` | RX-9901 |
 | RX-9903 | Complete Inline choose/try/install/data/style pilot | RX-9901 |
 | RX-9904 | Owner records approval or bounded revisions of the rendered pilot | RX-9902, RX-9903 |

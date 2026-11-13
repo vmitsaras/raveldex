@@ -55,15 +55,45 @@ selected preparation/demo/UI work is complete. The owner authorized source
 commit/push and CI verification; package publication and tags/releases remain
 separate. Run `npm run handoff:next` before selecting new work.
 
+The owner-reported UI pilot port collision is fixed and verified in
+[RX-9501](docs/evidence/RX-9501.md). `pilot:ui` now chooses a free loopback port
+when its preferred port is occupied and prints the actual URL. The root README
+now explains the complete demo-site preview, verified in [RX-9502](docs/evidence/RX-9502.md).
+N15 is complete locally; GitHub synchronization and source delivery were not part
+of these maintenance tasks.
+
+The owner-selected [header search modal](docs/planning/SITE_SEARCH_MODAL.md) is
+implemented and verified locally in [RX-9601](docs/evidence/RX-9601.md). The shared
+header uses the real installed modal component with a scoped site theme, lazy
+five-guide search, explicit recovery and no-JS browsing. The Workbench remains
+at `/demo/`. N16 is complete locally; visual owner review and source delivery
+remain separate from automated checks.
+
+The owner-selected [consumer demo presentation](docs/planning/DEMO_PRESENTATION.md)
+is implemented and verified locally in [RX-9701](docs/evidence/RX-9701.md). All
+five galleries prioritize live examples and all eight complete starter projects
+carry coherent self-contained themes. N17 is complete locally; independent
+review repairs and final package/site evidence are recorded separately from
+visual owner acceptance and source delivery.
+
+The owner-selected [continuous Load more correction](docs/planning/LOAD_MORE_APPEND.md)
+is implemented and verified locally in [RX-9801](docs/evidence/RX-9801.md).
+Inline/modal now append finite native batches through all matches without
+replacement windows; legacy cap/message inputs remain accepted and deprecated.
+The 31-match header and 1,005-record shared regressions, complete project selection
+and final package/site checks passed within the recorded environment. N18 is
+complete locally; source delivery and publication remain separate.
+
 [N19 documentation/demo experience](docs/planning/DOCS_DEMO_EXPERIENCE.md) is
 planned as a separate website backlog with eight tasks, RX-9901–RX-9908. The owner
 authorized planning and GitHub milestone/native sub-issue registration only.
 Implementation and site-only Tailwind dependency installation have not started;
 the selected-work queue identifies RX-9901 as the next eligible site slice without
 authorizing execution or reopening stable 1.0.0 preparation.
-The plan records N16–N18 on the separate source branch as an implementation-entry
-prerequisite; this N19-only delivery does not integrate that work. A rendered-pilot
-approval precedes wider rollout. Implementation and publication remain separate.
+The separate N15–N18 delivery now supplies the source baseline required by this
+plan. RX-9901 again depends on RX-9801, but N19 implementation remains unselected.
+A rendered-pilot approval still precedes wider rollout. See the
+[N15–N18 delivery record](docs/evidence/N15_N18_DELIVERY_20261113.md).
 
 All 80 pre-N12 tasks remain accepted. Their source-specific results and actual
 N10/N11 closeout are retained in [evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md).

@@ -1,6 +1,6 @@
 # Compact header search starter
 
-Copy this complete plain-browser project to add a header dropdown with actual guide links and a full-results page. Search `walking guide`: the header shows three of seven matching pages. **See all results** opens the inline search at `search/`, where Load more, Next results and Previous results reach every match. The sample guide pages and browse links also work without JavaScript.
+Copy this complete plain-browser project to add a header dropdown with actual guide links and a full-results page. Search `walking guide`: the header shows three of seven matching pages. **See all results** opens the inline search at `search/`, where repeated Load more appends every match while retaining earlier results. The sample guide pages and browse links also work without JavaScript.
 
 The starter creates one native engine per page. Header, inline results and an optional explicitly opened modal borrow that owner and use the same content and `mode: 'prefix'`. There is no crawler, suggestion service, provider registration, worker, storage, search history or second engine behind the modal.
 
@@ -43,7 +43,7 @@ Every record has exactly `id`, `title`, `body`, `category` and `path` string fie
 
 ## Full-results query meaning
 
-`configuration.mjs` selects `mode: 'prefix'` once for all three presenters. Earlier words match exactly; only the final word can complete an indexed word. The native engine still owns membership, relevance order and exact totals. Header `maxResults: 3` is a finite projection, not pagination. The inline route selects batches of three and a six-hit DOM window, with explicit continuation beyond it.
+`configuration.mjs` selects `mode: 'prefix'` once for all three presenters. Earlier words match exactly; only the final word can complete an indexed word. The native engine still owns membership, relevance order and exact totals. Header `maxResults: 3` is a finite projection, not pagination. The inline route appends batches of three until all matches are displayed. Its legacy `maxRenderedResults` setting remains accepted but does not impose a window or change continuation.
 
 The dropdown configures the real `search/?from=header#results` destination. It replaces only `q`, preserving the static parameter/hash and the unchanged current field value. Spaces, punctuation, Unicode and literal percent signs are encoded with URLSearchParams, never trimmed or completed for the link. `readInitialQuery(location.search)` reads the full page's single `q` once. Duplicate `q`, malformed percent/UTF-8 encoding, malformed UTF-16, line breaks or more than 2,048 decoded UTF-16 units are refused with `The query link could not be read. Enter a new search below.` The inline field remains usable. Other parameters are ignored; no history or Back/Forward URL synchronization is installed. Editing the inline field does not rewrite the URL.
 

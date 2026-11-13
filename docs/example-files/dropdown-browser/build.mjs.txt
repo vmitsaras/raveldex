@@ -23,9 +23,9 @@ async function page(path, title, content) {
   await writeFile(file, template.replaceAll('{{BASE}}', base).replaceAll('{{TITLE}}', escape(title))
     .replace('{{PAGE_CONTENT}}', content).replace('{{BROWSE_LINKS}}', links));
 }
-await page('', 'Compact header search', '<p class="eyebrow">Walking guides</p><h1>Find a guide from the header</h1><p>Search for <strong>walking guide</strong> to find seven pages. The compact popup shows three actual matches. Choose See all results for the complete inline list, or follow a guide link directly.</p><p>The header stays a dropdown on small screens. If no usable popup fits, its full-results link remains the recovery route.</p>');
-await page('search', 'All search results', '<h1>Search all walking guides</h1><p>The header and this inline list use the same public records and final-word-prefix mode. The query link is read once; editing here does not rewrite the address.</p><section id="results" aria-label="Full search results"><div data-full-results-root><p>Search needs JavaScript. Browse the guide links below.</p></div></section>');
+await page('', 'Compact header search', '<div class="page-intro"><h1>Find a guide from the header</h1><p>Try <strong>walking guide</strong> in the search field above. Browse three quick matches, follow a guide directly, or choose See all results to explore all seven pages.</p><p>Use the arrow keys and Enter to follow a quick result. On smaller screens, the full-results link is always available.</p></div>');
+await page('search', 'All search results', '<div class="page-intro"><h1>Search all walking guides</h1><p>Find a walking guide, then follow its title to the complete page. Change your search here to narrow the list.</p></div><section id="results" aria-label="Full search results"><div data-full-results-root><p>Search needs JavaScript. Browse the guide links below.</p></div></section>');
 for (const entry of entries) await page(entry.path.slice(1), entry.title,
-  `<p><a href="${escape(base)}">Back to all walking guides</a></p><p class="eyebrow">${escape(entry.category)}</p><h1>${escape(entry.title)}</h1><p>${escape(entry.body)}</p>`);
+  `<p><a href="${escape(base)}">Back to all walking guides</a></p><h1>${escape(entry.title)}</h1><p class="guide-meta">Category: ${escape(entry.category)}</p><p>${escape(entry.body)}</p>`);
 await copyFile(join(root, 'content.json'), join(output, 'content.json'));
 console.log(`Built ${entries.length} explicit guides with header and full-results search at ${base}. Serve dist under that same base.`);

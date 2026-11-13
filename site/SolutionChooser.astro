@@ -1,5 +1,5 @@
 ---
-const { current, describe = false } = Astro.props;
+const { current, describe = false, compare = true } = Astro.props;
 const base = '/raveldex/';
 const solutions = [
   ['inline', 'Inline', 'Keep a search field and results in the page.'],
@@ -12,7 +12,7 @@ const solutions = [
 <nav class:list={['solution-chooser', { 'solution-chooser--described': describe }]} aria-label="Search solutions">
   <ul>{solutions.map(([id, label, description]) => <li><a href={base + `examples/${id}/`} aria-current={current === id ? 'page' : undefined}>{label}</a>{describe && <p>{description}</p>}</li>)}</ul>
 </nav>
-<p><a href={base + 'examples/#choose-a-search-solution'}>Compare solutions and requirements</a></p>
+{compare && <p><a href={base + 'examples/#choose-a-search-solution'}>Compare solutions and requirements</a></p>}
 <style>
   .solution-chooser ul { display: flex; flex-wrap: wrap; gap: .5rem 1rem; list-style: none; padding: 0; }
   .solution-chooser--described ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem 2rem; }

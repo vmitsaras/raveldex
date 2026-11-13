@@ -1,21 +1,18 @@
 ---
-import Layout from './Layout.astro';
-import SolutionChooser from './SolutionChooser.astro';
+import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
-<Layout frontmatter={{ title: 'Ready to use inline search' }}>
-  <h1>Ready to use inline search</h1>
-  <SolutionChooser current="inline" />
-  <p>Add a search field, highlighted excerpts, topic filters and more results to an ordinary page. Start with a complete browser or Astro project, replace its explicit guide records and adjust a few CSS properties.</p>
+<ExampleShowcase family="inline" title="Ready to use inline search" description="Keep search in the page, with useful excerpts, topic filters and clear links to the full guide." previewTitle="Inline search starter preview" previewHeight={780}>
+  <Fragment slot="preview-hint">Search <code>walking guide</code>, choose a topic, then open a guide. Try Load more to see the remaining matches.</Fragment>
+  <details><summary>How this example works</summary>
+<p>Add a search field, highlighted excerpts, topic filters and more results to an ordinary page. Start with a complete browser or Astro project, replace its explicit guide records and adjust a few CSS properties.</p>
   <p>Use inline search when results belong in the page. For search that opens from a button, choose the <a href={base + 'examples/modal/'}>documentation modal</a>.</p>
   <p>For a header field with a few page links and a complete results route, choose the <a href={base + 'examples/dropdown/'}>compact header starter</a>.</p>
   <p>These starters use the optional inline interface with direct execution, source snippets and string facets. They keep one result per supplied page and exact matching totals. They do not crawl HTML.</p>
   <p>For a resource library with checkbox groups, selected chips, complete native pages and optional URL replay, use the <a href={base + 'examples/directory/'}>faceted directory</a>.</p>
-  <h2 id="try-inline">Try the browser starter</h2>
-  <p>Try <code>walking guide</code>, choose a type of guide to narrow the matches, and follow a result to its complete page. The guide links also work without JavaScript. This preview runs the installed browser starter shown below.</p>
-  <p><a href={base + 'examples/inline-preview/'}>Open the full preview</a></p>
-  <iframe src={base + 'examples/inline-preview/'} title="Inline search starter preview" loading="lazy" height="720" style="width: 100%; border: 1px solid currentColor; border-radius: .5rem;"></iframe>
+<p>Try <code>walking guide</code>, choose a type of guide to narrow the matches, and follow a result to its complete page. The guide links also work without JavaScript. This preview runs the installed browser starter shown below.</p>
+  </details>
   <h2 id="copy-inline">Choose a complete starter</h2>
   <p>Snippets need Intl.Segmenter. Astro also needs Web Crypto over HTTPS or localhost.</p>
   <details><summary>Data and browser requirements</summary>
@@ -40,4 +37,4 @@ const base = '/raveldex/';
   <p>For a dark surface, set background, color, muted, border, focus and highlight colors together. Keep visible focus and sufficient contrast when replacing those colors. See <a href={base + 'reference/hosts/#inline-result-pages-filters-and-snippets'}>inline options and theme properties</a> for the supported controls.</p>
   <h2 id="inline-support">Before using your own theme</h2>
   <p>Local automated Chrome checks cover installed examples, keyboard events, scripted composition, loading/retry, teardown, CSS overrides and emulated narrow/theme layouts. Human screen-reader speech, physical IME/touch/on-screen keyboards, actual browser zoom and other browser/device combinations need separate checks in your application. See <a href={base + 'reference/hosts/#starter-adoption-and-local-checks'}>starter adoption and local checks</a>.</p>
-</Layout>
+</ExampleShowcase>

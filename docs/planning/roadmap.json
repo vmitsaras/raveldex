@@ -176,6 +176,43 @@
       ]
     },
     {
+      "id": "N15",
+      "title": "N15 — Local demo server reliability",
+      "track": "release",
+      "goal": "Make local demos straightforward to preview and handle occupied ports without changes to search behavior.",
+      "exitCriteria": [
+        "The selected local-server bug is reproduced, fixed and verified with actual socket collisions."
+      ]
+    },
+    {
+      "id": "N16",
+      "title": "N16 — Demonstrate documentation search in the header",
+      "track": "release",
+      "goal": "Use Raveldex itself for clear, modern modal search throughout the demo documentation site.",
+      "exitCriteria": [
+        "The shared header opens the real installed modal with native documentation results and verified loading, keyboard, focus and responsive behavior."
+      ]
+    },
+    {
+      "id": "N17",
+      "title": "N17 — Modernize all five consumer demos",
+      "track": "release",
+      "goal": "Make live inline, modal, dropdown, directory and cards examples clear, modern and easy to adopt.",
+      "exitCriteria": [
+        "All five galleries and eight standalone projects share coherent presentation, verified native behavior and accurate complete downloads."
+      ]
+    },
+    {
+      "id": "N18",
+      "title": "N18 — Continuous Load more",
+      "goal": "Replace the inline/modal window switch with ordered user-triggered append through all exact matches.",
+      "exitCriteria": [
+        "Load more appends all matches without replacement windows, preserving query consistency, focus and finite admission/batch bounds.",
+        "Shared, modal, installed starter and real header regressions agree with current documentation and final candidate/site verification."
+      ],
+      "track": "release"
+    },
+    {
       "id": "N19",
       "title": "N19 — Documentation and demo experience",
       "track": "release",
@@ -4688,14 +4725,190 @@
       "blocker": null
     },
     {
+      "id": "RX-9501",
+      "title": "Choose a free port when the UI pilot port is occupied",
+      "milestone": "N15",
+      "status": "done",
+      "dependsOn": [
+        "RX-9404"
+      ],
+      "objective": "Fix the owner-reported EADDRINUSE failure in scripts/ui-pilot.mjs. Keep 4173 or --port as the preferred port, then retry once with an OS-assigned free port on a collision and print the actual URL.",
+      "acceptanceCriteria": [
+        "RX-9501-AC01: An occupied default or explicit preferred port does not stop the UI pilot; it serves the demo on another loopback port and prints the working URL.",
+        "RX-9501-AC02: A free explicit port and --port 0 still work; invalid ports fail and --no-serve exits without a listener.",
+        "RX-9501-AC03: Existing request allowlisting, methods, security headers and signal shutdown remain intact; only EADDRINUSE triggers one fallback attempt."
+      ],
+      "verification": [
+        "Run the real CLI with occupied default/explicit ports, fetch the reported URL, verify request boundaries and stop only the test-owned processes.",
+        "Run focused tooling tests, roadmap/document checks and one complete candidate verification; record actual outcomes and review."
+      ],
+      "affectedPaths": [
+        "scripts/ui-pilot.mjs",
+        "test/tooling/ui-pilot.test.mjs",
+        "examples/docs-search/README.md"
+      ],
+      "specs": [
+        "examples/docs-search/README.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9501.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9502",
+      "title": "Explain how to preview all demo pages from the README",
+      "milestone": "N15",
+      "status": "done",
+      "dependsOn": [
+        "RX-9501"
+      ],
+      "objective": "Add discoverable source-checkout instructions for the complete demo site, its five consumer pages and Workbench. Document a free-port preview, rebuild and shutdown, while keeping the standalone Workbench command clear.",
+      "acceptanceCriteria": [
+        "RX-9502-AC01: The root README shows prerequisites, repository-root install/build/preview commands and how to open the actual URL, stop the server and regenerate changed sources.",
+        "RX-9502-AC02: The five consumer demos and Workbench have accurate routes, and the README distinguishes full-site preview from standalone pilot:ui.",
+        "RX-9502-AC03: Generated site, package inventory/links/examples and planning/reference checks pass without changing runtime behavior."
+      ],
+      "verification": [
+        "Inspect command definitions and routes; regenerate with existing verified compiler output, fetch each documented demo route through the real preview server and verify the updated installed README.",
+        "Run packaged documentation checks, site identity/link/inventory checks and roadmap/generated/reference/diff checks; do not rebuild or rerun unchanged runtime qualification."
+      ],
+      "affectedPaths": [
+        "README.md"
+      ],
+      "specs": [
+        "site/README.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9502.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9601",
+      "title": "Integrate and refine the shared header search modal",
+      "milestone": "N16",
+      "status": "done",
+      "dependsOn": [
+        "RX-9502"
+      ],
+      "objective": "Replace the Demo header link with a working, modern documentation-search modal using the installed Raveldex component and the existing five-guide corpus. Preserve the advanced Workbench route.",
+      "acceptanceCriteria": [
+        "RX-9601-AC01: Every shared site header exposes a compact labelled search trigger with an accurate shortcut hint and a usable no-JavaScript guide link.",
+        "RX-9601-AC02: The installed modal returns independent-oracle results/counts and valid native section links; its modern scoped presentation works at desktop, 320px and short viewports.",
+        "RX-9601-AC03: First-open loading, retry, cancellation/late work, repeated opens, shortcut/editable rules, focus restoration and owner cleanup preserve existing contracts.",
+        "RX-9601-AC04: Relevant site regressions, complete candidate verification, generated identities/inventory and documentation/planning checks pass with exact evidence and explicit manual limits."
+      ],
+      "verification": [
+        "Observe the missing header modal regression, then verify the installed modal and actual corpus/links in a real browser.",
+        "Run focused site behavior and responsive checks, inspect desktop/mobile renders, review lifecycle and public boundaries, then record the complete verification and generated site identities."
+      ],
+      "affectedPaths": [
+        "site/Layout.astro",
+        "site/search.mjs",
+        "site/search-controller.mjs",
+        "site/search.css",
+        "scripts/build-pages.mjs",
+        "test/pages/site-search.test.mjs",
+        "README.md",
+        "site/README.md"
+      ],
+      "specs": [
+        "docs/planning/SITE_SEARCH_MODAL.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9601.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9701",
+      "title": "Modernize galleries and standalone consumer demos",
+      "milestone": "N17",
+      "status": "done",
+      "dependsOn": [
+        "RX-9601"
+      ],
+      "objective": "Apply the established header-modal direction to all five live demo families and their eight complete browser/Astro projects; prioritize trying the interface and preserve existing native behavior.",
+      "acceptanceCriteria": [
+        "RX-9701-AC01: Each gallery leads with a clear live demo, family navigation and a full-page preview, with installation/reference detail organized below it.",
+        "RX-9701-AC02: All eight complete starters have coherent modern controls/results/states and usable narrow layouts, preserving native semantics, results, ownership and URL state.",
+        "RX-9701-AC03: Exact downloads/source, copied root/subdirectory projects, keyboard/focus/composition/recovery and relevant themes/layouts pass, with desktop/mobile renders inspected for all five families.",
+        "RX-9701-AC04: Independent combined review, complete candidate verification, final Pages regression/inventory and planning/docs checks have current scoped evidence."
+      ],
+      "verification": [
+        "Delegate disjoint presentation changes, integrate a common gallery shell and inspect all five real installed previews on desktop/mobile.",
+        "Run relevant installed starter checks and one complete candidate verification; reuse that build for final Pages generation and all site regressions. Record exact identities, independent review and unrun manual scope."
+      ],
+      "affectedPaths": [
+        "site/",
+        "examples/inline-browser/",
+        "examples/inline-astro/",
+        "examples/modal-browser/",
+        "examples/modal-astro/",
+        "examples/dropdown-browser/",
+        "examples/directory-browser/",
+        "examples/directory-astro/",
+        "examples/cards-browser/",
+        "scripts/build-pages.mjs",
+        "test/pages/",
+        "test/consumer/"
+      ],
+      "specs": [
+        "docs/planning/DEMO_PRESENTATION.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9701.md"
+      ],
+      "blocker": null
+    },
+    {
+      "id": "RX-9801",
+      "title": "Keep Load more appending through all matches",
+      "milestone": "N18",
+      "status": "done",
+      "dependsOn": [
+        "RX-9701"
+      ],
+      "objective": "Implement the owner-authorized shared inline/modal append behavior, superseding the former maxRenderedResults window switch, with complete regression coverage and current installed documentation/site evidence.",
+      "acceptanceCriteria": [
+        "RX-9801-AC01: Inline/modal Load more always appends the next native batch until the exact total is visible, without Next/Previous replacement controls, skipped or duplicate IDs, changed order or detached earlier results.",
+        "RX-9801-AC02: Searches cross legacy caps including 20/31 and 1000/1005; only exhaustion makes Load more unavailable. Existing option/message bundles remain accepted with explicit deprecation and admission/batch limits.",
+        "RX-9801-AC03: Keyboard focus, append announcements/discovery, terminal no-ops, query/filter/clear/retry resets, revision failures, cancellation and teardown remain coherent. Directory/Workbench pagination stays unchanged.",
+        "RX-9801-AC04: Test-first shared/header regressions, related installed starter tests, independent review, one complete candidate verification and regenerated Pages/docs checks record actual environments, identities and limitations."
+      ],
+      "verification": [
+        "Observe focused regression failures against the old runtime and generated header before implementation.",
+        "Verify ordered accumulation and preserved DOM through the old limits, run affected regressions and complete candidate verification, then regenerate/check the installed site and documentation."
+      ],
+      "affectedPaths": [
+        "src/addons/ui/inline.ts",
+        "test/ui/",
+        "test/consumer/",
+        "test/pages/",
+        "site/",
+        "examples/",
+        "docs/api/",
+        "docs/specs/"
+      ],
+      "specs": [
+        "docs/specs/SEARCH_SOLUTIONS.md",
+        "docs/planning/LOAD_MORE_APPEND.md"
+      ],
+      "evidence": [
+        "docs/evidence/RX-9801.md"
+      ],
+      "blocker": null
+    },
+    {
       "id": "RX-9901",
       "title": "Establish site-only styling and contextual navigation",
       "milestone": "N19",
       "status": "planned",
       "dependsOn": [
-        "RX-9404"
+        "RX-9801"
       ],
-      "objective": "After an explicit implementation instruction and separate availability of the accepted N16–N18 baseline, extend the existing Astro shell with contextual navigation and a minimal site-only Tailwind styling contract. Preserve native consumer behavior and safe static publication; this planning delivery does not integrate earlier implementation work.",
+      "objective": "After an explicit implementation instruction and verification of the delivered N16–N18 baseline, extend the existing Astro shell with contextual navigation and a minimal site-only Tailwind styling contract. Preserve native consumer behavior and safe static publication. Delivery of the earlier implementation does not start N19.",
       "acceptanceCriteria": [
         "RX-9901-AC01: The actual local N16–N18 baseline and representative route/anchor/render inventories are recorded before implementation; no accepted consumer behavior is recreated or reopened.",
         "RX-9901-AC02: Explicit route metadata gives nested pages truthful current-page/category navigation, breadcrumbs and appropriate sidebars/outline; the four top-level destinations and secondary Workbench link work with and without JavaScript.",

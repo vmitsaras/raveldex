@@ -27,9 +27,11 @@ export function createInlineSearch({ root, status, button, manifestUrl, buildId,
         const documents = await candidate.loadDocuments({ signal: lifetime.signal });
         if (destroyed) return;
         mounted = mountRaveldexInline({ root, engine: candidate.engine, documents,
-          pageSize: 3, maxRenderedResults: 6, snippetFields: ['body'],
+          pageSize: 3, snippetFields: ['body'],
           facets: [{ field: 'category', label: 'Topic' }],
-          messages: { label: 'Search the workshop guide', placeholder: 'Try booking or tools', clear: 'Clear search and filters' } });
+          messages: { label: 'Search the workshop guide', placeholder: 'Try booking or tools', clear: 'Clear search and filters',
+            idle: 'Search the workshop guide, then choose a topic to narrow the results.',
+            facetSummary: 'Topics: {total} · Not shown: {omitted}' } });
         if (destroyed) return;
         ui = mounted; mounted = undefined;
         owned = candidate; candidate = undefined;
