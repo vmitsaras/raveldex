@@ -1,0 +1,101 @@
+Docs shell: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ docs shell marks nested routes correctly (1461.208917ms)
+✖ section navigation remains usable without JavaScript (165.91975ms)
+✖ responsive navigation preserves focus, anchors and long labels (30149.352416ms)
+✖ site styles preserve installed modal and iframe boundaries (180.968583ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45106.820041
+
+✖ failing tests:
+
+test at test/pages/docs-shell.test.mjs:32:1
+✖ docs shell marks nested routes correctly (1461.208917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      [
+  +     'Guides',
+  +     '/raveldex/guide/'
+  -     'Get started',
+  -     '/raveldex/guide/overview/'
+      ],
+      [
+  +     'API',
+  +     '/raveldex/reference/'
+  +   ],
+  +   [
+        'Examples',
+        '/raveldex/examples/'
+      ],
+  -   [
+  -     'Documentation',
+  -     '/raveldex/guide/'
+  -   ],
+  -   [
+  -     'API reference',
+  -     '/raveldex/reference/'
+  -   ]
+    ]
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-shell.test.mjs:47:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ [ 'Guides', '/raveldex/guide/' ], [ 'API', '/raveldex/reference/' ], [ 'Examples', '/raveldex/examples/' ] ],
+    expected: [ [ 'Get started', '/raveldex/guide/overview/' ], [ 'Examples', '/raveldex/examples/' ], [ 'Documentation', '/raveldex/guide/' ], [ 'API reference', '/raveldex/reference/' ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-shell.test.mjs:73:1
+✖ section navigation remains usable without JavaScript (165.91975ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-shell.test.mjs:78:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-shell.test.mjs:102:1
+✖ responsive navigation preserves focus, anchors and long labels (30149.352416ms)
+  locator.getAttribute: Timeout 30000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-site-section]')[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-shell.test.mjs:108:35) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for locator('[data-site-section]')" ]
+  }
+
+test at test/pages/docs-shell.test.mjs:142:1
+✖ site styles preserve installed modal and iframe boundaries (180.968583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-shell.test.mjs:146:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

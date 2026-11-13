@@ -170,7 +170,7 @@ test('consumer entry remains useful without JavaScript and reflows in narrow the
     assert.equal(await chooser.getByRole('link').count(), 5);
     const frame = page.frameLocator('iframe[title="Inline search starter preview"]');
     await frame.getByRole('link', { name: 'Plan your first walking trip', exact: true }).waitFor();
-    await page.getByRole('link', { name: 'Get started', exact: true }).click();
+    await page.getByRole('main').getByRole('link', { name: 'Get started', exact: true }).click();
     assert.equal(new URL(page.url()).pathname, '/raveldex/guide/overview/');
   } finally { await context.close(); }
   const page = await browser.newPage({ viewport: { width: 320, height: 900 } });

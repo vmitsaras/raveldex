@@ -34,15 +34,17 @@ recorded optional comparator skips and manual limits. No required selected task
 remains; reconcile with `npm run handoff:next`. Source delivery/publication remain
 separate and the earlier header/demo work is preserved.
 
-The separately delivered [N19 documentation/demo plan](docs/planning/DOCS_DEMO_EXPERIENCE.md)
-defines eight planned tasks and a rendered-pilot review gate. N19 remains planning-only;
-no product code or dependencies changed.
-N19 is queued but unstarted. When the owner explicitly selects implementation,
-RX-9901 is the first dependency-ready slice and again depends on RX-9801. The
-separate N15–N18 delivery supplies the previously missing source baseline; verify
-its current build before starting any future N19 task. The owner authorized this
-[N15–N18 delivery](docs/evidence/N15_N18_DELIVERY_20261113.md) and merge after CI,
-not N19 implementation or publication.
+The owner explicitly selected **RX-9901 only** from the delivered
+[N19 plan](docs/planning/DOCS_DEMO_EXPERIENCE.md). Implementation, full verification and review repairs
+are complete locally. The contextual
+shell, site development tooling and stable slots are described in
+[site/README.md](site/README.md); [RX-9901 evidence](docs/evidence/RX-9901.md)
+retains actual results and limits. RX-9902 and RX-9903 are dependency-ready;
+RX-9902–RX-9908 remain planned. The owner subsequently authorized RX-9901
+commit/push, PR creation and CI-gated merge. Follow the
+[source-delivery record](docs/evidence/RX_9901_DELIVERY_20261113.md).
+RX-9902 must remain unstarted; package publication and later implementation
+require separate instructions.
 
 Run commands appropriate to the changed risk and record actual outcomes in the
 task's evidence. The [release runbook](docs/release/PREPARATION.md) packs/verifies

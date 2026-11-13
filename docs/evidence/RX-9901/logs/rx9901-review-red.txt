@@ -1,0 +1,67 @@
+Docs shell: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ docs shell marks nested routes correctly (762.203833ms)
+✖ section navigation remains usable without JavaScript (190.021709ms)
+✖ contextual navigation does not duplicate unnamed complementary landmarks (188.941542ms)
+✔ responsive navigation preserves focus, anchors and long labels (576.024917ms)
+✔ site styles preserve installed modal and iframe boundaries (552.008333ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 2
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2660.235375
+
+✖ failing tests:
+
+test at test/pages/docs-shell.test.mjs:32:1
+✖ docs shell marks nested routes correctly (762.203833ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 'location'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-shell.test.mjs:50:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'location',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-shell.test.mjs:73:1
+✖ section navigation remains usable without JavaScript (190.021709ms)
+  AssertionError [ERR_ASSERTION]: Closing then resizing without JS retains the native way to reopen navigation
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-shell.test.mjs:85:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-shell.test.mjs:106:1
+✖ contextual navigation does not duplicate unnamed complementary landmarks (188.941542ms)
+  AssertionError [ERR_ASSERTION]: Complementary landmarks must be distinguishable
+  
+  1 !== 2
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-shell.test.mjs:112:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

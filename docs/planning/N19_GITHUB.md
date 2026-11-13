@@ -5,7 +5,7 @@ The owner explicitly requested a new milestone and native sub-issues based on th
 - Milestone: [N19 — Documentation and demo experience](https://github.com/vmitsaras/raveldex/milestone/16).
 - Overview/native parent: [#118](https://github.com/vmitsaras/raveldex/issues/118), deliberately **outside** milestone membership.
 - Canonical contract: [implementation plan](DOCS_DEMO_EXPERIENCE.md), [preserved source review](N19_RECOMMENDED_DESIGN_SOURCE.md), and [roadmap](roadmap.json).
-- State: **0/8 accepted**, all eight canonical tasks `planned`, no implementation evidence. The existing selected-work `release` track queues RX-9901 without authorizing execution or reopening stable 1.0.0 preparation.
+- Registration state: **0/8 accepted**, all eight canonical tasks `planned`, no implementation evidence. The existing selected-work `release` track queues RX-9901 without authorizing execution or reopening stable 1.0.0 preparation.
 
 | Task | Native sub-issue | Deliverable | Prerequisites |
 | --- | --- | --- | --- |
@@ -45,3 +45,26 @@ The owner subsequently authorized a PR and merge after passing CI, with no N19 i
 ## Subsequent N15–N18 implementation delivery
 
 The owner separately authorized delivery of the earlier implementation with CI-gated merge. That combined source restores RX-9801 as the canonical RX-9901 prerequisite and satisfies the previously separate baseline-availability gate. All eight N19 tasks remain planned; no N19 code, dependency installation or pilot approval is included. The original planning-only PR and registration evidence retain their dated scope. See the [N15–N18 delivery record](../evidence/N15_N18_DELIVERY_20261113.md).
+
+## RX-9901 implementation selection and local acceptance
+
+The owner explicitly selected RX-9901 on 13 November 2026. It is now implemented
+and verified locally on `codex/n19-rx9901`, based on merged `35ea42e`.
+[Task evidence](../evidence/RX-9901.md) records the actual baseline/final renders,
+19 focused checks, 38 site tests, full package selection (1,743 passes, eight
+optional comparator skips), installed candidate and all three repaired independent
+review findings. The canonical N19 state is now **1/8 accepted**.
+
+Tracking mirrors this local completion: #119 completed; #120/#121 ready but still
+planned; overview #118 remains open. Native children #119–#126 and milestone #16
+membership are preserved. Historical registration/delivery paragraphs above retain
+their original scope. Source commit/push, CI on a new pushed revision, broader
+implementation, rendered-pilot owner approval and publication remain separate.
+
+## RX-9901 source-delivery selection
+
+The owner subsequently authorized committing/pushing RX-9901 and creating a PR,
+with merge conditional on passing CI. RX-9902 is explicitly unstarted. The
+[delivery record](../evidence/RX_9901_DELIVERY_20261113.md) and PR result distinguish
+source delivery from the original local verification snapshots. Task acceptance
+remains 1/8; no later task is selected by this instruction.

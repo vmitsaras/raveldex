@@ -84,16 +84,16 @@ The 31-match header and 1,005-record shared regressions, complete project select
 and final package/site checks passed within the recorded environment. N18 is
 complete locally; source delivery and publication remain separate.
 
-[N19 documentation/demo experience](docs/planning/DOCS_DEMO_EXPERIENCE.md) is
-planned as a separate website backlog with eight tasks, RX-9901–RX-9908. The owner
-authorized planning and GitHub milestone/native sub-issue registration only.
-Implementation and site-only Tailwind dependency installation have not started;
-the selected-work queue identifies RX-9901 as the next eligible site slice without
-authorizing execution or reopening stable 1.0.0 preparation.
-The separate N15–N18 delivery now supplies the source baseline required by this
-plan. RX-9901 again depends on RX-9801, but N19 implementation remains unselected.
-A rendered-pilot approval still precedes wider rollout. See the
-[N15–N18 delivery record](docs/evidence/N15_N18_DELIVERY_20261113.md).
+[N19 documentation/demo experience](docs/planning/DOCS_DEMO_EXPERIENCE.md) has
+now been explicitly selected for RX-9901 only. This contextual-shell slice is
+implemented and verified locally on the delivered N15–N18 baseline, with site-only Tailwind development
+tooling, truthful route/section navigation and preserved installed search and
+starter boundaries. [RX-9901 evidence](docs/evidence/RX-9901.md) records actual
+checks and the scoped result. RX-9902–RX-9908 remain planned; the rendered-pilot
+approval gate still precedes rollout. The owner subsequently authorized
+[RX-9901 source delivery through a CI-checked PR](docs/evidence/RX_9901_DELIVERY_20261113.md),
+with RX-9902 explicitly unstarted. Package publication remains separate.
+See the [earlier baseline delivery](docs/evidence/N15_N18_DELIVERY_20261113.md).
 
 All 80 pre-N12 tasks remain accepted. Their source-specific results and actual
 N10/N11 closeout are retained in [evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md).

@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HOSTS · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/styles.css"><link rel="stylesheet" href="/raveldex/site-assets/search/modal.css"><link rel="stylesheet" href="/raveldex/site-assets/search.css"><script type="module" src="/raveldex/site-assets/search/main.mjs"></script></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><div class="site-header__actions"><a class="site-header__search-fallback" href="/raveldex/guide/" data-site-search-fallback>Browse guides</a><button class="site-header__search" type="button" hidden data-site-search-trigger aria-label="Search documentation" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75"></circle><path d="m16 16 4.5 4.5"></path></svg><span>Search docs</span><kbd aria-hidden="true"><span data-site-search-modifier>Ctrl</span> K</kbd></button><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/">Guides</a></li><li><a href="/raveldex/reference/">API</a></li><li><a href="/raveldex/examples/">Examples</a></li></ul></nav></div></header><main id="main" class="site-main site-main--article" tabindex="-1"><h1 id="consumer-search-ui-and-host-integrations">Consumer search, UI and host integrations</h1>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HOSTS · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/search/modal.css"><link rel="stylesheet" href="/raveldex/site-assets/search.css"><script type="module" src="/raveldex/site-assets/search/main.mjs"></script><script type="module" src="/raveldex/site-assets/shell.mjs"></script><link rel="stylesheet" href="/raveldex/site-assets/Layout.ClCvbDoQ.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><div class="site-header__actions"><a class="site-header__search-fallback" href="/raveldex/guide/" data-site-search-fallback>Browse guides</a><button class="site-header__search" type="button" hidden data-site-search-trigger aria-label="Search documentation" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75"></circle><path d="m16 16 4.5 4.5"></path></svg><span>Search docs</span><kbd aria-hidden="true"><span data-site-search-modifier>Ctrl</span> K</kbd></button><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/overview/">Get started</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/guide/">Documentation</a></li><li><a href="/raveldex/reference/" data-section-current="true" aria-current="location">API reference</a></li></ul></nav></div></header><div class="site-frame site-frame--context site-frame--outline"><div class="site-sidebar"><details class="site-section" data-site-section open><summary>API reference navigation</summary><nav aria-label="API reference navigation"><p class="site-section__label" aria-hidden="true">API reference</p><ul><li><a href="/raveldex/reference/astro-package/">Astro package</a></li><li><a href="/raveldex/reference/english-package/">English package</a></li><li><a href="/raveldex/reference/">API reference</a></li><li><a href="/raveldex/reference/core/">Core API</a></li><li><a href="/raveldex/reference/addons/">Addons</a></li><li><a href="/raveldex/reference/hosts/" aria-current="page">Hosts and UI</a></li><li><a href="/raveldex/reference/typo/">Typo</a></li><li><a href="/raveldex/reference/suggestions/">Suggestions</a></li><li><a href="/raveldex/reference/synonyms/">Synonyms</a></li><li><a href="/raveldex/reference/english/">English</a></li><li><a href="/raveldex/reference/identifiers/">Identifiers</a></li><li><a href="/raveldex/reference/literal/">Literal</a></li><li><a href="/raveldex/reference/proximity/">Proximity</a></li><li><a href="/raveldex/reference/query-syntax/">Query syntax</a></li><li><a href="/raveldex/reference/record-patch/">Record patch</a></li><li><a href="/raveldex/reference/static-astro/">Static astro</a></li><li><a href="/raveldex/reference/localization/">Localization</a></li><li><a href="/raveldex/reference/result-content/">Result content</a></li><li><a href="/raveldex/reference/cms-refresh/">Cms refresh</a></li></ul></nav></details></div><main id="main" class="site-main site-main--article" tabindex="-1"><nav class="site-breadcrumb" aria-label="Breadcrumb"><ol class="rx:flex rx:flex-wrap rx:items-center rx:gap-2"><li><a href="/raveldex/">Home</a><span aria-hidden="true">/</span></li><li><a href="/raveldex/reference/">API reference</a><span aria-hidden="true">/</span></li><li><span aria-current="page">Hosts and UI</span></li></ol></nav><h1 id="consumer-search-ui-and-host-integrations">Consumer search, UI and host integrations</h1>
 <p>Choose a Raveldex consumer interface for your application’s records, then add only the capabilities it needs. You supply searchable data and matching display records; no surface crawls pages or downloads an index automatically. Start with <a href="/raveldex/guide/overview/">installation and record preparation</a>. Workers, snapshots, storage and the developer Workbench remain separately selected integrations below.</p>
 <h2 id="consumer-search-interfaces">Consumer search interfaces</h2>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Need</th>
@@ -41,11 +41,11 @@
 <h3 id="mount-a-consumer-search-form">Mount a consumer search form</h3>
 <p>Use a connected root on an HTTP(S) page. Keep ordinary navigation outside it so visitors can browse when search is unavailable:</p>
 <!-- consumer-example: markup -->
-<pre><code class="language-html">&lt;section id="search" class="help-search" aria-label="Documentation search"&gt;&lt;/section&gt;
+<pre tabindex="0"><code class="language-html">&lt;section id="search" class="help-search" aria-label="Documentation search"&gt;&lt;/section&gt;
 </code></pre>
 <p>Copy <a href="/raveldex/example-files/inline.mjs">inline.mjs</a> into your installed ESM application and run this entry after the root exists, through a bundler with CSS support:</p>
 <!-- consumer-example: entry -->
-<pre><code class="language-js">import { createInlineSearch } from './inline.mjs';
+<pre tabindex="0"><code class="language-js">import { createInlineSearch } from './inline.mjs';
 import '@vmitsaras/raveldex/addons/ui/inline.css';
 
 const root = document.querySelector('#search');
@@ -59,7 +59,7 @@ const search = await createInlineSearch(root);
 <p>The recipe assumes the root remains until initialization returns and propagates initialization errors to your app after disposing its engine. For removal during async loading, visible loading/retry, lazy assets or repeated initialization, use the complete starter controllers rather than inventing lifecycle methods on the UI handle.</p>
 <p>Import the optional CSS explicitly; the module does not inject it. Override a few scoped component properties in your own stylesheet:</p>
 <!-- consumer-example: theme -->
-<pre><code class="language-css">.help-search .raveldex-inline {
+<pre tabindex="0"><code class="language-css">.help-search .raveldex-inline {
   --raveldex-inline-accent: #145b45;
   --raveldex-inline-gap: 1rem;
   --raveldex-inline-radius: .35rem;
@@ -68,7 +68,7 @@ const search = await createInlineSearch(root);
 <p>Fonts are inherited. Light/dark palettes, focus and highlight colors are separate roles: supply a complete appropriate set for a dark host and check contrast after overrides. Inline/modal/dropdown use light defaults with explicit host dark overrides; directory/cards also have automatic dark defaults. Properties beginning <code>--_</code> are private. There is no JavaScript theme option or mandatory font request. The surface-specific sections below list actual properties; changing CSS never changes search meaning.</p>
 <h3 id="consumer-capability-matrix">Consumer capability matrix</h3>
 <p>For the per-field matrix, native documentation/application/catalogue scenarios, supported combinations and the reviewed keep-current boundary, see <a href="/raveldex/reference/result-content/">native result content and hierarchy</a>. Authored display excerpts and query-derived matching snippets are different contracts; the guide also covers projecting rich records to strict basic display records.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Surface</th>
@@ -112,7 +112,7 @@ const search = await createInlineSearch(root);
 </table>
 <p>Snippets require explicitly installed snippet evidence plus source/offset providers for their selected fields; section previews require section evidence and exact-original, revision-bound heading maps. Core alone retains neither original source text nor offsets. Direct title/link search needs neither capability; static source delivery still requires source providers to rebuild its indexed fields. Missing requested capabilities fail explicitly. A supported section-context refusal may retain valid page links with an explicit unavailable-context notice; it never pretends that context succeeded. Images default off, and enabling them can make image requests; disabling them does not undo requests already sent.</p>
 <p>All five consumer text modes default to final-word prefix and allow explicit <code>text</code>. UI language is separate from query analysis: captured partial plain-text message overrides use English for omitted keys. Choose an analyzer explicitly when needed; see <a href="/raveldex/reference/english/">English morphology</a>. No automatic locale detection, translated UI or date formatting is implied; card dates are already-authored localized strings.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Surface</th>
@@ -154,16 +154,16 @@ const search = await createInlineSearch(root);
 <h2 id="native-dom-ui-and-css">Native DOM UI and CSS</h2>
 <p>This section documents the separate <strong>developer Workbench</strong>, with numerical scores and optional Inspector. Its existing exact-word default and public API remain supported. Use the consumer entries above for visitor-facing search.</p>
 <p>Use <code>mountRaveldexUI(options: UIOptions): UIHandle</code> from <code>/addons/ui</code> to put search controls into an element on your page. You supply the engine and keep responsibility for disposing it. Import the UI and its stylesheet through a bundler that handles CSS:</p>
-<pre><code class="language-js">import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
+<pre tabindex="0"><code class="language-js">import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui';
 import '@vmitsaras/raveldex/addons/ui/styles.css';
 </code></pre>
 <p>These imports make the function and styles available; they do not mount anything yet.</p>
 <h3 id="mount-a-minimal-search-form">Mount a minimal search form</h3>
 <p>Add this element to your page where you want the search controls to appear:</p>
-<pre><code class="language-html">&lt;section id="search" aria-label="Documentation search"&gt;&lt;/section&gt;
+<pre tabindex="0"><code class="language-html">&lt;section id="search" aria-label="Documentation search"&gt;&lt;/section&gt;
 </code></pre>
 <p>The element starts empty. Copy <a href="/raveldex/example-files/ui.mjs">ui.mjs</a> into your application, then put the following in a browser module processed by your bundler. Run it after the element exists:</p>
-<pre><code class="language-js">import { createSearchUI } from './ui.mjs';
+<pre tabindex="0"><code class="language-js">import { createSearchUI } from './ui.mjs';
 import '@vmitsaras/raveldex/addons/ui/styles.css';
 
 const search = await createSearchUI(document.querySelector('#search'));
@@ -172,7 +172,7 @@ const search = await createSearchUI(document.querySelector('#search'));
 </code></pre>
 <p>You should now see a search field and results. Type <code>atomic</code> to get one result, <strong>Atomic updates</strong>, linked to <code>/guide/updates/</code>. The example supplies that URL; your application needs to provide the destination page.</p>
 <p>The recipe creates one title/body record and a matching display entry. To use real documents, replace both entries and keep their IDs equal. It keeps data in memory and opens no database. Call the returned <code>dispose()</code> when removing the component; it destroys the UI first, then disposes the engine.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th><code>UIOptions</code></th>
@@ -224,7 +224,7 @@ const search = await createSearchUI(document.querySelector('#search'));
 <p>Typing feedback can interrupt spoken status messages. Check important flows with your target browser and screen reader, without requiring users to change their settings. The UI does not change those settings and exposes no public custom-event API.</p>
 <h3 id="css-customization">CSS customization</h3>
 <p>Import <code>@vmitsaras/raveldex/addons/ui/styles.css</code> separately, then use the five public properties below to adjust the generated <code>.raveldex-ui</code> block. The <code>data-raveldex-*</code> attributes identify internal elements; do not use them as an alternative application markup API.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Property</th>
@@ -267,7 +267,7 @@ const search = await createSearchUI(document.querySelector('#search'));
 <p>To start with a complete project, use the <a href="/raveldex/examples/inline-browser/">browser</a> or <a href="/raveldex/examples/inline-astro/">Astro</a> inline starter. The <a href="/raveldex/examples/inline/">solution gallery</a> provides a working preview, exact source files and complete starter downloads. Each guide includes package installation, replacement content, deployment bases, CSS and cleanup.</p>
 <p>Import <code>mountRaveldexInline</code> from <code>@vmitsaras/raveldex/addons/ui/inline</code> and its stylesheet separately from <code>@vmitsaras/raveldex/addons/ui/inline.css</code>. The inline preset provides a labeled search form, clear/submit controls, linked titles, optional snippets and simple filters, and Load more in finite batches. Title/link search works with core alone. It never installs snippets, facets, Inspector, workers or storage automatically.</p>
 <p>Supply your existing engine and display documents with matching IDs, just as in the DOM recipe above. <code>InlineUIOptions</code> accepts only these properties:</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Option</th>
@@ -328,7 +328,7 @@ const search = await createSearchUI(document.querySelector('#search'));
 <p>Text-only empty results identify the submitted query and suggest a different search; filtered empties name the selected filters and suggest changing a filter or Clear search and filters. Both preserve input/selections. <code>noResults</code> and optional <code>noResultsFiltered</code> support <code>{query}</code>: the submitted text trimmed and bounded to 160 Unicode code points plus an ellipsis, only for feedback. A supplied <code>noResults</code> override also covers filtered empties unless <code>noResultsFiltered</code> is supplied. Complete old bundles stay valid. Default failures say Search could not complete and offer Retry search or editing; a revision change asks for explicit retry. Codes remain available through an <code>error</code> override containing <code>{code}</code>. No automatic recovery query is added. Empty outcomes hide the empty results heading/list while keeping feedback visible. After recovery or reset, Retry search remains temporarily visible and unavailable if it still has keyboard focus; it retires after focus leaves. Loading, empty and error feedback use the existing border, gap and color properties, without hiding the polite status region.</p>
 <p>Summary templates substitute <code>{total}</code> and <code>{count}</code>; <code>pageSummary</code> also supports <code>{start}</code>/<code>{end}</code>. <code>resultsAdded</code> supports <code>{added}</code> (new batch size), <code>{start}</code>/<code>{end}</code> (displayed range), <code>{total}</code> (exact matches) and <code>{count}</code> (displayed hits); its default is <code>Results added: {added}. Showing {start}–{end} of {total}.</code> The <code>newResults</code> button label defaults to Go to new results. <code>unlistedValue</code> uses <code>{value}</code>, <code>facetSummary</code> uses <code>{total}</code>/<code>{omitted}</code>, and <code>snippetOmissions</code> uses <code>{count}</code>. The error template substitutes a sanitized native <code>{code}</code> (unrecognized failures use <code>INTERNAL_ERROR</code>); a revision mismatch uses <code>revisionChanged</code>. Every message, title, selection and excerpt is inserted as text, never HTML. UI messages do not select a different engine analyzer. The polite status region announces actual searching, composition and settled outcomes without repeating unchanged messages on each keystroke.</p>
 <p>The optional stylesheet uses <code>.raveldex-inline</code> and scoped <code>__form</code>, <code>__label</code>, <code>__field</code>, <code>__icon</code>, <code>__input</code>, <code>__submit</code>, <code>__clear</code>, <code>__status</code>, <code>__results-heading</code>, <code>__results</code>, <code>__result</code>, <code>__result-heading</code>, <code>__result-title</code> and <code>__retry</code> classes. Additional style hooks are <code>__facets</code>, <code>__facet-group</code>, <code>__facet-label</code>, <code>__facet</code>, <code>__facet-summary</code>, <code>__snippet</code>, <code>__highlight</code>, <code>__snippet-omissions</code>, <code>__navigation</code>, <code>__load-more</code>, <code>__new-results</code> and <code>__page-summary</code>. Inline/modal no longer create <code>__previous</code> or <code>__next</code> elements. <code>data-raveldex-inline-*</code> hooks are internal; they are not a caller-authored markup API.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Public CSS property</th>
@@ -394,7 +394,7 @@ const search = await createSearchUI(document.querySelector('#search'));
 <p>The default inline presentation includes neither numerical scores nor Inspector controls. For the developer-oriented presentation, explicitly use the existing native DOM UI instead of hiding controls with CSS. Complete <a href="/raveldex/examples/inline-browser/">browser</a> and <a href="/raveldex/examples/inline-astro/">Astro</a> starters include copy/install steps and explicit ownership. The existing <code>/addons/ui</code> Workbench API retains its exact-word default, full navigation and Inspector. No Pagefind runtime/API or indexing/loading compatibility is implied.</p>
 <h3 id="inline-anchored-sections">Inline anchored sections</h3>
 <p>Supply explicit heading metadata from the same originals indexed by your borrowed engine. Import the readonly <code>PageSections</code>, <code>PageSectionPage</code> and <code>PageSection</code> types from <code>@vmitsaras/raveldex/addons/sections</code>. Register <a href="/raveldex/reference/addons/#anchored-page-context">section evidence</a> when constructing the engine; mounting never installs it.</p>
-<pre><code class="language-js">const pageSections = {
+<pre tabindex="0"><code class="language-js">const pageSections = {
   kind: 'raveldex-page-sections', version: 1, revision: written.revision,
   pages: [{
     pageId: 'repair',
@@ -418,10 +418,10 @@ const ui = mountRaveldexInline({
 <p>CSS remains optional and component-scoped. Existing public properties take precedence; <code>--_</code> aliases remain private. Hosts can choose other accents or card backgrounds, but must check the resulting text, filled-action, boundary and focus contrast together. Text enlargement/emulated viewports are separate from actual browser zoom and mobile keyboard observations.</p>
 <h2 id="documentation-search-modal">Documentation search modal</h2>
 <p>Use the modal when documentation search should open from an explicit button. It reuses inline search, feedback, paging and optional anchored previews inside a native dialog. Supply an already created engine and matching display data; the modal borrows that owner and starts closed without searching. For first-open loading and complete owned application lifecycle, copy the <a href="/raveldex/examples/modal-browser/">browser</a> or <a href="/raveldex/examples/modal-astro/">Astro</a> starter. The <a href="/raveldex/examples/modal/">modal gallery</a> includes an installed preview, exact source downloads and CSS recipes.</p>
-<pre><code class="language-html">&lt;button id="docs-search-trigger" type="button"&gt;Search documentation&lt;/button&gt;
+<pre tabindex="0"><code class="language-html">&lt;button id="docs-search-trigger" type="button"&gt;Search documentation&lt;/button&gt;
 &lt;div id="docs-search"&gt;&lt;a href="/guide/"&gt;Browse the documentation&lt;/a&gt;&lt;/div&gt;
 </code></pre>
-<pre><code class="language-js">import { mountRaveldexModal } from '@vmitsaras/raveldex/addons/ui/modal';
+<pre tabindex="0"><code class="language-js">import { mountRaveldexModal } from '@vmitsaras/raveldex/addons/ui/modal';
 import '@vmitsaras/raveldex/addons/ui/modal.css';
 
 const modal = mountRaveldexModal({
@@ -439,7 +439,7 @@ const modal = mountRaveldexModal({
 </code></pre>
 <p>Here <code>engine</code> and <code>documents</code> come from your ordinary inline setup or explicit static loader. The single modal stylesheet includes inline styling through a local CSS import; JavaScript imports no stylesheet automatically. Keep normal browse links available before initialization and make the existing trigger an accessible named native button. Root and trigger must be connected in the same document, with the trigger outside root. The library preserves the trigger’s authored label rather than attempting to recreate the browser’s complete accessible-name algorithm.</p>
 <p><code>ModalUIOptions</code> includes the existing inline options, including partial inline <code>messages</code>, facets, snippets or <code>pageSections</code>/<code>maxSectionPreviews</code>. Existing bounds and the snippets/maps exclusion still apply. The additional options are:</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Option</th>
@@ -479,7 +479,7 @@ const modal = mountRaveldexModal({
 <p>Use <code>mountRaveldexDropdown</code> from <code>/addons/ui/dropdown</code> when a compact field should offer a few real page links. Import <code>/addons/ui/dropdown.css</code> separately. It uses core alone, borrows your existing engine and creates no index, snippets, suggestions, worker or storage. Native manual popover support is required; unsupported environments fail before replacing your browse content. Packages remain available separately.</p>
 <p>For a complete project, copy the <a href="/raveldex/examples/dropdown-browser/">browser header starter</a>. Its <a href="/raveldex/examples/dropdown/">gallery</a> has an installed preview, all source files and a CSS walkthrough. The starter builds a real <code>/search/</code> inline destination and guide pages at root or a subdirectory base.</p>
 <p>This wiring fragment expects your <code>engine</code> and <code>documents</code>, a connected <code>#header-search</code> element, and an existing <code>/search/</code> page that accepts <code>q</code> and selects the same prefix mode, analyzer and content. The runtime entry itself does not create that destination:</p>
-<pre><code class="language-js">import { mountRaveldexDropdown } from '@vmitsaras/raveldex/addons/ui/dropdown';
+<pre tabindex="0"><code class="language-js">import { mountRaveldexDropdown } from '@vmitsaras/raveldex/addons/ui/dropdown';
 import '@vmitsaras/raveldex/addons/ui/dropdown.css';
 
 const dropdown = mountRaveldexDropdown({
@@ -498,7 +498,7 @@ const dropdown = mountRaveldexDropdown({
 </code></pre>
 <p><code>DropdownUIOptions</code> requires <code>root</code>, <code>engine</code>, <code>documents</code> and <code>fullResults</code>. <code>maxResults</code> defaults to 5 and accepts integers 1..20; <code>debounceMs</code> defaults to 150 and accepts 0..2000; <code>mode</code> is <code>prefix</code> by default or <code>text</code>; <code>shortcut</code> is false by default. Display capture uses the existing finite ID/title/safe-URL limits. A detached root can be prepared, but search/open are inactive until it is connected to its original document. Same-kind duplicate mount returns its existing handle; destroy/remount to change configuration. A different UI preset cannot own that root simultaneously.</p>
 <p>The popup is a one-column grid of real native links. Input focus stays in the labeled text field; <code>aria-activedescendant</code> identifies only a visible current gridcell. Results never replace your words with a title. The exact native total and shown count are separate from the finite grid. No pagination or vocabulary suggestions are mixed into these hits. The ordinary full-results link is outside the popup and remains in normal Tab order.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Interaction</th>
@@ -549,7 +549,7 @@ const dropdown = mountRaveldexDropdown({
 <h2 id="directory-queries-and-url-state">Directory queries and URL state</h2>
 <p>Import <code>createDirectory</code> from <code>/addons/ui/directory</code> to compose text, multi-selected string filters and native pages around an existing engine. This nonvisual entry exposes state and results. The separate <a href="#directory-controls-and-styling">directory view</a> supplies controls and explicit CSS; <a href="/raveldex/examples/directory/">complete browser/Astro projects</a> provide installed adoption. Install filters and facets explicitly for the configured groups. With no groups, core alone is enough.</p>
 <p>Save this complete example as an ESM module in your installed application and run it with Node. Both <code>guide</code> and <code>manual</code> are selected within the same group, so either may match. Additional groups combine with AND, as does the text query.</p>
-<pre><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
+<pre tabindex="0"><code class="language-js">import { createRaveldex } from '@vmitsaras/raveldex';
 import { createFilters } from '@vmitsaras/raveldex/addons/filters';
 import { createFacets } from '@vmitsaras/raveldex/addons/facets';
 import { createDirectory } from '@vmitsaras/raveldex/addons/ui/directory';
@@ -580,7 +580,7 @@ try {
 <p>Use <code>subscribe(snapshot =&gt; { ... })</code> to observe transitions; subscription does not invoke an initial callback. At most 64 distinct listeners are supported, including a connected URL binding. Exceptions from an observer do not cancel search. Old responses cannot overwrite newer intent. Paging/replaying the same query across a changed revision reports <code>stale</code> with <code>REVISION_MISMATCH</code>, clears results and resets page one; explicitly call <code>refresh()</code> to accept the new revision. Out-of-range restored pages recover once to page one. Destroy cancels work and releases observers; dispose the borrowed engine separately.</p>
 <h3 id="connect-url-state-explicitly">Connect URL state explicitly</h3>
 <p>For a long-lived browser controller, add this fragment after creating it and before its initial query. Keep the returned binding for cleanup. Use a real HTTP(S) <code>window</code>; there is no ambient URL discovery.</p>
-<pre><code class="language-js">import { connectDirectoryURL } from '@vmitsaras/raveldex/addons/ui/directory';
+<pre tabindex="0"><code class="language-js">import { connectDirectoryURL } from '@vmitsaras/raveldex/addons/ui/directory';
 
 const url = connectDirectoryURL({
   controller: directory,
@@ -599,7 +599,7 @@ await url.read();
 <h2 id="directory-controls-and-styling">Directory controls and styling</h2>
 <p>Copy the <a href="/raveldex/reference/hosts/#directory-controls-and-styling">complete browser or Astro resource directory</a> for a working project with explicit records, actual destination pages, checkbox groups, chips and native page navigation. The browser example indexes its own public JSON; Astro builds an explicit static allowlist and loads matching source/display artifacts on Enable. Both use the same native controller semantics and include loading/Retry, optional URL ownership and teardown.</p>
 <p>To add controls to an existing long-lived browser controller, use this fragment after creating it. Supply your own connected HTML <code>root</code>, live <code>directory</code>, matching <code>{id,title,url}</code> <code>documents</code> and labels for its configured groups. The complete projects above include that setup; this fragment is not a standalone application.</p>
-<pre><code class="language-js">import { mountRaveldexDirectory } from '@vmitsaras/raveldex/addons/ui/directory/view';
+<pre tabindex="0"><code class="language-js">import { mountRaveldexDirectory } from '@vmitsaras/raveldex/addons/ui/directory/view';
 import '@vmitsaras/raveldex/addons/ui/directory.css';
 
 const view = mountRaveldexDirectory({
@@ -623,14 +623,14 @@ await directory.refresh();
 <p>For example, a collection has three Guides and two Manuals, with exactly one type per resource. Selecting Guide gives three results, Guide (3) and Manual (0). Selecting Manual alongside Guide gives five results because either type now qualifies. Selecting a topic in another group then keeps only resources of either type that also match that topic. A zero is a current count, not a reason to disable a choice. The same explanation and native checkbox behavior apply to directory list, cards and grid. Override the visible explanation with captured plain-text <code>messages.countHint</code> (at most 512 UTF-16 units); it does not change filtering or counting.</p>
 <p>Selected filters form a list of named removal buttons. Removing a focused or activated chip focuses the next surviving chip, previous chip or search input. Stable checkbox/page/Clear controls preserve existing focus. If a removed result held focus, focus recovers to the search input, with reentry checked before presentation continues. Filter resources uses native details/summary: open it normally, then Close filters or Escape inside it closes and restores summary focus. There is no focus trap or automatic resize dismissal. Waiting/composition/loading, exact current totals, no results, invalid selections, native failures and stale revisions have deliberate status outside the busy result section. An older asynchronous recovery cannot discard newer provisional text; external controller/URL replay wins over a pending draft.</p>
 <p>Import CSS explicitly, then override the component’s public properties in your own stylesheet:</p>
-<pre><code class="language-css">.raveldex-directory {
+<pre tabindex="0"><code class="language-css">.raveldex-directory {
   --raveldex-directory-accent: #145b45;
   --raveldex-directory-button-color: #fff;
   --raveldex-directory-radius: .75rem;
   --raveldex-directory-gap: 1.25rem;
 }
 </code></pre>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Public property</th>
@@ -701,7 +701,7 @@ await directory.refresh();
 <h2 id="rich-directory-results">Rich directory results</h2>
 <p>Copy the <a href="/raveldex/examples/cards/">complete rich-results browser project</a> to start with real resource pages, metadata mapping, local image assets and CSS you can edit. Its layout, density and image controls keep the same directory page and filter selection. Images start off. The basic browser/Astro directories remain available when you need linked titles and controls alone.</p>
 <p>For an existing browser controller, use this fragment after creating your own connected HTML <code>root</code>, live <code>directory</code>, matching display records and group labels. The complete project above includes indexing, loading/Retry, optional URL replay and ownership-safe cleanup; this fragment supplies just the rich view.</p>
-<pre><code class="language-js">import { mountRaveldexDirectoryCards } from '@vmitsaras/raveldex/addons/ui/directory/cards';
+<pre tabindex="0"><code class="language-js">import { mountRaveldexDirectoryCards } from '@vmitsaras/raveldex/addons/ui/directory/cards';
 import '@vmitsaras/raveldex/addons/ui/directory.css';
 import '@vmitsaras/raveldex/addons/ui/directory-cards.css';
 
@@ -733,7 +733,7 @@ console.log(view.getPresentation());
 <p><code>presentation</code> is a partial <code>{layout,density,images}</code>. Defaults are <code>list</code>, <code>comfortable</code>, false. Layout choices are <code>list</code>, <code>cards</code>, <code>grid</code>; density choices are <code>compact</code>, <code>comfortable</code>. <code>getPresentation()</code> returns a frozen complete snapshot. <code>setPresentation(partial)</code> validates first, then changes presentation synchronously without another search/history entry, without reordering results and without losing the existing title-link Nodes/focus. Query, filters, selected chips, page and exact totals remain native. CSS grid uses the same ordered list and ordinary links, with no interactive ARIA grid or extra keyboard model.</p>
 <p>Images use native lazy loading, asynchronous decoding and no-referrer policy. Only the current displayed page can create image elements after explicit opt-in. Disabling removes them and their callbacks; it cannot undo a request already sent. Enabling again may create a new request. The browser controls lazy-load timing and caching. A failed informative image shows localized failure text with its authored alternative; a failed decorative image disappears silently. Titles, metadata and links remain usable. There is no automatic alternate source or retry. Teardown clears image listeners as well as the base controls; late detached image events cannot update a newer page or restored/foreign markup. Controller and engine ownership stay with the application.</p>
 <p>Import both stylesheets, then edit your own CSS. These properties control the rich layer; the existing directory palette, font, focus and control properties still apply:</p>
-<pre><code class="language-css">.raveldex-directory-cards {
+<pre tabindex="0"><code class="language-css">.raveldex-directory-cards {
   --raveldex-directory-card-min-width: 18rem;
   --raveldex-directory-card-radius: .85rem;
   --raveldex-directory-card-gap: 1.25rem;
@@ -742,7 +742,7 @@ console.log(view.getPresentation());
   --raveldex-directory-card-image-fit: contain;
 }
 </code></pre>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Public property</th>
@@ -801,7 +801,7 @@ console.log(view.getPresentation());
 <p>The public rich classes use <code>.raveldex-directory-cards__*</code> alongside the base <code>.raveldex-directory__*</code>. Keep internal <code>--_</code> variables and data hooks private. Long text/RTL, narrow layout, dark/forced colors and reduced motion retain semantic source order and visible focus. Check your actual colors, image crops/alternatives, browser zoom, devices and assistive technology after changing content or CSS. Graph/CSS bytes, DOM counts and observed requests are separate measurements from memory, latency or paint.</p>
 <h2 id="starter-adoption-and-local-checks">Starter adoption and local checks</h2>
 <p>Choose the <a href="/raveldex/examples/inline/">inline gallery</a> for simple results in a page, the <a href="/raveldex/examples/modal/">modal gallery</a> for documentation search behind a button, the <a href="/raveldex/examples/dropdown/">header gallery</a> for a compact field and full-results route, the <a href="/raveldex/examples/directory/">directory gallery</a> for checkbox groups/chips/pages and optional URL replay, or <a href="/raveldex/reference/hosts/#rich-directory-results">rich directory results</a> for metadata and explicit images in list/card/grid layouts. Inline, modal and directory offer complete browser/Astro projects; the header and rich-results galleries offer browser projects. Each has complete source downloads, a live installed preview and a CSS walkthrough. Packages remain available separately: install the matching package versions in the setup guide, with its pinned build tooling, before building the copied project.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Starter</th>
@@ -845,7 +845,7 @@ console.log(view.getPresentation());
 </table>
 <p>The <a href="/raveldex/examples/">solution chooser</a> compares all five presentations and all eight complete projects, with their exact data, loading, CSS and keyboard requirements. Every supplied project uses direct main-thread execution. Browser inline/header/directory/rich projects start loading on page initialization; Astro inline/directory wait for their Enable button; documentation modals load on first open. These are complete local indexes, with no route crawling, index shards or automatic worker fallback.</p>
 <p>All starters select final-word prefix matching. Complete earlier terms remain exact; a final term with fewer than two normalized code points also stays exact. Empty inline/modal/header search is idle; directory/rich search deliberately browses all records. Selecting a filter may browse without text. Inline/modal results append through Load more until all matches are displayed; header dropdown results are a bounded projection with a real full-results route, while directory/rich controls use complete native pages. Result totals always count matching native records/pages; section previews do not add matches. Layout, density and image choices preserve directory state.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Presentation</th>
@@ -898,7 +898,7 @@ console.log(view.getPresentation());
 <h2 id="source-and-native-snapshots">Source and native snapshots</h2>
 <p>Use snapshots to export an engine’s state and restore it later. Call <code>createSnapshots(engine, options?)</code> from <code>/adapters/snapshots</code> with a supported direct engine. The helper uses your engine without owning it or adding methods to it.</p>
 <p>Its methods are <code>exportSource(options?)</code>, <code>exportNative(options?)</code> and <code>restore(encoded: string, options?)</code>. Each returns a promise and accepts core mutation signal/deadline options. <code>SnapshotOptions</code> lets you set <code>maxEncodedBytes</code>, from 1 KiB to the default and maximum 64 MiB.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Format</th>
@@ -929,7 +929,7 @@ console.log(view.getPresentation());
 <h2 id="indexeddb-persistence-and-recovery">IndexedDB persistence and recovery</h2>
 <p>Use <code>createIndexedDBPersistence(snapshots, options)</code> from <code>/adapters/indexeddb</code> to save and load snapshots explicitly. It manages its own database connections while borrowing the snapshot export/restore handles. Disposing storage does not dispose your engine.</p>
 <p>Supply <code>{ databaseName, namespace }</code> for a database owned by this adapter, not an unrelated application database. Optional settings are <code>{ indexedDB?, format?: 'source' | 'native', openTimeoutMs?, operationTimeoutMs? }</code>. The factory can be supplied directly or found when needed, and the default format is source. Native format requires the qualified direct-engine path; workers support source only.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Method</th>
@@ -965,7 +965,7 @@ your application owns visible messages, retry buttons, authoritative records and
 any replacement owner. Keep ordinary browse links outside the enhanced search
 root. Never describe a refused operation as an empty search or an uncertain write
 as safely rolled back.</p>
-<table>
+<table tabindex="0">
 <thead>
 <tr>
 <th>Observed failure</th>
@@ -1055,4 +1055,4 @@ save/load/erase exercise, not an offline search interface.</p>
 <p>The returned plan contains <code>{ configuration, records, origin, sourceRevision, returnFields, identity, differences }</code>. Read <code>identity</code> and <code>differences</code> for changes in analysis and ranking. <code>origin</code> and <code>sourceRevision</code> describe the old collection; they do not become the new engine’s revision or a storage generation.</p>
 <p>The <a href="/raveldex/example-files/migration.mjs">migration recipe</a> rebuilds a separate engine with bounded <code>addMany</code> calls, inspects it and disposes it. In your application, switch to the new engine only after the whole rebuild succeeds. Each batch is atomic, but the entire migration is not one transaction.</p>
 <p><code>MigrationError</code> has sanitized <code>code</code> and <code>details: { reason, nativeCode? }</code>. <code>MIGRATION_ERROR_CODES</code> is <code>INVALID_BYTES</code>, <code>INVALID_SNAPSHOT</code>, <code>INCOMPATIBLE_SNAPSHOT</code>, <code>NONCANONICAL_SNAPSHOT</code>, <code>CHECKSUM_MISMATCH</code>, <code>NATIVE_INCOMPATIBLE</code>, <code>CAPABILITY_REQUIRED</code>. The entry exports <code>MigrationErrorCode</code>, <code>MigrationErrorDetails</code>, <code>MigrationReason</code>, <code>LocalSearchMigration</code>, <code>LocalSearchMigrationIdentity</code> and <code>LocalSearchMigrationOrigin</code>. Foreign indexes, scores, live handles and namespaces are never reused. The repository <a href="https://github.com/vmitsaras/raveldex/blob/main/docs/migration/LOCALSEARCH.md">migration guide (repository access)</a> gives mapping and provenance details.</p>
-</main><footer class="site-footer"><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer><div class="site-search"><div data-site-search-root></div><dialog class="site-search-loading" data-site-search-loading aria-labelledby="site-search-loading-title" aria-describedby="site-search-loading-status"><header class="site-search-loading__header"><h2 id="site-search-loading-title">Search documentation</h2><button type="button" data-site-search-cancel>Close</button></header><div class="site-search-loading__body"><p id="site-search-loading-status" role="status" data-site-search-status>Loading documentation…</p><button type="button" data-site-search-retry hidden>Try again</button><p><a href="/raveldex/guide/">Browse the guides</a></p></div></dialog></div></body></html>
+</main><div class="site-outline"><nav aria-label="On this page"><p class="site-section__label">On this page</p><ul><li><a href="#consumer-search-interfaces">Consumer search interfaces</a></li><li><a href="#native-dom-ui-and-css">Native DOM UI and CSS</a></li><li><a href="#inline-search-foundation">Inline search foundation</a></li><li><a href="#consumer-visual-roles-and-host-themes">Consumer visual roles and host themes</a></li><li><a href="#documentation-search-modal">Documentation search modal</a></li><li><a href="#compact-dropdown-search">Compact dropdown search</a></li><li><a href="#directory-queries-and-url-state">Directory queries and URL state</a></li><li><a href="#directory-controls-and-styling">Directory controls and styling</a></li><li><a href="#rich-directory-results">Rich directory results</a></li><li><a href="#starter-adoption-and-local-checks">Starter adoption and local checks</a></li><li><a href="#one-owner-module-worker">One-owner module worker</a></li><li><a href="#source-and-native-snapshots">Source and native snapshots</a></li><li><a href="#indexeddb-persistence-and-recovery">IndexedDB persistence and recovery</a></li><li><a href="#recovery-choices-in-your-application">Recovery choices in your application</a></li><li><a href="#localsearch-source-migration">LocalSearch source migration</a></li></ul></nav></div></div><footer class="site-footer"><p><a href="/raveldex/demo/">Developer Workbench</a></p><p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href="/raveldex/site-assets/LICENSE.txt">MIT license</a></p></footer><div class="site-search"><div data-site-search-root></div><dialog class="site-search-loading" data-site-search-loading aria-labelledby="site-search-loading-title" aria-describedby="site-search-loading-status"><header class="site-search-loading__header"><h2 id="site-search-loading-title">Search documentation</h2><button type="button" data-site-search-cancel>Close</button></header><div class="site-search-loading__body"><p id="site-search-loading-status" role="status" data-site-search-status>Loading documentation…</p><button type="button" data-site-search-retry hidden>Try again</button><p><a href="/raveldex/guide/">Browse the guides</a></p></div></dialog></div></body></html>

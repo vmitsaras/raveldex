@@ -3606,7 +3606,7 @@ Implement the owner-authorized shared inline/modal append behavior, superseding 
 
 **Establish site-only styling and contextual navigation**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/119)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/119)
 
 **Dependencies:** [RX-9801](IMPLEMENTATION_TASKS.md#rx-9801)
 
@@ -3634,7 +3634,9 @@ After an explicit implementation instruction and verification of the delivered N
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9901.md](docs/evidence/RX-9901.md)
+- [docs/evidence/RX-9901/boundaries.json](docs/evidence/RX-9901/boundaries.json)
+- [docs/evidence/RX-9901/candidate-package/candidate-report.json](docs/evidence/RX-9901/candidate-package/candidate-report.json)
 
 
 ## RX-9902
