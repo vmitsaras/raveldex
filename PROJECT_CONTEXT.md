@@ -62,6 +62,28 @@ now explains the complete demo-site preview, verified in [RX-9502](docs/evidence
 N15 is complete locally; GitHub synchronization and source delivery were not part
 of these maintenance tasks.
 
+The owner-selected [header search modal](docs/planning/SITE_SEARCH_MODAL.md) is
+implemented and verified locally in [RX-9601](docs/evidence/RX-9601.md). The shared
+header uses the real installed modal component with a scoped site theme, lazy
+five-guide search, explicit recovery and no-JS browsing. The Workbench remains
+at `/demo/`. N16 is complete locally; visual owner review and source delivery
+remain separate from automated checks.
+
+The owner-selected [consumer demo presentation](docs/planning/DEMO_PRESENTATION.md)
+is implemented and verified locally in [RX-9701](docs/evidence/RX-9701.md). All
+five galleries prioritize live examples and all eight complete starter projects
+carry coherent self-contained themes. N17 is complete locally; independent
+review repairs and final package/site evidence are recorded separately from
+visual owner acceptance and source delivery.
+
+The owner-selected [continuous Load more correction](docs/planning/LOAD_MORE_APPEND.md)
+is implemented and verified locally in [RX-9801](docs/evidence/RX-9801.md).
+Inline/modal now append finite native batches through all matches without
+replacement windows; legacy cap/message inputs remain accepted and deprecated.
+The 31-match header and 1,005-record shared regressions, complete project selection
+and final package/site checks passed within the recorded environment. N18 is
+complete locally; source delivery and publication remain separate.
+
 All 80 pre-N12 tasks remain accepted. Their source-specific results and actual
 N10/N11 closeout are retained in [evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md).
 Those historical artifacts do not qualify changed 1.0.0 package inputs by themselves.

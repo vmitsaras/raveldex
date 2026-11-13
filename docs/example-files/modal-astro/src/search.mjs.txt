@@ -64,9 +64,11 @@ export function createDocumentationSearch({ root, trigger, loadingDialog, status
         const pageSections = await candidate.loadSections({ signal: attempt.abort.signal });
         if (!live() || !loadingDialog.open) return;
         mounted = mountRaveldexModal({ root, trigger, engine: candidate.engine, documents, pageSections,
-          pageSize: 3, maxRenderedResults: 6, resetOnClose, shortcut: false,
+          pageSize: 3, resetOnClose, shortcut: false,
           facets: [{ field: 'category', label: 'Topic' }],
-          messages: { label: 'Search the workshop guide', placeholder: 'Try bobbin or booking', clear: 'Clear search and filters' },
+          messages: { label: 'Search the workshop guide', placeholder: 'Try bobbin or booking', clear: 'Clear search and filters',
+            idle: 'Search the workshop guide, then choose a topic to narrow the results.',
+            facetSummary: 'Topics: {total} · Not shown: {omitted}' },
           modalMessages: { title: 'Search the workshop guide' } });
         if (!live() || !loadingDialog.open) return;
         hideLoading(attempt.opener);

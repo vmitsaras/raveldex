@@ -192,18 +192,22 @@ test('new-batch projection is serial and atomic; replacement/clear/destroy suppr
   observe('serialized projection / atomic append / cancellation / borrowed owner', { noReprojection: true, actions: ['replace', 'clear', 'destroy'] });
 });
 
-test('default 100-parent cap bounds 300 previews with lossless continuation and one context call in flight', async () => {
+test('section previews append past the legacy cap without reprojecting earlier pages', async () => {
   await open({ pageSize: 10, maxRenderedResults: 100 }, { capacity: 105 }); await search();
   for (let index = 0; index < 9; index++) await click('load-more');
   assert.equal(await part('result').count(), 100); assert.equal(await part('section').count(), 300);
   assert.equal(await page.evaluate(() => window.sectionHarness.state.calls.filter(c => c.evidence).length), 100);
   assert.equal(await page.evaluate(() => window.sectionHarness.state.maxRunning), 1);
+  assert.equal(await part('load-more').getAttribute('aria-disabled'), 'false');
+  const first = await ids(); await click('load-more'); const all = await ids();
+  assert.equal(await part('section').count(), 315); assert.equal(new Set(all).size, 105);
+  assert.deepEqual(all.slice(0, 100), first);
+  assert.deepEqual(all, Array.from({ length: 105 }, (_, i) => 'page:' + String(i).padStart(4, '0')));
+  assert.equal(await page.evaluate(() => window.sectionHarness.state.calls.filter(c => c.evidence).length), 105);
+  assert.equal(await page.evaluate(() => window.sectionHarness.state.maxRunning), 1);
   assert.equal(await part('load-more').getAttribute('aria-disabled'), 'true');
-  const first = await ids(); await click('next'); const last = await ids();
-  assert.equal(await part('section').count(), 15); assert.equal(new Set([...first, ...last]).size, 105);
-  assert.deepEqual([...first, ...last], Array.from({ length: 105 }, (_, i) => 'page:' + String(i).padStart(4, '0')));
   assert.match(await part('status').textContent(), /105/);
-  observe('actual default DOM parent/preview bounds and continuation', { parentCap: 100, previewCount: 300, allPages: 105, simultaneousContextRequests: 1 });
+  observe('section append beyond legacy cap', { legacyCap: 100, previewCount: 315, allPages: 105, simultaneousContextRequests: 1 });
 });
 
 for (const base of ['/', '/help/']) test(`${base}: encoded anchors navigate to real destination IDs`, async () => {

@@ -17,7 +17,7 @@ const output = join(work, 'output');
 await rm(work, { recursive: true, force: true }); // Only this script's scratch tree.
 await mkdir(join(source, 'src/pages'), { recursive: true });
 await copyFile(join(root, 'site/Layout.astro'), join(source, 'src/Layout.astro'));
-for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'StarterSetup.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs']) {
+for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'StarterSetup.astro', 'ExampleShowcase.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs']) {
   await copyFile(join(root, 'site', name), join(source, 'src', name));
 }
 await writeFile(join(source, 'package.json'), '{"private":true,"type":"module"}\n');
@@ -69,6 +69,7 @@ process.stderr.write(built.stderr);
 await mkdir(join(output, 'site-assets'), { recursive: true });
 await copyFile(join(root, 'site/styles.css'), join(output, 'site-assets/styles.css'));
 await copyFile(join(root, 'site/workbench.css'), join(output, 'site-assets/workbench.css'));
+await copyFile(join(root, 'site/search.css'), join(output, 'site-assets/search.css'));
 await copyFile(join(root, 'LICENSE'), join(output, 'site-assets/LICENSE.txt'));
 await mkdir(join(output, 'example-files'), { recursive: true });
 for (const name of RECIPES) await copyFile(join(root, `docs/api/examples/${name}.mjs`), join(output, `example-files/${name}.mjs`));
@@ -85,6 +86,20 @@ const destinations = Object.fromEntries(pilot.corpus.sources.map(item => {
   assert.ok(routes.has(item.path));
   return [item.path, routes.get(item.path)];
 }));
+// The shared header is a real installed consumer of the public modal export.
+const searchOutput = join(output, 'site-assets/search');
+await mkdir(searchOutput, { recursive: true });
+const searchContent = JSON.stringify({ schema: pilot.corpus.schema, records: pilot.corpus.records,
+  sections: pilot.corpus.sections.map(({ id, title, category, overview, sourcePath, anchor }) =>
+    ({ id, title, category, overview, url: destinations[sourcePath] + '#' + anchor })) });
+await writeFile(join(searchOutput, 'content.json'), searchContent);
+await copyFile(join(root, 'site/search.mjs'), join(pilot.directory, 'site-search-entry.mjs'));
+await copyFile(join(root, 'site/search-controller.mjs'), join(pilot.directory, 'search-controller.mjs'));
+await bundle({ absWorkingDir: pilot.directory, entryPoints: ['site-search-entry.mjs'], outfile: join(searchOutput, 'main.mjs'),
+  bundle: true, platform: 'browser', format: 'esm', target: 'es2022', minify: true,
+  treeShaking: true, legalComments: 'none', charset: 'ascii', sourcemap: false,
+  define: { SITE_SEARCH_SHA256: JSON.stringify(sha256(searchContent)) } });
+for (const name of ['modal.css', 'inline.css']) await copyFile(join(pilot.installed, 'dist/addons/ui', name), join(searchOutput, name));
 await writeFile(entryPath, entry.replace(original, `url: ${JSON.stringify(destinations)}[section.sourcePath] + '#' + section.anchor`));
 await bundle({ absWorkingDir: pilot.directory, entryPoints: ['pilot-entry.mjs'], outfile: 'main.mjs',
   bundle: true, platform: 'browser', format: 'esm', target: 'es2022', minify: true,
@@ -101,7 +116,7 @@ const staged = { files: (await walk(output)).map(path => ({ path })) };
 const links = await auditLinks(output, staged);
 const inputPaths = new Set([...PAGES.map(x => x[0]), ...RECIPES.map(name => `docs/api/examples/${name}.mjs`),
   themeSource,
-  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/StarterSetup.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
+  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/StarterSetup.astro', 'site/ExampleShowcase.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'site/search.mjs', 'site/search-controller.mjs', 'site/search.css', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
   'scripts/lib/ui-consumer.mjs', 'scripts/lib/packed-consumer.mjs', 'examples/core-docs/corpus.mjs',
   'scripts/lib/inline-starters.mjs', 'site/starters.mjs', ...starters.sourceInputs,
   'README.md', 'package.json', 'package-lock.json', 'LICENSE',

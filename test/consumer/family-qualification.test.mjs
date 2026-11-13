@@ -40,17 +40,25 @@ async function completePages(page, surface, expected, text) {
     }
     return;
   }
-  let start = 0, count = 2;
+  let count = Math.min(2, expected.length);
   for (let guard = 0; guard < 10; guard++) {
-    assert.deepEqual(await ids(page, surface), expected.slice(start, start + count));
-    if (start + count >= expected.length) return;
+    assert.deepEqual(await ids(page, surface), expected.slice(0, count));
+    assert.equal(await root(page).locator('[data-raveldex-inline-next], [data-raveldex-inline-previous]').count(), 0);
+    if (count >= expected.length) {
+      assert.equal(await root(page).locator('[data-raveldex-inline-load-more]').getAttribute('aria-disabled'), 'true');
+      return;
+    }
     const more = root(page).getByRole('button', { name: 'Load more', exact: true });
-    if (await more.count() && !await disabled(more)) { count = Math.min(4, count + 2, expected.length - start); await more.click(); }
-    else { start += count; count = Math.min(2, expected.length - start); await root(page).getByRole('button', { name: 'Next results', exact: true }).click(); }
-    await page.waitForFunction(({ start, count }) => {
-      const nodes = [...document.querySelectorAll('[data-raveldex-inline-result]')];
-      return document.querySelector('.raveldex-inline')?.dataset.state === 'results' && nodes.length === count && nodes[0]?.getAttribute('data-raveldex-inline-result') === ['a', 'b', 'c', 'd', 'e', 'f', 'g'][start];
-    }, { start, count });
+    assert.equal(await disabled(more), false);
+    const offset = count, added = Math.min(2, expected.length - count);
+    await more.click(); count += added;
+    await page.waitForFunction(count => {
+      const f = window.family, nodes = [...f.root.querySelectorAll('[data-raveldex-inline-result]')];
+      return f.root.querySelector('.raveldex-inline')?.dataset.state === 'results' && !f.root.querySelector('[aria-busy="true"]') && nodes.length === count;
+    }, count);
+    await ready(page, surface, text, expected.length);
+    const call = await page.evaluate(() => window.family.state.calls.at(-1));
+    assert.equal(call.offset, offset); assert.equal(call.limit, added);
   }
   assert.fail('Every native result must remain reachable');
 }
@@ -196,7 +204,7 @@ for (const surface of surfaces) {
       await Promise.all([page.waitForURL(href), root(page).getByRole('link', { name: 'See all results', exact: true }).click()]); await page.waitForFunction(() => window.familyReady);
       assert.equal(await page.locator('#query-echo').textContent(), text); await ready(page, 'inline', text, 7); await completePages(page, 'inline', expectedShared, text);
     } else await completePages(page, surface, expectedShared, text);
-    record(surface, 'native query meaning and complete results', { prefixMinimumCodePoints: 2, earlierWordsRemainExact: true, accentSensitive: true, nativeTotal: 7, allIDs: expectedShared, display: surface === 'dropdown' ? 'Bounded two-link window, complete actual inline destination with raw query' : 'Complete native page/window sequence', snippetsAndSections: 'Not configured in this body-only fixture' });
+    record(surface, 'native query meaning and complete results', { prefixMinimumCodePoints: 2, earlierWordsRemainExact: true, accentSensitive: true, nativeTotal: 7, allIDs: expectedShared, display: surface === 'dropdown' ? 'Bounded two-link window, complete accumulating inline destination with raw query' : directory(surface) ? 'Complete native page sequence' : 'All native results accumulated through Load more', snippetsAndSections: 'Not configured in this body-only fixture' });
   }));
 
   test(`${surface}: provisional composition, no-results and Clear preserve each surface contract`, async () => withSurface(surface, async page => {

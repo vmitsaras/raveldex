@@ -232,78 +232,91 @@ for (const host of ['direct', 'worker']) for (const strategy of ['source', 'offs
   });
 }
 
-test('a nonmultiple DOM cap has lossless Next/Previous windows and exact range summaries', async () => {
-  await open({ maxRenderedResults: 7 }); await search(); await activate('Load more');
-  const first = await ids(); assert.deepEqual(first, expected.slice(0, 7));
+test('Load more appends every match beyond the legacy cap without replacing earlier results', async () => {
+  await open({ pageSize: 5, maxRenderedResults: 20, facets: [], snippetFields: [] }, { count: 31, features: 'core' });
+  const all = Array.from({ length: 31 }, (_, i) => `item-${String(i).padStart(2, '0')}`);
+  await search();
+  await page.evaluate(() => { window.firstAppendedResult = document.querySelector('[data-raveldex-inline-result]'); });
+  for (const count of [10, 15, 20, 25, 30, 31]) {
+    assert.equal(await part('load-more').getAttribute('aria-disabled'), 'false', `Load more before ${count}`);
+    await activate('Load more');
+    assert.deepEqual(await ids(), all.slice(0, count));
+    assert.equal(await part('page-summary').textContent(), `Showing 1–${count} of 31.`);
+    assert.equal(await page.evaluate(() => window.firstAppendedResult === document.querySelector('[data-raveldex-inline-result]') && window.firstAppendedResult.isConnected), true);
+    assert.equal(await part('load-more').evaluate(node => node === document.activeElement), true);
+    assert.equal(await root().getByRole('button', { name: 'Next results', exact: true }).count(), 0);
+    assert.equal(await root().getByRole('button', { name: 'Previous results', exact: true }).count(), 0);
+  }
   assert.equal(await part('load-more').getAttribute('aria-disabled'), 'true');
-  assert.match(await part('page-summary').textContent(), /1.*7.*12/);
-  await activate('Next results'); const second = await ids(); assert.deepEqual(second, expected.slice(7));
-  assert.equal(await part('next').evaluate(node => node === document.activeElement), true);
-  assert.equal(await part('next').getAttribute('aria-disabled'), 'true');
-  assert.deepEqual([...first, ...second], expected); assert.equal(new Set([...first, ...second]).size, 12);
-  await activate('Previous results'); assert.deepEqual(await ids(), expected.slice(0, 5));
-  assert.equal(await part('previous').evaluate(node => node === document.activeElement), true);
-  observation('bounded DOM / lossless continuation', { cap: 7, first, second, exactTotal: 12, maximumObservedItems: 7 });
+  const before = await page.evaluate(() => window.controlsHarness.calls().length);
+  await part('load-more').press('Enter'); await settled();
+  assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), before);
+  assert.deepEqual(await ids(), all);
+  const calls = await page.evaluate(() => window.controlsHarness.calls().filter(call => !call.evidence));
+  assert.deepEqual(calls.map(call => [call.options.offset, call.options.limit]), [[0, 5], [5, 5], [10, 5], [15, 5], [20, 5], [25, 5], [30, 1]]);
+  observation('continuous 31-match append beyond legacy 20-hit cap', { total: 31, retainedFirstNode: true, batches: calls.map(call => [call.options.offset, call.options.limit]) });
 });
 
-test('batch/window boundaries expose useful actions and a native keyboard route to every appended result', async () => {
+test('a legacy nonmultiple cap does not truncate native batches or hide Load more', async () => {
+  await open({ maxRenderedResults: 7 }); await search();
+  await activate('Load more'); assert.deepEqual(await ids(), expected.slice(0, 10));
+  assert.equal(await part('load-more').getAttribute('aria-disabled'), 'false');
+  assert.equal(await part('page-summary').textContent(), 'Showing 1–10 of 12.');
+  await activate('Load more'); assert.deepEqual(await ids(), expected);
+  assert.equal(await part('load-more').getAttribute('aria-disabled'), 'true');
+  assert.equal(await part('page-summary').textContent(), 'Showing 1–12 of 12.');
+  observation('legacy nonmultiple cap / complete native batches', { legacyCap: 7, batchSize: 5, displayed: 12 });
+});
+
+test('batch and terminal boundaries expose a native keyboard route to every appended result', async () => {
   const cases = [];
-  for (const total of [0, 1, 4, 5, 6, 7, 8, 12]) {
+  for (const total of [0, 1, 4, 5, 6, 7, 8, 10, 11, 12]) {
     await open({ pageSize: 5, maxRenderedResults: 7, facets: [], snippetFields: [] }, { count: total, features: 'core' });
     await search();
     const all = Array.from({ length: total }, (_, i) => `item-${String(i).padStart(2, '0')}`);
     assert.deepEqual(await ids(), all.slice(0, 5));
-    assert.equal(await part('previous').isVisible(), false); assert.equal(await part('next').isVisible(), false);
+    assert.equal(await part('previous').count(), 0); assert.equal(await part('next').count(), 0);
     assert.equal(await part('new-results').isVisible(), false);
     assert.equal(await part('load-more').isVisible(), total > 5);
     assert.equal(await part('page-summary').textContent(), total ? `Showing 1–${Math.min(5, total)} of ${total}.` : '');
     if (total <= 5) {
       assert.equal(await part('navigation').isVisible(), false);
-      cases.push({ total, ranges: total ? [[1, total]] : [], actions: [] }); continue;
+      cases.push({ total, displayed: total, actions: [] }); continue;
     }
     const more = part('load-more'); await more.focus(); await more.press('Enter'); await settled();
-    const first = all.slice(0, 7); assert.deepEqual(await ids(), first);
-    assert.match(await part('page-summary').textContent(), new RegExp(`^Showing 1–${first.length} of ${total}\\.`));
+    const first = all.slice(0, 10); assert.deepEqual(await ids(), first);
+    assert.equal(await part('page-summary').textContent(), `Showing 1–${first.length} of ${total}.`);
     assert.equal(await more.evaluate(node => node === document.activeElement && !node.hidden), true);
-    assert.equal(await more.getAttribute('aria-disabled'), 'true');
+    assert.equal(await more.getAttribute('aria-disabled'), String(total <= 10));
     assert.equal(await part('status').textContent(), `Results added: ${first.length - 5}. Showing 1–${first.length} of ${total}.`);
     const beforeJump = await page.evaluate(() => window.controlsHarness.calls().length);
     await more.press('Tab');
     assert.equal(await part('new-results').evaluate(node => node === document.activeElement), true);
-    assert.equal(await more.isVisible(), false);
+    assert.equal(await more.isVisible(), total > 10);
     await part('new-results').press('Enter');
     assert.equal(await part('result-title').nth(5).evaluate(node => node === document.activeElement), true);
     assert.equal(await page.evaluate(() => window.controlsHarness.calls().length), beforeJump);
-    assert.equal(await part('next').isVisible(), total > 7);
-    if (total > 7) {
-      await activate('Next results'); assert.deepEqual(await ids(), all.slice(7));
-      assert.equal(await part('page-summary').textContent(), `Showing 8–${total} of ${total}.`);
-      assert.equal(await part('next').evaluate(node => node === document.activeElement && !node.hidden), true);
-      assert.equal(await part('new-results').isVisible(), false);
-      assert.deepEqual([...first, ...await ids()], all);
-      await activate('Previous results'); assert.deepEqual(await ids(), all.slice(0, 5));
-      assert.equal(await part('previous').evaluate(node => node === document.activeElement && !node.hidden), true);
-      assert.equal(await part('page-summary').textContent(), `Showing 1–5 of ${total}.`);
+    if (total > 10) {
+      await activate('Load more'); assert.deepEqual(await ids(), all);
+      assert.equal(await part('page-summary').textContent(), `Showing 1–${total} of ${total}.`);
+      assert.equal(await more.getAttribute('aria-disabled'), 'true');
     }
-    cases.push({ total, firstWindow: first, nextWindow: total > 7 ? all.slice(7) : [], jumpIndex: 5 });
+    cases.push({ total, firstAppend: first, jumpIndex: 5 });
   }
-  observation('independent batch/window/terminal boundaries and keyboard append discovery', { pageSize: 5, cap: 7, cases });
+  observation('batch/terminal boundaries and keyboard append discovery', { pageSize: 5, legacyCap: 7, cases });
 });
 
-test('three bounded windows retain exact ranges and complete native order', async () => {
+test('query changes reset fully accumulated results and restart native offsets', async () => {
   await open({ pageSize: 5, maxRenderedResults: 7, facets: [], snippetFields: [] }, { count: 15, features: 'core' });
   const all = Array.from({ length: 15 }, (_, i) => `item-${String(i).padStart(2, '0')}`);
-  await search(); await activate('Load more'); const first = await ids(); assert.deepEqual(first, all.slice(0, 7));
-  await activate('Next results'); assert.deepEqual(await ids(), all.slice(7, 12));
-  assert.equal(await part('page-summary').textContent(), 'Showing 8–12 of 15.');
-  await activate('Load more'); const second = await ids(); assert.deepEqual(second, all.slice(7, 14));
-  assert.match(await part('page-summary').textContent(), /^Showing 8–14 of 15\./);
-  await activate('Next results'); const last = await ids(); assert.deepEqual(last, all.slice(14));
-  assert.equal(await part('page-summary').textContent(), 'Showing 15–15 of 15.');
-  assert.deepEqual([...first, ...second, ...last], all);
-  await activate('Previous results'); assert.deepEqual(await ids(), all.slice(7, 12));
-  await activate('Previous results'); assert.deepEqual(await ids(), all.slice(0, 5));
-  observation('three native windows / exact complete membership', { total: 15, windows: [first, second, last], previousBatches: [all.slice(7, 12), all.slice(0, 5)] });
+  await search(); await activate('Load more'); await activate('Load more');
+  assert.deepEqual(await ids(), all);
+  await search('source'); assert.deepEqual(await ids(), all.slice(0, 5));
+  assert.equal(await part('page-summary').textContent(), 'Showing 1–5 of 15.');
+  assert.equal(await part('new-results').isVisible(), false);
+  const calls = await page.evaluate(() => window.controlsHarness.calls().filter(call => !call.evidence));
+  assert.deepEqual(calls.map(call => call.options.offset), [0, 5, 10, 0]);
+  observation('query reset after full accumulation', { total: 15, nativeOffsets: [0, 5, 10, 0] });
 });
 
 test('append status and discovery labels use captured optional translations', async () => {
@@ -402,17 +415,23 @@ test('native facet projection exposes omitted buckets without changing exact res
   observation('native 100-bucket projection remains explicit', { total: 101, distinct: 101, omitted: 1, renderedBuckets: 100 });
 });
 
-test('configured 1000-result DOM ceiling has explicit continuation and exact 1005-record coverage', async () => {
-  await open({ pageSize: 100, maxRenderedResults: 1000, facets: [], snippetFields: [] }, { corpus: 'capacity', features: 'core' });
+test('Load more passes the former default and maximum caps with exact 1005-record coverage', async () => {
   const all = Array.from({ length: 1005 }, (_, i) => `large-${String(i).padStart(4, '0')}`);
-  await search();
-  let maximumObservedItems = (await ids()).length;
-  for (let i = 0; i < 9; i++) { await activate('Load more'); maximumObservedItems = Math.max(maximumObservedItems, (await ids()).length); }
-  const first = await ids(); assert.deepEqual(first, all.slice(0, 1000));
-  assert.equal(maximumObservedItems, 1000); assert.equal(await part('load-more').getAttribute('aria-disabled'), 'true');
-  await activate('Next results'); const final = await ids(); assert.deepEqual(final, all.slice(1000));
-  assert.deepEqual([...first, ...final], all); assert.equal(await part('next').getAttribute('aria-disabled'), 'true');
-  observation('actual configured maximum rendered window', { records: 1005, configuredCap: 1000, maximumObservedItems, continuationItems: final.length,
+  for (const legacyOptions of [{}, { maxRenderedResults: 1000 }]) {
+    await open({ pageSize: 100, facets: [], snippetFields: [], ...legacyOptions }, { corpus: 'capacity', features: 'core' });
+    await search();
+    await page.evaluate(() => { window.capacityFirstResult = document.querySelector('[data-raveldex-inline-result]'); });
+    for (const count of [200, 300, 400, 500, 600, 700, 800, 900, 1000, 1005]) {
+      assert.equal(await part('load-more').getAttribute('aria-disabled'), 'false');
+      await activate('Load more'); assert.deepEqual(await ids(), all.slice(0, count));
+      assert.equal(await page.evaluate(() => window.capacityFirstResult === document.querySelector('[data-raveldex-inline-result]')), true);
+    }
+    assert.equal(await part('load-more').getAttribute('aria-disabled'), 'true');
+    assert.equal(await part('page-summary').textContent(), 'Showing 1–1005 of 1005.');
+    const calls = await page.evaluate(() => window.controlsHarness.calls().filter(call => !call.evidence));
+    assert.deepEqual(calls.map(call => [call.options.offset, call.options.limit]), [[0, 100], [100, 100], [200, 100], [300, 100], [400, 100], [500, 100], [600, 100], [700, 100], [800, 100], [900, 100], [1000, 5]]);
+  }
+  observation('append beyond former default and maximum caps', { records: 1005, retainedRows: 1005, batchSize: 100,
     claim: 'Observed DOM item counts, not a universal latency/capacity or memory guarantee.' });
 });
 

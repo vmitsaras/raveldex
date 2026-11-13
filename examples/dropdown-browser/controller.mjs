@@ -53,7 +53,7 @@ export function createHeaderSearch({ root, status, retry, load, fullResultsURL,
         if (!current(ticket)) return;
         if (fullRoot) {
           mountedInline = mountRaveldexInline({ root: fullRoot, engine: candidate.engine, documents: candidate.documents,
-            mode: configuration.mode, pageSize: configuration.pageSize, maxRenderedResults: configuration.maxRenderedResults,
+            mode: configuration.mode, pageSize: configuration.pageSize,
             messages: { label: 'Search all walking guides', placeholder: 'Try weather or walking guide',
               idle: 'Enter a word to search all walking guides.' } });
           if (!current(ticket)) return;
@@ -118,7 +118,7 @@ export function createHeaderSearch({ root, status, retry, load, fullResultsURL,
       if (!modal) {
         const mounted = mountRaveldexModal({ root: modalRoot, trigger: modalTrigger,
           engine: owner.engine, documents: owner.documents, mode: configuration.mode,
-          pageSize: configuration.pageSize, maxRenderedResults: configuration.maxRenderedResults,
+          pageSize: configuration.pageSize,
           shortcut: false, keyboardHints: false,
           messages: { label: 'Search walking guides in a dialog', placeholder: 'Try weather or walking guide' },
           modalMessages: { title: 'Search all walking guides' } });

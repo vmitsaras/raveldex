@@ -8,7 +8,7 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 77/77 done · 0 in progress · 0 dependency-ready.
+**Release progress:** 80/80 done · 0 in progress · 0 dependency-ready.
 
 **Planner state:** `complete`.
 
@@ -46,6 +46,9 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N13 — Make the demo welcoming and easy to try** | `RX-9301`–`RX-9304` | 4/4 | Help a new visitor understand, try and adopt Raveldex using natural language and readable results. |
 | **N14 — Polish search interfaces and recovery states** | `RX-9401`–`RX-9404` | 4/4 | Refine the five consumer surfaces and visible recovery journeys while preserving native behavior and the existing identity. |
 | **N15 — Local demo server reliability** | `RX-9501`–`RX-9502` | 2/2 | Make local demos straightforward to preview and handle occupied ports without changes to search behavior. |
+| **N16 — Demonstrate documentation search in the header** | `RX-9601`–`RX-9601` | 1/1 | Use Raveldex itself for clear, modern modal search throughout the demo documentation site. |
+| **N17 — Modernize all five consumer demos** | `RX-9701`–`RX-9701` | 1/1 | Make live inline, modal, dropdown, directory and cards examples clear, modern and easy to adopt. |
+| **N18 — Continuous Load more** | `RX-9801`–`RX-9801` | 1/1 | Replace the inline/modal window switch with ordered user-triggered append through all exact matches. |
 
 ## Task index
 
@@ -146,6 +149,9 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-9404](IMPLEMENTATION_TASKS.md#rx-9404) — Review optional-feature and adapter recovery journeys | `done` | `RX-9205` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9404%22) |
 | [RX-9501](IMPLEMENTATION_TASKS.md#rx-9501) — Choose a free port when the UI pilot port is occupied | `done` | `RX-9404` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9501%22) |
 | [RX-9502](IMPLEMENTATION_TASKS.md#rx-9502) — Explain how to preview all demo pages from the README | `done` | `RX-9501` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9502%22) |
+| [RX-9601](IMPLEMENTATION_TASKS.md#rx-9601) — Integrate and refine the shared header search modal | `done` | `RX-9502` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9601%22) |
+| [RX-9701](IMPLEMENTATION_TASKS.md#rx-9701) — Modernize galleries and standalone consumer demos | `done` | `RX-9601` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9701%22) |
+| [RX-9801](IMPLEMENTATION_TASKS.md#rx-9801) — Keep Load more appending through all matches | `done` | `RX-9701` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9801%22) |
 
 ## Milestone exit conditions
 
@@ -250,6 +256,19 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 ### N15 — Local demo server reliability
 
 - The selected local-server bug is reproduced, fixed and verified with actual socket collisions.
+
+### N16 — Demonstrate documentation search in the header
+
+- The shared header opens the real installed modal with native documentation results and verified loading, keyboard, focus and responsive behavior.
+
+### N17 — Modernize all five consumer demos
+
+- All five galleries and eight standalone projects share coherent presentation, verified native behavior and accurate complete downloads.
+
+### N18 — Continuous Load more
+
+- Load more appends all matches without replacement windows, preserving query consistency, focus and finite admission/batch bounds.
+- Shared, modal, installed starter and real header regressions agree with current documentation and final candidate/site verification.
 
 ## Execution and authorization
 

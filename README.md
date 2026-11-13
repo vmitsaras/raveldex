@@ -30,6 +30,8 @@ npm run pages:preview -- --port 0
 
 Open the HTTP URL printed in the terminal, such as `http://127.0.0.1:54321/raveldex/`. Port `0` selects a free port automatically; use the port actually printed. Keep the terminal running while you browse, and press Ctrl+C to stop the preview.
 
+Use **Search docs** in the header to try Raveldex's documentation-search modal on any site page. It searches the usage guides as you type, opens links to the matching sections and supports Ctrl/Command+K outside text fields. Search data loads on first open; you can close loading or retry a failed load. Without JavaScript, the header links to the guides instead.
+
 The homepage links all five consumer demos. Each demo page includes a live preview, a link to open it as a full page and complete starter projects. Append these paths to the printed `/raveldex/` address:
 
 | Demo | Path |

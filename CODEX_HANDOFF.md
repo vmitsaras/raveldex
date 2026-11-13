@@ -14,6 +14,26 @@ The subsequent owner-selected port-collision fix is complete locally:
 [README demo-preview instructions](docs/evidence/RX-9502.md). Both tasks are
 complete locally; their GitHub tracking and commit/push were not performed.
 
+The next owner-selected change, [N16 header modal search](docs/planning/SITE_SEARCH_MODAL.md),
+is implemented and verified locally. [RX-9601](docs/evidence/RX-9601.md) records
+the final site/project/package checks and rendered previews. Source delivery,
+GitHub synchronization and visual owner acceptance remain separate.
+
+The subsequent owner-selected modernization of all five consumer galleries and
+eight starter projects is complete locally: [N17 plan](docs/planning/DEMO_PRESENTATION.md),
+[RX-9701 verification and independent review](docs/evidence/RX-9701.md). Existing
+header-modal work is preserved. Visual owner review and source delivery remain
+separate from the passing project/site/package checks.
+
+The owner-selected [N18 continuous Load more correction](docs/planning/LOAD_MORE_APPEND.md)
+is implemented and verified locally in [RX-9801](docs/evidence/RX-9801.md).
+Shared inline/modal search appends through every match without switching to
+replacement pages; regressions cross the legacy 20/100/1,000 limits. Complete
+project, final installed candidate and generated-site checks passed with the
+recorded optional comparator skips and manual limits. No required selected task
+remains; reconcile with `npm run handoff:next`. Source delivery/publication remain
+separate and the earlier header/demo work is preserved.
+
 Run commands appropriate to the changed risk and record actual outcomes in the
 task's evidence. The [release runbook](docs/release/PREPARATION.md) packs/verifies
 all three libraries and the [site guide](site/README.md) owns generated Pages.

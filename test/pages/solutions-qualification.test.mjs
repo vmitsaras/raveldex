@@ -41,6 +41,21 @@ async function readyInline(frame, total, shown, added = 0) {
   const status = added ? `Results added: ${added}. Showing 1–${shown} of ${total}.` : `${total} results. Showing ${shown}.`;
   await frame.locator('.raveldex-inline__status').filter({ hasText: status }).waitFor();
 }
+async function completeInline(frame, expected) {
+  let visible = await ids(frame, 'data-raveldex-inline-result');
+  assert.deepEqual(visible, expected.slice(0, 3));
+  while (visible.length < expected.length) {
+    const previous = visible, added = Math.min(3, expected.length - previous.length);
+    await frame.getByRole('button', { name: 'Load more', exact: true }).click();
+    await readyInline(frame, expected.length, previous.length + added, added);
+    visible = await ids(frame, 'data-raveldex-inline-result');
+    assert.deepEqual(visible, expected.slice(0, previous.length + added));
+    assert.deepEqual(visible.slice(0, previous.length), previous);
+  }
+  assert.equal(await frame.locator('[data-raveldex-inline-next], [data-raveldex-inline-previous]').count(), 0);
+  assert.equal(await frame.locator('[data-raveldex-inline-page-summary]').textContent(), `Showing 1–${expected.length} of ${expected.length}.`);
+  return visible;
+}
 async function nativeSubmitFocus(input, root) {
   await input.focus(); await input.press('Tab');
   const focus = await root.evaluate(node => {
@@ -123,10 +138,7 @@ test('five-solution chooser, complete starter inventories and published CSS pres
           assert.equal(styles.modal.maxWidth, '40rem'); assert.equal(styles.modal.radius, '12px'); assert.ok(styles.modal.width <= 640);
         }
         focus = await nativeSubmitFocus(input, frame.locator('.raveldex-inline'));
-        await preview.scrollIntoViewIfNeeded(); await frame.getByRole('button', { name: 'Load more', exact: true }).click(); await readyInline(frame, expected.length, 6, 3);
-        const six = await ids(frame, attribute);
-        if (expected.length > 6) { await frame.getByRole('button', { name: 'Next results', exact: true }).click(); await readyInline(frame, expected.length, 1); complete = [...six, ...await ids(frame, attribute)]; }
-        else complete = six;
+        await preview.scrollIntoViewIfNeeded(); complete = await completeInline(frame, expected);
       } else if (entry.family === 'dropdown') {
         styles = await frame.locator('.raveldex-dropdown').evaluate(root => ({ accent: getComputedStyle(root).getPropertyValue('--raveldex-dropdown-accent').trim(), gap: getComputedStyle(root).getPropertyValue('--raveldex-dropdown-gap').trim(), radius: getComputedStyle(root.querySelector('input')).borderRadius }));
         assert.deepEqual(styles, { accent: '#145b45', gap: '.75rem', radius: '12px' });
@@ -137,8 +149,7 @@ test('five-solution chooser, complete starter inventories and published CSS pres
         await Promise.all([inner.waitForURL(destination.href), full.press('Enter')]); await readyInline(frame, expected.length, 3);
         assert.equal(await frame.locator('[data-raveldex-inline-input]').inputValue(), entry.query);
         assert.deepEqual(await ids(frame, 'data-raveldex-inline-result'), before);
-        await frame.getByRole('button', { name: 'Load more', exact: true }).click(); await readyInline(frame, expected.length, 6, 3); const six = await ids(frame, 'data-raveldex-inline-result');
-        await frame.getByRole('button', { name: 'Next results', exact: true }).click(); await readyInline(frame, expected.length, 1); complete = [...six, ...await ids(frame, 'data-raveldex-inline-result')];
+        complete = await completeInline(frame, expected);
       } else {
         styles = await frame.locator('.raveldex-directory').evaluate(root => ({ accent: getComputedStyle(root.querySelector('a')).color, radius: getComputedStyle(root).borderRadius, gap: getComputedStyle(root).getPropertyValue('--raveldex-directory-gap').trim() }));
         assert.equal(styles.accent, 'rgb(20, 91, 69)'); assert.equal(styles.radius, '12px');
