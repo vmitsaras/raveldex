@@ -3602,6 +3602,289 @@ Implement the owner-authorized shared inline/modal append behavior, superseding 
 - [docs/evidence/RX-9801.md](docs/evidence/RX-9801.md)
 
 
+## RX-9901
+
+**Establish site-only styling and contextual navigation**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/119)
+
+**Dependencies:** [RX-9801](IMPLEMENTATION_TASKS.md#rx-9801)
+
+Extend the existing Astro shell with explicit contextual navigation and a minimal site-only Tailwind styling contract, reusing the accepted local header/demo work and preserving safe static publication.
+
+**Expected affected areas**
+
+`site/Layout.astro`, `site/navigation.mjs`, `site/styles.css`, `site/pages.mjs`, `scripts/build-pages.mjs`, `package.json`, `package-lock.json`, `test/pages/docs-shell.test.mjs`, `test/pages/site-search.test.mjs`, `test/tooling/pages.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9901-AC01: The actual local N16–N18 baseline and representative route/anchor/render inventories are recorded before implementation; no accepted consumer behavior is recreated or reopened.
+- RX-9901-AC02: Explicit route metadata gives nested pages truthful current-page/category navigation, breadcrumbs and appropriate sidebars/outline; the four top-level destinations and secondary Workbench link work with and without JavaScript.
+- RX-9901-AC03: Exact compatible Tailwind/Vite versions are reviewed as site development tooling only, Preflight is omitted, unrelated versions remain unchanged and package/consumer style boundaries are verified.
+- RX-9901-AC04: Keyboard disclosure, skip/focus behavior, 320px and long-label layouts, real installed header-search behavior and source/publication hashes pass the focused site checks with actual evidence.
+
+**Verification**
+
+- Follow RX-9901 steps and file/interface ownership in docs/planning/DOCS_DEMO_EXPERIENCE.md; add docs-shell.test.mjs assertions for nested-route semantics, no-JS navigation and installed-modal/iframe style boundaries.
+- After a valid package build and site generation, run node --test test/tooling/pages.test.mjs test/pages/docs-shell.test.mjs test/pages/site-search.test.mjs and npm run pages:check; record actual identities, renders, limitations and review in docs/evidence/RX-9901.md.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9902
+
+**Lead the examples overview with five visual choices**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/120)
+
+**Dependencies:** [RX-9901](IMPLEMENTATION_TASKS.md#rx-9901)
+
+Make /examples/ a visual choose-first gallery using inert real-interface previews, accurate platform availability and a compact semantic comparison while preserving existing source links and anchors.
+
+**Expected affected areas**
+
+`site/Examples.astro`, `site/SolutionCard.astro`, `site/SolutionChooser.astro`, `site/styles.css`, `site/pages.mjs`, `site/starters.mjs`, `examples/README.md`, `scripts/build-pages.mjs`, `test/pages/docs-gallery.test.mjs`, `test/pages/solutions-qualification.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9902-AC01: Exactly five named interface choices link to their real detail pages; STARTERS supplies the exact eight project mappings, with no Astro variant invented for dropdown or rich results.
+- RX-9902-AC02: Each choice has a truthful inert thumbnail/preview, concise use case, platform labels and demo action; the gallery initializes no decorative search engines or external thumbnail services.
+- RX-9902-AC03: The four existing overview section anchors or explicit compatible aliases, all legitimate destinations, core-only/API examples and secondary Workbench entry remain reachable.
+- RX-9902-AC04: No-JS navigation, keyboard order, narrow layouts, compact semantic comparison, exact downloads and strict build/source/public inventory checks pass with actual evidence.
+
+**Verification**
+
+- Add docs-gallery.test.mjs assertions named gallery exposes five truthful interface choices and gallery preserves comparison anchors without initializing demo engines; inspect the request inventory separately from the existing lazy header search.
+- After generation, run node --test test/pages/docs-gallery.test.mjs test/pages/solutions-qualification.test.mjs test/tooling/pages.test.mjs and npm run pages:check; record results, captures and review in docs/evidence/RX-9902.md.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9903
+
+**Complete the Inline preview and installation pilot**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/121)
+
+**Dependencies:** [RX-9901](IMPLEMENTATION_TASKS.md#rx-9901)
+
+Adapt the existing Inline showcase into the complete try/install/data/style pilot, with exact read-only Preview/Code views, one real Browser/Astro setup choice and accessible copy/fallback behavior.
+
+**Expected affected areas**
+
+`site/ExampleShowcase.astro`, `site/DemoPreview.astro`, `site/CodePanel.astro`, `site/example-controls.mjs`, `site/StarterSetup.astro`, `site/Inline.astro`, `site/starters.mjs`, `scripts/build-pages.mjs`, `test/pages/docs-example-flow.test.mjs`, `test/pages/inline-starter.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9903-AC01: The Inline page leads with its actual installed Browser preview, then installation, data/style steps and requirements/help; existing copy-inline, inline-theme and inline-support anchors remain valid.
+- RX-9903-AC02: Preview/Code and installation choices preserve one iframe, query and engine owner; choosing Astro instructions never relabels the Browser preview or sends an unnecessary rebuild/reload.
+- RX-9903-AC03: Read-only code and clipboard text match the same allowlisted starter bytes as downloads, with escaped HTML/Astro source, filename context and truthful clipboard-denied/unavailable recovery.
+- RX-9903-AC04: Only real Browser/Astro instructions are offered, including exact commands/data/style files, essential prerequisites and local unpublished-package guidance; all setup and source content remain usable without JavaScript.
+- RX-9903-AC05: Keyboard tabs/disclosures/focus, announcements/cleanup, real seven-page Browser and six-page Astro fixtures, CSS recipe invariance, source/archive equality and narrow/full-page flows pass with recorded limitations.
+
+**Verification**
+
+- Follow the RX-9903 named behavioral assertions in docs/planning/DOCS_DEMO_EXPERIENCE.md and extend the actual installed preview tests; do not replace native result expectations with screenshot or markup-only checks.
+- After generation run node --test --test-concurrency=1 test/pages/docs-example-flow.test.mjs test/pages/inline-starter.test.mjs test/pages/solutions-qualification.test.mjs test/pages/site-search.test.mjs and npm run pages:check; run copied-project consumer checks if setup/source semantics change. Record actual evidence in docs/evidence/RX-9903.md.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9904
+
+**Review and approve the rendered pilot before rollout**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/122)
+
+**Dependencies:** [RX-9902](IMPLEMENTATION_TASKS.md#rx-9902), [RX-9903](IMPLEMENTATION_TASKS.md#rx-9903)
+
+Obtain and record an explicit owner decision on one working gallery/Inline pilot before applying its design to additional interfaces or long-form content.
+
+**Expected affected areas**
+
+`docs/evidence/RX-9904.md`, `docs/planning/roadmap.json`, `docs/planning/DOCS_DEMO_EXPERIENCE.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9904-AC01: One identified build is available through a working local URL with desktop/narrow captures and a complete choose/try/full-page/code/install/data/style/API walkthrough.
+- RX-9904-AC02: The owner explicitly approves the actual candidate or requests bounded revisions; the response, date and source/build identities are preserved without treating silence or automation as approval.
+- RX-9904-AC03: Requested revisions are repaired in the owning pilot slice and relevant checks are rerun before approval; RX-9905 through RX-9907 remain unstarted until the gate passes.
+- RX-9904-AC04: Visual owner approval is kept separate from browser/AT qualification and publication; no unchanged runtime rebuild, code expansion or benchmark campaign is required for this decision-only slice.
+
+**Verification**
+
+- Present the actual working pilot with a concise hierarchy/navigation/density/install decision checklist, including the owning tasks' code-copy failure and no-JS evidence.
+- Record the real owner response and scoped disposition in docs/evidence/RX-9904.md; leave the task unfinished with a precise pending decision while approval is unavailable.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9905
+
+**Apply the reviewed template to modal and dropdown**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/123)
+
+**Dependencies:** [RX-9904](IMPLEMENTATION_TASKS.md#rx-9904)
+
+Roll the approved detail/setup template onto modal and dropdown pages while retaining their distinct native dialog/Popover and full-page navigation behavior.
+
+**Expected affected areas**
+
+`site/Modal.astro`, `site/Dropdown.astro`, `site/ExampleShowcase.astro`, `site/StarterSetup.astro`, `test/pages/docs-example-flow.test.mjs`, `test/pages/modal-starter.test.mjs`, `test/pages/dropdown-starter.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9905-AC01: Modal offers its two actual platforms and dropdown Browser only; shared component/content ordering preserves existing anchors, accurate requirements and exact source/archive links.
+- RX-9905-AC02: Embedded modal framing is explained and the Browser preview label stays independent of setup choice; actual full-page modal first-open/cancel/retry/reopen/close/focus/section-link behavior remains intact.
+- RX-9905-AC03: Full-page dropdown keyboard selection, Enter/Escape/Tab and See all results retain the raw query and fallback navigation; optional expanded modal remains default-off and shares the existing owner.
+- RX-9905-AC04: No-JS destinations, copy failures, scoped CSS recipes and narrow layouts pass without new consumer-runtime or standalone-theme changes; actual environment/results and limitations are recorded.
+
+**Verification**
+
+- Add embedded modal explains its frame boundary and dropdown full-page handoff preserves raw query assertions in the shared docs flow tests; exercise whole-window behavior outside iframes.
+- After generation run node --test --test-concurrency=1 test/pages/docs-example-flow.test.mjs test/pages/modal-starter.test.mjs test/pages/dropdown-starter.test.mjs test/pages/site-search.test.mjs and npm run pages:check. Record results/review in docs/evidence/RX-9905.md.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9906
+
+**Apply the reviewed template to directory and rich results**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/124)
+
+**Dependencies:** [RX-9904](IMPLEMENTATION_TASKS.md#rx-9904)
+
+Roll the approved detail/setup template onto directory and rich-results pages while preserving exact native filter/URL state, metadata and image opt-in contracts.
+
+**Expected affected areas**
+
+`site/Directory.astro`, `site/Cards.astro`, `site/ExampleShowcase.astro`, `site/StarterSetup.astro`, `test/pages/docs-example-flow.test.mjs`, `test/pages/directory-starter.test.mjs`, `test/pages/cards-starter.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9906-AC01: Directory retains Browser/Astro choices and rich results Browser only, with accurate public records, provider registrations, stylesheet/data paths, exact downloads and existing anchors.
+- RX-9906-AC02: Real checkbox/chip/Clear all/page and Back/Forward flows retain native counts and explicit URL state; mobile filter disclosure and restored focus remain usable.
+- RX-9906-AC03: List/card/grid, density and image changes preserve the same result state/link Nodes; images remain off initially and source/platform/view switches introduce no image requests or ARIA grid behavior.
+- RX-9906-AC04: Failed-image text/link recovery, long metadata, public CSS overrides, no-JS destinations, narrow layouts and source/archive equality pass with actual scoped evidence and no consumer contract changes.
+
+**Verification**
+
+- Add directory setup and views preserve native filters and URL state and rich result views preserve links and image opt-in assertions; use the actual full-page existing starters.
+- After generation run node --test --test-concurrency=1 test/pages/docs-example-flow.test.mjs test/pages/directory-starter.test.mjs test/pages/cards-starter.test.mjs test/pages/solutions-qualification.test.mjs and npm run pages:check; run copied-project checks if installation/source behavior changes. Record evidence/review in docs/evidence/RX-9906.md.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9907
+
+**Give guides and API reference distinct reading layouts**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/125)
+
+**Dependencies:** [RX-9904](IMPLEMENTATION_TASKS.md#rx-9904)
+
+Apply contextual reading/reference layouts and improve representative Getting started, consumer hosts and core API content without losing contracts, anchors, executable examples or indexed source meaning.
+
+**Expected affected areas**
+
+`site/Layout.astro`, `site/navigation.mjs`, `site/CodePanel.astro`, `site/styles.css`, `site/guides.md`, `docs/api/GETTING_STARTED.md`, `docs/api/HOSTS.md`, `docs/api/CORE.md`, `scripts/build-pages.mjs`, `test/pages/docs-reading.test.mjs`, `test/tooling/usage-corpus.test.mjs`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9907-AC01: Getting started and consumer hosts use short task steps and real example links; representative core API sections retain purpose, signatures, defaults/constraints, returns, failures and related recipes, with remaining content complete.
+- RX-9907-AC02: Contextual sidebars and optional outlines target real preserved headings; old anchors or explicit aliases, public-record restrictions and consequential prerequisites remain reachable beside the relevant action.
+- RX-9907-AC03: Named highlighted code and copy match underlying snippets; clipboard failures and no-JS reading recover clearly, tables remain semantic and local code/table scrolling does not force whole-page overflow.
+- RX-9907-AC04: Executable fenced examples, package-doc self-containment, existing five-guide corpus/offset contracts and search behavior are preserved; affected inventory/link/example checks and keyboard/narrow/zoom checks have actual scoped evidence.
+
+**Verification**
+
+- Add docs-reading.test.mjs assertions for real outline targets, preserved API signatures/defaults/failures/examples, safe exact copying and bounded long code/tables; inventory anchors before content edits.
+- After generation run node --test test/pages/docs-reading.test.mjs test/tooling/pages.test.mjs test/pages/release-guidance.test.mjs test/tooling/usage-corpus.test.mjs, npm run docs:check and npm run pages:check. Use existing candidate documentation checks if packaged Markdown changes; record actual evidence/review in docs/evidence/RX-9907.md.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
+## RX-9908
+
+**Qualify the integrated site and synchronize the handoff**
+
+**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/126)
+
+**Dependencies:** [RX-9905](IMPLEMENTATION_TASKS.md#rx-9905), [RX-9906](IMPLEMENTATION_TASKS.md#rx-9906), [RX-9907](IMPLEMENTATION_TASKS.md#rx-9907)
+
+Verify and review the changed documentation/demo site on one identified candidate, repair essential defects and synchronize evidence, generated planning and native issue tracking without expanding historical qualification or publication scope.
+
+**Expected affected areas**
+
+`site/`, `scripts/build-pages.mjs`, `scripts/check-pages.mjs`, `test/pages/`, `test/tooling/pages.test.mjs`, `docs/evidence/RX-9908.md`, `site/README.md`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`, `docs/planning/GITHUB_TRACKING.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9908-AC01: The combined diff and all five presentations/eight starters retain approved pilot behavior, exact source/download inventories, route/anchor mappings, iframe state and private/public publication boundaries.
+- RX-9908-AC02: One complete stable-input candidate check and final generated-site suite pass with current source/build/dependency identities; relevant package documentation/installed behavior checks and all actual skips/failures are recorded.
+- RX-9908-AC03: The changed navigation, gallery, preview/code/setup, copy denial, no-JS, keyboard/focus, real contrast, forced colors/reduced motion and error/empty flows are checked at representative wide/narrow/short viewports; actual zoom/AT results retain exact environment scope.
+- RX-9908-AC04: Known essential usability/operability defects are fixed; unavailable manual checks are honestly Not run/Blocked with explicit scope/disposition rather than inferred Pass, and no exhaustive N9/N10 campaign is imposed.
+- RX-9908-AC05: Only evidenced tasks are marked done, then generated docs, project/site handoff and targeted GitHub milestone/native-parent read-back agree; publication, source commit/push, releases/tags and historical backfill remain separately authorized actions.
+
+**Verification**
+
+- Run npm run check once for the stable executable candidate, then reuse its successful build with npm run pages:generate, npm run pages:check and node --test --test-concurrency=1 test/pages/*.test.mjs; extend only affected copied-project/package-doc checks, not unrelated benchmark/recovery qualification.
+- Inspect 320/768/1280/1440 CSS px and a short viewport, actual 200%/400% zoom when available, keyboard/iframe entry-exit and final-token contrast. Record exact browser/OS/AT, command results, review repairs and manual limitations in docs/evidence/RX-9908.md.
+- Run npm run docs:generate, npm run handoff:check, npm run docs:check and targeted tracking read-back; retain the explicit RX-9904 owner response and verify exact native parent/milestone membership without changing unrelated issues.
+
+**Recorded evidence**
+
+None recorded. A future report destination in the verification steps is not evidence.
+
+
 ## Optional enhancement tasks
 
 The `RX-A*` task cards in [Optional features](docs/planning/OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.

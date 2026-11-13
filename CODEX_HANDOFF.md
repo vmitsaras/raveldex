@@ -34,6 +34,14 @@ recorded optional comparator skips and manual limits. No required selected task
 remains; reconcile with `npm run handoff:next`. Source delivery/publication remain
 separate and the earlier header/demo work is preserved.
 
+The owner-requested [N19 documentation/demo plan](docs/planning/DOCS_DEMO_EXPERIENCE.md)
+defines eight planned tasks and a rendered-pilot review gate. This request covers
+planning and GitHub registration only: no product code or dependencies changed.
+N19 is queued but unstarted. When the owner explicitly selects implementation,
+RX-9901 is the first dependency-ready slice; begin from the accepted
+local N16–N18 baseline rather than the older remote site. Do not infer source
+commit/push or publication authorization from the new milestone.
+
 Run commands appropriate to the changed risk and record actual outcomes in the
 task's evidence. The [release runbook](docs/release/PREPARATION.md) packs/verifies
 all three libraries and the [site guide](site/README.md) owns generated Pages.
