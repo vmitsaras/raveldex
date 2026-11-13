@@ -1,7 +1,7 @@
 ---
 const { frontmatter = {}, wide = false } = Astro.props;
 const base = '/raveldex/';
-const links = [['Guides', 'guide/'], ['API', 'reference/'], ['Examples', 'examples/'], ['Demo', 'demo/']];
+const links = [['Guides', 'guide/'], ['API', 'reference/'], ['Examples', 'examples/']];
 const current = Astro.url.pathname;
 ---
 <!doctype html>
@@ -12,17 +12,38 @@ const current = Astro.url.pathname;
     <title>{frontmatter.title} · Raveldex</title>
     <meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application." />
     <link rel="stylesheet" href={base + 'site-assets/styles.css'} />
+    <link rel="stylesheet" href={base + 'site-assets/search/modal.css'} />
+    <link rel="stylesheet" href={base + 'site-assets/search.css'} />
+    <script is:inline type="module" src={base + 'site-assets/search/main.mjs'}></script>
     <slot name="head" />
   </head>
   <body class="site">
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="site-header__brand" href={base} aria-label="Raveldex home">Raveldex</a>
-      <nav class="site-header__nav" aria-label="Main navigation"><ul>{links.map(([label, path]) => <li><a href={base + path} aria-current={current === base + path ? 'page' : undefined}>{label}</a></li>)}</ul></nav>
+      <div class="site-header__actions">
+        <a class="site-header__search-fallback" href={base + 'guide/'} data-site-search-fallback>Browse guides</a>
+        <button class="site-header__search" type="button" hidden data-site-search-trigger aria-label="Search documentation" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75" /><path d="m16 16 4.5 4.5" /></svg>
+          <span>Search docs</span><kbd aria-hidden="true"><span data-site-search-modifier>Ctrl</span> K</kbd>
+        </button>
+        <nav class="site-header__nav" aria-label="Main navigation"><ul>{links.map(([label, path]) => <li><a href={base + path} aria-current={current === base + path ? 'page' : undefined}>{label}</a></li>)}</ul></nav>
+      </div>
     </header>
     <main id="main" class:list={['site-main', { 'site-main--article': !wide }]} tabindex="-1"><slot /></main>
     <footer class="site-footer">
       <p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href={base + 'site-assets/LICENSE.txt'}>MIT license</a></p>
     </footer>
+    <div class="site-search">
+      <div data-site-search-root></div>
+      <dialog class="site-search-loading" data-site-search-loading aria-labelledby="site-search-loading-title" aria-describedby="site-search-loading-status">
+        <header class="site-search-loading__header"><h2 id="site-search-loading-title">Search documentation</h2><button type="button" data-site-search-cancel>Close</button></header>
+        <div class="site-search-loading__body">
+          <p id="site-search-loading-status" role="status" data-site-search-status>Loading documentation…</p>
+          <button type="button" data-site-search-retry hidden>Try again</button>
+          <p><a href={base + 'guide/'}>Browse the guides</a></p>
+        </div>
+      </dialog>
+    </div>
   </body>
 </html>

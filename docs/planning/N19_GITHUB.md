@@ -9,7 +9,7 @@ The owner explicitly requested a new milestone and native sub-issues based on th
 
 | Task | Native sub-issue | Deliverable | Prerequisites |
 | --- | --- | --- | --- |
-| RX-9901 | [#119](https://github.com/vmitsaras/raveldex/issues/119) | Site-only styling and contextual shell | Accepted main RX-9404 plus separate N16–N18 baseline entry gate |
+| RX-9901 | [#119](https://github.com/vmitsaras/raveldex/issues/119) | Site-only styling and contextual shell | Delivered RX-9801; explicit N19 implementation instruction still required |
 | RX-9902 | [#120](https://github.com/vmitsaras/raveldex/issues/120) | Five-choice visual gallery | RX-9901 |
 | RX-9903 | [#121](https://github.com/vmitsaras/raveldex/issues/121) | Inline preview/code and installation pilot | RX-9901 |
 | RX-9904 | [#122](https://github.com/vmitsaras/raveldex/issues/122) | Explicit rendered-pilot owner approval | RX-9902, RX-9903 |
@@ -41,3 +41,7 @@ No product source, tests, scripts, dependencies, lockfile or public generated si
 ## Planning-only PR delivery
 
 The owner subsequently authorized a PR and merge after passing CI, with no N19 implementation. The source branch also contains N15–N18 implementation, so delivery is isolated on `codex/n19-planning` from `main` instead of merging that branch. The main-compatible N19 graph depends on accepted RX-9404; the separate accepted N16–N18 source remains an explicit implementation-entry gate. No earlier milestone/task definitions or completion evidence are imported. The original registration records retain their actual local baseline identities and counts. [Delivery verification](../evidence/N19_DELIVERY_20261113.md) records this reconciliation.
+
+## Subsequent N15–N18 implementation delivery
+
+The owner separately authorized delivery of the earlier implementation with CI-gated merge. That combined source restores RX-9801 as the canonical RX-9901 prerequisite and satisfies the previously separate baseline-availability gate. All eight N19 tasks remain planned; no N19 code, dependency installation or pilot approval is included. The original planning-only PR and registration evidence retain their dated scope. See the [N15–N18 delivery record](../evidence/N15_N18_DELIVERY_20261113.md).

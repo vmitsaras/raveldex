@@ -71,9 +71,11 @@ export function createDocumentationSearch({ root, trigger, loadingDialog, status
         // Native close restores the real pre-loading opener. Respect focus
         // callbacks that abandon the session before mounting its replacement.
         mounted = mountRaveldexModal({ root, trigger, engine: candidate.engine, documents: candidate.documents,
-          pageSections: candidate.pageSections, pageSize: 3, maxRenderedResults: 6,
+          pageSections: candidate.pageSections, pageSize: 3,
           facets: [{ field: 'category', label: 'Topic' }], resetOnClose,
-          messages: { label: 'Search the workshop guide', placeholder: 'Try bobbin or workshop' },
+          messages: { label: 'Search the workshop guide', placeholder: 'Try bobbin or workshop',
+            idle: 'Search the workshop guide, then choose a topic to narrow the results.',
+            facetSummary: 'Topics: {total} · Not shown: {omitted}' },
           modalMessages: { title: 'Search workshop documentation' } });
         if (ended || !wanted || current !== attempt || !connected()) return;
         owner = candidate; candidate = undefined; ui = mounted; mounted = undefined;

@@ -1,18 +1,15 @@
 ---
-import Layout from './Layout.astro';
-import SolutionChooser from './SolutionChooser.astro';
+import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base='/raveldex/';
 ---
-<Layout frontmatter={{title:'Rich resource result cards'}}>
-  <h1>Rich resource result cards</h1>
-  <SolutionChooser current="cards" />
-  <p>Present the same native directory results as a list, cards or a responsive grid. Add explicit excerpts, category/breadcrumb/date text, named fields and optional images. Copy the complete browser project, replace its public data and adjust a few CSS properties.</p>
+<ExampleShowcase family="cards" title="Rich resource result cards" description="Give a resource library readable excerpts and metadata, with list, card and grid layouts." previewTitle="Rich resource results starter preview" previewHeight={920}>
+  <Fragment slot="preview-hint">Search <code>walking resource</code>. Try List, Cards and Grid, adjust the density or choose <strong>Show images</strong>.</Fragment>
+  <details><summary>How this example works</summary>
+<p>Present the same native directory results as a list, cards or a responsive grid. Add explicit excerpts, category/breadcrumb/date text, named fields and optional images. Copy the complete browser project, replace its public data and adjust a few CSS properties.</p>
   <p>Choose the <a href={base+'examples/directory/'}>plain browser or Astro directory</a> when titles and filters are enough. This rich browser project adds a separate display projection; no static artifact extension or framework is required.</p>
-  <h2 id="try-cards">Try the installed project</h2>
-  <p>Search <code>walking resource</code>: seven pages match. Choose Grid and Compact, then move through all three native result pages. Query, selected filters, exact total, current page and deterministic order stay the same. Check Show images to request illustrations for the current page. Images start off; the final resource deliberately demonstrates a missing image.</p>
-  <p><a href={base+'examples/cards-preview/'}>Open the complete rich-results preview</a></p>
-  <iframe src={base+'examples/cards-preview/'} title="Rich resource results starter preview" loading="lazy" height="900" style="width:100%;border:1px solid currentColor;border-radius:.5rem;"></iframe>
+<p>Search <code>walking resource</code>: seven pages match. Choose Grid and Compact, then move through all three native result pages. Query, selected filters, exact total, current page and deterministic order stay the same. Check Show images to request illustrations for the current page. Images start off; the final resource deliberately demonstrates a missing image.</p>
+  </details>
   <h2 id="copy-cards">Copy the complete browser project</h2>
   <p>Uses the directory controls. Images start off and load only when visitors choose to show them.</p>
   <StarterSetup family="cards" />
@@ -33,4 +30,4 @@ const base='/raveldex/';
   <h2 id="cards-adoption">Before adopting your own data and theme</h2>
   <p>Build at root and a subdirectory with edited title/body/metadata/CSS. Check all native pages, filters/chips, Back/Forward, List/Cards/Grid and both density choices, images off/on/broken, keyboard reading order, no-JavaScript browsing, long/RTL text, narrow/dark/forced-colors and reduced motion. This is a semantic list styled with CSS, without interactive ARIA grid behavior, commerce actions or displayed-page sorting.</p>
   <p>Scripted browser, selected axe and emulated layout checks remain distinct from human AT speech, physical input, real browser zoom, Safari/device support and deployment. Follow the <a href={base+'reference/hosts/#starter-adoption-and-local-checks'}>starter adoption checks</a> in your target application.</p>
-</Layout>
+</ExampleShowcase>

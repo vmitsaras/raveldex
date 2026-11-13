@@ -34,13 +34,21 @@ test('inline gallery serves exact complete source downloads and the installed st
     await input.fill('walking guide'); await input.press('Enter');
     await frame.locator('[data-raveldex-inline-result]').first().waitFor();
     assert.equal(await frame.locator('[data-raveldex-inline-result]').count(), 3);
+    const resultIDs = () => frame.locator('[data-raveldex-inline-result]').evaluateAll(nodes => nodes.map(node => node.dataset.raveldexInlineResult));
+    const first = await resultIDs();
     await frame.getByRole('button', { name: 'Load more', exact: true }).click();
     await frame.locator('[data-raveldex-inline-result]').nth(5).waitFor();
     assert.equal(await frame.locator('[data-raveldex-inline-result]').count(), 6);
+    const six = await resultIDs(); assert.deepEqual(six.slice(0, 3), first);
+    await frame.getByRole('button', { name: 'Load more', exact: true }).click();
+    await frame.locator('[data-raveldex-inline-result]').nth(6).waitFor();
+    const complete = await resultIDs(); assert.equal(complete.length, 7); assert.equal(new Set(complete).size, 7); assert.deepEqual(complete.slice(0, 6), six);
+    assert.equal(await frame.locator('[data-raveldex-inline-page-summary]').textContent(), 'Showing 1–7 of 7.');
+    assert.equal(await frame.locator('[data-raveldex-inline-next], [data-raveldex-inline-previous]').count(), 0);
     const destination = await frame.locator('[data-raveldex-inline-result] a').first().getAttribute('href');
     assert.ok(new URL(destination, url).pathname.startsWith('/raveldex/examples/inline-preview/guides/'));
     assert.equal((await fetch(destination)).status, 200);
-    observations.push({ name: 'real installed preview, exact paging and generated destination', visible: 6, destination });
+    observations.push({ name: 'real installed preview, complete accumulation and generated destination', visible: 7, completeIDs: complete, destination });
 
     const scratch = await mkdtemp(join(tmpdir(), 'raveldex-gallery-downloads-'));
     for (const starter of STARTERS.filter(item => item.family === 'inline')) {

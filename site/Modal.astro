@@ -1,20 +1,17 @@
 ---
-import Layout from './Layout.astro';
-import SolutionChooser from './SolutionChooser.astro';
+import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
-<Layout frontmatter={{ title: 'Documentation search modal starters' }}>
-  <h1>Documentation search modal starters</h1>
-  <SolutionChooser current="modal" />
-  <p>Open search from a button, find a matching page and jump to the heading that contains the match. Copy a complete browser or Astro project, replace its explicit page content and adjust the CSS.</p>
+<ExampleShowcase family="modal" title="Documentation search modal starters" description="Open focused documentation search from a button and jump straight to the matching heading." previewTitle="Documentation modal starter preview" previewHeight={680}>
+  <Fragment slot="preview-hint">Select <strong>Search documentation</strong>, search <code>bobbin</code> and follow the threading preview to its heading.</Fragment>
+  <details><summary>How this example works</summary>
+<p>Open search from a button, find a matching page and jump to the heading that contains the match. Copy a complete browser or Astro project, replace its explicit page content and adjust the CSS.</p>
   <p>Use the modal for search behind a button. Choose <a href={base + 'examples/inline/'}>inline search</a> when the field and results should stay in the page.</p>
   <p>For a compact field in an ordinary header, choose the <a href={base + 'examples/dropdown/'}>dropdown header starter</a>, with a real inline full-results destination.</p>
   <p>Each project uses the native documentation modal and one indexed record per page. Optional source evidence and section maps provide anchored previews while native page totals, order and paging stay authoritative. These projects load a complete local index on first open; they do not crawl HTML or load index shards.</p>
-  <h2 id="try-modal">Try the browser starter</h2>
-  <p>Select <strong>Search documentation</strong>, search <code>bobbin</code> and follow the threading preview to its actual heading. Try <code>workshop</code> to page through all six guides. Close during loading to cancel the attempt. Ordinary browse links work before loading and without JavaScript.</p>
-  <p><a href={base + 'examples/modal-preview/'}>Open the full modal preview</a></p>
-  <iframe src={base + 'examples/modal-preview/'} title="Documentation modal starter preview" loading="lazy" height="720" style="width: 100%; max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem); border: 1px solid currentColor; border-radius: .5rem;"></iframe>
+<p>Select <strong>Search documentation</strong>, search <code>bobbin</code> and follow the threading preview to its actual heading. Try <code>workshop</code> to page through all six guides. Close during loading to cancel the attempt. Ordinary browse links work before loading and without JavaScript.</p>
+  </details>
   <h2 id="copy-modal">Choose a complete starter</h2>
   <p>Needs native dialog, Intl.Segmenter and Web Crypto over HTTPS or localhost. Search loads when first opened.</p>
   <details><summary>Data and browser requirements</summary>
@@ -44,4 +41,4 @@ const base = '/raveldex/';
   <p>The wrappers own newly created search engines and destroy the borrowed UI before disposing them. To use an engine owned elsewhere, mount the modal directly and keep disposal with that existing owner. Query preservation, reset policy, retry and close/destroy behavior are described in both guides.</p>
   <h2 id="modal-support">Before using your own theme</h2>
   <p>Local automated Chrome checks cover installed examples, native dialog keyboard/focus behavior, scripted composition, first-open cancellation/retry, owner cleanup and emulated narrow/theme layouts. Human screen-reader speech, physical IME/touch/on-screen keyboards, actual browser zoom and other browser/device combinations need separate checks in your application. See <a href={base + 'reference/hosts/#starter-adoption-and-local-checks'}>starter adoption and local checks</a>.</p>
-</Layout>
+</ExampleShowcase>

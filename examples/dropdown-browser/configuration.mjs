@@ -3,7 +3,6 @@ export const configuration = Object.freeze({
   mode: 'prefix',
   maxResults: 3,
   pageSize: 3,
-  maxRenderedResults: 6,
   modalHandoff: false,
 });
 

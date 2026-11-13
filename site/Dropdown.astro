@@ -1,18 +1,15 @@
 ---
-import Layout from './Layout.astro';
-import SolutionChooser from './SolutionChooser.astro';
+import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
-<Layout frontmatter={{ title: 'Compact header search starter' }}>
-  <h1>Compact header search starter</h1>
-  <SolutionChooser current="dropdown" />
-  <p>Put a search field in your header, show a few matching pages and link to a complete results page. Copy the browser project, replace its public guide records and adjust the scoped CSS.</p>
+<ExampleShowcase family="dropdown" title="Compact header search starter" description="Find a page from a compact header field, with a complete results page when you need more." previewTitle="Dropdown header starter preview" previewHeight={680}>
+  <Fragment slot="preview-hint">Search <code>walking guide</code>. Use the arrow keys and Enter, or choose <strong>See all results</strong>.</Fragment>
+  <details><summary>How this example works</summary>
+<p>Put a search field in your header, show a few matching pages and link to a complete results page. Copy the browser project, replace its public guide records and adjust the scoped CSS.</p>
   <p>Choose this starter for a compact title-and-link search. Use <a href={base + 'examples/inline/'}>inline search</a> for results that stay in the page, or the <a href={base + 'examples/modal/'}>documentation modal</a> for search opened from a button with anchored section previews.</p>
-  <h2 id="try-dropdown">Try the installed header starter</h2>
-  <p>Search <code>walking guide</code>: seven pages match and the header shows up to three. Use the arrow keys to select a result and Enter to follow its actual link, or choose <strong>See all results</strong> to open the inline results page. Load more and Next results reach all seven pages. Escape dismisses the popup; Tab leaves it normally.</p>
-  <p><a href={base + 'examples/dropdown-preview/'}>Open the full header preview</a></p>
-  <iframe src={base + 'examples/dropdown-preview/'} title="Dropdown header starter preview" loading="lazy" height="720" style="width: 100%; border: 1px solid currentColor; border-radius: .5rem;"></iframe>
+<p>Search <code>walking guide</code>: seven pages match and the header shows up to three. Use the arrow keys to select a result and Enter to follow its actual link, or choose <strong>See all results</strong> to open the inline results page. Load more appends the remaining pages while keeping earlier results displayed. Escape dismisses the popup; Tab leaves it normally.</p>
+  </details>
   <h2 id="copy-dropdown">Copy the complete project</h2>
   <p>The quick popup needs native Popover. Otherwise, use the header form to open the working full results page.</p>
   <details><summary>Data and browser requirements</summary>
@@ -40,4 +37,4 @@ const base = '/raveldex/';
   <p>Keep the complete results route and browse links usable before loading, after a loading failure and without JavaScript. Rebuild and deploy the pages, content and assets together when changing the base or records.</p>
   <h2 id="dropdown-support">Before using your own theme</h2>
   <p>Installed-consumer checks and the acceptance record describe the tested browser, lifecycle and emulated layout scope. Human screen-reader speech, physical IME/touch/on-screen keyboards, actual browser zoom and other browser/device combinations need separate checks in your application. See <a href={base + 'reference/hosts/#starter-adoption-and-local-checks'}>starter adoption and local checks</a>. Playwright WebKit observations do not establish Safari support.</p>
-</Layout>
+</ExampleShowcase>

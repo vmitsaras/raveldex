@@ -21,10 +21,11 @@ export function createInlineSearch({ root, status, retry, load }) {
         candidate = await load(abort.signal);
         if (ended) return;
         mounted = mountRaveldexInline({ root, engine: candidate.engine, documents: candidate.documents,
-          pageSize: 3, maxRenderedResults: 6,
+          pageSize: 3,
           facets: [{ field: 'category', label: 'Type of guide' }], snippetFields: ['body'],
           messages: { label: 'Search walking guides', placeholder: 'Try weather or map',
-            idle: 'Enter a word, then choose a type of guide to narrow the matches.' } });
+            idle: 'Enter a word, then choose a type of guide to narrow the matches.',
+            facetSummary: 'Guide types: {total} · Not shown: {omitted}' } });
         // Replacing authored custom elements can synchronously destroy the view.
         if (ended) return;
         owner = candidate; candidate = undefined;

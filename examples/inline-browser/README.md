@@ -16,7 +16,7 @@ npm run preview -- --port 4176
 
 Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command.
 
-Open `http://127.0.0.1:4176/`. Search `walking guide`: there are seven matches, with three initially visible. Load more shows six; Next results reaches the seventh, and Previous results returns to the first window. Choose Guide to narrow to five pages. A search such as `weather` shows original text with highlighted matches; following its title opens the actual guide page. Ctrl+C stops this preview.
+Open `http://127.0.0.1:4176/`. Search `walking guide`: there are seven matches, with three initially visible. Load more shows six; selecting it again appends the seventh while keeping the earlier results displayed. Choose Guide to narrow to five pages. A search such as `weather` shows original text with highlighted matches; following its title opens the actual guide page. Ctrl+C stops this preview.
 
 ## Deploy under a subdirectory
 
@@ -49,7 +49,7 @@ The engine explicitly registers `createSourceProvider({ fields: ['body'] })`, `c
 }
 ```
 
-These affect links/controls, spacing and corner shape without editing generated markup. Check text/focus contrast after changing colors. `controller.mjs` sets the page size, visible-result cap and plain-text labels. The default final-word prefix mode lets `walk` find `walking`; earlier words remain exact.
+These affect links/controls, spacing and corner shape without editing generated markup. Check text/focus contrast after changing colors. `controller.mjs` sets the batch size and plain-text labels. Its legacy `maxRenderedResults` option is accepted but no longer limits appends; omit that option in new integrations. The default final-word prefix mode lets `walk` find `walking`; earlier words remain exact.
 
 ## Loading, retry and disposal
 

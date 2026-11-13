@@ -5,6 +5,7 @@ import { once } from 'node:events';
 import { mkdir } from 'node:fs/promises';
 import { chromium } from 'playwright-core';
 import { STARTERS, starterArchive, starterSource } from '../../site/starters.mjs';
+import { contrast } from '../helpers/contrast.mjs';
 
 let server, exited, browser, base;
 before(async () => {
@@ -26,6 +27,106 @@ after(async () => {
   await browser?.close();
   if (server?.exitCode === null && server.signalCode === null) server.kill('SIGTERM');
   await exited;
+});
+
+test('all five galleries lead with a visible live demo and direct full-page entry', async () => {
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  try {
+    for (const family of ['inline', 'modal', 'dropdown', 'directory', 'cards']) {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(new URL(`examples/${family}/`, base).href);
+      const frame = page.locator('.example-showcase__preview iframe');
+      assert.equal(await frame.count(), 1);
+      const bounds = await frame.boundingBox();
+      assert.ok(bounds.y < 630, `${family}: the live demo starts within the first desktop viewport`);
+      const open = page.getByRole('link', { name: 'Open full preview', exact: true });
+      assert.equal(await open.isVisible(), true);
+      const destination = new URL(await open.getAttribute('href'), base);
+      assert.equal(destination.pathname, `/raveldex/examples/${family}-preview/`);
+      assert.equal((await fetch(destination)).status, 200);
+      assert.equal(await page.locator('.solution-chooser a[aria-current="page"]').count(), 1);
+      assert.equal(await page.locator('details').filter({ has: page.getByText('How this example works', { exact: true }) }).getAttribute('open'), null);
+      await page.setViewportSize({ width: 320, height: 900 });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+      await open.focus();
+      assert.notEqual(await open.evaluate(node => getComputedStyle(node).outlineStyle), 'none');
+      if (process.env.RAVELDEX_GALLERY_SCREENSHOTS) {
+        await mkdir(process.env.RAVELDEX_GALLERY_SCREENSHOTS, { recursive: true });
+        await page.screenshot({ path: `${process.env.RAVELDEX_GALLERY_SCREENSHOTS}/${family}-gallery-320.png`, fullPage: true });
+        await page.setViewportSize({ width: 1280, height: 900 });
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.screenshot({ path: `${process.env.RAVELDEX_GALLERY_SCREENSHOTS}/${family}-gallery-desktop.png` });
+      }
+    }
+  } finally { await page.close(); }
+});
+
+test('demo themes keep search boundaries visible and public customization effective', async () => {
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  try {
+    for (const family of ['inline', 'modal', 'dropdown', 'directory', 'cards']) {
+      for (const colorScheme of ['light', 'dark']) {
+        await page.emulateMedia({ colorScheme });
+        await page.goto(new URL(`examples/${family}/`, base).href);
+        const frame = page.frameLocator('.example-showcase__preview iframe');
+        if (family === 'modal') await frame.getByRole('button', { name: 'Search documentation', exact: true }).click();
+        const input = frame.locator('.raveldex-inline__input, .raveldex-dropdown__input, .raveldex-directory__input').first();
+        await input.waitFor();
+        const colors = await input.evaluate(node => {
+          const own = getComputedStyle(node);
+          let parent = node.parentElement, outside;
+          while (parent) {
+            const value = getComputedStyle(parent).backgroundColor;
+            if (value.startsWith('rgb(') || value.endsWith(', 1)')) { outside = value; break; }
+            parent = parent.parentElement;
+          }
+          return { border: own.borderTopColor, inside: own.backgroundColor, outside: outside ?? 'rgb(255, 255, 255)', text: own.color, placeholder: getComputedStyle(node, '::placeholder').color };
+        });
+        assert.ok(contrast(colors.border, colors.inside) >= 3, `${family}/${colorScheme}: editable boundary against its fill`);
+        assert.ok(contrast(colors.border, colors.outside) >= 3, `${family}/${colorScheme}: editable boundary against its surroundings`);
+        assert.ok(contrast(colors.text, colors.inside) >= 4.5, `${family}/${colorScheme}: entered text contrast`);
+        assert.ok(contrast(colors.placeholder, colors.inside) >= 4.5, `${family}/${colorScheme}: placeholder contrast`);
+        if (colorScheme !== 'light') continue;
+        const prefix = family === 'dropdown' ? 'raveldex-dropdown' : ['directory', 'cards'].includes(family) ? 'raveldex-directory' : 'raveldex-inline';
+        const component = frame.locator(`.${prefix}`), form = frame.locator(`.${prefix}__form`);
+        const originalGap = await form.evaluate(node => parseFloat(getComputedStyle(node).columnGap));
+        await component.evaluate((node, prefix) => {
+          node.style.setProperty(`--${prefix}-gap`, '2rem');
+          node.style.setProperty(`--${prefix}-accent`, '#145b45');
+          node.style.setProperty(`--${prefix}-radius`, '1.25rem');
+          if (prefix === 'raveldex-directory') node.style.setProperty('--raveldex-directory-button-color', '#fff');
+        }, prefix);
+        assert.ok(await form.evaluate(node => parseFloat(getComputedStyle(node).columnGap)) > originalGap, `${family}: advertised gap affects spacing`);
+        assert.equal(await frame.locator(`.${prefix}__submit`).evaluate(node => getComputedStyle(node).backgroundColor), 'rgb(20, 91, 69)', `${family}: advertised accent changes the submit surface`);
+        assert.equal(await input.evaluate(node => getComputedStyle(node).borderTopLeftRadius), '20px', `${family}: advertised radius affects controls`);
+        if (prefix === 'raveldex-directory') assert.equal(await component.evaluate(node => getComputedStyle(node).borderTopLeftRadius), '20px', `${family}: advertised radius affects the outer directory`);
+      }
+    }
+  } finally { await page.close(); }
+});
+
+test('active dropdown hover retains the system color pair in forced colors', async () => {
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  try {
+    await page.emulateMedia({ forcedColors: 'active', colorScheme: 'light' });
+    await page.goto(new URL('examples/dropdown/', base).href);
+    const frame = page.frameLocator('.example-showcase__preview iframe');
+    const input = frame.locator('[data-raveldex-dropdown-input]');
+    await input.fill('walking guide'); await input.press('Enter');
+    await frame.locator('[data-raveldex-dropdown-result]').first().waitFor();
+    await input.press('ArrowDown');
+    const link = frame.locator('.raveldex-dropdown__cell.is-active .raveldex-dropdown__link');
+    await link.hover();
+    const colors = await link.evaluate(node => {
+      const probe = document.createElement('span'); probe.style.color = 'HighlightText'; probe.style.backgroundColor = 'Highlight';
+      document.body.append(probe);
+      const expected = getComputedStyle(probe), own = getComputedStyle(node), cell = getComputedStyle(node.closest('.raveldex-dropdown__cell'));
+      const value = { text: own.color, background: own.backgroundColor, cellBackground: cell.backgroundColor, expectedText: expected.color, expectedBackground: expected.backgroundColor };
+      probe.remove(); return value;
+    });
+    assert.equal(colors.text, colors.expectedText);
+    assert.ok(colors.background === colors.expectedBackground || colors.background === 'rgba(0, 0, 0, 0)' && colors.cellBackground === colors.expectedBackground);
+  } finally { await page.close(); }
 });
 
 test('home lets visitors try installed inline search and reach every interface without engine settings', async () => {

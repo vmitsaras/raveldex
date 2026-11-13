@@ -198,16 +198,19 @@ test('modal paging exposes exact ranges and explicit native keyboard discovery a
     assert.equal(await part('previous').isVisible(), false); assert.equal(await part('next').isVisible(), false);
     const more = part('load-more'), jump = part('new-results');
     await more.focus(); await more.press('Enter'); await settle();
-    assert.deepEqual(await ids(), ['page:a', 'page:b', 'page:c']);
+    assert.deepEqual(await ids(), ['page:a', 'page:b', 'page:c', 'page:d']);
     assert.equal(await more.evaluate(node => node === document.activeElement && !node.hidden), true);
-    assert.equal(await part('status').textContent(), 'Results added: 1. Showing 1–3 of 4.');
+    assert.equal(await more.getAttribute('aria-disabled'), 'true');
+    assert.equal(await part('status').textContent(), 'Results added: 2. Showing 1–4 of 4.');
+    assert.equal(await part('page-summary').textContent(), 'Showing 1–4 of 4.');
     const count = await calls(); await more.press('Tab');
     assert.equal(await jump.evaluate(node => node === document.activeElement), true);
     await jump.press('Space');
     assert.equal(await part('result-title').nth(2).evaluate(node => node === document.activeElement), true);
     assert.equal(await calls(), count); assert.equal(await page.evaluate(() => location.hash), '');
+    await close(); await show(); await settle();
     await page.evaluate(() => { window.modalHarness.state.holdMain = true; });
-    await part('next').focus(); await part('next').press('Enter');
+    await more.focus(); await more.press('Enter');
     await page.waitForFunction(() => window.modalHarness.state.pending.length === 1);
     await close(); assert.deepEqual(await ids(), []); assert.equal(await part('page-summary').textContent(), '');
     await show(); await settle(); await page.evaluate(() => window.modalHarness.release()); await page.waitForTimeout(40);
@@ -217,7 +220,7 @@ test('modal paging exposes exact ranges and explicit native keyboard discovery a
     assert.equal(await dialog().evaluate(node => node.scrollWidth <= node.clientWidth + 1), true);
     await close();
   }
-  observe('modal keyboard append discovery / narrow paging / stale closed window', { widths: [1100, 320], total: 4, cap: 3, explicitJump: 'page:c', implicitFocusMove: false });
+  observe('modal keyboard append discovery / append past legacy cap / stale closed append', { widths: [1100, 320], total: 4, legacyCap: 3, explicitJump: 'page:c', implicitFocusMove: false });
 });
 
 test('query/facet preservation, reset-on-close and map revision revalidation are explicit', async () => {

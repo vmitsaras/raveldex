@@ -1,17 +1,101 @@
-:root { font-family: system-ui, sans-serif; color: #24352e; background: #f5f8f5; line-height: 1.6; }
-body { margin: 0; }
-main { max-width: 52rem; margin: auto; padding: clamp(1rem, 4vw, 3rem); }
-a { color: #215d44; text-underline-offset: .18em; overflow-wrap: anywhere; }
-button { font: inherit; min-height: 2.75rem; padding: .6rem 1rem; cursor: pointer; }
-button:focus-visible, a:focus-visible { outline: 3px solid #874a00; outline-offset: 3px; }
-li { margin-block: .6rem; }
-#search-root { margin-block: 1.5rem; }
-/* These public properties are the complete small theme recipe. */
-.raveldex-inline {
-  --raveldex-inline-accent: #215d44;
-  --raveldex-inline-focus: #874a00;
-  --raveldex-inline-background: #fff;
-  --raveldex-inline-color: #24352e;
-  --raveldex-inline-radius: .35rem;
-  --raveldex-inline-font: system-ui, sans-serif;
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #151b21;
+  background: #f6f7f9;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+main { max-inline-size: 56rem; margin-inline: auto; padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 4rem; }
+h1 { max-inline-size: 22ch; margin: 0 0 .85rem; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.14; letter-spacing: -.035em; font-weight: 720; text-wrap: balance; }
+h2 { margin-block: 2rem .75rem; font-size: 1.25rem; line-height: 1.35; letter-spacing: -.02em; }
+h3 { line-height: 1.4; }
+p, li { line-height: 1.65; }
+main > p, .demo-intro > p { max-inline-size: 68ch; margin-block: 0 .75rem; color: #536171; }
+main > a { display: inline-block; min-block-size: 2.75rem; padding-block: .5rem; }
+a { color: #075ca8; text-underline-offset: .22em; }
+a:hover { text-decoration-thickness: .12em; }
+button { max-inline-size: 100%; min-block-size: 2.75rem; padding: .65rem 1rem; border: 1px solid #dce0e5; border-radius: .65rem; color: #151b21; background: #fff; font: inherit; font-weight: 600; line-height: 1.35; cursor: pointer; }
+button:hover { background: #eef1f4; }
+button:disabled { cursor: default; }
+:focus-visible { outline: 3px solid #075ca8; outline-offset: 3px; }
+::selection { color: #102c50; background: #dcecff; }
+.eyebrow { margin-block: 0 .5rem; color: #536171; font-size: .875rem; }
+.demo-intro { margin-block-end: 1.5rem; }
+.demo-intro > p { font-size: 1.0625rem; }
+[data-search-status], #search-status { color: #536171; font-size: .875rem; }
+[data-search-retry], #enable-search { margin-block: .5rem; }
+nav { margin-block-start: 2.5rem; padding-block-start: 1.25rem; border-block-start: 1px solid #dce0e5; }
+nav h2 { margin-block: 0 .75rem; }
+nav ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 0 2rem; padding: 0; margin: 0; list-style: none; }
+nav li { margin: 0; min-inline-size: 0; border-block-end: 1px solid #e5e8ec; }
+nav a { display: flex; align-items: center; min-block-size: 3.25rem; padding-block: .65rem; text-decoration: none; font-size: .9375rem; }
+nav a:hover { text-decoration: underline; }
+/* Keep this theme self-contained when copying the complete starter. */
+.raveldex-inline {
+  --raveldex-inline-accent: #075ca8;
+  --raveldex-inline-background: #fff;
+  --raveldex-inline-color: #151b21;
+  --raveldex-inline-muted: #536171;
+  --raveldex-inline-border: #7b8794;
+  --raveldex-inline-focus: #075ca8;
+  --raveldex-inline-border-width: 1px;
+  --raveldex-inline-gap: 1rem;
+  --raveldex-inline-radius: .65rem;
+  --raveldex-inline-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --raveldex-inline-title-size: 1.0625rem;
+  --raveldex-inline-result-padding: 1.15rem 0;
+  --raveldex-inline-highlight-background: #dcecff;
+  --raveldex-inline-highlight-color: #102c50;
+}
+.raveldex-inline__label { font-size: .875rem; }
+.raveldex-inline__input { min-block-size: 3rem; background: var(--raveldex-inline-background, #fff); font-size: 1rem; caret-color: var(--raveldex-inline-focus, #075ca8); }
+.raveldex-inline__input::placeholder { color: var(--raveldex-inline-muted, #536171); opacity: 1; }
+.raveldex-inline .raveldex-inline__submit { color: var(--raveldex-inline-background, #fff); border-color: var(--raveldex-inline-accent, #075ca8); background: var(--raveldex-inline-accent, #075ca8); }
+.raveldex-inline button:hover { background: var(--raveldex-inline-background, #fff); }
+.raveldex-inline .raveldex-inline__submit:hover { color: var(--raveldex-inline-background, #fff); background: var(--raveldex-inline-accent, #075ca8); filter: brightness(.9); }
+.raveldex-inline__clear { font-size: .875rem; }
+.raveldex-inline__facet-label { font-size: .875rem; }
+.raveldex-inline__facet { background: var(--raveldex-inline-background, #fff); }
+.raveldex-inline__facet-summary { font-size: .75rem; }
+.raveldex-inline__status { margin-block: 1rem; padding: 0; border: 0; font-size: .875rem; }
+.raveldex-inline:is([data-state=empty], [data-state=error]) .raveldex-inline__status { padding: .75rem 1rem; background: var(--raveldex-inline-background, #fff); border: 1px solid var(--raveldex-inline-border, #7b8794); }
+.raveldex-inline[data-state=error] .raveldex-inline__status { background: var(--raveldex-inline-background, #fff); }
+.raveldex-inline__results-heading { margin-block: 1.75rem .25rem; font-size: 1rem; }
+.raveldex-inline__result { border-block-end-color: #e5e8ec; }
+.raveldex-inline__result-title { text-decoration: none; }
+.raveldex-inline__result-title:hover { text-decoration: underline; }
+.raveldex-inline__snippet { margin-block-start: .35rem; color: var(--raveldex-inline-muted, #536171); font-size: .9375rem; line-height: 1.65; }
+.raveldex-inline__snippet-omissions, .raveldex-inline__section-caption, .raveldex-inline__section-omissions, .raveldex-inline__section-unavailable { font-size: .75rem; }
+.raveldex-inline__sections { border-inline-start-width: 1px; }
+.raveldex-inline__section-title { font-size: .9375rem; text-decoration: none; }
+.raveldex-inline__section-title:hover { text-decoration: underline; }
+.raveldex-inline__page-summary { font-size: .8125rem; }
+.raveldex-inline__navigation { padding: 0; border: 0; margin-block: .75rem 0; }
+.raveldex-inline__navigation button { font-size: .875rem; }
+.raveldex-inline button[aria-disabled=true], .raveldex-inline button:disabled { border-style: solid; color: var(--raveldex-inline-muted, #536171); background: var(--raveldex-inline-background, #fff); }
+[hidden] { display: none !important; }
+@media (max-width: 30rem) {
+  main { padding-block-start: 1.5rem; }
+  .demo-intro > p { font-size: 1rem; }
+  .raveldex-inline__form { gap: var(--raveldex-inline-gap, 1rem); }
+  .raveldex-inline__form > button { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none; transition: none; scroll-behavior: auto; }
+}
+@media (forced-colors: active) {
+  :root { color: CanvasText; background: Canvas; }
+  a { color: LinkText; }
+  :focus-visible { outline-color: Highlight; }
+  button { color: ButtonText; background: ButtonFace; border-color: ButtonText; }
+  .raveldex-inline__snippet, main > p, .demo-intro > p, [data-search-status], #search-status { color: CanvasText; }
+  .raveldex-inline .raveldex-inline__submit { filter: none; color: ButtonText; background: ButtonFace; border-color: ButtonText; }
+  .raveldex-inline:is([data-state=empty], [data-state=error]) .raveldex-inline__status { color: CanvasText; background: Canvas; border-color: CanvasText; }
+}
+
+[data-search-root], #search-root { margin-block: 1.5rem; }
+.raveldex-inline { padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid #dce0e5; border-radius: 1rem; }
+@media (forced-colors: active) { .raveldex-inline { border-color: CanvasText; } }

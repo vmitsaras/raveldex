@@ -3429,15 +3429,188 @@ Deliver self-contained optional issues, preserved historical tracking and a prec
 - [docs/evidence/RX-9205.md](docs/evidence/RX-9205.md)
 
 
+## RX-9501
+
+**Choose a free port when the UI pilot port is occupied**
+
+**Milestone:** N15 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9501%22)
+
+**Dependencies:** [RX-9404](IMPLEMENTATION_TASKS.md#rx-9404)
+
+Fix the owner-reported EADDRINUSE failure in scripts/ui-pilot.mjs. Keep 4173 or --port as the preferred port, then retry once with an OS-assigned free port on a collision and print the actual URL.
+
+**Expected affected areas**
+
+`scripts/ui-pilot.mjs`, `test/tooling/ui-pilot.test.mjs`, `examples/docs-search/README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[README.md](examples/docs-search/README.md)
+
+**Acceptance criteria**
+
+- RX-9501-AC01: An occupied default or explicit preferred port does not stop the UI pilot; it serves the demo on another loopback port and prints the working URL.
+- RX-9501-AC02: A free explicit port and --port 0 still work; invalid ports fail and --no-serve exits without a listener.
+- RX-9501-AC03: Existing request allowlisting, methods, security headers and signal shutdown remain intact; only EADDRINUSE triggers one fallback attempt.
+
+**Verification**
+
+- Run the real CLI with occupied default/explicit ports, fetch the reported URL, verify request boundaries and stop only the test-owned processes.
+- Run focused tooling tests, roadmap/document checks and one complete candidate verification; record actual outcomes and review.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9501.md](docs/evidence/RX-9501.md)
+
+
+## RX-9502
+
+**Explain how to preview all demo pages from the README**
+
+**Milestone:** N15 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9502%22)
+
+**Dependencies:** [RX-9501](IMPLEMENTATION_TASKS.md#rx-9501)
+
+Add discoverable source-checkout instructions for the complete demo site, its five consumer pages and Workbench. Document a free-port preview, rebuild and shutdown, while keeping the standalone Workbench command clear.
+
+**Expected affected areas**
+
+`README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[README.md](site/README.md)
+
+**Acceptance criteria**
+
+- RX-9502-AC01: The root README shows prerequisites, repository-root install/build/preview commands and how to open the actual URL, stop the server and regenerate changed sources.
+- RX-9502-AC02: The five consumer demos and Workbench have accurate routes, and the README distinguishes full-site preview from standalone pilot:ui.
+- RX-9502-AC03: Generated site, package inventory/links/examples and planning/reference checks pass without changing runtime behavior.
+
+**Verification**
+
+- Inspect command definitions and routes; regenerate with existing verified compiler output, fetch each documented demo route through the real preview server and verify the updated installed README.
+- Run packaged documentation checks, site identity/link/inventory checks and roadmap/generated/reference/diff checks; do not rebuild or rerun unchanged runtime qualification.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9502.md](docs/evidence/RX-9502.md)
+
+
+## RX-9601
+
+**Integrate and refine the shared header search modal**
+
+**Milestone:** N16 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9601%22)
+
+**Dependencies:** [RX-9502](IMPLEMENTATION_TASKS.md#rx-9502)
+
+Replace the Demo header link with a working, modern documentation-search modal using the installed Raveldex component and the existing five-guide corpus. Preserve the advanced Workbench route.
+
+**Expected affected areas**
+
+`site/Layout.astro`, `site/search.mjs`, `site/search-controller.mjs`, `site/search.css`, `scripts/build-pages.mjs`, `test/pages/site-search.test.mjs`, `README.md`, `site/README.md`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SITE_SEARCH_MODAL.md](docs/planning/SITE_SEARCH_MODAL.md)
+
+**Acceptance criteria**
+
+- RX-9601-AC01: Every shared site header exposes a compact labelled search trigger with an accurate shortcut hint and a usable no-JavaScript guide link.
+- RX-9601-AC02: The installed modal returns independent-oracle results/counts and valid native section links; its modern scoped presentation works at desktop, 320px and short viewports.
+- RX-9601-AC03: First-open loading, retry, cancellation/late work, repeated opens, shortcut/editable rules, focus restoration and owner cleanup preserve existing contracts.
+- RX-9601-AC04: Relevant site regressions, complete candidate verification, generated identities/inventory and documentation/planning checks pass with exact evidence and explicit manual limits.
+
+**Verification**
+
+- Observe the missing header modal regression, then verify the installed modal and actual corpus/links in a real browser.
+- Run focused site behavior and responsive checks, inspect desktop/mobile renders, review lifecycle and public boundaries, then record the complete verification and generated site identities.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9601.md](docs/evidence/RX-9601.md)
+
+
+## RX-9701
+
+**Modernize galleries and standalone consumer demos**
+
+**Milestone:** N17 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9701%22)
+
+**Dependencies:** [RX-9601](IMPLEMENTATION_TASKS.md#rx-9601)
+
+Apply the established header-modal direction to all five live demo families and their eight complete browser/Astro projects; prioritize trying the interface and preserve existing native behavior.
+
+**Expected affected areas**
+
+`site/`, `examples/inline-browser/`, `examples/inline-astro/`, `examples/modal-browser/`, `examples/modal-astro/`, `examples/dropdown-browser/`, `examples/directory-browser/`, `examples/directory-astro/`, `examples/cards-browser/`, `scripts/build-pages.mjs`, `test/pages/`, `test/consumer/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[DEMO_PRESENTATION.md](docs/planning/DEMO_PRESENTATION.md)
+
+**Acceptance criteria**
+
+- RX-9701-AC01: Each gallery leads with a clear live demo, family navigation and a full-page preview, with installation/reference detail organized below it.
+- RX-9701-AC02: All eight complete starters have coherent modern controls/results/states and usable narrow layouts, preserving native semantics, results, ownership and URL state.
+- RX-9701-AC03: Exact downloads/source, copied root/subdirectory projects, keyboard/focus/composition/recovery and relevant themes/layouts pass, with desktop/mobile renders inspected for all five families.
+- RX-9701-AC04: Independent combined review, complete candidate verification, final Pages regression/inventory and planning/docs checks have current scoped evidence.
+
+**Verification**
+
+- Delegate disjoint presentation changes, integrate a common gallery shell and inspect all five real installed previews on desktop/mobile.
+- Run relevant installed starter checks and one complete candidate verification; reuse that build for final Pages generation and all site regressions. Record exact identities, independent review and unrun manual scope.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9701.md](docs/evidence/RX-9701.md)
+
+
+## RX-9801
+
+**Keep Load more appending through all matches**
+
+**Milestone:** N18 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9801%22)
+
+**Dependencies:** [RX-9701](IMPLEMENTATION_TASKS.md#rx-9701)
+
+Implement the owner-authorized shared inline/modal append behavior, superseding the former maxRenderedResults window switch, with complete regression coverage and current installed documentation/site evidence.
+
+**Expected affected areas**
+
+`src/addons/ui/inline.ts`, `test/ui/`, `test/consumer/`, `test/pages/`, `site/`, `examples/`, `docs/api/`, `docs/specs/`. These are planning boundaries; create files only when this task needs them.
+
+**Contracts**
+
+[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [LOAD_MORE_APPEND.md](docs/planning/LOAD_MORE_APPEND.md)
+
+**Acceptance criteria**
+
+- RX-9801-AC01: Inline/modal Load more always appends the next native batch until the exact total is visible, without Next/Previous replacement controls, skipped or duplicate IDs, changed order or detached earlier results.
+- RX-9801-AC02: Searches cross legacy caps including 20/31 and 1000/1005; only exhaustion makes Load more unavailable. Existing option/message bundles remain accepted with explicit deprecation and admission/batch limits.
+- RX-9801-AC03: Keyboard focus, append announcements/discovery, terminal no-ops, query/filter/clear/retry resets, revision failures, cancellation and teardown remain coherent. Directory/Workbench pagination stays unchanged.
+- RX-9801-AC04: Test-first shared/header regressions, related installed starter tests, independent review, one complete candidate verification and regenerated Pages/docs checks record actual environments, identities and limitations.
+
+**Verification**
+
+- Observe focused regression failures against the old runtime and generated header before implementation.
+- Verify ordered accumulation and preserved DOM through the old limits, run affected regressions and complete candidate verification, then regenerate/check the installed site and documentation.
+
+**Recorded evidence**
+
+- [docs/evidence/RX-9801.md](docs/evidence/RX-9801.md)
+
+
 ## RX-9901
 
 **Establish site-only styling and contextual navigation**
 
 **Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/119)
 
-**Dependencies:** [RX-9404](IMPLEMENTATION_TASKS.md#rx-9404)
+**Dependencies:** [RX-9801](IMPLEMENTATION_TASKS.md#rx-9801)
 
-After an explicit implementation instruction and separate availability of the accepted N16–N18 baseline, extend the existing Astro shell with contextual navigation and a minimal site-only Tailwind styling contract. Preserve native consumer behavior and safe static publication; this planning delivery does not integrate earlier implementation work.
+After an explicit implementation instruction and verification of the delivered N16–N18 baseline, extend the existing Astro shell with contextual navigation and a minimal site-only Tailwind styling contract. Preserve native consumer behavior and safe static publication. Delivery of the earlier implementation does not start N19.
 
 **Expected affected areas**
 
