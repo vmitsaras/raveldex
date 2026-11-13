@@ -2,6 +2,14 @@
 
 The [milestone list](https://github.com/vmitsaras/raveldex/milestones) and [issues](https://github.com/vmitsaras/raveldex/issues) mirror stable IDs from `roadmap.json`.
 
+## N19 registration — 13 November 2026
+
+The owner requested planning and tracking only for [N19 documentation/demo experience](https://github.com/vmitsaras/raveldex/milestone/16). Overview [#118](https://github.com/vmitsaras/raveldex/issues/118) has eight verified native sub-issues, RX-9901–RX-9908 ([#119](https://github.com/vmitsaras/raveldex/issues/119) through [#126](https://github.com/vmitsaras/raveldex/issues/126)). Only those eight tasks belong to milestone #16; the overview has `milestone: null`. All canonical task statuses are `planned`, with 0/8 accepted.
+
+The [registration record](N19_GITHUB.md) and [plan](DOCS_DEMO_EXPERIENCE.md) describe the exact hierarchy, dependencies, rendered-pilot gate and current source/delivery boundary. Full instructions are included in the issues while the local plan awaits separately authorized source delivery. N19 uses the existing selected-work track; technical readiness does not authorize execution during the planning-only request or reopen stable 1.0.0 preparation.
+
+This was a targeted registration, preserving all pre-existing issue/milestone metadata and completed local work. N19 native links were created directly through the API; no linker/synchronizer code changed and no global apply/backfill of N15–N18 was run. Preserve these actual parents on later synchronization.
+
 ## N11 registration — 5 November 2026
 
 The owner-selected [consumer plugin polish milestone](https://github.com/vmitsaras/raveldex/milestone/11) has overview [#80](https://github.com/vmitsaras/raveldex/issues/80) and twelve planned native sub-issues, RX-9101–RX-9112 ([#81](https://github.com/vmitsaras/raveldex/issues/81) through [#92](https://github.com/vmitsaras/raveldex/issues/92)). Only task issues belong to the milestone; the overview remains unassigned. See the [registration record](N11_GITHUB.md) and [planning contract](../specs/N11_UI_UX_POLISH.md).

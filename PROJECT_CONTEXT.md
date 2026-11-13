@@ -55,6 +55,16 @@ selected preparation/demo/UI work is complete. The owner authorized source
 commit/push and CI verification; package publication and tags/releases remain
 separate. Run `npm run handoff:next` before selecting new work.
 
+[N19 documentation/demo experience](docs/planning/DOCS_DEMO_EXPERIENCE.md) is
+planned as a separate website backlog with eight tasks, RX-9901–RX-9908. The owner
+authorized planning and GitHub milestone/native sub-issue registration only.
+Implementation and site-only Tailwind dependency installation have not started;
+the selected-work queue identifies RX-9901 as the next eligible site slice without
+authorizing execution or reopening stable 1.0.0 preparation.
+The plan records N16–N18 on the separate source branch as an implementation-entry
+prerequisite; this N19-only delivery does not integrate that work. A rendered-pilot
+approval precedes wider rollout. Implementation and publication remain separate.
+
 All 80 pre-N12 tasks remain accepted. Their source-specific results and actual
 N10/N11 closeout are retained in [evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md).
 Those historical artifacts do not qualify changed 1.0.0 package inputs by themselves.
