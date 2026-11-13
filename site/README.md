@@ -4,6 +4,51 @@ The intended publishing source is **GitHub Pages → Deploy from a branch → ma
 
 ## Local workflow
 
+### Contextual shell contract (RX-9901)
+
+`pages.mjs` remains the only public route/content registry. Its existing
+`[source, route, title]` tuple prefix is unchanged; the fourth member adds
+`section`, `group`, `parent`, `label` and optional `outline: false` metadata.
+`navigation.mjs` derives exact current-page links, section selection, contextual
+siblings/selected-family starters and breadcrumbs from those entries. Never infer
+page identity by a URL prefix. The four primary destinations are Get started,
+Examples, Documentation and API reference; Developer Workbench stays a secondary
+documentation link at `/demo/`. Keep all existing public routes and heading IDs.
+
+`Layout.astro` keeps `frontmatter`, `wide`, the default content slot and the `head`
+slot. The optional `before-content` and `after-content` slots sit inside the one
+main landmark, after its breadcrumb. Markdown receives the explicit public route
+through generated frontmatter (including `404.html`) and Astro's actual `headings`;
+four or more level-two headings opt into an outline unless explicitly disabled.
+The outline hides below 90rem; below 64rem the same section navigation becomes a
+native labeled disclosure. Desktop summary hiding requires successful module
+enhancement, so a no-JS disclosure closed at a small width can still reopen after
+resizing. `shell.mjs` enhances only its responsive open state,
+preserves focused links during resizing and removes/rebinds its media listener
+across pagehide/bfcache restoration. Without JavaScript, the initially open native
+disclosure remains fully operable. Markdown tables/code blocks are keyboard
+scrollable using Astro 7's existing Sätteri HTML visitor, without a second parser.
+
+The exact `tailwindcss`/`@tailwindcss/vite` 4.3.5 development tools run only in the
+scratch Astro/Vite build (Astro 7.3.2, locked Vite 8.3.5). `styles.css` imports
+theme/utilities with the `rx:` prefix, omits Preflight and disables automatic
+scanning; only the explicitly named `Layout.astro` source is scanned initially.
+Add future site templates deliberately, with matching build copies/input hashes.
+Astro publishes compiled, hashed CSS; do not copy unprocessed Tailwind directives
+to public output. `--site-ink`, `--site-muted`, `--site-link`, `--site-line`,
+`--site-paper`, `--site-wash` and `--site-lime` are site-owned tokens on `.site`.
+Prose remains system sans-serif with a 76ch reading column and scrollable code and
+tables. These tokens/tools are not a package or starter customization API.
+
+Run `node --test test/tooling/pages.test.mjs test/pages/docs-shell.test.mjs test/pages/site-search.test.mjs`
+after generation, plus `npm run pages:check`. Tests exercise actual no-JS/keyboard
+navigation, long labels, 320px layout, modal styles and iframe isolation. Tailwind
+v4's documented browser baseline applies to the site tooling; it does not change
+the library's browser contract. See the [scoped RX-9901 evidence](../docs/evidence/RX-9901.md)
+for exact identities, renders, source boundaries and unrun human qualification.
+
+### Existing consumer examples and search
+
 The five consumer galleries share `ExampleShowcase.astro`: a short introduction,
 family navigation and the real installed live preview come before setup details.
 Full-page previews remain ordinary links. All eight standalone starter projects
@@ -31,8 +76,8 @@ native results. Category labels and overview text are separate display content.
 and theme; the package owns modal focus, queries and rendering. Loading is
 cancellable, retry is explicit, ready reopens reuse the index, and pagehide
 destroys the borrowed UI before disposing the owner. No-JavaScript/unsupported
-dialog hosts retain a guide link. The previous Demo navigation link is removed;
-the advanced Workbench remains at `demo/`.
+dialog hosts retain a guide link. The advanced Workbench remains a secondary
+documentation/footer link at `demo/`.
 
 The generator bundles against the same isolated installed tarball used by the
 Workbench, serves explicit assets under `site-assets/search/`, and records every

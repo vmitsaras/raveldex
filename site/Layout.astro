@@ -1,8 +1,11 @@
 ---
-const { frontmatter = {}, wide = false } = Astro.props;
-const base = '/raveldex/';
-const links = [['Guides', 'guide/'], ['API', 'reference/'], ['Examples', 'examples/']];
-const current = Astro.url.pathname;
+import './styles.css';
+import { BASE as base, href } from './pages.mjs';
+import { DESTINATIONS, navigationFor, pageOutline } from './navigation.mjs';
+const { frontmatter = {}, wide = false, headings = [] } = Astro.props;
+const current = frontmatter.route === undefined ? Astro.url.pathname : href(frontmatter.route);
+const navigation = navigationFor(current);
+const outline = pageOutline(navigation.page, headings);
 ---
 <!doctype html>
 <html lang="en">
@@ -11,10 +14,10 @@ const current = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{frontmatter.title} · Raveldex</title>
     <meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application." />
-    <link rel="stylesheet" href={base + 'site-assets/styles.css'} />
     <link rel="stylesheet" href={base + 'site-assets/search/modal.css'} />
     <link rel="stylesheet" href={base + 'site-assets/search.css'} />
     <script is:inline type="module" src={base + 'site-assets/search/main.mjs'}></script>
+    <script is:inline type="module" src={base + 'site-assets/shell.mjs'}></script>
     <slot name="head" />
   </head>
   <body class="site">
@@ -27,11 +30,35 @@ const current = Astro.url.pathname;
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75" /><path d="m16 16 4.5 4.5" /></svg>
           <span>Search docs</span><kbd aria-hidden="true"><span data-site-search-modifier>Ctrl</span> K</kbd>
         </button>
-        <nav class="site-header__nav" aria-label="Main navigation"><ul>{links.map(([label, path]) => <li><a href={base + path} aria-current={current === base + path ? 'page' : undefined}>{label}</a></li>)}</ul></nav>
+        <nav class="site-header__nav" aria-label="Main navigation"><ul>{DESTINATIONS.map(item => <li><a href={href(item.route)} data-section-current={navigation.page.section === item.id ? 'true' : undefined} aria-current={current === href(item.route) ? 'page' : navigation.page.section === item.id ? 'location' : undefined}>{item.label}</a></li>)}</ul></nav>
       </div>
     </header>
-    <main id="main" class:list={['site-main', { 'site-main--article': !wide }]} tabindex="-1"><slot /></main>
+    <div class:list={['site-frame', { 'site-frame--context': navigation.sidebar.length > 0, 'site-frame--outline': outline.length > 0, 'site-frame--wide': wide }]}>
+      {navigation.sidebar.length > 0 && <div class="site-sidebar">
+        <details class="site-section" data-site-section open>
+          <summary>{navigation.sectionLabel} navigation</summary>
+          <nav aria-label={`${navigation.sectionLabel} navigation`}>
+            <p class="site-section__label" aria-hidden="true">{navigation.sectionLabel}</p>
+            <ul>{navigation.sidebar.map(item => <li class:list={{ 'site-section__nested': item.nested }}><a href={item.href} aria-current={item.href === current ? 'page' : undefined}>{item.label}</a></li>)}</ul>
+          </nav>
+        </details>
+      </div>}
+      <main id="main" class:list={['site-main', { 'site-main--article': !wide }]} tabindex="-1">
+        {navigation.page.route && <nav class="site-breadcrumb" aria-label="Breadcrumb"><ol class="rx:flex rx:flex-wrap rx:items-center rx:gap-2">
+          {navigation.breadcrumbs.map(item => <li><a href={item.href}>{item.label}</a><span aria-hidden="true">/</span></li>)}
+          <li><span aria-current="page">{navigation.page.label}</span></li>
+        </ol></nav>}
+        <slot name="before-content" />
+        <slot />
+        <slot name="after-content" />
+      </main>
+      {outline.length > 0 && <div class="site-outline"><nav aria-label="On this page">
+        <p class="site-section__label">On this page</p>
+        <ul>{outline.map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul>
+      </nav></div>}
+    </div>
     <footer class="site-footer">
+      <p><a href={base + 'demo/'}>Developer Workbench</a></p>
       <p><a href="https://github.com/vmitsaras/raveldex">Source code</a> · <a href={base + 'site-assets/LICENSE.txt'}>MIT license</a></p>
     </footer>
     <div class="site-search">

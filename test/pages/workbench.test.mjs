@@ -274,10 +274,10 @@ test('without JavaScript the homepage keeps documentation and an honest search f
     const page = await context.newPage(); await page.goto(base);
     assert.ok(await page.locator('noscript p').isVisible());
     assert.match(await page.locator('noscript p').innerText(), /Search needs JavaScript/);
-    assert.ok(await page.getByRole('link', { name: 'Get started', exact: true }).isVisible());
+    assert.ok(await page.getByRole('main').getByRole('link', { name: 'Get started', exact: true }).isVisible());
     assert.equal(await page.locator('.search-workbench__queries').count(), 0);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-    await page.getByRole('link', { name: 'Get started', exact: true }).click();
+    await page.getByRole('main').getByRole('link', { name: 'Get started', exact: true }).click();
     assert.equal(new URL(page.url()).pathname, '/raveldex/guide/overview/');
   } finally { await context.close(); }
 });
@@ -291,7 +291,7 @@ test('shared reading shell reflows, identifies the current page and supports key
   const page = await browser.newPage();
   try {
     await page.goto(new URL('reference/', base).href);
-    assert.equal(await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'API' }).getAttribute('aria-current'), 'page');
+    assert.equal(await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'API reference', exact: true }).getAttribute('aria-current'), 'page');
     await page.keyboard.press('Tab');
     assert.equal(await page.locator('.skip').evaluate(node => node === document.activeElement), true);
     await page.keyboard.press('Enter');

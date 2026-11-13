@@ -17,14 +17,19 @@ const output = join(work, 'output');
 await rm(work, { recursive: true, force: true }); // Only this script's scratch tree.
 await mkdir(join(source, 'src/pages'), { recursive: true });
 await copyFile(join(root, 'site/Layout.astro'), join(source, 'src/Layout.astro'));
-for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'StarterSetup.astro', 'ExampleShowcase.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs']) {
+for (const name of ['Home.astro', 'Demo.astro', 'SearchWorkbench.astro', 'SolutionChooser.astro', 'StarterSetup.astro', 'ExampleShowcase.astro', 'Inline.astro', 'Modal.astro', 'Dropdown.astro', 'Directory.astro', 'Cards.astro', 'starters.mjs', 'pages.mjs', 'navigation.mjs', 'styles.css']) {
   await copyFile(join(root, 'site', name), join(source, 'src', name));
 }
 await writeFile(join(source, 'package.json'), '{"private":true,"type":"module"}\n');
 await writeFile(join(source, 'astro.config.mjs'), `import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+import { satteri } from '@astrojs/markdown-satteri';
+const keyboardScrollRegions = { name: 'site-keyboard-scroll-regions',
+  element: { filter: ['pre', 'table'], visit(node, context) { context.setProperty(node, 'tabIndex', 0); } } };
 export default defineConfig({ output: 'static', site: 'https://vmitsaras.github.io', base: ${JSON.stringify(BASE)},
   trailingSlash: 'always', outDir: ${JSON.stringify(output)}, build: { format: 'directory', assets: 'site-assets' },
-  markdown: { syntaxHighlight: false }, devToolbar: { enabled: false } });\n`);
+  vite: { plugins: [tailwindcss()] },
+  markdown: { syntaxHighlight: false, processor: satteri({ hastPlugins: [keyboardScrollRegions] }) }, devToolbar: { enabled: false } });\n`);
 const routes = new Map(PAGES.map(([path, route]) => [path, href(route)]));
 const recipes = new Map(RECIPES.map(name => [`docs/api/examples/${name}.mjs`, `${BASE}example-files/${name}.mjs`]));
 const themeSource = 'docs/api/examples/consumer-themes.css';
@@ -61,13 +66,13 @@ for (const [path, route, title] of PAGES) {
   const layout = relative(dirname(destination), join(source, 'src/Layout.astro')).replaceAll('\\', '/');
   const text = await readFile(join(root, path), 'utf8');
   const markdown = rewriteMarkdown(text, path, routes, recipes);
-  await writeFile(destination, `---\nlayout: ${JSON.stringify(layout.startsWith('.') ? layout : './' + layout)}\ntitle: ${JSON.stringify(title)}\n---\n${markdown}`);
+  await writeFile(destination, `---\nlayout: ${JSON.stringify(layout.startsWith('.') ? layout : './' + layout)}\ntitle: ${JSON.stringify(title)}\nroute: ${JSON.stringify(route)}\n---\n${markdown}`);
 }
 const built = await command(process.execPath, [join(root, 'node_modules/astro/bin/astro.mjs'), 'build', '--root', source]);
 process.stdout.write(built.stdout);
 process.stderr.write(built.stderr);
 await mkdir(join(output, 'site-assets'), { recursive: true });
-await copyFile(join(root, 'site/styles.css'), join(output, 'site-assets/styles.css'));
+await copyFile(join(root, 'site/shell.mjs'), join(output, 'site-assets/shell.mjs'));
 await copyFile(join(root, 'site/workbench.css'), join(output, 'site-assets/workbench.css'));
 await copyFile(join(root, 'site/search.css'), join(output, 'site-assets/search.css'));
 await copyFile(join(root, 'LICENSE'), join(output, 'site-assets/LICENSE.txt'));
@@ -116,7 +121,7 @@ const staged = { files: (await walk(output)).map(path => ({ path })) };
 const links = await auditLinks(output, staged);
 const inputPaths = new Set([...PAGES.map(x => x[0]), ...RECIPES.map(name => `docs/api/examples/${name}.mjs`),
   themeSource,
-  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/StarterSetup.astro', 'site/ExampleShowcase.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'site/search.mjs', 'site/search-controller.mjs', 'site/search.css', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
+  'site/Layout.astro', 'site/SearchWorkbench.astro', 'site/SolutionChooser.astro', 'site/StarterSetup.astro', 'site/ExampleShowcase.astro', 'site/styles.css', 'site/workbench.css', 'site/pages.mjs', 'site/navigation.mjs', 'site/shell.mjs', 'site/search.mjs', 'site/search-controller.mjs', 'site/search.css', 'scripts/build-pages.mjs', 'scripts/lib/pages.mjs',
   'scripts/lib/ui-consumer.mjs', 'scripts/lib/packed-consumer.mjs', 'examples/core-docs/corpus.mjs',
   'scripts/lib/inline-starters.mjs', 'site/starters.mjs', ...starters.sourceInputs,
   'README.md', 'package.json', 'package-lock.json', 'LICENSE',

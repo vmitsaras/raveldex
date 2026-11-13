@@ -2,6 +2,8 @@
 
 > For agentic workers: use the Superpowers `executing-plans` workflow to implement one dependency-ready task at a time after an explicit implementation instruction. The registration request authorized planning and GitHub setup only. The subsequent request authorizes delivery and merge of this planning-only PR after CI; it does not authorize product code, dependency installation or N19 implementation.
 
+**Current execution — 13 November 2026:** The owner subsequently selected RX-9901 implementation, required checks and roadmap/GitHub updates. The merged N15–N18 baseline is available at `35ea42e`. RX-9901 is implemented and verified locally; see [evidence](../evidence/RX-9901.md). RX-9902–RX-9908 remain planned. Earlier planning-only authorization statements below describe registration and delivery history. The owner then authorized RX-9901 commit/push, a PR and CI-gated merge; see the [delivery record](../evidence/RX_9901_DELIVERY_20261113.md). RX-9902 must remain unstarted. Publication and later-task implementation remain separate.
+
 **Goal:** Help a developer choose an interface, try the real starter, install the matching project, replace its data and find a precise API contract.
 
 **Architecture:** Retain the current static Astro site and explicit publication pipeline. Use original site-owned components and proposed site-only Tailwind CSS build tooling. Keep the installed iframe previews, consumer CSS, exact starter sources/archives and native search package independent of site styling.

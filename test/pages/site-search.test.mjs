@@ -133,7 +133,7 @@ test('shortcut respects editable fields and loading cancellation cannot reopen t
     const seen = new Promise(resolve => { requested = resolve; });
     const gate = new Promise(resolve => { release = resolve; });
     await page.route('**/site-assets/search/content.json', async route => { requested(); await gate; try { await route.continue(); } catch { /* the cancelled fetch is already gone */ } });
-    const opener = page.locator('.site-header__nav').getByRole('link', { name: 'Guides', exact: true });
+    const opener = page.locator('.site-header__nav').getByRole('link', { name: 'Documentation', exact: true });
     await opener.focus(); await opener.press('Control+k'); await seen;
     await page.locator('[data-site-search-loading][open]').waitFor();
     await page.locator('[data-site-search-cancel]').click(); release();
