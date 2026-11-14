@@ -3,8 +3,15 @@ import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
-<ExampleShowcase family="modal" title="Documentation search modal starters" description="Open focused documentation search from a button and jump straight to the matching heading." previewTitle="Documentation modal starter preview" previewHeight={680}>
+<ExampleShowcase pilot family="modal" title="Documentation search modal starters" description="Open focused documentation search from a button and jump straight to the matching heading." previewTitle="Documentation modal starter preview" previewHeight={680}>
   <Fragment slot="preview-hint">Select <strong>Search documentation</strong>, search <code>bobbin</code> and follow the threading preview to its heading.</Fragment>
+  <h2 id="copy-modal">Choose a complete starter</h2>
+  <StarterSetup family="modal" pilot />
+  <p>Needs native dialog, Intl.Segmenter and Web Crypto over HTTPS or localhost. Search loads when first opened.</p>
+  <details><summary>Data and browser requirements</summary>
+    <p>Install the core package; the Astro project also needs its matching Astro adapter, as described in its guide. The browser starter uses pinned esbuild tooling; the Astro starter builds versioned source, display and section artifacts from an explicit allowlist.</p>
+  <p>Both projects need native <code>dialog</code>, <code>Intl.Segmenter</code> and Web Crypto over HTTPS or localhost. Supply public page records and exact original section text/ranges, with raw anchors that match real heading IDs. The same explicit content renders those targets in each starter. Sections require the selected source/section providers; the Topic filter requires its facet registration. Deploy each rebuilt set of pages and search assets together.</p>
+  </details>
   <details><summary>How this example works</summary>
 <p>Open search from a button, find a matching page and jump to the heading that contains the match. Copy a complete browser or Astro project, replace its explicit page content and adjust the CSS.</p>
   <p>Use the modal for search behind a button. Choose <a href={base + 'examples/inline/'}>inline search</a> when the field and results should stay in the page.</p>
@@ -12,13 +19,6 @@ const base = '/raveldex/';
   <p>Each project uses the native documentation modal and one indexed record per page. Optional source evidence and section maps provide anchored previews while native page totals, order and paging stay authoritative. These projects load a complete local index on first open; they do not crawl HTML or load index shards.</p>
 <p>Select <strong>Search documentation</strong>, search <code>bobbin</code> and follow the threading preview to its actual heading. Try <code>workshop</code> to page through all six guides. Close during loading to cancel the attempt. Ordinary browse links work before loading and without JavaScript.</p>
   </details>
-  <h2 id="copy-modal">Choose a complete starter</h2>
-  <p>Needs native dialog, Intl.Segmenter and Web Crypto over HTTPS or localhost. Search loads when first opened.</p>
-  <details><summary>Data and browser requirements</summary>
-    <p>Install matching core and Astro packages as described in each guide. The browser starter uses pinned esbuild tooling; the Astro starter builds versioned source, display and section artifacts from an explicit allowlist.</p>
-  <p>Both projects need native <code>dialog</code>, <code>Intl.Segmenter</code> and Web Crypto over HTTPS or localhost. Supply public page records and exact original section text/ranges, with raw anchors that match real heading IDs. The same explicit content renders those targets in each starter. Sections require the selected source/section providers; the Topic filter requires its facet registration. Deploy each rebuilt set of pages and search assets together.</p>
-  </details>
-  <StarterSetup family="modal" />
   <h2 id="modal-theme">Change the appearance</h2>
   <ol>
     <li>Copy and install one complete starter using its setup guide. Open search and try <code>workshop</code> before changing the CSS.</li>

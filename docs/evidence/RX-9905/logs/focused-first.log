@@ -1,0 +1,69 @@
+Example flow: 157.0.8103.51 / v24.21.0 / darwin arm64
+✔ inline keeps preview implementation separate from install platform (836.312792ms)
+✔ switching views retains the same iframe and query (534.386208ms)
+✔ source views and copy equal allowlisted bytes (2162.575708ms)
+✔ clipboard denial and unavailable API offer manual recovery without success (294.6885ms)
+✔ all setup content remains readable without JavaScript (211.759834ms)
+✖ example controls clean up listeners and ignore late copy feedback across page lifecycle (640.91175ms)
+✔ legacy starter fragments reveal the matching installation on load and hash changes (155.4185ms)
+✔ installation guidance names each projects actual tarballs fields and build identity (149.173208ms)
+✔ embedded modal explains its frame boundary (249.359042ms)
+✖ dropdown full-page handoff preserves raw query (5399.550541ms)
+✔ modal shared views keep a live query and exact family source (3255.1195ms)
+✔ modal sources setup and old anchors work without JavaScript (202.123791ms)
+✔ dropdown shared views keep a live query and exact family source (1795.902958ms)
+✔ dropdown sources setup and old anchors work without JavaScript (193.100833ms)
+✔ full-page modal cancels first load retries failure and restores its opener (574.406792ms)
+✔ dropdown without native Popover retains a working full-results form (220.593791ms)
+✔ dropdown gallery serves its exact installed header starter and a real complete full-results route (1491.682417ms)
+✔ modal gallery exposes exact complete starters and a first-open installed preview with real heading links (1621.369958ms)
+Site search: 157.0.8103.51 / v24.21.0 / darwin arm64
+✔ every shared header offers lazy modal search instead of a Demo navigation link (1010.984458ms)
+✔ header modal uses native prefix results, exact counts, real links and preserved query/focus (1028.029833ms)
+✔ header Load more appends all addon matches past twenty without switching to pagination (829.940958ms)
+✔ shortcut respects editable fields and loading cancellation cannot reopen the modal (624.587583ms)
+✔ a failed first load offers explicit retry and ready reopen reuses the same index (550.171917ms)
+✔ header and modal remain usable at narrow/short widths and forced colors (1495.539ms)
+✔ without JavaScript the header retains ordinary guide navigation (165.092833ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 23
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 26699.982667
+
+✖ failing tests:
+
+test at test/pages/docs-example-flow.test.mjs:121:1
+✖ example controls clean up listeners and ignore late copy feedback across page lifecycle (640.91175ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'color-contrast'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:136:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'color-contrast' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-example-flow.test.mjs:180:1
+✖ dropdown full-page handoff preserves raw query (5399.550541ms)
+  page.waitForURL: Timeout 5000ms exceeded.
+  =========================== logs ===========================
+  waiting for navigation to "http://127.0.0.1:58254/raveldex/null" until "load"
+  ============================================================
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:199:306) {
+    name: 'TimeoutError',
+    log: []
+  }

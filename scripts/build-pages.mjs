@@ -22,10 +22,10 @@ for (const name of ['Home.astro', 'Demo.astro', 'Examples.astro', 'SolutionCard.
 }
 // Read only the existing explicit inventory; never interpolate source into executable HTML.
 const starterCode = [];
-for (const starter of STARTERS.filter(starter => starter.family === 'inline')) {
+for (const starter of STARTERS.filter(starter => ['inline', 'modal', 'dropdown'].includes(starter.family))) {
   const files = [];
   for (const path of starter.files) files.push({ path, text: await readFile(join(root, 'examples', starter.id, path), 'utf8') });
-  starterCode.push({ id: starter.id, files });
+  starterCode.push({ id: starter.id, family: starter.family, files });
 }
 await writeFile(join(source, 'src/starter-code.mjs'), `export const STARTER_CODE = ${JSON.stringify(starterCode)};\n`);
 await writeFile(join(source, 'package.json'), '{"private":true,"type":"module"}\n');

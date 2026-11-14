@@ -49,16 +49,19 @@ for exact identities, renders, source boundaries and unrun human qualification.
 
 ### Existing consumer examples and search
 
-The Inline pilot opts into `ExampleShowcase`/`StarterSetup` with `pilot`.
-Other families keep their previous flow pending the owner gate. `DemoPreview`
+Inline, Modal and Dropdown opt into `ExampleShowcase`/`StarterSetup` with `pilot`
+after the owner approved the RX-9904 gallery/Inline candidate. Directory and rich
+results retain their previous flow until RX-9906. Modal keeps its Browser/Astro
+choices; Dropdown offers only Browser. An embedded modal stays inside its iframe;
+the full preview demonstrates whole-window dialog/focus/section navigation. `DemoPreview`
 renders one persistent Browser iframe and an independent Code view; native
 pressed buttons switch views without replacing the frame. Installation platform
 and Code project are separate native selects. Astro instructions never relabel
 or rebuild the Browser preview. Without enhancement, both source projects and
 both setup variants remain readable through ordinary disclosures/links.
 
-The scratch builder creates `starter-code.mjs` from only the Inline `STARTERS`
-allowlist. `CodePanel` uses Astro's existing Code/Shiki renderer; a transformer
+The scratch builder creates `starter-code.mjs` from the explicit Inline/Modal/Dropdown `STARTERS`
+allowlists, then filters by the selected page family. `CodePanel` uses Astro's existing Code/Shiki renderer with its high-contrast light theme; a transformer
 restores its omitted final newline and fails the build on other text drift.
 Copy uses the same escaped literal text, without filenames or highlighting.
 Clipboard denial/unavailability leaves a manual-selection instruction. Select

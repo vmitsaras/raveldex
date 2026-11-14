@@ -109,7 +109,7 @@ test('gallery supports no-JS keyboard navigation and narrow comparison', async (
     }
     const table = page.getByRole('table');
     await table.focus(); await table.press('ArrowRight');
-    assert.equal(await table.evaluate(node => node === document.activeElement), true);
+    assert.equal(await table.evaluate(node => node === document.activeElement), true, await page.evaluate(()=>({url:location.href,active:document.activeElement.outerHTML.slice(0,500)})));
     for (const width of [320, 768, 1280, 1440]) {
       await page.setViewportSize({ width, height: 800 });
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${width}px page overflow`);

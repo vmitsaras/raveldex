@@ -1,0 +1,258 @@
+### Page
+- Page URL: http://127.0.0.1:56133/raveldex/examples/inline/
+- Page Title: Ready to use inline search · Raveldex
+### Snapshot
+```yaml
+- generic [ref=f7e1]:
+  - link "Skip to content" [ref=f7e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f7e3]:
+    - link "Raveldex home" [ref=f7e4] [cursor=pointer]:
+      - /url: /raveldex/
+      - text: Raveldex
+    - generic [ref=f7e5]:
+      - button "Search documentation" [ref=f7e6] [cursor=pointer]
+      - navigation "Main navigation" [ref=f7e10]:
+        - list [ref=f7e11]:
+          - listitem [ref=f7e12]:
+            - link "Get started" [ref=f7e13] [cursor=pointer]:
+              - /url: /raveldex/guide/overview/
+          - listitem [ref=f7e14]:
+            - link "Examples" [ref=f7e15] [cursor=pointer]:
+              - /url: /raveldex/examples/
+          - listitem [ref=f7e16]:
+            - link "Documentation" [ref=f7e17] [cursor=pointer]:
+              - /url: /raveldex/guide/
+          - listitem [ref=f7e18]:
+            - link "API reference" [ref=f7e19] [cursor=pointer]:
+              - /url: /raveldex/reference/
+  - generic [ref=f7e20]:
+    - group [ref=f7e22]:
+      - generic "Examples navigation" [ref=f7e23] [cursor=pointer]
+    - main [ref=f7e24]:
+      - navigation "Breadcrumb" [ref=f7e25]:
+        - list [ref=f7e26]:
+          - listitem [ref=f7e27]:
+            - link "Home" [ref=f7e28] [cursor=pointer]:
+              - /url: /raveldex/
+            - generic [aria-hidden] [ref=f7e29]: /
+          - listitem [ref=f7e30]:
+            - link "Examples" [ref=f7e31] [cursor=pointer]:
+              - /url: /raveldex/examples/
+            - generic [aria-hidden] [ref=f7e32]: /
+          - listitem [ref=f7e33]:
+            - generic [ref=f7e34]: Inline search
+      - generic [ref=f7e35]:
+        - generic [ref=f7e36]:
+          - generic [ref=f7e37]:
+            - heading "Ready to use inline search" [level=1] [ref=f7e38]
+            - paragraph [ref=f7e39]: Keep search in the page, with useful excerpts, topic filters and clear links to the full guide.
+          - link "Open full preview" [ref=f7e40] [cursor=pointer]:
+            - /url: /raveldex/examples/inline-preview/
+        - region "Try inline search" [ref=f7e43]:
+          - generic [ref=f7e44]:
+            - heading "Try inline search" [level=2] [ref=f7e45]
+            - generic [ref=f7e46]:
+              - strong [ref=f7e47]: Browser starter
+              - paragraph [ref=f7e48]:
+                - text: Search
+                - code [ref=f7e49]: walking guide
+                - text: ", choose a topic, then open a guide. Try Load more to see the remaining matches."
+          - generic [ref=f7e50]:
+            - group "Example view" [ref=f7e51]:
+              - button "Preview" [ref=f7e52] [cursor=pointer]
+              - button "Code" [pressed] [ref=f7e53] [cursor=pointer]
+            - generic [ref=f7e130]:
+              - heading "Read the complete source" [level=3] [ref=f7e131]
+              - paragraph [ref=f7e132]: Code project selection changes the source shown here. The live preview always runs the Browser starter.
+              - generic [ref=f7e133]:
+                - generic [ref=f7e134]:
+                  - generic [ref=f7e135]: Code project
+                  - combobox "Code project" [ref=f7e136]:
+                    - option "Browser" [selected]
+                    - option "Astro"
+                - region "inline-browser source" [ref=f7e137]:
+                  - heading "inline-browser" [level=4] [ref=f7e138]
+                  - group [ref=f7e139]:
+                    - generic "README.md" [ref=f7e140] [cursor=pointer]
+                    - button "Copy README.md" [ref=f7e159] [cursor=pointer]
+                    - button "Select source" [ref=f7e160] [cursor=pointer]
+                    - status [ref=f7e201]: Copy unavailable. Use Select source, then copy the selected text manually.
+                    - 'region "Source: README.md" [ref=f7e161]':
+                      - code [ref=f7e162]:
+                        - generic [ref=f7e163]: "# Inline search for a browser site"
+                        - generic [ref=f7e164]: Copy this complete starter to add a search form, original-text snippets, a type filter and complete result paging. It uses native Raveldex in the browser's main thread and a small explicit guide allowlist. There is no worker, crawler, server API or diagnostic selector. The rendered pages remain usable without JavaScript.
+                        - generic [ref=f7e165]: "## Install and run"
+                        - generic [ref=f7e166]: "Use Node 22 or later and npm. Extract the complete starter into an empty directory with `tar -xzf inline-browser.tar.gz --strip-components=1`, then enter that directory. From a source checkout, you can instead copy the complete `examples/inline-browser/` folder to a new project."
+                        - generic [ref=f7e167]: "Install Raveldex and the starter's pinned build tooling, then build and preview:"
+                        - generic [ref=f7e168]: "```sh"
+                        - generic [ref=f7e169]: npm install @vmitsaras/raveldex@1.0.0
+                        - generic [ref=f7e170]: npm run build
+                        - generic [ref=f7e171]: npm run preview -- --port 4176
+                        - generic [ref=f7e172]: "```"
+                        - generic [ref=f7e173]: "Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command."
+                        - generic [ref=f7e174]: "Open `http://127.0.0.1:4176/`. Search `walking guide`: there are seven matches, with three initially visible. Load more shows six; selecting it again appends the seventh while keeping the earlier results displayed. Choose Guide to narrow to five pages. A search such as `weather` shows original text with highlighted matches; following its title opens the actual guide page. Ctrl+C stops this preview."
+                        - generic [ref=f7e175]: "## Deploy under a subdirectory"
+                        - generic [ref=f7e176]: "Use the same base for the build and preview:"
+                        - generic [ref=f7e177]: "```sh"
+                        - generic [ref=f7e178]: RAVELDEX_INLINE_BASE=/help/ npm run build
+                        - generic [ref=f7e179]: RAVELDEX_INLINE_BASE=/help/ npm run preview -- --port 4176
+                        - generic [ref=f7e180]: "```"
+                        - generic [ref=f7e181]: "Open `http://127.0.0.1:4176/help/`. The base must begin and end with `/`. Deploy the contents of `dist/` under that path. The build places all script, stylesheet, data and browse/result links under that base. The loader resolves `content.json` relative to the bundled module rather than assuming the site root. Do not change the base without rebuilding."
+                        - generic [ref=f7e182]: "## Replace the sample content"
+                        - generic [ref=f7e183]: "Edit `content.json`, then rebuild. Each entry has a unique `id`, a plain-text `title` and `body`, a string `category` and a unique local `/guides/slug/` path. Titles must contain non-whitespace text, be well-formed UTF-16 and fit within 1,024 UTF-16 units; invalid titles are refused before replacing generated pages or creating a loaded search owner. This starter allows up to 1,000 explicit entries and adds them in batches of 100. Those are starter bounds, not a capacity or speed guarantee. `build.mjs` creates the corresponding browse list and static guide pages, escaping text rather than treating it as HTML. Do not put secrets in this public file or in indexed text."
+                        - generic [ref=f7e184]: "`load.mjs` maps the same entries to `{ id, text: { title, body }, metadata: { category } }` search records and `{ id, title, url }` display records. If you index existing pages instead, supply their real canonical URLs and preserve the relationship between IDs, original source text and display records. This starter does not extract HTML or invent section anchors. Keep the authored browse links available while data loads and when it fails."
+                        - generic [ref=f7e185]: "The engine explicitly registers `createSourceProvider({ fields: ['body'] })`, `createSnippetEvidence({ fields: { body: 'source' } })` and `createFacets({ fields: ['category'] })`. Title and body are indexed; only body source is retained for snippets. Equality filtering is native core behavior, so the structured-filter add-on is unnecessary. To use only title/link search, remove the snippet/facet options in `controller.mjs` and their corresponding optional registrations/schema metadata in `load.mjs`."
+                        - generic [ref=f7e186]: "## Change a few CSS values"
+                        - generic [ref=f7e187]: "`main.mjs` imports the optional `inline.css` first and `theme.css` second. Change the scoped public properties in `theme.css`, then rebuild:"
+                        - generic [ref=f7e188]: "```css"
+                        - generic [ref=f7e189]: ".raveldex-inline {"
+                        - generic [ref=f7e190]: "--raveldex-inline-accent: #294e82;"
+                        - generic [ref=f7e191]: "--raveldex-inline-gap: 1.25rem;"
+                        - generic [ref=f7e192]: "--raveldex-inline-radius: .65rem;"
+                        - generic [ref=f7e193]: "}"
+                        - generic [ref=f7e194]: "```"
+                        - generic [ref=f7e195]: "These affect links/controls, spacing and corner shape without editing generated markup. Check text/focus contrast after changing colors. `controller.mjs` sets the batch size and plain-text labels. Its legacy `maxRenderedResults` option is accepted but no longer limits appends; omit that option in new integrations. The default final-word prefix mode lets `walk` find `walking`; earlier words remain exact."
+                        - generic [ref=f7e196]: "## Loading, retry and disposal"
+                        - generic [ref=f7e197]: "`main.mjs` explicitly starts a controller. The controller deduplicates concurrent starts, announces loading, leaves browse links available and exposes Retry loading search after a data or initialization failure. Test recovery locally by blocking `content.json`, then unblocking it and selecting Retry loading search. Data fetches use an AbortSignal; an owner created after destruction is disposed before it can mount."
+                        - generic [ref=f7e198]: "`createInlineSearch` accepts a `load(signal)` callback that transfers a **newly owned** `{ engine, documents, dispose }` object. It destroys the borrowed UI before disposing that owner, including on initialization failure and late completion. Do not return an engine owned elsewhere in your application. To integrate with an existing borrowed engine, mount `mountRaveldexInline` directly, call its `destroy()` when the view ends, and leave engine disposal to its existing owner."
+                        - generic [ref=f7e199]: "Call and await `controller.destroy()` before removing the integration in your own navigation system. It is idempotent, removes its Retry listener, aborts loading and waits for any late owner to be released. This page calls destruction on `pagehide` and creates a fresh controller on a back/forward-cache `pageshow`. No global debug API is exposed. The inline preset separately handles stale searches and revision-safe retry after initialization."
+                        - generic [ref=f7e200]: The headless checks exercise installed bytes, navigation, failure/delay/retry and teardown. They do not establish human screen-reader, physical input, actual zoom, broad browser support or large-data performance qualification.
+                    - textbox "Selected source" [active] [ref=f7e202]: "# Inline search for a browser site Copy this complete starter to add a search form, original-text snippets, a type filter and complete result paging. It uses native Raveldex in the browser's main thread and a small explicit guide allowlist. There is no worker, crawler, server API or diagnostic selector. The rendered pages remain usable without JavaScript. ## Install and run Use Node 22 or later and npm. Extract the complete starter into an empty directory with `tar -xzf inline-browser.tar.gz --strip-components=1`, then enter that directory. From a source checkout, you can instead copy the complete `examples/inline-browser/` folder to a new project. Install Raveldex and the starter's pinned build tooling, then build and preview: ```sh npm install @vmitsaras/raveldex@1.0.0 npm run build npm run preview -- --port 4176 ``` Keep the generated `package-lock.json` and use `npm ci` for subsequent installs. To test a local Raveldex build, substitute its core tarball path for the package name in the install command. Open `http://127.0.0.1:4176/`. Search `walking guide`: there are seven matches, with three initially visible. Load more shows six; selecting it again appends the seventh while keeping the earlier results displayed. Choose Guide to narrow to five pages. A search such as `weather` shows original text with highlighted matches; following its title opens the actual guide page. Ctrl+C stops this preview. ## Deploy under a subdirectory Use the same base for the build and preview: ```sh RAVELDEX_INLINE_BASE=/help/ npm run build RAVELDEX_INLINE_BASE=/help/ npm run preview -- --port 4176 ``` Open `http://127.0.0.1:4176/help/`. The base must begin and end with `/`. Deploy the contents of `dist/` under that path. The build places all script, stylesheet, data and browse/result links under that base. The loader resolves `content.json` relative to the bundled module rather than assuming the site root. Do not change the base without rebuilding. ## Replace the sample content Edit `content.json`, then rebuild. Each entry has a unique `id`, a plain-text `title` and `body`, a string `category` and a unique local `/guides/slug/` path. Titles must contain non-whitespace text, be well-formed UTF-16 and fit within 1,024 UTF-16 units; invalid titles are refused before replacing generated pages or creating a loaded search owner. This starter allows up to 1,000 explicit entries and adds them in batches of 100. Those are starter bounds, not a capacity or speed guarantee. `build.mjs` creates the corresponding browse list and static guide pages, escaping text rather than treating it as HTML. Do not put secrets in this public file or in indexed text. `load.mjs` maps the same entries to `{ id, text: { title, body }, metadata: { category } }` search records and `{ id, title, url }` display records. If you index existing pages instead, supply their real canonical URLs and preserve the relationship between IDs, original source text and display records. This starter does not extract HTML or invent section anchors. Keep the authored browse links available while data loads and when it fails. The engine explicitly registers `createSourceProvider({ fields: ['body'] })`, `createSnippetEvidence({ fields: { body: 'source' } })` and `createFacets({ fields: ['category'] })`. Title and body are indexed; only body source is retained for snippets. Equality filtering is native core behavior, so the structured-filter add-on is unnecessary. To use only title/link search, remove the snippet/facet options in `controller.mjs` and their corresponding optional registrations/schema metadata in `load.mjs`. ## Change a few CSS values `main.mjs` imports the optional `inline.css` first and `theme.css` second. Change the scoped public properties in `theme.css`, then rebuild: ```css .raveldex-inline { --raveldex-inline-accent: #294e82; --raveldex-inline-gap: 1.25rem; --raveldex-inline-radius: .65rem; } ``` These affect links/controls, spacing and corner shape without editing generated markup. Check text/focus contrast after changing colors. `controller.mjs` sets the batch size and plain-text labels. Its legacy `maxRenderedResults` option is accepted but no longer limits appends; omit that option in new integrations. The default final-word prefix mode lets `walk` find `walking`; earlier words remain exact. ## Loading, retry and disposal `main.mjs` explicitly starts a controller. The controller deduplicates concurrent starts, announces loading, leaves browse links available and exposes Retry loading search after a data or initialization failure. Test recovery locally by blocking `content.json`, then unblocking it and selecting Retry loading search. Data fetches use an AbortSignal; an owner created after destruction is disposed before it can mount. `createInlineSearch` accepts a `load(signal)` callback that transfers a **newly owned** `{ engine, documents, dispose }` object. It destroys the borrowed UI before disposing that owner, including on initialization failure and late completion. Do not return an engine owned elsewhere in your application. To integrate with an existing borrowed engine, mount `mountRaveldexInline` directly, call its `destroy()` when the view ends, and leave engine disposal to its existing owner. Call and await `controller.destroy()` before removing the integration in your own navigation system. It is idempotent, removes its Retry listener, aborts loading and waits for any late owner to be released. This page calls destruction on `pagehide` and creates a fresh controller on a back/forward-cache `pageshow`. No global debug API is exposed. The inline preset separately handles stale searches and revision-safe retry after initialization. The headless checks exercise installed bytes, navigation, failure/delay/retry and teardown. They do not establish human screen-reader, physical input, actual zoom, broad browser support or large-data performance qualification."
+                  - group [ref=f7e141]:
+                    - generic "package.json" [ref=f7e142] [cursor=pointer]
+                  - group [ref=f7e143]:
+                    - generic "build.mjs" [ref=f7e144] [cursor=pointer]
+                  - group [ref=f7e145]:
+                    - generic "preview.mjs" [ref=f7e146] [cursor=pointer]
+                  - group [ref=f7e147]:
+                    - generic "index.html" [ref=f7e148] [cursor=pointer]
+                  - group [ref=f7e149]:
+                    - generic "main.mjs" [ref=f7e150] [cursor=pointer]
+                  - group [ref=f7e151]:
+                    - generic "controller.mjs" [ref=f7e152] [cursor=pointer]
+                  - group [ref=f7e153]:
+                    - generic "load.mjs" [ref=f7e154] [cursor=pointer]
+                  - group [ref=f7e155]:
+                    - generic "theme.css" [ref=f7e156] [cursor=pointer]
+                  - group [ref=f7e157]:
+                    - generic "content.json" [ref=f7e158] [cursor=pointer]
+        - generic [ref=f7e56]:
+          - heading "Choose a complete starter" [level=2] [ref=f7e57]
+          - paragraph [ref=f7e58]: Choose a project for your site. Each download includes the sample content, working pages and styles. Use Node 24 and npm; serve the built files over HTTP or HTTPS.
+          - paragraph [ref=f7e59]:
+            - text: Index only public records. Snippets require
+            - code [ref=f7e60]: Intl.Segmenter
+            - text: ; Astro also needs Web Crypto on HTTPS or localhost and matching core/adapter package versions. Registry installation below requires the exact versions to be available. For unpublished/local work, use the selected project's tarball instructions below. Rebuild and deploy pages and assets together after changing content, configuration or deployment base.
+          - generic [ref=f7e61]:
+            - generic [ref=f7e62]:
+              - text: Installation platform
+              - combobox "Installation platform" [ref=f7e63]:
+                - option "Browser" [selected]
+                - option "Astro"
+            - region "Plain browser" [ref=f7e64]:
+              - heading "Plain browser" [level=3] [ref=f7e65]
+              - generic [ref=f7e66]:
+                - link "Setup and replacement-data guide" [ref=f7e67] [cursor=pointer]:
+                  - /url: /raveldex/examples/inline-browser/
+                - link "Download the complete starter" [ref=f7e68] [cursor=pointer]:
+                  - /url: /raveldex/example-files/inline-browser.tar.gz
+              - paragraph [ref=f7e69]:
+                - text: "For local/unpublished packages, substitute the core tarball in the install command:"
+                - code [ref=f7e70]: npm install /absolute/path/core.tgz
+                - text: . Use the chosen project's pinned tooling and retain its generated lockfile.
+              - list [ref=f7e71]:
+                - listitem [ref=f7e72]:
+                  - text: In an empty directory, extract
+                  - code [ref=f7e73]: tar -xzf inline-browser.tar.gz --strip-components=1
+                  - text: . Read the setup guide for deployment paths and preview commands.
+                - listitem [ref=f7e74]:
+                  - text: Install from that directory with
+                  - code [ref=f7e75]: npm install @vmitsaras/raveldex@1.0.0
+                  - text: ", then run"
+                  - code [ref=f7e76]: npm run build
+                  - text: and
+                  - code [ref=f7e77]: npm run preview
+                  - text: to try the sample content.
+                - listitem [ref=f7e78]:
+                  - text: Replace the public records in
+                  - code [ref=f7e79]: content.json
+                  - text: ", keeping IDs and destination paths stable. The guide explains the fields and any matching heading anchors. Rebuild after editing."
+                - listitem [ref=f7e80]:
+                  - text: Change
+                  - code [ref=f7e81]: theme.css
+                  - text: using the theme recipe below. Rebuild, restart the preview and check search, links and keyboard focus with your own content.
+              - group [ref=f7e82]:
+                - generic "View exact source files" [ref=f7e83] [cursor=pointer]
+          - group [ref=f7e84]:
+            - generic "How this example works" [ref=f7e85] [cursor=pointer]
+          - paragraph [ref=f7e86]: Snippets need Intl.Segmenter. Astro also needs Web Crypto over HTTPS or localhost.
+          - group [ref=f7e87]:
+            - generic "Data and browser requirements" [ref=f7e88] [cursor=pointer]
+          - heading "Change the appearance" [level=2] [ref=f7e89]
+          - list [ref=f7e90]:
+            - listitem [ref=f7e91]: Copy and install one complete starter using its setup guide. Run it once and search the sample content before changing the CSS.
+            - listitem [ref=f7e92]:
+              - text: Edit the existing
+              - code [ref=f7e93]: .raveldex-inline
+              - text: rule in the browser's
+              - code [ref=f7e94]: theme.css
+              - text: or Astro's
+              - code [ref=f7e95]: src/style.css
+              - text: ". Those files load after the package stylesheet. Use these values for the accent, corners and result spacing:"
+          - region "Inline search theme properties" [ref=f7e96]:
+            - code [ref=f7e97]: ".raveldex-inline { --raveldex-inline-accent: #145b45; --raveldex-inline-radius: .75rem; --raveldex-inline-gap: 1.25rem; }"
+          - list [ref=f7e98]:
+            - listitem [ref=f7e99]:
+              - text: Stop the preview, run
+              - code [ref=f7e100]: npm run build
+              - text: in the copied project and restart its documented preview command with the same deployment base. Reload the page; the accent is green, corners are rounder and result spacing is wider.
+            - listitem [ref=f7e101]:
+              - text: Search
+              - code [ref=f7e102]: walking guide
+              - text: in the browser starter or
+              - code [ref=f7e103]: workshop
+              - text: in Astro. Totals remain seven and six pages respectively. Use Tab to inspect visible focus, then Load more and follow a result. The CSS changes appearance without changing search data or behavior.
+          - paragraph [ref=f7e104]:
+            - text: For a dark surface, set background, color, muted, border, focus and highlight colors together. Keep visible focus and sufficient contrast when replacing those colors. See
+            - link "inline options and theme properties" [ref=f7e105] [cursor=pointer]:
+              - /url: /raveldex/reference/hosts/#inline-result-pages-filters-and-snippets
+            - text: for the supported controls.
+          - heading "Before using your own theme" [level=2] [ref=f7e106]
+          - paragraph [ref=f7e107]:
+            - text: Local automated Chrome checks cover installed examples, keyboard events, scripted composition, loading/retry, teardown, CSS overrides and emulated narrow/theme layouts. Human screen-reader speech, physical IME/touch/on-screen keyboards, actual browser zoom and other browser/device combinations need separate checks in your application. See
+            - link "starter adoption and local checks" [ref=f7e108] [cursor=pointer]:
+              - /url: /raveldex/reference/hosts/#starter-adoption-and-local-checks
+            - text: .
+        - heading "Related interfaces" [level=2] [ref=f7e109]
+        - navigation "Search solutions" [ref=f7e110]:
+          - list [ref=f7e111]:
+            - listitem [ref=f7e112]:
+              - link "Inline" [ref=f7e113] [cursor=pointer]:
+                - /url: /raveldex/examples/inline/
+            - listitem [ref=f7e114]:
+              - link "Modal" [ref=f7e115] [cursor=pointer]:
+                - /url: /raveldex/examples/modal/
+            - listitem [ref=f7e116]:
+              - link "Dropdown" [ref=f7e117] [cursor=pointer]:
+                - /url: /raveldex/examples/dropdown/
+            - listitem [ref=f7e118]:
+              - link "Directory" [ref=f7e119] [cursor=pointer]:
+                - /url: /raveldex/examples/directory/
+            - listitem [ref=f7e120]:
+              - link "Cards" [ref=f7e121] [cursor=pointer]:
+                - /url: /raveldex/examples/cards/
+        - paragraph [ref=f7e122]:
+          - link "Compare solutions and requirements" [ref=f7e123] [cursor=pointer]:
+            - /url: /raveldex/examples/#choose-a-search-solution
+  - contentinfo [ref=f7e124]:
+    - paragraph [ref=f7e125]:
+      - link "Developer Workbench" [ref=f7e126] [cursor=pointer]:
+        - /url: /raveldex/demo/
+    - paragraph [ref=f7e127]:
+      - link "Source code" [ref=f7e128] [cursor=pointer]:
+        - /url: https://github.com/vmitsaras/raveldex
+      - text: ·
+      - link "MIT license" [ref=f7e129] [cursor=pointer]:
+        - /url: /raveldex/site-assets/LICENSE.txt
+```
