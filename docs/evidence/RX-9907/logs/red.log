@@ -1,0 +1,104 @@
+Reading: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ guide outline targets real preserved headings (863.517291ms)
+✖ reference retains signatures defaults failures and examples (120.440167ms)
+✖ reading code copies literal snippets and recovers from denied clipboard (126.214459ms)
+✖ long code and tables do not force page overflow (104.994167ms)
+✖ reading layouts retain no-JavaScript code navigation and complete contracts (94.609417ms)
+✔ reading presentation preserves the five-guide indexed bodies and original offsets (11.741334ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 1
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1666.97725
+
+✖ failing tests:
+
+test at test/pages/docs-reading.test.mjs:20:1
+✖ guide outline targets real preserved headings (863.517291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 'guide'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-reading.test.mjs:22:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'guide',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-reading.test.mjs:39:1
+✖ reference retains signatures defaults failures and examples (120.440167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + null
+  - 'reference'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-reading.test.mjs:41:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'reference',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-reading.test.mjs:51:1
+✖ reading code copies literal snippets and recovers from denied clipboard (126.214459ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(await blocks.count()>0)
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-reading.test.mjs:54:62)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-reading.test.mjs:65:1
+✖ long code and tables do not force page overflow (104.994167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 'guide'
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-reading.test.mjs:68:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'guide',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-reading.test.mjs:80:1
+✖ reading layouts retain no-JavaScript code navigation and complete contracts (94.609417ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(await page.locator('main [data-code-panel]').count()>0)
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-reading.test.mjs:83:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

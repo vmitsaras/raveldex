@@ -3831,7 +3831,7 @@ Roll the approved detail/setup template onto directory and rich-results pages wh
 
 **Give guides and API reference distinct reading layouts**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/125)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/125)
 
 **Dependencies:** [RX-9904](IMPLEMENTATION_TASKS.md#rx-9904)
 
@@ -3859,7 +3859,10 @@ Apply contextual reading/reference layouts and improve representative Getting st
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9907.md](docs/evidence/RX-9907.md)
+- [docs/evidence/RX-9907/boundaries.json](docs/evidence/RX-9907/boundaries.json)
+- [docs/evidence/RX-9907/review.md](docs/evidence/RX-9907/review.md)
+- [docs/evidence/RX-9907/tracking.json](docs/evidence/RX-9907/tracking.json)
 
 
 ## RX-9908

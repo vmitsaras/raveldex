@@ -4,6 +4,7 @@ function mount() {
   dispose?.();
   const controller = new AbortController();
   const { signal } = controller;
+  const copyAttempts = new WeakMap();
   const views = [...document.querySelectorAll('[data-view-switch]')];
   const choices = [...document.querySelectorAll('[data-example-choice]')];
   const showView = (root, value) => {
@@ -56,13 +57,16 @@ function mount() {
     button.hidden = false;
     button.addEventListener('click', async () => {
       const panel = button.closest('[data-code-panel]'), status = panel.querySelector('[data-copy-status]');
+      const attempt = (copyAttempts.get(panel) ?? 0) + 1;
+      copyAttempts.set(panel, attempt);
+      const current = () => !signal.aborted && copyAttempts.get(panel) === attempt;
       status.textContent = '';
       try {
         if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
         await navigator.clipboard.writeText(panel.getAttribute('data-code-text'));
-        if (!signal.aborted) status.textContent = 'Copied source.';
+        if (current()) status.textContent = 'Copied source.';
       } catch {
-        if (!signal.aborted) status.textContent = 'Copy unavailable. Use Select source, then copy the selected text manually.';
+        if (current()) status.textContent = 'Copy unavailable. Use Select source, then copy the selected text manually.';
       }
     }, { signal });
   }

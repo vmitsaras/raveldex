@@ -209,3 +209,32 @@ requirements, CSS recipes and support limits. The Workbench controls use everyda
 labels while keeping their stored values and data hooks. Restart or a setting
 change retains the query, clears category and returns to page one; Stop removes
 controls and releases the application owner.
+
+## Reading and reference pages
+
+`Layout.astro` selects guide/reference reading modes from the existing route
+registry. Guides keep a shorter prose column; reference code and semantic tables
+can use the wider center column, with local keyboard scrolling. Reading table cells keep ordinary word widths,
+so dense comparisons scroll locally rather than compressing to single letters. The right outline
+still targets real headings and hides before the left navigation collapses.
+
+`reading.mjs` adds site-only task steps to Getting started and Hosts and groups
+representative Core contracts under purpose, signatures, defaults, returns,
+failures and related recipes. The complete minimal-use code comes from the
+already-published `core.mjs` recipe. All five indexed Markdown sources, their
+fenced examples and original UTF-16 section bodies remain byte-identical; packaged
+docs and the installed search corpus are not rewritten by this presentation pass.
+
+The installed Satteri/Shiki pipeline highlights named code blocks on guide and
+reference routes only. Each figure retains the original fenced code as escaped
+text and a copy payload; generation refuses any highlighting normalization drift.
+The existing site-only `example-controls.mjs` supplies copy/manual selection and
+page lifecycle cleanup and latest-attempt copy feedback. Without JavaScript the names, highlighted code, semantic
+tables, all contracts and links remain readable. No new parser, runtime dependency
+or package customization API is introduced.
+
+After generation run `node --test test/pages/docs-reading.test.mjs test/tooling/pages.test.mjs test/pages/release-guidance.test.mjs test/tooling/usage-corpus.test.mjs`,
+then `npm run docs:check` and `npm run pages:check`. The reading checks cover
+preserved headings/signatures/examples/corpus, exact copied text and denial,
+late feedback, no-JS, local keyboard scrolling, 320 CSS px and emulated text scale.
+They do not establish human AT, physical input, OS clipboard or actual browser zoom.
