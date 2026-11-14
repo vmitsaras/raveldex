@@ -3680,7 +3680,7 @@ Make /examples/ a visual choose-first gallery using inert real-interface preview
 
 **Complete the Inline preview and installation pilot**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/121)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/121)
 
 **Dependencies:** [RX-9901](IMPLEMENTATION_TASKS.md#rx-9901)
 
@@ -3709,7 +3709,9 @@ Adapt the existing Inline showcase into the complete try/install/data/style pilo
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9903.md](docs/evidence/RX-9903.md)
+- [docs/evidence/RX-9903/boundaries.json](docs/evidence/RX-9903/boundaries.json)
+- [docs/evidence/RX-9903/candidate-package/candidate-report.json](docs/evidence/RX-9903/candidate-package/candidate-report.json)
 
 
 ## RX-9904

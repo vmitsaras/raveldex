@@ -1,22 +1,27 @@
 ---
 import { STARTERS, starterSource, starterArchive } from './starters.mjs';
-const { family } = Astro.props;
+const { family, pilot = false } = Astro.props;
 const base = '/raveldex/';
 ---
 <p>Choose a project for your site. Each download includes the sample content, working pages and styles. Use Node 24 and npm; serve the built files over HTTP or HTTPS.</p>
+{pilot && <p data-install-prerequisites>Index only public records. Snippets require <code>Intl.Segmenter</code>; Astro also needs Web Crypto on HTTPS or localhost and matching core/adapter package versions. Registry installation below requires the exact versions to be available. For unpublished/local work, use the selected project's tarball instructions below. Rebuild and deploy pages and assets together after changing content, configuration or deployment base.</p>}
+<div data-example-choice={pilot ? '' : undefined}>
+{pilot && <div hidden data-choice-label><label for={`install-${family}`}>Installation platform</label><select id={`install-${family}`} data-choice-select>{STARTERS.filter(starter => starter.family === family).map(starter => <option value={starter.id}>{starter.id.endsWith('-astro') ? 'Astro' : 'Browser'}</option>)}</select></div>}
 {STARTERS.filter(starter => starter.family === family).map(starter => {
   const astro = starter.id.endsWith('-astro');
   const stylesheet = astro ? 'src/style.css' : 'theme.css';
   const install = 'npm install @vmitsaras/raveldex@1.0.0' + (astro ? ' @vmitsaras/raveldex-astro@1.0.0' : '');
-  return <section class="starter-setup__project" aria-labelledby={'starter-' + starter.id}>
+  return <section class="starter-setup__project" data-choice-panel={pilot ? starter.id : undefined} data-starter-id={starter.id} aria-labelledby={'starter-' + starter.id}>
     <h3 id={'starter-' + starter.id}>{starter.title}</h3>
     <div class="starter-setup__actions"><a href={base + `examples/${starter.id}/`}>Setup and replacement-data guide</a><a href={base + starterArchive(starter.id)} download>Download the complete starter</a></div>
+    {pilot && <p data-package-guidance>For local/unpublished packages, substitute {astro ? 'matching core and Astro tarballs' : 'the core tarball'} in the install command: <code>{astro ? 'npm install /absolute/path/core.tgz /absolute/path/astro.tgz' : 'npm install /absolute/path/core.tgz'}</code>. Use the chosen project's pinned tooling and retain its generated lockfile.</p>}
     <ol data-starter-steps>
       <li>In an empty directory, extract <code>{`tar -xzf ${starter.id}.tar.gz --strip-components=1`}</code>. Read the setup guide for deployment paths and preview commands.</li>
       <li>Install from that directory with <code>{install}</code>, then run <code>npm run build</code> and <code>npm run preview</code> to try the sample content.</li>
-      <li>Replace the public records in <code>content.json</code>, keeping IDs and destination paths stable.{astro && <> Change <code>buildId</code> when the content changes.</>} The guide explains the fields and any matching heading anchors. Rebuild after editing.</li>
+      <li>{pilot && astro ? <>Replace <code>entries</code> in <code>content.json</code>: keep each <code>slug</code> stable and update <code>title</code>, <code>category</code> and <code>body</code>. Change <code>buildId</code> when content or configuration changes; the page's expected buildId must match the deployed manifest. Rebuild and deploy the complete page/asset set together.</> : <>Replace the public records in <code>content.json</code>, keeping IDs and destination paths stable.{astro && <> Change <code>buildId</code> when the content changes.</>} The guide explains the fields and any matching heading anchors. Rebuild after editing.</>}</li>
       <li>Change <code>{stylesheet}</code> using the theme recipe below. Rebuild, restart the preview and check search, links and keyboard focus with your own content.</li>
     </ol>
     <details><summary>View exact source files</summary><ul>{starter.files.map(path => <li><a href={base + starterSource(starter.id, path)}>{path}</a></li>)}</ul></details>
   </section>;
 })}
+</div>

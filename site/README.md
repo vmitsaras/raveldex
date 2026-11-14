@@ -49,6 +49,32 @@ for exact identities, renders, source boundaries and unrun human qualification.
 
 ### Existing consumer examples and search
 
+The Inline pilot opts into `ExampleShowcase`/`StarterSetup` with `pilot`.
+Other families keep their previous flow pending the owner gate. `DemoPreview`
+renders one persistent Browser iframe and an independent Code view; native
+pressed buttons switch views without replacing the frame. Installation platform
+and Code project are separate native selects. Astro instructions never relabel
+or rebuild the Browser preview. Without enhancement, both source projects and
+both setup variants remain readable through ordinary disclosures/links.
+
+The scratch builder creates `starter-code.mjs` from only the Inline `STARTERS`
+allowlist. `CodePanel` uses Astro's existing Code/Shiki renderer; a transformer
+restores its omitted final newline and fails the build on other text drift.
+Copy uses the same escaped literal text, without filenames or highlighting.
+Clipboard denial/unavailability leaves a manual-selection instruction. Select
+source creates and focuses an exact readonly field, including the final newline
+that browser range selection omits. Fragment navigation reveals the selected
+project before scrolling. `example-controls.mjs` owns removable site UI listeners;
+pagehide aborts listeners and suppresses late clipboard feedback, and persisted
+pageshow rebinds once. It never owns an engine or rewrites preview markup.
+
+The builder explicitly copies/hashes these components and the controller, keeping
+consumer CSS, downloaded source and package inputs separate. Run the RX-9903
+selection in `test/pages/docs-example-flow.test.mjs`, `inline-starter.test.mjs`,
+`solutions-qualification.test.mjs` and `site-search.test.mjs` after generation,
+plus the complete site suite and `pages:check`. Keep real Browser/Astro fixture
+verification distinct from human AT, physical input/zoom and owner approval.
+
 `Examples.astro` owns the overview at `/examples/`. Five inert local PNG snapshots
 show the real Browser starters; they add no iframe, search owner or remote image
 service. `solutions.mjs` supplies presentation names/use cases, while `STARTERS`

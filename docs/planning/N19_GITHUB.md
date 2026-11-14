@@ -88,3 +88,7 @@ authorized source delivery. Human owner approval at RX-9904 and publication
 remain separate. Historical registration/delivery sections above retain their scope.
 
 The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](../evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.
+
+## RX-9903 local acceptance
+
+The owner selected RX-9903 only after RX-9902 delivery in PR #139 (merge `c7d59a0`). The Inline pilot is implemented and verified locally on `codex/n19-rx9903`, with one persistent Browser preview, exact Code/copy/manual-selection views and independent Browser/Astro installation. N19 is **3/8 accepted**. RX-9904 explicitly remains **planned/unstarted**; owner approval and other-family rollout are separate. Source is uncommitted. See [RX-9903 evidence](../evidence/RX-9903.md) for 17 focused and 53 site passes, 1,744 project passes/eight optional comparator skips, installed candidate, four review repairs and one deferred Minor payload optimization. Native hierarchy and original milestone membership remain preserved; new evidence links on remote main await separately authorized source delivery.

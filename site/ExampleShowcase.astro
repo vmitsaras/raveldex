@@ -1,7 +1,8 @@
 ---
 import Layout from './Layout.astro';
 import SolutionChooser from './SolutionChooser.astro';
-const { family, title, description, previewTitle, previewHeight = 720 } = Astro.props;
+import DemoPreview from './DemoPreview.astro';
+const { family, title, description, previewTitle, previewHeight = 720, pilot = false } = Astro.props;
 const preview = `/raveldex/examples/${family}-preview/`;
 ---
 <Layout wide frontmatter={{ title }}>
@@ -12,17 +13,19 @@ const preview = `/raveldex/examples/${family}-preview/`;
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
       </a>
     </header>
-    <SolutionChooser current={family} compare={false} />
-    <section class="example-showcase__preview" aria-labelledby={`try-${family}`}>
+    {!pilot && <SolutionChooser current={family} compare={false} />}
+    {pilot ? <DemoPreview family={family} previewTitle={previewTitle} previewHeight={previewHeight}><slot name="preview-hint" /></DemoPreview> : <section class="example-showcase__preview" aria-labelledby={`try-${family}`}>
       <header class="example-showcase__toolbar">
         <h2 id={`try-${family}`}>Try {family === 'cards' ? 'rich result cards' : family === 'directory' ? 'the resource directory' : `${family} search`}</h2>
         <p><slot name="preview-hint" /></p>
       </header>
       <iframe src={preview} title={previewTitle} loading="lazy" height={previewHeight}></iframe>
-    </section>
+    </section>}
     <div class="example-showcase__docs site-main--article"><slot /></div>
+    {pilot && <><h2>Related interfaces</h2><SolutionChooser current={family} compare={false} /></>}
     <p class="example-showcase__compare"><a href="/raveldex/examples/#choose-a-search-solution">Compare solutions and requirements</a></p>
   </div>
+  {pilot && <script is:inline type="module" src="/raveldex/site-assets/example-controls.mjs"></script>}
 </Layout>
 
 <style is:global>
@@ -74,4 +77,16 @@ const preview = `/raveldex/examples/${family}-preview/`;
     .site a.example-showcase__open, .example-showcase .solution-chooser a[aria-current="page"] { border: 1px solid ButtonText; color: LinkText; }
     .example-showcase__intro p, .example-showcase__toolbar p, .example-showcase__docs details > :not(summary) { color: CanvasText; }
   }
+</style>
+<style is:global>
+  .example-pilot [hidden], .example-showcase__docs [hidden] { display: none !important; }
+  .example-controls { padding: 1rem; border-block-end: 1px solid #dce0e5; }
+  .example-controls button, .example-code button { font: inherit; padding: .5rem .8rem; border: 1px solid #7a8795; border-radius: .3rem; background: #fff; color: #151b21; }
+  .example-controls button[aria-pressed="true"] { background: #edf2f7; border-block-end: 3px solid #075ca8; font-weight: 700; }
+  .example-source { padding: 1rem; min-inline-size: 0; }
+  .example-code { min-inline-size: 0; margin-block: 1rem; border-block: 1px solid #dce0e5; padding-block: .5rem; }
+  .example-code summary { cursor: pointer; padding-block: .65rem; overflow-wrap: anywhere; }
+  .example-code pre { max-inline-size: 100%; overflow-x: auto; padding: 1rem; font-size: .875rem; }
+  .example-pilot label, .example-showcase__docs [data-choice-label] { display: block; margin-block: 1rem; }
+  .example-pilot select, .example-showcase__docs select { font: inherit; padding: .5rem; max-inline-size: 100%; }
 </style>

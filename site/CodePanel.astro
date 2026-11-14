@@ -1,0 +1,19 @@
+---
+import { Code } from 'astro:components';
+const { path, text } = Astro.props;
+const lang = path.endsWith('.astro') ? 'astro' : path.endsWith('.mjs') ? 'javascript' : path.endsWith('.json') ? 'json' : path.endsWith('.css') ? 'css' : path.endsWith('.html') ? 'html' : 'markdown';
+// Shiki omits the final newline; restore only that literal suffix and refuse any other drift.
+const literal = node => node.type === 'text' ? node.value : (node.children ?? []).map(literal).join('');
+const transformers = [{ code(node) {
+  const rendered = literal(node), suffix = text.slice(rendered.length);
+  if (!text.startsWith(rendered) || !/^\n*$/.test(suffix)) throw new Error(`Highlighted source differs: ${path}`);
+  if (suffix) node.children.push({ type: 'text', value: suffix });
+} }];
+---
+<details class="example-code" data-code-panel data-code-text={text}>
+  <summary data-code-file={path}>{path}</summary>
+  <button type="button" hidden data-copy-code aria-label={`Copy ${path}`}>Copy {path}</button>
+  <button type="button" hidden data-select-code>Select source</button>
+  <p role="status" aria-live="polite" data-copy-status></p>
+  <Code code={text} lang={lang} transformers={transformers} theme="github-light" tabindex="0" role="region" aria-label={`Source: ${path}`} />
+</details>
