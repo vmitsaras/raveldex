@@ -12,6 +12,6 @@ const starters = STARTERS.filter(starter => starter.family === solution.id);
     <ul class="solution-card__platforms" data-solution-platforms aria-label={`${solution.title} starter platforms`}>
       {starters.map(starter => <li><a href={href(`examples/${starter.id}`)}>{starter.id.endsWith('-astro') ? 'Astro' : 'Browser'}</a></li>)}
     </ul>
-    <a class="solution-card__demo" href={href(`examples/${solution.id}`)} data-solution-demo>{solution.action}<span aria-hidden="true"> →</span></a>
+    <a class="solution-card__demo" href={href(`examples/${solution.id}`)} data-solution-demo>Open<span class="solution-card__destination">{solution.action.slice(4)}</span></a>
   </div>
 </li>

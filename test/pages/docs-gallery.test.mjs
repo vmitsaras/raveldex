@@ -31,7 +31,7 @@ test('gallery exposes five truthful interface choices', async () => {
   try {
     await page.goto(new URL('examples/', base).href);
     assert.equal(await page.locator('main h1').innerText(), 'Choose a search interface');
-    const cards = page.locator('[data-solution-gallery] > li');
+    const cards = page.locator('[data-solution-gallery] > li:not(.examples-gallery__live)');
     assert.equal(await cards.count(), 5);
     const mappings = [];
     for (let i = 0; i < families.length; i++) {
@@ -60,10 +60,10 @@ test('gallery exposes five truthful interface choices', async () => {
 });
 
 // Catches lost legacy/source aliases and gallery-owned engines, frames or remote thumbnail requests.
-test('gallery preserves comparison anchors without initializing demo engines', async () => {
+test('gallery preserves comparison anchors and keeps its example cards static', async () => {
   const page = await browser.newPage(); page.setDefaultTimeout(5000);
   const requests = [], errors = [];
-  page.on('request', request => requests.push({ url: request.url(), type: request.resourceType() }));
+  page.on('request', request => { if (request.frame() === page.mainFrame()) requests.push({ url: request.url(), type: request.resourceType() }); });
   page.on('pageerror', error => errors.push(String(error)));
   try {
     await page.goto(new URL('examples/', base).href, { waitUntil: 'networkidle' });
@@ -73,8 +73,8 @@ test('gallery preserves comparison anchors without initializing demo engines', a
     assert.ok(await page.getByRole('table').getByRole('columnheader').count() >= 3);
     for (const destination of ['examples/core/', 'examples/browser/', 'examples/astro/', 'examples/migration/', 'examples/api/', 'demo/', 'guide/overview/', 'reference/hosts/#starter-adoption-and-local-checks'])
       assert.ok(await page.locator(`main a[href="/raveldex/${destination}"]`).count(), destination);
-    assert.equal(await page.locator('iframe, main input, main button').count(), 0);
-    assert.equal(page.frames().length, 1);
+    assert.equal(await page.locator('main input, main button').count(), 0);
+    assert.equal(await page.locator('iframe').count(), 0);
     const local = requests.filter(r => new URL(r.url).pathname.startsWith('/raveldex/'));
     assert.equal(requests.length, local.length, 'Only local assets');
     assert.equal(local.filter(r => /\.json(?:\?|$)|-preview\/|\/demo\/|worker/i.test(new URL(r.url).pathname)).length, 0, JSON.stringify(requests));
@@ -98,7 +98,7 @@ test('gallery supports no-JS keyboard navigation and narrow comparison', async (
     for (let i = 0; i < await links.count(); i++) {
       const active = links.nth(i);
       assert.equal(await active.evaluate(node => node === document.activeElement), true);
-      assert.notEqual(await active.evaluate(node => getComputedStyle(node).outlineStyle), 'none');
+      assert.notEqual(await active.evaluate(node => getComputedStyle(node, node.matches('.solution-card__demo') ? '::after' : null).outlineStyle), 'none');
       if (i + 1 < await links.count()) await active.press('Tab');
     }
     await gallery.locator('[data-solution-demo]').first().press('Enter');
@@ -123,7 +123,7 @@ test('gallery keeps focus and semantics in forced colors and reduced motion', as
     await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
     await page.goto(new URL('examples/', base).href);
     const link = page.locator('[data-solution-demo]').first();
-    await link.focus(); assert.notEqual(await link.evaluate(n => getComputedStyle(n).outlineStyle), 'none');
+    await link.focus(); assert.notEqual(await link.evaluate(n => getComputedStyle(n, '::after').outlineStyle), 'none');
     await page.emulateMedia({ forcedColors: 'none' });
     await page.addScriptTag({ content: await readFile(new URL('../../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8') });
     const violations = await page.evaluate(async () => (await axe.run({ runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } })).violations.map(n => ({ id: n.id, targets: n.nodes.map(item => item.target) })));
@@ -180,6 +180,63 @@ test('gallery feature and recovery links reach the precise retained instructions
     for (const destination of destinations) {
       await page.goto(new URL(destination, base).href);
       assert.equal(await page.locator(`[id="${new URL(page.url()).hash.slice(1)}"]`).isVisible(), true);
+    }
+  } finally { await page.close(); }
+});
+
+// The taller live example must not stretch the static cards into empty columns.
+test('home gallery keeps five compact choices alongside one working search', async () => {
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  try {
+    await page.goto(base);
+    assert.equal(await page.locator('main h1').innerText(), 'Choose a search interface');
+    assert.equal(await page.locator('iframe').count(), 0);
+    await page.locator('.examples-gallery__live > img').evaluate(n => n.decode());
+    assert.equal(await page.locator('.examples-gallery__live .solution-card__demo').getAttribute('href'), '/raveldex/examples/inline-preview/');
+    const cards = page.locator('[data-solution-gallery] > li:not(.examples-gallery__live)');
+    assert.equal(await cards.count(), 5);
+    for (const width of [772, 1280]) {
+      await page.setViewportSize({ width, height: 900 });
+      const boxes = await page.locator('[data-solution-gallery] > li').evaluateAll(nodes => nodes.map(n => {
+        const box = n.getBoundingClientRect(), link = n.querySelector('.solution-card__demo').getBoundingClientRect();
+        return { top: box.top, height: box.height, linkBottom: link.bottom };
+      }));
+      for (let i = 0; i < boxes.length; i += 2) {
+        assert.ok(Math.abs(boxes[i].top - boxes[i + 1].top) < 1);
+        assert.ok(Math.abs(boxes[i].height - boxes[i + 1].height) < 1, `Row ${i / 2} heights differ at ${width}px`);
+        assert.ok(Math.abs(boxes[i].linkBottom - boxes[i + 1].linkBottom) < 1, `Row links differ at ${width}px`);
+      }
+    }
+    await page.setViewportSize({ width: 320, height: 800 });
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth));
+  } finally { await page.close(); }
+});
+
+// The stretched native link must cover cards without swallowing their separate setup links.
+test('gallery cards open from their image and retain named keyboard and platform links', async () => {
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } }); page.setDefaultTimeout(5000);
+  try {
+    for (const route of ['', 'examples/']) {
+      await page.goto(new URL(route, base).href);
+      const cards = page.locator('[data-solution-gallery] > li');
+      for (let i = 0; i < 6; i++) {
+        const card = cards.nth(i), link = card.locator('.solution-card__demo');
+        const target = await link.getAttribute('href');
+        await card.locator('img').scrollIntoViewIfNeeded();
+        const image = await card.locator('img').boundingBox();
+        await page.mouse.click(image.x + image.width / 2, image.y + image.height / 2);
+        await page.waitForURL(url => url.pathname === target);
+        await page.goBack();
+        const current = cards.nth(i).locator('.solution-card__demo');
+        assert.equal(await current.evaluate(n => n.firstChild.textContent), 'Open');
+        const hidden = current.locator('.solution-card__destination');
+        assert.ok((await hidden.textContent()).trim().length > 0);
+        assert.ok((await hidden.boundingBox()).width <= 1);
+        await current.focus(); await current.press('Enter');
+        await page.waitForURL(url => url.pathname === target); await page.goBack();
+      }
+      const platform = cards.first().getByRole('link', { name: 'Astro', exact: true });
+      await platform.click(); await page.waitForURL('**/examples/inline-astro/');
     }
   } finally { await page.close(); }
 });

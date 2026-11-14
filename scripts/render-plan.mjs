@@ -21,7 +21,7 @@ function issueSearch(roadmap, id) {
 }
 
 function taskDocument(task) {
-  return task.milestone === 'N5' ? 'docs/planning/OPTIONAL_FEATURES.md' : 'IMPLEMENTATION_TASKS.md';
+  return task.milestone === 'N5' ? 'OPTIONAL_FEATURES.md' : 'IMPLEMENTATION_TASKS.md';
 }
 
 function taskLink(task, prefix = '') {
@@ -32,7 +32,11 @@ function list(items) {
   return items.map((item) => '- ' + item).join('\n');
 }
 
-function taskCard(roadmap, task, prefix = '') {
+function planningPath(path) {
+  return path.startsWith('docs/') ? '../' + path.slice('docs/'.length) : '../../' + path;
+}
+
+function taskCard(roadmap, task) {
   const tasks = new Map(roadmap.tasks.map((item) => [item.id, item]));
   const lines = [
     '## ' + task.id,
@@ -43,7 +47,7 @@ function taskCard(roadmap, task, prefix = '') {
       '[GitHub tracking](' + issueSearch(roadmap, task.id) + ')',
     '',
     '**Dependencies:** ' + (task.dependsOn.length > 0
-      ? task.dependsOn.map((id) => taskLink(tasks.get(id), prefix)).join(', ')
+      ? task.dependsOn.map((id) => taskLink(tasks.get(id))).join(', ')
       : 'None'),
     '',
     task.objective,
@@ -58,7 +62,7 @@ function taskCard(roadmap, task, prefix = '') {
     '',
     '**Contracts**',
     '',
-    task.specs.map((path) => '[' + path.split('/').at(-1) + '](' + prefix + path + ')').join(', '),
+    task.specs.map((path) => '[' + path.split('/').at(-1) + '](' + planningPath(path) + ')').join(', '),
     '',
     '**Acceptance criteria**',
     '',
@@ -71,7 +75,7 @@ function taskCard(roadmap, task, prefix = '') {
     '**Recorded evidence**',
     '',
     task.evidence.length > 0
-      ? list(task.evidence.map((path) => '[' + path + '](' + prefix + path + ')'))
+      ? list(task.evidence.map((path) => '[' + path + '](' + planningPath(path) + ')'))
       : 'None recorded. A future report destination in the verification steps is not evidence.',
     '',
   );
@@ -104,10 +108,10 @@ function renderRoadmap(roadmap) {
     '',
     '## Where to look',
     '',
-    '- [Canonical task state](docs/planning/roadmap.json): IDs, dependencies, status, acceptance, specifications, and actual evidence.',
+    '- [Canonical task state](roadmap.json): IDs, dependencies, status, acceptance, specifications, and actual evidence.',
     '- [Implementation task cards](IMPLEMENTATION_TASKS.md): the release tasks and verification requirements.',
-    '- [Optional feature tracks](docs/planning/OPTIONAL_FEATURES.md): current optional-task states and separately unscheduled research ideas.',
-    '- [Verification plan](docs/planning/VERIFICATION_PLAN.md): what must be observed before a capability is called verified.',
+    '- [Optional feature tracks](OPTIONAL_FEATURES.md): current optional-task states and separately unscheduled research ideas.',
+    '- [Verification plan](VERIFICATION_PLAN.md): what must be observed before a capability is called verified.',
     '- [GitHub milestones](https://github.com/' + roadmap.repository + '/milestones) and [issues](https://github.com/' + roadmap.repository + '/issues): the human tracking view, using the same IDs and acceptance conditions.',
     '',
     '`docs/planning/roadmap.json` is authoritative. This file, the task cards, and GitHub issues are generated tracking views. Update the manifest first and synchronize the views; issue closure alone does not establish verified completion.',
@@ -157,7 +161,7 @@ function renderRoadmap(roadmap) {
     '',
     '## Provenance',
     '',
-    'This roadmap transcribes the native-library direction and `RX-*` milestones from the owner-supplied conversation and adapts them for this fresh repository. It does not claim the earlier planning archive is present, external research was refreshed, or native implementation results already exist. See the [native direction decision](docs/decisions/0001-native-direction.md) and [project context](PROJECT_CONTEXT.md).',
+    'This roadmap transcribes the native-library direction and `RX-*` milestones from the owner-supplied conversation and adapts them for this fresh repository. It does not claim the earlier planning archive is present, external research was refreshed, or native implementation results already exist. See the [native direction decision](../decisions/0001-native-direction.md) and [project context](PROJECT_CONTEXT.md).',
     '',
   );
   return lines.join('\n');
@@ -169,11 +173,11 @@ function renderTasks(roadmap) {
     '',
     '# Raveldex implementation tasks',
     '',
-    'These bounded contracts describe the native release track. Proposed module paths are not a claim that implementation already exists. Task status and recorded evidence below are generated from [the canonical roadmap](docs/planning/roadmap.json).',
+    'These bounded contracts describe the native release track. Proposed module paths are not a claim that implementation already exists. Task status and recorded evidence below are generated from [the canonical roadmap](roadmap.json).',
     '',
     '## How to execute a task',
     '',
-    '1. Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the task card, its specifications, and directly affected source.',
+    '1. Read `../../AGENTS.md`, `PROJECT_CONTEXT.md`, the task card, its specifications, and directly affected source.',
     '2. Confirm dependencies are `done` and the current owner request covers the work. Readiness does not expand a bootstrap into the whole product.',
     '3. Implement the smallest useful slice satisfying its acceptance criteria. Clarify actual load-bearing gaps; do not reopen the selected native direction or invent new feature scope.',
     '4. Verify from the criteria using independent expected outcomes where applicable. Record Pass, Fail, Blocked, or Not Applicable for each criterion and explain any N/A.',
@@ -189,7 +193,7 @@ function renderTasks(roadmap) {
   lines.push(
     '## Optional enhancement tasks',
     '',
-    'The `RX-A*` task cards in [Optional features](docs/planning/OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.',
+    'The `RX-A*` task cards in [Optional features](OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.',
     '',
   );
   return lines.join('\n');
@@ -216,7 +220,7 @@ function renderOptional(roadmap) {
   ];
   for (const task of roadmap.tasks) {
     const milestone = roadmap.milestones.find((item) => item.id === task.milestone);
-    if (milestone.track === 'optional') lines.push(taskCard(roadmap, task, '../../'), '');
+    if (milestone.track === 'optional') lines.push(taskCard(roadmap, task), '');
   }
   lines.push(
     '## Research ideas outside the task backlog',
@@ -250,8 +254,8 @@ function main() {
   const check = args[0] === '--check';
   const roadmap = loadRoadmap(ROOT);
   const outputs = new Map([
-    ['ROADMAP.md', renderRoadmap(roadmap)],
-    ['IMPLEMENTATION_TASKS.md', renderTasks(roadmap)],
+    ['docs/planning/ROADMAP.md', renderRoadmap(roadmap)],
+    ['docs/planning/IMPLEMENTATION_TASKS.md', renderTasks(roadmap)],
     ['docs/planning/OPTIONAL_FEATURES.md', renderOptional(roadmap)],
   ]);
   const stale = [];

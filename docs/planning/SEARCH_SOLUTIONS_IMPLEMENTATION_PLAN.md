@@ -8,7 +8,7 @@ Deliver complete optional search experiences that a developer can adopt with a w
 
 The original request authorized the plan and local roadmap updates only. Successive owner instructions authorized RX-6001, RX-6002 and RX-6003 implementation, followed by the RX-6004 contract, RX-6005 implementation, RX-6006 modal, RX-6007 installed modal starters, RX-6008 first-wave qualification, RX-7001 compact dropdown, RX-7002 installed header adoption, RX-7003 directory queries/URL state RX-7004 directory controls/adoption RX-7005 rich result presentation and RX-7006 final family qualification. New tasks began as `planned` with empty evidence; a task is advanced only with its own real acceptance record. A later instruction to implement/continue is sufficient to start the next dependency-ready task; ordinary implementation details do not require another approval gate.
 
-The [canonical manifest](roadmap.json) owns task state, dependency order and stable task-specific acceptance criteria. [Generated task cards](../../IMPLEMENTATION_TASKS.md#rx-6001) expand those criteria. The [search-solutions contract](../specs/SEARCH_SOLUTIONS.md) owns required behavior and boundaries. This plan supplies execution details rather than competing task states.
+The [canonical manifest](roadmap.json) owns task state, dependency order and stable task-specific acceptance criteria. [Generated task cards](IMPLEMENTATION_TASKS.md#rx-6001) expand those criteria. The [search-solutions contract](../specs/SEARCH_SOLUTIONS.md) owns required behavior and boundaries. This plan supplies execution details rather than competing task states.
 
 ## Inputs, facts and assumptions
 

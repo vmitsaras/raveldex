@@ -145,7 +145,7 @@ export function mountRaveldexDropdown(options: DropdownUIOptions): DropdownUIHan
   popup.setAttribute('popover', 'manual'); popup.setAttribute('role', 'grid'); popup.setAttribute('aria-label', messages.resultsLabel);
   input.setAttribute('aria-controls', popup.id);
   if (shortcut) input.setAttribute('aria-keyshortcuts', 'Control+K Meta+K');
-  form.append(full); shell.append(form, hint, status, retry, popup);
+  form.append(full); shell.append(status, form, hint, retry, popup);
   const originalNodes = [...captured.root.childNodes], listeners: (() => void)[] = [];
   let destroyed = false, wanted = false, composing = false, suppressedComposition = false, imeSubmit = false;
   let compositionValue: string | undefined, timer: number | undefined, sequence = 0, controller: AbortController | undefined;
@@ -244,10 +244,10 @@ export function mountRaveldexDropdown(options: DropdownUIOptions): DropdownUIHan
     if (!usable()) { geometryFailure = 'anchor'; return false; }
     const view = win.visualViewport, leftEdge = view?.offsetLeft ?? 0, topEdge = view?.offsetTop ?? 0;
     const width = view?.width ?? win.innerWidth, height = view?.height ?? win.innerHeight;
-    const anchor = input.getBoundingClientRect(), panel = shell.getBoundingClientRect(), gutter = 8;
+    const anchor = input.getBoundingClientRect(), panel = form.getBoundingClientRect(), gutter = 8, gap = 4;
     if (width <= gutter * 2 || height <= gutter * 2 || !anchor.width || !anchor.height ||
       anchor.bottom <= topEdge || anchor.top >= topEdge + height || anchor.right <= leftEdge || anchor.left >= leftEdge + width) { geometryFailure = 'anchor'; return false; }
-    const availableBelow = Math.max(0, topEdge + height - gutter - panel.bottom), availableAbove = Math.max(0, panel.top - topEdge - gutter);
+    const availableBelow = Math.max(0, topEdge + height - gutter - panel.bottom - gap), availableAbove = Math.max(0, panel.top - topEdge - gutter - gap);
     const need = Math.min(popup.scrollHeight || 160, 160), above = availableBelow < need && availableAbove > availableBelow;
     const available = above ? availableAbove : availableBelow;
     const style = win.getComputedStyle(popup), borders = (parseFloat(style.borderTopWidth) || 0) + (parseFloat(style.borderBottomWidth) || 0);
@@ -257,7 +257,7 @@ export function mountRaveldexDropdown(options: DropdownUIOptions): DropdownUIHan
     popup.style.setProperty('--_max-height', `${available}px`);
     // While closed, assign a provisional top; after opening, use its constrained height.
     const blockSize = visible() ? popup.getBoundingClientRect().height : Math.min(available, popup.scrollHeight || 160);
-    popup.style.setProperty('--_top', `${above ? Math.max(topEdge + gutter, panel.top - blockSize) : panel.bottom}px`);
+    popup.style.setProperty('--_top', `${above ? Math.max(topEdge + gutter, panel.top - blockSize - gap) : panel.bottom + gap}px`);
     return true;
   };
   const collapseForSpace = (ticket: number, total: number): void => {

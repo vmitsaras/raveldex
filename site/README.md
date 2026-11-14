@@ -209,3 +209,79 @@ requirements, CSS recipes and support limits. The Workbench controls use everyda
 labels while keeping their stored values and data hooks. Restart or a setting
 change retains the query, clears category and returns to page one; Stop removes
 controls and releases the application owner.
+
+## Reading and reference pages
+
+`Layout.astro` selects guide/reference reading modes from the existing route
+registry. Guides keep a shorter prose column; reference code and semantic tables
+can use the wider center column, with local keyboard scrolling. Reading table cells keep ordinary word widths,
+so dense comparisons scroll locally rather than compressing to single letters. The right outline
+still targets real headings and hides before the left navigation collapses.
+
+`reading.mjs` adds site-only task steps to Getting started and Hosts and groups
+representative Core contracts under purpose, signatures, defaults, returns,
+failures and related recipes. The complete minimal-use code comes from the
+already-published `core.mjs` recipe. All five indexed Markdown sources, their
+fenced examples and original UTF-16 section bodies remain byte-identical; packaged
+docs and the installed search corpus are not rewritten by this presentation pass.
+
+The installed Satteri/Shiki pipeline highlights named code blocks on guide and
+reference routes only. Each figure retains the original fenced code as escaped
+text and a copy payload; generation refuses any highlighting normalization drift.
+The existing site-only `example-controls.mjs` supplies copy/manual selection and
+page lifecycle cleanup and latest-attempt copy feedback. Without JavaScript the names, highlighted code, semantic
+tables, all contracts and links remain readable. No new parser, runtime dependency
+or package customization API is introduced.
+
+After generation run `node --test test/pages/docs-reading.test.mjs test/tooling/pages.test.mjs test/pages/release-guidance.test.mjs test/tooling/usage-corpus.test.mjs`,
+then `npm run docs:check` and `npm run pages:check`. The reading checks cover
+preserved headings/signatures/examples/corpus, exact copied text and denial,
+late feedback, no-JS, local keyboard scrolling, 320 CSS px and emulated text scale.
+They do not establish human AT, physical input, OS clipboard or actual browser zoom.
+
+## Integrated site qualification
+
+RX-9908 qualifies the existing shell, five galleries, eight complete starter
+projects and guide/reference layouts together. After one successful `npm run check`,
+reuse that build with `npm run pages:generate`, `npm run pages:check` and
+`node --test --test-concurrency=1 test/pages/*.test.mjs`. The installed candidate
+checker can reuse the same build with `node scripts/candidate-check.mjs --output`
+followed by a new, unused evidence directory.
+
+`test/pages/integrated-site.test.mjs` adds the combined 320/768/1280/1440 CSS px
+and short-viewport matrix, rendered text/syntax/focus contrast, and scripted
+forced-colors/reduced-motion control checks. Set `RAVELDEX_INTEGRATED_REPORT` to
+a JSON output path to retain the measured pairs, geometry and adjacent captures.
+The existing family, reading, shell, search and public-inventory checks retain
+their semantic assertions for exact downloads/source, persistent iframe state,
+copy denial/recovery, no-JavaScript reading, empty/error states and keyboard access.
+Viewport sizing and media emulation do not qualify actual browser zoom or human AT.
+
+The [integrated evidence](../docs/evidence/RX-9908.md) records the actual candidate,
+commands, review, owner-approved manual limits and tracking read-back. Local
+acceptance does not publish the site or packages, deliver Git changes, or restore
+the deleted hosted workflows.
+
+## Home/gallery review amendment
+
+The owner's post-N19 visual review selects the examples gallery as the home page.
+`Home.astro` reuses `Examples.astro`; `/examples/` remains a working destination.
+The existing installed Inline preview occupies the sixth gallery position beside
+five static interface cards, with its own full-page link and no-JavaScript browse
+fallback. The core example and task links remain below the home gallery. Historic
+N19 evidence retains its original candidate identity; this amendment changes the
+previous inert-gallery assumption to one isolated live iframe, with no starter,
+engine or package changes.
+
+A subsequent owner review requests matching the sixth item to the other cards:
+its final presentation is a decorative existing Inline screenshot, heading,
+description and links. The live iframe is removed from both gallery routes;
+Open the search example reaches the working standalone starter, including its
+ordinary browse links without JavaScript. This supersedes the embedded-preview
+part of the amendment above while retaining the gallery as home.
+
+Card primary links display Open and keep their destination suffix in visually
+hidden text. A native anchor pseudo-element spans each positioned card; setup
+links have a higher stacking level and remain independently operable. Focus is
+shown on the full card, with forced-colors support. No JavaScript click forwarding
+or additional keyboard stops are introduced.

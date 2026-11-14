@@ -1,0 +1,45 @@
+Integrated site: {"browser":"157.0.8103.51","node":"v24.21.0","os":"darwin","release":"27.0.0","arch":"arm64"}
+✖ integrated page roles reflow and preserve keyboard access across wide narrow and short viewports (1052.276ms)
+✖ integrated shell code and setup use legible final rendered colors (353.607541ms)
+✔ integrated controls retain focus and state in forced colors and reduced motion (451.174042ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2189.634292
+
+✖ failing tests:
+
+test at test/pages/integrated-site.test.mjs:35:1
+✖ integrated page roles reflow and preserve keyboard access across wide narrow and short viewports (1052.276ms)
+  Error: ENOENT: no such file or directory, mkdir '/evidence'
+      at async mkdir (node:internal/fs/promises:1564:10)
+      at async TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/integrated-site.test.mjs:67:80)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'mkdir',
+    path: '/evidence'
+  }
+
+test at test/pages/integrated-site.test.mjs:76:1
+✖ integrated shell code and setup use legible final rendered colors (353.607541ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+  
+  'none'
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/integrated-site.test.mjs:106:14)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:541:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'none',
+    expected: 'none',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }

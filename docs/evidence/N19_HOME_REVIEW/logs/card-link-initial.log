@@ -1,0 +1,88 @@
+Docs gallery: 157.0.8103.51 / v24.21.0 / darwin arm64
+✔ gallery exposes five truthful interface choices (801.635042ms)
+✔ gallery preserves comparison anchors and keeps its example cards static (659.412291ms)
+✖ gallery supports no-JS keyboard navigation and narrow comparison (163.7885ms)
+✖ gallery keeps focus and semantics in forced colors and reduced motion (130.86225ms)
+✔ gallery comparison keeps readable columns accessible by keyboard at 320px (154.803167ms)
+✔ gallery archive labels include their complete visible wording (140.347792ms)
+✔ gallery feature and recovery links reach the precise retained instructions (251.9695ms)
+✔ home gallery keeps five compact choices alongside one working search (150.415709ms)
+✖ gallery cards open from their image and retain named keyboard and platform links (5114.444709ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 6
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7906.739333
+
+✖ failing tests:
+
+test at test/pages/docs-gallery.test.mjs:89:1
+✖ gallery supports no-JS keyboard navigation and narrow comparison (163.7885ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+  
+  'none'
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:101:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'none',
+    expected: 'none',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-gallery.test.mjs:120:1
+✖ gallery keeps focus and semantics in forced colors and reduced motion (130.86225ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+  
+  'none'
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:126:32)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:541:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'none',
+    expected: 'none',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-gallery.test.mjs:216:1
+✖ gallery cards open from their image and retain named keyboard and platform links (5114.444709ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-solution-gallery] > li').first().locator('img')[22m
+  [2m    - locator resolved to <img alt="" width="960" height="680" loading="lazy" src="/raveldex/site-assets/examples/inline.png"/>[22m
+  [2m  - attempting click action[22m
+  [2m    2 × waiting for element to be visible, enabled and stable[22m
+  [2m      - element is visible, enabled and stable[22m
+  [2m      - scrolling into view if needed[22m
+  [2m      - done scrolling[22m
+  [2m      - <a data-solution-demo="" class="solution-card__demo" href="/raveldex/examples/inline/">…</a> from <div class="solution-card__body">…</div> subtree intercepts pointer events[22m
+  [2m    - retrying click action[22m
+  [2m    - waiting 20ms[22m
+  [2m    2 × waiting for element to be visible, enabled and stable[22m
+  [2m      - element is visible, enabled and stable[22m
+  [2m      - scrolling into view if needed[22m
+  [2m      - done scrolling[22m
+  [2m      - <a data-solution-demo="" class="solution-card__demo" href="/raveldex/examples/inline/">…</a> from <div class="solution-card__body">…</div> subtree intercepts pointer events[22m
+  [2m    - retrying click action[22m
+  [2m      - waiting 100ms[22m
+  [2m    10 × waiting for element to be visible, enabled and stable[22m
+  [2m       - element is visible, enabled and stable[22m
+  [2m       - scrolling into view if needed[22m
+  [2m       - done scrolling[22m
+  [2m       - <a data-solution-demo="" class="solution-card__demo" href="/raveldex/examples/inline/">…</a> from <div class="solution-card__body">…</div> subtree intercepts pointer events[22m
+  [2m     - retrying click action[22m
+  [2m       - waiting 500ms[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-gallery.test.mjs:225:35) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for locator('[data-solution-gallery] > li').first().locator('img')", '    - locator resolved to <img alt="" width="960" height="680" loading="lazy" src="/raveldex/site-assets/examples/inline.png"/>', '  - attempting click action', '    2 × waiting for element to be visible, enabled and stable', '      - element is visible, enabled and stable', '      - scrolling into view if needed', '      - done scrolling', '      - <a data-solution-demo="" class="solution-card__demo" href="/raveldex/examples/inline/">…</a> from <div class="solution-card__body">…</div> subtree intercepts pointer events', '    - retrying click action', '    - waiting 20ms', '    2 × waiting for element to be visible, enabled and stable', '      - element is visible, enabled and stable', '      - scrolling into view if needed', '      - done scrolling', '      - <a data-solution-demo="" class="solution-card__demo" href="/raveldex/examples/inline/">…</a> from <div class="solution-card__body">…</div> subtree intercepts pointer events', '    - retrying click action', '      - waiting 100ms', '    10 × waiting for element to be visible, enabled and stable', '       - element is visible, enabled and stable', '       - scrolling into view if needed', '       - done scrolling', '       - <a data-solution-demo="" class="solution-card__demo" href="/raveldex/examples/inline/">…</a> from <div class="solution-card__body">…</div> subtree intercepts pointer events', '     - retrying click action', '       - waiting 500ms' ]
+  }

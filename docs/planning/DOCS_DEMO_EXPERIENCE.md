@@ -2,7 +2,7 @@
 
 > For agentic workers: use the Superpowers `executing-plans` workflow to implement one dependency-ready task at a time after an explicit implementation instruction. The registration request authorized planning and GitHub setup only. The subsequent request authorizes delivery and merge of this planning-only PR after CI; it does not authorize product code, dependency installation or N19 implementation.
 
-**Current execution — 14 November 2026:** The owner-selected RX-9906 is **implemented and verified locally** on `codex/n19-rx9906`, source base `877774b`. Directory and rich results use the approved Preview/Code/install template, with their actual projects, records/providers and native filtering/history/image contracts. [Evidence](../evidence/RX-9906.md) records required 26/26, full site 68/68, project 1,744 passed/eight optional skips/zero failures, fresh installed candidate, exact identities and one independent review. N19 is **6/8 accepted**. **RX-9907 remains planned/unstarted**, and RX-9908 waits for it. Changes are uncommitted/unpushed; source delivery and publication remain separate. Live read-back confirms RX-9905 [PR141](https://github.com/vmitsaras/raveldex/pull/141) was externally merged as `13637d8`; no executor merge or hosted CI pass is claimed here. Historical approval/delivery snapshots retain their original identities and scope.
+**Current execution — 14 November 2026:** The owner-selected RX-9908 integrated qualification is **implemented and verified locally** on `codex/n19-rx9908`, source base `62407bdce95700df1cca2998e8e5e305608db94e` (locally committed RX-9907). Fresh project verification passed **1,744 tests**, with eight optional skips and zero failures; the final site suite passed **80/80**, and fresh installed candidate, packaged docs, Pages and identity checks passed. All 92 original HTML routes, 433 anchors, eight exact starter projects and original five-guide bodies/UTF-16 offsets remain preserved. [Evidence](../evidence/RX-9908.md) records 40 route/viewport cases, 1,780 measured contrast pairs, native frame traversal, independent review and the owner's explicit acceptance of unavailable manual checks remaining unverified. No essential defect was found; the one deferred Minor is pinning the historical identity audit before a future rerun. N19 is **8/8 accepted**; no selected release task remains. Targeted GitHub closeout preserves native parents and human notes. RX-9908 changes remain uncommitted/unpushed; source delivery, hosted CI, deployment and publication remain separate, and workflow deletion is preserved. Historical pilot approval/delivery snapshots retain their exact original identities and scope.
 
 **Goal:** Help a developer choose an interface, try the real starter, install the matching project, replace its data and find a precise API contract.
 
@@ -197,3 +197,19 @@ The owner subsequently authorized [RX-9902 source delivery through a CI-checked 
 ## RX-9903 source-delivery selection — 14 November 2026
 
 The owner authorized [RX-9903 commit/push and PR delivery](../evidence/RX_9903_DELIVERY_20261114.md). After main removed all GitHub workflows, the owner explicitly selected preserving that deletion and leaving the PR open after local verification. Hosted CI and merge are not claimed. RX-9904 remains planned/unstarted; approval and rollout are separate.
+
+## Post-acceptance owner home/gallery amendment — 14 November 2026
+
+The owner's rendered-preview comments explicitly select the gallery as the home
+page and move the former home Inline search example into its sixth grid position.
+This later instruction supersedes the original inert-gallery requirement for the
+new review candidate: retain five inert choice cards and one isolated installed
+Inline iframe. Keep `/examples/`, existing home anchors/core/task links and all
+starter/guide/API destinations. Historical N19 evidence and RX-9904 approval stay
+tied to their original identities. See [the amendment evidence](../evidence/N19_HOME_REVIEW.md).
+No new milestone, tracking mutation or source delivery is implied.
+
+The subsequent owner card-style review supersedes the embedded-frame portion:
+show the existing Inline screenshot first, followed by heading, description and
+links matching the five interface cards. The actual search remains reachable
+through its standalone preview link; the home/gallery itself is static again.

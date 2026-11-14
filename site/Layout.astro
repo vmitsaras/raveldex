@@ -5,6 +5,7 @@ import { DESTINATIONS, navigationFor, pageOutline } from './navigation.mjs';
 const { frontmatter = {}, wide = false, headings = [] } = Astro.props;
 const current = frontmatter.route === undefined ? Astro.url.pathname : href(frontmatter.route);
 const navigation = navigationFor(current);
+const reading = !wide && (navigation.page.group === 'reference' ? 'reference' : navigation.page.group === 'guide' ? 'guide' : undefined);
 const outline = pageOutline(navigation.page, headings);
 ---
 <!doctype html>
@@ -18,6 +19,7 @@ const outline = pageOutline(navigation.page, headings);
     <link rel="stylesheet" href={base + 'site-assets/search.css'} />
     <script is:inline type="module" src={base + 'site-assets/search/main.mjs'}></script>
     <script is:inline type="module" src={base + 'site-assets/shell.mjs'}></script>
+    {reading && <script is:inline type="module" src={base + 'site-assets/example-controls.mjs'}></script>}
     <slot name="head" />
   </head>
   <body class="site">
@@ -43,7 +45,7 @@ const outline = pageOutline(navigation.page, headings);
           </nav>
         </details>
       </div>}
-      <main id="main" class:list={['site-main', { 'site-main--article': !wide }]} tabindex="-1">
+      <main id="main" data-reading-layout={reading} class:list={['site-main', { 'site-main--article': !wide, 'site-main--guide': reading === 'guide', 'site-main--reference': reading === 'reference' }]} tabindex="-1">
         {navigation.page.route && <nav class="site-breadcrumb" aria-label="Breadcrumb"><ol class="rx:flex rx:flex-wrap rx:items-center rx:gap-2">
           {navigation.breadcrumbs.map(item => <li><a href={item.href}>{item.label}</a><span aria-hidden="true">/</span></li>)}
           <li><span aria-current="page">{navigation.page.label}</span></li>

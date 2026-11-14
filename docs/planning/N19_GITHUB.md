@@ -111,7 +111,7 @@ The owner selected the next open rollout slice. RX-9905 applies the approved
 pilot template to Modal and Dropdown, preserving both Modal projects, Browser-only
 Dropdown, persistent preview, exact source/copy and native full-page behavior.
 [Evidence](../evidence/RX-9905.md): final required25/25, complete site61/61,
-project1744passes/eight optional skips/zero failures, installed candidate and
+project 1744passes/eight optional skips/zero failures, installed candidate and
 Pages/identity checks Pass. Review repair bounds a cancellation wait and qualifies
 the Astro-only adapter prerequisite. One README wording Minor and inherited
 source-HTML duplication optimization remain deferred.
@@ -153,3 +153,41 @@ the prior delivery paragraphs retain their historical open/no-CI scope. Its tree
 matches this slice's 877774b source base. This executor did not merge it.
 No commit/push, new PR/merge, workflow restoration, deployment or publication was
 performed for RX-9906. Evidence is local until separately authorized source delivery.
+
+## RX-9907 local acceptance — 14 November 2026
+
+The owner selected only RX-9907. [Evidence](../evidence/RX-9907.md) records
+required 22/22, complete site 77/77, complete project 1,744passed/eight optional skips/
+zero failures, fresh installed candidate and final source/output/capture identities.
+Site-only reading transformations preserve all five original indexed Markdown
+sources and offsets; packaged docs remain unchanged. Independent review found
+table readability/scroll and stale copy retry feedback defects; both repaired
+with observed RED→GREEN browser checks and a final green full site selection.
+
+Canonical RX-9907 is done; N19 is **7/8 accepted**. GitHub#125 is completed;
+overview#118 remains open. RX-9908 is dependency-ready but explicitly unstarted,
+still planned with empty evidence. Native hierarchy/notes and exact read-back
+are preserved in [tracking](../evidence/RX-9907/tracking.json).
+
+Changes remain uncommitted on codex/n19-rx9907, source base df9432d. Source delivery
+and publication are separate. Prior PR142 was externally merged as633f653, with
+the same source tree; no executor merge or hosted CI success is inferred.
+
+
+## RX-9908 integrated acceptance — 14 November 2026
+
+N19 is **8/8 accepted** after [RX-9908 qualification](../evidence/RX-9908.md):
+fresh project 1,744 passes/eight optional skips, final site 80/80, installed
+candidate and original output/corpus/route/anchor identities verified. One
+independent review found no essential defect; the historical identity helper
+pinning Minor is deferred. The owner explicitly accepted human AT, physical input
+and unavailable actual browser zoom remaining unverified for local N19 acceptance.
+The exact RX-9904 visual response/candidate remain unchanged.
+
+Targeted closeout updates N19 managed sections/current-execution notes and closes
+RX-9908, overview #118 and milestone #16 only after canonical acceptance. Exact
+native children/order, milestone membership, human notes and unrelated metadata
+are read back; cached aggregate counters do not override actual child states.
+RX-9908 changes remain uncommitted/unpushed on `codex/n19-rx9908`, base `62407bd`.
+No source delivery, workflow restoration, hosted CI, deployment, publication or
+release action is included. Historical snapshots above retain their original scope.

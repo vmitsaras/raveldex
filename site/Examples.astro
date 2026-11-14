@@ -4,6 +4,7 @@ import SolutionCard from './SolutionCard.astro';
 import { SOLUTIONS } from './solutions.mjs';
 import { STARTERS, starterArchive } from './starters.mjs';
 import { BASE, href } from './pages.mjs';
+const { home = false } = Astro.props;
 const sections = [
   ['choose-a-search-solution', 'Compare interfaces'],
   ['data-and-capabilities', 'Data and capabilities'],
@@ -18,16 +19,28 @@ const comparisons = [
   ['cards', 'List, cards or grid over directory results', 'Plain-text metadata; images start off', 'cards-data'],
 ];
 ---
-<Layout frontmatter={{ title: 'Choose a search interface', route: 'examples' }} wide headings={sections.map(([slug, text]) => ({ depth: 2, slug, text }))}>
+<Layout frontmatter={{ title: 'Choose a search interface', route: home ? '' : 'examples' }} wide headings={sections.map(([slug, text]) => ({ depth: 2, slug, text }))}>
+  {home && <Fragment slot="head"><link rel="stylesheet" href="/raveldex/site-assets/workbench.css" /></Fragment>}
   <div class="examples-gallery">
-    <header class="examples-gallery__intro">
+    <header class="examples-gallery__intro" id={home ? 'add-local-search-to-your-application' : undefined}>
       <p class="examples-gallery__eyebrow">Examples · Five interfaces, eight complete projects</p>
       <h1 id="examples">Choose a search interface</h1>
       <p>Find the layout that fits your site, try its working demo, then copy a complete project and replace the sample content.</p>
     </header>
     <p class="examples-gallery__snapshot-note">Snapshots show the Browser starters; open a gallery to try the live demo.</p>
-    <ul class="examples-gallery__choices" data-solution-gallery aria-label="Search interface choices">
+    <ul id={home ? 'choose-search' : undefined} class="examples-gallery__choices" data-solution-gallery aria-label="Search interface choices">
       {SOLUTIONS.map(solution => <SolutionCard solution={solution} />)}
+      <li class="solution-card examples-gallery__live" aria-labelledby="try-search">
+        <img src="/raveldex/site-assets/examples/inline.png" width="960" height="680" alt="" loading="lazy" />
+        <div class="solution-card__body">
+          <h2 id="try-search">Find a guide</h2>
+          <p>Try the complete search form, narrow results by topic and open a walking guide.</p>
+          <ul class="solution-card__platforms" aria-label="Guide search example links">
+            <li><a href="/raveldex/examples/inline/">Use this inline search</a></li>
+          </ul>
+          <a class="solution-card__demo" href="/raveldex/examples/inline-preview/">Open<span class="solution-card__destination"> the search example</span></a>
+        </div>
+      </li>
     </ul>
     <section aria-labelledby="choose-a-search-solution">
       <h2 id="choose-a-search-solution">Compare interfaces</h2>
@@ -61,5 +74,6 @@ const comparisons = [
       <p>Building your own interface? Start with <a href={href('examples/core')}>core-only terminal search</a> or the smaller <a href={href('examples/api')}>installed API recipes</a>. <a href={href('guide/overview')}>Get started</a> explains package installation.</p>
       <p>For developer exploration, open the <a href={href('demo')}>Developer Workbench</a> and its <a href={href('examples/browser')}>run instructions</a>. The <a href={href('examples/astro')}>Astro setup fixture</a> and <a href={href('examples/migration')}>migration converter example</a> cover separate integration tasks.</p>
     </section>
+    <slot />
   </div>
 </Layout>

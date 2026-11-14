@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Astro package · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/search/modal.css"><link rel="stylesheet" href="/raveldex/site-assets/search.css"><script type="module" src="/raveldex/site-assets/search/main.mjs"></script><script type="module" src="/raveldex/site-assets/shell.mjs"></script><link rel="stylesheet" href="/raveldex/site-assets/Layout.CDrjmQVC.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><div class="site-header__actions"><a class="site-header__search-fallback" href="/raveldex/guide/" data-site-search-fallback>Browse guides</a><button class="site-header__search" type="button" hidden data-site-search-trigger aria-label="Search documentation" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75"></circle><path d="m16 16 4.5 4.5"></path></svg><span>Search docs</span><kbd aria-hidden="true"><span data-site-search-modifier>Ctrl</span> K</kbd></button><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/overview/">Get started</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/guide/">Documentation</a></li><li><a href="/raveldex/reference/" data-section-current="true" aria-current="location">API reference</a></li></ul></nav></div></header><div class="site-frame site-frame--context site-frame--outline"><div class="site-sidebar"><details class="site-section" data-site-section open><summary>API reference navigation</summary><nav aria-label="API reference navigation"><p class="site-section__label" aria-hidden="true">API reference</p><ul><li><a href="/raveldex/reference/astro-package/" aria-current="page">Astro package</a></li><li><a href="/raveldex/reference/english-package/">English package</a></li><li><a href="/raveldex/reference/">API reference</a></li><li><a href="/raveldex/reference/core/">Core API</a></li><li><a href="/raveldex/reference/addons/">Addons</a></li><li><a href="/raveldex/reference/hosts/">Hosts and UI</a></li><li><a href="/raveldex/reference/typo/">Typo</a></li><li><a href="/raveldex/reference/suggestions/">Suggestions</a></li><li><a href="/raveldex/reference/synonyms/">Synonyms</a></li><li><a href="/raveldex/reference/english/">English</a></li><li><a href="/raveldex/reference/identifiers/">Identifiers</a></li><li><a href="/raveldex/reference/literal/">Literal</a></li><li><a href="/raveldex/reference/proximity/">Proximity</a></li><li><a href="/raveldex/reference/query-syntax/">Query syntax</a></li><li><a href="/raveldex/reference/record-patch/">Record patch</a></li><li><a href="/raveldex/reference/static-astro/">Static astro</a></li><li><a href="/raveldex/reference/localization/">Localization</a></li><li><a href="/raveldex/reference/result-content/">Result content</a></li><li><a href="/raveldex/reference/cms-refresh/">Cms refresh</a></li></ul></nav></details></div><main id="main" class="site-main site-main--article" tabindex="-1"><nav class="site-breadcrumb" aria-label="Breadcrumb"><ol class="rx:flex rx:flex-wrap rx:items-center rx:gap-2"><li><a href="/raveldex/">Home</a><span aria-hidden="true">/</span></li><li><a href="/raveldex/reference/">API reference</a><span aria-hidden="true">/</span></li><li><span aria-current="page">Astro package</span></li></ol></nav><h1 id="raveldex-static-search-and-astro-integration">Raveldex static search and Astro integration</h1>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Astro package · Raveldex</title><meta name="description" content="Learn to index records, build a search interface and integrate Raveldex with your application."><link rel="stylesheet" href="/raveldex/site-assets/search/modal.css"><link rel="stylesheet" href="/raveldex/site-assets/search.css"><script type="module" src="/raveldex/site-assets/search/main.mjs"></script><script type="module" src="/raveldex/site-assets/shell.mjs"></script><script type="module" src="/raveldex/site-assets/example-controls.mjs"></script><link rel="stylesheet" href="/raveldex/site-assets/Layout.CNAyDveX.css"></head><body class="site"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="site-header__brand" href="/raveldex/" aria-label="Raveldex home">Raveldex</a><div class="site-header__actions"><a class="site-header__search-fallback" href="/raveldex/guide/" data-site-search-fallback>Browse guides</a><button class="site-header__search" type="button" hidden data-site-search-trigger aria-label="Search documentation" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75"></circle><path d="m16 16 4.5 4.5"></path></svg><span>Search docs</span><kbd aria-hidden="true"><span data-site-search-modifier>Ctrl</span> K</kbd></button><nav class="site-header__nav" aria-label="Main navigation"><ul><li><a href="/raveldex/guide/overview/">Get started</a></li><li><a href="/raveldex/examples/">Examples</a></li><li><a href="/raveldex/guide/">Documentation</a></li><li><a href="/raveldex/reference/" data-section-current="true" aria-current="location">API reference</a></li></ul></nav></div></header><div class="site-frame site-frame--context site-frame--outline"><div class="site-sidebar"><details class="site-section" data-site-section open><summary>API reference navigation</summary><nav aria-label="API reference navigation"><p class="site-section__label" aria-hidden="true">API reference</p><ul><li><a href="/raveldex/reference/astro-package/" aria-current="page">Astro package</a></li><li><a href="/raveldex/reference/english-package/">English package</a></li><li><a href="/raveldex/reference/">API reference</a></li><li><a href="/raveldex/reference/core/">Core API</a></li><li><a href="/raveldex/reference/addons/">Addons</a></li><li><a href="/raveldex/reference/hosts/">Hosts and UI</a></li><li><a href="/raveldex/reference/typo/">Typo</a></li><li><a href="/raveldex/reference/suggestions/">Suggestions</a></li><li><a href="/raveldex/reference/synonyms/">Synonyms</a></li><li><a href="/raveldex/reference/english/">English</a></li><li><a href="/raveldex/reference/identifiers/">Identifiers</a></li><li><a href="/raveldex/reference/literal/">Literal</a></li><li><a href="/raveldex/reference/proximity/">Proximity</a></li><li><a href="/raveldex/reference/query-syntax/">Query syntax</a></li><li><a href="/raveldex/reference/record-patch/">Record patch</a></li><li><a href="/raveldex/reference/static-astro/">Static astro</a></li><li><a href="/raveldex/reference/localization/">Localization</a></li><li><a href="/raveldex/reference/result-content/">Result content</a></li><li><a href="/raveldex/reference/cms-refresh/">Cms refresh</a></li></ul></nav></details></div><main id="main" data-reading-layout="reference" class="site-main site-main--article site-main--reference" tabindex="-1"><nav class="site-breadcrumb" aria-label="Breadcrumb"><ol class="rx:flex rx:flex-wrap rx:items-center rx:gap-2"><li><a href="/raveldex/">Home</a><span aria-hidden="true">/</span></li><li><a href="/raveldex/reference/">API reference</a><span aria-hidden="true">/</span></li><li><span aria-current="page">Astro package</span></li></ol></nav><h1 id="raveldex-static-search-and-astro-integration">Raveldex static search and Astro integration</h1>
 <p>Build search files from a list of documents and load them when your application needs search. This package supplies a static builder, an Astro build hook and a browser loader. It does not add Astro as a dependency of core.</p>
 <p>Use the exact <code>@vmitsaras/raveldex@1.0.0</code> core peer. The build hook also needs Astro <code>7.3.2</code>; builder and client-only applications can omit that optional peer. Browsers load source snapshots and rebuild with the configured analyzer. Native snapshots still require an exact, application-qualified Node runtime.</p>
 <p>For a complete interface to copy, use the <a href="/raveldex/examples/inline-astro/">Astro inline starter</a>. It includes real page content, the explicit allowlist, optional snippets and topic facets, CSS customization, loading/retry and ownership-safe disposal. The <a href="/raveldex/examples/inline/">inline solutions page</a> links its complete source archive and a working browser preview.</p>
@@ -7,31 +7,50 @@
 <p>The <a href="/raveldex/examples/">solution chooser</a> compares all five presentations and their required data. Three complete Astro projects are supplied: inline, documentation modal and directory. The header and rich-results projects are plain-browser examples; no separate Astro starter or rich display artifact format is supplied for them. Keep each Astro source/display/optional-section generation, configuration and deployment base together. A source loader reconstructs every declared text field, so retain the original values for all of them.</p>
 <h2 id="install-matching-packages">Install matching packages</h2>
 <p>In an ESM application with Node <code>&gt;=22.12.0</code>, install matching core and integration versions:</p>
-<pre tabindex="0"><code class="language-sh">npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0 astro@7.3.2
-</code></pre>
+<figure class="reading-code" data-code-panel="" data-code-text="npm install @vmitsaras/raveldex@1.0.0 @vmitsaras/raveldex-astro@1.0.0 astro@7.3.2
+"><figcaption>Install matching packages · Shell 1</figcaption><button type="button" hidden data-copy-code="" aria-label="Copy Install matching packages · Shell 1">Copy code</button><button type="button" hidden data-select-code="">Select source</button><p role="status" aria-live="polite" data-copy-status=""></p><pre class="astro-code github-light-high-contrast" style="background-color:#ffffff;color:#0e1116; overflow-x: auto;" tabindex="0" data-language="sh" tabindex="0" role="region" aria-label="Install matching packages · Shell 1"><code><span class="line"><span style="color:#702C00">npm</span><span style="color:#032563"> install</span><span style="color:#032563"> @vmitsaras/raveldex@1.0.0</span><span style="color:#032563"> @vmitsaras/raveldex-astro@1.0.0</span><span style="color:#032563"> astro@7.3.2</span></span>
+</code></pre></figure>
 <p>Omit Astro itself if you only need the builder and client loader. Core-only applications do not need this package.</p>
 <p>To test local source changes, compile with <code>npm run build</code>, pack core with <code>npm pack --ignore-scripts</code>, then run <code>node scripts/pack-astro.mjs --output NEW_DIRECTORY</code> and install the resulting files together.</p>
 <h2 id="build-an-explicit-allowlist">Build an explicit allowlist</h2>
 <p>Choose the records that should be searchable and keep private or draft content out of the list. Save this as a Node <code>.mjs</code> file in the installed application and run it with Node:</p>
-<pre tabindex="0"><code class="language-js">import { createSourceProvider } from '@vmitsaras/raveldex/addons/phrases/source';
-import { buildStaticSearch } from '@vmitsaras/raveldex-astro/build';
+<figure class="reading-code" data-code-panel="" data-code-text="import { createSourceProvider } from &#x27;@vmitsaras/raveldex/addons/phrases/source&#x27;;
+import { buildStaticSearch } from &#x27;@vmitsaras/raveldex-astro/build&#x27;;
 
 const configuration = {
   schema: { text: { title: {}, body: {} } },
-  addons: [createSourceProvider({ fields: ['title', 'body'] })],
+  addons: [createSourceProvider({ fields: [&#x27;title&#x27;, &#x27;body&#x27;] })],
 };
 const artifacts = await buildStaticSearch({
   configuration,
-  buildId: 'docs-v1',
-  base: '/docs/',
+  buildId: &#x27;docs-v1&#x27;,
+  base: &#x27;/docs/&#x27;,
   entries: [{
-    record: { id: 'guide:mutations', text: { title: 'Atomic mutations', body: 'Incremental writes prepare privately and publish one coherent revision.' } },
-    title: 'Atomic mutations',
-    path: '/guide/mutations/',
+    record: { id: &#x27;guide:mutations&#x27;, text: { title: &#x27;Atomic mutations&#x27;, body: &#x27;Incremental writes prepare privately and publish one coherent revision.&#x27; } },
+    title: &#x27;Atomic mutations&#x27;,
+    path: &#x27;/guide/mutations/&#x27;,
   }],
 });
 console.log(artifacts.manifest.recordCount, artifacts.manifest.base);
-</code></pre>
+"><figcaption>Build an explicit allowlist · JavaScript 2</figcaption><button type="button" hidden data-copy-code="" aria-label="Copy Build an explicit allowlist · JavaScript 2">Copy code</button><button type="button" hidden data-select-code="">Select source</button><p role="status" aria-live="polite" data-copy-status=""></p><pre class="astro-code github-light-high-contrast" style="background-color:#ffffff;color:#0e1116; overflow-x: auto;" tabindex="0" data-language="js" tabindex="0" role="region" aria-label="Build an explicit allowlist · JavaScript 2"><code><span class="line"><span style="color:#A0111F">import</span><span style="color:#0E1116"> { createSourceProvider } </span><span style="color:#A0111F">from</span><span style="color:#032563"> '@vmitsaras/raveldex/addons/phrases/source'</span><span style="color:#0E1116">;</span></span>
+<span class="line"><span style="color:#A0111F">import</span><span style="color:#0E1116"> { buildStaticSearch } </span><span style="color:#A0111F">from</span><span style="color:#032563"> '@vmitsaras/raveldex-astro/build'</span><span style="color:#0E1116">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0111F">const</span><span style="color:#023B95"> configuration</span><span style="color:#A0111F"> =</span><span style="color:#0E1116"> {</span></span>
+<span class="line"><span style="color:#0E1116">  schema: { text: { title: {}, body: {} } },</span></span>
+<span class="line"><span style="color:#0E1116">  addons: [</span><span style="color:#622CBC">createSourceProvider</span><span style="color:#0E1116">({ fields: [</span><span style="color:#032563">'title'</span><span style="color:#0E1116">, </span><span style="color:#032563">'body'</span><span style="color:#0E1116">] })],</span></span>
+<span class="line"><span style="color:#0E1116">};</span></span>
+<span class="line"><span style="color:#A0111F">const</span><span style="color:#023B95"> artifacts</span><span style="color:#A0111F"> =</span><span style="color:#A0111F"> await</span><span style="color:#622CBC"> buildStaticSearch</span><span style="color:#0E1116">({</span></span>
+<span class="line"><span style="color:#0E1116">  configuration,</span></span>
+<span class="line"><span style="color:#0E1116">  buildId: </span><span style="color:#032563">'docs-v1'</span><span style="color:#0E1116">,</span></span>
+<span class="line"><span style="color:#0E1116">  base: </span><span style="color:#032563">'/docs/'</span><span style="color:#0E1116">,</span></span>
+<span class="line"><span style="color:#0E1116">  entries: [{</span></span>
+<span class="line"><span style="color:#0E1116">    record: { id: </span><span style="color:#032563">'guide:mutations'</span><span style="color:#0E1116">, text: { title: </span><span style="color:#032563">'Atomic mutations'</span><span style="color:#0E1116">, body: </span><span style="color:#032563">'Incremental writes prepare privately and publish one coherent revision.'</span><span style="color:#0E1116"> } },</span></span>
+<span class="line"><span style="color:#0E1116">    title: </span><span style="color:#032563">'Atomic mutations'</span><span style="color:#0E1116">,</span></span>
+<span class="line"><span style="color:#0E1116">    path: </span><span style="color:#032563">'/guide/mutations/'</span><span style="color:#0E1116">,</span></span>
+<span class="line"><span style="color:#0E1116">  }],</span></span>
+<span class="line"><span style="color:#0E1116">});</span></span>
+<span class="line"><span style="color:#0E1116">console.</span><span style="color:#622CBC">log</span><span style="color:#0E1116">(artifacts.manifest.recordCount, artifacts.manifest.base);</span></span>
+</code></pre></figure>
 <p>This prints <code>1 /docs/</code>: one indexed record, with <code>/docs/</code> as the deployment base. The frozen <code>{ manifest, files }</code> contains JSON strings keyed by safe file names; this example keeps them in memory rather than writing them.</p>
 <p>When writing the files yourself, create all content-addressed snapshot and display files in your own <code>raveldex/</code> directory before writing <code>manifest.json</code>. Keep that directory out of automatic content discovery. The Astro hook can do the writing for you.</p>
 <p>You supply the content: the adapter does not crawl routes, parse HTML or Markdown, infer IDs or retain source automatically. Select a source provider for every text field. Display titles and paths are separate from indexed text. Invalid records, duplicate IDs and unsafe paths reject the whole build.</p>
@@ -48,40 +67,67 @@ console.log(artifacts.manifest.recordCount, artifacts.manifest.base);
 <p>Native limits also apply. These are finite admission ceilings, not memory or response-time guarantees. Hashing, JSON processing and copying include bounded synchronous work.</p>
 <h2 id="use-the-astro-build-hook">Use the Astro build hook</h2>
 <p>Install matching core and integration tarballs in an Astro <code>7.3.2</code> project. Save your shared <code>configuration</code> and <code>entries</code> as named exports in <code>search-content.mjs</code>, using the builder example above. Put the following in <code>astro.config.mjs</code>:</p>
-<pre tabindex="0"><code class="language-js">import { defineConfig } from 'astro/config';
-import raveldexAstro from '@vmitsaras/raveldex-astro';
-import { configuration, entries } from './search-content.mjs';
+<figure class="reading-code" data-code-panel="" data-code-text="import { defineConfig } from &#x27;astro/config&#x27;;
+import raveldexAstro from &#x27;@vmitsaras/raveldex-astro&#x27;;
+import { configuration, entries } from &#x27;./search-content.mjs&#x27;;
 
 export default defineConfig({
-  output: 'static',
-  base: '/docs/',
-  trailingSlash: 'always',
+  output: &#x27;static&#x27;,
+  base: &#x27;/docs/&#x27;,
+  trailingSlash: &#x27;always&#x27;,
   integrations: [raveldexAstro({
     configuration,
-    buildId: 'docs-v1',
-    getEntries: () =&gt; entries,
+    buildId: &#x27;docs-v1&#x27;,
+    getEntries: () => entries,
   })],
 });
-</code></pre>
+"><figcaption>Use the Astro build hook · JavaScript 3</figcaption><button type="button" hidden data-copy-code="" aria-label="Copy Use the Astro build hook · JavaScript 3">Copy code</button><button type="button" hidden data-select-code="">Select source</button><p role="status" aria-live="polite" data-copy-status=""></p><pre class="astro-code github-light-high-contrast" style="background-color:#ffffff;color:#0e1116; overflow-x: auto;" tabindex="0" data-language="js" tabindex="0" role="region" aria-label="Use the Astro build hook · JavaScript 3"><code><span class="line"><span style="color:#A0111F">import</span><span style="color:#0E1116"> { defineConfig } </span><span style="color:#A0111F">from</span><span style="color:#032563"> 'astro/config'</span><span style="color:#0E1116">;</span></span>
+<span class="line"><span style="color:#A0111F">import</span><span style="color:#0E1116"> raveldexAstro </span><span style="color:#A0111F">from</span><span style="color:#032563"> '@vmitsaras/raveldex-astro'</span><span style="color:#0E1116">;</span></span>
+<span class="line"><span style="color:#A0111F">import</span><span style="color:#0E1116"> { configuration, entries } </span><span style="color:#A0111F">from</span><span style="color:#032563"> './search-content.mjs'</span><span style="color:#0E1116">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0111F">export</span><span style="color:#A0111F"> default</span><span style="color:#622CBC"> defineConfig</span><span style="color:#702C00">({</span></span>
+<span class="line"><span style="color:#0E1116">  output: </span><span style="color:#032563">'static'</span><span style="color:#702C00">,</span></span>
+<span class="line"><span style="color:#0E1116">  base: </span><span style="color:#032563">'/docs/'</span><span style="color:#702C00">,</span></span>
+<span class="line"><span style="color:#0E1116">  trailingSlash: </span><span style="color:#032563">'always'</span><span style="color:#702C00">,</span></span>
+<span class="line"><span style="color:#0E1116">  integrations: [</span><span style="color:#622CBC">raveldexAstro</span><span style="color:#0E1116">({</span></span>
+<span class="line"><span style="color:#0E1116">    configuration,</span></span>
+<span class="line"><span style="color:#0E1116">    buildId: </span><span style="color:#032563">'docs-v1'</span><span style="color:#0E1116">,</span></span>
+<span class="line"><span style="color:#622CBC">    getEntries</span><span style="color:#0E1116">: () </span><span style="color:#A0111F">=&gt;</span><span style="color:#0E1116"> entries,</span></span>
+<span class="line"><span style="color:#0E1116">  })]</span><span style="color:#702C00">,</span></span>
+<span class="line"><span style="color:#702C00">})</span><span style="color:#0E1116">;</span></span>
+</code></pre></figure>
 <p>An Astro static build now writes the search files beneath <code>dist/raveldex/</code>. The <code>/docs/</code> base means their public URLs start with <code>/docs/raveldex/</code>. <code>getEntries</code> supplies the explicit list of searchable documents after the static directory build completes. The hook writes the content files before the manifest.</p>
 <p>The reserved <code>raveldex/</code> directory must not already exist as a file, directory or symlink; a collision fails without overwriting it. A failed write may leave an incomplete new directory, so use only a complete successful build.</p>
 <p>Use a static build plus preview or another HTTP server. The hook does not support <code>astro dev</code>, watchers, SSR/server output or alternate file-output layouts. Your application controls deployment and retention of older generations.</p>
 <h2 id="load-only-what-the-page-uses">Load only what the page uses</h2>
 <p>After serving the generated files over HTTP(S), run this in a bundled browser module. It imports the same shared <code>configuration</code>, loads the manifest and source snapshot, searches for <code>atomic</code>, then explicitly loads display titles and URLs:</p>
-<pre tabindex="0"><code class="language-js">import { loadStaticSearch } from '@vmitsaras/raveldex-astro/client';
-import { configuration } from './search-content.mjs';
+<figure class="reading-code" data-code-panel="" data-code-text="import { loadStaticSearch } from &#x27;@vmitsaras/raveldex-astro/client&#x27;;
+import { configuration } from &#x27;./search-content.mjs&#x27;;
 
 const search = await loadStaticSearch({
-  manifestUrl: new URL('/docs/raveldex/manifest.json', location.origin).href,
-  expectedBuildId: 'docs-v1',
+  manifestUrl: new URL(&#x27;/docs/raveldex/manifest.json&#x27;, location.origin).href,
+  expectedBuildId: &#x27;docs-v1&#x27;,
   configuration,
 });
-const result = await search.engine.search('atomic');
+const result = await search.engine.search(&#x27;atomic&#x27;);
 // No display data or source page has been fetched by this native query.
 const documents = await search.loadDocuments();
 // The application may now pass search.engine and documents to mountRaveldexUI.
 await search.dispose();
-</code></pre>
+"><figcaption>Load only what the page uses · JavaScript 4</figcaption><button type="button" hidden data-copy-code="" aria-label="Copy Load only what the page uses · JavaScript 4">Copy code</button><button type="button" hidden data-select-code="">Select source</button><p role="status" aria-live="polite" data-copy-status=""></p><pre class="astro-code github-light-high-contrast" style="background-color:#ffffff;color:#0e1116; overflow-x: auto;" tabindex="0" data-language="js" tabindex="0" role="region" aria-label="Load only what the page uses · JavaScript 4"><code><span class="line"><span style="color:#A0111F">import</span><span style="color:#0E1116"> { loadStaticSearch } </span><span style="color:#A0111F">from</span><span style="color:#032563"> '@vmitsaras/raveldex-astro/client'</span><span style="color:#0E1116">;</span></span>
+<span class="line"><span style="color:#A0111F">import</span><span style="color:#0E1116"> { configuration } </span><span style="color:#A0111F">from</span><span style="color:#032563"> './search-content.mjs'</span><span style="color:#0E1116">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0111F">const</span><span style="color:#023B95"> search</span><span style="color:#A0111F"> =</span><span style="color:#A0111F"> await</span><span style="color:#622CBC"> loadStaticSearch</span><span style="color:#0E1116">({</span></span>
+<span class="line"><span style="color:#0E1116">  manifestUrl: </span><span style="color:#A0111F">new</span><span style="color:#622CBC"> URL</span><span style="color:#0E1116">(</span><span style="color:#032563">'/docs/raveldex/manifest.json'</span><span style="color:#0E1116">, location.origin).href,</span></span>
+<span class="line"><span style="color:#0E1116">  expectedBuildId: </span><span style="color:#032563">'docs-v1'</span><span style="color:#0E1116">,</span></span>
+<span class="line"><span style="color:#0E1116">  configuration,</span></span>
+<span class="line"><span style="color:#0E1116">});</span></span>
+<span class="line"><span style="color:#A0111F">const</span><span style="color:#023B95"> result</span><span style="color:#A0111F"> =</span><span style="color:#A0111F"> await</span><span style="color:#0E1116"> search.engine.</span><span style="color:#622CBC">search</span><span style="color:#0E1116">(</span><span style="color:#032563">'atomic'</span><span style="color:#0E1116">);</span></span>
+<span class="line"><span style="color:#66707B">// No display data or source page has been fetched by this native query.</span></span>
+<span class="line"><span style="color:#A0111F">const</span><span style="color:#023B95"> documents</span><span style="color:#A0111F"> =</span><span style="color:#A0111F"> await</span><span style="color:#0E1116"> search.</span><span style="color:#622CBC">loadDocuments</span><span style="color:#0E1116">();</span></span>
+<span class="line"><span style="color:#66707B">// The application may now pass search.engine and documents to mountRaveldexUI.</span></span>
+<span class="line"><span style="color:#A0111F">await</span><span style="color:#0E1116"> search.</span><span style="color:#622CBC">dispose</span><span style="color:#0E1116">();</span></span>
+</code></pre></figure>
 <p>With the builder data above, <code>result.total</code> is <code>1</code> and the hit ID is <code>guide:mutations</code>. The separate display list contains <strong>Atomic mutations</strong> at <code>/docs/guide/mutations/</code>. Nothing is rendered automatically. The final <code>dispose()</code> closes the owned engine; destroy any UI you mount before calling it.</p>
 <h3 id="loading-and-display-data">Loading and display data</h3>
 <p>SHA-256 needs WebCrypto SubtleCrypto, available in Node 22+ or a secure browser context. Missing crypto gives an explicit error. Choose a trusted HTTP(S) manifest URL whose path matches the deployment base plus <code>raveldex/manifest.json</code>. Requests stay in that directory, and redirects are rejected.</p>

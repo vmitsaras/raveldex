@@ -16,7 +16,8 @@ They do not download browsers during a normal test run.
 
 ## Find the right area
 
-- [Project map](PROJECT_CONTEXT.md): architecture, package boundaries and current work.
+- [Project map](docs/planning/PROJECT_CONTEXT.md): architecture, package boundaries and current work.
+- [Roadmap](docs/planning/ROADMAP.md) and [implementation task cards](docs/planning/IMPLEMENTATION_TASKS.md): generated work tracking.
 - [Source ownership](src/README.md): core, optional capabilities, adapters and UI.
 - [Test map](test/README.md): independent oracles, focused checks and browser fixtures.
 - [API reference](docs/api/README.md): supported imports, options and behavior.

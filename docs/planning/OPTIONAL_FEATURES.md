@@ -20,7 +20,7 @@ Live state is in [roadmap.json](roadmap.json); module boundaries are in [Add-ons
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/28)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Expand eligible tokens under a named edit-distance policy when judged typo queries demonstrate useful gains.
 
@@ -30,7 +30,7 @@ Expand eligible tokens under a named edit-distance policy when judged typo queri
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [TYPO_TOLERANCE.md](../../docs/specs/TYPO_TOLERANCE.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [TYPO_TOLERANCE.md](../specs/TYPO_TOLERANCE.md)
 
 **Acceptance criteria**
 
@@ -46,18 +46,18 @@ Expand eligible tokens under a named edit-distance policy when judged typo queri
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A010.md](../../docs/evidence/RX-A010.md)
-- [docs/evidence/RX-A010-package.json](../../docs/evidence/RX-A010-package.json)
-- [docs/evidence/RX-A010-behavior.log](../../docs/evidence/RX-A010-behavior.log)
-- [docs/evidence/RX-A010-baseline-environment.log](../../docs/evidence/RX-A010-baseline-environment.log)
-- [docs/evidence/RX-A010-check.log](../../docs/evidence/RX-A010-check.log)
-- [docs/evidence/RX-A010-candidate.json](../../docs/evidence/RX-A010-candidate.json)
-- [docs/evidence/RX-A010-preparation.json](../../docs/evidence/RX-A010-preparation.json)
-- [docs/evidence/RX-A010-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A010-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A010-review.json](../../docs/evidence/RX-A010-review.json)
-- [docs/evidence/RX-A010-sync.log](../../docs/evidence/RX-A010-sync.log)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A010.md](../evidence/RX-A010.md)
+- [docs/evidence/RX-A010-package.json](../evidence/RX-A010-package.json)
+- [docs/evidence/RX-A010-behavior.log](../evidence/RX-A010-behavior.log)
+- [docs/evidence/RX-A010-baseline-environment.log](../evidence/RX-A010-baseline-environment.log)
+- [docs/evidence/RX-A010-check.log](../evidence/RX-A010-check.log)
+- [docs/evidence/RX-A010-candidate.json](../evidence/RX-A010-candidate.json)
+- [docs/evidence/RX-A010-preparation.json](../evidence/RX-A010-preparation.json)
+- [docs/evidence/RX-A010-candidate-0.1.0-rc.0.tgz](../evidence/RX-A010-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A010-review.json](../evidence/RX-A010-review.json)
+- [docs/evidence/RX-A010-sync.log](../evidence/RX-A010-sync.log)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A020
@@ -66,7 +66,7 @@ Expand eligible tokens under a named edit-distance policy when judged typo queri
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/29)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Offer explicit query completions without silently rewriting submitted search semantics.
 
@@ -76,7 +76,7 @@ Offer explicit query completions without silently rewriting submitted search sem
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [SUGGESTIONS.md](../../docs/specs/SUGGESTIONS.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [SUGGESTIONS.md](../specs/SUGGESTIONS.md)
 
 **Acceptance criteria**
 
@@ -92,19 +92,19 @@ Offer explicit query completions without silently rewriting submitted search sem
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A020.md](../../docs/evidence/RX-A020.md)
-- [docs/evidence/RX-A020-behavior.log](../../docs/evidence/RX-A020-behavior.log)
-- [docs/evidence/RX-A020-initial-focused.log](../../docs/evidence/RX-A020-initial-focused.log)
-- [docs/evidence/RX-A020-package.json](../../docs/evidence/RX-A020-package.json)
-- [docs/evidence/RX-A020-independent-probes.json](../../docs/evidence/RX-A020-independent-probes.json)
-- [docs/evidence/RX-A020-independent-probes.mjs](../../docs/evidence/RX-A020-independent-probes.mjs)
-- [docs/evidence/RX-A020-review.json](../../docs/evidence/RX-A020-review.json)
-- [docs/evidence/RX-A020-check.log](../../docs/evidence/RX-A020-check.log)
-- [docs/evidence/RX-A020-preparation.json](../../docs/evidence/RX-A020-preparation.json)
-- [docs/evidence/RX-A020-candidate.json](../../docs/evidence/RX-A020-candidate.json)
-- [docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A020.md](../evidence/RX-A020.md)
+- [docs/evidence/RX-A020-behavior.log](../evidence/RX-A020-behavior.log)
+- [docs/evidence/RX-A020-initial-focused.log](../evidence/RX-A020-initial-focused.log)
+- [docs/evidence/RX-A020-package.json](../evidence/RX-A020-package.json)
+- [docs/evidence/RX-A020-independent-probes.json](../evidence/RX-A020-independent-probes.json)
+- [docs/evidence/RX-A020-independent-probes.mjs](../evidence/RX-A020-independent-probes.mjs)
+- [docs/evidence/RX-A020-review.json](../evidence/RX-A020-review.json)
+- [docs/evidence/RX-A020-check.log](../evidence/RX-A020-check.log)
+- [docs/evidence/RX-A020-preparation.json](../evidence/RX-A020-preparation.json)
+- [docs/evidence/RX-A020-candidate.json](../evidence/RX-A020-candidate.json)
+- [docs/evidence/RX-A020-candidate-0.1.0-rc.0.tgz](../evidence/RX-A020-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A030
@@ -113,7 +113,7 @@ Offer explicit query completions without silently rewriting submitted search sem
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/30)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Support transparent, bounded alternatives within original query groups for a judged domain vocabulary.
 
@@ -123,7 +123,7 @@ Support transparent, bounded alternatives within original query groups for a jud
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [SYNONYMS.md](../../docs/specs/SYNONYMS.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [SYNONYMS.md](../specs/SYNONYMS.md)
 
 **Acceptance criteria**
 
@@ -139,20 +139,20 @@ Support transparent, bounded alternatives within original query groups for a jud
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A030.md](../../docs/evidence/RX-A030.md)
-- [docs/evidence/RX-A030-behavior.log](../../docs/evidence/RX-A030-behavior.log)
-- [docs/evidence/RX-A030-baseline-sandbox.log](../../docs/evidence/RX-A030-baseline-sandbox.log)
-- [docs/evidence/RX-A030-baseline-loopback.log](../../docs/evidence/RX-A030-baseline-loopback.log)
-- [docs/evidence/RX-A030-package.json](../../docs/evidence/RX-A030-package.json)
-- [docs/evidence/RX-A030-independent-probes.json](../../docs/evidence/RX-A030-independent-probes.json)
-- [docs/evidence/RX-A030-independent-probes.mjs](../../docs/evidence/RX-A030-independent-probes.mjs)
-- [docs/evidence/RX-A030-check.log](../../docs/evidence/RX-A030-check.log)
-- [docs/evidence/RX-A030-preparation.json](../../docs/evidence/RX-A030-preparation.json)
-- [docs/evidence/RX-A030-candidate.json](../../docs/evidence/RX-A030-candidate.json)
-- [docs/evidence/RX-A030-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A030-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A030-review.json](../../docs/evidence/RX-A030-review.json)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A030.md](../evidence/RX-A030.md)
+- [docs/evidence/RX-A030-behavior.log](../evidence/RX-A030-behavior.log)
+- [docs/evidence/RX-A030-baseline-sandbox.log](../evidence/RX-A030-baseline-sandbox.log)
+- [docs/evidence/RX-A030-baseline-loopback.log](../evidence/RX-A030-baseline-loopback.log)
+- [docs/evidence/RX-A030-package.json](../evidence/RX-A030-package.json)
+- [docs/evidence/RX-A030-independent-probes.json](../evidence/RX-A030-independent-probes.json)
+- [docs/evidence/RX-A030-independent-probes.mjs](../evidence/RX-A030-independent-probes.mjs)
+- [docs/evidence/RX-A030-check.log](../evidence/RX-A030-check.log)
+- [docs/evidence/RX-A030-preparation.json](../evidence/RX-A030-preparation.json)
+- [docs/evidence/RX-A030-candidate.json](../evidence/RX-A030-candidate.json)
+- [docs/evidence/RX-A030-candidate-0.1.0-rc.0.tgz](../evidence/RX-A030-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A030-review.json](../evidence/RX-A030-review.json)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A040
@@ -161,7 +161,7 @@ Support transparent, bounded alternatives within original query groups for a jud
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/31)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Select one language with real corpus demand and provide compatible indexing/querying/source evidence.
 
@@ -171,7 +171,7 @@ Select one language with real corpus demand and provide compatible indexing/quer
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [ENGLISH_ANALYZER.md](../../docs/specs/ENGLISH_ANALYZER.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [ENGLISH_ANALYZER.md](../specs/ENGLISH_ANALYZER.md)
 
 **Acceptance criteria**
 
@@ -187,41 +187,41 @@ Select one language with real corpus demand and provide compatible indexing/quer
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A040-baseline.log](../../docs/evidence/RX-A040-baseline.log)
-- [docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A040-candidate.json](../../docs/evidence/RX-A040-candidate.json)
-- [docs/evidence/RX-A040-check.log](../../docs/evidence/RX-A040-check.log)
-- [docs/evidence/RX-A040-english-0.1.0-rc.0.tgz](../../docs/evidence/RX-A040-english-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A040-english-pack.log](../../docs/evidence/RX-A040-english-pack.log)
-- [docs/evidence/RX-A040-english-package.json](../../docs/evidence/RX-A040-english-package.json)
-- [docs/evidence/RX-A040-focused.log](../../docs/evidence/RX-A040-focused.log)
-- [docs/evidence/RX-A040-independent-probes.json](../../docs/evidence/RX-A040-independent-probes.json)
-- [docs/evidence/RX-A040-independent-probes.mjs](../../docs/evidence/RX-A040-independent-probes.mjs)
-- [docs/evidence/RX-A040-initial-lifecycle.log](../../docs/evidence/RX-A040-initial-lifecycle.log)
-- [docs/evidence/RX-A040-initial-standalone-tests.log](../../docs/evidence/RX-A040-initial-standalone-tests.log)
-- [docs/evidence/RX-A040-initial-typecheck.log](../../docs/evidence/RX-A040-initial-typecheck.log)
-- [docs/evidence/RX-A040-language-probes.json](../../docs/evidence/RX-A040-language-probes.json)
-- [docs/evidence/RX-A040-language-probes.mjs](../../docs/evidence/RX-A040-language-probes.mjs)
-- [docs/evidence/RX-A040-language-review.json](../../docs/evidence/RX-A040-language-review.json)
-- [docs/evidence/RX-A040-lifecycle.log](../../docs/evidence/RX-A040-lifecycle.log)
-- [docs/evidence/RX-A040-package.json](../../docs/evidence/RX-A040-package.json)
-- [docs/evidence/RX-A040-pre-standalone-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A040-pre-standalone-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A040-pre-standalone-candidate.json](../../docs/evidence/RX-A040-pre-standalone-candidate.json)
-- [docs/evidence/RX-A040-pre-standalone-check.log](../../docs/evidence/RX-A040-pre-standalone-check.log)
-- [docs/evidence/RX-A040-pre-standalone-package.json](../../docs/evidence/RX-A040-pre-standalone-package.json)
-- [docs/evidence/RX-A040-pre-standalone-preparation.json](../../docs/evidence/RX-A040-pre-standalone-preparation.json)
-- [docs/evidence/RX-A040-pre-standalone-sync.log](../../docs/evidence/RX-A040-pre-standalone-sync.log)
-- [docs/evidence/RX-A040-preparation.json](../../docs/evidence/RX-A040-preparation.json)
-- [docs/evidence/RX-A040-review.json](../../docs/evidence/RX-A040-review.json)
-- [docs/evidence/RX-A040-separate-installation-gap-review.json](../../docs/evidence/RX-A040-separate-installation-gap-review.json)
-- [docs/evidence/RX-A040-snapshot-stop-probe.mjs](../../docs/evidence/RX-A040-snapshot-stop-probe.mjs)
-- [docs/evidence/RX-A040-standalone-tests.log](../../docs/evidence/RX-A040-standalone-tests.log)
-- [docs/evidence/RX-A040-stem-typecheck.log](../../docs/evidence/RX-A040-stem-typecheck.log)
-- [docs/evidence/RX-A040-stop-probe.mjs](../../docs/evidence/RX-A040-stop-probe.mjs)
-- [docs/evidence/RX-A040-sync.log](../../docs/evidence/RX-A040-sync.log)
-- [docs/evidence/RX-A040.md](../../docs/evidence/RX-A040.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A040-baseline.log](../evidence/RX-A040-baseline.log)
+- [docs/evidence/RX-A040-candidate-0.1.0-rc.0.tgz](../evidence/RX-A040-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A040-candidate.json](../evidence/RX-A040-candidate.json)
+- [docs/evidence/RX-A040-check.log](../evidence/RX-A040-check.log)
+- [docs/evidence/RX-A040-english-0.1.0-rc.0.tgz](../evidence/RX-A040-english-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A040-english-pack.log](../evidence/RX-A040-english-pack.log)
+- [docs/evidence/RX-A040-english-package.json](../evidence/RX-A040-english-package.json)
+- [docs/evidence/RX-A040-focused.log](../evidence/RX-A040-focused.log)
+- [docs/evidence/RX-A040-independent-probes.json](../evidence/RX-A040-independent-probes.json)
+- [docs/evidence/RX-A040-independent-probes.mjs](../evidence/RX-A040-independent-probes.mjs)
+- [docs/evidence/RX-A040-initial-lifecycle.log](../evidence/RX-A040-initial-lifecycle.log)
+- [docs/evidence/RX-A040-initial-standalone-tests.log](../evidence/RX-A040-initial-standalone-tests.log)
+- [docs/evidence/RX-A040-initial-typecheck.log](../evidence/RX-A040-initial-typecheck.log)
+- [docs/evidence/RX-A040-language-probes.json](../evidence/RX-A040-language-probes.json)
+- [docs/evidence/RX-A040-language-probes.mjs](../evidence/RX-A040-language-probes.mjs)
+- [docs/evidence/RX-A040-language-review.json](../evidence/RX-A040-language-review.json)
+- [docs/evidence/RX-A040-lifecycle.log](../evidence/RX-A040-lifecycle.log)
+- [docs/evidence/RX-A040-package.json](../evidence/RX-A040-package.json)
+- [docs/evidence/RX-A040-pre-standalone-candidate-0.1.0-rc.0.tgz](../evidence/RX-A040-pre-standalone-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A040-pre-standalone-candidate.json](../evidence/RX-A040-pre-standalone-candidate.json)
+- [docs/evidence/RX-A040-pre-standalone-check.log](../evidence/RX-A040-pre-standalone-check.log)
+- [docs/evidence/RX-A040-pre-standalone-package.json](../evidence/RX-A040-pre-standalone-package.json)
+- [docs/evidence/RX-A040-pre-standalone-preparation.json](../evidence/RX-A040-pre-standalone-preparation.json)
+- [docs/evidence/RX-A040-pre-standalone-sync.log](../evidence/RX-A040-pre-standalone-sync.log)
+- [docs/evidence/RX-A040-preparation.json](../evidence/RX-A040-preparation.json)
+- [docs/evidence/RX-A040-review.json](../evidence/RX-A040-review.json)
+- [docs/evidence/RX-A040-separate-installation-gap-review.json](../evidence/RX-A040-separate-installation-gap-review.json)
+- [docs/evidence/RX-A040-snapshot-stop-probe.mjs](../evidence/RX-A040-snapshot-stop-probe.mjs)
+- [docs/evidence/RX-A040-standalone-tests.log](../evidence/RX-A040-standalone-tests.log)
+- [docs/evidence/RX-A040-stem-typecheck.log](../evidence/RX-A040-stem-typecheck.log)
+- [docs/evidence/RX-A040-stop-probe.mjs](../evidence/RX-A040-stop-probe.mjs)
+- [docs/evidence/RX-A040-sync.log](../evidence/RX-A040-sync.log)
+- [docs/evidence/RX-A040.md](../evidence/RX-A040.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A050
@@ -230,7 +230,7 @@ Select one language with real corpus demand and provide compatible indexing/quer
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/32)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Search developer identifiers without losing exact original names or inventing phrase/source evidence.
 
@@ -240,7 +240,7 @@ Search developer identifiers without losing exact original names or inventing ph
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [IDENTIFIER_ANALYSIS.md](../../docs/specs/IDENTIFIER_ANALYSIS.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [IDENTIFIER_ANALYSIS.md](../specs/IDENTIFIER_ANALYSIS.md)
 
 **Acceptance criteria**
 
@@ -256,35 +256,35 @@ Search developer identifiers without losing exact original names or inventing ph
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A050-analysis-review.json](../../docs/evidence/RX-A050-analysis-review.json)
-- [docs/evidence/RX-A050-analysis-review.mjs](../../docs/evidence/RX-A050-analysis-review.mjs)
-- [docs/evidence/RX-A050-baseline-sandbox-failure.log](../../docs/evidence/RX-A050-baseline-sandbox-failure.log)
-- [docs/evidence/RX-A050-baseline.log](../../docs/evidence/RX-A050-baseline.log)
-- [docs/evidence/RX-A050-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A050-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A050-candidate-check.log](../../docs/evidence/RX-A050-candidate-check.log)
-- [docs/evidence/RX-A050-candidate.json](../../docs/evidence/RX-A050-candidate.json)
-- [docs/evidence/RX-A050-check.log](../../docs/evidence/RX-A050-check.log)
-- [docs/evidence/RX-A050-evaluation-focused.log](../../docs/evidence/RX-A050-evaluation-focused.log)
-- [docs/evidence/RX-A050-final-check.log](../../docs/evidence/RX-A050-final-check.log)
-- [docs/evidence/RX-A050-initial-focused.log](../../docs/evidence/RX-A050-initial-focused.log)
-- [docs/evidence/RX-A050-initial-package.log](../../docs/evidence/RX-A050-initial-package.log)
-- [docs/evidence/RX-A050-npm-ci.log](../../docs/evidence/RX-A050-npm-ci.log)
-- [docs/evidence/RX-A050-package-check.log](../../docs/evidence/RX-A050-package-check.log)
-- [docs/evidence/RX-A050-package.json](../../docs/evidence/RX-A050-package.json)
-- [docs/evidence/RX-A050-providers.log](../../docs/evidence/RX-A050-providers.log)
-- [docs/evidence/RX-A050-qualification.json](../../docs/evidence/RX-A050-qualification.json)
-- [docs/evidence/RX-A050-repaired-focused.log](../../docs/evidence/RX-A050-repaired-focused.log)
-- [docs/evidence/RX-A050-runtime-review-artifact.json](../../docs/evidence/RX-A050-runtime-review-artifact.json)
-- [docs/evidence/RX-A050-runtime-review-initial.json](../../docs/evidence/RX-A050-runtime-review-initial.json)
-- [docs/evidence/RX-A050-runtime-review-initial.mjs](../../docs/evidence/RX-A050-runtime-review-initial.mjs)
-- [docs/evidence/RX-A050-runtime-review-probes-attempt1.json](../../docs/evidence/RX-A050-runtime-review-probes-attempt1.json)
-- [docs/evidence/RX-A050-runtime-review-probes.json](../../docs/evidence/RX-A050-runtime-review-probes.json)
-- [docs/evidence/RX-A050-runtime-review-probes.mjs](../../docs/evidence/RX-A050-runtime-review-probes.mjs)
-- [docs/evidence/RX-A050-runtime-review.json](../../docs/evidence/RX-A050-runtime-review.json)
-- [docs/evidence/RX-A050-sync.log](../../docs/evidence/RX-A050-sync.log)
-- [docs/evidence/RX-A050.md](../../docs/evidence/RX-A050.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A050-analysis-review.json](../evidence/RX-A050-analysis-review.json)
+- [docs/evidence/RX-A050-analysis-review.mjs](../evidence/RX-A050-analysis-review.mjs)
+- [docs/evidence/RX-A050-baseline-sandbox-failure.log](../evidence/RX-A050-baseline-sandbox-failure.log)
+- [docs/evidence/RX-A050-baseline.log](../evidence/RX-A050-baseline.log)
+- [docs/evidence/RX-A050-candidate-0.1.0-rc.0.tgz](../evidence/RX-A050-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A050-candidate-check.log](../evidence/RX-A050-candidate-check.log)
+- [docs/evidence/RX-A050-candidate.json](../evidence/RX-A050-candidate.json)
+- [docs/evidence/RX-A050-check.log](../evidence/RX-A050-check.log)
+- [docs/evidence/RX-A050-evaluation-focused.log](../evidence/RX-A050-evaluation-focused.log)
+- [docs/evidence/RX-A050-final-check.log](../evidence/RX-A050-final-check.log)
+- [docs/evidence/RX-A050-initial-focused.log](../evidence/RX-A050-initial-focused.log)
+- [docs/evidence/RX-A050-initial-package.log](../evidence/RX-A050-initial-package.log)
+- [docs/evidence/RX-A050-npm-ci.log](../evidence/RX-A050-npm-ci.log)
+- [docs/evidence/RX-A050-package-check.log](../evidence/RX-A050-package-check.log)
+- [docs/evidence/RX-A050-package.json](../evidence/RX-A050-package.json)
+- [docs/evidence/RX-A050-providers.log](../evidence/RX-A050-providers.log)
+- [docs/evidence/RX-A050-qualification.json](../evidence/RX-A050-qualification.json)
+- [docs/evidence/RX-A050-repaired-focused.log](../evidence/RX-A050-repaired-focused.log)
+- [docs/evidence/RX-A050-runtime-review-artifact.json](../evidence/RX-A050-runtime-review-artifact.json)
+- [docs/evidence/RX-A050-runtime-review-initial.json](../evidence/RX-A050-runtime-review-initial.json)
+- [docs/evidence/RX-A050-runtime-review-initial.mjs](../evidence/RX-A050-runtime-review-initial.mjs)
+- [docs/evidence/RX-A050-runtime-review-probes-attempt1.json](../evidence/RX-A050-runtime-review-probes-attempt1.json)
+- [docs/evidence/RX-A050-runtime-review-probes.json](../evidence/RX-A050-runtime-review-probes.json)
+- [docs/evidence/RX-A050-runtime-review-probes.mjs](../evidence/RX-A050-runtime-review-probes.mjs)
+- [docs/evidence/RX-A050-runtime-review.json](../evidence/RX-A050-runtime-review.json)
+- [docs/evidence/RX-A050-sync.log](../evidence/RX-A050-sync.log)
+- [docs/evidence/RX-A050.md](../evidence/RX-A050.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A060
@@ -293,7 +293,7 @@ Search developer identifiers without losing exact original names or inventing ph
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/33)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Expose bounded substring semantics as a distinct capability rather than disguising it as token prefix search.
 
@@ -303,7 +303,7 @@ Expose bounded substring semantics as a distinct capability rather than disguisi
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [LITERAL_MATCHING.md](../../docs/specs/LITERAL_MATCHING.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [LITERAL_MATCHING.md](../specs/LITERAL_MATCHING.md)
 
 **Acceptance criteria**
 
@@ -319,38 +319,38 @@ Expose bounded substring semantics as a distinct capability rather than disguisi
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A060-baseline.log](../../docs/evidence/RX-A060-baseline.log)
-- [docs/evidence/RX-A060-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A060-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A060-candidate-check.log](../../docs/evidence/RX-A060-candidate-check.log)
-- [docs/evidence/RX-A060-candidate.json](../../docs/evidence/RX-A060-candidate.json)
-- [docs/evidence/RX-A060-check.log](../../docs/evidence/RX-A060-check.log)
-- [docs/evidence/RX-A060-evaluation.log](../../docs/evidence/RX-A060-evaluation.log)
-- [docs/evidence/RX-A060-final-check.log](../../docs/evidence/RX-A060-final-check.log)
-- [docs/evidence/RX-A060-focused.log](../../docs/evidence/RX-A060-focused.log)
-- [docs/evidence/RX-A060-initial-focused.log](../../docs/evidence/RX-A060-initial-focused.log)
-- [docs/evidence/RX-A060-initial-lifecycle-syntax.log](../../docs/evidence/RX-A060-initial-lifecycle-syntax.log)
-- [docs/evidence/RX-A060-initial-package-clone.log](../../docs/evidence/RX-A060-initial-package-clone.log)
-- [docs/evidence/RX-A060-initial-package-headers.log](../../docs/evidence/RX-A060-initial-package-headers.log)
-- [docs/evidence/RX-A060-lifecycle.log](../../docs/evidence/RX-A060-lifecycle.log)
-- [docs/evidence/RX-A060-npm-ci.log](../../docs/evidence/RX-A060-npm-ci.log)
-- [docs/evidence/RX-A060-package-check.log](../../docs/evidence/RX-A060-package-check.log)
-- [docs/evidence/RX-A060-package.json](../../docs/evidence/RX-A060-package.json)
-- [docs/evidence/RX-A060-protocol-review-artifact.json](../../docs/evidence/RX-A060-protocol-review-artifact.json)
-- [docs/evidence/RX-A060-protocol-review-attempt1.json](../../docs/evidence/RX-A060-protocol-review-attempt1.json)
-- [docs/evidence/RX-A060-protocol-review.json](../../docs/evidence/RX-A060-protocol-review.json)
-- [docs/evidence/RX-A060-protocol-review.mjs](../../docs/evidence/RX-A060-protocol-review.mjs)
-- [docs/evidence/RX-A060-qualification.json](../../docs/evidence/RX-A060-qualification.json)
-- [docs/evidence/RX-A060-repaired-package.log](../../docs/evidence/RX-A060-repaired-package.log)
-- [docs/evidence/RX-A060-runtime-review-artifact.json](../../docs/evidence/RX-A060-runtime-review-artifact.json)
-- [docs/evidence/RX-A060-runtime-review-probes-attempt1.json](../../docs/evidence/RX-A060-runtime-review-probes-attempt1.json)
-- [docs/evidence/RX-A060-runtime-review-probes.json](../../docs/evidence/RX-A060-runtime-review-probes.json)
-- [docs/evidence/RX-A060-runtime-review-probes.mjs](../../docs/evidence/RX-A060-runtime-review-probes.mjs)
-- [docs/evidence/RX-A060-runtime-review-setup-failure.log](../../docs/evidence/RX-A060-runtime-review-setup-failure.log)
-- [docs/evidence/RX-A060-runtime-review.json](../../docs/evidence/RX-A060-runtime-review.json)
-- [docs/evidence/RX-A060-sync.log](../../docs/evidence/RX-A060-sync.log)
-- [docs/evidence/RX-A060.md](../../docs/evidence/RX-A060.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A060-baseline.log](../evidence/RX-A060-baseline.log)
+- [docs/evidence/RX-A060-candidate-0.1.0-rc.0.tgz](../evidence/RX-A060-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A060-candidate-check.log](../evidence/RX-A060-candidate-check.log)
+- [docs/evidence/RX-A060-candidate.json](../evidence/RX-A060-candidate.json)
+- [docs/evidence/RX-A060-check.log](../evidence/RX-A060-check.log)
+- [docs/evidence/RX-A060-evaluation.log](../evidence/RX-A060-evaluation.log)
+- [docs/evidence/RX-A060-final-check.log](../evidence/RX-A060-final-check.log)
+- [docs/evidence/RX-A060-focused.log](../evidence/RX-A060-focused.log)
+- [docs/evidence/RX-A060-initial-focused.log](../evidence/RX-A060-initial-focused.log)
+- [docs/evidence/RX-A060-initial-lifecycle-syntax.log](../evidence/RX-A060-initial-lifecycle-syntax.log)
+- [docs/evidence/RX-A060-initial-package-clone.log](../evidence/RX-A060-initial-package-clone.log)
+- [docs/evidence/RX-A060-initial-package-headers.log](../evidence/RX-A060-initial-package-headers.log)
+- [docs/evidence/RX-A060-lifecycle.log](../evidence/RX-A060-lifecycle.log)
+- [docs/evidence/RX-A060-npm-ci.log](../evidence/RX-A060-npm-ci.log)
+- [docs/evidence/RX-A060-package-check.log](../evidence/RX-A060-package-check.log)
+- [docs/evidence/RX-A060-package.json](../evidence/RX-A060-package.json)
+- [docs/evidence/RX-A060-protocol-review-artifact.json](../evidence/RX-A060-protocol-review-artifact.json)
+- [docs/evidence/RX-A060-protocol-review-attempt1.json](../evidence/RX-A060-protocol-review-attempt1.json)
+- [docs/evidence/RX-A060-protocol-review.json](../evidence/RX-A060-protocol-review.json)
+- [docs/evidence/RX-A060-protocol-review.mjs](../evidence/RX-A060-protocol-review.mjs)
+- [docs/evidence/RX-A060-qualification.json](../evidence/RX-A060-qualification.json)
+- [docs/evidence/RX-A060-repaired-package.log](../evidence/RX-A060-repaired-package.log)
+- [docs/evidence/RX-A060-runtime-review-artifact.json](../evidence/RX-A060-runtime-review-artifact.json)
+- [docs/evidence/RX-A060-runtime-review-probes-attempt1.json](../evidence/RX-A060-runtime-review-probes-attempt1.json)
+- [docs/evidence/RX-A060-runtime-review-probes.json](../evidence/RX-A060-runtime-review-probes.json)
+- [docs/evidence/RX-A060-runtime-review-probes.mjs](../evidence/RX-A060-runtime-review-probes.mjs)
+- [docs/evidence/RX-A060-runtime-review-setup-failure.log](../evidence/RX-A060-runtime-review-setup-failure.log)
+- [docs/evidence/RX-A060-runtime-review.json](../evidence/RX-A060-runtime-review.json)
+- [docs/evidence/RX-A060-sync.log](../evidence/RX-A060-sync.log)
+- [docs/evidence/RX-A060.md](../evidence/RX-A060.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A070
@@ -359,7 +359,7 @@ Expose bounded substring semantics as a distinct capability rather than disguisi
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/34)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Add selected ordered-gap semantics over positional data without redefining strict phrase search.
 
@@ -369,7 +369,7 @@ Add selected ordered-gap semantics over positional data without redefining stric
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [ORDERED_PROXIMITY.md](../../docs/specs/ORDERED_PROXIMITY.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [ORDERED_PROXIMITY.md](../specs/ORDERED_PROXIMITY.md)
 
 **Acceptance criteria**
 
@@ -385,37 +385,37 @@ Add selected ordered-gap semantics over positional data without redefining stric
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A070-artifact-review.json](../../docs/evidence/RX-A070-artifact-review.json)
-- [docs/evidence/RX-A070-baseline-permitted.log](../../docs/evidence/RX-A070-baseline-permitted.log)
-- [docs/evidence/RX-A070-baseline.log](../../docs/evidence/RX-A070-baseline.log)
-- [docs/evidence/RX-A070-build.log](../../docs/evidence/RX-A070-build.log)
-- [docs/evidence/RX-A070-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A070-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A070-candidate.json](../../docs/evidence/RX-A070-candidate.json)
-- [docs/evidence/RX-A070-candidate.log](../../docs/evidence/RX-A070-candidate.log)
-- [docs/evidence/RX-A070-check.log](../../docs/evidence/RX-A070-check.log)
-- [docs/evidence/RX-A070-ci.log](../../docs/evidence/RX-A070-ci.log)
-- [docs/evidence/RX-A070-final-check.log](../../docs/evidence/RX-A070-final-check.log)
-- [docs/evidence/RX-A070-focused-initial.log](../../docs/evidence/RX-A070-focused-initial.log)
-- [docs/evidence/RX-A070-matching.log](../../docs/evidence/RX-A070-matching.log)
-- [docs/evidence/RX-A070-package-initial.json](../../docs/evidence/RX-A070-package-initial.json)
-- [docs/evidence/RX-A070-package-initial.log](../../docs/evidence/RX-A070-package-initial.log)
-- [docs/evidence/RX-A070-package.json](../../docs/evidence/RX-A070-package.json)
-- [docs/evidence/RX-A070-package.log](../../docs/evidence/RX-A070-package.log)
-- [docs/evidence/RX-A070-parent-artifact-audit.json](../../docs/evidence/RX-A070-parent-artifact-audit.json)
-- [docs/evidence/RX-A070-protocol-review-attempt1.json](../../docs/evidence/RX-A070-protocol-review-attempt1.json)
-- [docs/evidence/RX-A070-protocol-review-attempt1.log](../../docs/evidence/RX-A070-protocol-review-attempt1.log)
-- [docs/evidence/RX-A070-protocol-review.json](../../docs/evidence/RX-A070-protocol-review.json)
-- [docs/evidence/RX-A070-protocol-review.log](../../docs/evidence/RX-A070-protocol-review.log)
-- [docs/evidence/RX-A070-qualification.json](../../docs/evidence/RX-A070-qualification.json)
-- [docs/evidence/RX-A070-runtime-review-attempt1.json](../../docs/evidence/RX-A070-runtime-review-attempt1.json)
-- [docs/evidence/RX-A070-runtime-review-attempt1.log](../../docs/evidence/RX-A070-runtime-review-attempt1.log)
-- [docs/evidence/RX-A070-runtime-review.json](../../docs/evidence/RX-A070-runtime-review.json)
-- [docs/evidence/RX-A070-runtime-review.log](../../docs/evidence/RX-A070-runtime-review.log)
-- [docs/evidence/RX-A070-sync.log](../../docs/evidence/RX-A070-sync.log)
-- [docs/evidence/RX-A070-typecheck.log](../../docs/evidence/RX-A070-typecheck.log)
-- [docs/evidence/RX-A070.md](../../docs/evidence/RX-A070.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A070-artifact-review.json](../evidence/RX-A070-artifact-review.json)
+- [docs/evidence/RX-A070-baseline-permitted.log](../evidence/RX-A070-baseline-permitted.log)
+- [docs/evidence/RX-A070-baseline.log](../evidence/RX-A070-baseline.log)
+- [docs/evidence/RX-A070-build.log](../evidence/RX-A070-build.log)
+- [docs/evidence/RX-A070-candidate-0.1.0-rc.0.tgz](../evidence/RX-A070-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A070-candidate.json](../evidence/RX-A070-candidate.json)
+- [docs/evidence/RX-A070-candidate.log](../evidence/RX-A070-candidate.log)
+- [docs/evidence/RX-A070-check.log](../evidence/RX-A070-check.log)
+- [docs/evidence/RX-A070-ci.log](../evidence/RX-A070-ci.log)
+- [docs/evidence/RX-A070-final-check.log](../evidence/RX-A070-final-check.log)
+- [docs/evidence/RX-A070-focused-initial.log](../evidence/RX-A070-focused-initial.log)
+- [docs/evidence/RX-A070-matching.log](../evidence/RX-A070-matching.log)
+- [docs/evidence/RX-A070-package-initial.json](../evidence/RX-A070-package-initial.json)
+- [docs/evidence/RX-A070-package-initial.log](../evidence/RX-A070-package-initial.log)
+- [docs/evidence/RX-A070-package.json](../evidence/RX-A070-package.json)
+- [docs/evidence/RX-A070-package.log](../evidence/RX-A070-package.log)
+- [docs/evidence/RX-A070-parent-artifact-audit.json](../evidence/RX-A070-parent-artifact-audit.json)
+- [docs/evidence/RX-A070-protocol-review-attempt1.json](../evidence/RX-A070-protocol-review-attempt1.json)
+- [docs/evidence/RX-A070-protocol-review-attempt1.log](../evidence/RX-A070-protocol-review-attempt1.log)
+- [docs/evidence/RX-A070-protocol-review.json](../evidence/RX-A070-protocol-review.json)
+- [docs/evidence/RX-A070-protocol-review.log](../evidence/RX-A070-protocol-review.log)
+- [docs/evidence/RX-A070-qualification.json](../evidence/RX-A070-qualification.json)
+- [docs/evidence/RX-A070-runtime-review-attempt1.json](../evidence/RX-A070-runtime-review-attempt1.json)
+- [docs/evidence/RX-A070-runtime-review-attempt1.log](../evidence/RX-A070-runtime-review-attempt1.log)
+- [docs/evidence/RX-A070-runtime-review.json](../evidence/RX-A070-runtime-review.json)
+- [docs/evidence/RX-A070-runtime-review.log](../evidence/RX-A070-runtime-review.log)
+- [docs/evidence/RX-A070-sync.log](../evidence/RX-A070-sync.log)
+- [docs/evidence/RX-A070-typecheck.log](../evidence/RX-A070-typecheck.log)
+- [docs/evidence/RX-A070.md](../evidence/RX-A070.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A080
@@ -424,7 +424,7 @@ Add selected ordered-gap semantics over positional data without redefining stric
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/35)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Compile an explicit user-facing syntax to the existing validated query tree without introducing a second evaluator.
 
@@ -434,7 +434,7 @@ Compile an explicit user-facing syntax to the existing validated query tree with
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [QUERY_SYNTAX.md](../../docs/specs/QUERY_SYNTAX.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [QUERY_SYNTAX.md](../specs/QUERY_SYNTAX.md)
 
 **Acceptance criteria**
 
@@ -450,36 +450,36 @@ Compile an explicit user-facing syntax to the existing validated query tree with
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A080-admission-initial.log](../../docs/evidence/RX-A080-admission-initial.log)
-- [docs/evidence/RX-A080-artifact-audit.log](../../docs/evidence/RX-A080-artifact-audit.log)
-- [docs/evidence/RX-A080-artifact-review.json](../../docs/evidence/RX-A080-artifact-review.json)
-- [docs/evidence/RX-A080-baseline.log](../../docs/evidence/RX-A080-baseline.log)
-- [docs/evidence/RX-A080-build-initial.log](../../docs/evidence/RX-A080-build-initial.log)
-- [docs/evidence/RX-A080-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A080-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A080-candidate.json](../../docs/evidence/RX-A080-candidate.json)
-- [docs/evidence/RX-A080-candidate.log](../../docs/evidence/RX-A080-candidate.log)
-- [docs/evidence/RX-A080-check.log](../../docs/evidence/RX-A080-check.log)
-- [docs/evidence/RX-A080-ci.log](../../docs/evidence/RX-A080-ci.log)
-- [docs/evidence/RX-A080-contract.log](../../docs/evidence/RX-A080-contract.log)
-- [docs/evidence/RX-A080-final-check.log](../../docs/evidence/RX-A080-final-check.log)
-- [docs/evidence/RX-A080-focused-initial.log](../../docs/evidence/RX-A080-focused-initial.log)
-- [docs/evidence/RX-A080-oracle-review.json](../../docs/evidence/RX-A080-oracle-review.json)
-- [docs/evidence/RX-A080-oracle-review.log](../../docs/evidence/RX-A080-oracle-review.log)
-- [docs/evidence/RX-A080-package-initial.json](../../docs/evidence/RX-A080-package-initial.json)
-- [docs/evidence/RX-A080-package-initial.log](../../docs/evidence/RX-A080-package-initial.log)
-- [docs/evidence/RX-A080-package.json](../../docs/evidence/RX-A080-package.json)
-- [docs/evidence/RX-A080-package.log](../../docs/evidence/RX-A080-package.log)
-- [docs/evidence/RX-A080-parent-artifact-audit.json](../../docs/evidence/RX-A080-parent-artifact-audit.json)
-- [docs/evidence/RX-A080-qualification.json](../../docs/evidence/RX-A080-qualification.json)
-- [docs/evidence/RX-A080-runtime-review-attempt1.json](../../docs/evidence/RX-A080-runtime-review-attempt1.json)
-- [docs/evidence/RX-A080-runtime-review-attempt1.log](../../docs/evidence/RX-A080-runtime-review-attempt1.log)
-- [docs/evidence/RX-A080-runtime-review.json](../../docs/evidence/RX-A080-runtime-review.json)
-- [docs/evidence/RX-A080-runtime-review.log](../../docs/evidence/RX-A080-runtime-review.log)
-- [docs/evidence/RX-A080-sync.log](../../docs/evidence/RX-A080-sync.log)
-- [docs/evidence/RX-A080-typecheck.log](../../docs/evidence/RX-A080-typecheck.log)
-- [docs/evidence/RX-A080.md](../../docs/evidence/RX-A080.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A080-admission-initial.log](../evidence/RX-A080-admission-initial.log)
+- [docs/evidence/RX-A080-artifact-audit.log](../evidence/RX-A080-artifact-audit.log)
+- [docs/evidence/RX-A080-artifact-review.json](../evidence/RX-A080-artifact-review.json)
+- [docs/evidence/RX-A080-baseline.log](../evidence/RX-A080-baseline.log)
+- [docs/evidence/RX-A080-build-initial.log](../evidence/RX-A080-build-initial.log)
+- [docs/evidence/RX-A080-candidate-0.1.0-rc.0.tgz](../evidence/RX-A080-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A080-candidate.json](../evidence/RX-A080-candidate.json)
+- [docs/evidence/RX-A080-candidate.log](../evidence/RX-A080-candidate.log)
+- [docs/evidence/RX-A080-check.log](../evidence/RX-A080-check.log)
+- [docs/evidence/RX-A080-ci.log](../evidence/RX-A080-ci.log)
+- [docs/evidence/RX-A080-contract.log](../evidence/RX-A080-contract.log)
+- [docs/evidence/RX-A080-final-check.log](../evidence/RX-A080-final-check.log)
+- [docs/evidence/RX-A080-focused-initial.log](../evidence/RX-A080-focused-initial.log)
+- [docs/evidence/RX-A080-oracle-review.json](../evidence/RX-A080-oracle-review.json)
+- [docs/evidence/RX-A080-oracle-review.log](../evidence/RX-A080-oracle-review.log)
+- [docs/evidence/RX-A080-package-initial.json](../evidence/RX-A080-package-initial.json)
+- [docs/evidence/RX-A080-package-initial.log](../evidence/RX-A080-package-initial.log)
+- [docs/evidence/RX-A080-package.json](../evidence/RX-A080-package.json)
+- [docs/evidence/RX-A080-package.log](../evidence/RX-A080-package.log)
+- [docs/evidence/RX-A080-parent-artifact-audit.json](../evidence/RX-A080-parent-artifact-audit.json)
+- [docs/evidence/RX-A080-qualification.json](../evidence/RX-A080-qualification.json)
+- [docs/evidence/RX-A080-runtime-review-attempt1.json](../evidence/RX-A080-runtime-review-attempt1.json)
+- [docs/evidence/RX-A080-runtime-review-attempt1.log](../evidence/RX-A080-runtime-review-attempt1.log)
+- [docs/evidence/RX-A080-runtime-review.json](../evidence/RX-A080-runtime-review.json)
+- [docs/evidence/RX-A080-runtime-review.log](../evidence/RX-A080-runtime-review.log)
+- [docs/evidence/RX-A080-sync.log](../evidence/RX-A080-sync.log)
+- [docs/evidence/RX-A080-typecheck.log](../evidence/RX-A080-typecheck.log)
+- [docs/evidence/RX-A080.md](../evidence/RX-A080.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A090
@@ -488,7 +488,7 @@ Compile an explicit user-facing syntax to the existing validated query tree with
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/36)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Offer partial record updates by composing authoritative source with the existing atomic replacement contract.
 
@@ -498,7 +498,7 @@ Offer partial record updates by composing authoritative source with the existing
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [RECORD_PATCH.md](../../docs/specs/RECORD_PATCH.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [RECORD_PATCH.md](../specs/RECORD_PATCH.md)
 
 **Acceptance criteria**
 
@@ -514,33 +514,33 @@ Offer partial record updates by composing authoritative source with the existing
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A090.md](../../docs/evidence/RX-A090.md)
-- [docs/evidence/RX-A090-artifact-review.json](../../docs/evidence/RX-A090-artifact-review.json)
-- [docs/evidence/RX-A090-artifact-review.log](../../docs/evidence/RX-A090-artifact-review.log)
-- [docs/evidence/RX-A090-baseline-retry-invalidated.log](../../docs/evidence/RX-A090-baseline-retry-invalidated.log)
-- [docs/evidence/RX-A090-baseline-sandbox.log](../../docs/evidence/RX-A090-baseline-sandbox.log)
-- [docs/evidence/RX-A090-build.log](../../docs/evidence/RX-A090-build.log)
-- [docs/evidence/RX-A090-candidate-0.1.0-rc.0.tgz](../../docs/evidence/RX-A090-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A090-candidate.json](../../docs/evidence/RX-A090-candidate.json)
-- [docs/evidence/RX-A090-candidate.log](../../docs/evidence/RX-A090-candidate.log)
-- [docs/evidence/RX-A090-check.log](../../docs/evidence/RX-A090-check.log)
-- [docs/evidence/RX-A090-ci.log](../../docs/evidence/RX-A090-ci.log)
-- [docs/evidence/RX-A090-final-check.log](../../docs/evidence/RX-A090-final-check.log)
-- [docs/evidence/RX-A090-focused.log](../../docs/evidence/RX-A090-focused.log)
-- [docs/evidence/RX-A090-lifecycle.log](../../docs/evidence/RX-A090-lifecycle.log)
-- [docs/evidence/RX-A090-package-initial.json](../../docs/evidence/RX-A090-package-initial.json)
-- [docs/evidence/RX-A090-package-initial.log](../../docs/evidence/RX-A090-package-initial.log)
-- [docs/evidence/RX-A090-package.json](../../docs/evidence/RX-A090-package.json)
-- [docs/evidence/RX-A090-package.log](../../docs/evidence/RX-A090-package.log)
-- [docs/evidence/RX-A090-post-build-audit.json](../../docs/evidence/RX-A090-post-build-audit.json)
-- [docs/evidence/RX-A090-qualification.json](../../docs/evidence/RX-A090-qualification.json)
-- [docs/evidence/RX-A090-runtime-review.json](../../docs/evidence/RX-A090-runtime-review.json)
-- [docs/evidence/RX-A090-runtime-review.log](../../docs/evidence/RX-A090-runtime-review.log)
-- [docs/evidence/RX-A090-syntax-isolation.log](../../docs/evidence/RX-A090-syntax-isolation.log)
-- [docs/evidence/RX-A090-verification-review.json](../../docs/evidence/RX-A090-verification-review.json)
-- [docs/evidence/RX-A090-verification-review.log](../../docs/evidence/RX-A090-verification-review.log)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-A090.md](../evidence/RX-A090.md)
+- [docs/evidence/RX-A090-artifact-review.json](../evidence/RX-A090-artifact-review.json)
+- [docs/evidence/RX-A090-artifact-review.log](../evidence/RX-A090-artifact-review.log)
+- [docs/evidence/RX-A090-baseline-retry-invalidated.log](../evidence/RX-A090-baseline-retry-invalidated.log)
+- [docs/evidence/RX-A090-baseline-sandbox.log](../evidence/RX-A090-baseline-sandbox.log)
+- [docs/evidence/RX-A090-build.log](../evidence/RX-A090-build.log)
+- [docs/evidence/RX-A090-candidate-0.1.0-rc.0.tgz](../evidence/RX-A090-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A090-candidate.json](../evidence/RX-A090-candidate.json)
+- [docs/evidence/RX-A090-candidate.log](../evidence/RX-A090-candidate.log)
+- [docs/evidence/RX-A090-check.log](../evidence/RX-A090-check.log)
+- [docs/evidence/RX-A090-ci.log](../evidence/RX-A090-ci.log)
+- [docs/evidence/RX-A090-final-check.log](../evidence/RX-A090-final-check.log)
+- [docs/evidence/RX-A090-focused.log](../evidence/RX-A090-focused.log)
+- [docs/evidence/RX-A090-lifecycle.log](../evidence/RX-A090-lifecycle.log)
+- [docs/evidence/RX-A090-package-initial.json](../evidence/RX-A090-package-initial.json)
+- [docs/evidence/RX-A090-package-initial.log](../evidence/RX-A090-package-initial.log)
+- [docs/evidence/RX-A090-package.json](../evidence/RX-A090-package.json)
+- [docs/evidence/RX-A090-package.log](../evidence/RX-A090-package.log)
+- [docs/evidence/RX-A090-post-build-audit.json](../evidence/RX-A090-post-build-audit.json)
+- [docs/evidence/RX-A090-qualification.json](../evidence/RX-A090-qualification.json)
+- [docs/evidence/RX-A090-runtime-review.json](../evidence/RX-A090-runtime-review.json)
+- [docs/evidence/RX-A090-runtime-review.log](../evidence/RX-A090-runtime-review.log)
+- [docs/evidence/RX-A090-syntax-isolation.log](../evidence/RX-A090-syntax-isolation.log)
+- [docs/evidence/RX-A090-verification-review.json](../evidence/RX-A090-verification-review.json)
+- [docs/evidence/RX-A090-verification-review.log](../evidence/RX-A090-verification-review.log)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
 
 
 ## RX-A100
@@ -549,7 +549,7 @@ Offer partial record updates by composing authoritative source with the existing
 
 **Milestone:** N5 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/37)
 
-**Dependencies:** [RX-4003](../../IMPLEMENTATION_TASKS.md#rx-4003)
+**Dependencies:** [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003)
 
 Integrate native search artifacts with static content pipelines while keeping extraction and framework behavior outside the engine.
 
@@ -559,7 +559,7 @@ Integrate native search artifacts with static content pipelines while keeping ex
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](../../docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../../docs/specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../../docs/planning/VERIFICATION_PLAN.md), [STATIC_ASTRO.md](../../docs/specs/STATIC_ASTRO.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [STATIC_ASTRO.md](../specs/STATIC_ASTRO.md)
 
 **Acceptance criteria**
 
@@ -575,65 +575,65 @@ Integrate native search artifacts with static content pipelines while keeping ex
 
 **Recorded evidence**
 
-- [docs/evidence/RX-A100.md](../../docs/evidence/RX-A100.md)
-- [docs/evidence/RX-A100-artifact-attempt1.log](../../docs/evidence/RX-A100-artifact-attempt1.log)
-- [docs/evidence/RX-A100-artifact-audit.json](../../docs/evidence/RX-A100-artifact-audit.json)
-- [docs/evidence/RX-A100-artifact-audit.log](../../docs/evidence/RX-A100-artifact-audit.log)
-- [docs/evidence/RX-A100-artifact-final.log](../../docs/evidence/RX-A100-artifact-final.log)
-- [docs/evidence/RX-A100-astro-0.1.0-rc.0.tgz](../../docs/evidence/RX-A100-astro-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A100-astro-final-package.json](../../docs/evidence/RX-A100-astro-final-package.json)
-- [docs/evidence/RX-A100-astro-final.log](../../docs/evidence/RX-A100-astro-final.log)
-- [docs/evidence/RX-A100-astro-metadata.json](../../docs/evidence/RX-A100-astro-metadata.json)
-- [docs/evidence/RX-A100-astro-package.json](../../docs/evidence/RX-A100-astro-package.json)
-- [docs/evidence/RX-A100-baseline.log](../../docs/evidence/RX-A100-baseline.log)
-- [docs/evidence/RX-A100-build-first.log](../../docs/evidence/RX-A100-build-first.log)
-- [docs/evidence/RX-A100-build-fixed.log](../../docs/evidence/RX-A100-build-fixed.log)
-- [docs/evidence/RX-A100-build-hook-final.log](../../docs/evidence/RX-A100-build-hook-final.log)
-- [docs/evidence/RX-A100-build-initial-failure.log](../../docs/evidence/RX-A100-build-initial-failure.log)
-- [docs/evidence/RX-A100-build-reviewed.log](../../docs/evidence/RX-A100-build-reviewed.log)
-- [docs/evidence/RX-A100-built-sites.json](../../docs/evidence/RX-A100-built-sites.json)
-- [docs/evidence/RX-A100-built-sites.tgz](../../docs/evidence/RX-A100-built-sites.tgz)
-- [docs/evidence/RX-A100-candidate.json](../../docs/evidence/RX-A100-candidate.json)
-- [docs/evidence/RX-A100-candidate.log](../../docs/evidence/RX-A100-candidate.log)
-- [docs/evidence/RX-A100-check.log](../../docs/evidence/RX-A100-check.log)
-- [docs/evidence/RX-A100-ci-locked.log](../../docs/evidence/RX-A100-ci-locked.log)
-- [docs/evidence/RX-A100-ci.log](../../docs/evidence/RX-A100-ci.log)
-- [docs/evidence/RX-A100-core-0.1.0-rc.0.tgz](../../docs/evidence/RX-A100-core-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-A100-fetch-receiver-before.log](../../docs/evidence/RX-A100-fetch-receiver-before.log)
-- [docs/evidence/RX-A100-final-check.log](../../docs/evidence/RX-A100-final-check.log)
-- [docs/evidence/RX-A100-focused-fixed.log](../../docs/evidence/RX-A100-focused-fixed.log)
-- [docs/evidence/RX-A100-focused-initial.log](../../docs/evidence/RX-A100-focused-initial.log)
-- [docs/evidence/RX-A100-focused.log](../../docs/evidence/RX-A100-focused.log)
-- [docs/evidence/RX-A100-gzip-before.log](../../docs/evidence/RX-A100-gzip-before.log)
-- [docs/evidence/RX-A100-hook-capture-before.log](../../docs/evidence/RX-A100-hook-capture-before.log)
-- [docs/evidence/RX-A100-inspector-observation.log](../../docs/evidence/RX-A100-inspector-observation.log)
-- [docs/evidence/RX-A100-late-fetch-before.log](../../docs/evidence/RX-A100-late-fetch-before.log)
-- [docs/evidence/RX-A100-node-types.log](../../docs/evidence/RX-A100-node-types.log)
-- [docs/evidence/RX-A100-open-unload-before.log](../../docs/evidence/RX-A100-open-unload-before.log)
-- [docs/evidence/RX-A100-package-attempt1.log](../../docs/evidence/RX-A100-package-attempt1.log)
-- [docs/evidence/RX-A100-package-attempt2.log](../../docs/evidence/RX-A100-package-attempt2.log)
-- [docs/evidence/RX-A100-package-attempt3.log](../../docs/evidence/RX-A100-package-attempt3.log)
-- [docs/evidence/RX-A100-package.json](../../docs/evidence/RX-A100-package.json)
-- [docs/evidence/RX-A100-package.log](../../docs/evidence/RX-A100-package.log)
-- [docs/evidence/RX-A100-qualification.json](../../docs/evidence/RX-A100-qualification.json)
-- [docs/evidence/RX-A100-reentrant-rejection-before.log](../../docs/evidence/RX-A100-reentrant-rejection-before.log)
-- [docs/evidence/RX-A100-runtime-review.json](../../docs/evidence/RX-A100-runtime-review.json)
-- [docs/evidence/RX-A100-runtime-review.log](../../docs/evidence/RX-A100-runtime-review.log)
-- [docs/evidence/RX-A100-tooling.log](../../docs/evidence/RX-A100-tooling.log)
-- [docs/evidence/RX-A100-typecheck-initial-failure.log](../../docs/evidence/RX-A100-typecheck-initial-failure.log)
-- [docs/evidence/RX-A100-typecheck.log](../../docs/evidence/RX-A100-typecheck.log)
-- [docs/evidence/RX-A100-verification-attempt1.json](../../docs/evidence/RX-A100-verification-attempt1.json)
-- [docs/evidence/RX-A100-verification-attempt1.log](../../docs/evidence/RX-A100-verification-attempt1.log)
-- [docs/evidence/RX-A100-verification-review.json](../../docs/evidence/RX-A100-verification-review.json)
-- [docs/evidence/RX-A100-verification-review.log](../../docs/evidence/RX-A100-verification-review.log)
-- [docs/evidence/RX-N5-remote-ci-20261030.md](../../docs/evidence/RX-N5-remote-ci-20261030.md)
-- [docs/evidence/RX-N5-remote-ci-20261030.json](../../docs/evidence/RX-N5-remote-ci-20261030.json)
-- [docs/evidence/RX-N5-remote-ci-20261030-review.json](../../docs/evidence/RX-N5-remote-ci-20261030-review.json)
-- [docs/evidence/RX-N5-remote-ci-20261030-raw.tar.gz](../../docs/evidence/RX-N5-remote-ci-20261030-raw.tar.gz)
-- [docs/evidence/RX-N5-remote-ci-20261030-node22.zip](../../docs/evidence/RX-N5-remote-ci-20261030-node22.zip)
-- [docs/evidence/RX-N5-remote-ci-20261030-node24.zip](../../docs/evidence/RX-N5-remote-ci-20261030-node24.zip)
-- [docs/evidence/RX-N5-remote-ci-20261030-failed-node22.zip](../../docs/evidence/RX-N5-remote-ci-20261030-failed-node22.zip)
-- [docs/evidence/RX-N5-remote-ci-20261030-failed-node24.zip](../../docs/evidence/RX-N5-remote-ci-20261030-failed-node24.zip)
+- [docs/evidence/RX-A100.md](../evidence/RX-A100.md)
+- [docs/evidence/RX-A100-artifact-attempt1.log](../evidence/RX-A100-artifact-attempt1.log)
+- [docs/evidence/RX-A100-artifact-audit.json](../evidence/RX-A100-artifact-audit.json)
+- [docs/evidence/RX-A100-artifact-audit.log](../evidence/RX-A100-artifact-audit.log)
+- [docs/evidence/RX-A100-artifact-final.log](../evidence/RX-A100-artifact-final.log)
+- [docs/evidence/RX-A100-astro-0.1.0-rc.0.tgz](../evidence/RX-A100-astro-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A100-astro-final-package.json](../evidence/RX-A100-astro-final-package.json)
+- [docs/evidence/RX-A100-astro-final.log](../evidence/RX-A100-astro-final.log)
+- [docs/evidence/RX-A100-astro-metadata.json](../evidence/RX-A100-astro-metadata.json)
+- [docs/evidence/RX-A100-astro-package.json](../evidence/RX-A100-astro-package.json)
+- [docs/evidence/RX-A100-baseline.log](../evidence/RX-A100-baseline.log)
+- [docs/evidence/RX-A100-build-first.log](../evidence/RX-A100-build-first.log)
+- [docs/evidence/RX-A100-build-fixed.log](../evidence/RX-A100-build-fixed.log)
+- [docs/evidence/RX-A100-build-hook-final.log](../evidence/RX-A100-build-hook-final.log)
+- [docs/evidence/RX-A100-build-initial-failure.log](../evidence/RX-A100-build-initial-failure.log)
+- [docs/evidence/RX-A100-build-reviewed.log](../evidence/RX-A100-build-reviewed.log)
+- [docs/evidence/RX-A100-built-sites.json](../evidence/RX-A100-built-sites.json)
+- [docs/evidence/RX-A100-built-sites.tgz](../evidence/RX-A100-built-sites.tgz)
+- [docs/evidence/RX-A100-candidate.json](../evidence/RX-A100-candidate.json)
+- [docs/evidence/RX-A100-candidate.log](../evidence/RX-A100-candidate.log)
+- [docs/evidence/RX-A100-check.log](../evidence/RX-A100-check.log)
+- [docs/evidence/RX-A100-ci-locked.log](../evidence/RX-A100-ci-locked.log)
+- [docs/evidence/RX-A100-ci.log](../evidence/RX-A100-ci.log)
+- [docs/evidence/RX-A100-core-0.1.0-rc.0.tgz](../evidence/RX-A100-core-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-A100-fetch-receiver-before.log](../evidence/RX-A100-fetch-receiver-before.log)
+- [docs/evidence/RX-A100-final-check.log](../evidence/RX-A100-final-check.log)
+- [docs/evidence/RX-A100-focused-fixed.log](../evidence/RX-A100-focused-fixed.log)
+- [docs/evidence/RX-A100-focused-initial.log](../evidence/RX-A100-focused-initial.log)
+- [docs/evidence/RX-A100-focused.log](../evidence/RX-A100-focused.log)
+- [docs/evidence/RX-A100-gzip-before.log](../evidence/RX-A100-gzip-before.log)
+- [docs/evidence/RX-A100-hook-capture-before.log](../evidence/RX-A100-hook-capture-before.log)
+- [docs/evidence/RX-A100-inspector-observation.log](../evidence/RX-A100-inspector-observation.log)
+- [docs/evidence/RX-A100-late-fetch-before.log](../evidence/RX-A100-late-fetch-before.log)
+- [docs/evidence/RX-A100-node-types.log](../evidence/RX-A100-node-types.log)
+- [docs/evidence/RX-A100-open-unload-before.log](../evidence/RX-A100-open-unload-before.log)
+- [docs/evidence/RX-A100-package-attempt1.log](../evidence/RX-A100-package-attempt1.log)
+- [docs/evidence/RX-A100-package-attempt2.log](../evidence/RX-A100-package-attempt2.log)
+- [docs/evidence/RX-A100-package-attempt3.log](../evidence/RX-A100-package-attempt3.log)
+- [docs/evidence/RX-A100-package.json](../evidence/RX-A100-package.json)
+- [docs/evidence/RX-A100-package.log](../evidence/RX-A100-package.log)
+- [docs/evidence/RX-A100-qualification.json](../evidence/RX-A100-qualification.json)
+- [docs/evidence/RX-A100-reentrant-rejection-before.log](../evidence/RX-A100-reentrant-rejection-before.log)
+- [docs/evidence/RX-A100-runtime-review.json](../evidence/RX-A100-runtime-review.json)
+- [docs/evidence/RX-A100-runtime-review.log](../evidence/RX-A100-runtime-review.log)
+- [docs/evidence/RX-A100-tooling.log](../evidence/RX-A100-tooling.log)
+- [docs/evidence/RX-A100-typecheck-initial-failure.log](../evidence/RX-A100-typecheck-initial-failure.log)
+- [docs/evidence/RX-A100-typecheck.log](../evidence/RX-A100-typecheck.log)
+- [docs/evidence/RX-A100-verification-attempt1.json](../evidence/RX-A100-verification-attempt1.json)
+- [docs/evidence/RX-A100-verification-attempt1.log](../evidence/RX-A100-verification-attempt1.log)
+- [docs/evidence/RX-A100-verification-review.json](../evidence/RX-A100-verification-review.json)
+- [docs/evidence/RX-A100-verification-review.log](../evidence/RX-A100-verification-review.log)
+- [docs/evidence/RX-N5-remote-ci-20261030.md](../evidence/RX-N5-remote-ci-20261030.md)
+- [docs/evidence/RX-N5-remote-ci-20261030.json](../evidence/RX-N5-remote-ci-20261030.json)
+- [docs/evidence/RX-N5-remote-ci-20261030-review.json](../evidence/RX-N5-remote-ci-20261030-review.json)
+- [docs/evidence/RX-N5-remote-ci-20261030-raw.tar.gz](../evidence/RX-N5-remote-ci-20261030-raw.tar.gz)
+- [docs/evidence/RX-N5-remote-ci-20261030-node22.zip](../evidence/RX-N5-remote-ci-20261030-node22.zip)
+- [docs/evidence/RX-N5-remote-ci-20261030-node24.zip](../evidence/RX-N5-remote-ci-20261030-node24.zip)
+- [docs/evidence/RX-N5-remote-ci-20261030-failed-node22.zip](../evidence/RX-N5-remote-ci-20261030-failed-node22.zip)
+- [docs/evidence/RX-N5-remote-ci-20261030-failed-node24.zip](../evidence/RX-N5-remote-ci-20261030-failed-node24.zip)
 
 
 ## RX-9301
@@ -642,7 +642,7 @@ Integrate native search artifacts with static content pipelines while keeping ex
 
 **Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9301%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 The homepage/demo and examples chooser currently foreground an engineering Workbench and long comparison text. Source: site/Home.astro, site/Demo.astro and examples/README.md. The stale generated snapshot was reviewed for design only. Make the first action and route to an appropriate consumer starter clear.
 
@@ -652,7 +652,7 @@ The homepage/demo and examples chooser currently foreground an engineering Workb
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../planning/DEMO_CLARITY.md)
 
 **Acceptance criteria**
 
@@ -668,7 +668,7 @@ The homepage/demo and examples chooser currently foreground an engineering Workb
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9301.md](../../docs/evidence/RX-9301.md)
+- [docs/evidence/RX-9301.md](../evidence/RX-9301.md)
 
 
 ## RX-9302
@@ -677,7 +677,7 @@ The homepage/demo and examples chooser currently foreground an engineering Workb
 
 **Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9302%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 Current shared copy includes distinct values and buckets omitted; the reviewed snapshot also showed 1 results and verbose engine status. Source: site/SearchWorkbench.astro and src/addons/ui/. Confirm regenerated behavior before treating snapshot grammar as a current defect. Explain what a visitor can do next.
 
@@ -687,7 +687,7 @@ Current shared copy includes distinct values and buckets omitted; the reviewed s
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../planning/DEMO_CLARITY.md)
 
 **Acceptance criteria**
 
@@ -703,7 +703,7 @@ Current shared copy includes distinct values and buckets omitted; the reviewed s
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9302.md](../../docs/evidence/RX-9302.md)
+- [docs/evidence/RX-9302.md](../evidence/RX-9302.md)
 
 
 ## RX-9303
@@ -712,7 +712,7 @@ Current shared copy includes distinct values and buckets omitted; the reviewed s
 
 **Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9303%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 The design review of the stale generated Workbench showed full-precision scores, raw Markdown links/backticks and clipped excerpt fragments. Current source: examples/core-docs/corpus.mjs, examples/docs-search/ and Workbench rendering. Confirm final generated output and separate corpus/display improvements from engine semantics.
 
@@ -722,7 +722,7 @@ The design review of the stale generated Workbench showed full-precision scores,
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../planning/DEMO_CLARITY.md)
 
 **Acceptance criteria**
 
@@ -738,7 +738,7 @@ The design review of the stale generated Workbench showed full-precision scores,
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9303.md](../../docs/evidence/RX-9303.md)
+- [docs/evidence/RX-9303.md](../evidence/RX-9303.md)
 
 
 ## RX-9304
@@ -747,7 +747,7 @@ The design review of the stale generated Workbench showed full-precision scores,
 
 **Milestone:** N13 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9304%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 Current advanced controls say Representation, Original source reanalysis, Reinitialize search and Destroy interface. Galleries repeat setup and qualification details. Source: site/SearchWorkbench.astro and the five gallery components. Make reset/recovery and copy/setup paths understandable without removing technical control.
 
@@ -757,7 +757,7 @@ Current advanced controls say Representation, Original source reanalysis, Reinit
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../../docs/planning/DEMO_CLARITY.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [DEMO_CLARITY.md](../planning/DEMO_CLARITY.md)
 
 **Acceptance criteria**
 
@@ -773,7 +773,7 @@ Current advanced controls say Representation, Original source reanalysis, Reinit
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9304.md](../../docs/evidence/RX-9304.md)
+- [docs/evidence/RX-9304.md](../evidence/RX-9304.md)
 
 
 ## RX-9401
@@ -782,7 +782,7 @@ Current advanced controls say Representation, Original source reanalysis, Reinit
 
 **Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9401%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 Inline and modal starters already have authored consumer content and scoped styling. Review current generated and installed surfaces, especially technical facet summaries, repeated labels/status, result spacing and constrained modal reading area. Source: src/addons/ui/inline*, modal* and matching starters.
 
@@ -792,7 +792,7 @@ Inline and modal starters already have authored consumer content and scoped styl
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [UI_POLISH.md](../planning/UI_POLISH.md)
 
 **Acceptance criteria**
 
@@ -808,7 +808,7 @@ Inline and modal starters already have authored consumer content and scoped styl
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9401.md](../../docs/evidence/RX-9401.md)
+- [docs/evidence/RX-9401.md](../evidence/RX-9401.md)
 
 
 ## RX-9402
@@ -817,7 +817,7 @@ Inline and modal starters already have authored consumer content and scoped styl
 
 **Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9402%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 The header starter uses a native popover with compact links and a real full-results route. Source: src/addons/ui/dropdown.ts and examples/dropdown-browser/. Review readable status and narrow popup/handoff hierarchy without replacing the established editing/keyboard model.
 
@@ -827,7 +827,7 @@ The header starter uses a native popover with compact links and a real full-resu
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [UI_POLISH.md](../planning/UI_POLISH.md)
 
 **Acceptance criteria**
 
@@ -843,7 +843,7 @@ The header starter uses a native popover with compact links and a real full-resu
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9402.md](../../docs/evidence/RX-9402.md)
+- [docs/evidence/RX-9402.md](../evidence/RX-9402.md)
 
 
 ## RX-9403
@@ -852,7 +852,7 @@ The header starter uses a native popover with compact links and a real full-resu
 
 **Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9403%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 Directory/cards use native filters, selected chips, complete pages, optional URL state and opt-in images. Source: src/addons/ui/directory* and matching starters. Review hierarchy and constrained layouts; deliberate missing-image fixtures are demonstrations, not unverified defects.
 
@@ -862,7 +862,7 @@ Directory/cards use native filters, selected chips, complete pages, optional URL
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [UI_POLISH.md](../planning/UI_POLISH.md)
 
 **Acceptance criteria**
 
@@ -878,7 +878,7 @@ Directory/cards use native filters, selected chips, complete pages, optional URL
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9403.md](../../docs/evidence/RX-9403.md)
+- [docs/evidence/RX-9403.md](../evidence/RX-9403.md)
 
 
 ## RX-9404
@@ -887,7 +887,7 @@ Directory/cards use native filters, selected chips, complete pages, optional URL
 
 **Milestone:** N14 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-9404%22)
 
-**Dependencies:** [RX-9205](../../IMPLEMENTATION_TASKS.md#rx-9205)
+**Dependencies:** [RX-9205](IMPLEMENTATION_TASKS.md#rx-9205)
 
 Workers, snapshots, IndexedDB and optional search capabilities are headless APIs. Review their visible states in existing demos/recipes and their adoption guidance, not hypothetical adapter screens. Source: docs/api/HOSTS.md, docs/api/ADDONS.md and docs/api/examples/.
 
@@ -897,7 +897,7 @@ Workers, snapshots, IndexedDB and optional search capabilities are headless APIs
 
 **Contracts**
 
-[RELEASE_1_0_0.md](../../docs/planning/RELEASE_1_0_0.md), [UI_POLISH.md](../../docs/planning/UI_POLISH.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md), [UI_POLISH.md](../planning/UI_POLISH.md)
 
 **Acceptance criteria**
 
@@ -913,7 +913,7 @@ Workers, snapshots, IndexedDB and optional search capabilities are headless APIs
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9404.md](../../docs/evidence/RX-9404.md)
+- [docs/evidence/RX-9404.md](../evidence/RX-9404.md)
 
 
 ## Research ideas outside the task backlog

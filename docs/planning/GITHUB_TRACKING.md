@@ -2,6 +2,28 @@
 
 The [milestone list](https://github.com/vmitsaras/raveldex/milestones) and [issues](https://github.com/vmitsaras/raveldex/issues) mirror stable IDs from `roadmap.json`.
 
+## Current N19 qualification — 14 November 2026
+
+RX-9908 is implemented and verified locally on `codex/n19-rx9908`, source base
+`62407bd`. N19 is **8/8 accepted**; all eight task issues, overview #118 and
+milestone #16 are closed after exact targeted read-back.
+[The task evidence](../evidence/RX-9908.md) records project 1,744 passed/eight
+optional skips, final site 80/80, fresh candidate/Pages/identity checks,
+independent review, owner manual disposition and targeted read-back. Native
+parent #118 keeps exactly #119–#126 in order; only those task issues belong to
+milestone #16, and the overview remains unassigned. Historical registration
+sections below retain their actual original states.
+
+The documented sync workflow is absent after the owner-preserved workflow
+deletion; older workflow sections describe its contract, not an enabled check.
+This slice uses targeted connector/API writes and exact read-back, preserving
+human notes, native relationships and unrelated metadata. No global backfill,
+commit/push, PR/merge, workflow restoration, hosted CI, deployment, npm
+publication, tags/releases or visibility change is selected. The milestone aggregate counter remains stale at eight open / zero closed, despite
+all eight directly verified closed task issues; no relationship/state manipulation
+was attempted to force the counter. No required selected release task remains;
+optional work requires a new instruction.
+
 ## N19 registration — 13 November 2026
 
 The owner requested planning and tracking only for [N19 documentation/demo experience](https://github.com/vmitsaras/raveldex/milestone/16). Overview [#118](https://github.com/vmitsaras/raveldex/issues/118) has eight verified native sub-issues, RX-9901–RX-9908 ([#119](https://github.com/vmitsaras/raveldex/issues/119) through [#126](https://github.com/vmitsaras/raveldex/issues/126)). Only those eight tasks belong to milestone #16; the overview has `milestone: null`. All canonical task statuses are `planned`, with 0/8 accepted.

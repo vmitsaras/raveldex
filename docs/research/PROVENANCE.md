@@ -5,7 +5,7 @@ Date: 2026-10-06. This is a traceability record, not refreshed competitor qualif
 ## Inputs used for initialization
 
 - Owner-provided conversation: return to a native TypeScript engine, provisional Raveldex name, small useful core, optional add-ons/adapters, 21 RX-* tasks across N0–N4 and later selected enhancements.
-- Fresh repository inspection: existing MIT license and .gitignore only, no issues, private visibility, initial commit recorded in PROJECT_CONTEXT.md.
+- Fresh repository inspection: existing MIT license and .gitignore only, no issues, private visibility, initial commit recorded in [project context](../planning/PROJECT_CONTEXT.md).
 - Supplied project instructions, agentic engineering model, specification/verification/review standards, source-routing rules, and relevant package principles.
 - The supplied PDF titled Codex Project Handoff Standard contains a short summary, not the full procedural handoff standard. No unseen detailed instructions were inferred from it.
 

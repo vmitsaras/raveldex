@@ -272,8 +272,11 @@ test('without JavaScript the homepage keeps documentation and an honest search f
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 900 } });
   try {
     const page = await context.newPage(); await page.goto(base);
-    assert.ok(await page.locator('noscript p').isVisible());
-    assert.match(await page.locator('noscript p').innerText(), /Search needs JavaScript/);
+    const example = page.locator('.examples-gallery__live .solution-card__demo');
+    assert.equal(await example.isVisible(), true);
+    await example.click();
+    await page.getByRole('link', { name: 'Plan your first walking trip', exact: true }).waitFor();
+    await page.goBack();
     assert.ok(await page.getByRole('main').getByRole('link', { name: 'Get started', exact: true }).isVisible());
     assert.equal(await page.locator('.search-workbench__queries').count(), 0);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));

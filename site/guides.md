@@ -13,3 +13,13 @@ New to Raveldex? [Getting started](../docs/api/GETTING_STARTED.md) takes you fro
 | Select an analyzer | [English](../docs/api/ENGLISH.md) or [code identifiers](../docs/api/IDENTIFIERS.md) |
 | Build a richer search box | [Typo tolerance](../docs/api/TYPO.md), [suggestions](../docs/api/SUGGESTIONS.md), [synonyms](../docs/api/SYNONYMS.md), [query syntax](../docs/api/QUERY_SYNTAX.md) |
 | Check host requirements and recover failures | [Compatibility](../docs/api/COMPATIBILITY.md) and [practical limits](../docs/api/LIMITATIONS.md) |
+
+## Choose, try and install
+
+1. [Choose an interface](../examples/README.md), then try its real preview.
+2. Open its Browser or Astro setup guide and copy the complete project.
+3. [Prepare public records](../docs/api/GETTING_STARTED.md#prepare-your-records) with stable IDs and real destinations.
+4. Check the [consumer adoption steps](../docs/api/HOSTS.md#starter-adoption-and-local-checks), then look up exact contracts in the [API reference](../docs/api/README.md).
+
+The [Pagefind migration appendix](../docs/api/PAGEFIND_MIGRATION.md) is optional;
+new integrations do not need an existing search provider.
