@@ -2,7 +2,7 @@
 
 > For agentic workers: use the Superpowers `executing-plans` workflow to implement one dependency-ready task at a time after an explicit implementation instruction. The registration request authorized planning and GitHub setup only. The subsequent request authorizes delivery and merge of this planning-only PR after CI; it does not authorize product code, dependency installation or N19 implementation.
 
-**Current execution — 13 November 2026:** RX-9901 is delivered in [PR #138](https://github.com/vmitsaras/raveldex/pull/138), merge `f30486a`, after passing CI. The owner subsequently selected RX-9902 implementation, checks and roadmap/GitHub updates only. RX-9902 is implemented and verified locally; see [evidence](../evidence/RX-9902.md). N19 is **2/8 accepted**. RX-9902 source remains uncommitted on `codex/n19-rx9902`; source delivery/publication are separate. **RX-9903 remains planned and unstarted**; RX-9904–RX-9908 remain planned and the existing owner pilot gate still applies. Earlier authorization and baseline statements below retain their registration-time scope.
+**Current execution — 13 November 2026:** The owner selected RX-9903 only after RX-9902 delivery in PR #139 (merge `c7d59a0`). The Inline pilot is implemented and verified locally on `codex/n19-rx9903`, with one persistent Browser preview, exact Code/copy/manual-selection views and independent Browser/Astro installation. N19 is **3/8 accepted**. RX-9904 explicitly remains **planned/unstarted**; owner approval and other-family rollout are separate. Source is uncommitted. See [RX-9903 evidence](../evidence/RX-9903.md) for 17 focused and 53 site passes, 1,744 project passes/eight optional comparator skips, installed candidate, four review repairs and one deferred Minor payload optimization.
 
 **Goal:** Help a developer choose an interface, try the real starter, install the matching project, replace its data and find a precise API contract.
 
@@ -193,3 +193,7 @@ No runtime/browser checks are required merely to register this plan. Registratio
 Mobbin URLs in the preserved proposal are structural provenance, not templates, copied assets or evidence of usability improvement. This plan adds no new claim about those screenshots.
 
 The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](../evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.
+
+## RX-9903 source-delivery selection — 14 November 2026
+
+The owner authorized [RX-9903 commit/push and PR delivery](../evidence/RX_9903_DELIVERY_20261114.md). After main removed all GitHub workflows, the owner explicitly selected preserving that deletion and leaving the PR open after local verification. Hosted CI and merge are not claimed. RX-9904 remains planned/unstarted; approval and rollout are separate.

@@ -1,0 +1,23 @@
+---
+import CodePanel from './CodePanel.astro';
+import { STARTER_CODE } from './starter-code.mjs';
+const { family, previewTitle, previewHeight } = Astro.props;
+---
+<section class="example-showcase__preview example-pilot" aria-labelledby={`try-${family}`}>
+  <header class="example-showcase__toolbar"><h2 id={`try-${family}`}>Try inline search</h2><div><strong data-preview-implementation>Browser starter</strong><p><slot /></p></div></header>
+  <div data-view-switch>
+    <div class="example-controls" hidden data-view-controls role="group" aria-label="Example view">
+      <button type="button" data-view="preview" aria-pressed="true">Preview</button>
+      <button type="button" data-view="code" aria-pressed="false">Code</button>
+    </div>
+    <div data-view-panel="preview"><iframe src={`/raveldex/examples/${family}-preview/`} title={previewTitle} loading="lazy" height={previewHeight}></iframe></div>
+    <div data-view-panel="code" class="example-source">
+      <h3>Read the complete source</h3>
+      <p>Code project selection changes the source shown here. The live preview always runs the Browser starter.</p>
+      <div data-example-choice>
+        <div hidden data-choice-label><label for={`code-project-${family}`}>Code project</label><select id={`code-project-${family}`} data-choice-select>{STARTER_CODE.map(starter => <option value={starter.id}>{starter.id.endsWith('-astro') ? 'Astro' : 'Browser'}</option>)}</select></div>
+        {STARTER_CODE.map(starter => <section data-choice-panel={starter.id} data-code-project={starter.id} aria-label={`${starter.id} source`}><h4>{starter.id}</h4>{starter.files.map(file => <CodePanel {...file} />)}</section>)}
+      </div>
+    </div>
+  </div>
+</section>

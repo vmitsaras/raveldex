@@ -1,0 +1,49 @@
+Example flow: 157.0.8103.51 / v24.21.0 / darwin arm64
+✔ inline keeps preview implementation separate from install platform (4737.828959ms)
+✔ switching views retains the same iframe and query (547.9315ms)
+✔ source views and copy equal allowlisted bytes (2148.103459ms)
+✖ clipboard denial and unavailable API offer manual recovery without success (5238.503625ms)
+✔ all setup content remains readable without JavaScript (261.014625ms)
+✔ example controls clean up listeners and ignore late copy feedback across page lifecycle (596.167042ms)
+✖ legacy starter fragments reveal the matching installation on load and hash changes (5110.383458ms)
+✖ installation guidance names each projects actual tarballs fields and build identity (5120.969333ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 5
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 50043.645333
+
+✖ failing tests:
+
+test at test/pages/docs-example-flow.test.mjs:92:1
+✖ clipboard denial and unavailable API offer manual recovery without success (5238.503625ms)
+  locator.focus: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-code-project="inline-browser"] [data-code-panel]').first().getByRole('button', { name: 'Select source', exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:102:70) {
+    name: 'TimeoutError',
+    log: [ `  - waiting for locator('[data-code-project="inline-browser"] [data-code-panel]').first().getByRole('button', { name: 'Select source', exact: true })` ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:140:1
+✖ legacy starter fragments reveal the matching installation on load and hash changes (5110.383458ms)
+  page.waitForFunction: Timeout 5000ms exceeded.
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:143:14) {
+    name: 'TimeoutError',
+    log: []
+  }
+
+test at test/pages/docs-example-flow.test.mjs:150:1
+✖ installation guidance names each projects actual tarballs fields and build identity (5120.969333ms)
+  locator.innerText: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-starter-id="inline-browser"]').locator('[data-package-guidance]')[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:152:130) {
+    name: 'TimeoutError',
+    log: [ `  - waiting for locator('[data-starter-id="inline-browser"]').locator('[data-package-guidance]')` ]
+  }

@@ -1,0 +1,89 @@
+Example flow: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ inline keeps preview implementation separate from install platform (6040.449959ms)
+✖ switching views retains the same iframe and query (5257.491416ms)
+✖ source views and copy equal allowlisted bytes (5153.814ms)
+✖ clipboard denial and unavailable API offer manual recovery without success (5134.440084ms)
+✖ all setup content remains readable without JavaScript (132.300375ms)
+✖ example controls clean up listeners and ignore late copy feedback across page lifecycle (5093.585875ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46592.297458
+
+✖ failing tests:
+
+test at test/pages/docs-example-flow.test.mjs:23:1
+✖ inline keeps preview implementation separate from install platform (6040.449959ms)
+  locator.innerText: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-preview-implementation]')[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:25:68) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for locator('[data-preview-implementation]')" ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:37:1
+✖ switching views retains the same iframe and query (5257.491416ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Code', exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:45:60) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Code', exact: true })" ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:62:1
+✖ source views and copy equal allowlisted bytes (5153.814ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Code', exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:65:59) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Code', exact: true })" ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:85:1
+✖ clipboard denial and unavailable API offer manual recovery without success (5134.440084ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Code', exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:87:59) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Code', exact: true })" ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:99:1
+✖ all setup content remains readable without JavaScript (132.300375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:103:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pages/docs-example-flow.test.mjs:110:1
+✖ example controls clean up listeners and ignore late copy feedback across page lifecycle (5093.585875ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Code', exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:112:59) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Code', exact: true })" ]
+  }

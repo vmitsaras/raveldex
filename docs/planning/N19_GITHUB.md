@@ -88,3 +88,11 @@ authorized source delivery. Human owner approval at RX-9904 and publication
 remain separate. Historical registration/delivery sections above retain their scope.
 
 The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](../evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.
+
+## RX-9903 local acceptance
+
+The owner selected RX-9903 only after RX-9902 delivery in PR #139 (merge `c7d59a0`). The Inline pilot is implemented and verified locally on `codex/n19-rx9903`, with one persistent Browser preview, exact Code/copy/manual-selection views and independent Browser/Astro installation. N19 is **3/8 accepted**. RX-9904 explicitly remains **planned/unstarted**; owner approval and other-family rollout are separate. Source is uncommitted. See [RX-9903 evidence](../evidence/RX-9903.md) for 17 focused and 53 site passes, 1,744 project passes/eight optional comparator skips, installed candidate, four review repairs and one deferred Minor payload optimization. Native hierarchy and original milestone membership remain preserved; new evidence links on remote main await separately authorized source delivery.
+
+## RX-9903 source-delivery selection — 14 November 2026
+
+The owner authorized [RX-9903 commit/push and PR delivery](../evidence/RX_9903_DELIVERY_20261114.md). Main commit `e3011b9` removed all GitHub workflows. The owner explicitly selected preserving the deletion and leaving the PR open after local verification. No hosted pass or merge may be inferred. N19 remains 3/8 accepted; RX-9904 remains planned/unstarted. Historical local-acceptance snapshots above retain their original identities.

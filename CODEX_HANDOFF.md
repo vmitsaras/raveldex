@@ -34,21 +34,7 @@ recorded optional comparator skips and manual limits. No required selected task
 remains; reconcile with `npm run handoff:next`. Source delivery/publication remain
 separate and the earlier header/demo work is preserved.
 
-The contextual shell from the [N19 plan](docs/planning/DOCS_DEMO_EXPERIENCE.md)
-was delivered in [PR #138](https://github.com/vmitsaras/raveldex/pull/138),
-merge `f30486a`, after passing Node 22/24 CI. The owner subsequently selected
-**RX-9902 only**. Its five-choice static overview, eight truthful platform/project
-mappings, compact comparison and preserved anchors/source alias are implemented
-and verified locally. [RX-9902 evidence](docs/evidence/RX-9902.md) records 16 focused
-and 45 site passes, complete project checks (1,744 passes/eight optional skips),
-installed candidate, three review repairs and one deferred minor test assertion.
-Current branch: `codex/n19-rx9902`; source is uncommitted. No delivery selected.
-N19 is 2/8 accepted. **RX-9903 remains planned and unstarted**, despite technical
-dependency readiness. RX-9904 still requires the owner's rendered-pilot response
-after RX-9903; RX-9904–RX-9908 remain planned. Publication/later implementation
-require separate instructions. The [site guide](site/README.md) owns the explicit
-gallery asset/capture contract; original verification/delivery records retain
-their dated scope.
+The owner selected RX-9903 only after RX-9902 delivery in PR #139 (merge `c7d59a0`). The Inline pilot is implemented and verified locally on `codex/n19-rx9903`, with one persistent Browser preview, exact Code/copy/manual-selection views and independent Browser/Astro installation. N19 is **3/8 accepted**. RX-9904 explicitly remains **planned/unstarted**; owner approval and other-family rollout are separate. Source delivery is selected in the [RX-9903 delivery record](docs/evidence/RX_9903_DELIVERY_20261114.md); the owner explicitly chose to preserve the removal of GitHub workflows and leave the PR open. See [RX-9903 evidence](docs/evidence/RX-9903.md) for 17 focused and 53 site passes, 1,744 project passes/eight optional comparator skips, installed candidate, four review repairs and one deferred Minor payload optimization.
 
 Run commands appropriate to the changed risk and record actual outcomes in the
 task's evidence. The [release runbook](docs/release/PREPARATION.md) packs/verifies
@@ -61,4 +47,4 @@ changes, followed by CI verification on the pushed commit. Preserve unrelated
 and optional benchmarks remain separate actions. Report the next required task separately from
 optional follow-ups and identify unrun/blocked checks precisely.
 
-The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](docs/evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.
+The owner subsequently authorized [RX-9903 commit/push and PR delivery](docs/evidence/RX_9903_DELIVERY_20261114.md). Preserve main's workflow deletion and leave the PR open without hosted CI. RX-9904 remains planned/unstarted; publication stays separate.

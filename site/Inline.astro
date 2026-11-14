@@ -3,8 +3,10 @@ import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
-<ExampleShowcase family="inline" title="Ready to use inline search" description="Keep search in the page, with useful excerpts, topic filters and clear links to the full guide." previewTitle="Inline search starter preview" previewHeight={780}>
+<ExampleShowcase pilot family="inline" title="Ready to use inline search" description="Keep search in the page, with useful excerpts, topic filters and clear links to the full guide." previewTitle="Inline search starter preview" previewHeight={780}>
   <Fragment slot="preview-hint">Search <code>walking guide</code>, choose a topic, then open a guide. Try Load more to see the remaining matches.</Fragment>
+  <h2 id="copy-inline">Choose a complete starter</h2>
+  <StarterSetup family="inline" pilot />
   <details><summary>How this example works</summary>
 <p>Add a search field, highlighted excerpts, topic filters and more results to an ordinary page. Start with a complete browser or Astro project, replace its explicit guide records and adjust a few CSS properties.</p>
   <p>Use inline search when results belong in the page. For search that opens from a button, choose the <a href={base + 'examples/modal/'}>documentation modal</a>.</p>
@@ -13,13 +15,11 @@ const base = '/raveldex/';
   <p>For a resource library with checkbox groups, selected chips, complete native pages and optional URL replay, use the <a href={base + 'examples/directory/'}>faceted directory</a>.</p>
 <p>Try <code>walking guide</code>, choose a type of guide to narrow the matches, and follow a result to its complete page. The guide links also work without JavaScript. This preview runs the installed browser starter shown below.</p>
   </details>
-  <h2 id="copy-inline">Choose a complete starter</h2>
   <p>Snippets need Intl.Segmenter. Astro also needs Web Crypto over HTTPS or localhost.</p>
   <details><summary>Data and browser requirements</summary>
     <p>Use Node 24 and npm for the documented setup. The browser project uses esbuild 0.28.2; the Astro project uses Astro 7.3.2 and the existing static search loader. Serve the built output over HTTP or HTTPS. Each guide covers package installation, changed deployment bases, loading failures, retry and cleanup.</p>
   <p>Supply an explicit list of public pages with stable IDs, titles, URLs and original text; the starter guides show the exact records to replace. Both examples select source snippets and a string topic facet. Their snippets require <code>Intl.Segmenter</code>; the Astro artifact loader also requires Web Crypto over HTTPS or localhost. Title/link-only integrations can omit snippets and facets by removing their matching UI options and registrations together.</p>
   </details>
-  <StarterSetup family="inline" />
   <h2 id="inline-theme">Change the appearance</h2>
   <ol>
     <li>Copy and install one complete starter using its setup guide. Run it once and search the sample content before changing the CSS.</li>
