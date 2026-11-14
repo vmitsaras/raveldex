@@ -3,16 +3,16 @@ import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base='/raveldex/';
 ---
-<ExampleShowcase family="cards" title="Rich resource result cards" description="Give a resource library readable excerpts and metadata, with list, card and grid layouts." previewTitle="Rich resource results starter preview" previewHeight={920}>
+<ExampleShowcase pilot family="cards" title="Rich resource result cards" description="Give a resource library readable excerpts and metadata, with list, card and grid layouts." previewTitle="Rich resource results starter preview" previewHeight={920}>
   <Fragment slot="preview-hint">Search <code>walking resource</code>. Try List, Cards and Grid, adjust the density or choose <strong>Show images</strong>.</Fragment>
+  <h2 id="copy-cards">Copy the complete browser project</h2>
+  <p>Uses the directory controls. Images start off and load only when visitors choose to show them.</p>
+  <StarterSetup family="cards" pilot />
   <details><summary>How this example works</summary>
 <p>Present the same native directory results as a list, cards or a responsive grid. Add explicit excerpts, category/breadcrumb/date text, named fields and optional images. Copy the complete browser project, replace its public data and adjust a few CSS properties.</p>
   <p>Choose the <a href={base+'examples/directory/'}>plain browser or Astro directory</a> when titles and filters are enough. This rich browser project adds a separate display projection; no static artifact extension or framework is required.</p>
 <p>Search <code>walking resource</code>: seven pages match. Choose Grid and Compact, then move through all three native result pages. Query, selected filters, exact total, current page and deterministic order stay the same. Check Show images to request illustrations for the current page. Images start off; the final resource deliberately demonstrates a missing image.</p>
   </details>
-  <h2 id="copy-cards">Copy the complete browser project</h2>
-  <p>Uses the directory controls. Images start off and load only when visitors choose to show them.</p>
-  <StarterSetup family="cards" />
   <h2 id="cards-theme">Change the appearance</h2>
   <ol><li>Copy, install, build and preview the complete project. Its List/Comfortable layout starts with images off.</li><li>Edit the existing component rules in <code>theme.css</code>, loaded after <code>directory.css</code> and <code>directory-cards.css</code>:</li></ol>
   <pre role="region" tabindex="0" aria-label="Rich result theme properties"><code>{`.raveldex-directory {

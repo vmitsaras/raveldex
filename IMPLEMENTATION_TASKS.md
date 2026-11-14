@@ -3793,7 +3793,7 @@ Roll the approved detail/setup template onto modal and dropdown pages while reta
 
 **Apply the reviewed template to directory and rich results**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/124)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/124)
 
 **Dependencies:** [RX-9904](IMPLEMENTATION_TASKS.md#rx-9904)
 
@@ -3821,7 +3821,10 @@ Roll the approved detail/setup template onto directory and rich-results pages wh
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9906.md](docs/evidence/RX-9906.md)
+- [docs/evidence/RX-9906/boundaries.json](docs/evidence/RX-9906/boundaries.json)
+- [docs/evidence/RX-9906/review.md](docs/evidence/RX-9906/review.md)
+- [docs/evidence/RX-9906/tracking.json](docs/evidence/RX-9906/tracking.json)
 
 
 ## RX-9907

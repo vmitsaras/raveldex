@@ -78,7 +78,7 @@ test('source views and copy equal allowlisted bytes',async()=>{
     await panel.locator('summary').click();
     const text=await readFile(new URL(`../../examples/${starter.id}/${file}`,import.meta.url),'utf8');
     assert.equal(await panel.locator('pre code').textContent(),text,starter.id+'/'+file);
-    assert.equal(await panel.locator('script,iframe').count(),0);
+    assert.equal(await panel.locator('script,iframe,img,svg').count(),0);
     await panel.getByRole('button',{name:'Copy '+file,exact:true}).click();
     await page.waitForFunction(()=>window.copies.length>0);
     assert.equal(await page.evaluate(()=>window.copies.pop()),text);
@@ -200,14 +200,15 @@ test('dropdown full-page handoff preserves raw query',async()=>{
  }finally{await page.close();}
 });
 
-for(const family of ['modal','dropdown']){
+for(const family of ['modal','dropdown','directory','cards']){
  test(`${family} shared views keep a live query and exact family source`,async()=>{
-  const page=await open({viewport:{width:320,height:800}});try{
+  const page=await open({viewport:{width:320,height:800}});const images=[];page.on('request',r=>{if(r.resourceType()==='image')images.push(r.url());});try{
    await page.goto(new URL(`examples/${family}/`,base).href);
    const frame=page.frameLocator('iframe');if(family==='modal')await frame.getByRole('button',{name:'Search documentation',exact:true}).click();
-   const input=frame.locator(family==='modal'?'[data-raveldex-inline-input]':'[data-raveldex-dropdown-input]');await input.fill(family==='modal'?'bobbin':'walking guide');await input.press('Enter');
-   await frame.locator(family==='modal'?'[data-raveldex-inline-result]':'[data-raveldex-dropdown-result]').first().waitFor();
-   const original=await page.locator('iframe').elementHandle();await frame.locator('html').evaluate(n=>n.dataset.identity='same');
+   const query=family==='modal'?'bobbin':family==='dropdown'?'walking guide':'walking resource';
+   const input=frame.locator(family==='modal'?'[data-raveldex-inline-input]':family==='dropdown'?'[data-raveldex-dropdown-input]':'input[type="search"]');await input.fill(query);await input.press('Enter');
+   await frame.locator(family==='modal'?'[data-raveldex-inline-result]':family==='dropdown'?'[data-raveldex-dropdown-result]':'[data-raveldex-directory-result]').first().waitFor();
+   const original=await page.locator('iframe').elementHandle();await frame.locator('html').evaluate(n=>{n.dataset.identity='same';window.originalResults=[...document.querySelectorAll('[data-raveldex-directory-result-link]')];});
    await page.getByRole('button',{name:'Code',exact:true}).click();
    await page.evaluate(()=>{window.copies=[];Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>window.copies.push(text)}});});
    for(const starter of STARTERS.filter(s=>s.family===family)){
@@ -215,7 +216,7 @@ for(const family of ['modal','dropdown']){
     const panels=page.locator(`[data-code-project="${starter.id}"] [data-code-panel]`);assert.equal(await panels.count(),starter.files.length);
     for(const file of starter.files){
      const panel=panels.filter({has:page.locator(`summary[data-code-file="${file}"]`)});await panel.locator('summary').click();
-     const text=await readFile(new URL(`../../examples/${starter.id}/${file}`,import.meta.url),'utf8');assert.equal(await panel.locator('pre code').textContent(),text,starter.id+'/'+file);assert.equal(await panel.locator('script,iframe').count(),0);
+     const text=await readFile(new URL(`../../examples/${starter.id}/${file}`,import.meta.url),'utf8');assert.equal(await panel.locator('pre code').textContent(),text,starter.id+'/'+file);assert.equal(await panel.locator('script,iframe,img,svg').count(),0);
      await panel.locator('[data-copy-code]').click();await page.waitForFunction(()=>window.copies.length>0);assert.equal(await page.evaluate(()=>window.copies.pop()),text);await panel.locator('summary').click();
     }
    }
@@ -225,12 +226,27 @@ for(const family of ['modal','dropdown']){
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
    await page.addScriptTag({content:await readFile(new URL('../../node_modules/axe-core/axe.min.js',import.meta.url),'utf8')});assert.deepEqual(await page.evaluate(async()=> (await axe.run({runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}})).violations),[]);
    if(process.env.RAVELDEX_EXAMPLE_CAPTURES)await page.screenshot({path:`${process.env.RAVELDEX_EXAMPLE_CAPTURES}/${family}-code-320.png`,fullPage:true});
-   await page.getByRole('button',{name:'Preview',exact:true}).click();assert.equal(await page.locator('iframe').evaluate((n,old)=>n===old,original),true);assert.equal(await frame.locator('html').getAttribute('data-identity'),'same');assert.equal(await input.inputValue(),family==='modal'?'bobbin':'walking guide');assert.equal(await frame.locator('html').evaluate(()=>performance.getEntriesByType('resource').filter(r=>r.name.endsWith('/content.json')).length),1);
+   await page.getByRole('button',{name:'Preview',exact:true}).click();assert.equal(await page.locator('iframe').evaluate((n,old)=>n===old,original),true);assert.equal(await frame.locator('html').getAttribute('data-identity'),'same');assert.equal(await input.inputValue(),query);if(family==='directory'||family==='cards'){assert.deepEqual(images,[]);assert.equal(await frame.locator('[data-raveldex-directory-result-link]').evaluateAll(nodes=>nodes.length===window.originalResults.length&&nodes.every((n,i)=>n===window.originalResults[i])),true);}assert.equal(await frame.locator('html').evaluate(()=>performance.getEntriesByType('resource').filter(r=>r.name.endsWith('/content.json')).length),1);
+   if(family==='cards'){
+    await frame.getByLabel('Layout',{exact:true}).selectOption('grid');await frame.getByLabel('Density',{exact:true}).selectOption('compact');
+    const optIn=frame.getByRole('checkbox',{name:'Show images',exact:true});await optIn.check();
+    const illustrated=frame.locator('[data-directory-root] img');assert.equal(await illustrated.count(),2);
+    for(const picture of await illustrated.all())await picture.scrollIntoViewIfNeeded();
+    await frame.locator('html').evaluate(async()=>{await Promise.all([...document.querySelectorAll('[data-directory-root] img')].map(n=>n.decode()));window.optedImages=[...document.querySelectorAll('[data-directory-root] img')];window.optedLinks=[...document.querySelectorAll('[data-raveldex-directory-result-link]')];});
+    const url=await frame.locator('html').evaluate(()=>location.href),requests=images.slice(),sources=await illustrated.evaluateAll(nodes=>nodes.map(n=>n.src));assert.equal(requests.length,2);
+    await page.getByRole('button',{name:'Code',exact:true}).click();
+    await page.getByLabel('Code project',{exact:true}).selectOption('cards-browser');await page.getByLabel('Installation platform',{exact:true}).selectOption('cards-browser');
+    await page.getByRole('button',{name:'Preview',exact:true}).click();
+    assert.equal(await optIn.isChecked(),true);assert.equal(await input.inputValue(),query);assert.equal(await frame.getByLabel('Layout',{exact:true}).inputValue(),'grid');assert.equal(await frame.getByLabel('Density',{exact:true}).inputValue(),'compact');
+    assert.equal(await frame.locator('html').evaluate(()=>location.href),url);assert.deepEqual(await illustrated.evaluateAll(nodes=>nodes.map(n=>n.src)),sources);assert.deepEqual(images,requests);
+    assert.equal(await illustrated.evaluateAll(nodes=>nodes.length===window.optedImages.length&&nodes.every((n,i)=>n===window.optedImages[i]&&n.naturalWidth>0)),true);
+    assert.equal(await frame.locator('[data-raveldex-directory-result-link]').evaluateAll(nodes=>nodes.length===window.optedLinks.length&&nodes.every((n,i)=>n===window.optedLinks[i])),true);
+   }
   }finally{await page.close();}
  });
  test(`${family} sources setup and old anchors work without JavaScript`,async()=>{
   const page=await open({javaScriptEnabled:false,viewport:{width:320,height:800}});try{
-   await page.goto(new URL(`examples/${family}/`,base).href);for(const id of [`try-${family}`,`copy-${family}`,`${family}-theme`,`${family}-support`,...(family==='dropdown'?['dropdown-narrow']:[])])assert.equal(await page.locator('#'+id).count(),1);for(const starter of STARTERS.filter(s=>s.family===family)){
+   await page.goto(new URL(`examples/${family}/`,base).href);for(const id of family==='directory'?['try-directory','copy-directory','directory-theme','directory-navigation','directory-checks']:family==='cards'?['try-cards','copy-cards','cards-theme','cards-data','cards-adoption']:[`try-${family}`,`copy-${family}`,`${family}-theme`,`${family}-support`,...(family==='dropdown'?['dropdown-narrow']:[])])assert.equal(await page.locator('#'+id).count(),1);for(const starter of STARTERS.filter(s=>s.family===family)){
     assert.equal(await page.locator(`[data-starter-id="${starter.id}"]`).isVisible(),true);const panel=page.locator(`[data-code-project="${starter.id}"] [data-code-panel]`).first();await panel.locator('summary').click();assert.equal(await panel.locator('pre').isVisible(),true);
    }assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
   }finally{await page.close();}
@@ -255,4 +271,92 @@ test('dropdown without native Popover retains a working full-results form',async
   await page.addInitScript(()=>{delete HTMLElement.prototype.showPopover;});
   await page.goto(new URL('examples/dropdown-preview/',base).href);const form=page.getByRole('search',{name:'Search all walking guides',exact:true});await form.waitFor();const raw='  walking   gui  ';await form.getByRole('searchbox').fill(raw);await form.getByRole('button',{name:'Search all guides',exact:true}).click();await page.waitForURL('**/dropdown-preview/search/**');assert.equal(new URL(page.url()).searchParams.get('q'),raw);await page.locator('[data-raveldex-inline-result]').first().waitFor();assert.equal(await page.locator('[data-raveldex-inline-input]').inputValue(),raw);
  }finally{await page.close();}
+});
+
+// The approved shell must keep each starter's native filter/page/history contract.
+async function exerciseResourceHistory(page, family) {
+ await page.goto(new URL(`examples/${family}-preview/?keep=a%20b#kept`,base).href);
+ const input=page.getByRole('searchbox',{name:'Search walking resources',exact:true});
+ await page.getByText('Directory is ready.',{exact:true}).waitFor();
+ await input.fill('walking resource');await input.press('Enter');
+ await page.getByText('7 results. Showing 1–3.',{exact:true}).waitFor();
+ await page.getByRole('button',{name:'Next page',exact:true}).click();
+ await page.getByText('7 results. Showing 4–6.',{exact:true}).waitFor();
+ const second=page.url();assert.equal(new URL(second).searchParams.get('page'),'2');
+ await page.getByText('Filter resources',{exact:true}).click();
+ await page.getByRole('checkbox',{name:/^Guides /}).check();
+ await page.getByText('3 results. Showing 1–3.',{exact:true}).waitFor();
+ await page.getByRole('checkbox',{name:/^Safety /}).check();
+ await page.getByText('2 results. Showing 1–2.',{exact:true}).waitFor();
+ const filtered=page.url(),url=new URL(filtered);assert.equal(url.searchParams.get('q'),'walking resource');assert.equal(url.searchParams.get('format'),'guide');assert.equal(url.searchParams.get('topic'),'safety');assert.equal(url.searchParams.get('keep'),'a b');assert.equal(url.hash,'#kept');
+ assert.deepEqual((await page.locator('[data-raveldex-directory-result]').evaluateAll(nodes=>nodes.map(n=>n.dataset.raveldexDirectoryResult))).sort(),['weather','wildlife']);
+ await page.getByRole('button',{name:'Close filters',exact:true}).click();
+ assert.equal(await page.locator('summary').evaluate(n=>n===document.activeElement),true);
+ await page.getByText('Filter resources',{exact:true}).press('Enter');await page.getByRole('checkbox',{name:/^Safety /}).focus();await page.keyboard.press('Escape');assert.equal(await page.locator('summary').evaluate(n=>n===document.activeElement),true);
+ await page.getByRole('button',{name:'Remove Topic: Safety',exact:true}).focus();await page.keyboard.press('Enter');
+ await page.getByText('3 results. Showing 1–3.',{exact:true}).waitFor();
+ assert.equal(await page.getByRole('button',{name:'Remove Resource type: Guides',exact:true}).evaluate(n=>n===document.activeElement),true);
+ await page.getByRole('button',{name:'Clear all',exact:true}).click();await page.getByText('7 results. Showing 1–3.',{exact:true}).waitFor();
+ await page.goBack();await page.getByText('3 results. Showing 1–3.',{exact:true}).waitFor();
+ await page.goBack();await page.getByText('2 results. Showing 1–2.',{exact:true}).waitFor();assert.equal(page.url(),filtered);
+ await page.goBack();await page.getByText('3 results. Showing 1–3.',{exact:true}).waitFor();
+ await page.goBack();await page.getByText('7 results. Showing 4–6.',{exact:true}).waitFor();assert.equal(page.url(),second);
+ await page.goForward();await page.getByText('3 results. Showing 1–3.',{exact:true}).waitFor();await page.goForward();await page.getByText('2 results. Showing 1–2.',{exact:true}).waitFor();assert.equal(page.url(),filtered);
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
+}
+
+test('directory setup and views preserve native filters and URL state',async()=>{
+ const page=await open({viewport:{width:320,height:800}});try{
+  await page.goto(new URL('examples/directory/',base).href);
+  await page.getByLabel('Installation platform',{exact:true}).selectOption('directory-astro');
+  const setup=page.locator('[data-starter-id="directory-astro"]');assert.equal(await setup.isVisible(),true);
+  // URL state is exercised on the actual full-page starter; the iframe remains Browser.
+  assert.equal(await page.locator('[data-preview-implementation]').innerText(),'Browser starter');
+  await exerciseResourceHistory(page,'directory');
+ }finally{await page.close();}
+});
+
+test('rich result views preserve links and image opt-in',async()=>{
+ const page=await open({viewport:{width:320,height:800}});const images=[];page.on('request',r=>{if(r.resourceType()==='image')images.push(r.url());});try{
+  await page.goto(new URL('examples/cards/',base).href);
+  assert.deepEqual(await page.getByLabel('Installation platform',{exact:true}).locator('option').evaluateAll(nodes=>nodes.map(n=>n.value)),['cards-browser']);
+  await exerciseResourceHistory(page,'cards');
+  const before=page.url();const links=page.locator('[data-raveldex-directory-result-link]');await links.evaluateAll(nodes=>window.originalLinks=nodes);
+  for(const layout of ['cards','grid','list']){
+   await page.getByLabel('Layout',{exact:true}).selectOption(layout);
+   for(const density of ['compact','comfortable']){
+    await page.getByLabel('Density',{exact:true}).selectOption(density);assert.equal(page.url(),before);
+    assert.equal(await links.evaluateAll(nodes=>nodes.every((n,i)=>n===window.originalLinks[i])&&nodes.length===window.originalLinks.length),true);
+    assert.equal(await page.locator('[role="grid"],[role="gridcell"]').count(),0);
+   }
+  }
+  assert.deepEqual(images,[]);assert.equal(await page.getByRole('checkbox',{name:'Show images',exact:true}).isChecked(),false);
+  await page.getByRole('checkbox',{name:'Show images',exact:true}).check();await page.locator('[data-directory-root] img').scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelector('[data-directory-root] img')?.naturalWidth>0);
+  assert.equal(await links.evaluateAll(nodes=>nodes.every((n,i)=>n===window.originalLinks[i])),true);assert.equal(page.url(),before);assert.equal(images.length,1);
+  await page.getByRole('checkbox',{name:'Show images',exact:true}).uncheck();assert.equal(await page.locator('[data-directory-root] img').count(),0);
+  await page.getByRole('button',{name:'Clear all',exact:true}).click();await page.getByText('7 results. Showing 1–3.',{exact:true}).waitFor();
+  const input=page.getByRole('searchbox',{name:'Search walking resources',exact:true});await input.fill('others');await input.press('Enter');await page.getByText('1 result. Showing 1–1.',{exact:true}).waitFor();
+  const target=page.locator('[data-raveldex-directory-result-link]'),href=await target.getAttribute('href');const node=await target.elementHandle();
+  await page.getByRole('checkbox',{name:'Show images',exact:true}).check();await page.locator('[data-raveldex-directory-result]').scrollIntoViewIfNeeded();await page.getByText('Image unavailable',{exact:false}).waitFor();
+  assert.equal(await target.evaluate((n,old)=>n===old,node),true);assert.equal(await target.getAttribute('href'),href);assert.match(await page.locator('[data-raveldex-directory-result]').innerText(),/Leave a route ready for others/);
+  await target.click();await page.waitForURL('**/resources/care/');assert.equal(await page.getByRole('heading',{level:1}).innerText(),'Leave a route ready for others');
+ }catch(error){console.error(error);throw error;}finally{await page.close();}
+});
+
+// Controlled public metadata must remain literal and readable in the actual starter.
+test('rich starter wraps long literal metadata at 320px without changing its destination',async()=>{
+ const page=await open({viewport:{width:320,height:800}});try{
+  const records=JSON.parse(await readFile(new URL('../../examples/cards-browser/content.json',import.meta.url),'utf8'));
+  const record=records.find(r=>r.id==='maps');record.title='LongResource '.repeat(65).trim();record.excerpt='<img src=x onerror=alert(1)> '+ 'تفاصيل '.repeat(180);record.category='Category'.repeat(28);record.breadcrumb=['Route'.repeat(48),'Public library'];record.date='Authored date '.repeat(16);record.fields=[{name:'Distance'.repeat(16),value:'Detail'.repeat(80)}];
+  await page.route('**/cards-preview/content.json',route=>route.fulfill({json:records}));
+  await page.goto(new URL('examples/cards-preview/',base).href);await page.getByText('Directory is ready.',{exact:true}).waitFor();
+  const input=page.getByRole('searchbox',{name:'Search walking resources',exact:true});await input.fill('symbols');await input.press('Enter');await page.getByText('1 result. Showing 1–1.',{exact:true}).waitFor();
+  const result=page.locator('[data-raveldex-directory-result="maps"]'),link=result.locator('[data-raveldex-directory-result-link]');const href=await link.getAttribute('href');
+  for(const layout of ['list','cards','grid']){
+   await page.getByLabel('Layout',{exact:true}).selectOption(layout);assert.ok((await result.textContent()).includes(record.excerpt));assert.equal(await link.textContent(),record.title);assert.equal(await link.getAttribute('href'),href);assert.equal(await result.locator('img,script,[onerror]').count(),0);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
+  }
+  await page.addScriptTag({content:await readFile(new URL('../../node_modules/axe-core/axe.min.js',import.meta.url),'utf8')});assert.deepEqual(await page.evaluate(async()=> (await axe.run({runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}})).violations),[]);
+  if(process.env.RAVELDEX_EXAMPLE_CAPTURES)await page.screenshot({path:`${process.env.RAVELDEX_EXAMPLE_CAPTURES}/cards-long-metadata-320.png`,fullPage:true});
+  await link.click();await page.waitForURL('**/resources/maps/');assert.equal(await page.getByRole('heading',{level:1}).innerText(),'Choose a walking map');
+ }catch(error){console.error(error);console.error(await page.locator('body').innerText());throw error;}finally{await page.close();}
 });

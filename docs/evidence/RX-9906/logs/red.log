@@ -1,0 +1,93 @@
+Example flow: 157.0.8103.51 / v24.21.0 / darwin arm64
+✖ directory shared views keep a live query and exact family source (5860.449917ms)
+✖ directory sources setup and old anchors work without JavaScript (5163.011333ms)
+✖ cards shared views keep a live query and exact family source (5248.751041ms)
+✖ cards sources setup and old anchors work without JavaScript (5174.368917ms)
+✖ directory setup and views preserve native filters and URL state (5151.507459ms)
+✖ rich result views preserve links and image opt-in (167.878792ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 47366.159083
+
+✖ failing tests:
+
+test at test/pages/docs-example-flow.test.mjs:204:2
+✖ directory shared views keep a live query and exact family source (5860.449917ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Code', exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:212:60) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Code', exact: true })" ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:232:2
+✖ directory sources setup and old anchors work without JavaScript (5163.011333ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-code-project="directory-browser"] [data-code-panel]').first().locator('summary')[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:235:213) {
+    name: 'TimeoutError',
+    log: [ `  - waiting for locator('[data-code-project="directory-browser"] [data-code-panel]').first().locator('summary')` ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:204:2
+✖ cards shared views keep a live query and exact family source (5248.751041ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for getByRole('button', { name: 'Code', exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:212:60) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByRole('button', { name: 'Code', exact: true })" ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:232:2
+✖ cards sources setup and old anchors work without JavaScript (5174.368917ms)
+  locator.click: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for locator('[data-code-project="cards-browser"] [data-code-panel]').first().locator('summary')[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:235:213) {
+    name: 'TimeoutError',
+    log: [ `  - waiting for locator('[data-code-project="cards-browser"] [data-code-panel]').first().locator('summary')` ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:293:1
+✖ directory setup and views preserve native filters and URL state (5151.507459ms)
+  locator.selectOption: Timeout 5000ms exceeded.
+  Call log:
+  [2m  - waiting for getByLabel('Installation platform', { exact: true })[22m
+  
+      at TestContext.<anonymous> (/Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:296:63) {
+    name: 'TimeoutError',
+    log: [ "  - waiting for getByLabel('Installation platform', { exact: true })" ]
+  }
+
+test at test/pages/docs-example-flow.test.mjs:304:1
+✖ rich result views preserve links and image opt-in (167.878792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   'cards-browser'
+  - ]
+  
+      at TestContext.<anonymous> (file:///Users/vasilis/.codex/worktrees/raveldex-n19-planning/raveldex/test/pages/docs-example-flow.test.mjs:307:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ 'cards-browser' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

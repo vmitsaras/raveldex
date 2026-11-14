@@ -49,25 +49,27 @@ for exact identities, renders, source boundaries and unrun human qualification.
 
 ### Existing consumer examples and search
 
-Inline, Modal and Dropdown opt into `ExampleShowcase`/`StarterSetup` with `pilot`
-after the owner approved the RX-9904 gallery/Inline candidate. Directory and rich
-results retain their previous flow until RX-9906. Modal keeps its Browser/Astro
-choices; Dropdown offers only Browser. An embedded modal stays inside its iframe;
-the full preview demonstrates whole-window dialog/focus/section navigation. `DemoPreview`
-renders one persistent Browser iframe and an independent Code view; native
-pressed buttons switch views without replacing the frame. Installation platform
-and Code project are separate native selects. Astro instructions never relabel
-or rebuild the Browser preview. Without enhancement, both source projects and
-both setup variants remain readable through ordinary disclosures/links.
+All five galleries opt into `ExampleShowcase`/`StarterSetup` with `pilot`
+after the owner approved the RX-9904 gallery/Inline candidate. Directory keeps
+Browser/Astro projects; rich results and Dropdown offer Browser only. An embedded
+modal stays inside its iframe; the full preview demonstrates whole-window
+dialog/focus/section navigation. `DemoPreview` renders one persistent Browser
+iframe and an independent Code view; native pressed buttons switch views without
+replacing the frame. Installation platform and Code project are separate native
+selects. Astro instructions never relabel or rebuild the Browser preview.
+Without enhancement, every applicable source project and setup variant remains
+readable through ordinary disclosures/links.
 
-The scratch builder creates `starter-code.mjs` from the explicit Inline/Modal/Dropdown `STARTERS`
-allowlists, then filters by the selected page family. `CodePanel` uses Astro's existing Code/Shiki renderer with its high-contrast light theme; a transformer
-restores its omitted final newline and fails the build on other text drift.
-Copy uses the same escaped literal text, without filenames or highlighting.
-Clipboard denial/unavailability leaves a manual-selection instruction. Select
-source creates and focuses an exact readonly field, including the final newline
-that browser range selection omits. Fragment navigation reveals the selected
-project before scrolling. `example-controls.mjs` owns removable site UI listeners;
+The scratch builder creates `starter-code.mjs` from the explicit `STARTERS`
+allowlists, then filters by the selected page family. SVG source is highlighted
+as literal XML, never embedded as an image. `CodePanel` uses Astro's existing
+Code/Shiki renderer with its high-contrast light theme; a transformer restores
+its omitted final newline and fails the build on other text drift. Copy uses the
+same escaped literal text, without filenames or highlighting. Clipboard
+denial/unavailability leaves a manual-selection instruction. Select source
+creates and focuses an exact readonly field, including the final newline that
+browser range selection omits. Fragment navigation reveals the selected project
+before scrolling. `example-controls.mjs` owns removable site UI listeners;
 pagehide aborts listeners and suppresses late clipboard feedback, and persisted
 pageshow rebinds once. It never owns an engine or rewrites preview markup.
 
