@@ -1,0 +1,23 @@
+### Result
+{"scope":"No-JavaScript render on the same verified local candidate","platforms":[{"id":"inline-browser","visible":true},{"id":"inline-astro","visible":true}],"sources":[{"id":"inline-browser","visible":true},{"id":"inline-astro","visible":true}],"documentWidth":{"scrollWidth":320,"clientWidth":320}}
+### Ran Playwright code
+```js
+await (async page => {
+  const context = await page.context().browser().newContext({ javaScriptEnabled: false, viewport: {width:320,height:800} });
+  const nojs = await context.newPage();
+  await nojs.goto('http://127.0.0.1:56133/raveldex/examples/inline/');
+  const report = {scope:'No-JavaScript render on the same verified local candidate',platforms:[],sources:[]};
+  for(const id of ['inline-browser','inline-astro']) {
+    report.platforms.push({id,visible:await nojs.locator(`[data-starter-id="${id}"]`).isVisible()});
+    report.sources.push({id,visible:await nojs.locator(`[data-code-project="${id}"]`).isVisible()});
+  }
+  await nojs.locator('.example-showcase__docs [data-example-choice]').screenshot({path:'output/playwright/rx9904/nojs-install-narrow.png'});
+  const file=nojs.locator('[data-code-project="inline-astro"] [data-code-panel]').filter({has:nojs.locator('summary[data-code-file="package.json"]')});
+  await file.locator('summary').click();
+  await file.screenshot({path:'output/playwright/rx9904/nojs-source-narrow.png'});
+  report.documentWidth=await nojs.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth}));
+  await context.close();
+  return report;
+}
+)(page);
+```

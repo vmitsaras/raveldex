@@ -3,19 +3,19 @@ import ExampleShowcase from './ExampleShowcase.astro';
 import StarterSetup from './StarterSetup.astro';
 const base = '/raveldex/';
 ---
-<ExampleShowcase family="dropdown" title="Compact header search starter" description="Find a page from a compact header field, with a complete results page when you need more." previewTitle="Dropdown header starter preview" previewHeight={680}>
+<ExampleShowcase pilot family="dropdown" title="Compact header search starter" description="Find a page from a compact header field, with a complete results page when you need more." previewTitle="Dropdown header starter preview" previewHeight={680}>
   <Fragment slot="preview-hint">Search <code>walking guide</code>. Use the arrow keys and Enter, or choose <strong>See all results</strong>.</Fragment>
+  <h2 id="copy-dropdown">Copy the complete project</h2>
+  <StarterSetup family="dropdown" pilot />
+  <p>The quick popup needs native Popover. Otherwise, use the header form to open the working full results page.</p>
+  <details><summary>Data and browser requirements</summary>
+    <p>Install Raveldex and the pinned esbuild tooling using the setup guide. This title/link example uses core directly; it needs no snippet, facet, section, worker or storage registration. Native Popover support is required for the header popup.</p>
+  </details>
   <details><summary>How this example works</summary>
 <p>Put a search field in your header, show a few matching pages and link to a complete results page. Copy the browser project, replace its public guide records and adjust the scoped CSS.</p>
   <p>Choose this starter for a compact title-and-link search. Use <a href={base + 'examples/inline/'}>inline search</a> for results that stay in the page, or the <a href={base + 'examples/modal/'}>documentation modal</a> for search opened from a button with anchored section previews.</p>
 <p>Search <code>walking guide</code>: seven pages match and the header shows up to three. Use the arrow keys to select a result and Enter to follow its actual link, or choose <strong>See all results</strong> to open the inline results page. Load more appends the remaining pages while keeping earlier results displayed. Escape dismisses the popup; Tab leaves it normally.</p>
   </details>
-  <h2 id="copy-dropdown">Copy the complete project</h2>
-  <p>The quick popup needs native Popover. Otherwise, use the header form to open the working full results page.</p>
-  <details><summary>Data and browser requirements</summary>
-    <p>Install Raveldex and the pinned esbuild tooling using the setup guide. This title/link example uses core directly; it needs no snippet, facet, section, worker or storage registration. Native Popover support is required for the header popup.</p>
-  </details>
-  <StarterSetup family="dropdown" />
   <h2 id="dropdown-theme">Change the appearance</h2>
   <ol>
     <li>Copy, install, build and preview the complete project using its guide. Search the sample records before changing them.</li>

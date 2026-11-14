@@ -1,0 +1,2572 @@
+### Page
+- Page URL: http://127.0.0.1:56133/raveldex/reference/hosts/#inline-result-pages-filters-and-snippets
+- Page Title: HOSTS · Raveldex
+### Snapshot
+```yaml
+- generic [active] [ref=f6e1]:
+  - link "Skip to content" [ref=f6e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f6e3]:
+    - link "Raveldex home" [ref=f6e4] [cursor=pointer]:
+      - /url: /raveldex/
+      - text: Raveldex
+    - generic [ref=f6e5]:
+      - button "Search documentation" [ref=f6e6] [cursor=pointer]
+      - navigation "Main navigation" [ref=f6e10]:
+        - list [ref=f6e11]:
+          - listitem [ref=f6e12]:
+            - link "Get started" [ref=f6e13] [cursor=pointer]:
+              - /url: /raveldex/guide/overview/
+          - listitem [ref=f6e14]:
+            - link "Examples" [ref=f6e15] [cursor=pointer]:
+              - /url: /raveldex/examples/
+          - listitem [ref=f6e16]:
+            - link "Documentation" [ref=f6e17] [cursor=pointer]:
+              - /url: /raveldex/guide/
+          - listitem [ref=f6e18]:
+            - link "API reference" [ref=f6e19] [cursor=pointer]:
+              - /url: /raveldex/reference/
+  - generic [ref=f6e20]:
+    - group [ref=f6e22]:
+      - generic "API reference navigation" [ref=f6e23] [cursor=pointer]
+    - main [ref=f6e24]:
+      - navigation "Breadcrumb" [ref=f6e25]:
+        - list [ref=f6e26]:
+          - listitem [ref=f6e27]:
+            - link "Home" [ref=f6e28] [cursor=pointer]:
+              - /url: /raveldex/
+            - generic [aria-hidden] [ref=f6e29]: /
+          - listitem [ref=f6e30]:
+            - link "API reference" [ref=f6e31] [cursor=pointer]:
+              - /url: /raveldex/reference/
+            - generic [aria-hidden] [ref=f6e32]: /
+          - listitem [ref=f6e33]:
+            - generic [ref=f6e34]: Hosts and UI
+      - heading "Consumer search, UI and host integrations" [level=1] [ref=f6e35]
+      - paragraph [ref=f6e36]:
+        - text: Choose a Raveldex consumer interface for your application’s records, then add only the capabilities it needs. You supply searchable data and matching display records; no surface crawls pages or downloads an index automatically. Start with
+        - link "installation and record preparation" [ref=f6e37] [cursor=pointer]:
+          - /url: /raveldex/guide/overview/
+        - text: . Workers, snapshots, storage and the developer Workbench remain separately selected integrations below.
+      - heading "Consumer search interfaces" [level=2] [ref=f6e38]
+      - table [ref=f6e39]:
+        - rowgroup [ref=f6e40]:
+          - row [ref=f6e41]:
+            - columnheader "Need" [ref=f6e42]
+            - columnheader "JavaScript entry after @vmitsaras/raveldex" [ref=f6e43]:
+              - text: JavaScript entry after
+              - code [ref=f6e44]: "@vmitsaras/raveldex"
+            - columnheader "Separate CSS entry" [ref=f6e45]
+        - rowgroup [ref=f6e46]:
+          - row [ref=f6e47]:
+            - cell "Inline form" [ref=f6e48]
+            - cell [ref=f6e49]:
+              - code [ref=f6e50]: /addons/ui/inline
+              - text: →
+              - code [ref=f6e51]: mountRaveldexInline
+            - cell [ref=f6e52]:
+              - code [ref=f6e53]: /addons/ui/inline.css
+          - row [ref=f6e54]:
+            - cell "Documentation dialog" [ref=f6e55]
+            - cell [ref=f6e56]:
+              - code [ref=f6e57]: /addons/ui/modal
+              - text: →
+              - code [ref=f6e58]: mountRaveldexModal
+            - cell [ref=f6e59]:
+              - code [ref=f6e60]: /addons/ui/modal.css
+              - text: (includes inline CSS)
+          - row [ref=f6e61]:
+            - cell "Compact header popup" [ref=f6e62]
+            - cell [ref=f6e63]:
+              - code [ref=f6e64]: /addons/ui/dropdown
+              - text: →
+              - code [ref=f6e65]: mountRaveldexDropdown
+            - cell [ref=f6e66]:
+              - code [ref=f6e67]: /addons/ui/dropdown.css
+          - row [ref=f6e68]:
+            - cell "Filterable directory" [ref=f6e69]
+            - cell [ref=f6e70]:
+              - code [ref=f6e71]: /addons/ui/directory
+              - text: →
+              - code [ref=f6e72]: createDirectory
+              - text: ;
+              - code [ref=f6e73]: /addons/ui/directory/view
+              - text: →
+              - code [ref=f6e74]: mountRaveldexDirectory
+            - cell [ref=f6e75]:
+              - code [ref=f6e76]: /addons/ui/directory.css
+          - row [ref=f6e77]:
+            - cell "Rich directory results" [ref=f6e78]
+            - cell [ref=f6e79]:
+              - text: Same directory controller;
+              - code [ref=f6e80]: /addons/ui/directory/cards
+              - text: →
+              - code [ref=f6e81]: mountRaveldexDirectoryCards
+            - cell [ref=f6e82]:
+              - text: Both
+              - code [ref=f6e83]: /addons/ui/directory.css
+              - text: and
+              - code [ref=f6e84]: /addons/ui/directory-cards.css
+      - paragraph [ref=f6e85]:
+        - text: For complete projects, the
+        - link "solution chooser" [ref=f6e86] [cursor=pointer]:
+          - /url: /raveldex/examples/
+        - text: links eight browser/Astro starters with explicit data, loading/retry and cleanup. For a small core-only integration, copy the recipe below. The
+        - code [ref=f6e87]: /addons/ui
+        - text: Workbench is for developer exploration; it is not required by any consumer preset.
+      - heading "Mount a consumer search form" [level=3] [ref=f6e88]
+      - paragraph [ref=f6e89]: "Use a connected root on an HTTP(S) page. Keep ordinary navigation outside it so visitors can browse when search is unavailable:"
+      - code [ref=f6e91]: <section id="search" class="help-search" aria-label="Documentation search"></section>
+      - paragraph [ref=f6e92]:
+        - text: Copy
+        - link "inline.mjs" [ref=f6e93] [cursor=pointer]:
+          - /url: /raveldex/example-files/inline.mjs
+        - text: "into your installed ESM application and run this entry after the root exists, through a bundler with CSS support:"
+      - code [ref=f6e95]: "import { createInlineSearch } from './inline.mjs'; import '@vmitsaras/raveldex/addons/ui/inline.css'; const root = document.querySelector('#search'); if (!(root instanceof HTMLElement)) throw new Error('Missing search root'); const search = await createInlineSearch(root); // When removing this integration, after initialization has returned: // await search.dispose();"
+      - paragraph [ref=f6e96]:
+        - text: The module creates one title/body record, joins its ID to an application-owned title/URL, and mounts
+        - code [ref=f6e97]: mountRaveldexInline
+        - text: with explicit
+        - code [ref=f6e98]: "mode: 'prefix'"
+        - text: . It starts idle with no automatic search. Enter
+        - code [ref=f6e99]: atom
+        - text: and submit to find
+        - strong [ref=f6e100]: Atomic updates
+        - text: at
+        - code [ref=f6e101]: /guide/updates/
+        - text: ; your application must supply that actual page. Prefix completes the final word after two normalized code points; earlier words remain exact. Choose explicit
+        - code [ref=f6e102]: "mode: 'text'"
+        - text: for complete words instead. This example selects no snippet, facet, worker, storage or Inspector capability.
+      - paragraph [ref=f6e103]:
+        - text: Replace both indexed text and display records, retaining matching stable IDs.
+        - code [ref=f6e104]: search.ui.search(text)
+        - text: explicitly updates the input/results;
+        - code [ref=f6e105]: clear()
+        - text: "clears text and filters to idle. Display data/options are captured: destroy/remount to replace them."
+        - code [ref=f6e106]: search.dispose()
+        - text: destroys this UI before disposing the engine created by the recipe. A preset mounted over your existing engine only borrows it; do not dispose that shared engine until its other users are finished.
+      - paragraph [ref=f6e107]: The recipe assumes the root remains until initialization returns and propagates initialization errors to your app after disposing its engine. For removal during async loading, visible loading/retry, lazy assets or repeated initialization, use the complete starter controllers rather than inventing lifecycle methods on the UI handle.
+      - paragraph [ref=f6e108]: "Import the optional CSS explicitly; the module does not inject it. Override a few scoped component properties in your own stylesheet:"
+      - code [ref=f6e110]: ".help-search .raveldex-inline { --raveldex-inline-accent: #145b45; --raveldex-inline-gap: 1rem; --raveldex-inline-radius: .35rem; }"
+      - paragraph [ref=f6e111]:
+        - text: "Fonts are inherited. Light/dark palettes, focus and highlight colors are separate roles: supply a complete appropriate set for a dark host and check contrast after overrides. Inline/modal/dropdown use light defaults with explicit host dark overrides; directory/cards also have automatic dark defaults. Properties beginning"
+        - code [ref=f6e112]: "--_"
+        - text: are private. There is no JavaScript theme option or mandatory font request. The surface-specific sections below list actual properties; changing CSS never changes search meaning.
+      - heading "Consumer capability matrix" [level=3] [ref=f6e113]
+      - paragraph [ref=f6e114]:
+        - text: For the per-field matrix, native documentation/application/catalogue scenarios, supported combinations and the reviewed keep-current boundary, see
+        - link "native result content and hierarchy" [ref=f6e115] [cursor=pointer]:
+          - /url: /raveldex/reference/result-content/
+        - text: . Authored display excerpts and query-derived matching snippets are different contracts; the guide also covers projecting rich records to strict basic display records.
+      - table [ref=f6e116]:
+        - rowgroup [ref=f6e117]:
+          - row [ref=f6e118]:
+            - columnheader "Surface" [ref=f6e119]
+            - columnheader "Result content" [ref=f6e120]
+            - columnheader "Filters and exact counts" [ref=f6e121]
+            - columnheader "Paging" [ref=f6e122]
+        - rowgroup [ref=f6e123]:
+          - row [ref=f6e124]:
+            - cell "Inline" [ref=f6e125]
+            - cell [ref=f6e126]:
+              - text: Title/link alone, or explicit original-source snippets
+              - strong [ref=f6e127]: or
+              - text: page/section context. Snippets and sections are mutually exclusive; no generic metadata/image row.
+            - cell "Optional single-value string selects; explicit facets registration; counts include all active filters. Starts idle with All-only choices." [ref=f6e128]
+            - cell "Load more appends batches until all matches are displayed. Exact total is separate from visible count." [ref=f6e129]
+          - row [ref=f6e130]:
+            - cell "Modal" [ref=f6e131]
+            - cell [ref=f6e132]:
+              - text: Same inline result/capability choices in native
+              - code [ref=f6e133]: dialog
+              - text: .
+            - cell "Same inline filters/counts." [ref=f6e134]
+            - cell "Same append behavior; earlier results remain displayed." [ref=f6e135]
+          - row [ref=f6e136]:
+            - cell "Dropdown" [ref=f6e137]
+            - cell "Title/link only. No snippet, section or rich-metadata options." [ref=f6e138]
+            - cell [ref=f6e139]:
+              - text: Exact total, no filters. Required
+              - code [ref=f6e140]: fullResults
+              - text: destination supplies a native link for valid nonempty queries.
+            - cell [ref=f6e141]:
+              - text: Bounded first page (
+              - code [ref=f6e142]: maxResults
+              - text: ", default 5, at most 20); full-results handoff, no accumulated paging."
+          - row [ref=f6e143]:
+            - cell "Directory" [ref=f6e144]
+            - cell "Title/link ordered list." [ref=f6e145]
+            - 'cell "Checkbox groups: OR within, AND across. Explicit filters/facets when configured; counts include the complete current filtered set, including their own group. A zero-count choice stays usable; unavailable projected counts are not zero." [ref=f6e146]'
+            - cell "Previous/Next replace a page; explicit URL-state binding is optional. No Load more." [ref=f6e147]
+          - row [ref=f6e148]:
+            - cell "Rich directory" [ref=f6e149]
+            - cell "Authored excerpt/category/breadcrumb/date/labeled fields; optional explicitly enabled dimensioned images with alternatives. No generated snippets/section marks." [ref=f6e150]
+            - cell "Same directory semantics. Display fields do not become filter metadata automatically." [ref=f6e151]
+            - cell "Same directory pages; list/cards/grid, density and image visibility change presentation only." [ref=f6e152]
+      - paragraph [ref=f6e153]: Snippets require explicitly installed snippet evidence plus source/offset providers for their selected fields; section previews require section evidence and exact-original, revision-bound heading maps. Core alone retains neither original source text nor offsets. Direct title/link search needs neither capability; static source delivery still requires source providers to rebuild its indexed fields. Missing requested capabilities fail explicitly. A supported section-context refusal may retain valid page links with an explicit unavailable-context notice; it never pretends that context succeeded. Images default off, and enabling them can make image requests; disabling them does not undo requests already sent.
+      - paragraph [ref=f6e154]:
+        - text: All five consumer text modes default to final-word prefix and allow explicit
+        - code [ref=f6e155]: text
+        - text: ". UI language is separate from query analysis: captured partial plain-text message overrides use English for omitted keys. Choose an analyzer explicitly when needed; see"
+        - link "English morphology" [ref=f6e156] [cursor=pointer]:
+          - /url: /raveldex/reference/english/
+        - text: . No automatic locale detection, translated UI or date formatting is implied; card dates are already-authored localized strings.
+      - table [ref=f6e157]:
+        - rowgroup [ref=f6e158]:
+          - row [ref=f6e159]:
+            - columnheader "Surface" [ref=f6e160]
+            - columnheader "Keyboard model" [ref=f6e161]
+            - columnheader "Ownership and refresh" [ref=f6e162]
+        - rowgroup [ref=f6e163]:
+          - row [ref=f6e164]:
+            - cell "Inline" [ref=f6e165]
+            - cell "Native input/buttons/selects and links; composition waits; stable navigation preserves focus." [ref=f6e166]
+            - cell "Borrows engine. Search explicitly after index changes; destroy/remount for changed display data. Clear resets query and filters." [ref=f6e167]
+          - row [ref=f6e168]:
+            - cell "Modal" [ref=f6e169]
+            - cell "Native dialog containment, opening search focus, Close/Escape and appropriate opener restoration." [ref=f6e170]
+            - cell [ref=f6e171]:
+              - text: Borrows engine. Close preserves query/selections by default; reopen revalidates.
+              - code [ref=f6e172]: resetOnClose
+              - text: is explicit.
+          - row [ref=f6e173]:
+            - cell "Dropdown" [ref=f6e174]
+            - cell "Input keeps editing focus; Up/Down selects a virtual current item, Enter searches/follows it, Escape dismisses, Tab traverses normally. Native pointer/modified links remain usable." [ref=f6e175]
+            - cell "Borrows engine. Retains raw query on close; full-results route owns its own presentation/explicitly shared engine." [ref=f6e176]
+          - row [ref=f6e177]:
+            - cell "Directory" [ref=f6e178]
+            - cell "Native form, checkboxes, chips, disclosure and links; keyboard close returns to the filter summary." [ref=f6e179]
+            - cell "View borrows controller; controller borrows engine. Clear all removes text/filters and browses all. Empty search keeps filters; controller refresh reruns current state at page one. New controller is idle; mounting a view reflects its current snapshot." [ref=f6e180]
+          - row [ref=f6e181]:
+            - cell "Rich directory" [ref=f6e182]
+            - cell "Same ordered-list interaction; CSS grid adds no ARIA grid or arrow model." [ref=f6e183]
+            - cell "Same owners; presentation changes preserve query/page/link identities. Image handlers are cleaned up." [ref=f6e184]
+      - paragraph [ref=f6e185]:
+        - text: Destroy UI/view first, then any explicit directory URL binding/controller, then the engine or static-loader owner you created. Destroying a borrowed view never disposes a shared controller/engine. No automatic mutation subscription or option replacement on same-kind remount is implied. Keep exact results, native links, composition, focus, stale-reply suppression and recovery intact after customization;
+        - link "starter adoption checks" [ref=f6e186] [cursor=pointer]:
+          - /url: "#starter-adoption-and-local-checks"
+        - text: cover the remaining browser/AT observations.
+      - paragraph [ref=f6e187]:
+        - text: For dynamic records, use the
+        - link "CMS refresh/remount guide and complete installed walkthrough" [ref=f6e188] [cursor=pointer]:
+          - /url: /raveldex/reference/cms-refresh/
+        - text: . It separates owner writes, explicit query/refresh and captured display maps, checks query outcomes, preserves supported committed state, and identifies inline/modal snapshot/filter restoration limits. Destroy the old view before replacing its host or mounting a changed display map; keep focus handoff and async CMS ordering application-owned.
+      - paragraph [ref=f6e189]:
+        - text: An existing Pagefind integration may use the
+        - link "secondary migration appendix" [ref=f6e190] [cursor=pointer]:
+          - /url: /raveldex/guide/pagefind-migration/
+        - text: . New integrations need no Pagefind knowledge, assets or API.
+      - heading "Native DOM UI and CSS" [level=2] [ref=f6e191]
+      - paragraph [ref=f6e192]:
+        - text: This section documents the separate
+        - strong [ref=f6e193]: developer Workbench
+        - text: ", with numerical scores and optional Inspector. Its existing exact-word default and public API remain supported. Use the consumer entries above for visitor-facing search."
+      - paragraph [ref=f6e194]:
+        - text: Use
+        - code [ref=f6e195]: "mountRaveldexUI(options: UIOptions): UIHandle"
+        - text: from
+        - code [ref=f6e196]: /addons/ui
+        - text: "to put search controls into an element on your page. You supply the engine and keep responsibility for disposing it. Import the UI and its stylesheet through a bundler that handles CSS:"
+      - code [ref=f6e198]: "import { mountRaveldexUI } from '@vmitsaras/raveldex/addons/ui'; import '@vmitsaras/raveldex/addons/ui/styles.css';"
+      - paragraph [ref=f6e199]: These imports make the function and styles available; they do not mount anything yet.
+      - heading "Mount a minimal search form" [level=3] [ref=f6e200]
+      - paragraph [ref=f6e201]: "Add this element to your page where you want the search controls to appear:"
+      - code [ref=f6e203]: <section id="search" aria-label="Documentation search"></section>
+      - paragraph [ref=f6e204]:
+        - text: The element starts empty. Copy
+        - link "ui.mjs" [ref=f6e205] [cursor=pointer]:
+          - /url: /raveldex/example-files/ui.mjs
+        - text: "into your application, then put the following in a browser module processed by your bundler. Run it after the element exists:"
+      - code [ref=f6e207]: "import { createSearchUI } from './ui.mjs'; import '@vmitsaras/raveldex/addons/ui/styles.css'; const search = await createSearchUI(document.querySelector('#search')); // Call this when your application removes the search component: // await search.dispose();"
+      - paragraph [ref=f6e208]:
+        - text: You should now see a search field and results. Type
+        - code [ref=f6e209]: atomic
+        - text: to get one result,
+        - strong [ref=f6e210]: Atomic updates
+        - text: ", linked to"
+        - code [ref=f6e211]: /guide/updates/
+        - text: . The example supplies that URL; your application needs to provide the destination page.
+      - paragraph [ref=f6e212]:
+        - text: The recipe creates one title/body record and a matching display entry. To use real documents, replace both entries and keep their IDs equal. It keeps data in memory and opens no database. Call the returned
+        - code [ref=f6e213]: dispose()
+        - text: when removing the component; it destroys the UI first, then disposes the engine.
+      - table [ref=f6e214]:
+        - rowgroup [ref=f6e215]:
+          - row [ref=f6e216]:
+            - columnheader "UIOptions" [ref=f6e217]:
+              - code [ref=f6e218]: UIOptions
+            - columnheader "Contract" [ref=f6e219]
+        - rowgroup [ref=f6e220]:
+          - row [ref=f6e221]:
+            - cell [ref=f6e222]:
+              - code [ref=f6e223]: root
+              - text: ","
+              - code [ref=f6e224]: engine
+              - text: ","
+              - code [ref=f6e225]: documents
+            - cell [ref=f6e226]:
+              - text: Provide a root element, your engine and a readonly list of
+              - code [ref=f6e227]: "{ id, title, url }"
+              - text: display documents. IDs connect results to this list, which is copied at mount. URLs must resolve to HTTP(S) without credentials.
+          - row [ref=f6e228]:
+            - cell [ref=f6e229]:
+              - code [ref=f6e230]: facets?
+            - cell [ref=f6e231]:
+              - text: Up to eight
+              - code [ref=f6e232]: UIFacet
+              - text: selections
+              - code [ref=f6e233]: "{ field, label }"
+              - text: ; requires installed exact string facets.
+          - row [ref=f6e234]:
+            - cell [ref=f6e235]:
+              - code [ref=f6e236]: snippetFields?
+            - cell "Explicit fields for installed snippets and source providers." [ref=f6e237]
+          - row [ref=f6e238]:
+            - cell [ref=f6e239]:
+              - code [ref=f6e240]: mode?
+            - cell [ref=f6e241]:
+              - code [ref=f6e242]: "'text'"
+              - text: (default),
+              - code [ref=f6e243]: "'prefix'"
+              - text: (complete the final word), or
+              - code [ref=f6e244]: "'phrase'"
+              - text: (requires phrase capability for selected fields).
+          - row [ref=f6e245]:
+            - cell [ref=f6e246]:
+              - code [ref=f6e247]: pageSize?
+              - text: ","
+              - code [ref=f6e248]: debounceMs?
+              - text: ","
+              - code [ref=f6e249]: label?
+            - cell [ref=f6e250]:
+              - text: Defaults 5, 150 ms and
+              - code [ref=f6e251]: Search documentation
+              - text: ; page size 1–100 and debounce 0–2,000 ms. Core’s configured page bounds still apply.
+      - paragraph [ref=f6e252]: "The returned handle gives you two methods:"
+      - list [ref=f6e253]:
+        - listitem [ref=f6e254]:
+          - code [ref=f6e255]: "search(): Promise<void>"
+          - text: runs the current controls immediately instead of waiting for the debounce timer. It resolves after the result is presented.
+        - listitem [ref=f6e256]:
+          - code [ref=f6e257]: "destroy(): void"
+          - text: cancels UI work, removes its listeners and restores the original DOM nodes. You can call it more than once. It does not dispose your engine.
+      - paragraph [ref=f6e258]: Mounting on an already mounted root returns the existing handle. Always destroy the UI before separately disposing its engine.
+      - paragraph [ref=f6e259]: The UI renders text safely, marks highlights explicitly and supplies visible focus and reduced-motion styles. It shows exact totals, pagination, empty results, errors and retry controls. An empty search browses all documents; entered text uses the selected mode.
+      - paragraph [ref=f6e260]:
+        - text: Set
+        - code [ref=f6e261]: "mode: 'prefix'"
+        - text: to require earlier words exactly and allow the final word to match the beginning of an indexed word. For example,
+        - code [ref=f6e262]: source provide
+        - text: can match
+        - code [ref=f6e263]: source provider
+        - text: ;
+        - code [ref=f6e264]: sour provide
+        - text: still requires the exact word
+        - code [ref=f6e265]: sour
+        - text: . The UI splits raw words at the basic analyzer’s Unicode letter/number boundaries, preserving original text for the engine’s selected analyzer. The final word needs at least two normalized Unicode code points; shorter endings use exact-word search. Trailing spaces or punctuation do not disable completion. Prefix expansion keeps native limits, errors and exact totals, and snippets highlight the complete matched word. A stricter engine prefix limit or a selected analyzer’s transformed term can still cause a native query refusal. Ordinary demo pages enable this mode; integrations that omit
+        - code [ref=f6e266]: mode
+        - text: continue to search exact words.
+      - paragraph [ref=f6e267]:
+        - text: While you compose text with an input method, pending searches wait until composition ends. Outdated requests are cancelled and stale replies are ignored. The display list is copied when you mount, so destroy and remount the UI when replacing that list. The
+        - link "browser example" [ref=f6e268] [cursor=pointer]:
+          - /url: /raveldex/example-files/browser.mjs
+        - text: also shows explicit search calls, cleanup and source persistence.
+      - heading "Keyboard, focus and status" [level=3] [ref=f6e269]
+      - paragraph [ref=f6e270]:
+        - text: You provide the root element, engine and display list; the UI creates its own labeled controls, ordered results and named native modal
+        - code [ref=f6e271]: dialog
+        - text: . You do not need to author its internal markup.
+      - list [ref=f6e272]:
+        - listitem [ref=f6e273]: Typing schedules a search after the configured delay.
+        - listitem [ref=f6e274]:
+          - text: Return in the search field or the
+          - strong [ref=f6e275]: Search
+          - text: button submits immediately.
+        - listitem [ref=f6e276]: Selects and result links use the browser’s normal keyboard behavior.
+        - listitem [ref=f6e277]: Search, filter and page updates do not deliberately move focus.
+      - paragraph [ref=f6e278]:
+        - text: Opening Inspector puts keyboard focus on
+        - strong [ref=f6e279]: Close Inspector
+        - text: . Use that button or Escape to close it and return focus to
+        - strong [ref=f6e280]: Inspect results
+        - text: ", provided the opener is still on the page. Tab navigation follows the browser’s native dialog behavior; the UI adds neither a custom Tab loop nor a focusable heading."
+      - paragraph [ref=f6e281]:
+        - text: Status messages use
+        - code [ref=f6e282]: role="status"
+        - text: and
+        - code [ref=f6e283]: aria-atomic="true"
+        - text: . The search section is
+        - code [ref=f6e284]: aria-busy
+        - text: during a search, and Inspector is busy while facts load. Unavailable page, retry and Inspector buttons use
+        - code [ref=f6e285]: aria-disabled="true"
+        - text: ": they remain in the tab order, but activation is guarded."
+      - paragraph [ref=f6e286]: Typing feedback can interrupt spoken status messages. Check important flows with your target browser and screen reader, without requiring users to change their settings. The UI does not change those settings and exposes no public custom-event API.
+      - heading "CSS customization" [level=3] [ref=f6e287]
+      - paragraph [ref=f6e288]:
+        - text: Import
+        - code [ref=f6e289]: "@vmitsaras/raveldex/addons/ui/styles.css"
+        - text: separately, then use the five public properties below to adjust the generated
+        - code [ref=f6e290]: .raveldex-ui
+        - text: block. The
+        - code [ref=f6e291]: data-raveldex-*
+        - text: attributes identify internal elements; do not use them as an alternative application markup API.
+      - table [ref=f6e292]:
+        - rowgroup [ref=f6e293]:
+          - row [ref=f6e294]:
+            - columnheader "Property" [ref=f6e295]
+            - columnheader "Default" [ref=f6e296]
+            - columnheader "Purpose" [ref=f6e297]
+        - rowgroup [ref=f6e298]:
+          - row [ref=f6e299]:
+            - cell [ref=f6e300]:
+              - code [ref=f6e301]: "--raveldex-ui-accent"
+            - cell [ref=f6e302]:
+              - code [ref=f6e303]: "#174ea6"
+            - cell "Link color" [ref=f6e304]
+          - row [ref=f6e305]:
+            - cell [ref=f6e306]:
+              - code [ref=f6e307]: "--raveldex-ui-background"
+            - cell [ref=f6e308]:
+              - code [ref=f6e309]: "#fff"
+            - cell "Surface background" [ref=f6e310]
+          - row [ref=f6e311]:
+            - cell [ref=f6e312]:
+              - code [ref=f6e313]: "--raveldex-ui-color"
+            - cell [ref=f6e314]:
+              - code [ref=f6e315]: "#17212b"
+            - cell "Text color" [ref=f6e316]
+          - row [ref=f6e317]:
+            - cell [ref=f6e318]:
+              - code [ref=f6e319]: "--raveldex-ui-border"
+            - cell [ref=f6e320]:
+              - code [ref=f6e321]: "#596b7d"
+            - cell "Control and structural borders" [ref=f6e322]
+          - row [ref=f6e323]:
+            - cell [ref=f6e324]:
+              - code [ref=f6e325]: "--raveldex-ui-focus"
+            - cell [ref=f6e326]:
+              - code [ref=f6e327]: "#7a2600"
+            - cell "Visible focus outline" [ref=f6e328]
+      - paragraph [ref=f6e329]:
+        - text: Set overrides on
+        - code [ref=f6e330]: .raveldex-ui
+        - text: itself, where the defaults are declared. For example,
+        - code [ref=f6e331]: ".my-search .raveldex-ui { --raveldex-ui-accent: #174ea6; }"
+        - text: sets the link color inside your
+        - code [ref=f6e332]: .my-search
+        - text: container. It leaves the current default unchanged; choose a different accessible color to see a difference. Properties beginning with
+        - code [ref=f6e333]: "--_"
+        - text: are private.
+      - paragraph [ref=f6e334]: Keep the stylesheet’s visible focus, disabled-state borders, scrolling dialog and narrow-screen wrapping usable when customizing it. Reduced-motion rules disable animation, transitions and smooth scrolling. Forced-colors rules use system colors for focus, borders and highlights. Check contrast after changing colors. There is no separate theme or variant registration API.
+      - heading "Inline search foundation" [level=2] [ref=f6e335]
+      - paragraph [ref=f6e336]:
+        - text: For all five consumer surfaces, the
+        - link "localization guide" [ref=f6e337] [cursor=pointer]:
+          - /url: /raveldex/reference/localization/
+        - text: inventories every label/status/hint, documents partial fallback and capture/remount behavior, and supplies a complete checked German bundle. UI language stays separate from query analysis; numbers and grammar retain the explicit existing contract.
+      - paragraph [ref=f6e338]:
+        - text: To start with a complete project, use the
+        - link "browser" [ref=f6e339] [cursor=pointer]:
+          - /url: /raveldex/examples/inline-browser/
+        - text: or
+        - link "Astro" [ref=f6e340] [cursor=pointer]:
+          - /url: /raveldex/examples/inline-astro/
+        - text: inline starter. The
+        - link "solution gallery" [ref=f6e341] [cursor=pointer]:
+          - /url: /raveldex/examples/inline/
+        - text: provides a working preview, exact source files and complete starter downloads. Each guide includes package installation, replacement content, deployment bases, CSS and cleanup.
+      - paragraph [ref=f6e342]:
+        - text: Import
+        - code [ref=f6e343]: mountRaveldexInline
+        - text: from
+        - code [ref=f6e344]: "@vmitsaras/raveldex/addons/ui/inline"
+        - text: and its stylesheet separately from
+        - code [ref=f6e345]: "@vmitsaras/raveldex/addons/ui/inline.css"
+        - text: . The inline preset provides a labeled search form, clear/submit controls, linked titles, optional snippets and simple filters, and Load more in finite batches. Title/link search works with core alone. It never installs snippets, facets, Inspector, workers or storage automatically.
+      - paragraph [ref=f6e346]:
+        - text: Supply your existing engine and display documents with matching IDs, just as in the DOM recipe above.
+        - code [ref=f6e347]: InlineUIOptions
+        - text: "accepts only these properties:"
+      - table [ref=f6e348]:
+        - rowgroup [ref=f6e349]:
+          - row [ref=f6e350]:
+            - columnheader "Option" [ref=f6e351]
+            - columnheader "Meaning" [ref=f6e352]
+        - rowgroup [ref=f6e353]:
+          - row [ref=f6e354]:
+            - cell [ref=f6e355]:
+              - code [ref=f6e356]: root
+              - text: ","
+              - code [ref=f6e357]: engine
+              - text: ","
+              - code [ref=f6e358]: documents
+            - cell [ref=f6e359]:
+              - text: Required element, borrowed engine and readonly
+              - code [ref=f6e360]: "{ id, title, url }"
+              - text: "entries. Display data is copied at mount with the same validation/limits as the legacy UI: up to 10,000 entries and 4,000,000 aggregate ID/title/URL UTF-16 units; ID/title/URL caps are 256/1,024/2,048. Navigation URLs must resolve to HTTP(S) without credentials."
+          - row [ref=f6e361]:
+            - cell [ref=f6e362]:
+              - code [ref=f6e363]: mode?
+            - cell [ref=f6e364]:
+              - code [ref=f6e365]: prefix
+              - text: by default or explicit
+              - code [ref=f6e366]: text
+              - text: . Prefix completes only the final word using the existing two-normalized-code-point threshold. Earlier words remain exact; shorter endings remain exact.
+          - row [ref=f6e367]:
+            - cell [ref=f6e368]:
+              - code [ref=f6e369]: pageSize?
+            - cell "Batch size, default 5, from 1 to 100 within native engine bounds. The summary reports the exact total and displayed count." [ref=f6e370]
+          - row [ref=f6e371]:
+            - cell [ref=f6e372]:
+              - code [ref=f6e373]: maxRenderedResults?
+            - cell [ref=f6e374]:
+              - text: Deprecated compatibility option. Supplied values remain validated as integers from
+              - code [ref=f6e375]: pageSize
+              - text: to 1,000, but no longer limit retained results or continuation. Omit it in new integrations.
+          - row [ref=f6e376]:
+            - cell [ref=f6e377]:
+              - code [ref=f6e378]: facets?
+            - cell [ref=f6e379]:
+              - text: Up to eight
+              - code [ref=f6e380]: "{ field, label }"
+              - text: string selections, as
+              - code [ref=f6e381]: UIFacet
+              - text: entries. Install facets for those metadata fields when creating the engine; the scalar selections use core equality and need no structured-filters add-on. Counts include all active filters, including their own group.
+          - row [ref=f6e382]:
+            - cell [ref=f6e383]:
+              - code [ref=f6e384]: snippetFields?
+            - cell "Up to 32 distinct source field names. Install snippets and the required source/offset providers explicitly; a core-only UI needs none of these." [ref=f6e385]
+          - row [ref=f6e386]:
+            - cell [ref=f6e387]:
+              - code [ref=f6e388]: pageSections?
+            - cell [ref=f6e389]:
+              - text: Captured revision-bound
+              - code [ref=f6e390]: PageSections
+              - text: metadata for optional heading previews. Requires the explicit section-evidence factory and source providers when context is requested; mutually exclusive with
+              - code [ref=f6e391]: snippetFields
+              - text: .
+          - row [ref=f6e392]:
+            - cell [ref=f6e393]:
+              - code [ref=f6e394]: maxSectionPreviews?
+            - cell [ref=f6e395]:
+              - text: Default 3, integer 1–3. Requires
+              - code [ref=f6e396]: pageSections
+              - text: ; selects source-ordered previews per displayed page.
+          - row [ref=f6e397]:
+            - cell [ref=f6e398]:
+              - code [ref=f6e399]: debounceMs?
+            - cell [ref=f6e400]:
+              - text: Default 150 ms, from 0 to 2,000. Enter and
+              - code [ref=f6e401]: search()
+              - text: flush the debounce.
+          - row [ref=f6e402]:
+            - cell [ref=f6e403]:
+              - code [ref=f6e404]: messages?
+            - cell [ref=f6e405]:
+              - text: A captured partial
+              - code [ref=f6e406]: InlineUIMessages
+              - text: bundle; nonempty plain strings up to 512 UTF-16 units each. Unknown keys, accessor properties and malformed strings are rejected before changing the root.
+      - paragraph [ref=f6e407]:
+        - text: The frozen
+        - code [ref=f6e408]: InlineUIHandle
+        - text: has
+        - code [ref=f6e409]: "search(text?: string): Promise<void>"
+        - text: ","
+        - code [ref=f6e410]: "clear(): void"
+        - text: and
+        - code [ref=f6e411]: "destroy(): void"
+        - text: . With text supplied,
+        - code [ref=f6e412]: search
+        - text: replaces the input then searches; without text it submits the current field. Native search failures are presented with a retry action and resolve after presentation. A non-string argument is rejected. After destroy, methods are harmless no-ops. Clear cancels pending work, clears text and facet selections, and restores idle without deliberately moving focus. Original root Node objects are restored on destroy; the application separately disposes the borrowed engine afterward.
+      - paragraph [ref=f6e413]: Mount starts idle and makes no search request. Nonempty input submits after debounce or Enter; an explicit facet selection can browse that category even with no text. Empty input with no active selections returns to idle. Composition waits until it ends; cancelled or stale replies cannot replace current results. Capability/provider checks occur when an actual search is made, including searches with zero matching IDs; requesting a feature that is not installed produces an explicit native error. Result replacement recovers focus to the search input if it would otherwise remove the focused result link. Controls remain in place during updates.
+      - paragraph [ref=f6e414]:
+        - text: "Mounting inline again on the same root returns the existing handle without applying new options. Destroy/remount to replace configuration or display data. Legacy and inline presets cannot own the same root at once: a conflicting mount fails with"
+        - code [ref=f6e415]: INVALID_OPTIONS
+        - text: before replacing DOM. Independent roots have independent state and label IDs. Neither preset registers a global keyboard shortcut.
+      - heading "Inline text and styling" [level=3] [ref=f6e416]
+      - paragraph [ref=f6e417]:
+        - text: The original messages are
+        - code [ref=f6e418]: label
+        - text: ","
+        - code [ref=f6e419]: placeholder
+        - text: ","
+        - code [ref=f6e420]: submit
+        - text: ","
+        - code [ref=f6e421]: clear
+        - text: ","
+        - code [ref=f6e422]: idle
+        - text: ","
+        - code [ref=f6e423]: searching
+        - text: ","
+        - code [ref=f6e424]: noResults
+        - text: ","
+        - code [ref=f6e425]: resultsLabel
+        - text: ","
+        - code [ref=f6e426]: resultsOne
+        - text: ","
+        - code [ref=f6e427]: resultsMany
+        - text: ","
+        - code [ref=f6e428]: error
+        - text: and
+        - code [ref=f6e429]: retry
+        - text: . Additive optional keys are
+        - code [ref=f6e430]: noResultsFiltered
+        - text: ","
+        - code [ref=f6e431]: composing
+        - text: ","
+        - code [ref=f6e432]: loadMore
+        - text: ","
+        - code [ref=f6e433]: newResults
+        - text: ","
+        - code [ref=f6e434]: resultsAdded
+        - text: ","
+        - code [ref=f6e435]: previous
+        - text: ","
+        - code [ref=f6e436]: next
+        - text: ","
+        - code [ref=f6e437]: paginationLabel
+        - text: ","
+        - code [ref=f6e438]: pageSummary
+        - text: ","
+        - code [ref=f6e439]: windowLimit
+        - text: ","
+        - code [ref=f6e440]: revisionChanged
+        - text: ","
+        - code [ref=f6e441]: all
+        - text: ","
+        - code [ref=f6e442]: emptyValue
+        - text: ","
+        - code [ref=f6e443]: nullValue
+        - text: ","
+        - code [ref=f6e444]: missingValue
+        - text: ","
+        - code [ref=f6e445]: unlistedValue
+        - text: ","
+        - code [ref=f6e446]: facetSummary
+        - text: ","
+        - code [ref=f6e447]: snippetOmissions
+        - text: and
+        - code [ref=f6e448]: snippetLimits
+        - text: . Existing complete original bundles remain valid; unspecified new keys use English defaults.
+      - paragraph [ref=f6e449]:
+        - text: The legacy
+        - code [ref=f6e450]: previous
+        - text: ","
+        - code [ref=f6e451]: next
+        - text: and
+        - code [ref=f6e452]: windowLimit
+        - text: message keys remain accepted and validated for compatibility, but inline/modal no longer render them. Directory and Workbench paging retain their own controls and messages.
+      - paragraph [ref=f6e453]:
+        - text: Inline and modal use
+        - strong [ref=f6e454]: Clear search
+        - text: by default without facets and
+        - strong [ref=f6e455]: Clear search and filters
+        - text: when facets are configured. Both reset the query and every facet selection; the label does not change that behavior. The button’s visible text is also its accessible name. Existing
+        - code [ref=f6e456]: messages.clear
+        - text: overrides remain authoritative; choose translated text that describes the complete reset scope.
+      - paragraph [ref=f6e457]:
+        - text: With facets, default idle guidance is
+        - strong [ref=f6e458]: Enter a search term to see filter choices.
+        - text: It appears on first mount and after reset, when selects contain only All. Each select references its own count summary and the shared status through
+        - code [ref=f6e459]: aria-describedby
+        - text: ", so the current guidance or result/error status is available alongside the native label. Controls remain enabled and mounted to preserve focus and selected-value recovery. Search populates choices; changing a selected filter can still intentionally search with an empty query. Mounting, empty input without filters, and reset do not issue a browse-all query."
+        - code [ref=f6e460]: messages.idle
+        - text: overrides are captured unchanged; no new message key is required.
+      - paragraph [ref=f6e461]:
+        - text: Text-only empty results identify the submitted query and suggest a different search; filtered empties name the selected filters and suggest changing a filter or Clear search and filters. Both preserve input/selections.
+        - code [ref=f6e462]: noResults
+        - text: and optional
+        - code [ref=f6e463]: noResultsFiltered
+        - text: support
+        - code [ref=f6e464]: "{query}"
+        - text: ": the submitted text trimmed and bounded to 160 Unicode code points plus an ellipsis, only for feedback. A supplied"
+        - code [ref=f6e465]: noResults
+        - text: override also covers filtered empties unless
+        - code [ref=f6e466]: noResultsFiltered
+        - text: is supplied. Complete old bundles stay valid. Default failures say Search could not complete and offer Retry search or editing; a revision change asks for explicit retry. Codes remain available through an
+        - code [ref=f6e467]: error
+        - text: override containing
+        - code [ref=f6e468]: "{code}"
+        - text: . No automatic recovery query is added. Empty outcomes hide the empty results heading/list while keeping feedback visible. After recovery or reset, Retry search remains temporarily visible and unavailable if it still has keyboard focus; it retires after focus leaves. Loading, empty and error feedback use the existing border, gap and color properties, without hiding the polite status region.
+      - paragraph [ref=f6e469]:
+        - text: Summary templates substitute
+        - code [ref=f6e470]: "{total}"
+        - text: and
+        - code [ref=f6e471]: "{count}"
+        - text: ;
+        - code [ref=f6e472]: pageSummary
+        - text: also supports
+        - code [ref=f6e473]: "{start}"
+        - text: /
+        - code [ref=f6e474]: "{end}"
+        - text: .
+        - code [ref=f6e475]: resultsAdded
+        - text: supports
+        - code [ref=f6e476]: "{added}"
+        - text: (new batch size),
+        - code [ref=f6e477]: "{start}"
+        - text: /
+        - code [ref=f6e478]: "{end}"
+        - text: (displayed range),
+        - code [ref=f6e479]: "{total}"
+        - text: (exact matches) and
+        - code [ref=f6e480]: "{count}"
+        - text: (displayed hits); its default is
+        - code [ref=f6e481]: "Results added: {added}. Showing {start}–{end} of {total}."
+        - text: The
+        - code [ref=f6e482]: newResults
+        - text: button label defaults to Go to new results.
+        - code [ref=f6e483]: unlistedValue
+        - text: uses
+        - code [ref=f6e484]: "{value}"
+        - text: ","
+        - code [ref=f6e485]: facetSummary
+        - text: uses
+        - code [ref=f6e486]: "{total}"
+        - text: /
+        - code [ref=f6e487]: "{omitted}"
+        - text: ", and"
+        - code [ref=f6e488]: snippetOmissions
+        - text: uses
+        - code [ref=f6e489]: "{count}"
+        - text: . The error template substitutes a sanitized native
+        - code [ref=f6e490]: "{code}"
+        - text: (unrecognized failures use
+        - code [ref=f6e491]: INTERNAL_ERROR
+        - text: ); a revision mismatch uses
+        - code [ref=f6e492]: revisionChanged
+        - text: . Every message, title, selection and excerpt is inserted as text, never HTML. UI messages do not select a different engine analyzer. The polite status region announces actual searching, composition and settled outcomes without repeating unchanged messages on each keystroke.
+      - paragraph [ref=f6e493]:
+        - text: The optional stylesheet uses
+        - code [ref=f6e494]: .raveldex-inline
+        - text: and scoped
+        - code [ref=f6e495]: __form
+        - text: ","
+        - code [ref=f6e496]: __label
+        - text: ","
+        - code [ref=f6e497]: __field
+        - text: ","
+        - code [ref=f6e498]: __icon
+        - text: ","
+        - code [ref=f6e499]: __input
+        - text: ","
+        - code [ref=f6e500]: __submit
+        - text: ","
+        - code [ref=f6e501]: __clear
+        - text: ","
+        - code [ref=f6e502]: __status
+        - text: ","
+        - code [ref=f6e503]: __results-heading
+        - text: ","
+        - code [ref=f6e504]: __results
+        - text: ","
+        - code [ref=f6e505]: __result
+        - text: ","
+        - code [ref=f6e506]: __result-heading
+        - text: ","
+        - code [ref=f6e507]: __result-title
+        - text: and
+        - code [ref=f6e508]: __retry
+        - text: classes. Additional style hooks are
+        - code [ref=f6e509]: __facets
+        - text: ","
+        - code [ref=f6e510]: __facet-group
+        - text: ","
+        - code [ref=f6e511]: __facet-label
+        - text: ","
+        - code [ref=f6e512]: __facet
+        - text: ","
+        - code [ref=f6e513]: __facet-summary
+        - text: ","
+        - code [ref=f6e514]: __snippet
+        - text: ","
+        - code [ref=f6e515]: __highlight
+        - text: ","
+        - code [ref=f6e516]: __snippet-omissions
+        - text: ","
+        - code [ref=f6e517]: __navigation
+        - text: ","
+        - code [ref=f6e518]: __load-more
+        - text: ","
+        - code [ref=f6e519]: __new-results
+        - text: and
+        - code [ref=f6e520]: __page-summary
+        - text: . Inline/modal no longer create
+        - code [ref=f6e521]: __previous
+        - text: or
+        - code [ref=f6e522]: __next
+        - text: elements.
+        - code [ref=f6e523]: data-raveldex-inline-*
+        - text: hooks are internal; they are not a caller-authored markup API.
+      - table [ref=f6e524]:
+        - rowgroup [ref=f6e525]:
+          - row [ref=f6e526]:
+            - columnheader "Public CSS property" [ref=f6e527]
+            - columnheader "Default" [ref=f6e528]
+        - rowgroup [ref=f6e529]:
+          - row [ref=f6e530]:
+            - cell [ref=f6e531]:
+              - code [ref=f6e532]: "--raveldex-inline-background"
+              - text: ","
+              - code [ref=f6e533]: "--raveldex-inline-color"
+            - cell [ref=f6e534]:
+              - code [ref=f6e535]: "#fff"
+              - text: ","
+              - code [ref=f6e536]: "#17212b"
+          - row [ref=f6e537]:
+            - cell [ref=f6e538]:
+              - code [ref=f6e539]: "--raveldex-inline-muted"
+              - text: ","
+              - code [ref=f6e540]: "--raveldex-inline-accent"
+            - cell [ref=f6e541]:
+              - code [ref=f6e542]: "#465563"
+              - text: ","
+              - code [ref=f6e543]: "#174ea6"
+          - row [ref=f6e544]:
+            - cell [ref=f6e545]:
+              - code [ref=f6e546]: "--raveldex-inline-border"
+              - text: ","
+              - code [ref=f6e547]: "--raveldex-inline-focus"
+            - cell [ref=f6e548]:
+              - code [ref=f6e549]: "#637383"
+              - text: ","
+              - code [ref=f6e550]: "#7a2600"
+          - row [ref=f6e551]:
+            - cell [ref=f6e552]:
+              - code [ref=f6e553]: "--raveldex-inline-font"
+              - text: ","
+              - code [ref=f6e554]: "--raveldex-inline-font-size"
+            - cell [ref=f6e555]:
+              - text: inherited font family,
+              - code [ref=f6e556]: 1rem
+          - row [ref=f6e557]:
+            - cell [ref=f6e558]:
+              - code [ref=f6e559]: "--raveldex-inline-gap"
+              - text: ","
+              - code [ref=f6e560]: "--raveldex-inline-radius"
+            - cell [ref=f6e561]:
+              - code [ref=f6e562]: .75rem
+              - text: ","
+              - code [ref=f6e563]: .5rem
+          - row [ref=f6e564]:
+            - cell [ref=f6e565]:
+              - code [ref=f6e566]: "--raveldex-inline-max-width"
+            - cell [ref=f6e567]:
+              - code [ref=f6e568]: 48rem
+          - row [ref=f6e569]:
+            - cell [ref=f6e570]:
+              - code [ref=f6e571]: "--raveldex-inline-line-height"
+              - text: ","
+              - code [ref=f6e572]: "--raveldex-inline-title-size"
+            - cell [ref=f6e573]:
+              - code [ref=f6e574]: "1.6"
+              - text: ","
+              - code [ref=f6e575]: 1.15em
+          - row [ref=f6e576]:
+            - cell [ref=f6e577]:
+              - code [ref=f6e578]: "--raveldex-inline-control-height"
+              - text: ","
+              - code [ref=f6e579]: "--raveldex-inline-control-padding"
+            - cell [ref=f6e580]:
+              - code [ref=f6e581]: 2.75rem
+              - text: minimum,
+              - code [ref=f6e582]: .6rem .85rem
+          - row [ref=f6e583]:
+            - cell [ref=f6e584]:
+              - code [ref=f6e585]: "--raveldex-inline-border-width"
+              - text: ","
+              - code [ref=f6e586]: "--raveldex-inline-result-padding"
+            - cell [ref=f6e587]:
+              - code [ref=f6e588]: 2px
+              - text: controls,
+              - code [ref=f6e589]: .75rem 0
+          - row [ref=f6e590]:
+            - cell [ref=f6e591]:
+              - code [ref=f6e592]: "--raveldex-inline-highlight-background"
+              - text: ","
+              - code [ref=f6e593]: "--raveldex-inline-highlight-color"
+            - cell [ref=f6e594]:
+              - code [ref=f6e595]: "#ffe59a"
+              - text: ","
+              - code [ref=f6e596]: "#17212b"
+          - row [ref=f6e597]:
+            - cell [ref=f6e598]:
+              - code [ref=f6e599]: "--raveldex-inline-error"
+            - cell [ref=f6e600]:
+              - code [ref=f6e601]: "#9b1c1c"
+      - paragraph [ref=f6e602]:
+        - text: Set properties on the search root or an ancestor. For a small branding change, override the accent, radius and gap; the host’s font is inherited. For a dark host theme, supply suitable surface, text, muted, link, directory filled-button text, border, focus and error colors together; set highlight foreground/background together if overriding them. Private
+        - code [ref=f6e603]: "--_"
+        - text: properties are not customization API. Keep visible focus, contrast, reflow and control targets usable. The stylesheet includes scoped reduced-motion and forced-colors behavior and never injects itself from JavaScript.
+      - heading "Inline result pages, filters and snippets" [level=3] [ref=f6e604]
+      - paragraph [ref=f6e605]:
+        - text: Load more requests the next native batch at the number of already displayed hits and appends it without changing earlier result nodes, order or exact total. It remains available until every match is displayed; there is no switch to Next/Previous results and no replacement window. The final batch can contain fewer than
+        - code [ref=f6e606]: pageSize
+        - text: hits. The range summary sits above the available actions and reports
+        - code [ref=f6e607]: "Showing 1–{count} of {total}."
+        - text: The
+        - link "current append contract (repository access)" [ref=f6e608] [cursor=pointer]:
+          - /url: https://github.com/vmitsaras/raveldex/blob/main/docs/planning/LOAD_MORE_APPEND.md
+        - text: supersedes the earlier capped-window behavior.
+      - paragraph [ref=f6e609]:
+        - text: Loading stays user initiated and each request is bounded by
+        - code [ref=f6e610]: pageSize
+        - text: (1–100). The UI admits at most 10,000 display documents and 4,000,000 aggregate ID/title/URL UTF-16 units; earlier rows remain retained as the user loads matching batches.
+        - code [ref=f6e611]: maxRenderedResults
+        - text: no longer adds a lower display cap. These admission and batch bounds do not establish memory usage, latency or device capacity. Revision/total consistency, duplicate-hit checks and explicit native refusal behavior still apply to every appended batch.
+      - paragraph [ref=f6e612]:
+        - text: Load more and Go to new results button nodes stay mounted, but unavailable unfocused actions are hidden. A focused unavailable action remains visible with guarded
+        - code [ref=f6e613]: aria-disabled
+        - text: until focus actually moves elsewhere; it then hides. This applies during loading, clear, error and terminal results without stealing focus. Repeated activation of an unavailable action issues no query. A complete single batch has a range summary without unnecessary actions; empty/reset/error states clear the stale range. Directory paging keeps its separate existing policy.
+      - paragraph [ref=f6e614]:
+        - text: After an append, Load more retains focus. Tab reaches Go to new results; Enter or Space deliberately focuses the first newly appended title link, without another query or a URL-fragment change. Subsequent link traversal stays native. Replacement, reset, failure, modal suspension and teardown invalidate that private target. The new button and append announcement reuse captured optional messages; no handle method, renderer or query behavior is added. The associated style hook is
+        - code [ref=f6e615]: .raveldex-inline__new-results
+        - text: .
+      - paragraph [ref=f6e616]: Changing the query or a filter resets accumulation. Paging checks the native revision; if the index changed, the UI clears old hits/counts and offers Retry from the first window with the query and selections retained. It also requires the snippet reply to match the main reply’s revision, IDs, scores and total before committing hits or counts. It does not subscribe to external mutations; a later search/paging action revalidates current state. Native search/provider/transport failure is shown as failure, never as a successful empty result.
+      - paragraph [ref=f6e617]:
+        - text: Each string facet uses a native select with an All choice. Empty strings are valid distinct values; null/missing buckets are informational unavailable options. Counts apply before hit paging and include every active filter. At most 100 buckets per field are displayed; the summary exposes omitted buckets. A selected value stays available when outside the displayed projection, without an invented count. The separate
+        - link "directory controller" [ref=f6e618] [cursor=pointer]:
+          - /url: "#directory-queries-and-url-state"
+        - text: supports multi-selection; own-group-excluding counts remain outside its scope.
+      - paragraph [ref=f6e619]: Explicit snippets use only the new batch of IDs, never all accumulated IDs. Returned text is original source, with validated marks at returned UTF-16 offsets and visible omission notices for undisplayed matches, window/highlight limits and oversized matches. Offsets alone do not supply the original text. A snippet failure clears the whole attempted presentation rather than mixing stale or incomplete context with a successful result list.
+      - paragraph [ref=f6e620]:
+        - text: The default inline presentation includes neither numerical scores nor Inspector controls. For the developer-oriented presentation, explicitly use the existing native DOM UI instead of hiding controls with CSS. Complete
+        - link "browser" [ref=f6e621] [cursor=pointer]:
+          - /url: /raveldex/examples/inline-browser/
+        - text: and
+        - link "Astro" [ref=f6e622] [cursor=pointer]:
+          - /url: /raveldex/examples/inline-astro/
+        - text: starters include copy/install steps and explicit ownership. The existing
+        - code [ref=f6e623]: /addons/ui
+        - text: Workbench API retains its exact-word default, full navigation and Inspector. No Pagefind runtime/API or indexing/loading compatibility is implied.
+      - heading "Inline anchored sections" [level=3] [ref=f6e624]
+      - paragraph [ref=f6e625]:
+        - text: Supply explicit heading metadata from the same originals indexed by your borrowed engine. Import the readonly
+        - code [ref=f6e626]: PageSections
+        - text: ","
+        - code [ref=f6e627]: PageSectionPage
+        - text: and
+        - code [ref=f6e628]: PageSection
+        - text: types from
+        - code [ref=f6e629]: "@vmitsaras/raveldex/addons/sections"
+        - text: . Register
+        - link "section evidence" [ref=f6e630] [cursor=pointer]:
+          - /url: /raveldex/reference/addons/#anchored-page-context
+        - text: when constructing the engine; mounting never installs it.
+      - code [ref=f6e632]: "const pageSections = { kind: 'raveldex-page-sections', version: 1, revision: written.revision, pages: [{ pageId: 'repair', sections: [{ anchor: 'chain', heading: 'Replace the chain', headingLevel: 2, field: 'body', valueIndex: 0, start: 0, end: original.length }], }], }; const ui = mountRaveldexInline({ root, engine, documents: [{ id: 'repair', title: 'Bicycle repairs', url: '/repair/' }], pageSections, maxSectionPreviews: 3, });"
+      - paragraph [ref=f6e633]:
+        - text: Here
+        - code [ref=f6e634]: written
+        - text: is the completed index mutation and
+        - code [ref=f6e635]: original
+        - text: is its exact body string. Render the corresponding heading with
+        - code [ref=f6e636]: id="chain"
+        - text: "on"
+        - code [ref=f6e637]: /repair/
+        - text: . The library does not discover headings or inspect destination pages. Maps are copied, validated and frozen before authored DOM changes. IDs must exist in display records; duplicates, overlapping ranges, accessors, malformed Unicode and invalid headings/anchors reject capture. Whole-source/grapheme validation occurs inside native context requests. A map may cover only some pages; missing/empty entries retain the parent link without inventing context counts.
+      - paragraph [ref=f6e638]:
+        - text: Use exact raw IDs for
+        - code [ref=f6e639]: anchor
+        - text: ", with no slugging, decoding or normalization. They must be 1–256 UTF-16 units without control characters, ASCII whitespace or"
+        - code [ref=f6e640]: ":~:"
+        - text: . Literal
+        - code [ref=f6e641]: "%"
+        - text: ","
+        - code [ref=f6e642]: "#"
+        - text: "and Unicode are encoded once:"
+        - code [ref=f6e643]: "%#café"
+        - text: becomes
+        - code [ref=f6e644]: "#%25%23caf%C3%A9"
+        - text: . Mapped parent URLs must have no existing fragment delimiter, including an empty trailing
+        - code [ref=f6e645]: "#"
+        - text: ; direct URL queries remain intact. The final absolute URL must fit 2,048 UTF-16 units. Keep page text and target documents correctly encoded as UTF-8.
+      - paragraph [ref=f6e646]:
+        - text: The UI keeps native page totals/order and projects only newly displayed mapped hits, with one detailed request in flight and an atomic batch commit. It shows up to three heading links beneath “Matching text in this page”; any known omitted context gets “More matching context is not shown.” A heading can have no excerpt when its contributing match cannot fit. The optional message keys
+        - code [ref=f6e647]: sectionCaption
+        - text: ","
+        - code [ref=f6e648]: sectionOmissions
+        - text: ","
+        - code [ref=f6e649]: sectionUnavailable
+        - text: and
+        - code [ref=f6e650]: sectionStale
+        - text: customize these texts without changing existing bundles. Section CSS uses
+        - code [ref=f6e651]: __sections
+        - text: ","
+        - code [ref=f6e652]: __section
+        - text: ","
+        - code [ref=f6e653]: __section-title
+        - text: ","
+        - code [ref=f6e654]: __section-caption
+        - text: ","
+        - code [ref=f6e655]: __section-omissions
+        - text: and
+        - code [ref=f6e656]: __section-unavailable
+        - text: alongside the existing snippet/theme hooks.
+      - paragraph [ref=f6e657]: A stale map retains validated parent pages with a visible warning and makes no context requests. Remount with fresh metadata to restore previews; old ranges are never restamped automatically. A typed context-only provider, source-bound, environment or resource refusal retains parents with visible unavailable context. Main search failures, mismatched revisions, malformed/incomplete replies and transport failures reject the whole attempted window and offer Retry. Clear, replacement searches and destroy suppress late work; destroy releases owned maps/previews, restores original nodes and leaves disposal of the borrowed engine to you. Human accessibility/platform qualification remains separate from these automated lifecycle checks.
+      - paragraph [ref=f6e658]: Maps are bounded to 10,000 pages, 16,384 sections total, 64 per page and 4 MiB serialized UTF-8. There is no import-time map retention or extra core index. As batches are appended, all admitted matching parents can remain displayed, with at most three previews per parent and the existing per-preview excerpt/mark bounds. Earlier output calculations based on a 1,000-parent DOM window describe the superseded window behavior, not the current accumulation ceiling. Output bounds are separate from measured memory usage.
+      - heading "Consumer visual roles and host themes" [level=2] [ref=f6e659]
+      - paragraph [ref=f6e660]:
+        - text: The Reading index styles share body
+        - code [ref=f6e661]: 1rem / 1.6
+        - text: ", linked result titles"
+        - code [ref=f6e662]: 1.15em / 1.35
+        - text: at weight 650, smaller
+        - code [ref=f6e663]: .875em / 1.5
+        - text: supporting context, a single configurable action accent and quiet dividers. Inline/dropdown Search uses accent text/border and stronger weight; directory keeps its existing filled Search. Reset/paging remain quieter outlined actions. Native result links have at least
+        - code [ref=f6e664]: 2.75rem
+        - text: target height and explicit underlines even under a plain host link reset. Source marks remain warm inline highlights, distinct from the 3px focus outline and dropdown virtual selection. Excerpts wrap within roughly 65ch; titles/excerpts are not height-clamped to equalize rows. Cards keep their existing comfortable/compact padding and semantic list/grid presentations. No score or Inspector styling is imported into consumers.
+      - paragraph [ref=f6e665]:
+        - text: Use the complete
+        - link "optional light/dark host recipes" [ref=f6e666] [cursor=pointer]:
+          - /url: /raveldex/example-files/consumer-themes.css
+        - text: by copying the file into your application and adding
+        - code [ref=f6e667]: search-theme-light
+        - text: or
+        - code [ref=f6e668]: search-theme-dark
+        - text: to the component root or an ancestor. Modal uses the inline palette unless you explicitly override modal-specific roles. Recipes set existing component variables plus the optional directory error role; they contain no global reset, font request, mandatory shared stylesheet or automatic theme selection. Directory/cards retain automatic dark defaults;
+        - code [ref=f6e669]: search-theme-light
+        - text: can explicitly select light colors on a dark-system host. Inline/modal/dropdown keep explicit theme selection. Set dropdown active text/fill and paired match colors together.
+      - paragraph [ref=f6e670]:
+        - text: CSS remains optional and component-scoped. Existing public properties take precedence;
+        - code [ref=f6e671]: "--_"
+        - text: aliases remain private. Hosts can choose other accents or card backgrounds, but must check the resulting text, filled-action, boundary and focus contrast together. Text enlargement/emulated viewports are separate from actual browser zoom and mobile keyboard observations.
+      - heading "Documentation search modal" [level=2] [ref=f6e672]
+      - paragraph [ref=f6e673]:
+        - text: Use the modal when documentation search should open from an explicit button. It reuses inline search, feedback, paging and optional anchored previews inside a native dialog. Supply an already created engine and matching display data; the modal borrows that owner and starts closed without searching. For first-open loading and complete owned application lifecycle, copy the
+        - link "browser" [ref=f6e674] [cursor=pointer]:
+          - /url: /raveldex/examples/modal-browser/
+        - text: or
+        - link "Astro" [ref=f6e675] [cursor=pointer]:
+          - /url: /raveldex/examples/modal-astro/
+        - text: starter. The
+        - link "modal gallery" [ref=f6e676] [cursor=pointer]:
+          - /url: /raveldex/examples/modal/
+        - text: includes an installed preview, exact source downloads and CSS recipes.
+      - code [ref=f6e678]: <button id="docs-search-trigger" type="button">Search documentation</button> <div id="docs-search"><a href="/guide/">Browse the documentation</a></div>
+      - code [ref=f6e680]: "import { mountRaveldexModal } from '@vmitsaras/raveldex/addons/ui/modal'; import '@vmitsaras/raveldex/addons/ui/modal.css'; const modal = mountRaveldexModal({ root: document.querySelector('#docs-search'), trigger: document.querySelector('#docs-search-trigger'), engine, documents, shortcut: true, // pageSections, // Optional maps from the same indexed originals and revision. }); // modal.open(); // await modal.search('source prov'); // modal.close(); // modal.destroy(); // await engine.dispose(); // The application owns this separate step."
+      - paragraph [ref=f6e681]:
+        - text: Here
+        - code [ref=f6e682]: engine
+        - text: and
+        - code [ref=f6e683]: documents
+        - text: come from your ordinary inline setup or explicit static loader. The single modal stylesheet includes inline styling through a local CSS import; JavaScript imports no stylesheet automatically. Keep normal browse links available before initialization and make the existing trigger an accessible named native button. Root and trigger must be connected in the same document, with the trigger outside root. The library preserves the trigger’s authored label rather than attempting to recreate the browser’s complete accessible-name algorithm.
+      - paragraph [ref=f6e684]:
+        - code [ref=f6e685]: ModalUIOptions
+        - text: includes the existing inline options, including partial inline
+        - code [ref=f6e686]: messages
+        - text: ", facets, snippets or"
+        - code [ref=f6e687]: pageSections
+        - text: /
+        - code [ref=f6e688]: maxSectionPreviews
+        - text: ". Existing bounds and the snippets/maps exclusion still apply. The additional options are:"
+      - table [ref=f6e689]:
+        - rowgroup [ref=f6e690]:
+          - row [ref=f6e691]:
+            - columnheader "Option" [ref=f6e692]
+            - columnheader "Meaning" [ref=f6e693]
+        - rowgroup [ref=f6e694]:
+          - row [ref=f6e695]:
+            - cell [ref=f6e696]:
+              - code [ref=f6e697]: trigger
+            - cell [ref=f6e698]:
+              - text: Required existing
+              - code [ref=f6e699]: HTMLButtonElement
+              - text: . Trigger ownership cannot be shared by two mounted modals.
+          - row [ref=f6e700]:
+            - cell [ref=f6e701]:
+              - code [ref=f6e702]: resetOnClose?
+            - cell "Default false. Preserve input and facet values; true clears both on close. Results/counts/errors are discarded on every close." [ref=f6e703]
+          - row [ref=f6e704]:
+            - cell [ref=f6e705]:
+              - code [ref=f6e706]: shortcut?
+            - cell "Default false. Coordinate Ctrl+K or Meta+K within this document." [ref=f6e707]
+          - row [ref=f6e708]:
+            - cell [ref=f6e709]:
+              - code [ref=f6e710]: keyboardHints?
+            - cell "Default true. Show contextual Escape and, when selected, shortcut hints. Hiding hints does not disable an opted-in shortcut." [ref=f6e711]
+          - row [ref=f6e712]:
+            - cell [ref=f6e713]:
+              - code [ref=f6e714]: modalMessages?
+            - cell [ref=f6e715]:
+              - text: Partial
+              - code [ref=f6e716]: ModalUIMessages
+              - text: with
+              - code [ref=f6e717]: title
+              - text: ","
+              - code [ref=f6e718]: close
+              - text: ","
+              - code [ref=f6e719]: escapeHint
+              - text: ","
+              - code [ref=f6e720]: shortcutHint
+              - text: . Plain nonblank text up to 512 UTF-16 units each. Title/close default to “Search documentation” / “Close search”; Escape help says “Close search closes this dialog. Escape may clear the search field first.” Shortcut help says “Ctrl/Command+K opens search outside text fields.”
+      - paragraph [ref=f6e721]:
+        - text: The readonly
+        - code [ref=f6e722]: ModalUIHandle
+        - text: has
+        - code [ref=f6e723]: open()
+        - text: ","
+        - code [ref=f6e724]: close()
+        - text: ","
+        - code [ref=f6e725]: search(text?)
+        - text: ","
+        - code [ref=f6e726]: clear()
+        - text: and
+        - code [ref=f6e727]: destroy()
+        - text: . Open focuses the search input and reruns the first native page from preserved controls; an empty unfiltered query remains idle. Repeated open is harmless. Search while closed changes the stored text without searching or reopening; clear also works while closed. Close aborts debounce/main/context work and prevents late replies from publishing. If application code calls the native dialog’s
+        - code [ref=f6e728]: close()
+        - text: directly, cleanup follows its queued close event; preexisting hidden feedback may persist until then, while late replies still cannot publish. Reopen checks the current revision/maps again. Reset-on-close clears input/filter values. Destroy cancels work, removes bindings, restores original root Node objects and owned trigger/scroll state, and never disposes the borrowed engine. Methods after destroy do nothing.
+      - paragraph [ref=f6e729]:
+        - text: Native Escape cancellation, the visible close button and deliberate backdrop activation share cleanup. Some browsers first clear a focused search field on Escape; press Escape again or use
+        - strong [ref=f6e730]: Close search
+        - text: to dismiss. Backdrop dismissal requires the same primary pointer to press and release outside the dialog, then click there; dragging through the backdrop does not dismiss. Ordinary result links keep their native navigation and modifier behavior. Native dialog behavior contains page focus; a browser may move keyboard focus into its own chrome during Tab traversal. There is no custom Tab loop. Close returns to the connected actual opener when it still owns the focus transition; removed openers, unrelated focus and other modal sessions are respected.
+      - paragraph [ref=f6e731]:
+        - text: Visible footer hints describe the search input through unique IDs, outside live feedback. Shortcut text and its reference appear only when
+        - code [ref=f6e732]: shortcut:true
+        - text: ;
+        - code [ref=f6e733]: keyboardHints:false
+        - text: omits all hint references. The footer is a named focusable scroll group, adding one deliberate native Tab stop so long translations can be read with native scrolling. Its height remains bounded and its focus outline is inset; help no longer uses line clamps. Neither guidance nor scrolling registers a new shortcut or issues a query.
+      - paragraph [ref=f6e734]:
+        - text: The optional shortcut ignores already handled/repeated events, composition, editables and visible editable shadow paths, Alt/Shift and simultaneous Control+Meta. Unknown focused shadow-capable hosts are conservatively excluded, including ordinary focusable
+        - code [ref=f6e735]: div
+        - text: /
+        - code [ref=f6e736]: main
+        - text: /
+        - code [ref=f6e737]: section
+        - text: regions that cannot be distinguished from concealed shadow content. Root/trigger shadow trees are captured explicitly; their actual editable controls are respected. The active eligible modal wins; otherwise the first connected enabled opt-in instance wins. An unrelated native modal found in the document or active/known shadow trees blocks opening. This does not discover every externally concealed/inactive shadow tree; coordinate those external modal lifecycles in the application. Destroy unregisters its binding, and the final opt-in instance removes the shared document listener. Merely importing or mounting inline search captures no keyboard shortcut.
+      - paragraph [ref=f6e738]:
+        - text: Style
+        - code [ref=f6e739]: .raveldex-modal
+        - text: and its scoped
+        - code [ref=f6e740]: __header
+        - text: ","
+        - code [ref=f6e741]: __title
+        - text: ","
+        - code [ref=f6e742]: __close
+        - text: ","
+        - code [ref=f6e743]: __search
+        - text: ","
+        - code [ref=f6e744]: __body
+        - text: ","
+        - code [ref=f6e745]: __footer
+        - text: and
+        - code [ref=f6e746]: __hint
+        - text: hooks. The shared inline properties continue to control input/results; modal background/color/border/focus default to those same values. Modal-specific
+        - code [ref=f6e747]: "--raveldex-modal-*"
+        - text: properties include
+        - code [ref=f6e748]: background
+        - text: ","
+        - code [ref=f6e749]: color
+        - text: ","
+        - code [ref=f6e750]: border
+        - text: ","
+        - code [ref=f6e751]: focus
+        - text: ","
+        - code [ref=f6e752]: gap
+        - text: ","
+        - code [ref=f6e753]: padding
+        - text: ","
+        - code [ref=f6e754]: gutter
+        - text: ","
+        - code [ref=f6e755]: max-width
+        - text: ","
+        - code [ref=f6e756]: height
+        - text: ","
+        - code [ref=f6e757]: border-width
+        - text: ","
+        - code [ref=f6e758]: radius
+        - text: ","
+        - code [ref=f6e759]: shadow
+        - text: ","
+        - code [ref=f6e760]: backdrop
+        - text: ","
+        - code [ref=f6e761]: title-size
+        - text: and
+        - code [ref=f6e762]: control-radius
+        - text: . Layout defaults are 48rem maximum width, 42rem preferred height, .75rem gutter/gap and 1rem padding. Set public overrides on the dialog or an inherited wrapper; properties starting
+        - code [ref=f6e763]: "--_"
+        - text: are private.
+      - paragraph [ref=f6e764]:
+        - text: The header/input remain reachable as results and facets scroll in the contained body. Short screens use a compact input row and keep the associated label available to assistive technology. Dynamic viewport/safe-area rules, visible focus, forced colors and reduced motion are included; check contrast and geometry after customization. Automated viewport checks do not establish physical on-screen-keyboard, actual zoom or human AT support. See the
+        - link "modal contract (repository access)" [ref=f6e765] [cursor=pointer]:
+          - /url: https://github.com/vmitsaras/raveldex/blob/main/docs/specs/DOCS_MODAL.md
+        - text: for exact ownership and lifecycle rules. Native/worker failures remain visible errors with Retry; the modal does not load assets, create another engine or silently change execution hosts.
+      - heading "Compact dropdown search" [level=2] [ref=f6e766]
+      - paragraph [ref=f6e767]:
+        - text: Use
+        - code [ref=f6e768]: mountRaveldexDropdown
+        - text: from
+        - code [ref=f6e769]: /addons/ui/dropdown
+        - text: when a compact field should offer a few real page links. Import
+        - code [ref=f6e770]: /addons/ui/dropdown.css
+        - text: separately. It uses core alone, borrows your existing engine and creates no index, snippets, suggestions, worker or storage. Native manual popover support is required; unsupported environments fail before replacing your browse content. Packages remain available separately.
+      - paragraph [ref=f6e771]:
+        - text: For a complete project, copy the
+        - link "browser header starter" [ref=f6e772] [cursor=pointer]:
+          - /url: /raveldex/examples/dropdown-browser/
+        - text: . Its
+        - link "gallery" [ref=f6e773] [cursor=pointer]:
+          - /url: /raveldex/examples/dropdown/
+        - text: has an installed preview, all source files and a CSS walkthrough. The starter builds a real
+        - code [ref=f6e774]: /search/
+        - text: inline destination and guide pages at root or a subdirectory base.
+      - paragraph [ref=f6e775]:
+        - text: This wiring fragment expects your
+        - code [ref=f6e776]: engine
+        - text: and
+        - code [ref=f6e777]: documents
+        - text: ", a connected"
+        - code [ref=f6e778]: "#header-search"
+        - text: element, and an existing
+        - code [ref=f6e779]: /search/
+        - text: page that accepts
+        - code [ref=f6e780]: q
+        - text: "and selects the same prefix mode, analyzer and content. The runtime entry itself does not create that destination:"
+      - code [ref=f6e782]: "import { mountRaveldexDropdown } from '@vmitsaras/raveldex/addons/ui/dropdown'; import '@vmitsaras/raveldex/addons/ui/dropdown.css'; const dropdown = mountRaveldexDropdown({ root: document.querySelector('#header-search'), engine, documents, fullResults: { url: '/search/?mode=prefix#results', queryParameter: 'q' }, maxResults: 5, messages: { label: 'Find a guide', fullResults: 'Search every guide' }, }); // dropdown.open(); // Focus and refresh a preserved query. // await dropdown.search('source prov'); // Search without moving focus. // dropdown.close(); // Keep the words; cancel presentation. // dropdown.clear(); // Return to idle without a query. // dropdown.destroy(); // Restore the original nodes. // await engine.dispose(); // Separate application-owned cleanup."
+      - paragraph [ref=f6e783]:
+        - code [ref=f6e784]: DropdownUIOptions
+        - text: requires
+        - code [ref=f6e785]: root
+        - text: ","
+        - code [ref=f6e786]: engine
+        - text: ","
+        - code [ref=f6e787]: documents
+        - text: and
+        - code [ref=f6e788]: fullResults
+        - text: .
+        - code [ref=f6e789]: maxResults
+        - text: defaults to 5 and accepts integers 1..20;
+        - code [ref=f6e790]: debounceMs
+        - text: defaults to 150 and accepts 0..2000;
+        - code [ref=f6e791]: mode
+        - text: is
+        - code [ref=f6e792]: prefix
+        - text: by default or
+        - code [ref=f6e793]: text
+        - text: ;
+        - code [ref=f6e794]: shortcut
+        - text: is false by default. Display capture uses the existing finite ID/title/safe-URL limits. A detached root can be prepared, but search/open are inactive until it is connected to its original document. Same-kind duplicate mount returns its existing handle; destroy/remount to change configuration. A different UI preset cannot own that root simultaneously.
+      - paragraph [ref=f6e795]:
+        - text: The popup is a one-column grid of real native links. Input focus stays in the labeled text field;
+        - code [ref=f6e796]: aria-activedescendant
+        - text: identifies only a visible current gridcell. Results never replace your words with a title. The exact native total and shown count are separate from the finite grid. No pagination or vocabulary suggestions are mixed into these hits. The ordinary full-results link is outside the popup and remains in normal Tab order.
+      - table [ref=f6e797]:
+        - rowgroup [ref=f6e798]:
+          - row [ref=f6e799]:
+            - columnheader "Interaction" [ref=f6e800]
+            - columnheader "Behavior" [ref=f6e801]
+        - rowgroup [ref=f6e802]:
+          - row [ref=f6e803]:
+            - cell "Down / Up" [ref=f6e804]
+            - cell "Enter first/last actual result, then stop at the boundary. If needed, flush the query and retain that explicit navigation intent for its current reply." [ref=f6e805]
+          - row [ref=f6e806]:
+            - cell "Enter with an active result" [ref=f6e807]
+            - cell "Follow its actual link without rewriting the field." [ref=f6e808]
+          - row [ref=f6e809]:
+            - cell "Enter without an active result / Search" [ref=f6e810]
+            - cell "Flush the current search and reopen current results." [ref=f6e811]
+          - row [ref=f6e812]:
+            - cell "Escape / Tab / Shift+Tab" [ref=f6e813]
+            - cell "Dismiss/cancel; Tab leaves normally. The query is preserved." [ref=f6e814]
+          - row [ref=f6e815]:
+            - cell "Editing, selection and modified input keys" [ref=f6e816]
+            - cell "Clear virtual selection and retain native editing; modified input Enter does not activate a hit." [ref=f6e817]
+          - row [ref=f6e818]:
+            - cell "Composition / Clear" [ref=f6e819]
+            - cell "No interim query or activation; committed text schedules search. Clear cancels and returns to idle, retaining input/action/external focus; a focused Retry/full-results/popup-link control that must disappear returns focus to input." [ref=f6e820]
+          - row [ref=f6e821]:
+            - cell "Result pointer/context menu / full-results link" [ref=f6e822]
+            - cell "Native links retain ordinary and modified activation." [ref=f6e823]
+      - paragraph [ref=f6e824]: Native Tab movement follows the browser’s keyboard-navigation preferences; the component does not add a Tab loop or force skipped native links/buttons into the sequence.
+      - paragraph [ref=f6e825]:
+        - code [ref=f6e826]: fullResults.url
+        - text: is a captured HTTP(S) URL without credentials, at most 2048 UTF-16 units. Its optional
+        - code [ref=f6e827]: queryParameter
+        - text: defaults to
+        - code [ref=f6e828]: q
+        - text: and matches
+        - code [ref=f6e829]: "[A-Za-z][A-Za-z0-9_-]{0,63}"
+        - text: . The link replaces that parameter with the exact current field value and preserves other parameters/hash. It does not trim, normalize, autocomplete or silently change query mode. Whitespace-only input is idle; malformed/oversized text has no handoff URL. Programmatic
+        - code [ref=f6e830]: search(text)
+        - text: rejects CR/LF rather than silently joining words in a single-line field. Native refusal or transport failure stays visible with Retry; there is no fallback engine.
+      - paragraph [ref=f6e831]: "Every edit/new reply clears old virtual selection before replacing rows. Close, outside pointer/focus, native popup closure, removal and destroy suppress old work. A programmatic search does not steal focus; a later outside interaction can cancel it. There is no live index-mutation subscription: reopen or refresh to obtain a new revision. Destroy restores original Node identities and never disposes your borrowed engine."
+      - paragraph [ref=f6e832]:
+        - text: Only one owned dropdown popup per document is shown.
+        - code [ref=f6e833]: "shortcut: true"
+        - text: opts into the modal’s existing Ctrl/Meta+K coordinator; editing/composition/repeat/modifier/already-handled events and unrelated modality are respected. No global shortcut is registered otherwise. Known owned shadow ancestry is supported; external concealed shadow/modal lifecycles still require application coordination. Automatic modal handoff is not part of this entry.
+      - paragraph [ref=f6e834]:
+        - text: "The dropdown shows a static keyboard hint: Arrow Up/Down selects a result; Enter opens it or searches without a selection; Escape dismisses results; Tab moves on. Its unique ID describes the combobox input outside the live status. Override optional"
+        - code [ref=f6e835]: messages.keyboardHint
+        - text: through the existing captured text bundle; old complete bundles remain valid. No shortcut is enabled by displaying help. Inline, directory and cards retain native lists and receive no combobox guidance.
+      - paragraph [ref=f6e836]:
+        - text: Style
+        - code [ref=f6e837]: .raveldex-dropdown
+        - text: and its scoped
+        - code [ref=f6e838]: __form
+        - text: ","
+        - code [ref=f6e839]: __label
+        - text: ","
+        - code [ref=f6e840]: __input
+        - text: ","
+        - code [ref=f6e841]: __submit
+        - text: ","
+        - code [ref=f6e842]: __clear
+        - text: ","
+        - code [ref=f6e843]: __hint
+        - text: ","
+        - code [ref=f6e844]: __status
+        - text: ","
+        - code [ref=f6e845]: __retry
+        - text: ","
+        - code [ref=f6e846]: __full-results
+        - text: ","
+        - code [ref=f6e847]: __popup
+        - text: ","
+        - code [ref=f6e848]: __row
+        - text: ","
+        - code [ref=f6e849]: __cell
+        - text: and
+        - code [ref=f6e850]: __link
+        - text: classes.
+        - code [ref=f6e851]: .is-active
+        - text: marks the current cell. Public
+        - code [ref=f6e852]: "--raveldex-dropdown-*"
+        - text: properties include
+        - code [ref=f6e853]: background
+        - text: ","
+        - code [ref=f6e854]: color
+        - text: ","
+        - code [ref=f6e855]: muted
+        - text: ","
+        - code [ref=f6e856]: accent
+        - text: ","
+        - code [ref=f6e857]: border
+        - text: ","
+        - code [ref=f6e858]: focus
+        - text: ","
+        - code [ref=f6e859]: active-background
+        - text: ","
+        - code [ref=f6e860]: active-color
+        - text: ","
+        - code [ref=f6e861]: error
+        - text: ","
+        - code [ref=f6e862]: font
+        - text: ","
+        - code [ref=f6e863]: font-size
+        - text: ","
+        - code [ref=f6e864]: line-height
+        - text: ","
+        - code [ref=f6e865]: gap
+        - text: ","
+        - code [ref=f6e866]: padding
+        - text: ","
+        - code [ref=f6e867]: radius
+        - text: ","
+        - code [ref=f6e868]: border-width
+        - text: ","
+        - code [ref=f6e869]: max-width
+        - text: ","
+        - code [ref=f6e870]: max-height
+        - text: and
+        - code [ref=f6e871]: shadow
+        - text: ;
+        - code [ref=f6e872]: "--_"
+        - text: geometry values are private. Defaults use a readable light surface, 44px controls, 40rem maximum component width and 20rem maximum popup height. Native top-layer placement escapes clipping ancestors and uses available viewport space with contained scrolling. If a short or enlarged viewport cannot fit a usable result row without covering controls, the popup collapses with the exact total, a space/recovery message and the full-results link. Keep visible focus, non-color active indication, contrast and full-results access when changing a theme.
+      - paragraph [ref=f6e873]:
+        - text: Dropdown body typography defaults to
+        - code [ref=f6e874]: 1rem / 1.6
+        - text: with inherited family. Linked result titles use
+        - code [ref=f6e875]: 1.15em / 1.35
+        - text: at weight 650. Search uses accent text/border and weight 650; reset/paging stay quieter outlined actions. Transparent host backgrounds remain supported without deriving text color from a transparent surface.
+      - paragraph [ref=f6e876]:
+        - text: Plain-text
+        - code [ref=f6e877]: DropdownUIMessages
+        - text: keys are
+        - code [ref=f6e878]: label
+        - text: ","
+        - code [ref=f6e879]: placeholder
+        - text: ","
+        - code [ref=f6e880]: submit
+        - text: ","
+        - code [ref=f6e881]: clear
+        - text: ","
+        - code [ref=f6e882]: idle
+        - text: ","
+        - code [ref=f6e883]: composing
+        - text: ","
+        - code [ref=f6e884]: searching
+        - text: ","
+        - code [ref=f6e885]: noResults
+        - text: ","
+        - code [ref=f6e886]: resultsLabel
+        - text: ","
+        - code [ref=f6e887]: resultsOne
+        - text: ","
+        - code [ref=f6e888]: resultsMany
+        - text: ","
+        - code [ref=f6e889]: error
+        - text: ","
+        - code [ref=f6e890]: retry
+        - text: ","
+        - code [ref=f6e891]: fullResults
+        - text: ","
+        - code [ref=f6e892]: closed
+        - text: and
+        - code [ref=f6e893]: noSpace
+        - text: ", with optional"
+        - code [ref=f6e894]: keyboardHint
+        - text: . Overrides are captured strings of at most 512 UTF-16 units. Counts use
+        - code [ref=f6e895]: "{total}"
+        - text: /
+        - code [ref=f6e896]: "{count}"
+        - text: tokens;
+        - code [ref=f6e897]: noResults
+        - text: supports the same bounded submitted
+        - code [ref=f6e898]: "{query}"
+        - text: token as inline. Default empty feedback suggests editing or opening the existing full-results link, and Clear search resets to idle without querying. Default failures offer Retry search without technical codes; an
+        - code [ref=f6e899]: error
+        - text: override can include
+        - code [ref=f6e900]: "{code}"
+        - text: for diagnostics. UI language does not select another analyzer.
+        - link "The concrete contract (repository access)" [ref=f6e901] [cursor=pointer]:
+          - /url: https://github.com/vmitsaras/raveldex/blob/main/docs/specs/DROPDOWN.md
+        - text: records keyboard, focus, placement, lifecycle and finite bounds. Scripted keyboard/composition, computed accessibility trees and emulated layouts are separate from human AT, physical input/mobile keyboard and actual zoom observations.
+      - paragraph [ref=f6e902]:
+        - text: The complete
+        - link "header starter" [ref=f6e903] [cursor=pointer]:
+          - /url: /raveldex/examples/dropdown-browser/
+        - text: uses
+        - code [ref=f6e904]: configuration.mjs
+        - text: to select prefix mode, three compact results and three-result inline batches. Load more on the full-results page appends until all matches are displayed. Its
+        - code [ref=f6e905]: /search/
+        - text: page reads a single
+        - code [ref=f6e906]: q
+        - text: value once, preserves the decoded raw words and refuses duplicate, multiline, malformed or overlong input with a recovery message. Header and destination use the same records and query configuration; the starter does not add URL history synchronization. Both pages keep ordinary browse links. Without native popovers, the header retains its authored GET search form and does not load an unused owner; the destination still uses the existing inline presenter. The public dropdown API continues to refuse unsupported hosts explicitly. No popover polyfill or alternate engine is installed. Build and preview with the same
+        - code [ref=f6e907]: RAVELDEX_DROPDOWN_BASE
+        - text: when deploying under a subdirectory.
+      - paragraph [ref=f6e908]:
+        - text: Set the starter’s
+        - code [ref=f6e909]: modalHandoff
+        - text: flag to
+        - code [ref=f6e910]: "true"
+        - text: only when you want its explicit larger-search button. The button transfers the committed header text to a modal using the same page owner, display records and mode. It adds no global shortcut, second engine or automatic width switch. The supplied bundle imports all three optional UI styles and presenters so this flag needs only a configuration edit and rebuild; this is the starter’s selected bundle cost, not the cost of importing
+        - code [ref=f6e911]: /addons/ui/dropdown
+        - text: alone. A new page navigation loads that page’s own owner; the controller destroys its borrowed surfaces before releasing it.
+      - heading "Directory queries and URL state" [level=2] [ref=f6e912]
+      - paragraph [ref=f6e913]:
+        - text: Import
+        - code [ref=f6e914]: createDirectory
+        - text: from
+        - code [ref=f6e915]: /addons/ui/directory
+        - text: to compose text, multi-selected string filters and native pages around an existing engine. This nonvisual entry exposes state and results. The separate
+        - link "directory view" [ref=f6e916] [cursor=pointer]:
+          - /url: "#directory-controls-and-styling"
+        - text: supplies controls and explicit CSS;
+        - link "complete browser/Astro projects" [ref=f6e917] [cursor=pointer]:
+          - /url: /raveldex/examples/directory/
+        - text: provide installed adoption. Install filters and facets explicitly for the configured groups. With no groups, core alone is enough.
+      - paragraph [ref=f6e918]:
+        - text: Save this complete example as an ESM module in your installed application and run it with Node. Both
+        - code [ref=f6e919]: guide
+        - text: and
+        - code [ref=f6e920]: manual
+        - text: are selected within the same group, so either may match. Additional groups combine with AND, as does the text query.
+      - code [ref=f6e922]: "import { createRaveldex } from '@vmitsaras/raveldex'; import { createFilters } from '@vmitsaras/raveldex/addons/filters'; import { createFacets } from '@vmitsaras/raveldex/addons/facets'; import { createDirectory } from '@vmitsaras/raveldex/addons/ui/directory'; const engine = createRaveldex({ schema: { text: { title: {} }, metadata: { kind: { type: 'string' } } }, addons: [createFilters({ fields: ['kind'] }), createFacets({ fields: ['kind'] })], }); const directory = createDirectory({ engine, groups: [{ field: 'kind', values: ['guide', 'manual'] }], pageSize: 20, }); try { await engine.addMany([ { id: 'a', text: { title: 'Install guide' }, metadata: { kind: 'guide' } }, { id: 'b', text: { title: 'Install manual' }, metadata: { kind: 'manual' } }, ]); await directory.update({ text: 'inst', filters: { kind: ['guide', 'manual'] } }); const snapshot = directory.getSnapshot(); if (snapshot.status !== 'ready') throw new Error(snapshot.error ?? snapshot.status); console.log(snapshot.result.total, snapshot.result.hits.map(hit => hit.id)); } finally { directory.destroy(); await engine.dispose(); }"
+      - paragraph [ref=f6e923]:
+        - text: This prints
+        - code [ref=f6e924]: "2"
+        - text: and the IDs
+        - code [ref=f6e925]: a
+        - text: ","
+        - code [ref=f6e926]: b
+        - text: . Construction is inert.
+        - code [ref=f6e927]: refresh()
+        - text: starts an empty browse or refreshes the current query at page one. The default mode completes the final word;
+        - code [ref=f6e928]: "mode: 'text'"
+        - text: selects exact words.
+        - code [ref=f6e929]: "update({ text?, filters? })"
+        - text: applies effective edits and resets to page one. A supplied filters object replaces all selections; omitted groups become empty. Equivalent ready/loading state is inert.
+        - code [ref=f6e930]: setPage(2)
+        - text: requests the second native page;
+        - code [ref=f6e931]: "restore({ text, filters, page })"
+        - text: admits a complete external state. These operations return Promises; read failures from the resulting snapshot. Invalid command input throws before changing state.
+      - paragraph [ref=f6e932]:
+        - text: Snapshots contain captured readonly state, status, change reason and a result only when ready.
+        - code [ref=f6e933]: result.total
+        - text: and
+        - code [ref=f6e934]: result.hits
+        - text: retain native totals, ranking and tie order.
+        - code [ref=f6e935]: result.facets
+        - text: counts the complete qualifying set before paging, including each group’s own active selections. Counts describe the current conjunction, not the effect of adding another choice.
+        - code [ref=f6e936]: result.selected[field]
+        - text: retains selected strings with a count of zero when absent from a complete projection, or
+        - code [ref=f6e937]: "null"
+        - text: when the truncated buckets cannot establish their count. Null/missing metadata buckets are informational, not selectable strings.
+      - paragraph [ref=f6e938]:
+        - text: Use
+        - code [ref=f6e939]: "subscribe(snapshot => { ... })"
+        - text: to observe transitions; subscription does not invoke an initial callback. At most 64 distinct listeners are supported, including a connected URL binding. Exceptions from an observer do not cancel search. Old responses cannot overwrite newer intent. Paging/replaying the same query across a changed revision reports
+        - code [ref=f6e940]: stale
+        - text: with
+        - code [ref=f6e941]: REVISION_MISMATCH
+        - text: ", clears results and resets page one; explicitly call"
+        - code [ref=f6e942]: refresh()
+        - text: to accept the new revision. Out-of-range restored pages recover once to page one. Destroy cancels work and releases observers; dispose the borrowed engine separately.
+      - heading "Connect URL state explicitly" [level=3] [ref=f6e943]
+      - paragraph [ref=f6e944]:
+        - text: For a long-lived browser controller, add this fragment after creating it and before its initial query. Keep the returned binding for cleanup. Use a real HTTP(S)
+        - code [ref=f6e945]: window
+        - text: ; there is no ambient URL discovery.
+      - code [ref=f6e947]: "import { connectDirectoryURL } from '@vmitsaras/raveldex/addons/ui/directory'; const url = connectDirectoryURL({ controller: directory, host: window, parameters: { query: 'q', page: 'page', filters: { kind: 'kind' } }, history: 'replace', }); await url.read(); // When removing this integration, before destroying directory: // url.destroy();"
+      - paragraph [ref=f6e948]:
+        - text: Connection claims names/listens without reading or searching.
+        - code [ref=f6e949]: read()
+        - text: admits initial state; native Back/Forward subsequently replays it. The default policy replaces the current entry. Choose
+        - code [ref=f6e950]: "history: 'push'"
+        - text: for explicit committed edits/page changes when traversable entries are wanted; the application controls when to call
+        - code [ref=f6e951]: update
+        - text: ", so avoid committing every keystroke with that policy. Replay and corrections always replace, with no new traversal entries."
+        - code [ref=f6e952]: url.write()
+        - text: retries the current state with replace after a refused write; it does not query or reload an older URL.
+      - paragraph [ref=f6e953]:
+        - text: Only the mapped query/page/filter names are owned. Unrelated raw query bytes/order, path, hash and
+        - code [ref=f6e954]: history.state
+        - text: survive. A controller can have one binding; multiple controllers may use disjoint names on the same host. Overlap rejects before mutation. Destroying a binding releases its claims/listener while retaining the URL and in-memory controller; controller destruction also disconnects it.
+      - paragraph [ref=f6e955]: Admission bounds are eight groups, 128 allowed strings per group, sixteen selected per group, 1,024 units per string, 65,536 aggregate configuration units and 8,192 selected units. Raw single-line text is at most 2,048 UTF-16 units; page size is 1..100 and pages stay inside the 10,000-document native ceiling. Selected empty strings are valid. URL names are unique bounded ASCII identifiers; href is at most 65,536 units and owned encoded segments at most 16,384. Native reduced limits/capability errors remain explicit.
+      - paragraph [ref=f6e956]:
+        - text: Invalid/duplicate query or page values reset that field; unknown/duplicate filter values are dropped, excess selections reset their group, and aggregate selection overflow clears filters while retaining admitted text. Any correction resets page one and records bounded
+        - code [ref=f6e957]: url.getSnapshot().issues
+        - text: . An oversized owned encoding resets all owned state; a whole-URL or history failure leaves the URL unchanged and reports an error. In-memory search stays usable. There is no storage, telemetry, search-history feature, disjunctive counting or new sorting. The
+        - link "concrete directory contract (repository access)" [ref=f6e958] [cursor=pointer]:
+          - /url: https://github.com/vmitsaras/raveldex/blob/main/docs/specs/DIRECTORY.md
+        - text: records recovery, ownership and lifecycle details.
+      - heading "Directory controls and styling" [level=2] [ref=f6e959]
+      - paragraph [ref=f6e960]:
+        - text: Copy the
+        - link "complete browser or Astro resource directory" [ref=f6e961] [cursor=pointer]:
+          - /url: /raveldex/reference/hosts/#directory-controls-and-styling
+        - text: for a working project with explicit records, actual destination pages, checkbox groups, chips and native page navigation. The browser example indexes its own public JSON; Astro builds an explicit static allowlist and loads matching source/display artifacts on Enable. Both use the same native controller semantics and include loading/Retry, optional URL ownership and teardown.
+      - paragraph [ref=f6e962]:
+        - text: To add controls to an existing long-lived browser controller, use this fragment after creating it. Supply your own connected HTML
+        - code [ref=f6e963]: root
+        - text: ", live"
+        - code [ref=f6e964]: directory
+        - text: ", matching"
+        - code [ref=f6e965]: "{id,title,url}"
+        - code [ref=f6e966]: documents
+        - text: and labels for its configured groups. The complete projects above include that setup; this fragment is not a standalone application.
+      - code [ref=f6e968]: "import { mountRaveldexDirectory } from '@vmitsaras/raveldex/addons/ui/directory/view'; import '@vmitsaras/raveldex/addons/ui/directory.css'; const view = mountRaveldexDirectory({ root, controller: directory, documents, groups: [{ field: 'kind', label: 'Resource type', values: [ { value: 'guide', label: 'Guides' }, { value: 'manual', label: 'Manuals' }, ] }], }); await directory.refresh(); // When removing the controls, before separately destroying directory: // view.destroy();"
+      - paragraph [ref=f6e969]: Mount reads the current snapshot and starts no query. It borrows the controller; destroying the view never destroys the controller or engine. Destroy restores the original Node objects when its shell still owns the root, leaves an application’s foreign replacement intact and stops timers/listeners/observation. Controller destruction also tears down the view. Same-kind duplicate mount returns its existing handle; destroy/remount to change options. Another UI preset cannot own that root at the same time. Foreign-document adoption suspends commands/presentation; teardown stays available. Focus reads the supplied root’s own document/shadow tree; a shadow-root caller also supplies its stylesheet inside that tree.
+      - paragraph [ref=f6e970]:
+        - code [ref=f6e971]: DirectoryViewOptions
+        - text: requires
+        - code [ref=f6e972]: root
+        - text: ","
+        - code [ref=f6e973]: controller
+        - text: ","
+        - code [ref=f6e974]: documents
+        - text: and
+        - code [ref=f6e975]: groups
+        - text: . Supply exactly one
+        - code [ref=f6e976]: "{field,label,values?}"
+        - text: label group for every configured controller field.
+        - code [ref=f6e977]: values
+        - text: is an optional list of
+        - code [ref=f6e978]: "{value,label}"
+        - text: mappings for allowed strings; other visible strings keep their raw labels and an empty string has an explicit empty label. Supply a readable mapping for a nonempty whitespace/control-only value.
+        - code [ref=f6e979]: debounceMs
+        - text: defaults to 150, integer 0..2000.
+        - code [ref=f6e980]: filtersOpen
+        - text: defaults false at every width; native disclosure state is not changed on resize. A
+        - code [ref=f6e981]: messages
+        - text: partial bundle supplies captured plain-text labels/status templates, including
+        - code [ref=f6e982]: label
+        - text: ","
+        - code [ref=f6e983]: placeholder
+        - text: ","
+        - code [ref=f6e984]: clear
+        - text: ","
+        - code [ref=f6e985]: filters
+        - text: ","
+        - code [ref=f6e986]: remove
+        - text: ","
+        - code [ref=f6e987]: results
+        - text: ","
+        - code [ref=f6e988]: resultOne
+        - text: ","
+        - code [ref=f6e989]: page
+        - text: ","
+        - code [ref=f6e990]: error
+        - text: ","
+        - code [ref=f6e991]: stale
+        - text: and
+        - code [ref=f6e992]: retry
+        - text: . Unknown keys, getters and invalid strings refuse before replacing authored content. Messages/explicit value labels are at most 512 UTF-16 units; group labels at most 256. Default raw value labels retain the controller’s 1,024-unit value bound. Display documents retain 10,000-entry / 4,000,000 aggregate units and 256/1,024/2,048 ID/title/URL limits. URLs must resolve to HTTP(S) without credentials.
+      - paragraph [ref=f6e993]:
+        - text: The handle has
+        - code [ref=f6e994]: search(text?)
+        - text: ","
+        - code [ref=f6e995]: clear()
+        - text: and
+        - code [ref=f6e996]: destroy()
+        - text: . Search with no argument flushes current controls after composition; explicit validated text cancels draft composition and preserves committed filters. Clear removes text and all selections, resets page one and browses resources. Both return operation Promises; later commands after destroy do nothing. Controller/native errors appear as friendly visible status with Refresh results. Typed codes remain in controller snapshots and in an optional
+        - code [ref=f6e997]: error
+        - text: template using
+        - code [ref=f6e998]: "{code}"
+        - text: . A missing display ID refuses visibly, preserving exact totals rather than silently dropping a result. An over-limit selection restores the last admitted controls with a readable message.
+      - paragraph [ref=f6e999]:
+        - text: Directory/cards empty feedback distinguishes text-only, filtered and empty browse results.
+        - code [ref=f6e1000]: noResults
+        - text: ", optional"
+        - code [ref=f6e1001]: noResultsFiltered
+        - text: and optional
+        - code [ref=f6e1002]: noResultsBrowse
+        - text: support the bounded submitted
+        - code [ref=f6e1003]: "{query}"
+        - text: token described above. A supplied old
+        - code [ref=f6e1004]: noResults
+        - text: override covers both new variants unless individually overridden; all strings are captured. Active choices/chips stay removable. Empty browse exposes the existing Refresh results button to explicitly check for updates; it does not poll or refresh automatically. Empty results hide the unused heading/list and blank pager. An unavailable Refresh results or pager remains visible while focused through pending work or refusal, then retires when focus leaves; a usable pager or refresh stays available. View mount still starts no query; Clear all retains its explicit browse behavior.
+      - paragraph [ref=f6e1005]:
+        - text: Native labeled checkboxes remain in place while counts/results update. Counts cover
+        - strong [ref=f6e1006]: all current results
+        - text: ", not just the visible page, and include the search and every selected filter. Within one group a result can match any selected choice; it must also match each other selected group. These counts describe the current results, rather than predicting what another choice will do. An absent bucket is zero only with a complete projection; otherwise its count is unavailable. Zero choices remain enabled, and selected zero/omitted values stay removable. Missing/null buckets are not selectable strings."
+      - paragraph [ref=f6e1007]:
+        - text: For example, a collection has three Guides and two Manuals, with exactly one type per resource. Selecting Guide gives three results, Guide (3) and Manual (0). Selecting Manual alongside Guide gives five results because either type now qualifies. Selecting a topic in another group then keeps only resources of either type that also match that topic. A zero is a current count, not a reason to disable a choice. The same explanation and native checkbox behavior apply to directory list, cards and grid. Override the visible explanation with captured plain-text
+        - code [ref=f6e1008]: messages.countHint
+        - text: (at most 512 UTF-16 units); it does not change filtering or counting.
+      - paragraph [ref=f6e1009]: "Selected filters form a list of named removal buttons. Removing a focused or activated chip focuses the next surviving chip, previous chip or search input. Stable checkbox/page/Clear controls preserve existing focus. If a removed result held focus, focus recovers to the search input, with reentry checked before presentation continues. Filter resources uses native details/summary: open it normally, then Close filters or Escape inside it closes and restores summary focus. There is no focus trap or automatic resize dismissal. Waiting/composition/loading, exact current totals, no results, invalid selections, native failures and stale revisions have deliberate status outside the busy result section. An older asynchronous recovery cannot discard newer provisional text; external controller/URL replay wins over a pending draft."
+      - paragraph [ref=f6e1010]: "Import CSS explicitly, then override the component’s public properties in your own stylesheet:"
+      - code [ref=f6e1012]: ".raveldex-directory { --raveldex-directory-accent: #145b45; --raveldex-directory-button-color: #fff; --raveldex-directory-radius: .75rem; --raveldex-directory-gap: 1.25rem; }"
+      - table [ref=f6e1013]:
+        - rowgroup [ref=f6e1014]:
+          - row [ref=f6e1015]:
+            - columnheader "Public property" [ref=f6e1016]
+            - columnheader "Light default" [ref=f6e1017]
+            - columnheader "Purpose" [ref=f6e1018]
+        - rowgroup [ref=f6e1019]:
+          - row [ref=f6e1020]:
+            - cell [ref=f6e1021]:
+              - code [ref=f6e1022]: "--raveldex-directory-accent"
+            - cell [ref=f6e1023]:
+              - code [ref=f6e1024]: "#174ea6"
+            - cell "Links, submit background and checkbox accent" [ref=f6e1025]
+          - row [ref=f6e1026]:
+            - cell [ref=f6e1027]:
+              - code [ref=f6e1028]: "--raveldex-directory-background"
+            - cell [ref=f6e1029]:
+              - code [ref=f6e1030]: "#fff"
+            - cell "Surface/control background" [ref=f6e1031]
+          - row [ref=f6e1032]:
+            - cell [ref=f6e1033]:
+              - code [ref=f6e1034]: "--raveldex-directory-color"
+            - cell [ref=f6e1035]:
+              - code [ref=f6e1036]: "#17212b"
+            - cell "Main text" [ref=f6e1037]
+          - row [ref=f6e1038]:
+            - cell [ref=f6e1039]:
+              - code [ref=f6e1040]: "--raveldex-directory-muted"
+            - cell [ref=f6e1041]:
+              - code [ref=f6e1042]: "#465563"
+            - cell "Counts and explanations" [ref=f6e1043]
+          - row [ref=f6e1044]:
+            - cell [ref=f6e1045]:
+              - code [ref=f6e1046]: "--raveldex-directory-border"
+            - cell [ref=f6e1047]:
+              - code [ref=f6e1048]: "#637383"
+            - cell "Borders and separators" [ref=f6e1049]
+          - row [ref=f6e1050]:
+            - cell [ref=f6e1051]:
+              - code [ref=f6e1052]: "--raveldex-directory-focus"
+            - cell [ref=f6e1053]:
+              - code [ref=f6e1054]: "#7a2600"
+            - cell "Visible focus outline" [ref=f6e1055]
+          - row [ref=f6e1056]:
+            - cell [ref=f6e1057]:
+              - code [ref=f6e1058]: "--raveldex-directory-button-color"
+            - cell [ref=f6e1059]:
+              - code [ref=f6e1060]: "#fff"
+            - cell "Text on the accent submit button" [ref=f6e1061]
+          - row [ref=f6e1062]:
+            - cell [ref=f6e1063]:
+              - code [ref=f6e1064]: "--raveldex-directory-error"
+            - cell [ref=f6e1065]:
+              - code [ref=f6e1066]: "#9b1c1c"
+            - cell "Failure, stale and invalid status text" [ref=f6e1067]
+          - row [ref=f6e1068]:
+            - cell [ref=f6e1069]:
+              - code [ref=f6e1070]: "--raveldex-directory-radius"
+            - cell [ref=f6e1071]:
+              - code [ref=f6e1072]: .5rem
+            - cell "Control/surface corners" [ref=f6e1073]
+          - row [ref=f6e1074]:
+            - cell [ref=f6e1075]:
+              - code [ref=f6e1076]: "--raveldex-directory-gap"
+            - cell [ref=f6e1077]:
+              - code [ref=f6e1078]: 1rem
+            - cell "Group/chip/result spacing" [ref=f6e1079]
+          - row [ref=f6e1080]:
+            - cell [ref=f6e1081]:
+              - code [ref=f6e1082]: "--raveldex-directory-padding"
+            - cell [ref=f6e1083]:
+              - code [ref=f6e1084]: 1rem
+            - cell "Surface padding" [ref=f6e1085]
+      - paragraph [ref=f6e1086]:
+        - text: Dark media uses a dark surface, light text and a light accent with dark submit text; focus defaults to warm
+        - code [ref=f6e1087]: "#ffd479"
+        - text: and error text to
+        - code [ref=f6e1088]: "#ffb4ab"
+        - text: . Explicit public overrides win in either media mode. Forced colors retains the native system palette. There is no animated transition; reduced-motion styling remains static. Set related colors together when changing the palette. Public classes use
+        - code [ref=f6e1089]: .raveldex-directory__*
+        - text: ; private
+        - code [ref=f6e1090]: "--_"
+        - text: variables and data hooks are implementation details. The
+        - link "concrete view contract (repository access)" [ref=f6e1091] [cursor=pointer]:
+          - /url: https://github.com/vmitsaras/raveldex/blob/main/docs/specs/DIRECTORY_VIEW.md
+        - text: owns precise lifecycle, focus and finite bounds.
+      - paragraph [ref=f6e1092]:
+        - text: The complete starters explicitly select URL synchronization and push for committed edits/pages. Choose replace for live edits in one entry, or turn
+        - code [ref=f6e1093]: urlState
+        - text: off for an in-memory directory. They keep unrelated parameters/hash/history state, show a notice for corrected links, and expose
+        - strong [ref=f6e1094]: Update search link
+        - text: when writing the URL fails; this retries current state without querying again. Native Back/Forward is separate from the scripted pagehide/persisted-pageshow cleanup probes. No storage, telemetry, search-history feature, rich cards/images or new sorting is selected. Human AT speech, physical input/mobile keyboards, actual browser zoom and Safari/device support need separate application checks.
+      - heading "Rich directory results" [level=2] [ref=f6e1095]
+      - paragraph [ref=f6e1096]:
+        - text: Copy the
+        - link "complete rich-results browser project" [ref=f6e1097] [cursor=pointer]:
+          - /url: /raveldex/examples/cards/
+        - text: to start with real resource pages, metadata mapping, local image assets and CSS you can edit. Its layout, density and image controls keep the same directory page and filter selection. Images start off. The basic browser/Astro directories remain available when you need linked titles and controls alone.
+      - paragraph [ref=f6e1098]:
+        - text: For an existing browser controller, use this fragment after creating your own connected HTML
+        - code [ref=f6e1099]: root
+        - text: ", live"
+        - code [ref=f6e1100]: directory
+        - text: ", matching display records and group labels. The complete project above includes indexing, loading/Retry, optional URL replay and ownership-safe cleanup; this fragment supplies just the rich view."
+      - code [ref=f6e1102]: "import { mountRaveldexDirectoryCards } from '@vmitsaras/raveldex/addons/ui/directory/cards'; import '@vmitsaras/raveldex/addons/ui/directory.css'; import '@vmitsaras/raveldex/addons/ui/directory-cards.css'; const view = mountRaveldexDirectoryCards({ root, controller: directory, documents: [{ id: 'route:river', title: 'Riverside walking guide', url: '/resources/river/', excerpt: 'Plan a route with level paths and rest stops.', category: 'Route guide', breadcrumb: ['Resources', 'Walking'], date: 'Updated November 2026', fields: [{ name: 'Distance', value: '5 km' }], image: { src: '/images/river.jpg', alt: 'Level path beside the river', width: 640, height: 400 }, }], groups, presentation: { layout: 'cards', density: 'comfortable', images: false }, imageUnavailable: 'Image unavailable', }); await directory.refresh(); view.setPresentation({ layout: 'grid', density: 'compact' }); // Only this explicit change permits image requests for the current result page: view.setPresentation({ images: true }); console.log(view.getPresentation()); // When removing the view, before separately destroying its controller: // view.destroy();"
+      - paragraph [ref=f6e1103]:
+        - text: Map your public content to
+        - code [ref=f6e1104]: DirectoryCardDocument
+        - text: "records: required"
+        - code [ref=f6e1105]: "{id,title,url}"
+        - text: ", optional"
+        - code [ref=f6e1106]: excerpt
+        - text: ","
+        - code [ref=f6e1107]: category
+        - text: ", ordered plain-text"
+        - code [ref=f6e1108]: breadcrumb
+        - text: ", already localized"
+        - code [ref=f6e1109]: date
+        - text: ", at most four"
+        - code [ref=f6e1110]: "{name,value}"
+        - text: fields, and an optional
+        - code [ref=f6e1111]: "{src,alt,width,height}"
+        - text: image. Optional empty excerpt/category/date strings produce no output. Omit unavailable breadcrumb/field entries. Dates are shown as supplied text; the view does not parse dates or invent ancestor links. It accepts no HTML templates or renderer callbacks. Keep a matching display record for every possible native match.
+      - paragraph [ref=f6e1112]:
+        - text: "Admission happens before replacing authored content. Titles and metadata are inserted as text. Result and image URLs resolve to HTTP(S) without credentials, including image data captured while images are disabled. Every image needs a deliberate alternative:"
+        - code [ref=f6e1113]: "alt: ''"
+        - text: is decorative, otherwise use readable descriptive text. Width/height are required integers 1..4096 and reserve aspect ratio. There are at most 10,000 records and 4,000,000 captured string units, with finite admission work. ID/title/URL limits remain 256/1024/2048 UTF-16 units; excerpts allow 4096, category/date 256, up to eight breadcrumb parts of 256, field names 128 and values 1024, image source 2048 and alt 1024. Unknown keys, getters, duplicate IDs/field names, unreadable nonempty text and invalid image data refuse.
+        - code [ref=f6e1114]: imageUnavailable
+        - text: is readable localized text of at most 512 units. The
+        - link "display contract (repository access)" [ref=f6e1115] [cursor=pointer]:
+          - /url: https://github.com/vmitsaras/raveldex/blob/main/docs/specs/DIRECTORY_CARDS.md
+        - text: records exact bounds and lifecycle behavior.
+      - paragraph [ref=f6e1116]:
+        - code [ref=f6e1117]: presentation
+        - text: is a partial
+        - code [ref=f6e1118]: "{layout,density,images}"
+        - text: . Defaults are
+        - code [ref=f6e1119]: list
+        - text: ","
+        - code [ref=f6e1120]: comfortable
+        - text: ", false. Layout choices are"
+        - code [ref=f6e1121]: list
+        - text: ","
+        - code [ref=f6e1122]: cards
+        - text: ","
+        - code [ref=f6e1123]: grid
+        - text: ; density choices are
+        - code [ref=f6e1124]: compact
+        - text: ","
+        - code [ref=f6e1125]: comfortable
+        - text: .
+        - code [ref=f6e1126]: getPresentation()
+        - text: returns a frozen complete snapshot.
+        - code [ref=f6e1127]: setPresentation(partial)
+        - text: validates first, then changes presentation synchronously without another search/history entry, without reordering results and without losing the existing title-link Nodes/focus. Query, filters, selected chips, page and exact totals remain native. CSS grid uses the same ordered list and ordinary links, with no interactive ARIA grid or extra keyboard model.
+      - paragraph [ref=f6e1128]: Images use native lazy loading, asynchronous decoding and no-referrer policy. Only the current displayed page can create image elements after explicit opt-in. Disabling removes them and their callbacks; it cannot undo a request already sent. Enabling again may create a new request. The browser controls lazy-load timing and caching. A failed informative image shows localized failure text with its authored alternative; a failed decorative image disappears silently. Titles, metadata and links remain usable. There is no automatic alternate source or retry. Teardown clears image listeners as well as the base controls; late detached image events cannot update a newer page or restored/foreign markup. Controller and engine ownership stay with the application.
+      - paragraph [ref=f6e1129]: "Import both stylesheets, then edit your own CSS. These properties control the rich layer; the existing directory palette, font, focus and control properties still apply:"
+      - code [ref=f6e1131]: ".raveldex-directory-cards { --raveldex-directory-card-min-width: 18rem; --raveldex-directory-card-radius: .85rem; --raveldex-directory-card-gap: 1.25rem; --raveldex-directory-card-padding: 1.25rem; --raveldex-directory-card-compact-padding: .75rem; --raveldex-directory-card-image-fit: contain; }"
+      - table [ref=f6e1132]:
+        - rowgroup [ref=f6e1133]:
+          - row [ref=f6e1134]:
+            - columnheader "Public property" [ref=f6e1135]
+            - columnheader "Default" [ref=f6e1136]
+            - columnheader "Purpose" [ref=f6e1137]
+        - rowgroup [ref=f6e1138]:
+          - row [ref=f6e1139]:
+            - cell [ref=f6e1140]:
+              - code [ref=f6e1141]: "--raveldex-directory-card-min-width"
+            - cell [ref=f6e1142]:
+              - code [ref=f6e1143]: 16rem
+            - cell "Preferred grid column minimum, bounded by available width" [ref=f6e1144]
+          - row [ref=f6e1145]:
+            - cell [ref=f6e1146]:
+              - code [ref=f6e1147]: "--raveldex-directory-card-gap"
+            - cell [ref=f6e1148]:
+              - code [ref=f6e1149]: 1rem
+              - text: ;
+              - code [ref=f6e1150]: .65rem
+              - text: compact
+            - cell "Card/grid spacing" [ref=f6e1151]
+          - row [ref=f6e1152]:
+            - cell [ref=f6e1153]:
+              - code [ref=f6e1154]: "--raveldex-directory-card-radius"
+            - cell [ref=f6e1155]:
+              - code [ref=f6e1156]: .5rem
+            - cell "Card/image corners" [ref=f6e1157]
+          - row [ref=f6e1158]:
+            - cell [ref=f6e1159]:
+              - code [ref=f6e1160]: "--raveldex-directory-card-padding"
+            - cell [ref=f6e1161]:
+              - code [ref=f6e1162]: 1rem
+            - cell "Comfortable card padding" [ref=f6e1163]
+          - row [ref=f6e1164]:
+            - cell [ref=f6e1165]:
+              - code [ref=f6e1166]: "--raveldex-directory-card-compact-padding"
+            - cell [ref=f6e1167]:
+              - code [ref=f6e1168]: .6rem
+            - cell "Compact card padding" [ref=f6e1169]
+          - row [ref=f6e1170]:
+            - cell [ref=f6e1171]:
+              - code [ref=f6e1172]: "--raveldex-directory-card-background"
+            - cell "Directory surface" [ref=f6e1173]
+            - cell "Card surface" [ref=f6e1174]
+          - row [ref=f6e1175]:
+            - cell [ref=f6e1176]:
+              - code [ref=f6e1177]: "--raveldex-directory-card-border"
+            - cell "Directory border" [ref=f6e1178]
+            - cell "Card/image borders" [ref=f6e1179]
+          - row [ref=f6e1180]:
+            - cell [ref=f6e1181]:
+              - code [ref=f6e1182]: "--raveldex-directory-card-image-height"
+            - cell [ref=f6e1183]:
+              - code [ref=f6e1184]: auto
+            - cell "Optional image-frame height; auto uses authored aspect ratio" [ref=f6e1185]
+          - row [ref=f6e1186]:
+            - cell [ref=f6e1187]:
+              - code [ref=f6e1188]: "--raveldex-directory-card-image-fit"
+            - cell [ref=f6e1189]:
+              - code [ref=f6e1190]: cover
+            - cell "Image fitting within reserved space" [ref=f6e1191]
+      - paragraph [ref=f6e1192]:
+        - text: The public rich classes use
+        - code [ref=f6e1193]: .raveldex-directory-cards__*
+        - text: alongside the base
+        - code [ref=f6e1194]: .raveldex-directory__*
+        - text: . Keep internal
+        - code [ref=f6e1195]: "--_"
+        - text: variables and data hooks private. Long text/RTL, narrow layout, dark/forced colors and reduced motion retain semantic source order and visible focus. Check your actual colors, image crops/alternatives, browser zoom, devices and assistive technology after changing content or CSS. Graph/CSS bytes, DOM counts and observed requests are separate measurements from memory, latency or paint.
+      - heading "Starter adoption and local checks" [level=2] [ref=f6e1196]
+      - paragraph [ref=f6e1197]:
+        - text: Choose the
+        - link "inline gallery" [ref=f6e1198] [cursor=pointer]:
+          - /url: /raveldex/examples/inline/
+        - text: for simple results in a page, the
+        - link "modal gallery" [ref=f6e1199] [cursor=pointer]:
+          - /url: /raveldex/examples/modal/
+        - text: for documentation search behind a button, the
+        - link "header gallery" [ref=f6e1200] [cursor=pointer]:
+          - /url: /raveldex/examples/dropdown/
+        - text: for a compact field and full-results route, the
+        - link "directory gallery" [ref=f6e1201] [cursor=pointer]:
+          - /url: /raveldex/examples/directory/
+        - text: for checkbox groups/chips/pages and optional URL replay, or
+        - link "rich directory results" [ref=f6e1202] [cursor=pointer]:
+          - /url: /raveldex/reference/hosts/#rich-directory-results
+        - text: "for metadata and explicit images in list/card/grid layouts. Inline, modal and directory offer complete browser/Astro projects; the header and rich-results galleries offer browser projects. Each has complete source downloads, a live installed preview and a CSS walkthrough. Packages remain available separately: install the matching package versions in the setup guide, with its pinned build tooling, before building the copied project."
+      - table [ref=f6e1203]:
+        - rowgroup [ref=f6e1204]:
+          - row [ref=f6e1205]:
+            - columnheader "Starter" [ref=f6e1206]
+            - columnheader "Selected capabilities and application requirements" [ref=f6e1207]
+        - rowgroup [ref=f6e1208]:
+          - row [ref=f6e1209]:
+            - cell "Browser inline" [ref=f6e1210]
+            - cell [ref=f6e1211]:
+              - text: Browser ESM/fetch, original body source, snippet evidence, string category facets and
+              - code [ref=f6e1212]: Intl.Segmenter
+              - text: . Explicit records build actual guide pages.
+          - row [ref=f6e1213]:
+            - cell "Astro inline" [ref=f6e1214]
+            - cell "The same snippets/facets plus the static source loader, matching core/Astro packages and Web Crypto over HTTPS or localhost. Retain original values for every declared text field when reconstructing source snapshots." [ref=f6e1215]
+          - row [ref=f6e1216]:
+            - cell "Browser modal" [ref=f6e1217]
+            - cell [ref=f6e1218]:
+              - text: Native
+              - code [ref=f6e1219]: dialog
+              - text: ","
+              - code [ref=f6e1220]: Intl.Segmenter
+              - text: and Web Crypto over HTTPS or localhost. Explicit original body/section evidence, page maps, string category facets and real authored heading IDs.
+          - row [ref=f6e1221]:
+            - cell "Astro modal" [ref=f6e1222]
+            - cell "The same modal requirements plus the static source loader and matching core/Astro packages. Source, display and the source-only section companion must belong to the same build/base; maps bind to the receiving owner revision." [ref=f6e1223]
+          - row [ref=f6e1224]:
+            - cell "Browser dropdown header" [ref=f6e1225]
+            - cell [ref=f6e1226]:
+              - text: Browser ESM/fetch; native Popover for the quick popup (ordinary GET form and working inline full page otherwise); core-only linked titles, one owner per page and the same prefix mode on its real inline full-results route. Optional explicit modal handoff additionally requires native
+              - code [ref=f6e1227]: dialog
+              - text: . No source/snippet/facet/section provider or Web Crypto requirement.
+          - row [ref=f6e1228]:
+            - cell "Browser directory" [ref=f6e1229]
+            - cell "Browser ESM/fetch, native details/form controls, explicitly installed set filters/facets, one controller and optional named URL binding. No snippet/source provider, worker, storage or Web Crypto requirement." [ref=f6e1230]
+          - row [ref=f6e1231]:
+            - cell "Astro directory" [ref=f6e1232]
+            - cell "The same directory controls plus the source-format static loader and paired core/Astro packages. Original title/body source is retained for reconstruction; Web Crypto over HTTPS/localhost validates matching artifacts." [ref=f6e1233]
+          - row [ref=f6e1234]:
+            - cell "Browser rich directory" [ref=f6e1235]
+            - cell "The browser directory controller plus explicitly mapped metadata and the optional cards renderer/CSS. Native image loading requires an explicit image-view choice; local authored assets and complete resource routes are included." [ref=f6e1236]
+      - paragraph [ref=f6e1237]:
+        - text: The
+        - link "solution chooser" [ref=f6e1238] [cursor=pointer]:
+          - /url: /raveldex/examples/
+        - text: compares all five presentations and all eight complete projects, with their exact data, loading, CSS and keyboard requirements. Every supplied project uses direct main-thread execution. Browser inline/header/directory/rich projects start loading on page initialization; Astro inline/directory wait for their Enable button; documentation modals load on first open. These are complete local indexes, with no route crawling, index shards or automatic worker fallback.
+      - paragraph [ref=f6e1239]: All starters select final-word prefix matching. Complete earlier terms remain exact; a final term with fewer than two normalized code points also stays exact. Empty inline/modal/header search is idle; directory/rich search deliberately browses all records. Selecting a filter may browse without text. Inline/modal results append through Load more until all matches are displayed; header dropdown results are a bounded projection with a real full-results route, while directory/rich controls use complete native pages. Result totals always count matching native records/pages; section previews do not add matches. Layout, density and image choices preserve directory state.
+      - table [ref=f6e1240]:
+        - rowgroup [ref=f6e1241]:
+          - row [ref=f6e1242]:
+            - columnheader "Presentation" [ref=f6e1243]
+            - columnheader "Ordinary keyboard/focus behavior" [ref=f6e1244]
+            - columnheader "Recovery and ownership" [ref=f6e1245]
+        - rowgroup [ref=f6e1246]:
+          - row [ref=f6e1247]:
+            - cell "Inline" [ref=f6e1248]
+            - cell "Native input editing, composition, Tab, form submission and ordinary result links" [ref=f6e1249]
+            - cell "Clear returns to idle; Retry search restarts against the current collection. Destroy restores authored content and leaves a borrowed engine usable." [ref=f6e1250]
+          - row [ref=f6e1251]:
+            - cell "Documentation modal" [ref=f6e1252]
+            - cell "Trigger opens native dialog; closing restores its logical opener. Escape follows native search/dialog behavior and may clear a focused search field first; Close search remains available. Optional shortcut bindings are explicit." [ref=f6e1253]
+            - cell "First-open loading can cancel/retry; closing retains or resets query as configured. Destroy the dialog before disposing its owner." [ref=f6e1254]
+          - row [ref=f6e1255]:
+            - cell "Compact header" [ref=f6e1256]
+            - cell "Native editing/composition, virtual arrow selection, Enter on the current link, Escape dismissal and ordinary Tab exit" [ref=f6e1257]
+            - cell "See all results preserves the raw query in the full-results route. Loading/Retry and optional modal handoff share the page owner." [ref=f6e1258]
+          - row [ref=f6e1259]:
+            - cell "Directory" [ref=f6e1260]
+            - cell "Native grouped checkboxes, named chip removal, complete-page buttons; Close/Escape restores the filter disclosure summary" [ref=f6e1261]
+            - cell "Unknown counts stay unknown; selected zero/omitted values stay removable. Explicit URL replay wins over drafts, with visible address-write recovery." [ref=f6e1262]
+          - row [ref=f6e1263]:
+            - cell "Rich directory" [ref=f6e1264]
+            - cell "The same directory behavior with ordinary list links and native presentation controls; CSS grid adds no ARIA grid keyboard model" [ref=f6e1265]
+            - cell "Presentation changes retain anchor focus and native state. Images require explicit opt-in; failure keeps text/links usable." [ref=f6e1266]
+      - paragraph [ref=f6e1267]: Native link traversal follows the browser/OS keyboard preference. In the automated macOS WebKit environment, Option+Tab traverses ordinary links; this is measured in an unstyled baseline without changing preferences. Check the behavior and speech in your actual browser/assistive-technology combination.
+      - paragraph [ref=f6e1268]: Replace public sample records with your own IDs, original text and real destinations. Keep maps, ranges and heading IDs aligned; native totals, scores and paging still count pages. Do not add private content to generated assets. Title/link-only search can omit snippet/section/facet UI options and their matching optional registrations together. Astro source reconstruction still needs original values for all declared text fields. Deploy the complete rebuilt output with one consistent base and build identity.
+      - paragraph [ref=f6e1269]: The starter wrappers own newly created engines or static handles. Destroy their borrowed UI before releasing those owners, and await wrapper destruction before replacing a view. For an engine owned elsewhere, mount the public UI directly and keep engine disposal with its existing owner. The complete projects show retry and late-owner cleanup; importing a UI entry alone does not create or load an engine. The header starter shares one newly loaded owner across its dropdown, full-page inline surface and explicitly enabled modal; it never creates a second owner merely to change presentation.
+      - paragraph [ref=f6e1270]: Local automated Chrome checks exercise installed bytes, actual native results/counts/pages, snippets/sections, scripted keyboard/composition, cancellation/retry and lifecycle races. Theme/reflow checks use emulated viewports, forced colors and reduced motion. These results do not establish human screen-reader speech, physical IME/touch/on-screen-keyboard behavior, actual 200%/400% browser zoom, other browser/device combinations or universal performance. Check those combinations in your application after replacing data, labels, layout or colors. Keep visible focus, contrast, native links and browse navigation usable in success, no-results, loading and failure states.
+      - heading "One-owner module worker" [level=2] [ref=f6e1271]
+      - paragraph [ref=f6e1272]:
+        - text: Use a module worker to run a complete engine off the main thread. Create the
+        - code [ref=f6e1273]: Worker
+        - text: yourself, then pass it to
+        - code [ref=f6e1274]: createWorkerRaveldex
+        - text: from
+        - code [ref=f6e1275]: /adapters/worker
+        - text: . The
+        - link "worker example" [ref=f6e1276] [cursor=pointer]:
+          - /url: /raveldex/example-files/worker.mjs
+        - text: and
+        - link "host module" [ref=f6e1277] [cursor=pointer]:
+          - /url: /raveldex/example-files/worker-host.mjs
+        - text: show both sides.
+      - paragraph [ref=f6e1278]:
+        - code [ref=f6e1279]: "createWorkerRaveldex(options: WorkerOptions): Promise<WorkerRaveldex>"
+        - text: takes
+        - code [ref=f6e1280]: "{ worker, configuration, ownership: 'owned' | 'external', sameHost: true, maxMessageBytes?, responseTimeoutMs? }"
+        - text: . The initial handshake checks the implementation, analyzer, ranking model and selected registrations.
+        - code [ref=f6e1281]: "sameHost: true"
+        - text: describes your browser and its own worker; it does not qualify other environments, and the default analyzer profile stays unqualified.
+      - paragraph [ref=f6e1282]:
+        - text: In the worker module, call
+        - code [ref=f6e1283]: serveRaveldexWorker(scope, options?)
+        - text: from
+        - code [ref=f6e1284]: /adapters/worker/host
+        - text: . Its options are
+        - code [ref=f6e1285]: "{ addons?, maxMessageBytes? }"
+        - text: ". Install matching add-ons in the client configuration and worker host: functions and live registration handles cannot be sent as cloneable data."
+      - paragraph [ref=f6e1286]:
+        - code [ref=f6e1287]: WorkerScope
+        - text: needs
+        - code [ref=f6e1288]: postMessage
+        - text: ","
+        - code [ref=f6e1289]: addEventListener
+        - text: and
+        - code [ref=f6e1290]: removeEventListener
+        - text: ;
+        - code [ref=f6e1291]: WorkerEndpoint
+        - text: also needs
+        - code [ref=f6e1292]: terminate
+        - text: . The host returns a
+        - code [ref=f6e1293]: WorkerHostHandle
+        - text: with an asynchronous
+        - code [ref=f6e1294]: dispose()
+        - text: method.
+      - paragraph [ref=f6e1295]:
+        - code [ref=f6e1296]: WorkerRaveldex
+        - text: has ordinary methods plus
+        - code [ref=f6e1297]: reconcile(operationId)
+        - text: and
+        - code [ref=f6e1298]: destroy()
+        - text: (the disposal alias). Mutation methods return
+        - code [ref=f6e1299]: MutationPromise
+        - text: ", a Promise with a captured"
+        - code [ref=f6e1300]: operationId
+        - text: .
+        - code [ref=f6e1301]: MutationReceipt
+        - text: is
+        - code [ref=f6e1302]: "{ operationId, status: 'pending' | 'expired' }"
+        - text: ","
+        - code [ref=f6e1303]: "{ operationId, status: 'committed', result }"
+        - text: or
+        - code [ref=f6e1304]: "{ operationId, status: 'rejected', error: WireError }"
+        - text: . Reconciliation uses the same owner/session and a bounded 256-receipt window. It is not durable deduplication across worker loss.
+      - paragraph [ref=f6e1305]: Messages default to a maximum of 8 MiB, which you can lower to 1 KiB. Message structure is bounded too, and at most 64 requests can be pending. The default response timeout is 65,000 ms, configurable from 1 to 120,000 ms. Engine deadlines and work limits apply separately.
+      - paragraph [ref=f6e1306]: If a reply is lost or late, an update may already have committed. Check its receipt while the worker survives. If the owner is gone or the receipt has expired, rebuild a new engine from your authoritative source instead of blindly repeating an add, replace or remove. An expired receipt proves neither success nor failure.
+      - paragraph [ref=f6e1307]:
+        - code [ref=f6e1308]: WorkerAdapterError
+        - text: has
+        - code [ref=f6e1309]: code
+        - text: ", sanitized"
+        - code [ref=f6e1310]: details
+        - text: and optional
+        - code [ref=f6e1311]: operationId
+        - text: ;
+        - code [ref=f6e1312]: WORKER_ERROR_CODES
+        - text: includes
+        - code [ref=f6e1313]: INVALID_TRANSPORT
+        - text: ","
+        - code [ref=f6e1314]: TRANSPORT_LIMIT
+        - text: ","
+        - code [ref=f6e1315]: INCOMPATIBLE_WORKER
+        - text: ","
+        - code [ref=f6e1316]: TIMEOUT
+        - text: ","
+        - code [ref=f6e1317]: TERMINATED
+        - text: ","
+        - code [ref=f6e1318]: STARTUP_FAILED
+        - text: ","
+        - code [ref=f6e1319]: OUTCOME_UNKNOWN
+        - text: and
+        - code [ref=f6e1320]: DISPOSED
+        - text: . Authoritative native errors remain
+        - code [ref=f6e1321]: RaveldexError
+        - text: ; snapshot errors carry their reason.
+        - code [ref=f6e1322]: WireError
+        - text: preserves the declared category/code rather than serializing an arbitrary Error/cause.
+        - code [ref=f6e1323]: WorkerErrorCode
+        - text: and
+        - code [ref=f6e1324]: WorkerErrorDetails
+        - text: are exported types.
+      - paragraph [ref=f6e1325]:
+        - text: Call
+        - code [ref=f6e1326]: destroy()
+        - text: or
+        - code [ref=f6e1327]: dispose()
+        - text: when you are done. The adapter asks the owner to acknowledge cleanup, releases client listeners and settles pending work. It terminates an
+        - code [ref=f6e1328]: owned
+        - text: endpoint; you remain responsible for an
+        - code [ref=f6e1329]: external
+        - text: one. An acknowledgement timeout still reports an error after local cleanup. Searches never silently fall back to the main thread.
+      - heading "Source and native snapshots" [level=2] [ref=f6e1330]
+      - paragraph [ref=f6e1331]:
+        - text: Use snapshots to export an engine’s state and restore it later. Call
+        - code [ref=f6e1332]: createSnapshots(engine, options?)
+        - text: from
+        - code [ref=f6e1333]: /adapters/snapshots
+        - text: with a supported direct engine. The helper uses your engine without owning it or adding methods to it.
+      - paragraph [ref=f6e1334]:
+        - text: Its methods are
+        - code [ref=f6e1335]: exportSource(options?)
+        - text: ","
+        - code [ref=f6e1336]: exportNative(options?)
+        - text: and
+        - code [ref=f6e1337]: "restore(encoded: string, options?)"
+        - text: . Each returns a promise and accepts core mutation signal/deadline options.
+        - code [ref=f6e1338]: SnapshotOptions
+        - text: lets you set
+        - code [ref=f6e1339]: maxEncodedBytes
+        - text: ", from 1 KiB to the default and maximum 64 MiB."
+      - table [ref=f6e1340]:
+        - rowgroup [ref=f6e1341]:
+          - row [ref=f6e1342]:
+            - columnheader "Format" [ref=f6e1343]
+            - columnheader "Requirements / meaning" [ref=f6e1344]
+        - rowgroup [ref=f6e1345]:
+          - row [ref=f6e1346]:
+            - cell [ref=f6e1347]:
+              - code [ref=f6e1348]: raveldex-source
+            - cell "Selected originals for every schema text field; exports owned source/configuration and rebuilds under the receiving analyzer. Does not promise prior membership, rank or score equivalence across environments." [ref=f6e1349]
+          - row [ref=f6e1350]:
+            - cell [ref=f6e1351]:
+              - code [ref=f6e1352]: raveldex-native
+            - cell "Explicit exact-Node-runtime qualification from owner creation; validates compatible native index/statistics/provider structures, configuration, analyzer/model, codecs and limits. It is not an arbitrary engine dump or a browser portability promise." [ref=f6e1353]
+      - paragraph [ref=f6e1354]: Both formats export versioned JSON strings with size, structure and corruption checks. Checksums detect changed bytes; they do not authenticate who sent them.
+      - paragraph [ref=f6e1355]:
+        - text: A successful restore replaces the receiving engine’s state in one atomic update at its next local revision. It returns
+        - code [ref=f6e1356]: "{ format, originRevision, revision, reindexed, receivingAnalyzer }"
+        - text: .
+        - code [ref=f6e1357]: originRevision
+        - text: records where the snapshot came from; it does not become the local revision.
+        - code [ref=f6e1358]: reindexed
+        - text: is
+        - code [ref=f6e1359]: "true"
+        - text: for a source rebuild and
+        - code [ref=f6e1360]: "false"
+        - text: for native state.
+      - paragraph [ref=f6e1361]: Cancellation or a validation, compatibility, work or deadline failure before commit leaves the previous state intact. A complete source rebuild can exceed a single operation’s budget even if the original data was added successfully in smaller batches.
+      - paragraph [ref=f6e1362]:
+        - text: For source snapshots, use ordinary
+        - code [ref=f6e1363]: createRaveldex
+        - text: ", source providers for every text field and"
+        - code [ref=f6e1364]: createSnapshots
+        - text: . Choose this path unless you have an exact-runtime native qualification for your application.
+      - paragraph [ref=f6e1365]:
+        - text: For native snapshots, create the engine with
+        - code [ref=f6e1366]: "createSnapshotRaveldex(configuration, { nativeQualification })"
+        - text: . You cannot add native qualification to an ordinary engine afterward. The declaration is
+        - code [ref=f6e1367]: NativeSnapshotQualification
+        - text: ":"
+        - code [ref=f6e1368]: "{ profileId, scope: 'exact-node-runtime', environment, evidence: string[] }"
+        - text: . Its environment includes
+        - code [ref=f6e1369]: "{ runtime: 'node', version, v8, icu, unicode, platform, arch }"
+        - text: .
+      - paragraph [ref=f6e1370]:
+        - code [ref=f6e1371]: currentNodeSnapshotEnvironment()
+        - text: reads the current runtime identity, but detecting versions does not qualify it. The evidence references are declarations supplied and trusted by your application, not proofs executed by the library.
+      - paragraph [ref=f6e1372]:
+        - link "snapshots.mjs" [ref=f6e1373] [cursor=pointer]:
+          - /url: /raveldex/example-files/snapshots.mjs
+        - text: takes the application’s declaration as an argument and exercises source and native round trips. The receiving native owner must match the exact declared profile/environment/evidence and compatible configuration. Use source snapshots when your application does not supply an exact-runtime native declaration.
+      - paragraph [ref=f6e1374]:
+        - code [ref=f6e1375]: SnapshotAdapterError extends RaveldexError
+        - text: adds
+        - code [ref=f6e1376]: "reason: SnapshotReason"
+        - text: .
+        - code [ref=f6e1377]: SNAPSHOT_REASONS
+        - text: is
+        - code [ref=f6e1378]: MALFORMED_SNAPSHOT
+        - text: ","
+        - code [ref=f6e1379]: ENCODED_LIMIT_EXCEEDED
+        - text: ","
+        - code [ref=f6e1380]: INTEGRITY_MISMATCH
+        - text: ","
+        - code [ref=f6e1381]: UNSUPPORTED_FORMAT
+        - text: ","
+        - code [ref=f6e1382]: UNSUPPORTED_CODEC
+        - text: ","
+        - code [ref=f6e1383]: SCHEMA_MISMATCH
+        - text: ","
+        - code [ref=f6e1384]: ANALYZER_MISMATCH
+        - text: ","
+        - code [ref=f6e1385]: RANKING_MISMATCH
+        - text: ","
+        - code [ref=f6e1386]: CAPABILITY_MISMATCH
+        - text: ","
+        - code [ref=f6e1387]: INDEX_DETAIL_MISMATCH
+        - text: ","
+        - code [ref=f6e1388]: LIMITS_MISMATCH
+        - text: ","
+        - code [ref=f6e1389]: SOURCE_UNAVAILABLE
+        - text: ","
+        - code [ref=f6e1390]: UNQUALIFIED_PROFILE
+        - text: ","
+        - code [ref=f6e1391]: PROFILE_MISMATCH
+        - text: ","
+        - code [ref=f6e1392]: INVALID_NATIVE_STATE
+        - text: ","
+        - code [ref=f6e1393]: UNSUPPORTED_ENGINE
+        - text: . Reasons distinguish compatibility from the ordinary error code.
+      - paragraph [ref=f6e1394]:
+        - text: "Browser workers use the separate source-only bridge:"
+        - code [ref=f6e1395]: createWorkerSnapshots(engine)
+        - text: from
+        - code [ref=f6e1396]: /adapters/worker/snapshots
+        - text: and
+        - code [ref=f6e1397]: serveSnapshotRaveldexWorker(scope, options?)
+        - text: from
+        - code [ref=f6e1398]: /adapters/worker/snapshots/host
+        - text: .
+        - link "worker.mjs" [ref=f6e1399] [cursor=pointer]:
+          - /url: /raveldex/example-files/worker.mjs
+        - text: and
+        - link "worker-host.mjs" [ref=f6e1400] [cursor=pointer]:
+          - /url: /raveldex/example-files/worker-host.mjs
+        - text: show a matched pair.
+        - code [ref=f6e1401]: WorkerSnapshots
+        - text: exposes
+        - code [ref=f6e1402]: exportSource
+        - text: ","
+        - code [ref=f6e1403]: restore
+        - text: and its own
+        - code [ref=f6e1404]: reconcile
+        - text: . Restore returns
+        - code [ref=f6e1405]: SnapshotRestorePromise
+        - text: with
+        - code [ref=f6e1406]: operationId
+        - text: ; its
+        - code [ref=f6e1407]: SnapshotRestoreReceipt
+        - text: is
+        - code [ref=f6e1408]: pending
+        - text: ","
+        - code [ref=f6e1409]: expired
+        - text: ","
+        - code [ref=f6e1410]: committed
+        - text: with a restore result, or
+        - code [ref=f6e1411]: rejected
+        - text: with a wire error. Pending/expired cannot resolve an unknown outcome. Ordinary mutation reconciliation is separate. Browser/worker native export and restore remain unavailable.
+      - paragraph [ref=f6e1412]:
+        - text: The snapshot entry also exports
+        - code [ref=f6e1413]: SnapshotEngineOptions
+        - text: ","
+        - code [ref=f6e1414]: SnapshotOptions
+        - text: ","
+        - code [ref=f6e1415]: SnapshotFormat
+        - text: ","
+        - code [ref=f6e1416]: SnapshotRestoreResult
+        - text: and
+        - code [ref=f6e1417]: Snapshots
+        - text: types. Worker snapshot/client/host types are available from their corresponding subpaths; no private control-channel import is supported.
+      - heading "IndexedDB persistence and recovery" [level=2] [ref=f6e1418]
+      - paragraph [ref=f6e1419]:
+        - text: Use
+        - code [ref=f6e1420]: createIndexedDBPersistence(snapshots, options)
+        - text: from
+        - code [ref=f6e1421]: /adapters/indexeddb
+        - text: to save and load snapshots explicitly. It manages its own database connections while borrowing the snapshot export/restore handles. Disposing storage does not dispose your engine.
+      - paragraph [ref=f6e1422]:
+        - text: Supply
+        - code [ref=f6e1423]: "{ databaseName, namespace }"
+        - text: for a database owned by this adapter, not an unrelated application database. Optional settings are
+        - code [ref=f6e1424]: "{ indexedDB?, format?: 'source' | 'native', openTimeoutMs?, operationTimeoutMs? }"
+        - text: . The factory can be supplied directly or found when needed, and the default format is source. Native format requires the qualified direct-engine path; workers support source only.
+      - table [ref=f6e1425]:
+        - rowgroup [ref=f6e1426]:
+          - row [ref=f6e1427]:
+            - columnheader "Method" [ref=f6e1428]
+            - columnheader "Required options / result" [ref=f6e1429]
+        - rowgroup [ref=f6e1430]:
+          - row [ref=f6e1431]:
+            - cell [ref=f6e1432]:
+              - code [ref=f6e1433]: "save(options: PersistenceWriteOptions)"
+            - 'cell "`{ expectedGeneration: string" [ref=f6e1434]'
+          - row [ref=f6e1435]:
+            - cell [ref=f6e1436]:
+              - code [ref=f6e1437]: "load(options?: PersistenceOptions)"
+            - cell [ref=f6e1438]:
+              - code [ref=f6e1439]: "{ signal?, deadlineMs? }"
+              - text: ; returns
+              - code [ref=f6e1440]: PersistenceLoadResult
+              - code [ref=f6e1441]: "{ status: 'missing', generation: null }"
+              - text: or
+              - code [ref=f6e1442]: "{ status: 'restored', generation, restore }"
+              - text: .
+          - row [ref=f6e1443]:
+            - cell [ref=f6e1444]:
+              - code [ref=f6e1445]: "erase(options: PersistenceWriteOptions)"
+            - cell [ref=f6e1446]:
+              - text: Same expected-generation requirement; returns
+              - code [ref=f6e1447]: PersistenceEraseResult
+              - code [ref=f6e1448]: "{ erased, generation: null, durable: true }"
+              - text: after deleting the namespace’s snapshot and metadata rows.
+          - row [ref=f6e1449]:
+            - cell [ref=f6e1450]:
+              - code [ref=f6e1451]: dispose()
+            - cell "Releases connections/actions without erasing storage or disposing the borrowed engine." [ref=f6e1452]
+      - paragraph [ref=f6e1453]:
+        - text: Keep the generation returned by a save or load and supply it on your next save or erase. This prevents one writer from silently overwriting another.
+        - code [ref=f6e1454]: GENERATION_CONFLICT
+        - text: means you need to read the current generation and decide how to resolve the change. A loaded generation describes the snapshot you read, not a lock on later writes.
+      - paragraph [ref=f6e1455]:
+        - code [ref=f6e1456]: "durable: true"
+        - text: means the strict-hint IndexedDB transaction completed. It does not guarantee survival of power loss or browser eviction. Saving bytes and later restoring an engine are separate operations.
+      - paragraph [ref=f6e1457]:
+        - text: Open timeout defaults to 5,000 ms (maximum 30,000); action timeout defaults to 30,000 ms (maximum 60,000), with at most 64 pending actions and a 64 MiB encoded ceiling. Actions include queue time, encoding and restore. A timeout during an uncertain restore can return
+        - code [ref=f6e1458]: OUTCOME_UNKNOWN
+        - text: ", including selected generation and operation identity when available. Do not automatically repeat that restore or call it rolled back. Use worker snapshot receipts when available, inspect the surviving owner separately, or explicitly recover into a new owner from authoritative data."
+      - paragraph [ref=f6e1459]:
+        - code [ref=f6e1460]: IndexedDBAdapterError
+        - text: is separate from core/snapshot errors, with
+        - code [ref=f6e1461]: code
+        - text: and frozen
+        - code [ref=f6e1462]: "details: IndexedDBErrorDetails"
+        - text: (
+        - code [ref=f6e1463]: phase?
+        - text: ", generation fields,"
+        - code [ref=f6e1464]: operationId?
+        - text: ","
+        - code [ref=f6e1465]: snapshotReason?
+        - text: ","
+        - code [ref=f6e1466]: selectedGeneration?
+        - text: ).
+        - code [ref=f6e1467]: INDEXEDDB_ERROR_CODES
+        - text: is
+        - code [ref=f6e1468]: INVALID_OPTIONS
+        - text: ","
+        - code [ref=f6e1469]: UNAVAILABLE
+        - text: ","
+        - code [ref=f6e1470]: QUOTA_EXCEEDED
+        - text: ","
+        - code [ref=f6e1471]: INCOMPATIBLE_DATABASE
+        - text: ","
+        - code [ref=f6e1472]: BLOCKED
+        - text: ","
+        - code [ref=f6e1473]: VERSION_CHANGED
+        - text: ","
+        - code [ref=f6e1474]: GENERATION_CONFLICT
+        - text: ","
+        - code [ref=f6e1475]: CORRUPT_DATA
+        - text: ","
+        - code [ref=f6e1476]: INCOMPATIBLE_SNAPSHOT
+        - text: ","
+        - code [ref=f6e1477]: TRANSACTION_FAILED
+        - text: ","
+        - code [ref=f6e1478]: CANCELLED
+        - text: ","
+        - code [ref=f6e1479]: TIMEOUT
+        - text: ","
+        - code [ref=f6e1480]: DISPOSED
+        - text: ","
+        - code [ref=f6e1481]: OUTCOME_UNKNOWN
+        - text: ","
+        - code [ref=f6e1482]: QUEUE_FULL
+        - text: .
+        - code [ref=f6e1483]: IndexedDBErrorCode
+        - text: is exported with the option/result/interface types above. No automatic save, startup restore, retry or namespace deletion occurs on import.
+      - heading "Recovery choices in your application" [level=2] [ref=f6e1484]
+      - paragraph [ref=f6e1485]: Workers, snapshots and persistence are headless APIs. They return typed failures; your application owns visible messages, retry buttons, authoritative records and any replacement owner. Keep ordinary browse links outside the enhanced search root. Never describe a refused operation as an empty search or an uncertain write as safely rolled back.
+      - table [ref=f6e1486]:
+        - rowgroup [ref=f6e1487]:
+          - row [ref=f6e1488]:
+            - columnheader "Observed failure" [ref=f6e1489]
+            - columnheader "Explain to the person using search" [ref=f6e1490]
+            - columnheader "Application recovery" [ref=f6e1491]
+        - rowgroup [ref=f6e1492]:
+          - row [ref=f6e1493]:
+            - cell [ref=f6e1494]:
+              - code [ref=f6e1495]: MISSING_CAPABILITY
+              - text: /
+              - code [ref=f6e1496]: INCOMPATIBLE_CAPABILITY
+            - cell "This search feature is unavailable in the current setup." [ref=f6e1497]
+            - cell "Register the explicitly selected provider for each field, or remove that feature from the UI and remount. Repeating the same request cannot install it. Title/link search can use core alone." [ref=f6e1498]
+          - row [ref=f6e1499]:
+            - cell [ref=f6e1500]:
+              - code [ref=f6e1501]: INVALID_QUERY
+              - text: ", bounded prefix/suggestion refusal"
+            - cell "Try complete words, a shorter query or fewer choices." [ref=f6e1502]
+            - cell "Preserve the submitted text and selections. Keep structured parser error spans separate from ordinary literal input. Suggestions are optional vocabulary completions; no suggestion is not a replacement for exact hits." [ref=f6e1503]
+          - row [ref=f6e1504]:
+            - cell [ref=f6e1505]:
+              - text: Worker
+              - code [ref=f6e1506]: STARTUP_FAILED
+              - text: ","
+              - code [ref=f6e1507]: INCOMPATIBLE_WORKER
+              - text: ","
+              - code [ref=f6e1508]: DISPOSED
+            - cell "Background search could not start or its owner has stopped. Offer an explicit restart, browse links or the application’s already supported direct mode." [ref=f6e1509]
+            - cell "Cancel/invalidate old presentation work. Destroy borrowed presenters before releasing the old owner; rebuild from authoritative data only after explicit recovery. Never accept late results from an abandoned request." [ref=f6e1510]
+          - row [ref=f6e1511]:
+            - cell [ref=f6e1512]:
+              - text: Worker read
+              - code [ref=f6e1513]: TIMEOUT
+              - text: ","
+              - code [ref=f6e1514]: TRANSPORT_LIMIT
+              - text: ","
+              - code [ref=f6e1515]: INVALID_TRANSPORT
+              - text: ","
+              - code [ref=f6e1516]: TERMINATED
+            - cell "This request could not complete. Try Search again or a smaller query; restart explicitly if failures persist." [ref=f6e1517]
+            - cell [ref=f6e1518]:
+              - text: A refused read does not establish that the worker is gone; even
+              - code [ref=f6e1519]: TERMINATED
+              - text: can report a single failed send. Preserve the original code and allow an explicit read on the same owner. An invalid received frame can close the adapter; a later
+              - code [ref=f6e1520]: DISPOSED
+              - text: confirms an unusable adapter. Ignore failures whose request signal is already aborted.
+          - row [ref=f6e1521]:
+            - cell [ref=f6e1522]:
+              - code [ref=f6e1523]: CANCELLED
+              - text: during loading/search
+            - cell "Loading stopped; the browse links remain available." [ref=f6e1524]
+            - cell "Respect the abandoned attempt. Do not show a late result/error or start another owner. A retry is a new explicit attempt." [ref=f6e1525]
+          - row [ref=f6e1526]:
+            - cell [ref=f6e1527]:
+              - text: Storage
+              - code [ref=f6e1528]: UNAVAILABLE
+              - text: ","
+              - code [ref=f6e1529]: BLOCKED
+              - text: ","
+              - code [ref=f6e1530]: QUOTA_EXCEEDED
+            - cell "This browser could not open or save the search cache. Browse the content, or use an independently available in-memory search." [ref=f6e1531]
+            - cell "Keep the original adapter error. Do not erase another namespace, request persistence or silently save elsewhere. Retry after a relevant change, such as closing another tab or freeing storage. A storage-only failure does not itself require disposing a borrowed live engine." [ref=f6e1532]
+          - row [ref=f6e1533]:
+            - cell [ref=f6e1534]:
+              - text: Storage
+              - code [ref=f6e1535]: GENERATION_CONFLICT
+            - cell "The saved search changed in another tab." [ref=f6e1536]
+            - cell [ref=f6e1537]:
+              - text: Decide whether to accept or replace the current cache.
+              - code [ref=f6e1538]: load()
+              - text: reads its generation
+              - strong [ref=f6e1539]: and restores into its receiver
+              - text: ": inspect with a separate compatible receiver when the live engine must stay intact. Never repeat the stale expected generation or erase the namespace to bypass the conflict."
+          - row [ref=f6e1540]:
+            - cell [ref=f6e1541]:
+              - text: Storage
+              - code [ref=f6e1542]: VERSION_CHANGED
+            - cell "The browser database changed while this operation was running." [ref=f6e1543]
+            - cell "The connection was closed by a database version-change event; this is not a namespace generation conflict. Coordinate other database users and check schema compatibility before reopening. Do not delete or downgrade a database automatically." [ref=f6e1544]
+          - row [ref=f6e1545]:
+            - cell [ref=f6e1546]:
+              - text: Storage
+              - code [ref=f6e1547]: CORRUPT_DATA
+              - text: /
+              - code [ref=f6e1548]: INCOMPATIBLE_SNAPSHOT
+            - cell "The saved search cannot be used with this setup." [ref=f6e1549]
+            - cell [ref=f6e1550]:
+              - text: These are IndexedDB wrapper codes. Keep the refusal and any
+              - code [ref=f6e1551]: snapshotReason
+              - text: ; rebuild a separate owner from authoritative records before explicitly switching.
+          - row [ref=f6e1552]:
+            - cell [ref=f6e1553]:
+              - text: Direct
+              - code [ref=f6e1554]: SnapshotAdapterError
+              - text: with its core
+              - code [ref=f6e1555]: code
+              - text: and
+              - code [ref=f6e1556]: .reason
+            - cell "The snapshot is invalid or incompatible with this setup." [ref=f6e1557]
+            - cell [ref=f6e1558]:
+              - text: Use the explicit reason, such as
+              - code [ref=f6e1559]: INTEGRITY_MISMATCH
+              - text: or
+              - code [ref=f6e1560]: PROFILE_MISMATCH
+              - text: ", rather than interpreting it as an IndexedDB code. Pre-commit refusal preserves the receiver. Do not bypass native qualification."
+          - row [ref=f6e1561]:
+            - cell [ref=f6e1562]:
+              - text: Worker mutation/source-restore
+              - code [ref=f6e1563]: OUTCOME_UNKNOWN
+            - cell "The update has not been confirmed. Do not claim success or rollback." [ref=f6e1564]
+            - cell [ref=f6e1565]:
+              - text: Retain its operation ID. While the owner survives, use mutation
+              - code [ref=f6e1566]: reconcile()
+              - text: or the separate worker-snapshot receipt API as appropriate. Pending/expired is inconclusive. If the owner is gone, rebuild from authoritative data; never blindly repeat a write. Worker mutations do not carry a storage generation.
+          - row [ref=f6e1567]:
+            - cell [ref=f6e1568]:
+              - text: IndexedDB
+              - code [ref=f6e1569]: save()
+              - text: /
+              - code [ref=f6e1570]: erase()
+              - code [ref=f6e1571]: OUTCOME_UNKNOWN
+            - cell "The cache write or deletion has not been confirmed." [ref=f6e1572]
+            - cell [ref=f6e1573]:
+              - text: "The error may contain only a phase: there may be no operation ID, generation or worker receipt. Do not replay it automatically. If examining the current cache with"
+              - code [ref=f6e1574]: load()
+              - text: ", use a separate receiver because loading restores engine state; inspect the returned generation/state and authoritative records before deciding the next CAS write."
+          - row [ref=f6e1575]:
+            - cell [ref=f6e1576]:
+              - text: IndexedDB
+              - code [ref=f6e1577]: load()
+              - code [ref=f6e1578]: OUTCOME_UNKNOWN
+              - text: during restore
+            - cell "It is not yet clear whether the receiving search was replaced." [ref=f6e1579]
+            - cell [ref=f6e1580]:
+              - text: Retain
+              - code [ref=f6e1581]: operationId
+              - text: and
+              - code [ref=f6e1582]: selectedGeneration
+              - strong [ref=f6e1583]: when supplied
+              - text: . A surviving worker snapshot receipt may settle a worker restore; a direct receiver has no invented worker receipt. Otherwise inspect/recover the receiver separately or rebuild a new owner from authoritative data before switching.
+      - paragraph [ref=f6e1584]:
+        - text: These are recovery choices, not automatic fallback behavior. The complete starter controllers demonstrate loading cancellation, single-owner retry and late-owner cleanup. The developer Workbench distinguishes a refused read from a stopped owner, keeps the query and shows the stable code in
+        - strong [ref=f6e1585]: Technical details
+        - text: . A refused read can be retried explicitly with
+        - strong [ref=f6e1586]: Search
+        - text: on the same worker; confirmed owner loss offers
+        - strong [ref=f6e1587]: Retry loading guides
+        - text: or
+        - strong [ref=f6e1588]: This page
+        - text: . Restarting clears its category/page as documented. It does not reconnect a dead worker invisibly. The storage recipe below is an explicit save/load/erase exercise, not an offline search interface.
+      - heading "LocalSearch source migration" [level=2] [ref=f6e1589]
+      - paragraph [ref=f6e1590]:
+        - text: Use
+        - code [ref=f6e1591]: convertLocalSearchSnapshot(bytes)
+        - text: from
+        - code [ref=f6e1592]: /integrations/localsearch
+        - text: to convert a supported companion source export before rebuilding a separate Raveldex engine. It checks the snapshot, checksum and supported data mapping.
+      - paragraph [ref=f6e1593]:
+        - text: The supported input identity is companion-v1, format 1, MiniSearch 7.2.0. Arbitrary MiniSearch indexes, worker messages and storage rows are rejected. Conversion needs
+        - code [ref=f6e1594]: crypto.subtle
+        - text: ", accepts at most 32 MiB and includes bounded synchronous work. It is not a queued, cancellable engine operation."
+      - paragraph [ref=f6e1595]:
+        - text: The returned plan contains
+        - code [ref=f6e1596]: "{ configuration, records, origin, sourceRevision, returnFields, identity, differences }"
+        - text: . Read
+        - code [ref=f6e1597]: identity
+        - text: and
+        - code [ref=f6e1598]: differences
+        - text: for changes in analysis and ranking.
+        - code [ref=f6e1599]: origin
+        - text: and
+        - code [ref=f6e1600]: sourceRevision
+        - text: describe the old collection; they do not become the new engine’s revision or a storage generation.
+      - paragraph [ref=f6e1601]:
+        - text: The
+        - link "migration recipe" [ref=f6e1602] [cursor=pointer]:
+          - /url: /raveldex/example-files/migration.mjs
+        - text: rebuilds a separate engine with bounded
+        - code [ref=f6e1603]: addMany
+        - text: calls, inspects it and disposes it. In your application, switch to the new engine only after the whole rebuild succeeds. Each batch is atomic, but the entire migration is not one transaction.
+      - paragraph [ref=f6e1604]:
+        - code [ref=f6e1605]: MigrationError
+        - text: has sanitized
+        - code [ref=f6e1606]: code
+        - text: and
+        - code [ref=f6e1607]: "details: { reason, nativeCode? }"
+        - text: .
+        - code [ref=f6e1608]: MIGRATION_ERROR_CODES
+        - text: is
+        - code [ref=f6e1609]: INVALID_BYTES
+        - text: ","
+        - code [ref=f6e1610]: INVALID_SNAPSHOT
+        - text: ","
+        - code [ref=f6e1611]: INCOMPATIBLE_SNAPSHOT
+        - text: ","
+        - code [ref=f6e1612]: NONCANONICAL_SNAPSHOT
+        - text: ","
+        - code [ref=f6e1613]: CHECKSUM_MISMATCH
+        - text: ","
+        - code [ref=f6e1614]: NATIVE_INCOMPATIBLE
+        - text: ","
+        - code [ref=f6e1615]: CAPABILITY_REQUIRED
+        - text: . The entry exports
+        - code [ref=f6e1616]: MigrationErrorCode
+        - text: ","
+        - code [ref=f6e1617]: MigrationErrorDetails
+        - text: ","
+        - code [ref=f6e1618]: MigrationReason
+        - text: ","
+        - code [ref=f6e1619]: LocalSearchMigration
+        - text: ","
+        - code [ref=f6e1620]: LocalSearchMigrationIdentity
+        - text: and
+        - code [ref=f6e1621]: LocalSearchMigrationOrigin
+        - text: . Foreign indexes, scores, live handles and namespaces are never reused. The repository
+        - link "migration guide (repository access)" [ref=f6e1622] [cursor=pointer]:
+          - /url: https://github.com/vmitsaras/raveldex/blob/main/docs/migration/LOCALSEARCH.md
+        - text: gives mapping and provenance details.
+  - contentinfo [ref=f6e1623]:
+    - paragraph [ref=f6e1624]:
+      - link "Developer Workbench" [ref=f6e1625] [cursor=pointer]:
+        - /url: /raveldex/demo/
+    - paragraph [ref=f6e1626]:
+      - link "Source code" [ref=f6e1627] [cursor=pointer]:
+        - /url: https://github.com/vmitsaras/raveldex
+      - text: ·
+      - link "MIT license" [ref=f6e1628] [cursor=pointer]:
+        - /url: /raveldex/site-assets/LICENSE.txt
+```

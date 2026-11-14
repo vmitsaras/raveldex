@@ -100,9 +100,9 @@ test('five-solution chooser, complete starter inventories and published CSS pres
       for (const other of families) assert.equal(await chooser.locator(`a[href="/raveldex/examples/${other.family}/"]`).count(), 1);
       assert.equal(await chooser.locator('[aria-current="page"]').getAttribute('href'), `/raveldex/examples/${entry.family}/`);
       const selected = STARTERS.filter(starter => starter.family === entry.family);
-      assert.equal(await page.getByRole('link', { name: 'Download the complete starter', exact: true }).count(), entry.family === 'inline' ? 1 : selected.length);
+      assert.equal(await page.getByRole('link', { name: 'Download the complete starter', exact: true }).count(), ['inline', 'modal', 'dropdown'].includes(entry.family) ? 1 : selected.length);
       for (const starter of selected) {
-        if (entry.family === 'inline') {
+        if (['inline', 'modal', 'dropdown'].includes(entry.family)) {
           await page.getByLabel('Installation platform', { exact: true }).selectOption(starter.id);
           assert.equal(await page.locator(`[data-starter-id="${starter.id}"]`).isVisible(), true);
         }

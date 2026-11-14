@@ -96,3 +96,39 @@ The owner selected RX-9903 only after RX-9902 delivery in PR #139 (merge `c7d59a
 ## RX-9903 source-delivery selection — 14 November 2026
 
 The owner authorized [RX-9903 commit/push and PR delivery](../evidence/RX_9903_DELIVERY_20261114.md). Main commit `e3011b9` removed all GitHub workflows. The owner explicitly selected preserving the deletion and leaving the PR open after local verification. No hosted pass or merge may be inferred. N19 remains 3/8 accepted; RX-9904 remains planned/unstarted. Historical local-acceptance snapshots above retain their original identities.
+
+## RX-9904 owner review — 14 November 2026
+
+RX-9904 is selected for owner review on 14 November 2026. The [review packet](../evidence/RX-9904.md) identifies source `85b72a0` from open/unmerged PR #140, the unchanged verified Pages build, desktop/320 px captures and a working local walkthrough. The task is **needs_decision**, awaiting explicit approval or bounded revisions; N19 remains **3/8 accepted**. RX-9905–RX-9907 remain planned/unstarted, and no owner approval, rollout, source delivery or publication is inferred.
+
+## RX-9904 explicit owner approval — 14 November 2026
+
+The owner approved RX-9904 candidate **N19-PILOT-85b72a0-ca92821e-20261114** on 14 November 2026 with the exact response **“Approve this candidate”**. The [review and approval record](../evidence/RX-9904.md) ties the decision to source `85b72a0`, the unchanged verified Pages manifest and fourteen captures. RX-9904 is **done**; N19 is **4/8 accepted**. RX-9905–RX-9907 remain planned/unstarted despite technical eligibility. Approval records this gate only; no rollout, source delivery, merge or publication is selected.
+
+## RX-9905 implementation closeout — 14 November 2026
+
+The owner selected the next open rollout slice. RX-9905 applies the approved
+pilot template to Modal and Dropdown, preserving both Modal projects, Browser-only
+Dropdown, persistent preview, exact source/copy and native full-page behavior.
+[Evidence](../evidence/RX-9905.md): final required25/25, complete site61/61,
+project1744passes/eight optional skips/zero failures, installed candidate and
+Pages/identity checks Pass. Review repair bounds a cancellation wait and qualifies
+the Astro-only adapter prerequisite. One README wording Minor and inherited
+source-HTML duplication optimization remain deferred.
+
+Canonical RX-9905 is done; N19 is5/8. RX-9906/9907 remain planned/unstarted with
+empty evidence; RX-9908 waits. Only #123 is selected for closure; preserve native
+parent/order/milestone membership and unowned discussion/metadata. Local rollout
+and RX-9904 approval records remain uncommitted. Fresh GitHub PR read-back shows
+#140 externally merged as `fa99d2df4cb7ec3ce1898e837fb92d54c1e04e90`; the executor
+did not merge it or run hosted CI. Historical pending/open snapshots remain
+historical. Final targeted tracking read-back is recorded in RX-9905 evidence.
+
+## RX-9905 source-delivery selection — 14 November 2026
+
+The owner explicitly selected commit/push and a PR for RX-9905, checking CI and
+merging only if everything passes. RX-9906 remains expressly unstarted. Delivery
+includes the prerequisite RX-9904 approval packet without changing its approved
+identity. [Delivery evidence](../evidence/RX_9905_DELIVERY_20261114.md) separates
+fresh local verification from hosted availability. Preserve deleted workflows;
+no-check status does not count as a hosted pass. Canonical N19 remains5/8.

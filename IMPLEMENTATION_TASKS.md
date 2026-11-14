@@ -3718,7 +3718,7 @@ Adapt the existing Inline showcase into the complete try/install/data/style pilo
 
 **Review and approve the rendered pilot before rollout**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/122)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/122)
 
 **Dependencies:** [RX-9902](IMPLEMENTATION_TASKS.md#rx-9902), [RX-9903](IMPLEMENTATION_TASKS.md#rx-9903)
 
@@ -3746,14 +3746,16 @@ Obtain and record an explicit owner decision on one working gallery/Inline pilot
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9904.md](docs/evidence/RX-9904.md)
+- [docs/evidence/RX-9904/candidate.json](docs/evidence/RX-9904/candidate.json)
+- [docs/evidence/RX-9904/approval.json](docs/evidence/RX-9904/approval.json)
 
 
 ## RX-9905
 
 **Apply the reviewed template to modal and dropdown**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/123)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/123)
 
 **Dependencies:** [RX-9904](IMPLEMENTATION_TASKS.md#rx-9904)
 
@@ -3781,7 +3783,10 @@ Roll the approved detail/setup template onto modal and dropdown pages while reta
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9905.md](docs/evidence/RX-9905.md)
+- [docs/evidence/RX-9905/boundaries.json](docs/evidence/RX-9905/boundaries.json)
+- [docs/evidence/RX-9905/review.md](docs/evidence/RX-9905/review.md)
+- [docs/evidence/RX-9905/candidate-package/candidate-report.json](docs/evidence/RX-9905/candidate-package/candidate-report.json)
 
 
 ## RX-9906
