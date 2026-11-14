@@ -1,7 +1,7 @@
 ---
 import { Code } from 'astro:components';
 const { path, text } = Astro.props;
-const lang = path.endsWith('.astro') ? 'astro' : path.endsWith('.mjs') ? 'javascript' : path.endsWith('.json') ? 'json' : path.endsWith('.css') ? 'css' : path.endsWith('.html') ? 'html' : 'markdown';
+const lang = path.endsWith('.astro') ? 'astro' : path.endsWith('.mjs') ? 'javascript' : path.endsWith('.json') ? 'json' : path.endsWith('.css') ? 'css' : path.endsWith('.svg') ? 'xml' : path.endsWith('.html') ? 'html' : 'markdown';
 // Shiki omits the final newline; restore only that literal suffix and refuse any other drift.
 const literal = node => node.type === 'text' ? node.value : (node.children ?? []).map(literal).join('');
 const transformers = [{ code(node) {

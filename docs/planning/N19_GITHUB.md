@@ -132,3 +132,24 @@ includes the prerequisite RX-9904 approval packet without changing its approved
 identity. [Delivery evidence](../evidence/RX_9905_DELIVERY_20261114.md) separates
 fresh local verification from hosted availability. Preserve deleted workflows;
 no-check status does not count as a hosted pass. Canonical N19 remains5/8.
+
+## RX-9906 implementation and local acceptance — 14 November 2026
+
+The owner explicitly selected only RX-9906. [Evidence](../evidence/RX-9906.md)
+records the completed Directory/rich-results rollout: exact required 26/26,
+complete site 68/68, complete project 1,744 passed/eight optional skips/zero failures,
+fresh installed candidate and exact source/output/capture identities. One fresh
+review's image-retention coverage and capture-inventory gaps are repaired and
+verified. Canonical RX-9906 is done; N19 is **6/8 accepted**.
+
+GitHub #124 is completed after canonical acceptance; overview #118 remains open.
+All eight native child IDs/order/parents and milestone memberships are preserved,
+with exact read-back in [tracking](../evidence/RX-9906/tracking.json).
+RX-9907 remains planned/ready but explicitly unstarted, empty evidence; RX-9908
+remains planned/waiting for RX-9907, empty evidence.
+
+Live read-back confirms PR141 externally merged as `13637d8` at 12:52:38 UTC;
+the prior delivery paragraphs retain their historical open/no-CI scope. Its tree
+matches this slice's 877774b source base. This executor did not merge it.
+No commit/push, new PR/merge, workflow restoration, deployment or publication was
+performed for RX-9906. Evidence is local until separately authorized source delivery.
