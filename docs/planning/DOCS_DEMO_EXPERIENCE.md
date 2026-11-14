@@ -193,3 +193,7 @@ No runtime/browser checks are required merely to register this plan. Registratio
 Mobbin URLs in the preserved proposal are structural provenance, not templates, copied assets or evidence of usability improvement. This plan adds no new claim about those screenshots.
 
 The owner subsequently authorized [RX-9902 source delivery through a CI-checked PR](../evidence/RX_9902_DELIVERY_20261113.md). RX-9903 explicitly remains unstarted; publication stays separate.
+
+## RX-9903 source-delivery selection — 14 November 2026
+
+The owner authorized [RX-9903 commit/push and PR delivery](../evidence/RX_9903_DELIVERY_20261114.md). After main removed all GitHub workflows, the owner explicitly selected preserving that deletion and leaving the PR open after local verification. Hosted CI and merge are not claimed. RX-9904 remains planned/unstarted; approval and rollout are separate.
