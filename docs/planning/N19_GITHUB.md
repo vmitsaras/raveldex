@@ -172,3 +172,22 @@ are preserved in [tracking](../evidence/RX-9907/tracking.json).
 Changes remain uncommitted on codex/n19-rx9907, source base df9432d. Source delivery
 and publication are separate. Prior PR142 was externally merged as633f653, with
 the same source tree; no executor merge or hosted CI success is inferred.
+
+
+## RX-9908 integrated acceptance — 14 November 2026
+
+N19 is **8/8 accepted** after [RX-9908 qualification](../evidence/RX-9908.md):
+fresh project 1,744 passes/eight optional skips, final site 80/80, installed
+candidate and original output/corpus/route/anchor identities verified. One
+independent review found no essential defect; the historical identity helper
+pinning Minor is deferred. The owner explicitly accepted human AT, physical input
+and unavailable actual browser zoom remaining unverified for local N19 acceptance.
+The exact RX-9904 visual response/candidate remain unchanged.
+
+Targeted closeout updates N19 managed sections/current-execution notes and closes
+RX-9908, overview #118 and milestone #16 only after canonical acceptance. Exact
+native children/order, milestone membership, human notes and unrelated metadata
+are read back; cached aggregate counters do not override actual child states.
+RX-9908 changes remain uncommitted/unpushed on `codex/n19-rx9908`, base `62407bd`.
+No source delivery, workflow restoration, hosted CI, deployment, publication or
+release action is included. Historical snapshots above retain their original scope.

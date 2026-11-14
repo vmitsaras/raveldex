@@ -238,3 +238,26 @@ then `npm run docs:check` and `npm run pages:check`. The reading checks cover
 preserved headings/signatures/examples/corpus, exact copied text and denial,
 late feedback, no-JS, local keyboard scrolling, 320 CSS px and emulated text scale.
 They do not establish human AT, physical input, OS clipboard or actual browser zoom.
+
+## Integrated site qualification
+
+RX-9908 qualifies the existing shell, five galleries, eight complete starter
+projects and guide/reference layouts together. After one successful `npm run check`,
+reuse that build with `npm run pages:generate`, `npm run pages:check` and
+`node --test --test-concurrency=1 test/pages/*.test.mjs`. The installed candidate
+checker can reuse the same build with `node scripts/candidate-check.mjs --output`
+followed by a new, unused evidence directory.
+
+`test/pages/integrated-site.test.mjs` adds the combined 320/768/1280/1440 CSS px
+and short-viewport matrix, rendered text/syntax/focus contrast, and scripted
+forced-colors/reduced-motion control checks. Set `RAVELDEX_INTEGRATED_REPORT` to
+a JSON output path to retain the measured pairs, geometry and adjacent captures.
+The existing family, reading, shell, search and public-inventory checks retain
+their semantic assertions for exact downloads/source, persistent iframe state,
+copy denial/recovery, no-JavaScript reading, empty/error states and keyboard access.
+Viewport sizing and media emulation do not qualify actual browser zoom or human AT.
+
+The [integrated evidence](../docs/evidence/RX-9908.md) records the actual candidate,
+commands, review, owner-approved manual limits and tracking read-back. Local
+acceptance does not publish the site or packages, deliver Git changes, or restore
+the deleted hosted workflows.

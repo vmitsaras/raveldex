@@ -8,11 +8,11 @@ The owner selected the native direction on 2026-10-06 and requested initializati
 
 ## Current tracked state
 
-**Release progress:** 87/88 done · 0 in progress · 1 dependency-ready.
+**Release progress:** 88/88 done · 0 in progress · 0 dependency-ready.
 
-**Planner state:** `ready`.
+**Planner state:** `complete`.
 
-**Next or resumable release task:** [RX-9908](IMPLEMENTATION_TASKS.md#rx-9908) — Qualify the integrated site and synchronize the handoff.
+**Next release task:** none. Read the planner state and any blockers below; a completed active backlog is a legitimate terminal state.
 
 Run `npm run handoff:status` and `npm run handoff:next` for the complete explanation. Dependency readiness identifies technical eligibility; the owner's current request determines execution scope. Deferred N5 ideas never enter automatic next-task selection.
 
@@ -49,7 +49,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | **N16 — Demonstrate documentation search in the header** | `RX-9601`–`RX-9601` | 1/1 | Use Raveldex itself for clear, modern modal search throughout the demo documentation site. |
 | **N17 — Modernize all five consumer demos** | `RX-9701`–`RX-9701` | 1/1 | Make live inline, modal, dropdown, directory and cards examples clear, modern and easy to adopt. |
 | **N18 — Continuous Load more** | `RX-9801`–`RX-9801` | 1/1 | Replace the inline/modal window switch with ordered user-triggered append through all exact matches. |
-| **N19 — Documentation and demo experience** | `RX-9901`–`RX-9908` | 7/8 | Help developers choose, try and integrate the existing search interfaces through a contextual Astro documentation site, visual gallery and truthful preview/setup pages; plan site-only Tailwind styling without changing native packages or standalone starters. |
+| **N19 — Documentation and demo experience** | `RX-9901`–`RX-9908` | 8/8 | Help developers choose, try and integrate the existing search interfaces through a contextual Astro documentation site, visual gallery and truthful preview/setup pages; plan site-only Tailwind styling without changing native packages or standalone starters. |
 
 ## Task index
 
@@ -160,7 +160,7 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-9905](IMPLEMENTATION_TASKS.md#rx-9905) — Apply the reviewed template to modal and dropdown | `done` | `RX-9904` | [Issue](https://github.com/vmitsaras/raveldex/issues/123) |
 | [RX-9906](IMPLEMENTATION_TASKS.md#rx-9906) — Apply the reviewed template to directory and rich results | `done` | `RX-9904` | [Issue](https://github.com/vmitsaras/raveldex/issues/124) |
 | [RX-9907](IMPLEMENTATION_TASKS.md#rx-9907) — Give guides and API reference distinct reading layouts | `done` | `RX-9904` | [Issue](https://github.com/vmitsaras/raveldex/issues/125) |
-| [RX-9908](IMPLEMENTATION_TASKS.md#rx-9908) — Qualify the integrated site and synchronize the handoff | `planned` | `RX-9905`, `RX-9906`, `RX-9907` | [Issue](https://github.com/vmitsaras/raveldex/issues/126) |
+| [RX-9908](IMPLEMENTATION_TASKS.md#rx-9908) — Qualify the integrated site and synchronize the handoff | `done` | `RX-9905`, `RX-9906`, `RX-9907` | [Issue](https://github.com/vmitsaras/raveldex/issues/126) |
 
 ## Milestone exit conditions
 

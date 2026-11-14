@@ -3869,7 +3869,7 @@ Apply contextual reading/reference layouts and improve representative Getting st
 
 **Qualify the integrated site and synchronize the handoff**
 
-**Milestone:** N19 · **Status:** `planned` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/126)
+**Milestone:** N19 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues/126)
 
 **Dependencies:** [RX-9905](IMPLEMENTATION_TASKS.md#rx-9905), [RX-9906](IMPLEMENTATION_TASKS.md#rx-9906), [RX-9907](IMPLEMENTATION_TASKS.md#rx-9907)
 
@@ -3899,7 +3899,13 @@ Verify and review the changed documentation/demo site on one identified candidat
 
 **Recorded evidence**
 
-None recorded. A future report destination in the verification steps is not evidence.
+- [docs/evidence/RX-9908.md](docs/evidence/RX-9908.md)
+- [docs/evidence/RX-9908/identities.json](docs/evidence/RX-9908/identities.json)
+- [docs/evidence/RX-9908/integrated.json](docs/evidence/RX-9908/integrated.json)
+- [docs/evidence/RX-9908/review.md](docs/evidence/RX-9908/review.md)
+- [docs/evidence/RX-9908/owner-disposition.json](docs/evidence/RX-9908/owner-disposition.json)
+- [docs/evidence/RX-9908/tracking.json](docs/evidence/RX-9908/tracking.json)
+- [docs/evidence/RX-9908/environment.json](docs/evidence/RX-9908/environment.json)
 
 
 ## Optional enhancement tasks
