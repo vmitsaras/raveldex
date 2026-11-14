@@ -261,3 +261,27 @@ The [integrated evidence](../docs/evidence/RX-9908.md) records the actual candid
 commands, review, owner-approved manual limits and tracking read-back. Local
 acceptance does not publish the site or packages, deliver Git changes, or restore
 the deleted hosted workflows.
+
+## Home/gallery review amendment
+
+The owner's post-N19 visual review selects the examples gallery as the home page.
+`Home.astro` reuses `Examples.astro`; `/examples/` remains a working destination.
+The existing installed Inline preview occupies the sixth gallery position beside
+five static interface cards, with its own full-page link and no-JavaScript browse
+fallback. The core example and task links remain below the home gallery. Historic
+N19 evidence retains its original candidate identity; this amendment changes the
+previous inert-gallery assumption to one isolated live iframe, with no starter,
+engine or package changes.
+
+A subsequent owner review requests matching the sixth item to the other cards:
+its final presentation is a decorative existing Inline screenshot, heading,
+description and links. The live iframe is removed from both gallery routes;
+Open the search example reaches the working standalone starter, including its
+ordinary browse links without JavaScript. This supersedes the embedded-preview
+part of the amendment above while retaining the gallery as home.
+
+Card primary links display Open and keep their destination suffix in visually
+hidden text. A native anchor pseudo-element spans each positioned card; setup
+links have a higher stacking level and remain independently operable. Focus is
+shown on the full card, with forced-colors support. No JavaScript click forwarding
+or additional keyboard stops are introduced.

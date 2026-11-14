@@ -72,7 +72,7 @@ export function milestoneSection(roadmap, milestone, index) {
     '', `**Track:** ${milestone.track}. **Progress:** ${tasks.filter((t) => t.status === 'done').length}/${tasks.length} tasks accepted.`,
     '', '**Exit criteria**', '', ...milestone.exitCriteria.map((c) => `- ${c}`),
     '', '**Task checklist**', '', ...tasks.map((t) => `- [${t.status === 'done' ? 'x' : ' '}] ${issueLink(roadmap, t.id, index)} — ${t.title}`),
-    '', `Roadmap: ${fileLink(roadmap, 'ROADMAP.md')}. Task detail: ${fileLink(roadmap, 'IMPLEMENTATION_TASKS.md')}.`,
+    '', `Roadmap: ${fileLink(roadmap, 'docs/planning/ROADMAP.md')}. Task detail: ${fileLink(roadmap, 'docs/planning/IMPLEMENTATION_TASKS.md')}.`,
     '', 'Closing this overview alone does not complete its tasks. Completion requires accepted evidence in the canonical roadmap.',
   ].join('\n');
 }

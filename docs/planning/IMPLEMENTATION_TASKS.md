@@ -2,11 +2,11 @@
 
 # Raveldex implementation tasks
 
-These bounded contracts describe the native release track. Proposed module paths are not a claim that implementation already exists. Task status and recorded evidence below are generated from [the canonical roadmap](docs/planning/roadmap.json).
+These bounded contracts describe the native release track. Proposed module paths are not a claim that implementation already exists. Task status and recorded evidence below are generated from [the canonical roadmap](roadmap.json).
 
 ## How to execute a task
 
-1. Read `AGENTS.md`, `PROJECT_CONTEXT.md`, the task card, its specifications, and directly affected source.
+1. Read `../../AGENTS.md`, `PROJECT_CONTEXT.md`, the task card, its specifications, and directly affected source.
 2. Confirm dependencies are `done` and the current owner request covers the work. Readiness does not expand a bootstrap into the whole product.
 3. Implement the smallest useful slice satisfying its acceptance criteria. Clarify actual load-bearing gaps; do not reopen the selected native direction or invent new feature scope.
 4. Verify from the criteria using independent expected outcomes where applicable. Record Pass, Fail, Blocked, or Not Applicable for each criterion and explain any N/A.
@@ -26,11 +26,11 @@ Create the maintainable native repository, explicitly record the adopted directi
 
 **Expected affected areas**
 
-`README.md`, `AGENTS.md`, `PROJECT_CONTEXT.md`, `CONTRIBUTING.md`, `package.json`, `ROADMAP.md`, `IMPLEMENTATION_TASKS.md`, `docs/planning/`, `docs/decisions/0001-native-direction.md`, `scripts/`, `.github/`. These are planning boundaries; create files only when this task needs them.
+`README.md`, `AGENTS.md`, `docs/planning/PROJECT_CONTEXT.md`, `CONTRIBUTING.md`, `package.json`, `docs/planning/ROADMAP.md`, `docs/planning/IMPLEMENTATION_TASKS.md`, `docs/planning/`, `docs/decisions/0001-native-direction.md`, `scripts/`, `.github/`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[REPOSITORY_BOOTSTRAP.md](docs/specs/REPOSITORY_BOOTSTRAP.md)
+[REPOSITORY_BOOTSTRAP.md](../specs/REPOSITORY_BOOTSTRAP.md)
 
 **Acceptance criteria**
 
@@ -51,8 +51,8 @@ Create the maintainable native repository, explicitly record the adopted directi
 
 **Recorded evidence**
 
-- [docs/evidence/BOOTSTRAP_VERIFICATION.md](docs/evidence/BOOTSTRAP_VERIFICATION.md)
-- [docs/evidence/BOOTSTRAP_REVIEW.md](docs/evidence/BOOTSTRAP_REVIEW.md)
+- [docs/evidence/BOOTSTRAP_VERIFICATION.md](../evidence/BOOTSTRAP_VERIFICATION.md)
+- [docs/evidence/BOOTSTRAP_REVIEW.md](../evidence/BOOTSTRAP_REVIEW.md)
 
 
 ## RX-0002
@@ -67,11 +67,11 @@ Turn the selected native design into a bounded implementation contract and accep
 
 **Expected affected areas**
 
-`docs/architecture/NATIVE_ARCHITECTURE.md`, `docs/architecture/ADDONS_AND_ADAPTERS.md`, `docs/specs/CORE_CONTRACT.md`, `docs/specs/RANKING.md`, `docs/specs/MUTATIONS_AND_EXECUTION.md`, `docs/planning/VERIFICATION_PLAN.md`, `docs/planning/roadmap.json`, `IMPLEMENTATION_TASKS.md`. These are planning boundaries; create files only when this task needs them.
+`docs/architecture/NATIVE_ARCHITECTURE.md`, `docs/architecture/ADDONS_AND_ADAPTERS.md`, `docs/specs/CORE_CONTRACT.md`, `docs/specs/RANKING.md`, `docs/specs/MUTATIONS_AND_EXECUTION.md`, `docs/planning/VERIFICATION_PLAN.md`, `docs/planning/roadmap.json`, `docs/planning/IMPLEMENTATION_TASKS.md`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[REPOSITORY_BOOTSTRAP.md](docs/specs/REPOSITORY_BOOTSTRAP.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md), [ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[REPOSITORY_BOOTSTRAP.md](../specs/REPOSITORY_BOOTSTRAP.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md), [ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -93,8 +93,8 @@ Turn the selected native design into a bounded implementation contract and accep
 
 **Recorded evidence**
 
-- [docs/evidence/BOOTSTRAP_VERIFICATION.md](docs/evidence/BOOTSTRAP_VERIFICATION.md)
-- [docs/evidence/BOOTSTRAP_REVIEW.md](docs/evidence/BOOTSTRAP_REVIEW.md)
+- [docs/evidence/BOOTSTRAP_VERIFICATION.md](../evidence/BOOTSTRAP_VERIFICATION.md)
+- [docs/evidence/BOOTSTRAP_REVIEW.md](../evidence/BOOTSTRAP_REVIEW.md)
 
 
 ## RX-1001
@@ -113,7 +113,7 @@ Implement validated native input contracts and a deterministic basic analyzer th
 
 **Contracts**
 
-[CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md)
+[CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md)
 
 **Acceptance criteria**
 
@@ -133,7 +133,7 @@ Implement validated native input contracts and a deterministic basic analyzer th
 
 **Recorded evidence**
 
-- [docs/evidence/RX-1001.md](docs/evidence/RX-1001.md)
+- [docs/evidence/RX-1001.md](../evidence/RX-1001.md)
 
 
 ## RX-1002
@@ -152,7 +152,7 @@ Build the first Raveldex-owned field-aware index and prove exact token eligibili
 
 **Contracts**
 
-[CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md)
+[CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md)
 
 **Acceptance criteria**
 
@@ -172,7 +172,7 @@ Build the first Raveldex-owned field-aware index and prove exact token eligibili
 
 **Recorded evidence**
 
-- [docs/evidence/RX-1002.md](docs/evidence/RX-1002.md)
+- [docs/evidence/RX-1002.md](../evidence/RX-1002.md)
 
 
 ## RX-1003
@@ -191,7 +191,7 @@ Implement complete typed query evaluation and the versioned native ranker with e
 
 **Contracts**
 
-[CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md)
+[CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md)
 
 **Acceptance criteria**
 
@@ -212,7 +212,7 @@ Implement complete typed query evaluation and the versioned native ranker with e
 
 **Recorded evidence**
 
-- [docs/evidence/RX-1003.md](docs/evidence/RX-1003.md)
+- [docs/evidence/RX-1003.md](../evidence/RX-1003.md)
 
 
 ## RX-1004
@@ -231,7 +231,7 @@ Add and change records through atomic native transactions that update affected i
 
 **Contracts**
 
-[MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md)
+[MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md)
 
 **Acceptance criteria**
 
@@ -252,7 +252,7 @@ Add and change records through atomic native transactions that update affected i
 
 **Recorded evidence**
 
-- [docs/evidence/RX-1004.md](docs/evidence/RX-1004.md)
+- [docs/evidence/RX-1004.md](../evidence/RX-1004.md)
 
 
 ## RX-1005
@@ -271,7 +271,7 @@ Make owned retrieval and mutation work resumable and bounded while preserving ex
 
 **Contracts**
 
-[MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md)
+[MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md)
 
 **Acceptance criteria**
 
@@ -292,7 +292,7 @@ Make owned retrieval and mutation work resumable and bounded while preserving ex
 
 **Recorded evidence**
 
-- [docs/evidence/RX-1005.md](docs/evidence/RX-1005.md)
+- [docs/evidence/RX-1005.md](../evidence/RX-1005.md)
 
 
 ## RX-1006
@@ -311,7 +311,7 @@ Deliver a usable real-content search consumer that proves the independent native
 
 **Contracts**
 
-[CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md), [VERIFICATION_PLAN.md](docs/planning/VERIFICATION_PLAN.md)
+[CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md)
 
 **Acceptance criteria**
 
@@ -332,7 +332,7 @@ Deliver a usable real-content search consumer that proves the independent native
 
 **Recorded evidence**
 
-- [docs/evidence/RX-1006.md](docs/evidence/RX-1006.md)
+- [docs/evidence/RX-1006.md](../evidence/RX-1006.md)
 
 
 ## RX-2001
@@ -351,7 +351,7 @@ Adapt the useful companion phrase approach into an optional native capability wi
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [VERIFICATION_PLAN.md](docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md)
 
 **Acceptance criteria**
 
@@ -373,7 +373,7 @@ Adapt the useful companion phrase approach into an optional native capability wi
 
 **Recorded evidence**
 
-- [docs/evidence/RX-2001.md](docs/evidence/RX-2001.md)
+- [docs/evidence/RX-2001.md](../evidence/RX-2001.md)
 
 
 ## RX-2002
@@ -392,7 +392,7 @@ Offer selected-field positional phrase verification and optional original offset
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -412,7 +412,7 @@ Offer selected-field positional phrase verification and optional original offset
 
 **Recorded evidence**
 
-- [docs/evidence/RX-2002.md](docs/evidence/RX-2002.md)
+- [docs/evidence/RX-2002.md](../evidence/RX-2002.md)
 
 
 ## RX-2003
@@ -431,7 +431,7 @@ Add optional numeric/set filters and selected keyword facet counts while preserv
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -451,7 +451,7 @@ Add optional numeric/set filters and selected keyword facet counts while preserv
 
 **Recorded evidence**
 
-- [docs/evidence/RX-2003.md](docs/evidence/RX-2003.md)
+- [docs/evidence/RX-2003.md](../evidence/RX-2003.md)
 
 
 ## RX-2004
@@ -470,7 +470,7 @@ Expose bounded query/record explanations and diagnostic exports derived from act
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [RANKING.md](docs/specs/RANKING.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [RANKING.md](../specs/RANKING.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -490,7 +490,7 @@ Expose bounded query/record explanations and diagnostic exports derived from act
 
 **Recorded evidence**
 
-- [docs/evidence/RX-2004.md](docs/evidence/RX-2004.md)
+- [docs/evidence/RX-2004.md](../evidence/RX-2004.md)
 
 
 ## RX-2005
@@ -509,7 +509,7 @@ Produce trustworthy presentation data from original source, using reanalysis or 
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -529,7 +529,7 @@ Produce trustworthy presentation data from original source, using reanalysis or 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-2005.md](docs/evidence/RX-2005.md)
+- [docs/evidence/RX-2005.md](../evidence/RX-2005.md)
 
 
 ## RX-2006
@@ -548,7 +548,7 @@ Deliver a usable optional native search interface and Inspector over real docume
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [VERIFICATION_PLAN.md](docs/planning/VERIFICATION_PLAN.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md)
 
 **Acceptance criteria**
 
@@ -570,8 +570,8 @@ Deliver a usable optional native search interface and Inspector over real docume
 
 **Recorded evidence**
 
-- [docs/evidence/RX-2006.md](docs/evidence/RX-2006.md)
-- [docs/evidence/RX-2006-review.md](docs/evidence/RX-2006-review.md)
+- [docs/evidence/RX-2006.md](../evidence/RX-2006.md)
+- [docs/evidence/RX-2006-review.md](../evidence/RX-2006-review.md)
 
 
 ## RX-3001
@@ -590,7 +590,7 @@ Host the complete native engine in one module worker through validated transport
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -610,12 +610,12 @@ Host the complete native engine in one module worker through validated transport
 
 **Recorded evidence**
 
-- [docs/evidence/RX-3001.md](docs/evidence/RX-3001.md)
-- [docs/evidence/RX-3001-review.md](docs/evidence/RX-3001-review.md)
-- [docs/evidence/RX-3001-browser.json](docs/evidence/RX-3001-browser.json)
-- [docs/evidence/RX-3001-package.json](docs/evidence/RX-3001-package.json)
-- [docs/evidence/RX-3001-transport-work.json](docs/evidence/RX-3001-transport-work.json)
-- [docs/evidence/RX-3001-review-probe.json](docs/evidence/RX-3001-review-probe.json)
+- [docs/evidence/RX-3001.md](../evidence/RX-3001.md)
+- [docs/evidence/RX-3001-review.md](../evidence/RX-3001-review.md)
+- [docs/evidence/RX-3001-browser.json](../evidence/RX-3001-browser.json)
+- [docs/evidence/RX-3001-package.json](../evidence/RX-3001-package.json)
+- [docs/evidence/RX-3001-transport-work.json](../evidence/RX-3001-transport-work.json)
+- [docs/evidence/RX-3001-review-probe.json](../evidence/RX-3001-review-probe.json)
 
 
 ## RX-3002
@@ -634,7 +634,7 @@ Export and restore explicit source/native snapshot formats with bounded decoding
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -654,11 +654,11 @@ Export and restore explicit source/native snapshot formats with bounded decoding
 
 **Recorded evidence**
 
-- [docs/evidence/RX-3002.md](docs/evidence/RX-3002.md)
-- [docs/evidence/RX-3002-review.md](docs/evidence/RX-3002-review.md)
-- [docs/evidence/RX-3002-package.json](docs/evidence/RX-3002-package.json)
-- [docs/evidence/RX-3002-costs.json](docs/evidence/RX-3002-costs.json)
-- [docs/evidence/RX-3002-review-probe.json](docs/evidence/RX-3002-review-probe.json)
+- [docs/evidence/RX-3002.md](../evidence/RX-3002.md)
+- [docs/evidence/RX-3002-review.md](../evidence/RX-3002-review.md)
+- [docs/evidence/RX-3002-package.json](../evidence/RX-3002-package.json)
+- [docs/evidence/RX-3002-costs.json](../evidence/RX-3002-costs.json)
+- [docs/evidence/RX-3002-review-probe.json](../evidence/RX-3002-review-probe.json)
 
 
 ## RX-3003
@@ -677,7 +677,7 @@ Provide explicitly selected local persistence and recovery with truthful commit/
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md)
 
 **Acceptance criteria**
 
@@ -697,11 +697,11 @@ Provide explicitly selected local persistence and recovery with truthful commit/
 
 **Recorded evidence**
 
-- [docs/evidence/RX-3003.md](docs/evidence/RX-3003.md)
-- [docs/evidence/RX-3003-review.md](docs/evidence/RX-3003-review.md)
-- [docs/evidence/RX-3003-browser-fifth.json](docs/evidence/RX-3003-browser-fifth.json)
-- [docs/evidence/RX-3003-review-probe.json](docs/evidence/RX-3003-review-probe.json)
-- [docs/evidence/RX-3003-browser-accepted.json](docs/evidence/RX-3003-browser-accepted.json)
+- [docs/evidence/RX-3003.md](../evidence/RX-3003.md)
+- [docs/evidence/RX-3003-review.md](../evidence/RX-3003-review.md)
+- [docs/evidence/RX-3003-browser-fifth.json](../evidence/RX-3003-browser-fifth.json)
+- [docs/evidence/RX-3003-review-probe.json](../evidence/RX-3003-review-probe.json)
+- [docs/evidence/RX-3003-browser-accepted.json](../evidence/RX-3003-browser-accepted.json)
 
 
 ## RX-3004
@@ -720,7 +720,7 @@ Provide a bounded route from the prior companion while keeping native implementa
 
 **Contracts**
 
-[ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -741,14 +741,14 @@ Provide a bounded route from the prior companion while keeping native implementa
 
 **Recorded evidence**
 
-- [docs/evidence/RX-3004.md](docs/evidence/RX-3004.md)
-- [docs/evidence/RX-3004-review.md](docs/evidence/RX-3004-review.md)
-- [docs/evidence/RX-3004-migration.json](docs/evidence/RX-3004-migration.json)
-- [docs/evidence/RX-3004-browser.json](docs/evidence/RX-3004-browser.json)
-- [docs/evidence/RX-3004-comparison.json](docs/evidence/RX-3004-comparison.json)
-- [docs/evidence/RX-3004-review-probe.json](docs/evidence/RX-3004-review-probe.json)
-- [docs/evidence/RX-3004-provenance.json](docs/evidence/RX-3004-provenance.json)
-- [docs/evidence/RX-3004-browser-final.json](docs/evidence/RX-3004-browser-final.json)
+- [docs/evidence/RX-3004.md](../evidence/RX-3004.md)
+- [docs/evidence/RX-3004-review.md](../evidence/RX-3004-review.md)
+- [docs/evidence/RX-3004-migration.json](../evidence/RX-3004-migration.json)
+- [docs/evidence/RX-3004-browser.json](../evidence/RX-3004-browser.json)
+- [docs/evidence/RX-3004-comparison.json](../evidence/RX-3004-comparison.json)
+- [docs/evidence/RX-3004-review-probe.json](../evidence/RX-3004-review-probe.json)
+- [docs/evidence/RX-3004-provenance.json](../evidence/RX-3004-provenance.json)
+- [docs/evidence/RX-3004-browser-final.json](../evidence/RX-3004-browser-final.json)
 
 
 ## RX-4001
@@ -767,7 +767,7 @@ Establish the native product's observed strengths and limitations through equiva
 
 **Contracts**
 
-[VERIFICATION_PLAN.md](docs/planning/VERIFICATION_PLAN.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md)
+[VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md)
 
 **Acceptance criteria**
 
@@ -789,20 +789,20 @@ Establish the native product's observed strengths and limitations through equiva
 
 **Recorded evidence**
 
-- [docs/evidence/RX-4001.md](docs/evidence/RX-4001.md)
-- [docs/evidence/RX-4001-review.md](docs/evidence/RX-4001-review.md)
-- [docs/evidence/RX-4001-correctness.json](docs/evidence/RX-4001-correctness.json)
-- [docs/evidence/RX-4001-relevance.json](docs/evidence/RX-4001-relevance.json)
-- [docs/evidence/RX-4001-comparison.json](docs/evidence/RX-4001-comparison.json)
-- [docs/evidence/RX-4001-costs.json](docs/evidence/RX-4001-costs.json)
-- [docs/evidence/RX-4001-costs-first.json](docs/evidence/RX-4001-costs-first.json)
-- [docs/evidence/RX-4001-costs-small-core-repeat.json](docs/evidence/RX-4001-costs-small-core-repeat.json)
-- [docs/evidence/RX-4001-costs-first-unrepaired.json](docs/evidence/RX-4001-costs-first-unrepaired.json)
-- [docs/evidence/RX-4001-browser-costs.json](docs/evidence/RX-4001-browser-costs.json)
-- [docs/evidence/RX-4001-review-probe.json](docs/evidence/RX-4001-review-probe.json)
-- [docs/evidence/RX-4001-package.json](docs/evidence/RX-4001-package.json)
-- [docs/evidence/RX-4001-package-final.json](docs/evidence/RX-4001-package-final.json)
-- [docs/evidence/RX-4001-package-audit.json](docs/evidence/RX-4001-package-audit.json)
+- [docs/evidence/RX-4001.md](../evidence/RX-4001.md)
+- [docs/evidence/RX-4001-review.md](../evidence/RX-4001-review.md)
+- [docs/evidence/RX-4001-correctness.json](../evidence/RX-4001-correctness.json)
+- [docs/evidence/RX-4001-relevance.json](../evidence/RX-4001-relevance.json)
+- [docs/evidence/RX-4001-comparison.json](../evidence/RX-4001-comparison.json)
+- [docs/evidence/RX-4001-costs.json](../evidence/RX-4001-costs.json)
+- [docs/evidence/RX-4001-costs-first.json](../evidence/RX-4001-costs-first.json)
+- [docs/evidence/RX-4001-costs-small-core-repeat.json](../evidence/RX-4001-costs-small-core-repeat.json)
+- [docs/evidence/RX-4001-costs-first-unrepaired.json](../evidence/RX-4001-costs-first-unrepaired.json)
+- [docs/evidence/RX-4001-browser-costs.json](../evidence/RX-4001-browser-costs.json)
+- [docs/evidence/RX-4001-review-probe.json](../evidence/RX-4001-review-probe.json)
+- [docs/evidence/RX-4001-package.json](../evidence/RX-4001-package.json)
+- [docs/evidence/RX-4001-package-final.json](../evidence/RX-4001-package-final.json)
+- [docs/evidence/RX-4001-package-audit.json](../evidence/RX-4001-package-audit.json)
 
 
 ## RX-4002
@@ -821,7 +821,7 @@ Collect the specific environment and resource observations required by the propo
 
 **Contracts**
 
-[VERIFICATION_PLAN.md](docs/planning/VERIFICATION_PLAN.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md), [ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md)
+[VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md), [ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md)
 
 **Acceptance criteria**
 
@@ -844,232 +844,232 @@ Collect the specific environment and resource observations required by the propo
 
 **Recorded evidence**
 
-- [docs/evidence/RX-4002.md](docs/evidence/RX-4002.md)
-- [docs/evidence/RX-4002-browsers-accepted.json](docs/evidence/RX-4002-browsers-accepted.json)
-- [docs/evidence/RX-4002-memory.json](docs/evidence/RX-4002-memory.json)
-- [docs/evidence/RX-4002-memory-graphs.json](docs/evidence/RX-4002-memory-graphs.json)
-- [docs/evidence/RX-4002-memory-summary.json](docs/evidence/RX-4002-memory-summary.json)
-- [docs/evidence/RX-4002-memory-integrity.json](docs/evidence/RX-4002-memory-integrity.json)
-- [docs/support/RX-4002.md](docs/support/RX-4002.md)
-- [docs/evaluation/RX-4002-memory-method.md](docs/evaluation/RX-4002-memory-method.md)
-- [docs/accessibility/RX-4002-manual-observations.md](docs/accessibility/RX-4002-manual-observations.md)
-- [docs/evidence/RX-4002-review.md](docs/evidence/RX-4002-review.md)
-- [docs/evidence/RX-4002-review-probe.json](docs/evidence/RX-4002-review-probe.json)
-- [docs/evidence/RX-4002-package-final.json](docs/evidence/RX-4002-package-final.json)
-- [docs/evidence/RX-4002-package-audit.json](docs/evidence/RX-4002-package-audit.json)
-- [docs/evidence/RX-4002-retainers.md](docs/evidence/RX-4002-retainers.md)
-- [docs/evidence/RX-4002-memory-retainers.json](docs/evidence/RX-4002-memory-retainers.json)
-- [docs/evidence/RX-4002-retainers-review.md](docs/evidence/RX-4002-retainers-review.md)
-- [docs/evidence/RX-4002-retainers-review-probe.json](docs/evidence/RX-4002-retainers-review-probe.json)
-- [docs/evidence/RX-4002-retainers-package.json](docs/evidence/RX-4002-retainers-package.json)
-- [docs/evidence/RX-4002-retainers-package-audit.json](docs/evidence/RX-4002-retainers-package-audit.json)
-- [docs/evidence/RX-4002-facets.md](docs/evidence/RX-4002-facets.md)
-- [docs/evidence/RX-4002-facet-keyboard-arrowup.json](docs/evidence/RX-4002-facet-keyboard-arrowup.json)
-- [docs/evidence/RX-4002-facet-keyboard-arrowup-source.mjs](docs/evidence/RX-4002-facet-keyboard-arrowup-source.mjs)
-- [docs/evidence/RX-4002-facet-keyboard-idle-typeahead.json](docs/evidence/RX-4002-facet-keyboard-idle-typeahead.json)
-- [docs/evidence/RX-4002-facets-review-probe.mjs](docs/evidence/RX-4002-facets-review-probe.mjs)
-- [docs/evidence/RX-4002-facets-review-probe.json](docs/evidence/RX-4002-facets-review-probe.json)
-- [docs/evidence/RX-4002-facets-package.json](docs/evidence/RX-4002-facets-package.json)
-- [docs/evidence/RX-4002-facets-package-audit.json](docs/evidence/RX-4002-facets-package-audit.json)
-- [docs/evidence/RX-4002-facets-review.md](docs/evidence/RX-4002-facets-review.md)
-- [docs/evidence/RX-4002-installed.md](docs/evidence/RX-4002-installed.md)
-- [docs/evidence/RX-4002-installed-package.json](docs/evidence/RX-4002-installed-package.json)
-- [docs/evidence/RX-4002-installed-observations.json](docs/evidence/RX-4002-installed-observations.json)
-- [docs/evidence/RX-4002-installed-preservation.json](docs/evidence/RX-4002-installed-preservation.json)
-- [docs/evidence/RX-4002-installed-audit.json](docs/evidence/RX-4002-installed-audit.json)
-- [docs/evidence/RX-4002-installed-review.md](docs/evidence/RX-4002-installed-review.md)
-- [docs/evidence/RX-4002-installed-review-observations.json](docs/evidence/RX-4002-installed-review-observations.json)
-- [docs/evidence/RX-4002-installed-matrix.md](docs/evidence/RX-4002-installed-matrix.md)
-- [docs/evidence/RX-4002-installed-matrix-package.json](docs/evidence/RX-4002-installed-matrix-package.json)
-- [docs/evidence/RX-4002-installed-matrix-observations.json](docs/evidence/RX-4002-installed-matrix-observations.json)
-- [docs/evidence/RX-4002-installed-matrix-audit.json](docs/evidence/RX-4002-installed-matrix-audit.json)
-- [docs/evidence/RX-4002-installed-matrix.jsonl](docs/evidence/RX-4002-installed-matrix.jsonl)
-- [docs/evidence/RX-4002-installed-matrix-review-observations.json](docs/evidence/RX-4002-installed-matrix-review-observations.json)
-- [docs/evidence/RX-4002-memory-restore.md](docs/evidence/RX-4002-memory-restore.md)
-- [docs/evidence/RX-4002-memory-restore.json](docs/evidence/RX-4002-memory-restore.json)
-- [docs/evidence/RX-4002-memory-restore-reconciliation.json](docs/evidence/RX-4002-memory-restore-reconciliation.json)
-- [docs/evidence/RX-4002-memory-restore-executed-run.mjs](docs/evidence/RX-4002-memory-restore-executed-run.mjs)
-- [docs/evidence/RX-4002-installed-matrix-review.md](docs/evidence/RX-4002-installed-matrix-review.md)
-- [docs/evidence/RX-4002-announcements.md](docs/evidence/RX-4002-announcements.md)
-- [docs/evidence/RX-4002-announcement-observations.json](docs/evidence/RX-4002-announcement-observations.json)
-- [docs/evidence/RX-4002-announcements-package.json](docs/evidence/RX-4002-announcements-package.json)
-- [docs/evidence/RX-4002-announcements-review.md](docs/evidence/RX-4002-announcements-review.md)
-- [docs/evidence/RX-4002-announcements-validation.json](docs/evidence/RX-4002-announcements-validation.json)
-- [docs/evidence/RX-4002-announcements-check.log](docs/evidence/RX-4002-announcements-check.log)
-- [docs/evidence/RX-4002-announcements-busy.md](docs/evidence/RX-4002-announcements-busy.md)
-- [docs/evidence/RX-4002-announcements-busy-validation.json](docs/evidence/RX-4002-announcements-busy-validation.json)
-- [docs/evidence/RX-4002-announcements-busy-review.md](docs/evidence/RX-4002-announcements-busy-review.md)
-- [docs/evidence/RX-4002-announcements-busy-check.log](docs/evidence/RX-4002-announcements-busy-check.log)
-- [docs/accessibility/RX-4002-announcement-investigation.md](docs/accessibility/RX-4002-announcement-investigation.md)
-- [docs/evidence/RX-4002-input.md](docs/evidence/RX-4002-input.md)
-- [docs/evidence/RX-4002-input-focused.log](docs/evidence/RX-4002-input-focused.log)
-- [docs/evidence/RX-4002-input-check.log](docs/evidence/RX-4002-input-check.log)
-- [docs/evidence/RX-4002-input-package.json](docs/evidence/RX-4002-input-package.json)
-- [docs/evidence/RX-4002-input-serve-validation.json](docs/evidence/RX-4002-input-serve-validation.json)
-- [docs/evidence/RX-4002-input-inspection.json](docs/evidence/RX-4002-input-inspection.json)
-- [docs/evidence/RX-4002-dead-key.md](docs/evidence/RX-4002-dead-key.md)
-- [docs/evidence/RX-4002-dead-key.json](docs/evidence/RX-4002-dead-key.json)
-- [docs/evidence/RX-4002-memory-browser-first-smoke.json.gz](docs/evidence/RX-4002-memory-browser-first-smoke.json.gz)
-- [docs/evidence/RX-4002-memory-browser-focused.log](docs/evidence/RX-4002-memory-browser-focused.log)
-- [docs/evidence/RX-4002-memory-browser-profiles-1000-0.json.gz](docs/evidence/RX-4002-memory-browser-profiles-1000-0.json.gz)
-- [docs/evidence/RX-4002-memory-browser-profiles-1000-1.json.gz](docs/evidence/RX-4002-memory-browser-profiles-1000-1.json.gz)
-- [docs/evidence/RX-4002-memory-browser-profiles-1000-2.json.gz](docs/evidence/RX-4002-memory-browser-profiles-1000-2.json.gz)
-- [docs/evidence/RX-4002-memory-browser-profiles-10000-0.json.gz](docs/evidence/RX-4002-memory-browser-profiles-10000-0.json.gz)
-- [docs/evidence/RX-4002-memory-browser-profiles-10000-1.json.gz](docs/evidence/RX-4002-memory-browser-profiles-10000-1.json.gz)
-- [docs/evidence/RX-4002-memory-browser-profiles-10000-2.json.gz](docs/evidence/RX-4002-memory-browser-profiles-10000-2.json.gz)
-- [docs/evidence/RX-4002-memory-browser-second-smoke.json.gz](docs/evidence/RX-4002-memory-browser-second-smoke.json.gz)
-- [docs/evidence/RX-4002-memory-browser.json.gz](docs/evidence/RX-4002-memory-browser.json.gz)
-- [docs/evidence/RX-4002-memory-browser.md](docs/evidence/RX-4002-memory-browser.md)
-- [docs/evidence/RX-4002-memory-browser-check.log](docs/evidence/RX-4002-memory-browser-check.log)
-- [docs/evidence/RX-4002-memory-browser-review.md](docs/evidence/RX-4002-memory-browser-review.md)
-- [docs/evidence/RX-4002-memory-browser-run.log](docs/evidence/RX-4002-memory-browser-run.log)
-- [docs/evidence/RX-4002-memory-collection-cohort-1000-fields.json.gz](docs/evidence/RX-4002-memory-collection-cohort-1000-fields.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-1000-joint.json.gz](docs/evidence/RX-4002-memory-collection-cohort-1000-joint.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-1000-noop.json.gz](docs/evidence/RX-4002-memory-collection-cohort-1000-noop.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-1000-reverse.json.gz](docs/evidence/RX-4002-memory-collection-cohort-1000-reverse.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-1000-side.json.gz](docs/evidence/RX-4002-memory-collection-cohort-1000-side.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-10000-fields.json.gz](docs/evidence/RX-4002-memory-collection-cohort-10000-fields.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-10000-joint.json.gz](docs/evidence/RX-4002-memory-collection-cohort-10000-joint.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-10000-noop.json.gz](docs/evidence/RX-4002-memory-collection-cohort-10000-noop.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-10000-reverse.json.gz](docs/evidence/RX-4002-memory-collection-cohort-10000-reverse.json.gz)
-- [docs/evidence/RX-4002-memory-collection-cohort-10000-side.json.gz](docs/evidence/RX-4002-memory-collection-cohort-10000-side.json.gz)
-- [docs/evidence/RX-4002-memory-collection-environment.json](docs/evidence/RX-4002-memory-collection-environment.json)
-- [docs/evidence/RX-4002-memory-collection-focused.log](docs/evidence/RX-4002-memory-collection-focused.log)
-- [docs/evidence/RX-4002-memory-collection-guard-tests.log](docs/evidence/RX-4002-memory-collection-guard-tests.log)
-- [docs/evidence/RX-4002-memory-collection-identity-audit.json](docs/evidence/RX-4002-memory-collection-identity-audit.json)
-- [docs/evidence/RX-4002-memory-collection-independent-audit.json](docs/evidence/RX-4002-memory-collection-independent-audit.json)
-- [docs/evidence/RX-4002-memory-collection-reconciliation.json](docs/evidence/RX-4002-memory-collection-reconciliation.json)
-- [docs/evidence/RX-4002-memory-collection-run.log](docs/evidence/RX-4002-memory-collection-run.log)
-- [docs/evidence/RX-4002-memory-collection-smoke.json.gz](docs/evidence/RX-4002-memory-collection-smoke.json.gz)
-- [docs/evidence/RX-4002-memory-collection-v1-sources.json.gz](docs/evidence/RX-4002-memory-collection-v1-sources.json.gz)
-- [docs/evidence/RX-4002-memory-collection.json](docs/evidence/RX-4002-memory-collection.json)
-- [docs/evidence/RX-4002-memory-collection.md](docs/evidence/RX-4002-memory-collection.md)
-- [docs/evidence/RX-4002-memory-collection-check.log](docs/evidence/RX-4002-memory-collection-check.log)
-- [docs/evidence/RX-4002-memory-collection-review.md](docs/evidence/RX-4002-memory-collection-review.md)
-- [docs/evidence/RX-4002-memory-mutation-baseline-check.log](docs/evidence/RX-4002-memory-mutation-baseline-check.log)
-- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-1000-cancel.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-core-only-1000-cancel.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-1000-commit.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-core-only-1000-commit.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-10000-cancel.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-core-only-10000-cancel.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-10000-commit.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-core-only-10000-commit.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-cancel.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-cancel.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-commit.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-commit.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-cancel.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-cancel.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-commit.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-commit.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-cancel.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-cancel.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-commit.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-commit.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-cancel.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-cancel.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-commit.json.gz](docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-commit.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-development.json.gz](docs/evidence/RX-4002-memory-mutation-development.json.gz)
-- [docs/evidence/RX-4002-memory-mutation-focused.log](docs/evidence/RX-4002-memory-mutation-focused.log)
-- [docs/evidence/RX-4002-memory-mutation-independent-audit.json](docs/evidence/RX-4002-memory-mutation-independent-audit.json)
-- [docs/evidence/RX-4002-memory-mutation-independent-audit.mjs](docs/evidence/RX-4002-memory-mutation-independent-audit.mjs)
-- [docs/evidence/RX-4002-memory-mutation-review.md](docs/evidence/RX-4002-memory-mutation-review.md)
-- [docs/evidence/RX-4002-memory-mutation-run.log](docs/evidence/RX-4002-memory-mutation-run.log)
-- [docs/evidence/RX-4002-memory-mutation.json](docs/evidence/RX-4002-memory-mutation.json)
-- [docs/evidence/RX-4002-memory-mutation.md](docs/evidence/RX-4002-memory-mutation.md)
-- [docs/evidence/RX-4002-memory-mutation-check.log](docs/evidence/RX-4002-memory-mutation-check.log)
-- [docs/evidence/RX-4002-memory-mutation-ci.log](docs/evidence/RX-4002-memory-mutation-ci.log)
-- [docs/evidence/RX-4002-memory-codec-baseline-check.log](docs/evidence/RX-4002-memory-codec-baseline-check.log)
-- [docs/evidence/RX-4002-memory-codec-calibration.json.gz](docs/evidence/RX-4002-memory-codec-calibration.json.gz)
-- [docs/evidence/RX-4002-memory-codec-ci.log](docs/evidence/RX-4002-memory-codec-ci.log)
-- [docs/evidence/RX-4002-memory-codec-cohort-1000-decode-envelope.json.gz](docs/evidence/RX-4002-memory-codec-cohort-1000-decode-envelope.json.gz)
-- [docs/evidence/RX-4002-memory-codec-cohort-1000-encode-envelope.json.gz](docs/evidence/RX-4002-memory-codec-cohort-1000-encode-envelope.json.gz)
-- [docs/evidence/RX-4002-memory-codec-cohort-1000-encode-prejoin.json.gz](docs/evidence/RX-4002-memory-codec-cohort-1000-encode-prejoin.json.gz)
-- [docs/evidence/RX-4002-memory-codec-cohort-1000-restore-precommit.json.gz](docs/evidence/RX-4002-memory-codec-cohort-1000-restore-precommit.json.gz)
-- [docs/evidence/RX-4002-memory-codec-cohort-10000-decode-envelope.json.gz](docs/evidence/RX-4002-memory-codec-cohort-10000-decode-envelope.json.gz)
-- [docs/evidence/RX-4002-memory-codec-cohort-10000-encode-envelope.json.gz](docs/evidence/RX-4002-memory-codec-cohort-10000-encode-envelope.json.gz)
-- [docs/evidence/RX-4002-memory-codec-cohort-10000-encode-prejoin.json.gz](docs/evidence/RX-4002-memory-codec-cohort-10000-encode-prejoin.json.gz)
-- [docs/evidence/RX-4002-memory-codec-cohort-10000-restore-precommit.json.gz](docs/evidence/RX-4002-memory-codec-cohort-10000-restore-precommit.json.gz)
-- [docs/evidence/RX-4002-memory-codec-focused.log](docs/evidence/RX-4002-memory-codec-focused.log)
-- [docs/evidence/RX-4002-memory-codec-independent-audit.json](docs/evidence/RX-4002-memory-codec-independent-audit.json)
-- [docs/evidence/RX-4002-memory-codec-independent-audit.mjs](docs/evidence/RX-4002-memory-codec-independent-audit.mjs)
-- [docs/evidence/RX-4002-memory-codec-review.md](docs/evidence/RX-4002-memory-codec-review.md)
-- [docs/evidence/RX-4002-memory-codec-run.log](docs/evidence/RX-4002-memory-codec-run.log)
-- [docs/evidence/RX-4002-memory-codec.json](docs/evidence/RX-4002-memory-codec.json)
-- [docs/evidence/RX-4002-memory-codec.md](docs/evidence/RX-4002-memory-codec.md)
-- [docs/evidence/RX-4002-memory-codec-check.log](docs/evidence/RX-4002-memory-codec-check.log)
-- [docs/evidence/RX-4002-memory-transport-baseline-check.log](docs/evidence/RX-4002-memory-transport-baseline-check.log)
-- [docs/evidence/RX-4002-memory-transport-calibration-trace.json.gz](docs/evidence/RX-4002-memory-transport-calibration-trace.json.gz)
-- [docs/evidence/RX-4002-memory-transport-calibration.json.gz](docs/evidence/RX-4002-memory-transport-calibration.json.gz)
-- [docs/evidence/RX-4002-memory-transport-ci.log](docs/evidence/RX-4002-memory-transport-ci.log)
-- [docs/evidence/RX-4002-memory-transport-feasibility-audit.json](docs/evidence/RX-4002-memory-transport-feasibility-audit.json)
-- [docs/evidence/RX-4002-memory-transport-feasibility-audit.mjs](docs/evidence/RX-4002-memory-transport-feasibility-audit.mjs)
-- [docs/evidence/RX-4002-memory-transport-feasibility.json.gz](docs/evidence/RX-4002-memory-transport-feasibility.json.gz)
-- [docs/evidence/RX-4002-memory-transport-focused.log](docs/evidence/RX-4002-memory-transport-focused.log)
-- [docs/evidence/RX-4002-memory-transport-independent-audit.json](docs/evidence/RX-4002-memory-transport-independent-audit.json)
-- [docs/evidence/RX-4002-memory-transport-independent-audit.mjs](docs/evidence/RX-4002-memory-transport-independent-audit.mjs)
-- [docs/evidence/RX-4002-memory-transport-review.md](docs/evidence/RX-4002-memory-transport-review.md)
-- [docs/evidence/RX-4002-memory-transport-run.log](docs/evidence/RX-4002-memory-transport-run.log)
-- [docs/evidence/RX-4002-memory-transport-trace-1000-0.json.gz](docs/evidence/RX-4002-memory-transport-trace-1000-0.json.gz)
-- [docs/evidence/RX-4002-memory-transport-trace-1000-1.json.gz](docs/evidence/RX-4002-memory-transport-trace-1000-1.json.gz)
-- [docs/evidence/RX-4002-memory-transport-trace-1000-2.json.gz](docs/evidence/RX-4002-memory-transport-trace-1000-2.json.gz)
-- [docs/evidence/RX-4002-memory-transport-trace-10000-0.json.gz](docs/evidence/RX-4002-memory-transport-trace-10000-0.json.gz)
-- [docs/evidence/RX-4002-memory-transport-trace-10000-1.json.gz](docs/evidence/RX-4002-memory-transport-trace-10000-1.json.gz)
-- [docs/evidence/RX-4002-memory-transport-trace-10000-2.json.gz](docs/evidence/RX-4002-memory-transport-trace-10000-2.json.gz)
-- [docs/evidence/RX-4002-memory-transport.json](docs/evidence/RX-4002-memory-transport.json)
-- [docs/evidence/RX-4002-memory-transport.md](docs/evidence/RX-4002-memory-transport.md)
-- [docs/evidence/RX-4002-memory-transport-calibration-audit.json](docs/evidence/RX-4002-memory-transport-calibration-audit.json)
-- [docs/evidence/RX-4002-memory-transport-check.log](docs/evidence/RX-4002-memory-transport-check.log)
-- [docs/evidence/RX-4002-memory-peak-capability.md](docs/evidence/RX-4002-memory-peak-capability.md)
-- [docs/evidence/RX-4002-memory-peak-capability.json](docs/evidence/RX-4002-memory-peak-capability.json)
-- [docs/evidence/RX-4002-memory-peak-capability.json.gz](docs/evidence/RX-4002-memory-peak-capability.json.gz)
-- [docs/evidence/RX-4002-memory-peak-capability-independent-audit.json](docs/evidence/RX-4002-memory-peak-capability-independent-audit.json)
-- [docs/evidence/RX-4002-peaks-at.md](docs/evidence/RX-4002-peaks-at.md)
-- [docs/evidence/RX-4002-focus-package.json](docs/evidence/RX-4002-focus-package.json)
-- [docs/evidence/RX-4002-peaks-at-review.md](docs/evidence/RX-4002-peaks-at-review.md)
-- [docs/evidence/RX-4002-peaks-at-identity.json](docs/evidence/RX-4002-peaks-at-identity.json)
-- [docs/evidence/RX-4002-peaks-at-identity.mjs](docs/evidence/RX-4002-peaks-at-identity.mjs)
-- [docs/evidence/RX-4002-peaks-at-check.log](docs/evidence/RX-4002-peaks-at-check.log)
-- [docs/evidence/RX-4002-inspector-focus-20261027.md](docs/evidence/RX-4002-inspector-focus-20261027.md)
-- [docs/evidence/RX-4002-inspector-focus-20261027.json](docs/evidence/RX-4002-inspector-focus-20261027.json)
-- [docs/evidence/RX-4002-inspector-focus-package-20261027.json.gz](docs/evidence/RX-4002-inspector-focus-package-20261027.json.gz)
-- [docs/evidence/RX-4002-normal-typing-20261027.md](docs/evidence/RX-4002-normal-typing-20261027.md)
-- [docs/evidence/RX-4002-native-events-20261027.md](docs/evidence/RX-4002-native-events-20261027.md)
-- [docs/evidence/RX-4002-native-events-20261027.json.gz](docs/evidence/RX-4002-native-events-20261027.json.gz)
-- [docs/evidence/RX-4002-native-events-audit-20261027.json](docs/evidence/RX-4002-native-events-audit-20261027.json)
-- [docs/evidence/RX-4002-native-events-audit.mjs](docs/evidence/RX-4002-native-events-audit.mjs)
-- [docs/evidence/RX-4002-runtime-instrumentation-20261028.md](docs/evidence/RX-4002-runtime-instrumentation-20261028.md)
-- [docs/evidence/RX-4002-runtime-instrumentation-identity-20261028.json](docs/evidence/RX-4002-runtime-instrumentation-identity-20261028.json)
-- [docs/evidence/RX-4002-runtime-public-controls-20261028.json.gz](docs/evidence/RX-4002-runtime-public-controls-20261028.json.gz)
-- [docs/evidence/RX-4002-managed-runtime-20261028.json.gz](docs/evidence/RX-4002-managed-runtime-20261028.json.gz)
-- [docs/evidence/RX-4002-runtime-archive-audit-20261028.mjs](docs/evidence/RX-4002-runtime-archive-audit-20261028.mjs)
-- [docs/evidence/RX-4002-managed-runtime-audit-20261028.py](docs/evidence/RX-4002-managed-runtime-audit-20261028.py)
-- [docs/evidence/RX-4002-runtime-check-20261028.log](docs/evidence/RX-4002-runtime-check-20261028.log)
-- [docs/evidence/RX-4002-runtime-final-review-20261028.json](docs/evidence/RX-4002-runtime-final-review-20261028.json)
-- [docs/evidence/RX-4002-runtime-workloads-20261028.md](docs/evidence/RX-4002-runtime-workloads-20261028.md)
-- [docs/evidence/RX-4002-runtime-workloads-identity-20261028.json](docs/evidence/RX-4002-runtime-workloads-identity-20261028.json)
-- [docs/evidence/RX-4002-runtime-workloads-20261028.tar.gz](docs/evidence/RX-4002-runtime-workloads-20261028.tar.gz)
-- [bench/memory/runtime-audit.py](bench/memory/runtime-audit.py)
-- [bench/memory/runtime-archive.py](bench/memory/runtime-archive.py)
-- [docs/evidence/RX-4002-runtime-workloads-check-20261028.log](docs/evidence/RX-4002-runtime-workloads-check-20261028.log)
-- [docs/evidence/RX-4002-runtime-workloads-review-20261028.json](docs/evidence/RX-4002-runtime-workloads-review-20261028.json)
-- [docs/evidence/RX-4002-gc-message-20261028.md](docs/evidence/RX-4002-gc-message-20261028.md)
-- [docs/evidence/RX-4002-gc-message-identity-20261028.json](docs/evidence/RX-4002-gc-message-identity-20261028.json)
-- [docs/evidence/RX-4002-gc-message-20261028.tar.gz](docs/evidence/RX-4002-gc-message-20261028.tar.gz)
-- [docs/evidence/RX-4002-gc-message-receiver-20261028.tar.gz](docs/evidence/RX-4002-gc-message-receiver-20261028.tar.gz)
-- [bench/memory/gc-runtime-audit.py](bench/memory/gc-runtime-audit.py)
-- [bench/memory/gc-runtime-audit.test.py](bench/memory/gc-runtime-audit.test.py)
-- [docs/evidence/RX-4002-gc-message-check-20261028.log](docs/evidence/RX-4002-gc-message-check-20261028.log)
-- [docs/evidence/RX-4002-gc-message-review-20261028.json](docs/evidence/RX-4002-gc-message-review-20261028.json)
-- [docs/evidence/RX-4002-codecs-copy-20261028.md](docs/evidence/RX-4002-codecs-copy-20261028.md)
-- [docs/evidence/RX-4002-codecs-copy-identity-20261028.json](docs/evidence/RX-4002-codecs-copy-identity-20261028.json)
-- [docs/evidence/RX-4002-codecs-copy-reconstruction-20261028.json](docs/evidence/RX-4002-codecs-copy-reconstruction-20261028.json)
-- [docs/evidence/RX-4002-codecs-copy-check-20261028.log](docs/evidence/RX-4002-codecs-copy-check-20261028.log)
-- [docs/evidence/RX-4002-codecs-copy-raw-01-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-01-20261028.tar.xz)
-- [docs/evidence/RX-4002-codecs-copy-raw-02-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-02-20261028.tar.xz)
-- [docs/evidence/RX-4002-codecs-copy-raw-03-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-03-20261028.tar.xz)
-- [docs/evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz)
-- [docs/evidence/RX-4002-codecs-copy-20261028.tar.xz](docs/evidence/RX-4002-codecs-copy-20261028.tar.xz)
-- [docs/evidence/RX-4002-codecs-copy-review-20261028.json](docs/evidence/RX-4002-codecs-copy-review-20261028.json)
-- [docs/evidence/RX-4002-gc-shrink-20261028.md](docs/evidence/RX-4002-gc-shrink-20261028.md)
-- [docs/evidence/RX-4002-gc-shrink-20261028.tar.xz](docs/evidence/RX-4002-gc-shrink-20261028.tar.xz)
-- [docs/evidence/RX-4002-gc-shrink-raw-index-20261028.json](docs/evidence/RX-4002-gc-shrink-raw-index-20261028.json)
-- [docs/evidence/RX-4002-gc-shrink-summary-20261028.json](docs/evidence/RX-4002-gc-shrink-summary-20261028.json)
-- [docs/evidence/RX-4002-gc-shrink-reconstruction-20261028.json](docs/evidence/RX-4002-gc-shrink-reconstruction-20261028.json)
-- [docs/evidence/RX-4002-wire-frontiers-20261028.json](docs/evidence/RX-4002-wire-frontiers-20261028.json)
-- [docs/evidence/RX-4002-gc-shrink-identity-20261028.json](docs/evidence/RX-4002-gc-shrink-identity-20261028.json)
-- [docs/evidence/RX-4002-gc-shrink-review-20261028.json](docs/evidence/RX-4002-gc-shrink-review-20261028.json)
-- [docs/evidence/RX-4002-gc-shrink-check-20261028.log](docs/evidence/RX-4002-gc-shrink-check-20261028.log)
+- [docs/evidence/RX-4002.md](../evidence/RX-4002.md)
+- [docs/evidence/RX-4002-browsers-accepted.json](../evidence/RX-4002-browsers-accepted.json)
+- [docs/evidence/RX-4002-memory.json](../evidence/RX-4002-memory.json)
+- [docs/evidence/RX-4002-memory-graphs.json](../evidence/RX-4002-memory-graphs.json)
+- [docs/evidence/RX-4002-memory-summary.json](../evidence/RX-4002-memory-summary.json)
+- [docs/evidence/RX-4002-memory-integrity.json](../evidence/RX-4002-memory-integrity.json)
+- [docs/support/RX-4002.md](../support/RX-4002.md)
+- [docs/evaluation/RX-4002-memory-method.md](../evaluation/RX-4002-memory-method.md)
+- [docs/accessibility/RX-4002-manual-observations.md](../accessibility/RX-4002-manual-observations.md)
+- [docs/evidence/RX-4002-review.md](../evidence/RX-4002-review.md)
+- [docs/evidence/RX-4002-review-probe.json](../evidence/RX-4002-review-probe.json)
+- [docs/evidence/RX-4002-package-final.json](../evidence/RX-4002-package-final.json)
+- [docs/evidence/RX-4002-package-audit.json](../evidence/RX-4002-package-audit.json)
+- [docs/evidence/RX-4002-retainers.md](../evidence/RX-4002-retainers.md)
+- [docs/evidence/RX-4002-memory-retainers.json](../evidence/RX-4002-memory-retainers.json)
+- [docs/evidence/RX-4002-retainers-review.md](../evidence/RX-4002-retainers-review.md)
+- [docs/evidence/RX-4002-retainers-review-probe.json](../evidence/RX-4002-retainers-review-probe.json)
+- [docs/evidence/RX-4002-retainers-package.json](../evidence/RX-4002-retainers-package.json)
+- [docs/evidence/RX-4002-retainers-package-audit.json](../evidence/RX-4002-retainers-package-audit.json)
+- [docs/evidence/RX-4002-facets.md](../evidence/RX-4002-facets.md)
+- [docs/evidence/RX-4002-facet-keyboard-arrowup.json](../evidence/RX-4002-facet-keyboard-arrowup.json)
+- [docs/evidence/RX-4002-facet-keyboard-arrowup-source.mjs](../evidence/RX-4002-facet-keyboard-arrowup-source.mjs)
+- [docs/evidence/RX-4002-facet-keyboard-idle-typeahead.json](../evidence/RX-4002-facet-keyboard-idle-typeahead.json)
+- [docs/evidence/RX-4002-facets-review-probe.mjs](../evidence/RX-4002-facets-review-probe.mjs)
+- [docs/evidence/RX-4002-facets-review-probe.json](../evidence/RX-4002-facets-review-probe.json)
+- [docs/evidence/RX-4002-facets-package.json](../evidence/RX-4002-facets-package.json)
+- [docs/evidence/RX-4002-facets-package-audit.json](../evidence/RX-4002-facets-package-audit.json)
+- [docs/evidence/RX-4002-facets-review.md](../evidence/RX-4002-facets-review.md)
+- [docs/evidence/RX-4002-installed.md](../evidence/RX-4002-installed.md)
+- [docs/evidence/RX-4002-installed-package.json](../evidence/RX-4002-installed-package.json)
+- [docs/evidence/RX-4002-installed-observations.json](../evidence/RX-4002-installed-observations.json)
+- [docs/evidence/RX-4002-installed-preservation.json](../evidence/RX-4002-installed-preservation.json)
+- [docs/evidence/RX-4002-installed-audit.json](../evidence/RX-4002-installed-audit.json)
+- [docs/evidence/RX-4002-installed-review.md](../evidence/RX-4002-installed-review.md)
+- [docs/evidence/RX-4002-installed-review-observations.json](../evidence/RX-4002-installed-review-observations.json)
+- [docs/evidence/RX-4002-installed-matrix.md](../evidence/RX-4002-installed-matrix.md)
+- [docs/evidence/RX-4002-installed-matrix-package.json](../evidence/RX-4002-installed-matrix-package.json)
+- [docs/evidence/RX-4002-installed-matrix-observations.json](../evidence/RX-4002-installed-matrix-observations.json)
+- [docs/evidence/RX-4002-installed-matrix-audit.json](../evidence/RX-4002-installed-matrix-audit.json)
+- [docs/evidence/RX-4002-installed-matrix.jsonl](../evidence/RX-4002-installed-matrix.jsonl)
+- [docs/evidence/RX-4002-installed-matrix-review-observations.json](../evidence/RX-4002-installed-matrix-review-observations.json)
+- [docs/evidence/RX-4002-memory-restore.md](../evidence/RX-4002-memory-restore.md)
+- [docs/evidence/RX-4002-memory-restore.json](../evidence/RX-4002-memory-restore.json)
+- [docs/evidence/RX-4002-memory-restore-reconciliation.json](../evidence/RX-4002-memory-restore-reconciliation.json)
+- [docs/evidence/RX-4002-memory-restore-executed-run.mjs](../evidence/RX-4002-memory-restore-executed-run.mjs)
+- [docs/evidence/RX-4002-installed-matrix-review.md](../evidence/RX-4002-installed-matrix-review.md)
+- [docs/evidence/RX-4002-announcements.md](../evidence/RX-4002-announcements.md)
+- [docs/evidence/RX-4002-announcement-observations.json](../evidence/RX-4002-announcement-observations.json)
+- [docs/evidence/RX-4002-announcements-package.json](../evidence/RX-4002-announcements-package.json)
+- [docs/evidence/RX-4002-announcements-review.md](../evidence/RX-4002-announcements-review.md)
+- [docs/evidence/RX-4002-announcements-validation.json](../evidence/RX-4002-announcements-validation.json)
+- [docs/evidence/RX-4002-announcements-check.log](../evidence/RX-4002-announcements-check.log)
+- [docs/evidence/RX-4002-announcements-busy.md](../evidence/RX-4002-announcements-busy.md)
+- [docs/evidence/RX-4002-announcements-busy-validation.json](../evidence/RX-4002-announcements-busy-validation.json)
+- [docs/evidence/RX-4002-announcements-busy-review.md](../evidence/RX-4002-announcements-busy-review.md)
+- [docs/evidence/RX-4002-announcements-busy-check.log](../evidence/RX-4002-announcements-busy-check.log)
+- [docs/accessibility/RX-4002-announcement-investigation.md](../accessibility/RX-4002-announcement-investigation.md)
+- [docs/evidence/RX-4002-input.md](../evidence/RX-4002-input.md)
+- [docs/evidence/RX-4002-input-focused.log](../evidence/RX-4002-input-focused.log)
+- [docs/evidence/RX-4002-input-check.log](../evidence/RX-4002-input-check.log)
+- [docs/evidence/RX-4002-input-package.json](../evidence/RX-4002-input-package.json)
+- [docs/evidence/RX-4002-input-serve-validation.json](../evidence/RX-4002-input-serve-validation.json)
+- [docs/evidence/RX-4002-input-inspection.json](../evidence/RX-4002-input-inspection.json)
+- [docs/evidence/RX-4002-dead-key.md](../evidence/RX-4002-dead-key.md)
+- [docs/evidence/RX-4002-dead-key.json](../evidence/RX-4002-dead-key.json)
+- [docs/evidence/RX-4002-memory-browser-first-smoke.json.gz](../evidence/RX-4002-memory-browser-first-smoke.json.gz)
+- [docs/evidence/RX-4002-memory-browser-focused.log](../evidence/RX-4002-memory-browser-focused.log)
+- [docs/evidence/RX-4002-memory-browser-profiles-1000-0.json.gz](../evidence/RX-4002-memory-browser-profiles-1000-0.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-1000-1.json.gz](../evidence/RX-4002-memory-browser-profiles-1000-1.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-1000-2.json.gz](../evidence/RX-4002-memory-browser-profiles-1000-2.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-10000-0.json.gz](../evidence/RX-4002-memory-browser-profiles-10000-0.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-10000-1.json.gz](../evidence/RX-4002-memory-browser-profiles-10000-1.json.gz)
+- [docs/evidence/RX-4002-memory-browser-profiles-10000-2.json.gz](../evidence/RX-4002-memory-browser-profiles-10000-2.json.gz)
+- [docs/evidence/RX-4002-memory-browser-second-smoke.json.gz](../evidence/RX-4002-memory-browser-second-smoke.json.gz)
+- [docs/evidence/RX-4002-memory-browser.json.gz](../evidence/RX-4002-memory-browser.json.gz)
+- [docs/evidence/RX-4002-memory-browser.md](../evidence/RX-4002-memory-browser.md)
+- [docs/evidence/RX-4002-memory-browser-check.log](../evidence/RX-4002-memory-browser-check.log)
+- [docs/evidence/RX-4002-memory-browser-review.md](../evidence/RX-4002-memory-browser-review.md)
+- [docs/evidence/RX-4002-memory-browser-run.log](../evidence/RX-4002-memory-browser-run.log)
+- [docs/evidence/RX-4002-memory-collection-cohort-1000-fields.json.gz](../evidence/RX-4002-memory-collection-cohort-1000-fields.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-1000-joint.json.gz](../evidence/RX-4002-memory-collection-cohort-1000-joint.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-1000-noop.json.gz](../evidence/RX-4002-memory-collection-cohort-1000-noop.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-1000-reverse.json.gz](../evidence/RX-4002-memory-collection-cohort-1000-reverse.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-1000-side.json.gz](../evidence/RX-4002-memory-collection-cohort-1000-side.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-10000-fields.json.gz](../evidence/RX-4002-memory-collection-cohort-10000-fields.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-10000-joint.json.gz](../evidence/RX-4002-memory-collection-cohort-10000-joint.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-10000-noop.json.gz](../evidence/RX-4002-memory-collection-cohort-10000-noop.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-10000-reverse.json.gz](../evidence/RX-4002-memory-collection-cohort-10000-reverse.json.gz)
+- [docs/evidence/RX-4002-memory-collection-cohort-10000-side.json.gz](../evidence/RX-4002-memory-collection-cohort-10000-side.json.gz)
+- [docs/evidence/RX-4002-memory-collection-environment.json](../evidence/RX-4002-memory-collection-environment.json)
+- [docs/evidence/RX-4002-memory-collection-focused.log](../evidence/RX-4002-memory-collection-focused.log)
+- [docs/evidence/RX-4002-memory-collection-guard-tests.log](../evidence/RX-4002-memory-collection-guard-tests.log)
+- [docs/evidence/RX-4002-memory-collection-identity-audit.json](../evidence/RX-4002-memory-collection-identity-audit.json)
+- [docs/evidence/RX-4002-memory-collection-independent-audit.json](../evidence/RX-4002-memory-collection-independent-audit.json)
+- [docs/evidence/RX-4002-memory-collection-reconciliation.json](../evidence/RX-4002-memory-collection-reconciliation.json)
+- [docs/evidence/RX-4002-memory-collection-run.log](../evidence/RX-4002-memory-collection-run.log)
+- [docs/evidence/RX-4002-memory-collection-smoke.json.gz](../evidence/RX-4002-memory-collection-smoke.json.gz)
+- [docs/evidence/RX-4002-memory-collection-v1-sources.json.gz](../evidence/RX-4002-memory-collection-v1-sources.json.gz)
+- [docs/evidence/RX-4002-memory-collection.json](../evidence/RX-4002-memory-collection.json)
+- [docs/evidence/RX-4002-memory-collection.md](../evidence/RX-4002-memory-collection.md)
+- [docs/evidence/RX-4002-memory-collection-check.log](../evidence/RX-4002-memory-collection-check.log)
+- [docs/evidence/RX-4002-memory-collection-review.md](../evidence/RX-4002-memory-collection-review.md)
+- [docs/evidence/RX-4002-memory-mutation-baseline-check.log](../evidence/RX-4002-memory-mutation-baseline-check.log)
+- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-1000-cancel.json.gz](../evidence/RX-4002-memory-mutation-cohort-core-only-1000-cancel.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-1000-commit.json.gz](../evidence/RX-4002-memory-mutation-cohort-core-only-1000-commit.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-10000-cancel.json.gz](../evidence/RX-4002-memory-mutation-cohort-core-only-10000-cancel.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-core-only-10000-commit.json.gz](../evidence/RX-4002-memory-mutation-cohort-core-only-10000-commit.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-cancel.json.gz](../evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-cancel.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-commit.json.gz](../evidence/RX-4002-memory-mutation-cohort-positions-offsets-1000-commit.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-cancel.json.gz](../evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-cancel.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-commit.json.gz](../evidence/RX-4002-memory-mutation-cohort-positions-offsets-10000-commit.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-cancel.json.gz](../evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-cancel.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-commit.json.gz](../evidence/RX-4002-memory-mutation-cohort-source-phrase-1000-commit.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-cancel.json.gz](../evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-cancel.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-commit.json.gz](../evidence/RX-4002-memory-mutation-cohort-source-phrase-10000-commit.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-development.json.gz](../evidence/RX-4002-memory-mutation-development.json.gz)
+- [docs/evidence/RX-4002-memory-mutation-focused.log](../evidence/RX-4002-memory-mutation-focused.log)
+- [docs/evidence/RX-4002-memory-mutation-independent-audit.json](../evidence/RX-4002-memory-mutation-independent-audit.json)
+- [docs/evidence/RX-4002-memory-mutation-independent-audit.mjs](../evidence/RX-4002-memory-mutation-independent-audit.mjs)
+- [docs/evidence/RX-4002-memory-mutation-review.md](../evidence/RX-4002-memory-mutation-review.md)
+- [docs/evidence/RX-4002-memory-mutation-run.log](../evidence/RX-4002-memory-mutation-run.log)
+- [docs/evidence/RX-4002-memory-mutation.json](../evidence/RX-4002-memory-mutation.json)
+- [docs/evidence/RX-4002-memory-mutation.md](../evidence/RX-4002-memory-mutation.md)
+- [docs/evidence/RX-4002-memory-mutation-check.log](../evidence/RX-4002-memory-mutation-check.log)
+- [docs/evidence/RX-4002-memory-mutation-ci.log](../evidence/RX-4002-memory-mutation-ci.log)
+- [docs/evidence/RX-4002-memory-codec-baseline-check.log](../evidence/RX-4002-memory-codec-baseline-check.log)
+- [docs/evidence/RX-4002-memory-codec-calibration.json.gz](../evidence/RX-4002-memory-codec-calibration.json.gz)
+- [docs/evidence/RX-4002-memory-codec-ci.log](../evidence/RX-4002-memory-codec-ci.log)
+- [docs/evidence/RX-4002-memory-codec-cohort-1000-decode-envelope.json.gz](../evidence/RX-4002-memory-codec-cohort-1000-decode-envelope.json.gz)
+- [docs/evidence/RX-4002-memory-codec-cohort-1000-encode-envelope.json.gz](../evidence/RX-4002-memory-codec-cohort-1000-encode-envelope.json.gz)
+- [docs/evidence/RX-4002-memory-codec-cohort-1000-encode-prejoin.json.gz](../evidence/RX-4002-memory-codec-cohort-1000-encode-prejoin.json.gz)
+- [docs/evidence/RX-4002-memory-codec-cohort-1000-restore-precommit.json.gz](../evidence/RX-4002-memory-codec-cohort-1000-restore-precommit.json.gz)
+- [docs/evidence/RX-4002-memory-codec-cohort-10000-decode-envelope.json.gz](../evidence/RX-4002-memory-codec-cohort-10000-decode-envelope.json.gz)
+- [docs/evidence/RX-4002-memory-codec-cohort-10000-encode-envelope.json.gz](../evidence/RX-4002-memory-codec-cohort-10000-encode-envelope.json.gz)
+- [docs/evidence/RX-4002-memory-codec-cohort-10000-encode-prejoin.json.gz](../evidence/RX-4002-memory-codec-cohort-10000-encode-prejoin.json.gz)
+- [docs/evidence/RX-4002-memory-codec-cohort-10000-restore-precommit.json.gz](../evidence/RX-4002-memory-codec-cohort-10000-restore-precommit.json.gz)
+- [docs/evidence/RX-4002-memory-codec-focused.log](../evidence/RX-4002-memory-codec-focused.log)
+- [docs/evidence/RX-4002-memory-codec-independent-audit.json](../evidence/RX-4002-memory-codec-independent-audit.json)
+- [docs/evidence/RX-4002-memory-codec-independent-audit.mjs](../evidence/RX-4002-memory-codec-independent-audit.mjs)
+- [docs/evidence/RX-4002-memory-codec-review.md](../evidence/RX-4002-memory-codec-review.md)
+- [docs/evidence/RX-4002-memory-codec-run.log](../evidence/RX-4002-memory-codec-run.log)
+- [docs/evidence/RX-4002-memory-codec.json](../evidence/RX-4002-memory-codec.json)
+- [docs/evidence/RX-4002-memory-codec.md](../evidence/RX-4002-memory-codec.md)
+- [docs/evidence/RX-4002-memory-codec-check.log](../evidence/RX-4002-memory-codec-check.log)
+- [docs/evidence/RX-4002-memory-transport-baseline-check.log](../evidence/RX-4002-memory-transport-baseline-check.log)
+- [docs/evidence/RX-4002-memory-transport-calibration-trace.json.gz](../evidence/RX-4002-memory-transport-calibration-trace.json.gz)
+- [docs/evidence/RX-4002-memory-transport-calibration.json.gz](../evidence/RX-4002-memory-transport-calibration.json.gz)
+- [docs/evidence/RX-4002-memory-transport-ci.log](../evidence/RX-4002-memory-transport-ci.log)
+- [docs/evidence/RX-4002-memory-transport-feasibility-audit.json](../evidence/RX-4002-memory-transport-feasibility-audit.json)
+- [docs/evidence/RX-4002-memory-transport-feasibility-audit.mjs](../evidence/RX-4002-memory-transport-feasibility-audit.mjs)
+- [docs/evidence/RX-4002-memory-transport-feasibility.json.gz](../evidence/RX-4002-memory-transport-feasibility.json.gz)
+- [docs/evidence/RX-4002-memory-transport-focused.log](../evidence/RX-4002-memory-transport-focused.log)
+- [docs/evidence/RX-4002-memory-transport-independent-audit.json](../evidence/RX-4002-memory-transport-independent-audit.json)
+- [docs/evidence/RX-4002-memory-transport-independent-audit.mjs](../evidence/RX-4002-memory-transport-independent-audit.mjs)
+- [docs/evidence/RX-4002-memory-transport-review.md](../evidence/RX-4002-memory-transport-review.md)
+- [docs/evidence/RX-4002-memory-transport-run.log](../evidence/RX-4002-memory-transport-run.log)
+- [docs/evidence/RX-4002-memory-transport-trace-1000-0.json.gz](../evidence/RX-4002-memory-transport-trace-1000-0.json.gz)
+- [docs/evidence/RX-4002-memory-transport-trace-1000-1.json.gz](../evidence/RX-4002-memory-transport-trace-1000-1.json.gz)
+- [docs/evidence/RX-4002-memory-transport-trace-1000-2.json.gz](../evidence/RX-4002-memory-transport-trace-1000-2.json.gz)
+- [docs/evidence/RX-4002-memory-transport-trace-10000-0.json.gz](../evidence/RX-4002-memory-transport-trace-10000-0.json.gz)
+- [docs/evidence/RX-4002-memory-transport-trace-10000-1.json.gz](../evidence/RX-4002-memory-transport-trace-10000-1.json.gz)
+- [docs/evidence/RX-4002-memory-transport-trace-10000-2.json.gz](../evidence/RX-4002-memory-transport-trace-10000-2.json.gz)
+- [docs/evidence/RX-4002-memory-transport.json](../evidence/RX-4002-memory-transport.json)
+- [docs/evidence/RX-4002-memory-transport.md](../evidence/RX-4002-memory-transport.md)
+- [docs/evidence/RX-4002-memory-transport-calibration-audit.json](../evidence/RX-4002-memory-transport-calibration-audit.json)
+- [docs/evidence/RX-4002-memory-transport-check.log](../evidence/RX-4002-memory-transport-check.log)
+- [docs/evidence/RX-4002-memory-peak-capability.md](../evidence/RX-4002-memory-peak-capability.md)
+- [docs/evidence/RX-4002-memory-peak-capability.json](../evidence/RX-4002-memory-peak-capability.json)
+- [docs/evidence/RX-4002-memory-peak-capability.json.gz](../evidence/RX-4002-memory-peak-capability.json.gz)
+- [docs/evidence/RX-4002-memory-peak-capability-independent-audit.json](../evidence/RX-4002-memory-peak-capability-independent-audit.json)
+- [docs/evidence/RX-4002-peaks-at.md](../evidence/RX-4002-peaks-at.md)
+- [docs/evidence/RX-4002-focus-package.json](../evidence/RX-4002-focus-package.json)
+- [docs/evidence/RX-4002-peaks-at-review.md](../evidence/RX-4002-peaks-at-review.md)
+- [docs/evidence/RX-4002-peaks-at-identity.json](../evidence/RX-4002-peaks-at-identity.json)
+- [docs/evidence/RX-4002-peaks-at-identity.mjs](../evidence/RX-4002-peaks-at-identity.mjs)
+- [docs/evidence/RX-4002-peaks-at-check.log](../evidence/RX-4002-peaks-at-check.log)
+- [docs/evidence/RX-4002-inspector-focus-20261027.md](../evidence/RX-4002-inspector-focus-20261027.md)
+- [docs/evidence/RX-4002-inspector-focus-20261027.json](../evidence/RX-4002-inspector-focus-20261027.json)
+- [docs/evidence/RX-4002-inspector-focus-package-20261027.json.gz](../evidence/RX-4002-inspector-focus-package-20261027.json.gz)
+- [docs/evidence/RX-4002-normal-typing-20261027.md](../evidence/RX-4002-normal-typing-20261027.md)
+- [docs/evidence/RX-4002-native-events-20261027.md](../evidence/RX-4002-native-events-20261027.md)
+- [docs/evidence/RX-4002-native-events-20261027.json.gz](../evidence/RX-4002-native-events-20261027.json.gz)
+- [docs/evidence/RX-4002-native-events-audit-20261027.json](../evidence/RX-4002-native-events-audit-20261027.json)
+- [docs/evidence/RX-4002-native-events-audit.mjs](../evidence/RX-4002-native-events-audit.mjs)
+- [docs/evidence/RX-4002-runtime-instrumentation-20261028.md](../evidence/RX-4002-runtime-instrumentation-20261028.md)
+- [docs/evidence/RX-4002-runtime-instrumentation-identity-20261028.json](../evidence/RX-4002-runtime-instrumentation-identity-20261028.json)
+- [docs/evidence/RX-4002-runtime-public-controls-20261028.json.gz](../evidence/RX-4002-runtime-public-controls-20261028.json.gz)
+- [docs/evidence/RX-4002-managed-runtime-20261028.json.gz](../evidence/RX-4002-managed-runtime-20261028.json.gz)
+- [docs/evidence/RX-4002-runtime-archive-audit-20261028.mjs](../evidence/RX-4002-runtime-archive-audit-20261028.mjs)
+- [docs/evidence/RX-4002-managed-runtime-audit-20261028.py](../evidence/RX-4002-managed-runtime-audit-20261028.py)
+- [docs/evidence/RX-4002-runtime-check-20261028.log](../evidence/RX-4002-runtime-check-20261028.log)
+- [docs/evidence/RX-4002-runtime-final-review-20261028.json](../evidence/RX-4002-runtime-final-review-20261028.json)
+- [docs/evidence/RX-4002-runtime-workloads-20261028.md](../evidence/RX-4002-runtime-workloads-20261028.md)
+- [docs/evidence/RX-4002-runtime-workloads-identity-20261028.json](../evidence/RX-4002-runtime-workloads-identity-20261028.json)
+- [docs/evidence/RX-4002-runtime-workloads-20261028.tar.gz](../evidence/RX-4002-runtime-workloads-20261028.tar.gz)
+- [bench/memory/runtime-audit.py](../../bench/memory/runtime-audit.py)
+- [bench/memory/runtime-archive.py](../../bench/memory/runtime-archive.py)
+- [docs/evidence/RX-4002-runtime-workloads-check-20261028.log](../evidence/RX-4002-runtime-workloads-check-20261028.log)
+- [docs/evidence/RX-4002-runtime-workloads-review-20261028.json](../evidence/RX-4002-runtime-workloads-review-20261028.json)
+- [docs/evidence/RX-4002-gc-message-20261028.md](../evidence/RX-4002-gc-message-20261028.md)
+- [docs/evidence/RX-4002-gc-message-identity-20261028.json](../evidence/RX-4002-gc-message-identity-20261028.json)
+- [docs/evidence/RX-4002-gc-message-20261028.tar.gz](../evidence/RX-4002-gc-message-20261028.tar.gz)
+- [docs/evidence/RX-4002-gc-message-receiver-20261028.tar.gz](../evidence/RX-4002-gc-message-receiver-20261028.tar.gz)
+- [bench/memory/gc-runtime-audit.py](../../bench/memory/gc-runtime-audit.py)
+- [bench/memory/gc-runtime-audit.test.py](../../bench/memory/gc-runtime-audit.test.py)
+- [docs/evidence/RX-4002-gc-message-check-20261028.log](../evidence/RX-4002-gc-message-check-20261028.log)
+- [docs/evidence/RX-4002-gc-message-review-20261028.json](../evidence/RX-4002-gc-message-review-20261028.json)
+- [docs/evidence/RX-4002-codecs-copy-20261028.md](../evidence/RX-4002-codecs-copy-20261028.md)
+- [docs/evidence/RX-4002-codecs-copy-identity-20261028.json](../evidence/RX-4002-codecs-copy-identity-20261028.json)
+- [docs/evidence/RX-4002-codecs-copy-reconstruction-20261028.json](../evidence/RX-4002-codecs-copy-reconstruction-20261028.json)
+- [docs/evidence/RX-4002-codecs-copy-check-20261028.log](../evidence/RX-4002-codecs-copy-check-20261028.log)
+- [docs/evidence/RX-4002-codecs-copy-raw-01-20261028.tar.xz](../evidence/RX-4002-codecs-copy-raw-01-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-raw-02-20261028.tar.xz](../evidence/RX-4002-codecs-copy-raw-02-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-raw-03-20261028.tar.xz](../evidence/RX-4002-codecs-copy-raw-03-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz](../evidence/RX-4002-codecs-copy-raw-04-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-20261028.tar.xz](../evidence/RX-4002-codecs-copy-20261028.tar.xz)
+- [docs/evidence/RX-4002-codecs-copy-review-20261028.json](../evidence/RX-4002-codecs-copy-review-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-20261028.md](../evidence/RX-4002-gc-shrink-20261028.md)
+- [docs/evidence/RX-4002-gc-shrink-20261028.tar.xz](../evidence/RX-4002-gc-shrink-20261028.tar.xz)
+- [docs/evidence/RX-4002-gc-shrink-raw-index-20261028.json](../evidence/RX-4002-gc-shrink-raw-index-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-summary-20261028.json](../evidence/RX-4002-gc-shrink-summary-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-reconstruction-20261028.json](../evidence/RX-4002-gc-shrink-reconstruction-20261028.json)
+- [docs/evidence/RX-4002-wire-frontiers-20261028.json](../evidence/RX-4002-wire-frontiers-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-identity-20261028.json](../evidence/RX-4002-gc-shrink-identity-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-review-20261028.json](../evidence/RX-4002-gc-shrink-review-20261028.json)
+- [docs/evidence/RX-4002-gc-shrink-check-20261028.log](../evidence/RX-4002-gc-shrink-check-20261028.log)
 
 
 ## RX-4003
@@ -1088,7 +1088,7 @@ Prepare a coherent native 0.1 candidate and a concrete release recommendation wh
 
 **Contracts**
 
-[VERIFICATION_PLAN.md](docs/planning/VERIFICATION_PLAN.md), [NATIVE_ARCHITECTURE.md](docs/architecture/NATIVE_ARCHITECTURE.md), [ADDONS_AND_ADAPTERS.md](docs/architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](docs/specs/CORE_CONTRACT.md), [RANKING.md](docs/specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](docs/specs/MUTATIONS_AND_EXECUTION.md)
+[VERIFICATION_PLAN.md](../planning/VERIFICATION_PLAN.md), [NATIVE_ARCHITECTURE.md](../architecture/NATIVE_ARCHITECTURE.md), [ADDONS_AND_ADAPTERS.md](../architecture/ADDONS_AND_ADAPTERS.md), [CORE_CONTRACT.md](../specs/CORE_CONTRACT.md), [RANKING.md](../specs/RANKING.md), [MUTATIONS_AND_EXECUTION.md](../specs/MUTATIONS_AND_EXECUTION.md)
 
 **Acceptance criteria**
 
@@ -1110,28 +1110,28 @@ Prepare a coherent native 0.1 candidate and a concrete release recommendation wh
 
 **Recorded evidence**
 
-- [docs/evidence/RX-4003.md](docs/evidence/RX-4003.md)
-- [docs/evidence/RX-4003-review.json](docs/evidence/RX-4003-review.json)
-- [docs/evidence/RX-4003-identity.json](docs/evidence/RX-4003-identity.json)
-- [docs/evidence/RX-4003-package.json](docs/evidence/RX-4003-package.json)
-- [docs/evidence/RX-4003-preparation.json](docs/evidence/RX-4003-preparation.json)
-- [docs/evidence/RX-4003-check.log](docs/evidence/RX-4003-check.log)
-- [docs/evidence/RX-4003-candidate-0.1.0-rc.0.tgz](docs/evidence/RX-4003-candidate-0.1.0-rc.0.tgz)
-- [docs/evidence/RX-4003-bundle.json](docs/evidence/RX-4003-bundle.json)
-- [docs/evidence/RX-4003-workflow-audit.json](docs/evidence/RX-4003-workflow-audit.json)
-- [docs/evidence/RX-4003-baseline-check.log](docs/evidence/RX-4003-baseline-check.log)
-- [docs/evidence/RX-4003-focused.log](docs/evidence/RX-4003-focused.log)
-- [docs/evidence/RX-4003-preparation-guards.log](docs/evidence/RX-4003-preparation-guards.log)
-- [docs/evidence/RX-4003-sandbox-failure.json](docs/evidence/RX-4003-sandbox-failure.json)
-- [docs/evidence/RX-4003-sync.log](docs/evidence/RX-4003-sync.log)
-- [docs/evidence/RX-4003-remote-ci-20261028.md](docs/evidence/RX-4003-remote-ci-20261028.md)
-- [docs/evidence/RX-4003-remote-ci-20261028.json](docs/evidence/RX-4003-remote-ci-20261028.json)
-- [docs/evidence/RX-4003-remote-ci-20261028.tar.gz](docs/evidence/RX-4003-remote-ci-20261028.tar.gz)
-- [docs/evidence/RX-4003-ci-node22-20261028.zip](docs/evidence/RX-4003-ci-node22-20261028.zip)
-- [docs/evidence/RX-4003-ci-node24-20261028.zip](docs/evidence/RX-4003-ci-node24-20261028.zip)
-- [docs/evidence/RX-4003-remote-ci-identity-20261028.json](docs/evidence/RX-4003-remote-ci-identity-20261028.json)
-- [docs/evidence/RX-4003-remote-ci-review-20261028.json](docs/evidence/RX-4003-remote-ci-review-20261028.json)
-- [docs/evidence/RX-4003-remote-ci-sync-20261028.log](docs/evidence/RX-4003-remote-ci-sync-20261028.log)
+- [docs/evidence/RX-4003.md](../evidence/RX-4003.md)
+- [docs/evidence/RX-4003-review.json](../evidence/RX-4003-review.json)
+- [docs/evidence/RX-4003-identity.json](../evidence/RX-4003-identity.json)
+- [docs/evidence/RX-4003-package.json](../evidence/RX-4003-package.json)
+- [docs/evidence/RX-4003-preparation.json](../evidence/RX-4003-preparation.json)
+- [docs/evidence/RX-4003-check.log](../evidence/RX-4003-check.log)
+- [docs/evidence/RX-4003-candidate-0.1.0-rc.0.tgz](../evidence/RX-4003-candidate-0.1.0-rc.0.tgz)
+- [docs/evidence/RX-4003-bundle.json](../evidence/RX-4003-bundle.json)
+- [docs/evidence/RX-4003-workflow-audit.json](../evidence/RX-4003-workflow-audit.json)
+- [docs/evidence/RX-4003-baseline-check.log](../evidence/RX-4003-baseline-check.log)
+- [docs/evidence/RX-4003-focused.log](../evidence/RX-4003-focused.log)
+- [docs/evidence/RX-4003-preparation-guards.log](../evidence/RX-4003-preparation-guards.log)
+- [docs/evidence/RX-4003-sandbox-failure.json](../evidence/RX-4003-sandbox-failure.json)
+- [docs/evidence/RX-4003-sync.log](../evidence/RX-4003-sync.log)
+- [docs/evidence/RX-4003-remote-ci-20261028.md](../evidence/RX-4003-remote-ci-20261028.md)
+- [docs/evidence/RX-4003-remote-ci-20261028.json](../evidence/RX-4003-remote-ci-20261028.json)
+- [docs/evidence/RX-4003-remote-ci-20261028.tar.gz](../evidence/RX-4003-remote-ci-20261028.tar.gz)
+- [docs/evidence/RX-4003-ci-node22-20261028.zip](../evidence/RX-4003-ci-node22-20261028.zip)
+- [docs/evidence/RX-4003-ci-node24-20261028.zip](../evidence/RX-4003-ci-node24-20261028.zip)
+- [docs/evidence/RX-4003-remote-ci-identity-20261028.json](../evidence/RX-4003-remote-ci-identity-20261028.json)
+- [docs/evidence/RX-4003-remote-ci-review-20261028.json](../evidence/RX-4003-remote-ci-review-20261028.json)
+- [docs/evidence/RX-4003-remote-ci-sync-20261028.log](../evidence/RX-4003-remote-ci-sync-20261028.log)
 
 
 ## RX-5001
@@ -1150,7 +1150,7 @@ Apply the reference typography, white reading surface, chartreuse actions and sh
 
 **Contracts**
 
-[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md)
 
 **Acceptance criteria**
 
@@ -1164,7 +1164,7 @@ Apply the reference typography, white reading surface, chartreuse actions and sh
 
 **Recorded evidence**
 
-- [docs/evidence/RX-5001.md](docs/evidence/RX-5001.md)
+- [docs/evidence/RX-5001.md](../evidence/RX-5001.md)
 
 
 ## RX-5002
@@ -1183,7 +1183,7 @@ Implement the reference homepage using the existing installed-package usage demo
 
 **Contracts**
 
-[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md)
 
 **Acceptance criteria**
 
@@ -1198,7 +1198,7 @@ Implement the reference homepage using the existing installed-package usage demo
 
 **Recorded evidence**
 
-- [docs/evidence/RX-5002.md](docs/evidence/RX-5002.md)
+- [docs/evidence/RX-5002.md](../evidence/RX-5002.md)
 
 
 ## RX-5003
@@ -1217,7 +1217,7 @@ Apply the same workbench and navigation to the dedicated demo while preserving d
 
 **Contracts**
 
-[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md)
 
 **Acceptance criteria**
 
@@ -1232,7 +1232,7 @@ Apply the same workbench and navigation to the dedicated demo while preserving d
 
 **Recorded evidence**
 
-- [docs/evidence/RX-5003.md](docs/evidence/RX-5003.md)
+- [docs/evidence/RX-5003.md](../evidence/RX-5003.md)
 
 
 ## RX-5004
@@ -1247,11 +1247,11 @@ Verify the implemented design, record actual evidence and synchronize project gu
 
 **Expected affected areas**
 
-`test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `site/README.md`. These are planning boundaries; create files only when this task needs them.
+`test/pages/`, `docs/evidence/`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`, `site/README.md`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md)
 
 **Acceptance criteria**
 
@@ -1266,11 +1266,11 @@ Verify the implemented design, record actual evidence and synchronize project gu
 
 **Recorded evidence**
 
-- [docs/evidence/RX-5004.md](docs/evidence/RX-5004.md)
-- [docs/evidence/RX-5004-pages-browser.json](docs/evidence/RX-5004-pages-browser.json)
-- [docs/evidence/RX-5004-images/home-desktop.png](docs/evidence/RX-5004-images/home-desktop.png)
-- [docs/evidence/RX-5004-images/home-mobile.png](docs/evidence/RX-5004-images/home-mobile.png)
-- [docs/evidence/RX-5004-AVAILABILITY-20261103.md](docs/evidence/RX-5004-AVAILABILITY-20261103.md)
+- [docs/evidence/RX-5004.md](../evidence/RX-5004.md)
+- [docs/evidence/RX-5004-pages-browser.json](../evidence/RX-5004-pages-browser.json)
+- [docs/evidence/RX-5004-images/home-desktop.png](../evidence/RX-5004-images/home-desktop.png)
+- [docs/evidence/RX-5004-images/home-mobile.png](../evidence/RX-5004-images/home-mobile.png)
+- [docs/evidence/RX-5004-AVAILABILITY-20261103.md](../evidence/RX-5004-AVAILABILITY-20261103.md)
 
 
 ## RX-5005
@@ -1289,7 +1289,7 @@ Make final-word prefix matching the ordinary demo default, retaining exact-word 
 
 **Contracts**
 
-[SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md)
 
 **Acceptance criteria**
 
@@ -1305,8 +1305,8 @@ Make final-word prefix matching the ordinary demo default, retaining exact-word 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-5005.md](docs/evidence/RX-5005.md)
-- [docs/evidence/RX-5005-raw.tar.gz](docs/evidence/RX-5005-raw.tar.gz)
+- [docs/evidence/RX-5005.md](../evidence/RX-5005.md)
+- [docs/evidence/RX-5005-raw.tar.gz](../evidence/RX-5005-raw.tar.gz)
 
 
 ## RX-6001
@@ -1325,7 +1325,7 @@ Prove a minimal installed Pagefind-style inline search path and freeze the small
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
 
 **Acceptance criteria**
 
@@ -1346,15 +1346,15 @@ Prove a minimal installed Pagefind-style inline search path and freeze the small
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6001.md](docs/evidence/RX-6001.md)
-- [docs/evidence/RX-6001-browser.json](docs/evidence/RX-6001-browser.json)
-- [docs/evidence/RX-6001-verification.json](docs/evidence/RX-6001-verification.json)
-- [docs/evidence/RX-6001-check.log.gz](docs/evidence/RX-6001-check.log.gz)
-- [docs/evidence/RX-6001-site.log.gz](docs/evidence/RX-6001-site.log.gz)
-- [docs/evidence/RX-6001-desktop.png](docs/evidence/RX-6001-desktop.png)
-- [docs/evidence/RX-6001-mobile.png](docs/evidence/RX-6001-mobile.png)
-- [docs/evidence/RX-6001-initial-site.log.gz](docs/evidence/RX-6001-initial-site.log.gz)
-- [docs/evidence/RX-6001-concurrent-site.log.gz](docs/evidence/RX-6001-concurrent-site.log.gz)
+- [docs/evidence/RX-6001.md](../evidence/RX-6001.md)
+- [docs/evidence/RX-6001-browser.json](../evidence/RX-6001-browser.json)
+- [docs/evidence/RX-6001-verification.json](../evidence/RX-6001-verification.json)
+- [docs/evidence/RX-6001-check.log.gz](../evidence/RX-6001-check.log.gz)
+- [docs/evidence/RX-6001-site.log.gz](../evidence/RX-6001-site.log.gz)
+- [docs/evidence/RX-6001-desktop.png](../evidence/RX-6001-desktop.png)
+- [docs/evidence/RX-6001-mobile.png](../evidence/RX-6001-mobile.png)
+- [docs/evidence/RX-6001-initial-site.log.gz](../evidence/RX-6001-initial-site.log.gz)
+- [docs/evidence/RX-6001-concurrent-site.log.gz](../evidence/RX-6001-concurrent-site.log.gz)
 
 
 ## RX-6002
@@ -1373,7 +1373,7 @@ Complete the inline consumer experience with explicitly selected snippets and si
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](docs/api/ADDONS.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](../api/ADDONS.md)
 
 **Acceptance criteria**
 
@@ -1394,16 +1394,16 @@ Complete the inline consumer experience with explicitly selected snippets and si
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6002.md](docs/evidence/RX-6002.md)
-- [docs/evidence/RX-6002-browser.json](docs/evidence/RX-6002-browser.json)
-- [docs/evidence/RX-6002-foundation.json](docs/evidence/RX-6002-foundation.json)
-- [docs/evidence/RX-6002-verification.json](docs/evidence/RX-6002-verification.json)
-- [docs/evidence/RX-6002-check.log.gz](docs/evidence/RX-6002-check.log.gz)
-- [docs/evidence/RX-6002-targeted.log.gz](docs/evidence/RX-6002-targeted.log.gz)
-- [docs/evidence/RX-6002-site.log.gz](docs/evidence/RX-6002-site.log.gz)
-- [docs/evidence/RX-6002-initial-check.log.gz](docs/evidence/RX-6002-initial-check.log.gz)
-- [docs/evidence/RX-6002-desktop.png](docs/evidence/RX-6002-desktop.png)
-- [docs/evidence/RX-6002-mobile-rtl-dark.png](docs/evidence/RX-6002-mobile-rtl-dark.png)
+- [docs/evidence/RX-6002.md](../evidence/RX-6002.md)
+- [docs/evidence/RX-6002-browser.json](../evidence/RX-6002-browser.json)
+- [docs/evidence/RX-6002-foundation.json](../evidence/RX-6002-foundation.json)
+- [docs/evidence/RX-6002-verification.json](../evidence/RX-6002-verification.json)
+- [docs/evidence/RX-6002-check.log.gz](../evidence/RX-6002-check.log.gz)
+- [docs/evidence/RX-6002-targeted.log.gz](../evidence/RX-6002-targeted.log.gz)
+- [docs/evidence/RX-6002-site.log.gz](../evidence/RX-6002-site.log.gz)
+- [docs/evidence/RX-6002-initial-check.log.gz](../evidence/RX-6002-initial-check.log.gz)
+- [docs/evidence/RX-6002-desktop.png](../evidence/RX-6002-desktop.png)
+- [docs/evidence/RX-6002-mobile-rtl-dark.png](../evidence/RX-6002-mobile-rtl-dark.png)
 
 
 ## RX-6003
@@ -1412,7 +1412,7 @@ Complete the inline consumer experience with explicitly selected snippets and si
 
 **Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6003%22)
 
-**Dependencies:** [RX-6002](IMPLEMENTATION_TASKS.md#rx-6002), [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100)
+**Dependencies:** [RX-6002](IMPLEMENTATION_TASKS.md#rx-6002), [RX-A100](OPTIONAL_FEATURES.md#rx-a100)
 
 Ship complete inline integrations that an external developer can install, supply with their own explicit content and adjust through a few CSS changes.
 
@@ -1422,7 +1422,7 @@ Ship complete inline integrations that an external developer can install, supply
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](../specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md)
 
 **Acceptance criteria**
 
@@ -1442,21 +1442,21 @@ Ship complete inline integrations that an external developer can install, supply
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6003-astro-targeted.log.gz](docs/evidence/RX-6003-astro-targeted.log.gz)
-- [docs/evidence/RX-6003-astro.json](docs/evidence/RX-6003-astro.json)
-- [docs/evidence/RX-6003-browser-targeted.log.gz](docs/evidence/RX-6003-browser-targeted.log.gz)
-- [docs/evidence/RX-6003-browser.json](docs/evidence/RX-6003-browser.json)
-- [docs/evidence/RX-6003-desktop.png](docs/evidence/RX-6003-desktop.png)
-- [docs/evidence/RX-6003-gallery.log.gz](docs/evidence/RX-6003-gallery.log.gz)
-- [docs/evidence/RX-6003-initial.log.gz](docs/evidence/RX-6003-initial.log.gz)
-- [docs/evidence/RX-6003-integration-check.log.gz](docs/evidence/RX-6003-integration-check.log.gz)
-- [docs/evidence/RX-6003-jekyll.json](docs/evidence/RX-6003-jekyll.json)
-- [docs/evidence/RX-6003-jekyll.log.gz](docs/evidence/RX-6003-jekyll.log.gz)
-- [docs/evidence/RX-6003-mobile.png](docs/evidence/RX-6003-mobile.png)
-- [docs/evidence/RX-6003-site.json](docs/evidence/RX-6003-site.json)
-- [docs/evidence/RX-6003-site.log.gz](docs/evidence/RX-6003-site.log.gz)
-- [docs/evidence/RX-6003-verification.json](docs/evidence/RX-6003-verification.json)
-- [docs/evidence/RX-6003.md](docs/evidence/RX-6003.md)
+- [docs/evidence/RX-6003-astro-targeted.log.gz](../evidence/RX-6003-astro-targeted.log.gz)
+- [docs/evidence/RX-6003-astro.json](../evidence/RX-6003-astro.json)
+- [docs/evidence/RX-6003-browser-targeted.log.gz](../evidence/RX-6003-browser-targeted.log.gz)
+- [docs/evidence/RX-6003-browser.json](../evidence/RX-6003-browser.json)
+- [docs/evidence/RX-6003-desktop.png](../evidence/RX-6003-desktop.png)
+- [docs/evidence/RX-6003-gallery.log.gz](../evidence/RX-6003-gallery.log.gz)
+- [docs/evidence/RX-6003-initial.log.gz](../evidence/RX-6003-initial.log.gz)
+- [docs/evidence/RX-6003-integration-check.log.gz](../evidence/RX-6003-integration-check.log.gz)
+- [docs/evidence/RX-6003-jekyll.json](../evidence/RX-6003-jekyll.json)
+- [docs/evidence/RX-6003-jekyll.log.gz](../evidence/RX-6003-jekyll.log.gz)
+- [docs/evidence/RX-6003-mobile.png](../evidence/RX-6003-mobile.png)
+- [docs/evidence/RX-6003-site.json](../evidence/RX-6003-site.json)
+- [docs/evidence/RX-6003-site.log.gz](../evidence/RX-6003-site.log.gz)
+- [docs/evidence/RX-6003-verification.json](../evidence/RX-6003-verification.json)
+- [docs/evidence/RX-6003.md](../evidence/RX-6003.md)
 
 
 ## RX-6004
@@ -1475,7 +1475,7 @@ Freeze the optional page/section mapping, anchored-link, source-evidence and sta
 
 **Contracts**
 
-[PAGE_SECTIONS.md](docs/specs/PAGE_SECTIONS.md), [SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [ADDONS.md](docs/api/ADDONS.md)
+[PAGE_SECTIONS.md](../specs/PAGE_SECTIONS.md), [SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](../specs/STATIC_ASTRO.md), [ADDONS.md](../api/ADDONS.md)
 
 **Acceptance criteria**
 
@@ -1495,13 +1495,13 @@ Freeze the optional page/section mapping, anchored-link, source-evidence and sta
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6004-contract.log.gz](docs/evidence/RX-6004-contract.log.gz)
-- [docs/evidence/RX-6004-initial-contract.log.gz](docs/evidence/RX-6004-initial-contract.log.gz)
-- [docs/evidence/RX-6004-integration-check.log.gz](docs/evidence/RX-6004-integration-check.log.gz)
-- [docs/evidence/RX-6004-jekyll.json](docs/evidence/RX-6004-jekyll.json)
-- [docs/evidence/RX-6004-pages.log.gz](docs/evidence/RX-6004-pages.log.gz)
-- [docs/evidence/RX-6004-verification.json](docs/evidence/RX-6004-verification.json)
-- [docs/evidence/RX-6004.md](docs/evidence/RX-6004.md)
+- [docs/evidence/RX-6004-contract.log.gz](../evidence/RX-6004-contract.log.gz)
+- [docs/evidence/RX-6004-initial-contract.log.gz](../evidence/RX-6004-initial-contract.log.gz)
+- [docs/evidence/RX-6004-integration-check.log.gz](../evidence/RX-6004-integration-check.log.gz)
+- [docs/evidence/RX-6004-jekyll.json](../evidence/RX-6004-jekyll.json)
+- [docs/evidence/RX-6004-pages.log.gz](../evidence/RX-6004-pages.log.gz)
+- [docs/evidence/RX-6004-verification.json](../evidence/RX-6004-verification.json)
+- [docs/evidence/RX-6004.md](../evidence/RX-6004.md)
 
 
 ## RX-6005
@@ -1520,7 +1520,7 @@ Implement optional Pagefind-style page/heading context using explicit section ma
 
 **Contracts**
 
-[PAGE_SECTIONS.md](docs/specs/PAGE_SECTIONS.md), [SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md)
+[PAGE_SECTIONS.md](../specs/PAGE_SECTIONS.md), [SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](../specs/STATIC_ASTRO.md)
 
 **Acceptance criteria**
 
@@ -1540,25 +1540,25 @@ Implement optional Pagefind-style page/heading context using explicit section ma
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6005-astro-targeted.log.gz](docs/evidence/RX-6005-astro-targeted.log.gz)
-- [docs/evidence/RX-6005-browser.json](docs/evidence/RX-6005-browser.json)
-- [docs/evidence/RX-6005-candidate.json.gz](docs/evidence/RX-6005-candidate.json.gz)
-- [docs/evidence/RX-6005-check.log.gz](docs/evidence/RX-6005-check.log.gz)
-- [docs/evidence/RX-6005-compatibility-raw.tar.gz](docs/evidence/RX-6005-compatibility-raw.tar.gz)
-- [docs/evidence/RX-6005-compatibility.json](docs/evidence/RX-6005-compatibility.json)
-- [docs/evidence/RX-6005-gallery.json](docs/evidence/RX-6005-gallery.json)
-- [docs/evidence/RX-6005-initial-checks.log.gz](docs/evidence/RX-6005-initial-checks.log.gz)
-- [docs/evidence/RX-6005-installed.json](docs/evidence/RX-6005-installed.json)
-- [docs/evidence/RX-6005-integration-check.log.gz](docs/evidence/RX-6005-integration-check.log.gz)
-- [docs/evidence/RX-6005-jekyll.json](docs/evidence/RX-6005-jekyll.json)
-- [docs/evidence/RX-6005-jekyll.log.gz](docs/evidence/RX-6005-jekyll.log.gz)
-- [docs/evidence/RX-6005-native-bytes.json](docs/evidence/RX-6005-native-bytes.json)
-- [docs/evidence/RX-6005-pages.log.gz](docs/evidence/RX-6005-pages.log.gz)
-- [docs/evidence/RX-6005-review-fix.log.gz](docs/evidence/RX-6005-review-fix.log.gz)
-- [docs/evidence/RX-6005-site.json](docs/evidence/RX-6005-site.json)
-- [docs/evidence/RX-6005-site.log.gz](docs/evidence/RX-6005-site.log.gz)
-- [docs/evidence/RX-6005-verification.json](docs/evidence/RX-6005-verification.json)
-- [docs/evidence/RX-6005.md](docs/evidence/RX-6005.md)
+- [docs/evidence/RX-6005-astro-targeted.log.gz](../evidence/RX-6005-astro-targeted.log.gz)
+- [docs/evidence/RX-6005-browser.json](../evidence/RX-6005-browser.json)
+- [docs/evidence/RX-6005-candidate.json.gz](../evidence/RX-6005-candidate.json.gz)
+- [docs/evidence/RX-6005-check.log.gz](../evidence/RX-6005-check.log.gz)
+- [docs/evidence/RX-6005-compatibility-raw.tar.gz](../evidence/RX-6005-compatibility-raw.tar.gz)
+- [docs/evidence/RX-6005-compatibility.json](../evidence/RX-6005-compatibility.json)
+- [docs/evidence/RX-6005-gallery.json](../evidence/RX-6005-gallery.json)
+- [docs/evidence/RX-6005-initial-checks.log.gz](../evidence/RX-6005-initial-checks.log.gz)
+- [docs/evidence/RX-6005-installed.json](../evidence/RX-6005-installed.json)
+- [docs/evidence/RX-6005-integration-check.log.gz](../evidence/RX-6005-integration-check.log.gz)
+- [docs/evidence/RX-6005-jekyll.json](../evidence/RX-6005-jekyll.json)
+- [docs/evidence/RX-6005-jekyll.log.gz](../evidence/RX-6005-jekyll.log.gz)
+- [docs/evidence/RX-6005-native-bytes.json](../evidence/RX-6005-native-bytes.json)
+- [docs/evidence/RX-6005-pages.log.gz](../evidence/RX-6005-pages.log.gz)
+- [docs/evidence/RX-6005-review-fix.log.gz](../evidence/RX-6005-review-fix.log.gz)
+- [docs/evidence/RX-6005-site.json](../evidence/RX-6005-site.json)
+- [docs/evidence/RX-6005-site.log.gz](../evidence/RX-6005-site.log.gz)
+- [docs/evidence/RX-6005-verification.json](../evidence/RX-6005-verification.json)
+- [docs/evidence/RX-6005.md](../evidence/RX-6005.md)
 
 
 ## RX-6006
@@ -1577,7 +1577,7 @@ Provide a complete documentation search modal around the verified consumer resul
 
 **Contracts**
 
-[DOCS_MODAL.md](docs/specs/DOCS_MODAL.md), [SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
+[DOCS_MODAL.md](../specs/DOCS_MODAL.md), [SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md)
 
 **Acceptance criteria**
 
@@ -1598,27 +1598,27 @@ Provide a complete documentation search modal around the verified consumer resul
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6006-browser-summary.json](docs/evidence/RX-6006-browser-summary.json)
-- [docs/evidence/RX-6006-browser.json](docs/evidence/RX-6006-browser.json)
-- [docs/evidence/RX-6006-browser.log.gz](docs/evidence/RX-6006-browser.log.gz)
-- [docs/evidence/RX-6006-gallery.json](docs/evidence/RX-6006-gallery.json)
-- [docs/evidence/RX-6006-integration-check.log.gz](docs/evidence/RX-6006-integration-check.log.gz)
-- [docs/evidence/RX-6006-jekyll.json](docs/evidence/RX-6006-jekyll.json)
-- [docs/evidence/RX-6006-jekyll.log.gz](docs/evidence/RX-6006-jekyll.log.gz)
-- [docs/evidence/RX-6006-modal-320x240-forced-colors.png](docs/evidence/RX-6006-modal-320x240-forced-colors.png)
-- [docs/evidence/RX-6006-modal-320x240.png](docs/evidence/RX-6006-modal-320x240.png)
-- [docs/evidence/RX-6006-modal-320x568-forced-colors.png](docs/evidence/RX-6006-modal-320x568-forced-colors.png)
-- [docs/evidence/RX-6006-modal-320x568.png](docs/evidence/RX-6006-modal-320x568.png)
-- [docs/evidence/RX-6006-modal-640x320-forced-colors.png](docs/evidence/RX-6006-modal-640x320-forced-colors.png)
-- [docs/evidence/RX-6006-modal-640x320.png](docs/evidence/RX-6006-modal-640x320.png)
-- [docs/evidence/RX-6006-modal-desktop.png](docs/evidence/RX-6006-modal-desktop.png)
-- [docs/evidence/RX-6006-pages-audit.log.gz](docs/evidence/RX-6006-pages-audit.log.gz)
-- [docs/evidence/RX-6006-pages.log.gz](docs/evidence/RX-6006-pages.log.gz)
-- [docs/evidence/RX-6006-review-and-initial-raw.tar.gz](docs/evidence/RX-6006-review-and-initial-raw.tar.gz)
-- [docs/evidence/RX-6006-site.json](docs/evidence/RX-6006-site.json)
-- [docs/evidence/RX-6006-site.log.gz](docs/evidence/RX-6006-site.log.gz)
-- [docs/evidence/RX-6006-verification.json](docs/evidence/RX-6006-verification.json)
-- [docs/evidence/RX-6006.md](docs/evidence/RX-6006.md)
+- [docs/evidence/RX-6006-browser-summary.json](../evidence/RX-6006-browser-summary.json)
+- [docs/evidence/RX-6006-browser.json](../evidence/RX-6006-browser.json)
+- [docs/evidence/RX-6006-browser.log.gz](../evidence/RX-6006-browser.log.gz)
+- [docs/evidence/RX-6006-gallery.json](../evidence/RX-6006-gallery.json)
+- [docs/evidence/RX-6006-integration-check.log.gz](../evidence/RX-6006-integration-check.log.gz)
+- [docs/evidence/RX-6006-jekyll.json](../evidence/RX-6006-jekyll.json)
+- [docs/evidence/RX-6006-jekyll.log.gz](../evidence/RX-6006-jekyll.log.gz)
+- [docs/evidence/RX-6006-modal-320x240-forced-colors.png](../evidence/RX-6006-modal-320x240-forced-colors.png)
+- [docs/evidence/RX-6006-modal-320x240.png](../evidence/RX-6006-modal-320x240.png)
+- [docs/evidence/RX-6006-modal-320x568-forced-colors.png](../evidence/RX-6006-modal-320x568-forced-colors.png)
+- [docs/evidence/RX-6006-modal-320x568.png](../evidence/RX-6006-modal-320x568.png)
+- [docs/evidence/RX-6006-modal-640x320-forced-colors.png](../evidence/RX-6006-modal-640x320-forced-colors.png)
+- [docs/evidence/RX-6006-modal-640x320.png](../evidence/RX-6006-modal-640x320.png)
+- [docs/evidence/RX-6006-modal-desktop.png](../evidence/RX-6006-modal-desktop.png)
+- [docs/evidence/RX-6006-pages-audit.log.gz](../evidence/RX-6006-pages-audit.log.gz)
+- [docs/evidence/RX-6006-pages.log.gz](../evidence/RX-6006-pages.log.gz)
+- [docs/evidence/RX-6006-review-and-initial-raw.tar.gz](../evidence/RX-6006-review-and-initial-raw.tar.gz)
+- [docs/evidence/RX-6006-site.json](../evidence/RX-6006-site.json)
+- [docs/evidence/RX-6006-site.log.gz](../evidence/RX-6006-site.log.gz)
+- [docs/evidence/RX-6006-verification.json](../evidence/RX-6006-verification.json)
+- [docs/evidence/RX-6006.md](../evidence/RX-6006.md)
 
 
 ## RX-6007
@@ -1627,7 +1627,7 @@ Provide a complete documentation search modal around the verified consumer resul
 
 **Milestone:** N7 · **Status:** `done` · [GitHub tracking](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-6007%22)
 
-**Dependencies:** [RX-6006](IMPLEMENTATION_TASKS.md#rx-6006), [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100)
+**Dependencies:** [RX-6006](IMPLEMENTATION_TASKS.md#rx-6006), [RX-A100](OPTIONAL_FEATURES.md#rx-a100)
 
 Ship complete browser and Astro documentation-modal integrations with on-demand initialization, real section links and explicit owner lifecycle.
 
@@ -1637,7 +1637,7 @@ Ship complete browser and Astro documentation-modal integrations with on-demand 
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DOCS_MODAL.md](docs/specs/DOCS_MODAL.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](../specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md), [DOCS_MODAL.md](../specs/DOCS_MODAL.md)
 
 **Acceptance criteria**
 
@@ -1656,25 +1656,25 @@ Ship complete browser and Astro documentation-modal integrations with on-demand 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6007-astro.json](docs/evidence/RX-6007-astro.json)
-- [docs/evidence/RX-6007-astro.log.gz](docs/evidence/RX-6007-astro.log.gz)
-- [docs/evidence/RX-6007-browser.json](docs/evidence/RX-6007-browser.json)
-- [docs/evidence/RX-6007-browser.log.gz](docs/evidence/RX-6007-browser.log.gz)
-- [docs/evidence/RX-6007-gallery-modal-320.png](docs/evidence/RX-6007-gallery-modal-320.png)
-- [docs/evidence/RX-6007-gallery-modal-desktop.png](docs/evidence/RX-6007-gallery-modal-desktop.png)
-- [docs/evidence/RX-6007-gallery.json](docs/evidence/RX-6007-gallery.json)
-- [docs/evidence/RX-6007-gallery.log.gz](docs/evidence/RX-6007-gallery.log.gz)
-- [docs/evidence/RX-6007-inline-gallery.json](docs/evidence/RX-6007-inline-gallery.json)
-- [docs/evidence/RX-6007-integration-check.log.gz](docs/evidence/RX-6007-integration-check.log.gz)
-- [docs/evidence/RX-6007-jekyll.json](docs/evidence/RX-6007-jekyll.json)
-- [docs/evidence/RX-6007-jekyll.log.gz](docs/evidence/RX-6007-jekyll.log.gz)
-- [docs/evidence/RX-6007-pages.log.gz](docs/evidence/RX-6007-pages.log.gz)
-- [docs/evidence/RX-6007-review-and-initial-raw.tar.gz](docs/evidence/RX-6007-review-and-initial-raw.tar.gz)
-- [docs/evidence/RX-6007-review.json](docs/evidence/RX-6007-review.json)
-- [docs/evidence/RX-6007-site.json](docs/evidence/RX-6007-site.json)
-- [docs/evidence/RX-6007-site.log.gz](docs/evidence/RX-6007-site.log.gz)
-- [docs/evidence/RX-6007-verification.json](docs/evidence/RX-6007-verification.json)
-- [docs/evidence/RX-6007.md](docs/evidence/RX-6007.md)
+- [docs/evidence/RX-6007-astro.json](../evidence/RX-6007-astro.json)
+- [docs/evidence/RX-6007-astro.log.gz](../evidence/RX-6007-astro.log.gz)
+- [docs/evidence/RX-6007-browser.json](../evidence/RX-6007-browser.json)
+- [docs/evidence/RX-6007-browser.log.gz](../evidence/RX-6007-browser.log.gz)
+- [docs/evidence/RX-6007-gallery-modal-320.png](../evidence/RX-6007-gallery-modal-320.png)
+- [docs/evidence/RX-6007-gallery-modal-desktop.png](../evidence/RX-6007-gallery-modal-desktop.png)
+- [docs/evidence/RX-6007-gallery.json](../evidence/RX-6007-gallery.json)
+- [docs/evidence/RX-6007-gallery.log.gz](../evidence/RX-6007-gallery.log.gz)
+- [docs/evidence/RX-6007-inline-gallery.json](../evidence/RX-6007-inline-gallery.json)
+- [docs/evidence/RX-6007-integration-check.log.gz](../evidence/RX-6007-integration-check.log.gz)
+- [docs/evidence/RX-6007-jekyll.json](../evidence/RX-6007-jekyll.json)
+- [docs/evidence/RX-6007-jekyll.log.gz](../evidence/RX-6007-jekyll.log.gz)
+- [docs/evidence/RX-6007-pages.log.gz](../evidence/RX-6007-pages.log.gz)
+- [docs/evidence/RX-6007-review-and-initial-raw.tar.gz](../evidence/RX-6007-review-and-initial-raw.tar.gz)
+- [docs/evidence/RX-6007-review.json](../evidence/RX-6007-review.json)
+- [docs/evidence/RX-6007-site.json](../evidence/RX-6007-site.json)
+- [docs/evidence/RX-6007-site.log.gz](../evidence/RX-6007-site.log.gz)
+- [docs/evidence/RX-6007-verification.json](../evidence/RX-6007-verification.json)
+- [docs/evidence/RX-6007.md](../evidence/RX-6007.md)
 
 
 ## RX-6008
@@ -1689,11 +1689,11 @@ Complete the first adoption wave and document the actual verified scope before d
 
 **Expected affected areas**
 
-`site/`, `examples/README.md`, `docs/api/`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+`site/`, `examples/README.md`, `docs/api/`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DOCS_MODAL.md](docs/specs/DOCS_MODAL.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md), [DOCS_MODAL.md](../specs/DOCS_MODAL.md)
 
 **Acceptance criteria**
 
@@ -1713,25 +1713,25 @@ Complete the first adoption wave and document the actual verified scope before d
 
 **Recorded evidence**
 
-- [docs/evidence/RX-6008-candidate.json.gz](docs/evidence/RX-6008-candidate.json.gz)
-- [docs/evidence/RX-6008-costs.json](docs/evidence/RX-6008-costs.json)
-- [docs/evidence/RX-6008-inline-320-rtl-dark.png](docs/evidence/RX-6008-inline-320-rtl-dark.png)
-- [docs/evidence/RX-6008-inline-desktop.png](docs/evidence/RX-6008-inline-desktop.png)
-- [docs/evidence/RX-6008-integration-check.log.gz](docs/evidence/RX-6008-integration-check.log.gz)
-- [docs/evidence/RX-6008-jekyll.json](docs/evidence/RX-6008-jekyll.json)
-- [docs/evidence/RX-6008-jekyll.log.gz](docs/evidence/RX-6008-jekyll.log.gz)
-- [docs/evidence/RX-6008-manual.json](docs/evidence/RX-6008-manual.json)
-- [docs/evidence/RX-6008-matrix.json](docs/evidence/RX-6008-matrix.json)
-- [docs/evidence/RX-6008-modal-320x240-forced-colors.png](docs/evidence/RX-6008-modal-320x240-forced-colors.png)
-- [docs/evidence/RX-6008-modal-desktop.png](docs/evidence/RX-6008-modal-desktop.png)
-- [docs/evidence/RX-6008-pages.log.gz](docs/evidence/RX-6008-pages.log.gz)
-- [docs/evidence/RX-6008-raw.tar.gz](docs/evidence/RX-6008-raw.tar.gz)
-- [docs/evidence/RX-6008-review.json](docs/evidence/RX-6008-review.json)
-- [docs/evidence/RX-6008-site.log.gz](docs/evidence/RX-6008-site.log.gz)
-- [docs/evidence/RX-6008-verification.json](docs/evidence/RX-6008-verification.json)
-- [docs/evidence/RX-6008-webkit-inline-320.png](docs/evidence/RX-6008-webkit-inline-320.png)
-- [docs/evidence/RX-6008-webkit-modal-320.png](docs/evidence/RX-6008-webkit-modal-320.png)
-- [docs/evidence/RX-6008.md](docs/evidence/RX-6008.md)
+- [docs/evidence/RX-6008-candidate.json.gz](../evidence/RX-6008-candidate.json.gz)
+- [docs/evidence/RX-6008-costs.json](../evidence/RX-6008-costs.json)
+- [docs/evidence/RX-6008-inline-320-rtl-dark.png](../evidence/RX-6008-inline-320-rtl-dark.png)
+- [docs/evidence/RX-6008-inline-desktop.png](../evidence/RX-6008-inline-desktop.png)
+- [docs/evidence/RX-6008-integration-check.log.gz](../evidence/RX-6008-integration-check.log.gz)
+- [docs/evidence/RX-6008-jekyll.json](../evidence/RX-6008-jekyll.json)
+- [docs/evidence/RX-6008-jekyll.log.gz](../evidence/RX-6008-jekyll.log.gz)
+- [docs/evidence/RX-6008-manual.json](../evidence/RX-6008-manual.json)
+- [docs/evidence/RX-6008-matrix.json](../evidence/RX-6008-matrix.json)
+- [docs/evidence/RX-6008-modal-320x240-forced-colors.png](../evidence/RX-6008-modal-320x240-forced-colors.png)
+- [docs/evidence/RX-6008-modal-desktop.png](../evidence/RX-6008-modal-desktop.png)
+- [docs/evidence/RX-6008-pages.log.gz](../evidence/RX-6008-pages.log.gz)
+- [docs/evidence/RX-6008-raw.tar.gz](../evidence/RX-6008-raw.tar.gz)
+- [docs/evidence/RX-6008-review.json](../evidence/RX-6008-review.json)
+- [docs/evidence/RX-6008-site.log.gz](../evidence/RX-6008-site.log.gz)
+- [docs/evidence/RX-6008-verification.json](../evidence/RX-6008-verification.json)
+- [docs/evidence/RX-6008-webkit-inline-320.png](../evidence/RX-6008-webkit-inline-320.png)
+- [docs/evidence/RX-6008-webkit-modal-320.png](../evidence/RX-6008-webkit-modal-320.png)
+- [docs/evidence/RX-6008.md](../evidence/RX-6008.md)
 
 
 ## RX-7001
@@ -1750,7 +1750,7 @@ Implement a bounded search-result combobox with native editing/link behavior, ke
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [DROPDOWN.md](docs/specs/DROPDOWN.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [DROPDOWN.md](../specs/DROPDOWN.md)
 
 **Acceptance criteria**
 
@@ -1770,13 +1770,13 @@ Implement a bounded search-result combobox with native editing/link behavior, ke
 
 **Recorded evidence**
 
-- [docs/evidence/RX-7001.md](docs/evidence/RX-7001.md)
-- [docs/evidence/RX-7001-verification.json](docs/evidence/RX-7001-verification.json)
-- [docs/evidence/RX-7001-review.json](docs/evidence/RX-7001-review.json)
-- [docs/evidence/RX-7001-browser-summary.json](docs/evidence/RX-7001-browser-summary.json)
-- [docs/evidence/RX-7001-costs.json](docs/evidence/RX-7001-costs.json)
-- [docs/evidence/RX-7001-candidate.json.gz](docs/evidence/RX-7001-candidate.json.gz)
-- [docs/evidence/RX-7001-raw.tar.gz](docs/evidence/RX-7001-raw.tar.gz)
+- [docs/evidence/RX-7001.md](../evidence/RX-7001.md)
+- [docs/evidence/RX-7001-verification.json](../evidence/RX-7001-verification.json)
+- [docs/evidence/RX-7001-review.json](../evidence/RX-7001-review.json)
+- [docs/evidence/RX-7001-browser-summary.json](../evidence/RX-7001-browser-summary.json)
+- [docs/evidence/RX-7001-costs.json](../evidence/RX-7001-costs.json)
+- [docs/evidence/RX-7001-candidate.json.gz](../evidence/RX-7001-candidate.json.gz)
+- [docs/evidence/RX-7001-raw.tar.gz](../evidence/RX-7001-raw.tar.gz)
 
 
 ## RX-7002
@@ -1795,7 +1795,7 @@ Deliver a working installed header search integration with a real inline full-re
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DROPDOWN.md](docs/specs/DROPDOWN.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md), [DROPDOWN.md](../specs/DROPDOWN.md)
 
 **Acceptance criteria**
 
@@ -1814,12 +1814,12 @@ Deliver a working installed header search integration with a real inline full-re
 
 **Recorded evidence**
 
-- [docs/evidence/RX-7002.md](docs/evidence/RX-7002.md)
-- [docs/evidence/RX-7002-verification.json](docs/evidence/RX-7002-verification.json)
-- [docs/evidence/RX-7002-browser-summary.json](docs/evidence/RX-7002-browser-summary.json)
-- [docs/evidence/RX-7002-review.json](docs/evidence/RX-7002-review.json)
-- [docs/evidence/RX-7002-costs.json](docs/evidence/RX-7002-costs.json)
-- [docs/evidence/RX-7002-raw.tar.gz](docs/evidence/RX-7002-raw.tar.gz)
+- [docs/evidence/RX-7002.md](../evidence/RX-7002.md)
+- [docs/evidence/RX-7002-verification.json](../evidence/RX-7002-verification.json)
+- [docs/evidence/RX-7002-browser-summary.json](../evidence/RX-7002-browser-summary.json)
+- [docs/evidence/RX-7002-review.json](../evidence/RX-7002-review.json)
+- [docs/evidence/RX-7002-costs.json](../evidence/RX-7002-costs.json)
+- [docs/evidence/RX-7002-raw.tar.gz](../evidence/RX-7002-raw.tar.gz)
 
 
 ## RX-7003
@@ -1838,7 +1838,7 @@ Prove complete native directory membership/counts/paging and opt-in browser URL 
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](docs/api/ADDONS.md), [DIRECTORY.md](docs/specs/DIRECTORY.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [ADDONS.md](../api/ADDONS.md), [DIRECTORY.md](../specs/DIRECTORY.md)
 
 **Acceptance criteria**
 
@@ -1858,8 +1858,8 @@ Prove complete native directory membership/counts/paging and opt-in browser URL 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-7003.md](docs/evidence/RX-7003.md)
-- [docs/evidence/RX-7003-verification.json](docs/evidence/RX-7003-verification.json)
+- [docs/evidence/RX-7003.md](../evidence/RX-7003.md)
+- [docs/evidence/RX-7003-verification.json](../evidence/RX-7003-verification.json)
 
 
 ## RX-7004
@@ -1878,7 +1878,7 @@ Build a complete filterable resource-directory solution using the verified nativ
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [DIRECTORY.md](docs/specs/DIRECTORY.md), [DIRECTORY_VIEW.md](docs/specs/DIRECTORY_VIEW.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](../specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md), [DIRECTORY.md](../specs/DIRECTORY.md), [DIRECTORY_VIEW.md](../specs/DIRECTORY_VIEW.md)
 
 **Acceptance criteria**
 
@@ -1898,8 +1898,8 @@ Build a complete filterable resource-directory solution using the verified nativ
 
 **Recorded evidence**
 
-- [docs/evidence/RX-7004.md](docs/evidence/RX-7004.md)
-- [docs/evidence/RX-7004-verification.json](docs/evidence/RX-7004-verification.json)
+- [docs/evidence/RX-7004.md](../evidence/RX-7004.md)
+- [docs/evidence/RX-7004-verification.json](../evidence/RX-7004-verification.json)
 
 
 ## RX-7005
@@ -1918,7 +1918,7 @@ Add optional safe metadata/image presentation for editorial and catalogue result
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [DIRECTORY_CARDS.md](docs/specs/DIRECTORY_CARDS.md), [DIRECTORY_VIEW.md](docs/specs/DIRECTORY_VIEW.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [DIRECTORY_CARDS.md](../specs/DIRECTORY_CARDS.md), [DIRECTORY_VIEW.md](../specs/DIRECTORY_VIEW.md)
 
 **Acceptance criteria**
 
@@ -1938,8 +1938,8 @@ Add optional safe metadata/image presentation for editorial and catalogue result
 
 **Recorded evidence**
 
-- [docs/evidence/RX-7005.md](docs/evidence/RX-7005.md)
-- [docs/evidence/RX-7005-verification.json](docs/evidence/RX-7005-verification.json)
+- [docs/evidence/RX-7005.md](../evidence/RX-7005.md)
+- [docs/evidence/RX-7005-verification.json](../evidence/RX-7005-verification.json)
 
 
 ## RX-7006
@@ -1954,11 +1954,11 @@ Finish the complete adoption path and verify shared correctness, interaction, op
 
 **Expected affected areas**
 
-`site/`, `examples/`, `docs/api/`, `integrations/astro/README.md`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`, `scripts/build-pages.mjs`. These are planning boundaries; create files only when this task needs them.
+`site/`, `examples/`, `docs/api/`, `integrations/astro/README.md`, `scripts/lib/pages.mjs`, `test/ui/`, `test/consumer/`, `test/pages/`, `docs/evidence/`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`, `docs/planning/roadmap.json`, `scripts/build-pages.mjs`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](docs/planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](docs/specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](docs/specs/SITE_WORKBENCH.md), [PAGE_SECTIONS.md](docs/specs/PAGE_SECTIONS.md), [DROPDOWN.md](docs/specs/DROPDOWN.md), [DIRECTORY.md](docs/specs/DIRECTORY.md), [DIRECTORY_VIEW.md](docs/specs/DIRECTORY_VIEW.md), [DIRECTORY_CARDS.md](docs/specs/DIRECTORY_CARDS.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md](../planning/SEARCH_SOLUTIONS_IMPLEMENTATION_PLAN.md), [STATIC_ASTRO.md](../specs/STATIC_ASTRO.md), [SITE_WORKBENCH.md](../specs/SITE_WORKBENCH.md), [PAGE_SECTIONS.md](../specs/PAGE_SECTIONS.md), [DROPDOWN.md](../specs/DROPDOWN.md), [DIRECTORY.md](../specs/DIRECTORY.md), [DIRECTORY_VIEW.md](../specs/DIRECTORY_VIEW.md), [DIRECTORY_CARDS.md](../specs/DIRECTORY_CARDS.md)
 
 **Acceptance criteria**
 
@@ -1978,8 +1978,8 @@ Finish the complete adoption path and verify shared correctness, interaction, op
 
 **Recorded evidence**
 
-- [docs/evidence/RX-7006.md](docs/evidence/RX-7006.md)
-- [docs/evidence/RX-7006-verification.json](docs/evidence/RX-7006-verification.json)
+- [docs/evidence/RX-7006.md](../evidence/RX-7006.md)
+- [docs/evidence/RX-7006-verification.json](../evidence/RX-7006-verification.json)
 
 
 ## RX-8001
@@ -1998,7 +1998,7 @@ Document untracked RX-5004 log references without inventing historical test resu
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2015,13 +2015,13 @@ Document untracked RX-5004 log references without inventing historical test resu
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8001.md](docs/evidence/RX-8001.md)
-- [docs/evidence/RX-8001/verified-source-freeze.json](docs/evidence/RX-8001/verified-source-freeze.json)
-- [docs/evidence/RX-8001/environment.json](docs/evidence/RX-8001/environment.json)
-- [docs/evidence/RX-8001/head-919c9ed/acceptance.json](docs/evidence/RX-8001/head-919c9ed/acceptance.json)
-- [docs/evidence/RX-8001/head-919c9ed/source.json](docs/evidence/RX-8001/head-919c9ed/source.json)
-- [docs/evidence/RX-8001/head-919c9ed/preparation.json](docs/evidence/RX-8001/head-919c9ed/preparation.json)
-- [docs/evidence/RX-8001/head-919c9ed/pages-browser.json](docs/evidence/RX-8001/head-919c9ed/pages-browser.json)
+- [docs/evidence/RX-8001.md](../evidence/RX-8001.md)
+- [docs/evidence/RX-8001/verified-source-freeze.json](../evidence/RX-8001/verified-source-freeze.json)
+- [docs/evidence/RX-8001/environment.json](../evidence/RX-8001/environment.json)
+- [docs/evidence/RX-8001/head-919c9ed/acceptance.json](../evidence/RX-8001/head-919c9ed/acceptance.json)
+- [docs/evidence/RX-8001/head-919c9ed/source.json](../evidence/RX-8001/head-919c9ed/source.json)
+- [docs/evidence/RX-8001/head-919c9ed/preparation.json](../evidence/RX-8001/head-919c9ed/preparation.json)
+- [docs/evidence/RX-8001/head-919c9ed/pages-browser.json](../evidence/RX-8001/head-919c9ed/pages-browser.json)
 
 
 ## RX-8002
@@ -2040,7 +2040,7 @@ Build reproducible real-doc, realistic high-cardinality and adversarial 100/1,00
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2056,11 +2056,11 @@ Build reproducible real-doc, realistic high-cardinality and adversarial 100/1,00
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8002.md](docs/evidence/RX-8002.md)
-- [docs/evidence/RX-8002/acceptance.json](docs/evidence/RX-8002/acceptance.json)
-- [docs/evidence/RX-8002/matrix/report.json](docs/evidence/RX-8002/matrix/report.json)
-- [docs/evaluation/RX-8002-method.md](docs/evaluation/RX-8002-method.md)
-- [test/fixtures/n9/freeze.json](test/fixtures/n9/freeze.json)
+- [docs/evidence/RX-8002.md](../evidence/RX-8002.md)
+- [docs/evidence/RX-8002/acceptance.json](../evidence/RX-8002/acceptance.json)
+- [docs/evidence/RX-8002/matrix/report.json](../evidence/RX-8002/matrix/report.json)
+- [docs/evaluation/RX-8002-method.md](../evaluation/RX-8002-method.md)
+- [test/fixtures/n9/freeze.json](../../test/fixtures/n9/freeze.json)
 
 
 ## RX-8003
@@ -2079,7 +2079,7 @@ Use complete posting-derived candidate sets for positive Boolean queries while f
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2095,10 +2095,10 @@ Use complete posting-derived candidate sets for positive Boolean queries while f
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8003.md](docs/evidence/RX-8003.md)
-- [docs/evidence/RX-8003/acceptance.json](docs/evidence/RX-8003/acceptance.json)
-- [docs/evidence/RX-8003/paired/report.json](docs/evidence/RX-8003/paired/report.json)
-- [docs/evidence/RX-8003/artifacts.json](docs/evidence/RX-8003/artifacts.json)
+- [docs/evidence/RX-8003.md](../evidence/RX-8003.md)
+- [docs/evidence/RX-8003/acceptance.json](../evidence/RX-8003/acceptance.json)
+- [docs/evidence/RX-8003/paired/report.json](../evidence/RX-8003/paired/report.json)
+- [docs/evidence/RX-8003/artifacts.json](../evidence/RX-8003/artifacts.json)
 
 
 ## RX-8004
@@ -2117,7 +2117,7 @@ Profile and separate execution continuation from deadline timers using host-appr
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2133,9 +2133,9 @@ Profile and separate execution continuation from deadline timers using host-appr
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8004.md](docs/evidence/RX-8004.md)
-- [docs/evidence/RX-8004/acceptance.json](docs/evidence/RX-8004/acceptance.json)
-- [docs/evidence/RX-8004/review.md](docs/evidence/RX-8004/review.md)
+- [docs/evidence/RX-8004.md](../evidence/RX-8004.md)
+- [docs/evidence/RX-8004/acceptance.json](../evidence/RX-8004/acceptance.json)
+- [docs/evidence/RX-8004/review.md](../evidence/RX-8004/review.md)
 
 
 ## RX-8005
@@ -2154,7 +2154,7 @@ Evaluate sorted-range seeking or another compact prefix lookup against existing 
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2170,9 +2170,9 @@ Evaluate sorted-range seeking or another compact prefix lookup against existing 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8005.md](docs/evidence/RX-8005.md)
-- [docs/evidence/RX-8005/acceptance.json](docs/evidence/RX-8005/acceptance.json)
-- [docs/evidence/RX-8005/review.md](docs/evidence/RX-8005/review.md)
+- [docs/evidence/RX-8005.md](../evidence/RX-8005.md)
+- [docs/evidence/RX-8005/acceptance.json](../evidence/RX-8005/acceptance.json)
+- [docs/evidence/RX-8005/review.md](../evidence/RX-8005/review.md)
 
 
 ## RX-8006
@@ -2191,7 +2191,7 @@ Cache per-query/per-field length averages and IDF inputs where applicable withou
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2207,9 +2207,9 @@ Cache per-query/per-field length averages and IDF inputs where applicable withou
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8006.md](docs/evidence/RX-8006.md)
-- [docs/evidence/RX-8006/acceptance.json](docs/evidence/RX-8006/acceptance.json)
-- [docs/evidence/RX-8006/review.md](docs/evidence/RX-8006/review.md)
+- [docs/evidence/RX-8006.md](../evidence/RX-8006.md)
+- [docs/evidence/RX-8006/acceptance.json](../evidence/RX-8006/acceptance.json)
+- [docs/evidence/RX-8006/review.md](../evidence/RX-8006/review.md)
 
 
 ## RX-8007
@@ -2228,7 +2228,7 @@ Reproduce and isolate source codec, validation, token and staging costs before p
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2244,10 +2244,10 @@ Reproduce and isolate source codec, validation, token and staging costs before p
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8007.md](docs/evidence/RX-8007.md)
-- [docs/evidence/RX-8007/acceptance.json](docs/evidence/RX-8007/acceptance.json)
-- [docs/evidence/RX-8007/review.md](docs/evidence/RX-8007/review.md)
-- [docs/evaluation/RX-8007-bulk-contract.md](docs/evaluation/RX-8007-bulk-contract.md)
+- [docs/evidence/RX-8007.md](../evidence/RX-8007.md)
+- [docs/evidence/RX-8007/acceptance.json](../evidence/RX-8007/acceptance.json)
+- [docs/evidence/RX-8007/review.md](../evidence/RX-8007/review.md)
+- [docs/evaluation/RX-8007-bulk-contract.md](../evaluation/RX-8007-bulk-contract.md)
 
 
 ## RX-8008
@@ -2266,7 +2266,7 @@ Reduce redundant restore preparation while preserving source/position/native-sta
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2282,11 +2282,11 @@ Reduce redundant restore preparation while preserving source/position/native-sta
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8008.md](docs/evidence/RX-8008.md)
-- [docs/evidence/RX-8008/acceptance.json](docs/evidence/RX-8008/acceptance.json)
-- [docs/evidence/RX-8008/review.md](docs/evidence/RX-8008/review.md)
-- [docs/evidence/RX-8008/raw-review.md](docs/evidence/RX-8008/raw-review.md)
-- [docs/evaluation/RX-8008-method.md](docs/evaluation/RX-8008-method.md)
+- [docs/evidence/RX-8008.md](../evidence/RX-8008.md)
+- [docs/evidence/RX-8008/acceptance.json](../evidence/RX-8008/acceptance.json)
+- [docs/evidence/RX-8008/review.md](../evidence/RX-8008/review.md)
+- [docs/evidence/RX-8008/raw-review.md](../evidence/RX-8008/raw-review.md)
+- [docs/evaluation/RX-8008-method.md](../evaluation/RX-8008-method.md)
 
 
 ## RX-8009
@@ -2305,7 +2305,7 @@ Repeat frozen matched workloads against separate installed baseline and candidat
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2321,12 +2321,12 @@ Repeat frozen matched workloads against separate installed baseline and candidat
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8009.md](docs/evidence/RX-8009.md)
-- [docs/evidence/RX-8009/acceptance.json](docs/evidence/RX-8009/acceptance.json)
-- [docs/evidence/RX-8009/node-review.md](docs/evidence/RX-8009/node-review.md)
-- [docs/evidence/RX-8009/review.md](docs/evidence/RX-8009/review.md)
-- [docs/evidence/RX-8009/summary.json](docs/evidence/RX-8009/summary.json)
-- [docs/evaluation/RX-8009-method.md](docs/evaluation/RX-8009-method.md)
+- [docs/evidence/RX-8009.md](../evidence/RX-8009.md)
+- [docs/evidence/RX-8009/acceptance.json](../evidence/RX-8009/acceptance.json)
+- [docs/evidence/RX-8009/node-review.md](../evidence/RX-8009/node-review.md)
+- [docs/evidence/RX-8009/review.md](../evidence/RX-8009/review.md)
+- [docs/evidence/RX-8009/summary.json](../evidence/RX-8009/summary.json)
+- [docs/evaluation/RX-8009-method.md](../evaluation/RX-8009-method.md)
 
 
 ## RX-8010
@@ -2345,7 +2345,7 @@ Build pinned isolated comparisons for MiniSearch, FlexSearch, Orama and Lunr whe
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2361,12 +2361,12 @@ Build pinned isolated comparisons for MiniSearch, FlexSearch, Orama and Lunr whe
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8010.md](docs/evidence/RX-8010.md)
-- [docs/evidence/RX-8010/acceptance.json](docs/evidence/RX-8010/acceptance.json)
-- [docs/evidence/RX-8010/review.md](docs/evidence/RX-8010/review.md)
-- [docs/evidence/RX-8010/node-audit.json](docs/evidence/RX-8010/node-audit.json)
-- [docs/evidence/RX-8010/summary.json](docs/evidence/RX-8010/summary.json)
-- [docs/evaluation/RX-8010-method.md](docs/evaluation/RX-8010-method.md)
+- [docs/evidence/RX-8010.md](../evidence/RX-8010.md)
+- [docs/evidence/RX-8010/acceptance.json](../evidence/RX-8010/acceptance.json)
+- [docs/evidence/RX-8010/review.md](../evidence/RX-8010/review.md)
+- [docs/evidence/RX-8010/node-audit.json](../evidence/RX-8010/node-audit.json)
+- [docs/evidence/RX-8010/summary.json](../evidence/RX-8010/summary.json)
+- [docs/evaluation/RX-8010-method.md](../evaluation/RX-8010-method.md)
 
 
 ## RX-8011
@@ -2381,11 +2381,11 @@ Consolidate measured differences, reproducibility, safe capacity/latency guidanc
 
 **Expected affected areas**
 
-`docs/evaluation/`, `docs/release/`, `docs/support/`, `README.md`, `CODEX_HANDOFF.md`. These are planning boundaries; create files only when this task needs them.
+`docs/evaluation/`, `docs/release/`, `docs/support/`, `README.md`, `docs/planning/CODEX_HANDOFF.md`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md)
+[N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md)
 
 **Acceptance criteria**
 
@@ -2401,16 +2401,16 @@ Consolidate measured differences, reproducibility, safe capacity/latency guidanc
 
 **Recorded evidence**
 
-- [docs/evidence/RX-8011.md](docs/evidence/RX-8011.md)
-- [docs/evidence/RX-8011/acceptance.json](docs/evidence/RX-8011/acceptance.json)
-- [docs/evidence/RX-8011/native-review.md](docs/evidence/RX-8011/native-review.md)
-- [docs/evidence/RX-8011/native-audit.json](docs/evidence/RX-8011/native-audit.json)
-- [docs/evidence/RX-8011/comparator-review.md](docs/evidence/RX-8011/comparator-review.md)
-- [docs/evidence/RX-8011/comparator-audit.json](docs/evidence/RX-8011/comparator-audit.json)
-- [docs/evidence/RX-8011/corrections.md](docs/evidence/RX-8011/corrections.md)
-- [docs/evaluation/RX-8011.md](docs/evaluation/RX-8011.md)
-- [docs/support/RX-8011.md](docs/support/RX-8011.md)
-- [docs/evidence/N9-POST-20261104.md](docs/evidence/N9-POST-20261104.md)
+- [docs/evidence/RX-8011.md](../evidence/RX-8011.md)
+- [docs/evidence/RX-8011/acceptance.json](../evidence/RX-8011/acceptance.json)
+- [docs/evidence/RX-8011/native-review.md](../evidence/RX-8011/native-review.md)
+- [docs/evidence/RX-8011/native-audit.json](../evidence/RX-8011/native-audit.json)
+- [docs/evidence/RX-8011/comparator-review.md](../evidence/RX-8011/comparator-review.md)
+- [docs/evidence/RX-8011/comparator-audit.json](../evidence/RX-8011/comparator-audit.json)
+- [docs/evidence/RX-8011/corrections.md](../evidence/RX-8011/corrections.md)
+- [docs/evaluation/RX-8011.md](../evaluation/RX-8011.md)
+- [docs/support/RX-8011.md](../support/RX-8011.md)
+- [docs/evidence/N9-POST-20261104.md](../evidence/N9-POST-20261104.md)
 
 
 ## RX-9001
@@ -2429,7 +2429,7 @@ Pin the before-N9/current/control artifacts and complete finite workload, host, 
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [N9_PERFORMANCE_RECOVERY.md](docs/specs/N9_PERFORMANCE_RECOVERY.md), [RX-8009-method.md](docs/evaluation/RX-8009-method.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](../specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [N9_PERFORMANCE_RECOVERY.md](../specs/N9_PERFORMANCE_RECOVERY.md), [RX-8009-method.md](../evaluation/RX-8009-method.md)
 
 **Acceptance criteria**
 
@@ -2446,12 +2446,12 @@ Pin the before-N9/current/control artifacts and complete finite workload, host, 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9001.md](docs/evidence/RX-9001.md)
-- [docs/evidence/RX-9001/identity/artifacts.json](docs/evidence/RX-9001/identity/artifacts.json)
-- [docs/evidence/RX-9001/method-freeze.json](docs/evidence/RX-9001/method-freeze.json)
-- [docs/evidence/RX-9001/pilot-acceptance.json](docs/evidence/RX-9001/pilot-acceptance.json)
-- [docs/evidence/RX-9001/review/method.md](docs/evidence/RX-9001/review/method.md)
-- [docs/evidence/RX-9001/verification/candidate-implementation.json](docs/evidence/RX-9001/verification/candidate-implementation.json)
+- [docs/evidence/RX-9001.md](../evidence/RX-9001.md)
+- [docs/evidence/RX-9001/identity/artifacts.json](../evidence/RX-9001/identity/artifacts.json)
+- [docs/evidence/RX-9001/method-freeze.json](../evidence/RX-9001/method-freeze.json)
+- [docs/evidence/RX-9001/pilot-acceptance.json](../evidence/RX-9001/pilot-acceptance.json)
+- [docs/evidence/RX-9001/review/method.md](../evidence/RX-9001/review/method.md)
+- [docs/evidence/RX-9001/verification/candidate-implementation.json](../evidence/RX-9001/verification/candidate-implementation.json)
 
 
 ## RX-9002
@@ -2470,7 +2470,7 @@ Review the optimized paths in composition, reuse existing safety evidence and re
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](../specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
 
 **Acceptance criteria**
 
@@ -2487,15 +2487,15 @@ Review the optimized paths in composition, reuse existing safety evidence and re
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9002.md](docs/evidence/RX-9002.md)
-- [docs/evidence/RX-9002/baseline.json](docs/evidence/RX-9002/baseline.json)
-- [docs/evidence/RX-9002/observations.json](docs/evidence/RX-9002/observations.json)
-- [docs/evidence/RX-9002/continuations/results.json](docs/evidence/RX-9002/continuations/results.json)
-- [docs/evidence/RX-9002/churn/results.json](docs/evidence/RX-9002/churn/results.json)
-- [docs/evidence/RX-9002/bulk/result.json](docs/evidence/RX-9002/bulk/result.json)
-- [docs/evidence/RX-9002/ownership/result.json](docs/evidence/RX-9002/ownership/result.json)
-- [docs/evidence/RX-9002/review/churn-ownership.md](docs/evidence/RX-9002/review/churn-ownership.md)
-- [docs/evidence/RX-9002/review/continuation-bulk.md](docs/evidence/RX-9002/review/continuation-bulk.md)
+- [docs/evidence/RX-9002.md](../evidence/RX-9002.md)
+- [docs/evidence/RX-9002/baseline.json](../evidence/RX-9002/baseline.json)
+- [docs/evidence/RX-9002/observations.json](../evidence/RX-9002/observations.json)
+- [docs/evidence/RX-9002/continuations/results.json](../evidence/RX-9002/continuations/results.json)
+- [docs/evidence/RX-9002/churn/results.json](../evidence/RX-9002/churn/results.json)
+- [docs/evidence/RX-9002/bulk/result.json](../evidence/RX-9002/bulk/result.json)
+- [docs/evidence/RX-9002/ownership/result.json](../evidence/RX-9002/ownership/result.json)
+- [docs/evidence/RX-9002/review/churn-ownership.md](../evidence/RX-9002/review/churn-ownership.md)
+- [docs/evidence/RX-9002/review/continuation-bulk.md](../evidence/RX-9002/review/continuation-bulk.md)
 
 
 ## RX-9003
@@ -2514,7 +2514,7 @@ Apply bounded fixes only to reproduced contract violations and establish a revie
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](../specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
 
 **Acceptance criteria**
 
@@ -2531,14 +2531,14 @@ Apply bounded fixes only to reproduced contract violations and establish a revie
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9003.md](docs/evidence/RX-9003.md)
-- [docs/evidence/RX-9003/baseline.json](docs/evidence/RX-9003/baseline.json)
-- [docs/evidence/RX-9003/verification/decision.json](docs/evidence/RX-9003/verification/decision.json)
-- [docs/evidence/RX-9003/verification/validation.json](docs/evidence/RX-9003/verification/validation.json)
-- [docs/evidence/RX-9003/verification/oracle.json](docs/evidence/RX-9003/verification/oracle.json)
-- [docs/evidence/RX-9003/review/contracts.md](docs/evidence/RX-9003/review/contracts.md)
-- [docs/evidence/RX-9003/identity/audit.json](docs/evidence/RX-9003/identity/audit.json)
-- [docs/evidence/RX-9003/identity/inventory.json](docs/evidence/RX-9003/identity/inventory.json)
+- [docs/evidence/RX-9003.md](../evidence/RX-9003.md)
+- [docs/evidence/RX-9003/baseline.json](../evidence/RX-9003/baseline.json)
+- [docs/evidence/RX-9003/verification/decision.json](../evidence/RX-9003/verification/decision.json)
+- [docs/evidence/RX-9003/verification/validation.json](../evidence/RX-9003/verification/validation.json)
+- [docs/evidence/RX-9003/verification/oracle.json](../evidence/RX-9003/verification/oracle.json)
+- [docs/evidence/RX-9003/review/contracts.md](../evidence/RX-9003/review/contracts.md)
+- [docs/evidence/RX-9003/identity/audit.json](../evidence/RX-9003/identity/audit.json)
+- [docs/evidence/RX-9003/identity/inventory.json](../evidence/RX-9003/identity/inventory.json)
 
 
 ## RX-9004
@@ -2557,7 +2557,7 @@ Recheck net before-N9-to-current performance on frozen native workloads while pr
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](../specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
 
 **Acceptance criteria**
 
@@ -2574,18 +2574,18 @@ Recheck net before-N9-to-current performance on frozen native workloads while pr
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9004.md](docs/evidence/RX-9004.md)
-- [docs/evaluation/RX-9004.md](docs/evaluation/RX-9004.md)
-- [docs/evidence/RX-9004/identity/artifacts.json](docs/evidence/RX-9004/identity/artifacts.json)
-- [docs/evidence/RX-9004/identity/collection-freeze.json](docs/evidence/RX-9004/identity/collection-freeze.json)
-- [docs/evidence/RX-9004/full-01-inventory.json](docs/evidence/RX-9004/full-01-inventory.json)
-- [docs/evidence/RX-9004/semantic/report.json](docs/evidence/RX-9004/semantic/report.json)
-- [docs/evidence/RX-9004/semantic-01-inventory.json](docs/evidence/RX-9004/semantic-01-inventory.json)
-- [docs/evidence/RX-9004/analysis/results.json](docs/evidence/RX-9004/analysis/results.json)
-- [docs/evidence/RX-9004/review/results.json](docs/evidence/RX-9004/review/results.json)
-- [docs/evidence/RX-9004/review/semantic-replay.json](docs/evidence/RX-9004/review/semantic-replay.json)
-- [docs/evidence/RX-9004/verification/validation.json](docs/evidence/RX-9004/verification/validation.json)
-- [docs/evidence/RX-9004/verification/identity.json](docs/evidence/RX-9004/verification/identity.json)
+- [docs/evidence/RX-9004.md](../evidence/RX-9004.md)
+- [docs/evaluation/RX-9004.md](../evaluation/RX-9004.md)
+- [docs/evidence/RX-9004/identity/artifacts.json](../evidence/RX-9004/identity/artifacts.json)
+- [docs/evidence/RX-9004/identity/collection-freeze.json](../evidence/RX-9004/identity/collection-freeze.json)
+- [docs/evidence/RX-9004/full-01-inventory.json](../evidence/RX-9004/full-01-inventory.json)
+- [docs/evidence/RX-9004/semantic/report.json](../evidence/RX-9004/semantic/report.json)
+- [docs/evidence/RX-9004/semantic-01-inventory.json](../evidence/RX-9004/semantic-01-inventory.json)
+- [docs/evidence/RX-9004/analysis/results.json](../evidence/RX-9004/analysis/results.json)
+- [docs/evidence/RX-9004/review/results.json](../evidence/RX-9004/review/results.json)
+- [docs/evidence/RX-9004/review/semantic-replay.json](../evidence/RX-9004/review/semantic-replay.json)
+- [docs/evidence/RX-9004/verification/validation.json](../evidence/RX-9004/verification/validation.json)
+- [docs/evidence/RX-9004/verification/identity.json](../evidence/RX-9004/verification/identity.json)
 
 
 ## RX-9005
@@ -2604,7 +2604,7 @@ Fill the missing current update-latency evidence with matched bounded mutations 
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](../specs/N10_HARDENING_PERFORMANCE_REVIEW.md)
 
 **Acceptance criteria**
 
@@ -2621,19 +2621,19 @@ Fill the missing current update-latency evidence with matched bounded mutations 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9005.md](docs/evidence/RX-9005.md)
-- [docs/evaluation/RX-9005.md](docs/evaluation/RX-9005.md)
-- [docs/evidence/RX-9005/identity/artifacts.json](docs/evidence/RX-9005/identity/artifacts.json)
-- [docs/evidence/RX-9005/collection-budget-revision.json](docs/evidence/RX-9005/collection-budget-revision.json)
-- [docs/evidence/RX-9005/full-inventory.json.gz](docs/evidence/RX-9005/full-inventory.json.gz)
-- [docs/evidence/RX-9005/analysis/results.json](docs/evidence/RX-9005/analysis/results.json)
-- [docs/evidence/RX-9005/review/reconstruction.json](docs/evidence/RX-9005/review/reconstruction.json)
-- [docs/evidence/RX-9005/review/parent-analysis.json](docs/evidence/RX-9005/review/parent-analysis.json)
-- [docs/evidence/RX-9005/review/state-replay.json](docs/evidence/RX-9005/review/state-replay.json)
-- [docs/evidence/RX-9005/review/final.json](docs/evidence/RX-9005/review/final.json)
-- [docs/evidence/RX-9005/verification/validation.json](docs/evidence/RX-9005/verification/validation.json)
-- [docs/evidence/RX-9005/verification/identity.json](docs/evidence/RX-9005/verification/identity.json)
-- [docs/evidence/RX-9005/verification/retention-audit.json](docs/evidence/RX-9005/verification/retention-audit.json)
+- [docs/evidence/RX-9005.md](../evidence/RX-9005.md)
+- [docs/evaluation/RX-9005.md](../evaluation/RX-9005.md)
+- [docs/evidence/RX-9005/identity/artifacts.json](../evidence/RX-9005/identity/artifacts.json)
+- [docs/evidence/RX-9005/collection-budget-revision.json](../evidence/RX-9005/collection-budget-revision.json)
+- [docs/evidence/RX-9005/full-inventory.json.gz](../evidence/RX-9005/full-inventory.json.gz)
+- [docs/evidence/RX-9005/analysis/results.json](../evidence/RX-9005/analysis/results.json)
+- [docs/evidence/RX-9005/review/reconstruction.json](../evidence/RX-9005/review/reconstruction.json)
+- [docs/evidence/RX-9005/review/parent-analysis.json](../evidence/RX-9005/review/parent-analysis.json)
+- [docs/evidence/RX-9005/review/state-replay.json](../evidence/RX-9005/review/state-replay.json)
+- [docs/evidence/RX-9005/review/final.json](../evidence/RX-9005/review/final.json)
+- [docs/evidence/RX-9005/verification/validation.json](../evidence/RX-9005/verification/validation.json)
+- [docs/evidence/RX-9005/verification/identity.json](../evidence/RX-9005/verification/identity.json)
+- [docs/evidence/RX-9005/verification/retention-audit.json](../evidence/RX-9005/verification/retention-audit.json)
 
 
 ## RX-9006
@@ -2652,7 +2652,7 @@ Reconcile existing recovery evidence and close essential current-candidate suppo
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](../specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2672,28 +2672,28 @@ Reconcile existing recovery evidence and close essential current-candidate suppo
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9006.md](docs/evidence/RX-9006.md)
-- [docs/evaluation/RX-9006.md](docs/evaluation/RX-9006.md)
-- [docs/evidence/RX-9006/timed-browser-report.json](docs/evidence/RX-9006/timed-browser-report.json)
-- [docs/evidence/RX-9006/timed-recovery-report.json](docs/evidence/RX-9006/timed-recovery-report.json)
-- [docs/evidence/RX-9006/recovery-budget-owner-decision.json](docs/evidence/RX-9006/recovery-budget-owner-decision.json)
-- [docs/evidence/RX-9006/review/recovery-incomplete-replay.json](docs/evidence/RX-9006/review/recovery-incomplete-replay.json)
-- [docs/evidence/RX-9006/review/browser-scoped-inputs.json](docs/evidence/RX-9006/review/browser-scoped-inputs.json)
-- [docs/evidence/RX-9006/review/browser-statistics.json](docs/evidence/RX-9006/review/browser-statistics.json)
-- [docs/evidence/RX-9006/analysis/recovery-prefix.json.gz](docs/evidence/RX-9006/analysis/recovery-prefix.json.gz)
-- [docs/evidence/RX-9006/identity/retention-execution.json](docs/evidence/RX-9006/identity/retention-execution.json)
-- [docs/evidence/RX-9006/overhead-slice1/README.md](docs/evidence/RX-9006/overhead-slice1/README.md)
-- [docs/evidence/RX-9006/overhead-slice2/README.md](docs/evidence/RX-9006/overhead-slice2/README.md)
-- [docs/evidence/RX-9006/overhead-slice3/README.md](docs/evidence/RX-9006/overhead-slice3/README.md)
-- [docs/evidence/RX-9006/preflight-20261106-01/README.md](docs/evidence/RX-9006/preflight-20261106-01/README.md)
-- [docs/evaluation/RX-9006-scoped-20261108.md](docs/evaluation/RX-9006-scoped-20261108.md)
-- [docs/evidence/RX-9006/scoped-20261108/README.md](docs/evidence/RX-9006/scoped-20261108/README.md)
-- [docs/evidence/RX-9006/scoped-20261108/reuse-audit.json](docs/evidence/RX-9006/scoped-20261108/reuse-audit.json)
-- [docs/evidence/RX-9006/scoped-20261108/support-audit.json](docs/evidence/RX-9006/scoped-20261108/support-audit.json)
-- [docs/evidence/RX-9006/scoped-20261108/review.md](docs/evidence/RX-9006/scoped-20261108/review.md)
-- [docs/evidence/RX-9006/scoped-20261108/preservation.json](docs/evidence/RX-9006/scoped-20261108/preservation.json)
-- [docs/evidence/RX-9006/scoped-20261108/checks.txt](docs/evidence/RX-9006/scoped-20261108/checks.txt)
-- [docs/evidence/RX-9007/tracking-closeout/README.md](docs/evidence/RX-9007/tracking-closeout/README.md)
+- [docs/evidence/RX-9006.md](../evidence/RX-9006.md)
+- [docs/evaluation/RX-9006.md](../evaluation/RX-9006.md)
+- [docs/evidence/RX-9006/timed-browser-report.json](../evidence/RX-9006/timed-browser-report.json)
+- [docs/evidence/RX-9006/timed-recovery-report.json](../evidence/RX-9006/timed-recovery-report.json)
+- [docs/evidence/RX-9006/recovery-budget-owner-decision.json](../evidence/RX-9006/recovery-budget-owner-decision.json)
+- [docs/evidence/RX-9006/review/recovery-incomplete-replay.json](../evidence/RX-9006/review/recovery-incomplete-replay.json)
+- [docs/evidence/RX-9006/review/browser-scoped-inputs.json](../evidence/RX-9006/review/browser-scoped-inputs.json)
+- [docs/evidence/RX-9006/review/browser-statistics.json](../evidence/RX-9006/review/browser-statistics.json)
+- [docs/evidence/RX-9006/analysis/recovery-prefix.json.gz](../evidence/RX-9006/analysis/recovery-prefix.json.gz)
+- [docs/evidence/RX-9006/identity/retention-execution.json](../evidence/RX-9006/identity/retention-execution.json)
+- [docs/evidence/RX-9006/overhead-slice1/README.md](../evidence/RX-9006/overhead-slice1/README.md)
+- [docs/evidence/RX-9006/overhead-slice2/README.md](../evidence/RX-9006/overhead-slice2/README.md)
+- [docs/evidence/RX-9006/overhead-slice3/README.md](../evidence/RX-9006/overhead-slice3/README.md)
+- [docs/evidence/RX-9006/preflight-20261106-01/README.md](../evidence/RX-9006/preflight-20261106-01/README.md)
+- [docs/evaluation/RX-9006-scoped-20261108.md](../evaluation/RX-9006-scoped-20261108.md)
+- [docs/evidence/RX-9006/scoped-20261108/README.md](../evidence/RX-9006/scoped-20261108/README.md)
+- [docs/evidence/RX-9006/scoped-20261108/reuse-audit.json](../evidence/RX-9006/scoped-20261108/reuse-audit.json)
+- [docs/evidence/RX-9006/scoped-20261108/support-audit.json](../evidence/RX-9006/scoped-20261108/support-audit.json)
+- [docs/evidence/RX-9006/scoped-20261108/review.md](../evidence/RX-9006/scoped-20261108/review.md)
+- [docs/evidence/RX-9006/scoped-20261108/preservation.json](../evidence/RX-9006/scoped-20261108/preservation.json)
+- [docs/evidence/RX-9006/scoped-20261108/checks.txt](../evidence/RX-9006/scoped-20261108/checks.txt)
+- [docs/evidence/RX-9007/tracking-closeout/README.md](../evidence/RX-9007/tracking-closeout/README.md)
 
 
 ## RX-9007
@@ -2708,11 +2708,11 @@ Synthesize completed query/update measurements and revised recovery qualificatio
 
 **Expected affected areas**
 
-`docs/evaluation/`, `docs/support/`, `docs/api/`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+`docs/evaluation/`, `docs/support/`, `docs/api/`, `docs/evidence/`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[N10_HARDENING_PERFORMANCE_REVIEW.md](docs/specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N10_HARDENING_PERFORMANCE_REVIEW.md](../specs/N10_HARDENING_PERFORMANCE_REVIEW.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2729,18 +2729,18 @@ Synthesize completed query/update measurements and revised recovery qualificatio
 
 **Recorded evidence**
 
-- [docs/evaluation/RX-9007.md](docs/evaluation/RX-9007.md)
-- [docs/support/RX-9007.md](docs/support/RX-9007.md)
-- [docs/evidence/RX-9007.md](docs/evidence/RX-9007.md)
-- [docs/evidence/RX-9007/query-audit.json](docs/evidence/RX-9007/query-audit.json)
-- [docs/evidence/RX-9007/update-audit.json](docs/evidence/RX-9007/update-audit.json)
-- [docs/evidence/RX-9007/reuse-map.json](docs/evidence/RX-9007/reuse-map.json)
-- [docs/evidence/RX-9007/review.md](docs/evidence/RX-9007/review.md)
-- [docs/evidence/RX-9007/preservation.json](docs/evidence/RX-9007/preservation.json)
-- [docs/evidence/RX-9007/checks.txt](docs/evidence/RX-9007/checks.txt)
-- [docs/evidence/RX-9007/tracking-closeout/README.md](docs/evidence/RX-9007/tracking-closeout/README.md)
-- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md)
-- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.json](docs/evidence/N10_N11_SOURCE_SYNC_20261108.json)
+- [docs/evaluation/RX-9007.md](../evaluation/RX-9007.md)
+- [docs/support/RX-9007.md](../support/RX-9007.md)
+- [docs/evidence/RX-9007.md](../evidence/RX-9007.md)
+- [docs/evidence/RX-9007/query-audit.json](../evidence/RX-9007/query-audit.json)
+- [docs/evidence/RX-9007/update-audit.json](../evidence/RX-9007/update-audit.json)
+- [docs/evidence/RX-9007/reuse-map.json](../evidence/RX-9007/reuse-map.json)
+- [docs/evidence/RX-9007/review.md](../evidence/RX-9007/review.md)
+- [docs/evidence/RX-9007/preservation.json](../evidence/RX-9007/preservation.json)
+- [docs/evidence/RX-9007/checks.txt](../evidence/RX-9007/checks.txt)
+- [docs/evidence/RX-9007/tracking-closeout/README.md](../evidence/RX-9007/tracking-closeout/README.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](../evidence/N10_N11_SOURCE_SYNC_20261108.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.json](../evidence/N10_N11_SOURCE_SYNC_20261108.json)
 
 
 ## RX-9101
@@ -2759,7 +2759,7 @@ Select one implementable Raveldex-first consumer identity and shared state contr
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [N11_CONSUMER_CONTRACT.md](docs/specs/N11_CONSUMER_CONTRACT.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [N11_CONSUMER_CONTRACT.md](../specs/N11_CONSUMER_CONTRACT.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2777,10 +2777,10 @@ Select one implementable Raveldex-first consumer identity and shared state contr
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9101.md](docs/evidence/RX-9101.md)
-- [docs/evidence/RX-9101/review.md](docs/evidence/RX-9101/review.md)
-- [docs/evidence/RX-9101/palette.json](docs/evidence/RX-9101/palette.json)
-- [docs/evidence/RX-9101/planning-tests.txt](docs/evidence/RX-9101/planning-tests.txt)
+- [docs/evidence/RX-9101.md](../evidence/RX-9101.md)
+- [docs/evidence/RX-9101/review.md](../evidence/RX-9101/review.md)
+- [docs/evidence/RX-9101/palette.json](../evidence/RX-9101/palette.json)
+- [docs/evidence/RX-9101/planning-tests.txt](../evidence/RX-9101/planning-tests.txt)
 
 
 ## RX-9102
@@ -2799,7 +2799,7 @@ Give first-time Raveldex consumers and dynamic/static integrators a short native
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2817,12 +2817,12 @@ Give first-time Raveldex consumers and dynamic/static integrators a short native
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9102.md](docs/evidence/RX-9102.md)
-- [docs/evidence/RX-9102/review.md](docs/evidence/RX-9102/review.md)
-- [docs/evidence/RX-9102/tooling-tests.txt](docs/evidence/RX-9102/tooling-tests.txt)
-- [docs/evidence/RX-9102/installed-example-attempt03.txt](docs/evidence/RX-9102/installed-example-attempt03.txt)
-- [docs/evidence/RX-9102/installed-checks.json](docs/evidence/RX-9102/installed-checks.json)
-- [docs/evidence/RX-9102/pages-source-check.json](docs/evidence/RX-9102/pages-source-check.json)
+- [docs/evidence/RX-9102.md](../evidence/RX-9102.md)
+- [docs/evidence/RX-9102/review.md](../evidence/RX-9102/review.md)
+- [docs/evidence/RX-9102/tooling-tests.txt](../evidence/RX-9102/tooling-tests.txt)
+- [docs/evidence/RX-9102/installed-example-attempt03.txt](../evidence/RX-9102/installed-example-attempt03.txt)
+- [docs/evidence/RX-9102/installed-checks.json](../evidence/RX-9102/installed-checks.json)
+- [docs/evidence/RX-9102/pages-source-check.json](../evidence/RX-9102/pages-source-check.json)
 
 
 ## RX-9103
@@ -2841,7 +2841,7 @@ Make inline/modal facet availability and reset outcomes understandable while pre
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2859,14 +2859,14 @@ Make inline/modal facet availability and reset outcomes understandable while pre
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9103.md](docs/evidence/RX-9103.md)
-- [docs/evidence/RX-9103/review.md](docs/evidence/RX-9103/review.md)
-- [docs/evidence/RX-9103/ui-tests-attempt01.txt](docs/evidence/RX-9103/ui-tests-attempt01.txt)
-- [docs/evidence/RX-9103/consumer-tests.txt](docs/evidence/RX-9103/consumer-tests.txt)
-- [docs/evidence/RX-9103/starter-tests.txt](docs/evidence/RX-9103/starter-tests.txt)
-- [docs/evidence/RX-9103/controls-final-report.json](docs/evidence/RX-9103/controls-final-report.json)
-- [docs/evidence/RX-9103/typecheck.txt](docs/evidence/RX-9103/typecheck.txt)
-- [docs/evidence/RX-9103/tooling-tests.txt](docs/evidence/RX-9103/tooling-tests.txt)
+- [docs/evidence/RX-9103.md](../evidence/RX-9103.md)
+- [docs/evidence/RX-9103/review.md](../evidence/RX-9103/review.md)
+- [docs/evidence/RX-9103/ui-tests-attempt01.txt](../evidence/RX-9103/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9103/consumer-tests.txt](../evidence/RX-9103/consumer-tests.txt)
+- [docs/evidence/RX-9103/starter-tests.txt](../evidence/RX-9103/starter-tests.txt)
+- [docs/evidence/RX-9103/controls-final-report.json](../evidence/RX-9103/controls-final-report.json)
+- [docs/evidence/RX-9103/typecheck.txt](../evidence/RX-9103/typecheck.txt)
+- [docs/evidence/RX-9103/tooling-tests.txt](../evidence/RX-9103/tooling-tests.txt)
 
 
 ## RX-9104
@@ -2885,7 +2885,7 @@ Reduce pagination clutter and clarify batch/window navigation without losing exa
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2903,16 +2903,16 @@ Reduce pagination clutter and clarify batch/window navigation without losing exa
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9104.md](docs/evidence/RX-9104.md)
-- [docs/evidence/RX-9104/review.md](docs/evidence/RX-9104/review.md)
-- [docs/evidence/RX-9104/ui-tests-attempt01.txt](docs/evidence/RX-9104/ui-tests-attempt01.txt)
-- [docs/evidence/RX-9104/controls-report.json](docs/evidence/RX-9104/controls-report.json)
-- [docs/evidence/RX-9104/shadow-report.json](docs/evidence/RX-9104/shadow-report.json)
-- [docs/evidence/RX-9104/modal-report.json](docs/evidence/RX-9104/modal-report.json)
-- [docs/evidence/RX-9104/consumer-tests.txt](docs/evidence/RX-9104/consumer-tests.txt)
-- [docs/evidence/RX-9104/starter-tests.txt](docs/evidence/RX-9104/starter-tests.txt)
-- [docs/evidence/RX-9104/typecheck-final.txt](docs/evidence/RX-9104/typecheck-final.txt)
-- [docs/evidence/RX-9104/tooling-tests.txt](docs/evidence/RX-9104/tooling-tests.txt)
+- [docs/evidence/RX-9104.md](../evidence/RX-9104.md)
+- [docs/evidence/RX-9104/review.md](../evidence/RX-9104/review.md)
+- [docs/evidence/RX-9104/ui-tests-attempt01.txt](../evidence/RX-9104/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9104/controls-report.json](../evidence/RX-9104/controls-report.json)
+- [docs/evidence/RX-9104/shadow-report.json](../evidence/RX-9104/shadow-report.json)
+- [docs/evidence/RX-9104/modal-report.json](../evidence/RX-9104/modal-report.json)
+- [docs/evidence/RX-9104/consumer-tests.txt](../evidence/RX-9104/consumer-tests.txt)
+- [docs/evidence/RX-9104/starter-tests.txt](../evidence/RX-9104/starter-tests.txt)
+- [docs/evidence/RX-9104/typecheck-final.txt](../evidence/RX-9104/typecheck-final.txt)
+- [docs/evidence/RX-9104/tooling-tests.txt](../evidence/RX-9104/tooling-tests.txt)
 
 
 ## RX-9105
@@ -2931,7 +2931,7 @@ Use clear consumer-facing status, empty and error language that explains the nex
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2949,17 +2949,17 @@ Use clear consumer-facing status, empty and error language that explains the nex
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9105.md](docs/evidence/RX-9105.md)
-- [docs/evidence/RX-9105/review.md](docs/evidence/RX-9105/review.md)
-- [docs/evidence/RX-9105/build.txt](docs/evidence/RX-9105/build.txt)
-- [docs/evidence/RX-9105/typecheck.txt](docs/evidence/RX-9105/typecheck.txt)
-- [docs/evidence/RX-9105/ui-tests-attempt01.txt](docs/evidence/RX-9105/ui-tests-attempt01.txt)
-- [docs/evidence/RX-9105/ui-focused-rerun.txt](docs/evidence/RX-9105/ui-focused-rerun.txt)
-- [docs/evidence/RX-9105/consumer-tests.txt](docs/evidence/RX-9105/consumer-tests.txt)
-- [docs/evidence/RX-9105/starter-tests.txt](docs/evidence/RX-9105/starter-tests.txt)
-- [docs/evidence/RX-9105/controls-report.json](docs/evidence/RX-9105/controls-report.json)
-- [docs/evidence/RX-9105/dropdown-report.json](docs/evidence/RX-9105/dropdown-report.json)
-- [docs/evidence/RX-9105/directory-report.json](docs/evidence/RX-9105/directory-report.json)
+- [docs/evidence/RX-9105.md](../evidence/RX-9105.md)
+- [docs/evidence/RX-9105/review.md](../evidence/RX-9105/review.md)
+- [docs/evidence/RX-9105/build.txt](../evidence/RX-9105/build.txt)
+- [docs/evidence/RX-9105/typecheck.txt](../evidence/RX-9105/typecheck.txt)
+- [docs/evidence/RX-9105/ui-tests-attempt01.txt](../evidence/RX-9105/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9105/ui-focused-rerun.txt](../evidence/RX-9105/ui-focused-rerun.txt)
+- [docs/evidence/RX-9105/consumer-tests.txt](../evidence/RX-9105/consumer-tests.txt)
+- [docs/evidence/RX-9105/starter-tests.txt](../evidence/RX-9105/starter-tests.txt)
+- [docs/evidence/RX-9105/controls-report.json](../evidence/RX-9105/controls-report.json)
+- [docs/evidence/RX-9105/dropdown-report.json](../evidence/RX-9105/dropdown-report.json)
+- [docs/evidence/RX-9105/directory-report.json](../evidence/RX-9105/directory-report.json)
 
 
 ## RX-9106
@@ -2978,7 +2978,7 @@ Help users discover surface-appropriate navigation and dismissal keys without re
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -2996,15 +2996,15 @@ Help users discover surface-appropriate navigation and dismissal keys without re
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9106.md](docs/evidence/RX-9106.md)
-- [docs/evidence/RX-9106/review.md](docs/evidence/RX-9106/review.md)
-- [docs/evidence/RX-9106/build.txt](docs/evidence/RX-9106/build.txt)
-- [docs/evidence/RX-9106/typecheck.txt](docs/evidence/RX-9106/typecheck.txt)
-- [docs/evidence/RX-9106/ui-tests-attempt01.txt](docs/evidence/RX-9106/ui-tests-attempt01.txt)
-- [docs/evidence/RX-9106/dropdown-report.json](docs/evidence/RX-9106/dropdown-report.json)
-- [docs/evidence/RX-9106/modal-report.json](docs/evidence/RX-9106/modal-report.json)
-- [docs/evidence/RX-9106/consumer-tests.txt](docs/evidence/RX-9106/consumer-tests.txt)
-- [docs/evidence/RX-9106/starter-tests.txt](docs/evidence/RX-9106/starter-tests.txt)
+- [docs/evidence/RX-9106.md](../evidence/RX-9106.md)
+- [docs/evidence/RX-9106/review.md](../evidence/RX-9106/review.md)
+- [docs/evidence/RX-9106/build.txt](../evidence/RX-9106/build.txt)
+- [docs/evidence/RX-9106/typecheck.txt](../evidence/RX-9106/typecheck.txt)
+- [docs/evidence/RX-9106/ui-tests-attempt01.txt](../evidence/RX-9106/ui-tests-attempt01.txt)
+- [docs/evidence/RX-9106/dropdown-report.json](../evidence/RX-9106/dropdown-report.json)
+- [docs/evidence/RX-9106/modal-report.json](../evidence/RX-9106/modal-report.json)
+- [docs/evidence/RX-9106/consumer-tests.txt](../evidence/RX-9106/consumer-tests.txt)
+- [docs/evidence/RX-9106/starter-tests.txt](../evidence/RX-9106/starter-tests.txt)
 
 
 ## RX-9107
@@ -3023,7 +3023,7 @@ Apply the RX-9101 Raveldex identity through scoped reusable consumer tokens and 
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3041,15 +3041,15 @@ Apply the RX-9101 Raveldex identity through scoped reusable consumer tokens and 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9107.md](docs/evidence/RX-9107.md)
-- [docs/evidence/RX-9107/review.md](docs/evidence/RX-9107/review.md)
-- [docs/evidence/RX-9107/build.txt](docs/evidence/RX-9107/build.txt)
-- [docs/evidence/RX-9107/typecheck-reuse.json](docs/evidence/RX-9107/typecheck-reuse.json)
-- [docs/evidence/RX-9107/contrast-summary.json](docs/evidence/RX-9107/contrast-summary.json)
-- [docs/evidence/RX-9107/ui-regressions.txt](docs/evidence/RX-9107/ui-regressions.txt)
-- [docs/evidence/RX-9107/consumer-final.txt](docs/evidence/RX-9107/consumer-final.txt)
-- [docs/evidence/RX-9107/family-final-report.json](docs/evidence/RX-9107/family-final-report.json)
-- [docs/evidence/RX-9107/package-docs-rerun.txt](docs/evidence/RX-9107/package-docs-rerun.txt)
+- [docs/evidence/RX-9107.md](../evidence/RX-9107.md)
+- [docs/evidence/RX-9107/review.md](../evidence/RX-9107/review.md)
+- [docs/evidence/RX-9107/build.txt](../evidence/RX-9107/build.txt)
+- [docs/evidence/RX-9107/typecheck-reuse.json](../evidence/RX-9107/typecheck-reuse.json)
+- [docs/evidence/RX-9107/contrast-summary.json](../evidence/RX-9107/contrast-summary.json)
+- [docs/evidence/RX-9107/ui-regressions.txt](../evidence/RX-9107/ui-regressions.txt)
+- [docs/evidence/RX-9107/consumer-final.txt](../evidence/RX-9107/consumer-final.txt)
+- [docs/evidence/RX-9107/family-final-report.json](../evidence/RX-9107/family-final-report.json)
+- [docs/evidence/RX-9107/package-docs-rerun.txt](../evidence/RX-9107/package-docs-rerun.txt)
 
 
 ## RX-9108
@@ -3068,7 +3068,7 @@ Make it practical to translate complete consumer interfaces consistently using t
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3086,11 +3086,11 @@ Make it practical to translate complete consumer interfaces consistently using t
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9108.md](docs/evidence/RX-9108.md)
-- [docs/evidence/RX-9108/review.md](docs/evidence/RX-9108/review.md)
-- [docs/evidence/RX-9108/localization-final.txt](docs/evidence/RX-9108/localization-final.txt)
-- [docs/evidence/RX-9108/localization-final-report.json](docs/evidence/RX-9108/localization-final-report.json)
-- [docs/evidence/RX-9108/preservation.json](docs/evidence/RX-9108/preservation.json)
+- [docs/evidence/RX-9108.md](../evidence/RX-9108.md)
+- [docs/evidence/RX-9108/review.md](../evidence/RX-9108/review.md)
+- [docs/evidence/RX-9108/localization-final.txt](../evidence/RX-9108/localization-final.txt)
+- [docs/evidence/RX-9108/localization-final-report.json](../evidence/RX-9108/localization-final-report.json)
+- [docs/evidence/RX-9108/preservation.json](../evidence/RX-9108/preservation.json)
 
 
 ## RX-9109
@@ -3109,7 +3109,7 @@ Map real documentation/catalog/content needs to Raveldex result hierarchy and ex
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3127,11 +3127,11 @@ Map real documentation/catalog/content needs to Raveldex result hierarchy and ex
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9109.md](docs/evidence/RX-9109.md)
-- [docs/evidence/RX-9109/review.md](docs/evidence/RX-9109/review.md)
-- [docs/evidence/RX-9109/package-checks.txt](docs/evidence/RX-9109/package-checks.txt)
-- [docs/evidence/RX-9109/package-report.json](docs/evidence/RX-9109/package-report.json)
-- [docs/evidence/RX-9109/source-reuse.json](docs/evidence/RX-9109/source-reuse.json)
+- [docs/evidence/RX-9109.md](../evidence/RX-9109.md)
+- [docs/evidence/RX-9109/review.md](../evidence/RX-9109/review.md)
+- [docs/evidence/RX-9109/package-checks.txt](../evidence/RX-9109/package-checks.txt)
+- [docs/evidence/RX-9109/package-report.json](../evidence/RX-9109/package-report.json)
+- [docs/evidence/RX-9109/source-reuse.json](../evidence/RX-9109/source-reuse.json)
 
 
 ## RX-9110
@@ -3150,7 +3150,7 @@ Make current-result facet counts understandable without changing conjunctive cou
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3168,11 +3168,11 @@ Make current-result facet counts understandable without changing conjunctive cou
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9110.md](docs/evidence/RX-9110.md)
-- [docs/evidence/RX-9110/review.md](docs/evidence/RX-9110/review.md)
-- [docs/evidence/RX-9110/ui-tests.txt](docs/evidence/RX-9110/ui-tests.txt)
-- [docs/evidence/RX-9110/package-inventory.json](docs/evidence/RX-9110/package-inventory.json)
-- [docs/evidence/RX-9110/preservation.json](docs/evidence/RX-9110/preservation.json)
+- [docs/evidence/RX-9110.md](../evidence/RX-9110.md)
+- [docs/evidence/RX-9110/review.md](../evidence/RX-9110/review.md)
+- [docs/evidence/RX-9110/ui-tests.txt](../evidence/RX-9110/ui-tests.txt)
+- [docs/evidence/RX-9110/package-inventory.json](../evidence/RX-9110/package-inventory.json)
+- [docs/evidence/RX-9110/preservation.json](../evidence/RX-9110/preservation.json)
 
 
 ## RX-9111
@@ -3191,7 +3191,7 @@ Give dynamic-content integrators an accurate lifecycle recipe using existing eng
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3209,11 +3209,11 @@ Give dynamic-content integrators an accurate lifecycle recipe using existing eng
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9111.md](docs/evidence/RX-9111.md)
-- [docs/evidence/RX-9111/review.md](docs/evidence/RX-9111/review.md)
-- [docs/evidence/RX-9111/cms-tests.txt](docs/evidence/RX-9111/cms-tests.txt)
-- [docs/evidence/RX-9111/cms-report.json](docs/evidence/RX-9111/cms-report.json)
-- [docs/evidence/RX-9111/preservation.json](docs/evidence/RX-9111/preservation.json)
+- [docs/evidence/RX-9111.md](../evidence/RX-9111.md)
+- [docs/evidence/RX-9111/review.md](../evidence/RX-9111/review.md)
+- [docs/evidence/RX-9111/cms-tests.txt](../evidence/RX-9111/cms-tests.txt)
+- [docs/evidence/RX-9111/cms-report.json](../evidence/RX-9111/cms-report.json)
+- [docs/evidence/RX-9111/preservation.json](../evidence/RX-9111/preservation.json)
 
 
 ## RX-9112
@@ -3228,11 +3228,11 @@ Verify changed consumer behavior and the original Raveldex design on one identif
 
 **Expected affected areas**
 
-`test/ui/`, `test/types/`, `docs/evidence/`, `docs/api/`, `docs/specs/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
+`test/ui/`, `test/types/`, `docs/evidence/`, `docs/api/`, `docs/specs/`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`, `docs/planning/roadmap.json`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[N11_UI_UX_POLISH.md](docs/specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](docs/planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
+[N11_UI_UX_POLISH.md](../specs/N11_UI_UX_POLISH.md), [SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md](../planning/SCOPED_QUALIFICATION_AND_IDENTITY_20261107.md)
 
 **Acceptance criteria**
 
@@ -3250,19 +3250,19 @@ Verify changed consumer behavior and the original Raveldex design on one identif
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9112.md](docs/evidence/RX-9112.md)
-- [docs/evidence/RX-9112/review.md](docs/evidence/RX-9112/review.md)
-- [docs/evidence/RX-9112/primary-family-report.json](docs/evidence/RX-9112/primary-family-report.json)
-- [docs/evidence/RX-9112/secondary-family-report.json](docs/evidence/RX-9112/secondary-family-report.json)
-- [docs/evidence/RX-9112/manual-walkthrough.md](docs/evidence/RX-9112/manual-walkthrough.md)
-- [docs/evidence/RX-9112/preservation.json](docs/evidence/RX-9112/preservation.json)
-- [docs/evidence/RX-9112/tracking-readback.json](docs/evidence/RX-9112/tracking-readback.json)
-- [docs/evidence/RX-9112/human-feedback.json](docs/evidence/RX-9112/human-feedback.json)
-- [docs/evidence/RX-9112/indexed-fields-probe.json](docs/evidence/RX-9112/indexed-fields-probe.json)
-- [docs/evidence/RX-9112/indexed-fields-probe.mjs](docs/evidence/RX-9112/indexed-fields-probe.mjs)
-- [docs/evidence/RX-9112/tracking-closeout.md](docs/evidence/RX-9112/tracking-closeout.md)
-- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](docs/evidence/N10_N11_SOURCE_SYNC_20261108.md)
-- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.json](docs/evidence/N10_N11_SOURCE_SYNC_20261108.json)
+- [docs/evidence/RX-9112.md](../evidence/RX-9112.md)
+- [docs/evidence/RX-9112/review.md](../evidence/RX-9112/review.md)
+- [docs/evidence/RX-9112/primary-family-report.json](../evidence/RX-9112/primary-family-report.json)
+- [docs/evidence/RX-9112/secondary-family-report.json](../evidence/RX-9112/secondary-family-report.json)
+- [docs/evidence/RX-9112/manual-walkthrough.md](../evidence/RX-9112/manual-walkthrough.md)
+- [docs/evidence/RX-9112/preservation.json](../evidence/RX-9112/preservation.json)
+- [docs/evidence/RX-9112/tracking-readback.json](../evidence/RX-9112/tracking-readback.json)
+- [docs/evidence/RX-9112/human-feedback.json](../evidence/RX-9112/human-feedback.json)
+- [docs/evidence/RX-9112/indexed-fields-probe.json](../evidence/RX-9112/indexed-fields-probe.json)
+- [docs/evidence/RX-9112/indexed-fields-probe.mjs](../evidence/RX-9112/indexed-fields-probe.mjs)
+- [docs/evidence/RX-9112/tracking-closeout.md](../evidence/RX-9112/tracking-closeout.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.md](../evidence/N10_N11_SOURCE_SYNC_20261108.md)
+- [docs/evidence/N10_N11_SOURCE_SYNC_20261108.json](../evidence/N10_N11_SOURCE_SYNC_20261108.json)
 
 
 ## RX-9201
@@ -3281,7 +3281,7 @@ Prepare core, English and Astro 1.0.0 artifacts without changing runtime contrac
 
 **Contracts**
 
-[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md)
 
 **Acceptance criteria**
 
@@ -3295,7 +3295,7 @@ Prepare core, English and Astro 1.0.0 artifacts without changing runtime contrac
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9201.md](docs/evidence/RX-9201.md)
+- [docs/evidence/RX-9201.md](../evidence/RX-9201.md)
 
 
 ## RX-9202
@@ -3314,7 +3314,7 @@ Remove redundant development presentation while keeping usable product guidance,
 
 **Contracts**
 
-[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md)
 
 **Acceptance criteria**
 
@@ -3328,7 +3328,7 @@ Remove redundant development presentation while keeping usable product guidance,
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9202.md](docs/evidence/RX-9202.md)
+- [docs/evidence/RX-9202.md](../evidence/RX-9202.md)
 
 
 ## RX-9203
@@ -3343,11 +3343,11 @@ Replace chronological handoffs with a short current map of the product, source, 
 
 **Expected affected areas**
 
-`AGENTS.md`, `CONTRIBUTING.md`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`. These are planning boundaries; create files only when this task needs them.
+`AGENTS.md`, `CONTRIBUTING.md`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md)
 
 **Acceptance criteria**
 
@@ -3360,7 +3360,7 @@ Replace chronological handoffs with a short current map of the product, source, 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9203.md](docs/evidence/RX-9203.md)
+- [docs/evidence/RX-9203.md](../evidence/RX-9203.md)
 
 
 ## RX-9204
@@ -3379,7 +3379,7 @@ Qualify the stable artifacts and regenerate Pages and exact starter downloads fr
 
 **Contracts**
 
-[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md)
 
 **Acceptance criteria**
 
@@ -3393,7 +3393,7 @@ Qualify the stable artifacts and regenerate Pages and exact starter downloads fr
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9204.md](docs/evidence/RX-9204.md)
+- [docs/evidence/RX-9204.md](../evidence/RX-9204.md)
 
 
 ## RX-9205
@@ -3408,11 +3408,11 @@ Deliver self-contained optional issues, preserved historical tracking and a prec
 
 **Expected affected areas**
 
-`docs/planning/roadmap.json`, `docs/evidence/`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `scripts/link-native-subissues.mjs`. These are planning boundaries; create files only when this task needs them.
+`docs/planning/roadmap.json`, `docs/evidence/`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`, `scripts/link-native-subissues.mjs`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[RELEASE_1_0_0.md](docs/planning/RELEASE_1_0_0.md)
+[RELEASE_1_0_0.md](../planning/RELEASE_1_0_0.md)
 
 **Acceptance criteria**
 
@@ -3426,7 +3426,7 @@ Deliver self-contained optional issues, preserved historical tracking and a prec
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9205.md](docs/evidence/RX-9205.md)
+- [docs/evidence/RX-9205.md](../evidence/RX-9205.md)
 
 
 ## RX-9501
@@ -3445,7 +3445,7 @@ Fix the owner-reported EADDRINUSE failure in scripts/ui-pilot.mjs. Keep 4173 or 
 
 **Contracts**
 
-[README.md](examples/docs-search/README.md)
+[README.md](../../examples/docs-search/README.md)
 
 **Acceptance criteria**
 
@@ -3460,7 +3460,7 @@ Fix the owner-reported EADDRINUSE failure in scripts/ui-pilot.mjs. Keep 4173 or 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9501.md](docs/evidence/RX-9501.md)
+- [docs/evidence/RX-9501.md](../evidence/RX-9501.md)
 
 
 ## RX-9502
@@ -3479,7 +3479,7 @@ Add discoverable source-checkout instructions for the complete demo site, its fi
 
 **Contracts**
 
-[README.md](site/README.md)
+[README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3494,7 +3494,7 @@ Add discoverable source-checkout instructions for the complete demo site, its fi
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9502.md](docs/evidence/RX-9502.md)
+- [docs/evidence/RX-9502.md](../evidence/RX-9502.md)
 
 
 ## RX-9601
@@ -3513,7 +3513,7 @@ Replace the Demo header link with a working, modern documentation-search modal u
 
 **Contracts**
 
-[SITE_SEARCH_MODAL.md](docs/planning/SITE_SEARCH_MODAL.md)
+[SITE_SEARCH_MODAL.md](../planning/SITE_SEARCH_MODAL.md)
 
 **Acceptance criteria**
 
@@ -3529,7 +3529,7 @@ Replace the Demo header link with a working, modern documentation-search modal u
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9601.md](docs/evidence/RX-9601.md)
+- [docs/evidence/RX-9601.md](../evidence/RX-9601.md)
 
 
 ## RX-9701
@@ -3548,7 +3548,7 @@ Apply the established header-modal direction to all five live demo families and 
 
 **Contracts**
 
-[DEMO_PRESENTATION.md](docs/planning/DEMO_PRESENTATION.md)
+[DEMO_PRESENTATION.md](../planning/DEMO_PRESENTATION.md)
 
 **Acceptance criteria**
 
@@ -3564,7 +3564,7 @@ Apply the established header-modal direction to all five live demo families and 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9701.md](docs/evidence/RX-9701.md)
+- [docs/evidence/RX-9701.md](../evidence/RX-9701.md)
 
 
 ## RX-9801
@@ -3583,7 +3583,7 @@ Implement the owner-authorized shared inline/modal append behavior, superseding 
 
 **Contracts**
 
-[SEARCH_SOLUTIONS.md](docs/specs/SEARCH_SOLUTIONS.md), [LOAD_MORE_APPEND.md](docs/planning/LOAD_MORE_APPEND.md)
+[SEARCH_SOLUTIONS.md](../specs/SEARCH_SOLUTIONS.md), [LOAD_MORE_APPEND.md](../planning/LOAD_MORE_APPEND.md)
 
 **Acceptance criteria**
 
@@ -3599,7 +3599,7 @@ Implement the owner-authorized shared inline/modal append behavior, superseding 
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9801.md](docs/evidence/RX-9801.md)
+- [docs/evidence/RX-9801.md](../evidence/RX-9801.md)
 
 
 ## RX-9901
@@ -3618,7 +3618,7 @@ After an explicit implementation instruction and verification of the delivered N
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3634,9 +3634,9 @@ After an explicit implementation instruction and verification of the delivered N
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9901.md](docs/evidence/RX-9901.md)
-- [docs/evidence/RX-9901/boundaries.json](docs/evidence/RX-9901/boundaries.json)
-- [docs/evidence/RX-9901/candidate-package/candidate-report.json](docs/evidence/RX-9901/candidate-package/candidate-report.json)
+- [docs/evidence/RX-9901.md](../evidence/RX-9901.md)
+- [docs/evidence/RX-9901/boundaries.json](../evidence/RX-9901/boundaries.json)
+- [docs/evidence/RX-9901/candidate-package/candidate-report.json](../evidence/RX-9901/candidate-package/candidate-report.json)
 
 
 ## RX-9902
@@ -3655,7 +3655,7 @@ Make /examples/ a visual choose-first gallery using inert real-interface preview
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3671,9 +3671,9 @@ Make /examples/ a visual choose-first gallery using inert real-interface preview
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9902.md](docs/evidence/RX-9902.md)
-- [docs/evidence/RX-9902/boundaries.json](docs/evidence/RX-9902/boundaries.json)
-- [docs/evidence/RX-9902/candidate-package/candidate-report.json](docs/evidence/RX-9902/candidate-package/candidate-report.json)
+- [docs/evidence/RX-9902.md](../evidence/RX-9902.md)
+- [docs/evidence/RX-9902/boundaries.json](../evidence/RX-9902/boundaries.json)
+- [docs/evidence/RX-9902/candidate-package/candidate-report.json](../evidence/RX-9902/candidate-package/candidate-report.json)
 
 
 ## RX-9903
@@ -3692,7 +3692,7 @@ Adapt the existing Inline showcase into the complete try/install/data/style pilo
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3709,9 +3709,9 @@ Adapt the existing Inline showcase into the complete try/install/data/style pilo
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9903.md](docs/evidence/RX-9903.md)
-- [docs/evidence/RX-9903/boundaries.json](docs/evidence/RX-9903/boundaries.json)
-- [docs/evidence/RX-9903/candidate-package/candidate-report.json](docs/evidence/RX-9903/candidate-package/candidate-report.json)
+- [docs/evidence/RX-9903.md](../evidence/RX-9903.md)
+- [docs/evidence/RX-9903/boundaries.json](../evidence/RX-9903/boundaries.json)
+- [docs/evidence/RX-9903/candidate-package/candidate-report.json](../evidence/RX-9903/candidate-package/candidate-report.json)
 
 
 ## RX-9904
@@ -3730,7 +3730,7 @@ Obtain and record an explicit owner decision on one working gallery/Inline pilot
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3746,9 +3746,9 @@ Obtain and record an explicit owner decision on one working gallery/Inline pilot
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9904.md](docs/evidence/RX-9904.md)
-- [docs/evidence/RX-9904/candidate.json](docs/evidence/RX-9904/candidate.json)
-- [docs/evidence/RX-9904/approval.json](docs/evidence/RX-9904/approval.json)
+- [docs/evidence/RX-9904.md](../evidence/RX-9904.md)
+- [docs/evidence/RX-9904/candidate.json](../evidence/RX-9904/candidate.json)
+- [docs/evidence/RX-9904/approval.json](../evidence/RX-9904/approval.json)
 
 
 ## RX-9905
@@ -3767,7 +3767,7 @@ Roll the approved detail/setup template onto modal and dropdown pages while reta
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3783,10 +3783,10 @@ Roll the approved detail/setup template onto modal and dropdown pages while reta
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9905.md](docs/evidence/RX-9905.md)
-- [docs/evidence/RX-9905/boundaries.json](docs/evidence/RX-9905/boundaries.json)
-- [docs/evidence/RX-9905/review.md](docs/evidence/RX-9905/review.md)
-- [docs/evidence/RX-9905/candidate-package/candidate-report.json](docs/evidence/RX-9905/candidate-package/candidate-report.json)
+- [docs/evidence/RX-9905.md](../evidence/RX-9905.md)
+- [docs/evidence/RX-9905/boundaries.json](../evidence/RX-9905/boundaries.json)
+- [docs/evidence/RX-9905/review.md](../evidence/RX-9905/review.md)
+- [docs/evidence/RX-9905/candidate-package/candidate-report.json](../evidence/RX-9905/candidate-package/candidate-report.json)
 
 
 ## RX-9906
@@ -3805,7 +3805,7 @@ Roll the approved detail/setup template onto directory and rich-results pages wh
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3821,10 +3821,10 @@ Roll the approved detail/setup template onto directory and rich-results pages wh
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9906.md](docs/evidence/RX-9906.md)
-- [docs/evidence/RX-9906/boundaries.json](docs/evidence/RX-9906/boundaries.json)
-- [docs/evidence/RX-9906/review.md](docs/evidence/RX-9906/review.md)
-- [docs/evidence/RX-9906/tracking.json](docs/evidence/RX-9906/tracking.json)
+- [docs/evidence/RX-9906.md](../evidence/RX-9906.md)
+- [docs/evidence/RX-9906/boundaries.json](../evidence/RX-9906/boundaries.json)
+- [docs/evidence/RX-9906/review.md](../evidence/RX-9906/review.md)
+- [docs/evidence/RX-9906/tracking.json](../evidence/RX-9906/tracking.json)
 
 
 ## RX-9907
@@ -3843,7 +3843,7 @@ Apply contextual reading/reference layouts and improve representative Getting st
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3859,10 +3859,10 @@ Apply contextual reading/reference layouts and improve representative Getting st
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9907.md](docs/evidence/RX-9907.md)
-- [docs/evidence/RX-9907/boundaries.json](docs/evidence/RX-9907/boundaries.json)
-- [docs/evidence/RX-9907/review.md](docs/evidence/RX-9907/review.md)
-- [docs/evidence/RX-9907/tracking.json](docs/evidence/RX-9907/tracking.json)
+- [docs/evidence/RX-9907.md](../evidence/RX-9907.md)
+- [docs/evidence/RX-9907/boundaries.json](../evidence/RX-9907/boundaries.json)
+- [docs/evidence/RX-9907/review.md](../evidence/RX-9907/review.md)
+- [docs/evidence/RX-9907/tracking.json](../evidence/RX-9907/tracking.json)
 
 
 ## RX-9908
@@ -3877,11 +3877,11 @@ Verify and review the changed documentation/demo site on one identified candidat
 
 **Expected affected areas**
 
-`site/`, `scripts/build-pages.mjs`, `scripts/check-pages.mjs`, `test/pages/`, `test/tooling/pages.test.mjs`, `docs/evidence/RX-9908.md`, `site/README.md`, `PROJECT_CONTEXT.md`, `CODEX_HANDOFF.md`, `docs/planning/roadmap.json`, `docs/planning/GITHUB_TRACKING.md`. These are planning boundaries; create files only when this task needs them.
+`site/`, `scripts/build-pages.mjs`, `scripts/check-pages.mjs`, `test/pages/`, `test/tooling/pages.test.mjs`, `docs/evidence/RX-9908.md`, `site/README.md`, `docs/planning/PROJECT_CONTEXT.md`, `docs/planning/CODEX_HANDOFF.md`, `docs/planning/roadmap.json`, `docs/planning/GITHUB_TRACKING.md`. These are planning boundaries; create files only when this task needs them.
 
 **Contracts**
 
-[DOCS_DEMO_EXPERIENCE.md](docs/planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](docs/planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](site/README.md)
+[DOCS_DEMO_EXPERIENCE.md](../planning/DOCS_DEMO_EXPERIENCE.md), [N19_RECOMMENDED_DESIGN_SOURCE.md](../planning/N19_RECOMMENDED_DESIGN_SOURCE.md), [README.md](../../site/README.md)
 
 **Acceptance criteria**
 
@@ -3899,15 +3899,15 @@ Verify and review the changed documentation/demo site on one identified candidat
 
 **Recorded evidence**
 
-- [docs/evidence/RX-9908.md](docs/evidence/RX-9908.md)
-- [docs/evidence/RX-9908/identities.json](docs/evidence/RX-9908/identities.json)
-- [docs/evidence/RX-9908/integrated.json](docs/evidence/RX-9908/integrated.json)
-- [docs/evidence/RX-9908/review.md](docs/evidence/RX-9908/review.md)
-- [docs/evidence/RX-9908/owner-disposition.json](docs/evidence/RX-9908/owner-disposition.json)
-- [docs/evidence/RX-9908/tracking.json](docs/evidence/RX-9908/tracking.json)
-- [docs/evidence/RX-9908/environment.json](docs/evidence/RX-9908/environment.json)
+- [docs/evidence/RX-9908.md](../evidence/RX-9908.md)
+- [docs/evidence/RX-9908/identities.json](../evidence/RX-9908/identities.json)
+- [docs/evidence/RX-9908/integrated.json](../evidence/RX-9908/integrated.json)
+- [docs/evidence/RX-9908/review.md](../evidence/RX-9908/review.md)
+- [docs/evidence/RX-9908/owner-disposition.json](../evidence/RX-9908/owner-disposition.json)
+- [docs/evidence/RX-9908/tracking.json](../evidence/RX-9908/tracking.json)
+- [docs/evidence/RX-9908/environment.json](../evidence/RX-9908/environment.json)
 
 
 ## Optional enhancement tasks
 
-The `RX-A*` task cards in [Optional features](docs/planning/OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.
+The `RX-A*` task cards in [Optional features](OPTIONAL_FEATURES.md) record their actual selected/completed/deferred states. Their dependency on `RX-4003` is only a prerequisite; unselected ideas never enter automatic next-task selection and do not block the N0–N4 candidate.

@@ -1,30 +1,9 @@
 ---
-import Layout from './Layout.astro';
-import SolutionChooser from './SolutionChooser.astro';
+import Examples from './Examples.astro';
 const { example } = Astro.props;
 const base = '/raveldex/';
 ---
-<Layout wide frontmatter={{ title: 'Raveldex documentation' }}>
-  <Fragment slot="head">
-    <link rel="stylesheet" href={base + 'site-assets/workbench.css'} />
-  </Fragment>
-  <section class="search-home__intro" aria-labelledby="add-local-search-to-your-application">
-    <h1 id="add-local-search-to-your-application">Add local search to your application.</h1>
-    <p>Help visitors find guides, pages and resources. Search runs in your application, with no search service to set up.</p>
-    <div class="search-home__links"><a class="site-button" href="#try-search">Try search <span aria-hidden="true">↓</span></a><a href={base + 'guide/overview/'}>Get started <span aria-hidden="true">→</span></a></div>
-  </section>
-  <section aria-labelledby="try-search">
-    <h2 id="try-search">Find a guide</h2>
-    <p>Try <strong>walking guide</strong>, narrow the results by topic, then open a guide. This is the complete inline starter you can use in your own project.</p>
-    <p><a href={base + 'examples/inline-preview/'}>Open the preview on its own</a> · <a href={base + 'examples/inline/'}>Use this inline search</a></p>
-    <iframe class="search-home__preview" src={base + 'examples/inline-preview/'} title="Inline search starter preview" height="720"></iframe>
-    <noscript><p>Search needs JavaScript. You can still browse all guides in the preview and open any starter below.</p></noscript>
-  </section>
-  <section aria-labelledby="choose-search">
-    <h2 id="choose-search">Choose how search fits your site</h2>
-    <SolutionChooser describe />
-    <p>For query modes, score explanations and worker comparisons, <a href={base + 'demo/'}>Explore the search Workbench</a>.</p>
-  </section>
+<Examples home>
   <section class="search-home__follow" aria-labelledby="build-the-search">
     <div>
       <h2 id="build-the-search">Make it your own</h2>
@@ -55,4 +34,4 @@ const base = '/raveldex/';
     </ul>
     <p>Read the <a href={base + 'guide/compatibility/'}>runtime requirements</a> and <a href={base + 'guide/limitations/'}>practical limits</a> before choosing optional capabilities.</p>
   </section>
-</Layout>
+</Examples>

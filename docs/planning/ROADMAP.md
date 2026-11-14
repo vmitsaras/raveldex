@@ -18,10 +18,10 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 
 ## Where to look
 
-- [Canonical task state](docs/planning/roadmap.json): IDs, dependencies, status, acceptance, specifications, and actual evidence.
+- [Canonical task state](roadmap.json): IDs, dependencies, status, acceptance, specifications, and actual evidence.
 - [Implementation task cards](IMPLEMENTATION_TASKS.md): the release tasks and verification requirements.
-- [Optional feature tracks](docs/planning/OPTIONAL_FEATURES.md): current optional-task states and separately unscheduled research ideas.
-- [Verification plan](docs/planning/VERIFICATION_PLAN.md): what must be observed before a capability is called verified.
+- [Optional feature tracks](OPTIONAL_FEATURES.md): current optional-task states and separately unscheduled research ideas.
+- [Verification plan](VERIFICATION_PLAN.md): what must be observed before a capability is called verified.
 - [GitHub milestones](https://github.com/vmitsaras/raveldex/milestones) and [issues](https://github.com/vmitsaras/raveldex/issues): the human tracking view, using the same IDs and acceptance conditions.
 
 `docs/planning/roadmap.json` is authoritative. This file, the task cards, and GitHub issues are generated tracking views. Update the manifest first and synchronize the views; issue closure alone does not establish verified completion.
@@ -76,16 +76,16 @@ Run `npm run handoff:status` and `npm run handoff:next` for the complete explana
 | [RX-4001](IMPLEMENTATION_TASKS.md#rx-4001) — Fair correctness, relevance, and cost comparison | `done` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/25) |
 | [RX-4002](IMPLEMENTATION_TASKS.md#rx-4002) — Browser, assistive-technology, memory, and device qualification | `done` | `RX-3004` | [Issue](https://github.com/vmitsaras/raveldex/issues/26) |
 | [RX-4003](IMPLEMENTATION_TASKS.md#rx-4003) — Package, public documentation, and independent candidate review | `done` | `RX-4001`, `RX-4002` | [Issue](https://github.com/vmitsaras/raveldex/issues/27) |
-| [RX-A010](docs/planning/OPTIONAL_FEATURES.md#rx-a010) — Bounded typo tolerance | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/28) |
-| [RX-A020](docs/planning/OPTIONAL_FEATURES.md#rx-a020) — Dictionary-backed suggestions | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/29) |
-| [RX-A030](docs/planning/OPTIONAL_FEATURES.md#rx-a030) — Directional one-step synonyms | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/30) |
-| [RX-A040](docs/planning/OPTIONAL_FEATURES.md#rx-a040) — Evaluated language analyzer pack | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/31) |
-| [RX-A050](docs/planning/OPTIONAL_FEATURES.md#rx-a050) — Code and identifier analysis | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/32) |
-| [RX-A060](docs/planning/OPTIONAL_FEATURES.md#rx-a060) — Explicit literal and infix matching | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/33) |
-| [RX-A070](docs/planning/OPTIONAL_FEATURES.md#rx-a070) — Ordered proximity matching | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/34) |
-| [RX-A080](docs/planning/OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/35) |
-| [RX-A090](docs/planning/OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/36) |
-| [RX-A100](docs/planning/OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
+| [RX-A010](OPTIONAL_FEATURES.md#rx-a010) — Bounded typo tolerance | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/28) |
+| [RX-A020](OPTIONAL_FEATURES.md#rx-a020) — Dictionary-backed suggestions | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/29) |
+| [RX-A030](OPTIONAL_FEATURES.md#rx-a030) — Directional one-step synonyms | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/30) |
+| [RX-A040](OPTIONAL_FEATURES.md#rx-a040) — Evaluated language analyzer pack | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/31) |
+| [RX-A050](OPTIONAL_FEATURES.md#rx-a050) — Code and identifier analysis | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/32) |
+| [RX-A060](OPTIONAL_FEATURES.md#rx-a060) — Explicit literal and infix matching | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/33) |
+| [RX-A070](OPTIONAL_FEATURES.md#rx-a070) — Ordered proximity matching | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/34) |
+| [RX-A080](OPTIONAL_FEATURES.md#rx-a080) — Bounded text query syntax | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/35) |
+| [RX-A090](OPTIONAL_FEATURES.md#rx-a090) — Explicit record patch convenience | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/36) |
+| [RX-A100](OPTIONAL_FEATURES.md#rx-a100) — Static-build and Astro adapter | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues/37) |
 | [RX-5001](IMPLEMENTATION_TASKS.md#rx-5001) — Shared site shell and responsive reading styles | `done` | `RX-4003` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5001%22) |
 | [RX-5002](IMPLEMENTATION_TASKS.md#rx-5002) — Homepage with real Search Workbench | `done` | `RX-5001` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5002%22) |
 | [RX-5003](IMPLEMENTATION_TASKS.md#rx-5003) — Dedicated demo and shared behavior | `done` | `RX-5002` | [Issue](https://github.com/vmitsaras/raveldex/issues?q=in%3Atitle%20%22RX-5003%22) |
@@ -304,4 +304,4 @@ Vectors, RAG, semantic models, another default engine backend, Rust/WASM, uncont
 
 ## Provenance
 
-This roadmap transcribes the native-library direction and `RX-*` milestones from the owner-supplied conversation and adapts them for this fresh repository. It does not claim the earlier planning archive is present, external research was refreshed, or native implementation results already exist. See the [native direction decision](docs/decisions/0001-native-direction.md) and [project context](PROJECT_CONTEXT.md).
+This roadmap transcribes the native-library direction and `RX-*` milestones from the owner-supplied conversation and adapts them for this fresh repository. It does not claim the earlier planning archive is present, external research was refreshed, or native implementation results already exist. See the [native direction decision](../decisions/0001-native-direction.md) and [project context](PROJECT_CONTEXT.md).

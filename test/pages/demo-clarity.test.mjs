@@ -138,24 +138,25 @@ test('home lets visitors try installed inline search and reach every interface w
       await mkdir(process.env.RAVELDEX_DEMO_SCREENSHOTS, { recursive: true });
       await page.screenshot({ path: `${process.env.RAVELDEX_DEMO_SCREENSHOTS}/home-desktop.png`, fullPage: true });
     }
-    const preview = page.locator('iframe[title="Inline search starter preview"]');
-    assert.equal(await preview.count(), 1, 'The first live demo is a complete consumer interface');
-    const frame = page.frameLocator('iframe[title="Inline search starter preview"]');
+    await page.locator('.examples-gallery__live .solution-card__demo').click();
+    const frame = page;
     const input = frame.getByRole('searchbox', { name: 'Search walking guides', exact: true });
     await input.fill('walking guide'); await input.press('Enter');
     await frame.locator('[data-raveldex-inline-status]').filter({ hasText: '7 results' }).waitFor();
     assert.equal(await frame.locator('[data-raveldex-inline-result]').count(), 3);
     await input.focus(); await input.press('Tab');
     assert.ok(await frame.getByRole('button', { name: 'Search', exact: true }).evaluate(node => node === node.ownerDocument.activeElement));
-    const chooser = page.getByRole('navigation', { name: 'Search solutions', exact: true });
+    await page.goBack();
+    assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), 'Choose a search interface');
+    const chooser = page.locator('[data-solution-gallery]');
     for (const family of ['inline', 'modal', 'dropdown', 'directory', 'cards']) {
-      const link = chooser.locator(`a[href="/raveldex/examples/${family}/"]`);
+      const link = chooser.locator(`[data-solution-demo][href="/raveldex/examples/${family}/"]`);
       assert.equal(await link.count(), 1); await link.focus(); await link.press('Enter');
       assert.equal(new URL(page.url()).pathname, `/raveldex/examples/${family}/`);
       await page.goBack();
     }
     assert.equal(await page.locator('[data-pilot-representation]').count(), 0);
-    await page.getByRole('link', { name: 'Explore the search Workbench', exact: true }).click();
+    await page.getByRole('main').getByRole('link', { name: 'Developer Workbench', exact: true }).click();
     await page.locator('[data-raveldex-input]').waitFor();
     assert.equal(new URL(page.url()).pathname, '/raveldex/demo/');
     assert.deepEqual(errors, []);
@@ -166,10 +167,12 @@ test('consumer entry remains useful without JavaScript and reflows in narrow the
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 900 } });
   try {
     const page = await context.newPage(); await page.goto(base);
-    const chooser = page.getByRole('navigation', { name: 'Search solutions', exact: true });
-    assert.equal(await chooser.getByRole('link').count(), 5);
-    const frame = page.frameLocator('iframe[title="Inline search starter preview"]');
-    await frame.getByRole('link', { name: 'Plan your first walking trip', exact: true }).waitFor();
+    assert.equal(await page.getByRole('heading', { level: 1 }).innerText(), 'Choose a search interface');
+    const chooser = page.locator('[data-solution-gallery]');
+    assert.equal(await chooser.locator('[data-solution-demo]').count(), 5);
+    await page.locator('.examples-gallery__live .solution-card__demo').click();
+    await page.getByRole('link', { name: 'Plan your first walking trip', exact: true }).waitFor();
+    await page.goBack();
     await page.getByRole('main').getByRole('link', { name: 'Get started', exact: true }).click();
     assert.equal(new URL(page.url()).pathname, '/raveldex/guide/overview/');
   } finally { await context.close(); }
@@ -178,11 +181,11 @@ test('consumer entry remains useful without JavaScript and reflows in narrow the
     await page.goto(base);
     for (const colorScheme of ['light', 'dark']) {
       await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
-      await page.locator('.solution-chooser a').first().evaluate(node => { node.dir = 'rtl'; node.textContent = 'دليل البحث ' + 'Averylonginterfacename'.repeat(5); });
+      await page.locator('[data-solution-demo]').first().evaluate(node => { node.dir = 'rtl'; node.textContent = 'دليل البحث ' + 'Averylonginterfacename'.repeat(5); });
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
     }
     await page.emulateMedia({ forcedColors: 'active' });
-    const link = page.locator('.solution-chooser a').first(); await link.focus();
+    const link = page.locator('[data-solution-demo]').first(); await link.focus();
     assert.notEqual(await link.evaluate(node => getComputedStyle(node).outlineStyle), 'none');
   } finally { await page.close(); }
 });

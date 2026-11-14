@@ -2,11 +2,11 @@
 
 ## Start here
 
-Read [project context](PROJECT_CONTEXT.md), run `npm run handoff:next`, then
-read the selected task in `IMPLEMENTATION_TASKS.md` and its referenced specs.
+Read [project context](docs/planning/PROJECT_CONTEXT.md), run `npm run handoff:next`, then
+read the selected task in `docs/planning/IMPLEMENTATION_TASKS.md` and its referenced specs.
 Read surrounding source and tests before editing. The [contributor guide](CONTRIBUTING.md)
 lists setup and verification commands. Current code/runtime evidence outranks
-historical handoffs; [CODEX_HANDOFF.md](CODEX_HANDOFF.md) is only a current-work pointer.
+historical handoffs; [current work handoff](docs/planning/CODEX_HANDOFF.md) is only a current-work pointer.
 
 ## Architecture and contracts
 
@@ -54,7 +54,7 @@ prerequisite for ordinary product work.
 ## Tracking and delivery
 
 The canonical roadmap owns task IDs, dependencies, status and acceptance.
-`ROADMAP.md`, `IMPLEMENTATION_TASKS.md` and optional task cards are generated.
+`docs/planning/ROADMAP.md`, `docs/planning/IMPLEMENTATION_TASKS.md` and optional task cards are generated.
 Run `npm run docs:generate` after manifest edits. Use `npm run docs:check`,
 `npm run handoff:check` and the relevant behavior checks before the full check.
 

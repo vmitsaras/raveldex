@@ -3,7 +3,7 @@ export const BASE = '/raveldex/';
 export const EXCLUDED = ['accessibility', 'api', 'architecture', 'decisions', 'evaluation',
   'evidence', 'history', 'migration', 'planning', 'release', 'research', 'specs', 'support'];
 export const PAGES = [
-  ['site/Home.astro', '', 'Raveldex documentation', { section: null, parent: null, label: 'Home', outline: false }],
+  ['site/Home.astro', '', 'Raveldex documentation', { section: 'examples', parent: null, label: 'Home', outline: false }],
   ['site/Demo.astro', 'demo', 'Search the usage guides', { section: 'documentation', group: 'guide', parent: 'guide', label: 'Developer Workbench', outline: false }],
   ['site/404.md', '404', 'Page not found', { section: null, parent: '', label: 'Page not found', outline: false }],
   ['docs/api/GETTING_STARTED.md', 'guide/overview', 'Getting started', { section: 'get-started', group: 'guide', parent: 'guide', label: 'Get started' }],

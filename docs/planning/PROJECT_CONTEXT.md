@@ -14,9 +14,9 @@ network, workers or storage on import.
 | `@vmitsaras/raveldex-astro` | `1.0.0` | Node `>=22.12.0`; exact core peer; optional Astro `7.3.2` hook |
 
 The manifests select public npm access. Example applications remain private.
-The [API reference](docs/api/README.md), [compatibility policy](docs/api/COMPATIBILITY.md)
-and [limits/recovery guide](docs/api/LIMITATIONS.md) describe supported behavior.
-The [release runbook](docs/release/PREPARATION.md) verifies local artifacts.
+The [API reference](../api/README.md), [compatibility policy](../api/COMPATIBILITY.md)
+and [limits/recovery guide](../api/LIMITATIONS.md) describe supported behavior.
+The [release runbook](../release/PREPARATION.md) verifies local artifacts.
 
 ## Source and test map
 
@@ -30,64 +30,64 @@ The [release runbook](docs/release/PREPARATION.md) verifies local artifacts.
 | Documentation site and exact starter archives | `site/`, `examples/` | `test/pages/`, Pages inventory/source/link checks |
 | Planner, package and GitHub tooling | `scripts/`, canonical roadmap | `test/tooling/`, installed package checks |
 
-See [source ownership](src/README.md), [test commands](test/README.md) and
-[contribution guidance](CONTRIBUTING.md) for focused entry points.
+See [source ownership](../../src/README.md), [test commands](../../test/README.md) and
+[contribution guidance](../../CONTRIBUTING.md) for focused entry points.
 
 ## Current work
 
-The [1.0.0 preparation](docs/planning/RELEASE_1_0_0.md) is complete: all five
-N12 tasks are accepted, verified and closed in GitHub. [Package/site acceptance](docs/evidence/RX-9204.md)
-and [tracking preservation](docs/evidence/RX-9205.md) retain the actual evidence.
+The [1.0.0 preparation](RELEASE_1_0_0.md) is complete: all five
+N12 tasks are accepted, verified and closed in GitHub. [Package/site acceptance](../evidence/RX-9204.md)
+and [tracking preservation](../evidence/RX-9205.md) retain the actual evidence.
 There is no remaining selected release-preparation task.
 
 [N13 demo clarity](https://github.com/vmitsaras/raveldex/issues/102) was explicitly
 selected for implementation after release preparation. RX-9301–RX-9304 are
 implemented and verified; all four issues and the N13 overview are complete.
-See the [demo plan](docs/planning/DEMO_CLARITY.md) and [final verification](docs/evidence/RX-9304.md).
+See the [demo plan](DEMO_CLARITY.md) and [final verification](../evidence/RX-9304.md).
 The latest core artifact includes these UI changes and supersedes the pre-N13
 artifact identity; it remains local and unpublished.
 [N14 consumer UI/recovery](https://github.com/vmitsaras/raveldex/issues/103) was
 explicitly selected and implemented one task at a time. RX-9401–RX-9404 are
-accepted and verified; the [UI polish plan](docs/planning/UI_POLISH.md) and
-[final evidence](docs/evidence/RX-9404.md) retain the scoped results. The latest
+accepted and verified; the [UI polish plan](UI_POLISH.md) and
+[final evidence](../evidence/RX-9404.md) retain the scoped results. The latest
 local core artifact includes N14 and supersedes N13's artifact identity. All
 selected preparation/demo/UI work is complete. The owner authorized source
 commit/push and CI verification; package publication and tags/releases remain
 separate. Run `npm run handoff:next` before selecting new work.
 
 The owner-reported UI pilot port collision is fixed and verified in
-[RX-9501](docs/evidence/RX-9501.md). `pilot:ui` now chooses a free loopback port
+[RX-9501](../evidence/RX-9501.md). `pilot:ui` now chooses a free loopback port
 when its preferred port is occupied and prints the actual URL. The root README
-now explains the complete demo-site preview, verified in [RX-9502](docs/evidence/RX-9502.md).
+now explains the complete demo-site preview, verified in [RX-9502](../evidence/RX-9502.md).
 N15 is complete locally; GitHub synchronization and source delivery were not part
 of these maintenance tasks.
 
-The owner-selected [header search modal](docs/planning/SITE_SEARCH_MODAL.md) is
-implemented and verified locally in [RX-9601](docs/evidence/RX-9601.md). The shared
+The owner-selected [header search modal](SITE_SEARCH_MODAL.md) is
+implemented and verified locally in [RX-9601](../evidence/RX-9601.md). The shared
 header uses the real installed modal component with a scoped site theme, lazy
 five-guide search, explicit recovery and no-JS browsing. The Workbench remains
 at `/demo/`. N16 is complete locally; visual owner review and source delivery
 remain separate from automated checks.
 
-The owner-selected [consumer demo presentation](docs/planning/DEMO_PRESENTATION.md)
-is implemented and verified locally in [RX-9701](docs/evidence/RX-9701.md). All
+The owner-selected [consumer demo presentation](DEMO_PRESENTATION.md)
+is implemented and verified locally in [RX-9701](../evidence/RX-9701.md). All
 five galleries prioritize live examples and all eight complete starter projects
 carry coherent self-contained themes. N17 is complete locally; independent
 review repairs and final package/site evidence are recorded separately from
 visual owner acceptance and source delivery.
 
-The owner-selected [continuous Load more correction](docs/planning/LOAD_MORE_APPEND.md)
-is implemented and verified locally in [RX-9801](docs/evidence/RX-9801.md).
+The owner-selected [continuous Load more correction](LOAD_MORE_APPEND.md)
+is implemented and verified locally in [RX-9801](../evidence/RX-9801.md).
 Inline/modal now append finite native batches through all matches without
 replacement windows; legacy cap/message inputs remain accepted and deprecated.
 The 31-match header and 1,005-record shared regressions, complete project selection
 and final package/site checks passed within the recorded environment. N18 is
 complete locally; source delivery and publication remain separate.
 
-The owner-selected RX-9908 integrated qualification is **implemented and verified locally** on `codex/n19-rx9908`, source base `62407bdce95700df1cca2998e8e5e305608db94e` (locally committed RX-9907). Fresh project verification passed **1,744 tests**, with eight optional skips and zero failures; the final site suite passed **80/80**, and fresh installed candidate, packaged docs, Pages and identity checks passed. All 92 original HTML routes, 433 anchors, eight exact starter projects and original five-guide bodies/UTF-16 offsets remain preserved. [Evidence](docs/evidence/RX-9908.md) records 40 route/viewport cases, 1,780 measured contrast pairs, native frame traversal, independent review and the owner's explicit acceptance of unavailable manual checks remaining unverified. No essential defect was found; the one deferred Minor is pinning the historical identity audit before a future rerun. N19 is **8/8 accepted**; no selected release task remains. Targeted GitHub closeout preserves native parents and human notes. RX-9908 changes remain uncommitted/unpushed; source delivery, hosted CI, deployment and publication remain separate, and workflow deletion is preserved. Historical pilot approval/delivery snapshots retain their exact original identities and scope.
+The owner-selected RX-9908 integrated qualification is **implemented and verified locally** on `codex/n19-rx9908`, source base `62407bdce95700df1cca2998e8e5e305608db94e` (locally committed RX-9907). Fresh project verification passed **1,744 tests**, with eight optional skips and zero failures; the final site suite passed **80/80**, and fresh installed candidate, packaged docs, Pages and identity checks passed. All 92 original HTML routes, 433 anchors, eight exact starter projects and original five-guide bodies/UTF-16 offsets remain preserved. [Evidence](../evidence/RX-9908.md) records 40 route/viewport cases, 1,780 measured contrast pairs, native frame traversal, independent review and the owner's explicit acceptance of unavailable manual checks remaining unverified. No essential defect was found; the one deferred Minor is pinning the historical identity audit before a future rerun. N19 is **8/8 accepted**; no selected release task remains. Targeted GitHub closeout preserves native parents and human notes. RX-9908 changes remain uncommitted/unpushed; source delivery, hosted CI, deployment and publication remain separate, and workflow deletion is preserved. Historical pilot approval/delivery snapshots retain their exact original identities and scope.
 
 All 80 pre-N12 tasks remain accepted. Their source-specific results and actual
-N10/N11 closeout are retained in [evidence](docs/evidence/N10_N11_CI_REPAIR_20261108.md).
+N10/N11 closeout are retained in [evidence](../evidence/N10_N11_CI_REPAIR_20261108.md).
 Those historical artifacts do not qualify changed 1.0.0 package inputs by themselves.
 
 ## Working constraints and evidence
@@ -111,3 +111,10 @@ Hosted Pages activation, source commit/push and registry/release publication are
 separate delivery actions. No hosted deployment is inferred from local generation.
 
 The approved RX-9904 pilot, RX-9905 rollout and their exact identities remain recorded in their task evidence. RX-9903 PR140 and RX-9905 PR141 were merged externally. Preserve the workflow-deletion decision; source delivery, hosted checks and publication remain distinct.
+
+
+The subsequent owner browser review selects the gallery as the home page and
+moves the existing live Inline search into the sixth gallery position. This
+[local review amendment](../evidence/N19_HOME_REVIEW.md) preserves the existing
+examples/guide/API routes, starters and historical N19 qualification. The changed
+candidate is local and uncommitted; it has no new visual approval or publication.

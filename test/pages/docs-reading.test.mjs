@@ -32,7 +32,7 @@ test('guide outline targets real preserved headings',async()=>{
    }
   }
   await page.goto(new URL('reference/hosts/',base).href);assert.equal(await page.locator('[data-reading-steps] li').count(),4);
-  await page.locator('[data-reading-steps]').getByRole('link',{name:'Try an interface',exact:true}).click();await page.waitForURL('**/examples/');assert.equal(await page.locator('[data-solution-gallery] > li').count(),5);
+  await page.locator('[data-reading-steps]').getByRole('link',{name:'Try an interface',exact:true}).click();await page.waitForURL('**/examples/');assert.equal(await page.locator('[data-solution-gallery] > li:not(.examples-gallery__live)').count(),5);
  }finally{await page.close();}
 });
 

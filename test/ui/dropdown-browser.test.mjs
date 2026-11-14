@@ -186,6 +186,37 @@ test('long RTL keyboard guidance wraps without becoming a live announcement or r
   observe('long RTL keyboard guidance',{codeUnits:text.length,narrow:320,clipped:false,noQueries:true});
 });
 
+test('dropdown stays fixed below its input controls without moving the form or hiding the result count', async () => {
+  await mount({ maxResults: 3 });
+  await page.evaluate(() => {
+    const h = window.dropdownHarness, field = document.querySelector('#dropdown-root .raveldex-dropdown__input');
+    h.state.holdNext = true; field.value = 'shared'; field.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  await page.waitForFunction(() => window.dropdownHarness.state.pending.length === 1);
+  const before = await part('form').boundingBox();
+  await page.evaluate(() => window.dropdownHarness.release());
+  await page.waitForFunction(() => {
+    const shell = document.querySelector('#dropdown-root .raveldex-dropdown');
+    return shell?.querySelector('.raveldex-dropdown__popup')?.matches(':popover-open') && shell.getAttribute('aria-busy') === 'false';
+  });
+  const after = await part('form').boundingBox();
+  const geometry = await popup().evaluate(node => {
+    const rect = node.getBoundingClientRect(), field = document.querySelector('#dropdown-root .raveldex-dropdown__input').getBoundingClientRect();
+    const controls = document.querySelector('#dropdown-root .raveldex-dropdown__form').getBoundingClientRect();
+    return { position: getComputedStyle(node).position, top: rect.top, bottom: rect.bottom, left: rect.left, fieldLeft: field.left, controlsBottom: controls.bottom };
+  });
+  assert.ok(before && after);
+  for (const key of ['x', 'y', 'width', 'height']) assert.ok(Math.abs(before[key] - after[key]) < 0.5, `Opening the top-layer list does not move or resize the form (${key})`);
+  assert.equal(geometry.position, 'fixed');
+  assert.ok(Math.abs(geometry.top - geometry.controlsBottom - 4) < 1 && Math.abs(geometry.left - geometry.fieldLeft) < 1,
+    'The fixed list starts below the input controls and aligns with the input');
+  assert.equal(await part('status').textContent(), '7 results. Showing 3.');
+  assert.equal(await cells().count(), 3);
+  assert.equal(await part('status').evaluate(node => !!(node.compareDocumentPosition(node.parentElement.querySelector('.raveldex-dropdown__form')) & 4)), true,
+    'The live result count appears before the input so it stays visible above the suggestions');
+  observe('input-anchored fixed dropdown',{geometry,formUnchanged:true,total:7,shown:3,status:await part('status').textContent()});
+});
+
 test('core-only idle mount and bounded native results expose a computed combobox/grid/link hierarchy', async () => {
   assert.equal(await input().getAttribute('type'), 'text');
   assert.equal(await input().getAttribute('role'), 'combobox');
@@ -852,8 +883,9 @@ test('top-layer placement survives clipping/transform, viewport edges and active
   await page.setViewportSize({ width: 320, height: 568 });
   await page.locator('#clip-host').evaluate(n => { n.style.cssText = 'position:fixed;bottom:4px;left:8px;width:300px;height:auto;overflow:hidden;transform:translateZ(0)'; });
   await search('shared');
-  const edge = await popup().evaluate(n => { const r = n.getBoundingClientRect(); return { top: r.top, bottom: r.bottom, left: r.left, right: r.right, anchor: document.querySelector('#dropdown-root .raveldex-dropdown__input').getBoundingClientRect().top }; });
-  assert.ok(edge.left >= 0 && edge.right <= 320 + 1 && edge.top >= 0 && edge.bottom <= 568 + 1); assert.ok(edge.bottom <= edge.anchor + 1, 'Bottom-edge popup chooses available space above');
+  const edge = await popup().evaluate(n => { const r = n.getBoundingClientRect(), a = document.querySelector('#dropdown-root .raveldex-dropdown__form').getBoundingClientRect(); return { top: r.top, bottom: r.bottom, left: r.left, right: r.right, anchorTop: a.top, anchorBottom: a.bottom }; });
+  assert.ok(edge.left >= 0 && edge.right <= 320 + 1 && edge.top >= 0 && edge.bottom <= 568 + 1);
+  assert.ok(Math.abs(edge.top - edge.anchorBottom - 4) < 1 || Math.abs(edge.bottom - edge.anchorTop + 4) < 1, 'At a viewport edge the fixed list remains four pixels below or above the input');
   const controls = await root().locator('button,a.raveldex-dropdown__full-results').evaluateAll(nodes => nodes.filter(n => !n.hidden).map(n => {
     const r = n.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
     return { text: n.textContent, inViewport: x >= 0 && x < innerWidth && y >= 0 && y < innerHeight,
@@ -907,7 +939,7 @@ test('long RTL/dark/text-scaled and forced-color layouts retain controls, active
 
 test('a short viewport with no usable row retains truthful totals and an accessible full-results recovery without auto-reopening', async () => {
   await page.setViewportSize({ width: 320, height: 240 });
-  await page.locator('#clip-host').evaluate(n => { n.style.cssText = 'position:fixed;top:32px;left:8px;width:304px;height:auto'; });
+  await page.locator('#clip-host').evaluate(n => { n.style.cssText = 'position:fixed;top:-70px;left:8px;width:304px;height:auto'; });
   // Wider font metrics must not push the recovery link below the fixed host's
   // viewport while the complete shell still leaves no usable popup row.
   await page.addStyleTag({ content: '.raveldex-dropdown{font-family:Arial,sans-serif;--raveldex-dropdown-gap:.75rem}' });
@@ -930,7 +962,7 @@ test('a short viewport with no usable row retains truthful totals and an accessi
       hit: n === document.elementFromPoint(x, y) || n.contains(document.elementFromPoint(x, y)) };
   });
   assert.ok(linkHit.bounds.left >= 0 && linkHit.bounds.top >= 0 && linkHit.bounds.right <= linkHit.viewport.width && linkHit.bounds.bottom <= linkHit.viewport.height,
-    'The complete focused full-results link remains inside the short viewport');
+    `The complete focused full-results link remains inside the short viewport: ${JSON.stringify(linkHit)}`);
   assert.equal(linkHit.hit, true); await screenshot('320x240-no-space');
   const count = (await calls()).length; await page.setViewportSize({ width: 1100, height: 850 }); await page.waitForTimeout(50);
   assert.equal(await expanded(), false); assert.equal((await calls()).length, count);

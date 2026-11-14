@@ -197,3 +197,19 @@ The owner subsequently authorized [RX-9902 source delivery through a CI-checked 
 ## RX-9903 source-delivery selection — 14 November 2026
 
 The owner authorized [RX-9903 commit/push and PR delivery](../evidence/RX_9903_DELIVERY_20261114.md). After main removed all GitHub workflows, the owner explicitly selected preserving that deletion and leaving the PR open after local verification. Hosted CI and merge are not claimed. RX-9904 remains planned/unstarted; approval and rollout are separate.
+
+## Post-acceptance owner home/gallery amendment — 14 November 2026
+
+The owner's rendered-preview comments explicitly select the gallery as the home
+page and move the former home Inline search example into its sixth grid position.
+This later instruction supersedes the original inert-gallery requirement for the
+new review candidate: retain five inert choice cards and one isolated installed
+Inline iframe. Keep `/examples/`, existing home anchors/core/task links and all
+starter/guide/API destinations. Historical N19 evidence and RX-9904 approval stay
+tied to their original identities. See [the amendment evidence](../evidence/N19_HOME_REVIEW.md).
+No new milestone, tracking mutation or source delivery is implied.
+
+The subsequent owner card-style review supersedes the embedded-frame portion:
+show the existing Inline screenshot first, followed by heading, description and
+links matching the five interface cards. The actual search remains reachable
+through its standalone preview link; the home/gallery itself is static again.
